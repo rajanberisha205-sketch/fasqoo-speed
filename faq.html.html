@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fasqoo FAQ & AI Technician</title>
+<meta name="description" content="Fasqoo Internet Speed Test FAQ and AI Technician. Get help with Internet, Wi-Fi, latency, speed, DNS and network problems.">
+
+<style>
+:root{
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --text:#17191d;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --soft:#f0f2f5;
+  --orange:#ff5a1f;
+  --orange-dark:#e94d17;
+  --shadow:0 10px 35px rgba(0,0,0,.07);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.25s ease;
+}
+
+body.dark{
+  --bg:#0d1117;
+  --card:#151b23;
+  --text:#f3f4f6;
+  --muted:#9ca3af;
+  --line:#27303b;
+  --soft:#1c2530;
+  --shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+
+.dark header{
+  background:rgba(13,17,23,.94);
+}
+
+.nav{
+  max-width:1250px;
+  margin:auto;
+  min-height:70px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--text);
+  flex-shrink:0;
+}
+
+.logo{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  background:var(--orange);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  font-weight:700;
+}
+
+.brand-name{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.4px;
+}
+
+.main-menu{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:20px;
+}
+
+.main-menu a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:400;
+  white-space:nowrap;
+  transition:.2s ease;
+}
+
+.main-menu a:hover{
+  color:var(--orange);
+}
+
+.menu-extra{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+#lang{
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--text);
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:12px;
+  cursor:pointer;
+  outline:none;
+}
+
+.theme-btn{
+  width:36px;
+  height:36px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  font-size:17px;
+}
+
+/* CONTAINER */
+
+.container{
+  width:min(1100px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:75px 0 45px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 12px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:var(--card);
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+.badge-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#22c55e;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(34px,6vw,58px);
+  letter-spacing:-2px;
+}
+
+.hero h1 span{
+  color:var(--orange);
+}
+
+.hero p{
+  max-width:700px;
+  margin:18px auto 0;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:16px;
+}
+
+/* FAQ */
+
+.section-title{
+  text-align:center;
+  margin:20px 0 35px;
+}
+
+.section-title h2{
+  margin:0 0 10px;
+  font-size:30px;
+  letter-spacing:-.8px;
+}
+
+.section-title p{
+  margin:0;
+  color:var(--muted);
+}
+
+.faq-list{
+  display:grid;
+  gap:12px;
+  margin-bottom:80px;
+}
+
+.faq-item{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.faq-question{
+  width:100%;
+  border:0;
+  background:none;
+  color:var(--text);
+  padding:20px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.faq-question span:last-child{
+  color:var(--orange);
+  font-size:20px;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 22px 20px;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+.faq-item.active .faq-answer{
+  display:block;
+}
+
+.faq-item.active .faq-question span:last-child{
+  transform:rotate(45deg);
+}
+
+/* AI */
+
+.ai-section{
+  margin:30px 0 80px;
+}
+
+.ai-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.ai-top{
+  padding:28px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.ai-icon{
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  background:var(--orange);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:24px;
+  flex-shrink:0;
+}
+
+.ai-top h2{
+  margin:0 0 5px;
+  font-size:22px;
+}
+
+.ai-top p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.powered{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.powered strong{
+  color:var(--text);
+}
+
+.ai-messages{
+  height:430px;
+  overflow-y:auto;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.ai-message{
+  max-width:82%;
+  padding:15px 17px;
+  border-radius:14px;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.ai-message p{
+  margin:7px 0 0;
+}
+
+.ai-message.assistant{
+  align-self:flex-start;
+  background:var(--soft);
+  border:1px solid var(--line);
+}
+
+.ai-message.user{
+  align-self:flex-end;
+  background:var(--orange);
+  color:#fff;
+}
+
+.ai-message.user strong{
+  color:#fff;
+}
+
+.ai-form{
+  padding:18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  gap:10px;
+}
+
+.ai-form input{
+  flex:1;
+  min-width:0;
+  height:48px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:0 15px;
+  background:var(--bg);
+  color:var(--text);
+  outline:none;
+  font-size:14px;
+}
+
+.ai-form input:focus{
+  border-color:var(--orange);
+}
+
+.ai-form button{
+  height:48px;
+  padding:0 22px;
+  border:0;
+  border-radius:10px;
+  background:var(--orange);
+  color:#fff;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.ai-form button:hover{
+  background:var(--orange-dark);
+}
+
+.ai-form button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* CTA */
+
+.cta{
+  text-align:center;
+  margin:0 0 80px;
+  padding:45px 25px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.cta h2{
+  margin:0 0 10px;
+  font-size:27px;
+}
+
+.cta p{
+  color:var(--muted);
+  margin:0 0 22px;
+}
+
+.cta a{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:9px;
+  background:var(--orange);
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 20px;
+  background:var(--card);
+}
+
+.footer-inner{
+  max-width:1100px;
+  margin:auto;
+  text-align:center;
+}
+
+.footer-copy{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:16px;
+}
+
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:12px;
+}
+
+.footer-links a:hover{
+  color:var(--orange);
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+  .nav{
+    flex-wrap:wrap;
+    padding:12px 18px;
+  }
+
+  .brand{
+    margin-right:auto;
+  }
+
+  .main-menu{
+    width:100%;
+    order:3;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px 18px;
+    padding-bottom:5px;
+  }
+
+  .menu-extra{
+    margin-left:0;
+  }
+}
+
+@media(max-width:600px){
+
+  .hero{
+    padding:50px 0 35px;
+  }
+
+  .hero h1{
+    letter-spacing:-1.3px;
+  }
+
+  .ai-top{
+    flex-wrap:wrap;
+  }
+
+  .powered{
+    width:100%;
+    margin-left:68px;
+  }
+
+  .ai-messages{
+    height:380px;
+    padding:16px;
+  }
+
+  .ai-message{
+    max-width:92%;
+  }
+
+  .ai-form{
+    flex-direction:column;
+  }
+
+  .ai-form button{
+    width:100%;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+
+<a class="brand" href="index.html">
+  <div class="logo">F</div>
+  <div class="brand-name">Fasqoo</div>
+</a>
+
+<nav class="main-menu" aria-label="Main navigation">
+
+  <a href="index.html" data-i18n="navHome">Home</a>
+
+  <a href="index.html" data-i18n="navSpeed">Speed Test</a>
+
+  <a href="faq.html" data-i18n="navFaq">FAQ</a>
+
+  <a href="#fasqoo-ai" data-i18n="navAI">
+    AI Technician
+  </a>
+
+  <a href="network-status.html" data-i18n="navNetwork">
+    Network Status
+  </a>
+
+  <a href="about.html" data-i18n="navAbout">
+    About
+  </a>
+
+  <div class="menu-extra">
+
+    <select id="lang" aria-label="Language">
+      <option value="de">Deutsch</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+      <option value="nl">Nederlands</option>
+      <option value="tr">Türkçe</option>
+      <option value="sq">Shqip</option>
+      <option value="ar">العربية</option>
+    </select>
+
+    <button
+      id="themeBtn"
+      class="theme-btn"
+      type="button"
+      aria-label="Dark mode">
+      ☾
+    </button>
+
+  </div>
+
+</nav>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="container">
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    <span data-i18n="badge">Fasqoo Support Center</span>
+  </div>
+
+  <h1>
+    <span data-i18n="heroTitle1">Fasqoo</span>
+    <span data-i18n="heroTitle2">Help Center</span>
+  </h1>
+
+  <p data-i18n="heroText">
+    Find answers to common Internet and network questions or ask our
+    AI Technician for professional troubleshooting assistance.
+  </p>
+
+</div>
+
+
+  </section>
+
+  <!-- FAQ -->
+
+  <section class="container">
+
+<div class="section-title">
+
+  <h2 data-i18n="faqTitle">
+    Frequently Asked Questions
+  </h2>
+
+  <p data-i18n="faqSubtitle">
+    Everything you need to know about Internet speed testing.
+  </p>
+
+</div>
+
+
+<div class="faq-list">
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q1">What is an Internet speed test?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a1">
+      An Internet speed test measures important connection
+      parameters such as download speed, upload speed, ping and
+      jitter. Fasqoo uses these measurements to help you understand
+      the quality of your Internet connection.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q2">What is download speed?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a2">
+      Download speed describes how quickly data can be transferred
+      from the Internet to your device. It is normally measured in
+      Mbps or Gbps.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q3">What is upload speed?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a3">
+      Upload speed describes how quickly your device can send data
+      to the Internet. It is important for video calls, cloud
+      backups, streaming and uploading files.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q4">What is ping?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a4">
+      Ping measures network response time. A lower ping generally
+      means a faster response between your device and the test
+      server. Low latency is especially important for online gaming
+      and real-time communication.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q5">What is jitter?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a5">
+      Jitter measures variations in packet arrival time. High jitter
+      can cause interruptions or unstable quality in gaming,
+      voice calls and video meetings.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q6">Why is my Wi-Fi slow?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a6">
+      Slow Wi-Fi can be caused by distance from the router,
+      interference, congestion, walls, old hardware or a busy
+      wireless channel. Testing with Ethernet can help determine
+      whether the problem is Wi-Fi or the Internet connection itself.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q7">Why is my ping high in games?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a7">
+      High gaming latency can be caused by server distance,
+      routing, Wi-Fi interference, network congestion or bufferbloat.
+      An Ethernet connection and a nearby game server can often
+      improve stability.
+    </div>
+
+  </div>
+
+
+  <div class="faq-item">
+
+    <button class="faq-question">
+      <span data-i18n="q8">Why is my upload speed slow?</span>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer" data-i18n="a8">
+      Upload performance may be limited by your Internet plan,
+      Wi-Fi conditions, router configuration, network congestion or
+      the provider's upstream capacity.
+    </div>
+
+  </div>
+
+</div>
+
+  </section>
+
+  <!-- AI TECHNICIAN -->
+
+  <section id="fasqoo-ai" class="ai-section">
+
+<div class="container">
+
+  <div class="section-title">
+
+    <h2 data-i18n="aiSectionTitle">
+      Fasqoo AI Technician
+    </h2>
+
+    <p data-i18n="aiSectionText">
+      Get technical help with your Internet and network connection.
+    </p>
+
+  </div>
+
+
+  <div class="ai-box">
+
+    <div class="ai-top">
+
+      <div class="ai-icon">
+        ✦
+      </div>
+
+      <div>
+        <h2 data-i18n="aiTitle">
+          Fasqoo AI Technician Assistant
+        </h2>
+
+        <p data-i18n="aiDescription">
+          Professional Internet and network troubleshooting assistance.
+        </p>
+      </div>
+
+      <div class="powered">
+        <span data-i18n="powered">Powered by</span>
+        <strong> Google Gemini</strong>
+      </div>
+
+    </div>
+
+
+    <div id="aiMessages" class="ai-messages">
+
+      <div class="ai-message assistant">
+
+        <strong>Fasqoo AI Technician</strong>
+
+        <p data-i18n="aiWelcome">
+          Hello! I can help you troubleshoot Internet, Wi-Fi,
+          ping, jitter, download, upload and other network problems.
+          What is the problem you are experiencing?
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <form id="aiForm" class="ai-form">
+
+      <input
+        id="aiInput"
+        type="text"
+        autocomplete="off"
+        required
+        data-i18n-placeholder="aiPlaceholder"
+        placeholder="Ask about your Internet connection..."
+      >
+
+      <button
+        id="aiSend"
+        type="submit"
+        data-i18n="aiButton">
+        Ask AI
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="container">
+
+
+<div class="cta">
+
+  <h2 data-i18n="ctaTitle">
+    Test your Internet connection
+  </h2>
+
+  <p data-i18n="ctaText">
+    Get your download, upload, ping and jitter results with Fasqoo.
+  </p>
+
+  <a href="index.html" data-i18n="ctaButton">
+    Start Speed Test
+  </a>
+
+</div>
+
+
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-inner">
+
+
+<div class="footer-copy">
+
+  <div data-i18n="copyright">
+    © 2026 Fasqoo. All Rights Reserved.
+  </div>
+
+  <div data-i18n="trademark">
+    Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo
+    and may only be used with permission.
+  </div>
+
+</div>
+
+
+<div class="footer-links">
+
+  <a href="about.html" data-i18n="footerAbout">About</a>
+
+  <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+
+  <a href="network-status.html" data-i18n="footerNetwork">
+    Network Status
+  </a>
+
+  <a href="privacy-policy.html" data-i18n="footerPrivacy">
+    Privacy Policy
+  </a>
+
+  <a href="terms.html" data-i18n="footerTerms">
+    Terms of Use
+  </a>
+
+  <a href="do-not-sell.html" data-i18n="footerDoNotSell">
+    Do Not Sell My Personal Information
+  </a>
+
+  <a href="modern-slavery.html" data-i18n="footerSlavery">
+    Modern Slavery Policy
+  </a>
+
+  <a href="accessibility.html" data-i18n="footerAccessibility">
+    Accessibility
+  </a>
+
+</div>
+
+
+  </div>
+
+</footer>
+
+<script>
+
+/* =========================================================
+   FASQOO TRANSLATIONS
+   ========================================================= */
+
+const translations = {
+
+de:{
+  navHome:"Home",
+  navSpeed:"Speed Test",
+  navFaq:"FAQ",
+  navAI:"AI Technician",
+  navNetwork:"Network Status",
+  navAbout:"Über Fasqoo",
+
+  badge:"Fasqoo Support Center",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Hilfezentrum",
+  heroText:"Finde Antworten auf häufige Internet- und Netzwerkfragen oder frage unseren AI Technician nach professioneller Hilfe.",
+
+  faqTitle:"Häufig gestellte Fragen",
+  faqSubtitle:"Alles, was du über Internet-Speedtests wissen musst.",
+
+  q1:"Was ist ein Internet-Speedtest?",
+  a1:"Ein Internet-Speedtest misst wichtige Verbindungswerte wie Download, Upload, Ping und Jitter. Fasqoo hilft dir dabei, die Qualität deiner Internetverbindung zu verstehen.",
+
+  q2:"Was ist Download-Geschwindigkeit?",
+  a2:"Die Download-Geschwindigkeit beschreibt, wie schnell Daten aus dem Internet auf dein Gerät übertragen werden. Sie wird normalerweise in Mbps oder Gbps gemessen.",
+
+  q3:"Was ist Upload-Geschwindigkeit?",
+  a3:"Die Upload-Geschwindigkeit beschreibt, wie schnell dein Gerät Daten ins Internet senden kann. Sie ist besonders für Videotelefonie, Cloud-Backups, Streaming und Datei-Uploads wichtig.",
+
+  q4:"Was ist Ping?",
+  a4:"Ping misst die Antwortzeit eines Netzwerks. Ein niedriger Ping bedeutet normalerweise eine schnellere Reaktion zwischen deinem Gerät und dem Testserver.",
+
+  q5:"Was ist Jitter?",
+  a5:"Jitter misst Schwankungen bei der Ankunft von Datenpaketen. Hoher Jitter kann Probleme bei Gaming, Sprach- und Videoanrufen verursachen.",
+
+  q6:"Warum ist mein WLAN langsam?",
+  a6:"Langsames WLAN kann durch Entfernung zum Router, Störungen, Überlastung, Wände, ältere Hardware oder einen ausgelasteten WLAN-Kanal verursacht werden.",
+
+  q7:"Warum ist mein Ping beim Gaming hoch?",
+  a7:"Hohe Latenz beim Gaming kann durch die Entfernung zum Server, Routing, WLAN-Störungen, Netzwerküberlastung oder Bufferbloat verursacht werden.",
+
+  q8:"Warum ist mein Upload langsam?",
+  a8:"Die Upload-Leistung kann durch deinen Internet-Tarif, WLAN-Bedingungen, Router-Einstellungen, Netzwerkauslastung oder die Upload-Kapazität deines Providers begrenzt werden.",
+
+  aiSectionTitle:"Fasqoo AI Technician",
+  aiSectionText:"Erhalte technische Hilfe für deine Internet- und Netzwerkverbindung.",
+  aiTitle:"Fasqoo AI Technician Assistant",
+  aiDescription:"Professionelle Unterstützung bei Internet- und Netzwerkproblemen.",
+  powered:"Bereitgestellt von",
+  aiWelcome:"Hallo! Ich kann dir bei Internet, WLAN, Ping, Jitter, Download, Upload und anderen Netzwerkproblemen helfen. Was ist dein Problem?",
+  aiPlaceholder:"Frage etwas über deine Internetverbindung...",
+  aiButton:"AI fragen",
+
+  ctaTitle:"Teste deine Internetverbindung",
+  ctaText:"Erhalte Download-, Upload-, Ping- und Jitter-Werte mit Fasqoo.",
+  ctaButton:"Speed Test starten",
+
+  copyright:"© 2026 Fasqoo. Alle Rechte vorbehalten.",
+  trademark:"Fasqoo™ und Fasqoo Internet Speed Test sind Marken von Fasqoo und dürfen nur mit Genehmigung verwendet werden.",
+
+  footerAbout:"Über Fasqoo",
+  footerFaq:"FAQ",
+  footerNetwork:"Network Status",
+  footerPrivacy:"Datenschutz",
+  footerTerms:"Nutzungsbedingungen",
+  footerDoNotSell:"Meine persönlichen Daten nicht verkaufen",
+  footerSlavery:"Modern Slavery Policy",
+  footerAccessibility:"Barrierefreiheit"
+},
+
+en:{
+  navHome:"Home",
+  navSpeed:"Speed Test",
+  navFaq:"FAQ",
+  navAI:"AI Technician",
+  navNetwork:"Network Status",
+  navAbout:"About",
+
+  badge:"Fasqoo Support Center",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Help Center",
+  heroText:"Find answers to common Internet and network questions or ask our AI Technician for professional troubleshooting assistance.",
+
+  faqTitle:"Frequently Asked Questions",
+  faqSubtitle:"Everything you need to know about Internet speed testing.",
+
+  q1:"What is an Internet speed test?",
+  a1:"An Internet speed test measures important connection parameters such as download speed, upload speed, ping and jitter.",
+
+  q2:"What is download speed?",
+  a2:"Download speed describes how quickly data can be transferred from the Internet to your device.",
+
+  q3:"What is upload speed?",
+  a3:"Upload speed describes how quickly your device can send data to the Internet.",
+
+  q4:"What is ping?",
+  a4:"Ping measures network response time. A lower ping generally means a faster response.",
+
+  q5:"What is jitter?",
+  a5:"Jitter measures variations in packet arrival time. High jitter can cause interruptions in gaming and calls.",
+
+  q6:"Why is my Wi-Fi slow?",
+  a6:"Slow Wi-Fi can be caused by distance from the router, interference, congestion, walls, old hardware or a busy wireless channel.",
+
+  q7:"Why is my ping high in games?",
+  a7:"High gaming latency can be caused by server distance, routing, Wi-Fi interference, network congestion or bufferbloat.",
+
+  q8:"Why is my upload speed slow?",
+  a8:"Upload performance may be limited by your Internet plan, Wi-Fi conditions, router configuration or network congestion.",
+
+  aiSectionTitle:"Fasqoo AI Technician",
+  aiSectionText:"Get technical help with your Internet and network connection.",
+  aiTitle:"Fasqoo AI Technician Assistant",
+  aiDescription:"Professional Internet and network troubleshooting assistance.",
+  powered:"Powered by",
+  aiWelcome:"Hello! I can help you troubleshoot Internet, Wi-Fi, ping, jitter, download, upload and other network problems. What is the problem you are experiencing?",
+  aiPlaceholder:"Ask about your Internet connection...",
+  aiButton:"Ask AI",
+
+  ctaTitle:"Test your Internet connection",
+  ctaText:"Get your download, upload, ping and jitter results with Fasqoo.",
+  ctaButton:"Start Speed Test",
+
+  copyright:"© 2026 Fasqoo. All Rights Reserved.",
+  trademark:"Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo and may only be used with permission.",
+
+  footerAbout:"About",
+  footerFaq:"FAQ",
+  footerNetwork:"Network Status",
+  footerPrivacy:"Privacy Policy",
+  footerTerms:"Terms of Use",
+  footerDoNotSell:"Do Not Sell My Personal Information",
+  footerSlavery:"Modern Slavery Policy",
+  footerAccessibility:"Accessibility"
+},
+
+fr:{
+  navHome:"Accueil",
+  navSpeed:"Test de vitesse",
+  navFaq:"FAQ",
+  navAI:"Technicien IA",
+  navNetwork:"État du réseau",
+  navAbout:"À propos",
+
+  badge:"Centre d'assistance Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Centre d'aide",
+  heroText:"Trouvez des réponses aux questions courantes sur Internet et les réseaux ou demandez de l'aide à notre technicien IA.",
+
+  faqTitle:"Questions fréquentes",
+  faqSubtitle:"Tout ce que vous devez savoir sur les tests de vitesse Internet.",
+
+  q1:"Qu'est-ce qu'un test de vitesse Internet?",
+  a1:"Un test de vitesse mesure le téléchargement, l'envoi, le ping et le jitter de votre connexion.",
+
+  q2:"Qu'est-ce que la vitesse de téléchargement?",
+  a2:"Elle indique la vitesse à laquelle les données sont transférées d'Internet vers votre appareil.",
+
+  q3:"Qu'est-ce que la vitesse d'envoi?",
+  a3:"Elle indique la vitesse à laquelle votre appareil peut envoyer des données vers Internet.",
+
+  q4:"Qu'est-ce que le ping?",
+  a4:"Le ping mesure le temps de réponse du réseau.",
+
+  q5:"Qu'est-ce que le jitter?",
+  a5:"Le jitter mesure les variations dans le temps d'arrivée des paquets.",
+
+  q6:"Pourquoi mon Wi-Fi est-il lent?",
+  a6:"La distance du routeur, les interférences, la congestion et les murs peuvent ralentir le Wi-Fi.",
+
+  q7:"Pourquoi mon ping est-il élevé dans les jeux?",
+  a7:"La distance du serveur, le routage, le Wi-Fi ou la congestion peuvent augmenter la latence.",
+
+  q8:"Pourquoi mon débit d'envoi est-il lent?",
+  a8:"Le débit d'envoi peut être limité par votre abonnement, le Wi-Fi, le routeur ou la congestion.",
+
+  aiSectionTitle:"Technicien IA Fasqoo",
+  aiSectionText:"Obtenez de l'aide technique pour votre connexion Internet.",
+  aiTitle:"Assistant Technicien IA Fasqoo",
+  aiDescription:"Assistance professionnelle pour les problèmes Internet et réseau.",
+  powered:"Propulsé par",
+  aiWelcome:"Bonjour ! Je peux vous aider à résoudre vos problèmes Internet, Wi-Fi, ping, jitter, téléchargement et envoi.",
+  aiPlaceholder:"Posez une question sur votre connexion...",
+  aiButton:"Demander à l'IA",
+
+  ctaTitle:"Testez votre connexion Internet",
+  ctaText:"Obtenez vos résultats de téléchargement, envoi, ping et jitter.",
+  ctaButton:"Démarrer le test",
+
+  copyright:"© 2026 Fasqoo. Tous droits réservés.",
+  trademark:"Fasqoo™ et Fasqoo Internet Speed Test sont des marques de Fasqoo.",
+
+  footerAbout:"À propos",
+  footerFaq:"FAQ",
+  footerNetwork:"État du réseau",
+  footerPrivacy:"Politique de confidentialité",
+  footerTerms:"Conditions d'utilisation",
+  footerDoNotSell:"Ne pas vendre mes informations personnelles",
+  footerSlavery:"Politique contre l'esclavage moderne",
+  footerAccessibility:"Accessibilité"
+},
+
+es:{
+  navHome:"Inicio",
+  navSpeed:"Test de velocidad",
+  navFaq:"FAQ",
+  navAI:"Técnico IA",
+  navNetwork:"Estado de red",
+  navAbout:"Acerca de",
+
+  badge:"Centro de soporte Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Centro de ayuda",
+  heroText:"Encuentra respuestas sobre Internet y redes o pide ayuda profesional a nuestro técnico de IA.",
+
+  faqTitle:"Preguntas frecuentes",
+  faqSubtitle:"Todo lo que necesitas saber sobre las pruebas de velocidad.",
+
+  q1:"¿Qué es una prueba de velocidad?",
+  a1:"Una prueba de velocidad mide la descarga, subida, ping y jitter de tu conexión.",
+
+  q2:"¿Qué es la velocidad de descarga?",
+  a2:"Indica la rapidez con la que los datos llegan desde Internet a tu dispositivo.",
+
+  q3:"¿Qué es la velocidad de subida?",
+  a3:"Indica la rapidez con la que tu dispositivo puede enviar datos a Internet.",
+
+  q4:"¿Qué es el ping?",
+  a4:"El ping mide el tiempo de respuesta de la red.",
+
+  q5:"¿Qué es el jitter?",
+  a5:"El jitter mide las variaciones en el tiempo de llegada de los paquetes.",
+
+  q6:"¿Por qué mi Wi-Fi es lento?",
+  a6:"La distancia al router, interferencias, congestión y paredes pueden afectar al Wi-Fi.",
+
+  q7:"¿Por qué tengo mucho ping en los juegos?",
+  a7:"La distancia al servidor, el enrutamiento, el Wi-Fi y la congestión pueden aumentar la latencia.",
+
+  q8:"¿Por qué mi velocidad de subida es lenta?",
+  a8:"Puede estar limitada por tu plan, Wi-Fi, router o congestión.",
+
+  aiSectionTitle:"Técnico IA Fasqoo",
+  aiSectionText:"Obtén ayuda técnica con tu conexión de Internet.",
+  aiTitle:"Asistente Técnico IA Fasqoo",
+  aiDescription:"Asistencia profesional para problemas de Internet y redes.",
+  powered:"Desarrollado por",
+  aiWelcome:"¡Hola! Puedo ayudarte con problemas de Internet, Wi-Fi, ping, jitter, descarga y subida.",
+  aiPlaceholder:"Pregunta sobre tu conexión...",
+  aiButton:"Preguntar a IA",
+
+  ctaTitle:"Prueba tu conexión a Internet",
+  ctaText:"Obtén tus resultados de descarga, subida, ping y jitter.",
+  ctaButton:"Iniciar prueba",
+
+  copyright:"© 2026 Fasqoo. Todos los derechos reservados.",
+  trademark:"Fasqoo™ y Fasqoo Internet Speed Test son marcas de Fasqoo.",
+
+  footerAbout:"Acerca de",
+  footerFaq:"FAQ",
+  footerNetwork:"Estado de red",
+  footerPrivacy:"Política de privacidad",
+  footerTerms:"Términos de uso",
+  footerDoNotSell:"No vender mi información personal",
+  footerSlavery:"Política contra la esclavitud moderna",
+  footerAccessibility:"Accesibilidad"
+},
+
+it:{
+  navHome:"Home",
+  navSpeed:"Test velocità",
+  navFaq:"FAQ",
+  navAI:"Tecnico IA",
+  navNetwork:"Stato rete",
+  navAbout:"Chi siamo",
+
+  badge:"Centro assistenza Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Centro assistenza",
+  heroText:"Trova risposte alle domande su Internet e reti oppure chiedi aiuto al nostro tecnico IA.",
+
+  faqTitle:"Domande frequenti",
+  faqSubtitle:"Tutto quello che devi sapere sui test di velocità.",
+
+  q1:"Cos'è un test di velocità Internet?",
+  a1:"Misura download, upload, ping e jitter della connessione.",
+
+  q2:"Cos'è la velocità di download?",
+  a2:"Indica quanto velocemente i dati vengono trasferiti da Internet al dispositivo.",
+
+  q3:"Cos'è la velocità di upload?",
+  a3:"Indica quanto velocemente il dispositivo può inviare dati a Internet.",
+
+  q4:"Cos'è il ping?",
+  a4:"Il ping misura il tempo di risposta della rete.",
+
+  q5:"Cos'è il jitter?",
+  a5:"Il jitter misura le variazioni nel tempo di arrivo dei pacchetti.",
+
+  q6:"Perché il mio Wi-Fi è lento?",
+  a6:"Distanza dal router, interferenze, congestione e pareti possono rallentare il Wi-Fi.",
+
+  q7:"Perché ho un ping alto nei giochi?",
+  a7:"Distanza dal server, routing, Wi-Fi e congestione possono aumentare la latenza.",
+
+  q8:"Perché il mio upload è lento?",
+  a8:"Può essere limitato dal piano Internet, Wi-Fi, router o congestione.",
+
+  aiSectionTitle:"Tecnico IA Fasqoo",
+  aiSectionText:"Ricevi assistenza tecnica per la tua connessione Internet.",
+  aiTitle:"Assistente Tecnico IA Fasqoo",
+  aiDescription:"Assistenza professionale per problemi Internet e di rete.",
+  powered:"Basato su",
+  aiWelcome:"Ciao! Posso aiutarti con problemi Internet, Wi-Fi, ping, jitter, download e upload.",
+  aiPlaceholder:"Fai una domanda sulla tua connessione...",
+  aiButton:"Chiedi all'IA",
+
+  ctaTitle:"Testa la tua connessione Internet",
+  ctaText:"Ottieni i risultati di download, upload, ping e jitter.",
+  ctaButton:"Avvia test",
+
+  copyright:"© 2026 Fasqoo. Tutti i diritti riservati.",
+  trademark:"Fasqoo™ e Fasqoo Internet Speed Test sono marchi di Fasqoo.",
+
+  footerAbout:"Chi siamo",
+  footerFaq:"FAQ",
+  footerNetwork:"Stato rete",
+  footerPrivacy:"Privacy",
+  footerTerms:"Termini di utilizzo",
+  footerDoNotSell:"Non vendere le mie informazioni personali",
+  footerSlavery:"Politica sulla schiavitù moderna",
+  footerAccessibility:"Accessibilità"
+},
+
+pt:{
+  navHome:"Início",
+  navSpeed:"Teste de velocidade",
+  navFaq:"FAQ",
+  navAI:"Técnico IA",
+  navNetwork:"Estado da rede",
+  navAbout:"Sobre",
+
+  badge:"Centro de suporte Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Centro de ajuda",
+  heroText:"Encontre respostas sobre Internet e redes ou peça ajuda ao nosso técnico de IA.",
+
+  faqTitle:"Perguntas frequentes",
+  faqSubtitle:"Tudo o que precisa saber sobre testes de velocidade.",
+
+  q1:"O que é um teste de velocidade?",
+  a1:"Um teste mede download, upload, ping e jitter da conexão.",
+
+  q2:"O que é velocidade de download?",
+  a2:"Indica a rapidez com que os dados são transferidos da Internet para o dispositivo.",
+
+  q3:"O que é velocidade de upload?",
+  a3:"Indica a rapidez com que o dispositivo envia dados para a Internet.",
+
+  q4:"O que é ping?",
+  a4:"Ping mede o tempo de resposta da rede.",
+
+  q5:"O que é jitter?",
+  a5:"Jitter mede as variações no tempo de chegada dos pacotes.",
+
+  q6:"Por que meu Wi-Fi está lento?",
+  a6:"Distância, interferências, congestionamento e paredes podem afetar o Wi-Fi.",
+
+  q7:"Por que meu ping está alto nos jogos?",
+  a7:"Distância do servidor, roteamento, Wi-Fi e congestionamento podem aumentar a latência.",
+
+  q8:"Por que meu upload está lento?",
+  a8:"Pode ser limitado pelo plano, Wi-Fi, router ou congestionamento.",
+
+  aiSectionTitle:"Técnico IA Fasqoo",
+  aiSectionText:"Obtenha ajuda técnica com a sua conexão.",
+  aiTitle:"Assistente Técnico IA Fasqoo",
+  aiDescription:"Assistência profissional para problemas de Internet e rede.",
+  powered:"Desenvolvido com",
+  aiWelcome:"Olá! Posso ajudar com problemas de Internet, Wi-Fi, ping, jitter, download e upload.",
+  aiPlaceholder:"Pergunte sobre a sua conexão...",
+  aiButton:"Perguntar à IA",
+
+  ctaTitle:"Teste sua conexão Internet",
+  ctaText:"Obtenha os resultados de download, upload, ping e jitter.",
+  ctaButton:"Iniciar teste",
+
+  copyright:"© 2026 Fasqoo. Todos os direitos reservados.",
+  trademark:"Fasqoo™ e Fasqoo Internet Speed Test são marcas da Fasqoo.",
+
+  footerAbout:"Sobre",
+  footerFaq:"FAQ",
+  footerNetwork:"Estado da rede",
+  footerPrivacy:"Privacidade",
+  footerTerms:"Termos de uso",
+  footerDoNotSell:"Não vender minhas informações pessoais",
+  footerSlavery:"Política contra a escravidão moderna",
+  footerAccessibility:"Acessibilidade"
+},
+
+nl:{
+  navHome:"Home",
+  navSpeed:"Snelheidstest",
+  navFaq:"FAQ",
+  navAI:"AI-technicus",
+  navNetwork:"Netwerkstatus",
+  navAbout:"Over",
+
+  badge:"Fasqoo Supportcentrum",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Helpcentrum",
+  heroText:"Vind antwoorden over internet en netwerken of vraag onze AI-technicus om hulp.",
+
+  faqTitle:"Veelgestelde vragen",
+  faqSubtitle:"Alles wat je moet weten over internetsnelheidstests.",
+
+  q1:"Wat is een internetsnelheidstest?",
+  a1:"Een snelheidstest meet download, upload, ping en jitter.",
+
+  q2:"Wat is downloadsnelheid?",
+  a2:"Dit geeft aan hoe snel gegevens van internet naar je apparaat worden verzonden.",
+
+  q3:"Wat is uploadsnelheid?",
+  a3:"Dit geeft aan hoe snel je apparaat gegevens naar internet kan sturen.",
+
+  q4:"Wat is ping?",
+  a4:"Ping meet de responstijd van het netwerk.",
+
+  q5:"Wat is jitter?",
+  a5:"Jitter meet variaties in de aankomsttijd van datapakketten.",
+
+  q6:"Waarom is mijn Wi-Fi langzaam?",
+  a6:"Afstand, interferentie, drukte en muren kunnen Wi-Fi vertragen.",
+
+  q7:"Waarom is mijn ping hoog tijdens gamen?",
+  a7:"Serverafstand, routing, Wi-Fi en netwerkdrukte kunnen de latency verhogen.",
+
+  q8:"Waarom is mijn uploadsnelheid laag?",
+  a8:"Dit kan worden veroorzaakt door je abonnement, Wi-Fi, router of netwerkdrukte.",
+
+  aiSectionTitle:"Fasqoo AI-technicus",
+  aiSectionText:"Krijg technische hulp met je internetverbinding.",
+  aiTitle:"Fasqoo AI Technician Assistant",
+  aiDescription:"Professionele hulp bij internet- en netwerkproblemen.",
+  powered:"Mogelijk gemaakt door",
+  aiWelcome:"Hallo! Ik kan helpen met internet, Wi-Fi, ping, jitter, download en upload problemen.",
+  aiPlaceholder:"Stel een vraag over je verbinding...",
+  aiButton:"Vraag AI",
+
+  ctaTitle:"Test je internetverbinding",
+  ctaText:"Bekijk je download, upload, ping en jitter.",
+  ctaButton:"Start snelheidstest",
+
+  copyright:"© 2026 Fasqoo. Alle rechten voorbehouden.",
+  trademark:"Fasqoo™ en Fasqoo Internet Speed Test zijn handelsmerken van Fasqoo.",
+
+  footerAbout:"Over",
+  footerFaq:"FAQ",
+  footerNetwork:"Netwerkstatus",
+  footerPrivacy:"Privacybeleid",
+  footerTerms:"Gebruiksvoorwaarden",
+  footerDoNotSell:"Verkoop mijn persoonlijke gegevens niet",
+  footerSlavery:"Beleid moderne slavernij",
+  footerAccessibility:"Toegankelijkheid"
+},
+
+tr:{
+  navHome:"Ana Sayfa",
+  navSpeed:"Hız Testi",
+  navFaq:"SSS",
+  navAI:"AI Teknisyeni",
+  navNetwork:"Ağ Durumu",
+  navAbout:"Hakkında",
+
+  badge:"Fasqoo Destek Merkezi",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Yardım Merkezi",
+  heroText:"İnternet ve ağ sorularınıza cevap bulun veya AI Teknisyenimizden profesyonel yardım alın.",
+
+  faqTitle:"Sık Sorulan Sorular",
+  faqSubtitle:"İnternet hız testleri hakkında bilmeniz gerekenler.",
+
+  q1:"İnternet hız testi nedir?",
+  a1:"İnternet hız testi indirme, yükleme, ping ve jitter değerlerini ölçer.",
+
+  q2:"İndirme hızı nedir?",
+  a2:"İnternetten cihazınıza verilerin ne kadar hızlı aktarıldığını gösterir.",
+
+  q3:"Yükleme hızı nedir?",
+  a3:"Cihazınızın internete ne kadar hızlı veri gönderebildiğini gösterir.",
+
+  q4:"Ping nedir?",
+  a4:"Ping ağın yanıt süresini ölçer.",
+
+  q5:"Jitter nedir?",
+  a5:"Jitter veri paketlerinin ulaşma süresindeki değişiklikleri ölçer.",
+
+  q6:"Wi-Fi neden yavaş?",
+  a6:"Mesafe, parazit, yoğunluk, duvarlar veya eski donanım Wi-Fi hızını etkileyebilir.",
+
+  q7:"Oyunlarda ping neden yüksek?",
+  a7:"Sunucu mesafesi, yönlendirme, Wi-Fi ve ağ yoğunluğu gecikmeyi artırabilir.",
+
+  q8:"Upload neden yavaş?",
+  a8:"Upload hızı internet planı, Wi-Fi, router veya ağ yoğunluğu nedeniyle sınırlanabilir.",
+
+  aiSectionTitle:"Fasqoo AI Teknisyeni",
+  aiSectionText:"İnternet bağlantınız için teknik yardım alın.",
+  aiTitle:"Fasqoo AI Technician Assistant",
+  aiDescription:"İnternet ve ağ sorunları için profesyonel yardım.",
+  powered:"Şunun tarafından desteklenmektedir:",
+  aiWelcome:"Merhaba! İnternet, Wi-Fi, ping, jitter, download ve upload sorunlarında yardımcı olabilirim.",
+  aiPlaceholder:"Bağlantınız hakkında soru sorun...",
+  aiButton:"AI'ya Sor",
+
+  ctaTitle:"İnternet bağlantınızı test edin",
+  ctaText:"Download, upload, ping ve jitter sonuçlarınızı alın.",
+  ctaButton:"Hız Testini Başlat",
+
+  copyright:"© 2026 Fasqoo. Tüm hakları saklıdır.",
+  trademark:"Fasqoo™ ve Fasqoo Internet Speed Test, Fasqoo'nun ticari markalarıdır.",
+
+  footerAbout:"Hakkında",
+  footerFaq:"SSS",
+  footerNetwork:"Ağ Durumu",
+  footerPrivacy:"Gizlilik Politikası",
+  footerTerms:"Kullanım Koşulları",
+  footerDoNotSell:"Kişisel bilgilerimi satma",
+  footerSlavery:"Modern Kölelik Politikası",
+  footerAccessibility:"Erişilebilirlik"
+},
+
+sq:{
+  navHome:"Ballina",
+  navSpeed:"Testi i Shpejtësisë",
+  navFaq:"FAQ",
+  navAI:"Tekniku AI",
+  navNetwork:"Statusi i Rrjetit",
+  navAbout:"Rreth Fasqoo",
+
+  badge:"Qendra e Ndihmës Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"Qendra e Ndihmës",
+  heroText:"Gjej përgjigje për pyetjet rreth Internetit dhe rrjetit ose kërko ndihmë profesionale nga Tekniku ynë AI.",
+
+  faqTitle:"Pyetjet e Shpeshta",
+  faqSubtitle:"Gjithçka që duhet të dish për testimin e shpejtësisë së Internetit.",
+
+  q1:"Çfarë është testi i shpejtësisë së Internetit?",
+  a1:"Testi mat Download, Upload, Ping dhe Jitter të lidhjes së Internetit.",
+
+  q2:"Çfarë është shpejtësia Download?",
+  a2:"Tregon sa shpejt të dhënat transferohen nga Interneti te pajisja juaj.",
+
+  q3:"Çfarë është shpejtësia Upload?",
+  a3:"Tregon sa shpejt pajisja juaj mund të dërgojë të dhëna në Internet.",
+
+  q4:"Çfarë është Ping?",
+  a4:"Ping mat kohën e reagimit të rrjetit.",
+
+  q5:"Çfarë është Jitter?",
+  a5:"Jitter mat ndryshimet në kohën e arritjes së paketave të të dhënave.",
+
+  q6:"Pse Wi-Fi im është i ngadalshëm?",
+  a6:"Distanca nga routeri, interferencat, ngarkesa dhe muret mund ta ngadalësojnë Wi-Fi.",
+
+  q7:"Pse kam Ping të lartë në lojëra?",
+  a7:"Distanca nga serveri, routing, Wi-Fi dhe ngarkesa e rrjetit mund ta rrisin vonesën.",
+
+  q8:"Pse Upload-i im është i ngadalshëm?",
+  a8:"Mund të kufizohet nga paketa e Internetit, Wi-Fi, routeri ose ngarkesa e rrjetit.",
+
+  aiSectionTitle:"Fasqoo AI Technician",
+  aiSectionText:"Merr ndihmë teknike për lidhjen tënde të Internetit dhe rrjetit.",
+  aiTitle:"Fasqoo AI Technician Assistant",
+  aiDescription:"Ndihmë profesionale për problemet e Internetit dhe rrjetit.",
+  powered:"Mundësuar nga",
+  aiWelcome:"Përshëndetje! Mund të të ndihmoj me problemet e Internetit, Wi-Fi, Ping, Jitter, Download dhe Upload.",
+  aiPlaceholder:"Pyet për lidhjen tënde të Internetit...",
+  aiButton:"Pyet AI",
+
+  ctaTitle:"Testo lidhjen tënde të Internetit",
+  ctaText:"Merr rezultatet e Download, Upload, Ping dhe Jitter.",
+  ctaButton:"Fillo Speed Test",
+
+  copyright:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",
+  trademark:"Fasqoo™ dhe Fasqoo Internet Speed Test janë marka tregtare të Fasqoo.",
+
+  footerAbout:"Rreth Fasqoo",
+  footerFaq:"FAQ",
+  footerNetwork:"Statusi i Rrjetit",
+  footerPrivacy:"Politika e Privatësisë",
+  footerTerms:"Kushtet e Përdorimit",
+  footerDoNotSell:"Mos i Shit të Dhënat e Mia Personale",
+  footerSlavery:"Politika për Skllavërinë Moderne",
+  footerAccessibility:"Qasshmëria"
+},
+
+ar:{
+  navHome:"الرئيسية",
+  navSpeed:"اختبار السرعة",
+  navFaq:"الأسئلة الشائعة",
+  navAI:"فني الذكاء الاصطناعي",
+  navNetwork:"حالة الشبكة",
+  navAbout:"حول",
+
+  badge:"مركز دعم Fasqoo",
+  heroTitle1:"Fasqoo",
+  heroTitle2:"مركز المساعدة",
+  heroText:"اعثر على إجابات لأسئلة الإنترنت والشبكات أو اطلب المساعدة من فني الذكاء الاصطناعي.",
+
+  faqTitle:"الأسئلة الشائعة",
+  faqSubtitle:"كل ما تحتاج معرفته عن اختبار سرعة الإنترنت.",
+
+  q1:"ما هو اختبار سرعة الإنترنت؟",
+  a1:"يقيس اختبار السرعة سرعة التنزيل والرفع وPing وJitter.",
+
+  q2:"ما هي سرعة التنزيل؟",
+  a2:"توضح سرعة انتقال البيانات من الإنترنت إلى جهازك.",
+
+  q3:"ما هي سرعة الرفع؟",
+  a3:"توضح سرعة إرسال البيانات من جهازك إلى الإنترنت.",
+
+  q4:"ما هو Ping؟",
+  a4:"يقيس Ping زمن استجابة الشبكة.",
+
+  q5:"ما هو Jitter؟",
+  a5:"يقيس Jitter التغيرات في وقت وصول حزم البيانات.",
+
+  q6:"لماذا Wi-Fi بطيء؟",
+  a6:"قد تؤثر المسافة والتداخل والازدحام والجدران والأجهزة القديمة على سرعة Wi-Fi.",
+
+  q7:"لماذا Ping مرتفع في الألعاب؟",
+  a7:"قد يؤدي بُعد الخادم والتوجيه وWi-Fi وازدحام الشبكة إلى زيادة زمن الاستجابة.",
+
+  q8:"لماذا سرعة الرفع بطيئة؟",
+  a8:"قد تكون سرعة الرفع محدودة بسبب باقة الإنترنت أو Wi-Fi أو الراوتر أو ازدحام الشبكة.",
+
+  aiSectionTitle:"فني Fasqoo للذكاء الاصطناعي",
+  aiSectionText:"احصل على مساعدة تقنية لاتصال الإنترنت والشبكة.",
+  aiTitle:"مساعد فني Fasqoo للذكاء الاصطناعي",
+  aiDescription:"مساعدة احترافية في مشاكل الإنترنت والشبكات.",
+  powered:"مدعوم بواسطة",
+  aiWelcome:"مرحباً! يمكنني مساعدتك في مشاكل الإنترنت وWi-Fi وPing وJitter والتنزيل والرفع.",
+  aiPlaceholder:"اسأل عن اتصال الإنترنت الخاص بك...",
+  aiButton:"اسأل الذكاء الاصطناعي",
+
+  ctaTitle:"اختبر اتصال الإنترنت",
+  ctaText:"احصل على نتائج التنزيل والرفع وPing وJitter.",
+  ctaButton:"بدء اختبار السرعة",
+
+  copyright:"© 2026 Fasqoo. جميع الحقوق محفوظة.",
+  trademark:"Fasqoo™ وFasqoo Internet Speed Test علامتان تجاريتان لـ Fasqoo.",
+
+  footerAbout:"حول",
+  footerFaq:"الأسئلة الشائعة",
+  footerNetwork:"حالة الشبكة",
+  footerPrivacy:"سياسة الخصوصية",
+  footerTerms:"شروط الاستخدام",
+  footerDoNotSell:"لا تبيع معلوماتي الشخصية",
+  footerSlavery:"سياسة مكافحة العبودية الحديثة",
+  footerAccessibility:"إمكانية الوصول"
+}
+
+};
+
+
+/* =========================================================
+   LANGUAGE SYSTEM
+   ========================================================= */
+
+const LANG_KEY = "fasqoo_language";
+
+function applyLanguage(lang){
+
+  if(!translations[lang]){
+    lang = "de";
+  }
+
+  const dictionary = translations[lang];
+
+  document.documentElement.lang = lang;
+
+  if(lang === "ar"){
+    document.documentElement.dir = "rtl";
+  }else{
+    document.documentElement.dir = "ltr";
+  }
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.getAttribute("data-i18n");
+
+    if(dictionary[key]){
+      element.textContent = dictionary[key];
+    }
+
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+
+    const key = element.getAttribute("data-i18n-placeholder");
+
+    if(dictionary[key]){
+      element.placeholder = dictionary[key];
+    }
+
+  });
+
+  const languageSelector = document.getElementById("lang");
+
+  if(languageSelector){
+    languageSelector.value = lang;
+  }
+
+  localStorage.setItem(LANG_KEY, lang);
+
+  document.title =
+    lang === "de"
+      ? "Fasqoo FAQ & AI Technician"
+      : lang === "ar"
+      ? "Fasqoo الأسئلة الشائعة وفني الذكاء الاصطناعي"
+      : "Fasqoo FAQ & AI Technician";
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+function updateThemeButton(){
+
+  const button = document.getElementById("themeBtn");
+
+  if(!button) return;
+
+  const dark =
+    document.body.classList.contains("dark");
+
+  button.textContent = dark ? "☀" : "☾";
+
+  button.setAttribute(
+    "aria-label",
+    dark
+      ? "Switch to light mode"
+      : "Switch to dark mode"
+  );
+
+  button.title =
+    dark
+      ? "Light mode"
+      : "Dark mode";
+}
+
+
+function loadTheme(){
+
+  if(localStorage.getItem("fasqoo_dark") === "true"){
+    document.body.classList.add("dark");
+  }
+
+  updateThemeButton();
+}
+
+
+/* =========================================================
+   FAQ ACCORDION
+   ========================================================= */
+
+document.querySelectorAll(".faq-question").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const item = button.parentElement;
+
+    item.classList.toggle("active");
+
+  });
+
+});
+
+
+/* =========================================================
+   AI TECHNICIAN
+   ========================================================= */
+
+const aiForm = document.getElementById("aiForm");
+const aiInput = document.getElementById("aiInput");
+const aiMessages = document.getElementById("aiMessages");
+const aiSend = document.getElementById("aiSend");
+
+let conversation = [];
+
+
+function escapeHtml(text){
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+}
+
+
+function addAIMessage(text,type){
+
+  const message = document.createElement("div");
+
+  message.className =
+    "ai-message " + type;
+
+  if(type === "assistant"){
+
+    message.innerHTML = `
+      <strong>Fasqoo AI Technician</strong>
+      <p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>
+    `;
+
+  }else{
+
+    message.innerHTML = `
+      <strong>You</strong>
+      <p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>
+    `;
+
+  }
+
+  aiMessages.appendChild(message);
+
+  aiMessages.scrollTop =
+    aiMessages.scrollHeight;
+}
+
+
+aiForm.addEventListener("submit",async(event)=>{
+
+  event.preventDefault();
+
+  const question =
+    aiInput.value.trim();
+
+  if(!question) return;
+
+
+  addAIMessage(question,"user");
+
+
+  conversation.push({
+    role:"user",
+    content:question
+  });
+
+
+  aiInput.value="";
+  aiInput.disabled=true;
+  aiSend.disabled=true;
+  aiSend.textContent="...";
+
+
+  const loading =
+    document.createElement("div");
+
+  loading.className =
+    "ai-message assistant";
+
+  loading.id="aiLoading";
+
+  loading.innerHTML=`
+    <strong>Fasqoo AI Technician</strong>
+    <p>Analyzing your network question...</p>
+  `;
+
+  aiMessages.appendChild(loading);
+
+  aiMessages.scrollTop =
+    aiMessages.scrollHeight;
+
+
+  try{
+
+    const response =
+      await fetch("/api/fasqoo-ai",{
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          messages:conversation
+        })
+
+      });
+
+
+    const data =
+      await response.json();
+
+
+    document
+      .getElementById("aiLoading")
+      ?.remove();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "AI request failed."
+      );
+
+    }
+
+
+    if(!data.answer){
+
+      throw new Error(
+        "Google Gemini returned no answer."
+      );
+
+    }
+
+
+    conversation.push({
+
+      role:"assistant",
+
+      content:data.answer
+
+    });
+
+
+    addAIMessage(
+      data.answer,
+      "assistant"
+    );
+
+
+  }catch(error){
+
+    document
+      .getElementById("aiLoading")
+      ?.remove();
+
+
+    addAIMessage(
+      "The Fasqoo AI Technician is currently unavailable. Please try again shortly.",
+      "assistant"
+    );
+
+
+    console.error(
+      "Fasqoo AI:",
+      error
+    );
+
+  }finally{
+
+    aiInput.disabled=false;
+    aiSend.disabled=false;
+
+    const currentLang =
+      localStorage.getItem(LANG_KEY) || "de";
+
+    aiSend.textContent =
+      translations[currentLang]?.aiButton ||
+      "Ask AI";
+
+    aiInput.focus();
+
+  }
+
+});
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  const selector =
+    document.getElementById("lang");
+
+  const savedLanguage =
+    localStorage.getItem(LANG_KEY) || "de";
+
+  applyLanguage(savedLanguage);
+
+  loadTheme();
+
+
+  selector.addEventListener("change",()=>{
+
+    applyLanguage(
+      selector.value
+    );
+
+  });
+
+
+  document
+    .getElementById("themeBtn")
+    .addEventListener("click",()=>{
+
+      document.body.classList.toggle("dark");
+
+      localStorage.setItem(
+        "fasqoo_dark",
+        document.body.classList.contains("dark")
+      );
+
+      updateThemeButton();
+
+    });
+
+});
+
+</script>
+<!-- KI Chat Bereich -->
+<div id="fasqoo-ai" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 20px 0;">
+    <h3>Frag unsere fasqoo AI</h3>
+    <textarea id="promptInput" style="width: 100%; height: 80px; padding: 10px; box-sizing: border-box;" placeholder="Stelle eine Frage..."></textarea>
+    <button id="sendBtn" style="background: #4A90E2; color: #fff; border: none; padding: 10px; width: 100%; margin-top: 10px; cursor: pointer;" onclick="sendToGemini()">Frage senden</button>
+    
+    <p><strong>Antwort:</strong></p>
+    <div id="output" style="background: #f9f9f9; padding: 15px; white-space: pre-wrap;">Die Antwort erscheint hier...</div>
+</div>
+
+<script>
+async function sendToGemini() {
+    const input = document.getElementById("promptInput");
+    const output = document.getElementById("output");
+    const btn = document.getElementById("sendBtn");
+    
+    if (!input.value.trim()) return alert("Bitte Frage eingeben!");
+    
+    btn.disabled = true;
+    output.innerText = "Übermittle an KI...";
+    
+    try {
+        const res = await fetch("/.netlify/functions/gemini", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: input.value.trim() }),
+        });
+        
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        output.innerText = data.text;
+    } catch {
+        output.innerText = "Fehler! Bitte stelle sicher, dass der GEMINI_API_KEY in Netlify eingetragen ist.";
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use – Fasqoo</title>
+    <style>
+        :root {
+            --bg-color: #030712;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .wrapper {
+            max-width: 680px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+        .back-nav {
+            margin-bottom: 40px;
+        }
+        .back-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s ease;
+        }
+        .back-nav a:hover {
+            color: var(--accent);
+        }
+        header {
+            margin-bottom: 48px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+        }
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #ffffff;
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+        p {
+            margin: 0 0 20px 0;
+            color: #d1d5db;
+            font-size: 1.05rem;
+        }
+        ul {
+            margin: 0 0 24px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+            color: #d1d5db;
+            font-size: 1.05rem;
+        }
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="/">&larr; Back to Speed Test</a>
+        </nav>
+        <main>
+            <header>
+                <h1>Terms of Use – Fasqoo</h1>
+                <div class="last-updated">Last updated: September 2026</div>
+            </header>
+            <p>Welcome to Fasqoo. By accessing or using the Fasqoo Internet Speed Test website, you agree to these Terms of Use. If you do not agree with these terms, please do not use the service.</p>
+            <h2>1. Use of the Service</h2>
+            <p>Fasqoo provides an Internet speed testing and network diagnostic service. The service may measure and display information such as:</p>
+            <ul>
+                <li>Download speed</li>
+                <li>Upload speed</li>
+                <li>Ping</li>
+                <li>Jitter</li>
+                <li>Internet Service Provider (ISP)</li>
+                <li>Network information</li>
+                <li>Approximate location</li>
+                <li>Connection quality</li>
+            </ul>
+            <p>The results are provided for informational and diagnostic purposes.</p>
+            <h2>2. Speed Test Results</h2>
+            <p>Internet speed results can vary depending on many factors, including your Internet connection, Wi-Fi signal, device, browser, network traffic, server location and Internet Service Provider. Fasqoo does not guarantee that speed test results will always represent the maximum speed available from your Internet Service Provider. Speed test results should therefore not be considered a guarantee of the speed or quality of your Internet service.</p>
+            <h2>3. Acceptable Use</h2>
+            <p>You agree to use Fasqoo only for lawful purposes. You must not:</p>
+            <ul>
+                <li>Attempt to damage or disrupt the Fasqoo service</li>
+                <li>Abuse or overload the speed test infrastructure</li>
+                <li>Use automated systems to generate excessive traffic</li>
+                <li>Attempt to gain unauthorized access to Fasqoo systems</li>
+                <li>Interfere with the operation of the website</li>
+                <li>Use the service for illegal activities</li>
+            </ul>
+            <p>Fasqoo reserves the right to restrict access to users who abuse the service or violate these Terms of Use.</p>
+            <h2>4. Availability</h2>
+            <p>Fasqoo aims to provide a reliable service but does not guarantee that the website or speed test will always be available. The service may occasionally be unavailable due to maintenance, technical problems, server issues, network interruptions or circumstances beyond our control.</p>
+            <h2>5. Third-Party Services</h2>
+            <p>Fasqoo may use third-party services for hosting, network measurements, IP information, analytics, advertising and other technical functions. The availability and operation of third-party services are outside the direct control of Fasqoo.</p>
+            <h2>6. Privacy</h2>
+            <p>Your use of Fasqoo is also subject to our Privacy Policy, which explains how information may be processed when you use the website. You can read the Privacy Policy on the Fasqoo website.</p>
+            <h2>7. Intellectual Property</h2>
+            <p>The Fasqoo name, logo, website design, software, graphics, text and other original content are protected by applicable intellectual property laws. You may not copy, reproduce, modify, distribute or commercially exploit Fasqoo content without prior permission, except where permitted by applicable law.</p>
+            <p><strong>Fasqoo™</strong> and <strong>Fasqoo Internet Speed Test</strong> are trademarks of Fasqoo and may only be used with permission.</p>
+            <h2>8. Disclaimer</h2>
+            <p>Fasqoo is provided on an "as is" and "as available" basis. To the extent permitted by applicable law, Fasqoo makes no guarantees regarding the accuracy, completeness, reliability or availability of the service or its results.</p>
+            <h2>9. Limitation of Liability</h2>
+            <p>To the extent permitted by applicable law, Fasqoo shall not be responsible for losses or damages resulting from the use of, or inability to use, the website or speed test service. This includes, where legally permitted, indirect, incidental or consequential damages.</p>
+            <h2>10. Changes to These Terms</h2>
+            <p>Fasqoo may update these Terms of Use from time to time. When changes are made, the updated version will be published on this page together with a new revision date. Your continued use of Fasqoo after changes are published constitutes acceptance of the updated Terms of Use, to the extent permitted by applicable law.</p>
+            <h2>11. Contact</h2>
+            <p>If you have questions regarding these Terms of Use, please contact Fasqoo through the contact information provided on the website.</p>
+            <footer>
+                <strong>Fasqoo™</strong> Professional Internet Speed Test<br>
+                &copy; 2026 Fasqoo. All Rights Reserved.
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

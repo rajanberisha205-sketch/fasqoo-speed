@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Do Not Sell or Share My Personal Information – Fasqoo</title>
+
+    <meta name="description" content="Fasqoo Do Not Sell or Share My Personal Information – Learn how to exercise applicable privacy choices and opt out of certain data sharing.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .card {
+            background: #111111;
+            padding: 45px;
+            border-radius: 18px;
+            border: 1px solid #242424;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 36px;
+            line-height: 1.2;
+            color: #ffffff;
+        }
+
+        h2 {
+            margin-top: 35px;
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        p {
+            margin: 12px 0;
+            font-size: 16px;
+            color: #d1d5db;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #d1d5db;
+        }
+
+        .updated {
+            color: #888888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .contact {
+            background: #181818;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #292929;
+            margin-top: 15px;
+        }
+
+        .contact strong {
+            color: #ffffff;
+        }
+
+        .contact a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777777;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px 40px;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 14px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            p,
+            li {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <a href="/" class="back-link">← Back to Speed Test</a>
+
+    <article class="card">
+
+        <h1>Do Not Sell or Share My Personal Information – Fasqoo</h1>
+
+        <div class="updated">
+            Last updated: September 3, 2026
+        </div>
+
+        <p>
+            At Fasqoo, we respect your privacy and your right to control how your
+            personal information is used.
+        </p>
+
+        <p>
+            This page explains how you may request that Fasqoo does not sell or
+            share your personal information where applicable under relevant
+            privacy laws.
+        </p>
+
+        <h2>1. Your Privacy Choices</h2>
+
+        <p>
+            Depending on your location and applicable privacy laws, you may have
+            the right to request that your personal information is not sold or
+            shared for purposes such as targeted advertising.
+        </p>
+
+        <p>
+            You may also have the right to limit certain types of data processing
+            or withdraw consent for non-essential cookies and similar technologies.
+        </p>
+
+        <h2>2. Information That May Be Processed</h2>
+
+        <p>
+            When you use the Fasqoo website or Internet Speed Test, certain
+            technical information may be processed, including:
+        </p>
+
+        <ul>
+            <li>IP address</li>
+            <li>Approximate location</li>
+            <li>Internet Service Provider (ISP)</li>
+            <li>Browser and device information</li>
+            <li>Network information</li>
+            <li>Website usage information</li>
+            <li>Speed test results</li>
+            <li>Cookies or similar technologies, where applicable</li>
+        </ul>
+
+        <p>
+            The specific information processed depends on the features and
+            services used on the website.
+        </p>
+
+        <h2>3. Advertising and Third-Party Services</h2>
+
+        <p>
+            Fasqoo may use third-party services for advertising, analytics,
+            hosting, technical functionality, or other website services.
+        </p>
+
+        <p>
+            Some third-party services may process information through cookies
+            or similar technologies.
+        </p>
+
+        <p>
+            Where required by applicable law, Fasqoo will provide appropriate
+            choices or obtain consent before using non-essential cookies or
+            similar technologies.
+        </p>
+
+        <h2>4. How to Submit a Request</h2>
+
+        <p>
+            If you wish to request that Fasqoo does not sell or share your
+            personal information, you may contact us using the contact
+            information provided on the Fasqoo website.
+        </p>
+
+        <p>
+            When submitting a request, please include:
+        </p>
+
+        <ul>
+            <li>
+                The subject:
+                <strong>Do Not Sell or Share My Personal Information Request</strong>
+            </li>
+            <li>
+                The email address or other information necessary to identify
+                and process your request
+            </li>
+            <li>A clear description of your request</li>
+        </ul>
+
+        <p>
+            We may request additional information when reasonably necessary to
+            verify and process your request.
+        </p>
+
+        <h2>5. Opting Out of Cookies and Advertising</h2>
+
+        <p>
+            You may also be able to control certain types of tracking by:
+        </p>
+
+        <ul>
+            <li>Adjusting your browser privacy settings</li>
+            <li>Blocking or deleting cookies</li>
+            <li>
+                Using available cookie preference tools on the Fasqoo website,
+                if provided
+            </li>
+            <li>
+                Adjusting advertising preferences offered by relevant
+                third-party providers
+            </li>
+        </ul>
+
+        <p>
+            Please note that disabling certain cookies may affect some website
+            functionality.
+        </p>
+
+        <h2>6. Authorized Agents</h2>
+
+        <p>
+            Where permitted by applicable law, you may use an authorized agent
+            to submit a privacy request on your behalf.
+        </p>
+
+        <p>
+            We may request reasonable information to verify the identity and
+            authority of the authorized agent before processing the request.
+        </p>
+
+        <h2>7. Non-Discrimination</h2>
+
+        <p>
+            Fasqoo will not unlawfully discriminate against users for exercising
+            applicable privacy rights.
+        </p>
+
+        <p>
+            However, some features or services may require certain technical
+            information in order to function correctly.
+        </p>
+
+        <h2>8. Changes to This Page</h2>
+
+        <p>
+            Fasqoo may update this page from time to time to reflect changes in
+            our services, privacy practices, or applicable legal requirements.
+        </p>
+
+        <p>
+            The latest version will be published on this page with an updated
+            revision date.
+        </p>
+
+        <h2>9. Contact</h2>
+
+        <p>
+            For questions or requests regarding your personal information,
+            please contact:
+        </p>
+
+        <div class="contact">
+
+            <p>
+                <strong>Fasqoo™</strong>
+            </p>
+
+            <p>
+                <strong>Professional Internet Speed Test</strong>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:mcomfortstore14@gmail.com">
+                    mcomfortstore14@gmail.com
+                </a>
+            </p>
+
+        </div>
+
+    </article>
+
+    <footer>
+        © 2026 Fasqoo. All Rights Reserved.
+    </footer>
+
+</main>
+
+</body>
+</html>
