@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Privacy Policy – Fasqoo</title>
+    <title>Network Status | Fasqoo</title>
 
-    <meta name="description" content="Fasqoo Privacy Policy – Learn how Fasqoo processes information when you use the Fasqoo Internet Speed Test.">
+    <meta name="description"
+          content="Check the current status of Fasqoo services, systems, and network infrastructure.">
+
+    <link rel="canonical" href="https://www.fasqoo.com/network-status.html">
 
     <style>
         * {
@@ -16,114 +19,208 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #000000;
-            color: #ffffff;
-            line-height: 1.7;
+            background: #f7f9fc;
+            color: #172033;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px 50px;
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e9f0;
+            padding: 20px 30px;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #ffffff;
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            color: #111827;
             text-decoration: none;
+        }
+
+        nav a {
+            color: #374151;
+            text-decoration: none;
+            margin-left: 22px;
             font-size: 15px;
-            font-weight: 500;
-            transition: opacity 0.2s ease;
         }
 
-        .back-link:hover {
-            opacity: 0.7;
+        nav a:hover {
+            color: #2563eb;
         }
 
-        .card {
-            background: #111111;
-            padding: 45px;
-            border-radius: 18px;
-            border: 1px solid #242424;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        main {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
         }
 
-        h1 {
-            margin-top: 0;
-            font-size: 36px;
-            line-height: 1.2;
-            color: #ffffff;
+        .hero {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
-        h2 {
-            margin-top: 35px;
+        .hero h1 {
+            font-size: 42px;
             margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .hero p {
+            color: #667085;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .status-card {
+            background: #ffffff;
+            border: 1px solid #e5e9f0;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .overall-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-dot {
+            width: 16px;
+            height: 16px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+        }
+
+        .overall-status h2 {
+            margin: 0;
             font-size: 24px;
-            color: #ffffff;
+            color: #15803d;
         }
 
-        p {
-            margin: 12px 0;
-            font-size: 16px;
-            color: #d1d5db;
+        .overall-status p {
+            margin: 6px 0 0;
+            color: #667085;
         }
 
-        ul {
-            padding-left: 25px;
+        .service {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid #edf0f4;
         }
 
-        li {
+        .service:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .operational {
+            color: #15803d;
+            font-weight: 600;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .small-dot {
+            width: 9px;
+            height: 9px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .incident {
+            background: #f8fafc;
+            border: 1px solid #e5e9f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .incident-title {
+            font-weight: 700;
             margin-bottom: 8px;
-            color: #d1d5db;
+        }
+
+        .incident p {
+            margin: 0;
+            color: #667085;
+            line-height: 1.6;
         }
 
         .updated {
-            color: #888888;
+            text-align: center;
+            color: #98a2b3;
             font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .contact {
-            background: #181818;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #292929;
-            margin-top: 15px;
-        }
-
-        .contact strong {
-            color: #ffffff;
+            margin-top: 30px;
         }
 
         footer {
+            margin-top: 70px;
+            padding: 30px 20px;
             text-align: center;
-            margin-top: 30px;
-            color: #777777;
+            background: #ffffff;
+            border-top: 1px solid #e5e9f0;
+            color: #667085;
             font-size: 14px;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 15px 40px;
+        footer a {
+            color: #667085;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 18px 20px;
             }
 
-            .card {
-                padding: 25px 20px;
-                border-radius: 14px;
+            .header-container {
+                flex-direction: column;
             }
 
-            h1 {
-                font-size: 28px;
+            nav {
+                text-align: center;
             }
 
-            h2 {
-                font-size: 21px;
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
             }
 
-            p,
-            li {
-                font-size: 15px;
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .status-card {
+                padding: 22px;
+            }
+
+            .service {
+                gap: 15px;
             }
         }
     </style>
@@ -131,224 +228,155 @@
 
 <body>
 
-<main class="container">
+<header>
+    <div class="header-container">
 
-    <a href="/" class="back-link">← Back to Speed Test</a>
+        <a href="/" class="logo">Fasqoo</a>
 
-    <article class="card">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/about.html">About</a>
+            <a href="/network-status.html">Network Status</a>
+        </nav>
 
-        <h1>Privacy Policy – Fasqoo</h1>
+    </div>
+</header>
 
-        <div class="updated">
-            Last updated: September 2026
+
+<main>
+
+    <section class="hero">
+        <h1>Network Status</h1>
+
+        <p>
+            Check the current operational status of Fasqoo services,
+            systems, and network infrastructure.
+        </p>
+    </section>
+
+
+    <section class="status-card">
+
+        <div class="overall-status">
+
+            <div class="status-dot"></div>
+
+            <div>
+                <h2>All Systems Operational</h2>
+
+                <p>
+                    All Fasqoo services are currently operating normally.
+                </p>
+            </div>
+
         </div>
 
-        <p>
-            Fasqoo respects your privacy. This Privacy Policy explains what
-            information may be processed when you use the Fasqoo Internet Speed
-            Test and how that information is handled.
-        </p>
+    </section>
 
-        <h2>1. Information We Process</h2>
 
-        <p>
-            When you use Fasqoo, technical information may be processed to
-            perform and improve the speed test. This may include:
-        </p>
+    <section class="status-card">
 
-        <ul>
-            <li>IP address</li>
-            <li>Internet Service Provider (ISP)</li>
-            <li>Approximate geographic location</li>
-            <li>Network and connection information</li>
-            <li>Download speed</li>
-            <li>Upload speed</li>
-            <li>Ping and latency</li>
-            <li>Jitter</li>
-            <li>Device and browser information</li>
-            <li>Date and time of the speed test</li>
-        </ul>
+        <h2>Service Status</h2>
 
-        <p>
-            The speed test requires certain technical information to function
-            correctly.
-        </p>
+        <div class="service">
 
-        <h2>2. IP Address and Location</h2>
+            <span class="service-name">
+                Fasqoo Website
+            </span>
 
-        <p>
-            Fasqoo may use your public IP address to determine information such
-            as your Internet Service Provider, network provider, country, region
-            or approximate location.
-        </p>
+            <span class="service-status operational">
+                <span class="small-dot"></span>
+                Operational
+            </span>
 
-        <p>
-            Fasqoo does not intentionally use your IP address to determine your
-            exact home address.
-        </p>
-
-        <h2>3. Speed Test Data</h2>
-
-        <p>
-            During a speed test, Fasqoo measures the performance of your Internet
-            connection, including download speed, upload speed, ping and jitter.
-        </p>
-
-        <p>
-            These measurements are used to display the results of your test and
-            may be used to improve the reliability and performance of the Fasqoo
-            service.
-        </p>
-
-        <h2>4. Cookies and Local Storage</h2>
-
-        <p>
-            Fasqoo may use cookies or browser local storage for technical and
-            functional purposes. This may include storing:
-        </p>
-
-        <ul>
-            <li>Language preferences</li>
-            <li>Dark or light mode preferences</li>
-            <li>Speed test settings</li>
-            <li>Test history</li>
-            <li>Other website preferences</li>
-        </ul>
-
-        <p>
-            You can manage or delete cookies and local storage through your
-            browser settings.
-        </p>
-
-        <h2>5. Advertising</h2>
-
-        <p>
-            Fasqoo may display advertising provided by third-party advertising
-            partners. Advertising providers may use cookies, similar technologies
-            or other information to provide and measure advertisements.
-        </p>
-
-        <p>
-            Where legally required, Fasqoo may request your consent before using
-            non-essential advertising or tracking technologies.
-        </p>
-
-        <h2>6. Analytics</h2>
-
-        <p>
-            Fasqoo may use analytics services to understand how visitors use the
-            website and to identify technical problems.
-        </p>
-
-        <p>
-            Analytics information may include browser type, device information,
-            pages visited, approximate location and interactions with the website.
-        </p>
-
-        <h2>7. Third-Party Services</h2>
-
-        <p>
-            Fasqoo may use third-party services to provide technical functionality,
-            including IP information, network information, speed-test
-            infrastructure, analytics or advertising.
-        </p>
-
-        <p>
-            These third-party providers may process information according to
-            their own privacy policies.
-        </p>
-
-        <h2>8. Data Retention</h2>
-
-        <p>
-            Fasqoo does not intend to retain personal information for longer than
-            necessary for the purposes described in this Privacy Policy.
-        </p>
-
-        <p>
-            Where information is stored, appropriate measures may be used to
-            protect it against unauthorized access or misuse.
-        </p>
-
-        <h2>9. Data Security</h2>
-
-        <p>
-            Fasqoo takes reasonable technical and organizational measures to
-            protect information processed through the website.
-        </p>
-
-        <p>
-            However, no Internet service can guarantee complete security of data
-            transmitted over the Internet.
-        </p>
-
-        <h2>10. Your Privacy Rights</h2>
-
-        <p>
-            Depending on your country or region, you may have rights concerning
-            your personal information, including the right to:
-        </p>
-
-        <ul>
-            <li>Request access to your personal information</li>
-            <li>Request correction of inaccurate information</li>
-            <li>Request deletion of personal information</li>
-            <li>Object to certain processing</li>
-            <li>Request restriction of processing</li>
-            <li>Withdraw consent where processing is based on consent</li>
-        </ul>
-
-        <p>
-            To exercise applicable rights, please contact Fasqoo using the
-            contact information provided on the website.
-        </p>
-
-        <h2>11. Children's Privacy</h2>
-
-        <p>
-            Fasqoo is not specifically directed at children. We do not knowingly
-            collect personal information from children for purposes that are not
-            permitted by applicable law.
-        </p>
-
-        <h2>12. Changes to This Privacy Policy</h2>
-
-        <p>
-            Fasqoo may update this Privacy Policy from time to time to reflect
-            changes to the website, technology, services or applicable legal
-            requirements.
-        </p>
-
-        <p>
-            The updated version will be published on this page with a new
-            revision date.
-        </p>
-
-        <h2>13. Contact</h2>
-
-        <p>
-            If you have questions about this Privacy Policy or the processing of
-            information by Fasqoo, please contact us through the contact
-            information provided on the Fasqoo website.
-        </p>
-
-        <div class="contact">
-            <p>
-                <strong>Fasqoo™</strong>
-            </p>
-
-            <p>
-                <strong>Professional Internet Speed Test</strong>
-            </p>
         </div>
 
-    </article>
 
-    <footer>
-        © 2026 Fasqoo. All Rights Reserved.
-    </footer>
+        <div class="service">
+
+            <span class="service-name">
+                Fasqoo AI Technician
+            </span>
+
+            <span class="service-status operational">
+                <span class="small-dot"></span>
+                Operational
+            </span>
+
+        </div>
+
+
+        <div class="service">
+
+            <span class="service-name">
+                Network Services
+            </span>
+
+            <span class="service-status operational">
+                <span class="small-dot"></span>
+                Operational
+            </span>
+
+        </div>
+
+
+        <div class="service">
+
+            <span class="service-name">
+                API Services
+            </span>
+
+            <span class="service-status operational">
+                <span class="small-dot"></span>
+                Operational
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <section class="status-card">
+
+        <h2>Current Incidents</h2>
+
+        <div class="incident">
+
+            <div class="incident-title">
+                No active incidents
+            </div>
+
+            <p>
+                There are currently no known service interruptions
+                or network incidents affecting Fasqoo services.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <p class="updated">
+        Status information is provided by Fasqoo.
+    </p>
 
 </main>
+
+
+<footer>
+
+    <p>
+        &copy; 2026 Fasqoo. All rights reserved.
+    </p>
+
+    <p>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/accessibility.html">Accessibility</a>
+    </p>
+
+</footer>
 
 </body>
 </html>
