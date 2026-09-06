@@ -1980,44 +1980,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 });
 
 </script>
-<!-- KI Chat Bereich -->
-<div id="fasqoo-ai" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 20px 0;">
-    <h3>Frag unsere fasqoo AI</h3>
-    <textarea id="promptInput" style="width: 100%; height: 80px; padding: 10px; box-sizing: border-box;" placeholder="Stelle eine Frage..."></textarea>
-    <button id="sendBtn" style="background: #4A90E2; color: #fff; border: none; padding: 10px; width: 100%; margin-top: 10px; cursor: pointer;" onclick="sendToGemini()">Frage senden</button>
-    
-    <p><strong>Antwort:</strong></p>
-    <div id="output" style="background: #f9f9f9; padding: 15px; white-space: pre-wrap;">Die Antwort erscheint hier...</div>
-</div>
-
-<script>
-async function sendToGemini() {
-    const input = document.getElementById("promptInput");
-    const output = document.getElementById("output");
-    const btn = document.getElementById("sendBtn");
-    
-    if (!input.value.trim()) return alert("Bitte Frage eingeben!");
-    
-    btn.disabled = true;
-    output.innerText = "Übermittle an KI...";
-    
-    try {
-        const res = await fetch("/.netlify/functions/gemini", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: input.value.trim() }),
-        });
-        
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        output.innerText = data.text;
-    } catch {
-        output.innerText = "Fehler! Bitte stelle sicher, dass der GEMINI_API_KEY in Netlify eingetragen ist.";
-    } finally {
-        btn.disabled = false;
-    }
-}
-</script>
 
 </body>
 </html>
