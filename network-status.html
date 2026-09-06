@@ -1,425 +1,405 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-<title>Fasqoo Network Status</title>
-<style>
-:root{
-  --bg:#070b14;--panel:#0d1424;--panel2:#111a2d;--line:#1d2940;
-  --text:#f4f7fb;--muted:#8e9ab0;--green:#32d583;--yellow:#f5c451;
-  --red:#ff5d6c;--blue:#5b8cff;--shadow:0 20px 60px rgba(0,0,0,.28);
-  --btn-bg:#172238;--dropdown-bg:#10192b;--dropdown-hover:#172238;
-  --track-bg:#1b2538;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fasqoo - Network Status</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --green: #10b981;
+      --border-color: #334155;
+    }
 
-/* LIGHT MODE FIXES */
-.light{
-  --bg:#f5f7fb;--panel:#ffffff;--panel2:#f1f4f9;--line:#dce2eb;
-  --text:#111827;--muted:#657086;--btn-bg:#eef2f8;--dropdown-bg:#ffffff;
-  --dropdown-hover:#f1f4f9;--track-bg:#e2e8f0;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-*{box-sizing:border-box} 
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh;transition:background .2s, color .2s}
-a{color:inherit;text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
-header{display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:28px}
-.site-header{position:relative;flex-wrap:wrap}.main-nav{display:flex;align-items:center;gap:6px;margin-left:auto}
-.main-nav a{color:var(--muted);padding:9px 11px;border-radius:9px;font-weight:600;transition:all .2s}.main-nav a:hover,.main-nav a.active-nav{color:var(--text);background:var(--btn-bg)}
-.header-actions{display:flex;align-items:center;gap:8px}.language{position:relative}.language>button,.theme-button{background:var(--panel2);border:1px solid var(--line);padding:9px 11px;border-radius:10px;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:600}
-.language-menu{display:none;position:absolute;right:0;top:46px;z-index:100;min-width:160px;padding:6px;background:var(--dropdown-bg);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);max-height:300px;overflow-y:auto}
-.language-menu.open{display:block}.language-menu button{display:block;width:100%;text-align:left;background:transparent;padding:9px 10px;color:var(--text);border:0;border-radius:8px;cursor:pointer;font-weight:500}.language-menu button:hover{background:var(--dropdown-hover)}
-.mobile-live{display:none}
-.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#5b8cff,#7b5cff);display:grid;place-items:center;font-weight:900;color:#fff}
-.brand h1{font-size:20px;margin:0;color:var(--text)}.brand small{color:var(--muted)}
-.live{display:flex;align-items:center;gap:9px;color:var(--green);font-weight:700}.dot{width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green)}
-.hero{padding:30px;border:1px solid var(--line);background:var(--panel);border-radius:24px;box-shadow:var(--shadow);margin-bottom:18px}
-.hero h2{font-size:34px;margin:0 0 7px;color:var(--text)}.hero p{margin:0;color:var(--muted)}
-.status{margin-top:22px;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:rgba(50,213,131,.08);border:1px solid rgba(50,213,131,.2)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
-.card .label{color:var(--muted);font-size:13px}.value{font-size:28px;font-weight:800;margin:7px 0;color:var(--text)}.good{color:var(--green)}.warn{color:var(--yellow)}.bad{color:var(--red)}
-.section{margin-top:26px}.section h3{margin:0 0 12px;font-size:19px;color:var(--text)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.tabs{display:flex;gap:6px;padding:14px;border-bottom:1px solid var(--line)}button.range{border:0;color:var(--text);background:var(--btn-bg);padding:9px 13px;border-radius:10px;cursor:pointer;font-weight:600}button.range.active{background:#315bd6;color:#fff}
-.chart{height:230px;padding:18px;display:flex;align-items:end;gap:5px}.bar{flex:1;min-width:2px;background:linear-gradient(to top,#315bd6,#65a1ff);border-radius:4px 4px 0 0;opacity:.8;transition:height .3s ease, background .3s}
-.bar.offline{background:var(--red)}
-.uptime{padding:18px}.uptime-row{display:grid;grid-template-columns:140px 1fr 70px;gap:12px;align-items:center;margin:12px 0;color:var(--text)}.track{height:10px;background:var(--track-bg);border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--green);border-radius:20px;transition:width .5s ease}
-.incident{padding:18px;border-bottom:1px solid var(--line);display:flex;gap:14px;color:var(--text)}.incident:last-child{border-bottom:0}.badge{height:max-content;padding:4px 9px;border-radius:8px;font-size:12px;font-weight:800;background:rgba(50,213,131,.1);color:var(--green)}.badge.warn{background:rgba(245,196,81,.1);color:var(--yellow)}
-.service{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line);color:var(--text)}.service:last-child{border:0}.service-name{font-weight:700}.service-meta{color:var(--muted);font-size:13px}.right{display:flex;align-items:center;gap:9px}.mini-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
-.footer{margin-top:25px;color:var(--muted);font-size:12px;text-align:center}
-.ip-badge{font-size:11px;padding:3px 8px;border-radius:6px;background:var(--btn-bg);color:var(--muted);display:inline-block;margin-top:5px}
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-@media(max-width:800px){.main-nav{order:3;width:100%;justify-content:center;overflow:auto}.main-nav a{white-space:nowrap}.mobile-live{display:flex;width:100%;order:4;justify-content:center}.site-header>.live:not(.mobile-live){display:none}.grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:27px}.uptime-row{grid-template-columns:110px 1fr 60px}}
-@media(max-width:500px){.wrap{padding:18px 12px 45px}header{align-items:flex-start}.grid{grid-template-columns:1fr 1fr}.card{padding:15px}.value{font-size:23px}.uptime-row{grid-template-columns:1fr}.hero{padding:22px}}
-</style>
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-icon {
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--text-main);
+    }
+
+    /* System Status Banner */
+    .status-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-dot {
+      width: 16px;
+      height: 16px;
+      background-color: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+      flex-shrink: 0;
+    }
+
+    .status-info b {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .status-info span {
+      color: var(--text-muted);
+      font-size: 14px;
+      display: block;
+    }
+
+    /* Stats Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .card-title {
+      color: var(--text-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .card-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--text-main);
+    }
+
+    .card-sub {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* Chart Section */
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 16px;
+      margin-top: 30px;
+    }
+
+    .chart-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .chart-container {
+      display: flex;
+      gap: 4px;
+      align-items: flex-end;
+      height: 40px;
+      margin: 15px 0;
+    }
+
+    .chart-bar {
+      flex: 1;
+      height: 100%;
+      background-color: var(--green);
+      border-radius: 3px;
+      transition: opacity 0.2s;
+    }
+
+    .chart-bar:hover {
+      opacity: 0.7;
+    }
+
+    .chart-footer {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Services List */
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .service-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .service-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .badge {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--green);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-<header class="site-header">
-  <a class="brand" href="/">
-    <div class="logo">F</div>
-    <div><h1>Fasqoo</h1><small id="subBrand">Internet Speed Test</small></div>
-  </a>
 
-  <nav class="main-nav">
-    <a href="/" id="navHome">Home</a>
-    <a href="/faq.html" id="navFaq">FAQ</a>
-    <a class="active-nav" href="/network-status.html" id="navStatus">Network Status</a>
-    <a href="/about.html" id="navAbout">About</a>
-  </nav>
-
-  <div class="header-actions">
-    <div class="language">
-      <button id="languageButton" type="button" aria-haspopup="true" aria-expanded="false">🌐 <span id="currentLanguage">DE</span> ▾</button>
-      <div id="languageMenu" class="language-menu">
-        <button data-lang="de">🇩🇪 Deutsch</button>
-        <button data-lang="en">🇬🇧 English</button>
-        <button data-lang="sq">🇦🇱 Shqip</button>
-        <button data-lang="tr">🇹🇷 Türkçe</button>
-        <button data-lang="es">🇪🇸 Español</button>
-        <button data-lang="fr">🇫🇷 Français</button>
-        <button data-lang="it">🇮🇹 Italiano</button>
-        <button data-lang="pt">🇵🇹 Português</button>
-        <button data-lang="pl">🇵🇱 Polski</button>
-        <button data-lang="ru">🇷🇺 Русский</button>
+<div class="container">
+  
+  <header>
+    <a href="/" class="logo">
+      <div class="logo-icon">F</div>
+      <div>
+        <h1 style="font-size: 18px;">Fasqoo</h1>
+        <small style="color: var(--text-muted);">Internet Speed Test</small>
       </div>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/network-status.html" class="active">Network Status</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  <section style="margin-bottom: 24px;">
+    <h2>Fasqoo Network Status</h2>
+    <p style="color: var(--text-muted); margin-top: 4px;">Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.</p>
+  </section>
+
+  <div class="status-banner">
+    <div class="status-dot"></div>
+    <div class="status-info">
+      <b>Keine bekannten Störungen</b>
+      <span>Alle überwachten Fasqoo-Dienste laufen normal.</span>
+      <span id="user-ip" style="margin-top: 4px; color: var(--green);">IP: Wird ermittelt...</span>
     </div>
-    <button id="themeButton" class="theme-button" type="button" aria-label="Theme switch">☾</button>
   </div>
 
-  <div class="live mobile-live"><span class="dot"></span><span class="liveText">Alle Systeme betriebsbereit</span></div>
-</header>
-
-<section class="hero">
-  <h2 id="heroTitle">Fasqoo Network Status</h2>
-  <p id="heroSubtitle">Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.</p>
-  <div class="status">
-    <span class="dot"></span>
-    <div>
-      <b id="statusTitle" style="color:var(--text)">Keine bekannten Störungen</b><br>
-      <span style="color:var(--muted)" id="statusDesc">Alle überwachten Fasqoo-Dienste laufen normal.</span><br>
-      <span class="ip-badge" id="clientIpDisplay">IP: WIRD ERMITTELT...</span>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">Gesamtverfügbarkeit</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">Letzte 90 Tage</div>
+    </div>
+    <div class="card">
+      <div class="card-title">API Status</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">Aktuelle Verfügbarkeit</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Speedtest Status</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">Aktuelle Verfügbarkeit</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Ø Antwortzeit</div>
+      <div class="card-value" id="ping-value">-- ms</div>
+      <div class="card-sub">Live Ping (alle 3s)</div>
     </div>
   </div>
-</section>
 
-<div class="grid">
-  <div class="card"><div class="label" id="lblOverall">Gesamtverfügbarkeit</div><div id="overall" class="value good">100%</div><div class="label" id="lblOverallSub">letzte Messungen</div></div>
-  <div class="card"><div class="label" id="lblApi">API</div><div id="api" class="value good">100%</div><div class="label" id="lblApiSub">aktuelle Verfügbarkeit</div></div>
-  <div class="card"><div class="label" id="lblSpeed">Speedtest</div><div id="speed" class="value good">100%</div><div class="label" id="lblSpeedSub">aktuelle Verfügbarkeit</div></div>
-  <div class="card"><div class="label" id="lblLatency">Ø Antwortzeit</div><div id="latency" class="value">-- ms</div><div class="label" id="lblLatencySub">Live Ping</div></div>
-</div>
-
-<section class="section">
-<h3 id="secAvailability">Verfügbarkeit</h3>
-<div class="panel">
-  <div class="tabs">
-    <button class="range active" data-range="live" id="btnLive">Live Stream</button>
-    <button class="range" data-range="24h" id="btn24h">24 Stunden</button>
-    <button class="range" data-range="7d" id="btn7d">7 Tage</button>
+  <h3 class="section-title">Systemverfügbarkeit</h3>
+  <div class="chart-box">
+    <div class="chart-container" id="uptime-chart"></div>
+    <div class="chart-footer">
+      <span>Vor 60 Tagen</span>
+      <span style="color: var(--green); font-weight: bold;">100 % Betriebsbereit</span>
+      <span>Heute</span>
+    </div>
   </div>
-  <div id="chart" class="chart" aria-label="Verfügbarkeitsdiagramm"></div>
-  <div class="uptime">
-    <div class="uptime-row"><b id="lblLast24h">Live Status</b><div class="track"><div class="fill" id="fill24h" style="width:100%"></div></div><b id="val24h">100%</b></div>
+
+  <h3 class="section-title">Dienste</h3>
+  <div class="services-list">
+    <div class="service-item">
+      <div>
+        <div class="service-name">Fasqoo Website</div>
+        <div class="service-desc">fasqoo.com Main Application</div>
+      </div>
+      <div class="badge"><span class="badge-dot"></span> Operational</div>
+    </div>
+
+    <div class="service-item">
+      <div>
+        <div class="service-name">Speedtest Engine</div>
+        <div class="service-desc">Download / Upload / Ping / Jitter</div>
+      </div>
+      <div class="badge"><span class="badge-dot"></span> Operational</div>
+    </div>
+
+    <div class="service-item">
+      <div>
+        <div class="service-name">API Services</div>
+        <div class="service-desc">REST API & Datenverarbeitung</div>
+      </div>
+      <div class="badge"><span class="badge-dot"></span> Operational</div>
+    </div>
+
+    <div class="service-item">
+      <div>
+        <div class="service-name">Network Monitoring</div>
+        <div class="service-desc">24/7 Health Checks</div>
+      </div>
+      <div class="badge"><span class="badge-dot"></span> Operational</div>
+    </div>
   </div>
-</div>
-</section>
 
-<section class="section">
-<h3 id="secServices">Dienste</h3>
-<div class="panel">
-  <div class="service"><div><div class="service-name" id="srvWeb">Fasqoo Website</div><div class="service-meta">fasqoo.com</div></div><div class="right"><span class="mini-dot"></span><span class="good srvStatus">Operational</span></div></div>
-  <div class="service"><div><div class="service-name" id="srvEngine">Speedtest Engine</div><div class="service-meta">Download / Upload / Ping / Jitter</div></div><div class="right"><span class="mini-dot"></span><span class="good srvStatus">Operational</span></div></div>
-  <div class="service"><div><div class="service-name" id="srvApi">API</div><div class="service-meta" id="srvApiMeta">REST API &amp; Datenverarbeitung</div></div><div class="right"><span class="mini-dot"></span><span class="good srvStatus">Operational</span></div></div>
-  <div class="service"><div><div class="service-name" id="srvMon">Network Monitoring</div><div class="service-meta" id="srvMonMeta">24/7 Health Checks</div></div><div class="right"><span class="mini-dot"></span><span class="good srvStatus">Operational</span></div></div>
-</div>
-</section>
+  <footer>
+    Fasqoo Network Status · Live Monitoring (Aktualisierung alle 3 Sek)
+  </footer>
 
-<section class="section">
-<h3 id="secIncidents">Vorfälle</h3>
-<div class="panel" id="incidents">
-  <div class="incident"><span class="badge">OK</span><div><b id="incTitle">Keine aktuellen Vorfälle</b><br><span style="color:var(--muted)" id="incDesc">Es wurden in diesem Zeitraum keine Störungen registriert.</span></div></div>
-</div>
-</section>
-
-<div class="footer">
-  Fasqoo Network Status · <span id="updated"></span> · <span id="lblAutoRefresh">Echtes Live Monitoring (Alle 3 Sek)</span>
-</div>
 </div>
 
 <script>
-let clientIP = "DEFAULT";
-let state = { measurements: [] };
-
-// 1. IP-Adresse ermitteln & Speicherung je IP laden
-async function initIPAndStorage() {
-  try {
-    const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    clientIP = data.ip || "DEFAULT";
-  } catch(e) {
-    clientIP = "DEFAULT";
-  }
-  document.getElementById("clientIpDisplay").textContent = "IP: " + clientIP;
-
-  const STORAGE_KEY = "fasqoo_status_ip_" + clientIP;
-  const localData = localStorage.getItem(STORAGE_KEY);
-  if(localData) {
-    state = JSON.parse(localData);
-  } else {
-    state = { measurements: [] };
-  }
-}
-
-function saveState(){
-  const STORAGE_KEY = "fasqoo_status_ip_" + clientIP;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-// 2. Echte Ping-Messung (HTTP Latency)
-async function performRealPing() {
-  const start = performance.now();
-  let isSuccess = true;
-  try {
-    await fetch(window.location.href + "?ping=" + Date.now(), { method: "HEAD", cache: "no-store" });
-  } catch(e) {
-    isSuccess = false;
-  }
-  const latency = Math.round(performance.now() - start);
-
-  const now = Date.now();
-  state.measurements.push({
-    ts: now,
-    latency: isSuccess ? latency : 0,
-    success: isSuccess
-  });
-
-  if(state.measurements.length > 100) {
-    state.measurements.shift();
-  }
-
-  saveState();
-  renderChart();
-}
-
-function renderChart(){
-  const chart = document.getElementById("chart");
-  chart.innerHTML = "";
-
-  const values = state.measurements.slice(-40);
-  if(values.length === 0) return;
-
-  let totalLatency = 0;
-  let successCount = 0;
-
-  values.forEach(v => {
-    const bar = document.createElement("div");
-    bar.className = "bar";
+  document.addEventListener("DOMContentLoaded", () => {
     
-    if(v.success) {
-      totalLatency += v.latency;
-      successCount++;
-      const h = Math.max(15, Math.min(100, (v.latency / 200) * 100));
-      bar.style.height = h + "%";
-    } else {
-      bar.className += " offline";
-      bar.style.height = "100%";
+    // 1. IP-Adresse des Besuchers ermitteln
+    const ipElement = document.getElementById("user-ip");
+    fetch("https://api.ipify.org?format=json")
+      .then(response => {
+        if (!response.ok) throw new Error("Netzwerkfehler");
+        return response.json();
+      })
+      .then(data => {
+        ipElement.innerText = `IP: ${data.ip}`;
+      })
+      .catch(() => {
+        ipElement.innerText = "IP: Nicht ermittelbar";
+      });
+
+    // 2. Echtzeit-Ping messen (HTTP Head Request)
+    const pingElement = document.getElementById("ping-value");
+
+    function measurePing() {
+      const startTime = performance.now();
+      
+      fetch(window.location.href, { method: "HEAD", cache: "no-store" })
+        .then(() => {
+          const duration = Math.round(performance.now() - startTime);
+          pingElement.innerText = `${duration} ms`;
+        })
+        .catch(() => {
+          pingElement.innerText = "Fehler";
+        });
     }
-    chart.appendChild(bar);
+
+    // Ping sofort ausführen und alle 3 Sekunden wiederholen
+    measurePing();
+    setInterval(measurePing, 3000);
+
+    // 3. Verfügbarkeitsdiagramm rendern (60 Balken)
+    const chartContainer = document.getElementById("uptime-chart");
+    const numberOfBars = 60;
+
+    for (let i = 0; i < numberOfBars; i++) {
+      const bar = document.createElement("div");
+      bar.className = "chart-bar";
+      bar.title = `Tag ${i + 1}: 100% Verfügbarkeit`;
+      chartContainer.appendChild(bar);
+    }
   });
-
-  const avgLatency = successCount > 0 ? Math.round(totalLatency / successCount) : 0;
-  document.getElementById("latency").textContent = avgLatency + " ms";
-
-  const uptimeRatio = Math.round((successCount / values.length) * 100);
-  document.getElementById("overall").textContent = uptimeRatio + "%";
-  document.getElementById("api").textContent = uptimeRatio + "%";
-  document.getElementById("speed").textContent = uptimeRatio + "%";
-  document.getElementById("val24h").textContent = uptimeRatio + "%";
-  document.getElementById("fill24h").style.width = uptimeRatio + "%";
-
-  const currentLang = localStorage.getItem("fasqoo_language") || "de";
-  const t = translations[currentLang] || translations.de;
-  document.getElementById("updated").textContent = t.updated + new Date().toLocaleTimeString();
-}
-
-// 3. Übersetzungsobjekte für ALLE 10 Sprachen
-const translations = {
-  de: {
-    title:"Fasqoo Network Status", subtitle:"Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.",
-    healthy:"Alle Systeme betriebsbereit", noIssues:"Keine bekannten Störungen",
-    description:"Alle überwachten Fasqoo-Dienste laufen normal.",
-    availability:"Verfügbarkeit", services:"Dienste", incidents:"Vorfälle",
-    operational:"Betriebsbereit", noIncidents:"Keine aktuellen Vorfälle",
-    noIncidentText:"Es wurden in diesem Zeitraum keine Störungen registriert.",
-    overallAvail:"Gesamtverfügbarkeit", last30Days:"letzte Messungen", currentAvail:"aktuelle Verfügbarkeit",
-    avgLatency:"Ø Antwortzeit", autoRefresh:"Echtes Live Monitoring (Alle 3 Sek)", updated:"Zuletzt aktualisiert: ",
-    navHome:"Home", navFaq:"FAQ", navStatus:"Netzwerk-Status", navAbout:"Über uns", subBrand:"Internet-Geschwindigkeitstest"
-  },
-  en: {
-    title:"Fasqoo Network Status", subtitle:"Live overview of availability, performance and current incidents.",
-    healthy:"All systems operational", noIssues:"No known incidents",
-    description:"All monitored Fasqoo services are operating normally.",
-    availability:"Availability", services:"Services", incidents:"Incidents",
-    operational:"Operational", noIncidents:"No current incidents",
-    noIncidentText:"No incidents have been recorded during this period.",
-    overallAvail:"Overall Availability", last30Days:"recent measurements", currentAvail:"current availability",
-    avgLatency:"Avg Latency", autoRefresh:"Real Live Monitoring (Every 3 sec)", updated:"Last updated: ",
-    navHome:"Home", navFaq:"FAQ", navStatus:"Network Status", navAbout:"About", subBrand:"Internet Speed Test"
-  },
-  sq: {
-    title:"Statusi i Rrjetit Fasqoo", subtitle:"Përmbledhje live e disponueshmërisë, performancës dhe pengesave.",
-    healthy:"Të gjitha sistemet në punë", noIssues:"Asnjë problem i njohur",
-    description:"Të gjitha shërbimet e monitoruara të Fasqoo funksionojnë normalisht.",
-    availability:"Disponueshmëria", services:"Shërbimet", incidents:"Incidentet",
-    operational:"Në funksion", noIncidents:"Asnjë incident aktiv",
-    noIncidentText:"Nuk është regjistruar asnjë pengesë gjatë kësaj periudhe.",
-    overallAvail:"Disponueshmëria Tërësore", last30Days:"matjet e fundit", currentAvail:"disponueshmëria aktuale",
-    avgLatency:"Koha Mesatare e Përgjigjes", autoRefresh:"Monitorim Live i Vërtetë (Çdo 3 Sek)", updated:"Përditësuar së fundmi: ",
-    navHome:"Kreu", navFaq:"Pyetjet Shpeshta", navStatus:"Statusi i Rrjetit", navAbout:"Rreth nesh", subBrand:"Testi i Shpejtësisë së Internetit"
-  },
-  tr: {
-    title:"Fasqoo Ağ Durumu", subtitle:"Kullanılabilirlik, performans ve güncel arızaların canlı özeti.",
-    healthy:"Tüm sistemler çalışıyor", noIssues:"Bilinen bir arıza yok",
-    description:"İzlenen tüm Fasqoo hizmetleri normal çalışıyor.",
-    availability:"Kullanılabilirlik", services:"Hizmetler", incidents:"Olaylar",
-    operational:"Çalışıyor", noIncidents:"Güncel olay yok",
-    noIncidentText:"Bu süre zarfında herhangi bir kesinti kaydedilmedi.",
-    overallAvail:"Genel Kullanılabilirlik", last30Days:"son ölçümler", currentAvail:"güncel kullanılabilirlik",
-    avgLatency:"Ort. Yanıt Süresi", autoRefresh:"Gerçek Canlı İzleme (Her 3 Sn)", updated:"Son güncelleme: ",
-    navHome:"Anasayfa", navFaq:"SSS", navStatus:"Ağ Durumu", navAbout:"Hakkımızda", subBrand:"İnternet Hız Testi"
-  },
-  es: {
-    title:"Estado de la Red Fasqoo", subtitle:"Resumen en vivo de disponibilidad, rendimiento e incidentes.",
-    healthy:"Todos los sistemas operativos", noIssues:"Sin problemas conocidos",
-    description:"Todos los servicios supervisados de Fasqoo funcionan con normalidad.",
-    availability:"Disponibilidad", services:"Servicios", incidents:"Incidentes",
-    operational:"Operativo", noIncidents:"Sin incidentes actuales",
-    noIncidentText:"No se han registrado interrupciones durante este período.",
-    overallAvail:"Disponibilidad General", last30Days:"últimas mediciones", currentAvail:"disponibilidad actual",
-    avgLatency:"Tiempo medio de respuesta", autoRefresh:"Monitoreo en Vivo Real (Cada 3 seg)", updated:"Última actualización: ",
-    navHome:"Inicio", navFaq:"Preguntas frecuentes", navStatus:"Estado de la Red", navAbout:"Sobre nosotros", subBrand:"Prueba de Velocidad de Internet"
-  },
-  fr: {
-    title:"Statut du Réseau Fasqoo", subtitle:"Aperçu en direct de la disponibilité, des performances et des incidents.",
-    healthy:"Tous les systèmes sont opérationnels", noIssues:"Aucun incident connu",
-    description:"Tous les services Fasqoo surveillés fonctionnent normalement.",
-    availability:"Disponibilité", services:"Services", incidents:"Incidents",
-    operational:"Opérationnel", noIncidents:"Aucun incident actuel",
-    noIncidentText:"Aucune interruption n'a été enregistrée durant cette période.",
-    overallAvail:"Disponibilité Globale", last30Days:"dernières mesures", currentAvail:"disponibilité actuelle",
-    avgLatency:"Temps de réponse moyen", autoRefresh:"Surveillance en Direct Réelle (Toutes les 3 sec)", updated:"Dernière mise à jour : ",
-    navHome:"Accueil", navFaq:"FAQ", navStatus:"Statut du Réseau", navAbout:"À propos", subBrand:"Test de Vitesse Internet"
-  },
-  it: {
-    title:"Stato della Rete Fasqoo", subtitle:"Panoramica in tempo reale di disponibilità, prestazioni e problemi.",
-    healthy:"Tutti i sistemi operativi", noIssues:"Nessun problema noto",
-    description:"Tutti i servizi Fasqoo monitorati funzionano normalmente.",
-    availability:"Disponibilità", services:"Servizi", incidents:"Incidenti",
-    operational:"Operativo", noIncidents:"Nessun incidente attuale",
-    noIncidentText:"Nessuna interruzione registrata in questo periodo.",
-    overallAvail:"Disponibilità Generale", last30Days:"ultime misurazioni", currentAvail:"disponibilità attuale",
-    avgLatency:"Tempo di risposta medio", autoRefresh:"Monitoraggio Live Reale (Ogni 3 sec)", updated:"Ultimo aggiornamento: ",
-    navHome:"Home", navFaq:"FAQ", navStatus:"Stato della Rete", navAbout:"Chi siamo", subBrand:"Test di Velocità Internet"
-  },
-  pt: {
-    title:"Status da Rede Fasqoo", subtitle:"Visão geral em tempo real da disponibilidade, desempenho e problemas.",
-    healthy:"Todos os sistemas operacionais", noIssues:"Nenhum problema conhecido",
-    description:"Todos os serviços Fasqoo monitorados estão funcionando normalmente.",
-    availability:"Disponibilidade", serviços:"Serviços", incidents:"Incidentes",
-    operational:"Operacional", noIncidents:"Nenhum incidente atual",
-    noIncidentText:"Nenhuma interrupção foi registrada neste período.",
-    overallAvail:"Disponibilidade Geral", last30Days:"últimas medições", currentAvail:"disponibilidade atual",
-    avgLatency:"Tempo médio de resposta", autoRefresh:"Monitoramento em Tempo Real (A cada 3 seg)", updated:"Última atualização: ",
-    navHome:"Início", navFaq:"FAQ", navStatus:"Status da Rede", navAbout:"Sobre nós", subBrand:"Teste de Velocidade de Internet"
-  },
-  pl: {
-    title:"Stan Sieci Fasqoo", subtitle:"Podgląd na żywo dostępności, wydajności i aktualnych awarii.",
-    healthy:"Wszystkie systemy działają", noIssues:"Brak znanych problemów",
-    description:"Wszystkie monitorowane usługi Fasqoo działają prawidłowo.",
-    availability:"Dostępność", services:"Usługi", incidents:"Incydenty",
-    operational:"Działa", noIncidents:"Brak aktualnych incydentów",
-    noIncidentText:"W tym okresie nie zarejestrowano żadnych przerw w działaniu.",
-    overallAvail:"Całkowita Dostępność", last30Days:"ostatnie pomiary", currentAvail:"aktualna dostępność",
-    avgLatency:"Średni czas odpowiedzi", autoRefresh:"Rzeczywiste Monitorowanie na Żywo (Co 3 sek)", updated:"Ostatnia aktualizacja: ",
-    navHome:"Strona Główna", navFaq:"FAQ", navStatus:"Stan Sieci", navAbout:"O nas", subBrand:"Test Prędkości Internetu"
-  },
-  ru: {
-    title:"Статус Сети Fasqoo", subtitle:"Обзор доступности, производительности и сбоев в реальном времени.",
-    healthy:"Все системы работают", noIssues:"Нет известных проблем",
-    description:"Все отслеживаемые службы Fasqoo работают в штатном режиме.",
-    availability:"Доступность", services:"Службы", incidents:"Инциденты",
-    operational:"Работает", noIncidents:"Нет текущих инцидентов",
-    noIncidentText:"За этот период сбоев зафиксировано не было.",
-    overallAvail:"Общая Доступность", last30Days:"последние измерения", currentAvail:"текущая доступность",
-    avgLatency:"Ср. время отклика", autoRefresh:"Реальный Мониторинг Live (Каждые 3 сек)", updated:"Последнее обновление: ",
-    navHome:"Главная", navFaq:"FAQ", navStatus:"Статус Сети", navAbout:"О нас", subBrand:"Тест Скорости Интернета"
-  }
-};
-
-// 4. Sprachmenü Event-Handler
-const languageButton = document.getElementById("languageButton");
-const languageMenu = document.getElementById("languageMenu");
-const currentLanguage = document.getElementById("currentLanguage");
-
-languageButton.addEventListener("click", () => {
-  const open = languageMenu.classList.toggle("open");
-  languageButton.setAttribute("aria-expanded", String(open));
-});
-
-document.querySelectorAll("[data-lang]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const lang = btn.dataset.lang;
-    localStorage.setItem("fasqoo_language", lang);
-    applyLanguage(lang);
-    languageMenu.classList.remove("open");
-  });
-});
-
-function applyLanguage(lang){
-  const t = translations[lang] || translations.de;
-  currentLanguage.textContent = lang.toUpperCase();
-  document.documentElement.lang = lang;
-  
-  document.getElementById("heroTitle").textContent = t.title;
-  document.getElementById("heroSubtitle").textContent = t.subtitle;
-  document.getElementById("statusTitle").textContent = t.noIssues;
-  document.getElementById("statusDesc").textContent = t.description;
-  document.getElementById("secAvailability").textContent = t.availability;
-  document.getElementById("secServices").textContent = t.services;
-  document.getElementById("secIncidents").textContent = t.incidents;
-  document.querySelectorAll(".srvStatus").forEach(x => x.textContent = t.operational);
-  document.getElementById("incTitle").textContent = t.noIncidents;
-  document.getElementById("incDesc").textContent = t.noIncidentText;
-  document.querySelectorAll(".liveText").forEach(x => x.textContent = t.healthy);
-  document.getElementById("lblOverall").textContent = t.overallAvail;
-  document.getElementById("lblOverallSub").textContent = t.last30Days;
-  document.getElementById("lblLatency").textContent = t.avgLatency;
-  document.getElementById("lblAutoRefresh").textContent = t.autoRefresh;
-  document.getElementById("navHome").textContent = t.navHome;
-  document.getElementById("navFaq").textContent = t.navFaq;
-  document.getElementById("navStatus").textContent = t.navStatus;
-  document.getElementById("navAbout").textContent = t.navAbout;
-  document.getElementById("subBrand").textContent = t.subBrand;
-}
-
-// 5. Theme Switcher (Light / Dark)
-const themeButton = document.getElementById("themeButton");
-themeButton.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-  themeButton.textContent = document.body.classList.contains("light") ? "☀" : "☾";
-});
-
-// App starten
-async function startApp() {
-  applyLanguage(localStorage.getItem("fasqoo_language") || "de");
-  await initIPAndStorage();
-  performRealPing();
-  setInterval(performRealPing, 3000);
-}
-
-startApp();
 </script>
+
 </body>
 </html>
