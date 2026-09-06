@@ -6,254 +6,228 @@
   <title>Fasqoo - Network Status</title>
   <style>
     :root {
-      --bg-color: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --text: #c9d1d9;
-      --text-muted: #8b949e;
-      --green: #238636;
-      --green-light: #2ea043;
-      --green-glow: #3fb950;
+      --bg-color: #0b0f19;
+      --card-bg: #111827;
+      --border-color: #1f2937;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-green: #10b981;
+    }
+
+    /* Light Mode Variablen */
+    body.light-mode {
+      --bg-color: #f3f4f6;
+      --card-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: background-color 0.2s, color 0.2s;
     }
 
     body {
       background-color: var(--bg-color);
-      color: var(--text);
-      line-height: 1.5;
+      color: var(--text-main);
       padding: 20px;
       display: flex;
       justify-content: center;
     }
 
-    .wrapper {
-      max-width: 900px;
+    .container {
+      max-width: 1000px;
       width: 100%;
     }
 
-    /* Header */
+    /* Header Navigation im Fasqoo Original-Stil */
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      justify-content: space-between;
+      padding: 12px 20px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       margin-bottom: 30px;
     }
 
-    header a {
-      text-decoration: none;
-      color: inherit;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
 
-    .brand {
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-icon {
+      color: var(--accent-green);
+      font-size: 22px;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--text-main);
+    }
+
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .logo-box {
-      background: var(--green-glow);
-      color: #000;
-      font-weight: bold;
-      width: 38px;
-      height: 38px;
+    /* Sprachen Dropdown */
+    .lang-dropdown {
+      position: relative;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
       border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 20px;
+      gap: 6px;
     }
 
-    .brand h1 {
-      font-size: 20px;
-      line-height: 1.1;
+    .lang-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 110%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: 140px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      z-index: 50;
+      overflow: hidden;
     }
 
-    .brand small {
-      color: var(--text-muted);
-      font-size: 12px;
+    .lang-menu.show {
+      display: block;
     }
 
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-
-    nav a:hover, nav a.active {
-      color: #fff;
-    }
-
-    .header-right {
+    .lang-item {
+      padding: 8px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: var(--text-main);
+      text-decoration: none;
       font-size: 13px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 20px;
+      cursor: pointer;
     }
 
-    .dot-online {
-      width: 8px;
-      height: 8px;
-      background: var(--green-glow);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--green-glow);
+    .lang-item:hover {
+      background-color: var(--border-color);
     }
 
-    /* Hero / Status Section */
-    section {
-      margin-bottom: 30px;
-    }
-
-    section h2 {
-      font-size: 24px;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    section p {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .status-banner {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+    /* Dark Mode Button */
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .status-banner-dot {
-      width: 14px;
-      height: 14px;
-      background: var(--green-glow);
-      border-radius: 50%;
-      margin-top: 4px;
-      box-shadow: 0 0 10px var(--green-glow);
-      flex-shrink: 0;
-    }
-
-    .status-banner-info b {
-      color: #fff;
+      align-items: center;
+      justify-content: center;
       font-size: 16px;
     }
 
-    .status-banner-info span {
-      display: block;
-      color: var(--text-muted);
-      font-size: 13px;
+    /* Layout & Cards */
+    .status-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
-    .ip-badge {
-      color: var(--green-glow) !important;
-      font-family: monospace;
-      margin-top: 6px;
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
     }
 
-    /* Top Cards Grid */
     .grid-4 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
       margin-bottom: 30px;
     }
 
-    .metric-card {
+    .card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 16px;
     }
 
-    .metric-title {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+    .card-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+    .card-value { font-size: 24px; font-weight: 700; margin: 4px 0; }
+    .card-sub { font-size: 12px; color: var(--text-muted); }
 
-    .metric-val {
-      font-size: 26px;
-      font-weight: bold;
-      color: #fff;
-      margin: 4px 0;
-    }
-
-    .metric-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Uptime Section */
-    .uptime-box {
+    .chart-box {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 30px;
     }
 
-    .chart-grid {
+    .chart-container {
       display: flex;
-      gap: 3px;
-      height: 36px;
+      gap: 4px;
+      height: 32px;
       margin: 15px 0;
     }
 
     .chart-bar {
       flex: 1;
-      background: var(--green-light);
+      background-color: var(--accent-green);
       border-radius: 2px;
-      transition: background 0.2s;
     }
 
-    .chart-bar:hover {
-      background: var(--green-glow);
-    }
-
-    .chart-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .live-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    /* Services List */
-    .services-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .service-row {
+    .services-list { display: flex; flex-direction: column; gap: 12px; }
+    .service-item {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 14px 18px;
       display: flex;
@@ -261,250 +235,186 @@
       align-items: center;
     }
 
-    .service-title {
-      font-weight: 600;
-      color: #fff;
-      font-size: 15px;
-    }
-
-    .service-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(63, 185, 80, 0.1);
-      border: 1px solid rgba(63, 185, 80, 0.3);
-      color: var(--green-glow);
-      padding: 4px 12px;
+    .badge {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+      padding: 4px 10px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
-    }
-
-    /* Incident Box */
-    .incident-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 40px;
-    }
-
-    .ok-badge {
-      background: var(--green-glow);
-      color: #000;
-      font-weight: bold;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
-<div class="wrapper">
+<div class="container">
   
-  <!-- Header -->
   <header>
-    <a href="/" class="brand">
-      <div class="logo-box">F</div>
-      <div>
-        <h1>Fasqoo</h1>
-        <small>Internet Speed Test</small>
+    <div class="nav-left">
+      <a href="/" class="logo">
+        <span class="logo-icon">⌁</span>
+        <span>Fasqoo</span>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/network-status.html" class="active">Network Status</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-dropdown">
+        <button class="lang-btn" id="lang-toggle">
+          <span id="current-flag">🇩🇪</span> <span id="current-lang">Deutsch</span> ▾
+        </button>
+        <div class="lang-menu" id="lang-menu">
+          <div class="lang-item" onclick="setLanguage('de', '🇩🇪', 'Deutsch')">🇩🇪 Deutsch</div>
+          <div class="lang-item" onclick="setLanguage('en', '🇬🇧', 'English')">🇬🇧 English</div>
+          <div class="lang-item" onclick="setLanguage('sq', '🇽🇰', 'Shqip')">🇽🇰 Shqip</div>
+          <div class="lang-item" onclick="setLanguage('tr', '🇹🇷', 'Türkçe')">🇹🇷 Türkçe</div>
+        </div>
       </div>
-    </a>
 
-    <nav>
-      <a href="/">Home</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/network-status.html" class="active">Network Status</a>
-      <a href="/about.html">About</a>
-    </nav>
-
-    <div class="header-right">
-      <span class="dot-online"></span>
-      <span>Alle Systeme betriebsbereit</span>
+      <button class="theme-btn" id="theme-toggle" title="Design wechseln">
+        <span id="theme-icon">☾</span>
+      </button>
     </div>
   </header>
 
-  <!-- Title & Status Banner -->
-  <section>
+  <section style="margin-bottom: 20px;">
     <h2>Fasqoo Network Status</h2>
-    <p>Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.</p>
-    
-    <div class="status-banner">
-      <div class="status-banner-dot"></div>
-      <div class="status-banner-info">
-        <b>Keine bekannten Störungen</b>
-        <span>Alle überwachten Fasqoo-Dienste laufen normal.</span>
-        <span class="ip-badge" id="live-ip">IP: WIRD ERMITTELT...</span>
-      </div>
-    </div>
+    <p style="color: var(--text-muted); font-size: 14px;">Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.</p>
   </section>
 
-  <!-- Top Metrics -->
-  <div class="grid-4">
-    <div class="metric-card">
-      <div class="metric-title">Gesamtverfügbarkeit</div>
-      <div class="metric-val">100%</div>
-      <div class="metric-sub">letzte Messungen</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-title">API</div>
-      <div class="metric-val">100%</div>
-      <div class="metric-sub">aktuelle Verfügbarkeit</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-title">Speedtest</div>
-      <div class="metric-val">100%</div>
-      <div class="metric-sub">aktuelle Verfügbarkeit</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-title">Ø Antwortzeit</div>
-      <div class="metric-val" id="live-ping">-- ms</div>
-      <div class="metric-sub">Live Ping</div>
+  <div class="status-banner">
+    <div class="status-dot"></div>
+    <div>
+      <b style="font-size: 16px;">Keine bekannten Störungen</b><br>
+      <span style="color: var(--text-muted); font-size: 13px;">Alle überwachten Fasqoo-Dienste laufen normal.</span><br>
+      <span id="user-ip" style="color: var(--accent-green); font-family: monospace; font-size: 13px;">IP: Wird ermittelt...</span>
     </div>
   </div>
 
-  <!-- Uptime Diagram -->
-  <section>
-    <h3 style="color:#fff; font-size:18px; margin-bottom:12px;">Verfügbarkeit</h3>
-    <div class="uptime-box">
-      <div class="chart-grid" id="chart-bars" aria-label="Verfügbarkeitsdiagramm"></div>
-      <div class="chart-meta">
-        <span>Vor 90 Tagen</span>
-        <div class="live-indicator">
-          <span class="dot-online"></span> 100% Status
-        </div>
-        <span>Heute</span>
-      </div>
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-title">Gesamtverfügbarkeit</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">letzte Messungen</div>
     </div>
-  </section>
-
-  <!-- Services Status -->
-  <section>
-    <h3 style="color:#fff; font-size:18px; margin-bottom:12px;">Dienste</h3>
-    <div class="services-grid">
-      <div class="service-row">
-        <div>
-          <div class="service-title">Fasqoo Website</div>
-          <div class="service-sub">fasqoo.com</div>
-        </div>
-        <div class="status-badge"><span class="dot-online"></span> Operational</div>
-      </div>
-
-      <div class="service-row">
-        <div>
-          <div class="service-title">Speedtest Engine</div>
-          <div class="service-sub">Download / Upload / Ping / Jitter</div>
-        </div>
-        <div class="status-badge"><span class="dot-online"></span> Operational</div>
-      </div>
-
-      <div class="service-row">
-        <div>
-          <div class="service-title">API</div>
-          <div class="service-sub">REST API & Datenverarbeitung</div>
-        </div>
-        <div class="status-badge"><span class="dot-online"></span> Operational</div>
-      </div>
-
-      <div class="service-row">
-        <div>
-          <div class="service-title">Network Monitoring</div>
-          <div class="service-sub">24/7 Health Checks</div>
-        </div>
-        <div class="status-badge"><span class="dot-online"></span> Operational</div>
-      </div>
+    <div class="card">
+      <div class="card-title">API</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">aktuelle Verfügbarkeit</div>
     </div>
-  </section>
-
-  <!-- Incidents -->
-  <section>
-    <h3 style="color:#fff; font-size:18px; margin-bottom:12px;">Vorfälle</h3>
-    <div class="incident-box">
-      <span class="ok-badge">OK</span>
-      <div>
-        <b style="color:#fff; font-size:14px;">Keine aktuellen Vorfälle</b><br>
-        <span style="color:var(--text-muted); font-size:13px;">Es wurden in diesem Zeitraum keine Störungen registriert.</span>
-      </div>
+    <div class="card">
+      <div class="card-title">Speedtest</div>
+      <div class="card-value">100%</div>
+      <div class="card-sub">aktuelle Verfügbarkeit</div>
     </div>
-  </section>
+    <div class="card">
+      <div class="card-title">Ø Antwortzeit</div>
+      <div class="card-value" id="ping-value">-- ms</div>
+      <div class="card-sub">Live Ping</div>
+    </div>
+  </div>
 
-  <!-- Footer -->
-  <footer>
-    Fasqoo Network Status · Live Monitoring · Echtes Live Monitoring (Alle 3 Sek)
-  </footer>
+  <h3 style="margin-bottom: 12px; font-size: 16px;">Verfügbarkeit</h3>
+  <div class="chart-box">
+    <div class="chart-container" id="chart-bars"></div>
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted);">
+      <span>Vor 90 Tagen</span>
+      <span style="color: var(--accent-green); font-weight: bold;">100% Status</span>
+      <span>Heute</span>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 12px; font-size: 16px;">Dienste</h3>
+  <div class="services-list">
+    <div class="service-item">
+      <div><b>Fasqoo Website</b><br><small style="color: var(--text-muted);">fasqoo.com</small></div>
+      <div class="badge">Operational</div>
+    </div>
+    <div class="service-item">
+      <div><b>Speedtest Engine</b><br><small style="color: var(--text-muted);">Download / Upload / Ping / Jitter</small></div>
+      <div class="badge">Operational</div>
+    </div>
+    <div class="service-item">
+      <div><b>API</b><br><small style="color: var(--text-muted);">REST API & Datenverarbeitung</small></div>
+      <div class="badge">Operational</div>
+    </div>
+  </div>
 
 </div>
 
-<!-- REPARIERTE JAVASCRIPT-LOGIK -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. IP-Adresse dynamisch abrufen
-    const ipDisplay = document.getElementById("live-ip");
+    // 1. Dark / Light Mode Schalter
+    const themeBtn = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      if (document.body.classList.contains("light-mode")) {
+        themeIcon.innerText = "☀️";
+      } else {
+        themeIcon.innerText = "☾";
+      }
+    });
+
+    // 2. Sprachen-Dropdown Steuerung
+    const langToggle = document.getElementById("lang-toggle");
+    const langMenu = document.getElementById("lang-menu");
+
+    langToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      langMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", () => {
+      langMenu.classList.remove("show");
+    });
+
+    // 3. Live IP Ermittlung
     fetch("https://api.ipify.org?format=json")
       .then(res => res.json())
       .then(data => {
-        if(data.ip) {
-          ipDisplay.innerText = "IP: " + data.ip;
-        } else {
-          ipDisplay.innerText = "IP: NICHT VERFÜGBAR";
-        }
+        document.getElementById("user-ip").innerText = "IP: " + data.ip;
       })
       .catch(() => {
-        ipDisplay.innerText = "IP: ERMITTLUNG FEHLGESCHLAGEN";
+        document.getElementById("user-ip").innerText = "IP: Nicht ermittelbar";
       });
 
-    // 2. Live Ping (Messung der echten Server-Antwortzeit)
-    const pingDisplay = document.getElementById("live-ping");
-
-    function executePing() {
-      const startTime = performance.now();
+    // 4. Live Ping Messung (3 Sek Interval)
+    function measurePing() {
+      const start = performance.now();
       fetch(window.location.href, { method: "HEAD", cache: "no-store" })
         .then(() => {
-          const latency = Math.round(performance.now() - startTime);
-          pingDisplay.innerText = latency + " ms";
+          const duration = Math.round(performance.now() - start);
+          document.getElementById("ping-value").innerText = duration + " ms";
         })
         .catch(() => {
-          pingDisplay.innerText = "-- ms";
+          document.getElementById("ping-value").innerText = "-- ms";
         });
     }
+    measurePing();
+    setInterval(measurePing, 3000);
 
-    // Ping sofort ausführen und alle 3 Sekunden wiederholen
-    executePing();
-    setInterval(executePing, 3000);
-
-    // 3. Verfügbarkeits-Diagramm generieren (50 Status-Balken)
-    const chartContainer = document.getElementById("chart-bars");
-    if (chartContainer) {
-      chartContainer.innerHTML = ""; // Container leeren
-      for (let i = 0; i < 50; i++) {
-        const bar = document.createElement("div");
-        bar.className = "chart-bar";
-        bar.title = "100% Verfügbarkeit";
-        chartContainer.appendChild(bar);
-      }
+    // 5. Verfügbarkeits-Balken erzeugen
+    const chart = document.getElementById("chart-bars");
+    for (let i = 0; i < 50; i++) {
+      const bar = document.createElement("div");
+      bar.className = "chart-bar";
+      chart.appendChild(bar);
     }
-
   });
+
+  function setLanguage(code, flag, name) {
+    document.getElementById("current-flag").innerText = flag;
+    document.getElementById("current-lang").innerText = name;
+    document.getElementById("lang-menu").classList.remove("show");
+  }
 </script>
 
 </body>
