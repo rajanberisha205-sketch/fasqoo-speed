@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://sitemaps.org">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://fasqoo.com</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://www.fasqoo.com/</loc>
   </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/faq.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/about.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/privacy-policy.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/terms.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/accessibility.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/do-not-sell.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.fasqoo.com/modern-slavery.html</loc>
+  </url>
+
 </urlset>
