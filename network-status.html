@@ -182,7 +182,6 @@ async function performRealPing() {
   const start = performance.now();
   let isSuccess = true;
   try {
-    // Führt einen realen HTTP-Ping gegen die eigene Origin oder eine schnelle Resource durch
     await fetch(window.location.href + "?ping=" + Date.now(), { method: "HEAD", cache: "no-store" });
   } catch(e) {
     isSuccess = false;
@@ -196,7 +195,6 @@ async function performRealPing() {
     success: isSuccess
   });
 
-  // Maximal 100 aktuelle Live-Messwerte pro IP vorhalten
   if(state.measurements.length > 100) {
     state.measurements.shift();
   }
@@ -209,7 +207,7 @@ function renderChart(){
   const chart = document.getElementById("chart");
   chart.innerHTML = "";
 
-  const values = state.measurements.slice(-40); // Die letzten 40 Messungen anzeigen
+  const values = state.measurements.slice(-40);
   if(values.length === 0) return;
 
   let totalLatency = 0;
@@ -222,7 +220,6 @@ function renderChart(){
     if(v.success) {
       totalLatency += v.latency;
       successCount++;
-      // Höhe berechnen basierend auf Latenz (30ms - 300ms Skalierung)
       const h = Math.max(15, Math.min(100, (v.latency / 200) * 100));
       bar.style.height = h + "%";
     } else {
@@ -247,6 +244,7 @@ function renderChart(){
   document.getElementById("updated").textContent = t.updated + new Date().toLocaleTimeString();
 }
 
+// 3. Übersetzungsobjekte für ALLE 10 Sprachen
 const translations = {
   de: {
     title:"Fasqoo Network Status", subtitle:"Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.",
@@ -256,10 +254,7 @@ const translations = {
     operational:"Betriebsbereit", noIncidents:"Keine aktuellen Vorfälle",
     noIncidentText:"Es wurden in diesem Zeitraum keine Störungen registriert.",
     overallAvail:"Gesamtverfügbarkeit", last30Days:"letzte Messungen", currentAvail:"aktuelle Verfügbarkeit",
-    avgLatency:"Ø Antwortzeit", lastMeas:"Live Ping", hours24:"Live Stream", days7:"24 Stunden", days30:"7 Tage",
-    last24h:"Live Status", srvWeb:"Fasqoo Webseite", srvEngine:"Speedtest Engine", srvApi:"API", srvApiMeta:"REST API & Datenverarbeitung",
-    srvMon:"Netzwerk-Überwachung", srvMonMeta:"24/7 Systemprüfungen",
-    autoRefresh:"Echtes Live Monitoring (Alle 3 Sek)", updated:"Zuletzt aktualisiert: ",
+    avgLatency:"Ø Antwortzeit", autoRefresh:"Echtes Live Monitoring (Alle 3 Sek)", updated:"Zuletzt aktualisiert: ",
     navHome:"Home", navFaq:"FAQ", navStatus:"Netzwerk-Status", navAbout:"Über uns", subBrand:"Internet-Geschwindigkeitstest"
   },
   en: {
@@ -270,14 +265,100 @@ const translations = {
     operational:"Operational", noIncidents:"No current incidents",
     noIncidentText:"No incidents have been recorded during this period.",
     overallAvail:"Overall Availability", last30Days:"recent measurements", currentAvail:"current availability",
-    avgLatency:"Avg Latency", lastMeas:"Live Ping", hours24:"Live Stream", days7:"24 Hours", days30:"7 Days",
-    last24h:"Live Status", srvWeb:"Fasqoo Website", srvEngine:"Speedtest Engine", srvApi:"API", srvApiMeta:"REST API & Data Processing",
-    srvMon:"Network Monitoring", srvMonMeta:"24/7 Health Checks",
-    autoRefresh:"Real Live Monitoring (Every 3 sec)", updated:"Last updated: ",
+    avgLatency:"Avg Latency", autoRefresh:"Real Live Monitoring (Every 3 sec)", updated:"Last updated: ",
     navHome:"Home", navFaq:"FAQ", navStatus:"Network Status", navAbout:"About", subBrand:"Internet Speed Test"
+  },
+  sq: {
+    title:"Statusi i Rrjetit Fasqoo", subtitle:"Përmbledhje live e disponueshmërisë, performancës dhe pengesave.",
+    healthy:"Të gjitha sistemet në punë", noIssues:"Asnjë problem i njohur",
+    description:"Të gjitha shërbimet e monitoruara të Fasqoo funksionojnë normalisht.",
+    availability:"Disponueshmëria", services:"Shërbimet", incidents:"Incidentet",
+    operational:"Në funksion", noIncidents:"Asnjë incident aktiv",
+    noIncidentText:"Nuk është regjistruar asnjë pengesë gjatë kësaj periudhe.",
+    overallAvail:"Disponueshmëria Tërësore", last30Days:"matjet e fundit", currentAvail:"disponueshmëria aktuale",
+    avgLatency:"Koha Mesatare e Përgjigjes", autoRefresh:"Monitorim Live i Vërtetë (Çdo 3 Sek)", updated:"Përditësuar së fundmi: ",
+    navHome:"Kreu", navFaq:"Pyetjet Shpeshta", navStatus:"Statusi i Rrjetit", navAbout:"Rreth nesh", subBrand:"Testi i Shpejtësisë së Internetit"
+  },
+  tr: {
+    title:"Fasqoo Ağ Durumu", subtitle:"Kullanılabilirlik, performans ve güncel arızaların canlı özeti.",
+    healthy:"Tüm sistemler çalışıyor", noIssues:"Bilinen bir arıza yok",
+    description:"İzlenen tüm Fasqoo hizmetleri normal çalışıyor.",
+    availability:"Kullanılabilirlik", services:"Hizmetler", incidents:"Olaylar",
+    operational:"Çalışıyor", noIncidents:"Güncel olay yok",
+    noIncidentText:"Bu süre zarfında herhangi bir kesinti kaydedilmedi.",
+    overallAvail:"Genel Kullanılabilirlik", last30Days:"son ölçümler", currentAvail:"güncel kullanılabilirlik",
+    avgLatency:"Ort. Yanıt Süresi", autoRefresh:"Gerçek Canlı İzleme (Her 3 Sn)", updated:"Son güncelleme: ",
+    navHome:"Anasayfa", navFaq:"SSS", navStatus:"Ağ Durumu", navAbout:"Hakkımızda", subBrand:"İnternet Hız Testi"
+  },
+  es: {
+    title:"Estado de la Red Fasqoo", subtitle:"Resumen en vivo de disponibilidad, rendimiento e incidentes.",
+    healthy:"Todos los sistemas operativos", noIssues:"Sin problemas conocidos",
+    description:"Todos los servicios supervisados de Fasqoo funcionan con normalidad.",
+    availability:"Disponibilidad", services:"Servicios", incidents:"Incidentes",
+    operational:"Operativo", noIncidents:"Sin incidentes actuales",
+    noIncidentText:"No se han registrado interrupciones durante este período.",
+    overallAvail:"Disponibilidad General", last30Days:"últimas mediciones", currentAvail:"disponibilidad actual",
+    avgLatency:"Tiempo medio de respuesta", autoRefresh:"Monitoreo en Vivo Real (Cada 3 seg)", updated:"Última actualización: ",
+    navHome:"Inicio", navFaq:"Preguntas frecuentes", navStatus:"Estado de la Red", navAbout:"Sobre nosotros", subBrand:"Prueba de Velocidad de Internet"
+  },
+  fr: {
+    title:"Statut du Réseau Fasqoo", subtitle:"Aperçu en direct de la disponibilité, des performances et des incidents.",
+    healthy:"Tous les systèmes sont opérationnels", noIssues:"Aucun incident connu",
+    description:"Tous les services Fasqoo surveillés fonctionnent normalement.",
+    availability:"Disponibilité", services:"Services", incidents:"Incidents",
+    operational:"Opérationnel", noIncidents:"Aucun incident actuel",
+    noIncidentText:"Aucune interruption n'a été enregistrée durant cette période.",
+    overallAvail:"Disponibilité Globale", last30Days:"dernières mesures", currentAvail:"disponibilité actuelle",
+    avgLatency:"Temps de réponse moyen", autoRefresh:"Surveillance en Direct Réelle (Toutes les 3 sec)", updated:"Dernière mise à jour : ",
+    navHome:"Accueil", navFaq:"FAQ", navStatus:"Statut du Réseau", navAbout:"À propos", subBrand:"Test de Vitesse Internet"
+  },
+  it: {
+    title:"Stato della Rete Fasqoo", subtitle:"Panoramica in tempo reale di disponibilità, prestazioni e problemi.",
+    healthy:"Tutti i sistemi operativi", noIssues:"Nessun problema noto",
+    description:"Tutti i servizi Fasqoo monitorati funzionano normalmente.",
+    availability:"Disponibilità", services:"Servizi", incidents:"Incidenti",
+    operational:"Operativo", noIncidents:"Nessun incidente attuale",
+    noIncidentText:"Nessuna interruzione registrata in questo periodo.",
+    overallAvail:"Disponibilità Generale", last30Days:"ultime misurazioni", currentAvail:"disponibilità attuale",
+    avgLatency:"Tempo di risposta medio", autoRefresh:"Monitoraggio Live Reale (Ogni 3 sec)", updated:"Ultimo aggiornamento: ",
+    navHome:"Home", navFaq:"FAQ", navStatus:"Stato della Rete", navAbout:"Chi siamo", subBrand:"Test di Velocità Internet"
+  },
+  pt: {
+    title:"Status da Rede Fasqoo", subtitle:"Visão geral em tempo real da disponibilidade, desempenho e problemas.",
+    healthy:"Todos os sistemas operacionais", noIssues:"Nenhum problema conhecido",
+    description:"Todos os serviços Fasqoo monitorados estão funcionando normalmente.",
+    availability:"Disponibilidade", serviços:"Serviços", incidents:"Incidentes",
+    operational:"Operacional", noIncidents:"Nenhum incidente atual",
+    noIncidentText:"Nenhuma interrupção foi registrada neste período.",
+    overallAvail:"Disponibilidade Geral", last30Days:"últimas medições", currentAvail:"disponibilidade atual",
+    avgLatency:"Tempo médio de resposta", autoRefresh:"Monitoramento em Tempo Real (A cada 3 seg)", updated:"Última atualização: ",
+    navHome:"Início", navFaq:"FAQ", navStatus:"Status da Rede", navAbout:"Sobre nós", subBrand:"Teste de Velocidade de Internet"
+  },
+  pl: {
+    title:"Stan Sieci Fasqoo", subtitle:"Podgląd na żywo dostępności, wydajności i aktualnych awarii.",
+    healthy:"Wszystkie systemy działają", noIssues:"Brak znanych problemów",
+    description:"Wszystkie monitorowane usługi Fasqoo działają prawidłowo.",
+    availability:"Dostępność", services:"Usługi", incidents:"Incydenty",
+    operational:"Działa", noIncidents:"Brak aktualnych incydentów",
+    noIncidentText:"W tym okresie nie zarejestrowano żadnych przerw w działaniu.",
+    overallAvail:"Całkowita Dostępność", last30Days:"ostatnie pomiary", currentAvail:"aktualna dostępność",
+    avgLatency:"Średni czas odpowiedzi", autoRefresh:"Rzeczywiste Monitorowanie na Żywo (Co 3 sek)", updated:"Ostatnia aktualizacja: ",
+    navHome:"Strona Główna", navFaq:"FAQ", navStatus:"Stan Sieci", navAbout:"O nas", subBrand:"Test Prędkości Internetu"
+  },
+  ru: {
+    title:"Статус Сети Fasqoo", subtitle:"Обзор доступности, производительности и сбоев в реальном времени.",
+    healthy:"Все системы работают", noIssues:"Нет известных проблем",
+    description:"Все отслеживаемые службы Fasqoo работают в штатном режиме.",
+    availability:"Доступность", services:"Службы", incidents:"Инциденты",
+    operational:"Работает", noIncidents:"Нет текущих инцидентов",
+    noIncidentText:"За этот период сбоев зафиксировано не было.",
+    overallAvail:"Общая Доступность", last30Days:"последние измерения", currentAvail:"текущая доступность",
+    avgLatency:"Ср. время отклика", autoRefresh:"Реальный Мониторинг Live (Каждые 3 сек)", updated:"Последнее обновление: ",
+    navHome:"Главная", navFaq:"FAQ", navStatus:"Статус Сети", navAbout:"О нас", subBrand:"Тест Скорости Интернета"
   }
 };
 
+// 4. Sprachmenü Event-Handler
 const languageButton = document.getElementById("languageButton");
 const languageMenu = document.getElementById("languageMenu");
 const currentLanguage = document.getElementById("currentLanguage");
@@ -323,19 +404,19 @@ function applyLanguage(lang){
   document.getElementById("subBrand").textContent = t.subBrand;
 }
 
-// Light/Dark Switcher Fix
+// 5. Theme Switcher (Light / Dark)
 const themeButton = document.getElementById("themeButton");
 themeButton.addEventListener("click", () => {
   document.body.classList.toggle("light");
   themeButton.textContent = document.body.classList.contains("light") ? "☀" : "☾";
 });
 
-// Initialization
+// App starten
 async function startApp() {
   applyLanguage(localStorage.getItem("fasqoo_language") || "de");
   await initIPAndStorage();
   performRealPing();
-  setInterval(performRealPing, 3000); // Live Ping alle 3 Sekunden
+  setInterval(performRealPing, 3000);
 }
 
 startApp();
