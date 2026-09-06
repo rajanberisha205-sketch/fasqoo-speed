@@ -146,7 +146,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fasqoo.com"/>
   </url>
 
-  <!-- 10. العَرَبِيَّة -->
+  <!-- 10. ARABIC -->
   <url>
     <loc>https://fasqoo.comar/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://fasqoo.com"/>
@@ -163,3 +163,4 @@
   </url>
 
 </urlset>
+
