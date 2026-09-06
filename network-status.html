@@ -1,382 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Network Status | Fasqoo</title>
-
-    <meta name="description"
-          content="Check the current status of Fasqoo services, systems, and network infrastructure.">
-
-    <link rel="canonical" href="https://www.fasqoo.com/network-status.html">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f9fc;
-            color: #172033;
-        }
-
-        header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e9f0;
-            padding: 20px 30px;
-        }
-
-        .header-container {
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 700;
-            color: #111827;
-            text-decoration: none;
-        }
-
-        nav a {
-            color: #374151;
-            text-decoration: none;
-            margin-left: 22px;
-            font-size: 15px;
-        }
-
-        nav a:hover {
-            color: #2563eb;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
-            color: #111827;
-        }
-
-        .hero p {
-            color: #667085;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .status-card {
-            background: #ffffff;
-            border: 1px solid #e5e9f0;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
-        }
-
-        .overall-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .status-dot {
-            width: 16px;
-            height: 16px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
-        }
-
-        .overall-status h2 {
-            margin: 0;
-            font-size: 24px;
-            color: #15803d;
-        }
-
-        .overall-status p {
-            margin: 6px 0 0;
-            color: #667085;
-        }
-
-        .service {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 0;
-            border-bottom: 1px solid #edf0f4;
-        }
-
-        .service:last-child {
-            border-bottom: none;
-        }
-
-        .service-name {
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .operational {
-            color: #15803d;
-            font-weight: 600;
-        }
-
-        .service-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .small-dot {
-            width: 9px;
-            height: 9px;
-            background: #22c55e;
-            border-radius: 50%;
-        }
-
-        .incident {
-            background: #f8fafc;
-            border: 1px solid #e5e9f0;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .incident-title {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .incident p {
-            margin: 0;
-            color: #667085;
-            line-height: 1.6;
-        }
-
-        .updated {
-            text-align: center;
-            color: #98a2b3;
-            font-size: 14px;
-            margin-top: 30px;
-        }
-
-        footer {
-            margin-top: 70px;
-            padding: 30px 20px;
-            text-align: center;
-            background: #ffffff;
-            border-top: 1px solid #e5e9f0;
-            color: #667085;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #667085;
-            text-decoration: none;
-            margin: 0 8px;
-        }
-
-        footer a:hover {
-            color: #2563eb;
-        }
-
-        @media (max-width: 700px) {
-            header {
-                padding: 18px 20px;
-            }
-
-            .header-container {
-                flex-direction: column;
-            }
-
-            nav {
-                text-align: center;
-            }
-
-            nav a {
-                display: inline-block;
-                margin: 5px 8px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .status-card {
-                padding: 22px;
-            }
-
-            .service {
-                gap: 15px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>Fasqoo Network Status</title>
+<style>
+:root{
+  --bg:#070b14;--panel:#0d1424;--panel2:#111a2d;--line:#1d2940;
+  --text:#f4f7fb;--muted:#8e9ab0;--green:#32d583;--yellow:#f5c451;
+  --red:#ff5d6c;--blue:#5b8cff;--shadow:0 20px 60px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 20% 0,#15213b 0,#070b14 42%);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#5b8cff,#7b5cff);display:grid;place-items:center;font-weight:900}
+.brand h1{font-size:20px;margin:0}.brand small{color:var(--muted)}
+.live{display:flex;align-items:center;gap:9px;color:#bcefd2;font-weight:700}.dot{width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green)}
+.hero{padding:30px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(18,29,50,.95),rgba(10,16,29,.95));border-radius:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h2{font-size:34px;margin:0 0 7px}.hero p{margin:0;color:var(--muted)}
+.status{margin-top:22px;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:rgba(50,213,131,.08);border:1px solid rgba(50,213,131,.2)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card .label{color:var(--muted);font-size:13px}.value{font-size:28px;font-weight:800;margin:7px 0}.good{color:var(--green)}.warn{color:var(--yellow)}.bad{color:var(--red)}
+.section{margin-top:26px}.section h3{margin:0 0 12px;font-size:19px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tabs{display:flex;gap:6px;padding:14px;border-bottom:1px solid var(--line)}button{border:0;color:var(--text);background:#172238;padding:9px 13px;border-radius:10px;cursor:pointer}button.active{background:#315bd6}
+.chart{height:230px;padding:18px;display:flex;align-items:end;gap:5px}.bar{flex:1;min-width:2px;background:linear-gradient(to top,#315bd6,#65a1ff);border-radius:4px 4px 0 0;opacity:.8}
+.uptime{padding:18px}.uptime-row{display:grid;grid-template-columns:130px 1fr 70px;gap:12px;align-items:center;margin:12px 0}.track{height:10px;background:#1b2538;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--green);border-radius:20px}
+.incident{padding:18px;border-bottom:1px solid var(--line);display:flex;gap:14px}.incident:last-child{border-bottom:0}.badge{height:max-content;padding:4px 9px;border-radius:8px;font-size:12px;font-weight:800;background:rgba(50,213,131,.1);color:var(--green)}.badge.warn{background:rgba(245,196,81,.1);color:var(--yellow)}
+.service{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}.service:last-child{border:0}.service-name{font-weight:700}.service-meta{color:var(--muted);font-size:13px}.right{display:flex;align-items:center;gap:9px}.mini-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.footer{margin-top:25px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:27px}.uptime-row{grid-template-columns:100px 1fr 60px}}
+@media(max-width:500px){.wrap{padding:18px 12px 45px}header{align-items:flex-start}.grid{grid-template-columns:1fr 1fr}.card{padding:15px}.value{font-size:23px}.uptime-row{grid-template-columns:1fr}.hero{padding:22px}}
+</style>
 </head>
-
 <body>
-
+<div class="wrap">
 <header>
-    <div class="header-container">
-
-        <a href="/" class="logo">Fasqoo</a>
-
-        <nav>
-            <a href="/">Home</a>
-            <a href="/faq.html">FAQ</a>
-            <a href="/about.html">About</a>
-            <a href="/network-status.html">Network Status</a>
-        </nav>
-
-    </div>
+  <a class="brand" href="/">
+    <div class="logo">F</div>
+    <div><h1>Fasqoo</h1><small>Network Status</small></div>
+  </a>
+  <div class="live"><span class="dot"></span>Alle Systeme betriebsbereit</div>
 </header>
 
+<section class="hero">
+  <h2>Fasqoo Network Status</h2>
+  <p>Live-Übersicht über Verfügbarkeit, Performance und aktuelle Störungen.</p>
+  <div class="status"><span class="dot"></span><div><b>Keine bekannten Störungen</b><br><span style="color:var(--muted)">Alle überwachten Fasqoo-Dienste laufen normal.</span></div></div>
+</section>
 
-<main>
+<div class="grid">
+  <div class="card"><div class="label">Gesamtverfügbarkeit</div><div id="overall" class="value good">99.99%</div><div class="label">letzte 30 Tage</div></div>
+  <div class="card"><div class="label">API</div><div id="api" class="value good">99.99%</div><div class="label">aktuelle Verfügbarkeit</div></div>
+  <div class="card"><div class="label">Speedtest</div><div id="speed" class="value good">99.98%</div><div class="label">aktuelle Verfügbarkeit</div></div>
+  <div class="card"><div class="label">Ø Antwortzeit</div><div id="latency" class="value">42 ms</div><div class="label">letzte Messungen</div></div>
+</div>
 
-    <section class="hero">
-        <h1>Network Status</h1>
+<section class="section">
+<h3>Verfügbarkeit</h3>
+<div class="panel">
+  <div class="tabs">
+    <button class="range active" data-range="24h">24 Stunden</button>
+    <button class="range" data-range="7d">7 Tage</button>
+    <button class="range" data-range="30d">30 Tage</button>
+  </div>
+  <div id="chart" class="chart" aria-label="Verfügbarkeitsdiagramm"></div>
+  <div class="uptime">
+    <div class="uptime-row"><b>Letzte 24h</b><div class="track"><div class="fill" style="width:99.99%"></div></div><b>99.99%</b></div>
+    <div class="uptime-row"><b>Letzte 7 Tage</b><div class="track"><div class="fill" style="width:99.98%"></div></div><b>99.98%</b></div>
+    <div class="uptime-row"><b>Letzte 30 Tage</b><div class="track"><div class="fill" style="width:99.99%"></div></div><b>99.99%</b></div>
+  </div>
+</div>
+</section>
 
-        <p>
-            Check the current operational status of Fasqoo services,
-            systems, and network infrastructure.
-        </p>
-    </section>
+<section class="section">
+<h3>Dienste</h3>
+<div class="panel">
+  <div class="service"><div><div class="service-name">Fasqoo Website</div><div class="service-meta">fasqoo.com</div></div><div class="right"><span class="mini-dot"></span><span class="good">Operational</span></div></div>
+  <div class="service"><div><div class="service-name">Speedtest Engine</div><div class="service-meta">Download / Upload / Ping / Jitter</div></div><div class="right"><span class="mini-dot"></span><span class="good">Operational</span></div></div>
+  <div class="service"><div><div class="service-name">API</div><div class="service-meta">REST API &amp; Datenverarbeitung</div></div><div class="right"><span class="mini-dot"></span><span class="good">Operational</span></div></div>
+  <div class="service"><div><div class="service-name">Network Monitoring</div><div class="service-meta">24/7 Health Checks</div></div><div class="right"><span class="mini-dot"></span><span class="good">Operational</span></div></div>
+</div>
+</section>
 
+<section class="section">
+<h3>Vorfälle</h3>
+<div class="panel" id="incidents">
+  <div class="incident"><span class="badge">OK</span><div><b>Keine aktuellen Vorfälle</b><br><span style="color:var(--muted)">Es wurden in diesem Zeitraum keine Störungen registriert.</span></div></div>
+</div>
+</section>
 
-    <section class="status-card">
+<div class="footer">
+  Fasqoo Network Status · <span id="updated"></span> · Automatische Aktualisierung alle 30 Sekunden
+</div>
+</div>
 
-        <div class="overall-status">
+<script>
+/*
+  FASQOO STATUS FRONTEND
+  ----------------------
+  Dieses Dokument läuft ohne Backend sofort.
+  Für echte 24/7-Daten ersetzt du die Demo-Funktion loadStatus()
+  durch deine API, z.B. GET /api/status.
+*/
 
-            <div class="status-dot"></div>
+const STORAGE_KEY = "fasqoo_network_status_v1";
+const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"measurements":[],"incidents":[]}');
 
-            <div>
-                <h2>All Systems Operational</h2>
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
 
-                <p>
-                    All Fasqoo services are currently operating normally.
-                </p>
-            </div>
+function addLocalMeasurement(){
+  const now = Date.now();
+  state.measurements.push({
+    ts: now,
+    uptime: 99.98 + Math.random()*0.02,
+    latency: Math.round(30 + Math.random()*30),
+    api: 99.98 + Math.random()*0.02,
+    speedtest: 99.97 + Math.random()*0.03
+  });
+  // Browser storage is intentionally capped.
+  state.measurements = state.measurements.filter(x => x.ts > now - 30*86400000);
+  save();
+}
 
-        </div>
+function render(range="24h"){
+  const now=Date.now();
+  const duration = range==="24h" ? 86400000 : range==="7d" ? 7*86400000 : 30*86400000;
+  const data = state.measurements.filter(x => x.ts >= now-duration);
+  const values = data.length ? data : Array.from({length: range==="24h"?24:range==="7d"?28:30},()=>({uptime:99.99,latency:42}));
 
-    </section>
+  const chart=document.getElementById("chart");
+  chart.innerHTML="";
+  values.slice(-60).forEach(v=>{
+    const bar=document.createElement("div");
+    bar.className="bar";
+    bar.style.height=Math.max(35,Math.min(100,(v.uptime-99)*5000))+"%";
+    chart.appendChild(bar);
+  });
 
+  const avg = values.reduce((a,b)=>a+(b.latency||42),0)/values.length;
+  document.getElementById("latency").textContent=Math.round(avg)+" ms";
+  document.getElementById("updated").textContent="Zuletzt aktualisiert: "+new Date().toLocaleString("de-DE");
+}
 
-    <section class="status-card">
+document.querySelectorAll(".range").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".range").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    render(btn.dataset.range);
+  });
+});
 
-        <h2>Service Status</h2>
+async function loadStatus(){
+  /*
+  Echte API:
+  const response = await fetch("/api/status", {cache:"no-store"});
+  const remote = await response.json();
+  // remote.services, remote.uptime, remote.incidents ...
+  */
+  addLocalMeasurement();
+  render(document.querySelector(".range.active").dataset.range);
+}
 
-        <div class="service">
-
-            <span class="service-name">
-                Fasqoo Website
-            </span>
-
-            <span class="service-status operational">
-                <span class="small-dot"></span>
-                Operational
-            </span>
-
-        </div>
-
-
-        <div class="service">
-
-            <span class="service-name">
-                Fasqoo AI Technician
-            </span>
-
-            <span class="service-status operational">
-                <span class="small-dot"></span>
-                Operational
-            </span>
-
-        </div>
-
-
-        <div class="service">
-
-            <span class="service-name">
-                Network Services
-            </span>
-
-            <span class="service-status operational">
-                <span class="small-dot"></span>
-                Operational
-            </span>
-
-        </div>
-
-
-        <div class="service">
-
-            <span class="service-name">
-                API Services
-            </span>
-
-            <span class="service-status operational">
-                <span class="small-dot"></span>
-                Operational
-            </span>
-
-        </div>
-
-    </section>
-
-
-    <section class="status-card">
-
-        <h2>Current Incidents</h2>
-
-        <div class="incident">
-
-            <div class="incident-title">
-                No active incidents
-            </div>
-
-            <p>
-                There are currently no known service interruptions
-                or network incidents affecting Fasqoo services.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <p class="updated">
-        Status information is provided by Fasqoo.
-    </p>
-
-</main>
-
-
-<footer>
-
-    <p>
-        &copy; 2026 Fasqoo. All rights reserved.
-    </p>
-
-    <p>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/accessibility.html">Accessibility</a>
-    </p>
-
-</footer>
-
+loadStatus();
+setInterval(loadStatus,30000);
+</script>
 </body>
 </html>
