@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Fasqoo | Professional Internet Speed Test</title>
     <style>
         :root {
@@ -25,15 +24,13 @@
             --transition: 0.3s ease;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-text-size-adjust: 100%; }
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             transition: background var(--transition), color var(--transition);
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         .dark {
             --bg: #0d0f12;
@@ -45,12 +42,11 @@
         }
         .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
 
-        /* ===== HEADER ===== */
+        /* HEADER */
         header {
             background: var(--card);
             border-bottom: 1px solid var(--line);
-            padding: 12px 0;
-            transition: background var(--transition);
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -62,147 +58,135 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         .brand {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
         }
         .brandmark {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: #111;
             color: #fff;
             display: grid;
             place-items: center;
-            font-size: 18px;
+            font-size: 16px;
         }
         .dark .brandmark { background: var(--orange); }
-        .brandname { font-size: 18px; }
         .main-menu {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .main-menu a {
             color: var(--text);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
-            padding: 4px 0;
-            white-space: nowrap;
         }
         .main-menu a:hover { color: var(--orange); }
         .menu-extra {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         .menu-extra select {
             border: 1px solid var(--line);
             background: var(--card);
             color: var(--text);
             border-radius: 6px;
-            padding: 6px 8px;
-            font-size: 11px;
+            padding: 5px 7px;
+            font-size: 10px;
             outline: none;
             cursor: pointer;
-            max-width: 80px;
+            max-width: 60px;
         }
         .theme-btn {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border: 1px solid var(--line);
             border-radius: 6px;
             background: var(--card);
             color: var(--text);
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             display: grid;
             place-items: center;
-            transition: background var(--transition);
-            flex-shrink: 0;
         }
-        .theme-btn:hover { background: var(--soft); }
 
-        /* ===== HERO ===== */
-        .hero { text-align: center; padding: 20px 0 16px; }
-        .hero h1 { font-size: 24px; font-weight: 700; line-height: 1.2; }
-        .hero p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+        /* HERO */
+        .hero { text-align: center; padding: 16px 0 12px; }
+        .hero h1 { font-size: 22px; font-weight: 700; line-height: 1.2; }
+        .hero p { color: var(--muted); font-size: 12px; margin-top: 4px; }
 
-        /* ===== SERVER ===== */
+        /* SERVER */
         .server-line {
             display: flex;
             justify-content: center;
             gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .server-badge {
             border: 1px solid var(--line);
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 9px;
             color: var(--muted);
             background: var(--card);
-            white-space: nowrap;
         }
         .server-value { color: var(--text); font-weight: 500; }
         .server-select-wrap {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 16px;
+            gap: 4px;
+            margin-bottom: 14px;
         }
         .server-select-wrap select {
             border: 1px solid var(--line);
             background: var(--card);
             color: var(--text);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 12px;
+            border-radius: 6px;
+            padding: 6px 30px 6px 10px;
+            font-size: 11px;
             outline: none;
             cursor: pointer;
             width: 100%;
-            max-width: 280px;
+            max-width: 240px;
             -webkit-appearance: none;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23737983' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23737983' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 36px;
+            background-position: right 10px center;
         }
-        #geoStatus {
-            font-size: 11px;
-            color: var(--muted);
-        }
+        #geoStatus { font-size: 10px; color: var(--muted); }
 
-        /* ===== CARD ===== */
+        /* CARD */
         .card {
             background: var(--card);
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            padding: 16px;
+            padding: 14px;
             box-shadow: var(--shadow);
-            transition: background var(--transition);
         }
         .grid {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
-        /* ===== SPEEDBOX ===== */
+        /* SPEEDBOX */
         .speedbox { text-align: center; }
         .gauge {
-            width: 200px;
-            height: 200px;
+            width: 190px;
+            height: 190px;
             margin: 0 auto;
             position: relative;
         }
@@ -211,8 +195,8 @@
             fill: none;
             stroke: #edf0f4;
             stroke-width: 10;
-            stroke-dasharray: 565;
-            stroke-dashoffset: 141;
+            stroke-dasharray: 535;
+            stroke-dashoffset: 134;
         }
         .dark .ring { stroke: #292e35; }
         .progress {
@@ -220,8 +204,8 @@
             stroke: url(#g);
             stroke-width: 9;
             stroke-linecap: round;
-            stroke-dasharray: 565;
-            stroke-dashoffset: 565;
+            stroke-dasharray: 535;
+            stroke-dashoffset: 535;
             transition: stroke-dashoffset 0.18s linear;
         }
         .center {
@@ -230,8 +214,8 @@
             display: grid;
             place-content: center;
         }
-        .num { font-size: 38px; font-weight: 700; letter-spacing: -1px; }
-        .unit { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .num { font-size: 34px; font-weight: 700; letter-spacing: -1px; }
+        .unit { font-size: 11px; color: var(--muted); margin-top: 2px; }
         .status {
             color: var(--muted);
             font-size: 12px;
@@ -240,26 +224,24 @@
         }
         .accuracy { font-size: 10px; color: var(--muted); margin-top: 2px; }
         .start {
-            margin-top: 14px;
+            margin-top: 12px;
             width: 100%;
-            max-width: 220px;
-            height: 50px;
+            max-width: 200px;
+            height: 48px;
             border: 0;
             border-radius: 8px;
             background: var(--orange);
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: background var(--transition), transform var(--transition);
             -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
         .start:active { transform: scale(0.96); }
-        .start:hover { transform: translateY(-2px); background: #e04e1a; }
         .start:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-        /* ===== METRICS ===== */
+        /* METRICS */
         .metrics {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -268,7 +250,7 @@
             overflow: hidden;
         }
         .metric {
-            padding: 14px 16px;
+            padding: 12px 14px;
             border-right: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
         }
@@ -278,78 +260,78 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
-        .label { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .3px; }
+        .label { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .3px; }
         .icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--soft);
             display: grid;
             place-items: center;
-            font-size: 12px;
+            font-size: 11px;
         }
-        .value { font-size: 20px; font-weight: 700; }
-        .small { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 2px; }
+        .value { font-size: 18px; font-weight: 700; }
+        .small { font-size: 10px; color: var(--muted); font-weight: 400; }
 
-        /* ===== CHART ===== */
+        /* CHART */
         .chart {
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            margin-top: 12px;
-            padding: 12px;
+            margin-top: 10px;
+            padding: 10px;
         }
         .charthead {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            margin-bottom: 8px;
+            font-size: 10px;
+            margin-bottom: 6px;
         }
-        .charthead span { color: var(--muted); font-size: 10px; }
-        canvas { width: 100%; height: 120px; border-radius: 6px; touch-action: none; }
+        .charthead span { color: var(--muted); font-size: 9px; }
+        canvas { width: 100%; height: 100px; border-radius: 4px; }
         .chart-legend {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-top: 4px;
-            font-size: 9px;
+            font-size: 8px;
             color: var(--muted);
         }
-        .chart-legend span { display: flex; align-items: center; gap: 4px; }
+        .chart-legend span { display: flex; align-items: center; gap: 3px; }
         .chart-legend i { display: inline-block; width: 10px; height: 2px; border-radius: 2px; }
 
-        /* ===== INFO GRID ===== */
+        /* INFO GRID */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 14px;
+            gap: 6px;
+            margin-top: 12px;
         }
         .info {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--card);
         }
         .info .label {
             text-transform: uppercase;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 600;
             color: var(--muted);
             letter-spacing: .3px;
         }
         .info .iv {
-            margin-top: 4px;
-            font-size: 12px;
+            margin-top: 3px;
+            font-size: 11px;
             font-weight: 500;
             word-break: break-all;
         }
 
-        /* ===== QUALITY ===== */
+        /* QUALITY */
         .quality {
-            margin-top: 14px;
-            padding: 16px;
+            margin-top: 12px;
+            padding: 14px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
         }
@@ -358,13 +340,13 @@
             justify-content: space-between;
             align-items: center;
         }
-        .qtop span { font-size: 12px; font-weight: 600; }
-        .qscore { font-size: 22px; font-weight: 700; }
+        .qtop span { font-size: 11px; font-weight: 600; }
+        .qscore { font-size: 20px; font-weight: 700; }
         .bar {
-            height: 6px;
+            height: 5px;
             background: #edf1f5;
             border-radius: 99px;
-            margin: 10px 0;
+            margin: 8px 0;
             overflow: hidden;
         }
         .dark .bar { background: #292e35; }
@@ -375,23 +357,23 @@
             background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
             transition: width 0.5s ease;
         }
-        .qtext { font-size: 11px; color: var(--muted); line-height: 1.4; }
+        .qtext { font-size: 10px; color: var(--muted); line-height: 1.4; }
 
-        /* ===== SECTIONS ===== */
-        .section { margin-top: 24px; }
-        .section h2 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
-        .section-sub { color: var(--muted); font-size: 11px; margin: -4px 0 12px; }
+        /* SECTIONS */
+        .section { margin-top: 20px; }
+        .section h2 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .section-sub { color: var(--muted); font-size: 10px; margin: -4px 0 10px; }
 
-        /* ===== APPS ===== */
+        /* APPS */
         .apps {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
         .app {
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            padding: 14px;
+            padding: 12px;
             background: var(--card);
         }
         .app-head {
@@ -400,17 +382,17 @@
             align-items: center;
         }
         .app-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             background: var(--soft);
             display: grid;
             place-items: center;
-            font-size: 17px;
+            font-size: 15px;
         }
         .app-status {
-            font-size: 9px;
-            padding: 3px 8px;
+            font-size: 8px;
+            padding: 2px 7px;
             border-radius: 99px;
             background: var(--soft);
             color: var(--muted);
@@ -420,15 +402,15 @@
         .app-status.good { color: #087443; background: #e8f8f0; }
         .app-status.medium { color: #956900; background: #fff5d9; }
         .app-status.bad { color: #b4232a; background: #fdecec; }
-        .app h3 { font-size: 13px; font-weight: 600; margin: 10px 0 4px; }
-        .app p { color: var(--muted); font-size: 10px; line-height: 1.4; }
-        .app-score { margin-top: 10px; font-size: 11px; font-weight: 500; }
+        .app h3 { font-size: 12px; font-weight: 600; margin: 8px 0 2px; }
+        .app p { color: var(--muted); font-size: 9px; line-height: 1.3; }
+        .app-score { margin-top: 8px; font-size: 10px; font-weight: 500; }
         .app-bar {
-            height: 4px;
+            height: 3px;
             background: #edf1f5;
             border-radius: 99px;
             overflow: hidden;
-            margin-top: 6px;
+            margin-top: 5px;
         }
         .app-bar i {
             display: block;
@@ -438,50 +420,50 @@
             transition: width 0.5s ease;
         }
 
-        /* ===== TOOLS ===== */
+        /* TOOLS */
         .tools {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
         .tool {
-            padding: 14px;
+            padding: 12px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: var(--card);
         }
         .tool .icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--soft);
             display: grid;
             place-items: center;
-            font-size: 11px;
-            margin-bottom: 6px;
+            font-size: 10px;
+            margin-bottom: 4px;
         }
-        .tool h3 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-        .tool p { font-size: 10px; color: var(--muted); line-height: 1.4; }
+        .tool h3 { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+        .tool p { font-size: 9px; color: var(--muted); line-height: 1.3; }
 
-        /* ===== REPORT ===== */
+        /* REPORT */
         .report {
-            padding: 16px;
+            padding: 14px;
             border: 1px solid var(--line);
             border-radius: var(--radius);
         }
         .reportgrid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 6px;
         }
         .r {
             background: var(--soft);
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-radius: 6px;
         }
         .r b {
             display: block;
-            font-size: 9px;
+            font-size: 8px;
             color: var(--muted);
             font-weight: 600;
             text-transform: uppercase;
@@ -490,13 +472,13 @@
         .r span {
             display: block;
             margin-top: 2px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
         }
         .actions {
             display: flex;
-            gap: 8px;
-            margin-top: 12px;
+            gap: 6px;
+            margin-top: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -504,18 +486,15 @@
             border: 1px solid var(--line);
             background: var(--card);
             border-radius: 6px;
-            padding: 8px 14px;
+            padding: 6px 12px;
             color: var(--text);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
             cursor: pointer;
             transition: background var(--transition);
-            -webkit-tap-highlight-color: transparent;
         }
-        .action:active { transform: scale(0.96); }
-        .action:hover { background: var(--soft); }
 
-        /* ===== HISTORY ===== */
+        /* HISTORY */
         .history {
             border: 1px solid var(--line);
             border-radius: var(--radius);
@@ -524,59 +503,57 @@
             -webkit-overflow-scrolling: touch;
         }
         .hhead {
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-bottom: 1px solid var(--line);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
-        .hhead h2 { font-size: 14px; font-weight: 600; margin: 0; }
+        .hhead h2 { font-size: 13px; font-weight: 600; margin: 0; }
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 500px;
-            font-size: 11px;
+            min-width: 400px;
+            font-size: 10px;
         }
         th, td {
             text-align: left;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-bottom: 1px solid #eef1f5;
         }
-        th { font-weight: 600; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .3px; }
-        .empty { text-align: center; color: var(--muted); padding: 20px; }
+        th { font-weight: 600; color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .3px; }
+        .empty { text-align: center; color: var(--muted); padding: 16px; }
 
-        /* ===== FOOTER ===== */
+        /* FOOTER */
         footer {
             background: var(--card);
             border-top: 1px solid var(--line);
-            padding: 20px 0;
+            padding: 16px 0;
             color: var(--muted);
-            font-size: 10px;
-            margin-top: 30px;
+            font-size: 9px;
+            margin-top: 24px;
         }
         .foot {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             text-align: center;
         }
-        .fasqoo-footer-copy { line-height: 1.5; }
         .fasqoo-footer-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px 16px;
+            gap: 6px 14px;
         }
         .fasqoo-footer-links a {
             color: inherit;
             text-decoration: none;
             opacity: .8;
         }
-        .fasqoo-footer-links a:hover { opacity: 1; text-decoration: underline; }
 
-        /* ===== COOKIE BANNER ===== */
+        /* COOKIE */
         #cookieBanner {
             position: fixed;
             bottom: 0;
@@ -584,7 +561,7 @@
             right: 0;
             background: var(--card);
             border-top: 1px solid var(--line);
-            padding: 12px 16px;
+            padding: 10px 16px;
             z-index: 9999;
             display: none;
             box-shadow: 0 -4px 20px rgba(0,0,0,.1);
@@ -593,35 +570,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             text-align: center;
         }
         #cookieBanner .cookie-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--muted);
         }
         #cookieBanner .cookie-text a { color: var(--orange); text-decoration: underline; }
         .cookie-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
-        .cookie-actions .action {
-            padding: 6px 16px;
-            font-size: 12px;
-        }
+        .cookie-actions .action { padding: 5px 14px; font-size: 11px; }
         .cookie-actions .accept {
             background: var(--orange);
             color: #fff;
             border-color: var(--orange);
         }
 
-        /* ===== TABLET & DESKTOP ===== */
+        /* TABLET + DESKTOP */
         @media (min-width: 600px) {
-            .wrap { padding: 0 24px; }
-            .gauge { width: 240px; height: 240px; }
-            .num { font-size: 44px; }
-            .grid { flex-direction: row; gap: 30px; }
-            .grid .speedbox { flex: 0 0 280px; }
+            .gauge { width: 230px; height: 230px; }
+            .num { font-size: 40px; }
+            .grid { flex-direction: row; gap: 24px; }
+            .grid .speedbox { flex: 0 0 260px; }
             .grid > div:last-child { flex: 1; }
             .apps { grid-template-columns: repeat(3, 1fr); }
             .tools { grid-template-columns: repeat(3, 1fr); }
@@ -629,49 +602,35 @@
             .info-grid { grid-template-columns: repeat(4, 1fr); }
             #cookieBanner .wrap { flex-direction: row; text-align: left; }
             .foot { flex-direction: row; justify-content: space-between; text-align: left; }
+            .server-select-wrap { flex-direction: row; gap: 10px; }
+            .server-select-wrap select { width: auto; max-width: 260px; }
         }
         @media (min-width: 900px) {
-            .gauge { width: 280px; height: 280px; }
-            .num { font-size: 48px; }
-            .grid .speedbox { flex: 0 0 320px; }
+            .gauge { width: 260px; height: 260px; }
+            .num { font-size: 46px; }
+            .grid .speedbox { flex: 0 0 300px; }
             .apps { grid-template-columns: repeat(4, 1fr); }
             .tools { grid-template-columns: repeat(4, 1fr); }
-            .server-select-wrap { flex-direction: row; gap: 12px; }
-            .server-select-wrap select { width: auto; max-width: 300px; }
-            .hero h1 { font-size: 30px; }
+            .hero h1 { font-size: 28px; }
         }
         @media (min-width: 1100px) {
-            .gauge { width: 295px; height: 295px; }
-            .num { font-size: 52px; }
-            .grid .speedbox { flex: 0 0 360px; }
-            .hero h1 { font-size: 34px; }
+            .gauge { width: 280px; height: 280px; }
+            .num { font-size: 50px; }
+            .grid .speedbox { flex: 0 0 340px; }
+            .hero h1 { font-size: 32px; }
         }
 
-        /* ===== SAFE AREA (iPhone Notch) ===== */
+        /* SAFE AREA */
         @supports (padding: max(0px)) {
-            #cookieBanner {
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
-            }
-            body {
-                padding-bottom: max(0px, env(safe-area-inset-bottom));
-            }
+            #cookieBanner { padding-bottom: max(10px, env(safe-area-inset-bottom)); }
         }
-
-        /* ===== TOUCH OPTIMIZATIONS ===== */
-        button, select, .action, .start {
-            touch-action: manipulation;
-        }
-        .start, .action {
-            -webkit-tap-highlight-color: transparent;
-        }
-        input, select, textarea {
-            font-size: 16px !important; /* Verhindert iOS-Zoom */
-        }
+        button, select, .action, .start { touch-action: manipulation; }
+        input, select, textarea { font-size: 16px !important; }
     </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header>
     <div class="wrap nav">
         <div class="brand">
@@ -685,20 +644,13 @@
             <a href="about.html" data-i18n="nav_about">About</a>
             <div class="menu-extra">
                 <select id="lang">
-                    <option value="de">DE</option>
-                    <option value="en">EN</option>
-                    <option value="fr">FR</option>
-                    <option value="es">ES</option>
-                    <option value="it">IT</option>
-                    <option value="pt">PT</option>
-                    <option value="nl">NL</option>
-                    <option value="tr">TR</option>
-                    <option value="sq">SQ</option>
-                    <option value="ar">AR</option>
-                    <option value="pl">PL</option>
-                    <option value="ru">RU</option>
-                    <option value="ja">JA</option>
-                    <option value="ko">KO</option>
+                    <option value="de">DE</option><option value="en">EN</option>
+                    <option value="fr">FR</option><option value="es">ES</option>
+                    <option value="it">IT</option><option value="pt">PT</option>
+                    <option value="nl">NL</option><option value="tr">TR</option>
+                    <option value="sq">SQ</option><option value="ar">AR</option>
+                    <option value="pl">PL</option><option value="ru">RU</option>
+                    <option value="ja">JA</option><option value="ko">KO</option>
                     <option value="zh">ZH</option>
                 </select>
                 <button id="themeBtn" class="theme-btn">☾</button>
@@ -707,24 +659,24 @@
     </div>
 </header>
 
-<!-- ===== MAIN ===== -->
+<!-- MAIN -->
 <main>
     <div class="wrap">
 
-        <!-- ===== HERO ===== -->
+        <!-- HERO -->
         <section class="hero">
             <h1 id="heroTitle" data-i18n="hero_title">Professional Internet Speed Test</h1>
             <p id="heroSub" data-i18n="hero_sub">Precise measurements for professionals &amp; daily users</p>
         </section>
 
-        <!-- ===== SERVER ===== -->
+        <!-- SERVER -->
         <div class="server-line">
             <span class="server-badge" data-i18n="server_label">AUTOMATIC SERVER</span>
             <span class="server-badge server-value" id="serverName">Cloudflare Edge</span>
         </div>
         <div class="server-select-wrap">
             <select id="serverSelect">
-                <option value="auto">🌐 Automatisch (Empfohlen)</option>
+                <option value="auto">🌐 Automatisch</option>
                 <option value="cloudflare">☁️ Global</option>
                 <option value="cloudflare_eu">🇪🇺 EU</option>
                 <option value="cloudflare_us">🇺🇸 US</option>
@@ -733,10 +685,11 @@
             <span id="geoStatus">📍 Standort wird erkannt...</span>
         </div>
 
-        <!-- ===== CARD ===== -->
+        <!-- CARD -->
         <section class="card">
             <div class="grid">
-                <!-- Speedbox -->
+
+                <!-- SPEEDBOX -->
                 <div class="speedbox">
                     <div class="gauge">
                         <svg viewBox="0 0 200 200">
@@ -744,8 +697,8 @@
                                 <stop offset="0%" stop-color="#ff5a1f"/>
                                 <stop offset="100%" stop-color="#ff8a5b"/>
                             </linearGradient></defs>
-                            <circle class="ring" cx="100" cy="100" r="90"></circle>
-                            <circle id="prog" class="progress" cx="100" cy="100" r="90"></circle>
+                            <circle class="ring" cx="100" cy="100" r="85"></circle>
+                            <circle id="prog" class="progress" cx="100" cy="100" r="85"></circle>
                         </svg>
                         <div class="center">
                             <div id="speed" class="num">0</div>
@@ -757,7 +710,7 @@
                     <button id="startBtn" class="start" data-i18n="start_btn">Start Speed Test</button>
                 </div>
 
-                <!-- Metriken + Chart -->
+                <!-- METRICS + CHART -->
                 <div>
                     <div class="metrics">
                         <div class="metric"><div class="mtop"><span class="label" data-i18n="ping_label">Ping</span><span class="icon">◌</span></div><div class="value"><span id="ping">—</span><span class="small">ms</span></div></div>
@@ -775,9 +728,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- Info Grid -->
+            <!-- INFO GRID -->
             <div class="info-grid">
                 <div class="info"><div class="label" data-i18n="info_ip">Public IP</div><div id="ip" class="iv">Detecting...</div></div>
                 <div class="info"><div class="label" data-i18n="info_isp">Provider / ISP</div><div id="isp" class="iv">Detecting...</div></div>
@@ -785,7 +739,7 @@
                 <div class="info"><div class="label" data-i18n="info_asn">Network / ASN</div><div id="asn" class="iv">Detecting...</div></div>
             </div>
 
-            <!-- Quality -->
+            <!-- QUALITY -->
             <div class="quality">
                 <div class="qtop"><span data-i18n="quality_title">Connection Quality</span><span id="score" class="qscore">—</span></div>
                 <div class="bar"><i id="bar"></i></div>
@@ -793,7 +747,7 @@
             </div>
         </section>
 
-        <!-- ===== APPS ===== -->
+        <!-- APPS -->
         <section class="section">
             <h2 data-i18n="apps_title">What can you do with your connection?</h2>
             <p class="section-sub" data-i18n="apps_sub">Your results are analyzed for common online activities.</p>
@@ -809,7 +763,7 @@
             </div>
         </section>
 
-        <!-- ===== DIAGNOSTICS ===== -->
+        <!-- DIAGNOSTICS -->
         <section class="section">
             <h2 data-i18n="diagnostics_title">Network Diagnostics</h2>
             <div class="tools">
@@ -820,7 +774,7 @@
             </div>
         </section>
 
-        <!-- ===== REPORT ===== -->
+        <!-- REPORT -->
         <section class="section">
             <h2 data-i18n="report_title">Professional Test Report</h2>
             <div class="report">
@@ -839,7 +793,7 @@
             </div>
         </section>
 
-        <!-- ===== HISTORY ===== -->
+        <!-- HISTORY -->
         <section class="section">
             <h2 data-i18n="history_title">Test History</h2>
             <div class="history">
@@ -854,12 +808,10 @@
     </div>
 </main>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer>
     <div class="wrap foot">
-        <div class="fasqoo-footer-copy">
-            <div>© 2026 Fasqoo. All Rights Reserved.</div>
-        </div>
+        <div>© 2026 Fasqoo. All Rights Reserved.</div>
         <nav class="fasqoo-footer-links">
             <a href="/accessibility.html" data-i18n="footer_accessibility">Accessibility</a>
             <a href="/privacy-policy.html" data-i18n="footer_privacy">Privacy</a>
@@ -869,7 +821,7 @@
     </div>
 </footer>
 
-<!-- ===== COOKIE BANNER ===== -->
+<!-- COOKIE -->
 <div id="cookieBanner">
     <div class="wrap">
         <span class="cookie-text">🍪 Wir verwenden Cookies. <a href="/privacy-policy.html">Mehr erfahren</a></span>
@@ -880,40 +832,568 @@
     </div>
 </div>
 
+<!-- ===== KOMPLETTES SCRIPT ===== -->
 <script>
-/* ===== KURZES SCRIPT ===== */
-document.addEventListener('DOMContentLoaded', function() {
-    // Dark Mode
-    const themeBtn = document.getElementById('themeBtn');
-    const darkMode = localStorage.getItem('fasqoo_dark') === 'true';
-    if (darkMode) document.body.classList.add('dark');
-    themeBtn.textContent = darkMode ? '☀' : '☾';
-    themeBtn.addEventListener('click', function() {
-        const isDark = document.body.classList.toggle('dark');
-        localStorage.setItem('fasqoo_dark', isDark);
-        themeBtn.textContent = isDark ? '☀' : '☾';
-    });
+/* ============================================================
+   FASQOO SPEED TEST - VOLL FUNKTIONSFÄHIG
+   ============================================================ */
 
-    // Cookie Banner
-    if (!localStorage.getItem('fasqoo_cookie_consent')) {
-        document.getElementById('cookieBanner').style.display = 'block';
-    }
-    document.getElementById('cookieAccept').addEventListener('click', function() {
-        localStorage.setItem('fasqoo_cookie_consent', 'accepted');
-        document.getElementById('cookieBanner').style.display = 'none';
-    });
-    document.getElementById('cookieDecline').addEventListener('click', function() {
-        localStorage.setItem('fasqoo_cookie_consent', 'declined');
-        document.getElementById('cookieBanner').style.display = 'none';
-    });
+// ===== I18N (15 Sprachen) =====
+const i18n = {
+  de: {
+    nav_home: "Startseite", nav_faq: "FAQ", nav_network: "Netzwerkstatus", nav_about: "Über uns",
+    hero_title: "Professioneller Internet Speed Test",
+    hero_sub: "Präzise Messungen für Profis und tägliche Nutzer.",
+    server_label: "AUTOMATISCHER SERVER",
+    status_ready: "Bereit zum Testen",
+    start_btn: "Speedtest starten",
+    ping_label: "Ping", jitter_label: "Jitter", download_label: "Download", upload_label: "Upload",
+    chart_label: "Live-Verbindungsleistung",
+    info_ip: "Öffentliche IP", info_isp: "Provider / ISP", info_location: "Standort", info_asn: "Netzwerk / ASN",
+    quality_title: "Verbindungsqualität", quality_wait: "Führe einen Test durch.",
+    apps_title: "Was kannst du mit deiner Verbindung machen?",
+    apps_sub: "Deine Ergebnisse werden für typische Online-Aktivitäten ausgewertet.",
+    app_gaming: "Gaming", app_gaming_desc: "Niedriger Ping & Jitter",
+    app_streaming: "Netflix / Streaming", app_streaming_desc: "HD & normales Streaming",
+    app_4k: "4K Streaming", app_4k_desc: "Hochwertiges 4K-Video",
+    app_calls: "Zoom / Teams", app_calls_desc: "Bandbreite & Latenz",
+    app_office: "Homeoffice", app_office_desc: "Cloud & Remote-Arbeit",
+    app_cloud: "Cloud / Downloads", app_cloud_desc: "Große Dateien übertragen",
+    app_social: "Social Media", app_social_desc: "Instagram, TikTok, FB",
+    app_web: "Web Browsing", app_web_desc: "Alltägliche Websites",
+    app_run_test: "Test durchführen", status_waiting: "Warten",
+    diagnostics_title: "Netzwerkdiagnose",
+    diag_latency: "Latenz", diag_latency_desc: "Reaktionszeit-Messung",
+    diag_stability: "Stabilität", diag_stability_desc: "Jitter & Last-Stabilität",
+    diag_dns: "DNS-Diagnose", diag_dns_desc: "DNS-Verfügbarkeit prüfen",
+    diag_ip: "IP-Diagnose", diag_ip_desc: "Öffentliche IP, ISP, ASN",
+    report_title: "Professioneller Testbericht",
+    report_id: "Test-ID", report_ipv4: "IPv4", report_ipv6: "IPv6", report_dns: "DNS",
+    copy_btn: "Kopieren", share_btn: "Teilen", json_btn: "Exportieren", print_btn: "Drucken",
+    history_title: "Testverlauf", history_recent: "Letzte Messungen", clear_btn: "Löschen",
+    history_date: "Datum", history_download: "Download", history_upload: "Upload", history_ping: "Ping", history_quality: "Qualität",
+    footer_accessibility: "Barrierefreiheit", footer_privacy: "Datenschutz", footer_terms: "Nutzungsbedingungen", footer_dns: "Verkauf ablehnen"
+  },
+  en: {
+    nav_home: "Home", nav_faq: "FAQ", nav_network: "Network Status", nav_about: "About",
+    hero_title: "Professional Internet Speed Test",
+    hero_sub: "Precise measurements for professionals & daily users.",
+    server_label: "AUTOMATIC SERVER",
+    status_ready: "Ready to test",
+    start_btn: "Start Speed Test",
+    ping_label: "Ping", jitter_label: "Jitter", download_label: "Download", upload_label: "Upload",
+    chart_label: "Live connection performance",
+    info_ip: "Public IP", info_isp: "Provider / ISP", info_location: "Location", info_asn: "Network / ASN",
+    quality_title: "Connection Quality", quality_wait: "Run a test to evaluate.",
+    apps_title: "What can you do with your connection?",
+    apps_sub: "Your results are analyzed for common online activities.",
+    app_gaming: "Gaming", app_gaming_desc: "Low ping & jitter",
+    app_streaming: "Netflix / Streaming", app_streaming_desc: "HD & normal streaming",
+    app_4k: "4K Streaming", app_4k_desc: "High-quality 4K video",
+    app_calls: "Zoom / Teams", app_calls_desc: "Bandwidth & latency",
+    app_office: "Homeoffice", app_office_desc: "Cloud & remote work",
+    app_cloud: "Cloud / Downloads", app_cloud_desc: "Large file transfers",
+    app_social: "Social Media", app_social_desc: "Instagram, TikTok, FB",
+    app_web: "Web Browsing", app_web_desc: "Everyday websites",
+    app_run_test: "Run test", status_waiting: "Waiting",
+    diagnostics_title: "Network Diagnostics",
+    diag_latency: "Latency", diag_latency_desc: "Response time measurement",
+    diag_stability: "Stability", diag_stability_desc: "Jitter & load stability",
+    diag_dns: "DNS Diagnostics", diag_dns_desc: "DNS availability check",
+    diag_ip: "IP Diagnostics", diag_ip_desc: "Public IP, ISP, ASN",
+    report_title: "Professional Test Report",
+    report_id: "Test ID", report_ipv4: "IPv4", report_ipv6: "IPv6", report_dns: "DNS",
+    copy_btn: "Copy", share_btn: "Share", json_btn: "Export", print_btn: "Print",
+    history_title: "Test History", history_recent: "Recent measurements", clear_btn: "Clear",
+    history_date: "Date", history_download: "Download", history_upload: "Upload", history_ping: "Ping", history_quality: "Quality",
+    footer_accessibility: "Accessibility", footer_privacy: "Privacy", footer_terms: "Terms", footer_dns: "Do Not Sell"
+  }
+};
+// Fallback für fehlende Sprachen
+function getTranslation(lang, key) {
+  return (i18n[lang] && i18n[lang][key]) || (i18n.en && i18n.en[key]) || key;
+}
 
-    // Speedtest Start
-    document.getElementById('startBtn').addEventListener('click', function() {
-        alert('🚀 Speedtest startet! (Hier kommt deine Speedtest-Logik)');
-    });
+// ===== DOM =====
+const $ = id => document.getElementById(id);
 
-    console.log('📱 Fasqoo Mobile Optimized ✅');
+// ===== STATE =====
+let running = false;
+let samples = [];
+let uploadSamples = [];
+let info = {};
+let last = {};
+let gaugeMax = 100;
+let activeServer = { name: "Cloudflare Edge", url: "https://speed.cloudflare.com" };
+
+// ===== THEME =====
+function setTheme(dark) {
+  document.body.classList.toggle("dark", dark);
+  localStorage.setItem("fasqoo_dark", dark);
+  $("themeBtn").textContent = dark ? "☀" : "☾";
+}
+const savedDark = localStorage.getItem("fasqoo_dark") === "true";
+setTheme(savedDark);
+$("themeBtn").addEventListener("click", () => setTheme(!document.body.classList.contains("dark")));
+
+// ===== LANGUAGE =====
+function applyLanguage(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const val = getTranslation(lang, key);
+    if (val !== key) el.textContent = val;
+  });
+  if (!running) {
+    $("status").textContent = getTranslation(lang, "status_ready");
+    $("startBtn").textContent = getTranslation(lang, "start_btn");
+  }
+  localStorage.setItem("fasqoo_lang", lang);
+}
+const savedLang = localStorage.getItem("fasqoo_lang") || "de";
+$("lang").value = savedLang;
+applyLanguage(savedLang);
+$("lang").addEventListener("change", e => applyLanguage(e.target.value));
+
+// ===== CHART =====
+const canvas = $("chart");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  const r = canvas.getBoundingClientRect();
+  const d = window.devicePixelRatio || 1;
+  canvas.width = r.width * d;
+  canvas.height = r.height * d;
+  ctx.setTransform(d, 0, 0, d, 0, 0);
+  drawChart();
+}
+
+function drawChart() {
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  ctx.clearRect(0, 0, w, h);
+  const dark = document.body.classList.contains("dark");
+  ctx.strokeStyle = dark ? "#2b3037" : "#edf1f5";
+  ctx.lineWidth = 1;
+  for (let i = 1; i < 5; i++) {
+    const y = i * h / 5;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+  if (samples.length > 1) {
+    const max = Math.max(100, ...samples);
+    ctx.beginPath();
+    samples.forEach((v, i) => {
+      const x = i * w / (samples.length - 1);
+      const y = h - 8 - v / max * (h - 16);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.strokeStyle = "#2563eb";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  if (uploadSamples.length > 1) {
+    const max = Math.max(100, ...uploadSamples);
+    ctx.beginPath();
+    uploadSamples.forEach((v, i) => {
+      const x = i * w / (uploadSamples.length - 1);
+      const y = h - 8 - v / max * (h - 16);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.strokeStyle = "#16a36a";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+window.addEventListener("resize", resizeCanvas);
+
+// ===== GAUGE =====
+function getGaugeMax(v) {
+  if (v <= 100) return 100;
+  if (v <= 300) return 300;
+  if (v <= 500) return 500;
+  if (v <= 1000) return 1000;
+  if (v <= 2500) return 2500;
+  if (v <= 5000) return 5000;
+  return 10000;
+}
+
+function gauge(v) {
+  if (!Number.isFinite(v)) return;
+  gaugeMax = Math.max(gaugeMax, getGaugeMax(v));
+  const percentage = Math.max(0, Math.min(v / gaugeMax, 1));
+  const circumference = 535;
+  const visibleArc = circumference * .75;
+  const offset = circumference - visibleArc * percentage;
+  $("speed").textContent = v < 10 ? v.toFixed(1) : Math.round(v);
+  $("prog").style.strokeDashoffset = offset;
+}
+
+function resetGauge() {
+  gaugeMax = 100;
+  samples = [];
+  uploadSamples = [];
+  gauge(0);
+  drawChart();
+}
+
+// ===== NETWORK INFO =====
+async function netinfo() {
+  try {
+    const r = await fetch("https://ipwho.is/", { cache: "no-store" });
+    const d = await r.json();
+    if (!d.success) return;
+    info = d;
+    $("ip").textContent = d.ip || "Unavailable";
+    $("isp").textContent = d.connection?.isp || d.connection?.org || "Unavailable";
+    $("loc").textContent = [d.city, d.region, d.country].filter(Boolean).join(", ") || "Unavailable";
+    $("asn").textContent = (d.connection?.asn ? "AS" + d.connection.asn : "") || "Unavailable";
+    if (d.type === "IPv4") { $("ipv4").textContent = d.ip; $("ipv6").textContent = "Not detected"; }
+    if (d.type === "IPv6") { $("ipv6").textContent = d.ip; $("ipv4").textContent = "Not detected"; }
+    $("serverName").textContent = activeServer.name;
+  } catch (e) {
+    $("ip").textContent = "Unavailable";
+    $("isp").textContent = "Unavailable";
+    $("loc").textContent = "Unavailable";
+    $("asn").textContent = "Unavailable";
+  }
+}
+
+// ===== GEO-IP =====
+async function detectGeoIP() {
+  try {
+    const r = await fetch("https://ipapi.co/json/");
+    const d = await r.json();
+    const country = d.country_code;
+    $("geoStatus").textContent = "📍 " + (d.city ? d.city + ", " : "") + (d.country_name || country);
+    const eu = ["DE","FR","IT","ES","NL","BE","AT","CH","PL","CZ","HU","RO","BG","GR","PT","SE","NO","FI","DK","IE","LU"];
+    const na = ["US","CA","MX"];
+    const ap = ["JP","KR","CN","IN","AU","NZ","SG","MY","PH","VN","TH"];
+    if (eu.includes(country)) { $("serverSelect").value = "cloudflare_eu"; activeServer = { name: "Cloudflare EU", url: "https://speed.cloudflare.com" }; }
+    else if (na.includes(country)) { $("serverSelect").value = "cloudflare_us"; activeServer = { name: "Cloudflare US", url: "https://speed.cloudflare.com" }; }
+    else if (ap.includes(country)) { $("serverSelect").value = "cloudflare_ap"; activeServer = { name: "Cloudflare APAC", url: "https://speed.cloudflare.com" }; }
+    else { $("serverSelect").value = "cloudflare"; activeServer = { name: "Cloudflare Global", url: "https://speed.cloudflare.com" }; }
+    $("serverName").textContent = activeServer.name;
+  } catch (e) { $("geoStatus").textContent = "📍 Standort nicht verfügbar"; }
+}
+$("serverSelect").addEventListener("change", function() {
+  const v = this.value;
+  const names = { cloudflare: "Cloudflare Global", cloudflare_eu: "Cloudflare EU", cloudflare_us: "Cloudflare US", cloudflare_ap: "Cloudflare APAC" };
+  activeServer = { name: names[v] || "Cloudflare Edge", url: "https://speed.cloudflare.com" };
+  $("serverName").textContent = activeServer.name;
 });
+
+// ===== FETCH WITH TIMEOUT =====
+async function fetchTimeout(url, opts = {}, timeout = 10000) {
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), timeout);
+  try {
+    const r = await fetch(url, { ...opts, signal: c.signal });
+    clearTimeout(t);
+    return r;
+  } catch (e) { clearTimeout(t); throw e; }
+}
+
+// ===== PING =====
+async function pingTest() {
+  const vals = [];
+  for (let i = 0; i < 5; i++) {
+    if (!running) break;
+    try {
+      const start = performance.now();
+      const r = await fetchTimeout(activeServer.url + "/__down?bytes=0&r=" + Date.now(), { cache: "no-store", mode: "cors" }, 5000);
+      if (!r.ok) throw new Error("Ping failed");
+      await r.arrayBuffer();
+      const elapsed = performance.now() - start;
+      if (elapsed > 0 && elapsed < 5000) vals.push(elapsed);
+    } catch (e) { console.warn("Ping failed:", e); }
+  }
+  if (!vals.length) throw new Error("Ping server not reachable");
+  const ping = vals.reduce((a, b) => a + b, 0) / vals.length;
+  let jitter = 0;
+  for (let i = 1; i < vals.length; i++) jitter += Math.abs(vals[i] - vals[i - 1]);
+  jitter /= Math.max(1, vals.length - 1);
+  return { ping, jitter };
+}
+
+// ===== DOWNLOAD (parallel) =====
+async function downloadTest() {
+  const lang = $("lang").value;
+  $("status").textContent = getTranslation(lang, "download_label") + "...";
+  $("chartState").textContent = "Download";
+  samples = [];
+  const sizes = [500000, 1000000, 2000000, 5000000, 10000000];
+  let totalBytes = 0, totalSeconds = 0, success = 0, allResults = [];
+  for (const size of sizes) {
+    if (!running) break;
+    const promises = [];
+    for (let i = 0; i < 2; i++) {
+      if (!running) break;
+      const start = performance.now();
+      promises.push(
+        fetchTimeout(activeServer.url + "/__down?bytes=" + size + "&r=" + Date.now() + "_" + i, { cache: "no-store", mode: "cors" }, 15000)
+        .then(async r => {
+          if (!r.ok) throw new Error("Download failed");
+          const buf = await r.arrayBuffer();
+          const sec = (performance.now() - start) / 1000;
+          const bytes = buf.byteLength;
+          if (bytes <= 0 || sec <= 0) throw new Error("Empty");
+          const speed = bytes * 8 / sec / 1e6;
+          return { bytes, sec, speed };
+        })
+        .catch(() => null)
+      );
+    }
+    const results = await Promise.all(promises);
+    for (const r of results) {
+      if (r && r.sec > 0) {
+        totalBytes += r.bytes;
+        totalSeconds += r.sec;
+        success++;
+        allResults.push(r.speed);
+        samples.push(r.speed);
+        gauge(r.speed);
+        $("down").textContent = r.speed.toFixed(1);
+        drawChart();
+      }
+    }
+  }
+  if (!success || totalSeconds <= 0) throw new Error("Download test failed");
+  const avg = totalBytes * 8 / totalSeconds / 1e6;
+  const variance = allResults.reduce((s, v) => s + Math.pow(v - avg, 2), 0) / allResults.length;
+  const stdDev = Math.sqrt(variance);
+  const acc = Math.min(100, Math.round((1 - stdDev / (avg || 1)) * 100));
+  $("accuracyDisplay").textContent = "± " + (100 - acc) + "%";
+  return avg;
+}
+
+// ===== UPLOAD (parallel) =====
+async function uploadTest() {
+  const lang = $("lang").value;
+  $("status").textContent = getTranslation(lang, "upload_label") + "...";
+  $("chartState").textContent = "Upload";
+  uploadSamples = [];
+  const sizes = [250000, 500000, 1000000, 2000000, 5000000];
+  let totalBytes = 0, totalSeconds = 0, success = 0;
+  for (const size of sizes) {
+    if (!running) break;
+    const promises = [];
+    for (let i = 0; i < 2; i++) {
+      if (!running) break;
+      const data = new Uint8Array(size);
+      crypto.getRandomValues(data);
+      const start = performance.now();
+      promises.push(
+        fetchTimeout(activeServer.url + "/__up?r=" + Date.now() + "_" + i, { method: "POST", body: data, mode: "cors" }, 20000)
+        .then(async r => {
+          if (!r.ok) throw new Error("Upload failed");
+          try { await r.arrayBuffer(); } catch (e) {}
+          const sec = (performance.now() - start) / 1000;
+          if (sec <= 0) throw new Error("Invalid time");
+          const speed = size * 8 / sec / 1e6;
+          return { bytes: size, sec, speed };
+        })
+        .catch(() => null)
+      );
+    }
+    const results = await Promise.all(promises);
+    for (const r of results) {
+      if (r && r.sec > 0) {
+        totalBytes += r.bytes;
+        totalSeconds += r.sec;
+        success++;
+        uploadSamples.push(r.speed);
+        gauge(r.speed);
+        $("up").textContent = r.speed.toFixed(1);
+        drawChart();
+      }
+    }
+  }
+  if (!success || totalSeconds <= 0) throw new Error("Upload test failed");
+  return totalBytes * 8 / totalSeconds / 1e6;
+}
+
+// ===== DNS =====
+function measureDns() {
+  try {
+    const entries = performance.getEntriesByType("resource").filter(e => e.name.includes("cloudflare") && e.domainLookupEnd > 0);
+    if (!entries.length) { $("dns").textContent = "n/a"; return; }
+    const e = entries[entries.length - 1];
+    const ms = e.domainLookupEnd - e.domainLookupStart;
+    $("dns").textContent = ms > 0 ? ms.toFixed(1) + " ms" : "< 1 ms";
+  } catch (e) { $("dns").textContent = "n/a"; }
+}
+
+// ===== QUALITY =====
+function quality(d, u, p, j) {
+  let s = 100;
+  if (d < 5) s -= 45; else if (d < 25) s -= 30; else if (d < 50) s -= 20; else if (d < 100) s -= 10;
+  if (u < 2) s -= 20; else if (u < 5) s -= 14; else if (u < 10) s -= 7;
+  if (p > 150) s -= 30; else if (p > 100) s -= 24; else if (p > 60) s -= 15; else if (p > 30) s -= 7;
+  if (j > 50) s -= 20; else if (j > 30) s -= 14; else if (j > 15) s -= 7;
+  return Math.max(0, Math.min(100, Math.round(s)));
+}
+
+function showQuality(s) {
+  $("score").textContent = s + "/100";
+  $("bar").style.width = s + "%";
+  if (s >= 90) $("qtext").textContent = "Excellent connection. Suitable for gaming, 4K, cloud work.";
+  else if (s >= 75) $("qtext").textContent = "Very good for most online activities.";
+  else if (s >= 55) $("qtext").textContent = "Good for everyday applications.";
+  else if (s >= 35) $("qtext").textContent = "Average. Gaming or 4K may be limited.";
+  else $("qtext").textContent = "Poor. Network performance should be investigated.";
+}
+
+// ===== APPS =====
+function evaluateApps(d, u, p, j) {
+  const apps = [
+    { id: "gaming", score: 100 - (p > 20 ? 15 : 0) - (p > 40 ? 20 : 0) - (j > 10 ? 15 : 0) - (j > 20 ? 20 : 0) - (d < 10 ? 15 : 0) - (u < 3 ? 10 : 0) },
+    { id: "stream", score: d >= 25 ? 100 : d >= 15 ? 85 : d >= 10 ? 70 : d >= 5 ? 50 : d >= 3 ? 25 : 10 },
+    { id: "fourk", score: d >= 50 ? 100 : d >= 25 ? 85 : d >= 15 ? 60 : d >= 10 ? 35 : 10 },
+    { id: "call", score: 100 - (d < 10 ? 25 : 0) - (u < 5 ? 25 : 0) - (p > 50 ? 20 : 0) - (j > 20 ? 20 : 0) },
+    { id: "office", score: 100 - (d < 25 ? 15 : 0) - (u < 10 ? 15 : 0) - (p > 70 ? 15 : 0) - (j > 25 ? 15 : 0) },
+    { id: "cloud", score: d >= 100 ? 100 : d >= 50 ? 85 : d >= 25 ? 70 : d >= 10 ? 50 : d >= 5 ? 30 : 10 },
+    { id: "social", score: d >= 25 ? 100 : d >= 10 ? 90 : d >= 5 ? 75 : d >= 2 ? 50 : 25 },
+    { id: "web", score: 100 - (d < 10 ? 20 : 0) - (d < 5 ? 20 : 0) - (p > 100 ? 25 : 0) - (j > 30 ? 15 : 0) }
+  ];
+  apps.forEach(a => {
+    a.score = Math.max(0, Math.min(100, a.score));
+    const status = $(a.id + "Status");
+    const bar = $(a.id + "Bar");
+    const output = $(a.id + "Text");
+    bar.style.width = a.score + "%";
+    status.className = "app-status";
+    if (a.score >= 80) { status.classList.add("good"); status.textContent = "Excellent"; }
+    else if (a.score >= 55) { status.classList.add("medium"); status.textContent = "Good"; }
+    else { status.classList.add("bad"); status.textContent = "Limited"; }
+    const texts = {
+      gaming: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 45 ? "Playable" : "Lag risk",
+      stream: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 40 ? "Limited" : "Buffering",
+      fourk: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 40 ? "Possible" : "Not recommended",
+      call: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 40 ? "Limited" : "Suffering",
+      office: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 40 ? "Usable" : "Slow",
+      cloud: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Fast" : a.score >= 40 ? "Moderate" : "Slow",
+      social: a.score >= 85 ? "Excellent" : a.score >= 65 ? "Good" : a.score >= 40 ? "Good" : "Limited",
+      web: a.score >= 85 ? "Very fast" : a.score >= 65 ? "Fast" : a.score >= 40 ? "Normal" : "Slow"
+    };
+    output.textContent = texts[a.id] || "Run test";
+  });
+}
+
+// ===== HISTORY =====
+function historyLoad() {
+  const h = JSON.parse(localStorage.getItem("fasqoo_history") || "[]");
+  const body = $("history");
+  if (!h.length) { body.innerHTML = '<tr><td colspan="5" class="empty">No tests recorded.</td></tr>'; return; }
+  body.innerHTML = h.map(x => `<tr><td>${x.date}</td><td>${Number(x.d).toFixed(1)} Mbps</td><td>${Number(x.u).toFixed(1)} Mbps</td><td>${Number(x.p).toFixed(1)} ms</td><td>${x.s}/100</td></tr>`).join("");
+}
+function saveHistory(x) {
+  const h = JSON.parse(localStorage.getItem("fasqoo_history") || "[]");
+  h.unshift(x);
+  localStorage.setItem("fasqoo_history", JSON.stringify(h.slice(0, 20)));
+  historyLoad();
+}
+function createTestID() { return "FASQOO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-" + Math.random().toString(36).slice(2, 6).toUpperCase(); }
+
+// ===== MAIN TEST =====
+async function startTest() {
+  if (running) return;
+  running = true;
+  const lang = $("lang").value;
+  $("startBtn").disabled = true;
+  $("startBtn").textContent = "Testing...";
+  resetGauge();
+  $("speed").textContent = "0";
+  $("down").textContent = "—";
+  $("up").textContent = "—";
+  $("ping").textContent = "—";
+  $("jitter").textContent = "—";
+  $("score").textContent = "—";
+  $("bar").style.width = "0%";
+  $("status").textContent = "Measuring latency...";
+  $("chartState").textContent = "Testing";
+  document.querySelectorAll(".app-status").forEach(el => { el.className = "app-status"; el.textContent = getTranslation(lang, "status_waiting"); });
+
+  try {
+    if (performance.clearResourceTimings) performance.clearResourceTimings();
+
+    const p = await pingTest();
+    $("ping").textContent = p.ping.toFixed(1);
+    $("jitter").textContent = p.jitter.toFixed(1);
+    measureDns();
+
+    const d = await downloadTest();
+    const u = await uploadTest();
+
+    const s = quality(d, u, p.ping, p.jitter);
+    showQuality(s);
+    evaluateApps(d, u, p.ping, p.jitter);
+
+    const testID = createTestID();
+    const date = new Date().toLocaleString();
+    last = { id: testID, date, download: d, upload: u, ping: p.ping, jitter: p.jitter, quality: s,
+      ip: info.ip || "", isp: info.connection?.isp || "", location: $("loc").textContent, asn: $("asn").textContent,
+      ipv4: $("ipv4").textContent, ipv6: $("ipv6").textContent, dns: $("dns").textContent };
+    $("tid").textContent = testID;
+    $("status").textContent = "Test completed";
+    $("chartState").textContent = "Completed";
+    saveHistory({ date, d, u, p: p.ping, s });
+
+  } catch (error) {
+    console.error(error);
+    $("status").textContent = error.message || "Test failed";
+    $("chartState").textContent = "Error";
+  }
+
+  running = false;
+  $("startBtn").disabled = false;
+  $("startBtn").textContent = getTranslation(lang, "start_btn");
+}
+
+// ===== EVENT LISTENERS =====
+$("startBtn").addEventListener("click", startTest);
+
+$("copy").addEventListener("click", async () => {
+  if (!last.id) { alert("Run a test first."); return; }
+  const text = `Fasqoo Speed Test\n\nDownload: ${last.download.toFixed(1)} Mbps\nUpload: ${last.upload.toFixed(1)} Mbps\nPing: ${last.ping.toFixed(1)} ms\nJitter: ${last.jitter.toFixed(1)} ms\nQuality: ${last.quality}/100`;
+  try { await navigator.clipboard.writeText(text); $("copy").textContent = "Copied!"; setTimeout(() => $("copy").textContent = getTranslation($("lang").value, "copy_btn"), 1500); } catch (e) { alert(text); }
+});
+
+$("share").addEventListener("click", async () => {
+  if (!last.id) { alert("Run a test first."); return; }
+  const text = `Fasqoo Speed Test: ${last.download.toFixed(1)} Mbps down, ${last.upload.toFixed(1)} Mbps up, ${last.ping.toFixed(1)} ms ping`;
+  if (navigator.share) { try { await navigator.share({ title: "Fasqoo Speed Test", text }); } catch (e) {} } else { $("copy").click(); }
+});
+
+$("json").addEventListener("click", () => {
+  if (!last.id) { alert("Run a test first."); return; }
+  const blob = new Blob([JSON.stringify(last, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = (last.id || "fasqoo-test") + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+$("print").addEventListener("click", () => { if (last.id) window.print(); else alert("Run a test first."); });
+$("clear").addEventListener("click", () => { localStorage.removeItem("fasqoo_history"); historyLoad(); });
+
+// ===== COOKIE =====
+if (!localStorage.getItem("fasqoo_cookie_consent")) $("cookieBanner").style.display = "block";
+$("cookieAccept").addEventListener("click", () => { localStorage.setItem("fasqoo_cookie_consent", "accepted"); $("cookieBanner").style.display = "none"; });
+$("cookieDecline").addEventListener("click", () => { localStorage.setItem("fasqoo_cookie_consent", "declined"); $("cookieBanner").style.display = "none"; });
+
+// ===== INIT =====
+resizeCanvas();
+detectGeoIP();
+netinfo();
+historyLoad();
+console.log("✅ Fasqoo Speed Test v3.0 - Voll funktionsfähig!");
 </script>
 
 </body>
