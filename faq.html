@@ -1,8 +1,14 @@
+
 <!DOCTYPE html>
 
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=ai-legible&utm_source=comment&utm_medium=referral&utm_id=0d9b2f33-2e9b-4deb-90bf-cec3a0b883d2
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="hosting-provider" content="Netlify">
+<meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=0d9b2f33-2e9b-4deb-90bf-cec3a0b883d2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Fasqoo FAQ & AI Technician</title>
@@ -547,28 +553,28 @@ footer{
   <div class="nav">
 
 
-<a class="brand" href="index.html">
+<a class='brand' href='/'>
   <div class="logo">F</div>
   <div class="brand-name">Fasqoo</div>
 </a>
 
 <nav class="main-menu" aria-label="Main navigation">
 
-  <a href="index.html" data-i18n="navHome">Home</a>
+  <a data-i18n='navHome' href='/'>Home</a>
 
-  <a href="index.html" data-i18n="navSpeed">Speed Test</a>
+  <a data-i18n='navSpeed' href='/'>Speed Test</a>
 
-  <a href="faq.html" data-i18n="navFaq">FAQ</a>
+  <a data-i18n='navFaq' href='/faq'>FAQ</a>
 
   <a href="#fasqoo-ai" data-i18n="navAI">
     AI Technician
   </a>
 
-  <a href="network-status.html" data-i18n="navNetwork">
+  <a data-i18n='navNetwork' href='/network-status'>
     Network Status
   </a>
 
-  <a href="about.html" data-i18n="navAbout">
+  <a data-i18n='navAbout' href='/about'>
     About
   </a>
 
@@ -887,7 +893,7 @@ footer{
     Get your download, upload, ping and jitter results with Fasqoo.
   </p>
 
-  <a href="index.html" data-i18n="ctaButton">
+  <a data-i18n='ctaButton' href='/'>
     Start Speed Test
   </a>
 
@@ -921,31 +927,31 @@ footer{
 
 <div class="footer-links">
 
-  <a href="about.html" data-i18n="footerAbout">About</a>
+  <a data-i18n='footerAbout' href='/about'>About</a>
 
-  <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+  <a data-i18n='footerFaq' href='/faq'>FAQ</a>
 
-  <a href="network-status.html" data-i18n="footerNetwork">
+  <a data-i18n='footerNetwork' href='/network-status'>
     Network Status
   </a>
 
-  <a href="privacy-policy.html" data-i18n="footerPrivacy">
+  <a data-i18n='footerPrivacy' href='/privacy-policy'>
     Privacy Policy
   </a>
 
-  <a href="terms.html" data-i18n="footerTerms">
+  <a data-i18n='footerTerms' href='/terms'>
     Terms of Use
   </a>
 
-  <a href="do-not-sell.html" data-i18n="footerDoNotSell">
+  <a data-i18n='footerDoNotSell' href='/do-not-sell'>
     Do Not Sell My Personal Information
   </a>
 
-  <a href="modern-slavery.html" data-i18n="footerSlavery">
+  <a data-i18n='footerSlavery' href='/modern-slavery'>
     Modern Slavery Policy
   </a>
 
-  <a href="accessibility.html" data-i18n="footerAccessibility">
+  <a data-i18n='footerAccessibility' href='/accessibility'>
     Accessibility
   </a>
 
@@ -1978,92 +1984,46 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
 
 });
-<!-- Kopiere mir einfach einen Bereich wie diesen hier rein: -->
-<input type="text" id="..." placeholder="What is the problem...">
-<button id="...">Ask AI</button>
 
 </script>
+<!-- KI Chat Bereich -->
+<div id="fasqoo-ai" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 20px 0;">
+    <h3>Frag unsere fasqoo AI</h3>
+    <textarea id="promptInput" style="width: 100%; height: 80px; padding: 10px; box-sizing: border-box;" placeholder="Stelle eine Frage..."></textarea>
+    <button id="sendBtn" style="background: #4A90E2; color: #fff; border: none; padding: 10px; width: 100%; margin-top: 10px; cursor: pointer;" onclick="sendToGemini()">Frage senden</button>
+    
+    <p><strong>Antwort:</strong></p>
+    <div id="output" style="background: #f9f9f9; padding: 15px; white-space: pre-wrap;">Die Antwort erscheint hier...</div>
+</div>
 
-  <!-- ========================================== -->
-<!-- START: FASQOO GEMINI AI ENGINE -->
-<!-- ========================================== -->
-
-<!-- Google AI SDK laden, damit der Browser Gemini versteht -->
-<script type="importmap">
-  {
-    "imports": {
-      "@google/generative-ai": "https://esm.run"
+<script>
+async function sendToGemini() {
+    const input = document.getElementById("promptInput");
+    const output = document.getElementById("output");
+    const btn = document.getElementById("sendBtn");
+    
+    if (!input.value.trim()) return alert("Bitte Frage eingeben!");
+    
+    btn.disabled = true;
+    output.innerText = "Übermittle an KI...";
+    
+    try {
+        const res = await fetch("/.netlify/functions/gemini", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: input.value.trim() }),
+        });
+        
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        output.innerText = data.text;
+    } catch {
+        output.innerText = "Fehler! Bitte stelle sicher, dass der GEMINI_API_KEY in Netlify eingetragen ist.";
+    } finally {
+        btn.disabled = false;
     }
-  }
+}
 </script>
-
-<script type="module">
-  import { GoogleGenerativeAI } from "@google/generative-ai";
-
-  // WICHTIG: Ersetze den Text in den Anführungszeichen mit deinem echten Google API-Key!
-  const API_KEY = "HIER_DEINEN_GEMINI_API_KEY_EINTRAGEN"; 
-  const genAI = new GoogleGenerativeAI(API_KEY);
-
-  const aiForm = document.getElementById('aiForm');
-  const aiInput = document.getElementById('aiInput');
-  const aiMessages = document.getElementById('aiMessages');
-
-  if (aiForm) {
-      aiForm.addEventListener('submit', async function(e) {
-          e.preventDefault(); // Verhindert, dass die Seite neu lädt
-          
-          const userQuestion = aiInput.value.trim();
-          if (!userQuestion) return;
-
-          // 1. Deine Frage im Chat anzeigen
-          const userDiv = document.createElement('div');
-          userDiv.className = 'ai-message user';
-          userDiv.innerHTML = `<strong>You</strong><p>${escapeHTML(userQuestion)}</p>`;
-          aiMessages.appendChild(userDiv);
-          
-          // Eingabefeld leeren
-          aiInput.value = '';
-          aiMessages.scrollTop = aiMessages.scrollHeight; // Zum Ende scrollen
-
-          // 2. Lade-Anzeige für die KI erstellen
-          const loadingDiv = document.createElement('div');
-          loadingDiv.className = 'ai-message assistant';
-          loadingDiv.innerHTML = `<strong>Fasqoo AI Technician</strong><p><em>Thinking...</em></p>`;
-          aiMessages.appendChild(loadingDiv);
-          aiMessages.scrollTop = aiMessages.scrollHeight;
-
-          try {
-              // Verbindung zu Gemini herstellen
-              const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-              
-              // Kontext mitgeben, damit Gemini weiß, dass es auf Fasqoo läuft
-              const prompt = "You are the Fasqoo AI Technician, a professional internet and network troubleshooting assistant. Help the user with this issue: " + userQuestion;
-              
-              const result = await model.generateContent(prompt);
-              const response = await result.response;
-              const text = response.text();
-              
-              // 3. Die Antwort der KI in das Lade-Feld reinschreiben
-              loadingDiv.querySelector('p').innerText = text;
-              
-          } catch (error) {
-              console.error("Gemini Fehler:", error);
-              loadingDiv.querySelector('p').innerHTML = "<span style='color: #ff6b6b;'>Sorry, an error occurred. Please verify your API Key.</span>";
-          }
-          
-          aiMessages.scrollTop = aiMessages.scrollHeight;
-      });
-  }
-
-  // Sicherheitsfunktion gegen bösartigen Code-Input
-  function escapeHTML(str) {
-      return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
-  }
-</script>
-
-<!-- ========================================== -->
-<!-- ENDE: FASQOO GEMINI AI ENGINE -->
-<!-- ========================================== -->
 
 </body>
 </html>
