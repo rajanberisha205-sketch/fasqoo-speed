@@ -1,18 +1,16 @@
 ```html
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>FAQ – Fasqoo Internet Speed Test</title>
-
-  <meta
-    name="description"
-    content="Fasqoo FAQ – Antworten auf häufige Fragen rund um Internetgeschwindigkeit, Ping, Upload, Download und den Fasqoo AI Technician."
-  >
+  <meta name="description"
+        content="Fasqoo FAQ – Find answers about internet speed, download, upload, ping, jitter, Wi-Fi and the Fasqoo AI Technician.">
 
   <meta name="theme-color" content="#ff5a1f">
+
+  <title>FAQ – Fasqoo Internet Speed Test</title>
 
   <style>
     :root {
@@ -22,10 +20,10 @@
       --muted: #6b7280;
       --border: #e5e7eb;
       --bg: #ffffff;
-      --card: #ffffff;
       --soft: #f7f7f8;
-      --ai: #fff7f3;
-      --shadow: 0 10px 35px rgba(0,0,0,.07);
+      --ai-bg: #fff7f3;
+      --green: #16a34a;
+      --shadow: 0 10px 35px rgba(0, 0, 0, .07);
       --radius: 18px;
     }
 
@@ -40,7 +38,13 @@
     }
 
     body {
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -52,24 +56,25 @@
     }
 
     button,
-    input,
-    textarea {
+    input {
       font: inherit;
     }
 
     .container {
       width: min(1100px, calc(100% - 32px));
-      margin: auto;
+      margin: 0 auto;
     }
 
-    /* HEADER */
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(12px);
+      z-index: 1000;
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -92,13 +97,13 @@
     .logo-mark {
       width: 38px;
       height: 38px;
-      border-radius: 12px;
-      background: var(--orange);
-      color: white;
       display: grid;
       place-items: center;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #fff;
       font-weight: 800;
-      box-shadow: 0 7px 18px rgba(255,90,31,.25);
+      box-shadow: 0 7px 18px rgba(255, 90, 31, .25);
     }
 
     .nav-links {
@@ -110,43 +115,50 @@
     .nav-links a {
       color: #4b5563;
       font-size: 15px;
+      transition: color .2s ease;
     }
 
     .nav-links a:hover {
       color: var(--orange);
     }
 
-    .speed-button {
-      background: var(--orange);
-      color: white !important;
+    .start-button {
       padding: 10px 17px;
       border-radius: 10px;
+      background: var(--orange);
+      color: #fff !important;
     }
 
-    /* HERO */
+    .start-button:hover {
+      background: var(--orange-dark);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       text-align: center;
-      padding: 70px 0 45px;
+      padding: 72px 0 45px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      padding: 7px 13px;
+      margin-bottom: 18px;
+      border-radius: 999px;
       background: #fff1eb;
       color: var(--orange);
-      padding: 7px 13px;
-      border-radius: 999px;
       font-size: 14px;
-      margin-bottom: 18px;
     }
 
     .badge-dot {
       width: 7px;
       height: 7px;
-      background: var(--orange);
       border-radius: 50%;
+      background: var(--orange);
     }
 
     h1 {
@@ -154,55 +166,67 @@
       line-height: 1.05;
       letter-spacing: -2px;
       margin-bottom: 18px;
+      font-weight: 650;
     }
 
     .hero p {
       max-width: 680px;
-      margin: auto;
+      margin: 0 auto;
       color: var(--muted);
       font-size: 18px;
     }
 
-    /* SEARCH */
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-section {
+      margin-bottom: 45px;
+    }
 
     .search-box {
-      margin: 0 auto 45px;
-      max-width: 720px;
       position: relative;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     .search-box input {
       width: 100%;
+      padding: 17px 20px 17px 50px;
       border: 1px solid var(--border);
       border-radius: 15px;
-      padding: 17px 20px 17px 50px;
       outline: none;
-      background: white;
+      background: #fff;
       box-shadow: var(--shadow);
+      color: var(--text);
     }
 
     .search-box input:focus {
       border-color: var(--orange);
-      box-shadow: 0 0 0 4px rgba(255,90,31,.08);
+      box-shadow: 0 0 0 4px rgba(255, 90, 31, .08);
     }
 
     .search-icon {
       position: absolute;
       left: 18px;
-      top: 15px;
-      font-size: 20px;
+      top: 14px;
       color: var(--muted);
+      font-size: 21px;
+      pointer-events: none;
     }
 
-    /* FAQ */
+    /* =========================
+       FAQ
+    ========================= */
 
     .faq-section {
       padding-bottom: 70px;
     }
 
     .section-title {
-      font-size: 28px;
       margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 600;
     }
 
     .faq-list {
@@ -211,37 +235,40 @@
     }
 
     .faq-item {
+      overflow: hidden;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--card);
+      background: #fff;
     }
 
     .faq-question {
       width: 100%;
-      border: 0;
-      background: white;
-      padding: 20px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      padding: 20px 22px;
+      border: 0;
+      background: #fff;
+      color: var(--text);
       text-align: left;
       cursor: pointer;
-      color: var(--text);
     }
 
     .faq-question:hover {
       background: #fafafa;
     }
 
-    .faq-question span:first-child {
+    .faq-question-text {
       font-size: 16px;
+      font-weight: 500;
     }
 
     .faq-icon {
+      flex-shrink: 0;
       color: var(--orange);
       font-size: 24px;
+      line-height: 1;
       transition: transform .2s ease;
     }
 
@@ -259,42 +286,55 @@
       transform: rotate(45deg);
     }
 
-    /* AI */
+    .no-results {
+      display: none;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* =========================
+       AI TECHNICIAN
+    ========================= */
 
     .ai-section {
       margin: 20px 0 80px;
     }
 
     .ai-card {
-      border-radius: 25px;
-      background: linear-gradient(145deg, #fff8f4, #ffffff);
-      border: 1px solid #ffd9ca;
-      box-shadow: var(--shadow);
       overflow: hidden;
+      border: 1px solid #ffd9ca;
+      border-radius: 25px;
+      background: linear-gradient(145deg, #fff8f4, #fff);
+      box-shadow: var(--shadow);
     }
 
     .ai-header {
-      padding: 25px;
       display: flex;
       align-items: center;
       gap: 15px;
+      padding: 25px;
       border-bottom: 1px solid #f1dfd8;
     }
 
     .ai-logo {
       width: 50px;
       height: 50px;
-      border-radius: 15px;
       display: grid;
       place-items: center;
+      flex-shrink: 0;
+      border-radius: 15px;
       background: var(--orange);
-      color: white;
+      color: #fff;
       font-size: 25px;
     }
 
     .ai-title h2 {
-      font-size: 22px;
       margin-bottom: 2px;
+      font-size: 22px;
+      font-weight: 600;
     }
 
     .ai-title p {
@@ -303,11 +343,11 @@
     }
 
     .online {
-      margin-left: auto;
       display: flex;
       align-items: center;
       gap: 6px;
-      color: #16a34a;
+      margin-left: auto;
+      color: var(--green);
       font-size: 13px;
     }
 
@@ -316,16 +356,17 @@
       height: 8px;
       border-radius: 50%;
       background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, .10);
     }
 
     .ai-messages {
       height: 390px;
       overflow-y: auto;
-      padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      background: white;
+      padding: 22px;
+      background: #fff;
     }
 
     .message {
@@ -339,23 +380,23 @@
 
     .message.assistant {
       align-self: flex-start;
-      background: #f4f4f5;
       border-bottom-left-radius: 5px;
+      background: #f4f4f5;
     }
 
     .message.user {
       align-self: flex-end;
-      background: var(--orange);
-      color: white;
       border-bottom-right-radius: 5px;
+      background: var(--orange);
+      color: #fff;
     }
 
     .typing {
       display: none;
       align-self: flex-start;
-      background: #f4f4f5;
       padding: 12px 16px;
       border-radius: 15px;
+      background: #f4f4f5;
       color: var(--muted);
       font-size: 14px;
     }
@@ -364,36 +405,72 @@
       display: block;
     }
 
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+      margin-left: 5px;
+    }
+
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #9ca3af;
+      animation: typing 1.2s infinite;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% {
+        opacity: .3;
+        transform: translateY(0);
+      }
+
+      30% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+
     .ai-form {
       display: flex;
       gap: 10px;
       padding: 18px;
-      background: #fafafa;
       border-top: 1px solid var(--border);
+      background: #fafafa;
     }
 
     .ai-form input {
       flex: 1;
       min-width: 0;
-      border: 1px solid var(--border);
-      background: white;
       padding: 14px 16px;
+      border: 1px solid var(--border);
       border-radius: 12px;
       outline: none;
+      background: #fff;
     }
 
     .ai-form input:focus {
       border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255, 90, 31, .08);
     }
 
     .ai-form button {
-      border: 0;
-      background: var(--orange);
-      color: white;
-      padding: 0 22px;
-      border-radius: 12px;
-      cursor: pointer;
       min-width: 90px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease;
     }
 
     .ai-form button:hover {
@@ -412,11 +489,13 @@
       font-size: 12px;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      border-top: 1px solid var(--border);
       padding: 30px 0;
+      border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 14px;
     }
@@ -437,9 +516,15 @@
       color: var(--orange);
     }
 
-    /* MOBILE */
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 700px) {
+      .container {
+        width: min(100% - 24px, 1100px);
+      }
+
       .nav {
         min-height: 62px;
       }
@@ -482,7 +567,12 @@
       }
 
       .ai-form button {
-        padding: 0 17px;
+        min-width: 70px;
+        padding: 0 15px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
       }
     }
   </style>
@@ -493,22 +583,25 @@
 <header>
   <div class="container nav">
 
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="Fasqoo Home">
       <span class="logo-mark">F</span>
       <span>Fasqoo</span>
     </a>
 
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="index.html">Speed Test</a>
       <a href="faq.html">FAQ</a>
       <a href="#ai">AI Technician</a>
-      <a href="index.html" class="speed-button">Start Test</a>
+      <a href="index.html" class="start-button">Start Test</a>
     </nav>
 
   </div>
 </header>
 
+
 <main>
+
+  <!-- HERO -->
 
   <section class="hero">
     <div class="container">
@@ -522,27 +615,33 @@
 
       <p>
         Find answers about internet speed, ping, download, upload,
-        servers and the Fasqoo Speed Test.
+        Wi-Fi, servers and the Fasqoo Speed Test.
       </p>
 
     </div>
   </section>
 
 
-  <section class="container">
+  <!-- SEARCH -->
+
+  <section class="container search-section">
 
     <div class="search-box">
       <span class="search-icon">⌕</span>
+
       <input
         type="search"
         id="faqSearch"
         placeholder="Search frequently asked questions..."
         autocomplete="off"
+        aria-label="Search frequently asked questions"
       >
     </div>
 
   </section>
 
+
+  <!-- FAQ -->
 
   <section class="container faq-section">
 
@@ -551,58 +650,78 @@
     <div class="faq-list" id="faqList">
 
       <div class="faq-item">
-        <button class="faq-question">
-          <span>What is an internet speed test?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            What is an internet speed test?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           An internet speed test measures the performance of your
-          internet connection. Fasqoo measures values such as download
-          speed, upload speed, ping and other connection information.
+          internet connection. Fasqoo measures values such as
+          download speed, upload speed, ping and other connection
+          information.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>What does download speed mean?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            What does download speed mean?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Download speed describes how quickly data can be transferred
-          from the internet to your device. It is usually measured in
-          Mbps or Gbps.
+          from the internet to your device. It is normally measured
+          in Mbps or Gbps.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>What does upload speed mean?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            What does upload speed mean?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
-          Upload speed describes how quickly your device can send data
-          to the internet. A good upload speed is useful for video calls,
+          Upload speed describes how quickly your device can send
+          data to the internet. It is useful for video calls,
           cloud backups, streaming and uploading files.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>What is ping?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            What is ping?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Ping measures the response time between your device and a
-          server. Lower ping is generally better, especially for online
-          gaming, video calls and other real-time applications.
+          server. Lower ping is generally better for online gaming,
+          video calls and other real-time applications.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>Why can my speed change between tests?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            Why can my speed change between tests?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Internet speed can change because of Wi-Fi conditions,
           network traffic, other devices using your connection,
@@ -610,36 +729,48 @@
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>Is Wi-Fi slower than an Ethernet connection?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            Is Wi-Fi slower than an Ethernet connection?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
-          Wi-Fi can be affected by distance, walls, interference and
-          other wireless networks. An Ethernet connection is usually
-          more stable and can provide more consistent results.
+          Wi-Fi can be affected by distance, walls, interference
+          and other wireless networks. Ethernet is usually more
+          stable and can provide more consistent results.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>Why is my internet slow even though my speed test looks good?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            Why is my internet slow even though my speed test looks good?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           A speed test is only one part of the picture. Slow websites
-          or applications can also be caused by the remote server,
+          or applications can also be caused by remote servers,
           DNS problems, Wi-Fi issues, high latency, device problems
-          or congestion.
+          or network congestion.
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>How can I improve my internet speed?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            How can I improve my internet speed?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Try testing close to your router, use Ethernet when possible,
           restart your router, reduce heavy downloads on other devices
@@ -647,11 +778,15 @@
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>What is jitter?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            What is jitter?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Jitter describes variation in network latency. Lower and more
           stable jitter is generally better for real-time activities
@@ -659,11 +794,15 @@
         </div>
       </div>
 
+
       <div class="faq-item">
-        <button class="faq-question">
-          <span>Can Fasqoo AI Technician help me troubleshoot my connection?</span>
+        <button class="faq-question" type="button">
+          <span class="faq-question-text">
+            Can Fasqoo AI Technician help me troubleshoot my connection?
+          </span>
           <span class="faq-icon">+</span>
         </button>
+
         <div class="faq-answer">
           Yes. You can describe your connection problem to the Fasqoo
           AI Technician. It can provide practical troubleshooting steps
@@ -671,6 +810,10 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="no-results" id="noResults">
+      No matching questions were found.
     </div>
 
   </section>
@@ -699,16 +842,34 @@
       </div>
 
 
-      <div class="ai-messages" id="aiMessages">
+      <div
+        class="ai-messages"
+        id="aiMessages"
+        aria-live="polite"
+        aria-label="Fasqoo AI Technician conversation"
+      >
 
         <div class="message assistant">
-          Hello! I am the Fasqoo AI Technician. I can help you troubleshoot your internet connection.
+Hello! I am the Fasqoo AI Technician.
 
-          Tell me what is happening — for example slow speed, high ping, disconnects, buffering or Wi-Fi problems.
+I can help you troubleshoot your internet connection.
+
+Tell me what is happening — for example:
+• slow speed
+• high ping
+• disconnects
+• buffering
+• Wi-Fi problems
+• unstable connection
         </div>
 
         <div class="typing" id="typing">
-          Fasqoo AI Technician is thinking...
+          Fasqoo AI Technician is thinking
+          <span class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </div>
 
       </div>
@@ -722,17 +883,23 @@
           placeholder="Describe your internet problem..."
           autocomplete="off"
           maxlength="3000"
+          aria-label="Describe your internet problem"
+          required
         >
 
-        <button type="submit" id="aiSend">
+        <button
+          type="submit"
+          id="aiSend"
+        >
           Send
         </button>
 
       </form>
 
       <div class="ai-note">
-        Fasqoo AI Technician provides general troubleshooting information
-        and does not have direct access to your device or router.
+        Fasqoo AI Technician provides general troubleshooting
+        information and does not have direct access to your device
+        or router.
       </div>
 
     </div>
@@ -760,13 +927,17 @@
 
 
 <script>
-  /* YEAR */
+  /* =========================
+     YEAR
+  ========================= */
 
   document.getElementById("year").textContent =
     new Date().getFullYear();
 
 
-  /* FAQ ACCORDION */
+  /* =========================
+     FAQ ACCORDION
+  ========================= */
 
   document.querySelectorAll(".faq-question").forEach(button => {
 
@@ -781,10 +952,13 @@
   });
 
 
-  /* FAQ SEARCH */
+  /* =========================
+     FAQ SEARCH
+  ========================= */
 
   const faqSearch = document.getElementById("faqSearch");
   const faqItems = document.querySelectorAll(".faq-item");
+  const noResults = document.getElementById("noResults");
 
   faqSearch.addEventListener("input", () => {
 
@@ -792,247 +966,411 @@
       .toLowerCase()
       .trim();
 
+    let visibleItems = 0;
+
     faqItems.forEach(item => {
 
-      const text = item.textContent.toLowerCase();
+      const text = item.textContent
+        .toLowerCase();
+
+      const match =
+        !search ||
+        text.includes(search);
 
       item.style.display =
-        !search || text.includes(search)
-          ? ""
-          : "none";
+        match ? "" : "none";
+
+      if (match) {
+        visibleItems++;
+      }
 
     });
+
+    noResults.style.display =
+      visibleItems === 0 ? "block" : "none";
 
   });
 
 
-  /* FASQOO AI */
+  /* =========================
+     FASQOO AI TECHNICIAN
+  ========================= */
 
-  const aiForm = document.getElementById("aiForm");
-  const aiInput = document.getElementById("aiInput");
-  const aiMessages = document.getElementById("aiMessages");
-  const aiSend = document.getElementById("aiSend");
-  const typing = document.getElementById("typing");
+  const aiForm =
+    document.getElementById("aiForm");
+
+  const aiInput =
+    document.getElementById("aiInput");
+
+  const aiMessages =
+    document.getElementById("aiMessages");
+
+  const aiSend =
+    document.getElementById("aiSend");
+
+  const typing =
+    document.getElementById("typing");
+
 
   let conversation = [];
+
   let isSending = false;
 
 
+  /* Add message to chat */
+
   function addMessage(text, type) {
 
-    const message = document.createElement("div");
+    const message =
+      document.createElement("div");
 
-    message.className = "message " + type;
+    message.className =
+      "message " + type;
 
-    message.textContent = text;
+    message.textContent =
+      text;
 
-    aiMessages.insertBefore(message, typing);
+    aiMessages.insertBefore(
+      message,
+      typing
+    );
 
-    aiMessages.scrollTop = aiMessages.scrollHeight;
-
+    aiMessages.scrollTop =
+      aiMessages.scrollHeight;
   }
 
+
+  /* Loading state */
 
   function setLoading(loading) {
 
     isSending = loading;
 
     aiSend.disabled = loading;
+
     aiInput.disabled = loading;
 
-    typing.classList.toggle("show", loading);
+    typing.classList.toggle(
+      "show",
+      loading
+    );
+
+    aiMessages.scrollTop =
+      aiMessages.scrollHeight;
 
     if (!loading) {
       aiInput.focus();
     }
-
-    aiMessages.scrollTop = aiMessages.scrollHeight;
-
   }
 
 
-  function getErrorMessage(status, serverMessage) {
+  /* Error messages */
+
+  function getErrorMessage(
+    status,
+    serverMessage
+  ) {
 
     if (status === 401 || status === 403) {
+
       return "The AI service rejected the request. Please check the Gemini API configuration in Vercel.";
     }
 
+
+    if (status === 404) {
+
+      return "The Fasqoo AI API could not be found. Make sure api/fasqoo-ai.js is deployed to Vercel.";
+    }
+
+
     if (status === 429) {
+
       return "The AI service is temporarily rate limited. Please wait a moment and try again.";
     }
 
+
     if (status >= 500) {
-      return "The Fasqoo AI server returned an error. Please check the Vercel API configuration.";
+
+      return "The Fasqoo AI server returned an error. Please check the Vercel Function Logs.";
     }
 
+
     if (serverMessage) {
+
       return "AI error: " + serverMessage;
     }
+
 
     return "The Fasqoo AI Technician is currently unavailable. Please try again shortly.";
   }
 
 
-  aiForm.addEventListener("submit", async event => {
+  /* =========================
+     SEND MESSAGE
+  ========================= */
 
-    event.preventDefault();
-
-    if (isSending) return;
-
-    const question = aiInput.value.trim();
-
-    if (!question) return;
-
-
-    /* Add user message */
-
-    addMessage(question, "user");
-
-    conversation.push({
-      role: "user",
-      content: question
-    });
-
-    aiInput.value = "";
-
-    setLoading(true);
-
-
-    /*
-      Keep only the last 10 messages.
-      This prevents the request from becoming unnecessarily large.
-    */
-
-    conversation = conversation.slice(-10);
-
-
-    const controller = new AbortController();
-
-    const timeout = setTimeout(() => {
-      controller.abort();
-    }, 30000);
-
-
-    try {
-
-      const response = await fetch("/api/fasqoo-ai", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          messages: conversation
-        }),
-
-        signal: controller.signal
-
-      });
-
-
-      const rawText = await response.text();
-
-      let data = {};
-
-      try {
-        data = rawText ? JSON.parse(rawText) : {};
-      } catch {
-        data = {
-          error: rawText
-        };
-      }
-
-
-      if (!response.ok) {
-
-        console.error(
-          "Fasqoo AI API error:",
-          response.status,
-          data
-        );
-
-        /*
-          Remove failed user message.
-          This allows a clean retry.
-        */
-
-        conversation.pop();
-
-        throw new Error(
-          getErrorMessage(
-            response.status,
-            data.error || data.message
-          )
-        );
-
-      }
-
-
-      if (!data.answer) {
-
-        conversation.pop();
-
-        throw new Error(
-          "The AI server returned no answer."
-        );
-
-      }
-
-
-      conversation.push({
-        role: "model",
-        content: data.answer
-      });
-
-      conversation = conversation.slice(-10);
-
-      addMessage(
-        data.answer,
-        "assistant"
-      );
-
-
-    } catch (error) {
-
-      console.error("Fasqoo AI:", error);
-
-      addMessage(
-        error.name === "AbortError"
-          ? "The AI request took too long. Please try again."
-          : error.message,
-        "assistant"
-      );
-
-    } finally {
-
-      clearTimeout(timeout);
-
-      setLoading(false);
-
-    }
-
-  });
-
-
-  /* Enter = Send */
-
-  aiInput.addEventListener("keydown", event => {
-
-    if (
-      event.key === "Enter" &&
-      !event.shiftKey
-    ) {
+  aiForm.addEventListener(
+    "submit",
+    async event => {
 
       event.preventDefault();
 
-      aiForm.requestSubmit();
+
+      if (isSending) {
+        return;
+      }
+
+
+      const question =
+        aiInput.value.trim();
+
+
+      if (!question) {
+        return;
+      }
+
+
+      /*
+        Add user message
+      */
+
+      addMessage(
+        question,
+        "user"
+      );
+
+
+      conversation.push({
+        role: "user",
+        content: question
+      });
+
+
+      aiInput.value = "";
+
+
+      setLoading(true);
+
+
+      /*
+        Keep the conversation small.
+        The API will use these messages
+        to maintain context.
+      */
+
+      conversation =
+        conversation.slice(-10);
+
+
+      /*
+        Request timeout
+      */
+
+      const controller =
+        new AbortController();
+
+      const timeout =
+        setTimeout(() => {
+
+          controller.abort();
+
+        }, 30000);
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/fasqoo-ai",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                messages:
+                  conversation
+              }),
+
+              signal:
+                controller.signal
+            }
+          );
+
+
+        const rawText =
+          await response.text();
+
+
+        let data = {};
+
+
+        try {
+
+          data =
+            rawText
+              ? JSON.parse(rawText)
+              : {};
+
+        } catch {
+
+          data = {
+            error: rawText
+          };
+
+        }
+
+
+        /*
+          API error
+        */
+
+        if (!response.ok) {
+
+          console.error(
+            "Fasqoo AI API error:",
+            response.status,
+            data
+          );
+
+
+          /*
+            Remove failed user message
+            from conversation so retry
+            does not duplicate it.
+          */
+
+          conversation.pop();
+
+
+          throw new Error(
+            getErrorMessage(
+              response.status,
+              data.error ||
+              data.message
+            )
+          );
+
+        }
+
+
+        /*
+          Missing answer
+        */
+
+        if (
+          !data.answer ||
+          typeof data.answer !== "string"
+        ) {
+
+          conversation.pop();
+
+
+          throw new Error(
+            "The AI server returned no answer."
+          );
+
+        }
+
+
+        /*
+          Save assistant response
+        */
+
+        conversation.push({
+          role: "model",
+          content: data.answer
+        });
+
+
+        conversation =
+          conversation.slice(-10);
+
+
+        /*
+          Display answer
+        */
+
+        addMessage(
+          data.answer,
+          "assistant"
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Fasqoo AI:",
+          error
+        );
+
+
+        let message;
+
+
+        if (
+          error.name ===
+          "AbortError"
+        ) {
+
+          message =
+            "The AI request took too long. Please try again.";
+
+        } else if (
+          error instanceof TypeError
+        ) {
+
+          message =
+            "The Fasqoo AI server could not be reached. Please check your Vercel deployment.";
+
+        } else {
+
+          message =
+            error.message ||
+            "The Fasqoo AI Technician is currently unavailable.";
+        }
+
+
+        addMessage(
+          message,
+          "assistant"
+        );
+
+      } finally {
+
+        clearTimeout(timeout);
+
+        setLoading(false);
+
+      }
 
     }
+  );
 
-  });
 
+  /* =========================
+     ENTER = SEND
+  ========================= */
+
+  aiInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
+
+        event.preventDefault();
+
+        aiForm.requestSubmit();
+
+      }
+
+    }
+  );
 </script>
 
 </body>
