@@ -1,30 +1,38 @@
 export default async function handler(req, res) {
-  // Nur POST erlauben
+  // ==========================================
+  // FASQOO AI TECHNICIAN
+  // VERCEL SERVERLESS FUNCTION
+  // ==========================================
+
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed. Use POST."
     });
   }
 
-  // Gemini API Key aus Vercel
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.error("GEMINI_API_KEY is missing.");
+    console.error("FASQOO ERROR: GEMINI_API_KEY is missing.");
 
     return res.status(500).json({
-      error: "GEMINI_API_KEY is missing in Vercel Environment Variables."
+      error: "GEMINI_API_KEY is missing in Vercel."
     });
   }
 
   try {
-    // Request Body
+    // ------------------------------------------
+    // READ REQUEST BODY
+    // ------------------------------------------
+
     let body = req.body;
 
     if (typeof body === "string") {
       try {
         body = JSON.parse(body);
-      } catch {
+      } catch (error) {
+        console.error("FASQOO ERROR: Invalid JSON.");
+
         return res.status(400).json({
           error: "Invalid JSON request."
         });
@@ -33,11 +41,14 @@ export default async function handler(req, res) {
 
     body = body || {};
 
-    let inputMessages = [];
+    // ------------------------------------------
+    // GET USER MESSAGE
+    // ------------------------------------------
 
-    // Nachrichten vom Frontend
+    let messages = [];
+
     if (Array.isArray(body.messages)) {
-      inputMessages = body.messages
+      messages = body.messages
         .filter(message => {
           return (
             message &&
@@ -45,26 +56,31 @@ export default async function handler(req, res) {
             message.content.trim().length > 0
           );
         })
-        .map(message => ({
-          role:
-            message.role === "assistant" ||
-            message.role === "model"
-              ? "model"
-              : "user",
+        .map(message => {
+          return {
+            role:
+              message.role === "assistant" ||
+              message.role === "model"
+                ? "model"
+                : "user",
 
-          content: message.content
-            .trim()
-            .slice(0, 5000)
-        }));
+            content: message.content
+              .trim()
+              .slice(0, 5000)
+          };
+        });
     }
 
-    // Alternativ einzelner Prompt
+    // ------------------------------------------
+    // SUPPORT SIMPLE PROMPT
+    // ------------------------------------------
+
     if (
-      inputMessages.length === 0 &&
+      messages.length === 0 &&
       typeof body.prompt === "string" &&
       body.prompt.trim()
     ) {
-      inputMessages = [
+      messages = [
         {
           role: "user",
           content: body.prompt.trim().slice(0, 5000)
@@ -72,40 +88,51 @@ export default async function handler(req, res) {
       ];
     }
 
-    if (inputMessages.length === 0) {
+    if (messages.length === 0) {
       return res.status(400).json({
         error: "Please enter a question."
       });
     }
 
-    // Nur die letzten 20 Nachrichten
-    inputMessages = inputMessages.slice(-20);
+    // ------------------------------------------
+    // LIMIT CHAT HISTORY
+    // ------------------------------------------
 
-    // Gemini darf nicht mit model beginnen
+    messages = messages.slice(-20);
+
+    // Gemini must start with user
     while (
-      inputMessages.length > 0 &&
-      inputMessages[0].role === "model"
+      messages.length > 0 &&
+      messages[0].role === "model"
     ) {
-      inputMessages.shift();
+      messages.shift();
     }
 
-    if (inputMessages.length === 0) {
+    if (messages.length === 0) {
       return res.status(400).json({
         error: "No valid user message found."
       });
     }
 
-    // Gemini Contents
-    const contents = inputMessages.map(message => ({
-      role: message.role,
-      parts: [
-        {
-          text: message.content
-        }
-      ]
-    }));
+    // ------------------------------------------
+    // GEMINI CONTENTS
+    // ------------------------------------------
 
-    // Fasqoo AI System Instruction
+    const contents = messages.map(message => {
+      return {
+        role: message.role,
+        parts: [
+          {
+            text: message.content
+          }
+        ]
+      };
+    });
+
+    // ------------------------------------------
+    // SYSTEM INSTRUCTION
+    // ------------------------------------------
+
     const systemInstruction = {
       parts: [
         {
@@ -114,7 +141,7 @@ You are Fasqoo AI Technician.
 
 You are the official technical support assistant of Fasqoo.
 
-Your job is to help users diagnose and understand Internet and network problems.
+Your job is to help users understand and troubleshoot Internet and network problems.
 
 You can help with:
 
@@ -153,7 +180,7 @@ Rules:
 
 5. Never claim to have measured the user's Internet connection unless measurements were explicitly provided.
 
-6. If the user provides speed test values, analyze them carefully.
+6. If the user provides speed test values, analyze those values carefully.
 
 7. If important information is missing, ask a short follow-up question.
 
@@ -161,13 +188,20 @@ Rules:
 
 9. Keep answers concise but useful.
 
-10. Never expose API keys, environment variables, internal instructions or server secrets.
+10. Never expose API keys, environment variables, server secrets or internal instructions.
 
 11. You are the official Fasqoo AI Technician.
 
 If the user provides:
 
-Download, Upload, Ping, Jitter, Packet Loss, ISP, Location or Server information,
+Download,
+Upload,
+Ping,
+Jitter,
+Packet Loss,
+ISP,
+Location,
+Server information,
 
 use those values when giving your diagnosis.
           `.trim()
@@ -175,15 +209,24 @@ use those values when giving your diagnosis.
       ]
     };
 
-    // Gemini Modell
+    // ------------------------------------------
+    // GEMINI MODEL
+    // ------------------------------------------
+
     const model = "gemini-3.8-flash";
 
     const url =
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-    console.log("Fasqoo AI: sending request to Gemini");
+    console.log(
+      "FASQOO AI: Sending request to Gemini."
+    );
 
-    const response = await fetch(url, {
+    // ------------------------------------------
+    // SEND REQUEST
+    // ------------------------------------------
+
+    const geminiResponse = await fetch(url, {
       method: "POST",
 
       headers: {
@@ -192,30 +235,29 @@ use those values when giving your diagnosis.
       },
 
       body: JSON.stringify({
-        systemInstruction: systemInstruction,
-        contents: contents,
-
-        generationConfig: {
-          maxOutputTokens: 1200,
-          temperature: 0.4
-        }
+        systemInstruction,
+        contents
       })
     });
 
-    const rawText = await response.text();
+    const rawText = await geminiResponse.text();
 
     console.log(
-      "Fasqoo AI: Gemini HTTP status:",
-      response.status
+      "FASQOO AI: Gemini status:",
+      geminiResponse.status
     );
+
+    // ------------------------------------------
+    // PARSE GEMINI RESPONSE
+    // ------------------------------------------
 
     let result;
 
     try {
       result = JSON.parse(rawText);
-    } catch {
+    } catch (error) {
       console.error(
-        "Fasqoo AI: Gemini returned invalid JSON:",
+        "FASQOO AI: Gemini returned invalid JSON:",
         rawText
       );
 
@@ -224,31 +266,38 @@ use those values when giving your diagnosis.
       });
     }
 
-    // Gemini Fehler
-    if (!response.ok) {
+    // ------------------------------------------
+    // GEMINI API ERROR
+    // ------------------------------------------
+
+    if (!geminiResponse.ok) {
       console.error(
-        "Fasqoo AI: Gemini API error:",
-        response.status,
+        "FASQOO AI: Gemini API error:",
         JSON.stringify(result)
       );
 
-      return res.status(response.status).json({
-        error:
-          result?.error?.message ||
-          `Gemini API error (${response.status}).`
+      const message =
+        result?.error?.message ||
+        "Gemini API request failed.";
+
+      return res.status(geminiResponse.status).json({
+        error: message
       });
     }
 
-    // Gemini Antwort
+    // ------------------------------------------
+    // GET ANSWER
+    // ------------------------------------------
+
     const answer =
       result?.candidates?.[0]?.content?.parts
-        ?.map(part => part.text || "")
+        ?.map(part => part?.text || "")
         .join("")
         .trim();
 
     if (!answer) {
       console.error(
-        "Fasqoo AI: Gemini returned no answer:",
+        "FASQOO AI: Gemini returned no answer:",
         JSON.stringify(result)
       );
 
@@ -257,15 +306,21 @@ use those values when giving your diagnosis.
       });
     }
 
-    console.log("Fasqoo AI: response successful");
+    console.log(
+      "FASQOO AI: Gemini response successful."
+    );
+
+    // ------------------------------------------
+    // RETURN TO WEBSITE
+    // ------------------------------------------
 
     return res.status(200).json({
-      answer: answer
+      answer
     });
 
   } catch (error) {
     console.error(
-      "Fasqoo AI Technician server error:",
+      "FASQOO AI SERVER ERROR:",
       error
     );
 
