@@ -1984,5 +1984,86 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </script>
 
+  <!-- ========================================== -->
+<!-- START: FASQOO GEMINI AI ENGINE -->
+<!-- ========================================== -->
+
+<!-- Google AI SDK laden, damit der Browser Gemini versteht -->
+<script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run"
+    }
+  }
+</script>
+
+<script type="module">
+  import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  // WICHTIG: Ersetze den Text in den Anführungszeichen mit deinem echten Google API-Key!
+  const API_KEY = "HIER_DEINEN_GEMINI_API_KEY_EINTRAGEN"; 
+  const genAI = new GoogleGenerativeAI(API_KEY);
+
+  const aiForm = document.getElementById('aiForm');
+  const aiInput = document.getElementById('aiInput');
+  const aiMessages = document.getElementById('aiMessages');
+
+  if (aiForm) {
+      aiForm.addEventListener('submit', async function(e) {
+          e.preventDefault(); // Verhindert, dass die Seite neu lädt
+          
+          const userQuestion = aiInput.value.trim();
+          if (!userQuestion) return;
+
+          // 1. Deine Frage im Chat anzeigen
+          const userDiv = document.createElement('div');
+          userDiv.className = 'ai-message user';
+          userDiv.innerHTML = `<strong>You</strong><p>${escapeHTML(userQuestion)}</p>`;
+          aiMessages.appendChild(userDiv);
+          
+          // Eingabefeld leeren
+          aiInput.value = '';
+          aiMessages.scrollTop = aiMessages.scrollHeight; // Zum Ende scrollen
+
+          // 2. Lade-Anzeige für die KI erstellen
+          const loadingDiv = document.createElement('div');
+          loadingDiv.className = 'ai-message assistant';
+          loadingDiv.innerHTML = `<strong>Fasqoo AI Technician</strong><p><em>Thinking...</em></p>`;
+          aiMessages.appendChild(loadingDiv);
+          aiMessages.scrollTop = aiMessages.scrollHeight;
+
+          try {
+              // Verbindung zu Gemini herstellen
+              const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+              
+              // Kontext mitgeben, damit Gemini weiß, dass es auf Fasqoo läuft
+              const prompt = "You are the Fasqoo AI Technician, a professional internet and network troubleshooting assistant. Help the user with this issue: " + userQuestion;
+              
+              const result = await model.generateContent(prompt);
+              const response = await result.response;
+              const text = response.text();
+              
+              // 3. Die Antwort der KI in das Lade-Feld reinschreiben
+              loadingDiv.querySelector('p').innerText = text;
+              
+          } catch (error) {
+              console.error("Gemini Fehler:", error);
+              loadingDiv.querySelector('p').innerHTML = "<span style='color: #ff6b6b;'>Sorry, an error occurred. Please verify your API Key.</span>";
+          }
+          
+          aiMessages.scrollTop = aiMessages.scrollHeight;
+      });
+  }
+
+  // Sicherheitsfunktion gegen bösartigen Code-Input
+  function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
+</script>
+
+<!-- ========================================== -->
+<!-- ENDE: FASQOO GEMINI AI ENGINE -->
+<!-- ========================================== -->
+
 </body>
 </html>
