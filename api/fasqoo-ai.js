@@ -12,11 +12,11 @@ export default async function handler(req, res) {
     });
   }
 
-  // Falls prompt leer ist, nimm die letzte Nachricht aus dem Nachrichten-Verlauf
   const userQuery = prompt || (messages && messages.length > 0 ? messages[messages.length - 1].content : "Hallo");
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // Aktualisiertes Modell: gemini-2.5-flash
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
