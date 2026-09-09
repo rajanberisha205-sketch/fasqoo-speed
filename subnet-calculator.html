@@ -522,7 +522,7 @@ const translations = {
     heroTitle: "Gelişmiş BT ve Ağ Teşhis Paketi",
     heroSub: "Sistem yöneticileri, geliştiriciler ve ağ teknisyenleri için profesyonel araçlar",
     copyResults: "📋 Sonucu Kopyala", printReport: "🖨️ Raporu Yazdır",
-    secTitle: "Teşhis ve Analiz Araçları", secSub: "Gelişmiş ağ ve sistem testlerini canlı olarak çalıştırın.",
+    secTitle: "Teşhis and Analiz Araçları", secSub: "Gelişmiş ağ ve sistem testlerini canlı olarak çalıştırın.",
     tool1Title: "Port Denetleyicisi (TCP)", tool1Desc: "Kritik portların (örn. 80, 443, 22, 3389) hedef sistemde erişilebilirliğini test edin.",
     btnTest: "Test Et", outPort: "> Port teşhisi için hazır...",
     tool2Title: "SSL/TLS Sertifika Kontrolü", tool2Desc: "Bir alan adının sertifika süresini, şifrelemesini ve sağlayıcısını doğrulayın.",
@@ -587,7 +587,7 @@ if(localStorage.getItem("fasqoo_dark") === "true"){
   themeBtn.textContent = "☀";
 }
 
-// SPRACHWECHSEL LOGIK (UI sofort aktualisieren ohne externe Translator-Tools)
+// SPRACHWECHSEL LOGIK
 const langSelect = $("langSelect");
 
 function setLanguage(lang) {
@@ -598,7 +598,6 @@ function setLanguage(lang) {
       el.textContent = dict[key];
     }
   });
-  // RTL-Unterstützung für Arabisch
   if(lang === 'ar') {
     document.documentElement.setAttribute('dir', 'rtl');
   } else {
@@ -611,7 +610,6 @@ langSelect.onchange = (e) => {
   setLanguage(e.target.value);
 };
 
-// Gespeicherte Sprache laden
 const savedLang = localStorage.getItem("fasqoo_lang") || "de";
 langSelect.value = savedLang;
 setLanguage(savedLang);
@@ -638,10 +636,10 @@ function renderLog(){
   `).join("");
 }
 
-// TOOL 1: Port Checker
+// TOOL 1: Port Checker (Korrigiert)
 $("runPortCheck").onclick = () => {
   const target = $("portTarget").value;
-  $("portOutput.innerHTML = `> Starte TCP-Handshake zu ${target}...\n> Status: Port ist offen und antwortet.`);
+  $("portOutput").innerHTML = `> Starte TCP-Handshake zu ${target}...\n> Status: Port ist offen und antwortet.`;
   addLog("Port-Checker", target, "Port erreichbar (Open)");
 };
 
