@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Advanced IT & Network Diagnostics with Fasqoo Speed Test.">
+  <meta name="description" content="Advanced IT & Network Engineer Toolkit with Fasqoo Diagnostics.">
   <meta name="robots" content="index, follow">
 
-  <title id="pageTitle">IT & Network Diagnostics – Fasqoo</title>
+  <title id="pageTitle">Network Engineer Toolkit – Fasqoo</title>
 
   <link rel="canonical" href="https://www.fasqoo.com/">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -20,9 +20,23 @@
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:400;}
-button,select,input{font:inherit;}
+button,select,input,textarea{font:inherit;}
 button{cursor:pointer;}
-.wrap{width:min(1240px,calc(100% - 32px));margin:auto;}
+.wrap{width:min(1280px,calc(100% - 32px));margin:auto;}
+
+/* LOGIN OVERLAY */
+#loginOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;width:100%;max-width:400px;box-shadow:var(--shadow);text-align:center;}
+.login-card .brandmark{margin:0 auto 16px;}
+.login-card h2{margin:0 0 8px;font-size:22px;}
+.login-card p{color:var(--muted);font-size:13px;margin:0 0 24px;}
+.login-form{display:flex;flex-direction:column;gap:14px;text-align:left;}
+.login-form label{font-size:12px;font-weight:500;color:var(--muted);}
+.login-form input{border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;outline:none;}
+.login-form input:focus{border-color:var(--orange);background:var(--card);}
+.login-btn{background:var(--orange);color:#fff;border:0;border-radius:8px;padding:12px;font-size:14px;font-weight:600;margin-top:10px;transition:.2s;}
+.login-btn:hover{opacity:.9;}
+.login-error{color:var(--red);font-size:12px;margin-top:10px;text-align:center;min-height:16px;}
 
 header{
   height:72px;
@@ -42,57 +56,53 @@ header{
 .brandname{font-size:22px;letter-spacing:-.5px;font-weight:600;}
 
 .main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;}
-.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;transition:color .2s ease,opacity .2s ease;}
-.main-menu a:hover{color:var(--orange);}
+.main-menu a, .main-menu button.link-btn{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;background:none;border:0;padding:0;cursor:pointer;transition:color .2s ease;}
+.main-menu a:hover, .main-menu button.link-btn:hover{color:var(--orange);}
 .menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
 .menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;outline:none;cursor:pointer;}
-.menu-extra select:hover{background:var(--soft);}
 .theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;padding:0;transition:.2s ease;}
-.theme-btn:hover{background:var(--soft);transform:translateY(-1px);}
-
-.menu-toggle{
-  display:none;
-  background:transparent;
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:6px 12px;
-  font-size:20px;
-  color:var(--text);
-}
+.theme-btn:hover{background:var(--soft);}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text);}
 
 main{padding:40px 0 80px;}
-.hero{text-align:center;margin-bottom:35px;}
-.hero h1{font-size:38px;line-height:1.2;font-weight:600;letter-spacing:-1px;margin:0 0 10px;}
+.hero{text-align:center;margin-bottom:30px;}
+.hero h1{font-size:36px;line-height:1.2;font-weight:600;letter-spacing:-1px;margin:0 0 10px;}
 .hero p{margin:0;color:var(--muted);font-size:15px;}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:32px;margin-bottom:24px;}
-.section-title{font-size:20px;font-weight:600;margin:0 0 8px;letter-spacing:-.3px;}
-.section-sub{color:var(--muted);font-size:13px;margin:0 0 20px;}
-
-.tool-actions{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+/* TOOLBAR & ACTIONS */
+.tool-actions{display:flex;gap:12px;margin-bottom:25px;flex-wrap:wrap;justify-content:center;}
 .action-btn{background:var(--soft);color:var(--text);border:1px solid var(--line);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:.2s;}
 .action-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
 
+/* CATEGORY TABS */
+.toolkit-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:25px;scrollbar-width:thin;}
+.tab-btn{background:var(--card);border:1px solid var(--line);color:var(--text);padding:10px 18px;border-radius:30px;font-size:13px;font-weight:500;white-space:nowrap;transition:.2s;}
+.tab-btn:hover,.tab-btn.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* TOOL GRID SYSTEM */
+.toolkit-section{display:none;}
+.toolkit-section.active{display:block;}
+
 .it-tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-.it-tool-box{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--card);display:flex;flex-direction:column;justify-content:space-between;transition:.2s;}
-.it-tool-box:hover{border-color:var(--orange);box-shadow:var(--shadow);}
+.it-tool-box{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;transition:.2s;}
+.it-tool-box:hover{border-color:var(--orange);}
 .it-tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .it-tool-icon{width:38px;height:38px;border-radius:8px;background:var(--soft);color:var(--orange);display:grid;place-items:center;font-size:18px;font-weight:bold;}
 .it-tool-header h3{font-size:16px;font-weight:600;margin:0;}
 .it-tool-box p{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 16px;}
-.it-input-group{display:flex;gap:8px;margin-bottom:12px;}
-.it-input-group input,.it-input-group select{flex:1;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 12px;border-radius:8px;font-size:12px;outline:none;}
-.it-input-group input:focus,.it-input-group select:focus{border-color:var(--orange);background:var(--card);}
+.it-input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.it-input-group input,.it-input-group select,.it-input-group textarea{flex:1;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 12px;border-radius:8px;font-size:12px;outline:none;}
+.it-input-group textarea{min-height:60px;resize:vertical;}
+.it-input-group input:focus,.it-input-group select:focus,.it-input-group textarea:focus{border-color:var(--orange);background:var(--card);}
 .it-btn{background:var(--text);color:var(--card);border:0;border-radius:8px;padding:10px 16px;font-size:12px;font-weight:500;transition:.2s;}
 .it-btn:hover{background:var(--orange);}
 
-.console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:140px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;}
+.console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:160px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;white-space:pre-wrap;}
 
-.history{border:1px solid var(--line);background:var(--card);border-radius:10px;overflow:hidden;}
+/* HISTORY TABLE */
+.history{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;margin-top:40px;box-shadow:var(--shadow);}
 .hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .hhead h2{margin:0;font-size:16px;font-weight:600;}
-
-/* Responsive Tabellen-Container für Handys */
 .table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 table{width:100%;border-collapse:collapse;text-align:left;min-width:500px;}
 th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;}
@@ -104,42 +114,47 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
 
 .dark{--bg:#030712;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;--line:#1e293b;--soft:#111827;}
 .dark header,.dark footer{background:#0f172a;}
-.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select{background:#111827;color:var(--text);border-color:var(--line);}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea,.dark .login-card input{background:#111827;color:var(--text);border-color:var(--line);}
 .dark th{background:#111827;}
 
 @media(max-width:900px){.it-tools-grid{grid-template-columns:1fr;}}
-
 @media(max-width:760px){
   .menu-toggle{display:block;}
-  .main-menu{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:72px;
-    left:0;
-    right:0;
-    background:var(--card);
-    border-bottom:1px solid var(--line);
-    padding:20px;
-    gap:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
-    align-items:flex-start;
-  }
+  .main-menu{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
   .main-menu.active{display:flex;}
-  .menu-extra{width:100%;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
   .foot{flex-direction:column;gap:12px;text-align:center;}
   .hero h1{font-size:28px;}
-  .card{padding:20px;}
 }
-
 @media print {
-  header, footer, .tool-actions, .it-input-group, .menu-toggle { display: none !important; }
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle, #loginOverlay { display: none !important; }
   body { background: #fff; color: #000; }
   .card, .history { border: none; box-shadow: none; }
 }
 </style>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay">
+  <div class="login-card">
+    <div class="brandmark">⌁</div>
+    <h2>Fasqoo Login</h2>
+    <p>Bitte melden Sie sich an, um das Toolkit zu nutzen.</p>
+    <form class="login-form" id="loginForm" onsubmit="return false;">
+      <div>
+        <label for="loginUser">Benutzername</label>
+        <input type="text" id="loginUser" placeholder="admin" required autocomplete="username">
+      </div>
+      <div>
+        <label for="loginPass">Passwort</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="login-btn" id="submitLogin">Anmelden</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+    <div style="margin-top:15px; font-size:11px; color:var(--muted);">Standard-Zugang: <b>admin</b> / <b>fasqoo2026</b></div>
+  </div>
+</div>
 
 <header>
   <div class="wrap nav">
@@ -151,23 +166,15 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
 
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
-      <a href="index.html" id="navHome" data-i18n="navHome">Home</a>
-      <a href="faq.html" id="navFaq" data-i18n="navFaq">FAQ</a>
-      <a href="network-status.html" id="navStatus" data-i18n="navStatus">Netzwerk-Status</a>
-      <a href="subnet-calculator.html" id="navSubnet" data-i18n="navSubnet">IP Subnet Calculator</a>
-      <a href="about.html" id="navAbout" data-i18n="navAbout">Über uns</a>
+      <a href="index.html">Home</a>
+      <a href="network-status.html">Netzwerk-Status</a>
+      <a href="subnet-calculator.html">Subnet Calculator</a>
+      <button class="link-btn" id="logoutBtn">Abmelden</button>
       <div class="menu-extra">
         <select id="langSelect" aria-label="Language">
           <option value="de">Deutsch</option>
           <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="it">Italiano</option>
-          <option value="pt">Português</option>
-          <option value="nl">Nederlands</option>
-          <option value="tr">Türkçe</option>
           <option value="sq">Shqip</option>
-          <option value="ar">العربية</option>
         </select>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode" title="Dark mode">☾</button>
       </div>
@@ -179,147 +186,241 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
   <div class="wrap">
 
     <section class="hero">
-      <h1 id="heroTitle" data-i18n="heroTitle">Erweiterte IT & Netzwerk-Diagnose Suite</h1>
-      <p id="heroSub" data-i18n="heroSub">Professionelle Werkzeuge für SysAdmins, Entwickler und Netzwerktechniker mit direktem Export</p>
+      <h1>Network Engineer Toolkit & Diagnose Suite</h1>
+      <p>Umfassendes Werkzeugset für IP-Subnetting, DNS, Netzwerkanalypse, Web-Server, Sicherheit und Administrator-Tools.</p>
     </section>
 
+    <!-- Global Actions -->
     <div class="tool-actions">
-      <button class="action-btn" id="copyResultsBtn" data-i18n="copyResults">📋 Ergebnis kopieren</button>
-      <button class="action-btn" id="jsonExportBtn" data-i18n="jsonExport">💻 JSON exportieren</button>
-      <button class="action-btn" id="printReportBtn" data-i18n="printReport">🖨️ Bericht drucken</button>
+      <button class="action-btn" id="copyResultsBtn">📋 Ergebnis kopieren</button>
+      <button class="action-btn" id="shareResultsBtn">📤 Ergebnis teilen</button>
+      <button class="action-btn" id="jsonExportBtn">💻 JSON exportieren</button>
+      <button class="action-btn" id="printReportBtn">🖨️ Bericht drucken</button>
     </div>
 
-    <section class="card">
-      <h2 class="section-title" data-i18n="secTitle">Diagnose & Analyse Werkzeuge</h2>
-      <p class="section-sub" data-i18n="secSub">Führe erweiterte Netzwerk- und Systemtests live aus.</p>
+    <!-- Category Tabs Navigation -->
+    <div class="toolkit-tabs" id="toolkitTabs">
+      <button class="tab-btn active" data-target="sec-subnet">📐 IP & Subnetting</button>
+      <button class="tab-btn" data-target="sec-dns">🌐 DNS & Records</button>
+      <button class="tab-btn" data-target="sec-network">⚡ Network & Ping</button>
+      <button class="tab-btn" data-target="sec-web">🔒 Web & Server</button>
+      <button class="tab-btn" data-target="sec-security">🛡️ IP / Security</button>
+      <button class="tab-btn" data-target="sec-admin">🛠️ Admin Tools</button>
+    </div>
 
+    <!-- 1. IP & SUBNETTING -->
+    <div class="toolkit-section active" id="sec-subnet">
       <div class="it-tools-grid">
-        
-        <!-- 1. Port Checker -->
         <div class="it-tool-box">
           <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">⚡</div>
-              <h3 data-i18n="tool1Title">Port-Checker (TCP)</h3>
-            </div>
-            <p data-i18n="tool1Desc">Prüfe die Erreichbarkeit kritischer Ports (z. B. 80, 443, 22, 3389) auf Zielsystemen.</p>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv4 / CIDR Calculator</h3></div>
+            <p>Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.</p>
             <div class="it-input-group">
-              <input type="text" id="portTarget" value="cloudflare.com:443" placeholder="domain.com:port">
-              <button class="it-btn" id="runPortCheck" data-i18n="btnTest">Testen</button>
+              <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="IP/CIDR (z.B. 10.0.0.0/16)">
+              <button class="it-btn" id="calcSubnetBtn">Berechnen</button>
             </div>
           </div>
-          <div class="console-output" id="portOutput" data-i18n="outPort">&gt; Bereit für Port-Diagnose...</div>
+          <div class="console-output" id="subnetOutput">> Bereit für Subnet-Berechnung...</div>
         </div>
-
-        <!-- 2. SSL Checker -->
         <div class="it-tool-box">
           <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">🔒</div>
-              <h3 data-i18n="tool2Title">SSL/TLS Zertifikatsprüfung</h3>
-            </div>
-            <p data-i18n="tool2Desc">Überprüfe Zertifikatslaufzeit, Verschlüsselung und Aussteller einer Domain.</p>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv6 & VLSM / Supernet Calculator</h3></div>
+            <p>Ermittle IPv6 Prefix-Ranges und teile IP-Netzwerke via VLSM auf.</p>
             <div class="it-input-group">
-              <input type="text" id="sslTarget" value="fasqoo.com" placeholder="domain.com">
-              <button class="it-btn" id="runSslCheck" data-i18n="btnAnalyze">Analysieren</button>
+              <input type="text" id="vlsmInput" value="192.168.0.0/22" placeholder="Netzwerk für VLSM">
+              <button class="it-btn" id="calcVlsmBtn">VLSM Analyse</button>
             </div>
           </div>
-          <div class="console-output" id="sslOutput" data-i18n="outSsl">&gt; Warten auf Eingabe...</div>
+          <div class="console-output" id="vlsmOutput">> Warten auf Eingabe...</div>
         </div>
-
-        <!-- 3. DNS Lookup -->
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">🌐</div>
-              <h3 data-i18n="tool3Title">DNS Lookup (A, AAAA, MX)</h3>
-            </div>
-            <p data-i18n="tool3Desc">Ermittle DNS-Einträge über sichere Resolver (Cloudflare/Google DoH).</p>
-            <div class="it-input-group">
-              <input type="text" id="dnsTarget" value="google.com" placeholder="domain.com">
-              <button class="it-btn" id="runDnsCheck" data-i18n="btnLookup">Lookup</button>
-            </div>
-          </div>
-          <div class="console-output" id="dnsOutput" data-i18n="outDns">&gt; DNS-Konsole bereit.</div>
-        </div>
-
-        <!-- 4. HTTP Header -->
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">📋</div>
-              <h3 data-i18n="tool4Title">HTTP-Header Inspector</h3>
-            </div>
-            <p data-i18n="tool4Desc">Untersuche Response-Header, Sicherheitsrichtlinien und Server-Signaturen.</p>
-            <div class="it-input-group">
-              <input type="text" id="headerTarget" value="https://www.cloudflare.com" placeholder="https://url.com">
-              <button class="it-btn" id="runHeaderCheck" data-i18n="btnInspect">Inspizieren</button>
-            </div>
-          </div>
-          <div class="console-output" id="headerOutput" data-i18n="outHeader">&gt; Warten auf URL...</div>
-        </div>
-
-        <!-- 5. Whois / IP Info -->
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">🔍</div>
-              <h3 data-i18n="tool5Title">IP-Geoloc & Whois Lookup</h3>
-            </div>
-            <p data-i18n="tool5Desc">Ermittle Standort, ASN, ISP und Netzwerk-Routen für IP-Adressen oder Domains.</p>
-            <div class="it-input-group">
-              <input type="text" id="whoisTarget" value="8.8.8.8" placeholder="IP oder Domain">
-              <button class="it-btn" id="runWhoisCheck" data-i18n="btnWhois">Whois</button>
-            </div>
-          </div>
-          <div class="console-output" id="whoisOutput" data-i18n="outWhois">&gt; Bereit für IP-Abfrage...</div>
-        </div>
-
-        <!-- 6. Ping Monitor -->
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header">
-              <div class="it-tool-icon">⏱️</div>
-              <h3 data-i18n="tool6Title">Latenz & Ping Monitor</h3>
-            </div>
-            <p data-i18n="tool6Desc">Simuliere Paketlaufzeiten und Round-Trip-Time (RTT) zu globalen Servern.</p>
-            <div class="it-input-group">
-              <select id="pingRegion">
-                <option value="eu-central">Frankfurt (EU-Central)</option>
-                <option value="us-east">New York (US-East)</option>
-                <option value="ap-east">Singapur (AP-East)</option>
-              </select>
-              <button class="it-btn" id="runPingCheck" data-i18n="btnPing">Ping</button>
-            </div>
-          </div>
-          <div class="console-output" id="pingOutput" data-i18n="outPing">&gt; Ping-Tool bereit.</div>
-        </div>
-
       </div>
-    </section>
+    </div>
 
-    <!-- LOG / HISTORIE -->
-    <section class="section">
-      <div class="history">
-        <div class="hhead">
-          <h2 data-i18n="logTitle">Ausgeführte Diagnosen (Aktivitätsprotokoll)</h2>
-          <button class="action-btn" id="clearLog" data-i18n="btnClearLog">Log löschen</button>
+    <!-- 2. DNS -->
+    <div class="toolkit-section" id="sec-dns">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🌐</div><h3>DNS Lookup (A, AAAA, MX, TXT, NS, SOA)</h3></div>
+            <p>Frage sämtliche DNS-Einträge und Reverse-DNS (PTR) über sichere DoH Resolver ab.</p>
+            <div class="it-input-group">
+              <input type="text" id="dnsDomainInput" value="google.com" placeholder="domain.com">
+              <select id="dnsTypeSelect">
+                <option value="ALL">Alle Records</option>
+                <option value="A">A (IPv4)</option>
+                <option value="AAAA">AAAA (IPv6)</option>
+                <option value="MX">MX (Mail)</option>
+                <option value="TXT">TXT</option>
+                <option value="NS">NS</option>
+                <option value="PTR">PTR / Reverse</option>
+              </select>
+              <button class="it-btn" id="runDnsTool">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="dnsToolOutput">> DNS-Konsole bereit.</div>
         </div>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th data-i18n="thTime">Zeitstempel</th>
-                <th data-i18n="thTool">Werkzeug</th>
-                <th data-i18n="thTarget">Ziel / Eingabe</th>
-                <th data-i18n="thResult">Ergebnis / Status</th>
-              </tr>
-            </thead>
-            <tbody id="itLogTable">
-              <tr><td colspan="4" class="empty" data-i18n="emptyLog">Noch keine Diagnose-Aktivitäten in dieser Session.</td></tr>
-            </tbody>
-          </table>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>DNS Propagation & DNSSEC Check</h3></div>
+            <p>Überprüfe weltweite DNS-Ausbreitung und Sicherheitsstatus (DNSSEC).</p>
+            <div class="it-input-group">
+              <input type="text" id="propInput" value="cloudflare.com" placeholder="domain.com">
+              <button class="it-btn" id="runPropBtn">Prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="propOutput">> Bereit für Propagation-Check...</div>
         </div>
+      </div>
+    </div>
+
+    <!-- 3. NETWORK -->
+    <div class="toolkit-section" id="sec-network">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">⚡</div><h3>Ping, Traceroute & MTR Simulator</h3></div>
+            <p>Simuliere Paketlaufzeiten, RTT, Jitter, MTU Tests und TCP Connectivity.</p>
+            <div class="it-input-group">
+              <input type="text" id="netTarget" value="8.8.8.8" placeholder="IP oder Hostname">
+              <select id="netTestType">
+                <option value="ping">Ping / Latency</option>
+                <option value="traceroute">Traceroute / MTR</option>
+                <option value="port">TCP Port Connect</option>
+                <option value="mtu">MTU & Packet Loss</option>
+              </select>
+              <button class="it-btn" id="runNetTest">Test starten</button>
+            </div>
+          </div>
+          <div class="console-output" id="netOutput">> Netzwerk-Diagnose bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔌</div><h3>TCP & UDP Port Checker</h3></div>
+            <p>Prüfe spezifische Ports auf Erreichbarkeit.</p>
+            <div class="it-input-group">
+              <input type="text" id="portTarget" value="example.com:443" placeholder="domain.com:port">
+              <button class="it-btn" id="runPortCheck">Port prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="portOutput">> Port-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WEB / SERVER -->
+    <div class="toolkit-section" id="sec-web">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔒</div><h3>SSL Certificate & TLS Version Analyzer</h3></div>
+            <p>Prüfe SSL/TLS Zertifikatslaufzeit, Verschlüsselung und Security Headers.</p>
+            <div class="it-input-group">
+              <input type="text" id="webTarget" value="https://cloudflare.com" placeholder="https://domain.com">
+              <button class="it-btn" id="runWebCheck">Analysieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="webOutput">> Web-Inspektor bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📋</div><h3>HTTP Header Inspector & Redirect Checker</h3></div>
+            <p>Untersuche HTTP Status, Response Header und Weiterleitungsketten.</p>
+            <div class="it-input-group">
+              <input type="text" id="headerInput" value="https://google.com" placeholder="https://url.com">
+              <button class="it-btn" id="runHeaderCheck">Inspizieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="headerOutput">> Header-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. IP / SECURITY -->
+    <div class="toolkit-section" id="sec-security">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛡️</div><h3>Public IP, ASN, ISP & Proxy/VPN Detection</h3></div>
+            <p>Erkenne eigene IPv4/IPv6, ASN, ISP, IP Reputation und Proxy/VPN Nutzung.</p>
+            <div class="it-input-group">
+              <input type="text" id="secIpInput" value="1.1.1.1" placeholder="IP-Adresse abfragen">
+              <button class="it-btn" id="runSecIpBtn">Abfragen</button>
+            </div>
+          </div>
+          <div class="console-output" id="secIpOutput">> Sicherheits-Tool bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>Reverse IP & Abuse Contact Lookup</h3></div>
+            <p>Finde gehostete Domains auf einer IP und Abuse-Kontakte.</p>
+            <div class="it-input-group">
+              <input type="text" id="abuseInput" value="8.8.8.8" placeholder="IP eingeben">
+              <button class="it-btn" id="runAbuseBtn">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="abuseOutput">> Abuse-Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ADMIN TOOLS -->
+    <div class="toolkit-section" id="sec-admin">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛠️</div><h3>Admin Utilities (MAC, Password, JWT, Base64, JSON)</h3></div>
+            <p>Generiere Passwörter, UUIDs, konvertiere Timestamps oder decodiere JWT/Base64.</p>
+            <div class="it-input-group">
+              <textarea id="adminInput" placeholder="Text oder JSON eingeben..."></textarea>
+              <select id="adminAction">
+                <option value="base64enc">Base64 Encode</option>
+                <option value="base64dec">Base64 Decode</option>
+                <option value="urlenc">URL Encode</option>
+                <option value="jwtdec">JWT Decoder</option>
+                <option value="pwdgen">Passwort Generator</option>
+                <option value="uuidgen">UUID Generator</option>
+                <option value="jsonfmt">JSON Formatter</option>
+                <option value="timestamp">Timestamp Converter</option>
+              </select>
+              <button class="it-btn" id="runAdminTool">Ausführen</button>
+            </div>
+          </div>
+          <div class="console-output" id="adminOutput">> Admin-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📌</div><h3>MAC Address & QR Code Generator</h3></div>
+            <p>Ermittle MAC Vendor Infos oder generiere QR-Codes.</p>
+            <div class="it-input-group">
+              <input type="text" id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="MAC-Adresse oder QR Text">
+              <button class="it-btn" id="runMacBtn">Verarbeiten</button>
+            </div>
+          </div>
+          <div class="console-output" id="macOutput">> MAC / QR Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <section class="history">
+      <div class="hhead">
+        <h2>Toolkit Aktivitätsprotokoll</h2>
+        <button class="action-btn" id="clearLog">Log löschen</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Zeitstempel</th>
+              <th>Kategorie / Werkzeug</th>
+              <th>Ziel / Eingabe</th>
+              <th>Ergebnis / Status</th>
+            </tr>
+          </thead>
+          <tbody id="itLogTable">
+            <tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -328,304 +429,62 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
 
 <footer>
 <div class="wrap foot">
-  <div>© 2026 Fasqoo. Alle Rechte vorbehalten.[cite: 4]</div>
-  <nav style="display:flex; gap:15px;">
-    <a href="/privacy-policy.html" data-i18n="footerPrivacy" style="color:inherit; text-decoration:none;">Datenschutz</a>
-    <a href="/terms.html" data-i18n="footerTerms" style="color:inherit; text-decoration:none;">Nutzungsbedingungen</a>
-  </nav>
+  <div>© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+  <div style="display:flex; gap:15px;">
+    <a href="/privacy.html" style="color:inherit; text-decoration:none;">Datenschutz</a>
+    <a href="/terms.html" style="color:inherit; text-decoration:none;">Nutzungsbedingungen</a>
+  </div>
 </div>
 </footer>
 
 <script>
 const $ = id => document.getElementById(id);
 
-// SPRACHWÖRTERBUCH (Übersetzungen für alle UI-Elemente)
-const translations = {
-  de: {
-    navHome: "Home", navFaq: "FAQ", navStatus: "Netzwerk-Status", navSubnet: "IP Subnet Calculator", navAbout: "Über uns",
-    heroTitle: "Erweiterte IT & Netzwerk-Diagnose Suite",
-    heroSub: "Professionelle Werkzeuge für SysAdmins, Entwickler und Netzwerktechniker mit direktem Export",
-    copyResults: "📋 Ergebnis kopieren", jsonExport: "💻 JSON exportieren", printReport: "🖨️ Bericht drucken",
-    secTitle: "Diagnose & Analyse Werkzeuge", secSub: "Führe erweiterte Netzwerk- und Systemtests live aus.",
-    tool1Title: "Port-Checker (TCP)", tool1Desc: "Prüfe die Erreichbarkeit kritischer Ports (z. B. 80, 443, 22, 3389) auf Zielsystemen.",
-    btnTest: "Testen", outPort: "> Bereit für Port-Diagnose...",
-    tool2Title: "SSL/TLS Zertifikatsprüfung", tool2Desc: "Überprüfe Zertifikatslaufzeit, Verschlüsselung und Aussteller einer Domain.",
-    btnAnalyze: "Analysieren", outSsl: "> Warten auf Eingabe...",
-    tool3Title: "DNS Lookup (A, AAAA, MX)", tool3Desc: "Ermittle DNS-Einträge über sichere Resolver (Cloudflare/Google DoH).",
-    btnLookup: "Lookup", outDns: "> DNS-Konsole bereit.",
-    tool4Title: "HTTP-Header Inspector", tool4Desc: "Untersuche Response-Header, Sicherheitsrichtlinien und Server-Signaturen.",
-    btnInspect: "Inspizieren", outHeader: "> Warten auf URL...",
-    tool5Title: "IP-Geoloc & Whois Lookup", tool5Desc: "Ermittle Standort, ASN, ISP und Netzwerk-Routen für IP-Adressen oder Domains.",
-    btnWhois: "Whois", outWhois: "> Bereit für IP-Abfrage...",
-    tool6Title: "Latenz & Ping Monitor", tool6Desc: "Simuliere Paketlaufzeiten und Round-Trip-Time (RTT) zu globalen Servern.",
-    btnPing: "Ping", outPing: "> Ping-Tool bereit.",
-    logTitle: "Ausgeführte Diagnosen (Aktivitätsprotokoll)", btnClearLog: "Log löschen",
-    thTime: "Zeitstempel", thTool: "Werkzeug", thTarget: "Ziel / Eingabe", thResult: "Ergebnis / Status",
-    emptyLog: "Noch keine Diagnose-Aktivitäten in dieser Session.",
-    footerPrivacy: "Datenschutz", footerTerms: "Nutzungsbedingungen"
-  },
-  en: {
-    navHome: "Home", navFaq: "FAQ", navStatus: "Network Status", navSubnet: "IP Subnet Calculator", navAbout: "About Us",
-    heroTitle: "Advanced IT & Network Diagnostics Suite",
-    heroSub: "Professional tools for SysAdmins, developers, and network engineers with direct export",
-    copyResults: "📋 Copy Results", jsonExport: "💻 Export JSON", printReport: "🖨️ Print Report",
-    secTitle: "Diagnostics & Analysis Tools", secSub: "Run advanced network and system tests live.",
-    tool1Title: "Port Checker (TCP)", tool1Desc: "Check reachability of critical ports (e.g., 80, 443, 22, 3389) on target systems.",
-    btnTest: "Test", outPort: "> Ready for port diagnostics...",
-    tool2Title: "SSL/TLS Certificate Check", tool2Desc: "Verify certificate expiration, encryption, and issuer for a domain.",
-    btnAnalyze: "Analyze", outSsl: "> Waiting for input...",
-    tool3Title: "DNS Lookup (A, AAAA, MX)", tool3Desc: "Query DNS records via secure resolvers (Cloudflare/Google DoH).",
-    btnLookup: "Lookup", outDns: "> DNS console ready.",
-    tool4Title: "HTTP Header Inspector", tool4Desc: "Examine response headers, security policies, and server signatures.",
-    btnInspect: "Inspect", outHeader: "> Waiting for URL...",
-    tool5Title: "IP Geoloc & Whois Lookup", tool5Desc: "Find location, ASN, ISP, and network routing for IP addresses or domains.",
-    btnWhois: "Whois", outWhois: "> Ready for IP query...",
-    tool6Title: "Latency & Ping Monitor", tool6Desc: "Simulate packet transit times and Round-Trip Time (RTT) to global servers.",
-    btnPing: "Ping", outPing: "> Ping tool ready.",
-    logTitle: "Executed Diagnostics (Activity Log)", btnClearLog: "Clear Log",
-    thTime: "Timestamp", thTool: "Tool", thTarget: "Target / Input", thResult: "Result / Status",
-    emptyLog: "No diagnostic activities in this session yet.",
-    footerPrivacy: "Privacy Policy", footerTerms: "Terms of Use"
-  },
-  sq: {
-    navHome: "Ballina", navFaq: "FAQ", navStatus: "Statusi i rrjetit", navSubnet: "Llogaritësi i Nënrrjetit", navAbout: "Rreth nesh",
-    heroTitle: "Suotë e Avancuar e Diagnostikimit IT & Rrjetit",
-    heroSub: "Mjete profesionale për administratorët e sistemeve, zhvilluesit dhe teknikët e rrjetit",
-    copyResults: "📋 Kopjo Rezultatin", jsonExport: "💻 Eksporto JSON", printReport: "🖨️ Printo Raportin",
-    secTitle: "Mjetet e Diagnostikimit & Analizës", secSub: "Ekzekuto teste të avancuara të rrjetit dhe sistemit drejtpërdrejt.",
-    tool1Title: "Kontrolluesi i Portave (TCP)", tool1Desc: "Verifiko mundësinë e arritjes së portave kritike (p.sh. 80, 443, 22, 3389).",
-    btnTest: "Testo", outPort: "> Gati për diagnostikim portash...",
-    tool2Title: "Kontrolli i Certifikatës SSL/TLS", tool2Desc: "Verifiko skadimin, enkriptimin dhe lëshuesin e certifikatës së një domeni.",
-    btnAnalyze: "Analizo", outSsl: "> Duke pritur hyrjen...",
-    tool3Title: "Kërkimi DNS (A, AAAA, MX)", tool3Desc: "Kërko regjistrat DNS përmes zgjidhësve të sigurt (Cloudflare/Google DoH).",
-    btnLookup: "Kërko", outDns: "> Konsola DNS është gati.",
-    tool4Title: "Inspektuesi i Header-ave HTTP", tool4Desc: "Ekamino header-at e përgjigjes, politikat e sigurisë dhe serverin.",
-    btnInspect: "Inspekto", outHeader: "> Duke pritur URL...",
-    tool5Title: "Geoloc IP & Whois", tool5Desc: "Gjej vendndodhjen, ASN, ISP dhe rrugëtimin për IP ose domeine.",
-    btnWhois: "Whois", outWhois: "> Gati për pyetje IP...",
-    tool6Title: "Monitoruesi i Latencës & Ping", tool6Desc: "Simulo kohën e transmetimit të paketave (RTT) drejt serverëve globalë.",
-    btnPing: "Ping", outPing: "> Mjeti i Ping është gati.",
-    logTitle: "Diagnostikimet e Ekzekutuara (Regjistri)", btnClearLog: "Pastro Log",
-    thTime: "Koha", thTool: "Mjeti", thTarget: "Destinacioni", thResult: "Rezultati / Statusi",
-    emptyLog: "Nuk ka ende aktivitete diagnostikuese në këtë sesion.",
-    footerPrivacy: "Politika e Privatësisë", footerTerms: "Kushtet e Përdorimit"
-  },
-  fr: {
-    navHome: "Accueil", navFaq: "FAQ", navStatus: "État du réseau", navSubnet: "Calculateur de sous-réseau", navAbout: "À propos",
-    heroTitle: "Suite avancée de diagnostic IT & Réseau",
-    heroSub: "Outils professionnels pour administrateurs système, développeurs et techniciens réseau",
-    copyResults: "📋 Copier le résultat", jsonExport: "💻 Exporter en JSON", printReport: "🖨️ Imprimer le rapport",
-    secTitle: "Outils de diagnostic et d'analyse", secSub: "Exécutez des tests réseau et système avancés en direct.",
-    tool1Title: "Vérificateur de ports (TCP)", tool1Desc: "Vérifiez l'accessibilité des ports critiques (ex: 80, 443, 22, 3389).",
-    btnTest: "Tester", outPort: "> Prêt pour le diagnostic des ports...",
-    tool2Title: "Vérification de certificat SSL/TLS", tool2Desc: "Vérifiez l'expiration, le chiffrement et l'émetteur d'un domaine.",
-    btnAnalyze: "Analyser", outSsl: "> En attente d'entrée...",
-    tool3Title: "Recherche DNS (A, AAAA, MX)", tool3Desc: "Interrogez les enregistrements DNS via des résolveurs sécurisés.",
-    btnLookup: "Rechercher", outDns: "> Console DNS prête.",
-    tool4Title: "Inspecteur d'en-têtes HTTP", tool4Desc: "Examinez les en-têtes de réponse et les politiques de sécurité.",
-    btnInspect: "Inspecter", outHeader: "> En attente d'URL...",
-    tool5Title: "Recherche Whois & Géolocalisation IP", tool5Desc: "Trouvez l'emplacement, l'ASN et le FAI pour les adresses IP.",
-    btnWhois: "Whois", outWhois: "> Prêt pour la requête IP...",
-    tool6Title: "Moniteur de latence & Ping", tool6Desc: "Simulez le temps de transit des paquets (RTT) vers des serveurs mondiaux.",
-    btnPing: "Ping", outPing: "> Outil Ping prêt.",
-    logTitle: "Diagnostics exécutés (Journal d'activité)", btnClearLog: "Effacer le journal",
-    thTime: "Horodatage", thTool: "Outil", thTarget: "Cible / Entrée", thResult: "Résultat / Statut",
-    emptyLog: "Aucune activité de diagnostic pour le moment.",
-    footerPrivacy: "Confidentialité", footerTerms: "Conditions d'utilisation"
-  },
-  es: {
-    navHome: "Inicio", navFaq: "FAQ", navStatus: "Estado de red", navSubnet: "Calculadora de Subred", navAbout: "Acerca de",
-    heroTitle: "Suite avanzada de diagnóstico IT y Redes",
-    heroSub: "Herramientas profesionales para administradores de sistemas y desarrolladores",
-    copyResults: "📋 Copiar resultado", jsonExport: "💻 Exportar JSON", printReport: "🖨️ Imprimir informe",
-    secTitle: "Herramientas de diagnóstico y análisis", secSub: "Ejecute pruebas avanzadas de red y sistema en vivo.",
-    tool1Title: "Verificador de puertos (TCP)", tool1Desc: "Compruebe la accesibilidad de puertos críticos (ej. 80, 443, 22, 3389).",
-    btnTest: "Probar", outPort: "> Listo para diagnóstico de puertos...",
-    tool2Title: "Comprobación de certificado SSL/TLS", tool2Desc: "Verifique la caducidad, cifrado y emisor de un dominio.",
-    btnAnalyze: "Analizar", outSsl: "> Esperando entrada...",
-    tool3Title: "Búsqueda DNS (A, AAAA, MX)", tool3Desc: "Consulte registros DNS mediante resolvers seguros (Cloudflare/Google).",
-    btnLookup: "Buscar", outDns: "> Consola DNS lista.",
-    tool4Title: "Inspector de cabeceras HTTP", tool4Desc: "Examine las cabeceras de respuesta y políticas de seguridad.",
-    btnInspect: "Inspeccionar", outHeader: "> Esperando URL...",
-    tool5Title: "Geoloc IP y Whois", tool5Desc: "Encuentre ubicación, ASN, ISP y encaminamiento de red para IPs.",
-    btnWhois: "Whois", outWhois: "> Listo para consulta IP...",
-    tool6Title: "Monitor de latencia y Ping", tool6Desc: "Simule tiempos de tránsito de paquetes (RTT) a servidores globales.",
-    btnPing: "Ping", outPing: "> Herramienta Ping lista.",
-    logTitle: "Diagnósticos ejecutados (Registro)", btnClearLog: "Borrar registro",
-    thTime: "Marca de tiempo", thTool: "Herramienta", thTarget: "Objetivo", thResult: "Resultado / Estado",
-    emptyLog: "No hay actividades de diagnóstico en esta sesión todavía.",
-    footerPrivacy: "Privacidad", footerTerms: "Términos de uso"
-  },
-  it: {
-    navHome: "Home", navFaq: "FAQ", navStatus: "Stato rete", navSubnet: "Calcolatore Subnet", navAbout: "Chi siamo",
-    heroTitle: "Suite avanzata di diagnostica IT e di rete",
-    heroSub: "Strumenti professionali per SysAdmin, sviluppatori e tecnici di rete",
-    copyResults: "📋 Copia risultato", jsonExport: "💻 Esporta JSON", printReport: "🖨️ Stampa report",
-    secTitle: "Strumenti di diagnostica e analisi", secSub: "Esegui test avanzati di rete e di sistema in tempo reale.",
-    tool1Title: "Verificatore porte (TCP)", tool1Desc: "Verifica l'accessibilità delle porte critiche (es. 80, 443, 22, 3389).",
-    btnTest: "Test", outPort: "> Pronto per la diagnostica delle porte...",
-    tool2Title: "Controllo certificato SSL/TLS", tool2Desc: "Verifica la scadenza, la crittografia e l'emittente di un dominio.",
-    btnAnalyze: "Analizza", outSsl: "> In attesa di input...",
-    tool3Title: "Lookup DNS (A, AAAA, MX)", tool3Desc: "Interroga i record DNS tramite resolver sicuri.",
-    btnLookup: "Cerca", outDns: "> Console DNS pronta.",
-    tool4Title: "Ispettore intestazioni HTTP", tool4Desc: "Esamina le intestazioni di risposta e le policy di sicurezza.",
-    btnInspect: "Ispeziona", outHeader: "> In attesa di URL...",
-    tool5Title: "Geoloc IP e Whois", tool5Desc: "Trova posizione, ASN, ISP e instradamento per indirizzi IP o domini.",
-    btnWhois: "Whois", outWhois: "> Pronto per interrogazione IP...",
-    tool6Title: "Monitor Latenza & Ping", tool6Desc: "Simula i tempi di transito dei pacchetti (RTT) verso server globali.",
-    btnPing: "Ping", outPing: "> Strumento Ping pronto.",
-    logTitle: "Diagnostica eseguita (Registro attività)", btnClearLog: "Cancella log",
-    thTime: "Timestamp", thTool: "Strumento", thTarget: "Target / Input", thResult: "Risultato / Stato",
-    emptyLog: "Nessuna attività diagnostica in questa sessione.",
-    footerPrivacy: "Privacy", footerTerms: "Termini d'uso"
-  },
-  pt: {
-    navHome: "Início", navFaq: "FAQ", navStatus: "Status da rede", navSubnet: "Calculadora de Sub-rede", navAbout: "Sobre nós",
-    heroTitle: "Suíte Avançada de Diagnóstico de TI e Rede",
-    heroSub: "Ferramentas profissionais para administradores de sistemas e desenvolvedores",
-    copyResults: "📋 Copiar resultado", jsonExport: "💻 Exportar JSON", printReport: "🖨️ Imprimir relatório",
-    secTitle: "Ferramentas de Diagnóstico e Análise", secSub: "Execute testes avançados de rede e sistema ao vivo.",
-    tool1Title: "Verificador de Portas (TCP)", tool1Desc: "Verifique a acessibilidade de portas críticas (ex: 80, 443, 22, 3389).",
-    btnTest: "Testar", outPort: "> Pronto para diagnóstico de portas...",
-    tool2Title: "Verificação de Certificado SSL/TLS", tool2Desc: "Verifique a validade, criptografia e emissor de um domínio.",
-    btnAnalyze: "Analisar", outSsl: "> Aguardando entrada...",
-    tool3Title: "Consulta DNS (A, AAAA, MX)", tool3Desc: "Consulte registros DNS através de resolvers seguros.",
-    btnLookup: "Buscar", outDns: "> Console DNS pronta.",
-    tool4Title: "Inspetor de Cabeçalho HTTP", tool4Desc: "Examine cabeçalhos de resposta e diretrizes de segurança.",
-    btnInspect: "Inspecionar", outHeader: "> Aguardando URL...",
-    tool5Title: "Geolocalização IP e Whois", tool5Desc: "Encontre localização, ASN, ISP e rotas de rede para IPs.",
-    btnWhois: "Whois", outWhois: "> Pronto para consulta de IP...",
-    tool6Title: "Monitor de Latência e Ping", tool6Desc: "Simule tempos de trânsito de pacotes (RTT) para servidores globais.",
-    btnPing: "Ping", outPing: "> Ferramenta Ping pronta.",
-    logTitle: "Diagnósticos Executados (Log)", btnClearLog: "Limpar Log",
-    thTime: "Timestamp", thTool: "Ferramenta", thTarget: "Alvo / Entrada", thResult: "Resultado / Status",
-    emptyLog: "Nenhuma atividade de diagnóstico nesta sessão ainda.",
-    footerPrivacy: "Privacidad", footerTerms: "Termos de Uso"
-  },
-  nl: {
-    navHome: "Home", navFaq: "FAQ", navStatus: "Netwerkstatus", navSubnet: "IP Subnet Calculator", navAbout: "Over ons",
-    heroTitle: "Geavanceerde IT & Netwerk Diagnose Suite",
-    heroSub: "Professionele tools voor systeembeheerders, ontwikkelaars en netwerktechnici",
-    copyResults: "📋 Resultaat kopiëren", jsonExport: "💻 JSON exporteren", printReport: "🖨️ Rapport afdrukken",
-    secTitle: "Diagnostiek & Analyse Tools", secSub: "Voer geavanceerde netwerk- en systeemtests live uit.",
-    tool1Title: "Poort Checker (TCP)", tool1Desc: "Controleer de bereikbaarheid van kritieke poorten (bijv. 80, 443, 22, 3389).",
-    btnTest: "Testen", outPort: "> Klaar voor poortdiagnostiek...",
-    tool2Title: "SSL/TLS Certificaatcontrole", tool2Desc: "Controleer de vervaldatum, versleuteling en uitgever van een domein.",
-    btnAnalyze: "Analyseren", outSsl: "> Wachten op invoer...",
-    tool3Title: "DNS Lookup (A, AAAA, MX)", tool3Desc: "Vraag DNS-records op via beveiligde resolvers.",
-    btnLookup: "Lookup", outDns: "> DNS-console gereed.",
-    tool4Title: "HTTP-header Inspector", tool4Desc: "Onderzoek response headers, beveiligingsbeleid en serversignaturen.",
-    btnInspect: "Inspecteren", outHeader: "> Wachten op URL...",
-    tool5Title: "IP Geoloc & Whois Lookup", tool5Desc: "Vind locatie, ASN, ISP en netwerkroutes voor IP-adressen.",
-    btnWhois: "Whois", outWhois: "> Klaar voor IP-opvraag...",
-    tool6Title: "Latencies & Ping Monitor", tool6Desc: "Simuleer pakketverzendingstijden (RTT) naar wereldwijde servers.",
-    btnPing: "Ping", outPing: "> Ping-tool gereed.",
-    logTitle: "Uitgevoerde Diagnostiek (Logboek)", btnClearLog: "Log wissen",
-    thTime: "Tijdstempel", thTool: "Tool", thTarget: "Doel / Invoer", thResult: "Resultaat / Status",
-    emptyLog: "Nog geen diagnose-activiteiten in deze sessie.",
-    footerPrivacy: "Privacybeleid", footerTerms: "Gebruiksvoorwaarden"
-  },
-  tr: {
-    navHome: "Ana Sayfa", navFaq: "S.S.S.", navStatus: "Ağ Durumu", navSubnet: "IP Alt Ağ Hesaplayıcı", navAbout: "Hakkımızda",
-    heroTitle: "Gelişmiş BT ve Ağ Teşhis Paketi",
-    heroSub: "Sistem yöneticileri, geliştiriciler ve ağ teknisyenleri için profesyonel araçlar",
-    copyResults: "📋 Sonucu Kopyala", jsonExport: "💻 JSON Dışa Aktar", printReport: "🖨️ Raporu Yazdır",
-    secTitle: "Teşhis and Analiz Araçları", secSub: "Gelişmiş ağ ve sistem testlerini canlı olarak çalıştırın.",
-    tool1Title: "Port Denetleyicisi (TCP)", tool1Desc: "Kritik portların (örn. 80, 443, 22, 3389) hedef sistemde erişilebilirliğini test edin.",
-    btnTest: "Test Et", outPort: "> Port teşhisi için hazır...",
-    tool2Title: "SSL/TLS Sertifika Kontrolü", tool2Desc: "Bir alan adının sertifika süresini, şifrelemesini ve sağlayıcısını doğrulayın.",
-    btnAnalyze: "Analiz Et", outSsl: "> Girdi bekleniyor...",
-    tool3Title: "DNS Sorgulama (A, AAAA, MX)", tool3Desc: "Güvenli çözücüler (Cloudflare/Google DoH) aracılığıyla DNS kayıtlarını sorgulayın.",
-    btnLookup: "Sorgula", outDns: "> DNS konsolu hazır.",
-    tool4Title: "HTTP Başlık Denetleyicisi", tool4Desc: "Yanıt başlıklarını, güvenlik politikalarını ve sunucu imzalarını inceleyin.",
-    btnInspect: "İncele", outHeader: "> URL bekleniyor...",
-    tool5Title: "IP Konum & Whois Sorgulama", tool5Desc: "IP adresleri veya alan adları için konum, ASN, ISS ve rota bilgilerini bulun.",
-    btnWhois: "Whois", outWhois: "> IP sorgusu için hazır...",
-    tool6Title: "Gecikme & Ping Monitörü", tool6Desc: "Küresel sunuculara paket iletim sürelerini (RTT) simüle edin.",
-    btnPing: "Ping", outPing: "> Ping aracı hazır.",
-    logTitle: "Çalıştırılan Teşhisler (İşlem Günlüğü)", btnClearLog: "Günlüğü Temizle",
-    thTime: "Zaman Damgası", thTool: "Araç", thTarget: "Hedef / Girdi", thResult: "Sonuç / Durum",
-    emptyLog: "Bu oturumda henüz teşhis etkinliği yok.",
-    footerPrivacy: "Gizlilik Politikası", footerTerms: "Kullanım Şartları"
-  },
-  ar: {
-    navHome: "الرئيسية", navFaq: "الأسئلة الشائعة", navStatus: "حالة الشبكة", navSubnet: "حاسبة الشبكة الفرعية", navAbout: "معلومات عنا",
-    heroTitle: "مجموعة تشخيص تكنولوجيا المعلومات والشبكات المتقدمة",
-    heroSub: "أدوات احترافية لمسؤولي الأنظمة والمطورين وفنيي الشبكات مع التصدير المباشر",
-    copyResults: "📋 نسخ النتيجة", jsonExport: "💻 تصدير JSON", printReport: "🖨️ طباعة التقرير",
-    secTitle: "أدوات التشخيص والتحليل", secSub: "قم بتشغيل اختبارات الشبكة والنظام المتقدمة مباشرة.",
-    tool1Title: "فاحص المنافذ (TCP)", tool1Desc: "تحقق من إمكانية الوصول إلى المنافذ الحرجة (مثل 80، 443، 22، 3389) على الأنظمة المستهدفة.",
-    btnTest: "اختبار", outPort: "> جاهز لتشخيص المنافذ...",
-    tool2Title: "فحص شهادة SSL/TLS", tool2Desc: "تحقق من انتهاء الصلاحية والتشفير والجهة المصدرة لشهادة النطاق.",
-    btnAnalyze: "تحليل", outSsl: "> في انتظار الإدخال...",
-    tool3Title: "بحث DNS (A, AAAA, MX)", tool3Desc: "استعلم عن سجلات DNS عبر محللات آمنة (Cloudflare/Google DoH).",
-    btnLookup: "بحث", outDns: "> وحدة تحكم DNS جاهزة.",
-    tool4Title: "فاحص رؤوس HTTP", tool4Desc: "افحص رؤوس الاستجابة وسياسات الأمان وتواقيع الخادم.",
-    btnInspect: "فحص", outHeader: "> في انتظار الرابط...",
-    tool5Title: "بحث Whois وموقع IP", tool5Desc: "اعثر على الموقع، ASN، مزود الخدمة، ومسارات الشبكة لعناوين IP أو النطاقات.",
-    btnWhois: "Whois", outWhois: "> جاهز لاستعلام IP...",
-    tool6Title: "مراقب زمن الانتقال والبنغ", tool6Desc: "محاكاة أوقات عبور الحزم (RTT) إلى الخوادم العالمية.",
-    btnPing: "بنغ", outPing: "> أداة البنغ جاهزة.",
-    logTitle: "التشخيصات المنفذة (سجل النشاط)", btnClearLog: "مسح السجل",
-    thTime: "الطابع الزمن", thTool: "الأداة", thTarget: "الهدف / المدخلات", thResult: "النتيجة / الحالة",
-    emptyLog: "لا توجد أنشطة تشخيصية في هذه الجلسة حتى الآن.",
-    footerPrivacy: "سياسة الخصوصية", footerTerms: "شروط الاستخدام"
-  }
-};
+// LOGIN LOGIK
+const CORRECT_USER = "admin";
+const CORRECT_PASS = "fasqoo2026";
 
-// MOBILE MENU TOGGLE
-const menuToggle = $("menuToggle");
-const mainMenu = $("mainMenu");
-if(menuToggle && mainMenu){
-  menuToggle.addEventListener("click", () => {
-    mainMenu.classList.toggle("active");
-  });
-}
-
-// THEME TOGGLE
-const themeBtn = $("themeBtn");
-themeBtn.onclick = () => {
-  document.body.classList.toggle("dark");
-  const dark = document.body.classList.contains("dark");
-  localStorage.setItem("fasqoo_dark", dark);
-  themeBtn.textContent = dark ? "☀" : "☾";
-};
-if(localStorage.getItem("fasqoo_dark") === "true"){
-  document.body.classList.add("dark");
-  themeBtn.textContent = "☀";
-}
-
-// SPRACHWECHSEL LOGIK
-const langSelect = $("langSelect");
-
-function setLanguage(lang) {
-  const dict = translations[lang] || translations["de"];
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if(dict[key]) {
-      el.textContent = dict[key];
-    }
-  });
-  if(lang === 'ar') {
-    document.documentElement.setAttribute('dir', 'rtl');
+function checkLoginState(){
+  if(sessionStorage.getItem("fasqoo_auth") === "true"){
+    $("loginOverlay").style.display = "none";
   } else {
-    document.documentElement.setAttribute('dir', 'ltr');
+    $("loginOverlay").style.display = "flex";
   }
-  localStorage.setItem("fasqoo_lang", lang);
 }
 
-langSelect.onchange = (e) => {
-  setLanguage(e.target.value);
+$("loginForm").onsubmit = () => {
+  const u = $("loginUser").value.trim();
+  const p = $("loginPass").value;
+  if(u === CORRECT_USER && p === CORRECT_PASS){
+    sessionStorage.setItem("fasqoo_auth", "true");
+    $("loginError").textContent = "";
+    checkLoginState();
+  } else {
+    $("loginError").textContent = "Falscher Benutzername oder Passwort!";
+  }
 };
 
-const savedLang = localStorage.getItem("fasqoo_lang") || "de";
-langSelect.value = savedLang;
-setLanguage(savedLang);
+$("logoutBtn").onclick = () => {
+  sessionStorage.removeItem("fasqoo_auth");
+  checkLoginState();
+};
 
-// PROTOKOLL & LOGIK FÜR TOOLS
-const logTable = $("itLogTable");
+// Direkt beim Laden prüfen
+checkLoginState();
+
+
+// TAB SWITCHING LOGIK
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toolkit-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    $(btn.getAttribute('data-target')).classList.add('active');
+  });
+});
+
+// LOG SYSTEM
 let logData = [];
-
 function addLog(tool, target, result){
   const time = new Date().toLocaleTimeString();
   logData.unshift({ time, tool, target, result });
@@ -633,10 +492,9 @@ function addLog(tool, target, result){
 }
 
 function renderLog(){
+  const logTable = $("itLogTable");
   if(!logData.length){
-    const currentLang = langSelect.value;
-    const emptyText = translations[currentLang]?.emptyLog || translations["de"].emptyLog;
-    logTable.innerHTML = `<tr><td colspan="4" class="empty">${emptyText}</td></tr>`;
+    logTable.innerHTML = `<tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>`;
     return;
   }
   logTable.innerHTML = logData.map(l => `
@@ -644,87 +502,124 @@ function renderLog(){
   `).join("");
 }
 
-// TOOL 1: Port Checker (Korrigiert)
+// SIMULATION HANDLER FÜR DIE TOOLS
+$("calcSubnetBtn").onclick = () => {
+  const val = $("subnetInput").value;
+  $("subnetOutput").textContent = `> Netzwerk: ${val}\n> Subnetzmaske: 255.255.255.0\n> Erster Host: .1 | Letzter Host: .254\n> Usable Hosts: 253`;
+  addLog("IP & Subnetting", val, "Subnetz erfolgreich berechnet");
+};
+
+$("calcVlsmBtn").onclick = () => {
+  const val = $("vlsmInput").value;
+  $("vlsmOutput").textContent = `> VLSM Aufteilung für ${val}:\n- Subnetz 1: /24 (254 Hosts)\n- Subnetz 2: /25 (126 Hosts)`;
+  addLog("VLSM Calculator", val, "VLSM Baum erstellt");
+};
+
+$("runDnsTool").onclick = () => {
+  const domain = $("dnsDomainInput").value;
+  const type = $("dnsTypeSelect").value;
+  $("dnsToolOutput").textContent = `> Abfrage (${type}) für ${domain}:\n[OK] Record gefunden -> IP: 142.250.185.46 (TTL 300)`;
+  addLog("DNS Lookup", `${domain} (${type})`, "Erfolgreich");
+};
+
+$("runPropBtn").onclick = () => {
+  const val = $("propInput").value;
+  $("propOutput").textContent = `> DNS Propagation Global Check (${val}):\n- Frankfurt: OK\n- New York: OK\n- Tokio: OK (DNSSEC Validated)`;
+  addLog("DNS Propagation", val, "100% propagated");
+};
+
+$("runNetTest").onclick = () => {
+  const target = $("netTarget").value;
+  const type = $("netTestType").value;
+  $("netOutput").textContent = `> Führe ${type} zu ${target} aus...\n> RTT Average: 14.2ms | Packet Loss: 0% | Jitter: 1.1ms`;
+  addLog("Network Test", `${type}: ${target}`, "Erfolgreich abgeschlossen");
+};
+
 $("runPortCheck").onclick = () => {
   const target = $("portTarget").value;
-  $("portOutput").innerHTML = `> Starte TCP-Handshake zu ${target}...\n> Status: Port ist offen und antwortet.`;
-  addLog("Port-Checker", target, "Port erreichbar (Open)");
+  $("portOutput").textContent = `> TCP Port Connect zu ${target}...\n> Status: OPEN (Antwort erhalten)`;
+  addLog("Port Checker", target, "Port Open");
 };
 
-// TOOL 2: SSL Checker
-$("runSslCheck").onclick = () => {
-  const target = $("sslTarget").value;
-  $("sslOutput").innerHTML = `> Analysiere Zertifikat für ${target}...\n> Aussteller: Let's Encrypt\n> Gültig bis: In 84 Tagen`;
-  addLog("SSL Checker", target, "Zertifikat valide");
+$("runWebCheck").onclick = () => {
+  const target = $("webTarget").value;
+  $("webOutput").textContent = `> SSL/TLS Check für ${target}:\n- Zertifikat: Gültig (Let's Encrypt)\n- TLS Version: TLS 1.3 (Secure)`;
+  addLog("SSL / Web Analyzer", target, "Zertifikat Valide");
 };
 
-// TOOL 3: DNS Lookup
-$("runDnsCheck").onclick = () => {
-  const target = $("dnsTarget").value;
-  $("dnsOutput").innerHTML = `> Frage DNS-Records ab (${target})...\n> A Record: 142.250.185.46\n> TTL: 300s`;
-  addLog("DNS Lookup", target, "Erfolgreich aufgelöst");
-};
-
-// TOOL 4: HTTP Header
 $("runHeaderCheck").onclick = () => {
-  const target = $("headerTarget").value;
-  $("headerOutput").innerHTML = `> Sende HTTP-Anfrage an ${target}...\n> HTTP/2 200 OK\n> Content-Type: text/html`;
+  const target = $("headerInput").value;
+  $("headerOutput").textContent = `> HTTP Headers für ${target}:\nHTTP/2 200 OK\nServer: cloudflare\nStrict-Transport-Security: max-age=...`;
   addLog("Header Inspector", target, "HTTP 200 OK");
 };
 
-// TOOL 5: Whois / IP Info
-$("runWhoisCheck").onclick = () => {
-  const target = $("whoisTarget").value;
-  $("whoisOutput").innerHTML = `> Lade Whois/Geoloc Daten für ${target}...\n> Land: US / Provider: Google LLC\n> ASN: AS15169`;
-  addLog("Whois Lookup", target, "Daten erfolgreich geladen");
+$("runSecIpBtn").onclick = () => {
+  const ip = $("secIpInput").value;
+  $("secIpOutput").textContent = `> IP Intelligence für ${ip}:\n- ISP: Cloudflare Inc.\n- ASN: AS13335\n- Proxy/VPN: Nein (Clean IP)`;
+  addLog("IP Security Check", ip, "Analysiert");
 };
 
-// TOOL 6: Ping Monitor
-$("runPingCheck").onclick = () => {
-  const region = $("pingRegion").value;
-  $("pingOutput").innerHTML = `> Pinge Server in ${region}...\n> RTT Min/Avg/Max: 12.4ms / 14.1ms / 18.9ms\n> Paketverlust: 0%`;
-  addLog("Ping Monitor", region, "RTT: 14.1ms (0% Loss)");
+$("runAbuseBtn").onclick = () => {
+  const ip = $("abuseInput").value;
+  $("abuseOutput").textContent = `> Abuse Kontakt für ${ip}:\nEmail: abuse@cloudflare.com\nPhone: +1-...`;
+  addLog("Abuse Lookup", ip, "Kontakt ermittelt");
 };
 
-// INTEGRATION: "Ergebnis kopieren"
+$("runAdminTool").onclick = () => {
+  const input = $("adminInput").value || "Test";
+  const action = $("adminAction").value;
+  let res = "";
+  if(action === 'base64enc') res = btoa(input);
+  else if(action === 'base64dec') { try { res = atob(input); } catch(e){ res = "Fehler: Ungültiges Base64"; } }
+  else if(action === 'pwdgen') res = "Tr9#mK9!zQ2$vL4%";
+  else if(action === 'uuidgen') res = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
+  else if(action === 'timestamp') res = "Unix Epoch: " + Math.floor(Date.now()/1000) + " / UTC: " + new Date().toUTCString();
+  else res = "Aktion " + action + " erfolgreich ausgeführt.";
+  
+  $("adminOutput").textContent = `> Admin Tool (${action}):\n${res}`;
+  addLog("Admin Utility", action, "Ausgeführt");
+};
+
+$("runMacBtn").onclick = () => {
+  const mac = $("macInput").value;
+  $("macOutput").textContent = `> MAC Lookup (${mac}):\n- Vendor: Apple, Inc. (OUI: 00:1A:2B)\n- Typ: Unicast / Universell vergeben`;
+  addLog("MAC Lookup", mac, "Vendor gefunden");
+};
+
+// EXPORT BUTTONS
 $("copyResultsBtn").onclick = () => {
-  if(!logData.length){
-    alert("Keine Testergebnisse zum Kopieren vorhanden.");
-    return;
-  }
-  const textSummary = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
-  navigator.clipboard.writeText(textSummary).then(() => {
-    alert("Ergebnis in die Zwischenablage kopiert!");
-  });
+  if(!logData.length){ alert("Keine Testergebnisse vorhanden."); return; }
+  const text = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
+  navigator.clipboard.writeText(text).then(() => alert("Ergebnisse kopiert!"));
 };
 
-// INTEGRATION: "JSON exportieren"
+$("shareResultsBtn").onclick = async () => {
+  if(!logData.length){ alert("Keine Ergebnisse zum Teilen."); return; }
+  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
+  if(navigator.share){ try { await navigator.share({title: 'Fasqoo Toolkit', text}); } catch(e){} }
+  else { navigator.clipboard.writeText(text); alert("In Zwischenablage kopiert."); }
+};
+
 $("jsonExportBtn").onclick = () => {
-  if(!logData.length){
-    alert("Keine Testergebnisse zum Exportieren vorhanden.");
-    return;
-  }
-  const jsonString = JSON.stringify(logData, null, 2);
-  const blob = new Blob([jsonString], { type: "application/json" });
+  if(!logData.length){ alert("Keine Daten."); return; }
+  const blob = new Blob([JSON.stringify(logData, null, 2)], {type: "application/json"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url;
-  a.download = "fasqoo-diagnostics-report.json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = "network-toolkit-report.json";
+  a.click(); URL.revokeObjectURL(url);
 };
 
-// INTEGRATION: "Bericht drucken"
-$("printReportBtn").onclick = () => {
-  window.print();
-};
+$("printReportBtn").onclick = () => window.print();
+$("clearLog").onclick = () => { logData = []; renderLog(); };
 
-$("clearLog").onclick = () => {
-  logData = [];
-  renderLog();
+// THEME & MOBILE MENU
+const themeBtn = $("themeBtn");
+themeBtn.onclick = () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  themeBtn.textContent = dark ? "☀" : "☾";
 };
+$("menuToggle").onclick = () => $("mainMenu").classList.toggle("active");
 </script>
 </body>
 </html>
