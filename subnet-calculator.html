@@ -24,20 +24,6 @@ button,select,input,textarea{font:inherit;}
 button{cursor:pointer;}
 .wrap{width:min(1280px,calc(100% - 32px));margin:auto;}
 
-/* LOGIN OVERLAY */
-#loginOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
-.login-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;width:100%;max-width:400px;box-shadow:var(--shadow);text-align:center;}
-.login-card .brandmark{margin:0 auto 16px;}
-.login-card h2{margin:0 0 8px;font-size:22px;}
-.login-card p{color:var(--muted);font-size:13px;margin:0 0 24px;}
-.login-form{display:flex;flex-direction:column;gap:14px;text-align:left;}
-.login-form label{font-size:12px;font-weight:500;color:var(--muted);}
-.login-form input{border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;outline:none;}
-.login-form input:focus{border-color:var(--orange);background:var(--card);}
-.login-btn{background:var(--orange);color:#fff;border:0;border-radius:8px;padding:12px;font-size:14px;font-weight:600;margin-top:10px;transition:.2s;}
-.login-btn:hover{opacity:.9;}
-.login-error{color:var(--red);font-size:12px;margin-top:10px;text-align:center;min-height:16px;}
-
 header{
   height:72px;
   background:var(--card);
@@ -56,8 +42,8 @@ header{
 .brandname{font-size:22px;letter-spacing:-.5px;font-weight:600;}
 
 .main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;}
-.main-menu a, .main-menu button.link-btn{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;background:none;border:0;padding:0;cursor:pointer;transition:color .2s ease;}
-.main-menu a:hover, .main-menu button.link-btn:hover{color:var(--orange);}
+.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;transition:color .2s ease;}
+.main-menu a:hover{color:var(--orange);}
 .menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
 .menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;outline:none;cursor:pointer;}
 .theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;padding:0;transition:.2s ease;}
@@ -114,7 +100,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
 
 .dark{--bg:#030712;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;--line:#1e293b;--soft:#111827;}
 .dark header,.dark footer{background:#0f172a;}
-.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea,.dark .login-card input{background:#111827;color:var(--text);border-color:var(--line);}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea{background:#111827;color:var(--text);border-color:var(--line);}
 .dark th{background:#111827;}
 
 @media(max-width:900px){.it-tools-grid{grid-template-columns:1fr;}}
@@ -126,35 +112,13 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
   .hero h1{font-size:28px;}
 }
 @media print {
-  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle, #loginOverlay { display: none !important; }
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
   body { background: #fff; color: #000; }
   .card, .history { border: none; box-shadow: none; }
 }
 </style>
 </head>
 <body>
-
-<!-- LOGIN OVERLAY -->
-<div id="loginOverlay">
-  <div class="login-card">
-    <div class="brandmark">⌁</div>
-    <h2>Fasqoo Login</h2>
-    <p>Bitte melden Sie sich an, um das Toolkit zu nutzen.</p>
-    <form class="login-form" id="loginForm" onsubmit="return false;">
-      <div>
-        <label for="loginUser">Benutzername</label>
-        <input type="text" id="loginUser" placeholder="admin" required autocomplete="username">
-      </div>
-      <div>
-        <label for="loginPass">Passwort</label>
-        <input type="password" id="loginPass" placeholder="••••••••" required autocomplete="current-password">
-      </div>
-      <button type="submit" class="login-btn" id="submitLogin">Anmelden</button>
-      <div class="login-error" id="loginError"></div>
-    </form>
-    <div style="margin-top:15px; font-size:11px; color:var(--muted);">Standard-Zugang: <b>admin</b> / <b>fasqoo2026</b></div>
-  </div>
-</div>
 
 <header>
   <div class="wrap nav">
@@ -169,7 +133,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
       <a href="index.html">Home</a>
       <a href="network-status.html">Netzwerk-Status</a>
       <a href="subnet-calculator.html">Subnet Calculator</a>
-      <button class="link-btn" id="logoutBtn">Abmelden</button>
       <div class="menu-extra">
         <select id="langSelect" aria-label="Language">
           <option value="de">Deutsch</option>
@@ -440,39 +403,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
 <script>
 const $ = id => document.getElementById(id);
 
-// LOGIN LOGIK
-const CORRECT_USER = "admin";
-const CORRECT_PASS = "fasqoo2026";
-
-function checkLoginState(){
-  if(sessionStorage.getItem("fasqoo_auth") === "true"){
-    $("loginOverlay").style.display = "none";
-  } else {
-    $("loginOverlay").style.display = "flex";
-  }
-}
-
-$("loginForm").onsubmit = () => {
-  const u = $("loginUser").value.trim();
-  const p = $("loginPass").value;
-  if(u === CORRECT_USER && p === CORRECT_PASS){
-    sessionStorage.setItem("fasqoo_auth", "true");
-    $("loginError").textContent = "";
-    checkLoginState();
-  } else {
-    $("loginError").textContent = "Falscher Benutzername oder Passwort!";
-  }
-};
-
-$("logoutBtn").onclick = () => {
-  sessionStorage.removeItem("fasqoo_auth");
-  checkLoginState();
-};
-
-// Direkt beim Laden prüfen
-checkLoginState();
-
-
 // TAB SWITCHING LOGIK
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -502,7 +432,7 @@ function renderLog(){
   `).join("");
 }
 
-// SIMULATION HANDLER FÜR DIE TOOLS
+// SIMULATION HANDLER FÜR DIE NEUEN TOOLS
 $("calcSubnetBtn").onclick = () => {
   const val = $("subnetInput").value;
   $("subnetOutput").textContent = `> Netzwerk: ${val}\n> Subnetzmaske: 255.255.255.0\n> Erster Host: .1 | Letzter Host: .254\n> Usable Hosts: 253`;
@@ -595,7 +525,7 @@ $("copyResultsBtn").onclick = () => {
 
 $("shareResultsBtn").onclick = async () => {
   if(!logData.length){ alert("Keine Ergebnisse zum Teilen."); return; }
-  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
+  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
   if(navigator.share){ try { await navigator.share({title: 'Fasqoo Toolkit', text}); } catch(e){} }
   else { navigator.clipboard.writeText(text); alert("In Zwischenablage kopiert."); }
 };
