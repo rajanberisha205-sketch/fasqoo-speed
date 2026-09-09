@@ -209,10 +209,11 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
   }
   .menu-extra{
     width:100%;
-    justify-content:space-between;
+    justify-content:flex-start;
     margin-top:10px;
     padding-top:10px;
     border-top:1px solid var(--line);
+    gap: 12px;
   }
 }
 
@@ -1144,7 +1145,7 @@ nl:{
   cld85:"Grote overdrachten: Zeer snel", cld65:"Snelle overdracht", cld40:"Matige snelheid", cld0:"Downloads traag",
   soc85:"Uitstekend", soc65:"Zeer goed", soc40:"Goed", soc0:"Beperkt",
   web85:"Zeer snel laden", web65:"Snel laden", web40:"Normaal laden", web0:"Trage paginaopbouw",
-  alertRun:"Voer eerst een snelheidstest uit.", unavail:"Niet beschikbaar", notDetected:"Niet gedetecteerd"
+  alertRun:"Voer eerst een snelheidstest uit.", unavail:"Niet beschikbaar", notDetected:"Not gedetecteerd"
 },
 tr:{
   navHome:"Anasayfa", navFaq:"SSS", navStatus:"Ağ Durumu", navAbout:"Hakkımızda",
@@ -1236,14 +1237,10 @@ function applyLanguage(lang){
   $("heroTitle").textContent = t.title;
   $("heroSub").textContent = t.sub;
   $("serverLabel").textContent = t.server;
-
-  if(!running){
-    $("status").textContent = t.ready;
-    $("start").textContent = t.start;
-  }
-
+  $("status").textContent = t.ready;
+  $("start").textContent = t.start;
   $("chartLiveLabel").textContent = t.chartLive;
-  if(!running) $("chartState").textContent = t.chartWait;
+  $("chartState").textContent = t.chartWait;
 
   $("lblIp").textContent = t.lblIp;
   $("lblIsp").textContent = t.lblIsp;
@@ -1251,7 +1248,9 @@ function applyLanguage(lang){
   $("lblAsn").textContent = t.lblAsn;
 
   $("qualityTitle").textContent = t.qTitle;
-  if(!last.id) $("qtext").textContent = t.qDefault;
+  if($("score").textContent === "—") {
+    $("qtext").textContent = t.qDefault;
+  }
 
   $("appsTitle").textContent = t.appsTitle;
   $("appsSub").textContent = t.appsSub;
@@ -1273,11 +1272,11 @@ function applyLanguage(lang){
   $("appWebTitle").textContent = t.appWTitle;
   $("appWebDesc").textContent = t.appWDesc;
 
-  if(!running && !last.id){
-    ["gaming","stream","fourk","call","office","cloud","social","web"].forEach(id => {
-      $(id+"Text").textContent = t.appRunTest;
-    });
-  }
+  document.querySelectorAll(".app-score span").forEach(el => {
+    if(el.textContent.includes("Test") || el.textContent.includes("Run") || el.textContent.includes("Kryej") || el.textContent.includes("Esegui") || el.textContent.includes("Lancer") || el.textContent.includes("Ejecutar") || el.textContent.includes("Executar") || el.textContent.includes("Test uitvoeren") || el.textContent.includes("çalıştır")){
+      el.textContent = t.appRunTest;
+    }
+  });
 
   $("diagnosticsTitle").textContent = t.diagTitle;
   $("diagLatTitle").textContent = t.diagLatT;
@@ -1298,7 +1297,6 @@ function applyLanguage(lang){
   $("historyTitle").textContent = t.histTitle;
   $("recentTitle").textContent = t.histRecent;
   $("clear").textContent = t.histClear;
-
   $("thDate").textContent = t.thDate;
   $("thDown").textContent = t.thDown;
   $("thUp").textContent = t.thUp;
@@ -1314,20 +1312,22 @@ function applyLanguage(lang){
   $("ftSlavery").textContent = t.ftSlavery;
 
   historyLoad();
-  netinfo();
 }
 
-const langSelect = $("lang");
-if(langSelect){
-  langSelect.addEventListener("change", (e) => {
-    applyLanguage(e.target.value);
-  });
+$("lang").addEventListener("change", (e) => {
+  applyLanguage(e.target.value);
+  localStorage.setItem("fasqoo_lang", e.target.value);
+});
+
+const savedLang = localStorage.getItem("fasqoo_lang");
+if(savedLang && translations[savedLang]){
+  $("lang").value = savedLang;
+  applyLanguage(savedLang);
 }
 
-// INITIAL STARTUP
 resizeCanvas();
-historyLoad();
 netinfo();
+historyLoad();
 </script>
 </body>
 </html>
