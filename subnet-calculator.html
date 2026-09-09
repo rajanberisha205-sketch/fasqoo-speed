@@ -89,12 +89,15 @@ main{padding:40px 0 80px;}
 .console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:140px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;}
 
 .history{border:1px solid var(--line);background:var(--card);border-radius:10px;overflow:hidden;}
-.hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+.hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .hhead h2{margin:0;font-size:16px;font-weight:600;}
-table{width:100%;border-collapse:collapse;text-align:left;}
-th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;}
+
+/* Responsive Tabellen-Container für Handys */
+.table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;text-align:left;min-width:500px;}
+th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;}
 th{font-weight:500;color:var(--muted);background:var(--soft);}
-.empty{text-align:center;color:var(--muted);padding:30px;}
+.empty{text-align:center;color:var(--muted);padding:30px;white-space:normal;}
 
 footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px;}
 .foot{display:flex;justify-content:space-between;align-items:center;}
@@ -125,6 +128,8 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
   .main-menu.active{display:flex;}
   .menu-extra{width:100%;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
   .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
+  .card{padding:20px;}
 }
 
 @media print {
@@ -180,6 +185,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
 
     <div class="tool-actions">
       <button class="action-btn" id="copyResultsBtn" data-i18n="copyResults">📋 Ergebnis kopieren</button>
+      <button class="action-btn" id="jsonExportBtn" data-i18n="jsonExport">💻 JSON exportieren</button>
       <button class="action-btn" id="printReportBtn" data-i18n="printReport">🖨️ Bericht drucken</button>
     </div>
 
@@ -299,19 +305,21 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;co
           <h2 data-i18n="logTitle">Ausgeführte Diagnosen (Aktivitätsprotokoll)</h2>
           <button class="action-btn" id="clearLog" data-i18n="btnClearLog">Log löschen</button>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th data-i18n="thTime">Zeitstempel</th>
-              <th data-i18n="thTool">Werkzeug</th>
-              <th data-i18n="thTarget">Ziel / Eingabe</th>
-              <th data-i18n="thResult">Ergebnis / Status</th>
-            </tr>
-          </thead>
-          <tbody id="itLogTable">
-            <tr><td colspan="4" class="empty" data-i18n="emptyLog">Noch keine Diagnose-Aktivitäten in dieser Session.</td></tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="thTime">Zeitstempel</th>
+                <th data-i18n="thTool">Werkzeug</th>
+                <th data-i18n="thTarget">Ziel / Eingabe</th>
+                <th data-i18n="thResult">Ergebnis / Status</th>
+              </tr>
+            </thead>
+            <tbody id="itLogTable">
+              <tr><td colspan="4" class="empty" data-i18n="emptyLog">Noch keine Diagnose-Aktivitäten in dieser Session.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -337,7 +345,7 @@ const translations = {
     navHome: "Home", navFaq: "FAQ", navStatus: "Netzwerk-Status", navSubnet: "IP Subnet Calculator", navAbout: "Über uns",
     heroTitle: "Erweiterte IT & Netzwerk-Diagnose Suite",
     heroSub: "Professionelle Werkzeuge für SysAdmins, Entwickler und Netzwerktechniker mit direktem Export",
-    copyResults: "📋 Ergebnis kopieren", printReport: "🖨️ Bericht drucken",
+    copyResults: "📋 Ergebnis kopieren", jsonExport: "💻 JSON exportieren", printReport: "🖨️ Bericht drucken",
     secTitle: "Diagnose & Analyse Werkzeuge", secSub: "Führe erweiterte Netzwerk- und Systemtests live aus.",
     tool1Title: "Port-Checker (TCP)", tool1Desc: "Prüfe die Erreichbarkeit kritischer Ports (z. B. 80, 443, 22, 3389) auf Zielsystemen.",
     btnTest: "Testen", outPort: "> Bereit für Port-Diagnose...",
@@ -360,7 +368,7 @@ const translations = {
     navHome: "Home", navFaq: "FAQ", navStatus: "Network Status", navSubnet: "IP Subnet Calculator", navAbout: "About Us",
     heroTitle: "Advanced IT & Network Diagnostics Suite",
     heroSub: "Professional tools for SysAdmins, developers, and network engineers with direct export",
-    copyResults: "📋 Copy Results", printReport: "🖨️ Print Report",
+    copyResults: "📋 Copy Results", jsonExport: "💻 Export JSON", printReport: "🖨️ Print Report",
     secTitle: "Diagnostics & Analysis Tools", secSub: "Run advanced network and system tests live.",
     tool1Title: "Port Checker (TCP)", tool1Desc: "Check reachability of critical ports (e.g., 80, 443, 22, 3389) on target systems.",
     btnTest: "Test", outPort: "> Ready for port diagnostics...",
@@ -383,7 +391,7 @@ const translations = {
     navHome: "Ballina", navFaq: "FAQ", navStatus: "Statusi i rrjetit", navSubnet: "Llogaritësi i Nënrrjetit", navAbout: "Rreth nesh",
     heroTitle: "Suotë e Avancuar e Diagnostikimit IT & Rrjetit",
     heroSub: "Mjete profesionale për administratorët e sistemeve, zhvilluesit dhe teknikët e rrjetit",
-    copyResults: "📋 Kopjo Rezultatin", printReport: "🖨️ Printo Raportin",
+    copyResults: "📋 Kopjo Rezultatin", jsonExport: "💻 Eksporto JSON", printReport: "🖨️ Printo Raportin",
     secTitle: "Mjetet e Diagnostikimit & Analizës", secSub: "Ekzekuto teste të avancuara të rrjetit dhe sistemit drejtpërdrejt.",
     tool1Title: "Kontrolluesi i Portave (TCP)", tool1Desc: "Verifiko mundësinë e arritjes së portave kritike (p.sh. 80, 443, 22, 3389).",
     btnTest: "Testo", outPort: "> Gati për diagnostikim portash...",
@@ -406,7 +414,7 @@ const translations = {
     navHome: "Accueil", navFaq: "FAQ", navStatus: "État du réseau", navSubnet: "Calculateur de sous-réseau", navAbout: "À propos",
     heroTitle: "Suite avancée de diagnostic IT & Réseau",
     heroSub: "Outils professionnels pour administrateurs système, développeurs et techniciens réseau",
-    copyResults: "📋 Copier le résultat", printReport: "🖨️ Imprimer le rapport",
+    copyResults: "📋 Copier le résultat", jsonExport: "💻 Exporter en JSON", printReport: "🖨️ Imprimer le rapport",
     secTitle: "Outils de diagnostic et d'analyse", secSub: "Exécutez des tests réseau et système avancés en direct.",
     tool1Title: "Vérificateur de ports (TCP)", tool1Desc: "Vérifiez l'accessibilité des ports critiques (ex: 80, 443, 22, 3389).",
     btnTest: "Tester", outPort: "> Prêt pour le diagnostic des ports...",
@@ -429,7 +437,7 @@ const translations = {
     navHome: "Inicio", navFaq: "FAQ", navStatus: "Estado de red", navSubnet: "Calculadora de Subred", navAbout: "Acerca de",
     heroTitle: "Suite avanzada de diagnóstico IT y Redes",
     heroSub: "Herramientas profesionales para administradores de sistemas y desarrolladores",
-    copyResults: "📋 Copiar resultado", printReport: "🖨️ Imprimir informe",
+    copyResults: "📋 Copiar resultado", jsonExport: "💻 Exportar JSON", printReport: "🖨️ Imprimir informe",
     secTitle: "Herramientas de diagnóstico y análisis", secSub: "Ejecute pruebas avanzadas de red y sistema en vivo.",
     tool1Title: "Verificador de puertos (TCP)", tool1Desc: "Compruebe la accesibilidad de puertos críticos (ej. 80, 443, 22, 3389).",
     btnTest: "Probar", outPort: "> Listo para diagnóstico de puertos...",
@@ -452,7 +460,7 @@ const translations = {
     navHome: "Home", navFaq: "FAQ", navStatus: "Stato rete", navSubnet: "Calcolatore Subnet", navAbout: "Chi siamo",
     heroTitle: "Suite avanzata di diagnostica IT e di rete",
     heroSub: "Strumenti professionali per SysAdmin, sviluppatori e tecnici di rete",
-    copyResults: "📋 Copia risultato", printReport: "🖨️ Stampa report",
+    copyResults: "📋 Copia risultato", jsonExport: "💻 Esporta JSON", printReport: "🖨️ Stampa report",
     secTitle: "Strumenti di diagnostica e analisi", secSub: "Esegui test avanzati di rete e di sistema in tempo reale.",
     tool1Title: "Verificatore porte (TCP)", tool1Desc: "Verifica l'accessibilità delle porte critiche (es. 80, 443, 22, 3389).",
     btnTest: "Test", outPort: "> Pronto per la diagnostica delle porte...",
@@ -475,7 +483,7 @@ const translations = {
     navHome: "Início", navFaq: "FAQ", navStatus: "Status da rede", navSubnet: "Calculadora de Sub-rede", navAbout: "Sobre nós",
     heroTitle: "Suíte Avançada de Diagnóstico de TI e Rede",
     heroSub: "Ferramentas profissionais para administradores de sistemas e desenvolvedores",
-    copyResults: "📋 Copiar resultado", printReport: "🖨️ Imprimir relatório",
+    copyResults: "📋 Copiar resultado", jsonExport: "💻 Exportar JSON", printReport: "🖨️ Imprimir relatório",
     secTitle: "Ferramentas de Diagnóstico e Análise", secSub: "Execute testes avançados de rede e sistema ao vivo.",
     tool1Title: "Verificador de Portas (TCP)", tool1Desc: "Verifique a acessibilidade de portas críticas (ex: 80, 443, 22, 3389).",
     btnTest: "Testar", outPort: "> Pronto para diagnóstico de portas...",
@@ -498,7 +506,7 @@ const translations = {
     navHome: "Home", navFaq: "FAQ", navStatus: "Netwerkstatus", navSubnet: "IP Subnet Calculator", navAbout: "Over ons",
     heroTitle: "Geavanceerde IT & Netwerk Diagnose Suite",
     heroSub: "Professionele tools voor systeembeheerders, ontwikkelaars en netwerktechnici",
-    copyResults: "📋 Resultaat kopiëren", printReport: "🖨️ Rapport afdrukken",
+    copyResults: "📋 Resultaat kopiëren", jsonExport: "💻 JSON exporteren", printReport: "🖨️ Rapport afdrukken",
     secTitle: "Diagnostiek & Analyse Tools", secSub: "Voer geavanceerde netwerk- en systeemtests live uit.",
     tool1Title: "Poort Checker (TCP)", tool1Desc: "Controleer de bereikbaarheid van kritieke poorten (bijv. 80, 443, 22, 3389).",
     btnTest: "Testen", outPort: "> Klaar voor poortdiagnostiek...",
@@ -521,7 +529,7 @@ const translations = {
     navHome: "Ana Sayfa", navFaq: "S.S.S.", navStatus: "Ağ Durumu", navSubnet: "IP Alt Ağ Hesaplayıcı", navAbout: "Hakkımızda",
     heroTitle: "Gelişmiş BT ve Ağ Teşhis Paketi",
     heroSub: "Sistem yöneticileri, geliştiriciler ve ağ teknisyenleri için profesyonel araçlar",
-    copyResults: "📋 Sonucu Kopyala", printReport: "🖨️ Raporu Yazdır",
+    copyResults: "📋 Sonucu Kopyala", jsonExport: "💻 JSON Dışa Aktar", printReport: "🖨️ Raporu Yazdır",
     secTitle: "Teşhis and Analiz Araçları", secSub: "Gelişmiş ağ ve sistem testlerini canlı olarak çalıştırın.",
     tool1Title: "Port Denetleyicisi (TCP)", tool1Desc: "Kritik portların (örn. 80, 443, 22, 3389) hedef sistemde erişilebilirliğini test edin.",
     btnTest: "Test Et", outPort: "> Port teşhisi için hazır...",
@@ -544,7 +552,7 @@ const translations = {
     navHome: "الرئيسية", navFaq: "الأسئلة الشائعة", navStatus: "حالة الشبكة", navSubnet: "حاسبة الشبكة الفرعية", navAbout: "معلومات عنا",
     heroTitle: "مجموعة تشخيص تكنولوجيا المعلومات والشبكات المتقدمة",
     heroSub: "أدوات احترافية لمسؤولي الأنظمة والمطورين وفنيي الشبكات مع التصدير المباشر",
-    copyResults: "📋 نسخ النتيجة", printReport: "🖨️ طباعة التقرير",
+    copyResults: "📋 نسخ النتيجة", jsonExport: "💻 تصدير JSON", printReport: "🖨️ طباعة التقرير",
     secTitle: "أدوات التشخيص والتحليل", secSub: "قم بتشغيل اختبارات الشبكة والنظام المتقدمة مباشرة.",
     tool1Title: "فاحص المنافذ (TCP)", tool1Desc: "تحقق من إمكانية الوصول إلى المنافذ الحرجة (مثل 80، 443، 22، 3389) على الأنظمة المستهدفة.",
     btnTest: "اختبار", outPort: "> جاهز لتشخيص المنافذ...",
@@ -688,6 +696,24 @@ $("copyResultsBtn").onclick = () => {
   navigator.clipboard.writeText(textSummary).then(() => {
     alert("Ergebnis in die Zwischenablage kopiert!");
   });
+};
+
+// INTEGRATION: "JSON exportieren"
+$("jsonExportBtn").onclick = () => {
+  if(!logData.length){
+    alert("Keine Testergebnisse zum Exportieren vorhanden.");
+    return;
+  }
+  const jsonString = JSON.stringify(logData, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "fasqoo-diagnostics-report.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 };
 
 // INTEGRATION: "Bericht drucken"
