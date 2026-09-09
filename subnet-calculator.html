@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPv4 Subnet Calculator - Fasqoo Tools</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+        h2 { margin-top: 0; color: var(--accent-color); font-size: 1.25rem; }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+        }
+        input { flex: 2; }
+        select { flex: 1; }
+        button {
+            padding: 10px 16px;
+            background: var(--accent-color);
+            color: #0f172a;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+        .results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .result-item {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .result-label { font-size: 0.8rem; color: #94a3b8; }
+        .result-value { font-size: 1rem; font-weight: bold; margin-top: 4px; font-family: monospace; }
+        .full-width { grid-column: span 2; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>IPv4 Subnet Calculator</h2>
+    <div class="input-group">
+        <input type="text" id="ipInput" placeholder="192.168.1.0" value="192.168.1.10">
+        <select id="cidrInput">
+            <!-- CIDR Options -->
+            <script>
+                for(let i=32; i>=0; i--) {
+                    document.write(`<option value="${i}" ${i===24?'selected':''}>/${i}</option>`);
+                }
+            </script>
+        </select>
+        <button onclick="calculateSubnet()">Berechnen</button>
+    </div>
+
+    <div class="results">
+        <div class="result-item">
+            <div class="result-label">Netzmaske</div>
+            <div class="result-value" id="netmask">—</div>
+        </div>
+        <div class="result-item">
+            <div class="result-label">Wildcard-Maske</div>
+            <div class="result-value" id="wildcard">—</div>
+        </div>
+        <div class="result-item">
+            <div class="result-label">Netzwerk-Adresse</div>
+            <div class="result-value" id="networkAddr">—</div>
+        </div>
+        <div class="result-item">
+            <div class="result-label">Broadcast-Adresse</div>
+            <div class="result-value" id="broadcastAddr">—</div>
+        </div>
+        <div class="result-item">
+            <div class="result-label">Erste nutzbare IP</div>
+            <div class="result-value" id="firstIP">—</div>
+        </div>
+        <div class="result-item">
+            <div class="result-label">Letzte nutzbare IP</div>
+            <div class="result-value" id="lastIP">—</div>
+        </div>
+        <div class="result-item full-width">
+            <div class="result-label">Verfügbare Hosts</div>
+            <div class="result-value" id="totalHosts">—</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function ipToInt(ip) {
+    return ip.split('.').reduce((acc, octet) => ((acc << 8) + parseInt(octet, 10)) >>> 0, 0);
+}
+
+function intToIp(int) {
+    return [
+        (int >>> 24) & 255,
+        (int >>> 16) & 255,
+        (int >>> 8) & 255,
+        int & 255
+    ].join('.');
+}
+
+function calculateSubnet() {
+    const ipStr = document.getElementById('ipInput').value.trim();
+    const cidr = parseInt(document.getElementById('cidrInput').value, 10);
+    
+    const ipInt = ipToInt(ipStr);
+    const maskInt = cidr === 0 ? 0 : (~((1 << (32 - cidr)) - 1)) >>> 0;
+    const wildcardInt = (~maskInt) >>> 0;
+    
+    const networkInt = (ipInt & maskInt) >>> 0;
+    const broadcastInt = (networkInt | wildcardInt) >>> 0;
+    
+    let firstInt = networkInt;
+    let lastInt = broadcastInt;
+    let hosts = wildcardInt + 1;
+
+    if (cidr <= 30) {
+        firstInt = networkInt + 1;
+        lastInt = broadcastInt - 1;
+        hosts = hosts - 2;
+    } else if (cidr === 31) {
+        hosts = 2; // Punkt-zu-Punkt nach RFC 3021
+    } else if (cidr === 32) {
+        hosts = 1;
+    }
+
+    document.getElementById('netmask').innerText = intToIp(maskInt);
+    document.getElementById('wildcard').innerText = intToIp(wildcardInt);
+    document.getElementById('networkAddr').innerText = intToIp(networkInt);
+    document.getElementById('broadcastAddr').innerText = intToIp(broadcastInt);
+    document.getElementById('firstIP').innerText = cidr === 32 ? intToIp(networkInt) : intToIp(firstInt);
+    document.getElementById('lastIP').innerText = cidr === 32 ? intToIp(networkInt) : intToIp(lastInt);
+    document.getElementById('totalHosts').innerText = hosts > 0 ? hosts.toLocaleString() : 0;
+}
+
+// Initial calculation on load
+window.onload = calculateSubnet;
+</script>
+
+</body>
+</html>
