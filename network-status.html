@@ -210,6 +210,18 @@ a{ color:inherit; text-decoration:none; }
 .profile-label{ color:var(--muted); font-size:12px; font-weight:700; }
 .profile-value{ margin-top:8px; font-size:17px; font-weight:900; word-break:break-word; }
 
+/* GEO-IP INFO BOX (Neu eingefügt) */
+.geoip-box {
+    margin-top: 20px;
+    padding: 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+.geoip-box h3 { font-size: 16px; margin-bottom: 8px; }
+.geoip-box p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
 /* PROBLEMS */
 .problem-list{ display:flex; flex-direction:column; gap:12px; }
 .problem{ background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); }
@@ -518,6 +530,12 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
     <div class="card profile-card"><div class="profile-label" data-i18n="windowSize">Fenstergröße</div><div class="profile-value" id="screenValue">—</div></div>
 </div>
 
+<!-- Integrierter Bereich für die Server-seitige IP-Geolokalisierung (wie besprochen) -->
+<div class="geoip-box">
+    <h3 data-i18n="geoipTitle">Funktionsweise der server-seitigen IP-Geolokalisierung</h3>
+    <p data-i18n="geoipText"><strong>IP-Erkennung:</strong> Beim Aufruf der Website liest der Server die IP-Adresse des Besuchers aus den Anfrage-Headern aus (z. B. über REMOTE_ADDR oder X-Forwarded-For).</p>
+</div>
+
 <div class="section-title">
     <h2 data-i18n="problemTitle">Auffälligkeiten</h2>
     <p data-i18n="problemDesc">Nur Dinge, die diese Messung tatsächlich belegt — mit Erklärung und nächsten Schritten.</p>
@@ -630,7 +648,7 @@ const THEME_KEY = "fasqoo_theme";
 
 let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || "de";
 
-/* VOLLSTÄNDIGE 100%ige ÜBERSETZUNG (INKLUSIVE STATISCHER & DYNAMISCHER STRINGS) */
+/* VOLLSTÄNDIGE ÜBERSETZUNG (Inklusive GEO-IP und aller Stati) */
 const translations = {
 de:{
 metaTitle:"Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime",
@@ -655,6 +673,8 @@ networkApi:"Browser-Netzwerkdaten", networkApiDesc:"Verbindungsinfo, die der Bro
 networkProfile:"Geräte- & Verbindungsprofil", networkProfileDesc:"Technische Angaben, die dein Browser selbst bereitstellt.",
 connType:"Verbindungstyp", downlink:"Geschätzte Downlink-Rate", rtt:"Browser-RTT", saveData:"Datensparmodus",
 onlineStateLabel:"Online-Status", protocol:"Protokoll", browser:"Browser", windowSize:"Fenstergröße",
+geoipTitle:"Funktionsweise der server-seitigen IP-Geolokalisierung",
+geoipText:"IP-Erkennung: Beim Aufruf der Website liest der Server die IP-Adresse des Besuchers aus den Anfrage-Headern aus (z. B. über REMOTE_ADDR oder X-Forwarded-For).",
 problemTitle:"Auffälligkeiten", problemDesc:"Nur Dinge, die diese Messung tatsächlich belegt — mit Erklärung und nächsten Schritten.",
 testSuite:"Testübersicht", testSuiteDesc:"Technische Testergebnisse dieser Browser-Sitzung.",
 testInternetName:"Browser-Online-Status", testHttpName:"Erreichbarkeit fasqoo.com",
@@ -669,7 +689,6 @@ copyReport:"Bericht kopieren", copied:"Kopiert", downloadReport:"Bericht herunte
 accuracyTitle:"Messgenauigkeit und Grenzen",
 accuracyText:"Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com. Sie beweisen nicht automatisch, dass dein Internetanbieter, ein Router oder eine DNS-Einstellung für ein Problem verantwortlich ist — dafür wären Messungen von unabhängigen Servern nötig, die diese Seite nicht durchführt.",
 rights:"Alle Rechte vorbehalten.",
-// Dynamic Status Strings
 statusReachable:"FASQOO.COM IST ERREICHBAR",
 statusFailed:"PRÜFUNG FEHLGESCHLAGEN",
 checkTitleSuccess:"fasqoo.com ist erreichbar",
@@ -684,7 +703,6 @@ badgeWaiting:"Wartet", badgeGood:"Gut", badgeElevated:"Erhöht", badgeHigh:"Hoch
 noIncidentsTitle:"Keine lokalen Vorfälle", noIncidentsText:"Im gespeicherten Verlauf wurden keine fehlgeschlagenen Prüfungen erkannt.",
 hasIncidentsTitle:"fehlgeschlagene Prüfung(en)", hasIncidentsText:"Das sind lokale Browser-Beobachtungen und kein bestätigter Ausfall von fasqoo.com insgesamt.",
 notAvailable:"Nicht verfügbar", active:"Aktiv", inactive:"Inaktiv", online:"Online", offline:"Offline",
-// Problems
 probOfflineTitle:"Keine Internetverbindung", probOfflineEv:"Der Browser meldet einen Offline-Status.", probOfflineMeaning:"Prüfe WLAN/Kabel, den Router und ob andere Geräte im selben Netz betroffen sind.",
 probLatencyTitle:"Erhöhte Antwortzeit", probLatencyEv:"durchschnittliche Antwortzeit.", probLatencyMeaning:"Die Anfragen an fasqoo.com dauern länger als üblich. Das kann lokale oder serverseitige Ursachen haben.",
 probJitterTitle:"Schwankende Antwortzeiten", probJitterEv:"Schwankung zwischen den Anfragen.", probJitterMeaning:"Große Schwankungen können Videoanrufe, Gaming oder Remote-Verbindungen beeinträchtigen.",
@@ -716,6 +734,8 @@ networkApi:"Browser Network API", networkApiDesc:"Connection info exposed by the
 networkProfile:"Device & Connection Profile", networkProfileDesc:"Technical information your browser provides itself.",
 connType:"Connection Type", downlink:"Estimated Downlink", rtt:"Browser RTT", saveData:"Data Saver",
 onlineStateLabel:"Online State", protocol:"Protocol", browser:"Browser", windowSize:"Window Size",
+geoipTitle:"How Server-Side IP Geolocation Works",
+geoipText:"<strong>IP Detection:</strong> When the website is accessed, the server extracts the visitor's IP address from request headers (e.g., via REMOTE_ADDR or X-Forwarded-For).",
 problemTitle:"Findings", problemDesc:"Only things this measurement actually shows — with explanation and next steps.",
 testSuite:"Test Overview", testSuiteDesc:"Technical test results from this browser session.",
 testInternetName:"Browser Online State", testHttpName:"fasqoo.com Reachability",
@@ -775,6 +795,8 @@ networkApi:"API Réseau Navigateur", networkApiDesc:"Informations réseau expos�
 networkProfile:"Profil de l'appareil et de la connexion", networkProfileDesc:"Informations techniques fournies par votre navigateur.",
 connType:"Type de connexion", downlink:"Débit descendant estimé", rtt:"RTT du navigateur", saveData:"Économie de données",
 onlineStateLabel:"État en ligne", protocol:"Protocole", browser:"Navigateur", windowSize:"Taille de la fenêtre",
+geoipTitle:"Fonctionnement de la géolocalisation IP côté serveur",
+geoipText:"<strong>Détection IP :</strong> Lors du chargement du site, le serveur lit l'adresse IP du visiteur à partir des en-têtes de requête (ex: REMOTE_ADDR ou X-Forwarded-For).",
 problemTitle:"Constats", problemDesc:"Uniquement ce que cette mesure démontre réellement — avec explication et étapes suivantes.",
 testSuite:"Aperçu des tests", testSuiteDesc:"Résultats techniques de cette session de navigateur.",
 testInternetName:"État en ligne du navigateur", testHttpName:"Accessibilité de fasqoo.com",
@@ -814,7 +836,6 @@ function applyLanguage(lang){
     
     const t = translations[lang];
     
-    // SEO Meta Tags dynamisch anpassen
     if(t.metaTitle){
         document.title = t.metaTitle;
         document.getElementById("seoTitle").textContent = t.metaTitle;
@@ -823,15 +844,13 @@ function applyLanguage(lang){
         document.getElementById("seoDesc").setAttribute("content", t.metaDesc);
     }
 
-    // HTML-Texte anpassen
     document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
-        if(t[key]) el.textContent = t[key];
+        if(t[key]) el.innerHTML = t[key]; // innerHTML genutzt, damit Tags wie <strong> funktionieren
     });
     
     document.getElementById("languageSelect").value = lang;
     
-    // Dynamische Komponenten nach Sprachwechsel aktualisieren
     updateNetworkProfile();
     if(latestDiagnostics.score !== null){
         updateHealthScore();
