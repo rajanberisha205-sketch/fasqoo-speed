@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,12 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>About Fasqoo – Professional Internet Speed Test</title>
+<title>Über Fasqoo – Professioneller Internet Speed Test</title>
 
-<meta
-  name="description"
-  content="Learn more about Fasqoo, a professional Internet speed test for download, upload, ping, jitter and network quality."
->
+<meta id="meta-desc" name="description" content="Erfahre mehr über Fasqoo – deine professionelle Plattform für präzise Internet-Geschwindigkeitstests, Latenzmessungen und KI-Netzwerkdiagnose.">
+<meta name="keywords" content="Fasqoo, Über uns, Speedtest, Internetgeschwindigkeit, Ping, Jitter, KI Techniker, Netzwerkdiagnose">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta id="og-title" property="og:title" content="Über Fasqoo – Professioneller Internet Speed Test">
+<meta id="og-desc" property="og:description" content="Erfahre mehr über Fasqoo – deine professionelle Plattform für präzise Internet-Geschwindigkeitstests, Latenzmessungen und KI-Netzwerkdiagnose.">
+<meta property="og:image" content="https://fasqoo.com/og-image.jpg">
 
 <style>
 
@@ -44,6 +48,7 @@ body{
 
 a{
   color:inherit;
+  text-decoration:none;
 }
 
 .wrap{
@@ -53,7 +58,7 @@ a{
 
 
 /* =========================
-   HEADER
+   HEADER & NAV
 ========================= */
 
 header{
@@ -62,12 +67,16 @@ header{
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
 .nav{
   display:flex;
   align-items:center;
-  gap:25px;
+  justify-content:space-between;
+  width:100%;
 }
 
 .brand{
@@ -86,39 +95,43 @@ header{
   display:grid;
   place-items:center;
   font-size:23px;
+  font-weight:bold;
 }
 
 .brandname{
   font-size:21px;
-  font-weight:500;
+  font-weight:600;
   letter-spacing:-.4px;
 }
 
 .main-menu{
   display:flex;
   align-items:center;
-  justify-content:flex-end;
   gap:22px;
   margin-left:auto;
 }
 
 .main-menu a{
   color:var(--text);
-  text-decoration:none;
-  font-size:13px;
-  font-weight:400;
+  font-size:14px;
+  font-weight:500;
   white-space:nowrap;
   transition:.2s ease;
+  padding:6px 0;
+  border-bottom:2px solid transparent;
 }
 
-.main-menu a:hover{
+.main-menu a:hover,
+.main-menu a.active{
   color:var(--orange);
+  border-bottom-color:var(--orange);
 }
 
 .menu-extra{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
+  margin-left:15px;
 }
 
 .menu-extra select{
@@ -151,6 +164,16 @@ header{
   background:var(--soft);
 }
 
+.menu-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:24px;
+  color:var(--text);
+  cursor:pointer;
+  padding:5px;
+}
+
 
 /* =========================
    HERO
@@ -163,11 +186,12 @@ header{
 
 .hero-label{
   display:inline-block;
-  padding:7px 12px;
+  padding:7px 14px;
   border-radius:30px;
   background:#fff0e6;
   color:var(--orange);
-  font-size:12px;
+  font-size:13px;
+  font-weight:600;
   margin-bottom:18px;
 }
 
@@ -175,7 +199,7 @@ header{
   margin:0 auto 18px;
   font-size:44px;
   line-height:1.12;
-  font-weight:500;
+  font-weight:600;
   letter-spacing:-1.5px;
   max-width:820px;
 }
@@ -226,7 +250,7 @@ header{
 .card h2{
   margin:0 0 12px;
   font-size:20px;
-  font-weight:500;
+  font-weight:600;
 }
 
 .card p{
@@ -253,7 +277,7 @@ header{
 .about-section h2{
   margin:0 0 18px;
   font-size:28px;
-  font-weight:500;
+  font-weight:600;
 }
 
 .about-section p{
@@ -278,6 +302,7 @@ header{
   background:var(--soft);
   border-radius:10px;
   font-size:14px;
+  font-weight:500;
 }
 
 .check{
@@ -309,7 +334,7 @@ header{
 .cta h2{
   margin:0 0 10px;
   font-size:28px;
-  font-weight:500;
+  font-weight:600;
 }
 
 .cta p{
@@ -323,8 +348,9 @@ header{
   display:inline-block;
   background:#fff;
   color:#111;
+  font-weight:600;
   text-decoration:none;
-  padding:12px 22px;
+  padding:12px 24px;
   border-radius:9px;
   font-size:14px;
   transition:.2s ease;
@@ -332,6 +358,7 @@ header{
 
 .cta a:hover{
   transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
 }
 
 
@@ -341,7 +368,7 @@ header{
 
 footer{
   margin-top:40px;
-  background:#fff;
+  background:var(--card);
   border-top:1px solid var(--line);
   padding:30px 0;
 }
@@ -369,6 +396,7 @@ footer{
   color:var(--muted);
   text-decoration:none;
   font-size:12px;
+  transition:.2s ease;
 }
 
 .footer-links a:hover{
@@ -413,42 +441,43 @@ footer{
    RESPONSIVE
 ========================= */
 
-@media(max-width:1050px){
-
-  .main-menu{
-    gap:14px;
-  }
-
-  .main-menu a{
-    font-size:12px;
-  }
-
-}
-
 @media(max-width:900px){
 
   .grid{
     grid-template-columns:1fr;
   }
 
-}
-
-@media(max-width:760px){
-
-  header{
-    padding:13px 0;
-  }
-
-  .nav{
-    flex-wrap:wrap;
+  .menu-toggle{
+    display:block;
   }
 
   .main-menu{
-    width:100%;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px 15px;
+    display:none;
+    position:absolute;
+    top:70px;
+    left:0;
+    right:0;
+    background:var(--card);
+    flex-direction:column;
+    padding:20px;
+    border-bottom:1px solid var(--line);
+    box-shadow:var(--shadow);
+    gap:15px;
+    margin-left:0;
   }
+
+  .main-menu.active{
+    display:flex;
+  }
+
+  .menu-extra{
+    margin-left:0;
+    margin-top:10px;
+  }
+
+}
+
+@media(max-width:760px){
 
   .hero{
     padding:55px 0 40px;
@@ -479,21 +508,8 @@ footer{
 
 @media(max-width:560px){
 
-  .nav{
-    flex-direction:column;
-    justify-content:center;
-  }
-
-  .brand{
-    justify-content:center;
-  }
-
-  .main-menu{
-    justify-content:center;
-  }
-
   .hero h1{
-    font-size:30px;
+    font-size:28px;
   }
 
   .hero p{
@@ -521,48 +537,25 @@ footer{
 
   <div class="wrap nav">
 
-    <div class="brand">
-
+    <a href="index.html" class="brand" aria-label="Fasqoo Home">
       <div class="brandmark">⌁</div>
+      <div class="brandname">Fasqoo</div>
+    </a>
 
-      <div class="brandname">
-        Fasqoo
-      </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
 
-    </div>
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
 
-
-    <nav class="main-menu" aria-label="Main navigation">
-
-      <a href="index.html" data-i18n="home">
-        Home
-      </a>
-
-      <a href="index.html" data-i18n="speedtest">
-        Speed Test
-      </a>
-
-      <a href="faq.html" data-i18n="faq">
-        FAQ
-      </a>
-
-      <a href="faq.html#fasqoo-ai" data-i18n="ai">
-        AI Technician
-      </a>
-
-      <a href="network-status.html" data-i18n="network">
-        Network Status
-      </a>
-
-      <a href="about.html" data-i18n="about">
-        About
-      </a>
-
+      <a href="index.html" data-i18n="home">Home</a>
+      <a href="index.html" data-i18n="speedtest">Speed Test</a>
+      <a href="faq.html" data-i18n="faq">FAQ</a>
+      <a href="faq.html#fasqoo-ai" data-i18n="ai">AI Technician</a>
+      <a href="network-status.html" data-i18n="network">Network Status</a>
+      <a href="about.html" class="active" data-i18n="about">About</a>
 
       <div class="menu-extra">
 
         <select id="lang" aria-label="Language">
-
           <option value="de">Deutsch</option>
           <option value="en">English</option>
           <option value="fr">Français</option>
@@ -573,9 +566,7 @@ footer{
           <option value="tr">Türkçe</option>
           <option value="sq">Shqip</option>
           <option value="ar">العربية</option>
-
         </select>
-
 
         <button
           id="themeBtn"
@@ -604,18 +595,15 @@ footer{
   <div class="wrap">
 
     <div class="hero-label" data-i18n="aboutLabel">
-      About Fasqoo
+      Über Fasqoo
     </div>
 
     <h1 data-i18n="heroTitle">
-      Fast, simple and professional Internet testing.
+      Schnelles, einfaches und professionelles Internet-Testing.
     </h1>
 
     <p data-i18n="heroText">
-      Fasqoo is a modern Internet speed testing platform designed
-      to help users understand their connection quickly and easily.
-      Measure download speed, upload speed, ping, jitter and overall
-      network quality from almost any device.
+      Fasqoo ist eine moderne Plattform für Internet-Geschwindigkeitstests. Sie hilft Nutzern dabei, ihre Verbindung schnell und einfach zu verstehen. Messe Download, Upload, Ping, Jitter und die allgemeine Netzwerkqualität von nahezu jedem Gerät.
     </p>
 
   </div>
@@ -631,64 +619,24 @@ footer{
 
   <div class="wrap">
 
-
     <div class="grid">
 
-
       <div class="card">
-
-        <div class="icon">
-          ⚡
-        </div>
-
-        <h2 data-i18n="fastTitle">
-          Fast Testing
-        </h2>
-
-        <p data-i18n="fastText">
-          Fasqoo is designed to make Internet speed testing
-          quick and easy. Start a test and see your connection
-          performance in real time.
-        </p>
-
+        <div class="icon">⚡</div>
+        <h2 data-i18n="fastTitle">Schnelle Tests</h2>
+        <p data-i18n="fastText">Fasqoo wurde entwickelt, um Internet-Geschwindigkeitstests schnell und einfach zu machen. Starte einen Test und sehe die Leistung deiner Verbindung in Echtzeit.</p>
       </div>
 
-
       <div class="card">
-
-        <div class="icon">
-          ◉
-        </div>
-
-        <h2 data-i18n="accurateTitle">
-          Accurate Measurements
-        </h2>
-
-        <p data-i18n="accurateText">
-          Our speed test evaluates important connection
-          characteristics including download, upload, ping
-          and jitter.
-        </p>
-
+        <div class="icon">◉</div>
+        <h2 data-i18n="accurateTitle">Präzise Messungen</h2>
+        <p data-i18n="accurateText">Unser Geschwindigkeitstest untersucht wichtige Eigenschaften deiner Verbindung, darunter Download, Upload, Ping und Jitter.</p>
       </div>
 
-
       <div class="card">
-
-        <div class="icon">
-          ◇
-        </div>
-
-        <h2 data-i18n="simpleTitle">
-          Easy to Understand
-        </h2>
-
-        <p data-i18n="simpleText">
-          Results are presented in a clear and simple way,
-          making it easier to understand whether your
-          connection is suitable for everyday activities.
-        </p>
-
+        <div class="icon">◇</div>
+        <h2 data-i18n="simpleTitle">Einfach verständlich</h2>
+        <p data-i18n="simpleText">Die Ergebnisse werden übersichtlich dargestellt, damit du leichter erkennen kannst, ob deine Verbindung für alltägliche Aktivitäten geeignet ist.</p>
       </div>
 
     </div>
@@ -700,88 +648,23 @@ footer{
 
     <section class="about-section">
 
-      <h2 data-i18n="whatTitle">
-        What is Fasqoo?
-      </h2>
+      <h2 data-i18n="whatTitle">Was ist Fasqoo?</h2>
 
-      <p data-i18n="whatText1">
-        Fasqoo is a professional Internet speed testing platform
-        created to provide users with useful information about
-        their Internet connection.
-      </p>
+      <p data-i18n="whatText1">Fasqoo ist eine professionelle Plattform für Internet-Geschwindigkeitstests, die entwickelt wurde, um Nutzern hilfreiche Informationen über ihre Internetverbindung zu geben.</p>
 
-      <p data-i18n="whatText2">
-        A modern Internet connection is more than just download
-        speed. Gaming, video calls, streaming, remote work and
-        cloud services can also depend on latency, jitter,
-        upload performance and connection stability.
-      </p>
+      <p data-i18n="whatText2">Eine moderne Internetverbindung besteht aus mehr als nur Download-Geschwindigkeit. Gaming, Videoanrufe, Streaming, Homeoffice und Cloud-Dienste können ebenfalls von Latenz, Jitter, Upload-Leistung und Verbindungsstabilität abhängen.</p>
 
-      <p data-i18n="whatText3">
-        Fasqoo brings these measurements together in one simple
-        interface so users can better understand the quality of
-        their Internet connection.
-      </p>
-
+      <p data-i18n="whatText3">Fasqoo vereint diese Messungen in einer einfachen Oberfläche, damit Nutzer die Qualität ihrer Internetverbindung besser verstehen können.</p>
 
       <div class="features">
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature1">
-            Download speed measurement
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature2">
-            Upload speed measurement
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature3">
-            Ping and latency testing
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature4">
-            Jitter measurement
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature5">
-            Network and ISP information
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature6">
-            Connection quality analysis
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature7">
-            Gaming and streaming evaluation
-          </span>
-        </div>
-
-        <div class="feature">
-          <div class="check">✓</div>
-          <span data-i18n="feature8">
-            AI Technician assistance
-          </span>
-        </div>
-
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature1">Download-Geschwindigkeit messen</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature2">Upload-Geschwindigkeit messen</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature3">Ping- und Latenztest</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature4">Jitter messen</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature5">Netzwerk- und ISP-Informationen</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature6">Analyse der Verbindungsqualität</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature7">Bewertung für Gaming und Streaming</span></div>
+        <div class="feature"><div class="check">✓</div><span data-i18n="feature8">Unterstützung durch AI Technician</span></div>
       </div>
 
     </section>
@@ -793,28 +676,13 @@ footer{
 
     <section class="about-section">
 
-      <h2 data-i18n="whyTitle">
-        Why use Fasqoo?
-      </h2>
+      <h2 data-i18n="whyTitle">Warum Fasqoo verwenden?</h2>
 
-      <p data-i18n="whyText1">
-        Internet performance can change depending on the time of
-        day, network congestion, Wi-Fi conditions, device hardware,
-        server distance and many other factors.
-      </p>
+      <p data-i18n="whyText1">Die Internetleistung kann sich abhängig von Tageszeit, Netzwerkauslastung, WLAN-Bedingungen, Hardware, Serverentfernung und vielen weiteren Faktoren verändern.</p>
 
-      <p data-i18n="whyText2">
-        For this reason, Fasqoo provides several measurements
-        instead of focusing only on one number. This gives users
-        a broader picture of their connection.
-      </p>
+      <p data-i18n="whyText2">Deshalb liefert Fasqoo mehrere Messwerte, anstatt sich nur auf eine Zahl zu konzentrieren. Dadurch erhältst du ein umfassenderes Bild deiner Verbindung.</p>
 
-      <p data-i18n="whyText3">
-        Whether you are checking your home Internet, troubleshooting
-        a connection, preparing for online gaming or checking whether
-        your connection is suitable for streaming, Fasqoo is designed
-        to provide useful information in seconds.
-      </p>
+      <p data-i18n="whyText3">Ob du dein Heim-Internet überprüfst, eine Verbindung analysierst, Online-Gaming vorbereitest oder herausfinden möchtest, ob deine Verbindung für Streaming geeignet ist – Fasqoo liefert hilfreiche Informationen in wenigen Sekunden.</p>
 
     </section>
 
@@ -825,22 +693,11 @@ footer{
 
     <section class="about-section">
 
-      <h2 data-i18n="aiTitle">
-        Fasqoo AI Technician
-      </h2>
+      <h2 data-i18n="aiTitle">Fasqoo AI Technician</h2>
 
-      <p data-i18n="aiText1">
-        Fasqoo also provides an AI-powered technician assistant
-        designed to help users understand and troubleshoot common
-        Internet and network problems.
-      </p>
+      <p data-i18n="aiText1">Fasqoo bietet außerdem einen KI-basierten Techniker-Assistenten, der Nutzern dabei hilft, häufige Internet- und Netzwerkprobleme zu verstehen und zu beheben.</p>
 
-      <p data-i18n="aiText2">
-        The AI Technician can help with topics such as Wi-Fi,
-        routers, DNS, DHCP, Ethernet, fiber connections, latency,
-        packet loss, gaming, streaming and many other network
-        situations.
-      </p>
+      <p data-i18n="aiText2">Der AI Technician kann unter anderem bei WLAN, Routern, DNS, DHCP, Ethernet, Glasfaser, Latenz, Paketverlust, Gaming, Streaming und vielen weiteren Netzwerkproblemen helfen.</p>
 
     </section>
 
@@ -851,21 +708,13 @@ footer{
 
     <section class="cta">
 
-      <h2 data-i18n="ctaTitle">
-        Test your Internet connection
-      </h2>
+      <h2 data-i18n="ctaTitle">Teste deine Internetverbindung</h2>
 
-      <p data-i18n="ctaText">
-        Find out how your connection performs with Fasqoo.
-        The test is simple, fast and works directly in your browser.
-      </p>
+      <p data-i18n="ctaText">Finde heraus, wie deine Verbindung mit Fasqoo funktioniert. Der Test ist einfach, schnell und funktioniert direkt in deinem Browser.</p>
 
-      <a href="index.html" data-i18n="ctaButton">
-        Start Speed Test
-      </a>
+      <a href="index.html" data-i18n="ctaButton">Speed Test starten</a>
 
     </section>
-
 
   </div>
 
@@ -881,47 +730,17 @@ footer{
   <div class="wrap footer-inner">
 
     <div class="footer-copy">
-
-      <span data-i18n="copyright">
-        © 2026 Fasqoo. All Rights Reserved.
-      </span>
-
-      <br>
-
-      <span data-i18n="trademark">
-        Fasqoo™ and Fasqoo Internet Speed Test are trademarks
-        of Fasqoo and may only be used with permission.
-      </span>
-
+      <span data-i18n="copyright">© 2026 Fasqoo. Alle Rechte vorbehalten.</span><br>
+      <span data-i18n="trademark">Fasqoo™ und Fasqoo Internet Speed Test sind Marken von Fasqoo und dürfen nur mit Genehmigung verwendet werden.</span>
     </div>
 
-
     <div class="footer-links">
-
-      <a href="accessibility.html" data-i18n="accessibility">
-        Accessibility
-      </a>
-
-      <a href="network-status.html" data-i18n="network">
-        Network Status
-      </a>
-
-      <a href="privacy-policy.html" data-i18n="privacy">
-        Privacy Policy
-      </a>
-
-      <a href="terms.html" data-i18n="terms">
-        Terms of Use
-      </a>
-
-      <a href="do-not-sell.html" data-i18n="donotsell">
-        Do Not Sell My Personal Information
-      </a>
-
-      <a href="modern-slavery.html" data-i18n="slavery">
-        Modern Slavery Policy
-      </a>
-
+      <a href="accessibility.html" data-i18n="accessibility">Barrierefreiheit</a>
+      <a href="network-status.html" data-i18n="network">Netzwerk-Status</a>
+      <a href="privacy-policy.html" data-i18n="privacy">Datenschutzrichtlinie</a>
+      <a href="terms.html" data-i18n="terms">Nutzungsbedingungen</a>
+      <a href="do-not-sell.html" data-i18n="donotsell">Meine Daten nicht verkaufen</a>
+      <a href="modern-slavery.html" data-i18n="slavery">Moderne Sklaverei Richtlinie</a>
     </div>
 
   </div>
@@ -942,8 +761,8 @@ de: {
   speedtest:"Speed Test",
   faq:"FAQ",
   ai:"AI Technician",
-  network:"Network Status",
-  about:"About",
+  network:"Netzwerk-Status",
+  about:"Über uns",
   aboutLabel:"Über Fasqoo",
   heroTitle:"Schnelles, einfaches und professionelles Internet-Testing.",
   heroText:"Fasqoo ist eine moderne Plattform für Internet-Geschwindigkeitstests. Sie hilft Nutzern dabei, ihre Verbindung schnell und einfach zu verstehen. Messe Download, Upload, Ping, Jitter und die allgemeine Netzwerkqualität von nahezu jedem Gerät.",
@@ -978,10 +797,11 @@ de: {
   accessibility:"Barrierefreiheit",
   privacy:"Datenschutzrichtlinie",
   terms:"Nutzungsbedingungen",
-  donotsell:"Meine persönlichen Daten nicht verkaufen",
-  slavery:"Modern Slavery Policy",
+  donotsell:"Meine Daten nicht verkaufen",
+  slavery:"Moderne Sklaverei Richtlinie",
   copyright:"© 2026 Fasqoo. Alle Rechte vorbehalten.",
-  trademark:"Fasqoo™ und Fasqoo Internet Speed Test sind Marken von Fasqoo und dürfen nur mit Genehmigung verwendet werden."
+  trademark:"Fasqoo™ und Fasqoo Internet Speed Test sind Marken von Fasqoo und dürfen nur mit Genehmigung verwendet werden.",
+  metaDesc: "Erfahre mehr über Fasqoo – deine professionelle Plattform für präzise Internet-Geschwindigkeitstests, Latenzmessungen und KI-Netzwerkdiagnose."
 },
 
 en: {
@@ -1028,7 +848,8 @@ en: {
   donotsell:"Do Not Sell My Personal Information",
   slavery:"Modern Slavery Policy",
   copyright:"© 2026 Fasqoo. All Rights Reserved.",
-  trademark:"Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo and may only be used with permission."
+  trademark:"Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo and may only be used with permission.",
+  metaDesc: "Learn more about Fasqoo, a professional Internet speed test platform for download, upload, ping, jitter, and AI network diagnostics."
 },
 
 fr: {
@@ -1075,7 +896,8 @@ fr: {
   donotsell:"Ne pas vendre mes informations personnelles",
   slavery:"Politique contre l’esclavage moderne",
   copyright:"© 2026 Fasqoo. Tous droits réservés.",
-  trademark:"Fasqoo™ et Fasqoo Internet Speed Test sont des marques de Fasqoo et ne peuvent être utilisées qu’avec autorisation."
+  trademark:"Fasqoo™ et Fasqoo Internet Speed Test sont des marques de Fasqoo et ne peuvent être utilisées qu’avec autorisation.",
+  metaDesc: "En savoir plus sur Fasqoo, la plateforme professionnelle de test de débit Internet, latence, gigue et diagnostic réseau IA."
 },
 
 es: {
@@ -1122,7 +944,8 @@ es: {
   donotsell:"No vender mi información personal",
   slavery:"Política contra la esclavitud moderna",
   copyright:"© 2026 Fasqoo. Todos los derechos reservados.",
-  trademark:"Fasqoo™ y Fasqoo Internet Speed Test son marcas comerciales de Fasqoo y solo pueden utilizarse con permiso."
+  trademark:"Fasqoo™ y Fasqoo Internet Speed Test son marcas comerciales de Fasqoo y solo pueden utilizarse con permiso.",
+  metaDesc: "Obtén más información sobre Fasqoo, la plataforma profesional para pruebas de velocidad de Internet, latencia, jitter y diagnóstico por IA."
 },
 
 it: {
@@ -1169,7 +992,8 @@ it: {
   donotsell:"Non vendere le mie informazioni personali",
   slavery:"Politica contro la schiavitù moderna",
   copyright:"© 2026 Fasqoo. Tutti i diritti riservati.",
-  trademark:"Fasqoo™ e Fasqoo Internet Speed Test sono marchi di Fasqoo."
+  trademark:"Fasqoo™ e Fasqoo Internet Speed Test sono marchi di Fasqoo.",
+  metaDesc: "Scopri di più su Fasqoo, la piattaforma professionale per test di velocità Internet, misurazione della latenza e diagnosi di rete con IA."
 },
 
 pt: {
@@ -1216,7 +1040,8 @@ pt: {
   donotsell:"Não vender as minhas informações pessoais",
   slavery:"Política contra a escravatura moderna",
   copyright:"© 2026 Fasqoo. Todos os direitos reservados.",
-  trademark:"Fasqoo™ e Fasqoo Internet Speed Test são marcas comerciais da Fasqoo."
+  trademark:"Fasqoo™ e Fasqoo Internet Speed Test são marcas comerciais da Fasqoo.",
+  metaDesc: "Saiba mais sobre a Fasqoo, a plataforma profissional para testes de velocidade de Internet, análise de ping, jitter e diagnóstico de rede por IA."
 },
 
 nl: {
@@ -1263,7 +1088,8 @@ nl: {
   donotsell:"Mijn persoonlijke gegevens niet verkopen",
   slavery:"Beleid tegen moderne slavernij",
   copyright:"© 2026 Fasqoo. Alle rechten voorbehouden.",
-  trademark:"Fasqoo™ en Fasqoo Internet Speed Test zijn handelsmerken van Fasqoo."
+  trademark:"Fasqoo™ en Fasqoo Internet Speed Test zijn handelsmerken van Fasqoo.",
+  metaDesc: "Lees meer over Fasqoo, het professionele platform voor internetsnelheidstests, ping, jitter en AI-netwerkdiagnostiek."
 },
 
 tr: {
@@ -1310,7 +1136,8 @@ tr: {
   donotsell:"Kişisel Bilgilerimi Satmayın",
   slavery:"Modern Kölelik Politikası",
   copyright:"© 2026 Fasqoo. Tüm hakları saklıdır.",
-  trademark:"Fasqoo™ ve Fasqoo Internet Speed Test, Fasqoo'nun ticari markalarıdır."
+  trademark:"Fasqoo™ ve Fasqoo Internet Speed Test, Fasqoo'nun ticari markalarıdır.",
+  metaDesc: "Fasqoo hakkında daha fazla bilgi edinin: İnternet hız testleri, gecikme, jitter ve yapay zeka destekli ağ analizi platformu."
 },
 
 sq: {
@@ -1357,7 +1184,8 @@ sq: {
   donotsell:"Mos i Shitni të Dhënat e Mia Personale",
   slavery:"Politika për Skllavërinë Moderne",
   copyright:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",
-  trademark:"Fasqoo™ dhe Fasqoo Internet Speed Test janë marka tregtare të Fasqoo dhe mund të përdoren vetëm me leje."
+  trademark:"Fasqoo™ dhe Fasqoo Internet Speed Test janë marka tregtare të Fasqoo dhe mund të përdoren vetëm me leje.",
+  metaDesc: "Mësoni më shumë rreth Fasqoo – platforma juaj profesionale për testimin e shpejtësisë së Internetit, latencës dhe diagnozën me AI."
 },
 
 ar: {
@@ -1404,185 +1232,116 @@ ar: {
   donotsell:"عدم بيع معلوماتي الشخصية",
   slavery:"سياسة مكافحة العبودية الحديثة",
   copyright:"© 2026 Fasqoo. جميع الحقوق محفوظة.",
-  trademark:"Fasqoo™ وFasqoo Internet Speed Test هما علامتان تجاريتان لـ Fasqoo."
+  trademark:"Fasqoo™ وFasqoo Internet Speed Test هما علامتان تجاريتان لـ Fasqoo.",
+  metaDesc: "تعرف على المزيد حول Fasqoo - المنصة الاحترافية لاختبار سرعة الإنترنت، قياس الاستجابة، وتشخيص الشبكة بالذكاء الاصطناعي."
 }
 
 };
 
 
 /* =========================================
-   APPLY LANGUAGE
+   APPLY LANGUAGE & SEO META DYNAMICS
 ========================================= */
 
 function applyLanguage(language){
 
   if(!translations[language]){
-    language = "en";
+    language = "de";
   }
 
   const text = translations[language];
 
   document.documentElement.lang = language;
+  document.documentElement.dir = (language === "ar") ? "rtl" : "ltr";
 
-  if(language === "ar"){
-    document.documentElement.dir = "rtl";
-  }else{
-    document.documentElement.dir = "ltr";
-  }
+  document.querySelectorAll("[data-i18n]").forEach(function(element){
+    const key = element.getAttribute("data-i18n");
+    if(Object.prototype.hasOwnProperty.call(text, key)){
+      element.textContent = text[key];
+    }
+  });
 
-  document
-    .querySelectorAll("[data-i18n]")
-    .forEach(function(element){
+  // Dynamic Title & Description (SEO)
+  const metaTitle = language === "de"
+    ? "Über Fasqoo – Professioneller Internet Speed Test"
+    : language === "fr"
+    ? "À propos de Fasqoo – Test de débit Internet"
+    : language === "es"
+    ? "Acerca de Fasqoo – Test de velocidad"
+    : language === "it"
+    ? "Informazioni su Fasqoo – Test velocità Internet"
+    : language === "pt"
+    ? "Sobre a Fasqoo – Teste de velocidade"
+    : language === "nl"
+    ? "Over Fasqoo – Internetsnelheidstest"
+    : language === "tr"
+    ? "Fasqoo Hakkında – İnternet Hız Testi"
+    : language === "sq"
+    ? "Rreth Fasqoo – Testi i Shpejtësisë"
+    : language === "ar"
+    ? "حول Fasqoo – اختبار سرعة الإنترنت"
+    : "About Fasqoo – Professional Internet Speed Test";
 
-      const key =
-        element.getAttribute("data-i18n");
+  document.title = metaTitle;
+  
+  const descTag = document.getElementById("meta-desc");
+  const ogTitleTag = document.getElementById("og-title");
+  const ogDescTag = document.getElementById("og-desc");
 
-      if(
-        Object.prototype.hasOwnProperty.call(
-          text,
-          key
-        )
-      ){
+  if(descTag && text.metaDesc) descTag.setAttribute("content", text.metaDesc);
+  if(ogTitleTag) ogTitleTag.setAttribute("content", metaTitle);
+  if(ogDescTag && text.metaDesc) ogDescTag.setAttribute("content", text.metaDesc);
 
-        element.textContent =
-          text[key];
-
-      }
-
-    });
-
-  document.title =
-    language === "de"
-      ? "Über Fasqoo – Professioneller Internet Speed Test"
-      : language === "fr"
-      ? "À propos de Fasqoo – Test de débit Internet"
-      : language === "es"
-      ? "Acerca de Fasqoo – Test de velocidad"
-      : language === "it"
-      ? "Informazioni su Fasqoo – Test velocità Internet"
-      : language === "pt"
-      ? "Sobre a Fasqoo – Teste de velocidade"
-      : language === "nl"
-      ? "Over Fasqoo – Internetsnelheidstest"
-      : language === "tr"
-      ? "Fasqoo Hakkında – İnternet Hız Testi"
-      : language === "sq"
-      ? "Rreth Fasqoo – Testi i Shpejtësisë"
-      : language === "ar"
-      ? "حول Fasqoo – اختبار سرعة الإنترنت"
-      : "About Fasqoo – Professional Internet Speed Test";
-
-  document
-    .getElementById("lang")
-    .value = language;
-
-  localStorage.setItem(
-    "fasqoo_language",
-    language
-  );
-
+  document.getElementById("lang").value = language;
+  localStorage.setItem("fasqoo_language", language);
 }
 
 
 /* =========================================
-   LANGUAGE SELECT
+   EVENTS & INITIALIZATION
 ========================================= */
 
-document
-  .getElementById("lang")
-  .addEventListener(
-    "change",
-    function(){
+document.getElementById("lang").addEventListener("change", function(){
+  applyLanguage(this.value);
+});
 
-      applyLanguage(
-        this.value
-      );
+// Mobile Navigation Toggle
+const menuToggle = document.getElementById("menuToggle");
+const mainMenu = document.getElementById("mainMenu");
 
-    }
-  );
+if(menuToggle && mainMenu){
+  menuToggle.addEventListener("click", () => {
+    mainMenu.classList.toggle("active");
+  });
+}
 
-
-/* =========================================
-   LOAD LANGUAGE
-========================================= */
-
-const savedLanguage =
-  localStorage.getItem(
-    "fasqoo_language"
-  );
-
-applyLanguage(
-  savedLanguage &&
-  translations[savedLanguage]
-    ? savedLanguage
-    : "de"
-);
+// Load Saved Language
+const savedLanguage = localStorage.getItem("fasqoo_language");
+applyLanguage(savedLanguage && translations[savedLanguage] ? savedLanguage : "de");
 
 
 /* =========================================
    DARK MODE
 ========================================= */
 
-const themeBtn =
-  document.getElementById("themeBtn");
-
+const themeBtn = document.getElementById("themeBtn");
 
 function updateTheme(){
-
-  const dark =
-    document.body
-      .classList
-      .contains("dark");
-
-  themeBtn.textContent =
-    dark ? "☀" : "☾";
-
-  themeBtn.setAttribute(
-    "title",
-    dark
-      ? "Light mode"
-      : "Dark mode"
-  );
-
+  const dark = document.body.classList.contains("dark");
+  themeBtn.textContent = dark ? "☀" : "☾";
+  themeBtn.setAttribute("title", dark ? "Light mode" : "Dark mode");
 }
 
+themeBtn.addEventListener("click", function(){
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem("fasqoo_dark", dark);
+  updateTheme();
+});
 
-themeBtn.addEventListener(
-  "click",
-  function(){
-
-    document.body
-      .classList
-      .toggle("dark");
-
-    const dark =
-      document.body
-        .classList
-        .contains("dark");
-
-    localStorage.setItem(
-      "fasqoo_dark",
-      dark
-    );
-
-    updateTheme();
-
-  }
-);
-
-
-if(
-  localStorage.getItem(
-    "fasqoo_dark"
-  ) === "true"
-){
-
-  document.body
-    .classList
-    .add("dark");
-
+if(localStorage.getItem("fasqoo_dark") === "true"){
+  document.body.classList.add("dark");
 }
-
 
 updateTheme();
 
