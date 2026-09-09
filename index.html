@@ -90,48 +90,43 @@ header{
   color:var(--text);
 }
 
-/* WERBUNG MITTIG & RESPONSIVE FIX */
-.ad-slot{display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;min-height:90px;margin:18px auto;}
+/* WERBUNGEN DESIGN (3 WERBE-SLOTS AN PC) */
+.ad-slot{display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;}
+
+/* WERBUNG UNTER DEM MENÜ */
 .ad-top{
   width:100%;
   max-width:728px;
   min-height:90px;
   margin:18px auto !important;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   text-align:center;
 }
-.ad-top > *{
-  display:block;
-  max-width:100%;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.ad-top iframe{
-  display:block;
-  width:100% !important;
-  max-width:100% !important;
-  border:0;
-  margin:0 auto !important;
-}
-.ad-top img{
-  max-width:100%;
-  height:auto;
-  display:block;
-  margin:0 auto;
+
+/* GRID FÜR LINKS, MITTE UND RECHTS */
+.ads-grid{
+  display:grid;
+  grid-template-columns: 160px minmax(0, 1fr) 300px;
+  gap: 18px;
+  align-items: start;
+  width: min(1280px, calc(100% - 28px));
+  margin: 0 auto;
 }
 
-.ad-side{width:160px;min-height:300px;}
-.ad-box{width:300px;min-height:250px;}
-.ads-grid{display:grid;grid-template-columns:160px minmax(0,1fr) 300px;gap:18px;align-items:start;}
+.ad-side-left{width:160px;min-height:600px;position:sticky;top:86px;}
+.ad-side-right{width:300px;min-height:250px;position:sticky;top:86px;}
 .ads-center{min-width:0;}
 
-@media(max-width:1100px){.ads-grid{grid-template-columns:160px minmax(0,1fr);}}
-@media(max-width:820px){.ads-grid{display:block;}.left-ad{display:none;}}
+/* RESPONSIVE DESIGN FÜR TABLET & MOBILE */
+@media(max-width:1100px){
+  .ads-grid{grid-template-columns: 160px minmax(0, 1fr);}
+  .ad-side-right{display:none;}
+}
+@media(max-width:820px){
+  .ads-grid{display:block;width:100%;}
+  .ad-side-left{display:none;}
+}
 
-main{padding:20px 0 65px;}
+main{padding:0 0 65px;}
 .hero{text-align:center;margin-bottom:25px;}
 .hero h1{font-size:34px;line-height:1.2;font-weight:400;letter-spacing:-1px;margin:0 0 9px;}
 .hero p{margin:0;color:var(--muted);font-size:14px;}
@@ -266,13 +261,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     height:auto;
     margin:10px auto;
   }
-  .ad-top iframe{
-    max-width:100% !important;
-    height:auto !important;
-    min-height:50px;
-  }
-  .right-ad{display:none;}
-  .wrap{width:min(100% - 20px,1180px);}
+  .wrap{width:100%;}
   .hero h1{font-size:26px;}
   .hero p{font-size:13px;}
   .card{padding:17px;}
@@ -334,8 +323,9 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
   </div>
 </header>
 
+<!-- 1. WERBUNG: UNTER DEM MENÜ (CENTER BANNER) -->
 <div class="ad-slot ad-top" aria-label="Advertisement">
-  <script>
+  <script type="text/javascript">
     atOptions = {
       'key' : '21d82857817335bfb19d20557f4efb15',
       'format' : 'iframe',
@@ -344,166 +334,172 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       'params' : {}
     };
   </script>
-  <script src="https://www.highrevenueformat.com/21d82857817335bfb19d20557f4efb15/invoke.js"></script>
+  <script type="text/javascript" src="https://www.highrevenueformat.com/21d82857817335bfb19d20557f4efb15/invoke.js"></script>
 </div>
 
+<!-- 3-SPALTIGES LAYOUT: LINKS WERBUNG | MITTE CONTENT | RECHTS WERBUNG -->
 <div class="ads-grid">
 
-<aside class="left-ad">
-<div class="ad-slot ad-side"></div>
-</aside>
+  <!-- 2. WERBUNG: LINKS (SKYSCRAPER / BANNER) -->
+  <aside class="ad-side-left">
+    <div class="ad-slot">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '21d82857817335bfb19d20557f4efb15',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="https://www.highrevenueformat.com/21d82857817335bfb19d20557f4efb15/invoke.js"></script>
+    </div>
+  </aside>
 
-<div class="ads-center">
-<main>
-<div class="wrap">
+  <!-- HAUPTINHALT (MITTE) -->
+  <div class="ads-center">
+    <main>
+      <div class="wrap">
 
-<section class="hero">
-<h1 id="heroTitle">Free Internet Speed Test – Check Your Download, Upload, Ping &amp; Jitter</h1>
-<p id="heroSub">Precise connection measurements for professionals, technicians and daily internet users</p>
-</section>
+        <section class="hero">
+          <h1 id="heroTitle">Free Internet Speed Test – Check Your Download, Upload, Ping &amp; Jitter</h1>
+          <p id="heroSub">Precise connection measurements for professionals, technicians and daily internet users</p>
+        </section>
 
-<div class="server-line">
-<span class="server-badge" id="serverLabel">AUTOMATIC SERVER</span>
-<span class="server-badge server-value" id="serverName">Cloudflare Edge</span>
-</div>
+        <div class="server-line">
+          <span class="server-badge" id="serverLabel">AUTOMATIC SERVER</span>
+          <span class="server-badge server-value" id="serverName">Cloudflare Edge</span>
+        </div>
 
-<section class="card">
-<div class="grid">
+        <section class="card">
+          <div class="grid">
 
-<div class="speedbox">
-<div class="gauge">
-<svg viewBox="0 0 300 300">
-<defs>
-<linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#ff5a1f"/>
-<stop offset="100%" stop-color="#ff8a5b"/>
-</linearGradient>
-</defs>
-<circle class="ring" cx="150" cy="150" r="130"></circle>
-<circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
-</svg>
-<div class="center">
-<div id="speed" class="num">0</div>
-<div class="unit">Mbps</div>
-</div>
-</div>
-<div id="status" class="status">Ready to test</div>
-<button id="start" class="start">Start Speed Test</button>
-</div>
+            <div class="speedbox">
+              <div class="gauge">
+                <svg viewBox="0 0 300 300">
+                  <defs>
+                    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ff5a1f"/>
+                      <stop offset="100%" stop-color="#ff8a5b"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="ring" cx="150" cy="150" r="130"></circle>
+                  <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+                </svg>
+                <div class="center">
+                  <div id="speed" class="num">0</div>
+                  <div class="unit">Mbps</div>
+                </div>
+              </div>
+              <div id="status" class="status">Ready to test</div>
+              <button id="start" class="start">Start Speed Test</button>
+            </div>
 
-<div>
-<div class="metrics">
-<div class="metric"><div class="mtop"><span class="label">Ping</span><span class="icon">◌</span></div><div class="value"><span id="ping">—</span><span class="small">ms</span></div></div>
-<div class="metric"><div class="mtop"><span class="label">Jitter</span><span class="icon">≋</span></div><div class="value"><span id="jitter">—</span><span class="small">ms</span></div></div>
-<div class="metric"><div class="mtop"><span class="label">Download</span><span class="icon">↓</span></div><div class="value"><span id="down">—</span><span class="small">Mbps</span></div></div>
-<div class="metric"><div class="mtop"><span class="label">Upload</span><span class="icon">↑</span></div><div class="value"><span id="up">—</span><span class="small">Mbps</span></div></div>
-</div>
+            <div>
+              <div class="metrics">
+                <div class="metric"><div class="mtop"><span class="label">Ping</span><span class="icon">◌</span></div><div class="value"><span id="ping">—</span><span class="small">ms</span></div></div>
+                <div class="metric"><div class="mtop"><span class="label">Jitter</span><span class="icon">≋</span></div><div class="value"><span id="jitter">—</span><span class="small">ms</span></div></div>
+                <div class="metric"><div class="mtop"><span class="label">Download</span><span class="icon">↓</span></div><div class="value"><span id="down">—</span><span class="small">Mbps</span></div></div>
+                <div class="metric"><div class="mtop"><span class="label">Upload</span><span class="icon">↑</span></div><div class="value"><span id="up">—</span><span class="small">Mbps</span></div></div>
+              </div>
 
-<div class="chart">
-<div class="charthead"><span>Live connection performance</span><span id="chartState">Waiting</span></div>
-<canvas id="chart"></canvas>
-</div>
-</div>
+              <div class="chart">
+                <div class="charthead"><span>Live connection performance</span><span id="chartState">Waiting</span></div>
+                <canvas id="chart"></canvas>
+              </div>
+            </div>
 
-</div>
+          </div>
 
-<div class="info-grid">
-<div class="info"><div class="label">Public IP</div><div id="ip" class="iv">Detecting...</div></div>
-<div class="info"><div class="label">Provider / ISP</div><div id="isp" class="iv">Detecting...</div></div>
-<div class="info"><div class="label">Location</div><div id="loc" class="iv">Detecting...</div></div>
-<div class="info"><div class="label">Network / ASN</div><div id="asn" class="iv">Detecting...</div></div>
-</div>
+          <div class="info-grid">
+            <div class="info"><div class="label">Public IP</div><div id="ip" class="iv">Detecting...</div></div>
+            <div class="info"><div class="label">Provider / ISP</div><div id="isp" class="iv">Detecting...</div></div>
+            <div class="info"><div class="label">Location</div><div id="loc" class="iv">Detecting...</div></div>
+            <div class="info"><div class="label">Network / ASN</div><div id="asn" class="iv">Detecting...</div></div>
+          </div>
 
-<div class="quality">
-<div class="qtop"><span id="qualityTitle">Connection Quality</span><span id="score" class="qscore">—</span></div>
-<div class="bar"><i id="bar"></i></div>
-<div id="qtext" class="qtext">Run a test to evaluate your connection.</div>
-</div>
+          <div class="quality">
+            <div class="qtop"><span id="qualityTitle">Connection Quality</span><span id="score" class="qscore">—</span></div>
+            <div class="bar"><i id="bar"></i></div>
+            <div id="qtext" class="qtext">Run a test to evaluate your connection.</div>
+          </div>
 
-</section>
+        </section>
 
-<section class="section" id="applications">
-<h2 id="appsTitle">What can you do with your connection?</h2>
-<p class="section-sub" id="appsSub">Your results are analyzed for common online activities.</p>
+        <section class="section" id="applications">
+          <h2 id="appsTitle">What can you do with your connection?</h2>
+          <p class="section-sub" id="appsSub">Your results are analyzed for common online activities.</p>
 
-<div class="apps">
+          <div class="apps">
+            <div class="app"><div class="app-head"><div class="app-icon">🎮</div><div class="app-status" id="gamingStatus">Waiting</div></div><h3>Gaming</h3><p>Low ping and low jitter are important for online gaming.</p><div class="app-score"><span id="gamingText">Run test</span></div><div class="app-bar"><i id="gamingBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">🎬</div><div class="app-status" id="streamStatus">Waiting</div></div><h3>Netflix / Streaming</h3><p>Suitable speed for HD and normal streaming.</p><div class="app-score"><span id="streamText">Run test</span></div><div class="app-bar"><i id="streamBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">📺</div><div class="app-status" id="fourkStatus">Waiting</div></div><h3>4K Streaming</h3><p>Checks whether your connection can handle high-quality 4K video.</p><div class="app-score"><span id="fourkText">Run test</span></div><div class="app-bar"><i id="fourkBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">📹</div><div class="app-status" id="callStatus">Waiting</div></div><h3>Zoom / Teams</h3><p>Evaluates bandwidth, latency and stability for video calls.</p><div class="app-score"><span id="callText">Run test</span></div><div class="app-bar"><i id="callBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">💻</div><div class="app-status" id="officeStatus">Waiting</div></div><h3>Homeoffice</h3><p>Good connection quality for cloud applications and remote work.</p><div class="app-score"><span id="officeText">Run test</span></div><div class="app-bar"><i id="officeBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">☁️</div><div class="app-status" id="cloudStatus">Waiting</div></div><h3>Cloud / Downloads</h3><p>Measures whether large files can be transferred efficiently.</p><div class="app-score"><span id="cloudText">Run test</span></div><div class="app-bar"><i id="cloudBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">📱</div><div class="app-status" id="socialStatus">Waiting</div></div><h3>Social Media</h3><p>Suitable for Instagram, TikTok, Facebook and normal browsing.</p><div class="app-score"><span id="socialText">Run test</span></div><div class="app-bar"><i id="socialBar"></i></div></div>
+            <div class="app"><div class="app-head"><div class="app-icon">🌐</div><div class="app-status" id="webStatus">Waiting</div></div><h3>Web Browsing</h3><p>Evaluates the connection for everyday websites and services.</p><div class="app-score"><span id="webText">Run test</span></div><div class="app-bar"><i id="webBar"></i></div></div>
+          </div>
+        </section>
 
-<div class="app"><div class="app-head"><div class="app-icon">🎮</div><div class="app-status" id="gamingStatus">Waiting</div></div><h3>Gaming</h3><p>Low ping and low jitter are important for online gaming.</p><div class="app-score"><span id="gamingText">Run test</span></div><div class="app-bar"><i id="gamingBar"></i></div></div>
+        <section class="section" id="diagnostics">
+          <h2 id="diagnosticsTitle">Network Diagnostics</h2>
+          <div class="tools">
+            <div class="tool"><div class="icon">⌁</div><h3>Latency</h3><p>Measures response time and helps identify delay-sensitive network problems.</p></div>
+            <div class="tool"><div class="icon">↯</div><h3>Stability</h3><p>Jitter and live samples show whether the connection remains stable under load.</p></div>
+            <div class="tool"><div class="icon">DNS</div><h3>DNS Diagnostics</h3><p>Checks DNS availability and basic resolver response information.</p></div>
+            <div class="tool"><div class="icon">IP</div><h3>IP Diagnostics</h3><p>Detects public IP, ISP, ASN and IPv4/IPv6 capability where available.</p></div>
+          </div>
+        </section>
 
-<div class="app"><div class="app-head"><div class="app-icon">🎬</div><div class="app-status" id="streamStatus">Waiting</div></div><h3>Netflix / Streaming</h3><p>Suitable speed for HD and normal streaming.</p><div class="app-score"><span id="streamText">Run test</span></div><div class="app-bar"><i id="streamBar"></i></div></div>
+        <section class="section">
+          <h2 id="reportTitle">Professional Test Report</h2>
+          <div class="report">
+            <div class="reportgrid">
+              <div class="r"><b>Test ID</b><span id="tid">—</span></div>
+              <div class="r"><b>IPv4</b><span id="ipv4">—</span></div>
+              <div class="r"><b>IPv6</b><span id="ipv6">—</span></div>
+              <div class="r"><b>DNS</b><span id="dns">—</span></div>
+            </div>
+            <div class="actions">
+              <button class="action" id="copy">Copy Result</button>
+              <button class="action" id="share">Share Result</button>
+              <button class="action" id="json">Export JSON</button>
+              <button class="action" id="print">Print Report</button>
+            </div>
+          </div>
+        </section>
 
-<div class="app"><div class="app-head"><div class="app-icon">📺</div><div class="app-status" id="fourkStatus">Waiting</div></div><h3>4K Streaming</h3><p>Checks whether your connection can handle high-quality 4K video.</p><div class="app-score"><span id="fourkText">Run test</span></div><div class="app-bar"><i id="fourkBar"></i></div></div>
+        <section class="section" id="historySection">
+          <h2 id="historyTitle">Test History</h2>
+          <div class="history">
+            <div class="hhead"><h2>Recent measurements</h2><button id="clear" class="action">Clear history</button></div>
+            <table>
+              <thead><tr><th>Date</th><th>Download</th><th>Upload</th><th>Ping</th><th>Quality</th></tr></thead>
+              <tbody id="history"></tbody>
+            </table>
+          </div>
+        </section>
 
-<div class="app"><div class="app-head"><div class="app-icon">📹</div><div class="app-status" id="callStatus">Waiting</div></div><h3>Zoom / Teams</h3><p>Evaluates bandwidth, latency and stability for video calls.</p><div class="app-score"><span id="callText">Run test</span></div><div class="app-bar"><i id="callBar"></i></div></div>
+      </div>
+    </main>
+  </div>
 
-<div class="app"><div class="app-head"><div class="app-icon">💻</div><div class="app-status" id="officeStatus">Waiting</div></div><h3>Homeoffice</h3><p>Good connection quality for cloud applications and remote work.</p><div class="app-score"><span id="officeText">Run test</span></div><div class="app-bar"><i id="officeBar"></i></div></div>
-
-<div class="app"><div class="app-head"><div class="app-icon">☁️</div><div class="app-status" id="cloudStatus">Waiting</div></div><h3>Cloud / Downloads</h3><p>Measures whether large files can be transferred efficiently.</p><div class="app-score"><span id="cloudText">Run test</span></div><div class="app-bar"><i id="cloudBar"></i></div></div>
-
-<div class="app"><div class="app-head"><div class="app-icon">📱</div><div class="app-status" id="socialStatus">Waiting</div></div><h3>Social Media</h3><p>Suitable for Instagram, TikTok, Facebook and normal browsing.</p><div class="app-score"><span id="socialText">Run test</span></div><div class="app-bar"><i id="socialBar"></i></div></div>
-
-<div class="app"><div class="app-head"><div class="app-icon">🌐</div><div class="app-status" id="webStatus">Waiting</div></div><h3>Web Browsing</h3><p>Evaluates the connection for everyday websites and services.</p><div class="app-score"><span id="webText">Run test</span></div><div class="app-bar"><i id="webBar"></i></div></div>
-
-</div>
-</section>
-
-<section class="section" id="diagnostics">
-<h2 id="diagnosticsTitle">Network Diagnostics</h2>
-<div class="tools">
-<div class="tool"><div class="icon">⌁</div><h3>Latency</h3><p>Measures response time and helps identify delay-sensitive network problems.</p></div>
-<div class="tool"><div class="icon">↯</div><h3>Stability</h3><p>Jitter and live samples show whether the connection remains stable under load.</p></div>
-<div class="tool"><div class="icon">DNS</div><h3>DNS Diagnostics</h3><p>Checks DNS availability and basic resolver response information.</p></div>
-<div class="tool"><div class="icon">IP</div><h3>IP Diagnostics</h3><p>Detects public IP, ISP, ASN and IPv4/IPv6 capability where available.</p></div>
-</div>
-</section>
-
-<section class="section">
-<h2 id="reportTitle">Professional Test Report</h2>
-<div class="report">
-<div class="reportgrid">
-<div class="r"><b>Test ID</b><span id="tid">—</span></div>
-<div class="r"><b>IPv4</b><span id="ipv4">—</span></div>
-<div class="r"><b>IPv6</b><span id="ipv6">—</span></div>
-<div class="r"><b>DNS</b><span id="dns">—</span></div>
-</div>
-<div class="actions">
-<button class="action" id="copy">Copy Result</button>
-<button class="action" id="share">Share Result</button>
-<button class="action" id="json">Export JSON</button>
-<button class="action" id="print">Print Report</button>
-</div>
-</div>
-</section>
-
-<section class="section" id="historySection">
-<h2 id="historyTitle">Test History</h2>
-<div class="history">
-<div class="hhead"><h2>Recent measurements</h2><button id="clear" class="action">Clear history</button></div>
-<table>
-<thead><tr><th>Date</th><th>Download</th><th>Upload</th><th>Ping</th><th>Quality</th></tr></thead>
-<tbody id="history"></tbody>
-</table>
-</div>
-</section>
-
-</div>
-</main>
-</div>
-
-<aside class="right-ad">
-<div class="ad-slot ad-box">
-<script>
-atOptions = {
-  'key' : '1093fe0c2eac21d58b8dcae665b81bd6',
-  'format' : 'iframe',
-  'height' : 250,
-  'width' : 300,
-  'params' : {}
-};
-</script>
-<script src="https://www.highrevenueformat.com/1093fe0c2eac21d58b8dcae665b81bd6/invoke.js"></script>
-</div>
-</aside>
+  <!-- 3. WERBUNG: RECHTS (MEDIUM RECTANGLE) -->
+  <aside class="ad-side-right">
+    <div class="ad-slot">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '1093fe0c2eac21d58b8dcae665b81bd6',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="https://www.highrevenueformat.com/1093fe0c2eac21d58b8dcae665b81bd6/invoke.js"></script>
+    </div>
+  </aside>
 
 </div>
 
