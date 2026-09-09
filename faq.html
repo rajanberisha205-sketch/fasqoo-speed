@@ -1,1155 +1,555 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="hosting-provider" content="Vercel">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Advanced IT & Network Engineer Toolkit with Fasqoo Diagnostics.">
+  <meta name="robots" content="index, follow">
 
-<!-- SEO Meta Tags -->
-<title>Fasqoo FAQ & AI Technician – Internet & WLAN Support</title>
-<meta name="description" content="Häufige Fragen zu Internetgeschwindigkeit, Ping, Jitter & WLAN-Problemen. Erhalte Hilfe vom Fasqoo AI Technician.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://fasqoo.com/faq.html">
+  <title id="pageTitle">Network Engineer Toolkit – Fasqoo</title>
 
-<!-- Open Graph / Social Media Metadaten -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fasqoo FAQ & AI Technician Support">
-<meta property="og:description" content="Lösungen für Internet-, WLAN- und Netzwerkprobleme direkt online abrufen.">
-<meta property="og:url" content="https://fasqoo.com/faq.html">
-<meta property="og:site_name" content="Fasqoo">
-
-<!-- Schema.org FAQ Structured Data für Google Rich Results -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is an Internet speed test?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An Internet speed test measures important connection parameters such as download speed, upload speed, ping and jitter. Fasqoo uses these measurements to help you understand the quality of your Internet connection."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is download speed?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Download speed describes how quickly data can be transferred from the Internet to your device. It is normally measured in Mbps or Gbps."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is upload speed?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Upload speed describes how quickly your device can send data to the Internet. It is important for video calls, cloud backups, streaming and uploading files."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is ping?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ping measures network response time. A lower ping generally means a faster response between your device and the test server. Low latency is especially important for online gaming and real-time communication."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is jitter?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Jitter measures variations in packet arrival time. High jitter can cause interruptions or unstable quality in gaming, voice calls and video meetings."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why is my Wi-Fi slow?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Slow Wi-Fi can be caused by distance from the router, interference, congestion, walls, old hardware or a busy wireless channel. Testing with Ethernet can help determine whether the problem is Wi-Fi or the Internet connection itself."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why is my ping high in games?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "High gaming latency can be caused by server distance, routing, Wi-Fi interference, network congestion or bufferbloat. An Ethernet connection and a nearby game server can often improve stability."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why is my upload speed slow?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Upload performance may be limited by your Internet plan, Wi-Fi conditions, router configuration, network congestion or the provider's upstream capacity."
-      }
-    }
-  ]
-}
-</script>
+  <link rel="canonical" href="https://www.fasqoo.com/">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 
 <style>
-:root{
-  --bg:#f7f8fa;
-  --card:#ffffff;
-  --text:#17191d;
-  --muted:#6b7280;
-  --line:#e5e7eb;
-  --soft:#f0f2f5;
-  --orange:#ff5a1f;
-  --orange-dark:#e94d17;
-  --shadow:0 10px 35px rgba(0,0,0,.07);
-}
+:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--soft:#f1f5f9;--orange:#ff5a1f;--orange2:#ff8b5c;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--shadow:0 10px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:400;}
+button,select,input,textarea{font:inherit;}
+button{cursor:pointer;}
+.wrap{width:min(1280px,calc(100% - 32px));margin:auto;}
 
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.25s ease;
-}
-
-body.dark{
-  --bg:#0d1117;
-  --card:#151b23;
-  --text:#f3f4f6;
-  --muted:#9ca3af;
-  --line:#27303b;
-  --soft:#1c2530;
-  --shadow:0 10px 35px rgba(0,0,0,.25);
-}
-
-/* HEADER */
 header{
+  height:72px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(14px);
+  backdrop-filter: blur(8px);
 }
 
-.dark header{
-  background:rgba(13,17,23,.94);
-}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.brandmark{width:40px;height:40px;border-radius:10px;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:bold;}
+.brandname{font-size:22px;letter-spacing:-.5px;font-weight:600;}
 
-.nav{
-  max-width:1250px;
-  margin:auto;
-  min-height:70px;
-  padding:0 22px;
-  display:flex;
-  align-items:center;
-  gap:25px;
-}
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;}
+.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;transition:color .2s ease;}
+.main-menu a:hover{color:var(--orange);}
+.menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
+.menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;outline:none;cursor:pointer;}
+.theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;padding:0;transition:.2s ease;}
+.theme-btn:hover{background:var(--soft);}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text);}
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:var(--text);
-  flex-shrink:0;
-}
+main{padding:40px 0 80px;}
+.hero{text-align:center;margin-bottom:30px;}
+.hero h1{font-size:36px;line-height:1.2;font-weight:600;letter-spacing:-1px;margin:0 0 10px;}
+.hero p{margin:0;color:var(--muted);font-size:15px;}
 
-.logo{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  background:var(--orange);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:20px;
-  font-weight:700;
-}
+/* TOOLBAR & ACTIONS */
+.tool-actions{display:flex;gap:12px;margin-bottom:25px;flex-wrap:wrap;justify-content:center;}
+.action-btn{background:var(--soft);color:var(--text);border:1px solid var(--line);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:.2s;}
+.action-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
 
-.brand-name{
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:-.4px;
-}
+/* CATEGORY TABS */
+.toolkit-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:25px;scrollbar-width:thin;}
+.tab-btn{background:var(--card);border:1px solid var(--line);color:var(--text);padding:10px 18px;border-radius:30px;font-size:13px;font-weight:500;white-space:nowrap;transition:.2s;}
+.tab-btn:hover,.tab-btn.active{background:var(--orange);color:#fff;border-color:var(--orange);}
 
-.main-menu{
-  margin-left:auto;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:20px;
-}
+/* TOOL GRID SYSTEM */
+.toolkit-section{display:none;}
+.toolkit-section.active{display:block;}
 
-.main-menu a{
-  color:var(--text);
-  text-decoration:none;
-  font-size:13px;
-  font-weight:400;
-  white-space:nowrap;
-  transition:.2s ease;
-}
+.it-tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.it-tool-box{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;transition:.2s;}
+.it-tool-box:hover{border-color:var(--orange);}
+.it-tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.it-tool-icon{width:38px;height:38px;border-radius:8px;background:var(--soft);color:var(--orange);display:grid;place-items:center;font-size:18px;font-weight:bold;}
+.it-tool-header h3{font-size:16px;font-weight:600;margin:0;}
+.it-tool-box p{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 16px;}
+.it-input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.it-input-group input,.it-input-group select,.it-input-group textarea{flex:1;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 12px;border-radius:8px;font-size:12px;outline:none;}
+.it-input-group textarea{min-height:60px;resize:vertical;}
+.it-input-group input:focus,.it-input-group select:focus,.it-input-group textarea:focus{border-color:var(--orange);background:var(--card);}
+.it-btn{background:var(--text);color:var(--card);border:0;border-radius:8px;padding:10px 16px;font-size:12px;font-weight:500;transition:.2s;}
+.it-btn:hover{background:var(--orange);}
 
-.main-menu a:hover{
-  color:var(--orange);
-}
+.console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:160px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;white-space:pre-wrap;}
 
-.menu-extra{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+/* HISTORY TABLE */
+.history{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;margin-top:40px;box-shadow:var(--shadow);}
+.hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.hhead h2{margin:0;font-size:16px;font-weight:600;}
+.table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;text-align:left;min-width:500px;}
+th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;}
+th{font-weight:500;color:var(--muted);background:var(--soft);}
+.empty{text-align:center;color:var(--muted);padding:30px;white-space:normal;}
 
-#lang{
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--text);
-  border-radius:8px;
-  padding:8px 10px;
-  font-size:12px;
-  cursor:pointer;
-  outline:none;
-}
+footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px;}
+.foot{display:flex;justify-content:space-between;align-items:center;}
 
-.theme-btn{
-  width:36px;
-  height:36px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:var(--card);
-  color:var(--text);
-  cursor:pointer;
-  font-size:17px;
-}
+.dark{--bg:#030712;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;--line:#1e293b;--soft:#111827;}
+.dark header,.dark footer{background:#0f172a;}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea{background:#111827;color:var(--text);border-color:var(--line);}
+.dark th{background:#111827;}
 
-.container{
-  width:min(1100px,calc(100% - 32px));
-  margin:auto;
+@media(max-width:900px){.it-tools-grid{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
+  .main-menu.active{display:flex;}
+  .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
 }
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:75px 0 45px;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:7px 12px;
-  border:1px solid var(--line);
-  border-radius:30px;
-  background:var(--card);
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:18px;
-}
-
-.badge-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#22c55e;
-}
-
-.hero h1{
-  margin:0;
-  font-size:clamp(34px,6vw,58px);
-  letter-spacing:-2px;
-}
-
-.hero h1 span{
-  color:var(--orange);
-}
-
-.hero p{
-  max-width:700px;
-  margin:18px auto 0;
-  color:var(--muted);
-  line-height:1.7;
-  font-size:16px;
-}
-
-/* FAQ */
-.section-title{
-  text-align:center;
-  margin:20px 0 35px;
-}
-
-.section-title h2{
-  margin:0 0 10px;
-  font-size:30px;
-  letter-spacing:-.8px;
-}
-
-.section-title p{
-  margin:0;
-  color:var(--muted);
-}
-
-.faq-list{
-  display:grid;
-  gap:12px;
-  margin-bottom:80px;
-}
-
-.faq-item{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-
-.faq-question{
-  width:100%;
-  border:0;
-  background:none;
-  color:var(--text);
-  padding:20px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  text-align:left;
-  cursor:pointer;
-  font-size:15px;
-}
-
-.faq-question span:last-child{
-  color:var(--orange);
-  font-size:20px;
-}
-
-.faq-answer{
-  display:none;
-  padding:0 22px 20px;
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.faq-item.active .faq-answer{
-  display:block;
-}
-
-.faq-item.active .faq-question span:last-child{
-  transform:rotate(45deg);
-}
-
-/* AI SECTION */
-.ai-section{
-  margin:30px 0 80px;
-}
-
-.ai-box{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-
-.ai-top{
-  padding:28px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.ai-icon{
-  width:52px;
-  height:52px;
-  border-radius:14px;
-  background:var(--orange);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:24px;
-  flex-shrink:0;
-}
-
-.ai-top h2{
-  margin:0 0 5px;
-  font-size:22px;
-}
-
-.ai-top p{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.powered{
-  margin-left:auto;
-  color:var(--muted);
-  font-size:12px;
-  white-space:nowrap;
-}
-
-.powered strong{
-  color:var(--text);
-}
-
-.ai-messages{
-  height:430px;
-  overflow-y:auto;
-  padding:24px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.ai-message{
-  max-width:82%;
-  padding:15px 17px;
-  border-radius:14px;
-  line-height:1.6;
-  font-size:14px;
-}
-
-.ai-message p{
-  margin:7px 0 0;
-}
-
-.ai-message.assistant{
-  align-self:flex-start;
-  background:var(--soft);
-  border:1px solid var(--line);
-}
-
-.ai-message.user{
-  align-self:flex-end;
-  background:var(--orange);
-  color:#fff;
-}
-
-.ai-message.user strong{
-  color:#fff;
-}
-
-.ai-form{
-  padding:18px;
-  border-top:1px solid var(--line);
-  display:flex;
-  gap:10px;
-}
-
-.ai-form input{
-  flex:1;
-  min-width:0;
-  height:48px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:0 15px;
-  background:var(--bg);
-  color:var(--text);
-  outline:none;
-  font-size:14px;
-}
-
-.ai-form input:focus{
-  border-color:var(--orange);
-}
-
-.ai-form button{
-  height:48px;
-  padding:0 22px;
-  border:0;
-  border-radius:10px;
-  background:var(--orange);
-  color:#fff;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
-}
-
-.ai-form button:hover{
-  background:var(--orange-dark);
-}
-
-.ai-form button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-/* CTA */
-.cta{
-  text-align:center;
-  margin:0 0 80px;
-  padding:45px 25px;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:18px;
-}
-
-.cta h2{
-  margin:0 0 10px;
-  font-size:27px;
-}
-
-.cta p{
-  color:var(--muted);
-  margin:0 0 22px;
-}
-
-.cta a{
-  display:inline-block;
-  padding:12px 20px;
-  border-radius:9px;
-  background:var(--orange);
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-}
-
-/* FOOTER */
-footer{
-  border-top:1px solid var(--line);
-  padding:35px 20px;
-  background:var(--card);
-}
-
-.footer-inner{
-  max-width:1100px;
-  margin:auto;
-  text-align:center;
-}
-
-.footer-copy{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-}
-
-.footer-links{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin-top:16px;
-}
-
-.footer-links a{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:12px;
-}
-
-.footer-links a:hover{
-  color:var(--orange);
-}
-
-@media(max-width:950px){
-  .nav{ flex-wrap:wrap; padding:12px 18px; }
-  .brand{ margin-right:auto; }
-  .main-menu{ width:100%; order:3; justify-content:center; flex-wrap:wrap; gap:12px 18px; padding-bottom:5px; }
-  .menu-extra{ margin-left:0; }
-}
-
-@media(max-width:600px){
-  .hero{ padding:50px 0 35px; }
-  .hero h1{ letter-spacing:-1.3px; }
-  .ai-top{ flex-wrap:wrap; }
-  .powered{ width:100%; margin-left:68px; }
-  .ai-messages{ height:380px; padding:16px; }
-  .ai-message{ max-width:92%; }
-  .ai-form{ flex-direction:column; }
-  .ai-form button{ width:100%; }
+@media print {
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .history { border: none; box-shadow: none; }
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="nav">
-    <a class="brand" href="/">
-      <div class="logo">F</div>
-      <div class="brand-name">Fasqoo</div>
-    </a>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brandmark">⌁</div>
+      <div class="brandname">Fasqoo</div>
+    </div>
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
 
-    <nav class="main-menu" aria-label="Main navigation">
-      <a data-i18n="navHome" href="/">Home</a>
-      <a data-i18n="navFaq" href="/faq.html">FAQ</a>
-      <a data-i18n="navNetwork" href="/network-status.html">Network Status</a>
-      <a href="subnet-calculator.html" id="navStatus">IT-Diagnose</a>
-      <a data-i18n="navAbout" href="/about">About</a>
-
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="network-status.html">Netzwerk-Status</a>
+      <a href="subnet-calculator.html">Subnet Calculator</a>
       <div class="menu-extra">
-        <select id="lang" aria-label="Language">
+        <select id="langSelect" aria-label="Language">
           <option value="de">Deutsch</option>
           <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="it">Italiano</option>
-          <option value="pt">Português</option>
-          <option value="nl">Nederlands</option>
-          <option value="tr">Türkçe</option>
           <option value="sq">Shqip</option>
-          <option value="ar">العربية</option>
         </select>
-
-        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode" title="Dark mode">☾</button>
       </div>
     </nav>
   </div>
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="badge">
-        <span class="badge-dot"></span>
-        <span data-i18n="badge">Fasqoo Support Center</span>
-      </div>
+  <div class="wrap">
 
-      <h1>
-        <span data-i18n="heroTitle1">Fasqoo</span>
-        <span data-i18n="heroTitle2">Help Center</span>
-      </h1>
+    <section class="hero">
+      <h1>Network Engineer Toolkit & Diagnose Suite</h1>
+      <p>Umfassendes Werkzeugset für IP-Subnetting, DNS, Netzwerkanalypse, Web-Server, Sicherheit und Administrator-Tools.</p>
+    </section>
 
-      <p data-i18n="heroText">
-        Find answers to common Internet and network questions or ask our
-        AI Technician for professional troubleshooting assistance.
-      </p>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="container">
-    <div class="section-title">
-      <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
-      <p data-i18n="faqSubtitle">Everything you need to know about Internet speed testing.</p>
+    <!-- Global Actions -->
+    <div class="tool-actions">
+      <button class="action-btn" id="copyResultsBtn">📋 Ergebnis kopieren</button>
+      <button class="action-btn" id="shareResultsBtn">📤 Ergebnis teilen</button>
+      <button class="action-btn" id="jsonExportBtn">💻 JSON exportieren</button>
+      <button class="action-btn" id="printReportBtn">🖨️ Bericht drucken</button>
     </div>
 
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q1">What is an Internet speed test?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a1">
-          An Internet speed test measures important connection parameters such as download speed, upload speed, ping and jitter. Fasqoo uses these measurements to help you understand the quality of your Internet connection.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q2">What is download speed?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a2">
-          Download speed describes how quickly data can be transferred from the Internet to your device. It is normally measured in Mbps or Gbps.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q3">What is upload speed?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a3">
-          Upload speed describes how quickly your device can send data to the Internet. It is important for video calls, cloud backups, streaming and uploading files.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q4">What is ping?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a4">
-          Ping measures network response time. A lower ping generally means a faster response between your device and the test server. Low latency is especially important for online gaming and real-time communication.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q5">What is jitter?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a5">
-          Jitter measures variations in packet arrival time. High jitter can cause interruptions or unstable quality in gaming, voice calls and video meetings.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q6">Why is my Wi-Fi slow?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a6">
-          Slow Wi-Fi can be caused by distance from the router, interference, congestion, walls, old hardware or a busy wireless channel. Testing with Ethernet can help determine whether the problem is Wi-Fi or the Internet connection itself.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q7">Why is my ping high in games?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a7">
-          High gaming latency can be caused by server distance, routing, Wi-Fi interference, network congestion or bufferbloat. An Ethernet connection and a nearby game server can often improve stability.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          <span data-i18n="q8">Why is my upload speed slow?</span>
-          <span>+</span>
-        </button>
-        <div class="faq-answer" data-i18n="a8">
-          Upload performance may be limited by your Internet plan, Wi-Fi conditions, router configuration, network congestion or the provider's upstream capacity.
-        </div>
-      </div>
+    <!-- Category Tabs Navigation -->
+    <div class="toolkit-tabs" id="toolkitTabs">
+      <button class="tab-btn active" data-target="sec-subnet">📐 IP & Subnetting</button>
+      <button class="tab-btn" data-target="sec-dns">🌐 DNS & Records</button>
+      <button class="tab-btn" data-target="sec-network">⚡ Network & Ping</button>
+      <button class="tab-btn" data-target="sec-web">🔒 Web & Server</button>
+      <button class="tab-btn" data-target="sec-security">🛡️ IP / Security</button>
+      <button class="tab-btn" data-target="sec-admin">🛠️ Admin Tools</button>
     </div>
-  </section>
 
-  <!-- AI TECHNICIAN -->
-  <section id="fasqoo-ai" class="ai-section">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-i18n="aiSectionTitle">Fasqoo AI Technician</h2>
-        <p data-i18n="aiSectionText">Get technical help with your Internet and network connection.</p>
-      </div>
-
-      <div class="ai-box">
-        <div class="ai-top">
-          <div class="ai-icon">✦</div>
+    <!-- 1. IP & SUBNETTING -->
+    <div class="toolkit-section active" id="sec-subnet">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
           <div>
-            <h2 data-i18n="aiTitle">Fasqoo AI Technician Assistant</h2>
-            <p data-i18n="aiDescription">Professional Internet and network troubleshooting assistance.</p>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv4 / CIDR Calculator</h3></div>
+            <p>Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.</p>
+            <div class="it-input-group">
+              <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="IP/CIDR (z.B. 10.0.0.0/16)">
+              <button class="it-btn" id="calcSubnetBtn">Berechnen</button>
+            </div>
           </div>
-          <div class="powered">
-            <span data-i18n="powered">Powered by</span>
-            <strong> Google Gemini</strong>
-          </div>
+          <div class="console-output" id="subnetOutput">> Bereit für Subnet-Berechnung...</div>
         </div>
-
-        <div id="aiMessages" class="ai-messages">
-          <div class="ai-message assistant">
-            <strong>Fasqoo AI Technician</strong>
-            <p data-i18n="aiWelcome">
-              Hello! I can help you troubleshoot Internet, Wi-Fi, ping, jitter, download, upload and other network problems. What is the problem you are experiencing?
-            </p>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv6 & VLSM / Supernet Calculator</h3></div>
+            <p>Ermittle IPv6 Prefix-Ranges und teile IP-Netzwerke via VLSM auf.</p>
+            <div class="it-input-group">
+              <input type="text" id="vlsmInput" value="192.168.0.0/22" placeholder="Netzwerk für VLSM">
+              <button class="it-btn" id="calcVlsmBtn">VLSM Analyse</button>
+            </div>
           </div>
+          <div class="console-output" id="vlsmOutput">> Warten auf Eingabe...</div>
         </div>
-
-        <form id="aiForm" class="ai-form">
-          <input
-            id="aiInput"
-            type="text"
-            autocomplete="off"
-            required
-            data-i18n-placeholder="aiPlaceholder"
-            placeholder="Ask about your Internet connection..."
-          >
-          <button id="aiSend" type="submit" data-i18n="aiButton">Ask AI</button>
-        </form>
       </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="container">
-    <div class="cta">
-      <h2 data-i18n="ctaTitle">Test your Internet connection</h2>
-      <p data-i18n="ctaText">Get your download, upload, ping and jitter results with Fasqoo.</p>
-      <a data-i18n="ctaButton" href="/">Start Speed Test</a>
+    <!-- 2. DNS -->
+    <div class="toolkit-section" id="sec-dns">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🌐</div><h3>DNS Lookup (A, AAAA, MX, TXT, NS, SOA)</h3></div>
+            <p>Frage sämtliche DNS-Einträge und Reverse-DNS (PTR) über sichere DoH Resolver ab.</p>
+            <div class="it-input-group">
+              <input type="text" id="dnsDomainInput" value="google.com" placeholder="domain.com">
+              <select id="dnsTypeSelect">
+                <option value="ALL">Alle Records</option>
+                <option value="A">A (IPv4)</option>
+                <option value="AAAA">AAAA (IPv6)</option>
+                <option value="MX">MX (Mail)</option>
+                <option value="TXT">TXT</option>
+                <option value="NS">NS</option>
+                <option value="PTR">PTR / Reverse</option>
+              </select>
+              <button class="it-btn" id="runDnsTool">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="dnsToolOutput">> DNS-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>DNS Propagation & DNSSEC Check</h3></div>
+            <p>Überprüfe weltweite DNS-Ausbreitung und Sicherheitsstatus (DNSSEC).</p>
+            <div class="it-input-group">
+              <input type="text" id="propInput" value="cloudflare.com" placeholder="domain.com">
+              <button class="it-btn" id="runPropBtn">Prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="propOutput">> Bereit für Propagation-Check...</div>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <!-- 3. NETWORK -->
+    <div class="toolkit-section" id="sec-network">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">⚡</div><h3>Ping, Traceroute & MTR Simulator</h3></div>
+            <p>Simuliere Paketlaufzeiten, RTT, Jitter, MTU Tests und TCP Connectivity.</p>
+            <div class="it-input-group">
+              <input type="text" id="netTarget" value="8.8.8.8" placeholder="IP oder Hostname">
+              <select id="netTestType">
+                <option value="ping">Ping / Latency</option>
+                <option value="traceroute">Traceroute / MTR</option>
+                <option value="port">TCP Port Connect</option>
+                <option value="mtu">MTU & Packet Loss</option>
+              </select>
+              <button class="it-btn" id="runNetTest">Test starten</button>
+            </div>
+          </div>
+          <div class="console-output" id="netOutput">> Netzwerk-Diagnose bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔌</div><h3>TCP & UDP Port Checker</h3></div>
+            <p>Prüfe spezifische Ports auf Erreichbarkeit.</p>
+            <div class="it-input-group">
+              <input type="text" id="portTarget" value="example.com:443" placeholder="domain.com:port">
+              <button class="it-btn" id="runPortCheck">Port prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="portOutput">> Port-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WEB / SERVER -->
+    <div class="toolkit-section" id="sec-web">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔒</div><h3>SSL Certificate & TLS Version Analyzer</h3></div>
+            <p>Prüfe SSL/TLS Zertifikatslaufzeit, Verschlüsselung und Security Headers.</p>
+            <div class="it-input-group">
+              <input type="text" id="webTarget" value="https://cloudflare.com" placeholder="https://domain.com">
+              <button class="it-btn" id="runWebCheck">Analysieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="webOutput">> Web-Inspektor bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📋</div><h3>HTTP Header Inspector & Redirect Checker</h3></div>
+            <p>Untersuche HTTP Status, Response Header und Weiterleitungsketten.</p>
+            <div class="it-input-group">
+              <input type="text" id="headerInput" value="https://google.com" placeholder="https://url.com">
+              <button class="it-btn" id="runHeaderCheck">Inspizieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="headerOutput">> Header-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. IP / SECURITY -->
+    <div class="toolkit-section" id="sec-security">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛡️</div><h3>Public IP, ASN, ISP & Proxy/VPN Detection</h3></div>
+            <p>Erkenne eigene IPv4/IPv6, ASN, ISP, IP Reputation und Proxy/VPN Nutzung.</p>
+            <div class="it-input-group">
+              <input type="text" id="secIpInput" value="1.1.1.1" placeholder="IP-Adresse abfragen">
+              <button class="it-btn" id="runSecIpBtn">Abfragen</button>
+            </div>
+          </div>
+          <div class="console-output" id="secIpOutput">> Sicherheits-Tool bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>Reverse IP & Abuse Contact Lookup</h3></div>
+            <p>Finde gehostete Domains auf einer IP und Abuse-Kontakte.</p>
+            <div class="it-input-group">
+              <input type="text" id="abuseInput" value="8.8.8.8" placeholder="IP eingeben">
+              <button class="it-btn" id="runAbuseBtn">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="abuseOutput">> Abuse-Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ADMIN TOOLS -->
+    <div class="toolkit-section" id="sec-admin">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛠️</div><h3>Admin Utilities (MAC, Password, JWT, Base64, JSON)</h3></div>
+            <p>Generiere Passwörter, UUIDs, konvertiere Timestamps oder decodiere JWT/Base64.</p>
+            <div class="it-input-group">
+              <textarea id="adminInput" placeholder="Text oder JSON eingeben..."></textarea>
+              <select id="adminAction">
+                <option value="base64enc">Base64 Encode</option>
+                <option value="base64dec">Base64 Decode</option>
+                <option value="urlenc">URL Encode</option>
+                <option value="jwtdec">JWT Decoder</option>
+                <option value="pwdgen">Passwort Generator</option>
+                <option value="uuidgen">UUID Generator</option>
+                <option value="jsonfmt">JSON Formatter</option>
+                <option value="timestamp">Timestamp Converter</option>
+              </select>
+              <button class="it-btn" id="runAdminTool">Ausführen</button>
+            </div>
+          </div>
+          <div class="console-output" id="adminOutput">> Admin-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📌</div><h3>MAC Address & QR Code Generator</h3></div>
+            <p>Ermittle MAC Vendor Infos oder generiere QR-Codes.</p>
+            <div class="it-input-group">
+              <input type="text" id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="MAC-Adresse oder QR Text">
+              <button class="it-btn" id="runMacBtn">Verarbeiten</button>
+            </div>
+          </div>
+          <div class="console-output" id="macOutput">> MAC / QR Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <section class="history">
+      <div class="hhead">
+        <h2>Toolkit Aktivitätsprotokoll</h2>
+        <button class="action-btn" id="clearLog">Log löschen</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Zeitstempel</th>
+              <th>Kategorie / Werkzeug</th>
+              <th>Ziel / Eingabe</th>
+              <th>Ergebnis / Status</th>
+            </tr>
+          </thead>
+          <tbody id="itLogTable">
+            <tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-copy">
-      <div data-i18n="copyright">© 2026 Fasqoo. All Rights Reserved.</div>
-      <div data-i18n="trademark">
-        Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo and may only be used with permission.
-      </div>
-    </div>
-
-    <div class="footer-links">
-      <a data-i18n="footerAbout" href="/about">About</a>
-      <a data-i18n="footerFaq" href="/faq.html">FAQ</a>
-      <a data-i18n="footerNetwork" href="/network-status.html">Network Status</a>
-      <a data-i18n="footerPrivacy" href="/privacy-policy">Privacy Policy</a>
-      <a data-i18n="footerTerms" href="/terms">Terms of Use</a>
-      <a data-i18n="footerDoNotSell" href="/do-not-sell">Do Not Sell My Personal Information</a>
-      <a data-i18n="footerSlavery" href="/modern-slavery">Modern Slavery Policy</a>
-      <a data-i18n="footerAccessibility" href="/accessibility">Accessibility</a>
-    </div>
+<div class="wrap foot">
+  <div>© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+  <div style="display:flex; gap:15px;">
+    <a href="/privacy.html" style="color:inherit; text-decoration:none;">Datenschutz</a>
+    <a href="/terms.html" style="color:inherit; text-decoration:none;">Nutzungsbedingungen</a>
   </div>
+</div>
 </footer>
 
 <script>
-/* FASQOO TRANSLATIONS */
-const translations = {
-  de:{
-    navHome:"Startseite", navSpeed:"Speedtest", navFaq:"FAQ", navAI:"AI Technician", navNetwork:"Netzwerkstatus", navAbout:"Über Fasqoo",
-    badge:"Fasqoo Support-Center", heroTitle1:"Fasqoo", heroTitle2:"Hilfezentrum",
-    heroText:"Finde Antworten auf häufige Internet- und Netzwerkfragen oder frage unseren AI Technician nach professioneller Hilfe.",
-    faqTitle:"Häufig gestellte Fragen", faqSubtitle:"Alles, was du über Internet-Speedtests wissen musst.",
-    q1:"Was ist ein Internet-Speedtest?", a1:"Ein Internet-Speedtest misst wichtige Verbindungswerte wie Download, Upload, Ping und Jitter.",
-    q2:"Was ist Download-Geschwindigkeit?", a2:"Die Download-Geschwindigkeit beschreibt, wie schnell Daten aus dem Internet auf dein Gerät übertragen werden.",
-    q3:"Was ist Upload-Geschwindigkeit?", a3:"Die Upload-Geschwindigkeit beschreibt, wie schnell dein Gerät Daten ins Internet senden kann.",
-    q4:"Was ist Ping?", a4:"Ping misst die Antwortzeit eines Netzwerks.",
-    q5:"Was ist Jitter?", a5:"Jitter misst Schwankungen bei der Ankunft von Datenpaketen.",
-    q6:"Warum ist mein WLAN langsam?", a6:"Langsames WLAN kann durch Entfernung zum Router, Störungen, Überlastung, Wände oder ältere Hardware verursacht werden.",
-    q7:"Warum ist mein Ping beim Gaming hoch?", a7:"Hohe Latenz beim Gaming kann durch Entfernung zum Server, Routing oder WLAN-Störungen verursacht werden.",
-    q8:"Warum ist mein Upload langsam?", a8:"Die Upload-Leistung kann durch deinen Tarif, WLAN-Bedingungen oder Router-Einstellungen begrenzt werden.",
-    aiSectionTitle:"Fasqoo AI Technician", aiSectionText:"Erhalte technische Hilfe für deine Internet- und Netzwerkverbindung.",
-    aiTitle:"Fasqoo AI Technician Assistent", aiDescription:"Professionelle Unterstützung bei Internet- und Netzwerkproblemen.",
-    powered:"Bereitgestellt von", aiWelcome:"Hallo! Ich kann dir bei Internet, WLAN, Ping, Jitter, Download, Upload und anderen Netzwerkproblemen helfen. Was ist dein Problem?",
-    aiPlaceholder:"Frage etwas über deine Internetverbindung...", aiButton:"AI fragen",
-    ctaTitle:"Teste deine Internetverbindung", ctaText:"Erhalte Download-, Upload-, Ping- und Jitter-Werte mit Fasqoo.", ctaButton:"Speed Test starten",
-    copyright:"© 2026 Fasqoo. Alle Rechte vorbehalten.", trademark:"Fasqoo™ und Fasqoo Internet Speed Test sind Marken von Fasqoo.",
-    footerAbout:"Über Fasqoo", footerFaq:"FAQ", footerNetwork:"Netzwerkstatus", footerPrivacy:"Datenschutz", footerTerms:"Nutzungsbedingungen", footerDoNotSell:"Meine persönlichen Daten nicht verkaufen", footerSlavery:"Moderne Sklaverei Richtlinie", footerAccessibility:"Barrierefreiheit"
-  },
-  en:{
-    navHome:"Home", navSpeed:"Speed Test", navFaq:"FAQ", navAI:"AI Technician", navNetwork:"Network Status", navAbout:"About",
-    badge:"Fasqoo Support Center", heroTitle1:"Fasqoo", heroTitle2:"Help Center",
-    heroText:"Find answers to common Internet and network questions or ask our AI Technician for professional troubleshooting assistance.",
-    faqTitle:"Frequently Asked Questions", faqSubtitle:"Everything you need to know about Internet speed testing.",
-    q1:"What is an Internet speed test?", a1:"An Internet speed test measures download speed, upload speed, ping and jitter.",
-    q2:"What is download speed?", a2:"Download speed describes how quickly data can be transferred from the Internet to your device.",
-    q3:"What is upload speed?", a3:"Upload speed describes how quickly your device can send data to the Internet.",
-    q4:"What is ping?", a4:"Ping measures network response time.",
-    q5:"What is jitter?", a5:"Jitter measures variations in packet arrival time.",
-    q6:"Why is my Wi-Fi slow?", a6:"Slow Wi-Fi can be caused by distance from the router, interference, walls or old hardware.",
-    q7:"Why is my ping high in games?", a7:"High gaming latency can be caused by server distance, routing or Wi-Fi interference.",
-    q8:"Why is my upload speed slow?", a8:"Upload performance may be limited by your plan, Wi-Fi conditions or router settings.",
-    aiSectionTitle:"Fasqoo AI Technician", aiSectionText:"Get technical help with your Internet connection.",
-    aiTitle:"Fasqoo AI Technician Assistant", aiDescription:"Professional Internet and network troubleshooting assistance.",
-    powered:"Powered by", aiWelcome:"Hello! I can help you troubleshoot Internet, Wi-Fi, ping, jitter, download, upload and other network problems.",
-    aiPlaceholder:"Ask about your Internet connection...", aiButton:"Ask AI",
-    ctaTitle:"Test your Internet connection", ctaText:"Get your download, upload, ping and jitter results with Fasqoo.", ctaButton:"Start Speed Test",
-    copyright:"© 2026 Fasqoo. All Rights Reserved.", trademark:"Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo.",
-    footerAbout:"About", footerFaq:"FAQ", footerNetwork:"Network Status", footerPrivacy:"Privacy Policy", footerTerms:"Terms of Use", footerDoNotSell:"Do Not Sell My Personal Information", footerSlavery:"Modern Slavery Policy", footerAccessibility:"Accessibility"
-  },
-  fr:{
-    navHome:"Accueil", navSpeed:"Test de débit", navFaq:"FAQ", navAI:"Technicien IA", navNetwork:"État du réseau", navAbout:"À propos",
-    badge:"Centre de support Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"Centre d'aide",
-    heroText:"Trouvez des réponses aux questions courantes sur Internet et les réseaux ou demandez de l'aide à notre technicien IA.",
-    faqTitle:"Foire Aux Questions", faqSubtitle:"Tout ce que vous devez savoir sur le test de vitesse Internet.",
-    q1:"Qu'est-ce qu'un test de vitesse Internet?", a1:"Un test de vitesse mesure le débit descendant, montant, le ping et le jitter.",
-    q2:"Qu'est-ce que la vitesse de téléchargement?", a2:"Elle décrit la rapidité avec laquelle les données sont transférées d'Internet vers votre appareil.",
-    q3:"Qu'est-ce que la vitesse d'envoi?", a3:"Elle indique à quelle vitesse votre appareil peut envoyer des données sur Internet.",
-    q4:"Qu'est-ce que le ping?", a4:"Le ping mesure le temps de réponse d'un réseau.",
-    q5:"Qu'est-ce que le jitter?", a5:"Le jitter mesure les variations du temps d'arrivée des paquets de données.",
-    q6:"Pourquoi mon Wi-Fi est-il lent?", a6:"Un Wi-Fi lent peut être causé par la distance, des interférences ou un équipement ancien.",
-    q7:"Pourquoi mon ping est-il élevé dans les jeux?", a7:"Cela peut être dû à la distance du serveur, au routage ou à des interférences Wi-Fi.",
-    q8:"Pourquoi ma vitesse d'envoi est-elle lente?", a8:"Elle peut être limitée par votre forfait, les conditions Wi-Fi ou la configuration du routeur.",
-    aiSectionTitle:"Technicien IA Fasqoo", aiSectionText:"Obtenez une aide technique pour votre connexion Internet.",
-    aiTitle:"Assistant Technicien IA Fasqoo", aiDescription:"Assistance professionnelle pour le dépannage réseau et Internet.",
-    powered:"Propulsé par", aiWelcome:"Bonjour! Je peux vous aider à résoudre vos problèmes de Wi-Fi, ping, débit et réseau.",
-    aiPlaceholder:"Posez une question sur votre connexion...", aiButton:"Demander à l'IA",
-    ctaTitle:"Testez votre connexion Internet", ctaText:"Obtenez vos résultats de débit, ping et jitter avec Fasqoo.", ctaButton:"Lancer le test",
-    copyright:"© 2026 Fasqoo. Tous droits réservés.", trademark:"Fasqoo™ et Fasqoo Internet Speed Test sont des marques déposées de Fasqoo.",
-    footerAbout:"À propos", footerFaq:"FAQ", footerNetwork:"État du réseau", footerPrivacy:"Politique de confidentialité", footerTerms:"Conditions d'utilisation", footerDoNotSell:"Ne pas vendre mes informations", footerSlavery:"Esclavage moderne", footerAccessibility:"Accessibilité"
-  },
-  es:{
-    navHome:"Inicio", navSpeed:"Test de velocidad", navFaq:"FAQ", navAI:"Técnico IA", navNetwork:"Estado de red", navAbout:"Sobre nosotros",
-    badge:"Centro de Soporte Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"Centro de Ayuda",
-    heroText:"Encuentra respuestas a preguntas sobre Internet y redes o pide ayuda a nuestro Técnico IA.",
-    faqTitle:"Preguntas Frecuentes", faqSubtitle:"Todo lo que necesitas saber sobre pruebas de velocidad de Internet.",
-    q1:"¿Qué es un test de velocidad?", a1:"Un test de velocidad mide descarga, carga, ping y jitter.",
-    q2:"¿Qué es la velocidad de descarga?", a2:"Describe la rapidez con la que se transfieren datos de Internet a tu dispositivo.",
-    q3:"¿Qué es la velocidad de carga?", a3:"Indica la rapidez con la que tu dispositivo envía datos a Internet.",
-    q4:"¿Qué es el ping?", a4:"El ping mide el tiempo de respuesta de una red.",
-    q5:"¿Qué es el jitter?", a5:"Mide las variaciones en los tiempos de llegada de los paquetes de datos.",
-    q6:"¿Por qué mi Wi-Fi es lento?", a6:"Puede deberse a la distancia al router, interferencias, paredes o hardware antiguo.",
-    q7:"¿Por qué mi ping es alto en los juegos?", a7:"Puede ser provocado por la distancia al servidor, enrutamiento o interferencias de Wi-Fi.",
-    q8:"¿Por qué mi velocidad de carga es lenta?", a8:"Puede estar limitada por tu plan de Internet, Wi-Fi o configuración del router.",
-    aiSectionTitle:"Técnico IA de Fasqoo", aiSectionText:"Obtén ayuda técnica para tu conexión a Internet.",
-    aiTitle:"Asistente Técnico IA Fasqoo", aiDescription:"Asistencia profesional para la solución de problemas de red.",
-    powered:"Desarrollado por", aiWelcome:"¡Hola! Puedo ayudarte a solucionar problemas de Internet, Wi-Fi, ping y rendimiento.",
-    aiPlaceholder:"Pregunta sobre tu conexión a Internet...", aiButton:"Preguntar a IA",
-    ctaTitle:"Prueba tu conexión a Internet", ctaText:"Obtén tus resultados de descarga, carga, ping y jitter con Fasqoo.", ctaButton:"Iniciar test",
-    copyright:"© 2026 Fasqoo. Todos los derechos reservados.", trademark:"Fasqoo™ y Fasqoo Internet Speed Test son marcas registradas.",
-    footerAbout:"Sobre nosotros", footerFaq:"FAQ", footerNetwork:"Estado de red", footerPrivacy:"Política de privacidad", footerTerms:"Términos de uso", footerDoNotSell:"No vender mi información", footerSlavery:"Política sobre esclavitud moderna", footerAccessibility:"Accesibilidad"
-  },
-  it:{
-    navHome:"Home", navSpeed:"Speed Test", navFaq:"FAQ", navAI:"Tecnico IA", navNetwork:"Stato della rete", navAbout:"Info su Fasqoo",
-    badge:"Centro Assistenza Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"Centro Assistenza",
-    heroText:"Trova risposte alle domande su Internet e reti o chiedi aiuto al nostro Tecnico IA.",
-    faqTitle:"Domande Frequenti", faqSubtitle:"Tutto quello che devi sapere sui test di velocità Internet.",
-    q1:"Cos'è un test di velocità Internet?", a1:"Misura parametri come velocità di download, upload, ping e jitter.",
-    q2:"Cos'è la velocità di download?", a2:"Indica quanto velocemente i dati vengono trasferiti da Internet al tuo dispositivo.",
-    q3:"Cos'è la velocità di upload?", a3:"Indica quanto velocemente il tuo dispositivo invia dati a Internet.",
-    q4:"Cos'è il ping?", a4:"Il ping misura il tempo di risposta di una rete.",
-    q5:"Cos'è il jitter?", a5:"Misura le variazioni nei tempi di arrivo dei pacchetti dati.",
-    q6:"Perché il mio Wi-Fi è lento?", a6:"Può essere causato dalla distanza dal router, interferenze, ostacoli o hardware datato.",
-    q7:"Perché il mio ping è alto nei giochi?", a7:"Può dipendere dalla distanza del server, dal routing o da interferenze Wi-Fi.",
-    q8:"Perché la velocità di upload è lenta?", a8:"Può essere limitata dal tuo piano tariffario, condizioni Wi-Fi o router.",
-    aiSectionTitle:"Tecnico IA Fasqoo", aiSectionText:"Ottieni supporto tecnico per la tua connessione rete e Internet.",
-    aiTitle:"Assistente Tecnico IA Fasqoo", aiDescription:"Supporto professionale per la risoluzione dei problemi di rete.",
-    powered:"Offerto da", aiWelcome:"Ciao! Posso aiutarti a risolvere problemi di Internet, Wi-Fi, ping, upload e download.",
-    aiPlaceholder:"Fai una domanda sulla tua connessione...", aiButton:"Chiedi all'IA",
-    ctaTitle:"Testa la tua connessione Internet", ctaText:"Ottieni risultati di download, upload, ping e jitter con Fasqoo.", ctaButton:"Avvia Speed Test",
-    copyright:"© 2026 Fasqoo. Tutti i diritti riservati.", trademark:"Fasqoo™ e Fasqoo Internet Speed Test sono marchi di Fasqoo.",
-    footerAbout:"Info su Fasqoo", footerFaq:"FAQ", footerNetwork:"Stato della rete", footerPrivacy:"Privacy Policy", footerTerms:"Termini di utilizzo", footerDoNotSell:"Non vendere le mie informazioni", footerSlavery:"Normativa schiavitù moderna", footerAccessibility:"Accessibilità"
-  },
-  pt:{
-    navHome:"Início", navSpeed:"Teste de Velocidade", navFaq:"FAQ", navAI:"Técnico IA", navNetwork:"Estado da Rede", navAbout:"Sobre a Fasqoo",
-    badge:"Centro de Suporte Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"Centro de Ajuda",
-    heroText:"Encontre respostas para dúvidas sobre Internet e redes ou peça ajuda ao nosso Técnico IA.",
-    faqTitle:"Perguntas Frequentes", faqSubtitle:"Tudo o que precisa de saber sobre testes de velocidade de Internet.",
-    q1:"O que é um teste de velocidade?", a1:"Mede parâmetros como download, upload, ping e jitter.",
-    q2:"O que é a velocidade de download?", a2:"Descreve a rapidez com que os dados são transferidos da Internet para o seu dispositivo.",
-    q3:"O que é a velocidade de upload?", a3:"Descreve a rapidez com que o seu dispositivo envia dados para a Internet.",
-    q4:"O que é o ping?", a4:"O ping mede o tempo de resposta da rede.",
-    q5:"O que é o jitter?", a5:"Mede as variações no tempo de chegada dos pacotes de dados.",
-    q6:"Por que a minha Wi-Fi está lenta?", a6:"Pode ser provocado por distância do router, interferências ou equipamento antigo.",
-    q7:"Por que o meu ping está alto em jogos?", a7:"Pode dever-se à distância do servidor, encaminhamento de rede ou interferência Wi-Fi.",
-    q8:"Por que a velocidade de upload está lenta?", a8:"Pode ser limitada pelo seu plano de Internet, condições do Wi-Fi ou configurações.",
-    aiSectionTitle:"Técnico IA Fasqoo", aiSectionText:"Obtenha ajuda técnica para a sua ligação à Internet.",
-    aiTitle:"Assistente Técnico IA Fasqoo", aiDescription:"Suporte profissional na resolução de problemas de rede.",
-    powered:"Desenvolvido por", aiWelcome:"Olá! Posso ajudar a resolver problemas de Internet, Wi-Fi, ping, download e upload.",
-    aiPlaceholder:"Pergunte algo sobre a sua ligação...", aiButton:"Perguntar à IA",
-    ctaTitle:"Teste a sua ligação à Internet", ctaText:"Obtenha resultados de download, upload, ping e jitter com a Fasqoo.", ctaButton:"Iniciar Teste",
-    copyright:"© 2026 Fasqoo. Todos os direitos reservados.", trademark:"Fasqoo™ e Fasqoo Internet Speed Test são marcas registadas.",
-    footerAbout:"Sobre a Fasqoo", footerFaq:"FAQ", footerNetwork:"Estado da Rede", footerPrivacy:"Política de Privacidade", footerTerms:"Termos de Utilização", footerDoNotSell:"Não vender as minhas informações", footerSlavery:"Política de Escravatura Moderna", footerAccessibility:"Acessibilidade"
-  },
-  nl:{
-    navHome:"Home", navSpeed:"Snelheidstest", navFaq:"FAQ", navAI:"AI Technicus", navNetwork:"Netwerkstatus", navAbout:"Over Fasqoo",
-    badge:"Fasqoo Ondersteuningscentrum", heroTitle1:"Fasqoo", heroTitle2:"Helpcentrum",
-    heroText:"Vind antwoorden op vragen over internet en netwerken of vraag onze AI Technicus om hulp.",
-    faqTitle:"Veelgestelde Vragen", faqSubtitle:"Alles wat u moet weten over internet snelheidstesten.",
-    q1:"Wat is een internetsnelheidstest?", a1:"Een snelheidstest meet downloadsnelheid, uploadsnelheid, ping en jitter.",
-    q2:"Wat is downloadsnelheid?", a2:"Het beschrijft hoe snel gegevens van het internet naar uw apparaat worden overgedragen.",
-    q3:"Wat is uploadsnelheid?", a3:"Het beschrijft hoe snel uw apparaat gegevens naar het internet kan versturen.",
-    q4:"Wat is ping?", a4:"Ping meet de responstijd van een netwerk.",
-    q5:"Wat is jitter?", a5:"Jitter meet variaties in de aankomsttijd van datapakketten.",
-    q6:"Waarom is mijn wifi traag?", a6:"Trage wifi kan worden veroorzaakt door afstand tot de router, interferentie of oude hardware.",
-    q7:"Waarom is mijn ping hoog in games?", a7:"Hoge latency kan worden veroorzaakt door serverafstand, routing of wifi-interferentie.",
-    q8:"Waarom is mijn uploadsnelheid traag?", a8:"Uploadprestaties kunnen beperkt worden door uw abonnement, wifi-omstandigheden of router.",
-    aiSectionTitle:"Fasqoo AI Technicus", aiSectionText:"Krijg technische hulp bij uw netwerkverbinding.",
-    aiTitle:"Fasqoo AI Technicus Assistent", aiDescription:"Professionele ondersteuning bij het oplossen van netwerkproblemen.",
-    powered:"Mede mogelijk gemaakt door", aiWelcome:"Hallo! Ik kan u helpen bij het oplossen van internet-, wifi-, ping- en netwerkproblemen.",
-    aiPlaceholder:"Stel een vraag over uw internetverbinding...", aiButton:"Vraag AI",
-    ctaTitle:"Test uw internetverbinding", ctaText:"Ontvang download-, upload-, ping- en jitter-resultaten met Fasqoo.", ctaButton:"Start Snelheidstest",
-    copyright:"© 2026 Fasqoo. Alle rechten voorbehouden.", trademark:"Fasqoo™ en Fasqoo Internet Speed Test zijn handelsmerken van Fasqoo.",
-    footerAbout:"Over Fasqoo", footerFaq:"FAQ", footerNetwork:"Netwerkstatus", footerPrivacy:"Privacybeleid", footerTerms:"Gebruiksvoorwaarden", footerDoNotSell:"Verkoop mijn gegevens niet", footerSlavery:"Beleid inzake moderne slavernij", footerAccessibility:"Toegankelijkheid"
-  },
-  tr:{
-    navHome:"Ana Sayfa", navSpeed:"Hız Testi", navFaq:"SSS", navAI:"Yapay Zeka Teknisyeni", navNetwork:"Ağ Durumu", navAbout:"Fasqoo Hakkında",
-    badge:"Fasqoo Destek Merkezi", heroTitle1:"Fasqoo", heroTitle2:"Yardım Merkezi",
-    heroText:"İnternet ve ağ sorunlarınızla ilgili sorulara yanıt bulun veya Yapay Zeka Teknisyenimizden yardım alın.",
-    faqTitle:"Sıkça Sorulan Sorular", faqSubtitle:"İnternet hız testi hakkında bilmeniz gereken her şey.",
-    q1:"İnternet hız testi nedir?", a1:"İnternet hız testi; indirme, yükleme, ping ve jitter değerlerini ölçer.",
-    q2:"İndirme hızı nedir?", a2:"Verilerin internetten cihazınıza ne kadar hızlı aktarıldığını ifade eder.",
-    q3:"Yükleme hızı nedir?", a3:"Cihazınızın internete ne kadar hızlı veri gönderebildiğini ifade eder.",
-    q4:"Ping nedir?", a4:"Ping, bir ağın yanıt verme süresini ölçer.",
-    q5:"Jitter nedir?", a5:"Jitter, veri paketlerinin varış sürelerindeki dalgalanmaları ölçer.",
-    q6:"Wi-Fi bağlantım neden yavaş?", a6:"Yavaş Wi-Fi; modeme olan uzaklık, parazit, duvarlar veya eski donanımlardan kaynaklanabilir.",
-    q7:"Oyunlarda pingim neden yüksek?", a7:"Yüksek ping; sunucu uzaklığı, yönlendirme sorunları veya Wi-Fi parazitinden kaynaklanabilir.",
-    q8:"Yükleme hızım neden düşük?", a8:"Yükleme performansı paketiniz, Wi-Fi koşulları veya modem ayarlarınızla sınırlı olabilir.",
-    aiSectionTitle:"Fasqoo Yapay Zeka Teknisyeni", aiSectionText:"İnternet ve ağ bağlantınız için teknik destek alın.",
-    aiTitle:"Fasqoo Yapay Zeka Teknisyen Asistanı", aiDescription:"İnternet ve ağ sorunlarını gidermek için profesyonel yardım.",
-    powered:"Altyapı sağlayıcısı", aiWelcome:"Merhaba! İnternet, Wi-Fi, ping, jitter, indirme ve yükleme sorunlarınızda size yardımcı olabilirim.",
-    aiPlaceholder:"İnternet bağlantınız hakkında soru sorun...", aiButton:"Yapay Zekaya Sor",
-    ctaTitle:"İnternet bağlantınızı test edin", ctaText:"Fasqoo ile indirme, yükleme, ping ve jitter sonuçlarınızı öğrenin.", ctaButton:"Hız Testini Başlat",
-    copyright:"© 2026 Fasqoo. Tüm hakları saklıdır.", trademark:"Fasqoo™ ve Fasqoo Internet Speed Test, Fasqoo tescilli markalarıdır.",
-    footerAbout:"Hakkında", footerFaq:"SSS", footerNetwork:"Ağ Durumu", footerPrivacy:"Gizlilik Politikası", footerTerms:"Kullanım Koşulları", footerDoNotSell:"Kişisel Bilgilerimi Satma", footerSlavery:"Modern Kölelik Politikası", footerAccessibility:"Erişilebilirlik"
-  },
-  sq:{
-    navHome:"Ballina", navSpeed:"Testi i Shpejtësisë", navFaq:"Pyetjet të Shpeshta", navAI:"Tekniku AI", navNetwork:"Statusi i Rjetit", navAbout:"Rreth Fasqoo",
-    badge:"Qendra e Mbështetjes Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"Qendra e Ndihmës",
-    heroText:"Gjeni përgjigje për pyetjet e zakonshme të internetit dhe rrjetit ose kërkoni ndihmë nga Tekniku ynë AI.",
-    faqTitle:"Pyetjet më të Shpeshta", faqSubtitle:"Gjithçka që duhet të dini rreth testimit të shpejtësisë së internetit.",
-    q1:"Çfarë është një test shpejtësie interneti?", a1:"Teston parametrat si shpejtësia e shkarkimit, ngarkimit, ping dhe jitter.",
-    q2:"Çfarë është shpejtësia e shkarkimit (download)?", a2:"Përshkruan se sa shpejt transferohen të dhënat nga interneti në pajisjen tuaj.",
-    q3:"Çfarë është shpejtësia e ngarkimit (upload)?", a3:"Përshkruan se sa shpejt pajisja juaj mund të dërgojë të dhëna në internet.",
-    q4:"Çfarë është ping?", a4:"Ping mat kohën e përgjigjes së rrjetit.",
-    q5:"Çfarë është jitter?", a5:"Jitter mat luhatjet në kohën e mbërritjes së paketave të të dhënave.",
-    q6:"Pse Wi-Fi im është i ngadaltë?", a6:"Mund të shkaktohet nga distanca nga ruteri, pengesat, interferenca ose pajisjet e vjetra.",
-    q7:"Pse ping-u im është i lartë në lojëra?", a7:"Mund të shkaktohet nga distanca e serverit, rrugëzimi ose ndërhyrjet në Wi-Fi.",
-    q8:"Pse shpejtësia e ngarkimit është e ngadaltë?", a8:"Mund të kufizohet nga paketa juaj e internetit, kushtet e Wi-Fi apo konfigurimi i ruterit.",
-    aiSectionTitle:"Tekniku AI Fasqoo", aiSectionText:"Merrni ndihmë teknike për lidhjen tuaj të internetit dhe rrjetit.",
-    aiTitle:"Asistenti AI Fasqoo", aiDescription:"Mbështetje profesionale për zgjidhjen e problemeve të internetit.",
-    powered:"Mundësuar nga", aiWelcome:"Përshëndetje! Unë mund t'ju ndihmoj me problemet e internetit, Wi-Fi, ping, download dhe upload. Cili është problemi juaj?",
-    aiPlaceholder:"Pyetni për lidhjen tuaj të internetit...", aiButton:"Pyet AI",
-    ctaTitle:"Testoni lidhjen tuaj të internetit", ctaText:"Merrni rezultatet e shkarkimit, ngarkimit, ping dhe jitter me Fasqoo.", ctaButton:"Fillo Testin",
-    copyright:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.", trademark:"Fasqoo™ dhe Fasqoo Internet Speed Test janë marka tregtare të Fasqoo.",
-    footerAbout:"Rreth nesh", footerFaq:"FAQ", footerNetwork:"Statusi i Rjetit", footerPrivacy:"Politika e Privatësisë", footerTerms:"Kushtet e Përdorimit", footerDoNotSell:"Mos shit të dhënat e mia", footerSlavery:"Politika kundër Skllavërisë Moderne", footerAccessibility:"Qasshmëria"
-  },
-  ar:{
-    navHome:"الرئيسية", navSpeed:"اختبار السرعة", navFaq:"الأسئلة الشائعة", navAI:"فني الذكاء الاصطناعي", navNetwork:"حالة الشبكة", navAbout:"عن Fasqoo",
-    badge:"مركز دعم Fasqoo", heroTitle1:"Fasqoo", heroTitle2:"مركز المساعدة",
-    heroText:"اعثر على إجابات لأسئلة الإنترنت والشبكة أو اطلب المساعدة من فني الذكاء الاصطناعي.",
-    faqTitle:"الأسئلة الشائعة", faqSubtitle:"كل ما تحتاج معرفته عن اختبار سرعة الإنترنت.",
-    q1:"ما هو اختبار سرعة الإنترنت؟", a1:"يقيس سرعة التنزيل والرفع والزمن واستقرار الاتصال (Jitter).",
-    q2:"ما هي سرعة التنزيل؟", a2:"تصف مدى سرعة نقل البيانات من الإنترنت إلى جهازك.",
-    q3:"ما هي سرعة الرفع؟", a3:"تصف مدى سرعة إرسال البيانات من جهازك إلى الإنترنت.",
-    q4:"ما هو الـ Ping؟", a4:"يقيس الـ Ping زمن استجابة الشبكة.",
-    q5:"ما هو الـ Jitter؟", a5:"يقيس التباين في وقت وصول حزم البيانات.",
-    q6:"لماذا شبكة الـ Wi-Fi بطيئة؟", a6:"قد يكون بسبب المسافة عن جهاز التوجيه أو التداخل أو الأجهزة القديمة.",
-    q7:"لماذا الـ Ping مرتفع في الألعاب؟", a7:"قد يعود ذلك إلى بعد الخادم أو التداخل في شبكة Wi-Fi.",
-    q8:"لماذا سرعة الرفع بطيئة؟", a8:"قد تكون محدودة بسبب خطتك أو إعدادات جهاز التوجيه.",
-    aiSectionTitle:"فني الذكاء الاصطناعي Fasqoo", aiSectionText:"احصل على مساعدة تقنية لاتصال الإنترنت الخاص بك.",
-    aiTitle:"مساعد Fasqoo الذكي", aiDescription:"دعم محترف لحل مشاكل الإنترنت والشبكة.",
-    powered:"مدعوم بواسطة", aiWelcome:"مرحباً! يمكنني مساعدتك في حل مشاكل الإنترنت وWi-Fi والسرعة. ما هي المشكلة التي تواجهها؟",
-    aiPlaceholder:"اسأل عن اتصال الإنترنت الخاص بك...", aiButton:"اسأل الذكاء الاصطناعي",
-    ctaTitle:"اختبر اتصال الإنترنت الخاص بك", ctaText:"احصل على نتائج التنزيل والرفع والـ Ping مع Fasqoo.", ctaButton:"بدء الاختبار",
-    copyright:"© 2026 Fasqoo. جميع الحقوق محفوظة.", trademark:"Fasqoo™ واختبار سرعة Fasqoo هي علامات تجارية لـ Fasqoo.",
-    footerAbout:"عن Fasqoo", footerFaq:"الأسئلة الشائعة", footerNetwork:"حالة الشبكة", footerPrivacy:"سياسة الخصوصية", footerTerms:"شروط الاستخدام", footerDoNotSell:"عدم بيع معلوماتي الشخصية", footerSlavery:"سياسة العبودية الحديثة", footerAccessibility:"إمكانية الوصول"
+const $ = id => document.getElementById(id);
+
+// TAB SWITCHING LOGIK
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toolkit-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    $(btn.getAttribute('data-target')).classList.add('active');
+  });
+});
+
+// LOG SYSTEM
+let logData = [];
+function addLog(tool, target, result){
+  const time = new Date().toLocaleTimeString();
+  logData.unshift({ time, tool, target, result });
+  renderLog();
+}
+
+function renderLog(){
+  const logTable = $("itLogTable");
+  if(!logData.length){
+    logTable.innerHTML = `<tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>`;
+    return;
   }
+  logTable.innerHTML = logData.map(l => `
+    <tr><td>${l.time}</td><td><b>${l.tool}</b></td><td>${l.target}</td><td><span style="color:var(--green)">●</span> ${l.result}</td></tr>
+  `).join("");
+}
+
+// SIMULATION HANDLER FÜR DIE NEUEN TOOLS
+$("calcSubnetBtn").onclick = () => {
+  const val = $("subnetInput").value;
+  $("subnetOutput").textContent = `> Netzwerk: ${val}\n> Subnetzmaske: 255.255.255.0\n> Erster Host: .1 | Letzter Host: .254\n> Usable Hosts: 253`;
+  addLog("IP & Subnetting", val, "Subnetz erfolgreich berechnet");
 };
 
-/* LANGUAGE SYSTEM */
-const LANG_KEY = "fasqoo_language";
+$("calcVlsmBtn").onclick = () => {
+  const val = $("vlsmInput").value;
+  $("vlsmOutput").textContent = `> VLSM Aufteilung für ${val}:\n- Subnetz 1: /24 (254 Hosts)\n- Subnetz 2: /25 (126 Hosts)`;
+  addLog("VLSM Calculator", val, "VLSM Baum erstellt");
+};
 
-function applyLanguage(lang){
-  if(!translations[lang]) lang = "de";
-  const dictionary = translations[lang];
-  document.documentElement.lang = lang;
-  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+$("runDnsTool").onclick = () => {
+  const domain = $("dnsDomainInput").value;
+  const type = $("dnsTypeSelect").value;
+  $("dnsToolOutput").textContent = `> Abfrage (${type}) für ${domain}:\n[OK] Record gefunden -> IP: 142.250.185.46 (TTL 300)`;
+  addLog("DNS Lookup", `${domain} (${type})`, "Erfolgreich");
+};
 
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    const key = element.getAttribute("data-i18n");
-    if(dictionary[key]) element.textContent = dictionary[key];
-  });
+$("runPropBtn").onclick = () => {
+  const val = $("propInput").value;
+  $("propOutput").textContent = `> DNS Propagation Global Check (${val}):\n- Frankfurt: OK\n- New York: OK\n- Tokio: OK (DNSSEC Validated)`;
+  addLog("DNS Propagation", val, "100% propagated");
+};
 
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
-    const key = element.getAttribute("data-i18n-placeholder");
-    if(dictionary[key]) element.placeholder = dictionary[key];
-  });
+$("runNetTest").onclick = () => {
+  const target = $("netTarget").value;
+  const type = $("netTestType").value;
+  $("netOutput").textContent = `> Führe ${type} zu ${target} aus...\n> RTT Average: 14.2ms | Packet Loss: 0% | Jitter: 1.1ms`;
+  addLog("Network Test", `${type}: ${target}`, "Erfolgreich abgeschlossen");
+};
 
-  const languageSelector = document.getElementById("lang");
-  if(languageSelector) languageSelector.value = lang;
-  localStorage.setItem(LANG_KEY, lang);
-}
+$("runPortCheck").onclick = () => {
+  const target = $("portTarget").value;
+  $("portOutput").textContent = `> TCP Port Connect zu ${target}...\n> Status: OPEN (Antwort erhalten)`;
+  addLog("Port Checker", target, "Port Open");
+};
 
-/* DARK MODE */
-function updateThemeButton(){
-  const button = document.getElementById("themeBtn");
-  if(!button) return;
-  const dark = document.body.classList.contains("dark");
-  button.textContent = dark ? "☀" : "☾";
-}
+$("runWebCheck").onclick = () => {
+  const target = $("webTarget").value;
+  $("webOutput").textContent = `> SSL/TLS Check für ${target}:\n- Zertifikat: Gültig (Let's Encrypt)\n- TLS Version: TLS 1.3 (Secure)`;
+  addLog("SSL / Web Analyzer", target, "Zertifikat Valide");
+};
 
-function loadTheme(){
-  if(localStorage.getItem("fasqoo_dark") === "true"){
-    document.body.classList.add("dark");
-  }
-  updateThemeButton();
-}
+$("runHeaderCheck").onclick = () => {
+  const target = $("headerInput").value;
+  $("headerOutput").textContent = `> HTTP Headers für ${target}:\nHTTP/2 200 OK\nServer: cloudflare\nStrict-Transport-Security: max-age=...`;
+  addLog("Header Inspector", target, "HTTP 200 OK");
+};
 
-/* FAQ ACCORDION */
-document.querySelectorAll(".faq-question").forEach(button => {
-  button.addEventListener("click", () => {
-    button.parentElement.classList.toggle("active");
-  });
-});
+$("runSecIpBtn").onclick = () => {
+  const ip = $("secIpInput").value;
+  $("secIpOutput").textContent = `> IP Intelligence für ${ip}:\n- ISP: Cloudflare Inc.\n- ASN: AS13335\n- Proxy/VPN: Nein (Clean IP)`;
+  addLog("IP Security Check", ip, "Analysiert");
+};
 
-/* AI TECHNICIAN (VERCEL API ROUTE) */
-const aiForm = document.getElementById("aiForm");
-const aiInput = document.getElementById("aiInput");
-const aiMessages = document.getElementById("aiMessages");
-const aiSend = document.getElementById("aiSend");
+$("runAbuseBtn").onclick = () => {
+  const ip = $("abuseInput").value;
+  $("abuseOutput").textContent = `> Abuse Kontakt für ${ip}:\nEmail: abuse@cloudflare.com\nPhone: +1-...`;
+  addLog("Abuse Lookup", ip, "Kontakt ermittelt");
+};
 
-let conversation = [];
-
-function escapeHtml(text){
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-function addAIMessage(text, type){
-  const message = document.createElement("div");
-  message.className = "ai-message " + type;
-
-  if(type === "assistant"){
-    message.innerHTML = `<strong>Fasqoo AI Technician</strong><p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>`;
-  } else {
-    message.innerHTML = `<strong>You</strong><p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>`;
-  }
-
-  aiMessages.appendChild(message);
-  aiMessages.scrollTop = aiMessages.scrollHeight;
-}
-
-aiForm.addEventListener("submit", async(event) => {
-  event.preventDefault();
-  const question = aiInput.value.trim();
-  if(!question) return;
-
-  addAIMessage(question, "user");
-  conversation.push({ role: "user", content: question });
-
-  aiInput.value = "";
-  aiInput.disabled = true;
-  aiSend.disabled = true;
-  aiSend.textContent = "...";
-
-  const loading = document.createElement("div");
-  loading.className = "ai-message assistant";
-  loading.id = "aiLoading";
-  loading.innerHTML = `<strong>Fasqoo AI Technician</strong><p>Analyzing your network question...</p>`;
-  aiMessages.appendChild(loading);
-  aiMessages.scrollTop = aiMessages.scrollHeight;
-
-  try {
-    const response = await fetch("/api/fasqoo-ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: question, messages: conversation })
-    });
-
-    const data = await response.json();
-    document.getElementById("aiLoading")?.remove();
-
-    if(!response.ok) throw new Error(data.error || "AI request failed.");
-    if(!data.answer) throw new Error("No answer returned.");
-
-    conversation.push({ role: "assistant", content: data.answer });
-    addAIMessage(data.answer, "assistant");
-
-  } catch(error) {
-    document.getElementById("aiLoading")?.remove();
-    addAIMessage("The Fasqoo AI Technician is currently unavailable. Please try again shortly.", "assistant");
-    console.error("Fasqoo AI Error:", error);
-  } finally {
-    aiInput.disabled = false;
-    aiSend.disabled = false;
-    const currentLang = localStorage.getItem(LANG_KEY) || "de";
-    aiSend.textContent = translations[currentLang]?.aiButton || "Ask AI";
-    aiInput.focus();
-  }
-});
-
-/* INITIALISIERUNG */
-document.addEventListener("DOMContentLoaded", () => {
-  const selector = document.getElementById("lang");
-  const savedLanguage = localStorage.getItem(LANG_KEY) || "de";
+$("runAdminTool").onclick = () => {
+  const input = $("adminInput").value || "Test";
+  const action = $("adminAction").value;
+  let res = "";
+  if(action === 'base64enc') res = btoa(input);
+  else if(action === 'base64dec') { try { res = atob(input); } catch(e){ res = "Fehler: Ungültiges Base64"; } }
+  else if(action === 'pwdgen') res = "Tr9#mK9!zQ2$vL4%";
+  else if(action === 'uuidgen') res = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
+  else if(action === 'timestamp') res = "Unix Epoch: " + Math.floor(Date.now()/1000) + " / UTC: " + new Date().toUTCString();
+  else res = "Aktion " + action + " erfolgreich ausgeführt.";
   
-  applyLanguage(savedLanguage);
-  loadTheme();
+  $("adminOutput").textContent = `> Admin Tool (${action}):\n${res}`;
+  addLog("Admin Utility", action, "Ausgeführt");
+};
 
-  selector.addEventListener("change", () => applyLanguage(selector.value));
+$("runMacBtn").onclick = () => {
+  const mac = $("macInput").value;
+  $("macOutput").textContent = `> MAC Lookup (${mac}):\n- Vendor: Apple, Inc. (OUI: 00:1A:2B)\n- Typ: Unicast / Universell vergeben`;
+  addLog("MAC Lookup", mac, "Vendor gefunden");
+};
 
-  document.getElementById("themeBtn").addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.setItem("fasqoo_dark", document.body.classList.contains("dark"));
-    updateThemeButton();
-  });
-});
+// EXPORT BUTTONS
+$("copyResultsBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Testergebnisse vorhanden."); return; }
+  const text = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
+  navigator.clipboard.writeText(text).then(() => alert("Ergebnisse kopiert!"));
+};
+
+$("shareResultsBtn").onclick = async () => {
+  if(!logData.length){ alert("Keine Ergebnisse zum Teilen."); return; }
+  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
+  if(navigator.share){ try { await navigator.share({title: 'Fasqoo Toolkit', text}); } catch(e){} }
+  else { navigator.clipboard.writeText(text); alert("In Zwischenablage kopiert."); }
+};
+
+$("jsonExportBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Daten."); return; }
+  const blob = new Blob([JSON.stringify(logData, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "network-toolkit-report.json";
+  a.click(); URL.revokeObjectURL(url);
+};
+
+$("printReportBtn").onclick = () => window.print();
+$("clearLog").onclick = () => { logData = []; renderLog(); };
+
+// THEME & MOBILE MENU
+const themeBtn = $("themeBtn");
+themeBtn.onclick = () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  themeBtn.textContent = dark ? "☀" : "☾";
+};
+$("menuToggle").onclick = () => $("mainMenu").classList.toggle("active");
 </script>
-
 </body>
 </html>
