@@ -4,20 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fasqoo Website-Status</title>
-<meta name="description" content="Fasqoo Website Status: Real response times, uptime, and history, measured directly in your browser."">
+<!-- SEO Meta Tags -->
+<title id="seoTitle">Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime</title>
+<meta name="description" id="seoDesc" content="Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser. Realistische Netzwerk-Diagnose ohne Simulation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://fasqoo.com/network-status.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fasqoo.com/network-status.html">
+<meta property="og:title" content="Fasqoo Website-Status & Netzwerkanalyse">
+<meta property="og:description" content="Echtzeit-Analyse der Verbindung und Server-Antwortzeiten von fasqoo.com direkt im Browser.">
+<meta property="og:image" content="https://fasqoo.com/og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://fasqoo.com/network-status.html">
+<meta name="twitter:title" content="Fasqoo Website-Status">
+<meta name="twitter:description" content="Echtzeit-Analyse der Verbindung zu fasqoo.com.">
+
+<!-- Structured Data / Schema.org für Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Fasqoo Website Status",
+  "url": "https://fasqoo.com/network-status.html",
+  "description": "Real-time network status, latency, and uptime measurement for fasqoo.com directly in the browser.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fasqoo",
+    "url": "https://fasqoo.com"
+  }
+}
+</script>
 
 <style>
-.lang-select{
-    height:38px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:var(--card);
-    color:var(--text);
-    padding:0 11px;
-    font-weight:700;
-    cursor:pointer;
-}
 :root{
     --bg:#f5f7fb;
     --card:#ffffff;
@@ -58,7 +80,7 @@ body.dark{
 
 a{ color:inherit; text-decoration:none; }
 
-/* NAVBAR */
+/* NAVBAR & MOBILE MENU */
 .navbar{
     position:sticky; top:0; z-index:1000;
     background:rgba(255,255,255,.92);
@@ -66,27 +88,43 @@ a{ color:inherit; text-decoration:none; }
     border-bottom:1px solid var(--border);
 }
 .dark .navbar{ background:rgba(11,18,32,.92); }
+
 .nav-container{
     max-width:1200px; margin:auto; padding:15px 20px;
     display:flex; align-items:center; justify-content:space-between; gap:20px;
 }
 .logo{ font-size:28px; font-weight:900; letter-spacing:-1.5px; color:var(--text); }
 .logo span{ color:var(--primary); }
+
 .nav-links{ display:flex; align-items:center; gap:24px; }
 .nav-links a{ color:var(--muted); font-size:14px; font-weight:700; transition:.2s; }
 .nav-links a:hover, .nav-links a.active{ color:var(--primary); }
+
 .nav-actions{ display:flex; align-items:center; gap:8px; }
+
+.lang-select{
+    height:38px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--card);
+    color:var(--text);
+    padding:0 11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
 .theme-btn{
     height:38px; width:40px; border:1px solid var(--border); border-radius:10px;
     background:var(--card); color:var(--text); font-size:18px; cursor:pointer;
 }
+
 .mobile-btn{
     display:none; border:1px solid var(--border); background:var(--card); color:var(--text);
-    width:40px; height:40px; border-radius:10px; font-size:20px;
+    width:40px; height:40px; border-radius:10px; font-size:20px; cursor:pointer;
 }
 
 /* HERO */
-.hero{ max-width:1000px; margin:50px auto 30px; padding:0 20px; text-align:center; }
+.hero{ max-width:1000px; margin:40px auto 30px; padding:0 20px; text-align:center; }
 .status-pill{
     display:inline-flex; align-items:center; gap:8px; padding:9px 15px; border-radius:999px;
     background:rgba(18,183,106,.1); color:var(--green); font-size:13px; font-weight:800;
@@ -98,7 +136,7 @@ a{ color:inherit; text-decoration:none; }
 .status-pill.error{ background:rgba(240,68,56,.1); color:var(--red); border-color:rgba(240,68,56,.2); }
 .status-pill.error .status-dot{ background:var(--red); }
 .hero h1{ margin-top:20px; font-size:42px; letter-spacing:-1.5px; }
-.hero p{ max-width:680px; margin:15px auto 0; color:var(--muted); line-height:1.7; }
+.hero p{ max-width:680px; margin:15px auto 0; color:var(--muted); line-height:1.7; font-size:15px; }
 
 /* MAIN */
 .container{ max-width:1200px; margin:auto; padding:0 20px 60px; }
@@ -262,28 +300,44 @@ a{ color:inherit; text-decoration:none; }
 footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted); font-size:12px; }
 .footer-inner{ max-width:1200px; margin:auto; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
 
-/* MOBILE */
+/* RESPONSIVE */
 @media(max-width:1000px){
-    .grid, .profile-grid, .diagnostic-grid{ grid-template-columns:repeat(2,1fr); }
+    .grid, .profile-grid{ grid-template-columns:repeat(2,1fr); }
+    .diagnostic-grid{ grid-template-columns:repeat(2,1fr); }
+    .health-panel{ grid-template-columns:1fr; text-align:center; }
+    
+    .mobile-btn{ display:block; }
+    
     .nav-links{
-        position:absolute; top:69px; left:0; right:0; background:var(--card);
-        border-bottom:1px solid var(--border); padding:15px 20px; display:none;
-        flex-direction:column; align-items:flex-start;
+        position:absolute; top:100%; left:0; right:0; 
+        background:var(--card);
+        border-bottom:1px solid var(--border); 
+        padding:20px; 
+        display:none;
+        flex-direction:column; 
+        align-items:flex-start;
+        gap:16px;
+        box-shadow:var(--shadow);
     }
     .nav-links.open{ display:flex; }
-    .mobile-btn{ display:block; }
-    .health-panel{ grid-template-columns:1fr; text-align:center; }
+    .nav-links a{ font-size:16px; width:100%; padding:6px 0; }
 }
+
 @media(max-width:600px){
-    .hero{ margin-top:35px; }
-    .hero h1{ font-size:30px; }
+    .hero{ margin-top:25px; }
+    .hero h1{ font-size:28px; }
     .grid, .diagnostic-grid, .profile-grid{ grid-template-columns:1fr; }
-    .check-panel{ flex-direction:column; align-items:stretch; }
+    
+    .check-panel{ flex-direction:column; align-items:stretch; text-align:center; }
+    .check-info{ flex-direction:column; }
     .check-btn{ width:100%; }
+    
     .explanation-grid{ grid-template-columns:1fr; }
     .test-row{ grid-template-columns:28px 1fr; }
-    .test-value{ grid-column:2; }
-    .footer-inner{ flex-direction:column; }
+    .test-value{ grid-column:2; margin-top:2px; }
+    .footer-inner{ flex-direction:column; text-align:center; }
+    
+    .report-actions button{ width:100%; }
 }
 </style>
 </head>
@@ -294,10 +348,10 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
     <div class="nav-container">
         <a href="index.html" class="logo">fasq<span>oo</span></a>
         <div class="nav-links" id="navLinks">
-            <a href="index.html" data-i18n="home">Home</a>
+            <a href="index.html" data-i18n="home">Startseite</a>
             <a href="faq.html" data-i18n="faq">FAQ</a>
-            <a href="network-status.html" class="active" data-i18n="networkStatus">Network Status</a>
-            <a href="about.html" data-i18n="about">About</a>
+            <a href="network-status.html" class="active" data-i18n="networkStatus">Website-Status</a>
+            <a href="about.html" data-i18n="about">Über uns</a>
         </div>
         <div class="nav-actions">
             <select class="lang-select" id="languageSelect" aria-label="Language">
@@ -321,20 +375,19 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
 <header class="hero">
     <div class="status-pill" id="mainStatusPill">
         <span class="status-dot"></span>
-        <span id="mainStatusText" data-i18n="running">RUNNING MEASUREMENT...</span>
+        <span id="mainStatusText" data-i18n="running">MESSUNG LÄUFT...</span>
     </div>
-    <h1 data-i18n="pageTitle">Fasqoo Website Status</h1>
+    <h1 data-i18n="pageTitle">Fasqoo Website-Status</h1>
     <p data-i18n="pageDescription">
-        Shows how fast and reliably your browser currently reaches fasqoo.com.
-        Every value here is a real measurement from this session — nothing is simulated or guessed.
+        Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.
     </p>
 </header>
 
 <main class="container">
 
 <div class="section-title">
-    <h2 data-i18n="healthTitle">Connection Score</h2>
-    <p data-i18n="healthDesc">Calculated only from measurements this browser can actually perform.</p>
+    <h2 data-i18n="healthTitle">Verbindungs-Score</h2>
+    <p data-i18n="healthDesc">Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.</p>
 </div>
 
 <div class="card health-panel">
@@ -343,35 +396,35 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
         <div class="health-score-label">/ 100</div>
     </div>
     <div class="health-details">
-        <h2 id="healthTitleDynamic">Verbindung wird analysiert...</h2>
-        <p id="healthDescriptionDynamic">Fasqoo sammelt Messdaten aus deinem Browser.</p>
+        <h2 id="healthTitleDynamic">...</h2>
+        <p id="healthDescriptionDynamic">...</p>
         <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
     </div>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="overview">Overview</h2>
-    <p data-i18n="overviewDesc">Real measurements collected by this browser.</p>
+    <h2 data-i18n="overview">Übersicht</h2>
+    <p data-i18n="overviewDesc">Echte Messungen, gesammelt von diesem Browser.</p>
 </div>
 
 <div class="grid">
     <div class="card overview-card">
-        <div class="card-label" data-i18n="observedUptime">Observed Uptime</div>
+        <div class="card-label" data-i18n="observedUptime">Beobachtete Erreichbarkeit</div>
         <div class="card-value" id="uptimeValue">—</div>
-        <div class="card-small" data-i18n="thisBrowser">This browser / last 24 hours</div>
+        <div class="card-small" data-i18n="thisBrowser">Dieser Browser / letzte 24 Std.</div>
     </div>
     <div class="card overview-card">
-        <div class="card-label" data-i18n="checks24h">Checks in 24h</div>
+        <div class="card-label" data-i18n="checks24h">Prüfungen in 24 Std.</div>
         <div class="card-value" id="checksValue">0</div>
-        <div class="card-small" data-i18n="localHistory">Local browser history</div>
+        <div class="card-small" data-i18n="localHistory">Lokaler Browser-Verlauf</div>
     </div>
     <div class="card overview-card">
-        <div class="card-label" data-i18n="currentResponse">Current Response</div>
+        <div class="card-label" data-i18n="currentResponse">Aktuelle Antwortzeit</div>
         <div class="card-value" id="responseValue">—</div>
         <div class="card-small">Browser → fasqoo.com</div>
     </div>
     <div class="card overview-card">
-        <div class="card-label" data-i18n="lastChecked">Last Checked</div>
+        <div class="card-label" data-i18n="lastChecked">Zuletzt geprüft</div>
         <div class="card-value" id="lastChecked">—</div>
         <div class="card-small" id="lastCheckedDate">—</div>
     </div>
@@ -381,204 +434,177 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
     <div class="check-info">
         <div class="big-status" id="bigStatus">✓</div>
         <div>
-            <div class="check-title" id="checkTitle">Prüfe fasqoo.com...</div>
-            <div class="check-subtitle" id="checkSubtitle" data-i18n="realMeasurement">Real browser measurement</div>
+            <div class="check-title" id="checkTitle">...</div>
+            <div class="check-subtitle" id="checkSubtitle" data-i18n="realMeasurement">Echte Browser-Messung</div>
         </div>
     </div>
-    <button class="check-btn" id="checkBtn" data-i18n="runCheck">Run Full Measurement</button>
+    <button class="check-btn" id="checkBtn" data-i18n="runCheck">Vollständige Messung starten</button>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="diagnostics">Measurements</h2>
-    <p data-i18n="diagnosticsDesc">Collected directly from this visitor's current connection.</p>
+    <h2 data-i18n="diagnostics">Messwerte</h2>
+    <p data-i18n="diagnosticsDesc">Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.</p>
 </div>
 
 <div class="diagnostic-grid">
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
-            <div class="diagnostic-name">Latenz</div>
-            <span class="badge" id="latencyBadge">Wartet</span>
+            <div class="diagnostic-name" data-i18n="latency">Latenz</div>
+            <span class="badge" id="latencyBadge">...</span>
         </div>
         <div class="metric"><span id="latencyValue">—</span> <span class="metric-unit">ms</span></div>
-        <div class="metric-description">Durchschnittliche Antwortzeit einer HTTP-Anfrage an fasqoo.com.</div>
+        <div class="metric-description" data-i18n="latencyDesc">Durchschnittliche Antwortzeit einer HTTP-Anfrage an fasqoo.com.</div>
     </div>
 
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
-            <div class="diagnostic-name">Jitter</div>
-            <span class="badge" id="jitterBadge">Wartet</span>
+            <div class="diagnostic-name" data-i18n="jitter">Jitter</div>
+            <span class="badge" id="jitterBadge">...</span>
         </div>
         <div class="metric"><span id="jitterValue">—</span> <span class="metric-unit">ms</span></div>
-        <div class="metric-description">Schwankung zwischen aufeinanderfolgenden Anfragen.</div>
+        <div class="metric-description" data-i18n="jitterDesc">Schwankung zwischen aufeinanderfolgenden Anfragen.</div>
     </div>
 
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
-            <div class="diagnostic-name">Fehlerrate</div>
-            <span class="badge" id="failureBadge">Wartet</span>
+            <div class="diagnostic-name" data-i18n="failureRate">Fehlerrate</div>
+            <span class="badge" id="failureBadge">...</span>
         </div>
         <div class="metric"><span id="failureValue">—</span> <span class="metric-unit">%</span></div>
-        <div class="metric-description">Anteil fehlgeschlagener Anfragen während der Messung.</div>
+        <div class="metric-description" data-i18n="failureRateDesc">Anteil fehlgeschlagener Anfragen während der Messung.</div>
     </div>
 
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
-            <div class="diagnostic-name">HTTP-Antwort</div>
-            <span class="badge" id="httpBadge">Wartet</span>
+            <div class="diagnostic-name" data-i18n="httpResponse">HTTP-Antwort</div>
+            <span class="badge" id="httpBadge">...</span>
         </div>
         <div class="metric"><span id="httpValue">—</span></div>
-        <div class="metric-description">HTTP-Status, den fasqoo.com zuletzt zurückgegeben hat.</div>
+        <div class="metric-description" data-i18n="httpResponseDesc">HTTP-Status, den fasqoo.com zuletzt zurückgegeben hat.</div>
     </div>
 
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
             <div class="diagnostic-name">HTTPS</div>
-            <span class="badge" id="httpsBadge">Wartet</span>
+            <span class="badge" id="httpsBadge">...</span>
         </div>
         <div class="metric"><span id="httpsValue">—</span></div>
-        <div class="metric-description">Ob diese Seite aktuell über eine verschlüsselte Verbindung läuft.</div>
+        <div class="metric-description" data-i18n="httpsDesc">Ob diese Seite aktuell über eine verschlüsselte Verbindung läuft.</div>
     </div>
 
     <div class="card diagnostic-card">
         <div class="diagnostic-top">
-            <div class="diagnostic-name">Browser-Netzwerkdaten</div>
-            <span class="badge" id="networkApiBadge">Wartet</span>
+            <div class="diagnostic-name" data-i18n="networkApi">Browser-Netzwerkdaten</div>
+            <span class="badge" id="networkApiBadge">...</span>
         </div>
         <div class="metric"><span id="effectiveTypeValue">—</span></div>
-        <div class="metric-description">Verbindungsinfo, die der Browser offenlegt — nicht jeder Browser unterstützt das.</div>
+        <div class="metric-description" data-i18n="networkApiDesc">Verbindungsinfo, die der Browser offenlegt — nicht jeder Browser unterstützt das.</div>
     </div>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="networkProfile">Device &amp; Connection Profile</h2>
-    <p data-i18n="networkProfileDesc">Technical information your browser provides itself.</p>
+    <h2 data-i18n="networkProfile">Geräte- &amp; Verbindungsprofil</h2>
+    <p data-i18n="networkProfileDesc">Technische Angaben, die dein Browser selbst bereitstellt.</p>
 </div>
 
 <div class="profile-grid">
-    <div class="card profile-card"><div class="profile-label" data-i18n="connType">Connection Type</div><div class="profile-value" id="connectionType">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="downlink">Estimated Downlink</div><div class="profile-value" id="downlinkValue">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="rtt">Browser RTT</div><div class="profile-value" id="browserRtt">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="saveData">Data Saver</div><div class="profile-value" id="saveDataValue">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="onlineStateLabel">Online State</div><div class="profile-value" id="onlineState">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="protocol">Protocol</div><div class="profile-value" id="protocolValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="connType">Verbindungstyp</div><div class="profile-value" id="connectionType">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="downlink">Geschätzte Downlink-Rate</div><div class="profile-value" id="downlinkValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="rtt">Browser-RTT</div><div class="profile-value" id="browserRtt">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="saveData">Datensparmodus</div><div class="profile-value" id="saveDataValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="onlineStateLabel">Online-Status</div><div class="profile-value" id="onlineState">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="protocol">Protokoll</div><div class="profile-value" id="protocolValue">—</div></div>
     <div class="card profile-card"><div class="profile-label" data-i18n="browser">Browser</div><div class="profile-value" id="browserValue">—</div></div>
-    <div class="card profile-card"><div class="profile-label" data-i18n="windowSize">Window Size</div><div class="profile-value" id="screenValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="windowSize">Fenstergröße</div><div class="profile-value" id="screenValue">—</div></div>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="problemTitle">Findings</h2>
-    <p data-i18n="problemDesc">Only things this measurement actually shows — with explanation and next steps.</p>
+    <h2 data-i18n="problemTitle">Auffälligkeiten</h2>
+    <p data-i18n="problemDesc">Nur Dinge, die diese Messung tatsächlich belegt — mit Erklärung und nächsten Schritten.</p>
 </div>
 
-<div class="problem-list" id="problemList">
-    <div class="card problem good">
-        <details open>
-            <summary>
-                <div class="problem-heading">
-                    <div class="problem-icon">✓</div>
-                    <div>
-                        <div class="problem-name">Messung wird vorbereitet</div>
-                        <div class="problem-severity">Fasqoo sammelt gerade Daten.</div>
-                    </div>
-                </div>
-                <span class="badge">Läuft</span>
-            </summary>
-            <div class="problem-body">
-                <div class="explanation-grid">
-                    <div class="explanation">
-                        <h4>Was passiert?</h4>
-                        <p>Fasqoo führt mehrere Testanfragen aus, bevor eine Einschätzung angezeigt wird.</p>
-                    </div>
-                    <div class="explanation">
-                        <h4>Hinweis</h4>
-                        <p>Ein einzelnes erstes Ergebnis reicht nicht aus, um zwischen einem lokalen Problem und einem Serverproblem zu unterscheiden.</p>
-                    </div>
-                </div>
-            </div>
-        </details>
-    </div>
-</div>
+<div class="problem-list" id="problemList"></div>
 
 <div class="section-title">
-    <h2 data-i18n="testSuite">Test Overview</h2>
-    <p data-i18n="testSuiteDesc">Technical test results from this browser session.</p>
+    <h2 data-i18n="testSuite">Testübersicht</h2>
+    <p data-i18n="testSuiteDesc">Technische Testergebnisse dieser Browser-Sitzung.</p>
 </div>
 
 <div class="card test-suite" id="testSuite">
     <div class="test-row">
         <div class="test-icon" id="testInternetIcon">?</div>
-        <div><div class="test-name" data-i18n="testInternetName">Browser Online State</div><div class="test-detail" id="testInternetDetail" data-i18n="waitingTest">Waiting for test</div></div>
+        <div><div class="test-name" data-i18n="testInternetName">Browser-Online-Status</div><div class="test-detail" id="testInternetDetail">—</div></div>
         <div class="test-value" id="testInternetValue">—</div>
     </div>
     <div class="test-row">
         <div class="test-icon" id="testHttpIcon">?</div>
-        <div><div class="test-name" data-i18n="testHttpName">fasqoo.com Reachability</div><div class="test-detail" id="testHttpDetail" data-i18n="waitingTest">Waiting for test</div></div>
+        <div><div class="test-name" data-i18n="testHttpName">Erreichbarkeit fasqoo.com</div><div class="test-detail" id="testHttpDetail">—</div></div>
         <div class="test-value" id="testHttpValue">—</div>
     </div>
     <div class="test-row">
         <div class="test-icon" id="testHttpsIcon">?</div>
-        <div><div class="test-name" data-i18n="testHttpsName">HTTPS Transport</div><div class="test-detail" id="testHttpsDetail" data-i18n="waitingTest">Waiting for test</div></div>
+        <div><div class="test-name" data-i18n="testHttpsName">HTTPS-Transport</div><div class="test-detail" id="testHttpsDetail">—</div></div>
         <div class="test-value" id="testHttpsValue">—</div>
     </div>
     <div class="test-row">
         <div class="test-icon" id="testStabilityIcon">?</div>
-        <div><div class="test-name" data-i18n="testStabilityName">Connection Stability</div><div class="test-detail" id="testStabilityDetail" data-i18n="waitingStability">Waiting for repeated measurement</div></div>
+        <div><div class="test-name" data-i18n="testStabilityName">Verbindungsstabilität</div><div class="test-detail" id="testStabilityDetail">—</div></div>
         <div class="test-value" id="testStabilityValue">—</div>
     </div>
 </div>
 
 <div class="notice">
-    <strong data-i18n="limitTitle">What this page can't do:</strong>
-    <span data-i18n="limitText">A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity. This page deliberately shows only what is actually measurable over HTTP. Anything else would be guessing.</span>
+    <strong data-i18n="limitTitle">Was diese Seite nicht kann:</strong>
+    <span data-i18n="limitText">Ein Browser kann keinen echten Paketverlust (ICMP), kein Traceroute und keine ISP-Identität ermitteln. Diese Seite zeigt deshalb bewusst nur das, was per HTTP tatsächlich messbar ist. Alles andere wäre geraten.</span>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="responseHistory">Response Time History</h2>
-    <p data-i18n="responseHistoryDesc">Real checks, stored locally in this browser.</p>
+    <h2 data-i18n="responseHistory">Antwortzeit-Verlauf</h2>
+    <p data-i18n="responseHistoryDesc">Echte Prüfungen, lokal in diesem Browser gespeichert.</p>
 </div>
 
 <div class="card chart-card">
     <div class="chart-header">
-        <h3 data-i18n="last24h">Last 24 hours</h3>
-        <span id="chartInfo">0 measurements</span>
+        <h3 data-i18n="last24h">Letzte 24 Stunden</h3>
+        <span id="chartInfo">—</span>
     </div>
     <div class="chart" id="chart">
-        <div class="no-data" data-i18n="noData">No measurements yet.</div>
+        <div class="no-data" data-i18n="noData">Noch keine Messungen vorhanden.</div>
     </div>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="incidents">Incidents</h2>
-    <p data-i18n="incidentsDesc">Events from browser-level monitoring.</p>
+    <h2 data-i18n="incidents">Vorfälle</h2>
+    <p data-i18n="incidentsDesc">Ereignisse aus der Browser-Überwachung.</p>
 </div>
 
 <div class="card incident">
     <div class="incident-icon" id="incidentIcon">✓</div>
     <div>
-        <h3 id="incidentTitle">Keine lokalen Vorfälle</h3>
-        <p id="incidentText">Im gespeicherten Verlauf wurden keine fehlgeschlagenen Prüfungen erkannt.</p>
+        <h3 id="incidentTitle">...</h3>
+        <p id="incidentText">...</p>
     </div>
 </div>
 
 <div class="section-title">
-    <h2 data-i18n="reportTitle">Summary Report</h2>
-    <p data-i18n="reportDesc">Generates a compact summary you can paste into a support ticket, for example.</p>
+    <h2 data-i18n="reportTitle">Kurzbericht</h2>
+    <p data-i18n="reportDesc">Erzeugt eine kompakte Zusammenfassung, die du z. B. in ein Support-Ticket kopieren kannst.</p>
 </div>
 
 <div class="card report-panel">
     <div class="report-actions">
-        <button class="secondary-btn" id="copyReportBtn" data-i18n="copyReport">Copy Report</button>
-        <button class="secondary-btn" id="downloadReportBtn" data-i18n="downloadReport">Download Report</button>
+        <button class="secondary-btn" id="copyReportBtn" data-i18n="copyReport">Bericht kopieren</button>
+        <button class="secondary-btn" id="downloadReportBtn" data-i18n="downloadReport">Bericht herunterladen</button>
     </div>
     <textarea id="reportPreview" readonly style="width:100%;min-height:200px;margin-top:16px;resize:vertical;border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--bg);color:var(--text);font-family:monospace;font-size:12px;line-height:1.6;"></textarea>
 </div>
 
 <div class="accuracy">
-    <strong data-i18n="accuracyTitle">Measurement accuracy and limitations</strong>
+    <strong data-i18n="accuracyTitle">Messgenauigkeit und Grenzen</strong>
     <p data-i18n="accuracyText">
-        These measurements describe only the path between your browser and fasqoo.com.
-        They do not automatically prove that your ISP, a router, or a DNS setting is responsible for a problem —
-        that would require measurements from independent servers, which this page does not perform.
+        Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com.
+        Sie beweisen nicht automatisch, dass dein Internetanbieter, ein Router oder eine DNS-Einstellung für ein Problem verantwortlich ist —
+        dafür wären Messungen von unabhängigen Servern nötig, die diese Seite nicht durchführt.
     </p>
 </div>
 
@@ -586,20 +612,11 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
 
 <footer>
     <div class="footer-inner">
-        <div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
+        <div>© 2026 Fasqoo. <span data-i18n="rights">Alle Rechte vorbehalten.</span></div>
     </div>
 </footer>
 
 <script>
-/* =========================================================
-   FASQOO WEBSITE STATUS — ehrliche Version
-   Misst ausschließlich Dinge, die ein Browser wirklich messen kann:
-   HTTP-Antwortzeit, HTTP/HTTPS-Status, Erfolg/Fehlschlag, sowie
-   vom Browser selbst offengelegte Verbindungsinfos.
-   Keine ISP-Erkennung, keine Support-Nummer, kein "Backend", das
-   noch nicht existiert.
-========================================================= */
-
 const CONFIG = {
     CHECK_INTERVAL: 30000,
     TIMEOUT: 10000,
@@ -613,25 +630,28 @@ const THEME_KEY = "fasqoo_theme";
 
 let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || "de";
 
-/* =========================================================
-   TRANSLATIONS (static labels only — measured values and
-   findings are generated live and shown in German, the
-   same way the diagnostic text was always English before)
-========================================================= */
+/* VOLLSTÄNDIGE 100%ige ÜBERSETZUNG (INKLUSIVE STATISCHER & DYNAMISCHER STRINGS) */
 const translations = {
 de:{
+metaTitle:"Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime",
+metaDesc:"Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser. Realistische Netzwerk-Diagnose ohne Simulation.",
 home:"Startseite", faq:"FAQ", networkStatus:"Website-Status", about:"Über uns",
 running:"MESSUNG LÄUFT...",
 pageTitle:"Fasqoo Website-Status",
 pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.",
-healthTitle:"Verbindungs-Score",
-healthDesc:"Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.",
+healthTitle:"Verbindungs-Score", healthDesc:"Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.",
 overview:"Übersicht", overviewDesc:"Echte Messungen, gesammelt von diesem Browser.",
 observedUptime:"Beobachtete Erreichbarkeit", thisBrowser:"Dieser Browser / letzte 24 Std.",
 checks24h:"Prüfungen in 24 Std.", localHistory:"Lokaler Browser-Verlauf",
 currentResponse:"Aktuelle Antwortzeit", lastChecked:"Zuletzt geprüft",
-realMeasurement:"Echte Browser-Messung", runCheck:"Vollständige Messung starten",
+realMeasurement:"Echte Browser-Messung", runCheck:"Vollständige Messung starten", runningBtn:"Messung läuft...",
 diagnostics:"Messwerte", diagnosticsDesc:"Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.",
+latency:"Latenz", latencyDesc:"Durchschnittliche Antwortzeit einer HTTP-Anfrage an fasqoo.com.",
+jitter:"Jitter", jitterDesc:"Schwankung zwischen aufeinanderfolgenden Anfragen.",
+failureRate:"Fehlerrate", failureRateDesc:"Anteil fehlgeschlagener Anfragen während der Messung.",
+httpResponse:"HTTP-Antwort", httpResponseDesc:"HTTP-Status, den fasqoo.com zuletzt zurückgegeben hat.",
+httpsDesc:"Ob diese Seite aktuell über eine verschlüsselte Verbindung läuft.",
+networkApi:"Browser-Netzwerkdaten", networkApiDesc:"Verbindungsinfo, die der Browser offenlegt — nicht jeder Browser unterstützt das.",
 networkProfile:"Geräte- & Verbindungsprofil", networkProfileDesc:"Technische Angaben, die dein Browser selbst bereitstellt.",
 connType:"Verbindungstyp", downlink:"Geschätzte Downlink-Rate", rtt:"Browser-RTT", saveData:"Datensparmodus",
 onlineStateLabel:"Online-Status", protocol:"Protokoll", browser:"Browser", windowSize:"Fenstergröße",
@@ -639,31 +659,60 @@ problemTitle:"Auffälligkeiten", problemDesc:"Nur Dinge, die diese Messung tats�
 testSuite:"Testübersicht", testSuiteDesc:"Technische Testergebnisse dieser Browser-Sitzung.",
 testInternetName:"Browser-Online-Status", testHttpName:"Erreichbarkeit fasqoo.com",
 testHttpsName:"HTTPS-Transport", testStabilityName:"Verbindungsstabilität",
-waitingTest:"Wartet auf Test", waitingStability:"Wartet auf mehrfache Messung",
 limitTitle:"Was diese Seite nicht kann:",
 limitText:"Ein Browser kann keinen echten Paketverlust (ICMP), kein Traceroute und keine ISP-Identität ermitteln. Diese Seite zeigt deshalb bewusst nur das, was per HTTP tatsächlich messbar ist. Alles andere wäre geraten.",
 responseHistory:"Antwortzeit-Verlauf", responseHistoryDesc:"Echte Prüfungen, lokal in diesem Browser gespeichert.",
 last24h:"Letzte 24 Stunden", noData:"Noch keine Messungen vorhanden.",
 incidents:"Vorfälle", incidentsDesc:"Ereignisse aus der Browser-Überwachung.",
 reportTitle:"Kurzbericht", reportDesc:"Erzeugt eine kompakte Zusammenfassung, die du z. B. in ein Support-Ticket kopieren kannst.",
-copyReport:"Bericht kopieren", downloadReport:"Bericht herunterladen",
+copyReport:"Bericht kopieren", copied:"Kopiert", downloadReport:"Bericht herunterladen",
 accuracyTitle:"Messgenauigkeit und Grenzen",
 accuracyText:"Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com. Sie beweisen nicht automatisch, dass dein Internetanbieter, ein Router oder eine DNS-Einstellung für ein Problem verantwortlich ist — dafür wären Messungen von unabhängigen Servern nötig, die diese Seite nicht durchführt.",
-rights:"Alle Rechte vorbehalten."
+rights:"Alle Rechte vorbehalten.",
+// Dynamic Status Strings
+statusReachable:"FASQOO.COM IST ERREICHBAR",
+statusFailed:"PRÜFUNG FEHLGESCHLAGEN",
+checkTitleSuccess:"fasqoo.com ist erreichbar",
+checkTitleFail:"Prüfung fehlgeschlagen",
+checkTitleAnalyzing:"Verbindung wird analysiert...",
+checkSubtitleAnalyzing:"Echte Browser-Messung läuft",
+scoreExcellent:"Sehr gute Verbindung", scoreExcellentDesc:"Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com.",
+scoreGood:"Gute Verbindung", scoreGoodDesc:"Insgesamt unauffällig, einzelne Werte sind leicht erhöht.",
+scoreWarning:"Verbindung sollte geprüft werden", scoreWarningDesc:"Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin.",
+scoreBad:"Deutliche Auffälligkeit erkannt", scoreBadDesc:"Mehrere Messwerte deuten auf ein Verbindungsproblem hin.",
+badgeWaiting:"Wartet", badgeGood:"Gut", badgeElevated:"Erhöht", badgeHigh:"Hoch", badgeStable:"Stabil", badgeFluctuating:"Schwankend", badgeOK:"In Ordnung", badgeFailed:"Fehlgeschlagen", badgeAvailable:"Verfügbar", badgeRestricted:"Eingeschränkt", badgeSecure:"Sicher", badgeUnsecure:"Unsicher",
+noIncidentsTitle:"Keine lokalen Vorfälle", noIncidentsText:"Im gespeicherten Verlauf wurden keine fehlgeschlagenen Prüfungen erkannt.",
+hasIncidentsTitle:"fehlgeschlagene Prüfung(en)", hasIncidentsText:"Das sind lokale Browser-Beobachtungen und kein bestätigter Ausfall von fasqoo.com insgesamt.",
+notAvailable:"Nicht verfügbar", active:"Aktiv", inactive:"Inaktiv", online:"Online", offline:"Offline",
+// Problems
+probOfflineTitle:"Keine Internetverbindung", probOfflineEv:"Der Browser meldet einen Offline-Status.", probOfflineMeaning:"Prüfe WLAN/Kabel, den Router und ob andere Geräte im selben Netz betroffen sind.",
+probLatencyTitle:"Erhöhte Antwortzeit", probLatencyEv:"durchschnittliche Antwortzeit.", probLatencyMeaning:"Die Anfragen an fasqoo.com dauern länger als üblich. Das kann lokale oder serverseitige Ursachen haben.",
+probJitterTitle:"Schwankende Antwortzeiten", probJitterEv:"Schwankung zwischen den Anfragen.", probJitterMeaning:"Große Schwankungen können Videoanrufe, Gaming oder Remote-Verbindungen beeinträchtigen.",
+probFailureTitle:"Wiederholte fehlgeschlagene Anfragen", probFailureEv:"der Testanfragen sind fehlgeschlagen.", probFailureMeaning:"Das ist eine im Browser beobachtete Fehlerrate, kein bestätigter Paketverlust im Netzwerk.",
+probHttpsTitle:"HTTPS ist nicht aktiv", probHttpsEv:"Diese Seite wird aktuell über HTTP ausgeliefert.", probHttpsMeaning:"Ohne HTTPS ist die Verbindung nicht verschlüsselt und die Serveridentität nicht geprüft.",
+probNoneTitle:"Keine Auffälligkeit erkannt", probNoneEv:"Alle Messwerte liegen im unauffälligen Bereich.", probNoneMeaning:"Diese Sitzung zeigt keine Latenz-, Jitter- oder Fehlerprobleme.",
+probNotEnoughTitle:"Noch nicht genug Daten", probNotEnoughEv:"Die Messung lief noch nicht vollständig durch.", probNotEnoughMeaning:"Für eine verlässliche Einschätzung sind mehrere Messpunkte nötig."
 },
 en:{
+metaTitle:"Fasqoo Website Status – Real-time Network & Uptime Check",
+metaDesc:"Measure fasqoo.com reachability, response time, and latency directly in your browser. Realistic network diagnostics without simulation.",
 home:"Home", faq:"FAQ", networkStatus:"Website Status", about:"About",
 running:"RUNNING MEASUREMENT...",
 pageTitle:"Fasqoo Website Status",
 pageDescription:"Shows how fast and reliably your browser currently reaches fasqoo.com. Every value here is a real measurement from this session — nothing is simulated or guessed.",
-healthTitle:"Connection Score",
-healthDesc:"Calculated only from measurements this browser can actually perform.",
+healthTitle:"Connection Score", healthDesc:"Calculated only from measurements this browser can actually perform.",
 overview:"Overview", overviewDesc:"Real measurements collected by this browser.",
 observedUptime:"Observed Uptime", thisBrowser:"This browser / last 24 hours",
 checks24h:"Checks in 24h", localHistory:"Local browser history",
 currentResponse:"Current Response", lastChecked:"Last Checked",
-realMeasurement:"Real browser measurement", runCheck:"Run Full Measurement",
+realMeasurement:"Real browser measurement", runCheck:"Run Full Measurement", runningBtn:"Measuring...",
 diagnostics:"Measurements", diagnosticsDesc:"Collected directly from this visitor's current connection.",
+latency:"Latency", latencyDesc:"Average response time of HTTP requests to fasqoo.com.",
+jitter:"Jitter", jitterDesc:"Variation between consecutive requests.",
+failureRate:"Failure Rate", failureRateDesc:"Percentage of failed requests during measurement.",
+httpResponse:"HTTP Response", httpResponseDesc:"HTTP status returned by fasqoo.com.",
+httpsDesc:"Whether this page currently runs over an encrypted connection.",
+networkApi:"Browser Network API", networkApiDesc:"Connection info exposed by the browser — not all browsers support this.",
 networkProfile:"Device & Connection Profile", networkProfileDesc:"Technical information your browser provides itself.",
 connType:"Connection Type", downlink:"Estimated Downlink", rtt:"Browser RTT", saveData:"Data Saver",
 onlineStateLabel:"Online State", protocol:"Protocol", browser:"Browser", windowSize:"Window Size",
@@ -671,31 +720,58 @@ problemTitle:"Findings", problemDesc:"Only things this measurement actually show
 testSuite:"Test Overview", testSuiteDesc:"Technical test results from this browser session.",
 testInternetName:"Browser Online State", testHttpName:"fasqoo.com Reachability",
 testHttpsName:"HTTPS Transport", testStabilityName:"Connection Stability",
-waitingTest:"Waiting for test", waitingStability:"Waiting for repeated measurement",
 limitTitle:"What this page can't do:",
 limitText:"A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity. This page deliberately shows only what is actually measurable over HTTP. Anything else would be guessing.",
 responseHistory:"Response Time History", responseHistoryDesc:"Real checks, stored locally in this browser.",
 last24h:"Last 24 hours", noData:"No measurements yet.",
 incidents:"Incidents", incidentsDesc:"Events from browser-level monitoring.",
 reportTitle:"Summary Report", reportDesc:"Generates a compact summary you can paste into a support ticket, for example.",
-copyReport:"Copy Report", downloadReport:"Download Report",
+copyReport:"Copy Report", copied:"Copied", downloadReport:"Download Report",
 accuracyTitle:"Measurement accuracy and limitations",
 accuracyText:"These measurements describe only the path between your browser and fasqoo.com. They do not automatically prove that your ISP, a router, or a DNS setting is responsible for a problem — that would require measurements from independent servers, which this page does not perform.",
-rights:"All rights reserved."
+rights:"All rights reserved.",
+statusReachable:"FASQOO.COM IS REACHABLE",
+statusFailed:"CHECK FAILED",
+checkTitleSuccess:"fasqoo.com is reachable",
+checkTitleFail:"Check failed",
+checkTitleAnalyzing:"Analyzing connection...",
+checkSubtitleAnalyzing:"Real browser measurement in progress",
+scoreExcellent:"Excellent Connection", scoreExcellentDesc:"Measurements show a stable, fast connection to fasqoo.com.",
+scoreGood:"Good Connection", scoreGoodDesc:"Overall normal, single values are slightly elevated.",
+scoreWarning:"Connection should be checked", scoreWarningDesc:"At least one measurement indicates degraded performance.",
+scoreBad:"Significant issue detected", scoreBadDesc:"Multiple values indicate connection issues.",
+badgeWaiting:"Waiting", badgeGood:"Good", badgeElevated:"Elevated", badgeHigh:"High", badgeStable:"Stable", badgeFluctuating:"Fluctuating", badgeOK:"OK", badgeFailed:"Failed", badgeAvailable:"Available", badgeRestricted:"Restricted", badgeSecure:"Secure", badgeUnsecure:"Unsecure",
+noIncidentsTitle:"No Local Incidents", noIncidentsText:"No failed checks detected in local history.",
+hasIncidentsTitle:"failed check(s)", hasIncidentsText:"These are browser observations and not a confirmed outage of fasqoo.com.",
+notAvailable:"Not available", active:"Active", inactive:"Inactive", online:"Online", offline:"Offline",
+probOfflineTitle:"No Internet Connection", probOfflineEv:"Browser reports offline status.", probOfflineMeaning:"Check Wi-Fi/cable, router, and other devices in the same network.",
+probLatencyTitle:"Elevated Response Time", probLatencyEv:"average response time.", probLatencyMeaning:"Requests to fasqoo.com take longer than usual. This may be local or server-side.",
+probJitterTitle:"Fluctuating Response Times", probJitterEv:"variation between requests.", probJitterMeaning:"High jitter affects real-time video calls, gaming, or remote connections.",
+probFailureTitle:"Repeated Failed Requests", probFailureEv:"of test requests failed.", probFailureMeaning:"Observed failure rate in browser, not confirmed ICMP packet loss.",
+probHttpsTitle:"HTTPS Not Active", probHttpsEv:"This page is served over unencrypted HTTP.", probHttpsMeaning:"Connection is unencrypted and server identity is unverified.",
+probNoneTitle:"No Issues Detected", probNoneEv:"All measurements are within normal ranges.", probNoneMeaning:"This session shows no latency, jitter, or failure issues.",
+probNotEnoughTitle:"Not Enough Data", probNotEnoughEv:"Measurement hasn't completed fully.", probNotEnoughMeaning:"Multiple data points are required for accurate results."
 },
 fr:{
+metaTitle:"Fasqoo État du Site – Mesure Réseau & Uptime en Temps Réel",
+metaDesc:"Mesurez la disponibilité, le temps de réponse et la latence de fasqoo.com dans votre navigateur. Diagnostic réseau réel.",
 home:"Accueil", faq:"FAQ", networkStatus:"État du site", about:"À propos",
 running:"MESURE EN COURS...",
 pageTitle:"État du site Fasqoo",
 pageDescription:"Montre la rapidité et la fiabilité avec lesquelles votre navigateur atteint fasqoo.com. Chaque valeur ici est une mesure réelle de cette session.",
-healthTitle:"Score de connexion",
-healthDesc:"Calculé uniquement à partir des mesures que ce navigateur peut réellement effectuer.",
+healthTitle:"Score de connexion", healthDesc:"Calculé uniquement à partir des mesures que ce navigateur peut réellement effectuer.",
 overview:"Vue d'ensemble", overviewDesc:"Mesures réelles collectées par ce navigateur.",
 observedUptime:"Disponibilité observée", thisBrowser:"Ce navigateur / dernières 24 heures",
 checks24h:"Vérifications en 24 h", localHistory:"Historique local",
 currentResponse:"Réponse actuelle", lastChecked:"Dernière vérification",
-realMeasurement:"Mesure réelle du navigateur", runCheck:"Lancer la mesure complète",
+realMeasurement:"Mesure réelle du navigateur", runCheck:"Lancer la mesure complète", runningBtn:"Mesure...",
 diagnostics:"Mesures", diagnosticsDesc:"Collectées directement depuis la connexion actuelle du visiteur.",
+latency:"Latence", latencyDesc:"Temps de réponse moyen des requêtes HTTP vers fasqoo.com.",
+jitter:"Gigotement (Jitter)", jitterDesc:"Variation entre deux requêtes consécutives.",
+failureRate:"Taux d'échec", failureRateDesc:"Pourcentage de requêtes échouées pendant la mesure.",
+httpResponse:"Réponse HTTP", httpResponseDesc:"Dernier statut HTTP retourné par fasqoo.com.",
+httpsDesc:"Indique si cette page utilise actuellement une connexion chiffrée.",
+networkApi:"API Réseau Navigateur", networkApiDesc:"Informations réseau exposées par le navigateur.",
 networkProfile:"Profil de l'appareil et de la connexion", networkProfileDesc:"Informations techniques fournies par votre navigateur.",
 connType:"Type de connexion", downlink:"Débit descendant estimé", rtt:"RTT du navigateur", saveData:"Économie de données",
 onlineStateLabel:"État en ligne", protocol:"Protocole", browser:"Navigateur", windowSize:"Taille de la fenêtre",
@@ -703,256 +779,69 @@ problemTitle:"Constats", problemDesc:"Uniquement ce que cette mesure démontre r
 testSuite:"Aperçu des tests", testSuiteDesc:"Résultats techniques de cette session de navigateur.",
 testInternetName:"État en ligne du navigateur", testHttpName:"Accessibilité de fasqoo.com",
 testHttpsName:"Transport HTTPS", testStabilityName:"Stabilité de la connexion",
-waitingTest:"En attente du test", waitingStability:"En attente de mesures répétées",
 limitTitle:"Ce que cette page ne peut pas faire :",
 limitText:"Un navigateur ne peut pas déterminer la vraie perte de paquets (ICMP), le traceroute ou l'identité du FAI. Cette page montre donc uniquement ce qui est réellement mesurable via HTTP.",
 responseHistory:"Historique des temps de réponse", responseHistoryDesc:"Vérifications réelles, stockées localement dans ce navigateur.",
 last24h:"Dernières 24 heures", noData:"Aucune mesure pour le moment.",
 incidents:"Incidents", incidentsDesc:"Événements de surveillance côté navigateur.",
 reportTitle:"Rapport résumé", reportDesc:"Génère un résumé compact que vous pouvez coller dans un ticket de support, par exemple.",
-copyReport:"Copier le rapport", downloadReport:"Télécharger le rapport",
+copyReport:"Copier le rapport", copied:"Copié", downloadReport:"Télécharger le rapport",
 accuracyTitle:"Précision et limites des mesures",
 accuracyText:"Ces mesures décrivent uniquement le chemin entre votre navigateur et fasqoo.com. Elles ne prouvent pas automatiquement qu'un FAI, un routeur ou un réglage DNS est responsable d'un problème.",
-rights:"Tous droits réservés."
-},
-it:{
-home:"Home", faq:"FAQ", networkStatus:"Stato del sito", about:"Chi siamo",
-running:"MISURAZIONE IN CORSO...",
-pageTitle:"Stato del sito Fasqoo",
-pageDescription:"Mostra quanto velocemente e in modo affidabile il tuo browser raggiunge fasqoo.com in questo momento. Ogni valore qui è una misurazione reale di questa sessione.",
-healthTitle:"Punteggio di connessione",
-healthDesc:"Calcolato solo dalle misurazioni che questo browser può effettivamente eseguire.",
-overview:"Panoramica", overviewDesc:"Misurazioni reali raccolte da questo browser.",
-observedUptime:"Disponibilità osservata", thisBrowser:"Questo browser / ultime 24 ore",
-checks24h:"Controlli in 24 ore", localHistory:"Cronologia locale",
-currentResponse:"Risposta attuale", lastChecked:"Ultimo controllo",
-realMeasurement:"Misurazione reale del browser", runCheck:"Avvia misurazione completa",
-diagnostics:"Misurazioni", diagnosticsDesc:"Raccolte direttamente dalla connessione attuale di questo visitatore.",
-networkProfile:"Profilo dispositivo e connessione", networkProfileDesc:"Informazioni tecniche fornite dal tuo browser.",
-connType:"Tipo di connessione", downlink:"Velocità stimata in downlink", rtt:"RTT del browser", saveData:"Risparmio dati",
-onlineStateLabel:"Stato online", protocol:"Protocollo", browser:"Browser", windowSize:"Dimensione finestra",
-problemTitle:"Riscontri", problemDesc:"Solo ciò che questa misurazione dimostra realmente — con spiegazione e prossimi passi.",
-testSuite:"Panoramica test", testSuiteDesc:"Risultati tecnici di questa sessione del browser.",
-testInternetName:"Stato online del browser", testHttpName:"Raggiungibilità di fasqoo.com",
-testHttpsName:"Trasporto HTTPS", testStabilityName:"Stabilità della connessione",
-waitingTest:"In attesa del test", waitingStability:"In attesa di misurazioni ripetute",
-limitTitle:"Cosa questa pagina non può fare:",
-limitText:"Un browser non può determinare la reale perdita di pacchetti (ICMP), il traceroute o l'identità dell'ISP. Questa pagina mostra quindi solo ciò che è realmente misurabile via HTTP.",
-responseHistory:"Cronologia tempi di risposta", responseHistoryDesc:"Controlli reali, salvati localmente in questo browser.",
-last24h:"Ultime 24 ore", noData:"Nessuna misurazione ancora disponibile.",
-incidents:"Incidenti", incidentsDesc:"Eventi del monitoraggio lato browser.",
-reportTitle:"Rapporto riassuntivo", reportDesc:"Genera un riepilogo compatto da incollare, ad esempio, in un ticket di supporto.",
-copyReport:"Copia rapporto", downloadReport:"Scarica rapporto",
-accuracyTitle:"Precisione e limiti delle misurazioni",
-accuracyText:"Queste misurazioni descrivono solo il percorso tra il tuo browser e fasqoo.com. Non dimostrano automaticamente che un ISP, un router o un'impostazione DNS sia responsabile di un problema.",
-rights:"Tutti i diritti riservati."
-},
-pt:{
-home:"Início", faq:"FAQ", networkStatus:"Status do site", about:"Sobre",
-running:"MEDIÇÃO EM ANDAMENTO...",
-pageTitle:"Status do site Fasqoo",
-pageDescription:"Mostra quão rápido e confiável seu navegador está alcançando fasqoo.com agora. Cada valor aqui é uma medição real desta sessão.",
-healthTitle:"Pontuação de conexão",
-healthDesc:"Calculada apenas com medições que este navegador consegue realmente realizar.",
-overview:"Visão geral", overviewDesc:"Medições reais coletadas por este navegador.",
-observedUptime:"Disponibilidade observada", thisBrowser:"Este navegador / últimas 24 horas",
-checks24h:"Verificações em 24h", localHistory:"Histórico local",
-currentResponse:"Resposta atual", lastChecked:"Última verificação",
-realMeasurement:"Medição real do navegador", runCheck:"Executar medição completa",
-diagnostics:"Medições", diagnosticsDesc:"Coletadas diretamente da conexão atual deste visitante.",
-networkProfile:"Perfil de dispositivo e conexão", networkProfileDesc:"Informações técnicas fornecidas pelo seu navegador.",
-connType:"Tipo de conexão", downlink:"Downlink estimado", rtt:"RTT do navegador", saveData:"Economia de dados",
-onlineStateLabel:"Estado online", protocol:"Protocolo", browser:"Navegador", windowSize:"Tamanho da janela",
-problemTitle:"Constatações", problemDesc:"Apenas o que esta medição realmente demonstra — com explicação e próximos passos.",
-testSuite:"Visão geral dos testes", testSuiteDesc:"Resultados técnicos desta sessão do navegador.",
-testInternetName:"Estado online do navegador", testHttpName:"Acessibilidade do fasqoo.com",
-testHttpsName:"Transporte HTTPS", testStabilityName:"Estabilidade da conexão",
-waitingTest:"Aguardando teste", waitingStability:"Aguardando medições repetidas",
-limitTitle:"O que esta página não pode fazer:",
-limitText:"Um navegador não consegue determinar perda real de pacotes (ICMP), traceroute ou identidade do provedor. Esta página mostra propositalmente apenas o que é realmente mensurável via HTTP.",
-responseHistory:"Histórico de tempo de resposta", responseHistoryDesc:"Verificações reais, armazenadas localmente neste navegador.",
-last24h:"Últimas 24 horas", noData:"Ainda sem medições.",
-incidents:"Incidentes", incidentsDesc:"Eventos de monitoramento no navegador.",
-reportTitle:"Relatório resumido", reportDesc:"Gera um resumo compacto que você pode colar em um chamado de suporte, por exemplo.",
-copyReport:"Copiar relatório", downloadReport:"Baixar relatório",
-accuracyTitle:"Precisão e limitações da medição",
-accuracyText:"Estas medições descrevem apenas o caminho entre seu navegador e fasqoo.com. Elas não provam automaticamente que um provedor, roteador ou configuração de DNS é responsável por um problema.",
-rights:"Todos os direitos reservados."
-},
-es:{
-home:"Inicio", faq:"FAQ", networkStatus:"Estado del sitio", about:"Acerca de",
-running:"MEDICIÓN EN CURSO...",
-pageTitle:"Estado del sitio Fasqoo",
-pageDescription:"Muestra qué tan rápido y confiable llega tu navegador a fasqoo.com ahora mismo. Cada valor aquí es una medición real de esta sesión.",
-healthTitle:"Puntuación de conexión",
-healthDesc:"Calculada únicamente con mediciones que este navegador puede realmente realizar.",
-overview:"Resumen", overviewDesc:"Mediciones reales recopiladas por este navegador.",
-observedUptime:"Disponibilidad observada", thisBrowser:"Este navegador / últimas 24 horas",
-checks24h:"Comprobaciones en 24 h", localHistory:"Historial local",
-currentResponse:"Respuesta actual", lastChecked:"Última comprobación",
-realMeasurement:"Medición real del navegador", runCheck:"Ejecutar medición completa",
-diagnostics:"Mediciones", diagnosticsDesc:"Recopiladas directamente de la conexión actual de este visitante.",
-networkProfile:"Perfil de dispositivo y conexión", networkProfileDesc:"Información técnica que proporciona tu propio navegador.",
-connType:"Tipo de conexión", downlink:"Downlink estimado", rtt:"RTT del navegador", saveData:"Ahorro de datos",
-onlineStateLabel:"Estado en línea", protocol:"Protocolo", browser:"Navegador", windowSize:"Tamaño de ventana",
-problemTitle:"Hallazgos", problemDesc:"Solo lo que esta medición realmente demuestra — con explicación y próximos pasos.",
-testSuite:"Resumen de pruebas", testSuiteDesc:"Resultados técnicos de esta sesión del navegador.",
-testInternetName:"Estado en línea del navegador", testHttpName:"Accesibilidad de fasqoo.com",
-testHttpsName:"Transporte HTTPS", testStabilityName:"Estabilidad de la conexión",
-waitingTest:"Esperando prueba", waitingStability:"Esperando mediciones repetidas",
-limitTitle:"Lo que esta página no puede hacer:",
-limitText:"Un navegador no puede determinar la pérdida real de paquetes (ICMP), traceroute ni la identidad del ISP. Por eso esta página muestra únicamente lo que es realmente medible por HTTP.",
-responseHistory:"Historial de tiempo de respuesta", responseHistoryDesc:"Comprobaciones reales, almacenadas localmente en este navegador.",
-last24h:"Últimas 24 horas", noData:"Aún no hay mediciones.",
-incidents:"Incidentes", incidentsDesc:"Eventos de monitoreo del lado del navegador.",
-reportTitle:"Informe resumido", reportDesc:"Genera un resumen compacto que puedes pegar, por ejemplo, en un ticket de soporte.",
-copyReport:"Copiar informe", downloadReport:"Descargar informe",
-accuracyTitle:"Precisión y limitaciones de la medición",
-accuracyText:"Estas mediciones describen únicamente la ruta entre tu navegador y fasqoo.com. No demuestran automáticamente que un ISP, un router o una configuración DNS sea responsable de un problema.",
-rights:"Todos los derechos reservados."
-},
-tr:{
-home:"Ana Sayfa", faq:"SSS", networkStatus:"Site Durumu", about:"Hakkında",
-running:"ÖLÇÜM YAPILIYOR...",
-pageTitle:"Fasqoo Site Durumu",
-pageDescription:"Tarayıcınızın fasqoo.com'a şu anda ne kadar hızlı ve güvenilir bir şekilde ulaştığını gösterir. Buradaki her değer bu oturumdan alınan gerçek bir ölçümdür.",
-healthTitle:"Bağlantı Skoru",
-healthDesc:"Yalnızca bu tarayıcının gerçekten yapabildiği ölçümlerden hesaplanır.",
-overview:"Genel Bakış", overviewDesc:"Bu tarayıcı tarafından toplanan gerçek ölçümler.",
-observedUptime:"Gözlemlenen Çalışma Süresi", thisBrowser:"Bu tarayıcı / son 24 saat",
-checks24h:"24 saatteki kontroller", localHistory:"Yerel geçmiş",
-currentResponse:"Mevcut Yanıt", lastChecked:"Son Kontrol",
-realMeasurement:"Gerçek tarayıcı ölçümü", runCheck:"Tam Ölçümü Başlat",
-diagnostics:"Ölçümler", diagnosticsDesc:"Bu ziyaretçinin mevcut bağlantısından doğrudan toplanır.",
-networkProfile:"Cihaz ve Bağlantı Profili", networkProfileDesc:"Tarayıcınızın kendisinin sağladığı teknik bilgiler.",
-connType:"Bağlantı Türü", downlink:"Tahmini İndirme Hızı", rtt:"Tarayıcı RTT", saveData:"Veri Tasarrufu",
-onlineStateLabel:"Çevrimiçi Durum", protocol:"Protokol", browser:"Tarayıcı", windowSize:"Pencere Boyutu",
-problemTitle:"Bulgular", problemDesc:"Yalnızca bu ölçümün gerçekten gösterdikleri — açıklama ve sonraki adımlarla birlikte.",
-testSuite:"Test Özeti", testSuiteDesc:"Bu tarayıcı oturumunun teknik test sonuçları.",
-testInternetName:"Tarayıcı Çevrimiçi Durumu", testHttpName:"fasqoo.com Erişilebilirliği",
-testHttpsName:"HTTPS İletimi", testStabilityName:"Bağlantı Kararlılığı",
-waitingTest:"Test bekleniyor", waitingStability:"Tekrarlı ölçüm bekleniyor",
-limitTitle:"Bu sayfanın yapamadıkları:",
-limitText:"Bir tarayıcı gerçek paket kaybını (ICMP), traceroute'u veya ISP kimliğini belirleyemez. Bu nedenle bu sayfa yalnızca HTTP üzerinden gerçekten ölçülebilen şeyleri gösterir.",
-responseHistory:"Yanıt Süresi Geçmişi", responseHistoryDesc:"Bu tarayıcıda yerel olarak saklanan gerçek kontroller.",
-last24h:"Son 24 saat", noData:"Henüz ölçüm yok.",
-incidents:"Olaylar", incidentsDesc:"Tarayıcı düzeyinde izleme olayları.",
-reportTitle:"Özet Rapor", reportDesc:"Örneğin bir destek biletine yapıştırabileceğiniz kısa bir özet oluşturur.",
-copyReport:"Raporu Kopyala", downloadReport:"Raporu İndir",
-accuracyTitle:"Ölçüm doğruluğu ve sınırları",
-accuracyText:"Bu ölçümler yalnızca tarayıcınız ile fasqoo.com arasındaki yolu tanımlar. Bir ISP'nin, yönlendiricinin veya DNS ayarının bir sorundan sorumlu olduğunu otomatik olarak kanıtlamaz.",
-rights:"Tüm hakları saklıdır."
-},
-sq:{
-home:"Ballina", faq:"FAQ", networkStatus:"Statusi i Sajtit", about:"Rreth Nesh",
-running:"MATJA NË VAZHDIM...",
-pageTitle:"Statusi i Sajtit Fasqoo",
-pageDescription:"Tregon sa shpejt dhe në mënyrë të besueshme browser-i juaj arrin fasqoo.com tani. Çdo vlerë këtu është një matje reale nga ky sesion.",
-healthTitle:"Rezultati i Lidhjes",
-healthDesc:"Llogaritur vetëm nga matjet që ky browser mund të kryejë realisht.",
-overview:"Përmbledhje", overviewDesc:"Matje reale të mbledhura nga ky browser.",
-observedUptime:"Disponueshmëria e vëzhguar", thisBrowser:"Ky browser / 24 orët e fundit",
-checks24h:"Kontrolle në 24 orë", localHistory:"Historia lokale",
-currentResponse:"Përgjigjja aktuale", lastChecked:"Kontrolluar së fundmi",
-realMeasurement:"Matje reale e browser-it", runCheck:"Fillo Matjen e Plotë",
-diagnostics:"Matjet", diagnosticsDesc:"Mbledhur direkt nga lidhja aktuale e këtij vizitori.",
-networkProfile:"Profili i Pajisjes dhe Lidhjes", networkProfileDesc:"Informacion teknik i ofruar nga vetë browser-i juaj.",
-connType:"Lloji i Lidhjes", downlink:"Shpejtësia e Vlerësuar e Shkarkimit", rtt:"RTT i Browser-it", saveData:"Kursimi i të Dhënave",
-onlineStateLabel:"Statusi Online", protocol:"Protokolli", browser:"Browser", windowSize:"Madhësia e Dritares",
-problemTitle:"Gjetjet", problemDesc:"Vetëm gjërat që kjo matje vërteton realisht — me shpjegim dhe hapa të mëtejshëm.",
-testSuite:"Përmbledhja e Testeve", testSuiteDesc:"Rezultatet teknike të këtij sesioni të browser-it.",
-testInternetName:"Statusi Online i Browser-it", testHttpName:"Aksesueshmëria e fasqoo.com",
-testHttpsName:"Transporti HTTPS", testStabilityName:"Stabiliteti i Lidhjes",
-waitingTest:"Duke pritur testin", waitingStability:"Duke pritur matje të përsëritura",
-limitTitle:"Çfarë nuk mund të bëjë kjo faqe:",
-limitText:"Një browser nuk mund të përcaktojë humbjen reale të paketave (ICMP), traceroute-in apo identitetin e ISP-së. Kjo faqe tregon qëllimisht vetëm atë që matet realisht përmes HTTP.",
-responseHistory:"Historia e Kohës së Përgjigjes", responseHistoryDesc:"Kontrolle reale, ruajtur lokalisht në këtë browser.",
-last24h:"24 orët e fundit", noData:"Ende pa matje.",
-incidents:"Incidentet", incidentsDesc:"Ngjarje nga monitorimi në nivel browser-i.",
-reportTitle:"Raport Përmbledhës", reportDesc:"Krijon një përmbledhje kompakte që mund ta ngjisni p.sh. në një tiket suporti.",
-copyReport:"Kopjo Raportin", downloadReport:"Shkarko Raportin",
-accuracyTitle:"Saktësia dhe kufizimet e matjes",
-accuracyText:"Këto matje përshkruajnë vetëm rrugën midis browser-it tuaj dhe fasqoo.com. Ato nuk vërtetojnë automatikisht se një ISP, router apo cilësim DNS është përgjegjës për një problem.",
-rights:"Të gjitha të drejtat e rezervuara."
-},
-ar:{
-home:"الرئيسية", faq:"الأسئلة الشائعة", networkStatus:"حالة الموقع", about:"حول",
-running:"جارٍ القياس...",
-pageTitle:"حالة موقع Fasqoo",
-pageDescription:"يوضح مدى سرعة وموثوقية وصول متصفحك حاليًا إلى fasqoo.com. كل قيمة هنا هي قياس حقيقي من هذه الجلسة.",
-healthTitle:"درجة الاتصال",
-healthDesc:"تُحسب فقط من القياسات التي يستطيع هذا المتصفح تنفيذها فعليًا.",
-overview:"نظرة عامة", overviewDesc:"قياسات حقيقية جمعها هذا المتصفح.",
-observedUptime:"وقت التشغيل المُلاحظ", thisBrowser:"هذا المتصفح / آخر 24 ساعة",
-checks24h:"الفحوصات خلال 24 ساعة", localHistory:"السجل المحلي",
-currentResponse:"الاستجابة الحالية", lastChecked:"آخر فحص",
-realMeasurement:"قياس حقيقي من المتصفح", runCheck:"تشغيل قياس كامل",
-diagnostics:"القياسات", diagnosticsDesc:"تم جمعها مباشرة من الاتصال الحالي لهذا الزائر.",
-networkProfile:"ملف الجهاز والاتصال", networkProfileDesc:"معلومات تقنية يوفرها متصفحك نفسه.",
-connType:"نوع الاتصال", downlink:"سرعة التنزيل المقدرة", rtt:"زمن الاستجابة للمتصفح", saveData:"توفير البيانات",
-onlineStateLabel:"حالة الاتصال بالإنترنت", protocol:"البروتوكول", browser:"المتصفح", windowSize:"حجم النافذة",
-problemTitle:"النتائج", problemDesc:"فقط ما يثبته هذا القياس فعليًا — مع شرح وخطوات تالية.",
-testSuite:"نظرة عامة على الاختبارات", testSuiteDesc:"نتائج الاختبار التقنية لهذه الجلسة.",
-testInternetName:"حالة اتصال المتصفح", testHttpName:"إمكانية الوصول إلى fasqoo.com",
-testHttpsName:"نقل HTTPS", testStabilityName:"استقرار الاتصال",
-waitingTest:"بانتظار الاختبار", waitingStability:"بانتظار قياسات متكررة",
-limitTitle:"ما لا تستطيع هذه الصفحة القيام به:",
-limitText:"لا يمكن للمتصفح تحديد فقدان الحزم الحقيقي (ICMP) أو traceroute أو هوية مزود الإنترنت. لذلك تعرض هذه الصفحة عمدًا فقط ما يمكن قياسه فعليًا عبر HTTP.",
-responseHistory:"سجل زمن الاستجابة", responseHistoryDesc:"فحوصات حقيقية، محفوظة محليًا في هذا المتصفح.",
-last24h:"آخر 24 ساعة", noData:"لا توجد قياسات بعد.",
-incidents:"الحوادث", incidentsDesc:"أحداث المراقبة على مستوى المتصفح.",
-reportTitle:"تقرير موجز", reportDesc:"ينشئ ملخصًا مضغوطًا يمكنك لصقه، على سبيل المثال، في تذكرة دعم.",
-copyReport:"نسخ التقرير", downloadReport:"تنزيل التقرير",
-accuracyTitle:"دقة القياس وحدوده",
-accuracyText:"تصف هذه القياسات فقط المسار بين متصفحك و fasqoo.com. ولا تثبت تلقائيًا أن مزود الإنترنت أو الراوتر أو إعداد DNS هو المسؤول عن مشكلة ما.",
-rights:"جميع الحقوق محفوظة."
-},
-zh:{
-home:"首页", faq:"常见问题", networkStatus:"网站状态", about:"关于",
-running:"正在测量...",
-pageTitle:"Fasqoo 网站状态",
-pageDescription:"显示您的浏览器当前访问 fasqoo.com 的速度和可靠性。此处的每个数值都是本次会话的真实测量结果。",
-healthTitle:"连接评分",
-healthDesc:"仅根据此浏览器实际能够执行的测量计算。",
-overview:"概览", overviewDesc:"此浏览器收集的真实测量数据。",
-observedUptime:"观察到的运行时间", thisBrowser:"此浏览器 / 最近24小时",
-checks24h:"24小时检查次数", localHistory:"本地历史记录",
-currentResponse:"当前响应", lastChecked:"上次检查",
-realMeasurement:"真实浏览器测量", runCheck:"开始完整测量",
-diagnostics:"测量数据", diagnosticsDesc:"直接从该访问者当前的连接收集。",
-networkProfile:"设备与连接概况", networkProfileDesc:"您的浏览器自身提供的技术信息。",
-connType:"连接类型", downlink:"估计下行速度", rtt:"浏览器RTT", saveData:"省流量模式",
-onlineStateLabel:"在线状态", protocol:"协议", browser:"浏览器", windowSize:"窗口大小",
-problemTitle:"发现结果", problemDesc:"仅显示此测量实际证明的内容——附带说明和后续步骤。",
-testSuite:"测试概览", testSuiteDesc:"此浏览器会话的技术测试结果。",
-testInternetName:"浏览器在线状态", testHttpName:"fasqoo.com 可访问性",
-testHttpsName:"HTTPS 传输", testStabilityName:"连接稳定性",
-waitingTest:"等待测试", waitingStability:"等待重复测量",
-limitTitle:"此页面无法做到的事：",
-limitText:"浏览器无法确定真实的丢包情况（ICMP）、路由追踪或ISP身份。因此，此页面故意只显示通过HTTP实际可测量的内容。",
-responseHistory:"响应时间历史", responseHistoryDesc:"真实检查记录，本地保存在此浏览器中。",
-last24h:"最近24小时", noData:"暂无测量数据。",
-incidents:"事件", incidentsDesc:"浏览器级别的监控事件。",
-reportTitle:"摘要报告", reportDesc:"生成一份简洁摘要，例如可粘贴到支持工单中。",
-copyReport:"复制报告", downloadReport:"下载报告",
-accuracyTitle:"测量准确性与局限性",
-accuracyText:"这些测量仅描述您的浏览器与 fasqoo.com 之间的路径。它们并不能自动证明ISP、路由器或DNS设置对某个问题负责。",
-rights:"版权所有。"
+rights:"Tous droits réservés.",
+statusReachable:"FASQOO.COM EST ACCESSIBLE", statusFailed:"ÉCHEC DU TEST", checkTitleSuccess:"fasqoo.com est accessible", checkTitleFail:"Test échoué", checkTitleAnalyzing:"Analyse de la connexion...", checkSubtitleAnalyzing:"Mesure réelle en cours",
+scoreExcellent:"Excellente connexion", scoreExcellentDesc:"Connexion stable et rapide vers fasqoo.com.", scoreGood:"Bonne connexion", scoreGoodDesc:"Globalement normal, valeurs légèrement élevées.", scoreWarning:"Vérification recommandée", scoreWarningDesc:"Au moins une valeur indique une baisse de performance.", scoreBad:"Problème important détecté", scoreBadDesc:"Plusieurs valeurs indiquent un souci de connexion.",
+badgeWaiting:"En attente", badgeGood:"Bon", badgeElevated:"Élevé", badgeHigh:"Très élevé", badgeStable:"Stable", badgeFluctuating:"Fluctuant", badgeOK:"OK", badgeFailed:"Échec", badgeAvailable:"Disponible", badgeRestricted:"Restreint", badgeSecure:"Sécurisé", badgeUnsecure:"Non sécurisé",
+noIncidentsTitle:"Aucun incident local", noIncidentsText:"Aucun échec détecté dans l'historique local.", hasIncidentsTitle:"test(s) échoué(s)", hasIncidentsText:"Observations navigateur, pas une panne confirmée de fasqoo.com.",
+notAvailable:"Non disponible", active:"Actif", inactive:"Inactif", online:"En ligne", offline:"Hors ligne",
+probOfflineTitle:"Pas de connexion Internet", probOfflineEv:"Le navigateur indique être hors ligne.", probOfflineMeaning:"Vérifiez le Wi-Fi, le câble et le routeur.",
+probLatencyTitle:"Temps de réponse élevé", probLatencyEv:"temps de réponse moyen.", probLatencyMeaning:"Les requêtes prennent plus de temps que d'habitude.",
+probJitterTitle:"Temps de réponse instables", probJitterEv:"variation entre les requêtes.", probJitterMeaning:"L'instabilité affecte les appels vidéo et les jeux.",
+probFailureTitle:"Échecs de requêtes répétés", probFailureEv:"des requêtes ont échoué.", probFailureMeaning:"Taux d'échec observé dans le navigateur.",
+probHttpsTitle:"HTTPS non actif", probHttpsEv:"Page servie en HTTP non chiffré.", probHttpsMeaning:"Connexion non sécurisée.",
+probNoneTitle:"Aucun problème détecté", probNoneEv:"Toutes les mesures sont normales.", probNoneMeaning:"Excellente stabilité de connexion.",
+probNotEnoughTitle:"Données insuffisantes", probNotEnoughEv:"La mesure n'est pas terminée.", probNotEnoughMeaning:"Plusieurs données sont nécessaires."
 }
 };
 
+/* SPRACH-UMSCHALTUNG & SEO UPDATE */
 function applyLanguage(lang){
     if(!translations[lang]) lang = "en";
     currentLanguage = lang;
     localStorage.setItem(LANGUAGE_KEY, lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    
     const t = translations[lang];
+    
+    // SEO Meta Tags dynamisch anpassen
+    if(t.metaTitle){
+        document.title = t.metaTitle;
+        document.getElementById("seoTitle").textContent = t.metaTitle;
+    }
+    if(t.metaDesc){
+        document.getElementById("seoDesc").setAttribute("content", t.metaDesc);
+    }
+
+    // HTML-Texte anpassen
     document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         if(t[key]) el.textContent = t[key];
     });
+    
     document.getElementById("languageSelect").value = lang;
+    
+    // Dynamische Komponenten nach Sprachwechsel aktualisieren
+    updateNetworkProfile();
+    if(latestDiagnostics.score !== null){
+        updateHealthScore();
+        renderProblems();
+    }
+    const history = getHistory();
+    if(history.length > 0){
+        updateIncident(history);
+    }
+    generateReport();
 }
 
 document.getElementById("languageSelect").addEventListener("change", function(){
@@ -960,16 +849,10 @@ document.getElementById("languageSelect").addEventListener("change", function(){
 });
 
 let latestDiagnostics = {
-    latency: null,
-    jitter: null,
-    failureRate: null,
-    httpStatus: null,
-    success: false,
-    score: null,
-    problems: []
+    latency: null, jitter: null, failureRate: null, httpStatus: null, success: false, score: null, problems: []
 };
 
-/* THEME */
+/* THEME SWITCHER */
 function applyTheme(){
     const theme = localStorage.getItem(THEME_KEY) || "light";
     document.body.classList.toggle("dark", theme === "dark");
@@ -981,12 +864,22 @@ document.getElementById("themeBtn").addEventListener("click", function(){
     applyTheme();
 });
 
-/* MOBILE MENU */
-document.getElementById("mobileBtn").addEventListener("click", function(){
-    document.getElementById("navLinks").classList.toggle("open");
+/* MOBILE MENU LOGIK */
+const mobileBtn = document.getElementById("mobileBtn");
+const navLinks = document.getElementById("navLinks");
+
+mobileBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    navLinks.classList.toggle("open");
 });
 
-/* HISTORY (localStorage) */
+document.addEventListener("click", function(e){
+    if(!navLinks.contains(e.target) && !mobileBtn.contains(e.target)){
+        navLinks.classList.remove("open");
+    }
+});
+
+/* BROWSER HISTORY */
 function getHistory(){
     try{
         const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -998,26 +891,24 @@ function saveHistory(history){
     catch(e){ console.warn("Verlauf konnte nicht gespeichert werden."); }
 }
 
-/* FETCH WITH TIMEOUT — the one real measurement this page makes */
+/* TIMED FETCH */
 async function timedFetch(url){
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
     const start = performance.now();
     try{
-        const response = await fetch(url, {
-            method: "GET", cache: "no-store", credentials: "same-origin", signal: controller.signal
-        });
+        const response = await fetch(url, { method: "GET", cache: "no-store", credentials: "same-origin", signal: controller.signal });
         const elapsed = Math.round(performance.now() - start);
         return { ok: response.status >= 200 && response.status < 400, status: response.status, ms: elapsed, error: null };
     }catch(error){
         const elapsed = Math.round(performance.now() - start);
-        return { ok:false, status:0, ms:elapsed, error: (error && error.message) ? error.message : "Anfrage fehlgeschlagen" };
+        return { ok:false, status:0, ms:elapsed, error: (error && error.message) ? error.message : "Fehler" };
     }finally{
         clearTimeout(timeout);
     }
 }
 
-/* SINGLE LIGHTWEIGHT CHECK (runs every 30s) */
+/* SINGLE CHECK */
 async function checkFasqoo(){
     const button = document.getElementById("checkBtn");
     button.disabled = true;
@@ -1037,11 +928,12 @@ async function checkFasqoo(){
     button.disabled = false;
 }
 
-/* FULL DIAGNOSIS (manual button) */
+/* FULL DIAGNOSIS */
 async function runFullDiagnosis(){
+    const t = translations[currentLanguage] || translations.de;
     const button = document.getElementById("checkBtn");
     button.disabled = true;
-    button.textContent = "Messung läuft...";
+    button.textContent = t.runningBtn;
 
     latestDiagnostics = { latency:null, jitter:null, failureRate:null, httpStatus:null, success:false, score:null, problems:[] };
     setMainChecking();
@@ -1059,11 +951,12 @@ async function runFullDiagnosis(){
     generateReport();
 
     button.disabled = false;
-    button.textContent = "Vollständige Messung starten";
+    button.textContent = t.runCheck;
 }
 
-/* ANALYSIS */
+/* ANALYZE */
 function analyzeMeasurements(results){
+    const t = translations[currentLanguage] || translations.de;
     const successful = results.filter(r => r.ok);
     const failed = results.filter(r => !r.ok);
     const times = successful.map(r => r.ms).filter(x => Number.isFinite(x));
@@ -1089,21 +982,21 @@ function analyzeMeasurements(results){
     document.getElementById("latencyValue").textContent = latency === null ? "—" : latency;
     document.getElementById("jitterValue").textContent = jitter === null ? "—" : jitter;
     document.getElementById("failureValue").textContent = failureRate;
-    document.getElementById("httpValue").textContent = (latest && latest.status) ? "HTTP " + latest.status : "Fehlgeschlagen";
+    document.getElementById("httpValue").textContent = (latest && latest.status) ? "HTTP " + latest.status : t.badgeFailed;
 
     setMetricBadge("latencyBadge",
         latency === null ? "error" : latency <= 80 ? "good" : latency <= 150 ? "warning" : "error",
-        latency === null ? "Kein Ergebnis" : latency <= 80 ? "Gut" : latency <= 150 ? "Erhöht" : "Hoch");
+        latency === null ? "—" : latency <= 80 ? t.badgeGood : latency <= 150 ? t.badgeElevated : t.badgeHigh);
 
     setMetricBadge("jitterBadge",
         jitter === null ? "error" : jitter <= 15 ? "good" : jitter <= 30 ? "warning" : "error",
-        jitter === null ? "Kein Ergebnis" : jitter <= 15 ? "Stabil" : jitter <= 30 ? "Schwankend" : "Hoch");
+        jitter === null ? "—" : jitter <= 15 ? t.badgeStable : jitter <= 30 ? t.badgeFluctuating : t.badgeHigh);
 
     setMetricBadge("failureBadge",
         failureRate === 0 ? "good" : failureRate <= 10 ? "warning" : "error",
         failureRate === 0 ? "0%" : failureRate + "%");
 
-    setMetricBadge("httpBadge", (latest && latest.ok) ? "good" : "error", (latest && latest.ok) ? "In Ordnung" : "Fehlgeschlagen");
+    setMetricBadge("httpBadge", (latest && latest.ok) ? "good" : "error", (latest && latest.ok) ? t.badgeOK : t.badgeFailed);
 
     updateHealthScore();
     renderProblems();
@@ -1112,6 +1005,7 @@ function analyzeMeasurements(results){
 
 /* HEALTH SCORE */
 function updateHealthScore(){
+    const t = translations[currentLanguage] || translations.de;
     const d = latestDiagnostics;
     let score = 100;
 
@@ -1140,68 +1034,47 @@ function updateHealthScore(){
     document.getElementById("scoreFill").style.width = score + "%";
 
     let title, description;
-    if(score >= 90){ title = "Sehr gute Verbindung"; description = "Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com."; }
-    else if(score >= 75){ title = "Gute Verbindung"; description = "Insgesamt unauffällig, einzelne Werte sind leicht erhöht."; }
-    else if(score >= 50){ title = "Verbindung sollte geprüft werden"; description = "Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin."; }
-    else{ title = "Deutliche Auffälligkeit erkannt"; description = "Mehrere Messwerte deuten auf ein Verbindungsproblem hin."; }
+    if(score >= 90){ title = t.scoreExcellent; description = t.scoreExcellentDesc; }
+    else if(score >= 75){ title = t.scoreGood; description = t.scoreGoodDesc; }
+    else if(score >= 50){ title = t.scoreWarning; description = t.scoreWarningDesc; }
+    else{ title = t.scoreBad; description = t.scoreBadDesc; }
 
     document.getElementById("healthTitleDynamic").textContent = title;
     document.getElementById("healthDescriptionDynamic").textContent = description;
 }
 
-/* PROBLEMS */
+/* PROBLEMS / FINDINGS */
 function renderProblems(){
+    const t = translations[currentLanguage] || translations.de;
     const d = latestDiagnostics;
     const problems = [];
 
     if(!navigator.onLine){
-        problems.push(createProblem("Keine Internetverbindung", "error",
-            "Der Browser meldet einen Offline-Status.",
-            "Prüfe WLAN/Kabel, den Router und ob andere Geräte im selben Netz betroffen sind.",
-            ["Physische/WLAN-Verbindung prüfen", "Router neu starten, falls mehrere Geräte betroffen sind", "Andere bekannte Website testen"]));
+        problems.push(createProblem(t.probOfflineTitle, "error", t.probOfflineEv, t.probOfflineMeaning, ["Wi-Fi/LAN", "Router"]));
     }
 
     if(d.latency !== null && d.latency > 150){
-        problems.push(createProblem("Erhöhte Antwortzeit", d.latency > 300 ? "error" : "warning",
-            d.latency + " ms durchschnittliche Antwortzeit.",
-            "Die Anfragen an fasqoo.com dauern länger als üblich. Das kann lokale oder serverseitige Ursachen haben.",
-            ["Test von einer kabelgebundenen Verbindung wiederholen", "Mit einem anderen Gerät im selben Netz vergleichen", "Zu einer anderen Tageszeit erneut testen"]));
+        problems.push(createProblem(t.probLatencyTitle, d.latency > 300 ? "error" : "warning", d.latency + " ms " + t.probLatencyEv, t.probLatencyMeaning, ["LAN Test", "Retry"]));
     }
 
     if(d.jitter !== null && d.jitter > 30){
-        problems.push(createProblem("Schwankende Antwortzeiten", d.jitter > 50 ? "error" : "warning",
-            d.jitter + " ms Schwankung zwischen den Anfragen.",
-            "Große Schwankungen können Videoanrufe, Gaming oder Remote-Verbindungen beeinträchtigen.",
-            ["Test bei ruhigem Netzwerk (keine laufenden Downloads) wiederholen", "Auf Ethernet statt WLAN testen"]));
+        problems.push(createProblem(t.probJitterTitle, d.jitter > 50 ? "error" : "warning", d.jitter + " ms " + t.probJitterEv, t.probJitterMeaning, ["Network activity"]));
     }
 
     if(d.failureRate !== null && d.failureRate > 10){
-        problems.push(createProblem("Wiederholte fehlgeschlagene Anfragen", d.failureRate > 25 ? "error" : "warning",
-            d.failureRate + "% der Testanfragen sind fehlgeschlagen.",
-            "Das ist eine im Browser beobachtete Fehlerrate, kein bestätigter Paketverlust im Netzwerk.",
-            ["Test mit anderem Browser/Gerät wiederholen", "Prüfen, ob andere Websites ebenfalls betroffen sind"]));
+        problems.push(createProblem(t.probFailureTitle, d.failureRate > 25 ? "error" : "warning", d.failureRate + "% " + t.probFailureEv, t.probFailureMeaning, ["Browser retry"]));
     }
 
     if(location.protocol !== "https:"){
-        problems.push(createProblem("HTTPS ist nicht aktiv", "error",
-            "Diese Seite wird aktuell über HTTP ausgeliefert.",
-            "Ohne HTTPS ist die Verbindung nicht verschlüsselt und die Serveridentität nicht geprüft.",
-            ["Gültiges TLS-Zertifikat einrichten", "HTTP automatisch auf HTTPS umleiten"]));
+        problems.push(createProblem(t.probHttpsTitle, "error", t.probHttpsEv, t.probHttpsMeaning, ["SSL Certificate"]));
     }
 
-    if(d.latency !== null && d.jitter !== null && d.failureRate !== null &&
-       d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine){
-        problems.push(createProblem("Keine Auffälligkeit erkannt", "good",
-            "Alle Messwerte liegen im unauffälligen Bereich.",
-            "Diese Sitzung zeigt keine Latenz-, Jitter- oder Fehlerprobleme.",
-            ["Diese Messung als Referenzwert für später aufbewahren"]));
+    if(d.latency !== null && d.jitter !== null && d.failureRate !== null && d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine){
+        problems.push(createProblem(t.probNoneTitle, "good", t.probNoneEv, t.probNoneMeaning, ["Status OK"]));
     }
 
     if(!problems.length){
-        problems.push(createProblem("Noch nicht genug Daten", "warning",
-            "Die Messung lief noch nicht vollständig durch.",
-            "Für eine verlässliche Einschätzung sind mehrere Messpunkte nötig.",
-            ["Messung erneut starten"]));
+        problems.push(createProblem(t.probNotEnoughTitle, "warning", t.probNotEnoughEv, t.probNotEnoughMeaning, ["Run Full Diagnostic"]));
     }
 
     latestDiagnostics.problems = problems;
@@ -1210,37 +1083,32 @@ function renderProblems(){
     container.innerHTML = "";
 
     problems.forEach(problem => {
-        const details = document.createElement("details");
-        details.open = problem.type === "error";
-
         const wrapper = document.createElement("div");
-        wrapper.className = "problem " + problem.type;
+        wrapper.className = "card problem " + problem.type;
 
         wrapper.innerHTML = `
-            <summary>
-                <div class="problem-heading">
-                    <div class="problem-icon">${problem.type === "good" ? "✓" : "!"}</div>
-                    <div>
-                        <div class="problem-name">${escapeHTML(problem.title)}</div>
-                        <div class="problem-severity">${escapeHTML(problem.evidence)}</div>
+            <details ${problem.type === "error" ? "open" : ""}>
+                <summary>
+                    <div class="problem-heading">
+                        <div class="problem-icon">${problem.type === "good" ? "✓" : "!"}</div>
+                        <div>
+                            <div class="problem-name">${escapeHTML(problem.title)}</div>
+                            <div class="problem-severity">${escapeHTML(problem.evidence)}</div>
+                        </div>
+                    </div>
+                    <span class="badge ${problem.type === "good" ? "good" : problem.type === "error" ? "error" : "warning"}">
+                        ${problem.type === "good" ? "OK" : problem.type === "error" ? "!" : "i"}
+                    </span>
+                </summary>
+                <div class="problem-body">
+                    <div class="explanation-grid">
+                        <div class="explanation">
+                            <h4>Info</h4>
+                            <p>${escapeHTML(problem.meaning)}</p>
+                        </div>
                     </div>
                 </div>
-                <span class="badge ${problem.type === "good" ? "good" : problem.type === "error" ? "error" : "warning"}">
-                    ${problem.type === "good" ? "Unauffällig" : problem.type === "error" ? "Wichtig" : "Beobachten"}
-                </span>
-            </summary>
-            <div class="problem-body">
-                <div class="explanation-grid">
-                    <div class="explanation">
-                        <h4>Was bedeutet das?</h4>
-                        <p>${escapeHTML(problem.meaning)}</p>
-                    </div>
-                    <div class="explanation">
-                        <h4>Nächste Schritte</h4>
-                        <ul>${problem.actions.map(x => "<li>" + escapeHTML(x) + "</li>").join("")}</ul>
-                    </div>
-                </div>
-            </div>
+            </details>
         `;
         container.appendChild(wrapper);
     });
@@ -1250,37 +1118,38 @@ function createProblem(title, type, evidence, meaning, actions){
     return { title, type, evidence, meaning, actions };
 }
 
-/* NETWORK PROFILE */
+/* PROFILE */
 function updateNetworkProfile(){
+    const t = translations[currentLanguage] || translations.de;
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 
-    document.getElementById("connectionType").textContent = (connection && connection.type) ? connection.type : "Nicht verfügbar";
-    document.getElementById("effectiveTypeValue").textContent = (connection && connection.effectiveType) ? connection.effectiveType : "Nicht verfügbar";
-    document.getElementById("downlinkValue").textContent = (connection && Number.isFinite(connection.downlink)) ? connection.downlink + " Mbps" : "Nicht verfügbar";
-    document.getElementById("browserRtt").textContent = (connection && Number.isFinite(connection.rtt)) ? connection.rtt + " ms" : "Nicht verfügbar";
-    document.getElementById("saveDataValue").textContent = connection ? (connection.saveData ? "Aktiv" : "Inaktiv") : "Nicht verfügbar";
-    document.getElementById("onlineState").textContent = navigator.onLine ? "Online" : "Offline";
+    document.getElementById("connectionType").textContent = (connection && connection.type) ? connection.type : t.notAvailable;
+    document.getElementById("effectiveTypeValue").textContent = (connection && connection.effectiveType) ? connection.effectiveType : t.notAvailable;
+    document.getElementById("downlinkValue").textContent = (connection && Number.isFinite(connection.downlink)) ? connection.downlink + " Mbps" : t.notAvailable;
+    document.getElementById("browserRtt").textContent = (connection && Number.isFinite(connection.rtt)) ? connection.rtt + " ms" : t.notAvailable;
+    document.getElementById("saveDataValue").textContent = connection ? (connection.saveData ? t.active : t.inactive) : t.notAvailable;
+    document.getElementById("onlineState").textContent = navigator.onLine ? t.online : t.offline;
     document.getElementById("protocolValue").textContent = location.protocol === "https:" ? "HTTPS" : "HTTP";
     document.getElementById("browserValue").textContent = detectBrowser();
     document.getElementById("screenValue").textContent = window.innerWidth + " × " + window.innerHeight;
 
-    setMetricBadge("networkApiBadge", connection ? "good" : "warning", connection ? "Verfügbar" : "Eingeschränkt");
-    setMetricBadge("httpsBadge", location.protocol === "https:" ? "good" : "error", location.protocol === "https:" ? "Sicher" : "Unsicher");
-    document.getElementById("httpsValue").textContent = location.protocol === "https:" ? "Sicher" : "HTTP";
+    setMetricBadge("networkApiBadge", connection ? "good" : "warning", connection ? t.badgeAvailable : t.badgeRestricted);
+    setMetricBadge("httpsBadge", location.protocol === "https:" ? "good" : "error", location.protocol === "https:" ? t.badgeSecure : t.badgeUnsecure);
+    document.getElementById("httpsValue").textContent = location.protocol === "https:" ? t.badgeSecure : "HTTP";
 }
 
-/* TEST RESULTS */
+/* TESTS */
 function updateTestResults(results){
+    const t = translations[currentLanguage] || translations.de;
     const success = results.filter(x => x.ok).length;
     const total = results.length;
     const failure = total ? Math.round(((total-success)/total)*100) : 100;
 
-    setTest("testInternet", navigator.onLine, navigator.onLine ? "Browser meldet online" : "Browser meldet offline", navigator.onLine ? "ONLINE" : "OFFLINE");
-    setTest("testHttp", success > 0, success > 0 ? success + "/" + total + " Anfragen erfolgreich" : "Keine erfolgreiche Anfrage", success + "/" + total);
-    setTest("testHttps", location.protocol === "https:", location.protocol === "https:" ? "Sichere Verbindung" : "Seite läuft nicht über HTTPS", location.protocol === "https:" ? "SICHER" : "HTTP");
+    setTest("testInternet", navigator.onLine, navigator.onLine ? t.online : t.offline, navigator.onLine ? t.online : t.offline);
+    setTest("testHttp", success > 0, success + "/" + total + " OK", success + "/" + total);
+    setTest("testHttps", location.protocol === "https:", location.protocol === "https:" ? t.badgeSecure : "HTTP", location.protocol === "https:" ? t.badgeSecure : "HTTP");
     setTest("testStability", failure === 0 && (latestDiagnostics.jitter === null || latestDiagnostics.jitter <= 30),
-        failure === 0 ? "Keine fehlgeschlagenen Anfragen" : failure + "% Fehlerrate",
-        failure === 0 ? "STABIL" : "PRÜFEN");
+        failure === 0 ? t.badgeStable : failure + "%", failure === 0 ? t.badgeStable : "Check");
 }
 
 function setTest(prefix, good, detail, value){
@@ -1299,38 +1168,41 @@ function setMetricBadge(id, type, text){
     el.textContent = text;
 }
 function resetBadges(){
-    ["latencyBadge","jitterBadge","failureBadge","httpBadge","httpsBadge","networkApiBadge"].forEach(id => setMetricBadge(id, "", "Wartet"));
+    const t = translations[currentLanguage] || translations.de;
+    ["latencyBadge","jitterBadge","failureBadge","httpBadge","httpsBadge","networkApiBadge"].forEach(id => setMetricBadge(id, "", t.badgeWaiting));
 }
 
 /* MAIN STATUS */
 function setMainChecking(){
+    const t = translations[currentLanguage] || translations.de;
     const pill = document.getElementById("mainStatusPill");
     pill.className = "status-pill warning";
-    document.getElementById("mainStatusText").textContent = "MESSUNG LÄUFT...";
+    document.getElementById("mainStatusText").textContent = t.running;
     document.getElementById("bigStatus").className = "big-status warning";
     document.getElementById("bigStatus").textContent = "...";
-    document.getElementById("checkTitle").textContent = "Verbindung wird analysiert...";
-    document.getElementById("checkSubtitle").textContent = "Echte Browser-Messung läuft";
+    document.getElementById("checkTitle").textContent = t.checkTitleAnalyzing;
+    document.getElementById("checkSubtitle").textContent = t.checkSubtitleAnalyzing;
 }
 
 function updateMainResult(result, history){
+    const t = translations[currentLanguage] || translations.de;
     const pill = document.getElementById("mainStatusPill");
     const big = document.getElementById("bigStatus");
 
     if(result.ok){
         pill.className = "status-pill";
-        document.getElementById("mainStatusText").textContent = "FASQOO.COM IST ERREICHBAR";
+        document.getElementById("mainStatusText").textContent = t.statusReachable;
         big.className = "big-status";
         big.textContent = "✓";
-        document.getElementById("checkTitle").textContent = "fasqoo.com ist erreichbar";
+        document.getElementById("checkTitle").textContent = t.checkTitleSuccess;
         document.getElementById("checkSubtitle").textContent = "HTTP " + result.status + " • " + result.ms + " ms";
     }else{
         pill.className = "status-pill error";
-        document.getElementById("mainStatusText").textContent = "PRÜFUNG FEHLGESCHLAGEN";
+        document.getElementById("mainStatusText").textContent = t.statusFailed;
         big.className = "big-status error";
         big.textContent = "×";
-        document.getElementById("checkTitle").textContent = "Prüfung fehlgeschlagen";
-        document.getElementById("checkSubtitle").textContent = result.error || "Die Website hat nicht normal geantwortet.";
+        document.getElementById("checkTitle").textContent = t.checkTitleFail;
+        document.getElementById("checkSubtitle").textContent = result.error || t.statusFailed;
     }
 
     document.getElementById("responseValue").textContent = result.ms + " ms";
@@ -1348,28 +1220,30 @@ function updateMainResult(result, history){
 
 /* INCIDENTS */
 function updateIncident(history){
+    const t = translations[currentLanguage] || translations.de;
     const failures = history.filter(x => !x.success).length;
     if(failures === 0){
         document.getElementById("incidentIcon").textContent = "✓";
-        document.getElementById("incidentTitle").textContent = "Keine lokalen Vorfälle";
-        document.getElementById("incidentText").textContent = "Im gespeicherten Verlauf wurden keine fehlgeschlagenen Prüfungen erkannt.";
+        document.getElementById("incidentTitle").textContent = t.noIncidentsTitle;
+        document.getElementById("incidentText").textContent = t.noIncidentsText;
     }else{
         document.getElementById("incidentIcon").textContent = "!";
-        document.getElementById("incidentTitle").textContent = failures + " fehlgeschlagene Prüfung" + (failures === 1 ? "" : "en");
-        document.getElementById("incidentText").textContent = "Das sind lokale Browser-Beobachtungen und kein bestätigter Ausfall von fasqoo.com insgesamt.";
+        document.getElementById("incidentTitle").textContent = failures + " " + t.hasIncidentsTitle;
+        document.getElementById("incidentText").textContent = t.hasIncidentsText;
     }
 }
 
 /* CHART */
 function drawChart(history){
+    const t = translations[currentLanguage] || translations.de;
     const chart = document.getElementById("chart");
     const info = document.getElementById("chartInfo");
     chart.innerHTML = "";
 
     const measurements = history.filter(x => Number.isFinite(x.responseMs));
     if(!measurements.length){
-        chart.innerHTML = '<div class="no-data">Noch keine Messungen vorhanden.</div>';
-        info.textContent = "0 Messungen";
+        chart.innerHTML = '<div class="no-data">' + t.noData + '</div>';
+        info.textContent = "0";
         return;
     }
 
@@ -1384,51 +1258,45 @@ function drawChart(history){
         chart.appendChild(bar);
     });
 
-    info.textContent = measurements.length + " Messungen";
+    info.textContent = measurements.length;
 }
 
 /* REPORT */
 function generateReport(){
+    const t = translations[currentLanguage] || translations.de;
     const d = latestDiagnostics;
     const lines = [
-        "FASQOO WEBSITE-STATUSBERICHT",
-        "=============================",
-        "",
-        "Zeitstempel: " + new Date().toISOString(),
+        "FASQOO STATUS REPORT",
+        "====================",
+        "Timestamp: " + new Date().toISOString(),
         "URL: " + window.location.href,
         "",
-        "MESSWERTE",
+        "METRICS",
         "Score: " + (d.score === null ? "N/A" : d.score + "/100"),
-        "Durchschnittliche Latenz: " + (d.latency === null ? "N/A" : d.latency + " ms"),
+        "Latency: " + (d.latency === null ? "N/A" : d.latency + " ms"),
         "Jitter: " + (d.jitter === null ? "N/A" : d.jitter + " ms"),
-        "Fehlerrate: " + (d.failureRate === null ? "N/A" : d.failureRate + "%"),
-        "HTTP-Status: " + (d.httpStatus || "N/A"),
+        "Failure Rate: " + (d.failureRate === null ? "N/A" : d.failureRate + "%"),
+        "HTTP Status: " + (d.httpStatus || "N/A"),
         "",
-        "PROFIL",
-        "Online: " + (navigator.onLine ? "Ja" : "Nein"),
-        "Protokoll: " + location.protocol,
+        "PROFILE",
+        "Online: " + (navigator.onLine ? t.online : t.offline),
+        "Protocol: " + location.protocol,
         "Browser: " + detectBrowser(),
-        "Fenstergröße: " + window.innerWidth + "x" + window.innerHeight,
-        "",
-        "AUFFÄLLIGKEITEN",
-        ...d.problems.map(p => "- " + p.title + " | " + p.evidence),
-        "",
-        "HINWEIS",
-        "Diese Messung beschreibt nur den Weg zwischen diesem Browser und fasqoo.com.",
-        "Sie belegt keine ISP-, Router- oder DNS-Ursache."
+        "Window: " + window.innerWidth + "x" + window.innerHeight
     ];
 
     document.getElementById("reportPreview").value = lines.join("\n");
 }
 
 document.getElementById("copyReportBtn").addEventListener("click", async function(){
+    const t = translations[currentLanguage] || translations.de;
     const text = document.getElementById("reportPreview").value;
     try{
         await navigator.clipboard.writeText(text);
-        this.textContent = "Kopiert";
-        setTimeout(() => this.textContent = "Bericht kopieren", 1500);
+        this.textContent = t.copied;
+        setTimeout(() => this.textContent = t.copyReport, 1500);
     }catch(e){
-        alert("Kopieren wird von diesem Browser nicht unterstützt.");
+        alert("Error copying text");
     }
 });
 
@@ -1452,7 +1320,7 @@ function detectBrowser(){
     if(/Chrome/i.test(ua)) return "Google Chrome";
     if(/Firefox/i.test(ua)) return "Mozilla Firefox";
     if(/Safari/i.test(ua) && !/Chrome/i.test(ua)) return "Apple Safari";
-    return "Unbekannter Browser";
+    return "Browser";
 }
 
 /* HELPERS */
@@ -1463,13 +1331,13 @@ function escapeHTML(value){
         .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
-/* ONLINE / OFFLINE */
+/* ONLINE / OFFLINE EVENTS */
 window.addEventListener("online", function(){
-    document.getElementById("onlineState").textContent = "Online";
+    updateNetworkProfile();
     updateHealthScore();
 });
 window.addEventListener("offline", function(){
-    document.getElementById("onlineState").textContent = "Offline";
+    updateNetworkProfile();
     updateHealthScore();
     renderProblems();
 });
@@ -1477,7 +1345,6 @@ window.addEventListener("offline", function(){
 /* INIT */
 applyTheme();
 applyLanguage(currentLanguage);
-updateNetworkProfile();
 checkFasqoo();
 runFullDiagnosis();
 
