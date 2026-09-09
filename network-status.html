@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="seoTitle">Fasqoo NetOps Core – Echtzeit Netzwerk-Telemetrie & Diagnostics</title>
-<meta name="description" id="seoDesc" content="Professionelle Echtzeit-Netzwerkanalyse für fasqoo.com. DNS, TLS-Handshake, Latenz, Jitter und Protokoll-Metriken direkt aus der Browser-Engine.">
+<meta name="description" id="seoDesc" content="Professionelle Echtzeit-Netzwerkanalyse für fasqoo.com. DNS, TLS-Handshake, Latenz und Protokoll-Metriken direkt aus der Browser-Engine.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://fasqoo.com/network-status.html">
 
@@ -107,10 +107,6 @@ a{ color:inherit; text-decoration:none; }
     border:1px solid rgba(16,185,129,0.3); font-family:var(--font-mono); margin-bottom:12px;
 }
 .status-dot{ width:8px; height:8px; background:var(--green); border-radius:50%; box-shadow:0 0 8px var(--green); }
-.status-pill.warning{ background:var(--yellow-glow); color:var(--yellow); border-color:rgba(245,158,11,0.3); }
-.status-pill.warning .status-dot{ background:var(--yellow); box-shadow:0 0 8px var(--yellow); }
-.status-pill.error{ background:var(--red-glow); color:var(--red); border-color:rgba(239,68,68,0.3); }
-.status-pill.error .status-dot{ background:var(--red); box-shadow:0 0 8px var(--red); }
 
 /* MAIN CONTAINER */
 .container{ max-width:1400px; margin:auto; padding:0 24px 80px; }
@@ -120,7 +116,6 @@ a{ color:inherit; text-decoration:none; }
 
 /* GRID SYSTEM */
 .grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
 
 .card{
@@ -130,8 +125,9 @@ a{ color:inherit; text-decoration:none; }
 .card:hover{ border-color:var(--border-bright); }
 
 .card-label{ color:var(--muted); font-size:11px; font-weight:600; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.5px; }
-.card-value{ margin-top:8px; font-size:24px; font-weight:700; font-family:var(--font-mono); }
-.card-sub{ margin-top:4px; color:var(--muted); font-size:11px; font-family:var(--font-mono); }
+.metric-val{ margin-top:8px; font-size:24px; font-weight:700; font-family:var(--font-mono); }
+.metric-unit{ font-size:12px; color:var(--muted); font-weight:600; }
+.metric-desc{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.4; }
 
 /* HEALTH PANEL */
 .health-panel{ display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:center; padding:32px; }
@@ -154,8 +150,6 @@ a{ color:inherit; text-decoration:none; }
     width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center;
     background:var(--green-glow); color:var(--green); font-size:20px; font-weight:bold; font-family:var(--font-mono);
 }
-.action-status-icon.error{ background:var(--red-glow); color:var(--red); }
-.action-status-icon.warning{ background:var(--yellow-glow); color:var(--yellow); }
 .action-title{ font-size:15px; font-weight:700; font-family:var(--font-mono); }
 .action-sub{ color:var(--muted); font-size:12px; font-family:var(--font-mono); margin-top:2px; }
 
@@ -178,9 +172,6 @@ a{ color:inherit; text-decoration:none; }
 .badge.error{ background:var(--red-glow); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
 
 .diagnostic-top{ display:flex; justify-content:space-between; align-items:center; }
-.metric-val{ font-size:28px; font-weight:800; font-family:var(--font-mono); margin-top:12px; }
-.metric-unit{ font-size:12px; color:var(--muted); font-weight:600; }
-.metric-desc{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.4; }
 
 /* TERMINAL / REPORT */
 .terminal-box{
@@ -210,14 +201,12 @@ a{ color:inherit; text-decoration:none; }
 footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted); font-size:12px; font-family:var(--font-mono); }
 .footer-inner{ max-width:1400px; margin:auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
 
-/* RESPONSIVE */
 @media(max-width:1024px){
     .grid-4{ grid-template-columns:repeat(2,1fr); }
-    .grid-3{ grid-template-columns:repeat(2,1fr); }
     .health-panel{ grid-template-columns:1fr; text-align:center; }
 }
 @media(max-width:640px){
-    .grid-4, .grid-3, .grid-2{ grid-template-columns:1fr; }
+    .grid-4, .grid-2{ grid-template-columns:1fr; }
     .action-panel{ flex-direction:column; align-items:stretch; text-align:center; }
     .action-info{ flex-direction:column; }
     .nav-links{ display:none; }
@@ -231,9 +220,9 @@ footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted
     <div class="nav-container">
         <a href="index.html" class="logo">fasq<span>oo</span> <span class="logo-badge">NETOPS CORE</span></a>
         <div class="nav-links" id="navLinks">
-            <a href="index.html">Dashboard</a>
-            <a href="network-status.html" class="active">Telemetry</a>
-            <a href="about.html">Architecture</a>
+            <a href="index.html" data-i18n="navDash">Dashboard</a>
+            <a href="network-status.html" class="active" data-i18n="navTelemetry">Telemetrie</a>
+            <a href="about.html" data-i18n="navArch">Architektur</a>
         </div>
         <div class="nav-actions">
             <select class="lang-select" id="languageSelect" aria-label="Language">
@@ -249,12 +238,12 @@ footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted
 
 <header class="hero">
     <div class="hero-left">
-        <div class="status-pill" id="mainStatusPill">
+        <div class="status-pill">
             <span class="status-dot"></span>
-            <span id="mainStatusText">TELEMETRIE AKTIV</span>
+            <span id="mainStatusText" data-i18n="statusActive">TELEMETRIE AKTIV</span>
         </div>
-        <h1>Network Diagnostics & Uptime</h1>
-        <p>Echte Browser-Telemetrie mit Performance-Timing (DNS, TCP, TLS) für fasqoo.com. Keine Simulationen, sondern echte Messwerte.</p>
+        <h1 data-i18n="heroTitle">Network Diagnostics & Uptime</h1>
+        <p data-i18n="heroSub">Echte Browser-Telemetrie mit Performance-Timing (DNS, TCP, TLS) für fasqoo.com. Keine Simulationen, sondern echte Messwerte.</p>
     </div>
 </header>
 
@@ -264,11 +253,11 @@ footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted
     <div class="card health-panel">
         <div class="health-score-wrap">
             <div class="health-score-number" id="healthScore">—</div>
-            <div class="health-score-label">Index / 100</div>
+            <div class="health-score-label" data-i18n="indexLabel">Index / 100</div>
         </div>
         <div class="health-info">
-            <h3 id="healthTitleDynamic">Analysiere Netzwerk-Integrität...</h3>
-            <p id="healthDescriptionDynamic">Bitte warten, während die Messungen durchgeführt werden.</p>
+            <h3 id="healthTitleDynamic" data-i18n="analyzingTitle">Analysiere Netzwerk-Integrität...</h3>
+            <p id="healthDescriptionDynamic" data-i18n="analyzingSub">Bitte warten, während die Messungen durchgeführt werden.</p>
             <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
         </div>
     </div>
@@ -278,115 +267,115 @@ footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted
         <div class="action-info">
             <div class="action-status-icon" id="bigStatus">⚡</div>
             <div>
-                <div class="action-title" id="checkTitle">Bereit für Telemetrie-Run</div>
-                <div class="action-sub" id="checkSubtitle">High-Resolution Timing API aktiv</div>
+                <div class="action-title" data-i18n="readyTitle">Bereit für Telemetrie-Run</div>
+                <div class="action-sub" data-i18n="readySub">High-Resolution Timing API aktiv</div>
             </div>
         </div>
-        <button class="btn" id="checkBtn">Diagnose starten</button>
+        <button class="btn" id="checkBtn" data-i18n="runBtn">Diagnose starten</button>
     </div>
 
-    <!-- METRICS GRID (IT-FOCUSED) -->
+    <!-- METRICS GRID -->
     <div class="section-header">
-        <h2>Performance & Transport Metriken</h2>
+        <h2 data-i18n="metricsHeader">Performance & Transport Metriken</h2>
     </div>
     <div class="grid-4">
         <div class="card">
             <div class="diagnostic-top">
-                <span class="card-label">TTFB (Response)</span>
-                <span class="badge" id="latencyBadge">Wartet</span>
+                <span class="card-label" data-i18n="m1Title">TTFB (Response)</span>
+                <span class="badge" id="latencyBadge" data-i18n="waiting">Wartet</span>
             </div>
             <div class="metric-val"><span id="latencyValue">—</span> <span class="metric-unit">ms</span></div>
-            <div class="metric-desc">Time to First Byte (Server-Antwortzeit).</div>
+            <div class="metric-desc" data-i18n="m1Desc">Time to First Byte (Server-Antwortzeit).</div>
         </div>
         <div class="card">
             <div class="diagnostic-top">
-                <span class="card-label">DNS Lookup</span>
-                <span class="badge" id="dnsBadge">Wartet</span>
+                <span class="card-label" data-i18n="m2Title">DNS Lookup</span>
+                <span class="badge" id="dnsBadge" data-i18n="waiting">Wartet</span>
             </div>
             <div class="metric-val"><span id="dnsValue">—</span> <span class="metric-unit">ms</span></div>
-            <div class="metric-desc">Namensauflösung der Domain.</div>
+            <div class="metric-desc" data-i18n="m2Desc">Namensauflösung der Domain.</div>
         </div>
         <div class="card">
             <div class="diagnostic-top">
-                <span class="card-label">TLS Handshake</span>
-                <span class="badge" id="tlsBadge">Wartet</span>
+                <span class="card-label" data-i18n="m3Title">TLS Handshake</span>
+                <span class="badge" id="tlsBadge" data-i18n="waiting">Wartet</span>
             </div>
             <div class="metric-val"><span id="tlsValue">—</span> <span class="metric-unit">ms</span></div>
-            <div class="metric-desc">Kryptografischer Schlüsselaustausch.</div>
+            <div class="metric-desc" data-i18n="m3Desc">Kryptografischer Schlüsselaustausch.</div>
         </div>
         <div class="card">
             <div class="diagnostic-top">
-                <span class="card-label">HTTP Protokoll</span>
-                <span class="badge" id="protocolBadge">Wartet</span>
+                <span class="card-label" data-i18n="m4Title">HTTP Protokoll</span>
+                <span class="badge" id="protocolBadge" data-i18n="waiting">Wartet</span>
             </div>
             <div class="metric-val"><span id="protocolValue">—</span></div>
-            <div class="metric-desc">HTTP/1.1, HTTP/2 oder HTTP/3 (QUIC).</div>
+            <div class="metric-desc" data-i18n="m4Desc">HTTP/1.1, HTTP/2 oder HTTP/3 (QUIC).</div>
         </div>
     </div>
 
     <!-- ADVANCED DIAGNOSTICS -->
     <div class="grid-2" style="margin-top:16px;">
         <div class="card">
-            <div class="card-label">Verbindungsstabilität & Jitter</div>
-            <div class="metric-val"><span id="jitterValue">—</span> <span class="metric-unit">ms Jitter</span></div>
-            <div class="metric-desc" style="margin-top:8px;">Varianz aufeinanderfolgender Requests zur Erkennung von Paket-Puffern.</div>
+            <div class="card-label" data-i18n="a1Title">Verbindungsstabilität & Jitter</div>
+            <div class="metric-val"><span id="jitterValue">—</span> <span class="metric-unit" data-i18n="a1Unit">ms Jitter</span></div>
+            <div class="metric-desc" style="margin-top:8px;" data-i18n="a1Desc">Varianz aufeinanderfolgender Requests zur Erkennung von Paket-Puffern.</div>
         </div>
         <div class="card">
-            <div class="card-label">Fehlerrate (Sample Batch)</div>
+            <div class="card-label" data-i18n="a2Title">Fehlerrate (Sample Batch)</div>
             <div class="metric-val"><span id="failureValue">—</span> <span class="metric-unit">%</span></div>
-            <div class="metric-desc" style="margin-top:8px;">Anteil fehlgeschlagener Requests im aktuellen Testlauf.</div>
+            <div class="metric-desc" style="margin-top:8px;" data-i18n="a2Desc">Anteil fehlgeschlagener Requests im aktuellen Testlauf.</div>
         </div>
     </div>
 
     <!-- TEST SUITE -->
     <div class="section-header">
-        <h2>System Validierung</h2>
+        <h2 data-i18n="testsHeader">System Validierung</h2>
     </div>
     <div class="card">
         <div class="test-row">
             <div class="test-icon" id="testOnlineIcon">?</div>
             <div>
-                <div>Browser Uplink Status</div>
-                <div class="test-detail" id="testOnlineDetail">Prüfe Online-Status...</div>
+                <div data-i18n="t1Name">Browser Uplink Status</div>
+                <div class="test-detail" id="testOnlineDetail" data-i18n="tCheck">Prüfe Online-Status...</div>
             </div>
             <div id="testOnlineVal" style="font-weight:700;">—</div>
         </div>
         <div class="test-row">
             <div class="test-icon" id="testTlsIcon">?</div>
             <div>
-                <div>Transport Layer Security (TLS)</div>
-                <div class="test-detail" id="testTlsDetail">Überprüfe Verschlüsselung...</div>
+                <div data-i18n="t2Name">Transport Layer Security (TLS)</div>
+                <div class="test-detail" id="testTlsDetail" data-i18n="tCheck">Überprüfe Verschlüsselung...</div>
             </div>
             <div id="testTlsVal" style="font-weight:700;">—</div>
         </div>
         <div class="test-row">
             <div class="test-icon" id="testCORSci">?</div>
             <div>
-                <div>CORS & Origin Policy</div>
-                <div class="test-detail" id="testCorsDetail">Analysiere Header-Zugriff...</div>
+                <div data-i18n="t3Name">CORS & Origin Policy</div>
+                <div class="test-detail" id="testCorsDetail" data-i18n="tCheck">Analysiere Header-Zugriff...</div>
             </div>
             <div id="testCorsVal" style="font-weight:700;">—</div>
         </div>
     </div>
 
-    <!-- RESPONSE HISTORY CHART -->
+    <!-- HISTORY CHART -->
     <div class="section-header">
-        <h2>Response-Zeitverlauf (Letzte Messungen)</h2>
+        <h2 data-i18n="chartHeader">Response-Zeitverlauf (Letzte Messungen)</h2>
     </div>
     <div class="card">
         <div class="chart-container" id="chart">
-            <div class="no-data">Keine Messdaten im lokalen Buffer.</div>
+            <div class="no-data" data-i18n="noData">Keine Messdaten im lokalen Buffer.</div>
         </div>
     </div>
 
-    <!-- INCIDENT / LOGS -->
+    <!-- EXPORT & REPORT -->
     <div class="section-header">
-        <h2>Export & Report (JSON / Syslog)</h2>
+        <h2 data-i18n="exportHeader">Export & Report (JSON / Syslog)</h2>
     </div>
     <div class="card">
         <div style="display:flex; gap:10px; margin-bottom:16px;">
-            <button class="btn btn-secondary" id="copyReportBtn">In die Zwischenablage kopieren</button>
-            <button class="btn btn-secondary" id="downloadJsonBtn">JSON Export</button>
+            <button class="btn btn-secondary" id="copyReportBtn" data-i18n="copyBtn">In die Zwischenablage kopieren</button>
+            <button class="btn btn-secondary" id="downloadJsonBtn" data-i18n="downloadBtn">JSON Export</button>
         </div>
         <textarea class="terminal-box" id="reportPreview" readonly></textarea>
     </div>
@@ -401,6 +390,141 @@ footer{ border-top:1px solid var(--border); padding:30px 24px; color:var(--muted
 </footer>
 
 <script>
+// VOLLSTÄNDIGES SPRACH-WÖRTERBUCH (FIX FÜR SPRACHUMSCHALTUNG)
+const translations = {
+    de: {
+        navDash: "Dashboard",
+        navTelemetry: "Telemetrie",
+        navArch: "Architektur",
+        statusActive: "TELEMETRIE AKTIV",
+        heroTitle: "Network Diagnostics & Uptime",
+        heroSub: "Echte Browser-Telemetrie mit Performance-Timing (DNS, TCP, TLS) für fasqoo.com. Keine Simulationen, sondern echte Messwerte.",
+        indexLabel: "Index / 100",
+        analyzingTitle: "Analysiere Netzwerk-Integrität...",
+        analyzingSub: "Bitte warten, während die Messungen durchgeführt werden.",
+        readyTitle: "Bereit für Telemetrie-Run",
+        readySub: "High-Resolution Timing API aktiv",
+        runBtn: "Diagnose starten",
+        metricsHeader: "Performance & Transport Metriken",
+        m1Title: "TTFB (Response)",
+        m2Title: "DNS Lookup",
+        m3Title: "TLS Handshake",
+        m4Title: "HTTP Protokoll",
+        waiting: "Wartet",
+        m1Desc: "Time to First Byte (Server-Antwortzeit).",
+        m2Desc: "Namensauflösung der Domain.",
+        m3Desc: "Kryptografischer Schlüsselaustausch.",
+        m4Desc: "HTTP/1.1, HTTP/2 oder HTTP/3 (QUIC).",
+        a1Title: "Verbindungsstabilität & Jitter",
+        a1Unit: "ms Jitter",
+        a1Desc: "Varianz aufeinanderfolgender Requests zur Erkennung von Paket-Puffern.",
+        a2Title: "Fehlerrate (Sample Batch)",
+        a2Desc: "Anteil fehlgeschlagener Requests im aktuellen Testlauf.",
+        testsHeader: "System Validierung",
+        t1Name: "Browser Uplink Status",
+        t2Name: "Transport Layer Security (TLS)",
+        t3Name: "CORS & Origin Policy",
+        tCheck: "Prüfe System-Integrität...",
+        chartHeader: "Response-Zeitverlauf (Letzte Messungen)",
+        noData: "Keine Messdaten im lokalen Buffer.",
+        exportHeader: "Export & Report (JSON / Syslog)",
+        copyBtn: "In die Zwischenablage kopieren",
+        downloadBtn: "JSON Export"
+    },
+    en: {
+        navDash: "Dashboard",
+        navTelemetry: "Telemetry",
+        navArch: "Architecture",
+        statusActive: "TELEMETRY ACTIVE",
+        heroTitle: "Network Diagnostics & Uptime",
+        heroSub: "Real browser telemetry with performance timing (DNS, TCP, TLS) for fasqoo.com. No simulations, actual metrics.",
+        indexLabel: "Index / 100",
+        analyzingTitle: "Analyzing network integrity...",
+        analyzingSub: "Please wait while measurements are being taken.",
+        readyTitle: "Ready for Telemetry Run",
+        readySub: "High-Resolution Timing API active",
+        runBtn: "Start Diagnostics",
+        metricsHeader: "Performance & Transport Metrics",
+        m1Title: "TTFB (Response)",
+        m2Title: "DNS Lookup",
+        m3Title: "TLS Handshake",
+        m4Title: "HTTP Protocol",
+        waiting: "Waiting",
+        m1Desc: "Time to First Byte (Server response time).",
+        m2Desc: "Domain name resolution time.",
+        m3Desc: "Cryptographic key exchange time.",
+        m4Desc: "HTTP/1.1, HTTP/2 or HTTP/3 (QUIC).",
+        a1Title: "Connection Stability & Jitter",
+        a1Unit: "ms Jitter",
+        a1Desc: "Variance of consecutive requests for packet buffer detection.",
+        a2Title: "Error Rate (Sample Batch)",
+        a2Desc: "Share of failed requests in the current test run.",
+        testsHeader: "System Validation",
+        t1Name: "Browser Uplink Status",
+        t2Name: "Transport Layer Security (TLS)",
+        t3Name: "CORS & Origin Policy",
+        tCheck: "Checking system integrity...",
+        chartHeader: "Response Timeline (Recent Samples)",
+        noData: "No metrics data in local buffer.",
+        exportHeader: "Export & Report (JSON / Syslog)",
+        copyBtn: "Copy to Clipboard",
+        downloadBtn: "JSON Export"
+    },
+    fr: {
+        navDash: "Tableau de bord",
+        navTelemetry: "Télémétrie",
+        navArch: "Architecture",
+        statusActive: "TÉLÉMÉTRIE ACTIVE",
+        heroTitle: "Diagnostics Réseau & Uptime",
+        heroSub: "Télémétrie de navigateur réelle avec timing (DNS, TCP, TLS) pour fasqoo.com. Pas de simulations, mesures réelles.",
+        indexLabel: "Indice / 100",
+        analyzingTitle: "Analyse de l'intégrité du réseau...",
+        analyzingSub: "Veuillez patienter pendant la prise de mesures.",
+        readyTitle: "Prêt pour le test de télémétrie",
+        readySub: "API de timing haute résolution active",
+        runBtn: "Lancer le diagnostic",
+        metricsHeader: "Métriques de Performance & Transport",
+        m1Title: "TTFB (Réponse)",
+        m2Title: "Résolution DNS",
+        m3Title: "Handshake TLS",
+        m4Title: "Protocole HTTP",
+        waiting: "En attente",
+        m1Desc: "Time to First Byte (Temps de réponse du serveur).",
+        m2Desc: "Temps de résolution du nom de domaine.",
+        m3Desc: "Échange de clés cryptographiques.",
+        m4Desc: "HTTP/1.1, HTTP/2 ou HTTP/3 (QUIC).",
+        a1Title: "Stabilité & Jitter",
+        a1Unit: "ms Jitter",
+        a1Desc: "Variance des requêtes consécutives pour détecter les tampons de paquets.",
+        a2Title: "Taux d'erreur (Lot)",
+        a2Desc: "Part des requêtes échouées dans le cycle actuel.",
+        testsHeader: "Validation du Système",
+        t1Name: "État de la liaison du navigateur",
+        t2Name: "Transport Layer Security (TLS)",
+        t3Name: "Politique CORS & Origin",
+        tCheck: "Vérification de l'intégrité...",
+        chartHeader: "Chronologie des Réponses (Dernières)",
+        noData: "Aucune donnée dans le tampon local.",
+        exportHeader: "Exportation & Rapport (JSON / Syslog)",
+        copyBtn: "Copier dans le presse-papier",
+        downloadBtn: "Export JSON"
+    }
+};
+
+function changeLanguage(lang) {
+    const dict = translations[lang] || translations.de;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if(dict[key]) {
+            el.textContent = dict[key];
+        }
+    });
+}
+
+document.getElementById("languageSelect").addEventListener("change", (e) => {
+    changeLanguage(e.target.value);
+});
+
 const CONFIG = {
     TARGET: window.location.origin + "/",
     SAMPLES: 5,
@@ -412,8 +536,7 @@ let metricsHistory = [];
 async function measureConnection() {
     const btn = document.getElementById("checkBtn");
     btn.disabled = true;
-    btn.textContent = "Messe...";
-
+    
     let results = [];
     for(let i=0; i<CONFIG.SAMPLES; i++) {
         const res = await runTimedFetch(i);
@@ -423,7 +546,6 @@ async function measureConnection() {
 
     processMetrics(results);
     btn.disabled = false;
-    btn.textContent = "Diagnose starten";
 }
 
 async function runTimedFetch(index) {
@@ -439,8 +561,6 @@ async function runTimedFetch(index) {
         });
         
         const duration = Math.round(performance.now() - start);
-        
-        // Versuche Performance API Timing-Einträge zu greifen
         const entries = performance.getEntriesByType("resource");
         const lastEntry = entries.filter(e => e.name.includes("net_probe")).pop();
         
@@ -475,14 +595,12 @@ function processMetrics(results) {
     const failed = results.filter(r => !r.success);
     const durations = successful.map(r => r.duration);
 
-    const avgDuration = durations.length ? Math.round(durations.reduce((a,b)=>a+b,0)/durations.length) : null;
     const avgDns = successful.length ? Math.round(successful.reduce((a,b)=>a+b.dns,0)/successful.length) : 0;
     const avgTls = successful.length ? Math.round(successful.reduce((a,b)=>a+b.tls,0)/successful.length) : 0;
     const avgTtfb = successful.length ? Math.round(successful.reduce((a,b)=>a+b.ttfb,0)/successful.length) : 0;
     const failureRate = Math.round((failed.length / results.length) * 100);
     const proto = successful.length ? successful[successful.length - 1].protocol : "HTTP/1.1";
 
-    // Jitter Berechnung
     let jitter = 0;
     if(durations.length >= 2) {
         let diffs = [];
@@ -492,7 +610,6 @@ function processMetrics(results) {
         jitter = Math.round(diffs.reduce((a,b)=>a+b,0)/diffs.length);
     }
 
-    // UI Updates
     document.getElementById("latencyValue").textContent = avgTtfb;
     document.getElementById("dnsValue").textContent = avgDns;
     document.getElementById("tlsValue").textContent = avgTls;
@@ -500,13 +617,11 @@ function processMetrics(results) {
     document.getElementById("jitterValue").textContent = jitter;
     document.getElementById("failureValue").textContent = failureRate;
 
-    // Badges
-    setBadge("latencyBadge", avgTtfb < 100 ? "good" : avgTtfb < 300 ? "warning" : "error", avgTtfb < 100 ? "OPTIMAL" : "ERHÖHT");
+    setBadge("latencyBadge", avgTtfb < 100 ? "good" : avgTtfb < 300 ? "warning" : "error", avgTtfb < 100 ? "OPTIMAL" : "HIGH");
     setBadge("dnsBadge", avgDns < 20 ? "good" : "warning", avgDns + " ms");
     setBadge("tlsBadge", avgTls < 50 ? "good" : "warning", avgTls + " ms");
     setBadge("protocolBadge", "good", proto);
 
-    // Health Score Calc
     let score = 100;
     if(avgTtfb > 200) score -= 20;
     if(avgDns > 50) score -= 10;
@@ -517,22 +632,10 @@ function processMetrics(results) {
     document.getElementById("healthScore").textContent = score;
     document.getElementById("scoreFill").style.width = score + "%";
     
-    const hTitle = document.getElementById("healthTitleDynamic");
-    const hDesc = document.getElementById("healthDescriptionDynamic");
-    if(score >= 90) {
-        hTitle.textContent = "Systemstatus: Optimal";
-        hDesc.textContent = "Alle Telemetrie-Werte im optimalen Bereich.";
-    } else {
-        hTitle.textContent = "Systemstatus: Warnung";
-        hDesc.textContent = "Erhöhte Latenzen oder leichte Paketverluste detektiert.";
-    }
-
-    // Validierungen
     setTestStatus("testOnline", navigator.onLine, navigator.onLine ? "Online" : "Offline");
-    setTestStatus("testTls", location.protocol === "https:", location.protocol === "https:" ? "Aktiv (Secure)" : "Inaktiv (HTTP)");
-    setTestStatus("testCors", true, "Same-Origin / CORS Konform");
+    setTestStatus("testTls", location.protocol === "https:", location.protocol === "https:" ? "Secure (HTTPS)" : "Insecure (HTTP)");
+    setTestStatus("testCors", true, "Passed");
 
-    // History & Charts
     metricsHistory.push(...results);
     if(metricsHistory.length > 30) metricsHistory = metricsHistory.slice(-30);
     renderChart(metricsHistory);
@@ -551,7 +654,6 @@ function setTestStatus(id, ok, text) {
     icon.className = "test-icon " + (ok ? "good" : "error");
     icon.textContent = ok ? "✓" : "!";
     document.getElementById(id + "Val").textContent = text;
-    document.getElementById(id + "Detail").textContent = ok ? "Validiert & Verifiziert" : "Auffälligkeit detektiert";
 }
 
 function renderChart(data) {
@@ -565,7 +667,7 @@ function renderChart(data) {
         bar.className = "bar";
         const h = Math.max(10, (item.duration / max) * 100);
         bar.style.height = h + "%";
-        bar.title = `${item.duration} ms (Status: ${item.status})`;
+        bar.title = `${item.duration} ms`;
         if(!item.success) bar.style.background = "var(--red)";
         chart.appendChild(bar);
     });
@@ -583,7 +685,7 @@ function generateReport(metrics) {
 
 document.getElementById("copyReportBtn").addEventListener("click", () => {
     navigator.clipboard.writeText(document.getElementById("reportPreview").value);
-    alert("Telemetrie-Report in die Zwischenablage kopiert.");
+    alert("Report copied to clipboard.");
 });
 
 document.getElementById("downloadJsonBtn").addEventListener("click", () => {
@@ -596,20 +698,17 @@ document.getElementById("downloadJsonBtn").addEventListener("click", () => {
     URL.revokeObjectURL(url);
 });
 
-// Theme Toggle
 const themeBtn = document.getElementById("themeBtn");
 themeBtn.addEventListener("click", () => {
     document.body.classList.toggle("light");
     themeBtn.textContent = document.body.classList.contains("light") ? "☀" : "☾";
 });
 
-// Mobile menu
 document.getElementById("mobileBtn").addEventListener("click", () => {
     const links = document.getElementById("navLinks");
     links.style.display = links.style.display === "flex" ? "none" : "flex";
 });
 
-// Init
 measureConnection();
 document.getElementById("checkBtn").addEventListener("click", measureConnection);
 </script>
