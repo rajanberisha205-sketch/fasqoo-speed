@@ -1,0 +1,1181 @@
+<?php
+// 1. Server-seitige Sprach- und IP-Erkennung
+$supported_languages = ['de', 'fr', 'en', 'it', 'pt', 'es', 'tr', 'sq', 'ar', 'zh'];
+$lang = 'de'; // Standardsprache
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], $supported_languages)) {
+    $lang = $_GET['lang'];
+    setcookie('fasqoo_language', $lang, time() + (86400 * 30), "/");
+} elseif (isset($_COOKIE['fasqoo_language']) && in_array($_COOKIE['fasqoo_language'], $supported_languages)) {
+    $lang = $_COOKIE['fasqoo_language'];
+} else {
+    // Server-seitige IP-Geolokalisierung (Beispiel über Cloudflare-Header oder Standard-Server-Variablen)
+    if (isset($_SERVER['HTTP_CF_IPCOUNTRY'])) {
+        $country = strtolower($_SERVER['HTTP_CF_IPCOUNTRY']);
+        if (in_array($country, ['us', 'gb', 'ca', 'au'])) { $lang = 'en'; }
+        elseif ($country == 'al' || $country == 'xk') { $lang = 'sq'; }
+        elseif ($country == 'fr') { $lang = 'fr'; }
+        elseif ($country == 'it') { $lang = 'it'; }
+        elseif ($country == 'es') { $lang = 'es'; }
+        elseif ($country == 'tr') { $lang = 'tr'; }
+    }
+}
+
+$dir = ($lang === 'ar') ? 'rtl' : 'ltr';
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $lang; ?>" dir="<?php echo $dir; ?>">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title id="seoTitle">Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime</title>
+<meta name="description" id="seoDesc" content="Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser. Realistische Netzwerk-Diagnose ohne Simulation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://fasqoo.com/network-status.php">
+
+<style>
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#101828;
+    --muted:#667085;
+    --border:#e4e7ec;
+    --primary:#2563eb;
+    --primary2:#1d4ed8;
+    --green:#12b76a;
+    --red:#f04438;
+    --yellow:#f79009;
+    --shadow:0 8px 30px rgba(16,24,40,.07);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+body.dark{
+    --bg:#0b1220;
+    --card:#111827;
+    --text:#f9fafb;
+    --muted:#98a2b3;
+    --border:#253047;
+    --primary:#3b82f6;
+    --primary2:#60a5fa;
+    --shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+a{ color:inherit; text-decoration:none; }
+
+.navbar{
+    position:sticky; top:0; z-index:1000;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+}
+.dark .navbar{ background:rgba(11,18,32,.92); }
+
+.nav-container{
+    max-width:1200px; margin:auto; padding:15px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.logo{ font-size:28px; font-weight:900; letter-spacing:-1.5px; color:var(--text); }
+.logo span{ color:var(--primary); }
+
+.nav-links{ display:flex; align-items:center; gap:24px; }
+.nav-links a{ color:var(--muted); font-size:14px; font-weight:700; transition:.2s; }
+.nav-links a:hover, .nav-links a.active{ color:var(--primary); }
+
+.nav-actions{ display:flex; align-items:center; gap:8px; }
+
+.lang-select{
+    height:38px; border:1px solid var(--border); border-radius:10px;
+    background:var(--card); color:var(--text); padding:0 11px; font-weight:700; cursor:pointer;
+}
+
+.theme-btn{
+    height:38px; width:40px; border:1px solid var(--border); border-radius:10px;
+    background:var(--card); color:var(--text); font-size:18px; cursor:pointer;
+}
+
+.mobile-btn{
+    display:none; border:1px solid var(--border); background:var(--card); color:var(--text);
+    width:40px; height:40px; border-radius:10px; font-size:20px; cursor:pointer;
+}
+
+.hero{ max-width:1000px; margin:40px auto 30px; padding:0 20px; text-align:center; }
+.status-pill{
+    display:inline-flex; align-items:center; gap:8px; padding:9px 15px; border-radius:999px;
+    background:rgba(18,183,106,.1); color:var(--green); font-size:13px; font-weight:800;
+    border:1px solid rgba(18,183,106,.2);
+}
+.status-dot{ width:9px; height:9px; background:var(--green); border-radius:50%; box-shadow:0 0 0 4px rgba(18,183,106,.12); }
+.status-pill.warning{ background:rgba(247,144,9,.1); color:var(--yellow); border-color:rgba(247,144,9,.2); }
+.status-pill.warning .status-dot{ background:var(--yellow); }
+.status-pill.error{ background:rgba(240,68,56,.1); color:var(--red); border-color:rgba(240,68,56,.2); }
+.status-pill.error .status-dot{ background:var(--red); }
+.hero h1{ margin-top:20px; font-size:42px; letter-spacing:-1.5px; }
+.hero p{ max-width:680px; margin:15px auto 0; color:var(--muted); line-height:1.7; font-size:15px; }
+
+.container{ max-width:1200px; margin:auto; padding:0 20px 60px; }
+.section-title{ margin:35px 0 15px; }
+.section-title h2{ font-size:22px; }
+.section-title p{ color:var(--muted); margin-top:5px; font-size:14px; }
+
+.grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.card{ background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+.overview-card{ padding:22px; }
+.card-label{ color:var(--muted); font-size:13px; font-weight:700; }
+.card-value{ margin-top:9px; font-size:26px; font-weight:900; }
+.card-small{ margin-top:6px; color:var(--muted); font-size:12px; }
+
+.health-panel{ margin-top:20px; padding:28px; display:grid; grid-template-columns:180px 1fr; gap:28px; align-items:center; }
+.health-score{
+    width:150px; height:150px; margin:auto; border-radius:50%;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    border:10px solid rgba(37,99,235,.12); background:var(--card);
+}
+.health-score-number{ font-size:42px; font-weight:900; }
+.health-score-label{ color:var(--muted); font-size:12px; font-weight:700; margin-top:2px; }
+.score-bar{ height:10px; background:var(--border); border-radius:20px; overflow:hidden; margin-top:16px; }
+.score-fill{ height:100%; width:0%; background:var(--primary); transition:width .5s ease; }
+
+.check-panel{ margin-top:20px; padding:24px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.check-info{ display:flex; align-items:center; gap:16px; }
+.big-status{
+    width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(18,183,106,.12); color:var(--green); font-size:24px; font-weight:900; flex-shrink:0;
+}
+.big-status.error{ background:rgba(240,68,56,.12); color:var(--red); }
+.big-status.warning{ background:rgba(247,144,9,.12); color:var(--yellow); }
+.check-title{ font-size:17px; font-weight:900; }
+.check-subtitle{ color:var(--muted); margin-top:5px; font-size:13px; }
+.check-btn{
+    border:0; border-radius:12px; background:var(--primary); color:white; padding:13px 20px;
+    font-weight:800; cursor:pointer; transition:.2s; white-space:nowrap;
+}
+.check-btn:hover{ background:var(--primary2); }
+.check-btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+.diagnostic-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.diagnostic-card{ padding:20px; }
+.diagnostic-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.diagnostic-name{ font-weight:900; font-size:14px; }
+.metric{ font-size:26px; font-weight:900; margin-top:14px; }
+.metric-unit{ font-size:13px; color:var(--muted); font-weight:700; }
+.metric-description{ margin-top:7px; color:var(--muted); font-size:12px; line-height:1.5; }
+
+.badge{
+    display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:5px 9px;
+    font-size:11px; font-weight:800; background:rgba(152,162,179,.12); color:var(--muted);
+}
+.badge.good{ color:var(--green); background:rgba(18,183,106,.1); }
+.badge.warning{ color:var(--yellow); background:rgba(247,144,9,.1); }
+.badge.error{ color:var(--red); background:rgba(240,68,56,.1); }
+
+.profile-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.profile-card{ padding:18px; }
+.profile-label{ color:var(--muted); font-size:12px; font-weight:700; }
+.profile-value{ margin-top:8px; font-size:17px; font-weight:900; word-break:break-word; }
+
+.geoip-box{ margin-top:20px; padding:22px; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+.geoip-box h3{ font-size:16px; margin-bottom:8px; }
+.geoip-box p{ color:var(--muted); font-size:13px; line-height:1.6; }
+
+.problem-list{ display:flex; flex-direction:column; gap:12px; }
+.problem{ background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); }
+.problem summary{
+    cursor:pointer; list-style:none; padding:18px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:15px;
+}
+.problem summary::-webkit-details-marker{ display:none; }
+.problem-heading{ display:flex; align-items:center; gap:12px; }
+.problem-icon{
+    width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-weight:900; background:rgba(247,144,9,.1); color:var(--yellow); flex-shrink:0;
+}
+.problem.error .problem-icon{ background:rgba(240,68,56,.1); color:var(--red); }
+.problem.good .problem-icon{ background:rgba(18,183,106,.1); color:var(--green); }
+.problem-name{ font-weight:900; font-size:14px; }
+.problem-severity{ font-size:12px; font-weight:600; color:var(--muted); margin-top:3px; }
+.problem-body{ padding:0 20px 22px; border-top:1px solid var(--border); }
+.explanation-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:16px; }
+.explanation{ border:1px solid var(--border); border-radius:12px; padding:15px; }
+.explanation h4{ font-size:13px; margin-bottom:6px; }
+.explanation p{ color:var(--muted); font-size:12px; line-height:1.6; }
+
+.test-suite{ padding:20px 22px; }
+.test-row{
+    display:grid; grid-template-columns:28px 1fr auto; gap:12px; align-items:center;
+    padding:14px 0; border-bottom:1px solid var(--border);
+}
+.test-row:last-child{ border-bottom:0; }
+.test-icon{
+    width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(152,162,179,.15); color:var(--muted); font-size:12px; font-weight:900;
+}
+.test-icon.good{ background:rgba(18,183,106,.12); color:var(--green); }
+.test-icon.error{ background:rgba(240,68,56,.12); color:var(--red); }
+.test-name{ font-weight:800; font-size:14px; }
+.test-detail{ color:var(--muted); font-size:11px; margin-top:3px; }
+.test-value{ font-weight:900; font-size:13px; }
+
+.notice{ padding:18px; border:1px solid var(--border); background:var(--card); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.6; margin-top:15px; }
+
+.chart-card{ padding:22px; margin-top:15px; }
+.chart-header{ display:flex; justify-content:space-between; align-items:center; gap:15px; }
+.chart-header h3{ font-size:16px; }
+.chart-header span{ color:var(--muted); font-size:12px; }
+.chart{
+    height:220px; margin-top:20px; display:flex; align-items:flex-end; gap:4px;
+    border-bottom:1px solid var(--border); padding:10px 4px 0; overflow:hidden;
+}
+.bar{ flex:1; min-width:4px; max-width:14px; background:var(--primary); border-radius:5px 5px 0 0; opacity:.85; }
+.no-data{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:14px; }
+
+.incident{ margin-top:15px; padding:22px; display:flex; gap:15px; align-items:flex-start; }
+.incident-icon{
+    width:40px; height:40px; border-radius:50%; background:rgba(18,183,106,.12); color:var(--green);
+    display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0;
+}
+.incident h3{ font-size:15px; }
+.incident p{ color:var(--muted); margin-top:5px; line-height:1.5; font-size:13px; }
+
+.report-panel{ padding:22px; }
+.report-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.secondary-btn{
+    border:1px solid var(--border); border-radius:11px; background:var(--card); color:var(--text);
+    padding:11px 16px; font-weight:800; cursor:pointer;
+}
+.secondary-btn:hover{ border-color:var(--primary); color:var(--primary); }
+
+.accuracy{ margin-top:20px; padding:20px; border-radius:14px; background:rgba(37,99,235,.07); border:1px solid rgba(37,99,235,.15); }
+.accuracy strong{ display:block; margin-bottom:7px; }
+.accuracy p{ color:var(--muted); font-size:13px; line-height:1.6; }
+
+footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted); font-size:12px; }
+.footer-inner{ max-width:1200px; margin:auto; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+
+@media(max-width:1000px){
+    .grid, .profile-grid, .diagnostic-grid{ grid-template-columns:repeat(2,1fr); }
+    .health-panel{ grid-template-columns:1fr; text-align:center; }
+    .mobile-btn{ display:block; }
+    .nav-links{
+        position:absolute; top:100%; left:0; right:0; background:var(--card);
+        border-bottom:1px solid var(--border); padding:20px; display:none;
+        flex-direction:column; align-items:flex-start; gap:16px; box-shadow:var(--shadow);
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ font-size:16px; width:100%; padding:6px 0; }
+}
+
+@media(max-width:600px){
+    .grid, .diagnostic-grid, .profile-grid{ grid-template-columns:1fr; }
+    .check-panel{ flex-direction:column; align-items:stretch; text-align:center; }
+    .check-info{ flex-direction:column; }
+    .check-btn{ width:100%; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.php" class="logo">fasq<span>oo</span></a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.php" data-i18n="home">Startseite</a>
+            <a href="faq.php" data-i18n="faq">FAQ</a>
+            <a href="network-status.php" class="active" data-i18n="networkStatus">Website-Status</a>
+            <a href="about.php" data-i18n="about">Über uns</a>
+        </div>
+        <div class="nav-actions">
+            <!-- Sprachauswahl leitet direkt an PHP weiter, um den Server-Status & GeoIP sauber zu aktualisieren -->
+            <select class="lang-select" id="languageSelect" onchange="location.href='?lang='+this.value">
+                <option value="de" <?php if($lang=='de') echo 'selected'; ?>>Deutsch</option>
+                <option value="en" <?php if($lang=='en') echo 'selected'; ?>>English</option>
+                <option value="fr" <?php if($lang=='fr') echo 'selected'; ?>>Français</option>
+                <option value="it" <?php if($lang=='it') echo 'selected'; ?>>Italiano</option>
+                <option value="pt" <?php if($lang=='pt') echo 'selected'; ?>>Português</option>
+                <option value="es" <?php if($lang=='es') echo 'selected'; ?>>Español</option>
+                <option value="tr" <?php if($lang=='tr') echo 'selected'; ?>>Türkçe</option>
+                <option value="sq" <?php if($lang=='sq') echo 'selected'; ?>>Shqip</option>
+                <option value="ar" <?php if($lang=='ar') echo 'selected'; ?>>العربية</option>
+                <option value="zh" <?php if($lang=='zh') echo 'selected'; ?>>中文</option>
+            </select>
+            <button class="theme-btn" id="themeBtn" aria-label="Theme">☾</button>
+            <button class="mobile-btn" id="mobileBtn" aria-label="Menu">☰</button>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="status-pill" id="mainStatusPill">
+        <span class="status-dot"></span>
+        <span id="mainStatusText" data-i18n="running">MESSUNG LÄUFT...</span>
+    </div>
+    <h1 data-i18n="pageTitle">Fasqoo Website-Status</h1>
+    <p data-i18n="pageDescription">
+        Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.
+    </p>
+</header>
+
+<main class="container">
+
+<div class="section-title">
+    <h2 data-i18n="healthTitle">Verbindungs-Score</h2>
+    <p data-i18n="healthDesc">Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.</p>
+</div>
+
+<div class="card health-panel">
+    <div class="health-score">
+        <div class="health-score-number" id="healthScore">—</div>
+        <div class="health-score-label">/ 100</div>
+    </div>
+    <div class="health-details">
+        <h2 id="healthTitleDynamic">...</h2>
+        <p id="healthDescriptionDynamic">...</p>
+        <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
+    </div>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="overview">Übersicht</h2>
+    <p data-i18n="overviewDesc">Echte Messungen, gesammelt von diesem Browser.</p>
+</div>
+
+<div class="grid">
+    <div class="card overview-card">
+        <div class="card-label" data-i18n="observedUptime">Beobachtete Erreichbarkeit</div>
+        <div class="card-value" id="uptimeValue">—</div>
+        <div class="card-small" data-i18n="thisBrowser">Dieser Browser / letzte 24 Std.</div>
+    </div>
+    <div class="card overview-card">
+        <div class="card-label" data-i18n="checks24h">Prüfungen in 24 Std.</div>
+        <div class="card-value" id="checksValue">0</div>
+        <div class="card-small" data-i18n="localHistory">Lokaler Browser-Verlauf</div>
+    </div>
+    <div class="card overview-card">
+        <div class="card-label" data-i18n="currentResponse">Aktuelle Antwortzeit</div>
+        <div class="card-value" id="responseValue">—</div>
+        <div class="card-small">Browser → fasqoo.com</div>
+    </div>
+    <div class="card overview-card">
+        <div class="card-label" data-i18n="lastChecked">Zuletzt geprüft</div>
+        <div class="card-value" id="lastChecked">—</div>
+        <div class="card-small" id="lastCheckedDate">—</div>
+    </div>
+</div>
+
+<div class="card check-panel">
+    <div class="check-info">
+        <div class="big-status" id="bigStatus">✓</div>
+        <div>
+            <div class="check-title" id="checkTitle">...</div>
+            <div class="check-subtitle" id="checkSubtitle" data-i18n="realMeasurement">Echte Browser-Messung</div>
+        </div>
+    </div>
+    <button class="check-btn" id="checkBtn" data-i18n="runCheck">Vollständige Messung starten</button>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="diagnostics">Messwerte</h2>
+    <p data-i18n="diagnosticsDesc">Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.</p>
+</div>
+
+<div class="diagnostic-grid">
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name" data-i18n="latency">Latenz</div>
+            <span class="badge" id="latencyBadge">...</span>
+        </div>
+        <div class="metric"><span id="latencyValue">—</span> <span class="metric-unit">ms</span></div>
+        <div class="metric-description" data-i18n="latencyDesc">Durchschnittliche Antwortzeit einer HTTP-Anfrage an fasqoo.com.</div>
+    </div>
+
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name" data-i18n="jitter">Jitter</div>
+            <span class="badge" id="jitterBadge">...</span>
+        </div>
+        <div class="metric"><span id="jitterValue">—</span> <span class="metric-unit">ms</span></div>
+        <div class="metric-description" data-i18n="jitterDesc">Schwankung zwischen aufeinanderfolgenden Anfragen.</div>
+    </div>
+
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name" data-i18n="failureRate">Fehlerrate</div>
+            <span class="badge" id="failureBadge">...</span>
+        </div>
+        <div class="metric"><span id="failureValue">—</span> <span class="metric-unit">%</span></div>
+        <div class="metric-description" data-i18n="failureRateDesc">Anteil fehlgeschlagener Anfragen während der Messung.</div>
+    </div>
+
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name" data-i18n="httpResponse">HTTP-Antwort</div>
+            <span class="badge" id="httpBadge">...</span>
+        </div>
+        <div class="metric"><span id="httpValue">—</span></div>
+        <div class="metric-description" data-i18n="httpResponseDesc">HTTP-Status, den fasqoo.com zuletzt zurückgegeben hat.</div>
+    </div>
+
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name">HTTPS</div>
+            <span class="badge" id="httpsBadge">...</span>
+        </div>
+        <div class="metric"><span id="httpsValue">—</span></div>
+        <div class="metric-description" data-i18n="httpsDesc">Ob diese Seite aktuell über eine verschlüsselte Verbindung läuft.</div>
+    </div>
+
+    <div class="card diagnostic-card">
+        <div class="diagnostic-top">
+            <div class="diagnostic-name" data-i18n="networkApi">Browser-Netzwerkdaten</div>
+            <span class="badge" id="networkApiBadge">...</span>
+        </div>
+        <div class="metric"><span id="effectiveTypeValue">—</span></div>
+        <div class="metric-description" data-i18n="networkApiDesc">Verbindungsinfo, die der Browser offenlegt.</div>
+    </div>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="networkProfile">Geräte- &amp; Verbindungsprofil</h2>
+    <p data-i18n="networkProfileDesc">Technische Angaben, die dein Browser selbst bereitstellt.</p>
+</div>
+
+<div class="profile-grid">
+    <div class="card profile-card"><div class="profile-label" data-i18n="connType">Verbindungstyp</div><div class="profile-value" id="connectionType">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="downlink">Geschätzte Downlink-Rate</div><div class="profile-value" id="downlinkValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="rtt">Browser-RTT</div><div class="profile-value" id="browserRtt">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="saveData">Datensparmodus</div><div class="profile-value" id="saveDataValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="onlineStateLabel">Online-Status</div><div class="profile-value" id="onlineState">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="protocol">Protokoll</div><div class="profile-value" id="protocolValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="browser">Browser</div><div class="profile-value" id="browserValue">—</div></div>
+    <div class="card profile-card"><div class="profile-label" data-i18n="windowSize">Fenstergröße</div><div class="profile-value" id="screenValue">—</div></div>
+</div>
+
+<div class="geoip-box">
+    <h3 data-i18n="geoipTitle">Funktionsweise der server-seitigen IP-Geolokalisierung</h3>
+    <p data-i18n="geoipText"><strong>IP-Erkennung:</strong> Deine erkannte IP wurde serverseitig ausgewertet, um die passende Sprache und Inhalte bereitzustellen (z.B. erkanntes Land über Server-Header).</p>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="problemTitle">Auffälligkeiten</h2>
+    <p data-i18n="problemDesc">Nur Dinge, die diese Messung tatsächlich belegt.</p>
+</div>
+
+<div class="problem-list" id="problemList"></div>
+
+<div class="section-title">
+    <h2 data-i18n="testSuite">Testübersicht</h2>
+    <p data-i18n="testSuiteDesc">Technische Testergebnisse dieser Browser-Sitzung.</p>
+</div>
+
+<div class="card test-suite" id="testSuite">
+    <div class="test-row">
+        <div class="test-icon" id="testInternetIcon">?</div>
+        <div><div class="test-name" data-i18n="testInternetName">Browser-Online-Status</div><div class="test-detail" id="testInternetDetail">—</div></div>
+        <div class="test-value" id="testInternetValue">—</div>
+    </div>
+    <div class="test-row">
+        <div class="test-icon" id="testHttpIcon">?</div>
+        <div><div class="test-name" data-i18n="testHttpName">Erreichbarkeit fasqoo.com</div><div class="test-detail" id="testHttpDetail">—</div></div>
+        <div class="test-value" id="testHttpValue">—</div>
+    </div>
+    <div class="test-row">
+        <div class="test-icon" id="testHttpsIcon">?</div>
+        <div><div class="test-name" data-i18n="testHttpsName">HTTPS-Transport</div><div class="test-detail" id="testHttpsDetail">—</div></div>
+        <div class="test-value" id="testHttpsValue">—</div>
+    </div>
+    <div class="test-row">
+        <div class="test-icon" id="testStabilityIcon">?</div>
+        <div><div class="test-name" data-i18n="testStabilityName">Verbindungsstabilität</div><div class="test-detail" id="testStabilityDetail">—</div></div>
+        <div class="test-value" id="testStabilityValue">—</div>
+    </div>
+</div>
+
+<div class="notice">
+    <strong data-i18n="limitTitle">Was diese Seite nicht kann:</strong>
+    <span data-i18n="limitText">Ein Browser kann keinen echten Paketverlust (ICMP) oder Traceroute ermitteln. Diese Seite zeigt daher bewusst nur HTTP-messbare Daten.</span>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="responseHistory">Antwortzeit-Verlauf</h2>
+    <p data-i18n="responseHistoryDesc">Echte Prüfungen, lokal im Browser gespeichert.</p>
+</div>
+
+<div class="card chart-card">
+    <div class="chart-header">
+        <h3 data-i18n="last24h">Letzte 24 Stunden</h3>
+        <span id="chartInfo">—</span>
+    </div>
+    <div class="chart" id="chart">
+        <div class="no-data" data-i18n="noData">Noch keine Messungen vorhanden.</div>
+    </div>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="incidents">Vorfälle</h2>
+    <p data-i18n="incidentsDesc">Ereignisse aus der Browser-Überwachung.</p>
+</div>
+
+<div class="card incident">
+    <div class="incident-icon" id="incidentIcon">✓</div>
+    <div>
+        <h3 id="incidentTitle">...</h3>
+        <p id="incidentText">...</p>
+    </div>
+</div>
+
+<div class="section-title">
+    <h2 data-i18n="reportTitle">Kurzbericht</h2>
+    <p data-i18n="reportDesc">Erzeugt eine kompakte Zusammenfassung für Support-Tickets.</p>
+</div>
+
+<div class="card report-panel">
+    <div class="report-actions">
+        <button class="secondary-btn" id="copyReportBtn" data-i18n="copyReport">Bericht kopieren</button>
+        <button class="secondary-btn" id="downloadReportBtn" data-i18n="downloadReport">Bericht herunterladen</button>
+    </div>
+    <textarea id="reportPreview" readonly style="width:100%;min-height:200px;margin-top:16px;resize:vertical;border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--bg);color:var(--text);font-family:monospace;font-size:12px;line-height:1.6;"></textarea>
+</div>
+
+<div class="accuracy">
+    <strong data-i18n="accuracyTitle">Messgenauigkeit und Grenzen</strong>
+    <p data-i18n="accuracyText">Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com.</p>
+</div>
+
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div>© 2026 Fasqoo. <span data-i18n="rights">Alle Rechte vorbehalten.</span></div>
+    </div>
+</footer>
+
+<script>
+// Server-seitig ermittelte Sprache direkt an JavaScript übergeben
+const currentLanguage = "<?php echo $lang; ?>";
+
+const CONFIG = {
+    CHECK_INTERVAL: 30000,
+    TIMEOUT: 10000,
+    DIAGNOSTIC_REQUESTS: 6
+};
+
+const TARGET_URL = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+const STORAGE_KEY = "fasqoo_status_history_v1";
+const THEME_KEY = "fasqoo_theme";
+
+const translations = {
+de:{
+metaTitle:"Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime",
+metaDesc:"Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser.",
+home:"Startseite", faq:"FAQ", networkStatus:"Website-Status", about:"Über uns",
+running:"MESSUNG LÄUFT...",
+pageTitle:"Fasqoo Website-Status",
+pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht.",
+healthTitle:"Verbindungs-Score", healthDesc:"Berechnet ausschließlich aus den Messungen dieses Browsers.",
+overview:"Übersicht", overviewDesc:"Echte Messungen, gesammelt von diesem Browser.",
+observedUptime:"Beobachtete Erreichbarkeit", thisBrowser:"Dieser Browser / letzte 24 Std.",
+checks24h:"Prüfungen in 24 Std.", localHistory:"Lokaler Browser-Verlauf",
+currentResponse:"Aktuelle Antwortzeit", lastChecked:"Zuletzt geprüft",
+realMeasurement:"Echte Browser-Messung", runCheck:"Vollständige Messung starten", runningBtn:"Messung läuft...",
+diagnostics:"Messwerte", diagnosticsDesc:"Direkt aus der aktuellen Verbindung erhoben.",
+latency:"Latenz", latencyDesc:"Durchschnittliche Antwortzeit einer HTTP-Anfrage.",
+jitter:"Jitter", jitterDesc:"Schwankung zwischen aufeinanderfolgenden Anfragen.",
+failureRate:"Fehlerrate", failureRateDesc:"Anteil fehlgeschlagener Anfragen.",
+httpResponse:"HTTP-Antwort", httpResponseDesc:"HTTP-Status von fasqoo.com.",
+httpsDesc:"Verschlüsselte Verbindung aktiv.",
+networkApi:"Browser-Netzwerkdaten", networkApiDesc:"Verbindungsinfo des Browsers.",
+networkProfile:"Geräte- & Verbindungsprofil", networkProfileDesc:"Technische Angaben des Browsers.",
+connType:"Verbindungstyp", downlink:"Geschätzte Downlink-Rate", rtt:"Browser-RTT", saveData:"Datensparmodus",
+onlineStateLabel:"Online-Status", protocol:"Protokoll", browser:"Browser", windowSize:"Fenstergröße",
+geoipTitle:"Funktionsweise der server-seitigen IP-Geolokalisierung",
+geoipText:"Beim Aufruf liest der Server die IP aus und bestimmt das Land.",
+problemTitle:"Auffälligkeiten", problemDesc:"Von der Messung belegte Auffälligkeiten.",
+testSuite:"Testübersicht", testSuiteDesc:"Technische Testergebnisse.",
+testInternetName:"Browser-Online-Status", testHttpName:"Erreichbarkeit fasqoo.com",
+testHttpsName:"HTTPS-Transport", testStabilityName:"Verbindungsstabilität",
+limitTitle:"Was diese Seite nicht kann:",
+limitText:"Kein echter ICMP-Paketverlust oder Traceroute im Browser.",
+responseHistory:"Antwortzeit-Verlauf", responseHistoryDesc:"Lokal gespeicherte Prüfungen.",
+last24h:"Letzte 24 Stunden", noData:"Noch keine Messungen.",
+incidents:"Vorfälle", incidentsDesc:"Ereignisse der Browser-Überwachung.",
+reportTitle:"Kurzbericht", reportDesc:"Kompakte Zusammenfassung.",
+copyReport:"Bericht kopieren", copied:"Kopiert", downloadReport:"Bericht herunterladen",
+accuracyTitle:"Messgenauigkeit und Grenzen",
+accuracyText:"Beschreibt nur den Weg Browser zu fasqoo.com.",
+rights:"Alle Rechte vorbehalten.",
+statusReachable:"FASQOO.COM IST ERREICHBAR", statusFailed:"PRÜFUNG FEHLGESCHLAGEN",
+checkTitleSuccess:"fasqoo.com ist erreichbar", checkTitleFail:"Prüfung fehlgeschlagen",
+checkTitleAnalyzing:"Verbindung wird analysiert...", checkSubtitleAnalyzing:"Messung läuft",
+scoreExcellent:"Sehr gute Verbindung", scoreExcellentDesc:"Stabile, schnelle Verbindung.",
+scoreGood:"Gute Verbindung", scoreGoodDesc:"Insgesamt unauffällig.",
+scoreWarning:"Verbindung prüfen", scoreWarningDesc:"Beeinträchtigung erkannt.",
+scoreBad:"Auffälligkeit erkannt", scoreBadDesc:"Verbindungsproblem.",
+badgeWaiting:"Wartet", badgeGood:"Gut", badgeElevated:"Erhöht", badgeHigh:"Hoch", badgeStable:"Stabil", badgeFluctuating:"Schwankend", badgeOK:"In Ordnung", badgeFailed:"Fehlgeschlagen", badgeAvailable:"Verfügbar", badgeRestricted:"Eingeschränkt", badgeSecure:"Sicher", badgeUnsecure:"Unsicher",
+noIncidentsTitle:"Keine lokalen Vorfälle", noIncidentsText:"Keine Fehler erkannt.",
+hasIncidentsTitle:"fehlgeschlagene Prüfung(en)", hasIncidentsText:"Lokale Browser-Beobachtungen.",
+notAvailable:"Nicht verfügbar", active:"Aktiv", inactive:"Inaktiv", online:"Online", offline:"Offline",
+probOfflineTitle:"Keine Internetverbindung", probOfflineEv:"Offline-Status.", probOfflineMeaning:"WLAN/Kabel prüfen.",
+probLatencyTitle:"Erhöhte Antwortzeit", probLatencyEv:"Antwortzeit hoch.", probLatencyMeaning:"Anfragen dauern länger.",
+probJitterTitle:"Schwankende Antwortzeiten", probJitterEv:"Schwankung.", probJitterMeaning:"Instabile Latenz.",
+probFailureTitle:"Fehlgeschlagene Anfragen", probFailureEv:"Fehlerrate erhöht.", probFailureMeaning:"Anfragen schlugen fehl.",
+probHttpsTitle:"HTTPS nicht aktiv", probHttpsEv:"HTTP genutzt.", probHttpsMeaning:"Unverschlüsselt.",
+probNoneTitle:"Keine Auffälligkeit", probNoneEv:"Alles normal.", probNoneMeaning:"Keine Probleme.",
+probNotEnoughTitle:"Nicht genug Daten", probNotEnoughEv:"Unvollständig.", probNotEnoughMeaning:"Mehr Daten nötig."
+},
+en:{
+metaTitle:"Fasqoo Website Status – Real-time Network & Uptime Check",
+metaDesc:"Measure fasqoo.com reachability, response time, and latency directly in your browser.",
+home:"Home", faq:"FAQ", networkStatus:"Website Status", about:"About",
+running:"RUNNING MEASUREMENT...",
+pageTitle:"Fasqoo Website Status",
+pageDescription:"Shows how fast and reliably your browser reaches fasqoo.com.",
+healthTitle:"Connection Score", healthDesc:"Calculated from browser measurements.",
+overview:"Overview", overviewDesc:"Real measurements collected.",
+observedUptime:"Observed Uptime", thisBrowser:"This browser / last 24h",
+checks24h:"Checks in 24h", localHistory:"Local history",
+currentResponse:"Current Response", lastChecked:"Last Checked",
+realMeasurement:"Real measurement", runCheck:"Run Full Measurement", runningBtn:"Measuring...",
+diagnostics:"Measurements", diagnosticsDesc:"Collected from current connection.",
+latency:"Latency", latencyDesc:"Average HTTP response time.",
+jitter:"Jitter", jitterDesc:"Variation between requests.",
+failureRate:"Failure Rate", failureRateDesc:"Percentage of failed requests.",
+httpResponse:"HTTP Response", httpResponseDesc:"HTTP status returned.",
+httpsDesc:"Encrypted connection active.",
+networkApi:"Browser Network API", networkApiDesc:"Connection info exposed.",
+networkProfile:"Device & Connection Profile", networkProfileDesc:"Technical specs.",
+connType:"Connection Type", downlink:"Estimated Downlink", rtt:"Browser RTT", saveData:"Data Saver",
+onlineStateLabel:"Online State", protocol:"Protocol", browser:"Browser", windowSize:"Window Size",
+geoipTitle:"How Server-Side IP Geolocation Works",
+geoipText:"The server evaluates your IP upon request to serve tailored content.",
+problemTitle:"Findings", problemDesc:"Actual measured findings.",
+testSuite:"Test Overview", testSuiteDesc:"Technical results.",
+testInternetName:"Browser Online State", testHttpName:"fasqoo.com Reachability",
+testHttpsName:"HTTPS Transport", testStabilityName:"Connection Stability",
+limitTitle:"What this page can't do:",
+limitText:"No browser ICMP packet loss or traceroute.",
+responseHistory:"Response Time History", responseHistoryDesc:"Stored locally.",
+last24h:"Last 24 hours", noData:"No measurements yet.",
+incidents:"Incidents", incidentsDesc:"Browser monitoring events.",
+reportTitle:"Summary Report", reportDesc:"Compact summary.",
+copyReport:"Copy Report", copied:"Copied", downloadReport:"Download Report",
+accuracyTitle:"Measurement accuracy and limitations",
+accuracyText:"Describes path to fasqoo.com only.",
+rights:"All rights reserved.",
+statusReachable:"FASQOO.COM IS REACHABLE", statusFailed:"CHECK FAILED",
+checkTitleSuccess:"fasqoo.com is reachable", checkTitleFail:"Check failed",
+checkTitleAnalyzing:"Analyzing connection...", checkSubtitleAnalyzing:"Running...",
+scoreExcellent:"Excellent Connection", scoreExcellentDesc:"Stable and fast.",
+scoreGood:"Good Connection", scoreGoodDesc:"Normal performance.",
+scoreWarning:"Check Connection", scoreWarningDesc:"Degraded performance.",
+scoreBad:"Issue Detected", scoreBadDesc:"Connection problems.",
+badgeWaiting:"Waiting", badgeGood:"Good", badgeElevated:"Elevated", badgeHigh:"High", badgeStable:"Stable", badgeFluctuating:"Fluctuating", badgeOK:"OK", badgeFailed:"Failed", badgeAvailable:"Available", badgeRestricted:"Restricted", badgeSecure:"Secure", badgeUnsecure:"Unsecure",
+noIncidentsTitle:"No Local Incidents", noIncidentsText:"No failed checks.",
+hasIncidentsTitle:"failed check(s)", hasIncidentsText:"Browser observations.",
+notAvailable:"Not available", active:"Active", inactive:"Inactive", online:"Online", offline:"Offline",
+probOfflineTitle:"No Internet Connection", probOfflineEv:"Offline status.", probOfflineMeaning:"Check Wi-Fi/cable.",
+probLatencyTitle:"Elevated Response Time", probLatencyEv:"High latency.", probLatencyMeaning:"Requests take longer.",
+probJitterTitle:"Fluctuating Response Times", probJitterEv:"High variation.", probJitterMeaning:"Unstable latency.",
+probFailureTitle:"Failed Requests", probFailureEv:"Failures detected.", probFailureMeaning:"Requests failed.",
+probHttpsTitle:"HTTPS Not Active", probHttpsEv:"HTTP used.", probHttpsMeaning:"Unencrypted connection.",
+probNoneTitle:"No Issues Detected", probNoneEv:"Normal.", probNoneMeaning:"No problems.",
+probNotEnoughTitle:"Not Enough Data", probNotEnoughEv:"Incomplete.", probNotEnoughMeaning:"More data required."
+},
+sq:{
+metaTitle:"Statusi i Faqes Fasqoo – Matja e Rrjetit në Kohë Reale",
+metaDesc:"Matni arritshmërinë, kohën e përgjigjes dhe latencën e fasqoo.com direkt në shfletuesin tuaj.",
+home:"Kryefaqja", faq:"Pyetje të shpeshta", networkStatus:"Statusi i Faqes", about:"Rreth nesh",
+running:"MATJA DUHET TË VAZHDOJË...",
+pageTitle:"Statusi i Faqes Fasqoo",
+pageDescription:"Tregon se sa shpejt dhe besueshëm shfletuesi juaj arrin fasqoo.com.",
+healthTitle:"Pikët e Lidhjes", healthDesc:"Llogaritur nga matjet e shfletuesit.",
+overview:"Përmbledhje", overviewDesc:"Matje reale të mbledhura nga shfletuesi.",
+observedUptime:"Disponueshmëria e vëzhguar", thisBrowser:"Ky shfletues / 24 orët e fundit",
+checks24h:"Kontrollet në 24h", localHistory:"Historiku lokal",
+currentResponse:"Përgjigja aktuale", lastChecked:"Kontrolluar së fundmi",
+realMeasurement:"Matje reale", runCheck:"Fillo matjen e plotë", runningBtn:"Duke matur...",
+diagnostics:"Vlerat e matjes", diagnosticsDesc:"Mbledhur direkt nga lidhja aktuale.",
+latency:"Latenca", latencyDesc:"Koha mesatare e përgjigjes HTTP.",
+jitter:"Jitter", jitterDesc:"Luhatja midis kërkesave.",
+failureRate:"Shkalla e gabimit", failureRateDesc:"Përqindja e kërkesave të dështuara.",
+httpResponse:"Përgjigja HTTP", httpResponseDesc:"Statusi i fundit HTTP.",
+httpsDesc:"Lidhje e enkoduar aktive.",
+networkApi:"Të dhënat e rrjetit", networkApiDesc:"Informacioni i shfletuesit.",
+networkProfile:"Profili i Pajisjes", networkProfileDesc:"Të dhëna teknike.",
+connType:"Lloji i lidhjes", downlink:"Shpejtësia e vlerësuar", rtt:"RTT e shfletuesit", saveData:"Kursimi i të dhënave",
+onlineStateLabel:"Statusi online", protocol:"Protokolli", browser:"Shfletuesi", windowSize:"Madhësia e dritares",
+geoipTitle:"Funksionimi i Gjeolokacionit IP nga Serveri",
+geoipText:"Serveri lexon IP-së tuaj për të caktuar gjuhën dhe përmbajtjen e duhur.",
+problemTitle:"Dukuritë", problemDesc:"Problemet e vërtetuara nga matja.",
+testSuite:"Përmbledhja e Testeve", testSuiteDesc:"Rezultatet teknike.",
+testInternetName:"Statusi Online", testHttpName:"Arritshmëria fasqoo.com",
+testHttpsName:"Transporti HTTPS", testStabilityName:"Stabiliteti i Lidhjes",
+limitTitle:"Çfarë nuk mund të bëjë kjo faqe:",
+limitText:"Shfletuesi nuk mund të mat humbjen e paketave ICMP.",
+responseHistory:"Historiku i Përgjigjeve", responseHistoryDesc:"Ruajtur lokalisht.",
+last24h:"24 orët e fundit", noData:"Ende nuk ka matje.",
+incidents:"Incidentet", incidentsDesc:"Ngjarjet e monitorimit.",
+reportTitle:"Raporti i Shkurtër", reportDesc:"Përmbledhje kompakte.",
+copyReport:"Kopjo raportin", copied:"U kopjua", downloadReport:"Shkarko raportin",
+accuracyTitle:"Saktësia dhe kufizimet",
+accuracyText:"Përshkruan vetëm rrugën midis shfletuesit dhe fasqoo.com.",
+rights:"Të gjitha të drejtat e rezervuara.",
+statusReachable:"FASQOO.COM ÉSHTË I ARRITSHMËM", statusFailed:"KONTROLLI DËSHTOI",
+checkTitleSuccess:"fasqoo.com është i arritshëm", checkTitleFail:"Kontrolli dështoi",
+checkTitleAnalyzing:"Duke analizuar lidhjen...", checkSubtitleAnalyzing:"Matja në progres",
+scoreExcellent:"Lidhje shumë e mirë", scoreExcellentDesc:"Lidhje e qëndrueshme dhe e shpejtë.",
+scoreGood:"Lidhje e mirë", scoreGoodDesc:"Performancë normale.",
+scoreWarning:"Kontrolloni lidhjen", scoreWarningDesc:"Vërehet ulje performance.",
+scoreBad:"U zbulua problem", scoreBadDesc:"Probleme me lidhjen.",
+badgeWaiting:"Në pritje", badgeGood:"Mirë", badgeElevated:"E ngritur", badgeHigh:"E lartë", badgeStable:"E qëndrueshme", badgeFluctuating:"E luhatshme", badgeOK:"Në rregull", badgeFailed:"Dështoi", badgeAvailable:"E disponueshme", badgeRestricted:"E kufizuar", badgeSecure:"E sigurt", badgeUnsecure:"E pasigurt",
+noIncidentsTitle:"Nuk ka incidente lokale", noIncidentsText:"Nuk u zbuluan gabime.",
+hasIncidentsTitle:"kontroll(e) e dështuar", hasIncidentsText:"Vëzhgime lokale të shfletuesit.",
+notAvailable:"Nuk është i disponueshëm", active:"Aktiv", inactive:"Joaktiv", online:"Online", offline:"Offline",
+probOfflineTitle:"Nuk ka lidhje interneti", probOfflineEv:"Statusi offline.", probOfflineMeaning:"Kontrolloni Wi-Fi/kabllon.",
+probLatencyTitle:"Koha e lartë e përgjigjes", probLatencyEv:"Latencë e lartë.", probLatencyMeaning:"Kërkesat marrin më shumë kohë.",
+probJitterTitle:"Përgjigje të luhatshme", probJitterEv:"Luhatje e lartë.", probLatencyMeaning:"Latencë e paqëndrueshme.",
+probFailureTitle:"Kërkesa të dështuara", probFailureEv:"Gabime të vëzhguara.", probFailureMeaning:"Disa kërkesa dështuan.",
+probHttpsTitle:"HTTPS nuk është aktiv", probHttpsEv:"Përdoret HTTP.", probHttpsMeaning:"Lidhje e paenkoduar.",
+probNoneTitle:"Nuk u zbulua problem", probNoneEv:"Gjithçka normale.", probNoneMeaning:"Nuk ka probleme.",
+probNotEnoughTitle:"Të dhëna të pamjaftueshme", probNotEnoughEv:"Matja nuk ka përfunduar.", probNotEnoughMeaning:"Nevojiten më shumë të dhëna."
+}
+};
+
+// Automatisches Anwenden der Sprachen und Übersetzungen beim Laden der PHP-Seite
+function applyLanguage(lang){
+    if(!translations[lang]) lang = "en";
+    const t = translations[lang] || translations.de;
+    
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if(t[key]) el.innerHTML = t[key];
+    });
+
+    document.getElementById("languageSelect").value = lang;
+}
+
+function applyTheme(){
+    const theme = localStorage.getItem(THEME_KEY) || "light";
+    document.body.classList.toggle("dark", theme === "dark");
+    document.getElementById("themeBtn").textContent = theme === "dark" ? "☀" : "☾";
+}
+
+document.getElementById("themeBtn").addEventListener("click", function(){
+    const dark = document.body.classList.contains("dark");
+    localStorage.setItem(THEME_KEY, dark ? "light" : "dark");
+    applyTheme();
+});
+
+const mobileBtn = document.getElementById("mobileBtn");
+const navLinks = document.getElementById("navLinks");
+mobileBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    navLinks.classList.toggle("open");
+});
+
+document.addEventListener("click", function(e){
+    if(!navLinks.contains(e.target) && !mobileBtn.contains(e.target)){
+        navLinks.classList.remove("open");
+    }
+});
+
+function getHistory(){
+    try{
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return Array.isArray(data) ? data : [];
+    }catch(e){ return []; }
+}
+
+function saveHistory(history){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(history)); }
+    catch(e){}
+}
+
+async function timedFetch(url){
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
+    const start = performance.now();
+    try{
+        const response = await fetch(url, { method: "GET", cache: "no-store", credentials: "same-origin", signal: controller.signal });
+        const elapsed = Math.round(performance.now() - start);
+        return { ok: response.status >= 200 && response.status < 400, status: response.status, ms: elapsed, error: null };
+    }catch(error){
+        const elapsed = Math.round(performance.now() - start);
+        return { ok:false, status:0, ms:elapsed, error: (error && error.message) ? error.message : "Fehler" };
+    }finally{
+        clearTimeout(timeout);
+    }
+}
+
+async function checkFasqoo(){
+    const button = document.getElementById("checkBtn");
+    button.disabled = true;
+    setMainChecking();
+
+    const url = TARGET_URL + "?fasqoo_check=" + Date.now();
+    const result = await timedFetch(url);
+
+    const history = getHistory();
+    history.push({ timestamp: Date.now(), success: result.ok, responseMs: result.ms, httpStatus: result.status, error: result.error });
+
+    const cutoff = Date.now() - (24 * 60 * 60 * 1000);
+    const cleaned = history.filter(x => x.timestamp >= cutoff);
+    saveHistory(cleaned);
+
+    updateMainResult(result, cleaned);
+    button.disabled = false;
+}
+
+let latestDiagnostics = { latency: null, jitter: null, failureRate: null, httpStatus: null, success: false, score: null, problems: [] };
+
+async function runFullDiagnosis(){
+    const t = translations[currentLanguage] || translations.de;
+    const button = document.getElementById("checkBtn");
+    button.disabled = true;
+    button.textContent = t.runningBtn;
+
+    latestDiagnostics = { latency:null, jitter:null, failureRate:null, httpStatus:null, success:false, score:null, problems:[] };
+    setMainChecking();
+    resetBadges();
+
+    const measurements = [];
+    for(let i=0; i<CONFIG.DIAGNOSTIC_REQUESTS; i++){
+        const url = TARGET_URL + "?fasqoo_diag=" + Date.now() + "_" + i;
+        measurements.push(await timedFetch(url));
+        await sleep(180);
+    }
+
+    analyzeMeasurements(measurements);
+    updateNetworkProfile();
+    generateReport();
+
+    button.disabled = false;
+    button.textContent = t.runCheck;
+}
+
+function analyzeMeasurements(results){
+    const t = translations[currentLanguage] || translations.de;
+    const successful = results.filter(r => r.ok);
+    const failed = results.filter(r => !r.ok);
+    const times = successful.map(r => r.ms).filter(x => Number.isFinite(x));
+
+    const latency = times.length ? Math.round(times.reduce((a,b)=>a+b,0)/times.length) : null;
+
+    let jitter = null;
+    if(times.length >= 2){
+        let diffs = [];
+        for(let i=1;i<times.length;i++){ diffs.push(Math.abs(times[i]-times[i-1])); }
+        jitter = Math.round(diffs.reduce((a,b)=>a+b,0)/diffs.length);
+    }
+
+    const failureRate = Math.round((failed.length/results.length)*100);
+    const latest = results[results.length-1];
+
+    latestDiagnostics.latency = latency;
+    latestDiagnostics.jitter = jitter;
+    latestDiagnostics.failureRate = failureRate;
+    latestDiagnostics.httpStatus = latest ? latest.status : null;
+    latestDiagnostics.success = successful.length > 0;
+
+    document.getElementById("latencyValue").textContent = latency === null ? "—" : latency;
+    document.getElementById("jitterValue").textContent = jitter === null ? "—" : jitter;
+    document.getElementById("failureValue").textContent = failureRate;
+    document.getElementById("httpValue").textContent = (latest && latest.status) ? "HTTP " + latest.status : t.badgeFailed;
+
+    setMetricBadge("latencyBadge", latency === null ? "error" : latency <= 80 ? "good" : latency <= 150 ? "warning" : "error", latency === null ? "—" : latency <= 80 ? t.badgeGood : latency <= 150 ? t.badgeElevated : t.badgeHigh);
+    setMetricBadge("jitterBadge", jitter === null ? "error" : jitter <= 15 ? "good" : jitter <= 30 ? "warning" : "error", jitter === null ? "—" : jitter <= 15 ? t.badgeStable : jitter <= 30 ? t.badgeFluctuating : t.badgeHigh);
+    setMetricBadge("failureBadge", failureRate === 0 ? "good" : failureRate <= 10 ? "warning" : "error", failureRate === 0 ? "0%" : failureRate + "%");
+    setMetricBadge("httpBadge", (latest && latest.ok) ? "good" : "error", (latest && latest.ok) ? t.badgeOK : t.badgeFailed);
+
+    updateHealthScore();
+    renderProblems();
+    updateTestResults(results);
+}
+
+function updateHealthScore(){
+    const t = translations[currentLanguage] || translations.de;
+    const d = latestDiagnostics;
+    let score = 100;
+
+    if(d.latency !== null){
+        if(d.latency > 300) score -= 40;
+        else if(d.latency > 150) score -= 25;
+        else if(d.latency > 80) score -= 10;
+    }
+    if(d.jitter !== null){
+        if(d.jitter > 50) score -= 25;
+        else if(d.jitter > 30) score -= 15;
+    }
+    if(d.failureRate !== null){
+        if(d.failureRate > 25) score -= 30;
+        else if(d.failureRate > 10) score -= 18;
+    }
+    if(!navigator.onLine) score -= 50;
+    if(location.protocol !== "https:") score -= 10;
+
+    score = Math.max(0, Math.min(100, score));
+    latestDiagnostics.score = score;
+
+    document.getElementById("healthScore").textContent = score;
+    document.getElementById("scoreFill").style.width = score + "%";
+
+    let title, description;
+    if(score >= 90){ title = t.scoreExcellent; description = t.scoreExcellentDesc; }
+    else if(score >= 75){ title = t.scoreGood; description = t.scoreGoodDesc; }
+    else if(score >= 50){ title = t.scoreWarning; description = t.scoreWarningDesc; }
+    else{ title = t.scoreBad; description = t.scoreBadDesc; }
+
+    document.getElementById("healthTitleDynamic").textContent = title;
+    document.getElementById("healthDescriptionDynamic").textContent = description;
+}
+
+function renderProblems(){
+    const t = translations[currentLanguage] || translations.de;
+    const d = latestDiagnostics;
+    const problems = [];
+
+    if(!navigator.onLine){
+        problems.push({ title: t.probOfflineTitle, type: "error", evidence: t.probOfflineEv, meaning: t.probOfflineMeaning });
+    }
+    if(d.latency !== null && d.latency > 150){
+        problems.push({ title: t.probLatencyTitle, type: d.latency > 300 ? "error" : "warning", evidence: d.latency + " ms", meaning: t.probLatencyMeaning });
+    }
+    if(d.jitter !== null && d.jitter > 30){
+        problems.push({ title: t.probJitterTitle, type: d.jitter > 50 ? "error" : "warning", evidence: d.jitter + " ms", meaning: t.probJitterMeaning });
+    }
+    if(d.failureRate !== null && d.failureRate > 10){
+        problems.push({ title: t.probFailureTitle, type: d.failureRate > 25 ? "error" : "warning", evidence: d.failureRate + "%", meaning: t.probFailureMeaning });
+    }
+    if(location.protocol !== "https:"){
+        problems.push({ title: t.probHttpsTitle, type: "error", evidence: t.probHttpsEv, meaning: t.probHttpsMeaning });
+    }
+    if(!problems.length){
+        problems.push({ title: t.probNoneTitle, type: "good", evidence: t.probNoneEv, meaning: t.probNoneMeaning });
+    }
+
+    const container = document.getElementById("problemList");
+    container.innerHTML = "";
+
+    problems.forEach(problem => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "card problem " + problem.type;
+        wrapper.innerHTML = `
+            <details ${problem.type === "error" ? "open" : ""}>
+                <summary>
+                    <div class="problem-heading">
+                        <div class="problem-icon">${problem.type === "good" ? "✓" : "!"}</div>
+                        <div>
+                            <div class="problem-name">${escapeHTML(problem.title)}</div>
+                            <div class="problem-severity">${escapeHTML(problem.evidence)}</div>
+                        </div>
+                    </div>
+                    <span class="badge ${problem.type === "good" ? "good" : problem.type === "error" ? "error" : "warning"}">
+                        ${problem.type === "good" ? "OK" : "!"}
+                    </span>
+                </summary>
+                <div class="problem-body">
+                    <div class="explanation-grid">
+                        <div class="explanation">
+                            <h4>Info</h4>
+                            <p>${escapeHTML(problem.meaning)}</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        `;
+        container.appendChild(wrapper);
+    });
+}
+
+function updateNetworkProfile(){
+    const t = translations[currentLanguage] || translations.de;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+    document.getElementById("connectionType").textContent = (connection && connection.type) ? connection.type : t.notAvailable;
+    document.getElementById("effectiveTypeValue").textContent = (connection && connection.effectiveType) ? connection.effectiveType : t.notAvailable;
+    document.getElementById("downlinkValue").textContent = (connection && Number.isFinite(connection.downlink)) ? connection.downlink + " Mbps" : t.notAvailable;
+    document.getElementById("browserRtt").textContent = (connection && Number.isFinite(connection.rtt)) ? connection.rtt + " ms" : t.notAvailable;
+    document.getElementById("saveDataValue").textContent = connection ? (connection.saveData ? t.active : t.inactive) : t.notAvailable;
+    document.getElementById("onlineState").textContent = navigator.onLine ? t.online : t.offline;
+    document.getElementById("protocolValue").textContent = location.protocol === "https:" ? "HTTPS" : "HTTP";
+    document.getElementById("browserValue").textContent = detectBrowser();
+    document.getElementById("screenValue").textContent = window.innerWidth + " × " + window.innerHeight;
+
+    setMetricBadge("httpsBadge", location.protocol === "https:" ? "good" : "error", location.protocol === "https:" ? t.badgeSecure : t.badgeUnsecure);
+    document.getElementById("httpsValue").textContent = location.protocol === "https:" ? t.badgeSecure : "HTTP";
+}
+
+function updateTestResults(results){
+    const t = translations[currentLanguage] || translations.de;
+    const success = results.filter(x => x.ok).length;
+    const total = results.length;
+    const failure = total ? Math.round(((total-success)/total)*100) : 100;
+
+    setTest("testInternet", navigator.onLine, navigator.onLine ? t.online : t.offline, navigator.onLine ? t.online : t.offline);
+    setTest("testHttp", success > 0, success + "/" + total + " OK", success + "/" + total);
+    setTest("testHttps", location.protocol === "https:", location.protocol === "https:" ? t.badgeSecure : "HTTP", location.protocol === "https:" ? t.badgeSecure : "HTTP");
+    setTest("testStability", failure === 0, failure === 0 ? t.badgeStable : failure + "%", failure === 0 ? t.badgeStable : "Check");
+}
+
+function setTest(prefix, good, detail, value){
+    const icon = document.getElementById(prefix + "Icon");
+    icon.className = "test-icon " + (good ? "good" : "error");
+    icon.textContent = good ? "✓" : "!";
+    document.getElementById(prefix + "Detail").textContent = detail;
+    document.getElementById(prefix + "Value").textContent = value;
+}
+
+function setMetricBadge(id, type, text){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.className = "badge " + type;
+    el.textContent = text;
+}
+
+function resetBadges(){
+    const t = translations[currentLanguage] || translations.de;
+    ["latencyBadge","jitterBadge","failureBadge","httpBadge","httpsBadge","networkApiBadge"].forEach(id => setMetricBadge(id, "", t.badgeWaiting));
+}
+
+function setMainChecking(){
+    const t = translations[currentLanguage] || translations.de;
+    const pill = document.getElementById("mainStatusPill");
+    pill.className = "status-pill warning";
+    document.getElementById("mainStatusText").textContent = t.running;
+    document.getElementById("bigStatus").className = "big-status warning";
+    document.getElementById("bigStatus").textContent = "...";
+    document.getElementById("checkTitle").textContent = t.checkTitleAnalyzing;
+    document.getElementById("checkSubtitle").textContent = t.checkSubtitleAnalyzing;
+}
+
+function updateMainResult(result, history){
+    const t = translations[currentLanguage] || translations.de;
+    const pill = document.getElementById("mainStatusPill");
+    const big = document.getElementById("bigStatus");
+
+    if(result.ok){
+        pill.className = "status-pill";
+        document.getElementById("mainStatusText").textContent = t.statusReachable;
+        big.className = "big-status";
+        big.textContent = "✓";
+        document.getElementById("checkTitle").textContent = t.checkTitleSuccess;
+        document.getElementById("checkSubtitle").textContent = "HTTP " + result.status + " • " + result.ms + " ms";
+    }else{
+        pill.className = "status-pill error";
+        document.getElementById("mainStatusText").textContent = t.statusFailed;
+        big.className = "big-status error";
+        big.textContent = "×";
+        document.getElementById("checkTitle").textContent = t.checkTitleFail;
+        document.getElementById("checkSubtitle").textContent = result.error || t.statusFailed;
+    }
+
+    document.getElementById("responseValue").textContent = result.ms + " ms";
+    document.getElementById("lastChecked").textContent = new Date().toLocaleTimeString();
+    document.getElementById("lastCheckedDate").textContent = new Date().toLocaleDateString();
+
+    const total = history.length;
+    const good = history.filter(x => x.success).length;
+    document.getElementById("uptimeValue").textContent = total ? ((good/total)*100).toFixed(2) + "%" : "—";
+    document.getElementById("checksValue").textContent = total;
+
+    drawChart(history);
+    updateIncident(history);
+}
+
+function updateIncident(history){
+    const t = translations[currentLanguage] || translations.de;
+    const failures = history.filter(x => !x.success).length;
+    if(failures === 0){
+        document.getElementById("incidentIcon").textContent = "✓";
+        document.getElementById("incidentTitle").textContent = t.noIncidentsTitle;
+        document.getElementById("incidentText").textContent = t.noIncidentsText;
+    }else{
+        document.getElementById("incidentIcon").textContent = "!";
+        document.getElementById("incidentTitle").textContent = failures + " " + t.hasIncidentsTitle;
+        document.getElementById("incidentText").textContent = t.hasIncidentsText;
+    }
+}
+
+function drawChart(history){
+    const t = translations[currentLanguage] || translations.de;
+    const chart = document.getElementById("chart");
+    const info = document.getElementById("chartInfo");
+    chart.innerHTML = "";
+
+    const measurements = history.filter(x => Number.isFinite(x.responseMs));
+    if(!measurements.length){
+        chart.innerHTML = '<div class="no-data">' + t.noData + '</div>';
+        info.textContent = "0";
+        return;
+    }
+
+    const max = Math.max(...measurements.map(x => x.responseMs), 1);
+    measurements.forEach(item => {
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        bar.style.height = Math.max(5, (item.responseMs/max)*100) + "%";
+        chart.appendChild(bar);
+    });
+
+    info.textContent = measurements.length;
+}
+
+function generateReport(){
+    const d = latestDiagnostics;
+    const lines = [
+        "FASQOO STATUS REPORT",
+        "Score: " + (d.score === null ? "N/A" : d.score + "/100"),
+        "Latency: " + (d.latency === null ? "N/A" : d.latency + " ms"),
+        "Jitter: " + (d.jitter === null ? "N/A" : d.jitter + " ms")
+    ];
+    document.getElementById("reportPreview").value = lines.join("\n");
+}
+
+document.getElementById("copyReportBtn").addEventListener("click", async function(){
+    await navigator.clipboard.writeText(document.getElementById("reportPreview").value);
+    this.textContent = "Kopiert";
+    setTimeout(() => this.textContent = "Bericht kopieren", 1500);
+});
+
+document.getElementById("downloadReportBtn").addEventListener("click", function(){
+    const blob = new Blob([document.getElementById("reportPreview").value], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "fasqoo-status.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+});
+
+function detectBrowser(){
+    const ua = navigator.userAgent;
+    if(/Edg/i.test(ua)) return "Microsoft Edge";
+    if(/Chrome/i.test(ua)) return "Google Chrome";
+    if(/Firefox/i.test(ua)) return "Mozilla Firefox";
+    if(/Safari/i.test(ua)) return "Apple Safari";
+    return "Browser";
+}
+
+function sleep(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
+function escapeHTML(value){ return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+// Initialisierung beim Laden
+applyTheme();
+applyLanguage(currentLanguage);
+checkFasqoo();
+runFullDiagnosis();
+
+setInterval(checkFasqoo, CONFIG.CHECK_INTERVAL);
+document.getElementById("checkBtn").addEventListener("click", runFullDiagnosis);
+</script>
+
+</body>
+</html>
