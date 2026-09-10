@@ -174,8 +174,8 @@
       font-size: 12px;
       padding: 12px;
       border-radius: 8px;
-      min-height: 110px;
-      max-height: 220px;
+      min-height: 120px;
+      max-height: 240px;
       overflow-y: auto;
       white-space: pre-wrap;
       word-break: break-all;
@@ -257,7 +257,7 @@
             <button class="btn" id="calcSubnetBtn" data-i18n="btnCalc">Berechnen</button>
           </div>
         </div>
-        <div class="console" id="subnetOutput">> Bereit...</div>
+        <div class="console" id="subnetOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
       <div class="card">
@@ -267,12 +267,12 @@
             <p data-i18n="vlsmDesc">Unterteile ein IPv4-Netzwerk dynamisch nach benötigten Hosts.</p>
           </div>
           <div class="form-group">
-            <input type="text" id="vlsmBaseInput" value="10.0.0.0/16" placeholder="Basisnetz z.B. 10.0.0.0/16">
-            <input type="text" id="vlsmHostsInput" value="100, 50, 20" placeholder="Hosts z.B. 100, 50, 20">
+            <input type="text" id="vlsmBaseInput" value="10.0.0.0/16" placeholder="10.0.0.0/16">
+            <input type="text" id="vlsmHostsInput" value="100, 50, 20" placeholder="100, 50, 20">
             <button class="btn" id="calcVlsmBtn" data-i18n="btnPlan">Netze Planen</button>
           </div>
         </div>
-        <div class="console" id="vlsmOutput">> Bereit...</div>
+        <div class="console" id="vlsmOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
     </div>
@@ -300,7 +300,7 @@
             <button class="btn" id="runDnsBtn" data-i18n="btnLookup">Abfragen</button>
           </div>
         </div>
-        <div class="console" id="dnsOutput">> Bereit...</div>
+        <div class="console" id="dnsOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
     </div>
@@ -321,7 +321,7 @@
             <button class="btn" id="runHttpBtn" data-i18n="btnTest">Testen</button>
           </div>
         </div>
-        <div class="console" id="httpOutput">> Bereit...</div>
+        <div class="console" id="httpOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
     </div>
@@ -342,7 +342,7 @@
             <button class="btn" id="runIpBtn" data-i18n="btnQuery">Abfragen</button>
           </div>
         </div>
-        <div class="console" id="ipOutput">> Bereit...</div>
+        <div class="console" id="ipOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
     </div>
@@ -361,8 +361,8 @@
           <div class="form-group">
             <textarea id="adminInput" placeholder="Text oder Token hier eingeben..."></textarea>
             <select id="adminAction">
-              <option value="pwdgen">Passwort-Generator (20 Zeichen)</option>
-              <option value="uuidgen">UUID v4 Generator</option>
+              <option value="pwdgen" data-i18n="optPwd">Passwort-Generator (20 Zeichen)</option>
+              <option value="uuidgen" data-i18n="optUuid">UUID v4 Generator</option>
               <option value="base64enc">Base64 Encode</option>
               <option value="base64dec">Base64 Decode</option>
               <option value="jwtdec">JWT Payload Decoder</option>
@@ -370,7 +370,7 @@
             <button class="btn" id="runAdminBtn" data-i18n="btnExecute">Ausführen</button>
           </div>
         </div>
-        <div class="console" id="adminOutput">> Bereit...</div>
+        <div class="console" id="adminOutput" data-i18n-console="ready">> Bereit...</div>
       </div>
 
     </div>
@@ -407,7 +407,7 @@
 </footer>
 
 <script>
-  // --- TRANSLATIONS DICTIONARY ---
+  // --- SPRACH-WÖRTERBUCH ---
   const i18n = {
     de: {
       heroTitle: "Network Engineer Toolkit",
@@ -443,7 +443,19 @@
       thTool: "Werkzeug",
       thInput: "Eingabe",
       thResult: "Ergebnis",
-      logEmpty: "Keine Aktionen protokolliert."
+      logEmpty: "Keine Aktionen protokolliert.",
+      optPwd: "Passwort-Generator (20 Zeichen)",
+      optUuid: "UUID v4 Generator",
+      ready: "> Bereit...",
+      errCidr: "Ungültiges IP/CIDR-Format (z. B. 192.168.1.0/24)",
+      errHosts: "Ungültiges Host-Format (z. B. 100, 50, 20)",
+      lblNet: "Netzadresse:",
+      lblMask: "Subnetmaske:",
+      lblBcast: "Broadcast:",
+      lblFirst: "Erster Host:",
+      lblLast: "Letzter Host:",
+      lblTotal: "Hosts Gesamt:",
+      lblUsable: "Nutzbar:"
     },
     en: {
       heroTitle: "Network Engineer Toolkit",
@@ -479,7 +491,19 @@
       thTool: "Tool",
       thInput: "Input",
       thResult: "Result",
-      logEmpty: "No actions logged yet."
+      logEmpty: "No actions logged yet.",
+      optPwd: "Password Generator (20 chars)",
+      optUuid: "UUID v4 Generator",
+      ready: "> Ready...",
+      errCidr: "Invalid IP/CIDR format (e.g. 192.168.1.0/24)",
+      errHosts: "Invalid hosts input (e.g. 100, 50, 20)",
+      lblNet: "Network IP:",
+      lblMask: "Subnet Mask:",
+      lblBcast: "Broadcast:",
+      lblFirst: "First Host:",
+      lblLast: "Last Host:",
+      lblTotal: "Total Hosts:",
+      lblUsable: "Usable:"
     },
     fr: {
       heroTitle: "Network Engineer Toolkit",
@@ -515,7 +539,19 @@
       thTool: "Outil",
       thInput: "Entrée",
       thResult: "Résultat",
-      logEmpty: "Aucune action enregistrée."
+      logEmpty: "Aucune action enregistrée.",
+      optPwd: "Générateur de mot de passe (20 car.)",
+      optUuid: "Générateur UUID v4",
+      ready: "> Prêt...",
+      errCidr: "Format IP/CIDR invalide (ex. 192.168.1.0/24)",
+      errHosts: "Format d'hôtes invalide (ex. 100, 50, 20)",
+      lblNet: "Adresse Réseau:",
+      lblMask: "Masque de Sous-réseau:",
+      lblBcast: "Diffusion (Broadcast):",
+      lblFirst: "Premier Hôte:",
+      lblLast: "Dernier Hôte:",
+      lblTotal: "Total d'Hôtes:",
+      lblUsable: "Utilisables:"
     },
     es: {
       heroTitle: "Network Engineer Toolkit",
@@ -551,13 +587,25 @@
       thTool: "Herramienta",
       thInput: "Entrada",
       thResult: "Resultado",
-      logEmpty: "Sin acciones registradas."
+      logEmpty: "Sin acciones registradas.",
+      optPwd: "Generador de contraseñas (20 car.)",
+      optUuid: "Generador UUID v4",
+      ready: "> Listo...",
+      errCidr: "Formato IP/CIDR inválido (ej. 192.168.1.0/24)",
+      errHosts: "Entrada de hosts inválida (ej. 100, 50, 20)",
+      lblNet: "Dirección de Red:",
+      lblMask: "Máscara de Subred:",
+      lblBcast: "Broadcast:",
+      lblFirst: "Primer Host:",
+      lblLast: "Último Host:",
+      lblTotal: "Hosts Totales:",
+      lblUsable: "Utilizables:"
     }
   };
 
   const $ = id => document.getElementById(id);
 
-  // --- LANGUAGE SYSTEM ---
+  // --- SPRACHUMSTELLUNG (i18n) ---
   function setLanguage(lang) {
     if (!i18n[lang]) lang = "de";
     const dict = i18n[lang];
@@ -571,18 +619,25 @@
       const key = el.getAttribute("data-i18n-ph");
       if (dict[key]) el.placeholder = dict[key];
     });
+
+    document.querySelectorAll("[data-i18n-console]").forEach(el => {
+      const key = el.getAttribute("data-i18n-console");
+      if (dict[key] && el.textContent.startsWith(">")) el.textContent = dict[key];
+    });
+
+    renderLog();
   }
 
   $("langSelect").addEventListener("change", e => setLanguage(e.target.value));
 
-  // --- THEME SYSTEM ---
+  // --- THEME SWITCHER ---
   $("themeBtn").addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
     $("themeBtn").textContent = isDark ? "☀" : "☾";
   });
 
-  // --- TAB NAVIGATION ---
+  // --- TAB STEUERUNG ---
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -592,7 +647,7 @@
     });
   });
 
-  // --- SEARCH FILTER ---
+  // --- SUCH-FILTER ---
   $("toolSearch").addEventListener("input", e => {
     const q = e.target.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card => {
@@ -600,7 +655,7 @@
     });
   });
 
-  // --- LOG SYSTEM ---
+  // --- LOGGING SYSTEM ---
   let activityLog = [];
   function addLog(tool, input, result) {
     const time = new Date().toLocaleTimeString();
@@ -610,8 +665,8 @@
 
   function renderLog() {
     const tbody = $("logTable");
+    const lang = $("langSelect").value || "de";
     if (!activityLog.length) {
-      const lang = $("langSelect").value || "de";
       tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">${i18n[lang].logEmpty}</td></tr>`;
       return;
     }
@@ -632,22 +687,37 @@
     navigator.clipboard.writeText(text).then(() => alert("Log kopiert!"));
   };
 
-  // --- IP / SUBNET CORE LOGIC ---
+  // --- IP-VALIDIERUNG & HELFER ---
+  function isValidIp(ip) {
+    const parts = ip.split(".");
+    if (parts.length !== 4) return false;
+    return parts.every(p => {
+      if (!/^\d+$/.test(p)) return false;
+      const n = parseInt(p, 10);
+      return n >= 0 && n <= 255;
+    });
+  }
+
   function ipToInt(ip) {
     return ip.split(".").reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
   }
+
   function intToIp(int) {
     return [(int >>> 24) & 255, (int >>> 16) & 255, (int >>> 8) & 255, int & 255].join(".");
   }
 
   // 1. SUBNET CALCULATOR
   $("calcSubnetBtn").onclick = () => {
+    const lang = $("langSelect").value || "de";
+    const dict = i18n[lang];
     try {
       const input = $("subnetInput").value.trim();
       const [ip, cidrStr] = input.split("/");
       const cidr = parseInt(cidrStr, 10);
 
-      if (!ip || isNaN(cidr) || cidr < 0 || cidr > 32) throw new Error("Ungültiges CIDR Format.");
+      if (!ip || !isValidIp(ip) || isNaN(cidr) || cidr < 0 || cidr > 32) {
+        throw new Error(dict.errCidr);
+      }
 
       const mask = cidr === 0 ? 0 : (0xFFFFFFFF << (32 - cidr)) >>> 0;
       const ipNum = ipToInt(ip);
@@ -656,33 +726,37 @@
       const totalHosts = Math.pow(2, 32 - cidr);
       const usableHosts = cidr >= 31 ? totalHosts : Math.max(0, totalHosts - 2);
 
-      const out = `Netzadresse:   ${intToIp(netNum)}
-Subnetmaske:   ${intToIp(mask)}
-Broadcast:     ${intToIp(bcastNum)}
-Erster Host:   ${cidr >= 31 ? intToIp(netNum) : intToIp(netNum + 1)}
-Letzter Host:  ${cidr >= 31 ? intToIp(bcastNum) : intToIp(bcastNum - 1)}
-Hosts Gesamt:  ${totalHosts.toLocaleString()}
-Nutzbar:       ${usableHosts.toLocaleString()}`;
+      const out = `${dict.lblNet.padEnd(16)} ${intToIp(netNum)}
+${dict.lblMask.padEnd(16)} ${intToIp(mask)}
+${dict.lblBcast.padEnd(16)} ${intToIp(bcastNum)}
+${dict.lblFirst.padEnd(16)} ${cidr >= 31 ? intToIp(netNum) : intToIp(netNum + 1)}
+${dict.lblLast.padEnd(16)} ${cidr >= 31 ? intToIp(bcastNum) : intToIp(bcastNum - 1)}
+${dict.lblTotal.padEnd(16)} ${totalHosts.toLocaleString()}
+${dict.lblUsable.padEnd(16)} ${usableHosts.toLocaleString()}`;
 
       $("subnetOutput").textContent = out;
       addLog("Subnet Calc", input, `${intToIp(netNum)}/${cidr}`);
     } catch (e) {
-      $("subnetOutput").textContent = "> Fehler: " + e.message;
+      $("subnetOutput").textContent = "> " + e.message;
     }
   };
 
   // 2. VLSM PLANNER
   $("calcVlsmBtn").onclick = () => {
+    const lang = $("langSelect").value || "de";
+    const dict = i18n[lang];
     try {
       const base = $("vlsmBaseInput").value.trim();
       const [ip, cidrStr] = base.split("/");
       const baseCidr = parseInt(cidrStr, 10);
-      const hostsReq = $("vlsmHostsInput").value.split(",").map(x => parseInt(x.trim(), 10)).filter(x => !isNaN(x)).sort((a,b) => b - a);
+      const hostsReq = $("vlsmHostsInput").value.split(",").map(x => parseInt(x.trim(), 10)).filter(x => !isNaN(x) && x > 0).sort((a,b) => b - a);
 
-      if (!ip || isNaN(baseCidr) || !hostsReq.length) throw new Error("Ungültige Eingaben.");
+      if (!ip || !isValidIp(ip) || isNaN(baseCidr) || baseCidr < 0 || baseCidr > 32 || !hostsReq.length) {
+        throw new Error(dict.errHosts);
+      }
 
       let currentIp = (ipToInt(ip) & (0xFFFFFFFF << (32 - baseCidr))) >>> 0;
-      let out = `VLSM Subnetz-Planung für ${base}:\n\n`;
+      let out = `VLSM Subnetz-Planung (${base}):\n\n`;
 
       hostsReq.forEach((req, idx) => {
         let p = 32;
@@ -699,17 +773,18 @@ Nutzbar:       ${usableHosts.toLocaleString()}`;
       });
 
       $("vlsmOutput").textContent = out;
-      addLog("VLSM Planner", base, `${hostsReq.length} Subnetze erzeugt`);
+      addLog("VLSM Planner", base, `${hostsReq.length} Subnetze`);
     } catch (e) {
-      $("vlsmOutput").textContent = "> Fehler: " + e.message;
+      $("vlsmOutput").textContent = "> " + e.message;
     }
   };
 
-  // 3. DNS LOOKUP
+  // 3. DNS LOOKUP (DoH)
   $("runDnsBtn").onclick = async () => {
     const domain = $("dnsDomain").value.trim();
     const type = $("dnsType").value;
-    $("dnsOutput").textContent = "> Fragt Cloudflare DoH ab...";
+    if (!domain) return;
+    $("dnsOutput").textContent = "> Querying Cloudflare DoH...";
 
     try {
       const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, {
@@ -718,12 +793,12 @@ Nutzbar:       ${usableHosts.toLocaleString()}`;
       const data = await res.json();
       
       if (!data.Answer) {
-        $("dnsOutput").textContent = `> Keine Records vom Typ ${type} gefunden.`;
+        $("dnsOutput").textContent = `> Keine DNS-Records für Typ ${type} gefunden.`;
         return;
       }
 
-      const records = data.Answer.map(a => `${a.name}  TTL:${a.TTL}  ${a.data}`).join("\n");
-      $("dnsOutput").textContent = `> DNS Records für ${domain} (${type}):\n\n` + records;
+      const records = data.Answer.map(a => `${a.name.padEnd(20)} TTL: ${a.TTL.toString().padEnd(6)} ${a.data}`).join("\n");
+      $("dnsOutput").textContent = `> DNS (${type}) für ${domain}:\n\n` + records;
       addLog("DNS Lookup", `${domain} (${type})`, `${data.Answer.length} Records`);
     } catch (e) {
       $("dnsOutput").textContent = "> Fehler bei DNS-Abfrage: " + e.message;
@@ -733,24 +808,26 @@ Nutzbar:       ${usableHosts.toLocaleString()}`;
   // 4. HTTP LATENCY TEST
   $("runHttpBtn").onclick = async () => {
     let url = $("httpUrl").value.trim();
+    if (!url) return;
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    $("httpOutput").textContent = "> Sende HTTP Request...";
+    $("httpOutput").textContent = "> HTTP Request gestartet...";
 
     try {
       const start = performance.now();
-      const res = await fetch(url, { method: "HEAD", mode: "no-cors", cache: "no-store" });
+      await fetch(url, { method: "HEAD", mode: "no-cors", cache: "no-store" });
       const duration = (performance.now() - start).toFixed(1);
 
-      $("httpOutput").textContent = `Ziel: ${url}\nHTTP Antwortezeit: ${duration} ms\nStatus: Online / Erreichbar`;
+      $("httpOutput").textContent = `Ziel: ${url}\nHTTP Latenz: ${duration} ms\nStatus: Online / Erreichbar`;
       addLog("HTTP Test", url, `${duration} ms`);
     } catch (e) {
-      $("httpOutput").textContent = "> HTTP Fehler / Offline: " + e.message;
+      $("httpOutput").textContent = "> HTTP Fehler / Ziel nicht erreichbar.";
     }
   };
 
   // 5. PUBLIC IP LOOKUP
   $("runIpBtn").onclick = async () => {
     const ip = $("ipLookupInput").value.trim();
+    if (!ip) return;
     $("ipOutput").textContent = "> Abfrage läuft...";
 
     try {
@@ -796,8 +873,8 @@ ASN:         ${data.connection?.asn || "k.A."}`;
         result = JSON.stringify(JSON.parse(decodeURIComponent(escape(atob(parts[1])))), null, 2);
       }
 
-      $("adminOutput").textContent = `> ${action} Ergebnis:\n\n` + result;
-      addLog("Admin Tool", action, "Erfolgreich");
+      $("adminOutput").textContent = `> Result (${action}):\n\n` + result;
+      addLog("Admin Tool", action, "OK");
     } catch (e) {
       $("adminOutput").textContent = "> Fehler: " + e.message;
     }
