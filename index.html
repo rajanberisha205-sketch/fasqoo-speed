@@ -299,10 +299,16 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 .banner-zentriert {
   width: 100%;
   display: flex;
-  justify-content: center; /* Zentriert den Banner waagerecht */
-  align-items: center;     /* Zentriert ihn senkrecht */
-  margin: 10px 0;          /* Kleiner Abstand nach oben und unten */
-  overflow: hidden;        /* Verhindert unabsichtliches Überlaufen */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.banner-zentriert iframe {
+  margin: 0 auto !important;
+  display: block !important;
 }
 </style>
 <main>
