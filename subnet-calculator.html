@@ -231,12 +231,12 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
         <div>
           <div class="metrics">
-            <div class="metric"><div class="mtop"><span class="label">Netzwerk-Adresse</span><span class="icon">🌐</span></div><div class="value" id="netAddr">192.168.1.0</div></div>
-            <div class="metric"><div class="mtop"><span class="label">Subnetzmaske</span><span class="icon">🎭</span></div><div class="value" id="netMask">255.255.255.0</div></div>
-            <div class="metric"><div class="mtop"><span class="label">Erste nutzbare IP</span><span class="icon">▶</span></div><div class="value" id="firstIp">192.168.1.1</div></div>
-            <div class="metric"><div class="mtop"><span class="label">Letzte nutzbare IP</span><span class="icon">◀</span></div><div class="value" id="lastIp">192.168.1.254</div></div>
-            <div class="metric"><div class="mtop"><span class="label">Broadcast-Adresse</span><span class="icon">📢</span></div><div class="value" id="broadAddr">192.168.1.255</div></div>
-            <div class="metric"><div class="mtop"><span class="label">Wildcard Maske</span><span class="icon">🃏</span></div><div class="value" id="wildMask">0.0.0.255</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblNetAddr">Netzwerk-Adresse</span><span class="icon">🌐</span></div><div class="value" id="netAddr">192.168.1.0</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblNetMask">Subnetzmaske</span><span class="icon">🎭</span></div><div class="value" id="netMask">255.255.255.0</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblFirstIp">Erste nutzbare IP</span><span class="icon">▶</span></div><div class="value" id="firstIp">192.168.1.1</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblLastIp">Letzte nutzbare IP</span><span class="icon">◀</span></div><div class="value" id="lastIp">192.168.1.254</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblBroadAddr">Broadcast-Adresse</span><span class="icon">📢</span></div><div class="value" id="broadAddr">192.168.1.255</div></div>
+            <div class="metric"><div class="mtop"><span class="label" id="lblWildMask">Wildcard Maske</span><span class="icon">🃏</span></div><div class="value" id="wildMask">0.0.0.255</div></div>
           </div>
         </div>
 
@@ -270,7 +270,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
       <!-- 3. DNS LOOKUP -->
       <div class="tool">
-        <h3><span>🔍</span> <span id="t3Title">Cloudflare DoH DNS Lookup</span></h3>
+        <h3><span>🔍</span> <span id="t3Title">Live DNS Lookup</span></h3>
         <p id="t3Desc">Fragt echte Live-DNS-Einträge ab.</p>
         <div class="tool-form">
           <input type="text" id="dnsDomain" class="tool-input" value="google.com">
@@ -330,7 +330,119 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 <script>
   const $ = id => document.getElementById(id);
 
-  // MOBILE MENU & THEME SWITCHING (From index.html)
+  // 100% EXAKTE TRADUKTIONEN / TRANSLATIONS (I18N DICTIONARY)
+  const translations = {
+    de: {
+      navHome: "Home", navFaq: "FAQ", navStatus: "Netzwerk-Status", navDiag: "IT-Diagnose", navAbout: "Über uns",
+      heroTitle: "IT-Diagnose & Subnet Calculator", heroSub: "Professionelle Netzwerkanalysen, CIDR-Berechnungen und Live-Diagnosen",
+      lblHosts: "Nutzbare Hosts", runSubnet: "Subnetz Berechnen",
+      lblNetAddr: "Netzwerk-Adresse", lblNetMask: "Subnetzmaske", lblFirstIp: "Erste nutzbare IP",
+      lblLastIp: "Letzte nutzbare IP", lblBroadAddr: "Broadcast-Adresse", lblWildMask: "Wildcard Maske",
+      diagToolsTitle: "Weitere Live IT-Werkzeuge",
+      t1Title: "Web-Latenz (Ping)", t1Desc: "Misst die exakte HTTP-Latenz zu einem Server.", runPing: "Messen",
+      t2Title: "Echter Speedtest", t2Desc: "Misst Ihre Download-Geschwindigkeit (Live-Netzwerktest).", runSpeed: "Speedtest Starten",
+      t3Title: "Live DNS Lookup", t3Desc: "Fragt echte Live-DNS-Einträge ab.", runDns: "Abfragen",
+      t4Title: "IP & Standort Analyse", t4Desc: "Analysiert Ihre eigene IP oder ein externes Ziel.", runIp: "Analysieren", ipPlaceholder: "Leer lassen für eigene IP",
+      t5Title: "System & Client Scan", t5Desc: "Liest relevante System- und Browserdaten aus.", runSys: "System Scan Ausführen",
+      ready: "> Bereit...", pinging: "> Ping an {url}...", pingErr: "Verbindungsfehler / CORS.",
+      speedRunning: "> Speedtest läuft (Lade Testdatei)...", speedErr: "> Fehler beim Ausführen des Speedtests.",
+      dnsQuerying: "> DNS-Abfrage läuft...", dnsNone: "> Keine DNS-Einträge gefunden.", dnsErr: "> Fehler bei der DNS-Abfrage.",
+      ipQuerying: "> IP Daten werden abgerufen...", ipErr: "> Fehler bei IP Abfrage.",
+      ftRights: "© 2026 Fasqoo. Alle Rechte vorbehalten.", ftTrade: "Fasqoo™ und Fasqoo Speed Test sind Marken von Fasqoo.",
+      ftAccess: "Barrierefreiheit", ftPrivacy: "Datenschutz", ftTerms: "Nutzungsbedingungen", ftNoSell: "Meine Daten nicht verkaufen", ftSlavery: "Richtlinie gegen Sklaverei"
+    },
+    en: {
+      navHome: "Home", navFaq: "FAQ", navStatus: "Network Status", navDiag: "IT Diagnostics", navAbout: "About Us",
+      heroTitle: "IT Diagnostics & Subnet Calculator", heroSub: "Professional network analysis, CIDR calculations, and live diagnostics",
+      lblHosts: "Usable Hosts", runSubnet: "Calculate Subnet",
+      lblNetAddr: "Network Address", lblNetMask: "Subnet Mask", lblFirstIp: "First Usable IP",
+      lblLastIp: "Last Usable IP", lblBroadAddr: "Broadcast Address", lblWildMask: "Wildcard Mask",
+      diagToolsTitle: "Additional Live IT Tools",
+      t1Title: "Web Latency (Ping)", t1Desc: "Measures exact HTTP latency to a server.", runPing: "Measure",
+      t2Title: "Real Speedtest", t2Desc: "Measures your download speed (Live network test).", runSpeed: "Start Speedtest",
+      t3Title: "Live DNS Lookup", t3Desc: "Queries real live DNS records.", runDns: "Query",
+      t4Title: "IP & Location Analysis", t4Desc: "Analyzes your own IP or an external target.", runIp: "Analyze", ipPlaceholder: "Leave blank for own IP",
+      t5Title: "System & Client Scan", t5Desc: "Reads relevant system and browser information.", runSys: "Run System Scan",
+      ready: "> Ready...", pinging: "> Pinging {url}...", pingErr: "Connection Error / CORS.",
+      speedRunning: "> Speedtest in progress (Downloading file)...", speedErr: "> Error running speedtest.",
+      dnsQuerying: "> Querying DNS records...", dnsNone: "> No DNS records found.", dnsErr: "> Error querying DNS.",
+      ipQuerying: "> Fetching IP data...", ipErr: "> Error fetching IP data.",
+      ftRights: "© 2026 Fasqoo. All rights reserved.", ftTrade: "Fasqoo™ and Fasqoo Speed Test are trademarks of Fasqoo.",
+      ftAccess: "Accessibility", ftPrivacy: "Privacy Policy", ftTerms: "Terms of Use", ftNoSell: "Do Not Sell My Info", ftSlavery: "Anti-Slavery Statement"
+    },
+    fr: {
+      navHome: "Accueil", navFaq: "FAQ", navStatus: "État du Réseau", navDiag: "Diagnostics IT", navAbout: "À propos",
+      heroTitle: "Diagnostics IT & Calculateur de Sous-réseau", heroSub: "Analyse réseau professionnelle, calculs CIDR et diagnostics en direct",
+      lblHosts: "Hôtes Utilisables", runSubnet: "Calculer Le Sous-réseau",
+      lblNetAddr: "Adresse Réseau", lblNetMask: "Masque de Sous-réseau", lblFirstIp: "Première IP Utilisable",
+      lblLastIp: "Dernière IP Utilisable", lblBroadAddr: "Adresse de Diffusion", lblWildMask: "Masque Generique",
+      diagToolsTitle: "Outils IT En Direct Supplémentaires",
+      t1Title: "Latence Web (Ping)", t1Desc: "Mesure la latence HTTP exacte vers un serveur.", runPing: "Mesurer",
+      t2Title: "Test de Débit Réel", t2Desc: "Mesure votre vitesse de téléchargement réelle.", runSpeed: "Lancer Le Test",
+      t3Title: "Recherche DNS En Direct", t3Desc: "Interroge les vrais enregistrements DNS.", runDns: "Interroger",
+      t4Title: "Analyse IP & Localisation", t4Desc: "Analyse votre propre IP ou une cible externe.", runIp: "Analyser", ipPlaceholder: "Laisser vide pour votre IP",
+      t5Title: "Scan Système & Client", t5Desc: "Lit les données système et navigateur pertinentes.", runSys: "Exécuter Le Scan",
+      ready: "> Prêt...", pinging: "> Ping sur {url}...", pingErr: "Erreur de connexion / CORS.",
+      speedRunning: "> Test de débit en cours...", speedErr: "> Erreur lors du test de débit.",
+      dnsQuerying: "> Recherche DNS en cours...", dnsNone: "> Aucun enregistrement trouvé.", dnsErr: "> Erreur lors de la recherche DNS.",
+      ipQuerying: "> Récupération des données IP...", ipErr: "> Erreur lors de la récupération IP.",
+      ftRights: "© 2026 Fasqoo. Tous droits réservés.", ftTrade: "Fasqoo™ et Fasqoo Speed Test sont des marques de Fasqoo.",
+      ftAccess: "Accessibilité", ftPrivacy: "Politique de Confidentialité", ftTerms: "Conditions d'Utilisation", ftNoSell: "Ne Pas Vendre Mes Infos", ftSlavery: "Déclaration Anti-Esclavage"
+    },
+    es: {
+      navHome: "Inicio", navFaq: "Preguntas", navStatus: "Estado de Red", navDiag: "Diagnóstico TI", navAbout: "Nosotros",
+      heroTitle: "Diagnóstico TI y Calculadora de Subred", heroSub: "Análisis de red profesional, cálculos CIDR y diagnósticos en vivo",
+      lblHosts: "Hosts Útiles", runSubnet: "Calcular Subred",
+      lblNetAddr: "Dirección de Red", lblNetMask: "Máscara de Subred", lblFirstIp: "Primera IP Útil",
+      lblLastIp: "Última IP Útil", lblBroadAddr: "Dirección Broadcast", lblWildMask: "Máscara Wildcard",
+      diagToolsTitle: "Herramientas de TI en Vivo",
+      t1Title: "Latencia Web (Ping)", t1Desc: "Mide la latencia HTTP exacta hacia un servidor.", runPing: "Medir",
+      t2Title: "Prueba de Velocidad Real", t2Desc: "Mide tu velocidad de descarga en tiempo real.", runSpeed: "Iniciar Prueba",
+      t3Title: "Búsqueda DNS en Vivo", t3Desc: "Consulta registros DNS reales en vivo.", runDns: "Consultar",
+      t4Title: "Análisis de IP y Ubicación", t4Desc: "Analiza tu propia IP o un destino externo.", runIp: "Analizar", ipPlaceholder: "Dejar en blanco para IP propia",
+      t5Title: "Escaneo de Sistema y Cliente", t5Desc: "Lee datos relevantes del sistema y del navegador.", runSys: "Ejecutar Escaneo",
+      ready: "> Listo...", pinging: "> Haciendo Ping a {url}...", pingErr: "Error de conexión / CORS.",
+      speedRunning: "> Prueba de velocidad en progreso...", speedErr: "> Error al ejecutar la prueba.",
+      dnsQuerying: "> Consultando registros DNS...", dnsNone: "> No se encontraron registros DNS.", dnsErr: "> Error en la consulta DNS.",
+      ipQuerying: "> Obteniendo datos de IP...", ipErr: "> Error al obtener datos de IP.",
+      ftRights: "© 2026 Fasqoo. Todos los derechos reservados.", ftTrade: "Fasqoo™ y Fasqoo Speed Test son marcas de Fasqoo.",
+      ftAccess: "Accesibilidad", ftPrivacy: "Política de Privacidad", ftTerms: "Términos de Uso", ftNoSell: "No Vender Mi Información", ftSlavery: "Declaración Contra la Esclavitud"
+    }
+  };
+
+  let currentLang = localStorage.getItem("fasqoo_lang") || "de";
+
+  function setLanguage(lang) {
+    if (!translations[lang]) lang = "de";
+    currentLang = lang;
+    localStorage.setItem("fasqoo_lang", lang);
+    $("lang").value = lang;
+
+    const t = translations[lang];
+    Object.keys(t).forEach(key => {
+      const el = $(key);
+      if (el) {
+        if (el.tagName === "INPUT" && el.hasAttribute("placeholder")) {
+          // Handled separately for specific placeholders
+        } else {
+          el.textContent = t[key];
+        }
+      }
+    });
+
+    if ($("ipInput")) $("ipInput").placeholder = t.ipPlaceholder;
+
+    // Reset Consoles Status text according to current language
+    ["pingOut", "speedOut", "dnsOut", "ipOut", "sysOut"].forEach(c => {
+      if ($(c) && ($(c).textContent.includes("> Bereit") || $(c).textContent.includes("> Ready") || $(c).textContent.includes("> Prêt") || $(c).textContent.includes("> Listo"))) {
+        $(c).textContent = t.ready;
+      }
+    });
+  }
+
+  $("lang").addEventListener("change", (e) => setLanguage(e.target.value));
+
+  // MOBILE MENU & THEME SWITCHING
   const menuToggle = $("menuToggle");
   const mainMenu = $("mainMenu");
   if(menuToggle && mainMenu){
@@ -348,23 +460,38 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     $("themeBtn").textContent = "☀";
   }
 
-  // IPv4 MATH & CALCULATOR LOGIC
+  // 100% ECHTE UND EXAKTE IPv4 BERECHNUNG LOGIK
   function ipToInt(ip) {
-    return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+    return ip.split('.').reduce((acc, octet) => ((acc << 8) + parseInt(octet, 10)) >>> 0, 0);
   }
 
   function intToIp(int) {
     return [(int >>> 24), (int >> 16 & 255), (int >> 8 & 255), (int & 255)].join('.');
   }
 
-  function calculateSubnet() {
-    const input = $("subnetInput").value.trim().split("/");
-    if (input.length !== 2) return alert("Bitte valides Format eingeben: z.B. 192.168.1.0/24");
-    
-    const ipStr = input[0];
-    const cidr = parseInt(input[1], 10);
+  function isValidIPv4(ip) {
+    const parts = ip.split('.');
+    if (parts.length !== 4) return false;
+    return parts.every(p => {
+      const n = Number(p);
+      return !isNaN(n) && n >= 0 && n <= 255 && p === n.toString();
+    });
+  }
 
-    if (isNaN(cidr) || cidr < 0 || cidr > 32) return alert("CIDR Prefix muss zwischen 0 und 32 liegen.");
+  function calculateSubnet() {
+    const rawInput = $("subnetInput").value.trim().split("/");
+    if (rawInput.length !== 2 || !isValidIPv4(rawInput[0])) {
+      alert(currentLang === "de" ? "Ungültige IP-Adresse/CIDR Format! Beispiel: 192.168.1.0/24" : "Invalid IP/CIDR Format! Example: 192.168.1.0/24");
+      return;
+    }
+    
+    const ipStr = rawInput[0];
+    const cidr = parseInt(rawInput[1], 10);
+
+    if (isNaN(cidr) || cidr < 0 || cidr > 32) {
+      alert(currentLang === "de" ? "CIDR Prefix muss zwischen 0 und 32 liegen." : "CIDR prefix must be between 0 and 32.");
+      return;
+    }
 
     const maskInt = cidr === 0 ? 0 : (~0 << (32 - cidr)) >>> 0;
     const wildInt = ~maskInt >>> 0;
@@ -386,83 +513,108 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     $("lastIp").textContent = intToIp(lastIpInt);
     $("broadAddr").textContent = intToIp(broadInt);
     $("wildMask").textContent = intToIp(wildInt);
+
+    // Dynamic Gauge visual representation
+    const maxVal = 816; // stroke-dasharray
+    const pct = cidr / 32;
+    $("prog").style.strokeDashoffset = maxVal - (maxVal * 0.75 * pct);
   }
 
   $("runSubnet").onclick = calculateSubnet;
-  calculateSubnet(); // Run on init
 
-  // 1. PING DIAGNOSTIC
+  // 1. ECHTE WEB-LATENZ (PING)
   $("runPing").onclick = async () => {
+    const t = translations[currentLang];
     let url = $("pingUrl").value.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    $("pingOut").textContent = `> Ping an ${url}...\n`;
+    $("pingOut").textContent = t.pinging.replace("{url}", url) + "\n";
 
     for(let i = 1; i <= 3; i++) {
       const start = performance.now();
       try {
         await fetch(url, { mode: 'no-cors', cache: 'no-cache' });
         const end = performance.now();
-        $("pingOut").textContent += `Antwort ${i}: Zeit=${(end - start).toFixed(2)} ms\n`;
+        $("pingOut").textContent += `[${i}] Latenz: ${(end - start).toFixed(2)} ms\n`;
       } catch(e) {
-        $("pingOut").textContent += `Antwort ${i}: Verbindungsfehler / CORS.\n`;
+        $("pingOut").textContent += `[${i}] ${t.pingErr}\n`;
       }
     }
   };
 
-  // 2. SPEEDTEST DIAGNOSTIC
+  // 2. ECHTER BANDBREITEN SPEEDTEST
   $("runSpeed").onclick = async () => {
-    $("speedOut").textContent = "> Speedtest läuft (Lade Testdatei)...";
-    const testUrl = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?cb=" + Math.random();
+    const t = translations[currentLang];
+    $("speedOut").textContent = t.speedRunning;
+    // Offizielle Hochgeschwindigkeits-Testdatei (1MB CDN Asset)
+    const testUrl = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?nocache=" + Date.now();
     const startTime = performance.now();
     try {
       const res = await fetch(testUrl, { cache: "no-store" });
       const data = await res.blob();
       const endTime = performance.now();
-      const durationSec = (endTime - startTime) / 1000;
-      const sizeMB = data.size / (1024 * 1024);
-      const speedMbps = ((sizeMB * 8) / durationSec).toFixed(2);
       
-      $("speedOut").textContent = `Ergebnis:\nDatenmenge: ${sizeMB.toFixed(2)} MB\nDauer: ${durationSec.toFixed(2)}s\nGeschwindigkeit: ${speedMbps} Mbit/s (${(sizeMB/durationSec).toFixed(2)} MB/s)`;
+      const durationSec = (endTime - startTime) / 1000;
+      const sizeBytes = data.size;
+      const speedMbps = ((sizeBytes * 8) / (durationSec * 1024 * 1024)).toFixed(2);
+      
+      $("speedOut").textContent = `Downloaded: ${(sizeBytes / 1024).toFixed(1)} KB\nDuration: ${durationSec.toFixed(2)}s\nSpeed: ${speedMbps} Mbit/s`;
     } catch(e) {
-      $("speedOut").textContent = "> Fehler beim Ausführen des Speedtests.";
+      $("speedOut").textContent = t.speedErr;
     }
   };
 
-  // 3. DNS LOOKUP DIAGNOSTIC
+  // 3. ECHTER DNS LOOKUP (Google Public DoH API)
   $("runDns").onclick = async () => {
+    const t = translations[currentLang];
     const domain = $("dnsDomain").value.trim();
     const type = $("dnsType").value;
-    $("dnsOut").textContent = "> DNS-Abfrage via Cloudflare DoH...";
+    $("dnsOut").textContent = t.dnsQuerying;
     try {
-      const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, {
-        headers: { 'Accept': 'application/dns-json' }
-      });
+      const res = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`);
       const data = await res.json();
       if (data.Answer && data.Answer.length > 0) {
-        $("dnsOut").textContent = data.Answer.map(a => `Type ${a.type} | TTL: ${a.TTL}s\n-> ${a.data}`).join("\n\n");
+        $("dnsOut").textContent = data.Answer.map(a => `Type: ${a.type} | TTL: ${a.TTL}s\nResult: ${a.data}`).join("\n\n");
       } else {
-        $("dnsOut").textContent = "> Keine DNS-Einträge gefunden.";
+        $("dnsOut").textContent = t.dnsNone;
       }
     } catch(e) { 
-      $("dnsOut").textContent = "> Fehler bei der DNS-Abfrage."; 
+      $("dnsOut").textContent = t.dnsErr; 
     }
   };
 
-  // 4. IP GEOLOCATION DIAGNOSTIC
+  // 4. ECHTE IP & GEOLOCATION ANLYSE
   $("runIp").onclick = async () => {
+    const t = translations[currentLang];
     const ip = $("ipInput").value.trim();
-    $("ipOut").textContent = "> IP Daten werden abgerufen...";
+    $("ipOut").textContent = t.ipQuerying;
     try {
       const res = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`);
       const data = await res.json();
-      $("ipOut").textContent = `IP: ${data.ip}\nLand: ${data.country}\nStadt: ${data.city}\nISP: ${data.connection?.isp || "N/A"}\nASN: ${data.connection?.asn || "N/A"}`;
-    } catch(e) { $("ipOut").textContent = "> Fehler bei IP Abfrage."; }
+      if(data.success === false) {
+        $("ipOut").textContent = t.ipErr + " (" + data.message + ")";
+        return;
+      }
+      $("ipOut").textContent = `IP: ${data.ip}\nType: ${data.type}\nCountry: ${data.country} (${data.country_code})\nCity: ${data.city}\nISP: ${data.connection?.isp || "N/A"}\nASN: ${data.connection?.asn || "N/A"}`;
+    } catch(e) { $("ipOut").textContent = t.ipErr; }
   };
 
-  // 5. SYSTEM SCAN DIAGNOSTIC
+  // 5. ECHTER SYSTEM & BROWSER SCAN
   $("runSys").onclick = () => {
-    $("sysOut").textContent = `User Agent: ${navigator.userAgent}\nBildschirm-Auflösung: ${screen.width}x${screen.height}\nSprache: ${navigator.language}\nOnline: ${navigator.onLine ? "Ja" : "Nein"}\nProzessorkerne: ${navigator.hardwareConcurrency || "N/A"}`;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const netType = connection ? connection.effectiveType : "N/A";
+    
+    $("sysOut").textContent = 
+      `User Agent: ${navigator.userAgent}\n` +
+      `Screen: ${screen.width}x${screen.height} (${screen.colorDepth}-bit)\n` +
+      `Language: ${navigator.language}\n` +
+      `CPU Cores: ${navigator.hardwareConcurrency || "N/A"}\n` +
+      `Network Type: ${netType}\n` +
+      `Online: ${navigator.onLine ? "Yes" : "No"}`;
   };
+
+  // INIT
+  setLanguage(currentLang);
+  calculateSubnet();
 </script>
 
 </body>
