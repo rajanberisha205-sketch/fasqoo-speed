@@ -3,160 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fasqoo - IT Diagnostics & Tools</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="IT-Diagnose & Netzwerk Tools – Subnet Calculator, Ping, DNS Lookup und IP-Analyse mit Fasqoo.">
+  <meta name="robots" content="index, follow">
 
-  <style>
-    :root {
-      --bg: #0b0f19;
-      --card-bg: #151d2a;
-      --card-border: #243044;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --primary: #3b82f6;
-      --primary-hover: #2563eb;
-      --accent: #f97316;
-      --console-bg: #030712;
-      --console-text: #38bdf8;
-      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
+  <title>IT Diagnostics & Subnet Calculator | Fasqoo</title>
 
-    body.light-mode {
-      --bg: #f1f5f9;
-      --card-bg: #ffffff;
-      --card-border: #cbd5e1;
-      --text: #0f172a;
-      --muted: #64748b;
-      --console-bg: #0f172a;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-    }
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--orange2:#ff8b5c;--green:#16a36a;--yellow:#e6a500;--red:#e5484d;--blue:#2563eb;--shadow:0 8px 30px rgba(0,0,0,.06);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:400;}
+button,select,input{font:inherit;}
+button{cursor:pointer;}
+.wrap{width:min(1180px,calc(100% - 28px));margin:auto;}
 
-    .wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+/* HEADER */
+header{
+  height:68px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
 
-    /* HEADER & NAV */
-    header {
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--card-border);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: var(--shadow);
-    }
-    .wrap.nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
-    }
-    .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 24px; cursor: pointer; }
-    .brandmark { color: var(--accent); font-size: 26px; }
-    
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 24px;
-      cursor: pointer;
-    }
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brandmark{width:38px;height:38px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-size:21px;}
+.brandname{font-size:21px;letter-spacing:-.4px;}
 
-    .main-menu { display: flex; align-items: center; gap: 24px; }
-    .main-menu a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.2s; }
-    .main-menu a:hover { color: var(--accent); }
-    
-    .menu-extra { display: flex; align-items: center; gap: 12px; }
-    .menu-extra select, .theme-btn {
-      background: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--card-border);
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 13px;
-      outline: none;
-    }
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;}
+.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:400;white-space:nowrap;transition:color .2s ease,opacity .2s ease;}
+.main-menu a:hover{color:var(--orange);}
+.menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
+.menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;outline:none;cursor:pointer;}
+.menu-extra select:hover{background:var(--soft);}
+.theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;padding:0;transition:.2s ease;}
+.theme-btn:hover{background:var(--soft);transform:translateY(-1px);}
 
-    @media (max-width: 820px) {
-      .menu-toggle { display: block; }
-      .main-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px; left: 0; width: 100%;
-        background: var(--card-bg);
-        border-bottom: 1px solid var(--card-border);
-        padding: 20px; gap: 16px;
-      }
-      .main-menu.open { display: flex; }
-    }
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:6px 12px;
+  font-size:20px;
+  color:var(--text);
+}
 
-    /* MAIN CONTENT */
-    main { padding: 40px 0; }
-    .hero { text-align: center; margin-bottom: 35px; }
-    .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
-    .hero p { color: var(--muted); font-size: 15px; }
+main{padding:30px 0 65px;}
+.hero{text-align:center;margin-bottom:25px;}
+.hero h1{font-size:34px;line-height:1.2;font-weight:400;letter-spacing:-1px;margin:0 0 9px;}
+.hero p{margin:0;color:var(--muted);font-size:14px;}
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
-    
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 24px;
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s;
-    }
-    .card:hover { transform: translateY(-2px); }
-    .card h3 { margin-bottom: 6px; font-size: 18px; color: var(--text); }
-    .card p { color: var(--muted); font-size: 13px; margin-bottom: 16px; min-height: 38px; }
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:28px;margin-bottom:30px;}
+.grid-hero{display:grid;grid-template-columns:360px 1fr;gap:30px;align-items:center;}
 
-    .form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-    .form-group input, .form-group select {
-      padding: 11px 14px; 
-      border-radius: 8px; 
-      border: 1px solid var(--card-border);
-      background: var(--bg); 
-      color: var(--text); 
-      outline: none;
-      font-size: 14px;
-    }
+/* SUBNET CALCULATOR HERO SECTION */
+.speedbox{text-align:center;}
+.gauge{width:295px;height:295px;margin:auto;position:relative;}
+.gauge svg{width:100%;height:100%;transform:rotate(-135deg);}
+.ring{fill:none;stroke:#edf0f4;stroke-width:13;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:204;}
+.progress{fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:204;transition:.18s linear;}
+.center{position:absolute;inset:0;display:grid;place-content:center;}
+.num{font-size:42px;line-height:1;font-weight:400;letter-spacing:-1px;}
+.unit{font-size:13px;color:var(--muted);margin-top:7px;}
+.status{min-height:21px;margin-top:4px;color:var(--muted);font-size:13px;}
 
-    .btn { 
-      background: var(--primary); 
-      color: #fff; 
-      border: 0; 
-      padding: 11px; 
-      border-radius: 8px; 
-      font-weight: 600; 
-      cursor: pointer; 
-      transition: background 0.2s;
-    }
-    .btn:hover { background: var(--primary-hover); }
+.subnet-form { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.subnet-input { width: 100%; max-width: 260px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--soft); color: var(--text); text-align: center; font-size: 15px; outline: none; }
+.start{width:220px;height:48px;border:0;border-radius:5px;background:var(--orange);color:#fff;font-size:14px;letter-spacing:.2px;transition:.2s;}
+.start:hover{transform:translateY(-1px);}
 
-    .console {
-      background: var(--console-bg); 
-      color: var(--console-text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
-      font-size: 12px; 
-      padding: 14px;
-      border-radius: 8px; 
-      min-height: 110px; 
-      max-height: 180px; 
-      overflow-y: auto; 
-      white-space: pre-wrap;
-      border: 1px solid var(--card-border);
-    }
-  </style>
+.metrics{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);}
+.metric{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+.metric:nth-child(2n){border-right:0;}
+.metric:nth-child(n+3){border-bottom:0;}
+.mtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.label{font-size:12px;color:var(--muted);}
+.icon{width:32px;height:32px;border-radius:50%;background:#f3f3f3;color:#111;display:grid;place-items:center;font-size:13px;}
+.value{font-size:20px; word-break: break-all;}
+
+/* DIAGNOSTICS GRID */
+.section-title{font-size:19px;font-weight:400;margin:0 0 13px;}
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.tool{padding:22px;border:1px solid var(--line);border-radius:6px;background:var(--card);box-shadow:var(--shadow);}
+.tool h3{font-size:15px;font-weight:600;margin:0 0 6px;display:flex;align-items:center;gap:8px;}
+.tool p{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px;}
+.tool-form{display:flex;gap:10px;margin-bottom:12px;}
+.tool-input{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--text);font-size:13px;outline:none;}
+.tool-select{padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--text);font-size:13px;outline:none;}
+.tool-btn{background:var(--text);color:var(--bg);border:none;padding:9px 16px;border-radius:6px;font-size:13px;font-weight:500;transition:0.2s;}
+.tool-btn:hover{opacity:0.9;}
+
+.console{
+  background:var(--soft);
+  color:var(--text);
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size:12px;
+  padding:14px;
+  border-radius:6px;
+  min-height:90px;
+  max-height:160px;
+  overflow-y:auto;
+  white-space:pre-wrap;
+  border:1px solid var(--line);
+}
+
+footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;color:var(--muted);font-size:11px;}
+.foot{display:flex;justify-content:space-between;}
+.fasqoo-footer-copy{display:flex;flex-direction:column;gap:8px;line-height:1.55}
+.fasqoo-footer-copy div:first-child{font-weight:600}
+.fasqoo-footer-links{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:14px}
+.fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82;transition:opacity .2s ease}
+.fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
+
+/* DARK MODE */
+.dark{--bg:#0d0f12;--card:#15181d;--text:#f3f4f6;--muted:#9aa1ab;--line:#2a2f36;--soft:#1b1f25;}
+.dark header,.dark footer{background:#111318;}
+.dark .ring{stroke:#292e35;}
+.dark .icon{background:#22262c;color:#eee;}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .tool-btn{background:var(--card);color:var(--text);border-color:var(--line);}
+.dark .tool-btn:hover{background:#22262c;}
+
+@media(max-width:900px){.grid-hero{grid-template-columns:1fr;}.tools{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:68px;left:0;right:0;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    padding:20px;gap:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    align-items:flex-start;
+  }
+  .main-menu.active{display:flex;}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);gap:12px;}
+}
+@media(max-width:560px){
+  .wrap{width:100%;}
+  .hero h1{font-size:26px;}
+  .card{padding:17px;}
+  .gauge{width:240px;height:240px;}
+  .num{font-size:32px;}
+  .foot{flex-direction:column;gap:7px;}
+  .tool-form{flex-direction:column;}
+}
+</style>
 </head>
 <body>
 
-<!-- HEADER NAVIGATION -->
 <header>
   <div class="wrap nav">
     <div class="brand">
@@ -178,12 +186,6 @@
           <option value="en">English</option>
           <option value="fr">Français</option>
           <option value="es">Español</option>
-          <option value="it">Italiano</option>
-          <option value="pt">Português</option>
-          <option value="nl">Nederlands</option>
-          <option value="tr">Türkçe</option>
-          <option value="sq">Shqip</option>
-          <option value="ar">العربية</option>
         </select>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode" title="Dark mode">☾</button>
       </div>
@@ -191,163 +193,205 @@
   </div>
 </header>
 
-<main class="wrap">
-  <div class="hero">
-    <h1 id="heroTitle">IT-Diagnose & Netzwerk Tools</h1>
-    <p id="heroSub">Echte Messungen und Analysen direkt über Ihren Browser.</p>
-  </div>
+<main>
+  <div class="wrap">
 
-  <div class="grid">
+    <section class="hero">
+      <h1 id="heroTitle">IT-Diagnose & Subnet Calculator</h1>
+      <p id="heroSub">Professionelle Netzwerkanalysen, CIDR-Berechnungen und Live-Diagnosen</p>
+    </section>
 
-    <!-- 1. LATENZ / PING -->
-    <div class="card">
-      <div>
-        <h3 id="t1Title">Echte Web-Latenz (Ping)</h3>
+    <!-- MAIN SUBNET CALCULATOR CARD -->
+    <section class="card">
+      <div class="grid-hero">
+
+        <div class="speedbox">
+          <div class="gauge">
+            <svg viewBox="0 0 300 300">
+              <defs>
+                <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff5a1f"/>
+                  <stop offset="100%" stop-color="#ff8a5b"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring" cx="150" cy="150" r="130"></circle>
+              <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+            </svg>
+            <div class="center">
+              <div id="subHostsCount" class="num">254</div>
+              <div class="unit" id="lblHosts">Nutzbare Hosts</div>
+            </div>
+          </div>
+          <div id="status" class="status">CIDR Subnet Calculator</div>
+          <div class="subnet-form">
+            <input type="text" id="subnetInput" class="subnet-input" value="192.168.1.0/24" placeholder="z.B. 10.0.0.0/16">
+            <button id="runSubnet" class="start">Subnetz Berechnen</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="metrics">
+            <div class="metric"><div class="mtop"><span class="label">Netzwerk-Adresse</span><span class="icon">🌐</span></div><div class="value" id="netAddr">192.168.1.0</div></div>
+            <div class="metric"><div class="mtop"><span class="label">Subnetzmaske</span><span class="icon">🎭</span></div><div class="value" id="netMask">255.255.255.0</div></div>
+            <div class="metric"><div class="mtop"><span class="label">Erste nutzbare IP</span><span class="icon">▶</span></div><div class="value" id="firstIp">192.168.1.1</div></div>
+            <div class="metric"><div class="mtop"><span class="label">Letzte nutzbare IP</span><span class="icon">◀</span></div><div class="value" id="lastIp">192.168.1.254</div></div>
+            <div class="metric"><div class="mtop"><span class="label">Broadcast-Adresse</span><span class="icon">📢</span></div><div class="value" id="broadAddr">192.168.1.255</div></div>
+            <div class="metric"><div class="mtop"><span class="label">Wildcard Maske</span><span class="icon">🃏</span></div><div class="value" id="wildMask">0.0.0.255</div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LIVE IT DIAGNOSTICS SECTION -->
+    <h2 class="section-title" id="diagToolsTitle">Weitere Live IT-Werkzeuge</h2>
+    <div class="tools">
+
+      <!-- 1. PING -->
+      <div class="tool">
+        <h3><span>⚡</span> <span id="t1Title">Web-Latenz (Ping)</span></h3>
         <p id="t1Desc">Misst die exakte HTTP-Latenz zu einem Server.</p>
-        <div class="form-group">
-          <input type="text" id="pingUrl" value="https://cloudflare.com">
-          <button class="btn" id="runPing">Latenz Messen</button>
+        <div class="tool-form">
+          <input type="text" id="pingUrl" class="tool-input" value="https://cloudflare.com">
+          <button class="tool-btn" id="runPing">Messen</button>
         </div>
+        <div class="console" id="pingOut">> Bereit...</div>
       </div>
-      <div class="console" id="pingOut">> Bereit...</div>
-    </div>
 
-    <!-- 2. SPEEDTEST -->
-    <div class="card">
-      <div>
-        <h3 id="t2Title">Echter Speedtest</h3>
+      <!-- 2. SPEEDTEST -->
+      <div class="tool">
+        <h3><span>🚀</span> <span id="t2Title">Echter Speedtest</span></h3>
         <p id="t2Desc">Misst Ihre Download-Geschwindigkeit (Live-Netzwerktest).</p>
-        <div class="form-group">
-          <button class="btn" id="runSpeed">Speedtest Starten</button>
+        <div class="tool-form">
+          <button class="tool-btn" id="runSpeed" style="width:100%;">Speedtest Starten</button>
         </div>
+        <div class="console" id="speedOut">> Bereit...</div>
       </div>
-      <div class="console" id="speedOut">> Bereit...</div>
-    </div>
 
-    <!-- 3. DNS LOOKUP -->
-    <div class="card">
-      <div>
-        <h3 id="t3Title">Cloudflare DoH DNS Lookup</h3>
+      <!-- 3. DNS LOOKUP -->
+      <div class="tool">
+        <h3><span>🔍</span> <span id="t3Title">Cloudflare DoH DNS Lookup</span></h3>
         <p id="t3Desc">Fragt echte Live-DNS-Einträge ab.</p>
-        <div class="form-group">
-          <input type="text" id="dnsDomain" value="google.com">
-          <select id="dnsType">
-            <option value="A">A (IPv4)</option>
-            <option value="AAAA">AAAA (IPv6)</option>
-            <option value="MX">MX (Mail)</option>
+        <div class="tool-form">
+          <input type="text" id="dnsDomain" class="tool-input" value="google.com">
+          <select id="dnsType" class="tool-select">
+            <option value="A">A</option>
+            <option value="AAAA">AAAA</option>
+            <option value="MX">MX</option>
             <option value="TXT">TXT</option>
           </select>
-          <button class="btn" id="runDns">DNS Abfragen</button>
+          <button class="tool-btn" id="runDns">Abfragen</button>
         </div>
+        <div class="console" id="dnsOut">> Bereit...</div>
       </div>
-      <div class="console" id="dnsOut">> Bereit...</div>
-    </div>
 
-    <!-- 4. IP LOOKUP -->
-    <div class="card">
-      <div>
-        <h3 id="t4Title">IP & Standort Analyse</h3>
+      <!-- 4. IP LOOKUP -->
+      <div class="tool">
+        <h3><span>📍</span> <span id="t4Title">IP & Standort Analyse</span></h3>
         <p id="t4Desc">Analysiert Ihre eigene IP oder ein externes Ziel.</p>
-        <div class="form-group">
-          <input type="text" id="ipInput" placeholder="Leer lassen für eigene IP">
-          <button class="btn" id="runIp">IP Analysieren</button>
+        <div class="tool-form">
+          <input type="text" id="ipInput" class="tool-input" placeholder="Leer lassen für eigene IP">
+          <button class="tool-btn" id="runIp">Analysieren</button>
         </div>
+        <div class="console" id="ipOut">> Bereit...</div>
       </div>
-      <div class="console" id="ipOut">> Bereit...</div>
-    </div>
 
-    <!-- 5. BROWSER SCANNER -->
-    <div class="card">
-      <div>
-        <h3 id="t5Title">System & Client Scan</h3>
+      <!-- 5. CLIENT SCAN -->
+      <div class="tool" style="grid-column: 1 / -1;">
+        <h3><span>💻</span> <span id="t5Title">System & Client Scan</span></h3>
         <p id="t5Desc">Liest relevante System- und Browserdaten aus.</p>
-        <div class="form-group">
-          <button class="btn" id="runSys">System Scan</button>
+        <div class="tool-form">
+          <button class="tool-btn" id="runSys">System Scan Ausführen</button>
         </div>
+        <div class="console" id="sysOut">> Bereit...</div>
       </div>
-      <div class="console" id="sysOut">> Bereit...</div>
-    </div>
 
-    <!-- 6. SUBNET CALCULATOR -->
-    <div class="card">
-      <div>
-        <h3 id="t6Title">IPv4 Subnet Calculator</h3>
-        <p id="t6Desc">Exakte mathematische CIDR-Berechnung.</p>
-        <div class="form-group">
-          <input type="text" id="subnetInput" value="192.168.1.0/24">
-          <button class="btn" id="runSubnet">Berechnen</button>
-        </div>
-      </div>
-      <div class="console" id="subnetOut">> Bereit...</div>
     </div>
 
   </div>
 </main>
 
+<footer>
+  <div class="wrap foot">
+    <div class="fasqoo-footer-copy">
+      <div id="ftRights">© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+      <div id="ftTrade">Fasqoo™ und Fasqoo Speed Test sind Marken von Fasqoo.</div>
+    </div>
+    <nav class="fasqoo-footer-links" aria-label="Footer">
+      <a href="/accessibility.html" id="ftAccess">Barrierefreiheit</a>
+      <a href="/privacy-policy.html" id="ftPrivacy">Datenschutz</a>
+      <a href="/terms.html" id="ftTerms">Nutzungsbedingungen</a>
+      <a href="/do-not-sell.html" id="ftNoSell">Meine Daten nicht verkaufen</a>
+      <a href="/modern-slavery.html" id="ftSlavery">Richtlinie gegen Sklaverei</a>
+    </nav>
+  </div>
+</footer>
+
 <script>
   const $ = id => document.getElementById(id);
 
-  // MOBILE MENU & THEME
-  $("menuToggle").onclick = () => $("mainMenu").classList.toggle("open");
+  // MOBILE MENU & THEME SWITCHING (From index.html)
+  const menuToggle = $("menuToggle");
+  const mainMenu = $("mainMenu");
+  if(menuToggle && mainMenu){
+    menuToggle.addEventListener("click", () => mainMenu.classList.toggle("active"));
+  }
+
   $("themeBtn").onclick = () => {
-    document.body.classList.toggle("light-mode");
-    $("themeBtn").textContent = document.body.classList.contains("light-mode") ? "☀" : "☾";
+    document.body.classList.toggle("dark");
+    const dark = document.body.classList.contains("dark");
+    localStorage.setItem("fasqoo_dark", dark);
+    $("themeBtn").textContent = dark ? "☀" : "☾";
   };
+  if(localStorage.getItem("fasqoo_dark") === "true"){
+    document.body.classList.add("dark");
+    $("themeBtn").textContent = "☀";
+  }
 
-  // MULTI-LANGUAGE DICTIONARY
-  const i18n = {
-    de: {
-      navHome: "Home", navFaq: "FAQ", navStatus: "Netzwerk-Status", navDiag: "IT-Diagnose", navAbout: "Über uns",
-      heroTitle: "IT-Diagnose & Netzwerk Tools", heroSub: "Echte Messungen und Analysen direkt über Ihren Browser.",
-      t1Title: "Echte Web-Latenz (Ping)", t1Desc: "Misst die exakte HTTP-Latenz zu einem Server.", runPing: "Latenz Messen",
-      t2Title: "Echter Speedtest", t2Desc: "Misst Ihre Download-Geschwindigkeit (Live-Netzwerktest).", runSpeed: "Speedtest Starten",
-      t3Title: "Cloudflare DoH DNS Lookup", t3Desc: "Fragt echte Live-DNS-Einträge ab.", runDns: "DNS Abfragen",
-      t4Title: "IP & Standort Analyse", t4Desc: "Analysiert Ihre eigene IP oder ein externes Ziel.", runIp: "IP Analysieren",
-      t5Title: "System & Client Scan", t5Desc: "Liest relevante System- und Browserdaten aus.", runSys: "System Scan",
-      t6Title: "IPv4 Subnet Calculator", t6Desc: "Exakte mathematische CIDR-Berechnung.", runSubnet: "Berechnen"
-    },
-    en: {
-      navHome: "Home", navFaq: "FAQ", navStatus: "Network Status", navDiag: "IT Diagnostics", navAbout: "About Us",
-      heroTitle: "IT Diagnostics & Network Tools", heroSub: "Real measurements and analysis directly in your browser.",
-      t1Title: "Real Web Latency (Ping)", t1Desc: "Measures exact HTTP latency to a server.", runPing: "Measure Latency",
-      t2Title: "Real Speedtest", t2Desc: "Measures your download speed (Live Network Test).", runSpeed: "Start Speedtest",
-      t3Title: "Cloudflare DoH DNS Lookup", t3Desc: "Queries real live DNS records.", runDns: "Lookup DNS",
-      t4Title: "IP & Location Analysis", t4Desc: "Analyzes your own IP or an external target.", runIp: "Analyze IP",
-      t5Title: "System & Client Scan", t5Desc: "Extracts system and browser diagnostics.", runSys: "Scan System",
-      t6Title: "IPv4 Subnet Calculator", t6Desc: "Exact mathematical CIDR calculation.", runSubnet: "Calculate"
-    },
-    fr: {
-      navHome: "Accueil", navFaq: "FAQ", navStatus: "État du réseau", navDiag: "Diagnostics IT", navAbout: "À propos",
-      heroTitle: "Diagnostics IT & Outils Réseau", heroSub: "Vraies mesures et analyses via votre navigateur.",
-      t1Title: "Latence Web Réelle", t1Desc: "Mesure la latence HTTP exacte.", runPing: "Mesurer",
-      t2Title: "Test de Débit Réel", t2Desc: "Mesure votre vitesse de téléchargement.", runSpeed: "Lancer le test",
-      t3Title: "Cloudflare DoH DNS Lookup", t3Desc: "Interroge les enregistrements DNS réels.", runDns: "Lancer DNS",
-      t4Title: "Analyse IP & Localisation", t4Desc: "Analyse votre IP ou une cible.", runIp: "Analyser IP",
-      t5Title: "Scanner Système", t5Desc: "Analyse votre système et navigateur.", runSys: "Scanner",
-      t6Title: "Calculateur Subnet IPv4", t6Desc: "Calcul mathématique CIDR exact.", runSubnet: "Calculer"
-    },
-    es: {
-      navHome: "Inicio", navFaq: "FAQ", navStatus: "Estado de Red", navDiag: "Diagnóstico IT", navAbout: "Nosotros",
-      heroTitle: "Diagnóstico IT y Herramientas de Red", heroSub: "Mediciones reales directamente en tu navegador.",
-      t1Title: "Latencia Web Real", t1Desc: "Mide la latencia HTTP exacta a un servidor.", runPing: "Medir Latencia",
-      t2Title: "Test de Velocidad Real", t2Desc: "Mide tu velocidad de descarga real.", runSpeed: "Iniciar Test",
-      t3Title: "Búsqueda DNS Cloudflare DoH", t3Desc: "Consulta registros DNS en vivo.", runDns: "Consultar DNS",
-      t4Title: "Análisis IP y Ubicación", t4Desc: "Analiza tu propia IP o un objetivo.", runIp: "Analizar IP",
-      t5Title: "Escáner del Sistema", t5Desc: "Obtiene información del sistema.", runSys: "Escanear",
-      t6Title: "Calculadora de Subred IPv4", t6Desc: "Cálculo matemático CIDR exacto.", runSubnet: "Calcular"
-    }
-  };
+  // IPv4 MATH & CALCULATOR LOGIC
+  function ipToInt(ip) {
+    return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+  }
 
-  // LANGUAGE SWITCHING LOGIC
-  $("lang").onchange = (e) => {
-    const lang = e.target.value;
-    const dict = i18n[lang] || i18n["en"];
-    for (let key in dict) {
-      if ($(key)) $(key).textContent = dict[key];
-    }
-  };
+  function intToIp(int) {
+    return [(int >>> 24), (int >> 16 & 255), (int >> 8 & 255), (int & 255)].join('.');
+  }
 
-  // 1. ECHTER PING / LATENZ
+  function calculateSubnet() {
+    const input = $("subnetInput").value.trim().split("/");
+    if (input.length !== 2) return alert("Bitte valides Format eingeben: z.B. 192.168.1.0/24");
+    
+    const ipStr = input[0];
+    const cidr = parseInt(input[1], 10);
+
+    if (isNaN(cidr) || cidr < 0 || cidr > 32) return alert("CIDR Prefix muss zwischen 0 und 32 liegen.");
+
+    const maskInt = cidr === 0 ? 0 : (~0 << (32 - cidr)) >>> 0;
+    const wildInt = ~maskInt >>> 0;
+    const ipIntVal = ipToInt(ipStr);
+    
+    const netInt = (ipIntVal & maskInt) >>> 0;
+    const broadInt = (netInt | wildInt) >>> 0;
+
+    let totalHosts = Math.pow(2, 32 - cidr);
+    let usableHosts = totalHosts > 2 ? totalHosts - 2 : totalHosts;
+    
+    let firstIpInt = cidr >= 31 ? netInt : netInt + 1;
+    let lastIpInt = cidr >= 31 ? broadInt : broadInt - 1;
+
+    $("subHostsCount").textContent = usableHosts.toLocaleString();
+    $("netAddr").textContent = intToIp(netInt);
+    $("netMask").textContent = intToIp(maskInt);
+    $("firstIp").textContent = intToIp(firstIpInt);
+    $("lastIp").textContent = intToIp(lastIpInt);
+    $("broadAddr").textContent = intToIp(broadInt);
+    $("wildMask").textContent = intToIp(wildInt);
+  }
+
+  $("runSubnet").onclick = calculateSubnet;
+  calculateSubnet(); // Run on init
+
+  // 1. PING DIAGNOSTIC
   $("runPing").onclick = async () => {
     let url = $("pingUrl").value.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
@@ -365,9 +409,9 @@
     }
   };
 
-  // 2. ECHTER SPEEDTEST (Reliable Cloudflare Asset)
+  // 2. SPEEDTEST DIAGNOSTIC
   $("runSpeed").onclick = async () => {
-    $("speedOut").textContent = "> Speedtest läuft (Lade 5 MB Testdatei)...";
+    $("speedOut").textContent = "> Speedtest läuft (Lade Testdatei)...";
     const testUrl = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?cb=" + Math.random();
     const startTime = performance.now();
     try {
@@ -384,7 +428,7 @@
     }
   };
 
-  // 3. ECHTER CLOUDFLARE DoH DNS LOOKUP
+  // 3. DNS LOOKUP DIAGNOSTIC
   $("runDns").onclick = async () => {
     const domain = $("dnsDomain").value.trim();
     const type = $("dnsType").value;
@@ -404,7 +448,7 @@
     }
   };
 
-  // 4. IP GEOLOCATION
+  // 4. IP GEOLOCATION DIAGNOSTIC
   $("runIp").onclick = async () => {
     const ip = $("ipInput").value.trim();
     $("ipOut").textContent = "> IP Daten werden abgerufen...";
@@ -415,18 +459,9 @@
     } catch(e) { $("ipOut").textContent = "> Fehler bei IP Abfrage."; }
   };
 
-  // 5. SYSTEM SCAN
+  // 5. SYSTEM SCAN DIAGNOSTIC
   $("runSys").onclick = () => {
-    $("sysOut").textContent = `User Agent: ${navigator.userAgent}\nAuflösung: ${screen.width}x${screen.height}\nSprache: ${navigator.language}\nOnline: ${navigator.onLine ? "Ja" : "Nein"}\nProzessorkerne: ${navigator.hardwareConcurrency || "N/A"}`;
-  };
-
-  // 6. SUBNET CALCULATOR
-  $("runSubnet").onclick = () => {
-    const input = $("subnetInput").value.trim().split("/");
-    if(input.length !== 2) return $("subnetOut").textContent = "> Format: 192.168.1.0/24";
-    const cidr = parseInt(input[1], 10);
-    const hosts = Math.pow(2, 32 - cidr);
-    $("subnetOut").textContent = `IP: ${input[0]}\nCIDR: /${cidr}\nMax Hosts: ${hosts > 2 ? hosts - 2 : hosts}`;
+    $("sysOut").textContent = `User Agent: ${navigator.userAgent}\nBildschirm-Auflösung: ${screen.width}x${screen.height}\nSprache: ${navigator.language}\nOnline: ${navigator.onLine ? "Ja" : "Nein"}\nProzessorkerne: ${navigator.hardwareConcurrency || "N/A"}`;
   };
 </script>
 
