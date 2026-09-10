@@ -1,0 +1,1645 @@
+<!-- FASQOO PRODUCTION CHECK: PTR/RFC1918/VLSM/password RNG hardened; dynamic i18n baseline added. -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff" id="themeColor">
+  <meta name="description" content="Fasqoo Network Engineer Toolkit – professionelle Netzwerk-, DNS-, IP-, Diagnose-, Security- und Admin-Werkzeuge.">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://cloudflare-dns.com https://1.1.1.1 https://ipwho.is https://rdap.org; font-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+  <title id="pageTitle">Fasqoo Network Engineer Toolkit – 50+ Netzwerk-Tools</title>
+
+  <link rel="canonical" href="https://www.fasqoo.com/subnet-calculator.html">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+<style>
+:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--soft:#f1f5f9;--orange:#ff5a1f;--orange2:#ff8b5c;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--shadow:0 10px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:400;}
+button,select,input,textarea{font:inherit;}
+button{cursor:pointer;}
+.wrap{width:min(1280px,calc(100% - 32px));margin:auto;}
+
+header{
+  height:72px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(12px);
+}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.brandname{font-size:28px;font-weight:900;letter-spacing:-1.5px;}
+.brandname span{color:var(--orange);}
+
+.main-menu{display:flex;align-items:center;gap:24px;margin-left:auto;}
+.main-menu a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;transition:.2s ease;}
+.main-menu a:hover,.main-menu a.active{color:var(--orange);}
+.menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
+.menu-extra select{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);padding:0 11px;font-weight:700;cursor:pointer;outline:none;}
+.theme-btn{height:38px;width:40px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:18px;cursor:pointer;display:grid;place-items:center;padding:0;transition:.2s ease;}
+.theme-btn:hover{background:var(--soft);}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:20px;color:var(--text);}
+
+main{padding:40px 0 80px;}
+.hero{text-align:center;margin-bottom:30px;}
+.hero h1{font-size:36px;line-height:1.2;font-weight:600;letter-spacing:-1px;margin:0 0 10px;}
+.hero p{margin:0;color:var(--muted);font-size:15px;}
+
+/* TOOLBAR & ACTIONS */
+.tool-actions{display:flex;gap:12px;margin-bottom:25px;flex-wrap:wrap;justify-content:center;}
+.action-btn{background:var(--soft);color:var(--text);border:1px solid var(--line);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:.2s;}
+.action-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* CATEGORY TABS */
+.toolkit-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:25px;scrollbar-width:thin;}
+.tab-btn{background:var(--card);border:1px solid var(--line);color:var(--text);padding:10px 18px;border-radius:30px;font-size:13px;font-weight:500;white-space:nowrap;transition:.2s;}
+.tab-btn:hover,.tab-btn.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* TOOL GRID SYSTEM */
+.toolkit-section{display:none;}
+.toolkit-section.active{display:block;}
+
+.it-tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.it-tool-box{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;transition:.2s;}
+.it-tool-box:hover{border-color:var(--orange);}
+.it-tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.it-tool-icon{width:38px;height:38px;border-radius:8px;background:var(--soft);color:var(--orange);display:grid;place-items:center;font-size:18px;font-weight:bold;}
+.it-tool-header h3{font-size:16px;font-weight:600;margin:0;}
+.it-tool-box p{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 16px;}
+.it-input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.it-input-group input,.it-input-group select,.it-input-group textarea{flex:1;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 12px;border-radius:8px;font-size:12px;outline:none;}
+.it-input-group textarea{min-height:60px;resize:vertical;}
+.it-input-group input:focus,.it-input-group select:focus,.it-input-group textarea:focus{border-color:var(--orange);background:var(--card);}
+.it-btn{background:var(--text);color:var(--card);border:0;border-radius:8px;padding:10px 16px;font-size:12px;font-weight:500;transition:.2s;}
+.it-btn:hover{background:var(--orange);}
+
+.console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:160px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;white-space:pre-wrap;}
+
+.history{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;margin-top:40px;box-shadow:var(--shadow);}
+.hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.hhead h2{margin:0;font-size:16px;font-weight:600;}
+.table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;text-align:left;min-width:500px;}
+th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;}
+th{font-weight:500;color:var(--muted);background:var(--soft);}
+.empty{text-align:center;color:var(--muted);padding:30px;white-space:normal;}
+
+footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px;}
+.foot{display:flex;justify-content:space-between;align-items:center;}
+
+.dark{--bg:#030712;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;--line:#1e293b;--soft:#111827;}
+.dark header,.dark footer{background:#0f172a;}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea{background:#111827;color:var(--text);border-color:var(--line);}
+.dark th{background:#111827;}
+
+@media(max-width:900px){.it-tools-grid{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:72px;
+    left:0;
+    right:0;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    padding:20px;
+    gap:16px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+  }
+  .main-menu.active{display:flex;}
+  .main-menu a{font-size:16px;width:100%;padding:6px 0;}
+  .menu-extra{width:100%;margin-left:0;justify-content:flex-start;}
+  .menu-extra select{flex:1;min-width:0;}
+  .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
+}
+@media print {
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .history { border: none; box-shadow: none; }
+}
+
+.live-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:var(--green);padding:7px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+.accuracy-note{margin:16px auto 0;max-width:760px;color:var(--muted);font-size:12px}
+.it-tool-box{min-height:285px}
+
+/* MOBILE / TABLET OPTIMIZATION
+{.it-tools-grid{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
+  .main-menu.active{display:flex;}
+  .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
+}
+@media print {
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .history { border: none; box-shadow: none; }
+}
+
+.live-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:var(--green);padding:7px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+.accuracy-note{margin:16px auto 0;max-width:760px;color:var(--muted);font-size:12px}
+.it-tool-box{min-height:285px}
+
+/* MOBILE / TABLET OPTIMIZATION */
+@media (max-width: 760px){
+  .wrap{width:min(100% - 20px,1280px)}
+  header{height:64px}
+  .nav{gap:10px}
+  .brand{gap:8px}
+  .brandmark{width:36px;height:36px;font-size:19px;border-radius:9px}
+  .brandname{font-size:19px}
+  .menu-toggle{display:block;margin-left:auto}
+  .main-menu{
+    display:none;
+    position:absolute;
+    top:64px;
+    left:10px;
+    right:10px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--card);
+    box-shadow:0 15px 35px rgba(0,0,0,.14);
+    flex-direction:column;
+    align-items:stretch;
+    gap:8px;
+    z-index:1100;
+  }
+  .main-menu.active{display:flex}
+  .main-menu>a{
+    padding:11px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  .main-menu>a:hover{background:var(--soft)}
+  .menu-extra{
+    margin:4px 0 0;
+    padding-top:10px;
+    border-top:1px solid var(--line);
+    width:100%;
+  }
+  .menu-extra select{flex:1;min-height:40px}
+  .theme-btn{width:40px;height:40px}
+  main{padding:25px 0 50px}
+  .hero{margin-bottom:22px}
+  .hero h1{font-size:25px;line-height:1.18;letter-spacing:-.5px}
+  .hero p{font-size:13px;line-height:1.5}
+  .accuracy-note{font-size:11px;line-height:1.5}
+  .tool-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:18px
+  }
+  .action-btn{
+    justify-content:center;
+    min-height:42px;
+    padding:9px 8px;
+    font-size:11px
+  }
+  .toolkit-tabs{
+    gap:7px;
+    margin-bottom:18px;
+    padding-bottom:8px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .toolkit-tabs::-webkit-scrollbar{display:none}
+  .tab-btn{
+    padding:9px 13px;
+    font-size:12px;
+    flex:0 0 auto;
+  }
+  .it-tools-grid{grid-template-columns:1fr;gap:13px}
+  .it-tool-box{
+    padding:17px;
+    border-radius:12px;
+    min-height:0;
+  }
+  .it-tool-header{gap:9px;margin-bottom:9px}
+  .it-tool-icon{width:35px;height:35px;font-size:16px}
+  .it-tool-header h3{font-size:14px;line-height:1.3}
+  .it-tool-box p{font-size:11px;line-height:1.5;margin-bottom:12px}
+  .it-input-group{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .it-input-group input,
+  .it-input-group select,
+  .it-input-group textarea,
+  .it-btn{
+    width:100%;
+    min-height:42px;
+    font-size:13px;
+  }
+  .it-input-group textarea{min-height:100px}
+  #vlsmHosts{min-height:100px;}
+  .it-btn{padding:10px 14px}
+  .console-output{
+    min-height:100px;
+    max-height:280px;
+    padding:12px;
+    font-size:11px;
+    line-height:1.5;
+    overflow:auto;
+    word-break:break-word;
+  }
+  .history{margin-top:25px;border-radius:12px}
+  .hhead{padding:15px}
+  .hhead h2{font-size:14px}
+  th,td{padding:11px 12px;font-size:11px}
+  table{min-width:560px}
+  footer{padding:22px 0}
+  .foot{gap:10px}
+}
+@media (max-width:420px){
+  .wrap{width:calc(100% - 14px)}
+  .brandname{font-size:18px}
+  .hero h1{font-size:22px}
+  .tool-actions{grid-template-columns:1fr}
+  .action-btn{min-height:40px}
+  .it-tool-box{padding:14px}
+  .tab-btn{padding:8px 11px}
+}
+@media (min-width:761px) and (max-width:1050px){
+  .wrap{width:min(100% - 24px,1280px)}
+  .main-menu{gap:12px}
+  .main-menu a{font-size:12px}
+  .it-tools-grid{grid-template-columns:1fr}
+}
+
+</style>
+
+<style id="fasqoo-modern-layer">
+:root{
+  --fq-bg:#f5f7fb; --fq-panel:rgba(255,255,255,.82); --fq-panel-solid:#fff;
+  --fq-text:#101828; --fq-muted:#667085; --fq-line:rgba(16,24,40,.09);
+  --fq-accent:#2563eb; --fq-accent2:#06b6d4; --fq-shadow:0 20px 60px rgba(16,24,40,.10);
+  --fq-radius:22px;
+}
+body{background:
+ radial-gradient(circle at 8% 0%,rgba(37,99,235,.10),transparent 28rem),
+ radial-gradient(circle at 92% 8%,rgba(6,182,212,.09),transparent 30rem),
+ var(--fq-bg); color:var(--fq-text); transition:background .3s,color .3s}
+header,.hero,.card,.tool-card,.panel,.result-card,.activity-log,.tabs,.section-card{
+ border-color:var(--fq-line)!important;
+}
+header{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(255,255,255,.72)!important;position:sticky;top:0;z-index:100}
+.hero{border-radius:28px!important;box-shadow:var(--fq-shadow);overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;inset:auto -15% -60% 45%;height:280px;background:radial-gradient(circle,rgba(37,99,235,.15),transparent 65%);pointer-events:none}
+.card,.tool-card,.panel,.result-card,.activity-log,.section-card{background:var(--fq-panel)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:var(--fq-radius)!important;box-shadow:0 10px 35px rgba(16,24,40,.055);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.card:hover,.tool-card:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(16,24,40,.10)}
+button,.btn{border-radius:13px!important;transition:transform .16s,box-shadow .16s,opacity .16s}
+button:hover,.btn:hover{transform:translateY(-1px)}
+input,select,textarea{border-radius:13px!important;border:1px solid var(--fq-line)!important;background:rgba(255,255,255,.72)!important;outline:none;transition:border .18s,box-shadow .18s}
+input:focus,select:focus,textarea:focus{border-color:rgba(37,99,235,.55)!important;box-shadow:0 0 0 4px rgba(37,99,235,.10)!important}
+.tabs{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:7px;border-radius:16px!important;background:rgba(255,255,255,.58)!important}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{white-space:nowrap}
+.fq-command{display:flex;align-items:center;gap:10px;margin:16px 0;padding:12px 14px;border:1px solid var(--fq-line);border-radius:16px;background:rgba(255,255,255,.68);box-shadow:0 8px 25px rgba(16,24,40,.05)}
+.fq-command kbd{padding:5px 8px;border:1px solid var(--fq-line);border-radius:8px;background:#fff;color:var(--fq-muted);font-size:12px}
+.fq-command input{flex:1;border:0!important;box-shadow:none!important;background:transparent!important}
+.fq-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--fq-accent);margin-bottom:8px}
+.fq-statusbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fq-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--fq-line);border-radius:999px;background:rgba(255,255,255,.7);font-size:12px;color:var(--fq-muted)}
+.fq-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.12)}
+.fq-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px}
+.fq-metric{padding:14px;border:1px solid var(--fq-line);border-radius:16px;background:rgba(255,255,255,.62)}
+.fq-metric small{display:block;color:var(--fq-muted);font-size:11px;margin-bottom:6px}
+.fq-metric strong{font-size:15px;word-break:break-word}
+.fq-copy{cursor:pointer}
+.fq-copy.copied{box-shadow:0 0 0 3px rgba(34,197,94,.12)}
+body.dark-mode{--fq-bg:#070b13;--fq-panel:rgba(15,23,42,.76);--fq-panel-solid:#0f172a;--fq-text:#e5edf8;--fq-muted:#94a3b8;--fq-line:rgba(226,232,240,.10);--fq-shadow:0 24px 70px rgba(0,0,0,.30)}
+body.dark-mode header,.dark-mode .tabs,.dark-mode .fq-command{background:rgba(15,23,42,.72)!important}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea{background:rgba(15,23,42,.76)!important;color:var(--fq-text)!important}
+body.dark-mode .fq-chip,body.dark-mode .fq-metric{background:rgba(15,23,42,.62)}
+body.dark-mode .fq-command kbd{background:#0f172a}
+@media(max-width:700px){
+ .hero{border-radius:20px!important}
+ .fq-command{margin:12px 0}
+ .fq-command kbd{display:none}
+ .fq-statusbar{gap:6px}
+ .fq-chip{font-size:11px}
+}
+</style>
+
+<!-- id="fasqoo-production-security" -->
+<!-- Fasqoo production security baseline.
+     Prefer equivalent HTTP response headers at the web server/CDN level. -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<style id="fasqoo-netkitbox-style">
+.fq-directory{margin:18px 0 34px;background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.fq-dir-inner{padding:30px}
+.fq-dir-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.fq-dir-badges span{font-size:11px;font-weight:800;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--soft)}
+.fq-dir-hero{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px}
+.fq-kicker{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--orange);margin-bottom:7px}
+.fq-dir-hero h2{margin:0;font-size:clamp(28px,4vw,46px);line-height:1.03;letter-spacing:-1.8px}
+.fq-dir-hero p{margin:12px 0 0;color:var(--muted);max-width:720px;line-height:1.55}
+.fq-dir-count{min-width:110px;text-align:center;border-left:1px solid var(--line);padding-left:22px}
+.fq-dir-count strong{display:block;font-size:34px;line-height:1}
+.fq-dir-count span{font-size:12px;color:var(--muted)}
+.fq-search-wrap{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:5px 12px;margin:20px 0}
+.fq-search-icon{font-size:23px;color:var(--muted)}
+.fq-search-wrap input{border:0;background:transparent;outline:0;width:100%;padding:12px 4px;color:var(--text);font-size:15px}
+.fq-search-wrap kbd{font-size:11px;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:6px;padding:4px 7px;white-space:nowrap}
+.fq-section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 10px}
+.fq-section-title span{font-size:18px;font-weight:900}
+.fq-section-title small{font-size:11px;color:var(--muted);font-weight:700}
+.fq-chip-row{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
+.fq-chip-row button,.fq-cat{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px 12px;font-weight:750;font-size:12px;white-space:nowrap}
+.fq-chip-row button:hover,.fq-cat:hover{border-color:var(--orange);color:var(--orange)}
+.fq-directory-heading{margin-top:30px}
+.fq-categories{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.fq-cat.active{background:var(--text);color:var(--card);border-color:var(--text)}
+.fq-tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fq-tool-card{display:grid;grid-template-columns:38px 1fr 28px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:13px;background:var(--card);transition:.18s ease}
+.fq-tool-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,23,42,.07);border-color:rgba(255,90,31,.45)}
+.fq-tool-icon{width:38px;height:38px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-weight:900;color:var(--orange)}
+.fq-tool-card strong{font-size:13px}
+.fq-tool-card p{font-size:11px;line-height:1.4;color:var(--muted);margin:4px 0}
+.fq-tool-card span{font-size:10px;color:var(--orange);font-weight:800}
+.fq-tool-card>button{border:0;background:transparent;color:var(--muted);font-size:20px}
+.fq-no-results{text-align:center;padding:30px;color:var(--muted);font-weight:700}
+@media(max-width:900px){.fq-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fq-dir-hero{align-items:start}.fq-dir-count{display:none}}
+@media(max-width:620px){.fq-dir-inner{padding:20px}.fq-tool-grid{grid-template-columns:1fr}.fq-search-wrap kbd{display:none}.fq-dir-hero h2{font-size:31px}}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand" aria-label="Fasqoo Startseite">
+      <div class="brandname">fasq<span>oo</span></div>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" type="button">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" id="navHome" data-i18n="home">Startseite</a>
+      <a href="faq.html" id="navFaq" data-i18n="faq">FAQ</a>
+      <a href="network-status.html" id="navStatus" class="active" data-i18n="diagnose">IT-Diagnose</a>
+      <a href="about.html" id="navAbout" data-i18n="about">Über uns</a>
+      <div class="menu-extra">
+        <select id="langSelect" aria-label="Language">
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+          <option value="tr">Türkçe</option>
+          <option value="sq">Shqip</option>
+          <option value="ar">العربية</option>
+          <option value="zh">中文</option>
+        </select>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme" title="Dark / Light">☾</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- FASQOO TOOL DIRECTORY / NETKITBOX-STYLE DISCOVERY LAYER -->
+<section class="fq-directory" id="toolDirectory">
+  <div class="fq-dir-inner">
+    <div class="fq-dir-badges">
+      <span>100% kostenlos</span><span>Keine Registrierung</span><span>Keine Limits</span>
+    </div>
+    <div class="fq-dir-hero">
+      <div>
+        <div class="fq-kicker">FASQOO NETWORK ENGINEER TOOLKIT</div>
+        <h2>Alle Netzwerk-Tools. An einem Ort.</h2>
+        <p>Subnetting, DNS, IP, Diagnose, Security, MikroTik, Fiber, WiFi und mehr – schnell, professionell und transparent.</p>
+      </div>
+      <div class="fq-dir-count"><strong id="fqToolCount">50+</strong><span>Werkzeuge</span></div>
+    </div>
+
+    <div class="fq-search-wrap">
+      <span class="fq-search-icon">⌕</span>
+      <input id="fqToolSearch" type="search" autocomplete="off"
+             placeholder="Netzwerk-Tools durchsuchen …"
+             aria-label="Netzwerk-Tools durchsuchen">
+      <kbd>Ctrl K</kbd>
+    </div>
+
+    <div class="fq-popular">
+      <div class="fq-section-title"><span>Beliebte Tools</span><small>Schnellzugriff</small></div>
+      <div class="fq-chip-row">
+        <button data-fq-target="#sec-subnet">Subnet Calculator</button>
+        <button data-fq-target="#sec-dns">DNS Lookup</button>
+        <button data-fq-target="#sec-security">What's My IP</button>
+        <button data-fq-target="#sec-network">Network Diagnostics</button>
+        <button data-fq-target="#sec-admin">Admin Utilities</button>
+        <button data-fq-target="#sec-admin">MAC / OUI</button>
+      </div>
+    </div>
+
+    <div class="fq-section-title fq-directory-heading">
+      <span>Toolbox</span><small id="fqResultCount">Alle Werkzeuge</small>
+    </div>
+
+    <div class="fq-categories" id="fqCategories">
+      <button class="fq-cat active" data-cat="all">Alle</button>
+      <button class="fq-cat" data-cat="ip">IP &amp; Subnet</button>
+      <button class="fq-cat" data-cat="dns">DNS &amp; Domain</button>
+      <button class="fq-cat" data-cat="diagnostics">Diagnostics</button>
+      <button class="fq-cat" data-cat="security">Security</button>
+      <button class="fq-cat" data-cat="admin">Admin &amp; Utils</button>
+      <button class="fq-cat" data-cat="web">Web &amp; HTTP</button>
+      <button class="fq-cat" data-cat="wireless">WiFi &amp; Wireless</button>
+    </div>
+
+    <div class="fq-tool-grid" id="fqToolGrid">
+      <article class="fq-tool-card" data-cat="ip" data-name="subnet calculator ipv4 cidr vlsm">
+        <div class="fq-tool-icon">⌘</div><div><strong>IPv4 Subnet Calculator</strong><p>Network, Broadcast, Mask, Wildcard, Hosts &amp; Range.</p><span>IP &amp; Subnet</span></div>
+        <button data-fq-target="#sec-subnet" aria-label="Subnet Calculator öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="ip" data-name="vlsm subnet planning">
+        <div class="fq-tool-icon">◫</div><div><strong>VLSM Planner</strong><p>Subnetze nach Host-Anforderungen planen und prüfen.</p><span>IP &amp; Subnet</span></div>
+        <button data-fq-target="#sec-subnet" aria-label="VLSM Planner öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="dns" data-name="dns lookup records doh ptr reverse dns">
+        <div class="fq-tool-icon">⌁</div><div><strong>DNS Lookup</strong><p>A, AAAA, MX, TXT, NS, CNAME und PTR mit echten Resolver-Daten.</p><span>DNS &amp; Domain</span></div>
+        <button data-fq-target="#sec-dns" aria-label="DNS Lookup öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="diagnostics ip" data-name="what is my ip public ip asn isp geolocation">
+        <div class="fq-tool-icon">◎</div><div><strong>What's My IP</strong><p>Öffentliche IP, ASN, Provider und API-basierte Netzwerkdaten.</p><span>Diagnostics</span></div>
+        <button data-fq-target="#sec-security" aria-label="IP Tool öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="diagnostics" data-name="network diagnostics ping traceroute mtur">
+        <div class="fq-tool-icon">↯</div><div><strong>Network Diagnostics</strong><p>Browser-Grenzen transparent prüfen: HTTP, Trace, Port und MTU.</p><span>Diagnostics</span></div>
+        <button data-fq-target="#sec-network" aria-label="Network Diagnostics öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="web" data-name="http headers redirect tls https web checker">
+        <div class="fq-tool-icon">↗</div><div><strong>HTTP / Web Inspector</strong><p>Status, Header und Redirects dort prüfen, wo der Browser Zugriff hat.</p><span>Web &amp; HTTP</span></div>
+        <button data-fq-target="#sec-web" aria-label="Web Inspector öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="security" data-name="security password jwt base64 json crypto">
+        <div class="fq-tool-icon">◆</div><div><strong>Security &amp; Crypto</strong><p>Passwort, JWT, Base64, JSON und weitere lokale Utilities.</p><span>Security</span></div>
+        <button data-fq-target="#sec-admin" aria-label="Security Utilities öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="admin" data-name="mac oui uuid timestamp admin utilities">
+        <div class="fq-tool-icon">⚙</div><div><strong>Admin Utilities</strong><p>MAC-Analyse, UUID, Timestamp, Text/JSON und Admin-Helfer.</p><span>Admin &amp; Utils</span></div>
+        <button data-fq-target="#sec-admin" aria-label="Admin Utilities öffnen">→</button>
+      </article>
+      <article class="fq-tool-card" data-cat="wireless" data-name="wifi wireless network">
+        <div class="fq-tool-icon">⌁</div><div><strong>WiFi &amp; Wireless</strong><p>Erweiterbare Kategorie für RF-, WiFi- und Link-Budget-Werkzeuge.</p><span>WiFi &amp; Wireless</span></div>
+        <button data-fq-target="#sec-network" aria-label="WiFi Tools öffnen">→</button>
+      </article>
+    </div>
+
+    <div class="fq-no-results" id="fqNoResults" hidden>Keine passenden Werkzeuge gefunden.</div>
+  </div>
+</section>
+
+  <div class="wrap">
+
+    <section class="hero">
+      <h1>Network Engineer Toolkit & Diagnose Suite</h1>
+      <p>Professionelle Netzwerk- und Admin-Werkzeuge – mit echten Berechnungen und transparenten Browser-Grenzen.</p>
+      <div class="accuracy-note" id="accuracyNote">Berechnete Netzwerkdaten werden lokal ermittelt. Externe Informationen stammen nur aus den abgefragten APIs/Resolvern; nicht mögliche Browser-Messungen werden ausdrücklich als nicht verfügbar gekennzeichnet.</div>
+    </section>
+
+    <!-- Global Actions -->
+    <div class="tool-actions">
+      <button class="action-btn" id="copyResultsBtn">📋 Ergebnis kopieren</button>
+      <button class="action-btn" id="shareResultsBtn">📤 Ergebnis teilen</button>
+      <button class="action-btn" id="jsonExportBtn">💻 JSON exportieren</button>
+      <button class="action-btn" id="printReportBtn">🖨️ Bericht drucken</button>
+    </div>
+
+    <!-- Category Tabs Navigation -->
+    <div class="toolkit-tabs" id="toolkitTabs">
+      <button class="tab-btn active" data-target="sec-subnet">📐 IP & Subnetting</button>
+      <button class="tab-btn" data-target="sec-dns">🌐 DNS & Records</button>
+      <button class="tab-btn" data-target="sec-network">⚡ Network & Ping</button>
+      <button class="tab-btn" data-target="sec-web">🔒 Web & Server</button>
+      <button class="tab-btn" data-target="sec-security">🛡️ IP / Security</button>
+      <button class="tab-btn" data-target="sec-admin">🛠️ Admin Tools</button>
+    </div>
+
+    <!-- 1. IP & SUBNETTING -->
+    <div class="toolkit-section active" id="sec-subnet">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv4 / CIDR Calculator</h3></div>
+            <p>Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.</p>
+            <div class="it-input-group">
+              <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="IP/CIDR (z.B. 10.0.0.0/16)">
+              <button class="it-btn" id="calcSubnetBtn">Berechnen</button>
+            </div>
+          </div>
+          <div class="console-output" id="subnetOutput">> Bereit für Subnet-Berechnung...</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv6 Prefix & VLSM Calculator</h3></div>
+            <p>Berechne IPv6-Prefix-Informationen und plane echte IPv4-VLSM-Subnetze anhand konkreter Host-Anforderungen.</p>
+            <div class="it-input-group">
+              <input type="text" id="vlsmInput" value="192.168.0.0/22" placeholder="Netzwerk, z. B. 192.168.0.0/22">
+              <textarea id="vlsmHosts" placeholder="Host-Anforderungen, z. B.&#10;100&#10;50&#10;20&#10;10"></textarea>
+              <button class="it-btn" id="calcVlsmBtn">VLSM Analyse</button>
+            </div>
+          </div>
+          <div class="console-output" id="vlsmOutput">> Warten auf Eingabe...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DNS -->
+    <div class="toolkit-section" id="sec-dns">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🌐</div><h3>DNS Lookup (A, AAAA, MX, TXT, NS, SOA)</h3></div>
+            <p>Frage sämtliche DNS-Einträge und Reverse-DNS (PTR) über sichere DoH Resolver ab.</p>
+            <div class="it-input-group">
+              <input type="text" id="dnsDomainInput" value="google.com" placeholder="domain.com">
+              <select id="dnsTypeSelect">
+                <option value="ALL">Alle Records</option>
+                <option value="A">A (IPv4)</option>
+                <option value="AAAA">AAAA (IPv6)</option>
+                <option value="MX">MX (Mail)</option>
+                <option value="TXT">TXT</option>
+                <option value="NS">NS</option>
+                <option value="PTR">PTR / Reverse</option>
+              </select>
+              <button class="it-btn" id="runDnsTool">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="dnsToolOutput">> DNS-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>DNS Propagation & DNSSEC Check</h3></div>
+            <p>Überprüfe weltweite DNS-Ausbreitung und Sicherheitsstatus (DNSSEC).</p>
+            <div class="it-input-group">
+              <input type="text" id="propInput" value="cloudflare.com" placeholder="domain.com">
+              <button class="it-btn" id="runPropBtn">Prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="propOutput">> Bereit für Propagation-Check...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. NETWORK -->
+    <div class="toolkit-section" id="sec-network">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">⚡</div><h3>Network Reachability & Diagnostics</h3></div>
+            <p>HTTP-Erreichbarkeit messen und klar erkennen, welche Netzwerkdiagnosen ein Browser nicht direkt durchführen kann.</p>
+            <div class="it-input-group">
+              <input type="text" id="netTarget" value="8.8.8.8" placeholder="IP oder Hostname">
+              <select id="netTestType">
+                <option value="ping">HTTP Reachability / Latency</option>
+                <option value="traceroute">Traceroute / MTR (Backend)</option>
+                <option value="port">TCP Port Connect (Backend)</option>
+                <option value="mtu">MTU & Packet Loss (Backend)</option>
+              </select>
+              <button class="it-btn" id="runNetTest">Test starten</button>
+            </div>
+          </div>
+          <div class="console-output" id="netOutput">> Netzwerk-Diagnose bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔌</div><h3>TCP / UDP Port Checker</h3></div>
+            <p>Zeigt transparent, dass echte TCP/UDP-Porttests aus einer normalen Webseite nicht zuverlässig möglich sind.</p>
+            <div class="it-input-group">
+              <input type="text" id="portTarget" value="example.com:443" placeholder="domain.com:port">
+              <button class="it-btn" id="runPortCheck">Port prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="portOutput">> Port-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WEB / SERVER -->
+    <div class="toolkit-section" id="sec-web">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔒</div><h3>HTTPS Reachability & TLS Analyzer</h3></div>
+            <p>Prüfe HTTPS-Erreichbarkeit und HTTP-Status. Für Zertifikat, Cipher und TLS-Version ist ein Server-Backend erforderlich.</p>
+            <div class="it-input-group">
+              <input type="text" id="webTarget" value="https://cloudflare.com" placeholder="https://domain.com">
+              <button class="it-btn" id="runWebCheck">Analysieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="webOutput">> Web-Inspektor bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📋</div><h3>HTTP Header Inspector & Redirect Checker</h3></div>
+            <p>Untersuche HTTP Status, Response Header und Weiterleitungsketten.</p>
+            <div class="it-input-group">
+              <input type="text" id="headerInput" value="https://google.com" placeholder="https://url.com">
+              <button class="it-btn" id="runHeaderCheck">Inspizieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="headerOutput">> Header-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. IP / SECURITY -->
+    <div class="toolkit-section" id="sec-security">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛡️</div><h3>Public IP, ASN, ISP & Proxy/VPN Detection</h3></div>
+            <p>Zeigt echte IP-, Standort-, ISP-, ASN- und – sofern von der API geliefert – Proxy/VPN-Daten.</p>
+            <div class="it-input-group">
+              <input type="text" id="secIpInput" value="1.1.1.1" placeholder="IP-Adresse abfragen">
+              <button class="it-btn" id="runSecIpBtn">Abfragen</button>
+            </div>
+          </div>
+          <div class="console-output" id="secIpOutput">> Sicherheits-Tool bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>Reverse IP & Abuse Contact Lookup</h3></div>
+            <p>Finde gehostete Domains auf einer IP und Abuse-Kontakte.</p>
+            <div class="it-input-group">
+              <input type="text" id="abuseInput" value="8.8.8.8" placeholder="IP eingeben">
+              <button class="it-btn" id="runAbuseBtn">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="abuseOutput">> Abuse-Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ADMIN TOOLS -->
+    <div class="toolkit-section" id="sec-admin">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛠️</div><h3>Admin Utilities (MAC, Password, JWT, Base64, JSON)</h3></div>
+            <p>Generiere Passwörter, UUIDs, konvertiere Timestamps oder decodiere JWT/Base64.</p>
+            <div class="it-input-group">
+              <textarea id="adminInput" placeholder="Text oder JSON eingeben..."></textarea>
+              <select id="adminAction">
+                <option value="base64enc">Base64 Encode</option>
+                <option value="base64dec">Base64 Decode</option>
+                <option value="urlenc">URL Encode</option>
+                <option value="jwtdec">JWT Decoder</option>
+                <option value="pwdgen">Passwort Generator</option>
+                <option value="uuidgen">UUID Generator</option>
+                <option value="jsonfmt">JSON Formatter</option>
+                <option value="timestamp">Timestamp Converter</option>
+              </select>
+              <button class="it-btn" id="runAdminTool">Ausführen</button>
+            </div>
+          </div>
+          <div class="console-output" id="adminOutput">> Admin-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📌</div><h3>MAC Address & QR Code Generator</h3></div>
+            <p>Ermittle MAC Vendor Infos oder generiere QR-Codes.</p>
+            <div class="it-input-group">
+              <input type="text" id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="MAC-Adresse oder QR Text">
+              <button class="it-btn" id="runMacBtn">Verarbeiten</button>
+            </div>
+          </div>
+          <div class="console-output" id="macOutput">> MAC / QR Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <section class="history">
+      <div class="hhead">
+        <h2>Toolkit Aktivitätsprotokoll</h2>
+        <button class="action-btn" id="clearLog">Log löschen</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Zeitstempel</th>
+              <th>Kategorie / Werkzeug</th>
+              <th>Ziel / Eingabe</th>
+              <th>Ergebnis / Status</th>
+            </tr>
+          </thead>
+          <tbody id="itLogTable">
+            <tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+<div class="wrap foot">
+  <div>© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+  <div style="display:flex; gap:15px;">
+    <a href="/privacy.html" style="color:inherit; text-decoration:none;">Datenschutz</a>
+    <a href="/terms.html" style="color:inherit; text-decoration:none;">Nutzungsbedingungen</a>
+  </div>
+</div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// TAB SWITCHING LOGIK
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toolkit-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    $(btn.getAttribute('data-target')).classList.add('active');
+  });
+});
+
+// LOG SYSTEM
+let logData = [];
+function addLog(tool, target, result){
+  const time = new Date().toLocaleTimeString();
+  logData.unshift({ time, tool, target, result });
+  renderLog();
+}
+
+function renderLog(){
+  const logTable = $("itLogTable");
+  if(!logData.length){
+    logTable.innerHTML = `<tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>`;
+    return;
+  }
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  logTable.innerHTML = logData.map(l => `
+    <tr><td>${esc(l.time)}</td><td><b>${esc(l.tool)}</b></td><td>${esc(l.target)}</td><td><span style="color:var(--green)">●</span> ${esc(l.result)}</td></tr>
+  `).join("");
+}
+
+// REAL TOOL IMPLEMENTATIONS — no simulated measurements
+function show(id, text){ $(id).textContent = text; }
+
+function ipv4ToInt(ip){
+  const p=ip.trim().split(".");
+  if(p.length!==4 || p.some(x=>!/^\d+$/.test(x)||+x<0||+x>255)) throw new Error("Ungültige IPv4-Adresse.");
+  return (((+p[0]<<24)>>>0)+(+p[1]<<16)+(+p[2]<<8)+(+p[3]))>>>0;
+}
+function intToIPv4(n){return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join(".");}
+function maskFromPrefix(p){return p===0?0:(0xFFFFFFFF<<(32-p))>>>0;}
+function binaryIPv4(ip){return ip.split(".").map(x=>(+x).toString(2).padStart(8,"0")).join(".");}
+function ipClass(ip){const a=+ip.split(".")[0];return a<=127?"A":a<=191?"B":a<=223?"C":a<=239?"D (Multicast)":"E (reserviert)";}
+function classifyIPv4(ip){
+  const o = ip.split(".").map(Number);
+  if(o.length!==4 || o.some(x=>!Number.isInteger(x)||x<0||x>255)) return "Ungültig";
+  const n = ((o[0]<<24)>>>0) + (o[1]<<16) + (o[2]<<8) + o[3];
+  if(o[0]===10 || (o[0]===172 && o[1]>=16 && o[1]<=31) || (o[0]===192 && o[1]===168)) return "Private (RFC1918)";
+  if(o[0]===127) return "Loopback";
+  if(o[0]===169 && o[1]===254) return "Link-Local (RFC3927)";
+  if((o[0]===100 && o[1]>=64 && o[1]<=127)) return "CGNAT (RFC6598)";
+  if(o[0]>=224 && o[0]<=239) return "Multicast";
+  if(o[0]===255 && o[1]===255 && o[2]===255 && o[3]===255) return "Limited Broadcast";
+  if(o[0]===0) return "This Network / Special";
+  return "Public / Global";
+};
+
+function prefixForHosts(hosts){
+  if(!Number.isInteger(hosts) || hosts < 1) throw new Error("Host-Anforderung muss mindestens 1 sein.");
+  for(let prefix=31; prefix>=0; prefix--){
+    const total=2**(32-prefix);
+    const usable=prefix>=31?total:Math.max(0,total-2);
+    if(usable>=hosts) return prefix;
+  }
+  throw new Error("Host-Anforderung ist zu groß für IPv4.");
+}
+
+function ipv6Info(raw){
+  const m=raw.trim().match(/^([0-9a-fA-F:]+)\/(\d{1,3})$/);
+  if(!m) throw new Error("IPv6-Format: Adresse/Prefix, z. B. 2001:db8::1/64");
+  const addr=m[1].toLowerCase(),prefix=Number(m[2]);
+  if(prefix<0||prefix>128) throw new Error("IPv6-Prefix muss zwischen /0 und /128 liegen.");
+  const parts=addr.split("::");
+  if(parts.length>2) throw new Error("Ungültige IPv6-Adresse.");
+  const left=parts[0]?parts[0].split(":"):[];
+  const right=parts.length===2&&parts[1]?parts[1].split(":"):[];
+  if(left.some(x=>!/^[0-9a-f]{1,4}$/.test(x))||right.some(x=>!/^[0-9a-f]{1,4}$/.test(x))) throw new Error("Ungültige IPv6-Hexadezimalgruppen.");
+  if(parts.length===1&&left.length!==8) throw new Error("IPv6-Adresse muss 8 Gruppen enthalten oder :: verwenden.");
+  if(parts.length===2&&left.length+right.length>=8) throw new Error(":: muss mindestens eine Gruppe ersetzen.");
+  const groups=parts.length===2?[...left,...Array(8-left.length-right.length).fill("0"),...right]:left;
+  if(groups.length!==8) throw new Error("Ungültige IPv6-Adresse.");
+  const bits=groups.map(g=>parseInt(g,16).toString(2).padStart(16,"0")).join("");
+  const networkBits=bits.slice(0,prefix)+"0".repeat(128-prefix);
+  const ng=[];
+  for(let i=0;i<8;i++) ng.push(parseInt(networkBits.slice(i*16,i*16+16),2).toString(16));
+  let network=ng.join(":");
+  const runs=network.match(/(^|:)0(?::0)+(?=:|$)/g);
+  if(runs){ let best=""; for(const run of runs) if(run.length>best.length) best=run; network=network.replace(best,"::"); }
+  return {input:raw.trim(),prefix,expanded:groups.map(g=>g.padStart(4,"0")).join(":"),network,hostBits:128-prefix,addresses:prefix===128?"1":`2^${128-prefix}`};
+}
+
+$("calcVlsmBtn").onclick=()=>{
+  try{
+    const raw=$("vlsmInput").value.trim();
+    if(raw.includes(":")){
+      const i=ipv6Info(raw);
+      show("vlsmOutput",`> IPv6 PREFIX ANALYSE
+> Eingabe: ${i.input}
+> Expanded: ${i.expanded}
+> Netzwerk-Prefix: ${i.network}/${i.prefix}
+> Host-Bits: ${i.hostBits}
+> Adressen: ${i.addresses}
+
+> IPv6 wird als Prefix analysiert.
+> Die VLSM-Tabelle unten ist für IPv4 mit Host-Anforderungen.`);
+      addLog("IPv6 Prefix",raw,"Echte Prefix-Analyse");
+      return;
+    }
+    const m=raw.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d|[12]\d|3[0-2])$/);
+    if(!m) throw new Error("Bitte ein gültiges IPv4-Netzwerk eingeben.");
+    const ip=ipv4ToInt(m[1]),p=+m[2],mask=maskFromPrefix(p),n=(ip&mask)>>>0,b=(n|(~mask>>>0))>>>0;
+    const hosts=($("vlsmHosts")?.value||"").split(/[,\s;]+/).filter(Boolean).map(Number);
+    if(!hosts.length){
+      show("vlsmOutput",`> IPv4 VLSM PLANER
+> Ausgangsnetz: ${intToIPv4(n)}/${p}
+> Bereich: ${intToIPv4(n)} – ${intToIPv4(b)}
+> Adressen gesamt: ${(2**(32-p)).toLocaleString("de-DE")}
+
+> Host-Anforderungen fehlen.
+> Beispiel: 100, 50, 20, 10
+> Es werden keine Beispiel-Subnetze erfunden.`);
+      addLog("VLSM",raw,"Netzwerk validiert – Host-Anforderungen fehlen");
+      return;
+    }
+    if(hosts.some(x=>!Number.isInteger(x)||x<1)) throw new Error("Alle Host-Anforderungen müssen positive ganze Zahlen sein.");
+
+    const req=hosts.map((hosts,i)=>({id:i+1,hosts})).sort((a,b)=>b.hosts-a.hosts);
+    const limit=b+1;
+    let cursor=n, rows=[];
+    for(const r of req){
+      const prefix=prefixForHosts(r.hosts),block=2**(32-prefix),aligned=Math.ceil(cursor/block)*block,end=aligned+block-1;
+      if(end>=limit) throw new Error(`Netzwerk zu klein für ${r.hosts} Hosts.`);
+      const first=prefix>=31?aligned:aligned+1,last=prefix>=31?end:end-1;
+      rows.push({id:r.id,hosts:r.hosts,prefix,network:aligned,broadcast:end,total:block,first,last});
+      cursor=end+1;
+    }
+    let out=`> ECHTE IPv4-VLSM-BERECHNUNG
+> Ausgangsnetz: ${intToIPv4(n)}/${p}
+> Gesamtadressen: ${(2**(32-p)).toLocaleString("de-DE")}
+> Anforderungen: ${hosts.join(", ")} Hosts
+
+`;
+    rows.forEach(r=>{
+      out+=`> Subnetz ${r.id}: ${r.hosts} Hosts
+  Netzwerk: ${intToIPv4(r.network)}/${r.prefix}
+  Maske: ${intToIPv4(maskFromPrefix(r.prefix))}
+  Hostbereich: ${intToIPv4(r.first)} – ${intToIPv4(r.last)}
+  Broadcast: ${intToIPv4(r.broadcast)}
+  Adressen: ${r.total}
+
+`;
+    });
+    out+=`> Verbleibende Adressen: ${limit-cursor}
+> Vergabe: größter Hostbedarf zuerst
+> Keine simulierten Messwerte.`;
+    show("vlsmOutput",out);
+    addLog("VLSM",`${raw} | Hosts: ${hosts.join(",")}`,"Echte VLSM-Aufteilung berechnet");
+  }catch(e){show("vlsmOutput","> Fehler: "+e.message);}
+};
+
+async function doh(domain,type){
+  const q=encodeURIComponent(domain.trim().replace(/^https?:\/\//,"").replace(/\/.*$/,""));
+  const r=await fetch(`https://cloudflare-dns.com/dns-query?name=${q}&type=${type}`,{headers:{accept:"application/dns-json"},cache:"no-store"});
+  if(!r.ok)throw new Error(`DNS Resolver HTTP ${r.status}`);
+  return r.json();
+}
+$("runDnsTool").onclick=async()=>{
+  const domain=$("dnsDomainInput").value.trim(),type=$("dnsTypeSelect").value;
+  show("dnsToolOutput","> Echte DNS-Abfrage läuft …");
+  try{
+    const types=type==="ALL"?["A","AAAA","MX","TXT","NS","SOA"]:type==="PTR"?["PTR"]:[type],out=[];
+    for(const t of types){const d=await doh(domain,t);out.push(`${t}:\n${d.Answer?.length?d.Answer.map(a=>`  ${a.data} (TTL ${a.TTL})`).join("\n"):"  Keine Antwort"}`);}
+    show("dnsToolOutput",`> Resolver: Cloudflare DNS over HTTPS\n> Domain: ${domain}\n\n`+out.join("\n"));
+    addLog("DNS Lookup",`${domain} (${type})`,"Echte Resolver-Antwort");
+  }catch(e){show("dnsToolOutput","> DNS-Fehler: "+e.message);}
+};
+
+$("runPropBtn").onclick=async()=>{
+  const domain=$("propInput").value.trim();show("propOutput","> Echte DNSSEC-Abfrage läuft …");
+  try{
+    const d=await doh(domain,"DNSKEY");
+    show("propOutput",`> Domain: ${domain}
+> DNSKEY Records: ${d.Answer?.length||0}
+> DNSSEC-Authentizitätsflag (AD): ${d.AD?"Ja":"Nein / nicht bestätigt"}
+
+> Wichtig: Das ist KEIN weltweiter Propagation-Test. Ein einzelner Browser-Resolver kann keine weltweiten Standorte repräsentieren.
+> Deshalb werden keine erfundenen Frankfurt/New-York/Tokio-Werte angezeigt.`);
+    addLog("DNSSEC Check",domain,"Echte Resolver-Antwort");
+  }catch(e){show("propOutput","> DNSSEC-Fehler: "+e.message);}
+};
+
+$("runNetTest").onclick=async()=>{
+  const target=$("netTarget").value.trim(),type=$("netTestType").value;
+  if(type!=="ping"){
+    show("netOutput",`> ${type}: NICHT DIREKT IM BROWSER MESSBAR.
+> Browser blockieren Raw ICMP, Traceroute/MTR und beliebige TCP/UDP-Sockets.
+> Es werden deshalb KEINE Fake-Werte angezeigt.
+
+> Für echte Messungen benötigt Fasqoo einen eigenen Backend-Messdienst.`);
+    addLog("Network Test",`${type}: ${target}`,"Nicht browserseitig messbar – kein Fake");
+    return;
+  }
+  let url=/^https?:\/\//i.test(target)?target:"https://"+target;
+  show("netOutput","> Echte Browser-HTTP-Erreichbarkeitsmessung läuft …");
+  try{
+    const t0=performance.now();await fetch(url,{method:"HEAD",mode:"no-cors",cache:"no-store"});const ms=performance.now()-t0;
+    show("netOutput",`> Ziel: ${url}
+> Messung: HTTP HEAD aus diesem Browser
+> Zeit: ${ms.toFixed(1)} ms
+> Hinweis: Das ist KEIN ICMP-Ping. Bei no-cors kann der Browser den HTTP-Status nicht lesen; die Zeit ist nur eine Browser-HTTP-Erreichbarkeitsmessung.`);
+    addLog("HTTP Reachability",url,`${ms.toFixed(1)} ms gemessen`);
+  }catch(e){show("netOutput","> Messung fehlgeschlagen: "+e.message);}
+};
+
+$("runPortCheck").onclick=()=>{
+  const target=$("portTarget").value.trim();
+  show("portOutput",`> Ziel: ${target}
+> Ein echter TCP-Port-Check ist aus einer normalen Webseite nicht zuverlässig möglich.
+> Browser dürfen keine beliebigen TCP-Sockets öffnen.
+> OPEN/CLOSED wird daher NICHT erfunden.
+
+> Für einen echten Port-Check braucht Fasqoo einen Backend-Endpoint.`);
+  addLog("Port Checker",target,"Nicht browserseitig möglich – kein Fake");
+};
+
+async function webHead(target){
+  const r=await fetch(target,{method:"HEAD",cache:"no-store"});
+  return r;
+}
+$("runWebCheck").onclick=async()=>{
+  let target=$("webTarget").value.trim();if(!/^https?:\/\//i.test(target))target="https://"+target;
+  show("webOutput","> Echte HTTPS/HTTP-Abfrage läuft …");
+  try{
+    const u=new URL(target);if(u.protocol!=="https:")throw new Error("Für SSL/TLS bitte HTTPS verwenden.");
+    const t0=performance.now(),r=await webHead(u.href),ms=performance.now()-t0;
+    show("webOutput",`> Ziel: ${u.href}
+> HTTP-Status: ${r.status} ${r.statusText}
+> Browser-Antwortzeit: ${ms.toFixed(1)} ms
+
+> Zertifikat/Cipher/TLS-Version werden nicht erfunden.
+> Detaillierte TLS-Analyse benötigt einen Server-Backend-Test.`);
+    addLog("Web / HTTPS",target,`HTTP ${r.status}`);
+  }catch(e){show("webOutput","> HTTPS-Abfrage fehlgeschlagen oder CORS blockiert: "+e.message);}
+};
+
+$("runHeaderCheck").onclick=async()=>{
+  let target=$("headerInput").value.trim();if(!/^https?:\/\//i.test(target))target="https://"+target;
+  show("headerOutput","> Echte HTTP-Header-Abfrage läuft …");
+  try{
+    const r=await webHead(target),headers=[...r.headers.entries()].map(([k,v])=>`${k}: ${v}`).join("\n");
+    show("headerOutput",`> URL: ${target}
+> HTTP: ${r.status} ${r.statusText}
+
+${headers||"(Header nicht durch CORS freigegeben)"}
+
+> Nur tatsächlich vom Browser freigegebene Header werden angezeigt.`);
+    addLog("HTTP Header",target,`HTTP ${r.status}`);
+  }catch(e){show("headerOutput","> Header-Abfrage fehlgeschlagen/CORS blockiert: "+e.message);}
+};
+
+$("runSecIpBtn").onclick=async()=>{
+  const ip=$("secIpInput").value.trim();show("secIpOutput","> Echte IP-Information wird abgefragt …");
+  try{
+    const r=await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`,{cache:"no-store"}),d=await r.json();
+    if(!d.success)throw new Error(d.message||"IP-Abfrage fehlgeschlagen");
+    show("secIpOutput",`> IP: ${d.ip}
+> Typ: ${d.type}
+> Land: ${d.country}
+> Stadt: ${d.city}
+> ISP: ${d.connection?.isp||"unbekannt"}
+> ASN: ${d.connection?.asn||"unbekannt"}
+> Organisation: ${d.connection?.org||"unbekannt"}
+
+> Proxy/VPN wird nur ausgewiesen, wenn die API es tatsächlich liefert.`);
+    addLog("IP Intelligence",ip,"Echte API-Antwort");
+  }catch(e){show("secIpOutput","> IP-Abfrage fehlgeschlagen: "+e.message);}
+};
+
+$("runAbuseBtn").onclick=async()=>{
+  const ip=$("abuseInput").value.trim();show("abuseOutput","> Echte RDAP-Abfrage läuft …");
+  try{
+    const r=await fetch(`https://rdap.org/ip/${encodeURIComponent(ip)}`,{cache:"no-store"});if(!r.ok)throw new Error(`RDAP HTTP ${r.status}`);
+    const d=await r.json(),emails=[];
+    (d.entities||[]).forEach(e=>(e.vcardArray?.[1]||[]).forEach(v=>{if(v[0]==="email"&&v[3])emails.push(v[3]);}));
+    show("abuseOutput",`> IP: ${ip}
+> RDAP Name: ${d.name||"unbekannt"}
+> Registry: ${d.port43||"nicht angegeben"}
+> E-Mail: ${emails.length?emails.join(", "):"Keine E-Mail im RDAP-Datensatz"}
+
+> Reverse-IP-Domains werden nicht erfunden; dafür wäre eine echte Reverse-IP-Datenquelle nötig.`);
+    addLog("RDAP / Abuse",ip,"Echte RDAP-Antwort");
+  }catch(e){show("abuseOutput","> RDAP-Fehler: "+e.message);}
+};
+
+function b64e(s){return btoa(unescape(encodeURIComponent(s)));}
+function b64d(s){return decodeURIComponent(escape(atob(s)));}
+$("runAdminTool").onclick=()=>{
+  const input=$("adminInput").value,action=$("adminAction").value;let res="";
+  try{
+    if(action==="base64enc")res=b64e(input);
+    else if(action==="base64dec")res=b64d(input);
+    else if(action==="urlenc")res=encodeURIComponent(input);
+    else if(action==="jwtdec"){const p=input.split(".");if(p.length<2)throw new Error("Ungültiges JWT.");res=JSON.stringify(JSON.parse(b64d(p[1].replace(/-/g,"+").replace(/_/g,"/"))),null,2)+"\n\nHinweis: Keine Signaturprüfung.";}
+    else if(action==="pwdgen"){const a=new Uint32Array(24);crypto.getRandomValues(a);const c="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";res=Array.from(a,x=>c[x%c.length]).join("");}
+    else if(action==="uuidgen")res=crypto.randomUUID();
+    else if(action==="jsonfmt")res=JSON.stringify(JSON.parse(input),null,2);
+    else if(action==="timestamp"){const n=input.trim()?Number(input):Math.floor(Date.now()/1000);if(!Number.isFinite(n))throw new Error("Ungültiger Timestamp.");res=`Unix: ${Math.trunc(n)}\nUTC: ${new Date(Math.trunc(n)*1000).toISOString()}`;}
+  }catch(e){res="Fehler: "+e.message;}
+  show("adminOutput",`> ${action}\n${res}`);addLog("Admin Utility",action,"Lokal korrekt ausgeführt");
+};
+
+$("runMacBtn").onclick=()=>{
+  const mac=$("macInput").value.trim();
+  if(!/^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/.test(mac)){show("macOutput","> Bitte eine gültige MAC-Adresse eingeben.");return;}
+  const b=parseInt(mac.split(":")[0],16),oui=mac.split(":").slice(0,3).join(":").toUpperCase();
+  show("macOutput",`> MAC: ${mac}
+> OUI: ${oui}
+> Unicast/Multicast: ${b&1?"Multicast":"Unicast"}
+> Lokal/Universell: ${b&2?"Lokal verwaltet":"Universell verwaltet"}
+> Vendor: Nicht bestimmt – ohne echte OUI-Datenbank wird nichts erfunden.`);
+  addLog("MAC Analysis",mac,"OUI/Bitflags korrekt analysiert");
+};
+
+// EXPORT BUTTONS
+$("copyResultsBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Testergebnisse vorhanden."); return; }
+  const text = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
+  navigator.clipboard.writeText(text).then(() => alert("Ergebnisse kopiert!"));
+};
+
+$("shareResultsBtn").onclick = async () => {
+  if(!logData.length){ alert("Keine Ergebnisse zum Teilen."); return; }
+  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
+  if(navigator.share){ try { await navigator.share({title: 'Fasqoo Toolkit', text}); } catch(e){} }
+  else { navigator.clipboard.writeText(text); alert("In Zwischenablage kopiert."); }
+};
+
+$("jsonExportBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Daten."); return; }
+  const blob = new Blob([JSON.stringify(logData, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "network-toolkit-report.json";
+  a.click(); URL.revokeObjectURL(url);
+};
+
+$("printReportBtn").onclick = () => window.print();
+$("clearLog").onclick = () => { logData = []; renderLog(); };
+
+// THEME & MOBILE MENU
+const themeBtn = $("themeBtn");
+function applyTheme(dark){
+  document.body.classList.toggle("dark", dark);
+  themeBtn.textContent = dark ? "☀" : "☾";
+  themeBtn.setAttribute("aria-label", dark ? "Light mode" : "Dark mode");
+  const tc=$("themeColor"); if(tc) tc.content=dark ? "#030712" : "#ffffff";
+  try{localStorage.setItem("fasqoo-theme", dark ? "dark" : "light");}catch(e){}
+}
+try{ applyTheme(localStorage.getItem("fasqoo-theme")==="dark"); }catch(e){}
+themeBtn.onclick = () => applyTheme(!document.body.classList.contains("dark"));
+$("menuToggle").onclick = () => $("mainMenu").classList.toggle("active");
+document.querySelectorAll("#mainMenu a").forEach(a => {
+  a.addEventListener("click", () => $("mainMenu").classList.remove("active"));
+});
+
+// NAVIGATION LANGUAGE SUPPORT — same 10 languages as network-status.html
+const NAV_TRANSLATIONS = {
+  de:{home:"Startseite",faq:"FAQ",diagnose:"IT-Diagnose",about:"Über uns"},
+  fr:{home:"Accueil",faq:"FAQ",diagnose:"Diagnostic IT",about:"À propos"},
+  en:{home:"Home",faq:"FAQ",diagnose:"IT Diagnostics",about:"About"},
+  it:{home:"Home",faq:"FAQ",diagnose:"Diagnostica IT",about:"Chi siamo"},
+  pt:{home:"Início",faq:"FAQ",diagnose:"Diagnóstico de TI",about:"Sobre"},
+  es:{home:"Inicio",faq:"FAQ",diagnose:"Diagnóstico IT",about:"Sobre nosotros"},
+  tr:{home:"Ana Sayfa",faq:"SSS",diagnose:"BT Tanılama",about:"Hakkımızda"},
+  sq:{home:"Kryefaqja",faq:"FAQ",diagnose:"Diagnostikë IT",about:"Rreth nesh"},
+  ar:{home:"الرئيسية",faq:"الأسئلة الشائعة",diagnose:"تشخيص تقنية المعلومات",about:"من نحن"},
+  zh:{home:"首页",faq:"常见问题",diagnose:"IT 诊断",about:"关于我们"}
+};
+
+const languageSelect = $("langSelect");
+const LANGUAGE_KEY = "fasqoo-language";
+
+function applyNavigationLanguage(lang){
+  if(!NAV_TRANSLATIONS[lang]) lang = "de";
+  const t = NAV_TRANSLATIONS[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(t[key]) el.textContent = t[key];
+  });
+  languageSelect.value = lang;
+  try{localStorage.setItem(LANGUAGE_KEY, lang);}catch(e){}
+}
+
+let savedLanguage = "de";
+try{ savedLanguage = localStorage.getItem(LANGUAGE_KEY) || "de"; }catch(e){}
+applyNavigationLanguage(savedLanguage);
+
+languageSelect.addEventListener("change", function(){
+  applyNavigationLanguage(this.value);
+  $("mainMenu").classList.remove("active");
+});
+
+</script>
+
+<script id="fasqoo-modern-js">
+(function(){
+  const $=s=>document.querySelector(s);
+  const search=$("#fqCommandSearch");
+  if(search){
+    const targets=[...document.querySelectorAll(".tool-card,.card,.panel,.section-card")];
+    function filter(){
+      const q=search.value.trim().toLowerCase();
+      targets.forEach(el=>{
+        const text=(el.innerText||"").toLowerCase();
+        el.style.display=(!q||text.includes(q))?"":"none";
+      });
+    }
+    search.addEventListener("input",filter);
+    document.addEventListener("keydown",e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search.focus();search.select();}
+      if(e.key==="Escape"&&document.activeElement===search){search.value="";filter();search.blur();}
+    });
+  }
+  document.addEventListener("click",async e=>{
+    const b=e.target.closest("[data-copy],.copy-btn");
+    if(!b)return;
+    const value=b.getAttribute("data-copy") || b.previousElementSibling?.textContent || "";
+    try{
+      await navigator.clipboard.writeText(value.trim());
+      b.classList.add("copied");
+      const old=b.textContent;b.textContent="✓";
+      setTimeout(()=>{b.classList.remove("copied");b.textContent=old},900);
+    }catch(_){}
+  });
+})();
+</script>
+
+
+<script id="fasqoo-full-i18n">
+(function(){
+const I18N={
+de:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Startseite",faq:"FAQ",diagnose:"IT-Diagnose",about:"Über uns",
+hero:"Network Engineer Toolkit & Diagnose Suite",heroP:"Professionelle Netzwerk- und Admin-Werkzeuge – mit echten Berechnungen und transparenten Browser-Grenzen.",
+accuracy:"Berechnete Netzwerkdaten werden lokal ermittelt. Externe Informationen stammen nur aus den abgefragten APIs/Resolvern; nicht mögliche Browser-Messungen werden ausdrücklich als nicht verfügbar gekennzeichnet.",
+copy:"📋 Ergebnis kopieren",share:"📤 Ergebnis teilen",json:"💻 JSON exportieren",print:"🖨️ Bericht drucken",
+subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Network & Ping",webTab:"🔒 Web & Server",secTab:"🛡️ IP / Security",adminTab:"🛠️ Admin Tools",
+search:"Tool suchen … z. B. Subnet, DNS, Ping, JWT",local:"Local calculations",nofake:"No fake metrics",responsive:"Responsive IT Toolkit",
+subnetTitle:"IPv4 / CIDR Calculator",subnetP:"Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.",calc:"Berechnen",subnetReady:"> Bereit für Subnet-Berechnung...",
+vlsmTitle:"IPv6 Prefix & VLSM Calculator",vlsmP:"Berechne IPv6-Prefix-Informationen und plane echte IPv4-VLSM-Subnetze anhand konkreter Host-Anforderungen.",vlsmPH:"Host-Anforderungen, z. B.\n100\n50\n20\n10",vlsmBtn:"VLSM Analyse",vlsmReady:"> Warten auf Eingabe...",
+dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Frage sämtliche DNS-Einträge und Reverse-DNS (PTR) über sichere DoH Resolver ab.",lookup:"Lookup",dnsReady:"> DNS-Konsole bereit.",all:"Alle Records",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverse",
+propTitle:"DNS Propagation & DNSSEC Check",propP:"Überprüfe DNS-Ausbreitung und Sicherheitsstatus (DNSSEC).",check:"Prüfen",propReady:"> Bereit für Propagation-Check...",
+netTitle:"Network Reachability & Diagnostics",netP:"HTTP-Erreichbarkeit messen und klar erkennen, welche Netzwerkdiagnosen ein Browser nicht direkt durchführen kann.",ping:"HTTP Reachability / Latency",trace:"Traceroute / MTR (Backend)",portBackend:"TCP Port Connect (Backend)",mtu:"MTU & Packet Loss (Backend)",start:"Test starten",netReady:"> Netzwerk-Diagnose bereit...",
+portTitle:"TCP / UDP Port Checker",portP:"Zeigt transparent, dass echte TCP/UDP-Porttests aus einer normalen Webseite nicht zuverlässig möglich sind.",portBtn:"Port prüfen",portReady:"> Port-Prüfung bereit.",
+tlsTitle:"HTTPS Reachability & TLS Analyzer",tlsP:"Prüfe HTTPS-Erreichbarkeit und HTTP-Status. Für Zertifikat, Cipher und TLS-Version ist ein Server-Backend erforderlich.",analyze:"Analysieren",webReady:"> Web-Inspektor bereit...",
+headerTitle:"HTTP Header Inspector & Redirect Checker",headerP:"Untersuche HTTP Status, Response Header und Weiterleitungsketten.",inspect:"Inspizieren",headerReady:"> Header-Prüfung bereit.",
+ipTitle:"Public IP, ASN, ISP & Proxy/VPN Detection",ipP:"Zeigt echte IP-, Standort-, ISP-, ASN- und – sofern von der API geliefert – Proxy/VPN-Daten.",query:"Abfragen",secReady:"> Sicherheits-Tool bereit.",
+abuseTitle:"Reverse IP & Abuse Contact Lookup",abuseP:"Finde gehostete Domains auf einer IP und Abuse-Kontakte.",abuseReady:"> Abuse-Tool bereit.",
+adminTitle:"Admin Utilities (MAC, Password, JWT, Base64, JSON)",adminP:"Generiere Passwörter, UUIDs, konvertiere Timestamps oder decodiere JWT/Base64.",execute:"Ausführen",adminReady:"> Admin-Konsole bereit.",
+macTitle:"MAC Address & QR Code Generator",macP:"Ermittle MAC Vendor Infos oder generiere QR-Codes.",process:"Verarbeiten",macReady:"> MAC / QR Tool bereit.",
+history:"Toolkit Aktivitätsprotokoll",clear:"Log löschen",time:"Zeitstempel",tool:"Kategorie / Werkzeug",target:"Ziel / Eingabe",result:"Ergebnis / Status",empty:"Noch keine Aktionen in dieser Session.",
+privacy:"Datenschutz",terms:"Nutzungsbedingungen",rights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",
+ipph:"IP/CIDR (z.B. 10.0.0.0/16)",networkPH:"Netzwerk, z. B. 192.168.0.0/22",domainPH:"domain.com",ipPH:"IP-Adresse abfragen",hostPH:"IP oder Hostname",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"MAC-Adresse oder QR Text",adminPH:"Text oder JSON eingeben..."
+},
+en:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Home",faq:"FAQ",diagnose:"IT Diagnostics",about:"About",
+hero:"Network Engineer Toolkit & Diagnostics Suite",heroP:"Professional network and admin tools – with real calculations and transparent browser limitations.",
+accuracy:"Network data is calculated locally. External information comes only from queried APIs/resolvers; browser measurements that are not possible are explicitly marked as unavailable.",
+copy:"📋 Copy results",share:"📤 Share results",json:"💻 Export JSON",print:"🖨️ Print report",
+subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Network & Ping",webTab:"🔒 Web & Server",secTab:"🛡️ IP / Security",adminTab:"🛠️ Admin Tools",
+search:"Search tools … e.g. Subnet, DNS, Ping, JWT",local:"Local calculations",nofake:"No fake metrics",responsive:"Responsive IT Toolkit",
+subnetTitle:"IPv4 / CIDR Calculator",subnetP:"Calculate subnet mask, network address, broadcast, usable hosts and binary IP.",calc:"Calculate",subnetReady:"> Ready for subnet calculation...",
+vlsmTitle:"IPv6 Prefix & VLSM Calculator",vlsmP:"Calculate IPv6 prefix information and plan real IPv4 VLSM subnets from concrete host requirements.",vlsmPH:"Host requirements, e.g.\n100\n50\n20\n10",vlsmBtn:"VLSM analysis",vlsmReady:"> Waiting for input...",
+dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Query DNS records and reverse DNS (PTR) through secure DoH resolvers.",lookup:"Lookup",dnsReady:"> DNS console ready.",all:"All records",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverse",
+propTitle:"DNS Propagation & DNSSEC Check",propP:"Check DNS propagation and security status (DNSSEC).",check:"Check",propReady:"> Ready for propagation check...",
+netTitle:"Network Reachability & Diagnostics",netP:"Measure HTTP reachability and clearly show which network diagnostics a browser cannot perform directly.",ping:"HTTP Reachability / Latency",trace:"Traceroute / MTR (Backend)",portBackend:"TCP Port Connect (Backend)",mtu:"MTU & Packet Loss (Backend)",start:"Start test",netReady:"> Network diagnostics ready...",
+portTitle:"TCP / UDP Port Checker",portP:"Transparently shows that reliable TCP/UDP port tests are not possible from a normal web page.",portBtn:"Check port",portReady:"> Port checker ready.",
+tlsTitle:"HTTPS Reachability & TLS Analyzer",tlsP:"Check HTTPS reachability and HTTP status. Certificate, cipher and TLS version analysis requires a server backend.",analyze:"Analyze",webReady:"> Web inspector ready...",
+headerTitle:"HTTP Header Inspector & Redirect Checker",headerP:"Inspect HTTP status, response headers and redirect chains.",inspect:"Inspect",headerReady:"> Header checker ready.",
+ipTitle:"Public IP, ASN, ISP & Proxy/VPN Detection",ipP:"Shows real IP, location, ISP, ASN and – when supplied by the API – proxy/VPN data.",query:"Query",secReady:"> Security tool ready.",
+abuseTitle:"Reverse IP & Abuse Contact Lookup",abuseP:"Find hosted domains on an IP and abuse contacts.",abuseReady:"> Abuse tool ready.",
+adminTitle:"Admin Utilities (MAC, Password, JWT, Base64, JSON)",adminP:"Generate passwords and UUIDs, convert timestamps, or decode JWT/Base64.",execute:"Run",adminReady:"> Admin console ready.",
+macTitle:"MAC Address & QR Code Generator",macP:"Inspect MAC vendor information or generate QR codes.",process:"Process",macReady:"> MAC / QR tool ready.",
+history:"Toolkit Activity Log",clear:"Clear log",time:"Timestamp",tool:"Category / Tool",target:"Target / Input",result:"Result / Status",empty:"No actions in this session yet.",
+privacy:"Privacy",terms:"Terms of use",rights:"© 2026 Fasqoo. All rights reserved.",
+ipph:"IP/CIDR (e.g. 10.0.0.0/16)",networkPH:"Network, e.g. 192.168.0.0/22",domainPH:"domain.com",ipPH:"Query IP address",hostPH:"IP or hostname",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"MAC address or QR text",adminPH:"Enter text or JSON..."
+},
+fr:{
+title:"Boîte à outils réseau – Fasqoo",home:"Accueil",faq:"FAQ",diagnose:"Diagnostic IT",about:"À propos",hero:"Boîte à outils réseau & suite de diagnostic",heroP:"Outils professionnels réseau et administration – calculs réels et limites du navigateur clairement indiquées.",accuracy:"Les données réseau sont calculées localement. Les informations externes proviennent uniquement des API/résolveurs interrogés ; les mesures impossibles dans le navigateur sont signalées comme indisponibles.",copy:"📋 Copier les résultats",share:"📤 Partager les résultats",json:"💻 Exporter JSON",print:"🖨️ Imprimer le rapport",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Réseau & Ping",webTab:"🔒 Web & Serveur",secTab:"🛡️ IP / Sécurité",adminTab:"🛠️ Outils admin",search:"Rechercher un outil … ex. Subnet, DNS, Ping, JWT",local:"Calculs locaux",nofake:"Aucune mesure fictive",responsive:"Outils IT responsifs",subnetTitle:"Calculateur IPv4 / CIDR",subnetP:"Calculer le masque, l'adresse réseau, le broadcast, les hôtes utilisables et l'IP binaire.",calc:"Calculer",subnetReady:"> Prêt pour le calcul du subnet...",vlsmTitle:"Calculateur IPv6 Prefix & VLSM",vlsmP:"Calculer les informations de préfixe IPv6 et planifier de vrais sous-réseaux IPv4 VLSM selon les besoins en hôtes.",vlsmPH:"Besoins en hôtes, ex.\n100\n50\n20\n10",vlsmBtn:"Analyse VLSM",vlsmReady:"> En attente de saisie...",dnsTitle:"Recherche DNS (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Interroger les enregistrements DNS et le DNS inverse (PTR) via des résolveurs DoH sécurisés.",lookup:"Recherche",dnsReady:"> Console DNS prête.",all:"Tous les enregistrements",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Inverse",propTitle:"Propagation DNS & contrôle DNSSEC",propP:"Vérifier la propagation DNS et l'état de sécurité (DNSSEC).",check:"Vérifier",propReady:"> Prêt pour le contrôle de propagation...",netTitle:"Accessibilité réseau & diagnostics",netP:"Mesurer l'accessibilité HTTP et indiquer clairement les diagnostics réseau qu'un navigateur ne peut pas effectuer directement.",ping:"Accessibilité HTTP / Latence",trace:"Traceroute / MTR (Backend)",portBackend:"Connexion TCP au port (Backend)",mtu:"MTU & perte de paquets (Backend)",start:"Démarrer le test",netReady:"> Diagnostics réseau prêts...",portTitle:"Vérificateur de ports TCP / UDP",portP:"Indique de façon transparente que les tests fiables de ports TCP/UDP ne sont pas possibles depuis une page web normale.",portBtn:"Vérifier le port",portReady:"> Vérificateur de ports prêt.",tlsTitle:"Accessibilité HTTPS & analyseur TLS",tlsP:"Vérifier l'accessibilité HTTPS et le statut HTTP. L'analyse du certificat, du cipher et de la version TLS nécessite un backend serveur.",analyze:"Analyser",webReady:"> Inspecteur Web prêt...",headerTitle:"Inspecteur d'en-têtes HTTP & redirections",headerP:"Examiner le statut HTTP, les en-têtes de réponse et les chaînes de redirection.",inspect:"Inspecter",headerReady:"> Contrôle des en-têtes prêt.",ipTitle:"IP publique, ASN, FAI & détection Proxy/VPN",ipP:"Affiche les données réelles d'IP, de localisation, de FAI, d'ASN et, si l'API les fournit, de proxy/VPN.",query:"Interroger",secReady:"> Outil de sécurité prêt.",abuseTitle:"Recherche IP inverse & contact Abuse",abuseP:"Trouver les domaines hébergés sur une IP et les contacts Abuse.",abuseReady:"> Outil Abuse prêt.",adminTitle:"Utilitaires admin (MAC, mot de passe, JWT, Base64, JSON)",adminP:"Générer des mots de passe et UUID, convertir des timestamps ou décoder JWT/Base64.",execute:"Exécuter",adminReady:"> Console admin prête.",macTitle:"Générateur d'adresse MAC & QR Code",macP:"Analyser les informations du fournisseur MAC ou générer des QR codes.",process:"Traiter",macReady:"> Outil MAC / QR prêt.",history:"Journal d'activité du toolkit",clear:"Effacer le journal",time:"Horodatage",tool:"Catégorie / Outil",target:"Cible / Entrée",result:"Résultat / Statut",empty:"Aucune action dans cette session.",privacy:"Confidentialité",terms:"Conditions d'utilisation",rights:"© 2026 Fasqoo. Tous droits réservés.",ipph:"IP/CIDR (ex. 10.0.0.0/16)",networkPH:"Réseau, ex. 192.168.0.0/22",domainPH:"domain.com",ipPH:"Interroger l'adresse IP",hostPH:"IP ou nom d'hôte",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"Adresse MAC ou texte QR",adminPH:"Saisir du texte ou JSON..."
+},
+it:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Home",faq:"FAQ",diagnose:"Diagnostica IT",about:"Chi siamo",hero:"Network Engineer Toolkit & Suite Diagnostica",heroP:"Strumenti professionali di rete e amministrazione – calcoli reali e limiti del browser trasparenti.",accuracy:"I dati di rete vengono calcolati localmente. Le informazioni esterne provengono solo dalle API/resolver interrogati; le misurazioni non possibili nel browser sono indicate come non disponibili.",copy:"📋 Copia risultati",share:"📤 Condividi risultati",json:"💻 Esporta JSON",print:"🖨️ Stampa report",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Rete & Ping",webTab:"🔒 Web & Server",secTab:"🛡️ IP / Sicurezza",adminTab:"🛠️ Strumenti Admin",search:"Cerca strumento … es. Subnet, DNS, Ping, JWT",local:"Calcoli locali",nofake:"Nessuna misura fittizia",responsive:"Toolkit IT responsive",subnetTitle:"Calcolatore IPv4 / CIDR",subnetP:"Calcola maschera, indirizzo di rete, broadcast, host utilizzabili e IP binario.",calc:"Calcola",subnetReady:"> Pronto per il calcolo della subnet...",vlsmTitle:"Calcolatore IPv6 Prefix & VLSM",vlsmP:"Calcola le informazioni del prefisso IPv6 e pianifica vere subnet IPv4 VLSM in base ai requisiti host.",vlsmPH:"Requisiti host, es.\n100\n50\n20\n10",vlsmBtn:"Analisi VLSM",vlsmReady:"> In attesa dell'input...",dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Interroga record DNS e DNS inverso (PTR) tramite resolver DoH sicuri.",lookup:"Lookup",dnsReady:"> Console DNS pronta.",all:"Tutti i record",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverse",propTitle:"Propagazione DNS & controllo DNSSEC",propP:"Controlla la propagazione DNS e lo stato di sicurezza (DNSSEC).",check:"Controlla",propReady:"> Pronto per il controllo della propagazione...",netTitle:"Raggiungibilità di rete & diagnostica",netP:"Misura la raggiungibilità HTTP e mostra chiaramente quali diagnostiche di rete un browser non può eseguire direttamente.",ping:"Raggiungibilità HTTP / Latenza",trace:"Traceroute / MTR (Backend)",portBackend:"Connessione porta TCP (Backend)",mtu:"MTU & perdita pacchetti (Backend)",start:"Avvia test",netReady:"> Diagnostica di rete pronta...",portTitle:"Controllo porte TCP / UDP",portP:"Mostra in modo trasparente che test affidabili delle porte TCP/UDP non sono possibili da una normale pagina web.",portBtn:"Controlla porta",portReady:"> Controllo porte pronto.",tlsTitle:"Raggiungibilità HTTPS & analizzatore TLS",tlsP:"Controlla raggiungibilità HTTPS e stato HTTP. Certificato, cipher e versione TLS richiedono un backend server.",analyze:"Analizza",webReady:"> Ispettore Web pronto...",headerTitle:"Ispettore Header HTTP & Redirect Checker",headerP:"Esamina stato HTTP, header di risposta e catene di reindirizzamento.",inspect:"Ispeziona",headerReady:"> Controllo header pronto.",ipTitle:"IP pubblico, ASN, ISP & rilevamento Proxy/VPN",ipP:"Mostra dati reali di IP, posizione, ISP, ASN e, se forniti dall'API, Proxy/VPN.",query:"Interroga",secReady:"> Strumento sicurezza pronto.",abuseTitle:"Reverse IP & ricerca contatto Abuse",abuseP:"Trova domini ospitati su un IP e contatti Abuse.",abuseReady:"> Strumento Abuse pronto.",adminTitle:"Utility Admin (MAC, Password, JWT, Base64, JSON)",adminP:"Genera password e UUID, converte timestamp o decodifica JWT/Base64.",execute:"Esegui",adminReady:"> Console Admin pronta.",macTitle:"Generatore indirizzo MAC & QR Code",macP:"Analizza informazioni del vendor MAC o genera QR code.",process:"Elabora",macReady:"> Strumento MAC / QR pronto.",history:"Registro attività Toolkit",clear:"Cancella registro",time:"Timestamp",tool:"Categoria / Strumento",target:"Destinazione / Input",result:"Risultato / Stato",empty:"Nessuna azione in questa sessione.",privacy:"Privacy",terms:"Termini di utilizzo",rights:"© 2026 Fasqoo. Tutti i diritti riservati.",ipph:"IP/CIDR (es. 10.0.0.0/16)",networkPH:"Rete, es. 192.168.0.0/22",domainPH:"domain.com",ipPH:"Interroga indirizzo IP",hostPH:"IP o hostname",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"Indirizzo MAC o testo QR",adminPH:"Inserisci testo o JSON..."
+},
+es:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Inicio",faq:"FAQ",diagnose:"Diagnóstico IT",about:"Sobre nosotros",hero:"Network Engineer Toolkit & Suite de Diagnóstico",heroP:"Herramientas profesionales de red y administración – cálculos reales y límites transparentes del navegador.",accuracy:"Los datos de red se calculan localmente. La información externa procede únicamente de las API/resolvers consultados; las mediciones no posibles en el navegador se indican explícitamente como no disponibles.",copy:"📋 Copiar resultados",share:"📤 Compartir resultados",json:"💻 Exportar JSON",print:"🖨️ Imprimir informe",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Red & Ping",webTab:"🔒 Web & Servidor",secTab:"🛡️ IP / Seguridad",adminTab:"🛠️ Herramientas Admin",search:"Buscar herramienta … p. ej. Subnet, DNS, Ping, JWT",local:"Cálculos locales",nofake:"Sin métricas falsas",responsive:"Toolkit IT responsive",subnetTitle:"Calculadora IPv4 / CIDR",subnetP:"Calcula máscara, dirección de red, broadcast, hosts utilizables e IP binaria.",calc:"Calcular",subnetReady:"> Listo para calcular la subred...",vlsmTitle:"Calculadora IPv6 Prefix & VLSM",vlsmP:"Calcula información de prefijo IPv6 y planifica subredes IPv4 VLSM reales según requisitos de hosts.",vlsmPH:"Requisitos de hosts, p. ej.\n100\n50\n20\n10",vlsmBtn:"Análisis VLSM",vlsmReady:"> Esperando entrada...",dnsTitle:"Consulta DNS (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Consulta registros DNS y DNS inverso (PTR) mediante resolvers DoH seguros.",lookup:"Consultar",dnsReady:"> Consola DNS lista.",all:"Todos los registros",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Correo)",txt:"TXT",ns:"NS",ptr:"PTR / Inverso",propTitle:"Propagación DNS & comprobación DNSSEC",propP:"Comprueba la propagación DNS y el estado de seguridad (DNSSEC).",check:"Comprobar",propReady:"> Listo para comprobar propagación...",netTitle:"Alcance de red & diagnósticos",netP:"Mide la accesibilidad HTTP y muestra claramente qué diagnósticos de red no puede realizar directamente un navegador.",ping:"Accesibilidad HTTP / Latencia",trace:"Traceroute / MTR (Backend)",portBackend:"Conexión TCP al puerto (Backend)",mtu:"MTU & pérdida de paquetes (Backend)",start:"Iniciar prueba",netReady:"> Diagnóstico de red listo...",portTitle:"Comprobador de puertos TCP / UDP",portP:"Muestra de forma transparente que las pruebas fiables de puertos TCP/UDP no son posibles desde una página web normal.",portBtn:"Comprobar puerto",portReady:"> Comprobador de puertos listo.",tlsTitle:"Accesibilidad HTTPS & analizador TLS",tlsP:"Comprueba accesibilidad HTTPS y estado HTTP. El certificado, cipher y versión TLS requieren un backend.",analyze:"Analizar",webReady:"> Inspector web listo...",headerTitle:"Inspector de cabeceras HTTP & redirecciones",headerP:"Examina estado HTTP, cabeceras de respuesta y cadenas de redirección.",inspect:"Inspeccionar",headerReady:"> Comprobación de cabeceras lista.",ipTitle:"IP pública, ASN, ISP & detección Proxy/VPN",ipP:"Muestra datos reales de IP, ubicación, ISP, ASN y, si la API los proporciona, Proxy/VPN.",query:"Consultar",secReady:"> Herramienta de seguridad lista.",abuseTitle:"Reverse IP & búsqueda de contacto Abuse",abuseP:"Encuentra dominios alojados en una IP y contactos Abuse.",abuseReady:"> Herramienta Abuse lista.",adminTitle:"Utilidades Admin (MAC, Contraseña, JWT, Base64, JSON)",adminP:"Genera contraseñas y UUID, convierte timestamps o decodifica JWT/Base64.",execute:"Ejecutar",adminReady:"> Consola Admin lista.",macTitle:"Generador de dirección MAC & QR Code",macP:"Analiza información del fabricante MAC o genera códigos QR.",process:"Procesar",macReady:"> Herramienta MAC / QR lista.",history:"Registro de actividad del Toolkit",clear:"Borrar registro",time:"Marca de tiempo",tool:"Categoría / Herramienta",target:"Objetivo / Entrada",result:"Resultado / Estado",empty:"Aún no hay acciones en esta sesión.",privacy:"Privacidad",terms:"Términos de uso",rights:"© 2026 Fasqoo. Todos los derechos reservados.",ipph:"IP/CIDR (p. ej. 10.0.0.0/16)",networkPH:"Red, p. ej. 192.168.0.0/22",domainPH:"domain.com",ipPH:"Consultar dirección IP",hostPH:"IP o hostname",portPH:"domain.com:puerto",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"Dirección MAC o texto QR",adminPH:"Introduce texto o JSON..."
+},
+pt:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Início",faq:"FAQ",diagnose:"Diagnóstico de TI",about:"Sobre",hero:"Network Engineer Toolkit & Suite de Diagnóstico",heroP:"Ferramentas profissionais de rede e administração – cálculos reais e limites transparentes do navegador.",accuracy:"Os dados de rede são calculados localmente. Informações externas vêm apenas das APIs/resolvers consultados; medições impossíveis no navegador são indicadas como indisponíveis.",copy:"📋 Copiar resultados",share:"📤 Partilhar resultados",json:"💻 Exportar JSON",print:"🖨️ Imprimir relatório",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Rede & Ping",webTab:"🔒 Web & Servidor",secTab:"🛡️ IP / Segurança",adminTab:"🛠️ Ferramentas Admin",search:"Pesquisar ferramenta … ex.: Subnet, DNS, Ping, JWT",local:"Cálculos locais",nofake:"Sem métricas falsas",responsive:"Toolkit IT responsivo",subnetTitle:"Calculadora IPv4 / CIDR",subnetP:"Calcule máscara, endereço de rede, broadcast, hosts utilizáveis e IP binário.",calc:"Calcular",subnetReady:"> Pronto para calcular a subnet...",vlsmTitle:"Calculadora IPv6 Prefix & VLSM",vlsmP:"Calcule informações de prefixo IPv6 e planeie subnets IPv4 VLSM reais com requisitos de hosts.",vlsmPH:"Requisitos de hosts, ex.\n100\n50\n20\n10",vlsmBtn:"Análise VLSM",vlsmReady:"> A aguardar entrada...",dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Consulte registos DNS e DNS reverso (PTR) através de resolvers DoH seguros.",lookup:"Consultar",dnsReady:"> Consola DNS pronta.",all:"Todos os registos",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverso",propTitle:"Propagação DNS & verificação DNSSEC",propP:"Verifique a propagação DNS e o estado de segurança (DNSSEC).",check:"Verificar",propReady:"> Pronto para verificar propagação...",netTitle:"Alcance de rede & diagnóstico",netP:"Meça a acessibilidade HTTP e indique claramente quais diagnósticos de rede um navegador não pode executar diretamente.",ping:"Acessibilidade HTTP / Latência",trace:"Traceroute / MTR (Backend)",portBackend:"Ligação TCP à porta (Backend)",mtu:"MTU & perda de pacotes (Backend)",start:"Iniciar teste",netReady:"> Diagnóstico de rede pronto...",portTitle:"Verificador de portas TCP / UDP",portP:"Mostra de forma transparente que testes fiáveis de portas TCP/UDP não são possíveis numa página web normal.",portBtn:"Verificar porta",portReady:"> Verificador de portas pronto.",tlsTitle:"Acessibilidade HTTPS & analisador TLS",tlsP:"Verifique acessibilidade HTTPS e estado HTTP. Certificado, cipher e versão TLS requerem um backend.",analyze:"Analisar",webReady:"> Inspetor Web pronto...",headerTitle:"Inspetor de cabeçalhos HTTP & redirecionamentos",headerP:"Analise estado HTTP, cabeçalhos de resposta e cadeias de redirecionamento.",inspect:"Inspecionar",headerReady:"> Verificação de cabeçalhos pronta.",ipTitle:"IP público, ASN, ISP & deteção Proxy/VPN",ipP:"Mostra dados reais de IP, localização, ISP, ASN e, quando fornecidos pela API, dados de Proxy/VPN.",query:"Consultar",secReady:"> Ferramenta de segurança pronta.",abuseTitle:"Reverse IP & pesquisa de contacto Abuse",abuseP:"Encontre domínios alojados num IP e contactos Abuse.",abuseReady:"> Ferramenta Abuse pronta.",adminTitle:"Utilitários Admin (MAC, Password, JWT, Base64, JSON)",adminP:"Gere passwords e UUIDs, converta timestamps ou descodifique JWT/Base64.",execute:"Executar",adminReady:"> Consola Admin pronta.",macTitle:"Gerador de endereço MAC & QR Code",macP:"Analise informações do fabricante MAC ou gere códigos QR.",process:"Processar",macReady:"> Ferramenta MAC / QR pronta.",history:"Registo de atividade do Toolkit",clear:"Limpar registo",time:"Timestamp",tool:"Categoria / Ferramenta",target:"Destino / Entrada",result:"Resultado / Estado",empty:"Ainda não existem ações nesta sessão.",privacy:"Privacidade",terms:"Termos de utilização",rights:"© 2026 Fasqoo. Todos os direitos reservados.",ipph:"IP/CIDR (ex.: 10.0.0.0/16)",networkPH:"Rede, ex.: 192.168.0.0/22",domainPH:"domain.com",ipPH:"Consultar endereço IP",hostPH:"IP ou hostname",portPH:"domain.com:porta",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"Endereço MAC ou texto QR",adminPH:"Introduza texto ou JSON..."
+},
+tr:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Ana Sayfa",faq:"SSS",diagnose:"BT Tanılama",about:"Hakkımızda",hero:"Network Engineer Toolkit & Tanılama Paketi",heroP:"Profesyonel ağ ve yönetim araçları – gerçek hesaplamalar ve şeffaf tarayıcı sınırları.",accuracy:"Ağ verileri yerel olarak hesaplanır. Harici bilgiler yalnızca sorgulanan API/resolver'lardan gelir; tarayıcıda yapılamayan ölçümler açıkça kullanılamaz olarak belirtilir.",copy:"📋 Sonuçları kopyala",share:"📤 Sonuçları paylaş",json:"💻 JSON dışa aktar",print:"🖨️ Raporu yazdır",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Ağ & Ping",webTab:"🔒 Web & Sunucu",secTab:"🛡️ IP / Güvenlik",adminTab:"🛠️ Yönetici Araçları",search:"Araç ara … ör. Subnet, DNS, Ping, JWT",local:"Yerel hesaplamalar",nofake:"Sahte metrik yok",responsive:"Duyarlı IT Toolkit",subnetTitle:"IPv4 / CIDR Hesaplayıcı",subnetP:"Alt ağ maskesini, ağ adresini, broadcast adresini, kullanılabilir hostları ve ikili IP'yi hesapla.",calc:"Hesapla",subnetReady:"> Subnet hesaplamaya hazır...",vlsmTitle:"IPv6 Prefix & VLSM Hesaplayıcı",vlsmP:"IPv6 prefix bilgilerini hesapla ve gerçek host gereksinimlerine göre IPv4 VLSM subnetleri planla.",vlsmPH:"Host gereksinimleri, ör.\n100\n50\n20\n10",vlsmBtn:"VLSM analizi",vlsmReady:"> Girdi bekleniyor...",dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Güvenli DoH resolver'ları üzerinden DNS kayıtlarını ve reverse DNS (PTR) sorgula.",lookup:"Sorgula",dnsReady:"> DNS konsolu hazır.",all:"Tüm kayıtlar",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverse",propTitle:"DNS Yayılımı & DNSSEC Kontrolü",propP:"DNS yayılımını ve güvenlik durumunu (DNSSEC) kontrol et.",check:"Kontrol et",propReady:"> Yayılım kontrolüne hazır...",netTitle:"Ağ erişilebilirliği & tanılama",netP:"HTTP erişilebilirliğini ölç ve tarayıcının doğrudan yapamayacağı ağ tanılamalarını açıkça göster.",ping:"HTTP Erişilebilirlik / Gecikme",trace:"Traceroute / MTR (Backend)",portBackend:"TCP Port Bağlantısı (Backend)",mtu:"MTU & Paket Kaybı (Backend)",start:"Testi başlat",netReady:"> Ağ tanılaması hazır...",portTitle:"TCP / UDP Port Kontrolü",portP:"Normal bir web sayfasından güvenilir TCP/UDP port testlerinin mümkün olmadığını şeffaf biçimde gösterir.",portBtn:"Portu kontrol et",portReady:"> Port kontrolü hazır.",tlsTitle:"HTTPS Erişilebilirlik & TLS Analizörü",tlsP:"HTTPS erişilebilirliğini ve HTTP durumunu kontrol et. Sertifika, cipher ve TLS sürümü için sunucu backend'i gerekir.",analyze:"Analiz et",webReady:"> Web denetleyicisi hazır...",headerTitle:"HTTP Header Denetleyici & Yönlendirme Kontrolü",headerP:"HTTP durumunu, yanıt başlıklarını ve yönlendirme zincirlerini incele.",inspect:"İncele",headerReady:"> Header kontrolü hazır.",ipTitle:"Genel IP, ASN, ISP & Proxy/VPN Tespiti",ipP:"Gerçek IP, konum, ISP, ASN ve API sağlıyorsa Proxy/VPN verilerini gösterir.",query:"Sorgula",secReady:"> Güvenlik aracı hazır.",abuseTitle:"Reverse IP & Abuse İletişim Sorgusu",abuseP:"Bir IP üzerinde barındırılan alan adlarını ve Abuse iletişimlerini bul.",abuseReady:"> Abuse aracı hazır.",adminTitle:"Yönetici Araçları (MAC, Parola, JWT, Base64, JSON)",adminP:"Parola ve UUID oluştur, timestamp dönüştür veya JWT/Base64 çöz.",execute:"Çalıştır",adminReady:"> Yönetici konsolu hazır.",macTitle:"MAC Adresi & QR Kod Oluşturucu",macP:"MAC üretici bilgilerini incele veya QR kodları oluştur.",process:"İşle",macReady:"> MAC / QR aracı hazır.",history:"Toolkit Etkinlik Günlüğü",clear:"Günlüğü temizle",time:"Zaman damgası",tool:"Kategori / Araç",target:"Hedef / Girdi",result:"Sonuç / Durum",empty:"Bu oturumda henüz işlem yok.",privacy:"Gizlilik",terms:"Kullanım şartları",rights:"© 2026 Fasqoo. Tüm hakları saklıdır.",ipph:"IP/CIDR (örn. 10.0.0.0/16)",networkPH:"Ağ, ör. 192.168.0.0/22",domainPH:"domain.com",ipPH:"IP adresini sorgula",hostPH:"IP veya hostname",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"MAC adresi veya QR metni",adminPH:"Metin veya JSON girin..."
+},
+sq:{
+title:"Network Engineer Toolkit – Fasqoo",home:"Kryefaqja",faq:"FAQ",diagnose:"Diagnostikë IT",about:"Rreth nesh",hero:"Network Engineer Toolkit & Paketa e Diagnostikës",heroP:"Mjete profesionale për rrjet dhe administrim – llogaritje reale dhe kufizime transparente të shfletuesit.",accuracy:"Të dhënat e rrjetit llogariten lokalisht. Informacioni i jashtëm vjen vetëm nga API/resolver-at e kërkuar; matjet që nuk mund të kryhen në shfletues shënohen qartë si të padisponueshme.",copy:"📋 Kopjo rezultatet",share:"📤 Ndaj rezultatet",json:"💻 Eksporto JSON",print:"🖨️ Printo raportin",subnetTab:"📐 IP & Subnetting",dnsTab:"🌐 DNS & Records",netTab:"⚡ Rrjet & Ping",webTab:"🔒 Web & Server",secTab:"🛡️ IP / Siguri",adminTab:"🛠️ Mjete Admin",search:"Kërko mjetin … p.sh. Subnet, DNS, Ping, JWT",local:"Llogaritje lokale",nofake:"Pa metrika të rreme",responsive:"Toolkit IT responsiv",subnetTitle:"Llogaritësi IPv4 / CIDR",subnetP:"Llogarit maskën e subnetit, adresën e rrjetit, broadcast, hostet e përdorshëm dhe IP binare.",calc:"Llogarit",subnetReady:"> Gati për llogaritjen e subnetit...",vlsmTitle:"Llogaritësi IPv6 Prefix & VLSM",vlsmP:"Llogarit informacionin e prefiksit IPv6 dhe planifiko subnet-e reale IPv4 VLSM sipas kërkesave të hosteve.",vlsmPH:"Kërkesat e hosteve, p.sh.\n100\n50\n20\n10",vlsmBtn:"Analizë VLSM",vlsmReady:"> Në pritje të hyrjes...",dnsTitle:"DNS Lookup (A, AAAA, MX, TXT, NS, SOA)",dnsP:"Kërko regjistrimet DNS dhe DNS reverse (PTR) përmes resolver-ave të sigurt DoH.",lookup:"Kërko",dnsReady:"> Konsola DNS është gati.",all:"Të gjitha rekordet",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (Mail)",txt:"TXT",ns:"NS",ptr:"PTR / Reverse",propTitle:"DNS Propagation & Kontroll DNSSEC",propP:"Kontrollo përhapjen DNS dhe statusin e sigurisë (DNSSEC).",check:"Kontrollo",propReady:"> Gati për kontrollin e propagation...",netTitle:"Arritshmëria e rrjetit & diagnostikë",netP:"Mat arritshmërinë HTTP dhe trego qartë cilat diagnostika rrjeti nuk mund të kryhen direkt nga shfletuesi.",ping:"Arritshmëri HTTP / Latencë",trace:"Traceroute / MTR (Backend)",portBackend:"Lidhje TCP me portën (Backend)",mtu:"MTU & Humbje paketash (Backend)",start:"Fillo testin",netReady:"> Diagnostika e rrjetit është gati...",portTitle:"Kontrolluesi i portave TCP / UDP",portP:"Tregon në mënyrë transparente se testet e besueshme të porteve TCP/UDP nuk janë të mundshme nga një faqe normale web.",portBtn:"Kontrollo portën",portReady:"> Kontrolluesi i portave është gati.",tlsTitle:"Arritshmëria HTTPS & Analizuesi TLS",tlsP:"Kontrollo arritshmërinë HTTPS dhe statusin HTTP. Certifikata, cipher dhe versioni TLS kërkojnë backend serveri.",analyze:"Analizo",webReady:"> Inspektori Web është gati...",headerTitle:"Inspektori i Header-ave HTTP & Redirect Checker",headerP:"Kontrollo statusin HTTP, header-at e përgjigjes dhe zinxhirët e ridrejtimit.",inspect:"Inspekto",headerReady:"> Kontrolli i header-ave është gati.",ipTitle:"IP publike, ASN, ISP & Zbulimi Proxy/VPN",ipP:"Tregon të dhëna reale të IP-së, vendndodhjes, ISP-së, ASN-së dhe, nëse jepen nga API, Proxy/VPN.",query:"Kërko",secReady:"> Mjeti i sigurisë është gati.",abuseTitle:"Reverse IP & Kërkimi i kontaktit Abuse",abuseP:"Gjej domenet e hostuara në një IP dhe kontaktet Abuse.",abuseReady:"> Mjeti Abuse është gati.",adminTitle:"Mjete Admin (MAC, Password, JWT, Base64, JSON)",adminP:"Gjenero fjalëkalime dhe UUID, konverto timestamp ose dekodo JWT/Base64.",execute:"Ekzekuto",adminReady:"> Konsola Admin është gati.",macTitle:"Gjenerator i adresës MAC & QR Code",macP:"Kontrollo informacionin e prodhuesit MAC ose gjenero kode QR.",process:"Përpuno",macReady:"> Mjeti MAC / QR është gati.",history:"Regjistri i aktiviteteve të Toolkit",clear:"Pastro regjistrin",time:"Timestamp",tool:"Kategoria / Mjeti",target:"Destinacioni / Hyrja",result:"Rezultati / Statusi",empty:"Nuk ka ende veprime në këtë sesion.",privacy:"Privatësia",terms:"Kushtet e përdorimit",rights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",ipph:"IP/CIDR (p.sh. 10.0.0.0/16)",networkPH:"Rrjeti, p.sh. 192.168.0.0/22",domainPH:"domain.com",ipPH:"Kërko adresën IP",hostPH:"IP ose hostname",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"Adresa MAC ose tekst QR",adminPH:"Shkruaj tekst ose JSON..."
+},
+ar:{
+title:"حزمة أدوات مهندس الشبكات – Fasqoo",home:"الرئيسية",faq:"الأسئلة الشائعة",diagnose:"تشخيص تقنية المعلومات",about:"من نحن",hero:"حزمة أدوات مهندس الشبكات ومجموعة التشخيص",heroP:"أدوات احترافية للشبكات والإدارة – حسابات حقيقية وحدود المتصفح موضحة بشفافية.",accuracy:"يتم حساب بيانات الشبكة محليًا. تأتي المعلومات الخارجية فقط من واجهات API وخوادم DNS التي تم الاستعلام عنها؛ ويتم توضيح القياسات التي لا يمكن للمتصفح تنفيذها على أنها غير متاحة.",copy:"📋 نسخ النتائج",share:"📤 مشاركة النتائج",json:"💻 تصدير JSON",print:"🖨️ طباعة التقرير",subnetTab:"📐 IP وتقسيم الشبكات",dnsTab:"🌐 DNS والسجلات",netTab:"⚡ الشبكة و Ping",webTab:"🔒 الويب والخادم",secTab:"🛡️ IP والأمان",adminTab:"🛠️ أدوات الإدارة",search:"ابحث عن أداة … مثل Subnet أو DNS أو Ping أو JWT",local:"حسابات محلية",nofake:"بدون مقاييس وهمية",responsive:"حزمة IT متجاوبة",subnetTitle:"حاسبة IPv4 / CIDR",subnetP:"احسب قناع الشبكة وعنوان الشبكة والبث والمضيفين القابلين للاستخدام وIP الثنائي.",calc:"احسب",subnetReady:"> جاهز لحساب الشبكة الفرعية...",vlsmTitle:"حاسبة IPv6 Prefix وVLSM",vlsmP:"احسب معلومات بادئة IPv6 وخطط لشبكات IPv4 VLSM حقيقية وفق متطلبات المضيفين.",vlsmPH:"متطلبات المضيفين، مثل\n100\n50\n20\n10",vlsmBtn:"تحليل VLSM",vlsmReady:"> في انتظار الإدخال...",dnsTitle:"بحث DNS (A, AAAA, MX, TXT, NS, SOA)",dnsP:"استعلم عن سجلات DNS وDNS العكسي (PTR) عبر خوادم DoH آمنة.",lookup:"بحث",dnsReady:"> وحدة تحكم DNS جاهزة.",all:"جميع السجلات",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX (البريد)",txt:"TXT",ns:"NS",ptr:"PTR / عكسي",propTitle:"انتشار DNS وفحص DNSSEC",propP:"تحقق من انتشار DNS وحالة الأمان (DNSSEC).",check:"تحقق",propReady:"> جاهز لفحص الانتشار...",netTitle:"إمكانية الوصول إلى الشبكة والتشخيص",netP:"قس إمكانية الوصول عبر HTTP ووضح التشخيصات الشبكية التي لا يستطيع المتصفح تنفيذها مباشرة.",ping:"إمكانية HTTP / زمن الاستجابة",trace:"Traceroute / MTR (Backend)",portBackend:"اتصال منفذ TCP (Backend)",mtu:"MTU وفقد الحزم (Backend)",start:"بدء الاختبار",netReady:"> تشخيص الشبكة جاهز...",portTitle:"فاحص منافذ TCP / UDP",portP:"يوضح بشفافية أن اختبارات منافذ TCP/UDP الموثوقة غير ممكنة من صفحة ويب عادية.",portBtn:"فحص المنفذ",portReady:"> فاحص المنافذ جاهز.",tlsTitle:"إمكانية HTTPS ومحلل TLS",tlsP:"تحقق من إمكانية HTTPS وحالة HTTP. تحليل الشهادة وCipher وإصدار TLS يحتاج إلى خادم خلفي.",analyze:"تحليل",webReady:"> فاحص الويب جاهز...",headerTitle:"فاحص ترويسات HTTP وإعادة التوجيه",headerP:"افحص حالة HTTP وترويسات الاستجابة وسلاسل إعادة التوجيه.",inspect:"فحص",headerReady:"> فحص الترويسات جاهز.",ipTitle:"IP العام وASN وISP وكشف Proxy/VPN",ipP:"يعرض بيانات IP والموقع وISP وASN الحقيقية، وبيانات Proxy/VPN إذا وفرتها واجهة API.",query:"استعلام",secReady:"> أداة الأمان جاهزة.",abuseTitle:"Reverse IP وبحث جهة Abuse",abuseP:"اعثر على النطاقات المستضافة على IP وجهات اتصال Abuse.",abuseReady:"> أداة Abuse جاهزة.",adminTitle:"أدوات الإدارة (MAC، كلمة المرور، JWT، Base64، JSON)",adminP:"أنشئ كلمات مرور وUUID، وحوّل timestamps أو فك ترميز JWT/Base64.",execute:"تنفيذ",adminReady:"> وحدة تحكم الإدارة جاهزة.",macTitle:"مولد عنوان MAC وQR Code",macP:"افحص معلومات الشركة المصنعة لـ MAC أو أنشئ رموز QR.",process:"معالجة",macReady:"> أداة MAC / QR جاهزة.",history:"سجل نشاط حزمة الأدوات",clear:"مسح السجل",time:"الطابع الزمني",tool:"الفئة / الأداة",target:"الهدف / الإدخال",result:"النتيجة / الحالة",empty:"لا توجد إجراءات في هذه الجلسة حتى الآن.",privacy:"الخصوصية",terms:"شروط الاستخدام",rights:"© 2026 Fasqoo. جميع الحقوق محفوظة.",ipph:"IP/CIDR (مثال: 10.0.0.0/16)",networkPH:"الشبكة، مثال: 192.168.0.0/22",domainPH:"domain.com",ipPH:"استعلام عن عنوان IP",hostPH:"IP أو اسم المضيف",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"عنوان MAC أو نص QR",adminPH:"أدخل نصًا أو JSON..."
+},
+zh:{
+title:"网络工程师工具包 – Fasqoo",home:"首页",faq:"常见问题",diagnose:"IT 诊断",about:"关于我们",hero:"网络工程师工具包与诊断套件",heroP:"专业网络与管理工具——真实计算，并透明说明浏览器限制。",accuracy:"网络数据在本地计算。外部信息仅来自实际查询的 API/DNS 解析器；浏览器无法执行的测量会明确标记为不可用。",copy:"📋 复制结果",share:"📤 分享结果",json:"💻 导出 JSON",print:"🖨️ 打印报告",subnetTab:"📐 IP 与子网",dnsTab:"🌐 DNS 与记录",netTab:"⚡ 网络与 Ping",webTab:"🔒 Web 与服务器",secTab:"🛡️ IP / 安全",adminTab:"🛠️ 管理工具",search:"搜索工具……例如 Subnet、DNS、Ping、JWT",local:"本地计算",nofake:"无虚假指标",responsive:"响应式 IT 工具包",subnetTitle:"IPv4 / CIDR 计算器",subnetP:"计算子网掩码、网络地址、广播地址、可用主机和二进制 IP。",calc:"计算",subnetReady:"> 已准备好进行子网计算...",vlsmTitle:"IPv6 Prefix 与 VLSM 计算器",vlsmP:"计算 IPv6 前缀信息，并根据实际主机需求规划 IPv4 VLSM 子网。",vlsmPH:"主机需求，例如\n100\n50\n20\n10",vlsmBtn:"VLSM 分析",vlsmReady:"> 等待输入...",dnsTitle:"DNS 查询（A、AAAA、MX、TXT、NS、SOA）",dnsP:"通过安全的 DoH 解析器查询 DNS 记录和反向 DNS（PTR）。",lookup:"查询",dnsReady:"> DNS 控制台已就绪。",all:"全部记录",a:"A (IPv4)",aaaa:"AAAA (IPv6)",mx:"MX（邮件）",txt:"TXT",ns:"NS",ptr:"PTR / 反向",propTitle:"DNS 传播与 DNSSEC 检查",propP:"检查 DNS 传播情况和安全状态（DNSSEC）。",check:"检查",propReady:"> 已准备好进行传播检查...",netTitle:"网络可达性与诊断",netP:"测量 HTTP 可达性，并明确显示浏览器无法直接执行的网络诊断。",ping:"HTTP 可达性 / 延迟",trace:"Traceroute / MTR（后端）",portBackend:"TCP 端口连接（后端）",mtu:"MTU 与丢包（后端）",start:"开始测试",netReady:"> 网络诊断已就绪...",portTitle:"TCP / UDP 端口检查器",portP:"透明说明普通网页无法可靠执行 TCP/UDP 端口测试。",portBtn:"检查端口",portReady:"> 端口检查器已就绪。",tlsTitle:"HTTPS 可达性与 TLS 分析器",tlsP:"检查 HTTPS 可达性和 HTTP 状态。证书、Cipher 和 TLS 版本分析需要服务器后端。",analyze:"分析",webReady:"> Web 检查器已就绪...",headerTitle:"HTTP Header 检查器与重定向检查",headerP:"检查 HTTP 状态、响应 Header 和重定向链。",inspect:"检查",headerReady:"> Header 检查已就绪。",ipTitle:"公网 IP、ASN、ISP 与 Proxy/VPN 检测",ipP:"显示真实的 IP、位置、ISP、ASN，以及 API 提供的 Proxy/VPN 数据。",query:"查询",secReady:"> 安全工具已就绪。",abuseTitle:"反向 IP 与 Abuse 联系方式查询",abuseP:"查找 IP 上托管的域名和 Abuse 联系方式。",abuseReady:"> Abuse 工具已就绪。",adminTitle:"管理工具（MAC、密码、JWT、Base64、JSON）",adminP:"生成密码和 UUID，转换时间戳或解码 JWT/Base64。",execute:"执行",adminReady:"> 管理控制台已就绪。",macTitle:"MAC 地址与 QR Code 生成器",macP:"检查 MAC 厂商信息或生成二维码。",process:"处理",macReady:"> MAC / QR 工具已就绪。",history:"工具包活动日志",clear:"清除日志",time:"时间戳",tool:"类别 / 工具",target:"目标 / 输入",result:"结果 / 状态",empty:"本次会话尚无操作。",privacy:"隐私",terms:"使用条款",rights:"© 2026 Fasqoo。保留所有权利。",ipph:"IP/CIDR（例如 10.0.0.0/16）",networkPH:"网络，例如 192.168.0.0/22",domainPH:"domain.com",ipPH:"查询 IP 地址",hostPH:"IP 或主机名",portPH:"domain.com:port",urlPH:"https://domain.com",url2PH:"https://url.com",macPH:"MAC 地址或 QR 文本",adminPH:"输入文本或 JSON..."
+}
+};
+
+const NAV={
+de:{home:"Startseite",faq:"FAQ",diagnose:"IT-Diagnose",about:"Über uns"},
+fr:{home:"Accueil",faq:"FAQ",diagnose:"Diagnostic IT",about:"À propos"},
+en:{home:"Home",faq:"FAQ",diagnose:"IT Diagnostics",about:"About"},
+it:{home:"Home",faq:"FAQ",diagnose:"Diagnostica IT",about:"Chi siamo"},
+pt:{home:"Início",faq:"FAQ",diagnose:"Diagnóstico de TI",about:"Sobre"},
+es:{home:"Inicio",faq:"FAQ",diagnose:"Diagnóstico IT",about:"Sobre nosotros"},
+tr:{home:"Ana Sayfa",faq:"SSS",diagnose:"BT Tanılama",about:"Hakkımızda"},
+sq:{home:"Kryefaqja",faq:"FAQ",diagnose:"Diagnostikë IT",about:"Rreth nesh"},
+ar:{home:"الرئيسية",faq:"الأسئلة الشائعة",diagnose:"تشخيص تقنية المعلومات",about:"من نحن"},
+zh:{home:"首页",faq:"常见问题",diagnose:"IT 诊断",about:"关于我们"}
+};
+
+function set(el,text){if(el&&text!=null)el.textContent=text}
+function apply(lang){
+  if(!I18N[lang])lang="de"; const t=I18N[lang];
+  document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.title=t.title;
+  set($("pageTitle"),t.title);
+  [["navHome",NAV[lang].home],["navFaq",NAV[lang].faq],["navStatus",NAV[lang].diagnose],["navAbout",NAV[lang].about],
+   ["accuracyNote",t.accuracy],["copyResultsBtn",t.copy],["shareResultsBtn",t.share],["jsonExportBtn",t.json],["printReportBtn",t.print],
+   ["calcSubnetBtn",t.calc],["calcVlsmBtn",t.vlsmBtn],["runDnsTool",t.lookup],["runPropBtn",t.check],["runNetTest",t.start],["runPortCheck",t.portBtn],
+   ["runWebCheck",t.analyze],["runHeaderCheck",t.inspect],["runSecIpBtn",t.query],["runAbuseBtn",t.lookup],["runAdminTool",t.execute],["runMacBtn",t.process],
+   ["clearLog",t.clear],["fqCommandSearch",null]].forEach(([id,v])=>{if(v)set($(id),v)});
+  const q=$("fqCommandSearch"); if(q)q.placeholder=t.search;
+  set(document.querySelector(".hero h1"),t.hero);set(document.querySelector(".hero p"),t.heroP);
+  const tabs=[t.subnetTab,t.dnsTab,t.netTab,t.webTab,t.secTab,t.adminTab];
+  document.querySelectorAll(".tab-btn").forEach((e,i)=>set(e,tabs[i]));
+  const boxes=document.querySelectorAll(".it-tool-box");
+  const vals=[
+    [t.subnetTitle,t.subnetP],[t.vlsmTitle,t.vlsmP],[t.dnsTitle,t.dnsP],[t.propTitle,t.propP],
+    [t.netTitle,t.netP],[t.portTitle,t.portP],[t.tlsTitle,t.tlsP],[t.headerTitle,t.headerP],
+    [t.ipTitle,t.ipP],[t.abuseTitle,t.abuseP],[t.adminTitle,t.adminP],[t.macTitle,t.macP]
+  ];
+  boxes.forEach((box,i)=>{if(!vals[i])return;set(box.querySelector("h3"),vals[i][0]);set(box.querySelector("p"),vals[i][1])});
+  const inputs={
+    subnetInput:t.ipph,vlsmInput:t.networkPH,vlsmHosts:t.vlsmPH,dnsDomainInput:t.domainPH,propInput:t.domainPH,
+    netTarget:t.hostPH,portTarget:t.portPH,webTarget:t.urlPH,headerInput:t.url2PH,secIpInput:t.ipPH,abuseInput:t.ipPH,macInput:t.macPH,adminInput:t.adminPH
+  };
+  Object.entries(inputs).forEach(([id,v])=>{if($(id))$(id).placeholder=v});
+  const dns=$("dnsTypeSelect"); if(dns){[t.all,t.a,t.aaaa,t.mx,t.txt,t.ns,t.ptr].forEach((v,i)=>{if(dns.options[i])dns.options[i].textContent=v})}
+  const nt=$("netTestType"); if(nt){[t.ping,t.trace,t.portBackend,t.mtu].forEach((v,i)=>{if(nt.options[i])nt.options[i].textContent=v})}
+  const ad=$("adminAction"); if(ad){
+    const ar=lang==="de"?["Base64 Encode","Base64 Decode","URL Encode","JWT Decoder","Passwort Generator","UUID Generator","JSON Formatter","Timestamp Converter"]:
+      lang==="en"?["Base64 Encode","Base64 Decode","URL Encode","JWT Decoder","Password Generator","UUID Generator","JSON Formatter","Timestamp Converter"]:
+      lang==="fr"?["Encodage Base64","Décodage Base64","Encodage URL","Décodeur JWT","Générateur de mot de passe","Générateur UUID","Formateur JSON","Convertisseur Timestamp"]:
+      lang==="es"?["Codificar Base64","Decodificar Base64","Codificar URL","Decodificador JWT","Generador de contraseñas","Generador UUID","Formateador JSON","Conversor de Timestamp"]:
+      lang==="it"?["Codifica Base64","Decodifica Base64","Codifica URL","Decoder JWT","Generatore password","Generatore UUID","Formatter JSON","Convertitore Timestamp"]:
+      lang==="pt"?["Codificar Base64","Descodificar Base64","Codificar URL","Descodificador JWT","Gerador de passwords","Gerador UUID","Formatador JSON","Conversor de Timestamp"]:
+      lang==="tr"?["Base64 Kodla","Base64 Çöz","URL Kodla","JWT Çözücü","Parola Oluşturucu","UUID Oluşturucu","JSON Biçimlendirici","Timestamp Dönüştürücü"]:
+      lang==="sq"?["Kodim Base64","Dekodim Base64","Kodim URL","Dekoder JWT","Gjenerator fjalëkalimi","Gjenerator UUID","Formatues JSON","Konvertues Timestamp"]:
+      lang==="ar"?["ترميز Base64","فك Base64","ترميز URL","فك JWT","مولد كلمات المرور","مولد UUID","تنسيق JSON","محول Timestamp"]:
+      ["Base64 编码","Base64 解码","URL 编码","JWT 解码器","密码生成器","UUID 生成器","JSON 格式化","时间戳转换"];
+    ar.forEach((v,i)=>{if(ad.options[i])ad.options[i].textContent=v});
+  }
+  const h=document.querySelector(".hhead h2");set(h,t.history);
+  const th=document.querySelectorAll("th");[t.time,t.tool,t.target,t.result].forEach((v,i)=>set(th[i],v));
+  const empty=document.querySelector(".empty");set(empty,t.empty);
+  const links=document.querySelectorAll("footer a");set(links[0],t.privacy);set(links[1],t.terms);
+  const foot=document.querySelector("footer .foot > div");if(foot)set(foot,t.rights);
+  document.querySelectorAll(".fq-chip").forEach((e,i)=>set(e,i===0?"● "+t.local:i===1?t.nofake:t.responsive));
+  try{localStorage.setItem("fasqoo-language",lang)}catch(e){}
+}
+const oldApply=window.applyNavigationLanguage;
+window.applyNavigationLanguage=function(lang){ apply(lang); };
+const sel=$("langSelect");
+if(sel){
+  let lang="de";try{lang=localStorage.getItem("fasqoo-language")||"de"}catch(e){}
+  apply(lang);sel.value=lang;
+  sel.addEventListener("change",()=>apply(sel.value));
+}
+})();
+</script>
+
+
+<script id="fasqoo-dynamic-i18n">
+(function(){
+  const map={
+    de:{ready:"> Bereit.",error:"Fehler: ",invalid:"Ungültige Eingabe.",none:"Keine Daten.",copied:"Ergebnisse kopiert!"},
+    en:{ready:"> Ready.",error:"Error: ",invalid:"Invalid input.",none:"No data.",copied:"Results copied!"},
+    fr:{ready:"> Prêt.",error:"Erreur : ",invalid:"Entrée invalide.",none:"Aucune donnée.",copied:"Résultats copiés !"},
+    it:{ready:"> Pronto.",error:"Errore: ",invalid:"Input non valido.",none:"Nessun dato.",copied:"Risultati copiati!"},
+    pt:{ready:"> Pronto.",error:"Erro: ",invalid:"Entrada inválida.",none:"Sem dados.",copied:"Resultados copiados!"},
+    es:{ready:"> Listo.",error:"Error: ",invalid:"Entrada no válida.",none:"Sin datos.",copied:"¡Resultados copiados!"},
+    tr:{ready:"> Hazır.",error:"Hata: ",invalid:"Geçersiz giriş.",none:"Veri yok.",copied:"Sonuçlar kopyalandı!"},
+    sq:{ready:"> Gati.",error:"Gabim: ",invalid:"Hyrje e pavlefshme.",none:"Nuk ka të dhëna.",copied:"Rezultatet u kopjuan!"},
+    ar:{ready:"> جاهز.",error:"خطأ: ",invalid:"إدخال غير صالح.",none:"لا توجد بيانات.",copied:"تم نسخ النتائج!"},
+    zh:{ready:"> 就绪。",error:"错误：",invalid:"输入无效。",none:"没有数据。",copied:"结果已复制！"}
+  };
+  window.fqT=function(k){
+    const lang=document.documentElement.lang||"de";
+    return (map[lang]||map.de)[k]||map.de[k]||k;
+  };
+})();
+</script>
+
+
+<script id="fasqoo-directory-js">
+(function(){
+  const q = document.getElementById('fqToolSearch');
+  const cards = [...document.querySelectorAll('.fq-tool-card')];
+  const cats = [...document.querySelectorAll('.fq-cat')];
+  const no = document.getElementById('fqNoResults');
+  const count = document.getElementById('fqResultCount');
+
+  function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function apply(){
+    const term=normalize(q.value);
+    const active=(document.querySelector('.fq-cat.active')||{}).dataset?.cat || 'all';
+    let shown=0;
+    cards.forEach(c=>{
+      const okTerm=!term || normalize(c.dataset.name).includes(term) || normalize(c.innerText).includes(term);
+      const okCat=active==='all' || (c.dataset.cat||'').split(/\s+/).includes(active);
+      const yes=okTerm&&okCat;
+      c.hidden=!yes; if(yes) shown++;
+    });
+    no.hidden=shown!==0;
+    count.textContent=term ? shown+' Treffer' : (active==='all'?'Alle Werkzeuge':shown+' Werkzeuge');
+  }
+  q?.addEventListener('input',apply);
+  cats.forEach(c=>c.addEventListener('click',()=>{
+    cats.forEach(x=>x.classList.remove('active')); c.classList.add('active'); apply();
+  }));
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();q?.focus();}
+    if(e.key==='Escape'&&document.activeElement===q){q.value='';apply();q.blur();}
+  });
+  document.querySelectorAll('[data-fq-target]').forEach(btn=>btn.addEventListener('click',()=>{
+    const target=btn.dataset.fqTarget;
+    const map={subnet:'#sec-subnet',dns:'#sec-dns',ip:'#sec-security',network:'#sec-network',admin:'#sec-admin',mac:'#sec-admin',header:'#sec-web'};
+    const el=document.querySelector(map[target]||target);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+  }));
+  const total=document.getElementById('fqToolCount'); if(total) total.textContent=cards.length+'+';
+  apply();
+})();
+</script>
+
+
+<script>
+/* FASQOO LANGUAGE LAYER — directory + major static labels */
+(function(){
+  const T={
+    de:{
+      heroTitle:"Alle Netzwerk-Tools. An einem Ort.",
+      heroDesc:"Subnetting, DNS, IP, Diagnose, Security, MikroTik, Fiber, WiFi und mehr – schnell, professionell und transparent.",
+      search:"Tools durchsuchen…",
+      popular:"Beliebte Tools",
+      categories:"Kategorien",
+      all:"Alle",
+      noResults:"Keine passenden Tools gefunden.",
+      free:"100% kostenlos", noReg:"Keine Registrierung", noLimits:"Keine Limits",
+      cards:{
+        subnet:["IPv4 Subnet Calculator","Subnetze, Netz-/Broadcast-Adresse, Hosts und CIDR-Details berechnen."],
+        vlsm:["VLSM Planner","Variable Subnetze planen und Adressbereiche effizient aufteilen."],
+        dns:["DNS Lookup","A, AAAA, MX, TXT, NS, SOA und PTR-DNS-Einträge prüfen."],
+        ip:["What's My IP","Öffentliche IP, ASN, ISP und Proxy/VPN-Informationen anzeigen."],
+        network:["Network Diagnostics","Erreichbarkeit, Ping-ähnliche Diagnose und Netzwerkstatus prüfen."],
+        web:["HTTP / Web Inspector","HTTP-Header, Redirects und HTTPS-Erreichbarkeit analysieren."],
+        security:["Security & Crypto","JWT, Base64, Hashing und weitere sichere Admin-Hilfen."],
+        admin:["Admin Utilities","JSON, UUID, Timestamp, Passwort und weitere Admin-Werkzeuge."],
+        wifi:["WiFi & Wireless","Werkzeuge und Referenzen für WiFi-/Wireless-Workflows."]
+      }
+    },
+    en:{
+      heroTitle:"All Network Tools. In One Place.",
+      heroDesc:"Subnetting, DNS, IP, diagnostics, security, MikroTik, fiber, WiFi and more — fast, professional and transparent.",
+      search:"Search tools…", popular:"Popular Tools", categories:"Categories", all:"All",
+      noResults:"No matching tools found.", free:"100% free", noReg:"No registration", noLimits:"No limits",
+      cards:{
+        subnet:["IPv4 Subnet Calculator","Calculate subnets, network/broadcast addresses, hosts and CIDR details."],
+        vlsm:["VLSM Planner","Plan variable-length subnets and allocate address ranges efficiently."],
+        dns:["DNS Lookup","Check A, AAAA, MX, TXT, NS, SOA and PTR DNS records."],
+        ip:["What's My IP","View public IP, ASN, ISP and proxy/VPN information."],
+        network:["Network Diagnostics","Check reachability and network diagnostics."],
+        web:["HTTP / Web Inspector","Analyze HTTP headers, redirects and HTTPS reachability."],
+        security:["Security & Crypto","JWT, Base64, hashing and other secure admin helpers."],
+        admin:["Admin Utilities","JSON, UUID, timestamp, password and other admin tools."],
+        wifi:["WiFi & Wireless","Tools and references for WiFi/wireless workflows."]
+      }
+    },
+    fr:{
+      heroTitle:"Tous les outils réseau. Au même endroit.",
+      heroDesc:"Subnetting, DNS, IP, diagnostic, sécurité, MikroTik, fibre, WiFi et plus — rapide, professionnel et transparent.",
+      search:"Rechercher des outils…", popular:"Outils populaires", categories:"Catégories", all:"Tous",
+      noResults:"Aucun outil correspondant trouvé.", free:"100 % gratuit", noReg:"Sans inscription", noLimits:"Sans limites",
+      cards:{
+        subnet:["Calculateur de sous-réseau IPv4","Calculer les sous-réseaux, adresses réseau/diffusion, hôtes et détails CIDR."],
+        vlsm:["Planificateur VLSM","Planifier des sous-réseaux de longueur variable et répartir les plages d’adresses."],
+        dns:["Recherche DNS","Vérifier les enregistrements DNS A, AAAA, MX, TXT, NS, SOA et PTR."],
+        ip:["Quelle est mon IP","Afficher l’IP publique, l’ASN, le FAI et les informations proxy/VPN."],
+        network:["Diagnostic réseau","Vérifier l’accessibilité et effectuer des diagnostics réseau."],
+        web:["Inspecteur HTTP / Web","Analyser les en-têtes HTTP, redirections et l’accessibilité HTTPS."],
+        security:["Sécurité & Crypto","JWT, Base64, hachage et autres outils d’administration."],
+        admin:["Utilitaires Admin","JSON, UUID, timestamp, mots de passe et autres outils d’administration."],
+        wifi:["WiFi & Sans fil","Outils et références pour les workflows WiFi/sans fil."]
+      }
+    },
+    es:{
+      heroTitle:"Todas las herramientas de red. En un solo lugar.",
+      heroDesc:"Subnetting, DNS, IP, diagnóstico, seguridad, MikroTik, fibra, WiFi y más — rápido, profesional y transparente.",
+      search:"Buscar herramientas…", popular:"Herramientas populares", categories:"Categorías", all:"Todas",
+      noResults:"No se encontraron herramientas.", free:"100 % gratis", noReg:"Sin registro", noLimits:"Sin límites",
+      cards:{
+        subnet:["Calculadora de subred IPv4","Calcula subredes, direcciones de red/broadcast, hosts y detalles CIDR."],
+        vlsm:["Planificador VLSM","Planifica subredes de longitud variable y distribuye rangos de direcciones."],
+        dns:["Consulta DNS","Comprueba registros DNS A, AAAA, MX, TXT, NS, SOA y PTR."],
+        ip:["Cuál es mi IP","Muestra IP pública, ASN, ISP e información de proxy/VPN."],
+        network:["Diagnóstico de red","Comprueba accesibilidad y realiza diagnósticos de red."],
+        web:["Inspector HTTP / Web","Analiza cabeceras HTTP, redirecciones y accesibilidad HTTPS."],
+        security:["Seguridad y Cripto","JWT, Base64, hash y otras herramientas administrativas."],
+        admin:["Utilidades Admin","JSON, UUID, timestamp, contraseñas y otras herramientas."],
+        wifi:["WiFi e inalámbrico","Herramientas y referencias para flujos WiFi/inalámbricos."]
+      }
+    },
+    it:{
+      heroTitle:"Tutti gli strumenti di rete. In un unico posto.",
+      heroDesc:"Subnetting, DNS, IP, diagnostica, sicurezza, MikroTik, fibra, WiFi e altro — veloce, professionale e trasparente.",
+      search:"Cerca strumenti…", popular:"Strumenti popolari", categories:"Categorie", all:"Tutti",
+      noResults:"Nessuno strumento trovato.", free:"100% gratuito", noReg:"Nessuna registrazione", noLimits:"Nessun limite",
+      cards:{
+        subnet:["Calcolatore subnet IPv4","Calcola subnet, indirizzi di rete/broadcast, host e dettagli CIDR."],
+        vlsm:["Pianificatore VLSM","Pianifica subnet a lunghezza variabile e assegna gli intervalli di indirizzi."],
+        dns:["DNS Lookup","Controlla i record DNS A, AAAA, MX, TXT, NS, SOA e PTR."],
+        ip:["Qual è il mio IP","Mostra IP pubblico, ASN, ISP e informazioni proxy/VPN."],
+        network:["Diagnostica di rete","Controlla raggiungibilità e diagnostica di rete."],
+        web:["Ispettore HTTP / Web","Analizza header HTTP, redirect e raggiungibilità HTTPS."],
+        security:["Sicurezza e Crypto","JWT, Base64, hashing e altri strumenti admin."],
+        admin:["Utilità Admin","JSON, UUID, timestamp, password e altri strumenti admin."],
+        wifi:["WiFi e Wireless","Strumenti e riferimenti per workflow WiFi/wireless."]
+      }
+    },
+    pt:{
+      heroTitle:"Todas as ferramentas de rede. Num só lugar.",
+      heroDesc:"Subnetting, DNS, IP, diagnóstico, segurança, MikroTik, fibra, WiFi e muito mais — rápido, profissional e transparente.",
+      search:"Pesquisar ferramentas…", popular:"Ferramentas populares", categories:"Categorias", all:"Todas",
+      noResults:"Nenhuma ferramenta encontrada.", free:"100% grátis", noReg:"Sem registo", noLimits:"Sem limites",
+      cards:{
+        subnet:["Calculadora de Subnet IPv4","Calcule subnets, endereços de rede/broadcast, hosts e detalhes CIDR."],
+        vlsm:["Planeador VLSM","Planeie subnets de comprimento variável e distribua intervalos de endereços."],
+        dns:["Consulta DNS","Verifique registos DNS A, AAAA, MX, TXT, NS, SOA e PTR."],
+        ip:["Qual é o meu IP","Veja IP público, ASN, ISP e informações de proxy/VPN."],
+        network:["Diagnóstico de Rede","Verifique acessibilidade e diagnóstico de rede."],
+        web:["Inspetor HTTP / Web","Analise cabeçalhos HTTP, redirecionamentos e acessibilidade HTTPS."],
+        security:["Segurança e Crypto","JWT, Base64, hashing e outras ferramentas administrativas."],
+        admin:["Utilitários Admin","JSON, UUID, timestamp, palavras-passe e outras ferramentas."],
+        wifi:["WiFi e Wireless","Ferramentas e referências para fluxos WiFi/wireless."]
+      }
+    },
+    tr:{
+      heroTitle:"Tüm ağ araçları. Tek bir yerde.",
+      heroDesc:"Subnetting, DNS, IP, teşhis, güvenlik, MikroTik, fiber, WiFi ve daha fazlası — hızlı, profesyonel ve şeffaf.",
+      search:"Araçlarda ara…", popular:"Popüler Araçlar", categories:"Kategoriler", all:"Tümü",
+      noResults:"Eşleşen araç bulunamadı.", free:"%100 ücretsiz", noReg:"Kayıt yok", noLimits:"Limit yok",
+      cards:{
+        subnet:["IPv4 Alt Ağ Hesaplayıcı","Alt ağları, ağ/yayın adreslerini, hostları ve CIDR ayrıntılarını hesaplayın."],
+        vlsm:["VLSM Planlayıcı","Değişken uzunluklu alt ağları planlayın ve adres aralıklarını verimli dağıtın."],
+        dns:["DNS Sorgulama","A, AAAA, MX, TXT, NS, SOA ve PTR DNS kayıtlarını kontrol edin."],
+        ip:["IP Adresim Nedir","Genel IP, ASN, ISS ve proxy/VPN bilgilerini görüntüleyin."],
+        network:["Ağ Teşhisi","Erişilebilirliği ve ağ tanılamasını kontrol edin."],
+        web:["HTTP / Web Denetleyici","HTTP başlıklarını, yönlendirmeleri ve HTTPS erişilebilirliğini analiz edin."],
+        security:["Güvenlik ve Kripto","JWT, Base64, hash ve diğer yönetim yardımcıları."],
+        admin:["Yönetici Araçları","JSON, UUID, zaman damgası, parola ve diğer yönetici araçları."],
+        wifi:["WiFi ve Kablosuz","WiFi/kablosuz iş akışları için araçlar ve referanslar."]
+      }
+    },
+    sq:{
+      heroTitle:"Të gjitha mjetet e rrjetit. Në një vend.",
+      heroDesc:"Subnetting, DNS, IP, diagnostikim, siguri, MikroTik, fibër, WiFi dhe më shumë — shpejt, profesionalisht dhe transparent.",
+      search:"Kërko mjete…", popular:"Mjetet e njohura", categories:"Kategoritë", all:"Të gjitha",
+      noResults:"Nuk u gjet asnjë mjet.", free:"100% falas", noReg:"Pa regjistrim", noLimits:"Pa kufizime",
+      cards:{
+        subnet:["Llogaritësi IPv4 Subnet","Llogarit subnetet, adresat e rrjetit/broadcast-it, hostet dhe detajet CIDR."],
+        vlsm:["Planifikuesi VLSM","Planifiko subnetet me gjatësi të ndryshueshme dhe shpërndaj intervalet e adresave."],
+        dns:["Kërkimi DNS","Kontrollo rekordet DNS A, AAAA, MX, TXT, NS, SOA dhe PTR."],
+        ip:["Cila është IP-ja ime","Shfaq IP-në publike, ASN, ISP dhe informacionin proxy/VPN."],
+        network:["Diagnostikimi i rrjetit","Kontrollo arritshmërinë dhe diagnostikimin e rrjetit."],
+        web:["Inspektori HTTP / Web","Analizo header-at HTTP, ridrejtimet dhe arritshmërinë HTTPS."],
+        security:["Siguria dhe Crypto","JWT, Base64, hashing dhe mjete të tjera administrimi."],
+        admin:["Mjetet e Adminit","JSON, UUID, timestamp, fjalëkalime dhe mjete të tjera administrimi."],
+        wifi:["WiFi dhe Wireless","Mjete dhe referenca për rrjetet WiFi/wireless."]
+      }
+    },
+    ar:{
+      heroTitle:"جميع أدوات الشبكات. في مكان واحد.",
+      heroDesc:"تقسيم الشبكات وDNS وIP والتشخيص والأمان وMikroTik والألياف وWiFi والمزيد — بسرعة واحترافية وشفافية.",
+      search:"ابحث عن الأدوات…", popular:"الأدوات الشائعة", categories:"الفئات", all:"الكل",
+      noResults:"لم يتم العثور على أدوات مطابقة.", free:"مجاني 100%", noReg:"بدون تسجيل", noLimits:"بدون حدود",
+      cards:{
+        subnet:["حاسبة الشبكة الفرعية IPv4","احسب الشبكات الفرعية وعناوين الشبكة والبث والمضيفين وتفاصيل CIDR."],
+        vlsm:["مخطط VLSM","خطط للشبكات الفرعية متغيرة الطول ووزّع نطاقات العناوين بكفاءة."],
+        dns:["بحث DNS","تحقق من سجلات DNS من نوع A وAAAA وMX وTXT وNS وSOA وPTR."],
+        ip:["ما هو عنوان IP الخاص بي","اعرض IP العام وASN وISP ومعلومات Proxy/VPN."],
+        network:["تشخيص الشبكة","تحقق من إمكانية الوصول وشخّص حالة الشبكة."],
+        web:["فاحص HTTP / Web","حلل ترويسات HTTP وإعادات التوجيه وإمكانية الوصول عبر HTTPS."],
+        security:["الأمان والتشفير","JWT وBase64 والتجزئة وأدوات إدارية آمنة أخرى."],
+        admin:["أدوات الإدارة","JSON وUUID والطابع الزمني وكلمات المرور وأدوات إدارية أخرى."],
+        wifi:["WiFi واللاسلكي","أدوات ومراجع لسير عمل WiFi والشبكات اللاسلكية."]
+      }
+    },
+    zh:{
+      heroTitle:"所有网络工具，尽在一处。",
+      heroDesc:"子网划分、DNS、IP、诊断、安全、MikroTik、光纤、WiFi 等 — 快速、专业、透明。",
+      search:"搜索工具…", popular:"热门工具", categories:"分类", all:"全部",
+      noResults:"未找到匹配的工具。", free:"100% 免费", noReg:"无需注册", noLimits:"无使用限制",
+      cards:{
+        subnet:["IPv4 子网计算器","计算子网、网络/广播地址、主机数和 CIDR 详细信息。"],
+        vlsm:["VLSM 规划器","规划可变长度子网并高效分配地址范围。"],
+        dns:["DNS 查询","检查 A、AAAA、MX、TXT、NS、SOA 和 PTR DNS 记录。"],
+        ip:["我的 IP","查看公网 IP、ASN、ISP 以及代理/VPN 信息。"],
+        network:["网络诊断","检查连通性并进行网络诊断。"],
+        web:["HTTP / Web 检查器","分析 HTTP 标头、重定向和 HTTPS 连通性。"],
+        security:["安全与加密","JWT、Base64、哈希和其他安全管理工具。"],
+        admin:["管理工具","JSON、UUID、时间戳、密码和其他管理工具。"],
+        wifi:["WiFi 与无线网络","WiFi/无线网络工作流程的工具和参考资料。"]
+      }
+    }
+  };
+
+  function lang(){
+    const htmlLang=(document.documentElement.lang||"de").toLowerCase().split("-")[0];
+    return T[htmlLang] ? htmlLang : "de";
+  }
+  function apply(){
+    const d=T[lang()];
+    const set=(sel,val)=>{const e=document.querySelector(sel);if(e&&val)e.textContent=val;};
+    const setAttr=(sel,attr,val)=>{const e=document.querySelector(sel);if(e&&val)e.setAttribute(attr,val);};
+    set("#fqHeroTitle",d.heroTitle);
+    set("#fqHeroDesc",d.heroDesc);
+    setAttr("#fqToolSearch","placeholder",d.search);
+    document.querySelectorAll("[data-fq-badge='free']").forEach(e=>e.textContent=d.free);
+    document.querySelectorAll("[data-fq-badge='noreg']").forEach(e=>e.textContent=d.noReg);
+    document.querySelectorAll("[data-fq-badge='nolimits']").forEach(e=>e.textContent=d.noLimits);
+    set("#fqPopularTitle",d.popular);
+    set("#fqCategoriesTitle",d.categories);
+    const all=document.querySelector("[data-fq-cat='all']");
+    if(all) all.textContent=d.all;
+    set("#fqNoResults",d.noResults);
+
+    const keys=["subnet","vlsm","dns","ip","network","web","security","admin","wifi"];
+    keys.forEach(k=>{
+      const card=document.querySelector(`[data-fq-key="${k}"]`);
+      if(!card||!d.cards[k]) return;
+      const h=card.querySelector("h3"), p=card.querySelector("p");
+      if(h) h.textContent=d.cards[k][0];
+      if(p) p.textContent=d.cards[k][1];
+    });
+  }
+  window.FasqooApplyDirectoryLanguage=apply;
+  new MutationObserver(()=>setTimeout(apply,0)).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  document.addEventListener("DOMContentLoaded",apply);
+})();
+</script>
+
+</body>
+</html>
