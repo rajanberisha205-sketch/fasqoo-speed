@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff" id="themeColor">
+  <meta name="description" content="Advanced IT & Network Engineer Toolkit with Fasqoo Diagnostics.">
+  <meta name="robots" content="index, follow">
+
+  <title id="pageTitle">Network Engineer Toolkit – Fasqoo</title>
+
+  <link rel="canonical" href="https://www.fasqoo.com/">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+<style>
+:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--soft:#f1f5f9;--orange:#ff5a1f;--orange2:#ff8b5c;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--shadow:0 10px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:400;}
+button,select,input,textarea{font:inherit;}
+button{cursor:pointer;}
+.wrap{width:min(1280px,calc(100% - 32px));margin:auto;}
+
+header{
+  height:72px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(12px);
+}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.brandname{font-size:28px;font-weight:900;letter-spacing:-1.5px;}
+.brandname span{color:var(--orange);}
+
+.main-menu{display:flex;align-items:center;gap:24px;margin-left:auto;}
+.main-menu a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;transition:.2s ease;}
+.main-menu a:hover,.main-menu a.active{color:var(--orange);}
+.menu-extra{display:flex;align-items:center;gap:8px;margin-left:3px;}
+.menu-extra select{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);padding:0 11px;font-weight:700;cursor:pointer;outline:none;}
+.theme-btn{height:38px;width:40px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:18px;cursor:pointer;display:grid;place-items:center;padding:0;transition:.2s ease;}
+.theme-btn:hover{background:var(--soft);}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:20px;color:var(--text);}
+
+main{padding:40px 0 80px;}
+.hero{text-align:center;margin-bottom:30px;}
+.hero h1{font-size:36px;line-height:1.2;font-weight:600;letter-spacing:-1px;margin:0 0 10px;}
+.hero p{margin:0;color:var(--muted);font-size:15px;}
+
+/* TOOLBAR & ACTIONS */
+.tool-actions{display:flex;gap:12px;margin-bottom:25px;flex-wrap:wrap;justify-content:center;}
+.action-btn{background:var(--soft);color:var(--text);border:1px solid var(--line);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:.2s;}
+.action-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* CATEGORY TABS */
+.toolkit-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:25px;scrollbar-width:thin;}
+.tab-btn{background:var(--card);border:1px solid var(--line);color:var(--text);padding:10px 18px;border-radius:30px;font-size:13px;font-weight:500;white-space:nowrap;transition:.2s;}
+.tab-btn:hover,.tab-btn.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* TOOL GRID SYSTEM */
+.toolkit-section{display:none;}
+.toolkit-section.active{display:block;}
+
+.it-tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.it-tool-box{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;transition:.2s;}
+.it-tool-box:hover{border-color:var(--orange);}
+.it-tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.it-tool-icon{width:38px;height:38px;border-radius:8px;background:var(--soft);color:var(--orange);display:grid;place-items:center;font-size:18px;font-weight:bold;}
+.it-tool-header h3{font-size:16px;font-weight:600;margin:0;}
+.it-tool-box p{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 16px;}
+.it-input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.it-input-group input,.it-input-group select,.it-input-group textarea{flex:1;border:1px solid var(--line);background:var(--soft);color:var(--text);padding:10px 12px;border-radius:8px;font-size:12px;outline:none;}
+.it-input-group textarea{min-height:60px;resize:vertical;}
+.it-input-group input:focus,.it-input-group select:focus,.it-input-group textarea:focus{border-color:var(--orange);background:var(--card);}
+.it-btn{background:var(--text);color:var(--card);border:0;border-radius:8px;padding:10px 16px;font-size:12px;font-weight:500;transition:.2s;}
+.it-btn:hover{background:var(--orange);}
+
+.console-output{background:#090d16;color:#38bdf8;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;min-height:90px;max-height:160px;overflow-y:auto;border:1px solid #1e293b;line-height:1.4;white-space:pre-wrap;}
+
+.history{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden;margin-top:40px;box-shadow:var(--shadow);}
+.hhead{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.hhead h2{margin:0;font-size:16px;font-weight:600;}
+.table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;text-align:left;min-width:500px;}
+th,td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;}
+th{font-weight:500;color:var(--muted);background:var(--soft);}
+.empty{text-align:center;color:var(--muted);padding:30px;white-space:normal;}
+
+footer{background:var(--card);border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px;}
+.foot{display:flex;justify-content:space-between;align-items:center;}
+
+.dark{--bg:#030712;--card:#0f172a;--text:#f8fafc;--muted:#94a3b8;--line:#1e293b;--soft:#111827;}
+.dark header,.dark footer{background:#0f172a;}
+.dark .menu-extra select,.dark .theme-btn,.dark .menu-toggle,.dark .it-input-group input,.dark .it-input-group select,.dark .it-input-group textarea{background:#111827;color:var(--text);border-color:var(--line);}
+.dark th{background:#111827;}
+
+@media(max-width:900px){.it-tools-grid{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:72px;
+    left:0;
+    right:0;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    padding:20px;
+    gap:16px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+  }
+  .main-menu.active{display:flex;}
+  .main-menu a{font-size:16px;width:100%;padding:6px 0;}
+  .menu-extra{width:100%;margin-left:0;justify-content:flex-start;}
+  .menu-extra select{flex:1;min-width:0;}
+  .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
+}
+@media print {
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .history { border: none; box-shadow: none; }
+}
+
+.live-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:var(--green);padding:7px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+.accuracy-note{margin:16px auto 0;max-width:760px;color:var(--muted);font-size:12px}
+.it-tool-box{min-height:285px}
+
+/* MOBILE / TABLET OPTIMIZATION
+{.it-tools-grid{grid-template-columns:1fr;}}
+@media(max-width:760px){
+  .menu-toggle{display:block;}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
+  .main-menu.active{display:flex;}
+  .foot{flex-direction:column;gap:12px;text-align:center;}
+  .hero h1{font-size:28px;}
+}
+@media print {
+  header, footer, .tool-actions, .toolkit-tabs, .it-input-group, .menu-toggle { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .history { border: none; box-shadow: none; }
+}
+
+.live-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:var(--green);padding:7px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+.accuracy-note{margin:16px auto 0;max-width:760px;color:var(--muted);font-size:12px}
+.it-tool-box{min-height:285px}
+
+/* MOBILE / TABLET OPTIMIZATION */
+@media (max-width: 760px){
+  .wrap{width:min(100% - 20px,1280px)}
+  header{height:64px}
+  .nav{gap:10px}
+  .brand{gap:8px}
+  .brandmark{width:36px;height:36px;font-size:19px;border-radius:9px}
+  .brandname{font-size:19px}
+  .menu-toggle{display:block;margin-left:auto}
+  .main-menu{
+    display:none;
+    position:absolute;
+    top:64px;
+    left:10px;
+    right:10px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--card);
+    box-shadow:0 15px 35px rgba(0,0,0,.14);
+    flex-direction:column;
+    align-items:stretch;
+    gap:8px;
+    z-index:1100;
+  }
+  .main-menu.active{display:flex}
+  .main-menu>a{
+    padding:11px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  .main-menu>a:hover{background:var(--soft)}
+  .menu-extra{
+    margin:4px 0 0;
+    padding-top:10px;
+    border-top:1px solid var(--line);
+    width:100%;
+  }
+  .menu-extra select{flex:1;min-height:40px}
+  .theme-btn{width:40px;height:40px}
+  main{padding:25px 0 50px}
+  .hero{margin-bottom:22px}
+  .hero h1{font-size:25px;line-height:1.18;letter-spacing:-.5px}
+  .hero p{font-size:13px;line-height:1.5}
+  .accuracy-note{font-size:11px;line-height:1.5}
+  .tool-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:18px
+  }
+  .action-btn{
+    justify-content:center;
+    min-height:42px;
+    padding:9px 8px;
+    font-size:11px
+  }
+  .toolkit-tabs{
+    gap:7px;
+    margin-bottom:18px;
+    padding-bottom:8px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .toolkit-tabs::-webkit-scrollbar{display:none}
+  .tab-btn{
+    padding:9px 13px;
+    font-size:12px;
+    flex:0 0 auto;
+  }
+  .it-tools-grid{grid-template-columns:1fr;gap:13px}
+  .it-tool-box{
+    padding:17px;
+    border-radius:12px;
+    min-height:0;
+  }
+  .it-tool-header{gap:9px;margin-bottom:9px}
+  .it-tool-icon{width:35px;height:35px;font-size:16px}
+  .it-tool-header h3{font-size:14px;line-height:1.3}
+  .it-tool-box p{font-size:11px;line-height:1.5;margin-bottom:12px}
+  .it-input-group{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .it-input-group input,
+  .it-input-group select,
+  .it-input-group textarea,
+  .it-btn{
+    width:100%;
+    min-height:42px;
+    font-size:13px;
+  }
+  .it-input-group textarea{min-height:100px}
+  .it-btn{padding:10px 14px}
+  .console-output{
+    min-height:100px;
+    max-height:280px;
+    padding:12px;
+    font-size:11px;
+    line-height:1.5;
+    overflow:auto;
+    word-break:break-word;
+  }
+  .history{margin-top:25px;border-radius:12px}
+  .hhead{padding:15px}
+  .hhead h2{font-size:14px}
+  th,td{padding:11px 12px;font-size:11px}
+  table{min-width:560px}
+  footer{padding:22px 0}
+  .foot{gap:10px}
+}
+@media (max-width:420px){
+  .wrap{width:calc(100% - 14px)}
+  .brandname{font-size:18px}
+  .hero h1{font-size:22px}
+  .tool-actions{grid-template-columns:1fr}
+  .action-btn{min-height:40px}
+  .it-tool-box{padding:14px}
+  .tab-btn{padding:8px 11px}
+}
+@media (min-width:761px) and (max-width:1050px){
+  .wrap{width:min(100% - 24px,1280px)}
+  .main-menu{gap:12px}
+  .main-menu a{font-size:12px}
+  .it-tools-grid{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand" aria-label="Fasqoo Startseite">
+      <div class="brandname">fasq<span>oo</span></div>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" type="button">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" id="navHome" data-i18n="home">Startseite</a>
+      <a href="faq.html" id="navFaq" data-i18n="faq">FAQ</a>
+      <a href="network-status.html" id="navStatus" class="active" data-i18n="diagnose">IT-Diagnose</a>
+      <a href="about.html" id="navAbout" data-i18n="about">Über uns</a>
+      <div class="menu-extra">
+        <select id="langSelect" aria-label="Language">
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+          <option value="tr">Türkçe</option>
+          <option value="sq">Shqip</option>
+          <option value="ar">العربية</option>
+          <option value="zh">中文</option>
+        </select>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme" title="Dark / Light">☾</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <h1>Network Engineer Toolkit & Diagnose Suite</h1>
+      <p>Professionelle Netzwerk- und Admin-Werkzeuge – ohne erfundene Messwerte.</p>
+    </section>
+
+    <!-- Global Actions -->
+    <div class="tool-actions">
+      <button class="action-btn" id="copyResultsBtn">📋 Ergebnis kopieren</button>
+      <button class="action-btn" id="shareResultsBtn">📤 Ergebnis teilen</button>
+      <button class="action-btn" id="jsonExportBtn">💻 JSON exportieren</button>
+      <button class="action-btn" id="printReportBtn">🖨️ Bericht drucken</button>
+    </div>
+
+    <!-- Category Tabs Navigation -->
+    <div class="toolkit-tabs" id="toolkitTabs">
+      <button class="tab-btn active" data-target="sec-subnet">📐 IP & Subnetting</button>
+      <button class="tab-btn" data-target="sec-dns">🌐 DNS & Records</button>
+      <button class="tab-btn" data-target="sec-network">⚡ Network & Ping</button>
+      <button class="tab-btn" data-target="sec-web">🔒 Web & Server</button>
+      <button class="tab-btn" data-target="sec-security">🛡️ IP / Security</button>
+      <button class="tab-btn" data-target="sec-admin">🛠️ Admin Tools</button>
+    </div>
+
+    <!-- 1. IP & SUBNETTING -->
+    <div class="toolkit-section active" id="sec-subnet">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv4 / CIDR Calculator</h3></div>
+            <p>Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.</p>
+            <div class="it-input-group">
+              <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="IP/CIDR (z.B. 10.0.0.0/16)">
+              <button class="it-btn" id="calcSubnetBtn">Berechnen</button>
+            </div>
+          </div>
+          <div class="console-output" id="subnetOutput">> Bereit für Subnet-Berechnung...</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3>IPv6 & VLSM / Supernet Calculator</h3></div>
+            <p>Ermittle IPv6 Prefix-Ranges und teile IP-Netzwerke via VLSM auf.</p>
+            <div class="it-input-group">
+              <input type="text" id="vlsmInput" value="192.168.0.0/22" placeholder="Netzwerk für VLSM">
+              <button class="it-btn" id="calcVlsmBtn">VLSM Analyse</button>
+            </div>
+          </div>
+          <div class="console-output" id="vlsmOutput">> Warten auf Eingabe...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DNS -->
+    <div class="toolkit-section" id="sec-dns">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🌐</div><h3>DNS Lookup (A, AAAA, MX, TXT, NS, SOA)</h3></div>
+            <p>Frage sämtliche DNS-Einträge und Reverse-DNS (PTR) über sichere DoH Resolver ab.</p>
+            <div class="it-input-group">
+              <input type="text" id="dnsDomainInput" value="google.com" placeholder="domain.com">
+              <select id="dnsTypeSelect">
+                <option value="ALL">Alle Records</option>
+                <option value="A">A (IPv4)</option>
+                <option value="AAAA">AAAA (IPv6)</option>
+                <option value="MX">MX (Mail)</option>
+                <option value="TXT">TXT</option>
+                <option value="NS">NS</option>
+                <option value="PTR">PTR / Reverse</option>
+              </select>
+              <button class="it-btn" id="runDnsTool">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="dnsToolOutput">> DNS-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>DNS Propagation & DNSSEC Check</h3></div>
+            <p>Überprüfe weltweite DNS-Ausbreitung und Sicherheitsstatus (DNSSEC).</p>
+            <div class="it-input-group">
+              <input type="text" id="propInput" value="cloudflare.com" placeholder="domain.com">
+              <button class="it-btn" id="runPropBtn">Prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="propOutput">> Bereit für Propagation-Check...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. NETWORK -->
+    <div class="toolkit-section" id="sec-network">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">⚡</div><h3>Ping, Traceroute & MTR Simulator</h3></div>
+            <p>Simuliere Paketlaufzeiten, RTT, Jitter, MTU Tests und TCP Connectivity.</p>
+            <div class="it-input-group">
+              <input type="text" id="netTarget" value="8.8.8.8" placeholder="IP oder Hostname">
+              <select id="netTestType">
+                <option value="ping">Ping / Latency</option>
+                <option value="traceroute">Traceroute / MTR</option>
+                <option value="port">TCP Port Connect</option>
+                <option value="mtu">MTU & Packet Loss</option>
+              </select>
+              <button class="it-btn" id="runNetTest">Test starten</button>
+            </div>
+          </div>
+          <div class="console-output" id="netOutput">> Netzwerk-Diagnose bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔌</div><h3>TCP & UDP Port Checker</h3></div>
+            <p>Prüfe spezifische Ports auf Erreichbarkeit.</p>
+            <div class="it-input-group">
+              <input type="text" id="portTarget" value="example.com:443" placeholder="domain.com:port">
+              <button class="it-btn" id="runPortCheck">Port prüfen</button>
+            </div>
+          </div>
+          <div class="console-output" id="portOutput">> Port-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WEB / SERVER -->
+    <div class="toolkit-section" id="sec-web">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔒</div><h3>SSL Certificate & TLS Version Analyzer</h3></div>
+            <p>Prüfe SSL/TLS Zertifikatslaufzeit, Verschlüsselung und Security Headers.</p>
+            <div class="it-input-group">
+              <input type="text" id="webTarget" value="https://cloudflare.com" placeholder="https://domain.com">
+              <button class="it-btn" id="runWebCheck">Analysieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="webOutput">> Web-Inspektor bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📋</div><h3>HTTP Header Inspector & Redirect Checker</h3></div>
+            <p>Untersuche HTTP Status, Response Header und Weiterleitungsketten.</p>
+            <div class="it-input-group">
+              <input type="text" id="headerInput" value="https://google.com" placeholder="https://url.com">
+              <button class="it-btn" id="runHeaderCheck">Inspizieren</button>
+            </div>
+          </div>
+          <div class="console-output" id="headerOutput">> Header-Prüfung bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. IP / SECURITY -->
+    <div class="toolkit-section" id="sec-security">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛡️</div><h3>Public IP, ASN, ISP & Proxy/VPN Detection</h3></div>
+            <p>Erkenne eigene IPv4/IPv6, ASN, ISP, IP Reputation und Proxy/VPN Nutzung.</p>
+            <div class="it-input-group">
+              <input type="text" id="secIpInput" value="1.1.1.1" placeholder="IP-Adresse abfragen">
+              <button class="it-btn" id="runSecIpBtn">Abfragen</button>
+            </div>
+          </div>
+          <div class="console-output" id="secIpOutput">> Sicherheits-Tool bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3>Reverse IP & Abuse Contact Lookup</h3></div>
+            <p>Finde gehostete Domains auf einer IP und Abuse-Kontakte.</p>
+            <div class="it-input-group">
+              <input type="text" id="abuseInput" value="8.8.8.8" placeholder="IP eingeben">
+              <button class="it-btn" id="runAbuseBtn">Lookup</button>
+            </div>
+          </div>
+          <div class="console-output" id="abuseOutput">> Abuse-Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ADMIN TOOLS -->
+    <div class="toolkit-section" id="sec-admin">
+      <div class="it-tools-grid">
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">🛠️</div><h3>Admin Utilities (MAC, Password, JWT, Base64, JSON)</h3></div>
+            <p>Generiere Passwörter, UUIDs, konvertiere Timestamps oder decodiere JWT/Base64.</p>
+            <div class="it-input-group">
+              <textarea id="adminInput" placeholder="Text oder JSON eingeben..."></textarea>
+              <select id="adminAction">
+                <option value="base64enc">Base64 Encode</option>
+                <option value="base64dec">Base64 Decode</option>
+                <option value="urlenc">URL Encode</option>
+                <option value="jwtdec">JWT Decoder</option>
+                <option value="pwdgen">Passwort Generator</option>
+                <option value="uuidgen">UUID Generator</option>
+                <option value="jsonfmt">JSON Formatter</option>
+                <option value="timestamp">Timestamp Converter</option>
+              </select>
+              <button class="it-btn" id="runAdminTool">Ausführen</button>
+            </div>
+          </div>
+          <div class="console-output" id="adminOutput">> Admin-Konsole bereit.</div>
+        </div>
+        <div class="it-tool-box">
+          <div>
+            <div class="it-tool-header"><div class="it-tool-icon">📌</div><h3>MAC Address & QR Code Generator</h3></div>
+            <p>Ermittle MAC Vendor Infos oder generiere QR-Codes.</p>
+            <div class="it-input-group">
+              <input type="text" id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="MAC-Adresse oder QR Text">
+              <button class="it-btn" id="runMacBtn">Verarbeiten</button>
+            </div>
+          </div>
+          <div class="console-output" id="macOutput">> MAC / QR Tool bereit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <section class="history">
+      <div class="hhead">
+        <h2>Toolkit Aktivitätsprotokoll</h2>
+        <button class="action-btn" id="clearLog">Log löschen</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Zeitstempel</th>
+              <th>Kategorie / Werkzeug</th>
+              <th>Ziel / Eingabe</th>
+              <th>Ergebnis / Status</th>
+            </tr>
+          </thead>
+          <tbody id="itLogTable">
+            <tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+<div class="wrap foot">
+  <div>© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+  <div style="display:flex; gap:15px;">
+    <a href="/privacy.html" style="color:inherit; text-decoration:none;">Datenschutz</a>
+    <a href="/terms.html" style="color:inherit; text-decoration:none;">Nutzungsbedingungen</a>
+  </div>
+</div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// TAB SWITCHING LOGIK
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toolkit-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    $(btn.getAttribute('data-target')).classList.add('active');
+  });
+});
+
+// LOG SYSTEM
+let logData = [];
+function addLog(tool, target, result){
+  const time = new Date().toLocaleTimeString();
+  logData.unshift({ time, tool, target, result });
+  renderLog();
+}
+
+function renderLog(){
+  const logTable = $("itLogTable");
+  if(!logData.length){
+    logTable.innerHTML = `<tr><td colspan="4" class="empty">Noch keine Aktionen in dieser Session.</td></tr>`;
+    return;
+  }
+  logTable.innerHTML = logData.map(l => `
+    <tr><td>${l.time}</td><td><b>${l.tool}</b></td><td>${l.target}</td><td><span style="color:var(--green)">●</span> ${l.result}</td></tr>
+  `).join("");
+}
+
+// REAL TOOL IMPLEMENTATIONS — no simulated measurements
+function show(id, text){ $(id).textContent = text; }
+
+function ipv4ToInt(ip){
+  const p=ip.trim().split(".");
+  if(p.length!==4 || p.some(x=>!/^\d+$/.test(x)||+x<0||+x>255)) throw new Error("Ungültige IPv4-Adresse.");
+  return (((+p[0]<<24)>>>0)+(+p[1]<<16)+(+p[2]<<8)+(+p[3]))>>>0;
+}
+function intToIPv4(n){return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join(".");}
+function maskFromPrefix(p){return p===0?0:(0xFFFFFFFF<<(32-p))>>>0;}
+function binaryIPv4(ip){return ip.split(".").map(x=>(+x).toString(2).padStart(8,"0")).join(".");}
+function ipClass(ip){const a=+ip.split(".")[0];return a<=127?"A":a<=191?"B":a<=223?"C":a<=239?"D (Multicast)":"E (reserviert)";}
+function isPrivateIPv4(n){const a=(n>>>24)&255,b=(n>>>16)&255;return a===10||(a===172&&b>=16&&b<=31)||(a===192&&b===168)||a===127||(a===169&&b===254);}
+
+$("calcSubnetBtn").onclick=()=>{
+  try{
+    const raw=$("subnetInput").value.trim(), m=raw.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d|[12]\d|3[0-2])$/);
+    if(!m) throw new Error("Format: IPv4/CIDR, z. B. 192.168.1.0/24");
+    const ip=ipv4ToInt(m[1]), p=+m[2], mask=maskFromPrefix(p), network=(ip&mask)>>>0, broadcast=(network|(~mask>>>0))>>>0;
+    const total=2**(32-p), usable=p>=31?total:Math.max(0,total-2), first=p>=31?network:network+1, last=p>=31?broadcast:broadcast-1;
+    show("subnetOutput",`> GÜLTIGE IPv4/CIDR-BERECHNUNG
+> IP: ${m[1]}
+> Präfix: /${p}
+> Subnetzmaske: ${intToIPv4(mask)}
+> Netzwerk: ${intToIPv4(network)}
+> Broadcast: ${intToIPv4(broadcast)}
+> Erste Adresse: ${intToIPv4(first)}
+> Letzte Adresse: ${intToIPv4(last)}
+> Adressen gesamt: ${total.toLocaleString("de-DE")}
+> Nutzbare Hosts: ${usable.toLocaleString("de-DE")}
+> Wildcard: ${intToIPv4((~mask)>>>0)}
+> Binär: ${binaryIPv4(m[1])}
+> Klasse: ${ipClass(m[1])}
+> Privat/Local: ${isPrivateIPv4(ip)?"Ja":"Nein"}`);
+    addLog("IPv4 / CIDR",raw,"Korrekt lokal berechnet");
+  }catch(e){show("subnetOutput","> Fehler: "+e.message);}
+};
+
+$("calcVlsmBtn").onclick=()=>{
+  try{
+    const raw=$("vlsmInput").value.trim(),m=raw.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d|[12]\d|3[0-2])$/);
+    if(!m) throw new Error("Bitte ein gültiges IPv4-Netzwerk eingeben.");
+    const ip=ipv4ToInt(m[1]),p=+m[2],mask=maskFromPrefix(p),n=(ip&mask)>>>0,b=(n|(~mask>>>0))>>>0;
+    show("vlsmOutput",`> Netzwerk: ${intToIPv4(n)}/${p}
+> Maske: ${intToIPv4(mask)}
+> Bereich: ${intToIPv4(n)} – ${intToIPv4(b)}
+> Adressen: ${(2**(32-p)).toLocaleString("de-DE")}
+
+> Für eine echte VLSM-Aufteilung fehlen konkrete Host-Anforderungen.
+> Keine Beispiel-Subnetze werden als echtes Ergebnis ausgegeben.`);
+    addLog("VLSM",raw,"Netzwerk korrekt validiert");
+  }catch(e){show("vlsmOutput","> Fehler: "+e.message);}
+};
+
+async function doh(domain,type){
+  const q=encodeURIComponent(domain.trim().replace(/^https?:\/\//,"").replace(/\/.*$/,""));
+  const r=await fetch(`https://cloudflare-dns.com/dns-query?name=${q}&type=${type}`,{headers:{accept:"application/dns-json"},cache:"no-store"});
+  if(!r.ok)throw new Error(`DNS Resolver HTTP ${r.status}`);
+  return r.json();
+}
+$("runDnsTool").onclick=async()=>{
+  const domain=$("dnsDomainInput").value.trim(),type=$("dnsTypeSelect").value;
+  show("dnsToolOutput","> Echte DNS-Abfrage läuft …");
+  try{
+    const types=type==="ALL"?["A","AAAA","MX","TXT","NS","SOA"]:type==="PTR"?["PTR"]:[type],out=[];
+    for(const t of types){const d=await doh(domain,t);out.push(`${t}:\n${d.Answer?.length?d.Answer.map(a=>`  ${a.data} (TTL ${a.TTL})`).join("\n"):"  Keine Antwort"}`);}
+    show("dnsToolOutput",`> Resolver: Cloudflare DNS over HTTPS\n> Domain: ${domain}\n\n`+out.join("\n"));
+    addLog("DNS Lookup",`${domain} (${type})`,"Echte Resolver-Antwort");
+  }catch(e){show("dnsToolOutput","> DNS-Fehler: "+e.message);}
+};
+
+$("runPropBtn").onclick=async()=>{
+  const domain=$("propInput").value.trim();show("propOutput","> Echte DNSSEC-Abfrage läuft …");
+  try{
+    const d=await doh(domain,"DNSKEY");
+    show("propOutput",`> Domain: ${domain}
+> DNSKEY Records: ${d.Answer?.length||0}
+> DNSSEC-Authentizitätsflag (AD): ${d.AD?"Ja":"Nein / nicht bestätigt"}
+
+> Wichtig: Das ist KEIN weltweiter Propagation-Test. Ein einzelner Browser-Resolver kann keine weltweiten Standorte repräsentieren.
+> Deshalb werden keine erfundenen Frankfurt/New-York/Tokio-Werte angezeigt.`);
+    addLog("DNSSEC Check",domain,"Echte Resolver-Antwort");
+  }catch(e){show("propOutput","> DNSSEC-Fehler: "+e.message);}
+};
+
+$("runNetTest").onclick=async()=>{
+  const target=$("netTarget").value.trim(),type=$("netTestType").value;
+  if(type!=="ping"){
+    show("netOutput",`> ${type}: NICHT DIREKT IM BROWSER MESSBAR.
+> Browser blockieren Raw ICMP, Traceroute/MTR und beliebige TCP/UDP-Sockets.
+> Es werden deshalb KEINE Fake-Werte angezeigt.
+
+> Für echte Messungen benötigt Fasqoo einen eigenen Backend-Messdienst.`);
+    addLog("Network Test",`${type}: ${target}`,"Nicht browserseitig messbar – kein Fake");
+    return;
+  }
+  let url=/^https?:\/\//i.test(target)?target:"https://"+target;
+  show("netOutput","> Echte Browser-HTTP-Erreichbarkeitsmessung läuft …");
+  try{
+    const t0=performance.now();await fetch(url,{method:"HEAD",mode:"no-cors",cache:"no-store"});const ms=performance.now()-t0;
+    show("netOutput",`> Ziel: ${url}
+> Messung: HTTP HEAD aus diesem Browser
+> Zeit: ${ms.toFixed(1)} ms
+> Hinweis: Das ist KEIN ICMP-Ping und enthält keinen erfundenen Paketverlust.`);
+    addLog("HTTP Reachability",url,`${ms.toFixed(1)} ms gemessen`);
+  }catch(e){show("netOutput","> Messung fehlgeschlagen: "+e.message);}
+};
+
+$("runPortCheck").onclick=()=>{
+  const target=$("portTarget").value.trim();
+  show("portOutput",`> Ziel: ${target}
+> Ein echter TCP-Port-Check ist aus einer normalen Webseite nicht zuverlässig möglich.
+> Browser dürfen keine beliebigen TCP-Sockets öffnen.
+> OPEN/CLOSED wird daher NICHT erfunden.
+
+> Für einen echten Port-Check braucht Fasqoo einen Backend-Endpoint.`);
+  addLog("Port Checker",target,"Nicht browserseitig möglich – kein Fake");
+};
+
+async function webHead(target){
+  const r=await fetch(target,{method:"HEAD",cache:"no-store"});
+  return r;
+}
+$("runWebCheck").onclick=async()=>{
+  let target=$("webTarget").value.trim();if(!/^https?:\/\//i.test(target))target="https://"+target;
+  show("webOutput","> Echte HTTPS/HTTP-Abfrage läuft …");
+  try{
+    const u=new URL(target);if(u.protocol!=="https:")throw new Error("Für SSL/TLS bitte HTTPS verwenden.");
+    const t0=performance.now(),r=await webHead(u.href),ms=performance.now()-t0;
+    show("webOutput",`> Ziel: ${u.href}
+> HTTP-Status: ${r.status} ${r.statusText}
+> Browser-Antwortzeit: ${ms.toFixed(1)} ms
+
+> Zertifikat/Cipher/TLS-Version werden nicht erfunden.
+> Detaillierte TLS-Analyse benötigt einen Server-Backend-Test.`);
+    addLog("Web / HTTPS",target,`HTTP ${r.status}`);
+  }catch(e){show("webOutput","> HTTPS-Abfrage fehlgeschlagen oder CORS blockiert: "+e.message);}
+};
+
+$("runHeaderCheck").onclick=async()=>{
+  let target=$("headerInput").value.trim();if(!/^https?:\/\//i.test(target))target="https://"+target;
+  show("headerOutput","> Echte HTTP-Header-Abfrage läuft …");
+  try{
+    const r=await webHead(target),headers=[...r.headers.entries()].map(([k,v])=>`${k}: ${v}`).join("\n");
+    show("headerOutput",`> URL: ${target}
+> HTTP: ${r.status} ${r.statusText}
+
+${headers||"(Header nicht durch CORS freigegeben)"}
+
+> Nur tatsächlich vom Browser freigegebene Header werden angezeigt.`);
+    addLog("HTTP Header",target,`HTTP ${r.status}`);
+  }catch(e){show("headerOutput","> Header-Abfrage fehlgeschlagen/CORS blockiert: "+e.message);}
+};
+
+$("runSecIpBtn").onclick=async()=>{
+  const ip=$("secIpInput").value.trim();show("secIpOutput","> Echte IP-Information wird abgefragt …");
+  try{
+    const r=await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`,{cache:"no-store"}),d=await r.json();
+    if(!d.success)throw new Error(d.message||"IP-Abfrage fehlgeschlagen");
+    show("secIpOutput",`> IP: ${d.ip}
+> Typ: ${d.type}
+> Land: ${d.country}
+> Stadt: ${d.city}
+> ISP: ${d.connection?.isp||"unbekannt"}
+> ASN: ${d.connection?.asn||"unbekannt"}
+> Organisation: ${d.connection?.org||"unbekannt"}
+
+> Proxy/VPN wird nur ausgewiesen, wenn die API es tatsächlich liefert.`);
+    addLog("IP Intelligence",ip,"Echte API-Antwort");
+  }catch(e){show("secIpOutput","> IP-Abfrage fehlgeschlagen: "+e.message);}
+};
+
+$("runAbuseBtn").onclick=async()=>{
+  const ip=$("abuseInput").value.trim();show("abuseOutput","> Echte RDAP-Abfrage läuft …");
+  try{
+    const r=await fetch(`https://rdap.org/ip/${encodeURIComponent(ip)}`,{cache:"no-store"});if(!r.ok)throw new Error(`RDAP HTTP ${r.status}`);
+    const d=await r.json(),emails=[];
+    (d.entities||[]).forEach(e=>(e.vcardArray?.[1]||[]).forEach(v=>{if(v[0]==="email"&&v[3])emails.push(v[3]);}));
+    show("abuseOutput",`> IP: ${ip}
+> RDAP Name: ${d.name||"unbekannt"}
+> Registry: ${d.port43||"nicht angegeben"}
+> E-Mail: ${emails.length?emails.join(", "):"Keine E-Mail im RDAP-Datensatz"}
+
+> Reverse-IP-Domains werden nicht erfunden; dafür wäre eine echte Reverse-IP-Datenquelle nötig.`);
+    addLog("RDAP / Abuse",ip,"Echte RDAP-Antwort");
+  }catch(e){show("abuseOutput","> RDAP-Fehler: "+e.message);}
+};
+
+function b64e(s){return btoa(unescape(encodeURIComponent(s)));}
+function b64d(s){return decodeURIComponent(escape(atob(s)));}
+$("runAdminTool").onclick=()=>{
+  const input=$("adminInput").value,action=$("adminAction").value;let res="";
+  try{
+    if(action==="base64enc")res=b64e(input);
+    else if(action==="base64dec")res=b64d(input);
+    else if(action==="urlenc")res=encodeURIComponent(input);
+    else if(action==="jwtdec"){const p=input.split(".");if(p.length<2)throw new Error("Ungültiges JWT.");res=JSON.stringify(JSON.parse(b64d(p[1].replace(/-/g,"+").replace(/_/g,"/"))),null,2)+"\n\nHinweis: Keine Signaturprüfung.";}
+    else if(action==="pwdgen"){const a=new Uint32Array(24);crypto.getRandomValues(a);const c="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";res=Array.from(a,x=>c[x%c.length]).join("");}
+    else if(action==="uuidgen")res=crypto.randomUUID();
+    else if(action==="jsonfmt")res=JSON.stringify(JSON.parse(input),null,2);
+    else if(action==="timestamp"){const n=input.trim()?Number(input):Math.floor(Date.now()/1000);if(!Number.isFinite(n))throw new Error("Ungültiger Timestamp.");res=`Unix: ${Math.trunc(n)}\nUTC: ${new Date(Math.trunc(n)*1000).toISOString()}`;}
+  }catch(e){res="Fehler: "+e.message;}
+  show("adminOutput",`> ${action}\n${res}`);addLog("Admin Utility",action,"Lokal korrekt ausgeführt");
+};
+
+$("runMacBtn").onclick=()=>{
+  const mac=$("macInput").value.trim();
+  if(!/^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/.test(mac)){show("macOutput","> Bitte eine gültige MAC-Adresse eingeben.");return;}
+  const b=parseInt(mac.split(":")[0],16),oui=mac.split(":").slice(0,3).join(":").toUpperCase();
+  show("macOutput",`> MAC: ${mac}
+> OUI: ${oui}
+> Unicast/Multicast: ${b&1?"Multicast":"Unicast"}
+> Lokal/Universell: ${b&2?"Lokal verwaltet":"Universell verwaltet"}
+> Vendor: Nicht bestimmt – ohne echte OUI-Datenbank wird nichts erfunden.`);
+  addLog("MAC Analysis",mac,"OUI/Bitflags korrekt analysiert");
+};
+
+// EXPORT BUTTONS
+$("copyResultsBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Testergebnisse vorhanden."); return; }
+  const text = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
+  navigator.clipboard.writeText(text).then(() => alert("Ergebnisse kopiert!"));
+};
+
+$("shareResultsBtn").onclick = async () => {
+  if(!logData.length){ alert("Keine Ergebnisse zum Teilen."); return; }
+  const text = "Fasqoo Network Toolkit Bericht:\n" + logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
+  if(navigator.share){ try { await navigator.share({title: 'Fasqoo Toolkit', text}); } catch(e){} }
+  else { navigator.clipboard.writeText(text); alert("In Zwischenablage kopiert."); }
+};
+
+$("jsonExportBtn").onclick = () => {
+  if(!logData.length){ alert("Keine Daten."); return; }
+  const blob = new Blob([JSON.stringify(logData, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "network-toolkit-report.json";
+  a.click(); URL.revokeObjectURL(url);
+};
+
+$("printReportBtn").onclick = () => window.print();
+$("clearLog").onclick = () => { logData = []; renderLog(); };
+
+// THEME & MOBILE MENU
+const themeBtn = $("themeBtn");
+function applyTheme(dark){
+  document.body.classList.toggle("dark", dark);
+  themeBtn.textContent = dark ? "☀" : "☾";
+  themeBtn.setAttribute("aria-label", dark ? "Light mode" : "Dark mode");
+  const tc=$("themeColor"); if(tc) tc.content=dark ? "#030712" : "#ffffff";
+  try{localStorage.setItem("fasqoo-theme", dark ? "dark" : "light");}catch(e){}
+}
+try{ applyTheme(localStorage.getItem("fasqoo-theme")==="dark"); }catch(e){}
+themeBtn.onclick = () => applyTheme(!document.body.classList.contains("dark"));
+$("menuToggle").onclick = () => $("mainMenu").classList.toggle("active");
+document.querySelectorAll("#mainMenu a").forEach(a => {
+  a.addEventListener("click", () => $("mainMenu").classList.remove("active"));
+});
+
+// NAVIGATION LANGUAGE SUPPORT — same 10 languages as network-status.html
+const NAV_TRANSLATIONS = {
+  de:{home:"Startseite",faq:"FAQ",diagnose:"IT-Diagnose",about:"Über uns"},
+  fr:{home:"Accueil",faq:"FAQ",diagnose:"Diagnostic IT",about:"À propos"},
+  en:{home:"Home",faq:"FAQ",diagnose:"IT Diagnostics",about:"About"},
+  it:{home:"Home",faq:"FAQ",diagnose:"Diagnostica IT",about:"Chi siamo"},
+  pt:{home:"Início",faq:"FAQ",diagnose:"Diagnóstico de TI",about:"Sobre"},
+  es:{home:"Inicio",faq:"FAQ",diagnose:"Diagnóstico IT",about:"Sobre nosotros"},
+  tr:{home:"Ana Sayfa",faq:"SSS",diagnose:"BT Tanılama",about:"Hakkımızda"},
+  sq:{home:"Kryefaqja",faq:"FAQ",diagnose:"Diagnostikë IT",about:"Rreth nesh"},
+  ar:{home:"الرئيسية",faq:"الأسئلة الشائعة",diagnose:"تشخيص تقنية المعلومات",about:"من نحن"},
+  zh:{home:"首页",faq:"常见问题",diagnose:"IT 诊断",about:"关于我们"}
+};
+
+const languageSelect = $("langSelect");
+const LANGUAGE_KEY = "fasqoo-language";
+
+function applyNavigationLanguage(lang){
+  if(!NAV_TRANSLATIONS[lang]) lang = "de";
+  const t = NAV_TRANSLATIONS[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(t[key]) el.textContent = t[key];
+  });
+  languageSelect.value = lang;
+  try{localStorage.setItem(LANGUAGE_KEY, lang);}catch(e){}
+}
+
+let savedLanguage = "de";
+try{ savedLanguage = localStorage.getItem(LANGUAGE_KEY) || "de"; }catch(e){}
+applyNavigationLanguage(savedLanguage);
+
+languageSelect.addEventListener("change", function(){
+  applyNavigationLanguage(this.value);
+  $("mainMenu").classList.remove("active");
+});
+
+</script>
+</body>
+</html>
