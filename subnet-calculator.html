@@ -3,820 +3,809 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff" id="themeColor">
-  <meta name="description" content="Fasqoo Network Engineer Toolkit – Professionelle Netzwerk-, DNS-, IP-, Diagnose-, Security- und Admin-Werkzeuge.">
-  <meta name="robots" content="index, follow">
-  
-  <title id="pageTitle">Fasqoo Network Engineer Toolkit – Subnet Calculator & IT Suite</title>
+  <meta name="theme-color" content="#0f172a" id="themeColor">
+  <meta name="description" content="Fasqoo Network Engineer Toolkit – Professionelle Netzwerk-, DNS-, IP-, Security- und Admin-Werkzeuge.">
+  <title id="pageTitle">Fasqoo Network Engineer Toolkit</title>
 
-  <link rel="canonical" href="https://www.fasqoo.com/subnet-calculator.html">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --soft: #f1f5f9;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent: #ff5a1f;
+      --success: #10b981;
+      --console-bg: #090d16;
+      --console-text: #38bdf8;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05);
+      --radius: 12px;
+    }
 
-  <!-- Security Baseline -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    body.dark {
+      --bg: #090d16;
+      --card: #111827;
+      --card-border: #1f2937;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --soft: #1f2937;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --console-bg: #030712;
+      --console-text: #60a5fa;
+      --shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
 
-<style>
-:root {
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --soft: #f1f5f9;
-  --orange: #ff5a1f;
-  --green: #10b981;
-  --blue: #3b82f6;
-  --shadow: 0 10px 25px -5px rgba(0,0,0,.05), 0 8px 10px -6px rgba(0,0,0,.05);
-  --radius: 14px;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      transition: background .2s, color .2s;
+    }
 
-body.dark {
-  --bg: #070b13;
-  --card: #0f172a;
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --line: #1e293b;
-  --soft: #111827;
-  --shadow: 0 20px 50px rgba(0,0,0,.3);
-}
+    .wrap { width: min(1200px, calc(100% - 32px)); margin: auto; }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, system-ui, -apple-system, sans-serif;
-  font-weight: 400;
-  line-height: 1.5;
-  transition: background .3s, color .3s;
-}
+    /* HEADER */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .brand { font-size: 24px; font-weight: 800; text-decoration: none; color: var(--text); letter-spacing: -0.5px; }
+    .brand span { color: var(--accent); }
 
-button, select, input, textarea { font: inherit; }
-button { cursor: pointer; }
-.wrap { width: min(1280px, calc(100% - 32px)); margin: auto; }
+    .nav-controls { display: flex; align-items: center; gap: 12px; }
+    select, button, input, textarea { font: inherit; }
+    
+    .select-lang, .theme-btn {
+      height: 40px;
+      padding: 0 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+    .theme-btn { width: 40px; padding: 0; display: grid; place-items: center; }
 
-/* HEADER & NAV */
-header {
-  height: 72px;
-  background: rgba(255,255,255,0.8);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(16px);
-}
-body.dark header { background: rgba(15,23,42,0.8); }
+    /* HERO */
+    .hero { text-align: center; padding: 40px 0 20px; }
+    .hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero p { color: var(--muted); max-width: 650px; margin: 0 auto; font-size: 16px; }
 
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-.brandname { font-size: 26px; font-weight: 900; letter-spacing: -1px; }
-.brandname span { color: var(--orange); }
+    /* SEARCH BAR */
+    .search-box {
+      margin: 25px auto;
+      max-width: 600px;
+      display: flex;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 6px 16px;
+      box-shadow: var(--shadow);
+    }
+    .search-box input {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
 
-.main-menu { display: flex; align-items: center; gap: 20px; margin-left: auto; }
-.main-menu a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: .2s; }
-.main-menu a:hover, .main-menu a.active { color: var(--orange); }
+    /* TABS */
+    .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 25px; border-bottom: 1px solid var(--card-border); }
+    .tab-btn {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--muted);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
 
-.menu-extra { display: flex; align-items: center; gap: 8px; }
-.menu-extra select, .theme-btn {
-  height: 38px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--card);
-  color: var(--text);
-  padding: 0 10px;
-  font-weight: 600;
-  outline: none;
-}
-.theme-btn { width: 40px; display: grid; place-items: center; padding: 0; }
-.menu-toggle { display: none; background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; font-size: 20px; color: var(--text); }
+    /* GRID & CARDS */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
 
-/* MAIN CONTENT */
-main { padding: 40px 0 80px; }
-.hero { text-align: center; margin-bottom: 30px; }
-.hero h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -1px; margin: 0 0 10px; }
-.hero p { margin: 0 auto; color: var(--muted); font-size: 15px; max-width: 720px; }
-.accuracy-note { margin: 16px auto 0; max-width: 760px; color: var(--muted); font-size: 12px; border: 1px dashed var(--line); padding: 10px 14px; border-radius: 10px; background: var(--card); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-head { margin-bottom: 12px; }
+    .card-head h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .card-head p { font-size: 13px; color: var(--muted); }
 
-/* DIRECTORY & SEARCH */
-.fq-directory { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; margin-bottom: 30px; box-shadow: var(--shadow); }
-.fq-search-wrap { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); background: var(--soft); border-radius: 12px; padding: 4px 12px; margin-top: 15px; }
-.fq-search-wrap input { border: 0; background: transparent; outline: 0; width: 100%; padding: 10px 4px; color: var(--text); font-size: 14px; }
-.fq-search-wrap kbd { font-size: 11px; color: var(--muted); border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 3px 6px; }
+    .form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--soft);
+      color: var(--text);
+      outline: none;
+    }
+    .form-group textarea { min-height: 80px; resize: vertical; }
 
-/* ACTIONS & TABS */
-.tool-actions { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
-.action-btn { background: var(--card); color: var(--text); border: 1px solid var(--line); padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; transition: .2s; }
-.action-btn:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn:hover { background: var(--primary-hover); }
 
-.toolkit-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 25px; scrollbar-width: none; }
-.tab-btn { background: var(--card); border: 1px solid var(--line); color: var(--muted); padding: 10px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; white-space: nowrap; transition: .2s; }
-.tab-btn:hover, .tab-btn.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .console {
+      background: var(--console-bg);
+      color: var(--console-text);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      min-height: 110px;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
 
-/* GRID & TOOLS */
-.toolkit-section { display: none; }
-.toolkit-section.active { display: block; }
-.it-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
-.it-tool-box { border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: var(--card); box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
-.it-tool-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.it-tool-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--soft); color: var(--orange); display: grid; place-items: center; font-weight: bold; }
-.it-tool-header h3 { font-size: 16px; font-weight: 700; margin: 0; }
-.it-tool-box p { color: var(--muted); font-size: 12px; margin: 0 0 14px; min-height: 36px; }
+    /* LOG & ACTIONS */
+    .actions-bar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 20px; }
+    .btn-secondary { background: var(--card); border: 1px solid var(--card-border); color: var(--text); }
+    
+    .history {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 40px;
+    }
+    .history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    th, td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); }
+    th { color: var(--muted); background: var(--soft); }
 
-.it-input-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-.it-input-group input, .it-input-group select, .it-input-group textarea {
-  width: 100%; border: 1px solid var(--line); background: var(--soft); color: var(--text); padding: 10px 12px; border-radius: 10px; font-size: 13px; outline: none; transition: .2s;
-}
-.it-input-group textarea { min-height: 70px; resize: vertical; }
-.it-input-group input:focus, .it-input-group select:focus, .it-input-group textarea:focus { border-color: var(--orange); background: var(--card); }
-
-.it-btn { background: var(--text); color: var(--card); border: 0; border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; transition: .2s; }
-.it-btn:hover { background: var(--orange); color: #fff; }
-
-.console-output {
-  background: #090d16; color: #38bdf8; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 12px; padding: 12px; border-radius: 10px; min-height: 100px; max-height: 200px; overflow-y: auto; border: 1px solid #1e293b; line-height: 1.4; white-space: pre-wrap; word-break: break-word;
-}
-
-/* HISTORY TABLE */
-.history { border: 1px solid var(--line); background: var(--card); border-radius: var(--radius); overflow: hidden; margin-top: 40px; box-shadow: var(--shadow); }
-.hhead { padding: 18px 20px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
-.hhead h2 { margin: 0; font-size: 16px; font-weight: 700; }
-.table-responsive { width: 100%; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; text-align: left; }
-th, td { padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 13px; white-space: nowrap; }
-th { font-weight: 600; color: var(--muted); background: var(--soft); }
-.empty { text-align: center; color: var(--muted); padding: 30px; }
-
-/* FOOTER */
-footer { background: var(--card); border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: 13px; margin-top: 60px; }
-.foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-
-@media (max-width: 768px) {
-  .menu-toggle { display: block; }
-  .main-menu { display: none; position: absolute; top: 72px; left: 16px; right: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; flex-direction: column; gap: 12px; box-shadow: var(--shadow); }
-  .main-menu.active { display: flex; }
-  .it-tools-grid { grid-template-columns: 1fr; }
-  .tool-actions { display: grid; grid-template-columns: 1fr 1fr; }
-}
-@media print {
-  header, footer, .tool-actions, .toolkit-tabs, .fq-directory, .it-input-group, .menu-toggle { display: none !important; }
-  body { background: #fff; color: #000; }
-  .it-tool-box, .history { border: 1px solid #ccc; box-shadow: none; }
-}
-</style>
+    footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 13px; margin-top: 40px; border-top: 1px solid var(--card-border); }
+  </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="brand" aria-label="Fasqoo Startseite">
-      <div class="brandname">fasq<span>oo</span></div>
-    </a>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" type="button">☰</button>
-
-    <nav class="main-menu" id="mainMenu">
-      <a href="index.html" data-i18n="home">Startseite</a>
-      <a href="faq.html" data-i18n="faq">FAQ</a>
-      <a href="network-status.html" class="active" data-i18n="diagnose">IT-Diagnose</a>
-      <a href="about.html" data-i18n="about">Über uns</a>
-      <div class="menu-extra">
-        <select id="langSelect" aria-label="Language">
-          <option value="de">Deutsch</option>
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-        </select>
-        <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme">☾</button>
-      </div>
-    </nav>
+    <a href="#" class="brand">fasq<span>oo</span></a>
+    <div class="nav-controls">
+      <select id="langSelect" class="select-lang" aria-label="Language">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+      </select>
+      <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme">☾</button>
+    </div>
   </div>
 </header>
 
-<main>
-  <div class="wrap">
+<main class="wrap">
 
-    <section class="hero">
-      <h1 data-i18n="hero">Network Engineer Toolkit & Suite</h1>
-      <p data-i18n="heroP">Professionelle Netzwerk- und Admin-Werkzeuge mit präzisen lokalen Berechnungen und transparenten Browser-Diagnosen.</p>
-      <div class="accuracy-note" data-i18n="accuracy">
-        Berechnete Netzwerkdaten werden 100% lokal ermittelt. Externe Informationen stammen nur aus echten APIs/DoH-Resolvern; nicht mögliche Browser-Messungen (z. B. ICMP Raw Ping) werden transparent deklariert.
-      </div>
-    </section>
-
-    <!-- DIRECTORY SEARCH -->
-    <section class="fq-directory">
-      <strong data-i18n="searchTitle">Schnellsuche im Toolkit</strong>
-      <div class="fq-search-wrap">
-        <span>⌕</span>
-        <input id="fqToolSearch" type="search" placeholder="Tool suchen … (z. B. Subnet, DNS, JWT, IP)" aria-label="Tool suchen">
-        <kbd>Ctrl K</kbd>
-      </div>
-    </section>
-
-    <!-- GLOBAL ACTIONS -->
-    <div class="tool-actions">
-      <button class="action-btn" id="copyResultsBtn" data-i18n="copy">📋 Ergebnis kopieren</button>
-      <button class="action-btn" id="shareResultsBtn" data-i18n="share">📤 Ergebnis teilen</button>
-      <button class="action-btn" id="jsonExportBtn" data-i18n="json">💻 JSON exportieren</button>
-      <button class="action-btn" id="printReportBtn" data-i18n="print">🖨️ Bericht drucken</button>
+  <section class="hero">
+    <h1 data-i18n="heroTitle">Network Engineer Toolkit</h1>
+    <p data-i18n="heroDesc">Professionelle Werkzeuge für IT-Admins & Netzwerker. 100% präzise Berechnungen & echte Abfragen.</p>
+    
+    <div class="search-box">
+      <input id="toolSearch" type="search" placeholder="Tool suchen …" data-i18n-ph="searchPh">
     </div>
+  </section>
 
-    <!-- CATEGORY TABS -->
-    <div class="toolkit-tabs" id="toolkitTabs">
-      <button class="tab-btn active" data-target="sec-subnet" data-i18n="subnetTab">📐 IP & Subnetting</button>
-      <button class="tab-btn" data-target="sec-dns" data-i18n="dnsTab">🌐 DNS & Records</button>
-      <button class="tab-btn" data-target="sec-network" data-i18n="netTab">⚡ Network & Ping</button>
-      <button class="tab-btn" data-target="sec-web" data-i18n="webTab">🔒 Web & Server</button>
-      <button class="tab-btn" data-target="sec-security" data-i18n="secTab">🛡️ IP / Security</button>
-      <button class="tab-btn" data-target="sec-admin" data-i18n="adminTab">🛠️ Admin Tools</button>
-    </div>
-
-    <!-- 1. IP & SUBNETTING -->
-    <div class="toolkit-section active" id="sec-subnet">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3 data-i18n="subnetTitle">IPv4 / CIDR Calculator</h3></div>
-            <p data-i18n="subnetP">Berechne Subnetmaske, Netzadresse, Broadcast, Usable Hosts und Binary IP.</p>
-            <div class="it-input-group">
-              <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="IP/CIDR (z.B. 10.0.0.0/16)">
-              <button class="it-btn" id="calcSubnetBtn" data-i18n="calc">Berechnen</button>
-            </div>
-          </div>
-          <div class="console-output" id="subnetOutput">> Bereit für Subnet-Berechnung...</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔹</div><h3 data-i18n="vlsmTitle">IPv6 Prefix & VLSM Planner</h3></div>
-            <p data-i18n="vlsmP">Berechne IPv6-Prefix-Informationen oder plane IPv4-VLSM-Subnetze anhand von Host-Anforderungen.</p>
-            <div class="it-input-group">
-              <input type="text" id="vlsmInput" value="192.168.0.0/22" placeholder="Netzwerk, z. B. 192.168.0.0/22">
-              <textarea id="vlsmHosts" placeholder="Host-Anforderungen (z. B. 100, 50, 20)"></textarea>
-              <button class="it-btn" id="calcVlsmBtn" data-i18n="vlsmBtn">VLSM Analyse</button>
-            </div>
-          </div>
-          <div class="console-output" id="vlsmOutput">> Warten auf Eingabe...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. DNS -->
-    <div class="toolkit-section" id="sec-dns">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🌐</div><h3 data-i18n="dnsTitle">DNS Lookup (DoH)</h3></div>
-            <p data-i18n="dnsP">Frage echte DNS-Einträge über sichere Cloudflare DoH Resolver ab.</p>
-            <div class="it-input-group">
-              <input type="text" id="dnsDomainInput" value="google.com" placeholder="domain.com">
-              <select id="dnsTypeSelect">
-                <option value="ALL">Alle Records</option>
-                <option value="A">A (IPv4)</option>
-                <option value="AAAA">AAAA (IPv6)</option>
-                <option value="MX">MX (Mail)</option>
-                <option value="TXT">TXT</option>
-                <option value="NS">NS</option>
-              </select>
-              <button class="it-btn" id="runDnsTool" data-i18n="lookup">Lookup</button>
-            </div>
-          </div>
-          <div class="console-output" id="dnsToolOutput">> DNS-Konsole bereit.</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3 data-i18n="propTitle">DNSSEC Status Check</h3></div>
-            <p data-i18n="propP">Überprüfe die DNSSEC-Signaturvalidierung einer Domain.</p>
-            <div class="it-input-group">
-              <input type="text" id="propInput" value="cloudflare.com" placeholder="domain.com">
-              <button class="it-btn" id="runPropBtn" data-i18n="check">Prüfen</button>
-            </div>
-          </div>
-          <div class="console-output" id="propOutput">> Bereit für DNSSEC-Check...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. NETWORK -->
-    <div class="toolkit-section" id="sec-network">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">⚡</div><h3 data-i18n="netTitle">HTTP Reachability & Latency</h3></div>
-            <p data-i18n="netP">Messe die HTTP-Antwortzeit direkt aus deinem Browser.</p>
-            <div class="it-input-group">
-              <input type="text" id="netTarget" value="https://1.1.1.1" placeholder="https://domain.com">
-              <select id="netTestType">
-                <option value="ping">HTTP Fetch Latency</option>
-                <option value="traceroute">Traceroute / MTR (Browser-Hinweis)</option>
-              </select>
-              <button class="it-btn" id="runNetTest" data-i18n="start">Test starten</button>
-            </div>
-          </div>
-          <div class="console-output" id="netOutput">> Netzwerk-Diagnose bereit.</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔌</div><h3 data-i18n="portTitle">TCP / UDP Port Checker Info</h3></div>
-            <p data-i18n="portP">Transparente Erklärung bezüglich Port-Scans in Webbrowsern.</p>
-            <div class="it-input-group">
-              <input type="text" id="portTarget" value="example.com:443" placeholder="domain.com:port">
-              <button class="it-btn" id="runPortCheck" data-i18n="portBtn">Port prüfen</button>
-            </div>
-          </div>
-          <div class="console-output" id="portOutput">> Port-Prüfung bereit.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. WEB / SERVER -->
-    <div class="toolkit-section" id="sec-web">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔒</div><h3 data-i18n="tlsTitle">HTTPS Reachability</h3></div>
-            <p data-i18n="tlsP">Prüfe den HTTPS-Erreichbarkeitsstatus aus dem Client-Browser.</p>
-            <div class="it-input-group">
-              <input type="text" id="webTarget" value="https://cloudflare.com" placeholder="https://domain.com">
-              <button class="it-btn" id="runWebCheck" data-i18n="analyze">Analysieren</button>
-            </div>
-          </div>
-          <div class="console-output" id="webOutput">> Web-Inspektor bereit.</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">📋</div><h3 data-i18n="headerTitle">HTTP Header Inspector</h3></div>
-            <p data-i18n="headerP">Untersuche verfügbare Response-Header einer Ziel-URL.</p>
-            <div class="it-input-group">
-              <input type="text" id="headerInput" value="https://google.com" placeholder="https://url.com">
-              <button class="it-btn" id="runHeaderCheck" data-i18n="inspect">Inspizieren</button>
-            </div>
-          </div>
-          <div class="console-output" id="headerOutput">> Header-Prüfung bereit.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. SECURITY -->
-    <div class="toolkit-section" id="sec-security">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🛡️</div><h3 data-i18n="ipTitle">Public IP & Geo-Lookup</h3></div>
-            <p data-i18n="ipP">Rufe echte IP-, ASN- und Standortdaten über externe APIs ab.</p>
-            <div class="it-input-group">
-              <input type="text" id="secIpInput" value="8.8.8.8" placeholder="IP-Adresse abfragen">
-              <button class="it-btn" id="runSecIpBtn" data-i18n="query">Abfragen</button>
-            </div>
-          </div>
-          <div class="console-output" id="secIpOutput">> Sicherheits-Tool bereit.</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🔍</div><h3 data-i18n="abuseTitle">RDAP Abuse Lookup</h3></div>
-            <p data-i18n="abuseP">Frage Abuse-Kontaktdaten über das offizielle RDAP-Protokoll ab.</p>
-            <div class="it-input-group">
-              <input type="text" id="abuseInput" value="1.1.1.1" placeholder="IP eingeben">
-              <button class="it-btn" id="runAbuseBtn" data-i18n="query">Lookup</button>
-            </div>
-          </div>
-          <div class="console-output" id="abuseOutput">> Abuse-Tool bereit.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6. ADMIN TOOLS -->
-    <div class="toolkit-section" id="sec-admin">
-      <div class="it-tools-grid">
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">🛠️</div><h3 data-i18n="adminTitle">Admin Utilities</h3></div>
-            <p data-i18n="adminP">Passwort-Generator, Base64, JWT-Decoder, UUID & Formatter.</p>
-            <div class="it-input-group">
-              <textarea id="adminInput" placeholder="Text, JWT oder JSON eingeben..."></textarea>
-              <select id="adminAction">
-                <option value="base64enc">Base64 Encode</option>
-                <option value="base64dec">Base64 Decode</option>
-                <option value="urlenc">URL Encode</option>
-                <option value="jwtdec">JWT Decoder</option>
-                <option value="pwdgen">Passwort Generator (Cryptographic)</option>
-                <option value="uuidgen">UUID v4 Generator</option>
-                <option value="jsonfmt">JSON Formatter</option>
-                <option value="timestamp">Timestamp Converter</option>
-              </select>
-              <button class="it-btn" id="runAdminTool" data-i18n="execute">Ausführen</button>
-            </div>
-          </div>
-          <div class="console-output" id="adminOutput">> Admin-Konsole bereit.</div>
-        </div>
-
-        <div class="it-tool-box">
-          <div>
-            <div class="it-tool-header"><div class="it-tool-icon">📌</div><h3 data-i18n="macTitle">MAC Address Parser</h3></div>
-            <p data-i18n="macP">Analysiere MAC-Adressen auf Unicast/Multicast & OUI-Bits.</p>
-            <div class="it-input-group">
-              <input type="text" id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="MAC-Adresse">
-              <button class="it-btn" id="runMacBtn" data-i18n="process">Verarbeiten</button>
-            </div>
-          </div>
-          <div class="console-output" id="macOutput">> MAC-Tool bereit.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LOG ACTIVITY -->
-    <section class="history">
-      <div class="hhead">
-        <h2 data-i18n="history">Toolkit Aktivitätsprotokoll</h2>
-        <button class="action-btn" id="clearLog" data-i18n="clear">Log löschen</button>
-      </div>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th data-i18n="time">Zeitstempel</th>
-              <th data-i18n="tool">Werkzeug</th>
-              <th data-i18n="target">Eingabe / Ziel</th>
-              <th data-i18n="result">Ergebnis / Status</th>
-            </tr>
-          </thead>
-          <tbody id="itLogTable">
-            <tr><td colspan="4" class="empty" data-i18n="empty">Noch keine Aktionen in dieser Session.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
+  <div class="actions-bar">
+    <button class="btn btn-secondary" id="copyLogBtn" data-i18n="copyLog">📋 Log kopieren</button>
+    <button class="btn btn-secondary" id="clearLogBtn" data-i18n="clearLog">🗑️ Log löschen</button>
   </div>
+
+  <!-- NAVIGATION TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" data-target="tab-subnet" data-i18n="tabSubnet">📐 Subnetting</button>
+    <button class="tab-btn" data-target="tab-dns" data-i18n="tabDns">🌐 DNS</button>
+    <button class="tab-btn" data-target="tab-web" data-i18n="tabWeb">⚡ Web & HTTP</button>
+    <button class="tab-btn" data-target="tab-security" data-i18n="tabSecurity">🛡️ IP & Security</button>
+    <button class="tab-btn" data-target="tab-admin" data-i18n="tabAdmin">🛠️ Admin Tools</button>
+  </div>
+
+  <!-- 1. SUBNETTING -->
+  <div class="tab-content active" id="tab-subnet">
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="subnetTitle">IPv4 Subnet Calculator</h3>
+            <p data-i18n="subnetDesc">Berechne Netzadresse, Maske, Broadcast und Host-Spannen.</p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="subnetInput" value="192.168.1.0/24" placeholder="192.168.1.0/24">
+            <button class="btn" id="calcSubnetBtn" data-i18n="btnCalc">Berechnen</button>
+          </div>
+        </div>
+        <div class="console" id="subnetOutput">> Bereit...</div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="vlsmTitle">VLSM Planer</h3>
+            <p data-i18n="vlsmDesc">Unterteile ein IPv4-Netzwerk dynamisch nach benötigten Hosts.</p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="vlsmBaseInput" value="10.0.0.0/16" placeholder="Basisnetz z.B. 10.0.0.0/16">
+            <input type="text" id="vlsmHostsInput" value="100, 50, 20" placeholder="Hosts z.B. 100, 50, 20">
+            <button class="btn" id="calcVlsmBtn" data-i18n="btnPlan">Netze Planen</button>
+          </div>
+        </div>
+        <div class="console" id="vlsmOutput">> Bereit...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. DNS -->
+  <div class="tab-content" id="tab-dns">
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="dnsTitle">Echter DNS Lookup (DoH)</h3>
+            <p data-i18n="dnsDesc">Rufe Live-Records direkt via Cloudflare DNS-over-HTTPS ab.</p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="dnsDomain" value="google.com" placeholder="domain.com">
+            <select id="dnsType">
+              <option value="A">A (IPv4)</option>
+              <option value="AAAA">AAAA (IPv6)</option>
+              <option value="MX">MX (Mail)</option>
+              <option value="TXT">TXT</option>
+              <option value="NS">NS</option>
+            </select>
+            <button class="btn" id="runDnsBtn" data-i18n="btnLookup">Abfragen</button>
+          </div>
+        </div>
+        <div class="console" id="dnsOutput">> Bereit...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. WEB & HTTP -->
+  <div class="tab-content" id="tab-web">
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="httpTitle">HTTP Latenz & Erreichbarkeit</h3>
+            <p data-i18n="httpDesc">Messe die HTTP-Antwortzeit einer Webseite aus dem Browser.</p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="httpUrl" value="https://cloudflare.com" placeholder="https://domain.com">
+            <button class="btn" id="runHttpBtn" data-i18n="btnTest">Testen</button>
+          </div>
+        </div>
+        <div class="console" id="httpOutput">> Bereit...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. IP & SECURITY -->
+  <div class="tab-content" id="tab-security">
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="ipTitle">Public IP & Geo Lookup</h3>
+            <p data-i18n="ipDesc">Ermittle Herkunft, ISP und ASN-Daten einer öffentlichen IP-Adresse.</p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="ipLookupInput" value="8.8.8.8" placeholder="8.8.8.8">
+            <button class="btn" id="runIpBtn" data-i18n="btnQuery">Abfragen</button>
+          </div>
+        </div>
+        <div class="console" id="ipOutput">> Bereit...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. ADMIN TOOLS -->
+  <div class="tab-content" id="tab-admin">
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-head">
+            <h3 data-i18n="adminTitle">Krypto & Converter Utilities</h3>
+            <p data-i18n="adminDesc">Generiere Passwörter, dekodiere Base64/JWTs oder erstelle UUIDs.</p>
+          </div>
+          <div class="form-group">
+            <textarea id="adminInput" placeholder="Text oder Token hier eingeben..."></textarea>
+            <select id="adminAction">
+              <option value="pwdgen">Passwort-Generator (20 Zeichen)</option>
+              <option value="uuidgen">UUID v4 Generator</option>
+              <option value="base64enc">Base64 Encode</option>
+              <option value="base64dec">Base64 Decode</option>
+              <option value="jwtdec">JWT Payload Decoder</option>
+            </select>
+            <button class="btn" id="runAdminBtn" data-i18n="btnExecute">Ausführen</button>
+          </div>
+        </div>
+        <div class="console" id="adminOutput">> Bereit...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HISTORY LOG -->
+  <section class="history">
+    <div class="history-head">
+      <h3 data-i18n="historyTitle">Aktivitätsprotokoll</h3>
+    </div>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="thTime">Zeit</th>
+            <th data-i18n="thTool">Werkzeug</th>
+            <th data-i18n="thInput">Eingabe</th>
+            <th data-i18n="thResult">Ergebnis</th>
+          </tr>
+        </thead>
+        <tbody id="logTable">
+          <tr><td colspan="4" style="text-align:center;" data-i18n="logEmpty">Keine Aktionen protokolliert.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div data-i18n="rights">© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
-    <div style="display:flex; gap:15px;">
-      <a href="/privacy.html" style="color:inherit; text-decoration:none;" data-i18n="privacy">Datenschutz</a>
-      <a href="/terms.html" style="color:inherit; text-decoration:none;" data-i18n="terms">Nutzungsbedingungen</a>
-    </div>
+  <div class="wrap">
+    <p>© 2026 Fasqoo. Alle Berechnungen erfolgen lokal und datenschutzkonform.</p>
   </div>
 </footer>
 
 <script>
-const $ = id => document.getElementById(id);
-
-// --- TAB NAVIGATION ---
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.toolkit-section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    $(btn.getAttribute('data-target')).classList.add('active');
-  });
-});
-
-// --- LOG SYSTEM ---
-let logData = [];
-function addLog(tool, target, result){
-  const time = new Date().toLocaleTimeString();
-  logData.unshift({ time, tool, target, result });
-  renderLog();
-}
-
-function renderLog(){
-  const logTable = $("itLogTable");
-  if(!logData.length){
-    logTable.innerHTML = `<tr><td colspan="4" class="empty">${getTranslation('empty')}</td></tr>`;
-    return;
-  }
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  logTable.innerHTML = logData.map(l => `
-    <tr>
-      <td>${esc(l.time)}</td>
-      <td><b>${esc(l.tool)}</b></td>
-      <td>${esc(l.target)}</td>
-      <td><span style="color:var(--green)">●</span> ${esc(l.result)}</td>
-    </tr>
-  `).join("");
-}
-
-// --- HELPER & CALCULATORS ---
-function show(id, text){ $(id).textContent = text; }
-
-function ipv4ToInt(ip){
-  const p = ip.trim().split(".");
-  if(p.length !== 4 || p.some(x => !/^\d+$/.test(x) || +x < 0 || +x > 255)) throw new Error("Ungültige IPv4-Adresse.");
-  return (((+p[0] << 24) >>> 0) + (+p[1] << 16) + (+p[2] << 8) + (+p[3])) >>> 0;
-}
-function intToIPv4(n){ return [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join("."); }
-function maskFromPrefix(p){ return p === 0 ? 0 : (0xFFFFFFFF << (32 - p)) >>> 0; }
-function binaryIPv4(ip){ return ip.split(".").map(x => (+x).toString(2).padStart(8, "0")).join("."); }
-
-function classifyIPv4(ip){
-  const o = ip.split(".").map(Number);
-  if(o[0]===10 || (o[0]===172 && o[1]>=16 && o[1]<=31) || (o[0]===192 && o[1]===168)) return "Private (RFC1918)";
-  if(o[0]===127) return "Loopback";
-  if(o[0]===169 && o[1]===254) return "Link-Local";
-  return "Public / Global";
-}
-
-// 1. IP SUBNET CALCULATOR
-$("calcSubnetBtn").onclick = () => {
-  try {
-    const raw = $("subnetInput").value.trim();
-    const m = raw.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d|[12]\d|3[0-2])$/);
-    if(!m) throw new Error("Format ungültig. Beispiel: 192.168.1.0/24");
-    
-    const ipStr = m[1], prefix = +m[2];
-    const ipNum = ipv4ToInt(ipStr);
-    const maskNum = maskFromPrefix(prefix);
-    const netNum = (ipNum & maskNum) >>> 0;
-    const bcastNum = (netNum | (~maskNum >>> 0)) >>> 0;
-    const wildcard = intToIPv4((~maskNum) >>> 0);
-    const totalHosts = Math.pow(2, 32 - prefix);
-    const usableHosts = prefix >= 31 ? totalHosts : Math.max(0, totalHosts - 2);
-    const firstHost = prefix >= 31 ? intToIPv4(netNum) : intToIPv4(netNum + 1);
-    const lastHost = prefix >= 31 ? intToIPv4(bcastNum) : intToIPv4(bcastNum - 1);
-
-    const out = `> IPv4 SUBNET ERGEBNIS
-> Eingabe: ${ipStr}/${prefix}
-> Netzadresse: ${intToIPv4(netNum)}
-> Subnetmaske: ${intToIPv4(maskNum)}
-> Broadcast: ${intToIPv4(bcastNum)}
-> Wildcard Mask: ${wildcard}
-> Host-Bereich: ${firstHost} - ${lastHost}
-> Nutzbare Hosts: ${usableHosts.toLocaleString()} (Gesamt: ${totalHosts.toLocaleString()})
-> Binär-IP: ${binaryIPv4(ipStr)}
-> Typ: ${classifyIPv4(ipStr)}`;
-
-    show("subnetOutput", out);
-    addLog("Subnet Calc", raw, `${intToIPv4(netNum)}/${prefix}`);
-  } catch(e) { show("subnetOutput", "> Fehler: " + e.message); }
-};
-
-// VLSM & IPv6 CALCULATOR
-$("calcVlsmBtn").onclick = () => {
-  try {
-    const raw = $("vlsmInput").value.trim();
-    if(raw.includes(":")){
-      show("vlsmOutput", `> IPv6 Prefix erkannt: ${raw}\n> IPv6-Adressraum wird unterstützt.`);
-      return;
+  // --- TRANSLATIONS DICTIONARY ---
+  const i18n = {
+    de: {
+      heroTitle: "Network Engineer Toolkit",
+      heroDesc: "Professionelle Werkzeuge für IT-Admins & Netzwerker. 100% präzise Berechnungen & echte Abfragen.",
+      searchPh: "Tool suchen …",
+      copyLog: "📋 Log kopieren",
+      clearLog: "🗑️ Log löschen",
+      tabSubnet: "📐 Subnetting",
+      tabDns: "🌐 DNS",
+      tabWeb: "⚡ Web & HTTP",
+      tabSecurity: "🛡️ IP & Security",
+      tabAdmin: "🛠️ Admin Tools",
+      subnetTitle: "IPv4 Subnet Calculator",
+      subnetDesc: "Berechne Netzadresse, Maske, Broadcast und Host-Spannen.",
+      vlsmTitle: "VLSM Planer",
+      vlsmDesc: "Unterteile ein IPv4-Netzwerk dynamisch nach benötigten Hosts.",
+      dnsTitle: "Echter DNS Lookup (DoH)",
+      dnsDesc: "Rufe Live-Records direkt via Cloudflare DNS-over-HTTPS ab.",
+      httpTitle: "HTTP Latenz & Erreichbarkeit",
+      httpDesc: "Messe die HTTP-Antwortzeit einer Webseite aus dem Browser.",
+      ipTitle: "Public IP & Geo Lookup",
+      ipDesc: "Ermittle Herkunft, ISP und ASN-Daten einer öffentlichen IP-Adresse.",
+      adminTitle: "Krypto & Converter Utilities",
+      adminDesc: "Generiere Passwörter, dekodiere Base64/JWTs oder erstelle UUIDs.",
+      btnCalc: "Berechnen",
+      btnPlan: "Netze Planen",
+      btnLookup: "Abfragen",
+      btnTest: "Testen",
+      btnQuery: "Abfragen",
+      btnExecute: "Ausführen",
+      historyTitle: "Aktivitätsprotokoll",
+      thTime: "Zeit",
+      thTool: "Werkzeug",
+      thInput: "Eingabe",
+      thResult: "Ergebnis",
+      logEmpty: "Keine Aktionen protokolliert."
+    },
+    en: {
+      heroTitle: "Network Engineer Toolkit",
+      heroDesc: "Professional IT & Network Engineer tools. 100% precise local calculations & live queries.",
+      searchPh: "Search tool …",
+      copyLog: "📋 Copy Log",
+      clearLog: "🗑️ Clear Log",
+      tabSubnet: "📐 Subnetting",
+      tabDns: "🌐 DNS",
+      tabWeb: "⚡ Web & HTTP",
+      tabSecurity: "🛡️ IP & Security",
+      tabAdmin: "🛠️ Admin Tools",
+      subnetTitle: "IPv4 Subnet Calculator",
+      subnetDesc: "Calculate Network IP, Subnet Mask, Broadcast and Host Ranges.",
+      vlsmTitle: "VLSM Planner",
+      vlsmDesc: "Subnet an IPv4 network dynamically based on required hosts.",
+      dnsTitle: "Live DNS Lookup (DoH)",
+      dnsDesc: "Fetch real DNS records via Cloudflare DNS-over-HTTPS.",
+      httpTitle: "HTTP Latency & Status",
+      httpDesc: "Measure HTTP response time directly from your browser.",
+      ipTitle: "Public IP & Geo Lookup",
+      ipDesc: "Retrieve location, ISP and ASN info for any public IP.",
+      adminTitle: "Crypto & Converter Utilities",
+      adminDesc: "Generate secure passwords, decode Base64/JWT or generate UUIDs.",
+      btnCalc: "Calculate",
+      btnPlan: "Plan Subnets",
+      btnLookup: "Lookup",
+      btnTest: "Test",
+      btnQuery: "Query",
+      btnExecute: "Execute",
+      historyTitle: "Activity Log",
+      thTime: "Time",
+      thTool: "Tool",
+      thInput: "Input",
+      thResult: "Result",
+      logEmpty: "No actions logged yet."
+    },
+    fr: {
+      heroTitle: "Network Engineer Toolkit",
+      heroDesc: "Outils réseau professionnels. Calculs 100% précis et requêtes réelles.",
+      searchPh: "Rechercher un outil…",
+      copyLog: "📋 Copier le journal",
+      clearLog: "🗑️ Effacer",
+      tabSubnet: "📐 Subnetting",
+      tabDns: "🌐 DNS",
+      tabWeb: "⚡ Web & HTTP",
+      tabSecurity: "🛡️ Sécurité",
+      tabAdmin: "🛠️ Administration",
+      subnetTitle: "Calculateur Subnet IPv4",
+      subnetDesc: "Calculez le réseau, le masque, le broadcast et la plage d'hôtes.",
+      vlsmTitle: "Planificateur VLSM",
+      vlsmDesc: "Subdivisez un réseau IPv4 en fonction des hôtes requis.",
+      dnsTitle: "Recherche DNS (DoH)",
+      dnsDesc: "Interrogez des enregistrements DNS réels via Cloudflare.",
+      httpTitle: "Latence HTTP & Statut",
+      httpDesc: "Mesurez le temps de réponse HTTP depuis le navigateur.",
+      ipTitle: "Lookup IP & Géolocalisation",
+      ipDesc: "Obtenez le pays, le FAI et l'ASN d'une adresse IP.",
+      adminTitle: "Utilitaires Crypto & Utilitaires",
+      adminDesc: "Générez des mots de passe, décodez du Base64/JWT ou créez des UUIDs.",
+      btnCalc: "Calculer",
+      btnPlan: "Planifier",
+      btnLookup: "Chercher",
+      btnTest: "Tester",
+      btnQuery: "Interroger",
+      btnExecute: "Exécuter",
+      historyTitle: "Journal d'activité",
+      thTime: "Heure",
+      thTool: "Outil",
+      thInput: "Entrée",
+      thResult: "Résultat",
+      logEmpty: "Aucune action enregistrée."
+    },
+    es: {
+      heroTitle: "Network Engineer Toolkit",
+      heroDesc: "Herramientas profesionales de red. Cálculos 100% precisos y consultas reales.",
+      searchPh: "Buscar herramienta…",
+      copyLog: "📋 Copiar Registro",
+      clearLog: "🗑️ Limpiar",
+      tabSubnet: "📐 Subnetting",
+      tabDns: "🌐 DNS",
+      tabWeb: "⚡ Web & HTTP",
+      tabSecurity: "🛡️ Seguridad",
+      tabAdmin: "🛠️ Admin Tools",
+      subnetTitle: "Calculadora de Subred IPv4",
+      subnetDesc: "Calcule la dirección de red, máscara, broadcast y rango de hosts.",
+      vlsmTitle: "Planificador VLSM",
+      vlsmDesc: "Divida una red IPv4 dinámicamente según los hosts requeridos.",
+      dnsTitle: "Búsqueda DNS (DoH)",
+      dnsDesc: "Obtenga registros DNS reales mediante Cloudflare DoH.",
+      httpTitle: "Latencia HTTP & Estado",
+      httpDesc: "Mida el tiempo de respuesta HTTP desde su navegador.",
+      ipTitle: "Lookup IP & Geolocalización",
+      ipDesc: "Obtenga ubicación, ISP y ASN de cualquier IP pública.",
+      adminTitle: "Utilidades Cripto & Conversor",
+      adminDesc: "Genere contraseñas seguras, decodifique Base64/JWT o cree UUIDs.",
+      btnCalc: "Calcular",
+      btnPlan: "Planificar",
+      btnLookup: "Buscar",
+      btnTest: "Probar",
+      btnQuery: "Consultar",
+      btnExecute: "Ejecutar",
+      historyTitle: "Registro de Actividad",
+      thTime: "Hora",
+      thTool: "Herramienta",
+      thInput: "Entrada",
+      thResult: "Resultado",
+      logEmpty: "Sin acciones registradas."
     }
-    const m = raw.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d|[12]\d|3[0-2])$/);
-    if(!m) throw new Error("Gültiges IPv4-Netz angeben (z. B. 192.168.0.0/22)");
-    
-    const hosts = ($("vlsmHosts").value || "").split(/[,\s;]+/).filter(Boolean).map(Number);
-    if(!hosts.length) throw new Error("Bitte mindestens eine Host-Anforderung eingeben.");
+  };
 
-    let cursor = (ipv4ToInt(m[1]) & maskFromPrefix(+m[2])) >>> 0;
-    let out = `> IPv4 VLSM APORTIONIERUNG (${raw})\n`;
+  const $ = id => document.getElementById(id);
 
-    hosts.sort((a,b) => b - a).forEach((h, idx) => {
-      let reqP = 32;
-      while(reqP >= 0 && (Math.pow(2, 32 - reqP) - 2) < h) reqP--;
-      const block = Math.pow(2, 32 - reqP);
-      const net = cursor;
-      const bcast = net + block - 1;
-      out += `\n> Subnetz ${idx+1} (${h} Hosts angefordert):
-  Netz: ${intToIPv4(net)}/${reqP}
-  Maske: ${intToIPv4(maskFromPrefix(reqP))}
-  Nutzbar: ${intToIPv4(net+1)} - ${intToIPv4(bcast-1)}`;
-      cursor = bcast + 1;
+  // --- LANGUAGE SYSTEM ---
+  function setLanguage(lang) {
+    if (!i18n[lang]) lang = "de";
+    const dict = i18n[lang];
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
     });
 
-    show("vlsmOutput", out);
-    addLog("VLSM Planner", raw, `${hosts.length} Subnetze berechnet`);
-  } catch(e) { show("vlsmOutput", "> Fehler: " + e.message); }
-};
-
-// 2. DNS LOOKUP VIA DOH
-async function doh(domain, type){
-  const q = encodeURIComponent(domain.trim().replace(/^https?:\/\//, ""));
-  const r = await fetch(`https://cloudflare-dns.com/dns-query?name=${q}&type=${type}`, { headers: { accept: "application/dns-json" } });
-  if(!r.ok) throw new Error(`HTTP ${r.status}`);
-  return r.json();
-}
-$("runDnsTool").onclick = async () => {
-  const domain = $("dnsDomainInput").value.trim(), type = $("dnsTypeSelect").value;
-  show("dnsToolOutput", "> Echte DoH Abfrage läuft...");
-  try {
-    const types = type === "ALL" ? ["A", "AAAA", "MX", "TXT", "NS"] : [type];
-    let resText = `> Resolver: Cloudflare DoH\n> Domain: ${domain}\n\n`;
-    for(const t of types){
-      const d = await doh(domain, t);
-      resText += `[${t}]\n` + (d.Answer ? d.Answer.map(a => `  ${a.data} (TTL ${a.TTL})`).join("\n") : "  Kein Eintrag") + "\n";
-    }
-    show("dnsToolOutput", resText);
-    addLog("DNS Lookup", domain, "Erfolgreich");
-  } catch(e) { show("dnsToolOutput", "> Fehler: " + e.message); }
-};
-
-$("runPropBtn").onclick = async () => {
-  const domain = $("propInput").value.trim();
-  show("propOutput", "> DNSSEC Prüfung via Cloudflare DoH...");
-  try {
-    const d = await doh(domain, "DNSKEY");
-    show("propOutput", `> Domain: ${domain}\n> DNSKEY Records: ${d.Answer ? d.Answer.length : 0}\n> Authenticated Data (AD): ${d.AD ? "JA (DNSSEC Valide)" : "NEIN / Nicht vorhanden"}`);
-    addLog("DNSSEC Check", domain, d.AD ? "Valide" : "Kein DNSSEC");
-  } catch(e) { show("propOutput", "> Fehler: " + e.message); }
-};
-
-// 3. NETWORK DIAGNOSTICS
-$("runNetTest").onclick = async () => {
-  const target = $("netTarget").value.trim(), type = $("netTestType").value;
-  if(type !== "ping"){
-    show("netOutput", `> Info: Traceroute/MTR kann aus Sicherheitsgründen nicht direkt aus dem Browser ausgeführt werden. Echte Raw ICMP/Sockets sind im Browser blockiert.`);
-    addLog("Network Diagnostic", target, "Browser-Limitierung erklärt");
-    return;
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+      const key = el.getAttribute("data-i18n-ph");
+      if (dict[key]) el.placeholder = dict[key];
+    });
   }
-  let url = /^https?:\/\//i.test(target) ? target : "https://" + target;
-  show("netOutput", "> HTTP Latency Messung läuft...");
-  try {
-    const t0 = performance.now();
-    await fetch(url, { method: "HEAD", mode: "no-cors", cache: "no-store" });
-    const ms = performance.now() - t0;
-    show("netOutput", `> Ziel: ${url}\n> Client HTTP Latency: ${ms.toFixed(1)} ms\n> Status: Erreichbar`);
-    addLog("HTTP Latency", url, `${ms.toFixed(1)} ms`);
-  } catch(e) { show("netOutput", "> Messung fehlgeschlagen / CORS Blocked: " + e.message); }
-};
 
-$("runPortCheck").onclick = () => {
-  show("portOutput", `> Transparenz-Hinweis:\nDirekte TCP/UDP Portscans sind in Standard-Webbrowsern aus Sicherheitsgründen gesperrt.\nVerwende für Portscans Tools wie Nmap oder ein dedicated Backend.`);
-  addLog("Port Checker", $("portTarget").value, "Information ausgegeben");
-};
+  $("langSelect").addEventListener("change", e => setLanguage(e.target.value));
 
-// 4. WEB INSPECTION
-$("runWebCheck").onclick = async () => {
-  let target = $("webTarget").value.trim();
-  if(!/^https?:\/\//i.test(target)) target = "https://" + target;
-  show("webOutput", "> HTTPS-Prüfung...");
-  try {
-    const t0 = performance.now();
-    const r = await fetch(target, { method: "HEAD", cache: "no-store" });
-    const ms = performance.now() - t0;
-    show("webOutput", `> URL: ${target}\n> HTTP Status: ${r.status} ${r.statusText}\n> RTT: ${ms.toFixed(1)} ms`);
-    addLog("HTTPS Check", target, `HTTP ${r.status}`);
-  } catch(e) { show("webOutput", "> HTTP-Fehler / CORS: " + e.message); }
-};
-
-$("runHeaderCheck").onclick = async () => {
-  let target = $("headerInput").value.trim();
-  if(!/^https?:\/\//i.test(target)) target = "https://" + target;
-  show("headerOutput", "> Header Abfrage...");
-  try {
-    const r = await fetch(target, { method: "HEAD", cache: "no-store" });
-    const h = [...r.headers.entries()].map(([k,v]) => `${k}: ${v}`).join("\n");
-    show("headerOutput", `> URL: ${target}\n\n${h || "(Keine sichtbaren Header durch CORS)"}`);
-    addLog("HTTP Headers", target, "Erfolgreich");
-  } catch(e) { show("headerOutput", "> Fehler: " + e.message); }
-};
-
-// 5. SECURITY & IP
-$("runSecIpBtn").onclick = async () => {
-  const ip = $("secIpInput").value.trim();
-  show("secIpOutput", "> IP Geo-Lookup läuft...");
-  try {
-    const r = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`);
-    const d = await r.json();
-    if(!d.success) throw new Error(d.message || "Lookup fehlgeschlagen");
-    show("secIpOutput", `> IP: ${d.ip}\n> Typ: ${d.type}\n> Land: ${d.country} (${d.country_code})\n> Stadt: ${d.city}\n> ISP: ${d.connection?.isp}\n> ASN: ${d.connection?.asn}`);
-    addLog("IP Lookup", ip, `${d.country}`);
-  } catch(e) { show("secIpOutput", "> Fehler: " + e.message); }
-};
-
-$("runAbuseBtn").onclick = async () => {
-  const ip = $("abuseInput").value.trim();
-  show("abuseOutput", "> RDAP Abfrage läuft...");
-  try {
-    const r = await fetch(`https://rdap.org/ip/${encodeURIComponent(ip)}`);
-    if(!r.ok) throw new Error(`HTTP ${r.status}`);
-    const d = await r.json();
-    show("abuseOutput", `> IP: ${ip}\n> Handle: ${d.handle || "N/A"}\n> Name: ${d.name || "N/A"}\n> Port43 Registry: ${d.port43 || "N/A"}`);
-    addLog("RDAP Lookup", ip, "Abgerufen");
-  } catch(e) { show("abuseOutput", "> Fehler: " + e.message); }
-};
-
-// 6. ADMIN UTILITIES
-$("runAdminTool").onclick = () => {
-  const input = $("adminInput").value, action = $("adminAction").value;
-  let res = "";
-  try {
-    if(action === "base64enc") res = btoa(unescape(encodeURIComponent(input)));
-    else if(action === "base64dec") res = decodeURIComponent(escape(atob(input)));
-    else if(action === "urlenc") res = encodeURIComponent(input);
-    else if(action === "jwtdec") {
-      const p = input.split(".");
-      if(p.length < 2) throw new Error("Ungültiges JWT-Format");
-      res = JSON.stringify(JSON.parse(decodeURIComponent(escape(atob(p[1])))), null, 2);
-    }
-    else if(action === "pwdgen") {
-      const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
-      const arr = new Uint32Array(24);
-      crypto.getRandomValues(arr);
-      res = Array.from(arr, x => c[x % c.length]).join("");
-    }
-    else if(action === "uuidgen") res = crypto.randomUUID();
-    else if(action === "jsonfmt") res = JSON.stringify(JSON.parse(input), null, 2);
-    else if(action === "timestamp") {
-      const t = input.trim() ? Number(input) : Math.floor(Date.now()/1000);
-      res = `Unix: ${t}\nUTC: ${new Date(t * 1000).toISOString()}`;
-    }
-    show("adminOutput", `> ${action}\n` + res);
-    addLog("Admin Utility", action, "Ausgeführt");
-  } catch(e) { show("adminOutput", "> Fehler: " + e.message); }
-};
-
-$("runMacBtn").onclick = () => {
-  const mac = $("macInput").value.trim();
-  if(!/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(mac)){
-    show("macOutput", "> Ungültige MAC-Adresse");
-    return;
-  }
-  const firstByte = parseInt(mac.split(/[:-]/)[0], 16);
-  const isMulticast = (firstByte & 1) === 1;
-  const isLocal = (firstByte & 2) === 2;
-  show("macOutput", `> MAC: ${mac}\n> Typ: ${isMulticast ? "Multicast" : "Unicast"}\n> Verwaltung: ${isLocal ? "Lokal verwaltet (LAA)" : "Universell / Global (UAA)"}`);
-  addLog("MAC Parser", mac, isMulticast ? "Multicast" : "Unicast");
-};
-
-// --- EXPORT & SHARE ---
-$("copyResultsBtn").onclick = () => {
-  if(!logData.length) return alert("Keine Log-Daten vorhanden.");
-  const text = logData.map(l => `[${l.time}] ${l.tool} -> ${l.target}: ${l.result}`).join("\n");
-  navigator.clipboard.writeText(text).then(() => alert("Ergebnisse in Zwischenablage kopiert."));
-};
-
-$("shareResultsBtn").onclick = async () => {
-  if(!logData.length) return alert("Keine Log-Daten vorhanden.");
-  const text = logData.map(l => `[${l.time}] ${l.tool}: ${l.result}`).join("\n");
-  if(navigator.share) try { await navigator.share({ title: 'Fasqoo Report', text }); } catch(e){}
-  else { navigator.clipboard.writeText(text); alert("Kopiert!"); }
-};
-
-$("jsonExportBtn").onclick = () => {
-  if(!logData.length) return alert("Keine Daten vorhanden.");
-  const blob = new Blob([JSON.stringify(logData, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "fasqoo-toolkit-report.json";
-  a.click();
-};
-
-$("printReportBtn").onclick = () => window.print();
-$("clearLog").onclick = () => { logData = []; renderLog(); };
-
-// --- THEME & SEARCH ---
-const themeBtn = $("themeBtn");
-function setTheme(dark){
-  document.body.classList.toggle("dark", dark);
-  themeBtn.textContent = dark ? "☀" : "☾";
-  try { localStorage.setItem("fasqoo-theme", dark ? "dark" : "light"); } catch(e){}
-}
-themeBtn.onclick = () => setTheme(!document.body.classList.contains("dark"));
-try { if(localStorage.getItem("fasqoo-theme") === "dark") setTheme(true); } catch(e){}
-
-$("menuToggle").onclick = () => $("mainMenu").classList.toggle("active");
-
-$("fqToolSearch").oninput = (e) => {
-  const q = e.target.value.toLowerCase();
-  document.querySelectorAll(".it-tool-box").forEach(box => {
-    box.style.display = box.textContent.toLowerCase().includes(q) ? "" : "none";
+  // --- THEME SYSTEM ---
+  $("themeBtn").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    $("themeBtn").textContent = isDark ? "☀" : "☾";
   });
-};
-document.addEventListener("keydown", e => {
-  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
-    e.preventDefault(); $("fqToolSearch").focus();
-  }
-});
 
-// --- I18N DICTIONARY ---
-const I18N = {
-  de: { home:"Startseite", faq:"FAQ", diagnose:"IT-Diagnose", about:"Über uns", hero:"Network Engineer Toolkit & Suite", heroP:"Professionelle Netzwerk- und Admin-Werkzeuge mit präzisen lokalen Berechnungen und transparenten Browser-Diagnosen.", accuracy:"Berechnete Netzwerkdaten werden 100% lokal ermittelt. Externe Informationen stammen nur aus echten APIs/DoH-Resolvern; nicht mögliche Browser-Messungen (z. B. ICMP Raw Ping) werden transparent deklariert.", copy:"📋 Ergebnis kopieren", share:"📤 Ergebnis teilen", json:"💻 JSON exportieren", print:"🖨️ Bericht drucken", subnetTab:"📐 IP & Subnetting", dnsTab:"🌐 DNS & Records", netTab:"⚡ Network & Ping", webTab:"🔒 Web & Server", secTab:"🛡️ IP / Security", adminTab:"🛠️ Admin Tools", history:"Toolkit Aktivitätsprotokoll", clear:"Log löschen", empty:"Noch keine Aktionen in dieser Session." },
-  en: { home:"Home", faq:"FAQ", diagnose:"IT Diagnostics", about:"About Us", hero:"Network Engineer Toolkit & Suite", heroP:"Professional network & admin tools featuring 100% accurate local calculations and transparent browser diagnostics.", accuracy:"Calculated network data is computed locally. External info originates exclusively from live APIs/DoH resolvers; unsupported browser measurements are explicitly declared.", copy:"📋 Copy Results", share:"📤 Share Results", json:"💻 Export JSON", print:"🖨️ Print Report", subnetTab:"📐 IP & Subnetting", dnsTab:"🌐 DNS & Records", netTab:"⚡ Network & Ping", webTab:"🔒 Web & Server", secTab:"🛡️ IP / Security", adminTab:"🛠️ Admin Tools", history:"Toolkit Activity Log", clear:"Clear Log", empty:"No actions recorded in this session." },
-  fr: { home:"Accueil", faq:"FAQ", diagnose:"Diagnostic IT", about:"À propos", hero:"Boîte à Outils Network Engineer", heroP:"Outils réseau et d'administration professionnels avec des calculs locaux précis.", accuracy:"Les données réseau calculées sont traitées localement.", copy:"📋 Copier", share:"📤 Partager", json:"💻 Exporter JSON", print:"🖨️ Imprimer", subnetTab:"📐 IP & Subnetting", dnsTab:"🌐 DNS & Records", netTab:"⚡ Réseau & Ping", webTab:"🔒 Web & Serveur", secTab:"🛡️ Sécurité", adminTab:"🛠️ Admin Tools", history:"Journal d'activité", clear:"Effacer", empty:"Aucune action enregistrée." },
-  es: { home:"Inicio", faq:"FAQ", diagnose:"Diagnóstico IT", about:"Sobre nosotros", hero:"Network Engineer Toolkit & Suite", heroP:"Herramientas profesionales de red y administración con cálculos locales 100% precisos.", accuracy:"Los datos calculados se procesan localmente.", copy:"📋 Copiar", share:"📤 Compartir", json:"💻 Exportar JSON", print:"🖨️ Imprimir", subnetTab:"📐 IP & Subnetting", dnsTab:"🌐 DNS & Records", netTab:"⚡ Red & Ping", webTab:"🔒 Web & Servidor", secTab:"🛡️ Seguridad", adminTab:"🛠️ Admin Tools", history:"Registro de actividad", clear:"Limpiar", empty:"Sin acciones registradas." }
-};
-
-function getTranslation(key){
-  const lang = $("langSelect").value || "de";
-  return (I18N[lang] && I18N[lang][key]) ? I18N[lang][key] : (I18N.de[key] || "");
-}
-
-$("langSelect").onchange = (e) => {
-  const lang = e.target.value;
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const k = el.getAttribute("data-i18n");
-    if(I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
+  // --- TAB NAVIGATION ---
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      $(btn.getAttribute("data-target")).classList.add("active");
+    });
   });
-};
+
+  // --- SEARCH FILTER ---
+  $("toolSearch").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(q) ? "" : "none";
+    });
+  });
+
+  // --- LOG SYSTEM ---
+  let activityLog = [];
+  function addLog(tool, input, result) {
+    const time = new Date().toLocaleTimeString();
+    activityLog.unshift({ time, tool, input, result });
+    renderLog();
+  }
+
+  function renderLog() {
+    const tbody = $("logTable");
+    if (!activityLog.length) {
+      const lang = $("langSelect").value || "de";
+      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">${i18n[lang].logEmpty}</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = activityLog.map(l => `
+      <tr>
+        <td>${l.time}</td>
+        <td><b>${l.tool}</b></td>
+        <td>${l.input}</td>
+        <td>${l.result}</td>
+      </tr>
+    `).join("");
+  }
+
+  $("clearLogBtn").onclick = () => { activityLog = []; renderLog(); };
+  $("copyLogBtn").onclick = () => {
+    if (!activityLog.length) return alert("Log ist leer.");
+    const text = activityLog.map(l => `[${l.time}] ${l.tool} -> ${l.input}: ${l.result}`).join("\n");
+    navigator.clipboard.writeText(text).then(() => alert("Log kopiert!"));
+  };
+
+  // --- IP / SUBNET CORE LOGIC ---
+  function ipToInt(ip) {
+    return ip.split(".").reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+  }
+  function intToIp(int) {
+    return [(int >>> 24) & 255, (int >>> 16) & 255, (int >>> 8) & 255, int & 255].join(".");
+  }
+
+  // 1. SUBNET CALCULATOR
+  $("calcSubnetBtn").onclick = () => {
+    try {
+      const input = $("subnetInput").value.trim();
+      const [ip, cidrStr] = input.split("/");
+      const cidr = parseInt(cidrStr, 10);
+
+      if (!ip || isNaN(cidr) || cidr < 0 || cidr > 32) throw new Error("Ungültiges CIDR Format.");
+
+      const mask = cidr === 0 ? 0 : (0xFFFFFFFF << (32 - cidr)) >>> 0;
+      const ipNum = ipToInt(ip);
+      const netNum = (ipNum & mask) >>> 0;
+      const bcastNum = (netNum | (~mask >>> 0)) >>> 0;
+      const totalHosts = Math.pow(2, 32 - cidr);
+      const usableHosts = cidr >= 31 ? totalHosts : Math.max(0, totalHosts - 2);
+
+      const out = `Netzadresse:   ${intToIp(netNum)}
+Subnetmaske:   ${intToIp(mask)}
+Broadcast:     ${intToIp(bcastNum)}
+Erster Host:   ${cidr >= 31 ? intToIp(netNum) : intToIp(netNum + 1)}
+Letzter Host:  ${cidr >= 31 ? intToIp(bcastNum) : intToIp(bcastNum - 1)}
+Hosts Gesamt:  ${totalHosts.toLocaleString()}
+Nutzbar:       ${usableHosts.toLocaleString()}`;
+
+      $("subnetOutput").textContent = out;
+      addLog("Subnet Calc", input, `${intToIp(netNum)}/${cidr}`);
+    } catch (e) {
+      $("subnetOutput").textContent = "> Fehler: " + e.message;
+    }
+  };
+
+  // 2. VLSM PLANNER
+  $("calcVlsmBtn").onclick = () => {
+    try {
+      const base = $("vlsmBaseInput").value.trim();
+      const [ip, cidrStr] = base.split("/");
+      const baseCidr = parseInt(cidrStr, 10);
+      const hostsReq = $("vlsmHostsInput").value.split(",").map(x => parseInt(x.trim(), 10)).filter(x => !isNaN(x)).sort((a,b) => b - a);
+
+      if (!ip || isNaN(baseCidr) || !hostsReq.length) throw new Error("Ungültige Eingaben.");
+
+      let currentIp = (ipToInt(ip) & (0xFFFFFFFF << (32 - baseCidr))) >>> 0;
+      let out = `VLSM Subnetz-Planung für ${base}:\n\n`;
+
+      hostsReq.forEach((req, idx) => {
+        let p = 32;
+        while (p >= 0 && (Math.pow(2, 32 - p) - 2) < req) p--;
+        const mask = (0xFFFFFFFF << (32 - p)) >>> 0;
+        const bcast = (currentIp | (~mask >>> 0)) >>> 0;
+
+        out += `Subnetz ${idx + 1} (${req} Hosts):
+  Netz: ${intToIp(currentIp)}/${p}
+  Maske: ${intToIp(mask)}
+  Bereich: ${intToIp(currentIp + 1)} - ${intToIp(bcast - 1)}\n\n`;
+
+        currentIp = bcast + 1;
+      });
+
+      $("vlsmOutput").textContent = out;
+      addLog("VLSM Planner", base, `${hostsReq.length} Subnetze erzeugt`);
+    } catch (e) {
+      $("vlsmOutput").textContent = "> Fehler: " + e.message;
+    }
+  };
+
+  // 3. DNS LOOKUP
+  $("runDnsBtn").onclick = async () => {
+    const domain = $("dnsDomain").value.trim();
+    const type = $("dnsType").value;
+    $("dnsOutput").textContent = "> Fragt Cloudflare DoH ab...";
+
+    try {
+      const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, {
+        headers: { "accept": "application/dns-json" }
+      });
+      const data = await res.json();
+      
+      if (!data.Answer) {
+        $("dnsOutput").textContent = `> Keine Records vom Typ ${type} gefunden.`;
+        return;
+      }
+
+      const records = data.Answer.map(a => `${a.name}  TTL:${a.TTL}  ${a.data}`).join("\n");
+      $("dnsOutput").textContent = `> DNS Records für ${domain} (${type}):\n\n` + records;
+      addLog("DNS Lookup", `${domain} (${type})`, `${data.Answer.length} Records`);
+    } catch (e) {
+      $("dnsOutput").textContent = "> Fehler bei DNS-Abfrage: " + e.message;
+    }
+  };
+
+  // 4. HTTP LATENCY TEST
+  $("runHttpBtn").onclick = async () => {
+    let url = $("httpUrl").value.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    $("httpOutput").textContent = "> Sende HTTP Request...";
+
+    try {
+      const start = performance.now();
+      const res = await fetch(url, { method: "HEAD", mode: "no-cors", cache: "no-store" });
+      const duration = (performance.now() - start).toFixed(1);
+
+      $("httpOutput").textContent = `Ziel: ${url}\nHTTP Antwortezeit: ${duration} ms\nStatus: Online / Erreichbar`;
+      addLog("HTTP Test", url, `${duration} ms`);
+    } catch (e) {
+      $("httpOutput").textContent = "> HTTP Fehler / Offline: " + e.message;
+    }
+  };
+
+  // 5. PUBLIC IP LOOKUP
+  $("runIpBtn").onclick = async () => {
+    const ip = $("ipLookupInput").value.trim();
+    $("ipOutput").textContent = "> Abfrage läuft...";
+
+    try {
+      const res = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`);
+      const data = await res.json();
+
+      if (!data.success) throw new Error(data.message || "Abfrage fehlgeschlagen");
+
+      const out = `IP:          ${data.ip}
+Land:        ${data.country} (${data.country_code})
+Stadt:       ${data.city}
+ISP:         ${data.connection?.isp || "k.A."}
+ASN:         ${data.connection?.asn || "k.A."}`;
+
+      $("ipOutput").textContent = out;
+      addLog("IP Lookup", ip, `${data.country}`);
+    } catch (e) {
+      $("ipOutput").textContent = "> Fehler: " + e.message;
+    }
+  };
+
+  // 6. ADMIN UTILITIES
+  $("runAdminBtn").onclick = () => {
+    const input = $("adminInput").value;
+    const action = $("adminAction").value;
+    let result = "";
+
+    try {
+      if (action === "pwdgen") {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        const bytes = new Uint32Array(20);
+        crypto.getRandomValues(bytes);
+        result = Array.from(bytes, b => chars[b % chars.length]).join("");
+      } else if (action === "uuidgen") {
+        result = crypto.randomUUID();
+      } else if (action === "base64enc") {
+        result = btoa(unescape(encodeURIComponent(input)));
+      } else if (action === "base64dec") {
+        result = decodeURIComponent(escape(atob(input)));
+      } else if (action === "jwtdec") {
+        const parts = input.split(".");
+        if (parts.length < 2) throw new Error("Ungültiges JWT Format.");
+        result = JSON.stringify(JSON.parse(decodeURIComponent(escape(atob(parts[1])))), null, 2);
+      }
+
+      $("adminOutput").textContent = `> ${action} Ergebnis:\n\n` + result;
+      addLog("Admin Tool", action, "Erfolgreich");
+    } catch (e) {
+      $("adminOutput").textContent = "> Fehler: " + e.message;
+    }
+  };
+
+  // Initialisierung
+  setLanguage("de");
 </script>
+
 </body>
 </html>
