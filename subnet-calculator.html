@@ -3,500 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fasqoo – Network & Admin Tools</title>
+  <title>Fasqoo - Online IT Tools</title>
 
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #111827;
-      --card-border: #1f2937;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --accent-orange: #f97316;
-      --console-bg: #030712;
+      --accent: #f97316;
+      --console-bg: #020617;
       --console-text: #38bdf8;
-      --header-bg: #0d1322;
     }
 
     body.light-mode {
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --card-border: #e2e8f0;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
+      --card-border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
       --console-bg: #0f172a;
-      --console-text: #38bdf8;
-      --header-bg: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
 
-    .container { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+    .wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
 
-    /* --- FASQOO HEADER & MENU --- */
+    /* EXACT FASQOO HEADER STYLES */
     header {
-      background: var(--header-bg);
+      background: var(--card-bg);
       border-bottom: 1px solid var(--card-border);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-
-    .fasqoo-nav {
+    .wrap.nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
     }
-
-    .brand-logo {
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 22px; cursor: pointer; }
+    .brandmark { color: var(--accent); font-size: 24px; }
+    
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
       font-size: 24px;
-      font-weight: 900;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: -0.5px;
+      cursor: pointer;
     }
-    .brand-logo span { color: var(--accent-orange); }
 
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 24px;
-    }
-    .nav-links a {
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent-orange); }
-
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .lang-select, .theme-toggle {
-      background: var(--card-bg);
-      color: var(--text-main);
+    .main-menu { display: flex; align-items: center; gap: 20px; }
+    .main-menu a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 14px; }
+    .main-menu a:hover { color: var(--accent); }
+    
+    .menu-extra { display: flex; align-items: center; gap: 10px; }
+    .menu-extra select, .theme-btn {
+      background: var(--bg);
+      color: var(--text);
       border: 1px solid var(--card-border);
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 6px;
       cursor: pointer;
+      font-weight: 600;
       font-size: 13px;
-      font-weight: 600;
     }
 
-    /* --- HERO & SEARCH BAR --- */
-    .hero { text-align: center; padding: 40px 0 20px; }
-    .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
-    .hero p { color: var(--text-muted); font-size: 15px; }
-
-    .search-container { margin: 24px auto; max-width: 500px; }
-    .search-container input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      color: var(--text-main);
-      outline: none;
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .main-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px; left: 0; width: 100%;
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--card-border);
+        padding: 20px; gap: 15px;
+      }
+      .main-menu.open { display: flex; }
     }
 
-    /* --- CATEGORY TABS --- */
-    .tab-bar {
-      display: flex;
-      gap: 10px;
-      border-bottom: 1px solid var(--card-border);
-      margin-bottom: 24px;
-      overflow-x: auto;
-    }
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 10px 16px;
-      font-weight: 600;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      white-space: nowrap;
-    }
-    .tab-btn.active {
-      color: var(--accent-orange);
-      border-bottom-color: var(--accent-orange);
-    }
-
-    /* --- DASHBOARD GRID & CARDS --- */
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    /* GRID & CARDS */
+    main { padding: 30px 0; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
-
+    
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
-    .card h3 { font-size: 16px; margin-bottom: 6px; }
-    .card p { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+    .card h3 { margin-bottom: 6px; font-size: 17px; }
+    .card p { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
 
     .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-    .form-group input, .form-group select, .form-group textarea {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid var(--card-border);
-      background: var(--bg);
-      color: var(--text-main);
-      outline: none;
+    .form-group input, .form-group select {
+      padding: 10px; border-radius: 6px; border: 1px solid var(--card-border);
+      background: var(--bg); color: var(--text); outline: none;
     }
 
-    .btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .btn { background: var(--primary); color: #fff; border: 0; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; }
     .btn:hover { background: var(--primary-hover); }
 
     .console {
-      background: var(--console-bg);
-      color: var(--console-text);
-      font-family: monospace;
-      font-size: 12px;
-      padding: 12px;
-      border-radius: 6px;
-      min-height: 100px;
-      max-height: 180px;
-      overflow-y: auto;
-      white-space: pre-wrap;
+      background: var(--console-bg); color: var(--console-text);
+      font-family: monospace; font-size: 12px; padding: 12px;
+      border-radius: 6px; min-height: 100px; max-height: 180px; overflow-y: auto; white-space: pre-wrap;
     }
-
-    footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 13px; }
   </style>
 </head>
 <body>
 
-<!-- FASQOO HEADER NAVIGATION MENU -->
+<!-- DEIN MENU SYSTEM -->
 <header>
-  <div class="container fasqoo-nav">
-    <a href="#" class="brand-logo">fasq<span>oo</span></a>
-
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#tab-subnet" onclick="switchTab('tab-subnet')">Subnetting</a></li>
-        <li><a href="#tab-netwiz" onclick="switchTab('tab-netwiz')">Web Wiz Tools</a></li>
-        <li><a href="#tab-dns" onclick="switchTab('tab-dns')">DNS Lookup</a></li>
-        <li><a href="#tab-security" onclick="switchTab('tab-security')">Security & IP</a></li>
-        <li><a href="#tab-admin" onclick="switchTab('tab-admin')">Utilities</a></li>
-      </ul>
-    </nav>
-
-    <div class="nav-actions">
-      <select class="lang-select">
-        <option value="de">DE</option>
-        <option value="en">EN</option>
-      </select>
-      <button class="theme-toggle" id="themeBtn">☾</button>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brandmark">⌁</div>
+      <div class="brandname">Fasqoo</div>
     </div>
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" id="navHome">Home</a>
+      <a href="faq.html" id="navFaq">FAQ</a>
+      <a href="network-status.html" id="navStatus">Netzwerk-Status</a>
+      <a href="subnet-calculator.html" id="navStatus">IT-Diagnose</a>
+      <a href="about.html" id="navAbout">Über uns</a>
+      <div class="menu-extra">
+        <select id="lang" aria-label="Language">
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="nl">Nederlands</option>
+          <option value="tr">Türkçe</option>
+          <option value="sq">Shqip</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode" title="Dark mode">☾</button>
+      </div>
+    </nav>
   </div>
 </header>
 
-<main class="container">
-  <section class="hero">
-    <h1>Netzwerk & Online Admin Toolkit</h1>
-    <p>Integrierte Tools für CIDR, WHOIS, Ping, Traceroute & DNS Analysis.</p>
-    <div class="search-container">
-      <input id="toolSearch" type="search" placeholder="Suche nach Tools (z.B. Ping, WHOIS, CIDR)...">
+<main class="wrap">
+  <div class="grid">
+
+    <!-- 1. ECHTE LATENZ (PING) -->
+    <div class="card">
+      <div>
+        <h3>Echte Web-Latenz (Real Ping)</h3>
+        <p>Misst die exakte HTTP-Verzögerung zu einem echten Server.</p>
+        <div class="form-group">
+          <input type="text" id="pingUrl" value="https://cloudflare.com">
+          <button class="btn" id="runPing">Latenz Messen</button>
+        </div>
+      </div>
+      <div class="console" id="pingOut">> Bereit...</div>
     </div>
-  </section>
 
-  <!-- NAVIGATION TABS -->
-  <div class="tab-bar">
-    <button class="tab-btn active" data-target="tab-subnet">Subnet Calculator</button>
-    <button class="tab-btn" data-target="tab-netwiz">Web Wiz Network Tools</button>
-    <button class="tab-btn" data-target="tab-dns">DNS Lookup</button>
-    <button class="tab-btn" data-target="tab-security">IP & Security</button>
-    <button class="tab-btn" data-target="tab-admin">Admin Utilities</button>
-  </div>
-
-  <!-- 1. SUBNETTING -->
-  <div class="tab-content active" id="tab-subnet">
-    <div class="grid">
-      <div class="card">
-        <div>
-          <h3>IPv4 Subnet Calculator</h3>
-          <p>Netzwerk-Adresse, Maske, Broadcast & IP-Bereich berechnen.</p>
-          <div class="form-group">
-            <input type="text" id="subnetInput" value="192.168.1.0/24">
-            <button class="btn" id="calcSubnetBtn">Berechnen</button>
-          </div>
+    <!-- 2. ECHTER EIGENER SPEEDTEST -->
+    <div class="card">
+      <div>
+        <h3>Echter Download-Speedtest</h3>
+        <p>Misst die tatsächliche Internet-Geschwindigkeit live.</p>
+        <div class="form-group">
+          <button class="btn" id="runSpeed">Speedtest Starten</button>
         </div>
-        <div class="console" id="subnetOutput">> Bereit...</div>
       </div>
+      <div class="console" id="speedOut">> Bereit...</div>
     </div>
-  </div>
 
-  <!-- 2. WEB WIZ TOOLS (PING, TRACEROUTE, WHOIS, PORT SCAN, HTTP HEADERS) -->
-  <div class="tab-content" id="tab-netwiz">
-    <div class="grid">
-
-      <!-- PING -->
-      <div class="card">
-        <div>
-          <h3>Ping Diagnostic</h3>
-          <p>Antwortzeiten & ICMP-Erreichbarkeit prüfen.</p>
-          <div class="form-group">
-            <input type="text" id="pingTarget" value="google.com">
-            <button class="btn" id="runPingBtn">Ping Starten</button>
-          </div>
+    <!-- 3. ECHTER DNS LOOKUP -->
+    <div class="card">
+      <div>
+        <h3>Echter DNS Lookup (Cloudflare DoH)</h3>
+        <p>Fragt echte Live-DNS-Einträge für eine Domain ab.</p>
+        <div class="form-group">
+          <input type="text" id="dnsDomain" value="google.com">
+          <select id="dnsType">
+            <option value="A">A (IPv4)</option>
+            <option value="AAAA">AAAA (IPv6)</option>
+            <option value="MX">MX (Mail)</option>
+            <option value="TXT">TXT</option>
+          </select>
+          <button class="btn" id="runDns">DNS Abfragen</button>
         </div>
-        <div class="console" id="pingOutput">> Bereit...</div>
       </div>
-
-      <!-- TRACEROUTE -->
-      <div class="card">
-        <div>
-          <h3>Traceroute Tool</h3>
-          <p>Paketweg & Hop-Verzögerungen analysieren.</p>
-          <div class="form-group">
-            <input type="text" id="traceTarget" value="1.1.1.1">
-            <button class="btn" id="runTraceBtn">Trace Starten</button>
-          </div>
-        </div>
-        <div class="console" id="traceOutput">> Bereit...</div>
-      </div>
-
-      <!-- WHOIS -->
-      <div class="card">
-        <div>
-          <h3>WHOIS Domain Lookup</h3>
-          <p>Registrar, Domain-Inhaber & Ablaufdatum abrufen.</p>
-          <div class="form-group">
-            <input type="text" id="whoisTarget" value="wikipedia.org">
-            <button class="btn" id="runWhoisBtn">WHOIS Abfragen</button>
-          </div>
-        </div>
-        <div class="console" id="whoisOutput">> Bereit...</div>
-      </div>
-
-      <!-- HTTP HEADERS -->
-      <div class="card">
-        <div>
-          <h3>HTTP Header Inspector</h3>
-          <p>Webserver Status-Codes & Antwort-Header prüfen.</p>
-          <div class="form-group">
-            <input type="text" id="headerTarget" value="https://cloudflare.com">
-            <button class="btn" id="runHeaderBtn">Header Abrufen</button>
-          </div>
-        </div>
-        <div class="console" id="headerOutput">> Bereit...</div>
-      </div>
-
-      <!-- PORT SCANNER -->
-      <div class="card">
-        <div>
-          <h3>Port Scanner Test</h3>
-          <p>Standard-Ports (HTTP, HTTPS, SSH, FTP) prüfen.</p>
-          <div class="form-group">
-            <input type="text" id="portTarget" value="google.com">
-            <button class="btn" id="runPortBtn">Ports Scannen</button>
-          </div>
-        </div>
-        <div class="console" id="portOutput">> Bereit...</div>
-      </div>
-
+      <div class="console" id="dnsOut">> Bereit...</div>
     </div>
-  </div>
 
-  <!-- 3. DNS LOOKUP -->
-  <div class="tab-content" id="tab-dns">
-    <div class="grid">
-      <div class="card">
-        <div>
-          <h3>Live DNS Lookup (Cloudflare DoH)</h3>
-          <p>A, AAAA, MX & TXT DNS-Einträge abfragen.</p>
-          <div class="form-group">
-            <input type="text" id="dnsDomain" value="google.com">
-            <select id="dnsType">
-              <option value="A">A (IPv4)</option>
-              <option value="AAAA">AAAA (IPv6)</option>
-              <option value="MX">MX (Mail)</option>
-              <option value="TXT">TXT</option>
-            </select>
-            <button class="btn" id="runDnsBtn">Abfragen</button>
-          </div>
+    <!-- 4. ECHTE IP & GEOLOCATION -->
+    <div class="card">
+      <div>
+        <h3>Echte IP-Adresse & Standort</h3>
+        <p>Analysiert Deine eigene IP oder eine externe Ziel-IP.</p>
+        <div class="form-group">
+          <input type="text" id="ipInput" placeholder="Leer lassen für eigene IP">
+          <button class="btn" id="runIp">IP Analysieren</button>
         </div>
-        <div class="console" id="dnsOutput">> Bereit...</div>
       </div>
+      <div class="console" id="ipOut">> Bereit...</div>
     </div>
-  </div>
 
-  <!-- 4. SECURITY & IP -->
-  <div class="tab-content" id="tab-security">
-    <div class="grid">
-      <div class="card">
-        <div>
-          <h3>IP Geolocation Lookup</h3>
-          <p>IP-Adresse analysieren (Land, Stadt, ISP, ASN).</p>
-          <div class="form-group">
-            <input type="text" id="ipLookupInput" value="8.8.8.8">
-            <button class="btn" id="runIpBtn">IP Scannen</button>
-          </div>
+    <!-- 5. ECHTER BROWSER & SYSTEM CHECK -->
+    <div class="card">
+      <div>
+        <h3>System & Client Analyzer</h3>
+        <p>Liest exakte Browser-, Device- & Netzwerk-Parameter aus.</p>
+        <div class="form-group">
+          <button class="btn" id="runSys">System Scan</button>
         </div>
-        <div class="console" id="ipOutput">> Bereit...</div>
       </div>
+      <div class="console" id="sysOut">> Bereit...</div>
     </div>
-  </div>
 
-  <!-- 5. UTILITIES -->
-  <div class="tab-content" id="tab-admin">
-    <div class="grid">
-      <div class="card">
-        <div>
-          <h3>Admin Utilities</h3>
-          <p>Sichere Passwörter & UUIDs generieren.</p>
-          <div class="form-group">
-            <select id="adminAction">
-              <option value="pwdgen">Passwort-Generator (20 Zeichen)</option>
-              <option value="uuidgen">UUID v4 Generator</option>
-            </select>
-            <button class="btn" id="runAdminBtn">Generieren</button>
-          </div>
+    <!-- 6. ECHTER IPV4 SUBNET CALCULATOR -->
+    <div class="card">
+      <div>
+        <h3>IPv4 Subnet Calculator</h3>
+        <p>Exakte mathematische CIDR-Berechnung.</p>
+        <div class="form-group">
+          <input type="text" id="subnetInput" value="192.168.1.0/24">
+          <button class="btn" id="runSubnet">Berechnen</button>
         </div>
-        <div class="console" id="adminOutput">> Bereit...</div>
       </div>
+      <div class="console" id="subnetOut">> Bereit...</div>
     </div>
-  </div>
 
+  </div>
 </main>
-
-<footer>
-  <div class="container">
-    <p>© 2026 Fasqoo Toolkit Engine – Alle Funktionen laufen lokal im Browser.</p>
-  </div>
-</footer>
 
 <script>
   const $ = id => document.getElementById(id);
 
-  // TAB SWITCHING
-  function switchTab(tabId) {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    const btn = document.querySelector(`[data-target="${tabId}"]`);
-    if (btn) btn.classList.add("active");
-    $(tabId).classList.add("active");
-  }
+  // MENU TOGGLE
+  $("menuToggle").onclick = () => $("mainMenu").classList.toggle("open");
 
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => switchTab(btn.getAttribute("data-target")));
-  });
-
-  // DARK MODE TOGGLE
+  // THEME SWITCHER
   $("themeBtn").onclick = () => {
     document.body.classList.toggle("light-mode");
     $("themeBtn").textContent = document.body.classList.contains("light-mode") ? "☀" : "☾";
   };
 
-  // SEARCH FILTER
-  $("toolSearch").oninput = e => {
-    const q = e.target.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(c => {
-      c.style.display = c.textContent.toLowerCase().includes(q) ? "" : "none";
-    });
-  };
+  // 1. ECHTER LATENZMESSER
+  $("runPing").onclick = async () => {
+    let url = $("pingUrl").value.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    $("pingOut").textContent = `> Sende HTTP Ping an ${url}...\n`;
 
-  // 1. SUBNET CALCULATOR
-  $("calcSubnetBtn").onclick = () => {
-    const val = $("subnetInput").value.trim().split("/");
-    if (val.length !== 2) return $("subnetOutput").textContent = "> Ungültiges Format. Beispiel: 192.168.1.0/24";
-    $("subnetOutput").textContent = `Netzwerk: ${val[0]}\nCIDR: /${val[1]}\nStatus: Gültiges Subnetz.`;
-  };
-
-  // 2. PING SIMULATION
-  $("runPingBtn").onclick = async () => {
-    const target = $("pingTarget").value.trim();
-    $("pingOutput").textContent = `> PING ${target} mit 32 Bytes:\n`;
-    for(let i = 1; i <= 4; i++) {
-      await new Promise(r => setTimeout(r, 300));
-      $("pingOutput").textContent += `Antwort von ${target}: Zeit=${Math.floor(Math.random() * 20 + 10)}ms TTL=56\n`;
+    for(let i = 1; i <= 3; i++) {
+      const start = performance.now();
+      try {
+        await fetch(url, { mode: 'no-cors', cache: 'no-cache' });
+        const end = performance.now();
+        $("pingOut").textContent += `Antwort ${i}: Zeit=${(end - start).toFixed(2)} ms\n`;
+      } catch(e) {
+        $("pingOut").textContent += `Antwort ${i}: Fehler/Blockiert durch CORS.\n`;
+      }
     }
   };
 
-  // 3. TRACEROUTE SIMULATION
-  $("runTraceBtn").onclick = async () => {
-    const target = $("traceTarget").value.trim();
-    $("traceOutput").textContent = `> Traceroute zu ${target}:\n`;
-    const hops = ["192.168.1.1", "10.0.0.1", "62.155.241.1", target];
-    for(let i=0; i<hops.length; i++) {
-      await new Promise(r => setTimeout(r, 400));
-      $("traceOutput").textContent += ` ${i+1}  ${Math.floor(Math.random()*10+5)}ms  ${hops[i]}\n`;
+  // 2. ECHTER SPEEDTEST
+  $("runSpeed").onclick = async () => {
+    $("speedOut").textContent = "> Speedtest läuft (Lade Testpaket)...";
+    const testUrl = "https://fetch-tests.envoyproxy.io/1mb.bin?cache=" + Math.random();
+    const startTime = performance.now();
+    try {
+      const res = await fetch(testUrl);
+      const data = await res.blob();
+      const endTime = performance.now();
+      const durationSec = (endTime - startTime) / 1000;
+      const sizeMB = data.size / (1024 * 1024);
+      const speedMbps = ((sizeMB * 8) / durationSec).toFixed(2);
+      $("speedOut").textContent = `Ergebnis:\nGröße: ${sizeMB.toFixed(2)} MB\nDauer: ${durationSec.toFixed(2)} Sek\nGeschwindigkeit: ${speedMbps} Mbit/s (${(sizeMB/durationSec).toFixed(2)} MB/s)`;
+    } catch(e) {
+      $("speedOut").textContent = "> Fehler beim Ausführen des Speedtests.";
     }
   };
 
-  // 4. WHOIS LOOKUP
-  $("runWhoisBtn").onclick = async () => {
-    const target = $("whoisTarget").value.trim();
-    $("whoisOutput").textContent = `Domain: ${target}\nStatus: Active\nRegistrar: MarkMonitor Inc.\nCreation Date: 2001-05-11`;
-  };
-
-  // 5. HTTP HEADER
-  $("runHeaderBtn").onclick = async () => {
-    const target = $("headerTarget").value.trim();
-    $("headerOutput").textContent = `HTTP/1.1 200 OK\nServer: cloudflare\nContent-Type: text/html\nCache-Control: max-age=3600`;
-  };
-
-  // 6. PORT SCANNER
-  $("runPortBtn").onclick = async () => {
-    const target = $("portTarget").value.trim();
-    $("portOutput").textContent = `> Port-Scan auf ${target}:\n`;
-    const ports = [21, 22, 80, 443, 3306];
-    for (let p of ports) {
-      await new Promise(r => setTimeout(r, 200));
-      $("portOutput").textContent += `Port ${p}: ${[80, 443, 22].includes(p) ? 'OPEN' : 'CLOSED'}\n`;
-    }
-  };
-
-  // 7. LIVE DNS LOOKUP
-  $("runDnsBtn").onclick = async () => {
+  // 3. ECHTER LIVE DNS LOOKUP
+  $("runDns").onclick = async () => {
     const domain = $("dnsDomain").value.trim();
     const type = $("dnsType").value;
-    $("dnsOutput").textContent = "> DNS Anfrage via Cloudflare...";
+    $("dnsOut").textContent = "> Abfrage via Cloudflare DoH...";
     try {
-      const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, { headers: { "accept": "application/dns-json" } });
+      const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, {
+        headers: { "accept": "application/dns-json" }
+      });
       const data = await res.json();
-      $("dnsOutput").textContent = data.Answer ? data.Answer.map(a => `${a.name}  TTL:${a.TTL}  ${a.data}`).join("\n") : "> Keine DNS Records.";
-    } catch(e) { $("dnsOutput").textContent = "> Fehler bei DNS Abfrage."; }
+      if (data.Answer) {
+        $("dnsOut").textContent = data.Answer.map(a => `${a.name} | TTL: ${a.TTL} | ${a.data}`).join("\n");
+      } else {
+        $("dnsOut").textContent = "> Keine DNS-Einträge gefunden.";
+      }
+    } catch(e) { $("dnsOut").textContent = "> Fehler bei der Live-Abfrage."; }
   };
 
-  // 8. IP GEOLOCATION
-  $("runIpBtn").onclick = async () => {
-    const ip = $("ipLookupInput").value.trim();
-    $("ipOutput").textContent = "> Suche Standort-Daten...";
+  // 4. ECHTE IP & GEOLOCATION
+  $("runIp").onclick = async () => {
+    const ip = $("ipInput").value.trim();
+    $("ipOut").textContent = "> Abfrage läuft...";
     try {
       const res = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`);
       const data = await res.json();
-      $("ipOutput").textContent = `IP: ${data.ip}\nLand: ${data.country}\nStadt: ${data.city}\nISP: ${data.connection?.isp || "Unbekannt"}`;
-    } catch(e) { $("ipOutput").textContent = "> Fehler bei der Standortabfrage."; }
+      $("ipOut").textContent = `IP: ${data.ip}\nTyp: ${data.type}\nLand: ${data.country} (${data.country_code})\nStadt: ${data.city}\nISP: ${data.connection?.isp || "N/A"}\nASN: ${data.connection?.asn || "N/A"}`;
+    } catch(e) { $("ipOut").textContent = "> Abfrage fehlgeschlagen."; }
   };
 
-  // 9. UTILITIES
-  $("runAdminBtn").onclick = () => {
-    const action = $("adminAction").value;
-    if (action === "pwdgen") {
-      const bytes = new Uint32Array(20); crypto.getRandomValues(bytes);
-      $("adminOutput").textContent = Array.from(bytes, b => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"[b % 70]).join("");
-    } else {
-      $("adminOutput").textContent = crypto.randomUUID();
-    }
+  // 5. SYSTEM SCAN
+  $("runSys").onclick = () => {
+    $("sysOut").textContent = `User Agent: ${navigator.userAgent}
+Bildschirm: ${screen.width}x${screen.height} (Farbtiefe: ${screen.colorDepth}-bit)
+Sprache: ${navigator.language}
+Online-Status: ${navigator.onLine ? "Online" : "Offline"}
+Cores: ${navigator.hardwareConcurrency || "N/A"}
+Cookies Aktiv: ${navigator.cookieEnabled}`;
+  };
+
+  // 6. SUBNET CALCULATOR (ECHTER ALGORITHMUS)
+  $("runSubnet").onclick = () => {
+    const input = $("subnetInput").value.trim().split("/");
+    if(input.length !== 2) return $("subnetOut").textContent = "> Format: 192.168.1.0/24";
+    const ip = input[0];
+    const cidr = parseInt(input[1], 10);
+    const ipArr = ip.split(".").map(Number);
+    
+    if (ipArr.length !== 4 || cidr < 0 || cidr > 32) return $("subnetOut").textContent = "> Ungültige IP/CIDR.";
+
+    const maskNum = (0xFFFFFFFF << (32 - cidr)) >>> 0;
+    const maskStr = [(maskNum>>>24)&255, (maskNum>>>16)&255, (maskNum>>>8)&255, maskNum&255].join(".");
+    
+    const hosts = Math.pow(2, 32 - cidr);
+    $("subnetOut").textContent = `IP: ${ip}\nNetzmaske: ${maskStr}\nCIDR: /${cidr}\nMax Hosts: ${hosts > 2 ? hosts - 2 : hosts}`;
   };
 </script>
 
