@@ -22,11 +22,7 @@
 <meta name="twitter:url" content="https://fasqoo.com/network-status.html">
 <meta name="twitter:title" content="Fasqoo Website-Status">
 <meta name="twitter:description" content="Echtzeit-Analyse der Verbindung zu fasqoo.com.">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  
+
 <!-- Structured Data / Schema.org für Google -->
 <script type="application/ld+json">
 {
@@ -97,8 +93,11 @@ a{ color:inherit; text-decoration:none; }
     max-width:1200px; margin:auto; padding:15px 20px;
     display:flex; align-items:center; justify-content:space-between; gap:20px;
 }
-.logo{ font-size:28px; font-weight:900; letter-spacing:-1.5px; color:var(--text); }
+.logo{ font-size:28px; font-weight:900; letter-spacing:-1.5px; color:var(--text); display:flex; align-items:center; gap:8px; }
 .logo span{ color:var(--primary); }
+
+/* NEUE ZEILE – nur für das Logo-Bild */
+.brandmark-img{ height:32px; width:auto; display:inline-block; vertical-align:middle; object-fit:contain; }
 
 .nav-links{ display:flex; align-items:center; gap:24px; }
 .nav-links a{ color:var(--muted); font-size:14px; font-weight:700; transition:.2s; }
@@ -350,7 +349,7 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
 
 <nav class="navbar">
     <div class="nav-container">
-        <a href="index.html" class="logo">fasq<span>oo</span></a>
+        <a href="index.html" class="logo"><img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark-img"><span>Fasqoo</span></a>
         <div class="nav-links" id="navLinks">
             <a href="index.html" data-i18n="home">Startseite</a>
             <a href="faq.html" data-i18n="faq">FAQ</a>
