@@ -44,6 +44,7 @@ body{
   background:var(--bg);
   color:var(--text);
   transition:.2s ease;
+  overflow-x: hidden;
 }
 
 a{
@@ -438,7 +439,7 @@ footer{
 
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE (MOBILE OPTIMIZED)
 ========================= */
 
 @media(max-width:900px){
@@ -459,6 +460,7 @@ footer{
     right:0;
     background:var(--card);
     flex-direction:column;
+    align-items:flex-start;
     padding:20px;
     border-bottom:1px solid var(--line);
     box-shadow:var(--shadow);
@@ -470,9 +472,20 @@ footer{
     display:flex;
   }
 
+  .main-menu a {
+    width: 100%;
+    padding: 8px 0;
+  }
+
   .menu-extra{
     margin-left:0;
-    margin-top:10px;
+    margin-top:5px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .menu-extra select {
+    flex-grow: 1;
   }
 
 }
@@ -484,7 +497,8 @@ footer{
   }
 
   .hero h1{
-    font-size:34px;
+    font-size:32px;
+    letter-spacing:-1px;
   }
 
   .features{
@@ -492,7 +506,7 @@ footer{
   }
 
   .about-section{
-    padding:27px;
+    padding:24px 20px;
   }
 
   .footer-inner{
@@ -509,15 +523,19 @@ footer{
 @media(max-width:560px){
 
   .hero h1{
-    font-size:28px;
+    font-size:26px;
   }
 
   .hero p{
-    font-size:14px;
+    font-size:13px;
   }
 
   .cta{
-    padding:32px 20px;
+    padding:32px 16px;
+  }
+
+  .cta h2 {
+    font-size: 22px;
   }
 
 }
@@ -735,11 +753,12 @@ footer{
     </div>
 
     <div class="footer-links">
-      <a href="/impressum.html" id="ftAccess">Impressum</a>
-<a href="/privacy-policy.html" id="ftPrivacy">Privacy Policy</a>
-<a href="/terms.html" id="ftTerms">Terms of Use</a>
-<a href="/do-not-sell.html" id="ftNoSell">Do Not Sell My Personal Info</a>
-      
+      <a href="accessibility.html" data-i18n="accessibility">Barrierefreiheit</a>
+      <a href="network-status.html" data-i18n="network">Netzwerk-Status</a>
+      <a href="privacy-policy.html" data-i18n="privacy">Datenschutzrichtlinie</a>
+      <a href="terms.html" data-i18n="terms">Nutzungsbedingungen</a>
+      <a href="do-not-sell.html" data-i18n="donotsell">Meine Daten nicht verkaufen</a>
+      <a href="modern-slavery.html" data-i18n="slavery">Moderne Sklaverei Richtlinie</a>
     </div>
 
   </div>
@@ -1260,7 +1279,6 @@ function applyLanguage(language){
     }
   });
 
-  // Dynamic Title & Description (SEO)
   const metaTitle = language === "de"
     ? "Über Fasqoo – Professioneller Internet Speed Test"
     : language === "fr"
