@@ -9,332 +9,652 @@
     <meta name="description" content="Fasqoo Do Not Sell or Share My Personal Information – Learn how to exercise applicable privacy choices and opt out of certain data sharing.">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #000000;
-            color: #ffffff;
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px 50px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: opacity 0.2s ease;
-        }
-
-        .back-link:hover {
-            opacity: 0.7;
-        }
-
-        .card {
-            background: #111111;
-            padding: 45px;
-            border-radius: 18px;
-            border: 1px solid #242424;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            margin-top: 0;
-            font-size: 36px;
-            line-height: 1.2;
-            color: #ffffff;
-        }
-
-        h2 {
-            margin-top: 35px;
-            margin-bottom: 12px;
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        p {
-            margin: 12px 0;
-            font-size: 16px;
-            color: #d1d5db;
-        }
-
-        ul {
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            color: #d1d5db;
-        }
-
-        .updated {
-            color: #888888;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .contact {
-            background: #181818;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #292929;
-            margin-top: 15px;
-        }
-
-        .contact strong {
-            color: #ffffff;
-        }
-
-        .contact a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777777;
-            font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 15px 40px;
-            }
-
-            .card {
-                padding: 25px 20px;
-                border-radius: 14px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 21px;
-            }
-
-            p,
-            li {
-                font-size: 15px;
-            }
-        }
-    </style>
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-color: #38bdf8;
+  --border-color: #334155;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+a { color: var(--accent-color); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  background-color: rgba(15, 23, 42, .95);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+header > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { display:flex; align-items:center; gap:.5rem; font-weight:bold; font-size:1.25rem; }
+nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+nav a { color:var(--text-color); }
+select {
+  background:var(--card-bg);
+  color:var(--text-color);
+  border:1px solid var(--border-color);
+  padding:.4rem .8rem;
+  border-radius:6px;
+  cursor:pointer;
+}
+main { max-width:900px; margin:2rem auto; padding:0 1.5rem; }
+.content-box {
+  background-color:var(--card-bg);
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:2.5rem;
+  box-shadow:0 10px 25px -5px rgba(0,0,0,.3);
+}
+h1 { margin-top:0; color:#fff; border-bottom:1px solid var(--border-color); padding-bottom:.75rem; }
+h2 { color:var(--accent-color); margin-top:1.8rem; font-size:1.25rem; }
+p, li { color:var(--text-muted); }
+li { margin-bottom:.5rem; }
+.contact {
+  background: rgba(15,23,42,.45);
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+footer {
+  border-top:1px solid var(--border-color);
+  margin-top:4rem;
+  padding:2rem;
+  background-color:#0b1120;
+}
+footer > div {
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.footer-copy { color:var(--text-muted); font-size:.875rem; }
+footer nav { display:flex; gap:1.2rem; }
+footer nav a { color:var(--text-muted); font-size:.9rem; }
+@media(max-width:800px) {
+  header > div { flex-direction:column; gap:1rem; align-items:flex-start; }
+  nav { gap:.8rem; }
+}
+@media(max-width:600px) {
+  header { padding:1rem; }
+  main { padding:0 1rem; }
+  .content-box { padding:1.5rem; }
+}
+</style>
 </head>
 
 <body>
+<header>
+  <div>
+    <div class="logo"><div>⌁</div><div>Fasqoo</div></div>
+    <nav aria-label="Main navigation">
+      <a href="/" data-i18n="home">Home</a>
+      <a href="/faq.html" data-i18n="faq">FAQ</a>
+      <a href="/network-status.html" data-i18n="network">Network Status</a>
+      <a href="/subnet-calculator.html" data-i18n="diagnostics">IT Diagnostics</a>
+      <a href="/about.html" data-i18n="about">About Us</a>
+      <select id="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="nl">Nederlands</option>
+        <option value="tr">Türkçe</option>
+        <option value="sq">Shqip</option>
+        <option value="ar">العربية</option>
+      </select>
+    </nav>
+  </div>
+</header>
 
-<main class="container">
+<main>
+  <div class="content-box">
+    <h1 data-i18n="h1">Do Not Sell or Share My Personal Information – Fasqoo</h1>
+    <p><strong data-i18n="updatedLabel">Last updated:</strong> September 3, 2026</p>
 
-    <a href="/" class="back-link">← Back to Speed Test</a>
+    <p data-i18n="intro1">At Fasqoo, we respect your privacy and your right to control how your personal information is used.</p>
+    <p data-i18n="intro2">This page explains how you may request that Fasqoo does not sell or share your personal information where applicable under relevant privacy laws.</p>
 
-    <article class="card">
+    <h2 data-i18n="sec1Title">1. Your Privacy Choices</h2>
+    <p data-i18n="sec1Text1">Depending on your location and applicable privacy laws, you may have the right to request that your personal information is not sold or shared for purposes such as targeted advertising.</p>
+    <p data-i18n="sec1Text2">You may also have the right to limit certain types of data processing or withdraw consent for non-essential cookies and similar technologies.</p>
 
-        <h1>Do Not Sell or Share My Personal Information – Fasqoo</h1>
+    <h2 data-i18n="sec2Title">2. Information That May Be Processed</h2>
+    <p data-i18n="sec2Text">When you use the Fasqoo website or Internet Speed Test, certain technical information may be processed, including:</p>
+    <ul>
+      <li data-i18n="p1">IP address</li>
+      <li data-i18n="p2">Approximate location</li>
+      <li data-i18n="p3">Internet Service Provider (ISP)</li>
+      <li data-i18n="p4">Browser and device information</li>
+      <li data-i18n="p5">Network information</li>
+      <li data-i18n="p6">Website usage information</li>
+      <li data-i18n="p7">Speed test results</li>
+      <li data-i18n="p8">Cookies or similar technologies, where applicable</li>
+    </ul>
+    <p data-i18n="sec2Footer">The specific information processed depends on the features and services used on the website.</p>
 
-        <div class="updated">
-            Last updated: September 3, 2026
-        </div>
+    <h2 data-i18n="sec3Title">3. Advertising and Third-Party Services</h2>
+    <p data-i18n="sec3Text1">Fasqoo may use third-party services for advertising, analytics, hosting, technical functionality, or other website services.</p>
+    <p data-i18n="sec3Text2">Some third-party services may process information through cookies or similar technologies.</p>
+    <p data-i18n="sec3Text3">Where required by applicable law, Fasqoo will provide appropriate choices or obtain consent before using non-essential cookies or similar technologies.</p>
 
-        <p>
-            At Fasqoo, we respect your privacy and your right to control how your
-            personal information is used.
-        </p>
+    <h2 data-i18n="sec4Title">4. How to Submit a Request</h2>
+    <p data-i18n="sec4Text1">If you wish to request that Fasqoo does not sell or share your personal information, you may contact us using the contact information provided on the Fasqoo website.</p>
+    <p data-i18n="sec4Text2">When submitting a request, please include:</p>
+    <ul>
+      <li data-i18n="r1">The subject: <strong>Do Not Sell or Share My Personal Information Request</strong></li>
+      <li data-i18n="r2">The email address or other information necessary to identify and process your request</li>
+      <li data-i18n="r3">A clear description of your request</li>
+    </ul>
+    <p data-i18n="sec4Footer">We may request additional information when reasonably necessary to verify and process your request.</p>
 
-        <p>
-            This page explains how you may request that Fasqoo does not sell or
-            share your personal information where applicable under relevant
-            privacy laws.
-        </p>
+    <h2 data-i18n="sec5Title">5. Opting Out of Cookies and Advertising</h2>
+    <p data-i18n="sec5Text">You may also be able to control certain types of tracking by:</p>
+    <ul>
+      <li data-i18n="o1">Adjusting your browser privacy settings</li>
+      <li data-i18n="o2">Blocking or deleting cookies</li>
+      <li data-i18n="o3">Using available cookie preference tools on the Fasqoo website, if provided</li>
+      <li data-i18n="o4">Adjusting advertising preferences offered by relevant third-party providers</li>
+    </ul>
+    <p data-i18n="sec5Footer">Please note that disabling certain cookies may affect some website functionality.</p>
 
-        <h2>1. Your Privacy Choices</h2>
+    <h2 data-i18n="sec6Title">6. Authorized Agents</h2>
+    <p data-i18n="sec6Text1">Where permitted by applicable law, you may use an authorized agent to submit a privacy request on your behalf.</p>
+    <p data-i18n="sec6Text2">We may request reasonable information to verify the identity and authority of the authorized agent before processing the request.</p>
 
-        <p>
-            Depending on your location and applicable privacy laws, you may have
-            the right to request that your personal information is not sold or
-            shared for purposes such as targeted advertising.
-        </p>
+    <h2 data-i18n="sec7Title">7. Non-Discrimination</h2>
+    <p data-i18n="sec7Text1">Fasqoo will not unlawfully discriminate against users for exercising applicable privacy rights.</p>
+    <p data-i18n="sec7Text2">However, some features or services may require certain technical information in order to function correctly.</p>
 
-        <p>
-            You may also have the right to limit certain types of data processing
-            or withdraw consent for non-essential cookies and similar technologies.
-        </p>
+    <h2 data-i18n="sec8Title">8. Changes to This Page</h2>
+    <p data-i18n="sec8Text1">Fasqoo may update this page from time to time to reflect changes in our services, privacy practices, or applicable legal requirements.</p>
+    <p data-i18n="sec8Text2">The latest version will be published on this page with an updated revision date.</p>
 
-        <h2>2. Information That May Be Processed</h2>
+    <h2 data-i18n="sec9Title">9. Contact</h2>
+    <p data-i18n="sec9Text">For questions or requests regarding your personal information, please contact:</p>
 
-        <p>
-            When you use the Fasqoo website or Internet Speed Test, certain
-            technical information may be processed, including:
-        </p>
-
-        <ul>
-            <li>IP address</li>
-            <li>Approximate location</li>
-            <li>Internet Service Provider (ISP)</li>
-            <li>Browser and device information</li>
-            <li>Network information</li>
-            <li>Website usage information</li>
-            <li>Speed test results</li>
-            <li>Cookies or similar technologies, where applicable</li>
-        </ul>
-
-        <p>
-            The specific information processed depends on the features and
-            services used on the website.
-        </p>
-
-        <h2>3. Advertising and Third-Party Services</h2>
-
-        <p>
-            Fasqoo may use third-party services for advertising, analytics,
-            hosting, technical functionality, or other website services.
-        </p>
-
-        <p>
-            Some third-party services may process information through cookies
-            or similar technologies.
-        </p>
-
-        <p>
-            Where required by applicable law, Fasqoo will provide appropriate
-            choices or obtain consent before using non-essential cookies or
-            similar technologies.
-        </p>
-
-        <h2>4. How to Submit a Request</h2>
-
-        <p>
-            If you wish to request that Fasqoo does not sell or share your
-            personal information, you may contact us using the contact
-            information provided on the Fasqoo website.
-        </p>
-
-        <p>
-            When submitting a request, please include:
-        </p>
-
-        <ul>
-            <li>
-                The subject:
-                <strong>Do Not Sell or Share My Personal Information Request</strong>
-            </li>
-            <li>
-                The email address or other information necessary to identify
-                and process your request
-            </li>
-            <li>A clear description of your request</li>
-        </ul>
-
-        <p>
-            We may request additional information when reasonably necessary to
-            verify and process your request.
-        </p>
-
-        <h2>5. Opting Out of Cookies and Advertising</h2>
-
-        <p>
-            You may also be able to control certain types of tracking by:
-        </p>
-
-        <ul>
-            <li>Adjusting your browser privacy settings</li>
-            <li>Blocking or deleting cookies</li>
-            <li>
-                Using available cookie preference tools on the Fasqoo website,
-                if provided
-            </li>
-            <li>
-                Adjusting advertising preferences offered by relevant
-                third-party providers
-            </li>
-        </ul>
-
-        <p>
-            Please note that disabling certain cookies may affect some website
-            functionality.
-        </p>
-
-        <h2>6. Authorized Agents</h2>
-
-        <p>
-            Where permitted by applicable law, you may use an authorized agent
-            to submit a privacy request on your behalf.
-        </p>
-
-        <p>
-            We may request reasonable information to verify the identity and
-            authority of the authorized agent before processing the request.
-        </p>
-
-        <h2>7. Non-Discrimination</h2>
-
-        <p>
-            Fasqoo will not unlawfully discriminate against users for exercising
-            applicable privacy rights.
-        </p>
-
-        <p>
-            However, some features or services may require certain technical
-            information in order to function correctly.
-        </p>
-
-        <h2>8. Changes to This Page</h2>
-
-        <p>
-            Fasqoo may update this page from time to time to reflect changes in
-            our services, privacy practices, or applicable legal requirements.
-        </p>
-
-        <p>
-            The latest version will be published on this page with an updated
-            revision date.
-        </p>
-
-        <h2>9. Contact</h2>
-
-        <p>
-            For questions or requests regarding your personal information,
-            please contact:
-        </p>
-
-        <div class="contact">
-
-            <p>
-                <strong>Fasqoo™</strong>
-            </p>
-
-            <p>
-                <strong>Professional Internet Speed Test</strong>
-            </p>
-
-            <p>
-                <strong>Email:</strong>
-                <a href="mailto:mcomfortstore14@gmail.com">
-                    mcomfortstore14@gmail.com
-                </a>
-            </p>
-
-        </div>
-
-    </article>
-
-    <footer>
-        © 2026 Fasqoo. All Rights Reserved.
-    </footer>
-
+    <div class="contact">
+      <p><strong>Fasqoo™</strong></p>
+      <p><strong>Professional Internet Speed Test</strong></p>
+      <p><strong>Email:</strong> <a href="mailto:mcomfortstore14@gmail.com">mcomfortstore14@gmail.com</a></p>
+    </div>
+  </div>
 </main>
 
+<footer>
+  <div>
+    <div class="footer-copy">
+      <div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
+      <div data-i18n="trademarks">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/accessibility.html" data-i18n="accessibility">Accessibility</a>
+      <a href="/privacy-policy.html" data-i18n="privacy">Privacy Policy</a>
+      <a href="/terms.html" data-i18n="terms">Terms of Use</a>
+      <a href="/do-not-sell.html" data-i18n="dns">Do Not Sell My Info</a>
+      <a href="/impressum.html" data-i18n="imprint">Imprint</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const T = {
+en:{
+title:"Do Not Sell or Share My Personal Information – Fasqoo",home:"Home",faq:"FAQ",network:"Network Status",diagnostics:"IT Diagnostics",about:"About Us",
+h1:"Do Not Sell or Share My Personal Information – Fasqoo",updatedLabel:"Last updated:",
+intro1:"At Fasqoo, we respect your privacy and your right to control how your personal information is used.",
+intro2:"This page explains how you may request that Fasqoo does not sell or share your personal information where applicable under relevant privacy laws.",
+sec1Title:"1. Your Privacy Choices",
+sec1Text1:"Depending on your location and applicable privacy laws, you may have the right to request that your personal information is not sold or shared for purposes such as targeted advertising.",
+sec1Text2:"You may also have the right to limit certain types of data processing or withdraw consent for non-essential cookies and similar technologies.",
+sec2Title:"2. Information That May Be Processed",
+sec2Text:"When you use the Fasqoo website or Internet Speed Test, certain technical information may be processed, including:",
+p1:"IP address",p2:"Approximate location",p3:"Internet Service Provider (ISP)",p4:"Browser and device information",p5:"Network information",p6:"Website usage information",p7:"Speed test results",p8:"Cookies or similar technologies, where applicable",
+sec2Footer:"The specific information processed depends on the features and services used on the website.",
+sec3Title:"3. Advertising and Third-Party Services",
+sec3Text1:"Fasqoo may use third-party services for advertising, analytics, hosting, technical functionality, or other website services.",
+sec3Text2:"Some third-party services may process information through cookies or similar technologies.",
+sec3Text3:"Where required by applicable law, Fasqoo will provide appropriate choices or obtain consent before using non-essential cookies or similar technologies.",
+sec4Title:"4. How to Submit a Request",
+sec4Text1:"If you wish to request that Fasqoo does not sell or share your personal information, you may contact us using the contact information provided on the Fasqoo website.",
+sec4Text2:"When submitting a request, please include:",
+r1:"The subject: Do Not Sell or Share My Personal Information Request",
+r2:"The email address or other information necessary to identify and process your request",
+r3:"A clear description of your request",
+sec4Footer:"We may request additional information when reasonably necessary to verify and process your request.",
+sec5Title:"5. Opting Out of Cookies and Advertising",
+sec5Text:"You may also be able to control certain types of tracking by:",
+o1:"Adjusting your browser privacy settings",o2:"Blocking or deleting cookies",o3:"Using available cookie preference tools on the Fasqoo website, if provided",o4:"Adjusting advertising preferences offered by relevant third-party providers",
+sec5Footer:"Please note that disabling certain cookies may affect some website functionality.",
+sec6Title:"6. Authorized Agents",
+sec6Text1:"Where permitted by applicable law, you may use an authorized agent to submit a privacy request on your behalf.",
+sec6Text2:"We may request reasonable information to verify the identity and authority of the authorized agent before processing the request.",
+sec7Title:"7. Non-Discrimination",
+sec7Text1:"Fasqoo will not unlawfully discriminate against users for exercising applicable privacy rights.",
+sec7Text2:"However, some features or services may require certain technical information in order to function correctly.",
+sec8Title:"8. Changes to This Page",
+sec8Text1:"Fasqoo may update this page from time to time to reflect changes in our services, privacy practices, or applicable legal requirements.",
+sec8Text2:"The latest version will be published on this page with an updated revision date.",
+sec9Title:"9. Contact",
+sec9Text:"For questions or requests regarding your personal information, please contact:",
+accessibility:"Accessibility",privacy:"Privacy Policy",terms:"Terms of Use",dns:"Do Not Sell My Info",imprint:"Imprint",rights:"All rights reserved.",trademarks:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo."
+},
+de:{
+title:"Meine persönlichen Daten nicht verkaufen oder weitergeben – Fasqoo",home:"Startseite",faq:"FAQ",network:"Netzwerkstatus",diagnostics:"IT-Diagnose",about:"Über uns",
+h1:"Meine persönlichen Daten nicht verkaufen oder weitergeben – Fasqoo",updatedLabel:"Zuletzt aktualisiert:",
+intro1:"Bei Fasqoo respektieren wir Ihre Privatsphäre und Ihr Recht zu kontrollieren, wie Ihre persönlichen Daten verwendet werden.",
+intro2:"Diese Seite erklärt, wie Sie verlangen können, dass Fasqoo Ihre persönlichen Daten nicht verkauft oder weitergibt, sofern dies nach den geltenden Datenschutzgesetzen anwendbar ist.",
+sec1Title:"1. Ihre Datenschutzoptionen",
+sec1Text1:"Je nach Ihrem Standort und den geltenden Datenschutzgesetzen haben Sie möglicherweise das Recht zu verlangen, dass Ihre persönlichen Daten nicht für Zwecke wie zielgerichtete Werbung verkauft oder weitergegeben werden.",
+sec1Text2:"Sie haben möglicherweise auch das Recht, bestimmte Arten der Datenverarbeitung einzuschränken oder die Einwilligung für nicht essenzielle Cookies und ähnliche Technologien zu widerrufen.",
+sec2Title:"2. Informationen, die verarbeitet werden können",
+sec2Text:"Wenn Sie die Fasqoo-Website oder den Internet-Geschwindigkeitstest nutzen, können bestimmte technische Informationen verarbeitet werden, einschließlich:",
+p1:"IP-Adresse",p2:"Ungefährer Standort",p3:"Internet-Anbieter (ISP)",p4:"Browser- und Geräteinformationen",p5:"Netzwerkinformationen",p6:"Informationen zur Websitenutzung",p7:"Speedtest-Ergebnisse",p8:"Cookies oder ähnliche Technologien, sofern anwendbar",
+sec2Footer:"Die spezifisch verarbeiteten Informationen hängen von den auf der Website genutzten Funktionen und Diensten ab.",
+sec3Title:"3. Werbung und Dienste von Drittanbietern",
+sec3Text1:"Fasqoo kann Dienste von Drittanbietern für Werbung, Analysen, Hosting, technische Funktionalitäten oder andere Websitedienste nutzen.",
+sec3Text2:"Einige Drittanbieterdienste können Informationen durch Cookies oder ähnliche Technologien verarbeiten.",
+sec3Text3:"Wo dies nach geltendem Recht erforderlich ist, bietet Fasqoo entsprechende Optionen an oder holt die Einwilligung ein, bevor nicht essenzielle Cookies verwendet werden.",
+sec4Title:"4. So reichen Sie eine Anfrage ein",
+sec4Text1:"Wenn Sie verlangen möchten, dass Fasqoo Ihre persönlichen Daten nicht verkauft oder weitergibt, können Sie uns über die auf der Website angegebenen Kontaktdaten kontaktieren.",
+sec4Text2:"Bitte geben Sie bei der Einreichung einer Anfrage Folgendes an:",
+r1:"Betreff: Anfrage bezüglich 'Meine persönlichen Daten nicht verkaufen oder weitergeben'",
+r2:"Die E-Mail-Adresse oder andere Informationen, die erforderlich sind, um Ihre Anfrage zu identifizieren und zu bearbeiten",
+r3:"Eine klare Beschreibung Ihrer Anfrage",
+sec4Footer:"Wir können zusätzliche Informationen anfordern, wenn dies vernünftigerweise erforderlich ist, um Ihre Anfrage zu verifizieren und zu bearbeiten.",
+sec5Title:"5. Deaktivierung von Cookies und Werbung",
+sec5Text:"Sie können bestimmte Arten des Trackings auch wie folgt steuern:",
+o1:"Anpassen Ihrer Browser-Datenschutzeinstellungen",o2:"Blockieren oder Löschen von Cookies",o3:"Nutzung verfügbarer Cookie-Einstellungstools auf der Fasqoo-Website, falls vorhanden",o4:"Anpassen der Werbeeinstellungen von relevanten Drittanbietern",
+sec5Footer:"Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies einige Website-Funktionen beeinträchtigen kann.",
+sec6Title:"6. Bevollmächtigte Vertreter",
+sec6Text1:"Soweit nach geltendem Recht zulässig, können Sie einen bevollmächtigten Vertreter nutzen, um eine Datenschutzanfrage in Ihrem Namen einzureichen.",
+sec6Text2:"Wir können angemessene Informationen anfordern, um die Identität und Berechtigung des Bevollmächtigten zu überprüfen, bevor wir die Anfrage bearbeiten.",
+sec7Title:"7. Nichtdiskriminierung",
+sec7Text1:"Fasqoo wird Benutzer nicht unrechtmäßig benachteiligen, weil sie ihre Datenschutzrechte ausüben.",
+sec7Text2:"Einige Funktionen oder Dienste können jedoch bestimmte technische Informationen erfordern, um korrekt zu funktionieren.",
+sec8Title:"8. Änderungen dieser Seite",
+sec8Text1:"Fasqoo kann diese Seite von Zeit zu Zeit aktualisieren, um Änderungen an unseren Diensten, Datenschutzpraktiken oder gesetzlichen Anforderungen widerzuspiegeln.",
+sec8Text2:"Die neueste Version wird auf dieser Seite mit einem aktualisierten Überarbeitungsdatum veröffentlicht.",
+sec9Title:"9. Kontakt",
+sec9Text:"Für Fragen oder Anfragen bezüglich Ihrer persönlichen Daten wenden Sie sich bitte an:",
+accessibility:"Barrierefreiheit",privacy:"Datenschutzerklärung",terms:"Nutzungsbedingungen",dns:"Meine Daten nicht verkaufen",imprint:"Impressum",rights:"Alle Rechte vorbehalten.",trademarks:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo."
+},
+fr:{
+title:"Ne pas vendre ou partager mes informations personnelles – Fasqoo",home:"Accueil",faq:"FAQ",network:"État du réseau",diagnostics:"Diagnostic IT",about:"À propos",
+h1:"Ne pas vendre ou partager mes informations personnelles – Fasqoo",updatedLabel:"Dernière mise à jour :",
+intro1:"Chez Fasqoo, nous respectons votre vie privée et votre droit de contrôler l'utilisation de vos informations personnelles.",
+intro2:"Cette page explique comment demander à Fasqoo de ne pas vendre ou partager vos données personnelles.",
+sec1Title:"1. Vos choix en matière de confidentialité",
+sec1Text1:"Selon votre région, vous pouvez avoir le droit de refuser la vente ou le partage de vos informations personnelles pour de la publicité ciblée.",
+sec1Text2:"Vous pouvez également limiter certains traitements ou retirer votre consentement pour les cookies non essentiels.",
+sec2Title:"2. Informations pouvant être traitées",
+sec2Text:"Lorsque vous utilisez Fasqoo, certaines données techniques peuvent être traitées :",
+p1:"Adresse IP",p2:"Localisation approximative",p3:"Fournisseur d'accès Internet (FAI)",p4:"Informations sur le navigateur et l'appareil",p5:"Informations réseau",p6:"Données d'utilisation du site",p7:"Résultats du test de vitesse",p8:"Cookies ou technologies similaires",
+sec2Footer:"Les données traitées dépendent des fonctionnalités utilisées.",
+sec3Title:"3. Publicité et services tiers",
+sec3Text1:"Fasqoo peut utiliser des services tiers pour l'affichage publicitaire, l'analyse ou l'hébergement.",
+sec3Text2:"Certains tiers traitent des informations via des cookies.",
+sec3Text3:"Lorsque la loi l'exige, nous vous demanderons votre consentement avant d'utiliser des cookies non essentiels.",
+sec4Title:"4. Comment soumettre une demande",
+sec4Text1:"Pour demander à ne pas vendre ou partager vos informations, contactez-nous via les coordonnées fournies sur le site.",
+sec4Text2:"Veuillez inclure dans votre demande :",
+r1:"Sujet : Demande de non-vente / non-partage de mes informations",
+r2:"Adresse e-mail ou informations nécessaires pour identifier votre demande",
+r3:"Une description claire de votre demande",
+sec4Footer:"Des vérifications d'identité supplémentaires peuvent être demandées si nécessaire.",
+sec5Title:"5. Refuser les cookies et la publicité",
+sec5Text:"Vous pouvez contrôler le suivi en :",
+o1:"Modifiant les paramètres de confidentialité de votre navigateur",o2:"Bloquant ou supprimant les cookies",o3:"Utilisant les outils de préférences de cookies du site",o4:"Ajustant vos préférences publicitaires auprès des tiers",
+sec5Footer:"Remarque : désactiver certains cookies peut affecter le fonctionnement du site.",
+sec6Title:"6. Agents autorisés",
+sec6Text1:"Conformément à la loi, vous pouvez désigner un agent autorisé pour effectuer la demande en votre nom.",
+sec6Text2:"Nous pouvons demander une preuve d'habilitation avant de traiter la demande.",
+sec7Title:"7. Non-discrimination",
+sec7Text1:"Fasqoo ne vous discrimine en aucun cas pour avoir exercé vos droits.",
+sec7Text2:"Cependant, certaines fonctions nécessitent des données techniques pour fonctionner.",
+sec8Title:"8. Modifications de cette page",
+sec8Text1:"Cette page peut être mise à jour périodiquement.",
+sec8Text2:"La dernière version sera toujours publiée ici.",
+sec9Title:"9. Contact",
+sec9Text:"Pour toute question concernant vos données personnelles, veuillez contacter :",
+accessibility:"Accessibilité",privacy:"Politique de confidentialité",terms:"Conditions d'utilisation",dns:"Ne pas vendre mes infos",imprint:"Mentions légales",rights:"Tous droits réservés.",trademarks:"Fasqoo est une marque déposée."
+},
+es:{
+title:"No vender ni compartir mi información personal – Fasqoo",home:"Inicio",faq:"Preguntas frecuentes",network:"Estado de la red",diagnostics:"Diagnóstico TI",about:"Sobre nosotros",
+h1:"No vender ni compartir mi información personal – Fasqoo",updatedLabel:"Última actualización:",
+intro1:"En Fasqoo respetamos su privacidad y su derecho a controlar el uso de sus datos personales.",
+intro2:"Esta página explica cómo solicitar que Fasqoo no venda ni comparta sus datos personales.",
+sec1Title:"1. Sus opciones de privacidad",
+sec1Text1:"Según su ubicación, puede tener derecho a solicitar que no se vendan ni compartan sus datos con fines de publicidad dirigida.",
+sec1Text2:"También puede limitar cierto procesamiento o retirar su consentimiento para cookies no esenciales.",
+sec2Title:"2. Información que puede ser procesada",
+sec2Text:"Al usar Fasqoo, se pueden procesar ciertos datos técnicos, como:",
+p1:"Dirección IP",p2:"Ubicación aproximada",p3:"Proveedor de Internet (ISP)",p4:"Información del navegador y dispositivo",p5:"Información de red",p6:"Uso del sitio web",p7:"Resultados de pruebas de velocidad",p8:"Cookies o tecnologías similares",
+sec2Footer:"Los datos dependen de los servicios utilizados.",
+sec3Title:"3. Publicidad y servicios de terceros",
+sec3Text1:"Usamos servicios de terceros para análisis, alojamiento y publicidad.",
+sec3Text2:"Algunos terceros procesan datos mediante cookies.",
+sec3Text3:"Solicitaremos consentimiento para cookies no esenciales cuando la ley lo exija.",
+sec4Title:"4. Cómo enviar una solicitud",
+sec4Text1:"Para solicitar que no se vendan ni compartan sus datos, contáctenos mediante los canales oficiales.",
+sec4Text2:"Incluya en su mensaje:",
+r1:"Asunto: Solicitud de No Vender ni Compartir Mi Información Personal",
+r2:"Correo electrónico o datos de identificación",
+r3:"Descripción clara de su solicitud",
+sec4Footer:"Podemos solicitar verificación adicional si es necesario.",
+sec5Title:"5. Exclusión de cookies y publicidad",
+sec5Text:"Puede gestionar el seguimiento mediante:",
+o1:"Ajustes de privacidad en su navegador",o2:"Bloqueo o eliminación de cookies",o3:"Herramientas de preferencias del sitio",o4:"Ajustes de preferencias en proveedores publicitarios",
+sec5Footer:"Desactivar cookies puede afectar la funcionalidad del sitio.",
+sec6Title:"6. Agentes autorizados",
+sec6Text1:"Puede utilizar un agente autorizado para enviar una solicitud en su nombre.",
+sec6Text2:"Verificaremos la autorización del agente antes de procesar el pedido.",
+sec7Title:"7. No discriminación",
+sec7Text1:"No discriminaremos a ningún usuario por ejercer sus derechos de privacidad.",
+sec7Text2:"No obstante, algunas funciones requieren datos técnicos para operar.",
+sec8Title:"8. Cambios en esta página",
+sec8Text1:"Podemos actualizar este aviso periódicamente.",
+sec8Text2:"La versión actualizada se publicará aquí con su fecha respectiva.",
+sec9Title:"9. Contacto",
+sec9Text:"Para preguntas sobre su información personal, póngase en contacto con:",
+accessibility:"Accesibilidad",privacy:"Política de privacidad",terms:"Términos de uso",dns:"No vender mi información",imprint:"Aviso legal",rights:"Todos los derechos reservados.",trademarks:"Fasqoo es una marca registrada."
+},
+it:{
+title:"Non vendere o me condividere le mie informazioni personali – Fasqoo",home:"Home",faq:"FAQ",network:"Stato della rete",diagnostics:"Diagnostica IT",about:"Chi siamo",
+h1:"Non vendere o condividere le mie informazioni personali – Fasqoo",updatedLabel:"Ultimo aggiornamento:",
+intro1:"In Fasqoo rispettiamo la tua privacy e il tuo diritto di controllare come vengono usati i tuoi dati.",
+intro2:"Questa pagina spiega come richiedere a Fasqoo di non vendere o condividere le tue informazioni personali.",
+sec1Title:"1. Le tue scelte sulla privacy",
+sec1Text1:"In base alla tua posizione, potresti avere il diritto di richiedere di non vendere o condividere i tuoi dati per pubblicità mirata.",
+sec1Text2:"Puoi anche limitare alcuni trattamenti o revocare il consenso ai cookie non essenziali.",
+sec2Title:"2. Dati che possono essere trattati",
+sec2Text:"Quando usi il servizio, possiamo elaborare dati tecnici tra cui:",
+p1:"Indirizzo IP",p2:"Posizione approssimativa",p3:"Fornitore di servizi Internet",p4:"Informazioni su browser e dispositivo",p5:"Informazioni di rete",p6:"Dati di utilizzo del sito",p7:"Risultati del test di velocità",p8:"Cookie o tecnologie simili",
+sec2Footer:"I dati dipendono dalle funzioni utilizzate.",
+sec3Title:"3. Pubblicità e servizi terzi",
+sec3Text1:"Fasqoo può avvalersi di servizi terzi per analisi, pubblicità e hosting.",
+sec3Text2:"Alcuni terzi elaborano informazioni tramite cookie.",
+sec3Text3:"Ove richiesto dalla legge, chiederemo il tuo consenso prima di usare cookie non essenziali.",
+sec4Title:"4. Come inviare una richiesta",
+sec4Text1:"Per richiedere la non vendita o condivisione dei dati, contattaci tramite i recapiti del sito.",
+sec4Text2:"Includi nella richiesta:",
+r1:"Oggetto: Richiesta Non vendere o condividere le mie informazioni",
+r2:"Email o informazioni utili per identificare la richiesta",
+r3:"Descrizione chiara della richiesta",
+sec4Footer:"Potremmo richiedere verifiche sull'identità se necessario.",
+sec5Title:"5. Disattivazione di cookie e pubblicità",
+sec5Text:"Puoi controllare il tracciamento tramite:",
+o1:"Impostazioni privacy del browser",o2:"Blocco o eliminazione dei cookie",o3:"Strumenti del sito per i cookie",o4:"Preferenze sui network pubblicitari",
+sec5Footer:"Disabilitare alcuni cookie potrebbe influenzare il funzionamento del sito.",
+sec6Title:"6. Agenti autorizzati",
+sec6Text1:"Puoi nominare un agente autorizzato per inviare la richiesta per tuo conto.",
+sec6Text2:"Verificheremo l'autorizzazione prima di procedere.",
+sec7Title:"7. Non discriminazione",
+sec7Text1:"Non applicheremo alcuna discriminazione per l'esercizio dei tuoi diritti.",
+sec7Text2:"Alcune funzioni tecniche potrebbero tuttavia richiedere dati minimi.",
+sec8Title:"8. Modifiche a questa pagina",
+sec8Text1:"Possiamo aggiornare queste informazioni periodicamente.",
+sec8Text2:"La versione aggiornata sarà sempre visibile qui.",
+sec9Title:"9. Contatti",
+sec9Text:"Per domande sui tuoi dati personali, scrivi a:",
+accessibility:"Accessibilità",privacy:"Informativa sulla privacy",terms:"Termini di utilizzo",dns:"Non vendere le mie info",imprint:"Note legali",rights:"Tutti i diritti riservati.",trademarks:"Fasqoo è un marchio registrato."
+},
+pt:{
+title:"Não vender ou compartilhar minhas informações pessoais – Fasqoo",home:"Início",faq:"FAQ",network:"Status da Rede",diagnostics:"Diagnóstico de TI",about:"Sobre Nós",
+h1:"Não vender ou compartilhar minhas informações pessoais – Fasqoo",updatedLabel:"Última atualização:",
+intro1:"No Fasqoo, respeitamos sua privacidade e seu direito de controlar como suas informações são usadas.",
+intro2:"Esta página explica como solicitar que o Fasqoo não venda ou compartilhe seus dados pessoais.",
+sec1Title:"1. Suas Opções de Privacidade",
+sec1Text1:"Dependendo da sua localização, você pode ter o direito de recusar a venda ou compartilhamento de dados para publicidade direcionada.",
+sec1Text2:"Você também pode limitar o processamento ou retirar o consentimento para cookies não essenciais.",
+sec2Title:"2. Informações que Podem ser Processadas",
+sec2Text:"Ao usar o Fasqoo, algumas informações técnicas podem ser coletadas:",
+p1:"Endereço IP",p2:"Localização aproximada",p3:"Provedor de Internet (ISP)",p4:"Informações de navegador e dispositivo",p5:"Informações de rede",p6:"Dados de uso do site",p7:"Resultados do teste de velocidade",p8:"Cookies e tecnologias semelhantes",
+sec2Footer:"Os dados variam de acordo com os recursos utilizados.",
+sec3Title:"3. Publicidade e Serviços de Terceiros",
+sec3Text1:"Utilizamos parceiros para anúncios, análises e hospedagem.",
+sec3Text2:"Terceiros podem usar cookies para processar dados.",
+sec3Text3:"Obteremos consentimento para cookies não essenciais quando exigido por lei.",
+sec4Title:"4. Como Enviar uma Solicitação",
+sec4Text1:"Para solicitar a não venda/compartilhamento de dados, entre em contato pelos nossos canais oficiais.",
+sec4Text2:"Inclua na solicitação:",
+r1:"Assunto: Solicitação de Não Vender ou Compartilhar Minhas Informações",
+r2:"E-mail ou informações de identificação",
+r3:"Descrição clara do pedido",
+sec4Footer:"Podemos solicitar confirmações para validar sua identidade.",
+sec5Title:"5. Desativando Cookies e Anúncios",
+sec5Text:"Você pode gerenciar o rastreamento através de:",
+o1:"Configurações de privacidade do navegador",o2:"Bloqueio/exclusão de cookies",o3:"Painel de preferências do site",o4:"Ajustes em provedores de anúncios",
+sec5Footer:"A desativação de cookies pode afetar funcionalidades do site.",
+sec6Title:"6. Agentes Autorizados",
+sec6Text1:"Um agente autorizado pode enviar a solicitação em seu nome, se a legislação permitir.",
+sec6Text2:"Verificaremos a procuração antes do atendimento.",
+sec7Title:"7. Não Discriminação",
+sec7Text1:"Não haverá discriminação contra usuários que exercerem seus direitos.",
+sec7Text2:"Algumas funções exigem dados técnicos indispensáveis.",
+sec8Title:"8. Alterações Nesta Página",
+sec8Text1:"Podemos atualizar este aviso de tempos em tempos.",
+sec8Text2:"A versão mais recente estará disponível nesta página.",
+sec9Title:"9. Contato",
+sec9Text:"Dúvidas sobre seus dados podem ser encaminhadas para:",
+accessibility:"Acessibilidade",privacy:"Política de Privacidade",terms:"Termos de Uso",dns:"Não vender minhas informações",imprint:"Aviso Legal",rights:"Todos os direitos reservados.",trademarks:"Fasqoo é uma marca registrada."
+},
+nl:{
+title:"Verkoop of deel mijn persoonlijke gegevens niet – Fasqoo",home:"Home",faq:"FAQ",network:"Netwerkstatus",diagnostics:"IT-diagnostiek",about:"Over ons",
+h1:"Verkoop of deel mijn persoonlijke gegevens niet – Fasqoo",updatedLabel:"Laatst bijgewerkt:",
+intro1:"Bij Fasqoo respecteren we uw privacy e uw recht om controle te houden over uw gegevens.",
+intro2:"Op deze pagina leest u hoe u een verzoek kunt indienen om uw gegevens niet te verkopen of te delen.",
+sec1Title:"1. Uw privacykeuzes",
+sec1Text1:"Afhankelijk van uw locatie heeft u mogelijk het recht om bezwaar te maken tegen de verkoop of het delen van gegevens voor gerichte advertenties.",
+sec1Text2:"U kunt ook de verwerking beperken of toestemming voor niet-essentiële cookies intrekken.",
+sec2Title:"2. Gegevens die verwerkt kunnen worden",
+sec2Text:"Bij het gebruik van de site kunnen de volgende technische gegevens worden verwerkt:",
+p1:"IP-adres",p2:"Geschatte locatie",p3:"Internetprovider (ISP)",p4:"Browser- en apparaatinformatie",p5:"Netwerkinformatie",p6:"Gebruiksgegevens",p7:"Snelheidstestresultaten",p8:"Cookies en vergelijkbare technologieën",
+sec2Footer:"Welke gegevens verwerkt worden hangt af van de gebruikte functies.",
+sec3Title:"3. Advertenties en diensten van derden",
+sec3Text1:"Fasqoo kan derden inschakelen voor advertenties, analyse en hosting.",
+sec3Text2:"Sommige derden verwerken informatie via cookies.",
+sec3Text3:"Indien wettelijk vereist vragen wij eerst uw toestemming voor niet-essentiële cookies.",
+sec4Title:"4. Hoe u een verzoek indient",
+sec4Text1:"Als u niet wilt dat uw gegevens verkocht of gedeeld worden, neem dan contact met ons op.",
+sec4Text2:"Vermeld in uw verzoek:",
+r1:"Onderwerp: Verzoek Verkoop of deel mijn persoonlijke gegevens niet",
+r2:"Uw e-mailadres of identificatiegegevens",
+r3:"Een duidelijke omschrijving van uw verzoek",
+sec4Footer:"Wij kunnen om aanvullende verificatie vragen om uw verzoek te verwerken.",
+sec5Title:"5. Afmelden voor cookies en advertenties",
+sec5Text:"U kunt tracking beheren via:",
+o1:"Privacy-instellingen van uw browser",o2:"Schoonmaken of blokkeren van cookies",o3:"Cookievoorkeuren op onze website",o4:"Instellingen bij advertentienetwerken",
+sec5Footer:"Het uitschakelen van cookies kan de werking van de website beïnvloeden.",
+sec6Title:"6. Gemachtigde vertegenwoordigers",
+sec6Text1:"Waar toegestaan kunt u een gemachtigde inschakelen om het verzoek namens u in te dienen.",
+sec6Text2:"Wij controleren de machtiging voordat we het verzoek verwerken.",
+sec7Title:"7. Gelijke behandeling",
+sec7Text1:"Fasqoo zal u niet benadelen vanwege het uitoefenen van uw privacyrechten.",
+sec7Text2:"Sommige functies vereisen echter wel minimale technische gegevens.",
+sec8Title:"8. Wijzigingen",
+sec8Text1:"Deze pagina kan periodiek worden bijgewerkt.",
+sec8Text2:"De nieuwste versie staat altijd op deze pagina.",
+sec9Title:"9. Contact",
+sec9Text:"Voor vragen over uw persoonlijke gegevens kunt u contact opnemen met:",
+accessibility:"Toegankelijkheid",privacy:"Privacybeleid",terms:"Gebruiksvoorwaarden",dns:"Verkoop mijn info niet",imprint:"Colofon",rights:"Alle rechten voorbehouden.",trademarks:"Fasqoo is een handelsmerk."
+},
+tr:{
+title:"Kişisel Bilgilerimi Satmayın veya Paylaşmayın – Fasqoo",home:"Ana Sayfa",faq:"SSS",network:"Ağ Durumu",diagnostics:"BT Teşhis",about:"Hakkımızda",
+h1:"Kişisel Bilgilerimi Satmayın veya Paylaşmayın – Fasqoo",updatedLabel:"Son güncelleme:",
+intro1:"Fasqoo olarak gizliliğinize ve kişisel verilerinizi kontrol etme hakkınıza saygı duyuyoruz.",
+intro2:"Bu sayfa, kişisel bilgilerinizin satılmaması veya paylaşılmaması talebini nasıl ileteceğinizi açıklar.",
+sec1Title:"1. Gizlilik Tercihleriniz",
+sec1Text1:"Konumunuza bağlı olarak, verilerinizin hedefli reklamcılık amacıyla satılmasına veya paylaşılmasına itiraz etme hakkınız olabilir.",
+sec1Text2:"Ayrıca zorunlu olmayan çerezleri reddetme hakkına da sahipsiniz.",
+sec2Title:"2. İşlenebilecek Bilgiler",
+sec2Text:"Fasqoo'yu kullandığınızda şu teknik bilgiler işlenebilir:",
+p1:"IP adresi",p2:"Yaklaşık konum",p3:"İnternet Servis Sağlayıcısı (ISP)",p4:"Tarayıcı ve cihaz bilgileri",p5:"Ağ bilgileri",p6:"Site kullanım verileri",p7:"Hız testi sonuçları",p8:"Çerezler ve benzeri teknolojiler",
+sec2Footer:"İşlenen veriler kullanılan hizmetlere göre değişiklik gösterir.",
+sec3Title:"3. Reklam ve Üçüncü Taraf Hizmetleri",
+sec3Text1:"Fasqoo analiz, reklam ve barındırma için üçüncü taraf hizmetler kullanabilir.",
+sec3Text2:"Harici sağlayıcılar çerezler vasıtasıyla veri işleyebilir.",
+sec3Text3:"Gerekli durumlarda zorunlu olmayan çerezler için onayınız alınır.",
+sec4Title:"4. Talebinizi Nasıl İletirsiniz?",
+sec4Text1:"Verilerinizin satılmamasını/paylaşılmamasını talep etmek için iletişim bilgilerimizden bize ulaşabilirsiniz.",
+sec4Text2:"Talebinizde lütfen şunlara yer verin:",
+r1:"Konu: Kişisel Bilgilerimi Satmayın veya Paylaşmayın Talebi",
+r2:"Sizi doğrulamak için gerekli e-posta adresi",
+r3:"Talebinizin net bir açıklaması",
+sec4Footer:"Güvenlik için ek doğrulama bilgileri talep edebiliriz.",
+sec5Title:"5. Çerezlerden ve Reklamlardan Çıkış",
+sec5Text:"İzlemeyi şu yollarla da engelleyebilirsiniz:",
+o1:"Tarayıcı gizlilik ayarlarını düzenleyerek",o2:"Çerezleri engelleyerek veya silerek",o3:"Sitedeki çerez tercihlerini kullanarak",o4:"Reklam sağlayıcılarının tercihlerini güncelleyerek",
+sec5Footer:"Çerezleri kapatmak site işlevselliğini etkileyebilir.",
+sec6Title:"6. Yetkili Temsilciler",
+sec6Text1:"Yasal olarak mümkünse adınıza başvuru yapması için yetkili bir temsilci atayabilirsiniz.",
+sec6Text2:"İşlem öncesinde temsilcinin yetkisini doğrulama hakkımız saklıdır.",
+sec7Title:"7. Ayrımcılık Yapılmaması",
+sec7Text1:"Gizlilik haklarınızı kullandığınız için size hiçbir şekilde ayrımcılık yapılmaz.",
+sec7Text2:"Ancak bazı teknik veriler hizmetin çalışması için zorunludur.",
+sec8Title:"8. Değişiklikler",
+sec8Text1:"Bu bildirim zaman zaman güncellenebilir.",
+sec8Text2:"Güncel sürüm her zaman bu sayfada yayınlanacaktır.",
+sec9Title:"9. İletişim",
+sec9Text:"Kişisel verilerinizle ilgili sorularınız için şu adrese başvurabilirsiniz:",
+accessibility:"Erişilebilirlik",privacy:"Gizlilik Politikası",terms:"Kullanım Koşulları",dns:"Bilgilerimi Satma",imprint:"Künye",rights:"Tüm hakları saklıdır.",trademarks:"Fasqoo bir markadır."
+},
+sq:{
+title:"Mos me vendos apo me ndaj të dhënat e mia personale – Fasqoo",home:"Ballina",faq:"Pyetjet e shpeshta",network:"Statusi i Rregullt",diagnostics:"Diagnostikimi IT",about:"Rreth nesh",
+h1:"Mos me vendos apo me ndaj të dhënat e mia personale – Fasqoo",updatedLabel:"Përditësuar së fundmi:",
+intro1:"Në Fasqoo, ne respektojmë privatësinë tuaj dhe të drejtën tuaj për të kontrolluar përdorimin e të dhënave personale.",
+intro2:"Kjo faqe spjegon se si mund të kërkoni që Fasqoo të mos shesë apo ndajë të dhënat tuaja personale.",
+sec1Title:"1. Zgjedhjet tuaja të Privatësisë",
+sec1Text1:"Varësisht nga vendndodhja juaj, ju keni të drejtë të kërkoni që të dhënat tuaja të mos shiten apo ndahen për qëllime si reklamimi i synuar.",
+sec1Text2:"Gjithashtu keni të drejtë të kufizoni përpunimin e të dhënave apo të tërhiqni pëlqimin për cookie-t jo essentiale.",
+sec2Title:"2. Informatat që mund të përpunohen",
+sec2Text:"Kur përdorni uebfaqen Fasqoo, mund të përpunohen të dhëna teknike si:",
+p1:"Adresa IP",p2:"Vendndodhja e përafërt",p3:"Ofruesi i shërbimit të internetit (ISP)",p4:"Informatat e shfletuesit dhe pajisjes",p5:"Informatat e rrjetit",p6:"Të dhënat e përdorimit të uebfaqes",p7:"Rezultatet e testit të shpejtësisë",p8:"Cookie-t apo teknologjitë e ngjashme",
+sec2Footer:"Të dhënat specifike varen nga funksionet që përdorni.",
+sec3Title:"3. Reklamat dhe Shërbimet e Palëve të Treta",
+sec3Text1:"Fasqoo mund të përdorë shërbime të palëve të treta për analiza, reklama dhe hosting.",
+sec3Text2:"Disa palë të treta përpunojnë të dhëna përmes cookie-ve.",
+sec3Text3:"Kur kërkohet me ligj, ne do të marrim pëlqimin tuaj para përdorimit të cookie-ve jo essentiale.",
+sec4Title:"4. Si të dërgoni një kërkesë",
+sec4Text1:"Nëse dëshironi të kërkoni që të dhënat tuaja të mos shiten apo ndahen, na kontaktoni përmes të dhënave tona të kontaktit.",
+sec4Text2:"Gjatë dërgimit të kërkesës, ju lutem përfshini:",
+r1:"Subjektin: Kërkesë për mos-shitjen apo mos-ndarjen e të dhënave personale",
+r2:"Adresën e email-it apo informatat e nevojshme për identifikim",
+r3:"Përshkrimin e qartë të kërkesës suaj",
+sec4Footer:"Mund të kërkojmë konfirmime shtesë për të verifikuar identitetin tuaj.",
+sec5Title:"5. Largimi nga Cookie-t dhe Reklamat",
+sec5Text:"Ju mund të kontrolloni gjurmimin edhe përmes:",
+o1:"Caktimit të cilësimeve të privatësisë në shfletues",o2:"Bllokimit apo fshirjes së cookie-ve",o3:"Përdorimit të veglave të preferencave në uebfaqen tonë",o4:"Ndryshimit të preferencave te rrjetet reklamuese",
+sec5Footer:"Kini parasysh se çaktivizimi i cookie-ve mund të ndikojë në funksionalitetin e faqes.",
+sec6Title:"6. Agentët e Autorizuar",
+sec6Text1:"Ju mund të përdorni një agent të autorizuar për të dorëzuar kërkesën në emrin tuaj.",
+sec6Text2:"Ne do të verifikojmë autorizimin para se të përpunojmë kërkesën.",
+sec7Title:"7. Mos-diskriminimi",
+sec7Text1:"Fasqoo nuk do t'ju diskriminojë në asnjë mënyrë për ushtrimin e të drejtave tuaja të privatësisë.",
+sec7Text2:"Megjithatë, disa funksione teknike kërkojnë të dhëna minimale për të funksionuar.",
+sec8Title:"8. Ndryshimet në këtë faqe",
+sec8Text1:"Kjo faqe mund të përditësohet kohë pas kohe.",
+sec8Text2:"Versioni më i fundit do të publikohet gjithmonë këtu.",
+sec9Title:"9. Kontakti",
+sec9Text:"Për pyetje apo kërkesa rreth të dhënave tuaja personale, ju lutem kontaktoni:",
+accessibility:"Qasshmëria",privacy:"Politika e Privatësisë",terms:"Kushtet e Përdorimit",dns:"Mos me vendos të dhënat e mia",imprint:"Imprint",rights:"Të gjitha të drejtat e rezervuara.",trademarks:"Fasqoo është markë e regjistruar."
+},
+ar:{
+title:"عدم بيع أو مشاركة معلوماتي الشخصية – Fasqoo",home:"الرئيسية",faq:"الأسئلة الشائعة",network:"حالة الشبكة",diagnostics:"تشخيص IT",about:"من نحن",
+h1:"عدم بيع أو مشاركة معلوماتي الشخصية – Fasqoo",updatedLabel:"آخر تحديث:",
+intro1:"في Fasqoo، نحترم خصوصيتك وحقك في التحكم بكيفية استخدام معلوماتك الشخصية.",
+intro2:"توضح هذه الصفحة كيفية تقديم طلب لعدم بيع أو مشاركة بياناتك الشخصية بموجب قوانين الخصوصية.",
+sec1Title:"1. خيارات الخصوصية الخاصة بك",
+sec1Text1:"يحق لك طلب عدم بيع أو مشاركة معلوماتك الشخصية لأغراض الإعلانات الموجهة وفقاً للقوانين المطبقة.",
+sec1Text2:"يمكنك أيضاً تقييد أنواع معينة من معالجة البيانات أو سحب الموافقة على ملفات تعريف الارتباط غير الضرورية.",
+sec2Title:"2. المعلومات التي قد يتم معالجتها",
+sec2Text:"عند استخدامك لموقع Fasqoo، قد يتم معالجة بعض المعلومات التقنية مثل:",
+p1:"عنوان IP",p2:"الموقع التقريبي",p3:"مزود خدمة الإنترنت (ISP)",p4:"معلومات المتصفح والجهاز",p5:"معلومات الشبكة",p6:"بيانات استخدام الموقع",p7:"نتائج اختبار السرعة",p8:"ملفات تعريف الارتباط والتقنيات المماثلة",
+sec2Footer:"تعتمد البيانات المعالجة على الميزات المستخدمة في الموقع.",
+sec3Title:"3. الإعلانات وخدمات الطرف الثالث",
+sec3Text1:"قد نستخدم خدمات طرف ثالث للإعلانات والتحليلات والاستضافة.",
+sec3Text2:"قد تقوم بعض أطراف الثالث بمعالجة البيانات عبر ملفات تعريف الارتباط.",
+sec3Text3:"سنحصل على موافقتك قبل استخدام ملفات تعريف الارتباط غير الضرورية حيثما ينص القانون.",
+sec4Title:"4. كيفية تقديم الطلب",
+sec4Text1:"إذا كنت ترغب في عدم بيع أو مشاركة معلوماتك، يمكنك التواصل معنا عبر بيانات الاتصال المتاحة.",
+sec4Text2:"يرجى تضمين ما يلي في طلبك:",
+r1:"الموضوع: طلب عدم بيع أو مشاركة معلوماتي الشخصية",
+r2:"البريد الإلكتروني أو البيانات اللازمة للتحقق من شخصيتك",
+r3:"وصف واضح لطلبك",
+sec4Footer:"قد نطلب معلومات إضافية للتحقق من هويتك ومعالجة الطلب.",
+sec5Title:"5. إلغاء الاشتراك في ملفات تعريف الارتباط والإعلانات",
+sec5Text:"يمكنك التحكم في التتبع من خلال:",
+o1:"تعديل إعدادات الخصوصية في متصفحك",o2:"حظر أو حذف ملفات تعريف الارتباط",o3:"استخدام أدوات تفضيلات الكوكيز على الموقع",o4:"تعديل تفضيلات الإعلانات لدى مزودي الخدمات",
+sec5Footer:"قد يؤدي تعطيل بعض ملفات تعريف الارتباط إلى تأثر وظائف الموقع.",
+sec6Title:"6. الوكلاء المعتمدون",
+sec6Text1:"يحق لك استخدام وكيل معتمد لتقديم الطلب نيابة عنك وفقاً للقانون.",
+sec6Text2:"سنقوم بالتحقق من تفويض الوكيل قبل معالجة الطلب.",
+sec7Title:"7. عدم التمييز",
+sec7Text1:"لن تمارس Fasqoo أي تمييز ضدك بسبب ممارستك لحقوق الخصوصية.",
+sec7Text2:"ومع ذلك، تطلب بعض الخدمات بيانات تقنية معملية للعمل بشكل صحيح.",
+sec8Title:"8. التغييرات على هذه الصفحة",
+sec8Text1:"قد نقوم بتحديث هذه الصفحة من وقت لآخر.",
+sec8Text2:"سيتم نشر أحدث نسخة هنا مع تاريخ التحديث.",
+sec9Title:"9. الاتصال",
+sec9Text:"للأسئلة أو الطلبات المتعلقة بمعلوماتك الشخصية، يرجى التواصل معنا عبر:",
+accessibility:"إمكانية الوصول",privacy:"سياسة الخصوصية",terms:"شروط الاستخدام",dns:"عدم بيع معلوماتي",imprint:"بيانات النشر",rights:"جميع الحقوق محفوظة.",trademarks:"Fasqoo هي علامة تجارية."
+}
+};
+
+function applyLanguage(lang) {
+  const t = T[lang] || T.en;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+  document.title = t.title || T.en.title;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = (t && t[key] !== undefined) ? t[key] : T.en[key];
+    if (value !== undefined) {
+      el.textContent = value;
+    }
+  });
+
+  const selectEl = document.getElementById("lang-select");
+  if (selectEl) {
+    selectEl.value = lang;
+  }
+
+  localStorage.setItem("fasqoo-language", lang);
+}
+
+const selector = document.getElementById("lang-select");
+if (selector) {
+  selector.addEventListener("change", (e) => {
+    applyLanguage(e.target.value);
+  });
+}
+
+const savedLang = localStorage.getItem("fasqoo-language") || (navigator.language || "en").slice(0, 2).toLowerCase();
+applyLanguage(T[savedLang] ? savedLang : "en");
+</script>
 </body>
 </html>
