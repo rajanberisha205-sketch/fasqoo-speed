@@ -244,6 +244,58 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 .fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82;transition:opacity .2s ease}
 .fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
 @media (max-width:700px){.fasqoo-footer-links{flex-direction:column;gap:9px}}
+
+/* FASQOO RESPONSIVE ADS */
+.fasqoo-ad{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  margin:18px auto;
+  min-height:0;
+}
+.fasqoo-ad-inner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  max-width:100%;
+  overflow:hidden;
+}
+.fasqoo-ad-top{
+  margin:4px auto 20px;
+}
+.fasqoo-ad-mid{
+  margin:28px auto 10px;
+}
+.fasqoo-ad-rect{
+  margin:28px auto 10px;
+}
+.fasqoo-ad iframe{
+  display:block;
+  border:0;
+  max-width:100%;
+}
+.ad-320{width:320px;height:50px;}
+.ad-468{width:468px;height:60px;}
+.ad-300x250{width:300px;height:250px;}
+
+@media (min-width:761px){
+  .ad-mobile{display:none;}
+  .ad-desktop{display:flex;}
+}
+@media (max-width:760px){
+  .ad-desktop{display:none;}
+  .ad-mobile{display:flex;}
+  .fasqoo-ad-top{margin:8px auto 18px;}
+  .fasqoo-ad-mid{margin:24px auto 8px;}
+  .fasqoo-ad-rect{margin:24px auto 8px;}
+}
+@media (max-width:360px){
+  .ad-320{transform:scale(.94); transform-origin:center center;}
+  .fasqoo-ad{min-height:47px;}
+}
+
 </style>
 </head>
 <body>
@@ -281,6 +333,37 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     </nav>
   </div>
 </header>
+
+  <!-- Responsive top banner: 320x50 mobile / 468x60 desktop -->
+  <div class="fasqoo-ad fasqoo-ad-top ad-mobile" aria-label="Advertisement">
+    <div class="fasqoo-ad-inner ad-320">
+      <script>
+        atOptions = {
+          'key' : 'e9bcdd636ed6a2aab2bb0b7547ce5e3e',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/e9bcdd636ed6a2aab2bb0b7547ce5e3e/invoke.js"></script>
+    </div>
+  </div>
+
+  <div class="fasqoo-ad fasqoo-ad-top ad-desktop" aria-label="Advertisement">
+    <div class="fasqoo-ad-inner ad-468">
+      <script>
+        atOptions = {
+          'key' : '83fcafad122b52ba21ac28bb43e26f5c',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/83fcafad122b52ba21ac28bb43e26f5c/invoke.js"></script>
+    </div>
+  </div>
 
 <main>
   <div class="wrap">
@@ -365,6 +448,23 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
         <div class="app"><div class="app-head"><div class="app-icon">🌐</div><div class="app-status" id="webStatus">Wartet</div></div><h3 id="appWebTitle">Web-Surfen</h3><p id="appWebDesc">Bewertet die Verbindung für tägliche Webseiten.</p><div class="app-score"><span id="webText">Test ausführen</span></div><div class="app-bar"><i id="webBar"></i></div></div>
       </div>
     </section>
+
+
+    <!-- Responsive 300x250 ad -->
+    <div class="fasqoo-ad fasqoo-ad-rect" aria-label="Advertisement">
+      <div class="fasqoo-ad-inner ad-300x250">
+        <script>
+          atOptions = {
+            'key' : 'e63da33b4a56554d2451ef8d41960c88',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highrevenueformat.com/e63da33b4a56554d2451ef8d41960c88/invoke.js"></script>
+      </div>
+    </div>
 
     <section class="section" id="diagnostics">
       <h2 id="diagnosticsTitle">Netzwerkdiagnose</h2>
