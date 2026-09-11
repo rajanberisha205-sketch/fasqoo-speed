@@ -11,6 +11,14 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://fasqoo.com/faq.html">
 
+<!-- Favicons & App Icons -->
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="apple-touch-icon" href="/android-chrome-192x192.png">
+
 <!-- Open Graph / Social Media Metadaten -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fasqoo FAQ & AI Technician Support">
@@ -155,41 +163,18 @@ header{
   gap:25px;
 }
 
+/* BRAND / NEW SVG LOGO STYLES */
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
   text-decoration:none;
   color:var(--text);
   flex-shrink:0;
 }
 
-.logo{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  background:var(--orange);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:20px;
-  font-weight:700;
-}
-
-.brand-name{
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:-.4px;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--text);
-  cursor: pointer;
-  margin-left: auto;
+.brand svg {
+  height: 35px;
+  width: auto;
 }
 
 .main-menu{
@@ -211,6 +196,62 @@ header{
 
 .main-menu a:hover{
   color:var(--orange);
+}
+
+/* DROPDOWN MENU STYLES */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: .2s ease;
+}
+
+.dropbtn:hover {
+  color: var(--orange);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card);
+  min-width: 180px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 100;
+  padding: 6px;
+  margin-top: 8px;
+}
+
+.dropdown-content a {
+  padding: 10px 14px;
+  display: block;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.dropdown-content a:hover {
+  background: var(--soft);
+  color: var(--orange);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .menu-extra{
@@ -562,11 +603,9 @@ footer{
 
 @media(max-width:950px){
   .nav{ flex-wrap:wrap; padding:12px 18px; }
-  .brand{ margin-right:0; }
-  .menu-toggle { display: block; }
-  .main-menu{ display: none; width:100%; order:3; justify-content:center; flex-direction:column; align-items:flex-start; gap:15px; padding:15px 0; }
-  .main-menu.active{ display: flex; }
-  .menu-extra{ margin-left:0; width:100%; justify-content:space-between; }
+  .brand{ margin-right:auto; }
+  .main-menu{ width:100%; order:3; justify-content:center; flex-wrap:wrap; gap:12px 18px; padding-bottom:5px; }
+  .menu-extra{ margin-left:0; }
 }
 
 @media(max-width:600px){
@@ -578,6 +617,7 @@ footer{
   .ai-message{ max-width:92%; }
   .ai-form{ flex-direction:column; }
   .ai-form button{ width:100%; }
+  .brand svg { height: 30px; }
 }
 </style>
 </head>
@@ -586,20 +626,28 @@ footer{
 
 <header>
   <div class="nav">
-    <a class="brand" href="index.html">
-      <div class="logo">F</div>
-      <div class="brand-name">Fasqoo</div>
+    <!-- NEUES SVG LOGO IM MENÜ -->
+    <a class="brand" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 50">
+        <rect fill="#ff5a1f" rx="10" x="0" y="6" width="38" height="38" />
+        <text fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle" dominant-baseline="central" x="19" y="26">F</text>
+        <text fill="currentColor" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="-0.4px" x="52" y="28">Fasqoo</text>
+      </svg>
     </a>
-    
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
 
-    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
-      <a href="index.html" id="navHome">Home</a>
-      <a href="faq.html" id="navFaq" style="color: var(--orange);">FAQ</a>
-      <a href="network-status.html" id="navStatus">Netzwerk-Status</a>
-      <a href="subnet-calculator.html" id="navDiag">IT-Diagnose</a>
-      <a href="about.html" id="navAbout">Über uns</a>
+    <nav class="main-menu" aria-label="Main navigation">
+      <a data-i18n="navHome" href="/">Home</a>
+      <a href="subnet-calculator.html" id="navStatus">IT-Diagnose</a>
       
+      <!-- Dropdown Menu Integration -->
+      <div class="dropdown">
+        <button class="dropbtn">Menu ▾</button>
+        <div class="dropdown-content">
+          <a data-i18n="navNetwork" href="/network-status.html">Network Status</a>
+          <a data-i18n="navAbout" href="/about">About</a>
+        </div>
+      </div>
+
       <div class="menu-extra">
         <select id="lang" aria-label="Language">
           <option value="de">Deutsch</option>
@@ -786,21 +834,27 @@ footer{
   </section>
 </main>
 
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-copy">
       <div data-i18n="copyright">© 2026 Fasqoo. All Rights Reserved.</div>
+      <div data-i18n="trademark">
+        Fasqoo™ and Fasqoo Internet Speed Test are trademarks of Fasqoo and may only be used with permission.
+      </div>
     </div>
 
     <div class="footer-links">
-     <a href="/accessibility.html" id="ftAccess">Accessibility</a>
-<a href="/impressum.html" id="ftAccess">Impressum</a>
-<a href="/privacy-policy.html" id="ftPrivacy">Privacy Policy</a>
-<a href="/terms.html" id="ftTerms">Terms of Use</a>
-<a href="/do-not-sell.html" id="ftNoSell">Do Not Sell My Personal Info</a>
+      <a data-i18n="footerAbout" href="/about">About</a>
+      <a data-i18n="footerFaq" href="/faq.html">FAQ</a>
+      <a data-i18n="footerNetwork" href="/network-status.html">Network Status</a>
+      <a data-i18n="footerPrivacy" href="/privacy-policy">Privacy Policy</a>
+      <a data-i18n="footerTerms" href="/terms">Terms of Use</a>
+      <a data-i18n="footerDoNotSell" href="/do-not-sell">Do Not Sell My Personal Information</a>
+      <a data-i18n="footerSlavery" href="/modern-slavery">Modern Slavery Policy</a>
+      <a data-i18n="footerAccessibility" href="/accessibility">Accessibility</a>
     </div>
+  </div>
 </footer>
 
 <script>
@@ -879,7 +933,7 @@ const translations = {
     q3:"¿Qué es la velocidad de carga?", a3:"Indica la rapidez con la que tu dispositivo envía datos a Internet.",
     q4:"¿Qué es el ping?", a4:"El ping mide el tiempo de respuesta de una red.",
     q5:"¿Qué es el jitter?", a5:"Mide las variaciones en los tiempos de llegada de los paquetes de datos.",
-    q6:"¿Por qué mi Wi-Fi es lento?", a6:"Puede deberse a la distancia al router, interferencias, paredes o hardware antiguo.",
+    q6:"¿Por qué mi Wi-Fi es lento?", a6:"Puede deberse al alcance del router, interferencias, paredes o hardware antiguo.",
     q7:"¿Por qué mi ping es alto en los juegos?", a7:"Puede ser provocado por la distancia al servidor, enrutamiento o interferencias de Wi-Fi.",
     q8:"¿Por qué mi velocidad de carga es lenta?", a8:"Puede estar limitada por tu plan de Internet, Wi-Fi o configuración del router.",
     aiSectionTitle:"Técnico IA de Fasqoo", aiSectionText:"Obtén ayuda técnica para tu conexión a Internet.",
@@ -1055,15 +1109,6 @@ function loadTheme(){
     document.body.classList.add("dark");
   }
   updateThemeButton();
-}
-
-/* MOBILE MENU TOGGLE */
-const menuToggle = document.getElementById("menuToggle");
-const mainMenu = document.getElementById("mainMenu");
-if(menuToggle && mainMenu){
-  menuToggle.addEventListener("click", () => {
-    mainMenu.classList.toggle("active");
-  });
 }
 
 /* FAQ ACCORDION */
