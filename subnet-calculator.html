@@ -16,7 +16,7 @@
             --accent-hover: #0284c7;
             --success: #22c55e;
             --radius: 12px;
-            --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         }
 
         [data-theme="light"] {
@@ -54,6 +54,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
         }
 
         h1 {
@@ -61,10 +63,10 @@
             color: var(--accent);
         }
 
-        /* Dashboard Grid Layout */
+        /* Modernes Karten-Layout für alle Tools */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 1.5rem;
         }
 
@@ -76,22 +78,16 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .card-full {
-            grid-column: 1 / -1;
-        }
-
-        .card h2 {
-            font-size: 1.25rem;
+        .card h2, .card h3 {
+            font-size: 1.2rem;
             margin-bottom: 1rem;
+            color: var(--text-main);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        /* Form Elements */
-        .input-group {
+        /* Formularelemente */
+        .input-group, .form-group {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
@@ -103,11 +99,12 @@
             border: 1px solid var(--border-color);
             background-color: var(--bg-input);
             color: var(--text-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
+            transition: border-color 0.2s;
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: var(--accent);
         }
 
@@ -124,116 +121,132 @@
             background-color: var(--accent-hover);
         }
 
-        /* Results Display */
-        .results-table {
+        /* Tabellen für Ergebnisse */
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
         }
 
-        .results-table td {
+        td, th {
             padding: 0.6rem 0;
             border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            text-align: left;
         }
 
-        .results-table td:first-child {
+        td:first-child {
             color: var(--text-muted);
-            width: 40%;
+            width: 45%;
         }
 
-        .code-val {
+        /* Monospace für IP-Adressen und Werte */
+        .code-val, code, pre {
             font-family: var(--font-mono);
             font-weight: 600;
             color: var(--accent);
         }
 
-        /* Copy Button Icon */
-        .copy-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 2px 6px;
-            font-size: 0.8rem;
+        /* Steuerungsleiste oben (Sprachauswahl & Theme) */
+        .top-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
 
-        .copy-btn:hover {
-            color: var(--accent);
+        /* Responsives Design */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Fasqoo IT Diagnostics</h1>
-        <button onclick="toggleTheme()" id="themeBtn">☀️ Light Mode</button>
-    </header>
-
-    <div class="dashboard-grid">
-        <!-- Hauptrechner (Full Width) -->
-        <div class="card card-full">
-            <h2>IPv4 Subnetzrechner</h2>
-            <div class="input-group">
-                <input type="text" id="ipInput" placeholder="z.B. 192.168.1.10/24" style="flex: 1;">
-                <button onclick="calculateSubnet()">Berechnen</button>
+    <div class="container">
+        <header>
+            <h1>IT Diagnostics & Subnet Calculator</h1>
+            <div class="top-controls">
+                <!-- Sprachauswahl (falls vorhanden, hier integriert) -->
+                <select id="langSelect">
+                    <option value="de">Deutsch</option>
+                    <option value="en">English</option>
+                </select>
+                <button onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
             </div>
-            
-            <table class="results-table">
-                <tr>
-                    <td>Netzwerkadresse:</td>
-                    <td><span class="code-val" id="resNetwork">192.168.1.0</span> <button class="copy-btn">📋</button></td>
-                </tr>
-                <tr>
-                    <td>Subnetzmaske:</td>
-                    <td><span class="code-val" id="resMask">255.255.255.0</span> <button class="copy-btn">📋</button></td>
-                </tr>
-                <tr>
-                    <td>Nutzbarer IP-Bereich:</td>
-                    <td><span class="code-val" id="resRange">192.168.1.1 - 192.168.1.254</span></td>
-                </tr>
-                <tr>
-                    <td>Broadcast-Adresse:</td>
-                    <td><span class="code-val" id="resBroadcast">192.168.1.255</span></td>
-                </tr>
-                <tr>
-                    <td>Nutzbare Hosts:</td>
-                    <td><span class="code-val" id="resHosts">254</span></td>
-                </tr>
-            </table>
-        </div>
+        </header>
 
-        <!-- Tool 2: DNS Lookup -->
-        <div class="card">
-            <h2>Live DNS Lookup</h2>
-            <div class="input-group">
-                <input type="text" placeholder="domain.com" style="flex: 1;">
-                <button>Abfragen</button>
+        <div class="dashboard-grid">
+            <!-- 1. IPv4 Subnetzrechner -->
+            <div class="card">
+                <h2>IPv4 Subnet Calculator</h2>
+                <div class="input-group">
+                    <input type="text" id="ipv4Input" placeholder="192.168.1.10/24" style="flex: 1;">
+                    <button onclick="calculateIPv4()">Berechnen</button>
+                </div>
+                <table>
+                    <tr><td>Netzwerk:</td><td><span class="code-val" id="netAddr">-</span></td></tr>
+                    <tr><td>Subnetzmaske:</td><td><span class="code-val" id="netMask">-</span></td></tr>
+                    <tr><td>Erste IP:</td><td><span class="code-val" id="firstIp">-</span></td></tr>
+                    <tr><td>Letzte IP:</td><td><span class="code-val" id="lastIp">-</span></td></tr>
+                    <tr><td>Broadcast:</td><td><span class="code-val" id="broadcast">-</span></td></tr>
+                    <tr><td>Hosts:</td><td><span class="code-val" id="totalHosts">-</span></td></tr>
+                </table>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Ergebnisse werden hier strukturiert angezeigt...</p>
-        </div>
 
-        <!-- Tool 3: Web Speed & Latency -->
-        <div class="card">
-            <h2>Netzwerk-Diagnose</h2>
-            <p style="margin-bottom: 1rem; color: var(--text-muted);">Messe deine aktuelle Latenz und Browser-Geschwindigkeit.</p>
-            <button style="width: 100%;">Test Starten</button>
+            <!-- 2. DNS Lookup Tool -->
+            <div class="card">
+                <h2>Live DNS Lookup</h2>
+                <div class="input-group">
+                    <input type="text" id="dnsInput" placeholder="beispiel.de" style="flex: 1;">
+                    <button onclick="runDnsLookup()">Abfragen</button>
+                </div>
+                <div id="dnsResults" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                    Ergebnisse erscheinen hier...
+                </div>
+            </div>
+
+            <!-- 3. Netzwerk-Diagnose & Speed -->
+            <div class="card">
+                <h2>Netzwerk-Diagnose</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Latenz, Speedtest und System-Infos messen.</p>
+                <button onclick="runDiagnostics()" style="width: 100%; margin-bottom: 1rem;">Diagnose Starten</button>
+                <div id="diagResults">
+                    <table>
+                        <tr><td>Latenz (Ping):</td><td><span class="code-val" id="pingResult">-</span></td></tr>
+                        <tr><td>Geschwindigkeit:</td><td><span class="code-val" id="speedResult">-</span></td></tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        document.getElementById('themeBtn').innerText = next === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-    }
+    <script>
+        // Design-Funktion: Light/Dark Mode Umschalter
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            document.getElementById('themeBtn').innerText = newTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        }
 
-    function calculateSubnet() {
-        // Hier deine bestehende JavaScript-Logik einbinden!
-    }
-</script>
-
+        // Platzhalter für deine originalen Funktionen:
+        function calculateIPv4() {
+            // Hier greift deine bestehende Logik
+        }
+        function runDnsLookup() {
+            // Hier greift deine bestehende Logik
+        }
+        function runDiagnostics() {
+            // Hier greift deine bestehende Logik
+        }
+    </script>
 </body>
 </html>
