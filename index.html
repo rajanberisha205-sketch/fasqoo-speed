@@ -1372,8 +1372,9 @@ function applyLanguage(lang){
   $("appWebTitle").textContent = t.appWTitle;
   $("appWebDesc").textContent = t.appWDesc;
 
-  document.querySelectorAll(".app-score span").forEach(el => {
-    if(el.textContent.includes("Test") || el.textContent.includes("Run") || el.textContent.includes("Kryej") || el.textContent.includes("Esegui") || el.textContent.includes("Lancer") || el.textContent.includes("Ejecutar") || el.textContent.includes("Executar") || el.textContent.includes("Test uitvoeren") || el.textContent.includes("çalıştır")){
+  document.querySelectorAll("[id$='Text']").forEach(el => {
+    if(el.id !== "gamingText" && el.id !== "streamText" && el.id !== "fourkText" && el.id !== "callText" && el.id !== "officeText" && el.id !== "cloudText" && el.id !== "socialText" && el.id !== "webText") return;
+    if(el.textContent.includes("Test") || el.textContent.includes("Run") || el.textContent.includes("Kryej")) {
       el.textContent = t.appRunTest;
     }
   });
@@ -1411,23 +1412,26 @@ function applyLanguage(lang){
   $("ftNoSell").textContent = t.ftNoSell;
   $("ftSlavery").textContent = t.ftSlavery;
 
+  localStorage.setItem("fasqoo_lang", lang);
   historyLoad();
 }
 
-$("lang").addEventListener("change", (e) => {
-  applyLanguage(e.target.value);
-  localStorage.setItem("fasqoo_lang", e.target.value);
-});
-
-const savedLang = localStorage.getItem("fasqoo_lang");
-if(savedLang && translations[savedLang]){
-  $("lang").value = savedLang;
-  applyLanguage(savedLang);
+const langSelect = $("lang");
+if(langSelect){
+  langSelect.addEventListener("change", (e)=>{
+    applyLanguage(e.target.value);
+  });
 }
 
-resizeCanvas();
-netinfo();
-historyLoad();
+const savedLang = localStorage.getItem("fasqoo_lang") || "de";
+if(langSelect){ langSelect.value = savedLang; }
+applyLanguage(savedLang);
+
+window.addEventListener("load", ()=>{
+  resizeCanvas();
+  netinfo();
+  historyLoad();
+});
 </script>
 </body>
 </html>
