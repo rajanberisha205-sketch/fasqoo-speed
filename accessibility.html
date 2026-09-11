@@ -211,7 +211,6 @@ footer nav a { color:var(--text-muted); font-size:.9rem; }
     </nav>
   </div>
 </footer>
-
 <script>
 const T = {
 en:{
@@ -241,37 +240,163 @@ browser:"Unterstützung von Browsern und Hilfstechnologien",browserText:"Fasqoo 
 continuous:"Kontinuierliche Verbesserung",continuousText:"Barrierefreiheit ist ein fortlaufender Prozess. Wir überprüfen die Fasqoo-Website regelmäßig und nehmen, wo möglich, Verbesserungen vor. Mit der Entwicklung neuer Barrierefreiheitstechnologien und Standards werden wir weiterhin daran arbeiten, die Erfahrung für alle Nutzer zu verbessern.",
 feedback:"Feedback",feedbackText:"Wenn Sie bei der Nutzung von Fasqoo auf ein Barrierefreiheitsproblem stoßen, freuen wir uns über Ihr Feedback. Bitte teilen Sie uns Folgendes mit:",fb1:"Die Seite, auf der das Problem aufgetreten ist",fb2:"Was Sie tun wollten",fb3:"Was nicht funktioniert hat",fb4:"Welches Gerät und welchen Browser Sie verwendet haben, sofern bekannt",feedbackHelp:"Ihr Feedback hilft uns, Probleme zu erkennen und die Website zu verbessern.",
 contact:"Kontakt",contactText:"Bei Fragen zur Barrierefreiheit, Feedback oder Unterstützung kontaktieren Sie uns bitte:",emailLabel:"E-Mail:",websiteLabel:"Website:",accessibility:"Barrierefreiheit",privacy:"Datenschutzerklärung",terms:"Nutzungsbedingungen",dns:"Meine Daten nicht verkaufen",imprint:"Impressum",rights:"Alle Rechte vorbehalten.",trademarks:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo."
+},
+fr:{
+title:"Déclaration d'accessibilité – Fasqoo",home:"Accueil",faq:"FAQ",network:"État du réseau",diagnostics:"Diagnostic IT",about:"À propos",
+h1:"Déclaration d'accessibilité – Fasqoo",updatedLabel:"Dernière mise à jour :",intro:"Fasqoo s'engage à rendre son site web accessible et facile à utiliser pour le plus grand nombre de personnes possible.",
+commitment:"Notre engagement",commitmentText:"Nous travaillons continuellement à améliorer l'accessibilité et l'expérience globale du site Fasqoo.",
+features:"Fonctionnalités d'accessibilité",aims:"Fasqoo vise à fournir :",f1:"Un texte clair et lisible",f2:"Un contraste suffisant entre le texte et l'arrière-plan",f3:"Navigation adaptée au clavier",f4:"Boutons et liens clairement identifiables",f5:"Étiquettes descriptives",f6:"Mises en page adaptatives",f7:"Prise en charge des navigateurs modernes",f8:"Structure de site accessible",
+speed:"Accessibilité du Speedtest",speedText1:"Le test de vitesse Fasqoo est conçu pour être facile à utiliser.",speedText2:"Les résultats sont affichés dans un format clair.",
+keyboard:"Navigation au clavier",keyboardText:"Fasqoo prend en charge la navigation au clavier :",tab:"pour se déplacer entre les éléments",shiftTab:"pour revenir en arrière",or:"ou",activate:"pour activer les boutons et liens",
+readers:"Lecteurs d'écran",readersText1:"Nous structurons le site pour qu'il soit compris par les logiciels de lecture d'écran.",readersText2:"Nous améliorons continuellement les étiquettes et la navigation.",
+mobile:"Accessibilité mobile",mobileText:"Fasqoo adapte automatiquement sa mise en page sur les petits écrans.",
+browser:"Support navigateurs",browserText:"Fasqoo prend en charge les versions récentes des navigateurs courants.",
+continuous:"Amélioration continue",continuousText:"L'accessibilité est un processus continu.",
+feedback:"Commentaires",feedbackText:"Si vous rencontrez un problème d'accessibilité, contactez-nous en décrivant :",fb1:"La page concernée",fb2:"Ce que vous essayiez de faire",fb3:"Ce qui n'a pas fonctionné",fb4:"Votre appareil et navigateur",feedbackHelp:"Vos retours nous aident à nous améliorer.",
+contact:"Contact",contactText:"Pour toute question sur l'accessibilité :",emailLabel:"E-mail :",websiteLabel:"Site web :",accessibility:"Accessibilité",privacy:"Politique de confidentialité",terms:"Conditions d'utilisation",dns:"Ne pas vendre mes informations",imprint:"Mentions légales",rights:"Tous droits réservés.",trademarks:"Fasqoo est une marque déposée."
+},
+es:{
+title:"Declaración de accesibilidad – Fasqoo",home:"Inicio",faq:"Preguntas frecuentes",network:"Estado de la red",diagnostics:"Diagnóstico TI",about:"Sobre nosotros",
+h1:"Declaración de accesibilidad – Fasqoo",updatedLabel:"Última actualización:",intro:"Fasqoo se compromete a hacer que su sitio web sea accesible y fácil de usar para todos.",
+commitment:"Nuestro compromiso",commitmentText:"Trabajamos continuamente para mejorar la accesibilidad y la experiencia del sitio.",
+features:"Funciones de accesibilidad",aims:"Fasqoo ofrece:",f1:"Texto claro y legible",f2:"Contraste suficiente",f3:"Navegación por teclado",f4:"Botones y enlaces claros",f5:"Etiquetas descriptivas",f6:"Diseño adaptable",f7:"Soporte para navegadores modernos",f8:"Estructura accesible",
+speed:"Accesibilidad de la prueba de velocidad",speedText1:"El test de velocidad de Fasqoo es fácil de usar.",speedText2:"Los resultados se muestran de forma clara.",
+keyboard:"Navegación por teclado",keyboardText:"Fasqoo admite la navegación por teclado:",tab:"para desplazarse por los elementos",shiftTab:"para retroceder",or:"o",activate:"para activar botones y enlaces",
+readers:"Lectores de pantalla",readersText1:"Estructuramos el sitio para programas lectores de pantalla.",readersText2:"Mejoramos continuamente la información de navegación.",
+mobile:"Accesibilidad móvil",mobileText:"Fasqoo adapta su diseño a pantallas pequeñas.",
+browser:"Soporte de navegadores",browserText:"Compatible con las versiones actuales de los navegadores.",
+continuous:"Mejora continua",continuousText:"La accesibilidad es un proceso continuo.",
+feedback:"Comentarios",feedbackText:"Si encuentra algún problema, contáctenos indicando:",fb1:"La página con el problema",fb2:"Lo que intentaba hacer",fb3:"Qué falló",fb4:"Su dispositivo y navegador",feedbackHelp:"Sus comentarios nos ayudan a mejorar.",
+contact:"Contacto",contactText:"Para preguntas sobre accesibilidad:",emailLabel:"Correo electrónico:",websiteLabel:"Sitio web:",accessibility:"Accesibilidad",privacy:"Política de privacidad",terms:"Términos de uso",dns:"No vender mi información",imprint:"Aviso legal",rights:"Todos los derechos reservados.",trademarks:"Fasqoo es una marca registrada."
+},
+it:{
+title:"Dichiarazione di accessibilità – Fasqoo",home:"Home",faq:"FAQ",network:"Stato della rete",diagnostics:"Diagnostica IT",about:"Chi siamo",
+h1:"Dichiarazione di accessibilità – Fasqoo",updatedLabel:"Ultimo aggiornamento:",intro:"Fasqoo si impegna a rendere il proprio sito web accessibile a tutti.",
+commitment:"Il nostro impegno",commitmentText:"Lavoriamo continuamente per migliorare l'accessibilità e l'esperienza utente.",
+features:"Funzionalità di accessibilità",aims:"Fasqoo offre:",f1:"Testo chiaro e leggibile",f2:"Contrasto adeguato",f3:"Navigazione da tastiera",f4:"Pulsanti e link ben visibili",f5:"Etichette descrittive",f6:"Layout reattivo",f7:"Supporto per browser moderni",f8:"Struttura del sito accessibile",
+speed:"Accessibilità del Speedtest",speedText1:"Il test di velocità Fasqoo è facile da usare.",speedText2:"I risultati sono mostrati in modo chiaro.",
+keyboard:"Navigazione da tastiera",keyboardText:"Fasqoo supporta la navigazione da tastiera:",tab:"per spostarsi tra gli elementi",shiftTab:"per tornare indietro",or:"o",activate:"per attivare pulsanti e link",
+readers:"Lettori di schermo",readersText1:"Strutturiamo il sito per i software di lettura dello schermo.",readersText2:"Miglioriamo continuamente i contenuti e le etichette.",
+mobile:"Accessibilità mobile",mobileText:"Fasqoo adatta il layout ai dispositivi mobili.",
+browser:"Supporto browser",browserText:"Supportiamo le versioni recenti dei principali browser.",
+continuous:"Miglioramento continuo",continuousText:"L'accessibilità è un processo in continuo sviluppo.",
+feedback:"Feedback",feedbackText:"Se riscontri problemi di accessibilità, contattaci descrivendo:",fb1:"La pagina interessata",fb2:"Cosa stavi cercando di fare",fb3:"Cosa è andato storto",fb4:"Dispositivo e browser utilizzati",feedbackHelp:"Il tuo feedback ci aiuta a migliorare.",
+contact:"Contatti",contactText:"Per domande sull'accessibilità:",emailLabel:"Email:",websiteLabel:"Sito web:",accessibility:"Accessibilità",privacy:"Informativa sulla privacy",terms:"Termini di utilizzo",dns:"Non vendere le mie informazioni",imprint:"Note legali",rights:"Tutti i diritti riservati.",trademarks:"Fasqoo è un marchio registrato."
+},
+pt:{
+title:"Declaração de Acessibilidade – Fasqoo",home:"Início",faq:"FAQ",network:"Status da Rede",diagnostics:"Diagnóstico de TI",about:"Sobre Nós",
+h1:"Declaração de Acessibilidade – Fasqoo",updatedLabel:"Última atualização:",intro:"A Fasqoo está empenhada em tornar o seu site acessível a todos.",
+commitment:"Nosso Compromisso",commitmentText:"Trabalhamos continuamente para melhorar a acessibilidade e usabilidade do site.",
+features:"Recursos de Acessibilidade",aims:"A Fasqoo oferece:",f1:"Texto claro e legível",f2:"Contraste suficiente",f3:"Navegação por teclado",f4:"Botões e links claros",f5:"Rótulos descritivos",f6:"Layouts responsivos",f7:"Suporte a navegadores modernos",f8:"Estrutura acessível",
+speed:"Acessibilidade do Teste de Velocidade",speedText1:"O Teste de Velocidade Fasqoo foi projetado para ser fácil de usar.",speedText2:"Resultados exibidos de forma clara.",
+keyboard:"Navegação por Teclado",keyboardText:"A Fasqoo suporta navegação por teclado:",tab:"para alternar entre elementos",shiftTab:"para voltar",or:"ou",activate:"para ativar botões e links",
+readers:"Leitores de Tela",readersText1:"Estruturamos o site para funcionar bem com leitores de tela.",readersText2:"Melhoramos continuamente nossos rótulos e estrutura.",
+mobile:"Acessibilidade Móvel",mobileText:"O site adapta-se automaticamente a telas menores.",
+browser:"Suporte a Navegadores",browserText:"Suporte para as versões atuais dos navegadores.",
+continuous:"Melhoria Contínua",continuousText:"A acessibilidade é um processo contínuo.",
+feedback:"Comentários",feedbackText:"Se encontrar um problema, entre em contato relatando:",fb1:"A página com o problema",fb2:"O que estava tentando fazer",fb3:"O que deu errado",fb4:"Seu dispositivo e navegador",feedbackHelp:"Seu feedback nos ajuda a melhorar.",
+contact:"Contato",contactText:"Para dúvidas sobre acessibilidade:",emailLabel:"E-mail:",websiteLabel:"Website:",accessibility:"Acessibilidade",privacy:"Política de Privacidade",terms:"Termos de Uso",dns:"Não vender minhas informações",imprint:"Aviso Legal",rights:"Todos os direitos reservados.",trademarks:"Fasqoo é uma marca registrada."
+},
+nl:{
+title:"Toegankelijkheidsverklaring – Fasqoo",home:"Home",faq:"FAQ",network:"Netwerkstatus",diagnostics:"IT-diagnostiek",about:"Over ons",
+h1:"Toegankelijkheidsverklaring – Fasqoo",updatedLabel:"Laatst bijgewerkt:",intro:"Fasqoo streeft erachter om de website voor iedereen toegankelijk te maken.",
+commitment:"Onze inzet",commitmentText:"We werken continu aan het verbeteren van de toegankelijkheid van Fasqoo.",
+features:"Toegankelijkheidsfuncties",aims:"Fasqoo biedt:",f1:"Duidelijke en leesbare tekst",f2:"Voldoende contrast",f3:"Toetsenbordnavigatie",f4:"Duidelijke knoppen en links",f5:"Beschrijvende labels",f6:"Responsive lay-out",f7:"Ondersteuning voor moderne browsers",f8:"Toegankelijke structuur",
+speed:"Snelheidstest toegankelijkheid",speedText1:"De Fasqoo-snelheidstest is eenvoudig te bedienen.",speedText2:"Testresultaten worden helder weergegeven.",
+keyboard:"Toetsenbordnavigatie",keyboardText:"Fasqoo ondersteunt navigatie via het toetsenbord:",tab:"om te navigeren tussen elementen",shiftTab:"om achteruit te navigeren",or:"of",activate:"om knoppen en links te activeren",
+readers:"Schermlezers",readersText1:"We structureren de site optimaal voor schermlezers.",readersText2:"We verbeteren continu onze opbouw en labels.",
+mobile:"Mobiele toegankelijkheid",mobileText:"De website past zich automatisch aan kleinere schermen aan.",
+browser:"Browserondersteuning",browserText:"Ondersteuning voor recente versies van populaire browsers.",
+continuous:"Continu verbeteren",continuousText:"Toegankelijkheid is een voortdurend proces.",
+feedback:"Feedback",feedbackText:"Ondervindt u problemen? Neem contact met ons op met:",fb1:"De betreffende pagina",fb2:"Wat u probeerde te doen",fb3:"Wat er misging",fb4:"Uw apparaat en browser",feedbackHelp:"Uw feedback helpt ons enorm.",
+contact:"Contact",contactText:"Voor vragen over toegankelijkheid:",emailLabel:"E-mail:",websiteLabel:"Website:",accessibility:"Toegankelijkheid",privacy:"Privacybeleid",terms:"Gebruiksvoorwaarden",dns:"Verkoop mijn info niet",imprint:"Colofon",rights:"Alle rechten voorbehouden.",trademarks:"Fasqoo is een handelsmerk."
+},
+tr:{
+title:"Erişilebilirlik Bildirimi – Fasqoo",home:"Ana Sayfa",faq:"SSS",network:"Ağ Durumu",diagnostics:"BT Teşhis",about:"Hakkımızda",
+h1:"Erişilebilirlik Bildirimi – Fasqoo",updatedLabel:"Son güncelleme:",intro:"Fasqoo, web sitesini herkes için erişilebilir kılmayı taahhüt eder.",
+commitment:"Taahhüdümüz",commitmentText:"Kullanılabilirliği ve erişilebilirliği sürekli geliştiriyoruz.",
+features:"Erişilebilirlik Özellikleri",aims:"Fasqoo şunları sunar:",f1:"Açık ve okunabilir metin",f2:"Yeterli kontrast",f3:"Klavye gezinmesi",f4:"Net düğmeler ve bağlantılar",f5:"Açıklayıcı etiketler",f6:"Duyarlı tasarım",f7:"Modern tarayıcı desteği",f8:"Erişilebilir site yapısı",
+speed:"Hız Testi Erişilebilirliği",speedText1:"Fasqoo Hız Testi kolayca çalıştırılacak şekilde tasarlanmıştır.",speedText2:"Sonuçlar net bir formatta gösterilir.",
+keyboard:"Klavye Gezinmesi",keyboardText:"Fasqoo klavye ile gezinmeyi destekler:",tab:"ögeler arasında geçiş yapmak için",shiftTab:"geri gitmek için",or:"veya",activate:"düğmeleri ve bağlantıları etkinleştirmek için",
+readers:"Ekran Okuyucular",readersText1:"Ekran okuyucu yazılımları için web sitesini uygun şekilde yapılandırıyoruz.",readersText2:"Etiketleri ve gezinti ögelerini sürekli iyileştiriyoruz.",
+mobile:"Mobil Erişilebilirlik",mobileText:"Mobil cihazlarda otomatik olarak uygun düzene geçer.",
+browser:"Tarayıcı Desteği",browserText:"Güncel tarayıcı sürümlerini destekliyoruz.",
+continuous:"Sürekli İyileştirme",continuousText:"Erişilebilirlik devam eden bir süreçtir.",
+feedback:"Geri Bildirim",feedbackText:"Bir sorunla karşılaşırsanız bize bildirin:",fb1:"Sorunun oluştuğu sayfa",fb2:"Ne yapmaya çalıştığınız",fb3:"Neyin yanlış gittiği",fb4:"Cihazınız ve tarayıcınız",feedbackHelp:"Geri bildirimleriniz sitemizi geliştirmemize yardımcı olur.",
+contact:"İletişim",contactText:"Erişilebilirlik soruları için:",emailLabel:"E-posta:",websiteLabel:"Web sitesi:",accessibility:"Erişilebilirlik",privacy:"Gizlilik Politikası",terms:"Kullanım Koşulları",dns:"Bilgilerimi Satma",imprint:"Künye",rights:"Tüm hakları saklıdır.",trademarks:"Fasqoo bir markadır."
+},
+sq:{
+title:"Deklarata e Qasshmërisë – Fasqoo",home:"Ballina",faq:"Pyetjet e shpeshta",network:"Statusi i Rregullt",diagnostics:"Diagnostikimi IT",about:"Rreth nesh",
+h1:"Deklarata e Qasshmërisë – Fasqoo",updatedLabel:"Përditësuar së fundmi:",intro:"Fasqoo është e përkushtuar ta bëjë uebsajtin e saj të qasshëm për të gjithë.",
+commitment:"Përkushtimi ynë",commitmentText:"Ne punojmë vazhdimisht për të përmirësuar përvojën e përdoruesit dhe qasshmërinë.",
+features:"Veçoritë e Qasshmërisë",aims:"Fasqoo synon të ofrojë:",f1:"Tekst të qartë dhe të lexueshëm",f2:"Kontrast të mjaftueshëm",f3:"Lundrim me tastierë",f4:"Butona dhe lidhje të qarta",f5:"Etiketa përshkruese",f6:"Dizajn adaptues",f7:"Mbështetje për shfletues modernë",f8:"Strukturë e qasshme",
+speed:"Qasshmëria e Testit të Shpejtësisë",speedText1:"Testi i Shpejtësisë Fasqoo është projektuar të jetë i lehtë në përdorim.",speedText2:"Rezultatet shfaqen në mënyrë të qartë.",
+keyboard:"Lundrimi me Tastierë",keyboardText:"Fasqoo mbështet lundrimin përmes tastierës:",tab:"për të lëvizur mes elementeve",shiftTab:"për t'u kthyer prapa",or:"ose",activate:"për të aktivizuar butonat dhe lidhjet",
+readers:"Lexuesit e Ekranit",readersText1:"Ne e strukturojmë uebsajtin për softuerët e leximit të ekranit.",readersText2:"Përmirësojmë vazhdimisht etiketat dhe lundrimin.",
+mobile:"Qasshmëria në Celular",mobileText:"Përshtatet automatikisht për ekranet më të vogla.",
+browser:"Mbështetja e Shfletuesve",browserText:"Mbështet të gjithë shfletuesit kryesorë modernë.",
+continuous:"Përmirësim i Vazhdueshëm",continuousText:"Qasshmëria është një proces i vazhdueshëm.",
+feedback:"Komentet",feedbackText:"Nëse hasni ndonjë problem, na kontaktoni duke përshkruar:",fb1:"Faqen ku ndodhi problemi",fb2:"Çfarë po mevisnit të bënit",fb3:"Çfarë shkoi gabim",fb4:"Pajisjen dhe shfletuesin tuaj",feedbackHelp:"Komentet tuaja na ndihmojnë të përmirësohemi.",
+contact:"Kontakti",contactText:"Për pyetje rreth qasshmërisë:",emailLabel:"Email:",websiteLabel:"Uebsajti:",accessibility:"Qasshmëria",privacy:"Politika e Privatësisë",terms:"Kushtet e Përdorimit",dns:"Mos me vendos të dhënat e mia",imprint:"Imprint",rights:"Të gjitha të drejtat e rezervuara.",trademarks:"Fasqoo është markë e regjistruar."
+},
+ar:{
+title:"بيان إمكانية الوصول – Fasqoo",home:"الرئيسية",faq:"الأسئلة الشائعة",network:"حالة الشبكة",diagnostics:"تشخيص IT",about:"من نحن",
+h1:"بيان إمكانية الوصول – Fasqoo",updatedLabel:"آخر تحديث:",intro:"تلتزم Fasqoo بجمعل موقعها متاحاً وسهل الاستخدام للجميع.",
+commitment:"التزامنا",commitmentText:"نعمل باستمرار على تحسين إمكانية الوصول وتجربة المستخدم.",
+features:"ميزات إمكانية الوصول",aims:"تهدف Fasqoo إلى توفير:",f1:"نص واضح وسهل القراءة",f2:"تباين كافٍ بين النصوص والخلفية",f3:"تصفح سهل باستخدام لوحة المفاتيح",f4:"أزرار وروابط واضحة",f5:"تسميات توضيحية",f6:"تخطيط متجاوب للشاشات",f7:"دعم المتصفحات الحديثة",f8:"هيكلية موقع ميسرة",
+speed:"سهولة استخدام اختبار السرعة",speedText1:"تم تصميم اختبار السرعة ليكون سهلاً في الاستخدام.",speedText2:"تعرض النتائج بشكل واضح ومفهوم.",
+keyboard:"التنقل بلواح المفاتيح",keyboardText:"يدعم الموقع التنقل باستخدام لوحة المفاتيح:",tab:"للتنقل بين العناصر",shiftTab:"للرنوع للوراء",or:"أو",activate:"لتفعيل الأزرار والروابط",
+readers:"قارئات الشاشة",readersText1:"نهيكل الموقع ليتوافق مع برامج قراءة الشاشة.",readersText2:"نعمل على تحسين التسميات وعناصر التنقل.",
+mobile:"إمكانية الوصول عبر الهاتف",mobileText:"يتكيف الموقع تلقائياً مع الشاشات الصغيرة.",
+browser:"دعم المتصفحات",browserText:"ندعم أحدث إصدارات المتصفحات الشائعة.",
+continuous:"التحسين المستمر",continuousText:"إمكانية الوصول هي عملية مستمرة.",
+feedback:"الآراء واللاحظات",feedbackText:"إذا واجهتك أي مشكلة، يرجى التواصل معنا ووصف:",fb1:"الصفحة التي حدثت بها المشكلة",fb2:"ما الذي كنت تحاول القيام به",fb3:"ما الذي حدث بشكل خاطئ",fb4:"نوع الجهاز والمتصفح المستخدم",feedbackHelp:"تساعدنا ملاحظاتك على تحسين الموقع.",
+contact:"الاتصال",contactText:"للاستفسارات حول إمكانية الوصول:",emailLabel:"البريد الإلكتروني:",websiteLabel:"الموقع الإلكتروني:",accessibility:"إمكانية الوصول",privacy:"سياسة الخصوصية",terms:"شروط الاستخدام",dns:"عدم بيع معلوماتي",imprint:"بيانات النشر",rights:"جميع الحقوق محفوظة.",trademarks:"Fasqoo هي علامة تجارية."
 }
 };
 
-function applyLanguage(lang){
+function applyLanguage(lang) {
+  // 1. Hole das Übersetzungsobjekt oder verwende Englisch als Fallback
   const t = T[lang] || T.en;
+
+  // 2. Attribute für Sprache und Schriftrichtung festlegen (HTML Element)
   document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  
-  // Seitentitel korrekt aktualisieren
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+
+  // 3. Seitentitel aktualisieren
   document.title = t.title || T.en.title;
-  
-  // Alle Übersetzungskey-Elemente durchgehen
+
+  // 4. Alle HTML-Elemente mit [data-i18n] übersetzen
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    // Nutzt die Übersetzung der Zielsprache oder fällt auf Englisch zurück
-    const val = (t && t[key] !== undefined) ? t[key] : T.en[key];
-    if(val !== undefined) el.textContent = val;
+    const value = (t && t[key] !== undefined) ? t[key] : T.en[key];
+    if (value !== undefined) {
+      el.textContent = value;
+    }
   });
-  
+
+  // 5. Select-Menü synchronisieren
   const selectEl = document.getElementById("lang-select");
-  if(selectEl) selectEl.value = lang;
+  if (selectEl) {
+    selectEl.value = lang;
+  }
+
+  // 6. Sprache im Speicher sichern
   localStorage.setItem("fasqoo-language", lang);
 }
 
+// Event Listener für die Sprachauswahl aktivieren
 const selector = document.getElementById("lang-select");
-if(selector) {
-  selector.addEventListener("change", () => applyLanguage(selector.value));
+if (selector) {
+  selector.addEventListener("change", (e) => {
+    applyLanguage(e.target.value);
+  });
 }
 
-const saved = localStorage.getItem("fasqoo-language") || ((navigator.language || "en").slice(0, 2).toLowerCase());
-applyLanguage(saved);
+// Beim Laden der Seite Sprache auslesen und anwenden
+const savedLang = localStorage.getItem("fasqoo-language") || (navigator.language || "en").slice(0, 2).toLowerCase();
+applyLanguage(T[savedLang] ? savedLang : "en");
 </script>
+
 </body>
 </html>
