@@ -244,26 +244,34 @@ contact:"Kontakt",contactText:"Bei Fragen zur Barrierefreiheit, Feedback oder Un
 }
 };
 
-// For languages not fully customized above, use English as the stable fallback.
-// The selector still works and the page never redirects to missing folders.
-["fr","es","it","pt","nl","tr","sq","ar"].forEach(k => T[k] = {...T.en, title:T.en.title});
-
 function applyLanguage(lang){
-  const t=T[lang]||T.en;
-  document.documentElement.lang=lang;
-  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-  document.title=t.title;
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key=el.getAttribute("data-i18n");
-    if(t[key]!==undefined) el.textContent=t[key];
+  const t = T[lang] || T.en;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  
+  // Seitentitel korrekt aktualisieren
+  document.title = t.title || T.en.title;
+  
+  // Alle Übersetzungskey-Elemente durchgehen
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    // Nutzt die Übersetzung der Zielsprache oder fällt auf Englisch zurück
+    const val = (t && t[key] !== undefined) ? t[key] : T.en[key];
+    if(val !== undefined) el.textContent = val;
   });
-  document.getElementById("lang-select").value=lang;
-  localStorage.setItem("fasqoo-language",lang);
+  
+  const selectEl = document.getElementById("lang-select");
+  if(selectEl) selectEl.value = lang;
+  localStorage.setItem("fasqoo-language", lang);
 }
-const selector=document.getElementById("lang-select");
-selector.addEventListener("change",()=>applyLanguage(selector.value));
-const saved=localStorage.getItem("fasqoo-language") || ((navigator.language||"en").slice(0,2).toLowerCase());
-applyLanguage(T[saved]?saved:"en");
+
+const selector = document.getElementById("lang-select");
+if(selector) {
+  selector.addEventListener("change", () => applyLanguage(selector.value));
+}
+
+const saved = localStorage.getItem("fasqoo-language") || ((navigator.language || "en").slice(0, 2).toLowerCase());
+applyLanguage(saved);
 </script>
 </body>
 </html>
