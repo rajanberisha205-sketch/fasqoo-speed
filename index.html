@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -244,58 +245,9 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 .fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82;transition:opacity .2s ease}
 .fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
 @media (max-width:700px){.fasqoo-footer-links{flex-direction:column;gap:9px}}
-
-/* ============================================ */
-/* WERBEBANNER STYLES                          */
-/* ============================================ */
-.ad-top{display:flex;justify-content:center;align-items:center;margin:16px auto;min-height:90px;max-width:100%;overflow:hidden;}
-
-.ad-side{position:fixed;top:100px;z-index:500;min-height:600px;}
-.ad-side.left{left:10px;width:160px;}
-.ad-side.right{right:10px;width:468px;}
-
-/* Linker Sidebar-Banner nur auf großen Bildschirmen */
-@media (max-width:1500px){.ad-side.left{display:none;}}
-/* Rechter Banner (468x60) nur auf sehr großen Bildschirmen */
-@media (max-width:1780px){.ad-side.right{display:none;}}
-
-/* Auf Handy alles ausblenden */
-@media (max-width:768px){.ad-top,.ad-side,.ad-bottom{display:none !important;}}
 </style>
 </head>
 <body>
-
-<!-- ============================================ -->
-<!-- WERBEBANNER 3: RECHTS (468x60)              -->
-<!-- ============================================ -->
-<div class="ad-side right">
-  <script>
-    atOptions = {
-      'key' : '83fcafad122b52ba21ac28bb43e26f5c',
-      'format' : 'iframe',
-      'height' : 60,
-      'width' : 468,
-      'params' : {}
-    };
-  </script>
-  <script src="https://www.highrevenueformat.com/83fcafad122b52ba21ac28bb43e26f5c/invoke.js"></script>
-</div>
-
-<!-- ============================================ -->
-<!-- WERBEBANNER 2: LINKS (160x600)              -->
-<!-- ============================================ -->
-<div class="ad-side left">
-  <script>
-    atOptions = {
-      'key' : '82f4dc162703c8569f37d8920486bbbf',
-      'format' : 'iframe',
-      'height' : 600,
-      'width' : 160,
-      'params' : {}
-    };
-  </script>
-  <script src="https://www.highrevenueformat.com/82f4dc162703c8569f37d8920486bbbf/invoke.js"></script>
-</div>
 
 <header>
   <div class="wrap nav">
@@ -330,22 +282,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     </nav>
   </div>
 </header>
-
-<!-- ============================================ -->
-<!-- WERBEBANNER 1: UNTERM MENÜ (728x90)         -->
-<!-- ============================================ -->
-<div class="ad-top">
-  <script>
-    atOptions = {
-      'key' : 'd8a4bf9bc4c98da4c03e854cf1efd68c',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script src="https://www.highrevenueformat.com/d8a4bf9bc4c98da4c03e854cf1efd68c/invoke.js"></script>
-</div>
 
 <main>
   <div class="wrap">
