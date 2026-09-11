@@ -350,7 +350,7 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
         <div class="nav-links" id="navLinks">
             <a href="index.html" data-i18n="home">Startseite</a>
             <a href="faq.html" data-i18n="faq">FAQ</a>
-            <a href="subnet-calculator.html" id="navStatus">IT-Diagnose</a>
+            <a href="subnet-calculator.html" id="navStatus" data-i18n="networkStatus">IT-Diagnose</a>
             <a href="about.html" data-i18n="about">Über uns</a>
         </div>
         <div class="nav-actions">
@@ -610,19 +610,9 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-copy">
-      <div data-i18n="copyright">© 2026 Fasqoo. All Rights Reserved.</div>
-    </div>
-
-    <div class="footer-links">
-     <a href="/accessibility.html" id="ftAccess">Accessibility</a>
-<a href="/impressum.html" id="ftAccess">Impressum</a>
-<a href="/privacy-policy.html" id="ftPrivacy">Privacy Policy</a>
-<a href="/terms.html" id="ftTerms">Terms of Use</a>
-<a href="/do-not-sell.html" id="ftNoSell">Do Not Sell My Personal Info</a>
+    <div class="footer-inner">
+        <div>© 2026 Fasqoo. <span data-i18n="rights">Alle Rechte vorbehalten.</span></div>
     </div>
 </footer>
 
@@ -645,7 +635,7 @@ const translations = {
 de:{
 metaTitle:"Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime",
 metaDesc:"Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser. Realistische Netzwerk-Diagnose ohne Simulation.",
-home:"Startseite", faq:"FAQ", networkStatus:"Website-Status", about:"Über uns",
+home:"Startseite", faq:"FAQ", networkStatus:"IT-Diagnose", about:"Über uns",
 running:"MESSUNG LÄUFT...",
 pageTitle:"Fasqoo Website-Status",
 pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.",
@@ -931,7 +921,7 @@ httpResponse:"Respuesta HTTP", httpResponseDesc:"Último estado HTTP devuelto po
 httpsDesc:"Si esta página se ejecuta actualmente a través de una conexión cifrada.",
 networkApi:"API de Red del Navegador", networkApiDesc:"Información de conexión expuesta por el navegador — no todos los navegadores lo admiten.",
 networkProfile:"Perfil de Dispositivo y Conexión", networkProfileDesc:"Información técnica proporcionada por tu propio navegador.",
-connType:"Tipo de Conexión", downlink:"Downlink Estimado", rtt:"RTT del Navegador", saveData:"Ahorro de Datos",
+connType:"Tipo de Conexión", downlink:"Downlink Estimado", rtt:"RTT del navegador", saveData:"Ahorro de Datos",
 onlineStateLabel:"Estado en Línea", protocol:"Protocolo", browser:"Navegador", windowSize:"Tamaño de Ventana",
 problemTitle:"Hallazgos", problemDesc:"Solo lo que esta medición demuestra realmente — con explicación y próximos pasos.",
 testSuite:"Resumen de Pruebas", testSuiteDesc:"Resultados de pruebas técnicas de esta sesión del navegador.",
@@ -1545,172 +1535,173 @@ function setMainChecking(){
 function updateMainResult(result, history){
     const t = translations[currentLanguage] || translations.de;
     const pill = document.getElementById("mainStatusPill");
-    const big = document.getElementById("bigStatus");
+    pill.className = result.ok ? "status-pill" : "status-pill error";
+    document.getElementById("mainStatusText").textContent = result.ok ? t.statusReachable : t.statusFailed;
 
-    if(result.ok){
-        pill.className = "status-pill";
-        document.getElementById("mainStatusText").textContent = t.statusReachable;
-        big.className = "big-status";
-        big.textContent = "✓";
-        document.getElementById("checkTitle").textContent = t.checkTitleSuccess;
-        document.getElementById("checkSubtitle").textContent = "HTTP " + result.status + " • " + result.ms + " ms";
-    }else{
-        pill.className = "status-pill error";
-        document.getElementById("mainStatusText").textContent = t.statusFailed;
-        big.className = "big-status error";
-        big.textContent = "×";
-        document.getElementById("checkTitle").textContent = t.checkTitleFail;
-        document.getElementById("checkSubtitle").textContent = result.error || t.statusFailed;
-    }
+    const big = document.getElementById("bigStatus");
+    big.className = result.ok ? "big-status" : "big-status error";
+    big.textContent = result.ok ? "✓" : "!";
+
+    document.getElementById("checkTitle").textContent = result.ok ? t.checkTitleSuccess : t.checkTitleFail;
+    document.getElementById("checkSubtitle").textContent = (result.error ? result.error + " — " : "") + t.realMeasurement;
 
     document.getElementById("responseValue").textContent = result.ms + " ms";
-    document.getElementById("lastChecked").textContent = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit", second:"2-digit"});
-    document.getElementById("lastCheckedDate").textContent = new Date().toLocaleDateString();
+    if(result.ok){
+        document.getElementById("lastChecked").textContent = "Jetzt";
+        document.getElementById("lastCheckedDate").textContent = new Date().toLocaleTimeString();
+    }
 
-    const total = history.length;
-    const good = history.filter(x => x.success).length;
-    document.getElementById("uptimeValue").textContent = total ? ((good/total)*100).toFixed(2) + "%" : "—";
-    document.getElementById("checksValue").textContent = total;
-
-    drawChart(history);
+    updateOverviewStats(history);
+    renderChart(history);
     updateIncident(history);
+    generateReport();
 }
 
-/* INCIDENTS */
-function updateIncident(history){
-    const t = translations[currentLanguage] || translations.de;
-    const failures = history.filter(x => !x.success).length;
-    if(failures === 0){
-        document.getElementById("incidentIcon").textContent = "✓";
-        document.getElementById("incidentTitle").textContent = t.noIncidentsTitle;
-        document.getElementById("incidentText").textContent = t.noIncidentsText;
-    }else{
-        document.getElementById("incidentIcon").textContent = "!";
-        document.getElementById("incidentTitle").textContent = failures + " " + t.hasIncidentsTitle;
-        document.getElementById("incidentText").textContent = t.hasIncidentsText;
-    }
+function updateOverviewStats(history){
+    const total = history.length;
+    if(!total) return;
+    const successCount = history.filter(x => x.success).length;
+    const uptime = Math.round((successCount/total)*100);
+
+    document.getElementById("uptimeValue").textContent = uptime + "%";
+    document.getElementById("checksValue").textContent = total;
 }
 
 /* CHART */
-function drawChart(history){
-    const t = translations[currentLanguage] || translations.de;
+function renderChart(history){
     const chart = document.getElementById("chart");
-    const info = document.getElementById("chartInfo");
     chart.innerHTML = "";
-
-    const measurements = history.filter(x => Number.isFinite(x.responseMs));
-    if(!measurements.length){
-        chart.innerHTML = '<div class="no-data">' + t.noData + '</div>';
-        info.textContent = "0";
+    if(!history.length){
+        chart.innerHTML = '<div class="no-data" data-i18n="noData">Noch keine Messungen vorhanden.</div>';
+        document.getElementById("chartInfo").textContent = "—";
         return;
     }
 
-    const max = Math.max(...measurements.map(x => x.responseMs), 1);
-    measurements.forEach(item => {
+    const maxMs = Math.max(...history.map(x => x.responseMs), 100);
+    history.slice(-30).forEach(item => {
         const bar = document.createElement("div");
         bar.className = "bar";
-        const height = Math.max(5, (item.responseMs/max)*100);
-        bar.style.height = height + "%";
-        bar.title = new Date(item.timestamp).toLocaleTimeString() + " — " + item.responseMs + " ms";
-        if(!item.success) bar.style.opacity = ".35";
+        const heightPct = Math.max(8, Math.min(100, Math.round((item.responseMs / maxMs) * 100)));
+        bar.style.height = heightPct + "%";
+        bar.style.background = item.success ? "var(--primary)" : "var(--red)";
+        bar.title = new Date(item.timestamp).toLocaleTimeString() + " - " + item.responseMs + " ms";
         chart.appendChild(bar);
     });
 
-    info.textContent = measurements.length;
+    document.getElementById("chartInfo").textContent = history.length + " Prüfungen";
+}
+
+/* INCIDENT */
+function updateIncident(history){
+    const t = translations[currentLanguage] || translations.de;
+    const failed = history.filter(x => !x.success);
+    const icon = document.getElementById("incidentIcon");
+    const title = document.getElementById("incidentTitle");
+    const text = document.getElementById("incidentText");
+
+    if(!failed.length){
+        icon.className = "incident-icon";
+        icon.textContent = "✓";
+        title.textContent = t.noIncidentsTitle;
+        text.textContent = t.noIncidentsText;
+    }else{
+        icon.className = "incident-icon error";
+        icon.textContent = "!";
+        title.textContent = failed.length + " " + t.hasIncidentsTitle;
+        text.textContent = t.hasIncidentsText;
+    }
 }
 
 /* REPORT */
 function generateReport(){
     const t = translations[currentLanguage] || translations.de;
     const d = latestDiagnostics;
-    const lines = [
-        "FASQOO STATUS REPORT",
-        "====================",
-        "Timestamp: " + new Date().toISOString(),
-        "URL: " + window.location.href,
-        "",
-        "METRICS",
-        "Score: " + (d.score === null ? "N/A" : d.score + "/100"),
-        "Latency: " + (d.latency === null ? "N/A" : d.latency + " ms"),
-        "Jitter: " + (d.jitter === null ? "N/A" : d.jitter + " ms"),
-        "Failure Rate: " + (d.failureRate === null ? "N/A" : d.failureRate + "%"),
-        "HTTP Status: " + (d.httpStatus || "N/A"),
-        "",
-        "PROFILE",
-        "Online: " + (navigator.onLine ? t.online : t.offline),
-        "Protocol: " + location.protocol,
-        "Browser: " + detectBrowser(),
-        "Window: " + window.innerWidth + "x" + window.innerHeight
-    ];
+    const history = getHistory();
+    const successCount = history.filter(x => x.success).length;
+    const uptime = history.length ? Math.round((successCount/history.length)*100) : 100;
 
-    document.getElementById("reportPreview").value = lines.join("\n");
+    const report = [
+        "=== FASQOO WEBSITE STATUS REPORT ===",
+        "Time: " + new Date().toISOString(),
+        "Target: " + TARGET_URL,
+        "Browser: " + detectBrowser(),
+        "Online: " + (navigator.onLine ? "Yes" : "No"),
+        "HTTPS: " + (location.protocol === "https:" ? "Yes" : "No"),
+        "Score: " + (d.score !== null ? d.score + "/100" : "N/A"),
+        "Latency: " + (d.latency !== null ? d.latency + " ms" : "N/A"),
+        "Jitter: " + (d.jitter !== null ? d.jitter + " ms" : "N/A"),
+        "Failure Rate: " + (d.failureRate !== null ? d.failureRate + "%" : "N/A"),
+        "Local Uptime (24h): " + uptime + "% (" + history.length + " checks)",
+        "====================================="
+    ].join("\n");
+
+    document.getElementById("reportPreview").value = report;
 }
 
-document.getElementById("copyReportBtn").addEventListener("click", async function(){
+document.getElementById("copyReportBtn").addEventListener("click", function(){
     const t = translations[currentLanguage] || translations.de;
-    const text = document.getElementById("reportPreview").value;
-    try{
-        await navigator.clipboard.writeText(text);
-        this.textContent = t.copied;
-        setTimeout(() => this.textContent = t.copyReport, 1500);
-    }catch(e){
-        alert("Error copying text");
-    }
+    const ta = document.getElementById("reportPreview");
+    ta.select();
+    navigator.clipboard.writeText(ta.value).then(() => {
+        const btn = this;
+        const old = btn.textContent;
+        btn.textContent = t.copied || "Kopiert";
+        setTimeout(() => btn.textContent = old, 1500);
+    });
 });
 
 document.getElementById("downloadReportBtn").addEventListener("click", function(){
-    const text = document.getElementById("reportPreview").value;
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([document.getElementById("reportPreview").value], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "fasqoo-status-" + new Date().toISOString().replace(/[:.]/g,"-") + ".txt";
+    a.download = "fasqoo-status-report-" + Date.now() + ".txt";
     document.body.appendChild(a);
     a.click();
-    a.remove();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
 });
 
-/* BROWSER DETECTION */
+/* HELPERS */
 function detectBrowser(){
     const ua = navigator.userAgent;
-    if(/Edg/i.test(ua)) return "Microsoft Edge";
-    if(/Chrome/i.test(ua)) return "Google Chrome";
-    if(/Firefox/i.test(ua)) return "Mozilla Firefox";
-    if(/Safari/i.test(ua) && !/Chrome/i.test(ua)) return "Apple Safari";
-    return "Browser";
+    if(ua.includes("Firefox")) return "Firefox";
+    if(ua.includes("SamsungBrowser")) return "Samsung Browser";
+    if(ua.includes("Opera") || ua.includes("OPR")) return "Opera";
+    if(ua.includes("Trident")) return "Internet Explorer";
+    if(ua.includes("Edge")) return "Edge";
+    if(ua.includes("Chrome")) return "Chrome";
+    if(ua.includes("Safari")) return "Safari";
+    return "Unknown Browser";
 }
 
-/* HELPERS */
+function escapeHTML(str){
+    return String(str).replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+}
+
 function sleep(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
-function escapeHTML(value){
-    return String(value)
-        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
 
-/* ONLINE / OFFLINE EVENTS */
-window.addEventListener("online", function(){
-    updateNetworkProfile();
-    updateHealthScore();
-});
-window.addEventListener("offline", function(){
-    updateNetworkProfile();
-    updateHealthScore();
-    renderProblems();
+document.getElementById("checkBtn").addEventListener("click", function(){
+    runFullDiagnosis();
 });
 
-/* INIT */
-applyTheme();
-applyLanguage(currentLanguage);
-checkFasqoo();
-runFullDiagnosis();
-
-setInterval(checkFasqoo, CONFIG.CHECK_INTERVAL);
-setInterval(updateNetworkProfile, 5000);
-setInterval(generateReport, 5000);
-
-document.getElementById("checkBtn").addEventListener("click", runFullDiagnosis);
+/* INITIALIZE */
+window.addEventListener("DOMContentLoaded", () => {
+    applyTheme();
+    applyLanguage(currentLanguage);
+    
+    const history = getHistory();
+    if(history.length > 0){
+        renderChart(history);
+        updateOverviewStats(history);
+        updateIncident(history);
+    }
+    
+    runFullDiagnosis();
+    setInterval(checkFasqoo, CONFIG.CHECK_INTERVAL);
+});
 </script>
 
 </body>
