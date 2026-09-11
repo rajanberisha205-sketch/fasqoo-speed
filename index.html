@@ -67,8 +67,8 @@ header{
 }
 
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;}
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.brandmark{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;object-fit:contain;}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;padding-left:28px;}
+.brandmark{width:38px;height:38px;border-radius:50%;display:block;object-fit:contain;}
 .brandname{font-size:21px;letter-spacing:-.4px;font-weight:700;}
 
 /* MENÜ DESIGN & DROPDOWN FOR MOBILE */
@@ -215,6 +215,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 /* MOBILER HAMBURGER DROPDOWN LOGIK */
 @media(max-width:760px){
   .menu-toggle{display:block;}
+  .brand{padding-left:0;}
   .main-menu{
     display:none;
     flex-direction:column;
