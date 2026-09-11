@@ -9,356 +9,510 @@
     <meta name="description" content="Fasqoo Privacy Policy – Learn how Fasqoo processes information when you use the Fasqoo Internet Speed Test.">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #000000;
-            color: #ffffff;
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px 50px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: opacity 0.2s ease;
-        }
-
-        .back-link:hover {
-            opacity: 0.7;
-        }
-
-        .card {
-            background: #111111;
-            padding: 45px;
-            border-radius: 18px;
-            border: 1px solid #242424;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            margin-top: 0;
-            font-size: 36px;
-            line-height: 1.2;
-            color: #ffffff;
-        }
-
-        h2 {
-            margin-top: 35px;
-            margin-bottom: 12px;
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        p {
-            margin: 12px 0;
-            font-size: 16px;
-            color: #d1d5db;
-        }
-
-        ul {
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            color: #d1d5db;
-        }
-
-        .updated {
-            color: #888888;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .contact {
-            background: #181818;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #292929;
-            margin-top: 15px;
-        }
-
-        .contact strong {
-            color: #ffffff;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777777;
-            font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 15px 40px;
-            }
-
-            .card {
-                padding: 25px 20px;
-                border-radius: 14px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 21px;
-            }
-
-            p,
-            li {
-                font-size: 15px;
-            }
-        }
-    </style>
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-color: #38bdf8;
+  --border-color: #334155;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+a { color: var(--accent-color); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  background-color: rgba(15, 23, 42, .95);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+header > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { display:flex; align-items:center; gap:.5rem; font-weight:bold; font-size:1.25rem; }
+nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+nav a { color:var(--text-color); }
+select {
+  background:var(--card-bg);
+  color:var(--text-color);
+  border:1px solid var(--border-color);
+  padding:.4rem .8rem;
+  border-radius:6px;
+  cursor:pointer;
+}
+main { max-width:900px; margin:2rem auto; padding:0 1.5rem; }
+.content-box {
+  background-color:var(--card-bg);
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:2.5rem;
+  box-shadow:0 10px 25px -5px rgba(0,0,0,.3);
+}
+h1 { margin-top:0; color:#fff; border-bottom:1px solid var(--border-color); padding-bottom:.75rem; }
+h2 { color:var(--accent-color); margin-top:1.8rem; font-size:1.25rem; }
+p, li { color:var(--text-muted); }
+li { margin-bottom:.5rem; }
+.contact {
+  background: rgba(15,23,42,.45);
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:1rem 1.25rem;
+}
+footer {
+  border-top:1px solid var(--border-color);
+  margin-top:4rem;
+  padding:2rem;
+  background-color:#0b1120;
+}
+footer > div {
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.footer-copy { color:var(--text-muted); font-size:.875rem; }
+footer nav { display:flex; gap:1.2rem; }
+footer nav a { color:var(--text-muted); font-size:.9rem; }
+@media(max-width:800px) {
+  header > div { flex-direction:column; gap:1rem; align-items:flex-start; }
+  nav { gap:.8rem; }
+}
+@media(max-width:600px) {
+  header { padding:1rem; }
+  main { padding:0 1rem; }
+  .content-box { padding:1.5rem; }
+}
+</style>
 </head>
 
 <body>
+<header>
+  <div>
+    <div class="logo"><div>⌁</div><div>Fasqoo</div></div>
+    <nav aria-label="Main navigation">
+      <a href="/" data-i18n="home">Home</a>
+      <a href="/faq.html" data-i18n="faq">FAQ</a>
+      <a href="/network-status.html" data-i18n="network">Network Status</a>
+      <a href="/subnet-calculator.html" data-i18n="diagnostics">IT Diagnostics</a>
+      <a href="/about.html" data-i18n="about">About Us</a>
+      <select id="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="nl">Nederlands</option>
+        <option value="tr">Türkçe</option>
+        <option value="sq">Shqip</option>
+        <option value="ar">العربية</option>
+      </select>
+    </nav>
+  </div>
+</header>
 
-<main class="container">
+<main>
+  <div class="content-box">
+    <h1 data-i18n="h1">Privacy Policy – Fasqoo</h1>
+    <p><strong data-i18n="updatedLabel">Last updated:</strong> September 2026</p>
 
-    <a href="/" class="back-link">← Back to Speed Test</a>
+    <p data-i18n="intro">Fasqoo respects your privacy. This Privacy Policy explains what information may be processed when you use the Fasqoo Internet Speed Test and how that information is handled.</p>
 
-    <article class="card">
+    <h2 data-i18n="sec1Title">1. Information We Process</h2>
+    <p data-i18n="sec1Text">When you use Fasqoo, technical information may be processed to perform and improve the speed test. This may include:</p>
+    <ul>
+      <li data-i18n="p1">IP address</li>
+      <li data-i18n="p2">Internet Service Provider (ISP)</li>
+      <li data-i18n="p3">Approximate geographic location</li>
+      <li data-i18n="p4">Network and connection information</li>
+      <li data-i18n="p5">Download speed</li>
+      <li data-i18n="p6">Upload speed</li>
+      <li data-i18n="p7">Ping and latency</li>
+      <li data-i18n="p8">Jitter</li>
+      <li data-i18n="p9">Device and browser information</li>
+      <li data-i18n="p10">Date and time of the speed test</li>
+    </ul>
+    <p data-i18n="sec1Footer">The speed test requires certain technical information to function correctly.</p>
 
-        <h1>Privacy Policy – Fasqoo</h1>
+    <h2 data-i18n="sec2Title">2. IP Address and Location</h2>
+    <p data-i18n="sec2Text1">Fasqoo may use your public IP address to determine information such as your Internet Service Provider, network provider, country, region or approximate location.</p>
+    <p data-i18n="sec2Text2">Fasqoo does not intentionally use your IP address to determine your exact home address.</p>
 
-        <div class="updated">
-            Last updated: September 2026
-        </div>
+    <h2 data-i18n="sec3Title">3. Speed Test Data</h2>
+    <p data-i18n="sec3Text1">During a speed test, Fasqoo measures the performance of your Internet connection, including download speed, upload speed, ping and jitter.</p>
+    <p data-i18n="sec3Text2">These measurements are used to display the results of your test and may be used to improve the reliability and performance of the Fasqoo service.</p>
 
-        <p>
-            Fasqoo respects your privacy. This Privacy Policy explains what
-            information may be processed when you use the Fasqoo Internet Speed
-            Test and how that information is handled.
-        </p>
+    <h2 data-i18n="sec4Title">4. Cookies and Local Storage</h2>
+    <p data-i18n="sec4Text1">Fasqoo may use cookies or browser local storage for technical and functional purposes.</p>
+    <p data-i18n="sec4Text2">This may include storing:</p>
+    <ul>
+      <li data-i18n="c1">Language preferences</li>
+      <li data-i18n="c2">Dark or light mode preferences</li>
+      <li data-i18n="c3">Speed test settings</li>
+      <li data-i18n="c4">Test history</li>
+      <li data-i18n="c5">Other website preferences</li>
+    </ul>
+    <p data-i18n="sec4Footer">You can manage or delete cookies and local storage through your browser settings.</p>
 
-        <h2>1. Information We Process</h2>
+    <h2 data-i18n="sec5Title">5. Advertising</h2>
+    <p data-i18n="sec5Text1">Fasqoo may display advertising provided by third-party advertising partners.</p>
+    <p data-i18n="sec5Text2">Advertising providers may use cookies, similar technologies or other information to provide and measure advertisements.</p>
+    <p data-i18n="sec5Text3">Where legally required, Fasqoo may request your consent before using non-essential advertising or tracking technologies.</p>
 
-        <p>
-            When you use Fasqoo, technical information may be processed to
-            perform and improve the speed test. This may include:
-        </p>
+    <h2 data-i18n="sec6Title">6. Analytics</h2>
+    <p data-i18n="sec6Text1">Fasqoo may use analytics services to understand how visitors use the website and to identify technical problems.</p>
+    <p data-i18n="sec6Text2">Analytics information may include browser type, device information, pages visited, approximate location and interactions with the website.</p>
 
-        <ul>
-            <li>IP address</li>
-            <li>Internet Service Provider (ISP)</li>
-            <li>Approximate geographic location</li>
-            <li>Network and connection information</li>
-            <li>Download speed</li>
-            <li>Upload speed</li>
-            <li>Ping and latency</li>
-            <li>Jitter</li>
-            <li>Device and browser information</li>
-            <li>Date and time of the speed test</li>
-        </ul>
+    <h2 data-i18n="sec7Title">7. Third-Party Services</h2>
+    <p data-i18n="sec7Text1">Fasqoo may use third-party services to provide technical functionality, including IP information, network information, speed-test infrastructure, analytics or advertising.</p>
+    <p data-i18n="sec7Text2">These third-party providers may process information according to their own privacy policies.</p>
 
-        <p>
-            The speed test requires certain technical information to function
-            correctly.
-        </p>
+    <h2 data-i18n="sec8Title">8. Data Retention</h2>
+    <p data-i18n="sec8Text1">Fasqoo does not intend to retain personal information for longer than necessary for the purposes described in this Privacy Policy.</p>
+    <p data-i18n="sec8Text2">Where information is stored, appropriate measures may be used to protect it against unauthorized access or misuse.</p>
 
-        <h2>2. IP Address and Location</h2>
+    <h2 data-i18n="sec9Title">9. Data Security</h2>
+    <p data-i18n="sec9Text1">Fasqoo takes reasonable technical and organizational measures to protect information processed through the website.</p>
+    <p data-i18n="sec9Text2">However, no Internet service can guarantee complete security of data transmitted over the Internet.</p>
 
-        <p>
-            Fasqoo may use your public IP address to determine information such
-            as your Internet Service Provider, network provider, country, region
-            or approximate location.
-        </p>
+    <h2 data-i18n="sec10Title">10. Your Privacy Rights</h2>
+    <p data-i18n="sec10Text1">Depending on your country or region, you may have rights concerning your personal information, including the right to:</p>
+    <ul>
+      <li data-i18n="r1">Request access to your personal information</li>
+      <li data-i18n="r2">Request correction of inaccurate information</li>
+      <li data-i18n="r3">Request deletion of personal information</li>
+      <li data-i18n="r4">Object to certain processing</li>
+      <li data-i18n="r5">Request restriction of processing</li>
+      <li data-i18n="r6">Withdraw consent where processing is based on consent</li>
+    </ul>
+    <p data-i18n="sec10Footer">To exercise applicable rights, please contact Fasqoo using the contact information provided on the website.</p>
 
-        <p>
-            Fasqoo does not intentionally use your IP address to determine your
-            exact home address.
-        </p>
+    <h2 data-i18n="sec11Title">11. Children's Privacy</h2>
+    <p data-i18n="sec11Text">Fasqoo is not specifically directed at children. We do not knowingly collect personal information from children for purposes that are not permitted by applicable law.</p>
 
-        <h2>3. Speed Test Data</h2>
+    <h2 data-i18n="sec12Title">12. Changes to This Privacy Policy</h2>
+    <p data-i18n="sec12Text1">Fasqoo may update this Privacy Policy from time to time to reflect changes to the website, technology, services or applicable legal requirements.</p>
+    <p data-i18n="sec12Text2">The updated version will be published on this page with a new revision date.</p>
 
-        <p>
-            During a speed test, Fasqoo measures the performance of your Internet
-            connection, including download speed, upload speed, ping and jitter.
-        </p>
+    <h2 data-i18n="sec13Title">13. Contact</h2>
+    <p data-i18n="sec13Text">If you have questions about this Privacy Policy or the processing of information by Fasqoo, please contact us through the contact information provided on the Fasqoo website.</p>
 
-        <p>
-            These measurements are used to display the results of your test and
-            may be used to improve the reliability and performance of the Fasqoo
-            service.
-        </p>
-
-        <h2>4. Cookies and Local Storage</h2>
-
-        <p>
-            Fasqoo may use cookies or browser local storage for technical and
-            functional purposes.
-        </p>
-
-        <p>
-            This may include storing:
-        </p>
-
-        <ul>
-            <li>Language preferences</li>
-            <li>Dark or light mode preferences</li>
-            <li>Speed test settings</li>
-            <li>Test history</li>
-            <li>Other website preferences</li>
-        </ul>
-
-        <p>
-            You can manage or delete cookies and local storage through your
-            browser settings.
-        </p>
-
-        <h2>5. Advertising</h2>
-
-        <p>
-            Fasqoo may display advertising provided by third-party advertising
-            partners.
-        </p>
-
-        <p>
-            Advertising providers may use cookies, similar technologies or other
-            information to provide and measure advertisements.
-        </p>
-
-        <p>
-            Where legally required, Fasqoo may request your consent before using
-            non-essential advertising or tracking technologies.
-        </p>
-
-        <h2>6. Analytics</h2>
-
-        <p>
-            Fasqoo may use analytics services to understand how visitors use the
-            website and to identify technical problems.
-        </p>
-
-        <p>
-            Analytics information may include browser type, device information,
-            pages visited, approximate location and interactions with the website.
-        </p>
-
-        <h2>7. Third-Party Services</h2>
-
-        <p>
-            Fasqoo may use third-party services to provide technical functionality,
-            including IP information, network information, speed-test
-            infrastructure, analytics or advertising.
-        </p>
-
-        <p>
-            These third-party providers may process information according to
-            their own privacy policies.
-        </p>
-
-        <h2>8. Data Retention</h2>
-
-        <p>
-            Fasqoo does not intend to retain personal information for longer than
-            necessary for the purposes described in this Privacy Policy.
-        </p>
-
-        <p>
-            Where information is stored, appropriate measures may be used to
-            protect it against unauthorized access or misuse.
-        </p>
-
-        <h2>9. Data Security</h2>
-
-        <p>
-            Fasqoo takes reasonable technical and organizational measures to
-            protect information processed through the website.
-        </p>
-
-        <p>
-            However, no Internet service can guarantee complete security of data
-            transmitted over the Internet.
-        </p>
-
-        <h2>10. Your Privacy Rights</h2>
-
-        <p>
-            Depending on your country or region, you may have rights concerning
-            your personal information, including the right to:
-        </p>
-
-        <ul>
-            <li>Request access to your personal information</li>
-            <li>Request correction of inaccurate information</li>
-            <li>Request deletion of personal information</li>
-            <li>Object to certain processing</li>
-            <li>Request restriction of processing</li>
-            <li>Withdraw consent where processing is based on consent</li>
-        </ul>
-
-        <p>
-            To exercise applicable rights, please contact Fasqoo using the
-            contact information provided on the website.
-        </p>
-
-        <h2>11. Children's Privacy</h2>
-
-        <p>
-            Fasqoo is not specifically directed at children. We do not knowingly
-            collect personal information from children for purposes that are not
-            permitted by applicable law.
-        </p>
-
-        <h2>12. Changes to This Privacy Policy</h2>
-
-        <p>
-            Fasqoo may update this Privacy Policy from time to time to reflect
-            changes to the website, technology, services or applicable legal
-            requirements.
-        </p>
-
-        <p>
-            The updated version will be published on this page with a new
-            revision date.
-        </p>
-
-        <h2>13. Contact</h2>
-
-        <p>
-            If you have questions about this Privacy Policy or the processing of
-            information by Fasqoo, please contact us through the contact
-            information provided on the Fasqoo website.
-        </p>
-
-        <div class="contact">
-
-            <p>
-                <strong>Fasqoo™</strong>
-            </p>
-
-            <p>
-                <strong>Professional Internet Speed Test</strong>
-            </p>
-
-        </div>
-
-    </article>
-
-    <footer>
-        © 2026 Fasqoo. All Rights Reserved.
-    </footer>
-
+    <div class="contact">
+      <p><strong>Fasqoo™</strong></p>
+      <p><strong>Professional Internet Speed Test</strong></p>
+    </div>
+  </div>
 </main>
 
+<footer>
+  <div>
+    <div class="footer-copy">
+      <div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
+      <div data-i18n="trademarks">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/accessibility.html" data-i18n="accessibility">Accessibility</a>
+      <a href="/privacy-policy.html" data-i18n="privacy">Privacy Policy</a>
+      <a href="/terms.html" data-i18n="terms">Terms of Use</a>
+      <a href="/do-not-sell.html" data-i18n="dns">Do Not Sell My Info</a>
+      <a href="/impressum.html" data-i18n="imprint">Imprint</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const T = {
+en:{
+title:"Privacy Policy – Fasqoo",home:"Home",faq:"FAQ",network:"Network Status",diagnostics:"IT Diagnostics",about:"About Us",
+h1:"Privacy Policy – Fasqoo",updatedLabel:"Last updated:",intro:"Fasqoo respects your privacy. This Privacy Policy explains what information may be processed when you use the Fasqoo Internet Speed Test and how that information is handled.",
+sec1Title:"1. Information We Process",sec1Text:"When you use Fasqoo, technical information may be processed to perform and improve the speed test. This may include:",
+p1:"IP address",p2:"Internet Service Provider (ISP)",p3:"Approximate geographic location",p4:"Network and connection information",p5:"Download speed",p6:"Upload speed",p7:"Ping and latency",p8:"Jitter",p9:"Device and browser information",p10:"Date and time of the speed test",
+sec1Footer:"The speed test requires certain technical information to function correctly.",
+sec2Title:"2. IP Address and Location",sec2Text1:"Fasqoo may use your public IP address to determine information such as your Internet Service Provider, network provider, country, region or approximate location.",sec2Text2:"Fasqoo does not intentionally use your IP address to determine your exact home address.",
+sec3Title:"3. Speed Test Data",sec3Text1:"During a speed test, Fasqoo measures the performance of your Internet connection, including download speed, upload speed, ping and jitter.",sec3Text2:"These measurements are used to display the results of your test and may be used to improve the reliability and performance of the Fasqoo service.",
+sec4Title:"4. Cookies and Local Storage",sec4Text1:"Fasqoo may use cookies or browser local storage for technical and functional purposes.",sec4Text2:"This may include storing:",
+c1:"Language preferences",c2:"Dark or light mode preferences",c3:"Speed test settings",c4:"Test history",c5:"Other website preferences",
+sec4Footer:"You can manage or delete cookies and local storage through your browser settings.",
+sec5Title:"5. Advertising",sec5Text1:"Fasqoo may display advertising provided by third-party advertising partners.",sec5Text2:"Advertising providers may use cookies, similar technologies or other information to provide and measure advertisements.",sec5Text3:"Where legally required, Fasqoo may request your consent before using non-essential advertising or tracking technologies.",
+sec6Title:"6. Analytics",sec6Text1:"Fasqoo may use analytics services to understand how visitors use the website and to identify technical problems.",sec6Text2:"Analytics information may include browser type, device information, pages visited, approximate location and interactions with the website.",
+sec7Title:"7. Third-Party Services",sec7Text1:"Fasqoo may use third-party services to provide technical functionality, including IP information, network information, speed-test infrastructure, analytics or advertising.",sec7Text2:"These third-party providers may process information according to their own privacy policies.",
+sec8Title:"8. Data Retention",sec8Text1:"Fasqoo does not intend to retain personal information for longer than necessary for the purposes described in this Privacy Policy.",sec8Text2:"Where information is stored, appropriate measures may be used to protect it against unauthorized access or misuse.",
+sec9Title:"9. Data Security",sec9Text1:"Fasqoo takes reasonable technical and organizational measures to protect information processed through the website.",sec9Text2:"However, no Internet service can guarantee complete security of data transmitted over the Internet.",
+sec10Title:"10. Your Privacy Rights",sec10Text1:"Depending on your country or region, you may have rights concerning your personal information, including the right to:",
+r1:"Request access to your personal information",r2:"Request correction of inaccurate information",r3:"Request deletion of personal information",r4:"Object to certain processing",r5:"Request restriction of processing",r6:"Withdraw consent where processing is based on consent",
+sec10Footer:"To exercise applicable rights, please contact Fasqoo using the contact information provided on the website.",
+sec11Title:"11. Children's Privacy",sec11Text:"Fasqoo is not specifically directed at children. We do not knowingly collect personal information from children for purposes that are not permitted by applicable law.",
+sec12Title:"12. Changes to This Privacy Policy",sec12Text1:"Fasqoo may update this Privacy Policy from time to time to reflect changes to the website, technology, services or applicable legal requirements.",sec12Text2:"The updated version will be published on this page with a new revision date.",
+sec13Title:"13. Contact",sec13Text:"If you have questions about this Privacy Policy or the processing of information by Fasqoo, please contact us through the contact information provided on the Fasqoo website.",
+accessibility:"Accessibility",privacy:"Privacy Policy",terms:"Terms of Use",dns:"Do Not Sell My Info",imprint:"Imprint",rights:"All rights reserved.",trademarks:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo."
+},
+de:{
+title:"Datenschutzerklärung – Fasqoo",home:"Startseite",faq:"FAQ",network:"Netzwerkstatus",diagnostics:"IT-Diagnose",about:"Über uns",
+h1:"Datenschutzerklärung – Fasqoo",updatedLabel:"Zuletzt aktualisiert:",intro:"Fasqoo respektiert Ihre Privatsphäre. Diese Datenschutzerklärung erläutert, welche Informationen verarbeitet werden können, wenn Sie den Fasqoo Internet Speed Test nutzen, und wie diese Informationen behandelt werden.",
+sec1Title:"1. Informationen, die wir verarbeiten",sec1Text:"Wenn Sie Fasqoo nutzen, können technische Informationen verarbeitet werden, um den Geschwindigkeits-Test durchzuführen und zu verbessern. Dazu gehören unter anderem:",
+p1:"IP-Adresse",p2:"Internet-Anbieter (ISP)",p3:"Ungefährer geografischer Standort",p4:"Netzwerk- und Verbindungsinformationen",p5:"Download-Geschwindigkeit",p6:"Upload-Geschwindigkeit",p7:"Ping und Latenz",p8:"Jitter",p9:"Geräte- und Browser-Informationen",p10:"Datum und Uhrzeit des Speedtests",
+sec1Footer:"Der Speedtest benötigt bestimmte technische Informationen, um ordnungsgemäß zu funktionieren.",
+sec2Title:"2. IP-Adresse und Standort",sec2Text1:"Fasqoo kann Ihre öffentliche IP-Adresse verwenden, um Informationen wie Ihren Internet-Anbieter, Netzwerkanbieter, Land, Region oder den ungefähren Standort zu ermitteln.",sec2Text2:"Fasqoo verwendet Ihre IP-Adresse nicht vorsätzlich, um Ihre genaue Wohnadresse zu ermitteln.",
+sec3Title:"3. Speedtest-Daten",sec3Text1:"Während eines Speedtests misst Fasqoo die Leistung Ihrer Internetverbindung, einschließlich Download-, Upload-Geschwindigkeit, Ping und Jitter.",sec3Text2:"Diese Messungen werden verwendet, um die Ergebnisse Ihres Tests anzuzeigen, und können verwendet werden, um die Zuverlässigkeit und Leistung des Fasqoo-Dienstes zu verbessern.",
+sec4Title:"4. Cookies und lokaler Speicher",sec4Text1:"Fasqoo kann Cookies oder den lokalen Speicher des Browsers für technische und funktionale Zwecke verwenden.",sec4Text2:"Dies kann das Speichern folgender Daten umfassen:",
+c1:"Spracheinstellungen",c2:"Dunkel- oder Hellmodus-Einstellungen",c3:"Speedtest-Einstellungen",c4:"Testverlauf",c5:"Andere Website-Einstellungen",
+sec4Footer:"Sie können Cookies und den lokalen Speicher über Ihre Browsereinstellungen verwalten oder löschen.",
+sec5Title:"5. Werbung",sec5Text1:"Fasqoo kann Werbung anzeigen, die von Drittanbietern für Werbung bereitgestellt wird.",sec5Text2:"Werbeanbieter können Cookies, ähnliche Technologien oder andere Informationen verwenden, um Werbeanzeigen bereitzustellen und zu messen.",sec5Text3:"Sofern gesetzlich vorgeschrieben, holt Fasqoo Ihre Einwilligung ein, bevor nicht essenzielle Werbe- oder Tracking-Technologien verwendet werden.",
+sec6Title:"6. Analysen",sec6Text1:"Fasqoo kann Analysedienste nutzen, um zu verstehen, wie Besucher die Website nutzen, und um technische Probleme zu identifizieren.",sec6Text2:"Analyseinformationen können Browsertyp, Geräteinformationen, besuchte Seiten, ungefähren Standort und Interaktionen mit der Website umfassen.",
+sec7Title:"7. Dienste von Drittanbietern",sec7Text1:"Fasqoo kann Dienste von Drittanbietern nutzen, um technische Funktionalitäten bereitzustellen, einschließlich IP-Informationen, Netzwerkinformationen, Speedtest-Infrastruktur, Analysen oder Werbung.",sec7Text2:"Diese Drittanbieter können Informationen gemäß ihren eigenen Datenschutzrichtlinien verarbeiten.",
+sec8Title:"8. Datenspeicherung",sec8Text1:"Fasqoo beabsichtigt nicht, personenbezogene Daten länger als für die in dieser Datenschutzerklärung beschriebenen Zwecke erforderlich aufzubewahren.",sec8Text2:"Wo Informationen gespeichert werden, werden angemessene Maßnahmen ergriffen, um sie vor unbefugtem Zugriff oder Missbrauch zu schützen.",
+sec9Title:"9. Datensicherheit",sec9Text1:"Fasqoo ergreift angemessene technische und organisatorische Maßnahmen, um die über die Website verarbeiteten Informationen zu schützen.",sec9Text2:"Kein Internetdienst kann jedoch die vollständige Sicherheit der über das Internet übertragenen Daten garantieren.",
+sec10Title:"10. Ihre Datenschutzrechte",sec10Text1:"Je nach Land oder Region haben Sie möglicherweise Rechte bezüglich Ihrer personenbezogenen Daten, einschließlich des Rechts auf:",
+r1:"Auskunft über Ihre personenbezogenen Daten",r2:"Berichtigung unrichtiger Daten",r3:"Löschung personenbezogener Daten",r4:"Widerspruch gegen bestimmte Verarbeitungen",r5:"Einschränkung der Verarbeitung",r6:"Widerruf der Einwilligung, wenn die Verarbeitung auf einer Einwilligung beruht",
+sec10Footer:"Um Ihre Rechte auszuüben, kontaktieren Sie Fasqoo bitte über die auf der Website angegebenen Kontaktdaten.",
+sec11Title:"11. Schutz der Privatsphäre von Kindern",sec11Text:"Fasqoo richtet sich nicht speziell an Kinder. Wir sammeln nicht wissentlich personenbezogene Daten von Kindern für Zwecke, die nach geltendem Recht nicht zulässig sind.",
+sec12Title:"12. Änderungen dieser Datenschutzerklärung",sec12Text1:"Fasqoo kann diese Datenschutzerklärung von Zeit zu Zeit aktualisieren, um Änderungen an der Website, der Technologie, den Diensten oder den gesetzlichen Anforderungen Rechnung zu tragen.",sec12Text2:"Die aktualisierte Version wird auf dieser Seite mit einem neuen Überarbeitungsdatum veröffentlicht.",
+sec13Title:"13. Kontakt",sec13Text:"Wenn Sie Fragen zu dieser Datenschutzerklärung oder zur Verarbeitung von Informationen durch Fasqoo haben, kontaktieren Sie uns bitte über die auf der Website angegebenen Informationen.",
+accessibility:"Barrierefreiheit",privacy:"Datenschutzerklärung",terms:"Nutzungsbedingungen",dns:"Meine Daten nicht verkaufen",imprint:"Impressum",rights:"Alle Rechte vorbehalten.",trademarks:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo."
+},
+fr:{
+title:"Politique de confidentialité – Fasqoo",home:"Accueil",faq:"FAQ",network:"État du réseau",diagnostics:"Diagnostic IT",about:"À propos",
+h1:"Politique de confidentialité – Fasqoo",updatedLabel:"Dernière mise à jour :",intro:"Fasqoo respecte votre vie privée. Cette politique explique comment les informations sont traitées lors de l'utilisation du test de vitesse.",
+sec1Title:"1. Informations traitées",sec1Text:"Des informations techniques peuvent être traitées pour exécuter et améliorer le test :",
+p1:"Adresse IP",p2:"Fournisseur d'accès Internet (FAI)",p3:"Localisation géographique approximative",p4:"Informations sur le réseau",p5:"Vitesse de téléchargement",p6:"Vitesse d'envoi",p7:"Ping et latence",p8:"Jitter",p9:"Informations sur l'appareil et le navigateur",p10:"Date et heure du test",
+sec1Footer:"Le test nécessite ces données pour fonctionner correctement.",
+sec2Title:"2. Adresse IP et localisation",sec2Text1:"Votre IP publique est utilisée pour déterminer votre FAI et localisation approximative.",sec2Text2:"Nous ne cherchons pas à connaître votre adresse résidentielle exacte.",
+sec3Title:"3. Données de test",sec3Text1:"Pendant le test, la vitesse et la qualité de votre connexion sont mesurées.",sec3Text2:"Ces données permettent d'afficher vos résultats et d'améliorer le service.",
+sec4Title:"4. Cookies et stockage local",sec4Text1:"Des cookies peuvent être utilisés pour des raisons techniques.",sec4Text2:"Cela inclut la conservation de :",
+c1:"Préférences de langue",c2:"Thème sombre ou clair",c3:"Paramètres de test",c4:"Historique des tests",c5:"Autres préférences",
+sec4Footer:"Vous pouvez les effacer dans votre navigateur.",
+sec5Title:"5. Publicité",sec5Text1:"Des annonces de partenaires tiers peuvent être affichées.",sec5Text2:"Ces partenaires utilisent des cookies pour mesurer la publicité.",sec5Text3:"Votre consentement sera demandé si la loi l'exige.",
+sec6Title:"6. Analyses",sec6Text1:"Des outils d'analyse nous aident à comprendre l'utilisation du site.",sec6Text2:"Ils collectent le type de navigateur, les pages vues et l'emplacement approximatif.",
+sec7Title:"7. Services tiers",sec7Text1:"Des services tiers gèrent certaines fonctionnalités techniques.",sec7Text2:"Ils traitent les données selon leur propre politique.",
+sec8Title:"8. Conservation des données",sec8Text1:"Les données ne sont conservées que le temps nécessaire.",sec8Text2:"Des mesures appropriées les protègent contre les accès non autorisés.",
+sec9Title:"9. Sécurité",sec9Text1:"Nous prenons des mesures organisationnelles et techniques adaptées.",sec9Text2:"Toutefois, aucun service web n'est sécurisé à 100%.",
+sec10Title:"10. Vos droits",sec10Text1:"Selon votre région, vous disposez de droits sur vos données :",
+r1:"Accès à vos données",r2:"Correction d'informations inexactes",r3:"Suppression de données",r4:"Opposition au traitement",r5:"Limitation du traitement",r6:"Retrait du consentement",
+sec10Footer:"Contactez-nous pour exercer vos droits.",
+sec11Title:"11. Protection des enfants",sec11Text:"Fasqoo ne collecte pas sciemment de données auprès des enfants.",
+sec12Title:"12. Modifications",sec12Text1:"Cette politique peut être mise à jour régulièrement.",sec12Text2:"La version à jour sera publiée sur cette page.",
+sec13Title:"13. Contact",sec13Text:"Pour toute question, contactez-nous via les coordonnées fournies.",
+accessibility:"Accessibilité",privacy:"Politique de confidentialité",terms:"Conditions d'utilisation",dns:"Ne pas vendre mes infos",imprint:"Mentions légales",rights:"Tous droits réservés.",trademarks:"Fasqoo est une marque déposée."
+},
+es:{
+title:"Política de privacidad – Fasqoo",home:"Inicio",faq:"Preguntas frecuentes",network:"Estado de la red",diagnostics:"Diagnóstico TI",about:"Sobre nosotros",
+h1:"Política de privacidad – Fasqoo",updatedLabel:"Última actualización:",intro:"Fasqoo respeta su privacidad. Esta política explica cómo se procesa la información al usar el test de velocidad.",
+sec1Title:"1. Información procesada",sec1Text:"Se procesa información técnica para realizar la prueba:",
+p1:"Dirección IP",p2:"Proveedor de servicios de Internet",p3:"Ubicación geográfica aproximada",p4:"Información de red y conexión",p5:"Velocidad de descarga",p6:"Velocidad de carga",p7:"Ping y latencia",p8:"Jitter",p9:"Información del dispositivo y navegador",p10:"Fecha y hora de la prueba",
+sec1Footer:"Esta información es necesaria para el funcionamiento del servicio.",
+sec2Title:"2. Dirección IP y ubicación",sec2Text1:"Su IP se usa para identificar el proveedor y la región aproximada.",sec2Text2:"No rastreamos su dirección física exacta.",
+sec3Title:"3. Datos de la prueba",sec3Text1:"Medimos el rendimiento y la calidad de su conexión a Internet.",sec3Text2:"Los datos sirven para mostrar el resultado y optimizar el servicio.",
+sec4Title:"4. Cookies y almacenamiento",sec4Text1:"Usamos almacenamiento local para funciones técnicas.",sec4Text2:"Esto incluye guardar:",
+c1:"Preferencias de idioma",c2:"Modo claro u oscuro",c3:"Configuración del test",c4:"Historial de pruebas",c5:"Otras preferencias",
+sec4Footer:"Puede gestionar sus cookies desde la configuración del navegador.",
+sec5Title:"5. Publicidad",sec5Text1:"Podemos mostrar anuncios de socios publicitarios.",sec5Text2:"Los proveedores pueden usar cookies para gestionar los anuncios.",sec5Text3:"Solicitaremos su consentimiento según exija la ley.",
+sec6Title:"6. Analítica",sec6Text1:"Utilizamos métricas para detectar errores y entender el tráfico.",sec6Text2:"Incluye el tipo de dispositivo, páginas vistas y ubicación estimada.",
+sec7Title:"7. Servicios de terceros",sec7Text1:"Utilizamos herramientas de terceros para soportar nuestra infraestructura.",sec7Text2:"Ellos procesan los datos según sus propias políticas.",
+sec8Title:"8. Retención de datos",sec8Text1:"Los datos solo se conservan durante el tiempo necesario.",sec8Text2:"Aplicamos medidas de protección de la información.",
+sec9Title:"9. Seguridad",sec9Text1:"Implementamos medidas razonables de seguridad tecnológica.",sec9Text2:"Ningún sistema en Internet es 100% inexpugnable.",
+sec10Title:"10. Sus derechos",sec10Text1:"Tiene derechos sobre sus datos personales:",
+r1:"Acceso a sus datos",r2:"Rectificación de información",r3:"Eliminación de datos",r4:"Oposición al tratamiento",r5:"Limitación del tratamiento",r6:"Retirar el consentimiento",
+sec10Footer:"Póngase en contacto con nosotros para ejercer sus derechos.",
+sec11Title:"11. Menores de edad",sec11Text:"Fasqoo no recopila intencionadamente información de menores.",
+sec12Title:"12. Cambios en la política",sec12Text1:"Esta política puede actualizarse periódicamente.",sec12Text2:"La versión nueva se publicará con la fecha de revisión.",
+sec13Title:"13. Contacto",sec13Text:"Para dudas sobre privacidad, contáctenos mediante el formulario del sitio.",
+accessibility:"Accesibilidad",privacy:"Política de privacidad",terms:"Términos de uso",dns:"No vender mi información",imprint:"Aviso legal",rights:"Todos los derechos reservados.",trademarks:"Fasqoo es una marca registrada."
+},
+it:{
+title:"Informativa sulla privacy – Fasqoo",home:"Home",faq:"FAQ",network:"Stato della rete",diagnostics:"Diagnostica IT",about:"Chi siamo",
+h1:"Informativa sulla privacy – Fasqoo",updatedLabel:"Ultimo aggiornamento:",intro:"Fasqoo rispetta la tua privacy. Questa informativa spiega come vengono gestiti i dati durante il test.",
+sec1Title:"1. Informazioni elaborate",sec1Text:"Per eseguire il test di velocità raccogliamo dati tecnici:",
+p1:"Indirizzo IP",p2:"Provider Internet (ISP)",p3:"Posizione geografica approssimativa",p4:"Dati di rete e connessione",p5:"Velocità di download",p6:"Velocità di upload",p7:"Ping e latenza",p8:"Jitter",p9:"Dati su dispositivo e browser",p10:"Data e ora del test",
+sec1Footer:"I dati sono essenziali per il funzionamento della piattaforma.",
+sec2Title:"2. Indirizzo IP e posizione",sec2Text1:"L'IP viene usato per determinare il provider e la regione approssimativa.",sec2Text2:"Non viene mai identificato il tuo indirizzo di casa.",
+sec3Title:"3. Dati del test",sec3Text1:"Misuriamo la velocità e la stabilità della connessione.",sec3Text2:"I risultati servono a mostrare la misura e a migliorare la rete.",
+sec4Title:"4. Cookie e archiviazione locale",sec4Text1:"Utilizziamo cookie per scopi tecnici e funzionali.",sec4Text2:"Questo consente di salvare:",
+c1:"Lingua preferita",c2:"Tema chiaro o scuro",c3:"Impostazioni del test",c4:"Cronologia test",c5:"Altre preferenze",
+sec4Footer:"Puoi gestire i cookie dalle impostazioni del browser.",
+sec5Title:"5. Pubblicità",sec5Text1:"Mostriamo annunci di terze parti per sostenere il servizio.",sec5Text2:"I fornitori usano cookie per misurare le inserzioni.",sec5Text3:"Richiediamo il consenso ove previsto dalla legge.",
+sec6Title:"6. Analisi",sec6Text1:"Usiamo strumenti di analisi per risolvere errori tecnici.",sec6Text2:"Includono tipo di browser, pagine viste e dati generali.",
+sec7Title:"7. Servizi terzi",sec7Text1:"Ci affidiamo a partner terzi per l'infrastruttura di rete.",sec7Text2:"Essi applicano le proprie politiche di privacy.",
+sec8Title:"8. Conservazione dati",sec8Text1:"I dati sono conservati solo per il tempo strettamente necessario.",sec8Text2:"Adottiamo adeguate misure di protezione.",
+sec9Title:"9. Sicurezza",sec9Text1:"Applichiamo misure di sicurezza adeguate ai dati.",sec9Text2:"Nessun sistema digitale è del tutto privo di rischi.",
+sec10Title:"10. I tuoi diritti",sec10Text1:"In base alla normativa hai diritto a:",
+r1:"Accedere ai tuoi dati",r2:"Correggere dati errati",r3:"Cancellare i dati",r4:"Opporti al trattamento",r5:"Limitare il trattamento",r6:"Revocare il consenso",
+sec10Footer:"Contattaci per esercitare i tuoi diritti.",
+sec11Title:"11. Tutela dei minori",sec11Text:"Fasqoo non raccoglie consapevolmente dati da minori.",
+sec12Title:"12. Modifiche",sec12Text1:"Possiamo aggiornare questa informativa periodicamente.",sec12Text2:"La nuova data indicherà l'ultimo aggiornamento.",
+sec13Title:"13. Contatti",sec13Text:"Per domende sulla privacy contattaci tramite il sito.",
+accessibility:"Accessibilità",privacy:"Informativa sulla privacy",terms:"Termini di utilizzo",dns:"Non vendere le mie info",imprint:"Note legali",rights:"Tutti i diritti riservati.",trademarks:"Fasqoo è un marchio registrato."
+},
+pt:{
+title:"Política de Privacidade – Fasqoo",home:"Início",faq:"FAQ",network:"Status da Rede",diagnostics:"Diagnóstico de TI",about:"Sobre Nós",
+h1:"Política de Privacidade – Fasqoo",updatedLabel:"Última atualização:",intro:"A Fasqoo respeita a sua privacidade. Esta política explica como os seus dados são tratados.",
+sec1Title:"1. Informações Processadas",sec1Text:"Dados técnicos processados para a realização do teste:",
+p1:"Endereço IP",p2:"Provedor de Internet (ISP)",p3:"Localização geográfica aproximada",p4:"Dados de rede e conexão",p5:"Velocidade de download",p6:"Velocidade de upload",p7:"Ping e latência",p8:"Jitter",p9:"Informações do dispositivo e navegador",p10:"Data e hora do teste",
+sec1Footer:"As informações são necessárias para a execução correta.",
+sec2Title:"2. Endereço IP e Localização",sec2Text1:"O IP é utilizado para determinar o seu provedor e região aproximada.",sec2Text2:"Não identificamos o seu endereço residencial exato.",
+sec3Title:"3. Dados do Teste",sec3Text1:"Medimos o desempenho da sua conexão de internet.",sec3Text2:"Os resultados servem para exibir as estatísticas e otimizar a plataforma.",
+sec4Title:"4. Cookies e Armazenamento Local",sec4Text1:"Utilizamos armazenamento local para o funcionamento do site.",sec4Text2:"Isso inclui guardar:",
+c1:"Preferência de idioma",c2:"Modo claro ou escuro",c3:"Ajustes de teste",c4:"Histórico de testes",c5:"Outras preferências",
+sec4Footer:"Você pode gerenciar os cookies no seu navegador.",
+sec5Title:"5. Publicidade",sec5Text1:"Podemos exibir anúncios de parceiros terceirizados.",sec5Text2:"Eles usam cookies para medir e entregar anúncios relevantes.",sec5Text3:"Pediremos consentimento quando exigido por lei.",
+sec6Title:"6. Análise de Dados",sec6Text1:"Usamos serviços de análise para identificar problemas técnicos.",sec6Text2:"Isso inclui dados do navegador, páginas acessadas e localização geral.",
+sec7Title:"7. Serviços de Terceiros",sec7Text1:"Parceiros fornecem infraestrutura de rede e análises.",sec7Text2:"Eles seguem as suas próprias políticas de privacidade.",
+sec8Title:"8. Retenção de Dados",sec8Text1:"Guardamos dados apenas pelo tempo necessário.",sec8Text2:"Medidas de proteção são adotadas contra acessos indevidos.",
+sec9Title:"9. Segurança",sec9Text1:"Adotamos medidas técnicas para proteger suas informações.",sec9Text2:"Porém, nenhum meio de transmissão na internet é totalmente seguro.",
+sec10Title:"10. Seus Direitos",sec10Text1:"Você possui direitos legais sobre os seus dados:",
+r1:"Acesso às informações",r2:"Correção de dados incorretos",r3:"Exclusão de dados",r4:"Oposição ao processamento",r5:"Restrição de uso",r6:"Retirada de consentimento",
+sec10Footer:"Entre em contato conosco para exercer seus direitos.",
+sec11Title:"11. Privacidade de Menores",sec11Text:"Não coletamos intencionalmente dados de menores de idade.",
+sec12Title:"12. Alterações nesta Política",sec12Text1:"Esta política pode ser atualizada periodicamente.",sec12Text2:"A versão mais recente estará sempre disponível nesta página.",
+sec13Title:"13. Contato",sec13Text:"Dúvidas sobre privacidade podem ser enviadas pelo canal oficial no site.",
+accessibility:"Acessibilidade",privacy:"Política de Privacidade",terms:"Termos de Uso",dns:"Não vender minhas informações",imprint:"Aviso Legal",rights:"Todos os direitos reservados.",trademarks:"Fasqoo é uma marca registrada."
+},
+nl:{
+title:"Privacybeleid – Fasqoo",home:"Home",faq:"FAQ",network:"Netwerkstatus",diagnostics:"IT-diagnostiek",about:"Over ons",
+h1:"Privacybeleid – Fasqoo",updatedLabel:"Laatst bijgewerkt:",intro:"Fasqoo respecteert uw privacy. Dit beleid legt uit welke gegevens worden verwerkt.",
+sec1Title:"1. Informatie die we verwerken",sec1Text:"Technische gegevens worden verwerkt om de test uit te voeren:",
+p1:"IP-adres",p2:"Internetprovider (ISP)",p3:"Geschatte geografische locatie",p4:"Netwerk- en verbindingsinformatie",p5:"Downloadsnelheid",p6:"Uploadsnelheid",p7:"Ping en latentie",p8:"Jitter",p9:"Apparaat- en browserinformatie",p10:"Datum en tijd van de test",
+sec1Footer:"Deze gegevens zijn noodzakelijk voor de werking van de dienst.",
+sec2Title:"2. IP-adres en locatie",sec2Text1:"Uw IP-adres wordt gebruikt om de provider en geschatte regio te bepalen.",sec2Text2:"We achterhalen nooit uw exacte woonadres.",
+sec3Title:"3. Testgegevens",sec3Text1:"We meten de prestaties en kwaliteit van uw internetverbinding.",sec3Text2:"De gegevens tonen het resultaat en helpen de dienst te verbeteren.",
+sec4Title:"4. Cookies en lokale opslag",sec4Text1:"We gebruiken lokale opslag voor technische functionaliteit.",sec4Text2:"Dit omvat het opslaan van:",
+c1:"Taalvoorkeuren",c2:"Donkere of lichte modus",c3:"Testinstellingen",c4:"Testhistorie",c5:"Andere voorkeuren",
+sec4Footer:"U kunt cookies beheren in uw browser instellingen.",
+sec5Title:"5. Advertenties",sec5Text1:"Er kunnen advertenties van derden worden getoond.",sec5Text2:"Partners kunnen cookies gebruiken om advertenties te meten.",sec5Text3:"Indien wettelijk vereist, vragen we om uw toestemming.",
+sec6Title:"6. Analyse",sec6Text1:"Analysediensten helpen ons om de werking van de site te begrijpen.",sec6Text2:"Dit omvat browsertype, bezochte pagina's en algemene locatie.",
+sec7Title:"7. Diensten van derden",sec7Text1:"Derde partijen ondersteunen onze technische infrastructuur.",sec7Text2:"Zij verwerken gegevens volgens hun eigen privacybeleid.",
+sec8Title:"8. Bewaartermijn",sec8Text1:"Gegevens worden niet langer bewaard dan noodzakelijk.",sec8Text2:"Er zijn maatregelen getroffen tegen onbevoegde toegang.",
+sec9Title:"9. Beveiliging",sec9Text1:"Wij nemen passende technische beveiligingsmaatregelen.",sec9Text2:"Geen enkele internetverbinding is echter 100% gegarandeerd veilig.",
+sec10Title:"10. Uw rechten",sec10Text1:"U heeft de volgende rechten met betrekking tot uw данные:",
+r1:"Inzage in uw gegevens",r2:"Correctie van onjuiste gegevens",r3:"Verwijdering van gegevens",r4:"Bezwaar maken tegen verwerking",r5:"Beperking van verwerking",r6:"In trekken van toestemming",
+sec10Footer:"Neem contact met ons op om uw rechten uit te oefenen.",
+sec11Title:"11. Bescherming van kinderen",sec11Text:"Fasqoo verzamelt niet bewust gegevens van kinderen.",
+sec12Title:"12. Wijzigingen",sec12Text1:"Dit privacybeleid kan van tijd tot tijd worden bijgewerkt.",sec12Text2:"Nieuwe versies worden op deze pagina gepubliceerd.",
+sec13Title:"13. Contact",sec13Text:"Vragen over het privacybeleid kunt u stellen via de contactpagina.",
+accessibility:"Toegankelijkheid",privacy:"Privacybeleid",terms:"Gebruiksvoorwaarden",dns:"Verkoop mijn info niet",imprint:"Colofon",rights:"Alle rechten voorbehouden.",trademarks:"Fasqoo is een handelsmerk."
+},
+tr:{
+title:"Gizlilik Politikası – Fasqoo",home:"Ana Sayfa",faq:"SSS",network:"Ağ Durumu",diagnostics:"BT Teşhis",about:"Hakkımızda",
+h1:"Gizlilik Politikası – Fasqoo",updatedLabel:"Son güncelleme:",intro:"Fasqoo gizliliğinize saygı duyar. Bu politika, işlenen verileri ve kullanım detaylarını açıklar.",
+sec1Title:"1. İşlediğimiz Bilgiler",sec1Text:"Testi gerçekleştirmek için teknik veriler işlenir:",
+p1:"IP adresi",p2:"İnternet Servis Sağlayıcısı (ISP)",p3:"Yaklaşık coğrafi konum",p4:"Ağ ve bağlantı bilgileri",p5:"İndirme hızı",p6:"Yükleme hızı",p7:"Ping ve gecikme süresi",p8:"Jitter (seğirme)",p9:"Cihaz ve tarayıcı bilgisi",p10:"Test tarihi ve saati",
+sec1Footer:"Sistemin düzgün çalışması için bu veriler gereklidir.",
+sec2Title:"2. IP Adresi ve Konum",sec2Text1:"IP adresiniz servis sağlayıcınızı ve yaklaşık bölgenizi belirlemede kullanılır.",sec2Text2:"Ev adresinizi kesin olarak tespit etmek için kullanılmaz.",
+sec3Title:"3. Hız Testi Verileri",sec3Text1:"İnternet bağlantınızın performansını ve kalitesini ölçüyoruz.",sec3Text2:"Veriler sonuçları göstermek ve hizmet kalitesini artırmak için kullanılır.",
+sec4Title:"4. Çerezler ve Yerel Depolama",sec4Text1:"İşlevsel ve teknik amaçlarla çerezler kullanılabilir.",sec4Text2:"Şu tercihler saklanabilir:",
+c1:"Dil tercihleri",c2:"Karanlık veya aydınlık mod",c3:"Test ayarları",c4:"Test geçmişi",c5:"Diğer site tercihleri",
+sec4Footer:"Çerezleri tarayıcı ayarlarınızdan silebilirsiniz.",
+sec5Title:"5. Reklamlar",sec5Text1:"Üçüncü taraf ortakların reklamları görüntülenebilir.",sec5Text2:"Reklam sağlayıcıları performansı ölçmek için çerez kullanabilir.",sec5Text3:"Yasal olarak gerekli olduğunda onayınız istenir.",
+sec6Title:"6. Analizler",sec6Text1:"Site kullanımını anlamak ve teknik sorunları çözmek için analiz kullanılır.",sec6Text2:"Tarayıcı türü, ziyaret edilen sayfalar ve genel konum verilerini kapsar.",
+sec7Title:"7. Üçüncü Taraf Hizmetleri",sec7Text1:"Teknik altyapı için üçüncü taraf servislerden yararlanılır.",sec7Text2:"Bu sağlayıcılar verileri kendi gizlilik politikalarına göre işler.",
+sec8Title:"8. Veri Saklama",sec8Text1:"Kişisel veriler gereğinden fazla süre saklanmaz.",sec8Text2:"Verilerin korunması için gerekli önlemler alınır.",
+sec9Title:"9. Veri Güvenliği",sec9Text1:"Bilgilerinizi korumak için makul teknik tedbirler alınır.",sec9Text2:"Ancak İnternet üzerinden yapılan hiçbir aktarım %100 güvenli değildir.",
+sec10Title:"10. Gizlilik Haklarınız",sec10Text1:"Verilerinizle ilgili aşağıdaki haklara sahipsiniz:",
+r1:"Kişisel verilere erişim talebi",r2:"Hatalı verilerin düzeltilmesi",r3:"Verilerin silinmesini isteme",r4:"İşlemeye itiraz etme",r5:"İşlemenin kısıtlanması",r6:"Onayı geri çekme",
+sec10Footer:"Haklarınızı kullanmak için bizimle iletişime geçin.",
+sec11Title:"11. Çocukların Gizliliği",sec11Text:"Fasqoo çocuklardan bilerek veri toplamaz.",
+sec12Title:"12. Politika Değişiklikleri",sec12Text1:"Bu politika zaman zaman güncellenebilir.",sec12Text2:"Güncellenmiş sürüm bu sayfada yayınlanacaktır.",
+sec13Title:"13. İletişim",sec13Text:"Gizlilikle ilgili sorularınız için iletişim kanalından bize ulaşın.",
+accessibility:"Erişilebilirlik",privacy:"Gizlilik Politikası",terms:"Kullanım Koşulları",dns:"Bilgilerimi Satma",imprint:"Künye",rights:"Tüm hakları saklıdır.",trademarks:"Fasqoo bir markadır."
+},
+sq:{
+title:"Politika e Privatësisë – Fasqoo",home:"Ballina",faq:"Pyetjet e shpeshta",network:"Statusi i Rregullt",diagnostics:"Diagnostikimi IT",about:"Rreth nesh",
+h1:"Politika e Privatësisë – Fasqoo",updatedLabel:"Përditësuar së fundmi:",intro:"Fasqoo respekton privatësinë tuaj. Kjo politikë sqaron përpunimin e të dhënave tuaja.",
+sec1Title:"1. Informacionet që përpunojmë",sec1Text:"Të dhënat teknike përpunohen për të realizuar testin e shpejtësisë:",
+p1:"Adresa IP",p2:"Ofertuesi i Shërbimit të Internetit (ISP)",p3:"Vendndodhja gjeografike e përafërt",p4:"Informacioni i rrjetit dhe lidhjes",p5:"Shpejtësia e shkarkimit (Download)",p6:"Shpejtësia e ngarkimit (Upload)",p7:"Ping dhe vonesa (Latency)",p8:"Jitter",p9:"Informacioni i pajisjes dhe shfletuesit",p10:"Data dhe ora e testit",
+sec1Footer:"Këto të dhëna janë të nevojshme për funksionimin e testit.",
+sec2Title:"2. Adresa IP dhe Vendndodhja",sec2Text1:"Adresa IP përdoret për të përcaktuar me afërsi rajonin dhe rrjetin tuaj.",sec2Text2:"Ne nuk e përdorim adresën IP për të gjetur adresën tuaj të saktë të shtëpisë.",
+sec3Title:"3. Të dhënat e Testit",sec3Text1:"Ne matim performancën e lidhjes suaj të internetit.",sec3Text2:"Këto matje shfaqin rezultatin dhe ndihmojnë në përmirësimin e shërbimit.",
+sec4Title:"4. Cookies dhe Ruajtja Lokale",sec4Text1:"Përdorim ruajtjen lokale për arsye teknike dhe funksionale.",sec4Text2:"Kjo përfshin ruajtjen e:",
+c1:"Preferencave të gjuhës",c2:"Modës së errët apo të ndritshme",c3:"Cilësimeve të testit",c4:"Historikut të testit",c5:"Preferencave të tjera",
+sec4Footer:"Mund t'i fshini cookies përmes cilësimeve të shfletuesit.",
+sec5Title:"5. Reklamat",sec5Text1:"Mund të shfaqim reklama nga partnerë të palëve të treta.",sec5Text2:"Ata mund të përdorin cookies për matjen e reklamave.",sec5Text3:"Ne do të kërkojmë pëlqimin tuaj kur e kërkon ligji.",
+sec6Title:"6. Analitika",sec6Text1:"Përdorim analitikë për të identifikuar problemet teknike.",sec6Text2:"Kjo përfshin llojin e shfletuesit, faqet e vizituara dhe vendndodhjen e përafërt.",
+sec7Title:"7. Shërbimet e Palëve të Treta",sec7Text1:"Palët e treta ndihmojnë në infrastrukturën teknike të testit.",sec7Text2:"Ata përpunojnë të dhënat sipas politikave të tyre të privatësisë.",
+sec8Title:"8. Ruajtja e të Dhënave",sec8Text1:"Të dhënat ruhen vetëm për aq kohë sa është e nevojshme.",sec8Text2:"Zbatohen masa mbrojtëse kundër qasjes së paautorizuar.",
+sec9Title:"9. Siguria e të Dhënave",sec9Text1:"Marrim masa teknike për të mbrojtur informacionin tuaj.",sec9Text2:"Sidoqoftë, asnjë shërbim në internet nuk garanton siguri 100%.",
+sec10Title:"10. Të drejtat tuaja",sec10Text1:"Ju keni të drejta mbi të dhënat tuaja personale:",
+r1:"Qasje në të dhënat tuaja",r2:"Përmirësimin e të dhënave të pasakta",r3:"Fshirjen e të dhënave",r4:"Kundërshtimin e përpunimit",r5:"Kufizimin e përpunimit",r6:"Tërheqjen e pëlqimit",
+sec10Footer:"Na kontaktoni për të ushtruar të drejtat tuaja.",
+sec11Title:"11. Privatësia e Fëmijëve",sec11Text:"Fasqoo nuk mbledh me vetëdije të dhëna nga fëmijët.",
+sec12Title:"12. Ndryshimet në Politiko",sec12Text1:"Kjo politikë mund të përditësohet kohë pas kohe.",sec12Text2:"Versioni i ri do të publikohet në këtë faqe.",
+sec13Title:"13. Kontakti",sec13Text:"Për pyetje rreth privatësisë, na kontaktoni përmes faqes sonë.",
+accessibility:"Qasshmëria",privacy:"Politika e Privatësisë",terms:"Kushtet e Përdorimit",dns:"Mos me vendos të dhënat e mia",imprint:"Imprint",rights:"Të gjitha të drejtat e rezervuara.",trademarks:"Fasqoo është markë e regjistruar."
+},
+ar:{
+title:"سياسة الخصوصية – Fasqoo",home:"الرئيسية",faq:"الأسئلة الشائعة",network:"حالة الشبكة",diagnostics:"تشخيص IT",about:"من نحن",
+h1:"سياسة الخصوصية – Fasqoo",updatedLabel:"آخر تحديث:",intro:"تحترم Fasqoo خصوصيتك. توضح هذه السياسة كيفية التعامل مع المعلومات عند استخدام اختبار السرعة.",
+sec1Title:"1. المعلومات التي نعالجها",sec1Text:"قد يتم معالجة معلومات تقنية لتشغيل وتحسين اختبار السرعة، وتتضمن:",
+p1:"عنوان IP",p2:"مزود خدمة الإنترنت (ISP)",p3:"الموقع الجغرافي التقريبي",p4:"معلومات الشبكة والاتصال",p5:"سرعة التنزيل",p6:"سرعة الرفع",p7:"الاستجابة والزمن (Ping)",p8:"التذبذب (Jitter)",p9:"معلومات الجهاز والمتصفح",p10:"تاريخ ووقت الاختبار",
+sec1Footer:"تتطلب أداة الاختبار هذه البيانات لتعمل بشكل صحيح.",
+sec2Title:"2. عنوان IP والموقع",sec2Text1:"يُستخدم عنوان IP لتحديد المزود والموقع التقريبي فقط.",sec2Text2:"لا نستخدم عنوان IP لتحديد موقع منزلك الدقيق.",
+sec3Title:"3. بيانات اختبار السرعة",sec3Text1:"نقوم بقياس أداء وجودة اتصالك بالإنترنت.",sec3Text2:"تُستخدم النتائج لعرض التقرير ولتحسين جودة الخدمة.",
+sec4Title:"4. ملفات تعريف الارتباط والتقنيات المحلية",sec4Text1:"نستخدم التخزين المحلي لأغراض تقنية ووظيفية.",sec4Text2:"يتضمن ذلك حفظ:",
+c1:"تفضيلات اللغة",c2:"المظهر الداكن أو الفاتح",c3:"إعدادات الاختبار",c4:"سجل الاختبارات",c5:"تفضيلات الموقع الأخرى",
+sec4Footer:"يمكنك إدارة أو حذف ملفات تعريف الارتباط من إعدادات المتصفح.",
+sec5Title:"5. الإعلانات",sec5Text1:"قد نقتض الإعلانات عبر شركاء خارجيين.",sec5Text2:"قد يستخدم الشركاء ملفات تعريف الارتباط لقياس الأداء الإعلاني.",sec5Text3:"سنطلب موافقتك عند لزوم ذلك قانوناً.",
+sec6Title:"6. التحليلات",sec6Text1:"نستخدم خدمات التحليل لفهم كيفية استخدام الموقع ولإصلاح الأخطاء.",sec6Text2:"تشمل البيانات نوع المتصفح، الصفحات المزارة، والموقع التقريبي.",
+sec7Title:"7. خدمات الطرف الثالث",sec7Text1:"نستعين بخدمات خارجية لدعم البنية التحتية والتحليلات.",sec7Text2:"تعالج هذه الأطراف البيانات وفقاً لسياساتها الخاصة.",
+sec8Title:"8. الاحتفاظ بالبيانات",sec8Text1:"لا نحتفظ بالبيانات الشخصية لفترة أطول من اللازم.",sec8Text2:"تُتخذ التدابير اللازمة لحماية البيانات من الوصول غير المصرح به.",
+sec9Title:"9. أمان البيانات",sec9Text1:"نتخذ إجراءات تنظيمية وتقنية مناسبة لحماية بياناتك.",sec9Text2:"ومع ذلك، لا يوجد خدمة عبر الإنترنت مضمونة بشكل مطلق.",
+sec10Title:"10. حقوق الخصوصية الخاصة بك",sec10Text1:"تتمتع بحقوق تتعلق ببياناتك الشخصية تشمل:",
+r1:"طلب الوصول إلى بياناتك",r2:"تصحيح البيانات غير الدقيقة",r3:"طلب مسح البيانات",r4:"الاعتراض على المعالجة",r5:"تقييد معالجة البيانات",r6:"سحب الموافقة الممنوحة",
+sec10Footer:"للممارسة حقوقك يرجى التواصل معنا عبر معلومات الاتصال.",
+sec11Title:"11. خصوصية الأطفال",sec11Text:"الموقع غير موجه للأطفال ولا نجمع بياناتهم بشكل متعمد.",
+sec12Title:"12. التغييرات على السياسة",sec12Text1:"قد نحدث سياسة الخصوصية من وقت لآخر.",sec12Text2:"سيتم نشر النسخة المحدثة بتاريخ جديد في هذه الصفحة.",
+sec13Title:"13. الاتصال",sec13Text:"لأي استفسار حول سياسة الخصوصية يرجى التواصل معنا عبر الموقع.",
+accessibility:"إمكانية الوصول",privacy:"سياسة الخصوصية",terms:"شروط الاستخدام",dns:"عدم بيع معلوماتي",imprint:"بيانات النشر",rights:"جميع الحقوق محفوظة.",trademarks:"Fasqoo هي علامة تجارية."
+}
+};
+
+function applyLanguage(lang) {
+  const t = T[lang] || T.en;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+  document.title = t.title || T.en.title;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = (t && t[key] !== undefined) ? t[key] : T.en[key];
+    if (value !== undefined) {
+      el.textContent = value;
+    }
+  });
+
+  const selectEl = document.getElementById("lang-select");
+  if (selectEl) {
+    selectEl.value = lang;
+  }
+
+  localStorage.setItem("fasqoo-language", lang);
+}
+
+const selector = document.getElementById("lang-select");
+if (selector) {
+  selector.addEventListener("change", (e) => {
+    applyLanguage(e.target.value);
+  });
+}
+
+const savedLang = localStorage.getItem("fasqoo-language") || (navigator.language || "en").slice(0, 2).toLowerCase();
+applyLanguage(T[savedLang] ? savedLang : "en");
+</script>
 </body>
 </html>
