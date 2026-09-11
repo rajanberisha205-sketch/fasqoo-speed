@@ -130,10 +130,10 @@
 
 <header>
   <div>
-    <div class="logo">
+    <a href="/" class="logo" style="color: inherit; text-decoration: none;">
       <div>⌁</div>
       <div>Fasqoo</div>
-    </div>
+    </a>
     
     <nav aria-label="Main navigation">
       <a href="/">Home</a>
@@ -142,7 +142,6 @@
       <a href="/subnet-calculator.html">IT Diagnostics</a>
       <a href="/about.html">About Us</a>
       <div>
-        <!-- ID 'lang-select' hinzugefügt für das JavaScript-Skript -->
         <select id="lang-select" aria-label="Language">
           <option value="en" selected>English</option>
           <option value="de">Deutsch</option>
@@ -229,17 +228,15 @@
   </div>
 </footer>
 
-<!-- JavaScript für die funktionierende Sprachauswahl -->
 <script>
   document.getElementById('lang-select').addEventListener('change', function() {
-    var selectedLang = this.value;
+    var lang = this.value;
     
-    // Wenn Englisch gewählt wird -> Hauptpfad '/'
-    if (selectedLang === 'en') {
-      window.location.href = 'https://www.fasqoo.com/';
+    // Leitet auf die jeweilige funktionierende Sprach-Hauptseite weiter
+    if (lang === 'en') {
+      window.location.href = '/';
     } else {
-      // Für alle anderen Sprachen -> '/de/', '/sq/', '/fr/' etc.
-      window.location.href = 'https://www.fasqoo.com/' + selectedLang + '/';
+      window.location.href = '/' + lang + '/';
     }
   });
 </script>
