@@ -4,7 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <title>Internet Speed Test – White Style | Fasqoo</title>
+  
+  <!-- SEO Meta Tags -->
+  <title>Fast & Free Internet Speed Test | Fasqoo Lite</title>
+  <meta name="description" content="Test your internet speed instantly with Fasqoo Lite. Accurate download, upload, ping, and jitter measurements powered by Cloudflare edge network.">
+  <meta name="keywords" content="internet speed test, broadband speed test, wifi speed test, check internet speed, fasqoo lite, ping test">
+  <link rel="canonical" href="https://lite.fasqoo.com/">
+
+  <!-- Open Graph / Social Media SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lite.fasqoo.com/">
+  <meta property="og:title" content="Fast & Free Internet Speed Test | Fasqoo Lite">
+  <meta property="og:description" content="Check your download speed, upload speed, and latency instantly with our lightweight internet speed test.">
+  <meta property="og:image" content="https://lite.fasqoo.com/fasqoologo.png">
+
+  <!-- Twitter Card SEO -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fast & Free Internet Speed Test | Fasqoo Lite">
+  <meta name="twitter:description" content="Check your download speed, upload speed, and latency instantly with our lightweight internet speed test.">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,7 +39,7 @@
   --text:#111111;
   --muted:#666666;
   --line:#e5e5e5;
-  --red:#e50914; /* Netflix Red */
+  --red:#e50914;
 }
 
 *{box-sizing:border-box;}
@@ -39,7 +56,6 @@ body{
 
 .wrap{width:min(900px, calc(100% - 40px));margin:auto;}
 
-/* Header / Nav */
 header{
   padding:20px 0;
 }
@@ -54,6 +70,7 @@ header{
   display:flex;
   align-items:center;
   gap:10px;
+  text-decoration:none;
 }
 
 .brandmark{
@@ -69,7 +86,6 @@ header{
   color:var(--text);
 }
 
-/* Main Speed Area */
 main{
   flex:1;
   display:flex;
@@ -110,7 +126,6 @@ main{
   letter-spacing:1px;
 }
 
-/* Extra Details (Hidden during test, shown after) */
 .details-grid{
   display:grid;
   grid-template-columns:repeat(4, 1fr);
@@ -157,7 +172,6 @@ main{
   margin-left:2px;
 }
 
-/* Controls / Restart Button */
 .controls{
   margin-top:30px;
 }
@@ -181,7 +195,6 @@ main{
   color:var(--bg);
 }
 
-/* Footer */
 footer{
   padding:25px 0;
   text-align:center;
@@ -218,15 +231,17 @@ footer{
 
 <header>
   <div class="wrap nav">
-    <div class="brand">
+    <a href="https://fasqoo.com" class="brand">
       <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
       <div class="brandname">Fasqoo</div>
-    </div>
+    </a>
   </div>
 </header>
 
 <main>
   <div class="wrap">
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Internet Speed Test Lite</h1>
+    
     <div class="speed-container">
       <div id="speed" class="speed-number">0</div>
       <div id="unit" class="speed-unit">Mbps</div>
@@ -277,7 +292,6 @@ const $ = id => document.getElementById(id);
 const SPEED_BASE = "https://speed.cloudflare.com";
 let isRunning = false;
 
-// Auto-start on page load
 window.addEventListener("DOMContentLoaded", () => {
   startSpeedTest();
   fetchIpInfo();
@@ -312,7 +326,6 @@ async function startSpeedTest(){
   $("status").textContent = "Measuring ping...";
 
   try{
-    // 1. Ping Test
     const pings = [];
     for(let i=0; i<5; i++){
       const start = performance.now();
@@ -334,7 +347,6 @@ async function startSpeedTest(){
     $("pingVal").innerHTML = avgPing.toFixed(0) + "<span>ms</span>";
     $("jitterVal").innerHTML = jitter.toFixed(0) + "<span>ms</span>";
 
-    // 2. Download Test
     $("status").textContent = "Measuring download...";
     const sizes = [1e6, 2e6, 5e6, 10e6, 20e6, 40e6, 80e6];
     let totalBytes = 0;
@@ -363,7 +375,6 @@ async function startSpeedTest(){
     const finalDownload = totalSeconds > 0 ? (totalBytes * 8 / totalSeconds / 1e6) : lastSpeed;
     $("speed").textContent = finalDownload < 10 ? finalDownload.toFixed(1) : Math.round(finalDownload);
 
-    // 3. Upload Test
     $("status").textContent = "Measuring upload...";
     const upSizes = [500000, 1000000, 2500000, 5000000];
     let upBytes = 0;
@@ -389,7 +400,6 @@ async function startSpeedTest(){
     const finalUpload = upSeconds > 0 ? (upBytes * 8 / upSeconds / 1e6) : lastUpSpeed;
     $("upVal").innerHTML = (finalUpload < 10 ? finalUpload.toFixed(1) : Math.round(finalUpload)) + "<span>Mbps</span>";
 
-    // Finish
     $("status").textContent = "Test complete";
     $("detailsGrid").classList.add("visible");
     $("restartBtn").style.display = "inline-block";
