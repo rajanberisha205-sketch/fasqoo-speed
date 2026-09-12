@@ -1,47 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://sitemaps.org">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+    <!-- Main -->
+    <url>
+        <loc>https://www.fasqoo.com/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
 
-  <url>
-    <loc>https://fasqoo.com</loc>
-    <priority>1.0</priority>
-  </url>
+    <!-- Tools -->
+    <url>
+        <loc>https://www.fasqoo.com/subnet-calculator.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
 
- 
-  <url>
-    <loc>https://fasqoo.com</loc>
+    <url>
+        <loc>https://www.fasqoo.com/network-status.html</loc>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/it-diagnose.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/ai-technician.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Information -->
+    <url>
+        <loc>https://www.fasqoo.com/faq</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/about</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Legal -->
+    <url>
+        <loc>https://www.fasqoo.com/accessibility.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/impressum.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/datenschutz.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://www.fasqoo.com/nutzungsbedingungen.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+<url>
+    <loc>https://www.fasqoo.com/fasqoo-lite.html</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-
- 
-  <url>
-    <loc>https://fasqoo.com.faq.html</loc>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://fasqoo.comabout.html</loc>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://fasqoo.comprivacy-policy.html</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://fasqoo.comterms.html</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://fasqoo.comaccessibility.html</loc>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://fasqoo.comdo-not-sell.html</loc>
-    <priority>0.3</priority>
-  </url>
-
+</url>
+  
 </urlset>
