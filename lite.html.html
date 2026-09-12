@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Internet Speed Test – White Style | Fasqoo</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --card:#f4f4f5;
+  --text:#111111;
+  --muted:#666666;
+  --line:#e5e5e5;
+  --red:#e50914; /* Netflix Red */
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Roboto', sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.wrap{width:min(900px, calc(100% - 40px));margin:auto;}
+
+/* Header / Nav */
+header{
+  padding:20px 0;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brandmark{
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brandname{
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:1px;
+  color:var(--text);
+}
+
+/* Main Speed Area */
+main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px 0;
+}
+
+.speed-container{
+  margin-bottom:20px;
+}
+
+.speed-number{
+  font-size:clamp(80px, 20vw, 180px);
+  font-weight:300;
+  line-height:1;
+  letter-spacing:-3px;
+  color:var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.speed-unit{
+  font-size:clamp(20px, 4vw, 32px);
+  color:var(--red);
+  font-weight:500;
+  margin-top:5px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.status-text{
+  font-size:16px;
+  color:var(--muted);
+  margin-top:15px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* Extra Details (Hidden during test, shown after) */
+.details-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:15px;
+  width:100%;
+  margin-top:50px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.5s ease, transform 0.5s ease;
+  pointer-events:none;
+}
+
+.details-grid.visible{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.detail-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:20px 15px;
+  border-radius:6px;
+  text-align:center;
+}
+
+.detail-label{
+  font-size:12px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.detail-value{
+  font-size:20px;
+  font-weight:500;
+  color:var(--text);
+}
+
+.detail-value span{
+  font-size:12px;
+  color:var(--muted);
+  margin-left:2px;
+}
+
+/* Controls / Restart Button */
+.controls{
+  margin-top:30px;
+}
+
+.restart-btn{
+  background:transparent;
+  border:2px solid var(--text);
+  color:var(--text);
+  padding:10px 30px;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  border-radius:4px;
+  cursor:pointer;
+  transition:all 0.2s;
+  display:none;
+}
+
+.restart-btn:hover{
+  background:var(--text);
+  color:var(--bg);
+}
+
+/* Footer */
+footer{
+  padding:25px 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  border-top:1px solid var(--line);
+  line-height:1.8;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+@media(max-width:700px){
+  .details-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
+      <div class="brandname">Fasqoo</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="speed-container">
+      <div id="speed" class="speed-number">0</div>
+      <div id="unit" class="speed-unit">Mbps</div>
+      <div id="status" class="status-text">Measuring connection...</div>
+    </div>
+
+    <div class="controls">
+      <button id="restartBtn" class="restart-btn" onclick="startSpeedTest()">Test Again</button>
+    </div>
+
+    <div id="detailsGrid" class="details-grid">
+      <div class="detail-box">
+        <div class="detail-label">Latency (Ping)</div>
+        <div class="detail-value" id="pingVal">-<span>ms</span></div>
+      </div>
+      <div class="detail-box">
+        <div class="detail-label">Jitter</div>
+        <div class="detail-value" id="jitterVal">-<span>ms</span></div>
+      </div>
+      <div class="detail-box">
+        <div class="detail-label">Upload</div>
+        <div class="detail-value" id="upVal">-<span>Mbps</span></div>
+      </div>
+      <div class="detail-box">
+        <div class="detail-label">Server / IP</div>
+        <div class="detail-value" id="ipVal" style="font-size:14px; padding-top:4px;">Loading...</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Fasqoo. All Rights Reserved.</div>
+    <div style="margin-top: 4px;">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo. • Powered by Cloudflare Edge</div>
+    <div class="footer-links">
+      <a href="#accessibility">Accessibility</a>
+      <a href="#impressum">Imprint</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Use</a>
+      <a href="#donotsell">Do Not Sell My Personal Info</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const SPEED_BASE = "https://speed.cloudflare.com";
+let isRunning = false;
+
+// Auto-start on page load
+window.addEventListener("DOMContentLoaded", () => {
+  startSpeedTest();
+  fetchIpInfo();
+});
+
+async function fetchIpInfo(){
+  try{
+    const res = await fetch("https://ipwho.is/");
+    const data = await res.json();
+    if(data.success){
+      $("ipVal").textContent = data.ip;
+    }
+  }catch(e){
+    $("ipVal").textContent = "Cloudflare";
+  }
+}
+
+function testTimeout(ms){
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), ms);
+  return { signal: c.signal, clear: () => clearTimeout(t) };
+}
+
+async function startSpeedTest(){
+  if(isRunning) return;
+  isRunning = true;
+  
+  $("restartBtn").style.display = "none";
+  $("detailsGrid").classList.remove("visible");
+  $("speed").textContent = "0";
+  $("unit").textContent = "Mbps";
+  $("status").textContent = "Measuring ping...";
+
+  try{
+    // 1. Ping Test
+    const pings = [];
+    for(let i=0; i<5; i++){
+      const start = performance.now();
+      const timer = testTimeout(3000);
+      try{
+        const res = await fetch(SPEED_BASE + "/__down?bytes=0&r=" + Math.random(), { signal: timer.signal, cache: "no-store" });
+        await res.arrayBuffer();
+        pings.push(performance.now() - start);
+      }catch(e){}
+      timer.clear();
+    }
+    const avgPing = pings.length ? pings.reduce((a,b)=>a+b,0)/pings.length : 0;
+    let jitter = 0;
+    if(pings.length > 1){
+      for(let i=1; i<pings.length; i++) jitter += Math.abs(pings[i] - pings[i-1]);
+      jitter /= (pings.length - 1);
+    }
+
+    $("pingVal").innerHTML = avgPing.toFixed(0) + "<span>ms</span>";
+    $("jitterVal").innerHTML = jitter.toFixed(0) + "<span>ms</span>";
+
+    // 2. Download Test
+    $("status").textContent = "Measuring download...";
+    const sizes = [1e6, 2e6, 5e6, 10e6, 20e6, 40e6, 80e6];
+    let totalBytes = 0;
+    let totalSeconds = 0;
+    let lastSpeed = 0;
+
+    for(const size of sizes){
+      if(!isRunning) break;
+      const timer = testTimeout(10000);
+      const start = performance.now();
+      try{
+        const res = await fetch(SPEED_BASE + "/__down?bytes=" + size + "&r=" + Math.random(), { signal: timer.signal, cache: "no-store" });
+        const buf = await res.arrayBuffer();
+        const seconds = (performance.now() - start) / 1000;
+        const speed = (buf.byteLength * 8) / seconds / 1e6;
+        
+        totalBytes += buf.byteLength;
+        totalSeconds += seconds;
+        lastSpeed = speed;
+
+        $("speed").textContent = speed < 10 ? speed.toFixed(1) : Math.round(speed);
+      }catch(e){}
+      timer.clear();
+    }
+
+    const finalDownload = totalSeconds > 0 ? (totalBytes * 8 / totalSeconds / 1e6) : lastSpeed;
+    $("speed").textContent = finalDownload < 10 ? finalDownload.toFixed(1) : Math.round(finalDownload);
+
+    // 3. Upload Test
+    $("status").textContent = "Measuring upload...";
+    const upSizes = [500000, 1000000, 2500000, 5000000];
+    let upBytes = 0;
+    let upSeconds = 0;
+    let lastUpSpeed = 0;
+
+    for(const size of upSizes){
+      const data = new Uint8Array(size);
+      const timer = testTimeout(10000);
+      const start = performance.now();
+      try{
+        const res = await fetch(SPEED_BASE + "/__up?r=" + Math.random(), { method: "POST", body: data, signal: timer.signal, cache: "no-store" });
+        await res.arrayBuffer();
+        const seconds = (performance.now() - start) / 1000;
+        const speed = (size * 8) / seconds / 1e6;
+        upBytes += size;
+        upSeconds += seconds;
+        lastUpSpeed = speed;
+      }catch(e){}
+      timer.clear();
+    }
+
+    const finalUpload = upSeconds > 0 ? (upBytes * 8 / upSeconds / 1e6) : lastUpSpeed;
+    $("upVal").innerHTML = (finalUpload < 10 ? finalUpload.toFixed(1) : Math.round(finalUpload)) + "<span>Mbps</span>";
+
+    // Finish
+    $("status").textContent = "Test complete";
+    $("detailsGrid").classList.add("visible");
+    $("restartBtn").style.display = "inline-block";
+
+  }catch(err){
+    $("status").textContent = "Error during test.";
+    $("restartBtn").style.display = "inline-block";
+  }
+
+  isRunning = false;
+}
+</script>
+
+</body>
+</html>
