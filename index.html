@@ -271,6 +271,61 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 .fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
 @media (max-width:700px){.fasqoo-footer-links{flex-direction:column;gap:9px}}
 </style>
+
+
+
+
+
+  <style>
+        /* Professionelles Header-Layout */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eef2f5; /* Dezente Trennlinie */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a; /* Edles Dunkelgrau/Schwarz */
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        /* 🌐 PROFESSIONELLER LITE-BUTTON (Minimalistisch & Clean) */
+        .lite-btn {
+            background-color: transparent;
+            color: #0284c7; /* Professionelles Tech-Blau */
+            border: 1px solid #0284c7; /* Feiner Rahmen */
+            padding: 6px 14px;
+            border-radius: 6px; /* Leicht abgerundet für einen modernen Business-Look */
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin-left: auto; /* Schiebt den Button vor das Handymenü */
+            margin-right: 20px; /* Abstand zum Hamburger-Menü */
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Subtiler Hover-Effekt */
+        .lite-btn:hover {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
+
+        /* Ihr bestehendes Handymenü-Icon */
+        .menu-toggle {
+            font-size: 24px;
+            color: #0f172a;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -280,6 +335,13 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
       <div class="brandname">Fasqoo</div>
     </div>
+  <!-- Ihr bestehendes Fasqoo-Logo -->
+        <a href="/" class="logo">Fasqoo</a>
+
+        <!-- NEU: Der professionelle Link zur Lite-Version -->
+        <a href="https://fasqoo.com" class="lite-btn">
+            Fasqoo Lite
+        </a>
     
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
 
