@@ -345,7 +345,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
         <a href="https://lite.fasqoo.com/" class="lite-btn">
             Fasqoo Lite
         </a>
-   
+   <button id="installButton" style="display: none;">App auf Desktop installieren</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
       <a href="index.html" id="navHome">Home</a>
@@ -1760,30 +1760,37 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Optional: Eigener Installations-Butto
+// Service Worker registrieren
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('ServiceWorker registriert:', reg.scope))
+      .catch(err => console.log('ServiceWorker Fehler:', err));
+  });
+}
+
 let deferredPrompt;
-const installBtn = document.getElementById('installButton');
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+  
+  const installBtn = document.getElementById('installButton');
   if (installBtn) {
     installBtn.style.display = 'block';
   }
 });
 
-if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
-      }
+document.addEventListener('click', async (e) => {
+  if (e.target && e.target.id === 'installButton' && deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      deferredPrompt = null;
+      e.target.style.display = 'none';
     }
-  });
-} 
+  }
+});
 </script>
  
 </body>
