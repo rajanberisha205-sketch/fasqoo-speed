@@ -325,6 +325,11 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
             color: #0f172a;
             cursor: pointer;
         }
+    @media (max-width: 760px) {
+  #installButton {
+    display: none !important;
+  }
+}
     </style>
 </head>
 <body>
@@ -341,7 +346,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
         <a href="https://lite.fasqoo.com/" class="lite-btn">
             Fasqoo Lite
         </a>
-  <button id="installButton" class="lite-btn" style="display: none;">App installieren</button>
+  <button id="installButton" class="lite-btn">App installieren</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
       <a href="index.html" id="navHome">Home</a>
