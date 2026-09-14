@@ -333,75 +333,10 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
 
 
-    .header-dropdown {
-  position: relative;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: 15px;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 110%;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  min-width: 220px;
-  z-index: 1001;
-  flex-direction: column;
-  padding: 6px;
-}
-
-.header-dropdown:hover .dropdown-menu {
+    .dropdown-item {
   display: flex;
-}
-
-.dropdown-item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: none;
-  padding: 9px 12px;
-  font-size: 12px;
-  color: var(--text);
-  border-radius: 6px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-
-    .header-dropdown {
-  position: relative;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: 15px;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 110%;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  min-width: 230px;
-  z-index: 1001;
-  flex-direction: column;
-  padding: 6px;
-}
-
-.header-dropdown:hover .dropdown-menu {
-  display: flex;
-}
-
-.dropdown-item {
-  display: block;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   text-align: left;
   background: transparent;
@@ -413,11 +348,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background: var(--soft);
-  color: var(--orange);
 }
     </style>
 </head>
