@@ -1876,9 +1876,7 @@ if (installBtn) {
       }
     }
   });
-  notDetected:"Not detected"
 }
-};
 
 // SPRACH-WECHSLER (LANGUAGE SWITCHER)
 const langSelect = $("lang");
@@ -1886,7 +1884,6 @@ if(langSelect){
   langSelect.addEventListener("change", (e) => {
     currentLang = e.target.value;
     localStorage.setItem("fasqoo_lang", currentLang);
-   
   });
 }
 
