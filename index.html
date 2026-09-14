@@ -330,9 +330,60 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     display: none !important;
   }
 }
+
+
+
+    .header-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+  z-index: 1001;
+  flex-direction: column;
+  padding: 6px;
+}
+
+.header-dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 9px 12px;
+  font-size: 12px;
+  color: var(--text);
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: var(--soft);
+  color: var(--orange);
+}
     </style>
 </head>
 <body>
+
+
+  
+<header>
 <div class="header-dropdown">
   <button class="lite-btn dropdown-btn">App / Download ▾</button>
   <div class="dropdown-menu">
@@ -342,7 +393,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 </div>
 
   
-<header>
   <div class="wrap nav">
     <div class="brand">
       <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
