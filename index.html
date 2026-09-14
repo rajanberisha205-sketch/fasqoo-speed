@@ -1836,7 +1836,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// === NEUES BANNER SCRIPT HIERFÜR ===
+
 let deferredPrompt;
 const installBanner = document.getElementById('installBanner');
 const installBtn = document.getElementById('installButton');
@@ -1887,11 +1887,10 @@ if(langSelect){
   langSelect.addEventListener("change", (e) => {
     currentLang = e.target.value;
     localStorage.setItem("fasqoo_lang", currentLang);
-    // Hier kannst du die Logik für den Sprachwechsel einfügen
+   
   });
 }
 
-// BEIM LADEN DER SEITE INITIALISIEREN
 window.addEventListener("DOMContentLoaded", () => {
   resizeCanvas();
   historyLoad();
