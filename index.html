@@ -276,86 +276,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 @media (max-width:700px){.fasqoo-footer-links{flex-direction:column;gap:9px}}
 </style>
 
-<style>
-  .pwa-install-banner {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    padding: 12px 16px;
-    display: none;
-    align-items: center;
-    gap: 12px;
-    z-index: 9999;
-    border: 1px solid #e0e0e0;
-    font-family: system-ui, -apple-system, sans-serif;
-    animation: slideUp 0.3s ease-out;
-  }
-
-  .banner-logo {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  .banner-text {
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    color: #1a1a1a;
-  }
-
-  .banner-text strong {
-    font-size: 15px;
-    color: #000000;
-  }
-
-  .banner-install-btn {
-    background-color: #0070f3;
-    color: #ffffff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-    transition: background 0.2s;
-  }
-
-  .banner-install-btn:hover {
-    background-color: #0051a2;
-  }
-
-  .banner-close-btn {
-    background: transparent;
-    border: none; unten
-    font-size: 18px;
-    color: #888888;
-    cursor: pointer;
-    padding: 0 4px;
-  }
-
-  .banner-close-btn:hover {
-    color: #000000;
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(40px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-</style>
-
-
-
   <style>
         /* Professionelles Header-Layout */
         header {
@@ -1836,72 +1756,31 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-
-let deferredPrompt;
-const installBanner = document.getElementById('installBanner');
-const installBtn = document.getElementById('installButton');
-const closeBannerBtn = document.getElementById('closeBannerBtn');
-let autoHideTimeout;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  if (installBanner) {
-    installBanner.style.display = 'flex';
-
-    // Banner ausblenden nach 5 Sekunden (5000 ms)
-    autoHideTimeout = setTimeout(() => {
-      installBanner.style.display = 'none';
-    }, 5000);
+  // Service Worker registrieren
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('ServiceWorker registriert:', reg.scope))
+        .catch(err => console.log('ServiceWorker Fehler:', err));
+    });
   }
-});
 
-if (closeBannerBtn) {
-  closeBannerBtn.addEventListener('click', () => {
-    installBanner.style.display = 'none';
-    clearTimeout(autoHideTimeout);
+  // SPRACH-WECHSLER (LANGUAGE SWITCHER)
+  const langSelect = $("lang");
+  if(langSelect){
+    langSelect.addEventListener("change", (e) => {
+      currentLang = e.target.value;
+      localStorage.setItem("fasqoo_lang", currentLang);
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    resizeCanvas();
+    historyLoad();
+    netinfo();
+    measureDns();
   });
-}
-
-if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    clearTimeout(autoHideTimeout);
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        deferredPrompt = null;
-        installBanner.style.display = 'none';
-      }
-    }
-  });
-}
-
-// SPRACH-WECHSLER (LANGUAGE SWITCHER)
-const langSelect = $("lang");
-if(langSelect){
-  langSelect.addEventListener("change", (e) => {
-    currentLang = e.target.value;
-    localStorage.setItem("fasqoo_lang", currentLang);
-  });
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  resizeCanvas();
-  historyLoad();
-  netinfo();
-  measureDns();
-});
 </script>
- <div id="installBanner" class="pwa-install-banner">
-  <img src="/android-chrome-192x192.png" alt="Fasqoo Logo" class="banner-logo">
-  <div class="banner-text">
-    <strong>Fasqoo</strong>
-    <span>Als Desktop-App installieren</span>
-  </div>
-  <button id="installButton" class="banner-install-btn">Installieren</button>
-  <button id="closeBannerBtn" class="banner-close-btn">&times;</button>
-</div>
+
 </body>
 </html>
