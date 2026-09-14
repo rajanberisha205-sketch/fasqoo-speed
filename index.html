@@ -345,7 +345,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
         <a href="https://lite.fasqoo.com/" class="lite-btn">
             Fasqoo Lite
         </a>
-    <button id="installButton" style="display: none;">App auf Desktop installieren</button>
+   
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
       <a href="index.html" id="navHome">Home</a>
@@ -1751,32 +1751,6 @@ resizeCanvas();
 netinfo();
 historyLoad();
 </script>
-  <script>
-  // ... hier steht dein gesamter bisheriger JavaScript-Code ...
-
-  let deferredPrompt;
-  const installBtn = document.getElementById('installButton');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) {
-      installBtn.style.display = 'block'; // Button anzeigen, sobald Installation möglich ist
-    }
-  });
-
-  if (installBtn) {
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          deferredPrompt = null;
-          installBtn.style.display = 'none';
-        }
-      }
-    });
-  }
-</script>
+ 
 </body>
 </html>
