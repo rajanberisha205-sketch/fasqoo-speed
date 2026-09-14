@@ -1877,6 +1877,30 @@ if (installBtn) {
     }
   });
 });
+  notDetected:"Not detected"
+}
+};
+
+// SPRACH-WECHSLER (LANGUAGE SWITCHER)
+const langSelect = $("lang");
+if(langSelect){
+  langSelect.addEventListener("change", (e) => {
+    currentLang = e.target.value;
+    localStorage.setItem("fasqoo_lang", currentLang);
+    // Hier kannst du die Logik für den Sprachwechsel einfügen
+  });
+}
+
+// BEIM LADEN DER SEITE INITIALISIEREN
+window.addEventListener("DOMContentLoaded", () => {
+  resizeCanvas();
+  historyLoad();
+  netinfo();
+  measureDns();
+});
+</script>
+</body>
+</html>
 </script>
  <div id="installBanner" class="pwa-install-banner">
   <img src="/android-chrome-192x192.png" alt="Fasqoo Logo" class="banner-logo">
