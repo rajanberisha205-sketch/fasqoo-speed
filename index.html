@@ -1904,10 +1904,7 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-  (function() {
-    if (window._fasqooInstallInitialized) return;
-    window._fasqooInstallInitialized = true;
-
+  document.addEventListener('DOMContentLoaded', () => {
     let deferredPrompt = null;
 
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -1915,62 +1912,49 @@ if ('serviceWorker' in navigator) {
       deferredPrompt = e;
     });
 
-    // 1. Windows / Android
+    // 1. Windows
     const winBtn = document.getElementById('installButtonWin');
     if (winBtn) {
-      winBtn.addEventListener('click', async () => {
+      winBtn.addEventListener('click', () => {
+        console.log('Windows-Button geklickt');
         if (deferredPrompt) {
           deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            deferredPrompt = null;
-          }
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              deferredPrompt = null;
+            }
+          });
         } else {
-          alert('Die App ist bereits auf deinem Gerät installiert oder wird vom Browser vorbereitet.');
+          alert('Windows / Android: Die App wird vom Browser vorbereitet oder ist bereits installiert.');
         }
       });
     }
 
-    // 2. macOS (Chrome / Edge / Brave)
+    // 2. macOS
     const macBtn = document.getElementById('installButtonMac');
     if (macBtn) {
-      macBtn.addEventListener('click', async () => {
+      macBtn.addEventListener('click', () => {
+        console.log('macOS-Button geklickt');
         const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
         if (isSafari) {
-          alert('So installierst du Fasqoo in Safari auf dem Mac:\n\n1. Klicke oben in der Menüleiste auf "Ablage"\n2. Wähle "Zum Dock hinzufügen..." aus\n3. Bestätige mit "Hinzufügen"');
+          alert('So installierst du Fasqoo in Safari auf dem Mac:\n\n1. Klicke oben in der Menüleiste auf "Ablage"\n2. Wähle "Zum Dock hinzufügen..." aus');
         } else if (deferredPrompt) {
           deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            deferredPrompt = null;
-          }
         } else {
-          alert('Wenn du Chrome, Edge oder Brave nutzt, klicke auf das Installieren-Symbol in der Browser-Adressleiste.');
+          alert('Klicke auf das Installieren-Symbol in der Adressleiste von Chrome, Edge oder Brave.');
         }
       });
     }
 
-    // 3. Safari (Mac & iPhone)
+    // 3. Safari
     const safariBtn = document.getElementById('installButtonSafari');
     if (safariBtn) {
       safariBtn.addEventListener('click', () => {
+        console.log('Safari-Button geklickt');
         alert('So installierst du Fasqoo in Safari:\n\n• Am Mac: Klicke oben in der Menüleiste auf "Ablage" -> "Zum Dock hinzufügen...".\n• Auf dem iPhone/iPad: Tippe unten auf das Teilen-Symbol (Viereck mit Pfeil) -> "Zum Home-Bildschirm".');
       });
     }
-
-    // 4. iPhone direkt
-    const iphoneBtn = document.getElementById('installButtonIphone');
-    if (iphoneBtn) {
-      iphoneBtn.addEventListener('click', () => {
-        alert('So installierst du Fasqoo auf dem iPhone:\n\n1. Tippe unten in Safari auf das Teilen-Symbol (Viereck mit Pfeil nach oben).\n2. Scrolle im Menü nach unten und wähle "Zum Home-Bildschirm".\n3. Tippe oben rechts auf "Hinzufügen".');
-      });
-    }
-
-    window.addEventListener('appinstalled', () => {
-      deferredPrompt = null;
-    });
-  })();
+  });
 </script>
 </body>
 </html>
