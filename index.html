@@ -41,7 +41,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  
+  <!-- Apple Touch Icon (wichtig für den Mac / Home Screen) -->
+<link rel="apple-touch-icon" href="/path/to/dein-icon.png">
+
+<!-- Safari Web App Meta-Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fasqoo">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1882,15 +1888,16 @@ if ('serviceWorker' in navigator) {
 
   <script>
   let deferredPrompt;
-  const installBtn = document.getElementById('installButton');
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
   });
 
-  if (installBtn) {
-    installBtn.addEventListener('click', async () => {
+  // Windows / Android Button
+  const winBtn = document.getElementById('installButtonWin');
+  if (winBtn) {
+    winBtn.addEventListener('click', async () => {
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
@@ -1898,7 +1905,27 @@ if ('serviceWorker' in navigator) {
           deferredPrompt = null;
         }
       } else {
-        alert('Die App kann entweder bereits installiert sein oder dein Browser bereitet den Installations-Dialog noch vor.');
+        alert('Die App ist bereits auf deinem Gerät installiert oder wird vom Browser vorbereitet.');
+      }
+    });
+  }
+
+  // macOS Button (mit Safari-Check)
+  const macBtn = document.getElementById('installButtonMac');
+  if (macBtn) {
+    macBtn.addEventListener('click', async () => {
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      if (isSafari) {
+        alert('So installierst du Fasqoo in Safari auf dem Mac:\n\n1. Klicke oben in der Menüleiste auf "Ablage"\n2. Wähle "Zum Dock hinzufügen..." aus\n3. Bestätige mit "Hinzufügen"');
+      } else if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          deferredPrompt = null;
+        }
+      } else {
+        alert('Die App ist bereits auf deinem Mac installiert oder wird vom Browser vorbereitet.');
       }
     });
   }
