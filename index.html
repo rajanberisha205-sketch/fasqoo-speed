@@ -407,40 +407,8 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <div class="brandname">Fasqoo</div>
     </div>
  
-
-        <!-- Link zur Lite-Version -->
-        <a href="https://lite.fasqoo.com/" class="lite-btn">
-            Fasqoo Lite
-        </a>
-<div class="header-dropdown">
-  <button class="lite-btn dropdown-btn" type="button">Download ▾</button>
-  <div class="dropdown-menu">
-    <!-- Windows -->
-    <button class="dropdown-item" type="button" onclick="fasqooInstall('windows')">
-      <svg class="dropdown-icon-img" viewBox="0 0 88 88" width="16" height="16" fill="currentColor">
-        <path d="M0 12.402l35.687-4.86.016 34.403-35.67V12.402zm35.67 35.843L35.703 83.18 0 77.828V48.245l35.67 0zM40.422 5.655L87.906 0v35.859H40.422V5.655zm47.484 41.61V88L40.422 81.328V47.265H87.906z"/>
-      </svg>
-      <span>Windows</span>
-    </button>
-    
-    <!-- macOS -->
-    <button class="dropdown-item" type="button" onclick="fasqooInstall('mac')">
-      <svg class="dropdown-icon-img" viewBox="0 0 170 170" width="16" height="16" fill="currentColor">
-        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.34.13-9.14-1.9-14.4-6.08-3.69-3.04-7.66-7.87-11.94-14.49-6.3-9.79-11.17-20.72-14.6-32.79-3.44-12.07-5.16-23.47-5.16-34.2 0-14.89 3.82-27.31 11.46-37.26 7.64-9.95 17.47-15.04 29.5-15.27 4.57 0 9.77 1.22 15.6 3.66 5.82 2.44 9.7 3.66 11.64 3.66 1.63 0 5.62-1.29 11.97-3.87 6.35-2.58 11.75-3.74 16.2-3.47 11.85.76 21.46 5.23 28.84 13.41-10.43 6.3-15.54 15.22-15.33 26.75.21 9.13 3.79 16.63 10.74 22.5 6.95 5.87 15.11 9.08 24.47 9.63-2.5 7.4-5.83 14.8-10.01 22.2zM119.22 31.09c0-6.74 2.45-13.06 7.35-18.96 4.9-5.9 10.98-9.46 18.25-10.68.11 1.09.16 1.96.16 2.61 0 6.63-2.5 12.95-7.5 18.96-5 6.01-11.12 9.48-18.36 10.42-.05-.76-.08-1.53-.08-2.35z"/>
-      </svg>
-      <span>macOS</span>
-    </button>
-
-    <!-- Safari -->
-    <button class="dropdown-item" type="button" onclick="fasqooInstall('safari')">
-      <svg class="dropdown-icon-img" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-      </svg>
-      <span>Safari</span>
-    </button>
-  </div>
-</div>
+<button id="installBtn" style="display: none;">Install Desktop</button>
+        
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
       <a href="faq.html" id="navFaq">FAQ</a>
@@ -1902,40 +1870,25 @@ if ('serviceWorker' in navigator) {
     deferredPrompt = null;
   });
 </script>
-
 <script>
-  let deferredPrompt = null;
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'inline-block';
+});
 
-  function fasqooInstall(platform) {
-    if (platform === 'windows') {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            deferredPrompt = null;
-          }
-        });
-      } else {
-        alert('Windows / Android: Die App wird vom Browser vorbereitet oder ist bereits installiert.');
-      }
-    } else if (platform === 'mac') {
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-      if (isSafari) {
-        alert('So installierst du Fasqoo in Safari auf dem Mac:\n\n1. Klicke oben in der Menüleiste auf "Ablage"\n2. Wähle "Zum Dock hinzufügen..." aus');
-      } else if (deferredPrompt) {
-        deferredPrompt.prompt();
-      } else {
-        alert('Klicke auf das Installieren-Symbol in der Adressleiste von Chrome, Edge oder Brave.');
-      }
-    } else if (platform === 'safari') {
-      alert('So installierst du Fasqoo in Safari:\n\n• Am Mac: Klicke oben in der Menüleiste auf "Ablage" -> "Zum Dock hinzufügen...".\n• Auf dem iPhone/iPad: Tippe unten auf das Teilen-Symbol (Viereck mit Pfeil) -> "Zum Home-Bildschirm".');
-    }
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {
+    installBtn.style.display = 'none';
   }
-</script>
+  deferredPrompt = null;
+});
+  </script>
 </body>
 </html>
