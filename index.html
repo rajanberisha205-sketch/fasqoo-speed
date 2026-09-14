@@ -421,12 +421,21 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <span>Windows</span>
     </button>
     
-    <!-- macOS -->
+    <!-- macOS (Chrome / Edge / Brave) -->
     <button id="installButtonMac" class="dropdown-item" type="button">
       <svg class="dropdown-icon-img" viewBox="0 0 170 170" width="16" height="16" fill="currentColor">
         <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.34.13-9.14-1.9-14.4-6.08-3.69-3.04-7.66-7.87-11.94-14.49-6.3-9.79-11.17-20.72-14.6-32.79-3.44-12.07-5.16-23.47-5.16-34.2 0-14.89 3.82-27.31 11.46-37.26 7.64-9.95 17.47-15.04 29.5-15.27 4.57 0 9.77 1.22 15.6 3.66 5.82 2.44 9.7 3.66 11.64 3.66 1.63 0 5.62-1.29 11.97-3.87 6.35-2.58 11.75-3.74 16.2-3.47 11.85.76 21.46 5.23 28.84 13.41-10.43 6.3-15.54 15.22-15.33 26.75.21 9.13 3.79 16.63 10.74 22.5 6.95 5.87 15.11 9.08 24.47 9.63-2.5 7.4-5.83 14.8-10.01 22.2zM119.22 31.09c0-6.74 2.45-13.06 7.35-18.96 4.9-5.9 10.98-9.46 18.25-10.68.11 1.09.16 1.96.16 2.61 0 6.63-2.5 12.95-7.5 18.96-5 6.01-11.12 9.48-18.36 10.42-.05-.76-.08-1.53-.08-2.35z"/>
       </svg>
       <span>macOS</span>
+    </button>
+
+    <!-- Safari (Mac & iPhone) -->
+    <button id="installButtonSafari" class="dropdown-item" type="button">
+      <svg class="dropdown-icon-img" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+      </svg>
+      <span>Safari (Mac / iPhone)</span>
     </button>
 
     <!-- iPhone (iOS) -->
@@ -1901,7 +1910,7 @@ if ('serviceWorker' in navigator) {
   });
 </script>
 
-  <script>
+ <script>
   let deferredPrompt;
 
   window.addEventListener('beforeinstallprompt', (e) => {
@@ -1909,7 +1918,7 @@ if ('serviceWorker' in navigator) {
     deferredPrompt = e;
   });
 
-  // Windows / Android Button
+  // 1. Windows / Android
   const winBtn = document.getElementById('installButtonWin');
   if (winBtn) {
     winBtn.addEventListener('click', async () => {
@@ -1925,23 +1934,35 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // macOS Button (mit Safari-Check)
+  // 2. macOS (Chrome / Edge / Brave)
   const macBtn = document.getElementById('installButtonMac');
   if (macBtn) {
     macBtn.addEventListener('click', async () => {
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-      if (isSafari) {
-        alert('So installierst du Fasqoo in Safari auf dem Mac:\n\n1. Klicke oben in der Menüleiste auf "Ablage"\n2. Wähle "Zum Dock hinzufügen..." aus\n3. Bestätige mit "Hinzufügen"');
-      } else if (deferredPrompt) {
+      if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
           deferredPrompt = null;
         }
       } else {
-        alert('Die App ist bereits auf deinem Mac installiert oder wird vom Browser vorbereitet.');
+        alert('Wenn du Chrome, Edge oder Brave nutzt, klicke auf das Installieren-Symbol in der Browser-Adressleiste.');
       }
+    });
+  }
+
+  // 3. Safari (Mac & iPhone)
+  const safariBtn = document.getElementById('installButtonSafari');
+  if (safariBtn) {
+    safariBtn.addEventListener('click', () => {
+      alert('So installierst du Fasqoo in Safari:\n\n• Am Mac: Klicke oben in der Menüleiste auf "Ablage" -> "Zum Dock hinzufügen...".\n• Auf dem iPhone/iPad: Tippe unten auf das Teilen-Symbol (Viereck mit Pfeil) -> "Zum Home-Bildschirm".');
+    });
+  }
+
+  // 4. iPhone direkt
+  const iphoneBtn = document.getElementById('installButtonIphone');
+  if (iphoneBtn) {
+    iphoneBtn.addEventListener('click', () => {
+      alert('So installierst du Fasqoo auf dem iPhone:\n\n1. Tippe unten in Safari auf das Teilen-Symbol (Viereck mit Pfeil nach oben).\n2. Scrolle im Menü nach unten und wähle "Zum Home-Bildschirm".\n3. Tippe oben rechts auf "Hinzufügen".');
     });
   }
 
