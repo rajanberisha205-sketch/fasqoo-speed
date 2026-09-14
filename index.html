@@ -1752,5 +1752,32 @@ resizeCanvas();
 netinfo();
 historyLoad();
 </script>
+  <script>
+  // ... hier steht dein gesamter bisheriger JavaScript-Code ...
+
+  let deferredPrompt;
+  const installBtn = document.getElementById('installButton');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.style.display = 'block'; // Button anzeigen, sobald Installation möglich ist
+    }
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          deferredPrompt = null;
+          installBtn.style.display = 'none';
+        }
+      }
+    });
+  }
+</script>
 </body>
 </html>
