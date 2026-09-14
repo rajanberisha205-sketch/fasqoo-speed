@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,9 +42,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <!-- Apple Touch Icon (wichtig für den Mac / Home Screen) -->
-<link rel="apple-touch-icon" href="/path/to/dein-icon.png">
-
+  
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -332,45 +331,34 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     display: none !important;
   }
 }
-
-
-
-
+    </style>
 </head>
 <body>
 
-
-  
 <header>
-
   <div class="wrap nav">
     <div class="brand">
       <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
       <div class="brandname">Fasqoo</div>
     </div>
  
-<div class="header-dropdown">
-  <button class="lite-btn dropdown-btn" type="button">Download ▾</button>
-  <div class="dropdown-menu">
-    <button id="installButtonWin" class="dropdown-item" type="button">
-      <svg class="dropdown-icon-img" viewBox="0 0 88 88" width="16" height="16" fill="currentColor">
-        <path d="M0 12.402l35.687-4.86.016 34.403-35.67V12.402zm35.67 35.843L35.703 83.18 0 77.828V48.245l35.67 0zM40.422 5.655L87.906 0v35.859H40.422V5.655zm47.484 41.61V88L40.422 81.328V47.265H87.906z"/>
-      </svg>
-      <span>Windows</span>
-    </button>
-  </div>
-</div>
-        
+
+        <!-- Link zur Lite-Version -->
+        <a href="https://lite.fasqoo.com/" class="lite-btn">
+            Fasqoo Lite
+        </a>
+  <button id="installButton" class="lite-btn">App installieren</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" id="navHome">Home</a>
       <a href="faq.html" id="navFaq">FAQ</a>
       <a href="network-status.html" id="navStatus">Netzwerk-Status</a>
       <a href="subnet-calculator.html" id="navDiag">IT-Diagnose</a>
       <a href="about.html" id="navAbout">Über uns</a>
       <div class="menu-extra">
         <select id="lang" aria-label="Language">
-          <option value="en">English</option>
           <option value="de">Deutsch</option>
+          <option value="en">English</option>
           <option value="fr">Français</option>
           <option value="es">Español</option>
           <option value="it">Italiano</option>
@@ -1789,32 +1777,38 @@ if ('serviceWorker' in navigator) {
     netinfo();
     measureDns();
   });
-    
-
-  </script>
-  <script>
-  let deferredPrompt = null;
+</script>
+<script>
+  let deferredPrompt;
+  const installBtn = document.getElementById('installButton');
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    if (installBtn) {
+      installBtn.style.display = 'inline-flex';
+    }
   });
 
-  const winBtn = document.getElementById('installButtonWin');
-  if (winBtn) {
-    winBtn.addEventListener('click', async () => {
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
           deferredPrompt = null;
+          installBtn.style.display = 'none';
         }
-      } else {
-        alert('Tipp: Schau oben rechts in deiner Browser-Adressleiste (Chrome oder Edge) auf das Installieren-Symbol oder klicke auf die drei Punkte -> "App installieren".');
       }
     });
   }
-</script>
 
+  window.addEventListener('appinstalled', () => {
+    if (installBtn) {
+      installBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  });
+</script>
 </body>
 </html>
