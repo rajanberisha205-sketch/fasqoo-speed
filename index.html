@@ -384,15 +384,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
   
 <header>
-<div class="header-dropdown">
-  <button class="lite-btn dropdown-btn">App / Download ▾</button>
-  <div class="dropdown-menu">
-    <button id="installButton" class="dropdown-item">💻 Desktop / Android installieren</button>
-    <a href="#" id="iosGuideBtn" class="dropdown-item">📱 iPhone (iOS) Anleitung</a>
-  </div>
-</div>
 
-  
   <div class="wrap nav">
     <div class="brand">
       <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
@@ -404,7 +396,13 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
         <a href="https://lite.fasqoo.com/" class="lite-btn">
             Fasqoo Lite
         </a>
-  <button id="installButton" class="lite-btn">App installieren</button>
+ <div class="header-dropdown">
+  <button class="lite-btn dropdown-btn">App / Download ▾</button>
+  <div class="dropdown-menu">
+    <button id="installButton" class="dropdown-item">💻 Desktop / Android installieren</button>
+    <a href="#" id="iosGuideBtn" class="dropdown-item">📱 iPhone (iOS) Anleitung</a>
+  </div>
+</div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
       <a href="index.html" id="navHome">Home</a>
