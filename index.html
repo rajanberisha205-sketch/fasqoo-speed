@@ -284,53 +284,74 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
             align-items: center;
             padding: 14px 24px;
             background-color: #ffffff;
-            border-bottom: 1px solid #eef2f5; /* Dezente Trennlinie */
+            border-bottom: 1px solid #eef2f5;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         .logo {
             font-size: 22px;
             font-weight: 700;
-            color: #0f172a; /* Edles Dunkelgrau/Schwarz */
+            color: #0f172a;
             text-decoration: none;
             letter-spacing: -0.5px;
         }
 
-        /* 🌐 PROFESSIONELLER LITE-BUTTON (Minimalistisch & Clean) */
+        /* 🌐 PROFESSIONELLER LITE-BUTTON */
         .lite-btn {
             background-color: transparent;
-            color: #0284c7; /* Professionelles Tech-Blau */
-            border: 1px solid #0284c7; /* Feiner Rahmen */
+            color: #0284c7;
+            border: 1px solid #0284c7;
             padding: 6px 14px;
-            border-radius: 6px; /* Leicht abgerundet für einen modernen Business-Look */
+            border-radius: 6px;
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            margin-left: auto; /* Schiebt den Button vor das Handymenü */
-            margin-right: 20px; /* Abstand zum Hamburger-Menü */
+            margin-left: auto;
+            margin-right: 10px;
             transition: all 0.2s ease-in-out;
         }
 
-        /* Subtiler Hover-Effekt */
         .lite-btn:hover {
             background-color: #0284c7;
             color: #ffffff;
         }
 
-        /* Ihr bestehendes Handymenü-Icon */
+        /* 📥 DOWNLOAD / INSTALL BUTTON (Desktop Chrome) */
+        .install-btn {
+            background-color: #ff5a1f;
+            color: #ffffff;
+            border: 1px solid #ff5a1f;
+            padding: 6px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .install-btn:hover {
+            background-color: #e04b13;
+            border-color: #e04b13;
+        }
+
         .menu-toggle {
             font-size: 24px;
             color: #0f172a;
             cursor: pointer;
         }
     @media (max-width: 760px) {
-  #installButton {
-    display: none !important;
-  }
-}
-    </style>
+      #installButton {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -341,11 +362,15 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <div class="brandname">Fasqoo</div>
     </div>
  
+    <!-- Link zur Lite-Version -->
+    <a href="https://lite.fasqoo.com/" class="lite-btn" id="navLite">
+        Fasqoo Lite
+    </a>
 
-        <!-- Link zur Lite-Version -->
-        <a href="https://lite.fasqoo.com/" class="lite-btn">
-            Fasqoo Lite
-        </a>
+    <!-- Direkter Download / Installieren Button für Desktop Chrome -->
+    <button id="installButton" class="install-btn" style="display:none;">
+      <span>📥</span> <span id="installBtnText">Installieren</span>
+    </button>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
@@ -1218,9 +1243,150 @@ if(localStorage.getItem("fasqoo_dark") === "true"){
   $("themeBtn").textContent = "☾";
 }
 
+/* SPRACHWECHSEL & ÜBERSETZUNGS-LOGIK */
+const langSelect = $("lang");
+if(langSelect){
+  langSelect.addEventListener("change", (e) => {
+    setLanguage(e.target.value);
+  });
+}
+
+function setLanguage(lang){
+  if(!translations[lang]) lang = "de";
+  currentLang = lang;
+  if(langSelect) langSelect.value = lang;
+  localStorage.setItem("fasqoo_lang", lang);
+
+  const t = translations[lang];
+  
+  // Header Nav
+  if($("navFaq")) $("navFaq").textContent = t.navFaq;
+  if($("navStatus")) $("navStatus").textContent = t.navStatus;
+  if($("navDiag")) $("navDiag").textContent = t.navDiag;
+  if($("navAbout")) $("navAbout").textContent = t.navAbout;
+  if($("navLite")) $("navLite").textContent = t.navLite;
+  if($("installBtnText")) $("installBtnText").textContent = t.installBtn;
+
+  // Hero
+  if($("heroTitle")) $("heroTitle").textContent = t.title;
+  if($("heroSub")) $("heroSub").textContent = t.sub;
+  if($("serverLabel")) $("serverLabel").textContent = t.server;
+
+  // Main Controls
+  if(!running && $("start")) $("start").textContent = t.start;
+  if(!running && $("status")) $("status").textContent = t.ready;
+
+  // Metrics labels
+  if($("lblMetricPing")) $("lblMetricPing").textContent = t.ping;
+  if($("lblMetricJitter")) $("lblMetricJitter").textContent = t.jitter;
+  if($("lblMetricDown")) $("lblMetricDown").textContent = t.download;
+  if($("lblMetricUp")) $("lblMetricUp").textContent = t.upload;
+  if($("chartLiveLabel")) $("chartLiveLabel").textContent = t.chartLive;
+  if($("chartState") && !running) $("chartState").textContent = t.chartWait;
+
+  // Info Grid
+  if($("lblIp")) $("lblIp").textContent = t.lblIp;
+  if($("lblIsp")) $("lblIsp").textContent = t.lblIsp;
+  if($("lblLoc")) $("lblLoc").textContent = t.lblLoc;
+  if($("lblAsn")) $("lblAsn").textContent = t.lblAsn;
+
+  // Quality
+  if($("qualityTitle")) $("qualityTitle").textContent = t.qTitle;
+  if($("score").textContent === "—" && $("qtext")) $("qtext").textContent = t.qDefault;
+
+  // Apps section
+  if($("appsTitle")) $("appsTitle").textContent = t.appsTitle;
+  if($("appsSub")) $("appsSub").textContent = t.appsSub;
+  if($("appGamingTitle")) $("appGamingTitle").textContent = t.appGTitle;
+  if($("appGamingDesc")) $("appGamingDesc").textContent = t.appGDesc;
+  if($("appStreamTitle")) $("appStreamTitle").textContent = t.appSTitle;
+  if($("appStreamDesc")) $("appStreamDesc").textContent = t.appSDesc;
+  if($("app4kTitle")) $("app4kTitle").textContent = t.app4Title;
+  if($("app4kDesc")) $("app4kDesc").textContent = t.app4Desc;
+  if($("appCallTitle")) $("appCallTitle").textContent = t.appCTitle;
+  if($("appCallDesc")) $("appCallDesc").textContent = t.appCDesc;
+  if($("appOfficeTitle")) $("appOfficeTitle").textContent = t.appOTitle;
+  if($("appOfficeDesc")) $("appOfficeDesc").textContent = t.appODesc;
+  if($("appCloudTitle")) $("appCloudTitle").textContent = t.appClTitle;
+  if($("appCloudDesc")) $("appCloudDesc").textContent = t.appClDesc;
+  if($("appSocialTitle")) $("appSocialTitle").textContent = t.appSoTitle;
+  if($("appSocialDesc")) $("appSocialDesc").textContent = t.appSoDesc;
+  if($("appWebTitle")) $("appWebTitle").textContent = t.appWTitle;
+  if($("appWebDesc")) $("appWebDesc").textContent = t.appWDesc;
+
+  // Diagnostics
+  if($("diagnosticsTitle")) $("diagnosticsTitle").textContent = t.diagTitle;
+  if($("diagLatTitle")) $("diagLatTitle").textContent = t.diagLatT;
+  if($("diagLatDesc")) $("diagLatDesc").textContent = t.diagLatD;
+  if($("diagStabTitle")) $("diagStabTitle").textContent = t.diagStabT;
+  if($("diagStabDesc")) $("diagStabDesc").textContent = t.diagStabD;
+  if($("diagDnsTitle")) $("diagDnsTitle").textContent = t.diagDnsT;
+  if($("diagDnsDesc")) $("diagDnsDesc").textContent = t.diagDnsD;
+  if($("diagIpTitle")) $("diagIpTitle").textContent = t.diagIpT;
+  if($("diagIpDesc")) $("diagIpDesc").textContent = t.diagIpD;
+
+  // Report & History
+  if($("reportTitle")) $("reportTitle").textContent = t.repTitle;
+  if($("lblRepTestId")) $("lblRepTestId").textContent = t.lblRepTestId;
+  if($("copy")) $("copy").textContent = t.copy;
+  if($("share")) $("share").textContent = t.share;
+  if($("json")) $("json").textContent = t.json;
+  if($("print")) $("print").textContent = t.print;
+  if($("historyTitle")) $("historyTitle").textContent = t.histTitle;
+  if($("recentTitle")) $("recentTitle").textContent = t.histRecent;
+  if($("clear")) $("clear").textContent = t.histClear;
+  if($("thDate")) $("thDate").textContent = t.thDate;
+  if($("thDown")) $("thDown").textContent = t.thDown;
+  if($("thUp")) $("thUp").textContent = t.thUp;
+  if($("thPing")) $("thPing").textContent = t.thPing;
+  if($("thQual")) $("thQual").textContent = t.thQual;
+
+  // Footer
+  if($("ftRights")) $("ftRights").textContent = t.ftRights;
+  if($("ftTrade")) $("ftTrade").textContent = t.ftTrade;
+  if($("ftAccess")) $("ftAccess").textContent = t.ftAccess;
+  if($("ftPrivacy")) $("ftPrivacy").textContent = t.ftPrivacy;
+  if($("ftTerms")) $("ftTerms").textContent = t.ftTerms;
+  if($("ftNoSell")) $("ftNoSell").textContent = t.ftNoSell;
+
+  historyLoad();
+  netinfo();
+}
+
+// Initialisiere Sprache beim Laden
+const savedLang = localStorage.getItem("fasqoo_lang") || "de";
+setLanguage(savedLang);
+
+/* PWA INSTALL PROMPT LOGIC (Desktop Chrome Direct Download/Install) */
+let deferredPrompt;
+const installButton = $("installButton");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if(installButton) installButton.style.display = "inline-flex";
+});
+
+if(installButton){
+  installButton.addEventListener("click", async () => {
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if(outcome === "accepted"){
+      installButton.style.display = "none";
+    }
+    deferredPrompt = null;
+  });
+}
+
+window.addEventListener("appinstalled", () => {
+  if(installButton) installButton.style.display = "none";
+  deferredPrompt = null;
+});
+
 const translations = {
 de:{
-  navHome:"Home", navFaq:"FAQ", navStatus:"Netzwerk-Status", navDiag:"IT-Diagnose", navAbout:"Über uns",
+  navHome:"Home", navFaq:"FAQ", navStatus:"Netzwerk-Status", navDiag:"IT-Diagnose", navAbout:"Über uns", navLite:"Fasqoo Lite", installBtn:"Installieren",
   title:"Kostenloser Internet-Geschwindigkeitstest", sub:"Präzise Verbindungsmessung für Profis, Techniker und tägliche Internetnutzer",
   server:"AUTOMATISCHER SERVER", ready:"Bereit zum Testen", start:"Speedtest starten", startAgain:"Test erneut starten", testing:"Test läuft...", complete:"Test abgeschlossen",
   ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Echtzeit-Leistung", chartWait:"Wartet",
@@ -1235,22 +1401,13 @@ de:{
   appClTitle:"Cloud & Downloads", appClDesc:"Misst, wie effizient große Dateien übertragen werden.",
   appSoTitle:"Social Media", appSoDesc:"Geeignet für Instagram, TikTok, Facebook und Browsen.",
   appWTitle:"Web-Surfen", appWDesc:"Bewertet die Verbindung für tägliche Webseiten.",
-  appRunTest:"Test ausführen",
-  detGaming:"Führe einen Test aus, um zu sehen, welche Spiele (z.B. Shooter, MMOs, Strategie) du ohne Lag spielen kannst und welche Optimierungen (z.B. LAN-Kabel) nötig sind.",
-  detStream:"Erfahre, ob deine Bandbreite für flüssiges HD-Streaming auf Netflix, YouTube und anderen Plattformen ohne Pufferzeiten ausreicht.",
-  detFourk:"Prüft die Eignung für Ultra-HD / 4K Streaming (Netflix, Apple TV, YouTube 4K) und zeigt, welche Download-Geschwindigkeit hierfür erforderlich ist.",
-  detCall:"Ideal für Microsoft Teams, Zoom und Google Meet. Zeigt an, ob ruckelfreie Videoanrufe in HD mit mehreren Teilnehmern möglich sind.",
-  detOffice:"Bewertet die Stabilität für den Zugriff auf Firmen-VPNs, Cloud-Dokumente und professionelle Remote-Desktop-Anwendungen.",
-  detCloud:"Misst die Effizienz beim Herunterladen großer Dateien, Spiele-Updates oder beim Sichern von Daten in Cloud-Speichern (Google Drive, OneDrive).",
-  detSocial:"Zeigt an, wie schnell Reels, Stories und Videos auf Instagram, TikTok und Facebook ohne Nachladen wiedergegeben werden.",
-  detWeb:"Bewertet die Ladezeiten für alltägliche Webseiten, Online-Banking und Nachrichtenportale ohne Wartezeiten.",
   diagTitle:"Netzwerkdiagnose", diagLatT:"Latenz", diagLatD:"Misst die Antwortzeit und hilft bei Verzögerungsproblemen.",
   diagStabT:"Stabilität", diagStabD:"Jitter zeigt, ob die Verbindung unter Last stabil bleibt.",
   diagDnsT:"DNS-Diagnose", diagDnsD:"Prüft die Erreichbarkeit und Antwortzeiten der DNS-Resolver.",
   diagIpT:"IP-Diagnose", diagIpD:"Erkennt öffentliche IP, ISP, ASN sowie IPv4/IPv6-Status.",
   repTitle:"Professioneller Testbericht", lblRepTestId:"Test ID", copy:"Ergebnis kopieren", share:"Ergebnis teilen", json:"JSON exportieren", print:"Bericht drucken", copied:"Kopiert",
   histTitle:"Testverlauf", histRecent:"Letzte Messungen", histClear:"Verlauf löschen", thDate:"Datum", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualität", noHistory:"Noch keine Messungen gespeichert.",
-  ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.", ftTrade:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo.", ftAccess:"Barrierefreiheit", ftPrivacy:"Datenschutz", ftTerms:"Nutzungsbedingungen", ftNoSell:"Meine Daten nicht verkaufen", ftSlavery:"Richtlinie gegen Sklaverei",
+  ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.", ftTrade:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo.", ftAccess:"Barrierefreiheit", ftPrivacy:"Datenschutz", ftTerms:"Nutzungsbedingungen", ftNoSell:"Meine Daten nicht verkaufen",
   stPing:"Latenz wird gemessen...", stDown:"Download-Geschwindigkeit wird gemessen...", stUp:"Upload-Geschwindigkeit wird gemessen...", stErr:"Test konnte nicht abgeschlossen werden.",
   stExc:"Hervorragend", stGood:"Gut", stLim:"Eingeschränkt",
   q90:"Hervorragende Verbindung. Perfekt für Gaming, 4K-Streaming und Videocalls.", q75:"Sehr gute Verbindung für HD-Streaming, Gaming und Telefonie.", q55:"Gute Verbindung für alltägliche Online-Aktivitäten.", q35:"Durchschnittliche Verbindung. Anforderungsvolle Dienste evtl. eingeschränkt.", q0:"Schlechte Verbindung. Bitte Netzwerk prüfen.",
@@ -1265,7 +1422,7 @@ de:{
   alertRun:"Bitte führe zuerst einen Speedtest aus.", unavail:"Nicht verfügbar", notDetected:"Nicht erkannt"
 },
 en:{
-  navHome:"Home", navFaq:"FAQ", navStatus:"Network Status", navDiag:"IT Diagnostics", navAbout:"About Us",
+  navHome:"Home", navFaq:"FAQ", navStatus:"Network Status", navDiag:"IT Diagnostics", navAbout:"About Us", navLite:"Fasqoo Lite", installBtn:"Install",
   title:"Free Internet Speed Test", sub:"Precise connection measurements for professionals, technicians and daily users",
   server:"AUTOMATIC SERVER", ready:"Ready to test", start:"Start Speed Test", startAgain:"Test Again", testing:"Testing...", complete:"Test completed",
   ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Live Performance", chartWait:"Waiting",
@@ -1280,22 +1437,13 @@ en:{
   appClTitle:"Cloud & Downloads", appClDesc:"Measures how efficiently large files can be transferred.",
   appSoTitle:"Social Media", appSoDesc:"Suitable for Instagram, TikTok, Facebook and browsing.",
   appWTitle:"Web Browsing", appWDesc:"Evaluates the connection for everyday websites.",
-  appRunTest:"Run test",
-  detGaming:"Run a test to see which games (e.g. shooters, MMOs, strategy) you can play without lag and what optimizations (e.g. LAN cable) are needed.",
-  detStream:"Find out if your bandwidth is sufficient for smooth HD streaming on Netflix, YouTube, and other platforms without buffering.",
-  detFourk:"Checks suitability for Ultra HD / 4K streaming (Netflix, Apple TV, YouTube 4K) and shows the required download speed.",
-  detCall:"Ideal for Microsoft Teams, Zoom, and Google Meet. Indicates whether stutter-free HD video calls with multiple participants are possible.",
-  detOffice:"Evaluates stability for accessing corporate VPNs, cloud documents, and professional remote desktop applications.",
-  detCloud:"Measures efficiency when downloading large files, game updates, or backing up data to cloud storage (Google Drive, OneDrive).",
-  detSocial:"Shows how quickly reels, stories, and videos on Instagram, TikTok, and Facebook play without reloading.",
-  detWeb:"Evaluates loading times for everyday websites, online banking, and news portals without waiting times.",
   diagTitle:"Network Diagnostics", diagLatT:"Latency", diagLatD:"Measures response time and helps identify delay problems.",
   diagStabT:"Stability", diagStabD:"Jitter shows whether connection remains stable under load.",
   diagDnsT:"DNS Diagnostics", diagDnsD:"Checks DNS availability and resolver response times.",
   diagIpT:"IP Diagnostics", diagIpD:"Detects public IP, ISP, ASN and IPv4/IPv6 capability.",
   repTitle:"Professional Test Report", lblRepTestId:"Test ID", copy:"Copy Result", share:"Share Result", json:"Export JSON", print:"Print Report", copied:"Copied",
   histTitle:"Test History", histRecent:"Recent measurements", histClear:"Clear history", thDate:"Date", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Quality", noHistory:"No tests recorded yet.",
-  ftRights:"© 2026 Fasqoo. All Rights Reserved.", ftTrade:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.", ftAccess:"Accessibility", ftPrivacy:"Privacy Policy", ftTerms:"Terms of Use", ftNoSell:"Do Not Sell My Personal Info", ftSlavery:"Modern Slavery Policy",
+  ftRights:"© 2026 Fasqoo. All Rights Reserved.", ftTrade:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.", ftAccess:"Accessibility", ftPrivacy:"Privacy Policy", ftTerms:"Terms of Use", ftNoSell:"Do Not Sell My Personal Info",
   stPing:"Measuring latency...", stDown:"Measuring download speed...", stUp:"Measuring upload speed...", stErr:"Test could not be completed.",
   stExc:"Excellent", stGood:"Good", stLim:"Limited",
   q90:"Excellent connection. Perfect for gaming, 4K streaming and video calls.", q75:"Very good connection for HD streaming, gaming and video calls.", q55:"Good connection for everyday online activities.", q35:"Average connection. Demanding services may be limited.", q0:"Poor connection. Please check network.",
@@ -1310,7 +1458,7 @@ en:{
   alertRun:"Please run a speed test first.", unavail:"Unavailable", notDetected:"Not detected"
 },
 fr:{
-  navHome:"Accueil", navFaq:"FAQ", navStatus:"État du réseau", navDiag:"Diagnostic IT", navAbout:"À propos",
+  navHome:"Accueil", navFaq:"FAQ", navStatus:"État du réseau", navDiag:"Diagnostic IT", navAbout:"À propos", navLite:"Fasqoo Lite", installBtn:"Installer",
   title:"Test de vitesse Internet gratuit", sub:"Mesures précises pour professionnels, techniciens et utilisateurs quotidiens",
   server:"SERVEUR AUTOMATIQUE", ready:"Prêt à tester", start:"Lancer le test", startAgain:"Relancer le test", testing:"Test en cours...", complete:"Test terminé",
   ping:"Ping", jitter:"Jitter", download:"Téléchargement", upload:"Envoi", chartLive:"Performance en direct", chartWait:"En attente",
@@ -1325,22 +1473,13 @@ fr:{
   appClTitle:"Cloud & Téléchargements", appClDesc:"Mesure l'efficacité du transfert de gros fichiers.",
   appSoTitle:"Réseaux Sociaux", appSoDesc:"Adapté pour Instagram, TikTok, Facebook et la navigation.",
   appWTitle:"Navigation Web", appWDesc:"Évalue la connexion pour la navigation quotidienne.",
-  appRunTest:"Lancer le test",
-  detGaming:"Exécutez un test pour voir quels jeux (FPS, MMO, stratégie) vous pouvez jouer sans décalage et quelles optimisations (câble LAN) sont nécessaires.",
-  detStream:"Découvrez si votre bande passante suffit pour le streaming HD fluide sur Netflix, YouTube et d'autres plateformes sans mise en mémoire tampon.",
-  detFourk:"Vérifie l'aptitude pour le streaming Ultra-HD / 4K (Netflix, Apple TV, YouTube 4K) et indique la vitesse de téléchargement requise.",
-  detCall:"Idéal pour Microsoft Teams, Zoom et Google Meet. Indique si des appels vidéo HD fluides avec plusieurs participants sont possibles.",
-  detOffice:"Évalue la stabilité pour l'accès aux VPN d'entreprise, aux documents cloud et aux applications de bureau à distance.",
-  detCloud:"Mesure l'efficacité lors du téléchargement de fichiers volumineux, de mises à jour de jeux ou de la sauvegarde de données sur le cloud.",
-  detSocial:"Indique à quelle vitesse les reels, stories et vidéos sur Instagram, TikTok et Facebook se chargent sans attente.",
-  detWeb:"Évalue les temps de chargement des sites Web quotidiens, de la banque en ligne et des portails d'actualités.",
   diagTitle:"Diagnostic réseau", diagLatT:"Latence", diagLatD:"Mesure le temps de réponse et aide à identifier les retards.",
   diagStabT:"Stabilité", diagStabD:"Le jitter montre si la connexion reste stable sous charge.",
   diagDnsT:"Diagnostic DNS", diagDnsD:"Vérifie la disponibilité et le temps de réponse du DNS.",
   diagIpT:"Diagnostic IP", diagIpD:"Détecte l'IP publique, FAI, ASN et le statut IPv4/IPv6.",
   repTitle:"Rapport de test professionnel", lblRepTestId:"ID de test", copy:"Copier le résultat", share:"Partager le résultat", json:"Exporter en JSON", print:"Imprimer le rapport", copied:"Copié",
   histTitle:"Historique", histRecent:"Mesures récentes", histClear:"Effacer l'historique", thDate:"Date", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualité", noHistory:"Aucun test enregistré.",
-  ftRights:"© 2026 Fasqoo. Tous droits réservés.", ftTrade:"Fasqoo et Fasqoo Speed Test sont des marques déposées.", ftAccess:"Accessibilité", ftPrivacy:"Confidentialité", ftTerms:"Conditions d'utilisation", ftNoSell:"Ne pas vendre mes données", ftSlavery:"Politique sur l'esclavage moderne",
+  ftRights:"© 2026 Fasqoo. Tous droits réservés.", ftTrade:"Fasqoo et Fasqoo Speed Test sont des marques déposées.", ftAccess:"Accessibilité", ftPrivacy:"Confidentialité", ftTerms:"Conditions d'utilisation", ftNoSell:"Ne pas vendre mes données",
   stPing:"Mesure de la latence...", stDown:"Mesure du téléchargement...", stUp:"Mesure de l'envoi...", stErr:"Le test n'a pas pu être terminé.",
   stExc:"Excellent", stGood:"Bon", stLim:"Limité",
   q90:"Excellente connexion. Parfaite pour le jeu, la 4K et les appels vidéo.", q75:"Très bonne connexion pour le HD, les jeux et la vidéo.", q55:"Bonne connexion pour l'usage quotidien.", q35:"Connexion moyenne. Services exigeants parfois limités.", q0:"Connexion faible. Vérifiez votre réseau.",
@@ -1350,12 +1489,12 @@ fr:{
   call85:"Appels vidéo : Excellent", call65:"Appels vidéo : Bon", call40:"Appels vidéo : Limité", call0:"Appels vidéo altérés",
   off85:"Excellent pour le télétravail", off65:"Bon pour le télétravail", off40:"Utilisable", off0:"Risque de lenteur",
   cld85:"Gros transferts : Très rapide", cld65:"Transfert rapide", cld40:"Vitesse modérée", cld0:"Téléchargements lents",
-  soc85:"Excellent", soc65:"Trè bon", soc40:"Bon", soc0:"Limité",
+  soc85:"Excellent", soc65:"Très bon", soc40:"Bon", soc0:"Limité",
   web85:"Chargement très rapide", web65:"Chargement rapide", web40:"Chargement normal", web0:"Chargement lent",
   alertRun:"Veuillez d'abord lancer un test.", unavail:"Indisponible", notDetected:"Non détecté"
 },
 es:{
-  navHome:"Inicio", navFaq:"FAQ", navStatus:"Estado de red", navDiag:"Diagnóstico TI", navAbout:"Sobre nosotros",
+  navHome:"Inicio", navFaq:"FAQ", navStatus:"Estado de red", navDiag:"Diagnóstico TI", navAbout:"Sobre nosotros", navLite:"Fasqoo Lite", installBtn:"Instalar",
   title:"Test de velocidad de Internet gratis", sub:"Mediciones precisas para profesionales, técnicos y usuarios habituales",
   server:"SERVIDOR AUTOMÁTICO", ready:"Listo para probar", start:"Iniciar prueba", startAgain:"Probar de nuevo", testing:"Probando...", complete:"Prueba completada",
   ping:"Ping", jitter:"Jitter", download:"Descarga", upload:"Subida", chartLive:"Rendimiento en vivo", chartWait:"En espera",
@@ -1370,22 +1509,13 @@ es:{
   appClTitle:"Nube y Descargas", appClDesc:"Mide la eficiencia al transferir archivos grandes.",
   appSoTitle:"Redes Sociales", appSoDesc:"Apto para Instagram, TikTok, Facebook y navegar.",
   appWTitle:"Navegación Web", appWDesc:"Evalúa la conexión para páginas cotidianas.",
-  appRunTest:"Ejecutar test",
-  detGaming:"Ejecuta una prueba para ver qué juegos (shooters, MMOs, estrategia) puedes jugar sin lag y qué optimizaciones (cable LAN) se necesitan.",
-  detStream:"Descubre si tu ancho de banda es suficiente para streaming HD fluido en Netflix, YouTube y otras plataformas sin almacenamiento en búfer.",
-  detFourk:"Comprueba la idoneidad para streaming Ultra-HD / 4K (Netflix, Apple TV, YouTube 4K) y muestra la velocidad de descarga necesaria.",
-  detCall:"Ideal para Microsoft Teams, Zoom y Google Meet. Indica si son posibles videollamadas HD fluidas con varios participantes.",
-  detOffice:"Evalúa la estabilidad para acceder a VPNs corporativas, documentos en la nube y aplicaciones de escritorio remoto.",
-  detCloud:"Mide la eficiencia al descargar archivos grandes, actualizaciones de juegos o hacer copias de seguridad en la nube.",
-  detSocial:"Muestra qué tan rápido se reproducen los reels, historias y vídeos en Instagram, TikTok y Facebook sin recargar.",
-  detWeb:"Evalúa los tiempos de carga para sitios web cotidianos, banca online y portales de noticias.",
   diagTitle:"Diagnóstico de red", diagLatT:"Latencia", diagLatD:"Mide el tiempo de respuesta y detecta demoras.",
   diagStabT:"Estabilidad", diagStabD:"El jitter muestra si la red se mantiene estable bajo carga.",
   diagDnsT:"Diagnóstico DNS", diagDnsD:"Prueba la disponibilidad y respuesta de los DNS.",
   diagIpT:"Diagnóstico IP", diagIpD:"Detecta IP pública, ISP, ASN y compatibilidad IPv4/IPv6.",
   repTitle:"Informe de prueba profesional", lblRepTestId:"ID de prueba", copy:"Copiar resultado", share:"Compartir resultado", json:"Exportar JSON", print:"Imprimir informe", copied:"Copiado",
   histTitle:"Historial de pruebas", histRecent:"Mediciones recientes", histClear:"Borrar historial", thDate:"Fecha", thDown:"Descarga", thUp:"Subida", thPing:"Ping", thQual:"Calidad", noHistory:"No hay pruebas guardadas.",
-  ftRights:"© 2026 Fasqoo. Todos los derechos reservados.", ftTrade:"Fasqoo y Fasqoo Speed Test son marcas registradas.", ftAccess:"Accesibilidad", ftPrivacy:"Política de Privacidad", ftTerms:"Términos de uso", ftNoSell:"No vender mi información", ftSlavery:"Política contra la esclavitud moderna",
+  ftRights:"© 2026 Fasqoo. Todos los derechos reservados.", ftTrade:"Fasqoo y Fasqoo Speed Test son marcas registradas.", ftAccess:"Accesibilidad", ftPrivacy:"Política de Privacidad", ftTerms:"Términos de uso", ftNoSell:"No vender mi información",
   stPing:"Midiendo latencia...", stDown:"Midiendo descarga...", stUp:"Midiendo subida...", stErr:"La prueba no pudo completarse.",
   stExc:"Excelente", stGood:"Bueno", stLim:"Limitado",
   q90:"Excelente conexión. Perfecta para juegos, 4K y videollamadas.", q75:"Muy buena conexión para HD, juegos y conferencias.", q55:"Buena conexión para el uso diario.", q35:"Conexión promedio. Servicios exigentes limitados.", q0:"Conexión deficiente. Comprueba tu red.",
@@ -1400,7 +1530,7 @@ es:{
   alertRun:"Por favor ejecuta primero un test.", unavail:"No disponible", notDetected:"No detectado"
 },
 it:{
-  navHome:"Home", navFaq:"FAQ", navStatus:"Stato rete", navDiag:"Diagnostica IT", navAbout:"Chi siamo",
+  navHome:"Home", navFaq:"FAQ", navStatus:"Stato rete", navDiag:"Diagnostica IT", navAbout:"Chi siamo", navLite:"Fasqoo Lite", installBtn:"Installa",
   title:"Speed Test Internet Gratuito", sub:"Misurazioni precise per professionisti, tecnici e utenti quotidiani",
   server:"SERVER AUTOMATICO", ready:"Pronto per il test", start:"Avvia Speed Test", startAgain:"Ripeti Test", testing:"Test in corso...", complete:"Test completato",
   ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Prestazioni Live", chartWait:"In attesa",
@@ -1412,370 +1542,173 @@ it:{
   app4Title:"Streaming 4K", app4Desc:"Verifica se la tua connessione supporta i video 4K.",
   appCTitle:"Videoconferenze", appCDesc:"Valuta banda e latenza per le tue chiamate video.",
   appOTitle:"Smart Working", appODesc:"Qualità per applicazioni cloud e lavoro da casa.",
-  appClTitle:"Cloud e Download", appClDesc:"Misura l'efficienza nel trasferimento di file di grandi dimensioni.",
+  appClTitle:"Cloud e Download", appClDesc:"Misura l'efficienza nel trasferimento di file grandi.",
   appSoTitle:"Social Media", appSoDesc:"Adatto per Instagram, TikTok, Facebook e navigazione.",
-  appWTitle:"Navigazione Web", appWDesc:"Valuta la connessione per la navigazione quotidiana.",
-  appRunTest:"Esegui test",
-  detGaming:"Esegui un test per vedere quali giochi (sparatutto, MMO, strategia) puoi giocare senza lag e quali ottimizzazioni (cavo LAN) sono necessarie.",
-  detStream:"Scopri se la tua larghezza di banda è sufficiente per uno streaming HD fluido su Netflix, YouTube e altre piattaforme senza buffering.",
-  detFourk:"Verifica l'idoneità per lo streaming Ultra-HD / 4K (Netflix, Apple TV, YouTube 4K) e mostra la velocità di download richiesta.",
-  detCall:"Ideale per Microsoft Teams, Zoom e Google Meet. Indica se sono possibili videochiamate HD fluide con più partecipanti.",
-  detOffice:"Valuta la stabilità per l'accesso a VPN aziendali, documenti cloud e applicazioni di desktop remoto professionali.",
-  detCloud:"Misura l'efficienza nel download di file di grandi dimensioni, aggiornamenti di giochi o backup di dati su cloud.",
-  detSocial:"Mostra quanto velocemente reel, storie e video su Instagram, TikTok e Facebook vengono riprodotti senza ricaricare.",
-  detWeb:"Valuta i tempi di carico per siti Web di tutti i giorni, home banking e portali di notizie.",
-  diagTitle:"Diagnostica di rete", diagLatT:"Latenza", diagLatD:"Misura i tempi di risposta e individua ritardi di rete.",
-  diagStabT:"Stabilità", diagStabD:"Il jitter mostra se la connessione resta stabile sotto carico.",
-  diagDnsT:"Diagnostica DNS", diagDnsD:"Verifica disponibilità e tempi di risposta DNS.",
+  appWTitle:"Navigazione Web", appWDesc:"Valuta la connessione per i siti web quotidiani.",
+  diagTitle:"Diagnostica di rete", diagLatT:"Latenza", diagLatD:"Misura il tempo di risposta e aiuta con i problemi di ritardo.",
+  diagStabT:"Stabilità", diagStabD:"Il jitter mostra se la connessione rimane stabile sotto carico.",
+  diagDnsT:"Diagnostica DNS", diagDnsD:"Verifica la reperibilità e i tempi di risposta dei resolver DNS.",
   diagIpT:"Diagnostica IP", diagIpD:"Rileva IP pubblico, ISP, ASN e stato IPv4/IPv6.",
-  repTitle:"Report di test professionale", lblRepTestId:"ID Test", copy:"Copia risultato", share:"Condividi risultato", json:"Esporta JSON", print:"Stampa report", copied:"Copiato",
-  histTitle:"Cronologia test", histRecent:"Misurazioni recenti", histClear:"Cancella cronologia", thDate:"Data", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualità", noHistory:"Nessun test salvato.",
-  ftRights:"© 2026 Fasqoo. Tutti i diritti riservati.", ftTrade:"Fasqoo e Fasqoo Speed Test sono marchi di Fasqoo.", ftAccess:"Accessibilità", ftPrivacy:"Informativa Privacy", ftTerms:"Termini di utilizzo", ftNoSell:"Non vendere i miei dati", ftSlavery:"Politica contro la schiavitù moderna",
-  stPing:"Misurazione latenza...", stDown:"Misurazione download...", stUp:"Misurazione upload...", stErr:"Impossibile completare il test.",
+  repTitle:"Rapporto di prova professionale", lblRepTestId:"ID Test", copy:"Copia risultato", share:"Condividi risultato", json:"Esporta JSON", print:"Stampa report", copied:"Copiato",
+  histTitle:"Cronologia test", histRecent:"Ultime misurazioni", histClear:"Cancella cronologia", thDate:"Data", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualità", noHistory:"Nessun test salvato.",
+  ftRights:"© 2026 Fasqoo. Tutti i diritti riservati.", ftTrade:"Fasqoo e Fasqoo Speed Test sono marchi di Fasqoo.", ftAccess:"Accessibilità", ftPrivacy:"Privacy", ftTerms:"Termini d'uso", ftNoSell:"Non vendere le mie informazioni",
+  stPing:"Misurazione della latenza...", stDown:"Misurazione della velocità di download...", stUp:"Misurazione della velocità di upload...", stErr:"Impossibile completare il test.",
   stExc:"Eccellente", stGood:"Buono", stLim:"Limitato",
-  q90:"Connessione eccellente. Perfetta per gaming, 4K e chiamate video.", q75:"Ottima connessione per HD, gaming e videoconferenze.", q55:"Buona connessione per uso quotidiano.", q35:"Connessione nella media. Servizi pesanti limitati.", q0:"Connessione debole. Controlla la tua rete.",
-  gam85:"Eccellente per il gaming online", gam65:"Buono per il gaming", gam45:"Giocabile", gam0:"Può causare lag",
-  str85:"Streaming HD: Eccellente", str65:"Streaming HD: Buono", str40:"Streaming HD: Limitato", str0:"Possibili blocchi",
+  q90:"Connessione eccellente. Perfetta per gaming, streaming 4K e videochiamate.", q75:"Ottima connessione per streaming HD, gaming e chiamate.", q55:"Buona connessione per le normali attività online.", q35:"Connessione media. Servizi impegnativi eventualmente limitati.", q0:"Connessione scarsa. Verificare la rete.",
+  gam85:"Perfetto per il gaming online", gam65:"Buono per il gaming", gam45:"Giocabile", gam0:"Può causare ritardi",
+  str85:"Streaming HD: Eccellente", str65:"Streaming HD: Buono", str40:"Streaming HD: Limitato", str0:"Lo streaming potrebbe avere buffering",
   fk85:"Streaming 4K: Eccellente", fk65:"Streaming 4K: Buono", fk40:"Streaming 4K: Possibile", fk0:"4K non consigliato",
   call85:"Videochiamate: Eccellenti", call65:"Videochiamate: Buone", call40:"Videochiamate: Limitate", call0:"Videochiamate disturbate",
-  off85:"Eccellente per lo smart working", off65:"Buono per lo smart working", off40:"Utilizzabile", off0:"Potrebbe essere lento",
-  cld85:"Grandi trasferimenti: Velocissimo", cld65:"Trasferimento veloce", cld40:"Velocità moderata", cld0:"Download lenti",
-  soc85:"Eccellente", soc65:"Molto buono", soc40:"Buono", soc0:"Limitato",
-  web85:"Caricamento velocissimo", web65:"Caricamento veloce", web40:"Caricamento normale", web0:"Caricamento lento",
+  off85:"Eccellente per smart working", off65:"Buono per smart working", off40:"Utilizzabile", off0:"Possibilmente lento",
+  cld85:"Grandi trasferimenti: Molto veloci", cld65:"Trasferimento veloce", cld40:"Velocità moderata", cld0:"Download molto lenti",
+  soc85:"Eccellente", soc65:"Ottimo", soc40:"Buono", soc0:"Limitato",
+  web85:"Caricamento molto veloce", web65:"Caricamento veloce", web40:"Caricamento normale", web0:"Caricamento lento",
   alertRun:"Esegui prima uno speed test.", unavail:"Non disponibile", notDetected:"Non rilevato"
 },
 pt:{
-  navHome:"Início", navFaq:"FAQ", navStatus:"Estado da Rede", navDiag:"Diagnóstico TI", navAbout:"Sobre Nós",
-  title:"Teste de Velocidade da Internet Grátis", sub:"Medições precisas para profissionais, técnicos e utilizadores diários",
+  navHome:"Início", navFaq:"FAQ", navStatus:"Estado da Rede", navDiag:"Diagnóstico IT", navAbout:"Sobre nós", navLite:"Fasqoo Lite", installBtn:"Instalar",
+  title:"Teste de Velocidade de Internet Gratuito", sub:"Medições precisas para profissionais, técnicos e utilizadores diários",
   server:"SERVIDOR AUTOMÁTICO", ready:"Pronto para testar", start:"Iniciar Teste", startAgain:"Testar Novamente", testing:"A testar...", complete:"Teste concluído",
-  ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Desempenho em Tempo Real", chartWait:"A aguardar",
+  ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Desempenho em direto", chartWait:"A aguardar",
   lblIp:"IP Público", lblIsp:"Provedor / ISP", lblLoc:"Localização", lblAsn:"Rede / ASN",
-  qTitle:"Qualidade da Ligação", qDefault:"Execute um teste para avaliar a sua ligação.",
-  appsTitle:"O que pode fazer com a sua ligação?", appsSub:"Os seus resultados são analisados para atividades online comuns. (Clique num cartão para detalhes)",
-  appGTitle:"Jogos", appGDesc:"Ping baixo e pouco jitter são essenciais para jogos online.",
-  appSTitle:"Streaming", appSDesc:"Boa velocidade para streaming HD normal.",
+  qTitle:"Qualidade da Conexão", qDefault:"Execute um teste para avaliar a sua ligação.",
+  appsTitle:"O que pode fazer com a sua ligação?", appsSub:"Os seus resultados são analisados para atividades comuns. (Clique num cartão para detalhes)",
+  appGTitle:"Jogos", appGDesc:"Ping baixo e pouco jitter são importantes para jogos online.",
+  appSTitle:"Streaming", appSDesc:"Boa velocidade para streaming HD e normal.",
   app4Title:"Streaming 4K", app4Desc:"Verifica se a sua ligação suporta vídeo 4K.",
-  appCTitle:"Videochamadas", appCDesc:"Avalia a largura de banda e latência para videochamadas.",
-  appOTitle:"Teletrabalho", appODesc:"Qualidade para aplicações na nuvem e trabalho remoto.",
-  appClTitle:"Nuvem & Downloads", appClDesc:"Mede a eficiência na transferência de ficheiros grandes.",
+  appCTitle:"Videoconferências", appCDesc:"Avalia largura de banda e latência para chamadas.",
+  appOTitle:"Teletrabalho", appODesc:"Qualidade para aplicações em nuvem e trabalho remoto.",
+  appClTitle:"Cloud e Downloads", appClDesc:" Mede a eficiência de transferência de ficheiros grandes.",
   appSoTitle:"Redes Sociais", appSoDesc:"Adequado para Instagram, TikTok, Facebook e navegação.",
-  appWTitle:"Navegação Web", appWDesc:"Avalia a ligação para sites do dia a dia.",
-  appRunTest:"Executar teste",
-  detGaming:"Execute um teste para ver quais jogos (shooters, MMOs, estratégia) você pode jogar sem lag e quais otimizações (cabo LAN) são necessárias.",
-  detStream:"Descubra se a sua largura de banda é suficiente para streaming HD fluído no Netflix, YouTube e outras plataformas sem buffering.",
-  detFourk:"Verifica a adequação para streaming Ultra-HD / 4K (Netflix, Apple TV, YouTube 4K) e mostra a velocidade de download necessária.",
-  detCall:"Ideal para Microsoft Teams, Zoom e Google Meet. Indica se videochamadas HD fluidas com vários participantes são possíveis.",
-  detOffice:"Avalia a estabilidade para aceder a VPNs empresariais, documentos em nuvem e aplicações de ambiente de trabalho remoto.",
-  detCloud:"Mede a eficiência ao descarregar ficheiros grandes, atualizações de jogos ou fazer cópias de segurança na nuvem.",
-  detSocial:"Mostra quão rapidamente reels, histórias e vídeos no Instagram, TikTok e Facebook são reproduzidos sem recarregar.",
-  detWeb:"Avalia os tempos de carregamento para sites do dia a dia, home banking e portais de notícias.",
-  diagTitle:"Diagnóstico de Rede", diagLatT:"Latência", diagLatD:"Mede o tempo de resposta e identifica atrasos.",
-  diagStabT:"Estabilidade", diagStabD:"O jitter mostra se a rede se mantém estável sob carga.",
-  diagDnsT:"Diagnóstico DNS", diagDnsD:"Verifica a disponibilidade e tempos de resposta do DNS.",
+  appWTitle:"Navegação Web", appWDesc:"Avalia a ligação para sites diários.",
+  diagTitle:"Diagnóstico de Rede", diagLatT:"Latência", diagLatD:"Mede o tempo de resposta e ajuda com problemas de atraso.",
+  diagStabT:"Estabilidade", diagStabD:"O jitter mostra se a ligação permanece estável sob carga.",
+  diagDnsT:"Diagnóstico DNS", diagDnsD:"Verifica a disponibilidade e tempos de resposta dos DNS.",
   diagIpT:"Diagnóstico IP", diagIpD:"Deteta IP público, ISP, ASN e estado IPv4/IPv6.",
-  repTitle:"Relatório de Teste Profissional", lblRepTestId:"ID de Teste", copy:"Copiar Resultado", share:"Partilhar Resultado", json:"Exportar JSON", print:"Imprimir Relatório", copied:"Copiado",
-  histTitle:"Histórico de Testes", histRecent:"Medições recentes", histClear:"Limpar histórico", thDate:"Data", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualidade", noHistory:"Nenhum teste gravado.",
-  ftRights:"© 2026 Fasqoo. Todos os direitos reservados.", ftTrade:"Fasqoo e Fasqoo Speed Test são marcas registadas.", ftAccess:"Acessibilidade", ftPrivacy:"Política de Privacidade", ftTerms:"Termos de Utilização", ftNoSell:"Não vender os meus dados", ftSlavery:"Politica contra a escravatura moderna",
-  stPing:"A medir latência...", stDown:"A medir download...", stUp:"A medir upload...", stErr:"O teste não pôde ser concluído.",
+  repTitle:"Relatório de Teste Profissional", lblRepTestId:"ID do Teste", copy:"Copiar Resultado", share:"Partilhar", json:"Exportar JSON", print:"Imprimir Relatório", copied:"Copiado",
+  histTitle:"Histórico de Testes", histRecent:"Medições recentes", histClear:"Limpar histórico", thDate:"Data", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Qualidade", noHistory:"Ainda sem testes guardados.",
+  ftRights:"© 2026 Fasqoo. Todos os direitos reservados.", ftTrade:"Fasqoo e Fasqoo Speed Test são marcas registadas.", ftAccess:"Acessibilidade", ftPrivacy:"Privacidade", ftTerms:"Termos de Utilização", ftNoSell:"Não vender as minhas informações",
+  stPing:"A medir latência...", stDown:"A medir velocidade de download...", stUp:"A medir velocidade de upload...", stErr:"Não foi possível concluir o teste.",
   stExc:"Excelente", stGood:"Bom", stLim:"Limitado",
-  q90:"Ligação excelente. Perfeita para jogos, 4K e videochamadas.", q75:"Muito boa ligação para HD, jogos e videochamadas.", q55:"Boa ligação para o uso diário.", q35:"Ligação média. Serviços exigentes podem sofrer limitações.", q0:"Ligação fraca. Verifique a sua rede.",
+  q90:"Ligação excelente. Perfeita para jogos, streaming 4K e chamadas.", q75:"Muito boa ligação para streaming HD, jogos e chamadas.", q55:"Boa ligação para atividades diárias.", q35:"Ligação média. Serviços exigentes podem estar limitados.", q0:"Ligação fraca. Verifique a rede.",
   gam85:"Excelente para jogos online", gam65:"Bom para jogos", gam45:"Jogável", gam0:"Pode causar atrasos",
-  str85:"Streaming HD: Excelente", str65:"Streaming HD: Bom", str40:"Streaming HD: Limitado", str0:"Pode sofrer paragens",
+  str85:"Streaming HD: Excelente", str65:"Streaming HD: Bom", str40:"Streaming HD: Limitado", str0:"O streaming pode ter buffers",
   fk85:"Streaming 4K: Excelente", fk65:"Streaming 4K: Bom", fk40:"Streaming 4K: Possível", fk0:"4K não recomendado",
-  call85:"Videochamadas: Excelente", call65:"Videochamadas: Boas", call40:"Videochamadas: Limitadas", call0:"Videochamadas instáveis",
-  off85:"Excelente para teletrabalho", off65:"Bom para teletrabalho", off40:"Utilizável", off0:"Pode ser lento",
-  cld85:"Transferências grandes: Muito rápido", cld65:"Transferência rápida", cld40:"Velocidade moderada", cld0:"Downloads lentos",
+  call85:"Videocall: Excelente", call65:"Videocall: Bom", call40:"Videocall: Limitado", call0:"Videocall com problemas",
+  off85:"Excelente para teletrabalho", off65:"Bom para teletrabalho", off40:"Utilizável", off0:"Possivelmente lento",
+  cld85:"Grandes transferências: Muito rápidas", cld65:"Transferência rápida", cld40:"Velocidade moderada", cld0:"Downloads muito lentos",
   soc85:"Excelente", soc65:"Muito bom", soc40:"Bom", soc0:"Limitado",
   web85:"Carregamento muito rápido", web65:"Carregamento rápido", web40:"Carregamento normal", web0:"Carregamento lento",
-  alertRun:"Por favor execute um teste primeiro.", unavail:"Indisponível", notDetected:"Não detetado"
+  alertRun:"Por favor, execute primeiro um teste de velocidade.", unavail:"Indisponível", notDetected:"Não detetado"
 },
 nl:{
-  navHome:"Home", navFaq:"FAQ", navStatus:"Netwerkstatus", navDiag:"IT-Diagnostiek", navAbout:"Over ons",
-  title:"Gratis Internet Snelheidstest", sub:"Nauwkeurige metingen voor professionals, technici en dagelijkse gebruikers",
-  server:"AUTOMATISCHE SERVER", ready:"Klaar om te testen", start:"Snelheidstest starten", startAgain:"Opnieuw testen", testing:"Test bezig...", complete:"Test voltooid",
+  navHome:"Home", navFaq:"FAQ", navStatus:"Netwerkstatus", navDiag:"IT-Diagnostiek", navAbout:"Over ons", navLite:"Fasqoo Lite", installBtn:"Installeren",
+  title:"Gratis Internet Snelheidstest", sub:"Nauwkeurige verbindingsmetingen voor professionals, technici en dagelijkse gebruikers",
+  server:"AUTOMATISCHE SERVER", ready:"Klaar om te testen", start:"Start Snelheidstest", startAgain:"Opnieuw testen", testing:"Bezig met testen...", complete:"Test voltooid",
   ping:"Ping", jitter:"Jitter", download:"Download", upload:"Upload", chartLive:"Live prestaties", chartWait:"Wachten",
   lblIp:"Openbaar IP", lblIsp:"Provider / ISP", lblLoc:"Locatie", lblAsn:"Netwerk / ASN",
-  qTitle:"Verbindingskwaliteit", qDefault:"Voer een test uit om je verbinding te beoordelen.",
-  appsTitle:"Wat kun je doen met je verbinding?", appsSub:"Je resultaten worden geanalyseerd voor veelgebruikte online activiteiten. (Klik op een kaart voor details)",
-  appGTitle:"Gaming", appGDesc:"Lage ping en weinig jitter zijn belangrijk voor online gaming.",
+  qTitle:"Verbindingskwaliteit", qDefault:"Voer een test uit om je verbinding te evalueren.",
+  appsTitle:"Wat kun je doen met je verbinding?", appsSub:"Je resultaten worden geanalyseerd voor veelvoorkomende online activiteiten. (Klik op een vak voor details)",
+  appGTitle:"Gamen", appGDesc:"Lage ping en weinig jitter zijn belangrijk voor online gaming.",
   appSTitle:"Streaming", appSDesc:"Goede snelheid voor HD en normale streaming.",
-  app4Title:"4K Streaming", app4Desc:"Controleert of je verbinding 4K-video aan kan.",
-  appCTitle:"Videobellen", appCDesc:"Evalueert bandbreedte en responstijd voor videocalls.",
-  appOTitle:"Thuiswerken", appODesc:"Kwaliteit voor cloudtoepassingen en thuiswerken.",
-  appClTitle:"Cloud & Downloads", appClDesc:"Meet hoe efficiënt grote bestanden worden overgedragen.",
-  appSoTitle:"Sociale Media", appSoDesc:"Geschikt voor Instagram, TikTok, Facebook en browsen.",
-  appWTitle:"Websurfen", appWDesc:"Beoordeelt de verbinding voor dagelijkse websites.",
-  appRunTest:"Test uitvoeren",
-  detGaming:"Voer een test uit om te zien welke games (shooters, MMO's, strategie) je zonder lag kunt spelen en welke optimalisaties (LAN-kabel) nodig zijn.",
-  detStream:"Ontdek of je bandbreedte voldoende is voor soepele HD-streaming op Netflix, YouTube en andere platforms zonder buffering.",
-  detFourk:"Controleert de geschiktheid voor Ultra-HD / 4K streaming (Netflix, Apple TV, YouTube 4K) en toont de benodigde downloadsnelheid.",
-  detCall:"Ideaal voor Microsoft Teams, Zoom en Google Meet. Geeft aan of vloeiende HD-videogesprekken met meerdere deelnemers mogelijk zijn.",
-  detOffice:"Beoordeelt de stabiliteit voor toegang tot bedrijfs-VPN's, clouddocumenten en professionele remote desktop-toepassingen.",
-  detCloud:"Meet de efficiëntie bij het downloaden van grote bestanden, game-updates of het back-uppen van gegevens naar cloudopslag.",
-  detSocial:"Laat zien hoe snel reels, stories en video's op Instagram, TikTok en Facebook worden afgespeeld zonder herladen.",
-  detWeb:"Beoordeelt de laadtijden voor dagelijkse websites, internetbankieren en nieuwsportals.",
-  diagTitle:"Netwerkdiagnose", diagLatT:"Latenz", diagLatD:"Meet reactietijd en helpt bij vertragingsproblemen.",
-  diagStabT:"Stabiliteit", diagStabD:"Jitter toont of de verbinding onder belasting stabil blijft.",
-  diagDnsT:"DNS-diagnose", diagDnsD:"Controleert DNS-beschikbaarheid en responstijden.",
-  diagIpT:"IP-diagnose", diagIpD:"Detecteert openbaar IP, ISP, ASN en IPv4/IPv6-status.",
-  repTitle:"Professioneel testrapport", lblRepTestId:"Test-ID", copy:"Resultaat kopiëren", share:"Resultaat delen", json:"JSON exporteren", print:"Rapport afdrukken", copied:"Gekopieerd",
-  histTitle:"Testgeschiedenis", histRecent:"Recente metingen", histClear:"Geschiedenis wissselen", thDate:"Datum", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Kwaliteit", noHistory:"Nog geen metingen opgeslagen.",
-  ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.", ftTrade:"Fasqoo en Fasqoo Speed Test zijn handelsmerken van Fasqoo.", ftAccess:"Toegankelijkheid", ftPrivacy:"Privacybeleid", ftTerms:"Gebruiksvoorwaarden", ftNoSell:"Mijn gegevens niet verkopen", ftSlavery:"Beleid inzake moderne slavernij",
-  stPing:"Latenz meten...", stDown:"Downloadsnelheid meten...", stUp:"Uploadsnelheid meten...", stErr:"Test kon niet worden voltooid.",
+  app4Title:"4K Streaming", app4Desc:"Controleert of je verbinding 4K-video aankan.",
+  appCTitle:"Videogesprekken", appCDesc:"Evalueert bandbreedte en latentie voor videogesprekken.",
+  appOTitle:"Thuiswerken", appODesc:"Goede kwaliteit voor cloudtoepassingen en thuiswerk.",
+  appClTitle:"Cloud & Downloads", appClDesc:"Meet hoe efficiënt grote bestanden kunnen worden overgedragen.",
+  appSoTitle:"Social Media", appSoDesc:"Geschikt voor Instagram, TikTok, Facebook en browsen.",
+  appWTitle:"Web Surfen", appWDesc:"Evalueert de verbinding voor dagelijkse websites.",
+  diagTitle:"Netwerkdiagnostiek", diagLatT:"Latentie", diagLatD:"Meet de reactietijd en helpt vertragingsproblemen op te sporen.",
+  diagStabT:"Stabiliteit", diagStabD:"Jitter laat zien of de verbinding stabiel blijft onder belasting.",
+  diagDnsT:"DNS-diagnostiek", diagDnsD:"Controleert DNS-beschikbaarheid en responstijden.",
+  diagIpT:"IP-diagnostiek", diagIpD:"Detecteert openbaar IP, ISP, ASN en IPv4/IPv6-status.",
+  repTitle:"Professioneel Testrapport", lblRepTestId:"Test ID", copy:"Resultaat kopiëren", share:"Resultaat delen", json:"Exporteer JSON", print:"Rapport afdrukken", copied:"Gekopieerd",
+  histTitle:"Testgeschiedenis", histRecent:"Recente metingen", histClear:"Geschiedenis wissen", thDate:"Datum", thDown:"Download", thUp:"Upload", thPing:"Ping", thQual:"Kwaliteit", noHistory:"Nog geen tests opgeslagen.",
+  ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.", ftTrade:"Fasqoo en Fasqoo Speed Test zijn handelsmerken van Fasqoo.", ftAccess:"Toegankelijkheid", ftPrivacy:"Privacybeleid", ftTerms:"Gebruiksvoorwaarden", ftNoSell:"Verkoop mijn persoonlijke info niet",
+  stPing:"Latentie meten...", stDown:"Downloadsnelheid meten...", stUp:"Uploadsnelheid meten...", stErr:"Test kon niet worden voltooid.",
   stExc:"Uitstekend", stGood:"Goed", stLim:"Beperkt",
-  q90:"Uitstekende verbinding. Perfect voor gaming, 4K en videobellen.", q75:"Zeer goede verbinding voor HD, gaming en videocalls.", q55:"Goede verbinding voor dagelijks gebruik.", q35:"Gemiddelde verbinding. Zware diensten mogelijk beperkt.", q0:"Slechte verbinding. Controleer je netwerk.",
+  q90:"Uitstekende verbinding. Perfect voor gaming, 4K-streaming en videogesprekken.", q75:"Zeer goede verbinding voor HD-streaming, gaming en bellen.", q55:"Goede verbinding voor dagelijkse online activiteiten.", q35:"Gemiddelde verbinding. Veeleisende diensten mogelijk beperkt.", q0:"Slechte verbinding. Controleer het netwerk.",
   gam85:"Uitstekend voor online gaming", gam65:"Goed voor gaming", gam45:"Speelbaar", gam0:"Kan vertraging veroorzaken",
-  str85:"HD Streaming: Uitstekend", str65:"HD Streaming: Goed", str40:"HD Streaming: Beperkt", str0:"Kan bufferen",
+  str85:"HD Streaming: Uitstekend", str65:"HD Streaming: Goed", str40:"HD Streaming: Beperkt", str0:"Streaming kan bufferen",
   fk85:"4K Streaming: Uitstekend", fk65:"4K Streaming: Goed", fk40:"4K Streaming: Mogelijk", fk0:"4K niet aanbevolen",
-  call85:"Videobellen: Uitstekend", call65:"Videobellen: Goed", call40:"Videobellen: Beperkt", call0:"Videobellen verstoord",
+  call85:"Videogesprekken: Uitstekend", call65:"Videogesprekken: Goed", call40:"Videogesprekken: Beperkt", call0:"Videogesprekken kunnen haperen",
   off85:"Uitstekend voor thuiswerken", off65:"Goed voor thuiswerken", off40:"Bruikbaar", off0:"Mogelijk traag",
-  cld85:"Grote overdrachten: Zeer snel", cld65:"Snelle overdracht", cld40:"Matige snelheid", cld0:"Downloads traag",
+  cld85:"Grote overdrachten: Zeer snel", cld65:"Snelle overdracht", cld40:"Matige snelheid", cld0:"Grote downloads traag",
   soc85:"Uitstekend", soc65:"Zeer goed", soc40:"Goed", soc0:"Beperkt",
-  web85:"Zeer snel laden", web65:"Snel laden", web40:"Normaal laden", web0:"Trage paginaopbouw",
-  alertRun:"Voer eerst een snelheidstest uit.", unavail:"Niet beschikbaar", notDetected:"Not gedetecteerd"
+  web85:"Zeer snel laden", web65:"Snel laden", web40:"Normaal laden", web0:"Langzaam laden",
+  alertRun:"Voer eerst een snelheidstest uit.", unavail:"Niet beschikbaar", notDetected:"Niet gedetecteerd"
 },
 tr:{
-  navHome:"Anasayfa", navFaq:"SSS", navStatus:"Ağ Durumu", navDiag:"BT Tanılama", navAbout:"Hakkımızda",
+  navHome:"Ana Sayfa", navFaq:"SSS", navStatus:"Ağ Durumu", navDiag:"BT Tanılama", navAbout:"Hakkımızda", navLite:"Fasqoo Lite", installBtn:"Yükle",
   title:"Ücretsiz İnternet Hız Testi", sub:"Profesyoneller, teknisyenler ve günlük kullanıcılar için hassas bağlantı ölçümü",
-  server:"OTOMATİK SUNUCU", ready:"Teste hazır", start:"Hız Testini Başlat", startAgain:"Yeniden Test Et", testing:"Test yapılıyor...", complete:"Test tamamlandı",
-  ping:"Ping", jitter:"Jitter", download:"İndirme", upload:"Yükleme", chartLive:"Canlı Performans", chartWait:"Bekliyor",
-  lblIp:"Açık IP", lblIsp:"Sağlayıcı / ISP", lblLoc:"Konum", lblAsn:"Ağ / ASN",
+  server:"OTOMATİK SUNUCU", ready:"Test etmeye hazır", start:"Hız Testini Başlat", startAgain:"Tekrar Test Et", testing:"Test ediliyor...", complete:"Test tamamlandı",
+  ping:"Ping", jitter:"Jitter", download:"İndirme", upload:"Yükleme", chartLive:"Canlı Performans", chartWait:"Bekleniyor",
+  lblIp:"Genel IP", lblIsp:"Sağlayıcı / İSS", lblLoc:"Konum", lblAsn:"Ağ / ASN",
   qTitle:"Bağlantı Kalitesi", qDefault:"Bağlantınızı değerlendirmek için bir test çalıştırın.",
-  appsTitle:"Bağlantınızla neler yapabilirsiniz?", appsSub:"Sonuçlarınız yaygın çevrimiçi aktiviteler için analiz edilir. (Detaylar için kutuya tıklayın)",
-  appGTitle:"Oyun", appGDesc:"Düşük ping ve az jitter çevrimiçi oyunlar için önemlidir.",
-  appSTitle:"Yayın İzleme", appSDesc:"HD ve normal yayınlar için iyi hız.",
-  app4Title:"4K Yayın İzleme", app4Desc:"Bağlantınızın 4K videoyu kaldırıp kaldırmayacağını kontrol eder.",
-  appCTitle:"Görüntülü Görüşme", appCDesc:"Görüntülü aramalar için bant genişliğini ve gecikmeyi değerlendirir.",
-  appOTitle:"Evden Çalışma", appODesc:"Bulut uygulamaları ve uzaktan çalışma için bağlantı kalitesi.",
-  appClTitle:"Bulut & İndirme", appClDesc:"Büyük dosyaların ne kadar verimli aktarıldığını ölçer.",
-  appSoTitle:"Sosyal Medya", appSoDesc:"Instagram, TikTok, Facebook ve gezinme için uygun.",
-  appWTitle:"Webde Gezinme", appWDesc:"Günlük web siteleri için bağlantıyı değerlendirir.",
-  appRunTest:"Testi çalıştır",
-  detGaming:"Hangi oyunları (nişancı, MMO, strateji) gecikmesiz oynayabileceğinizi ve hangi optimizasyonların (LAN kablosu) gerektiğini görmek için bir test çalıştırın.",
-  detStream:"Netflix, YouTube ve diğer platformlarda takılmadan akıcı HD yayın için bant genişliğinizin yeterli olup olmadığını öğrenin.",
-  detFourk:"Ultra-HD / 4K yayın uyumluluğunu (Netflix, Apple TV, YouTube 4K) kontrol eder ve gerekli indirme hızını gösterir.",
-  detCall:"Microsoft Teams, Zoom ve Google Meet için idealdir. Birden fazla katılımcıyla takılmasız HD görüntülü görüşmelerin mümkün olup olmadığını gösterir.",
-  detOffice:"Kurumsal VPN'lere, bulut belgelere ve profesyonel uzak masaüstü uygulamalarına erişim için kararlılığı değerlendirir.",
-  detCloud:"Büyük dosyaları, oyun güncellemelerini indirirken veya bulut depolamaya veri yedeklerken verimliliği ölçer.",
-  detSocial:"Instagram, TikTok ve Facebook'taki reels, hikaye ve videoların yeniden yüklenmeden ne kadar hızlı oynatıldığını gösterir.",
-  detWeb:"Günlük web siteleri, internet bankacılığı ve haber portalları için yükleme sürelerini değerlendirir.",
-  diagTitle:"Ağ Tanılama", diagLatT:"Gecikme", diagLatD:"Yanıt süresini ölçer ve gecikme sorunlarını belirler.",
-  diagStabT:"Kararlılık", diagStabD:"Jitter, bağlantının yük altında kararlı kalıp kalmadığını gösterir.",
-  diagDnsT:"DNS Tanılama", diagDnsD:"DNS kullanılabilirliğini ve yanıt sürelerini kontrol eder.",
-  diagIpT:"IP Tanılama", diagIpD:"Açık IP, ISP, ASN ve IPv4/IPv6 durumunu tespit eder.",
-  repTitle:"Profesyonel Test Raporu", lblRepTestId:"Test ID", copy:"Sonucu Kopyala", share:"Sonucu Paylaş", json:"JSON Dışa Aktar", print:"Raporu Yazdır", copied:"Kopylandı",
+  appsTitle:"Bağlantınızla neler yapabilirsiniz?", appsSub:"Sonuçlarınız yaygın çevrimiçi etkinlikler için analiz edilir. (Ayrıntılar için bir kutuya tıklayın)",
+  appGTitle:"Oyun", appGDesc:"Düşük ping ve düşük jitter, çevrimiçi oyunlar için önemlidir.",
+  appSTitle:"Yayın (Streaming)", appSDesc:"HD ve normal yayınlar için uygun hız.",
+  app4Title:"4K Yayın", app4Desc:"Bağlantınızın 4K videoyu kaldırıp kaldıramayacağını kontrol eder.",
+  appCTitle:"Görüşmeler", appCDesc:"Görüntülü aramalar için bant genişliği ve gecikmeyi değerlendirir.",
+  appOTitle:"Ev Ofis", appODesc:"Bulut uygulamaları ve uzaktan çalışma için iyi kalite.",
+  appClTitle:"Bulut ve İndirmeler", appClDesc:"Büyük dosyaların ne kadar verimli aktarıldığını ölçer.",
+  appSoTitle:"Sosyal Medya", appSoDesc:"Instagram, TikTok, Facebook ve gezinme için uygundur.",
+  appWTitle:"Web'de Gezinme", appWDesc:"Günlük web siteleri için bağlantıyı değerlendirir.",
+  diagTitle:"Ağ Tanılama", diagLatT:"Gecikme (Latency)", diagLatD:"Yanıt süresini ölçer ve gecikme sorunlarını belirlemeye yardımcı olur.",
+  diagStabT:"Kararlılık", diagStabD:"Jitter, yük altında bağlantının kararlı kalıp kalmadığını gösterir.",
+  diagDnsT:"DNS Tanılama", diagDnsD:"DNS kullanılabilirliğini ve çözümleyici yanıt sürelerini kontrol eder.",
+  diagIpT:"IP Tanılama", diagIpD:"Genel IP, İSS, ASN ve IPv4/IPv6 durumunu algılar.",
+  repTitle:"Profesyonel Test Raporu", lblRepTestId:"Test Kimliği", copy:"Sonucu Kopyala", share:"Sonucu Paylaş", json:"JSON Dışa Aktar", print:"Raporu Yazdır", copied:"Kopyalandı",
   histTitle:"Test Geçmişi", histRecent:"Son ölçümler", histClear:"Geçmişi temizle", thDate:"Tarih", thDown:"İndirme", thUp:"Yükleme", thPing:"Ping", thQual:"Kalite", noHistory:"Henüz kaydedilmiş test yok.",
-  ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.", ftTrade:"Fasqoo et Fasqoo Speed Test, Fasqoo markalarıdır.", ftAccess:"Erişilebilirlik", ftPrivacy:"Gizlilik Politikası", ftTerms:"Kullanım Koşulları", ftNoSell:"Bilgilerimi Satma", ftSlavery:"Modern Kölelik Politikası",
+  ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.", ftTrade:"Fasqoo ve Fasqoo Speed Test, Fasqoo'nun tescilli markalarıdır.", ftAccess:"Erişilebilirlik", ftPrivacy:"Gizlilik Politikası", ftTerms:"Kullanım Şartları", ftNoSell:"Kişisel Bilgilerimi Satma",
   stPing:"Gecikme ölçülüyor...", stDown:"İndirme hızı ölçülüyor...", stUp:"Yükleme hızı ölçülüyor...", stErr:"Test tamamlanamadı.",
   stExc:"Mükemmel", stGood:"İyi", stLim:"Sınırlı",
-  q90:"Mükemmel bağlantı. Oyun, 4K yayın ve görüntülü aramalar için ideal.", q75:"HD yayın, oyun ve görüşmeler için çok iyi bağlantı.", q55:"Günlük çevrimiçi aktiviteler için iyi bağlantı.", q35:"Ortalama bağlantı. Yüksek gereksinimli servisler sınırlanabilir.", q0:"Zayıf bağlantı. Lütfen ağınızı kontrol edin.",
+  q90:"Mükemmel bağlantı. Oyun, 4K yayın ve görüntülü aramalar için kusursuz.", q75:"HD yayın, oyun ve aramalar için çok iyi bağlantı.", q55:"Günlük çevrimiçi aktiviteler için iyi bağlantı.", q35:"Ortalama bağlantı. Talepkar hizmetler sınırlı olabilir.", q0:"Zayıf bağlantı. Lütfen ağı kontrol edin.",
   gam85:"Çevrimiçi oyunlar için mükemmel", gam65:"Oyun için iyi", gam45:"Oynanabilir", gam0:"Gecikmeye neden olabilir",
-  str85:"HD Yayın: Mükemmel", str65:"HD Yayın: İyi", str40:"HD Yayın: Sınırlı", str0:"Donmalar yaşanabilir",
-  fk85:"4K Yayın: Mükemmel", fk65:"4K Yayın: İyi", fk40:"4K Yayın: Mümkün", fk0:"4K önerilmez",
-  call85:"Görüntülü Görüşme: Mükemmel", call65:"Görüntülü Görüşme: İyi", call40:"Görüntülü Görüşme: Sınırlı", call0:"Görüşme kalitesi düşebilir",
-  off85:"Evden çalışma için mükemmel", off65:"Evden çalışma için iyi", off40:"Kullanılabilir", off0:"Yavaş olabilir",
-  cld85:"Büyük aktarımlar: Çok hızlı", cld65:"Hızlı aktarım", cld40:"Orta hız", cld0:"İndirmeler yavaş olabilir",
+  str85:"HD Yayın: Mükemmel", str65:"HD Yayın: İyi", str40:"HD Yayın: Sınırlı", str0:"Yayın arabelleğe alabilir",
+  fk85:"4K Yayın: Mükemmel", fk65:"4K Yayın: İyi", fk40:"4K Yayın: Olası", fk0:"4K önerilmez",
+  call85:"Görüşmeler: Mükemmel", call65:"Görüşmeler: İyi", call40:"Görüşmeler: Sınırlı", call0:"Görüşmeler sorunlu olabilir",
+  off85:"Ev ofis için mükemmel", off65:"Ev ofis için iyi", off40:"Kullanılabilir", off0:"Yavaş olabilir",
+  cld85:"Büyük aktarımlar: Çok hızlı", cld65:"Hızlı aktarım", cld40:"Orta hız", cld0:"Büyük indirmeler yavaş",
   soc85:"Mükemmel", soc65:"Çok iyi", soc40:"İyi", soc0:"Sınırlı",
-  web85:"Çok hızlı yükleme", web65:"Hızlı yükleme", web40:"Normal yükleme", web0:"Yavaş sayfa yükleme",
-  alertRun:"Lütfen önce bir hız testi yapın.", unavail:"Kullanılamıyor", notDetected:"Tespit edilmedi"
+  web85:"Çok hızlı yükleme", web65:"Hızlı yükleme", web40:"Normal yükleme", web0:"Yavaş yükleme",
+  alertRun:"Lütfen önce bir hız testi çalıştırın.", unavail:"Kullanılamıyor", notDetected:"Algılanmadı"
 },
 sq:{
-  navHome:"Kreu", navFaq:"FAQ", navStatus:"Statusi i rrjetit", navDiag:"Diagnostika IT", navAbout:"Rreth nesh",
-  title:"Test i Shpejtësisë së Internetit Falas", sub:"Matje të sakta për profesionistë, teknikë dhe përdorues të përditshëm",
-  server:"SERVER AUTOMATIK", ready:"Gati për testim", start:"Fillo Testin", startAgain:"Testo Sërish", testing:"Testimi në vazhdim...", complete:"Testi përfundoi",
-  ping:"Ping", jitter:"Jitter", download:"Shkarkim", upload:"Ngarkim", chartLive:"Performanca me kohë reale", chartWait:"Pritje",
+  navHome:"Kryefaqja", navFaq:"FAQ", navStatus:"Gjendja e Rrjetit", navDiag:"Diagnostika IT", navAbout:"Rreth Nesh", navLite:"Fasqoo Lite", installBtn:"Instalo",
+  title:"Test Falas i Shpejtësisë së Internetit", sub:"Matje të sakta të lidhjes për profesionistë, teknikë dhe përdorues të përditshëm",
+  server:"SERVERI AUTOMATIK", ready:"Gati për testim", start:"Fillo Testin e Shpejtësisë", startAgain:"Riprovo Testin", testing:"Duke testuar...", complete:"Testi përfundoi",
+  ping:"Ping", jitter:"Jitter", download:"Shkarkim", upload:"Ngarkim", chartLive:"Performanca Live", chartWait:"Duke pritur",
   lblIp:"IP Publike", lblIsp:"Ofruesi / ISP", lblLoc:"Vendndodhja", lblAsn:"Rrjeti / ASN",
-  qTitle:"Cilësia e Lidhjes", qDefault:"Bëj një test për të vlerësuar lidhjen tënde.",
-  appsTitle:"Çfarë mund të bësh me lidhjen tënde?", appsSub:"Rezultatet analizohen për aktivitetet më të zakonshme online. (Kliko mbi një kuti për detaje)",
-  appGTitle:"Lojëra Online", appGDesc:"Ping i ulët dhe pak jitter janë me rëndësi për lojërat.",
-  appSTitle:"Transmetim (Streaming)", appSDesc:"Shpejtësi e mirë për transmetim HD normal.",
-  app4Title:"Transmetim 4K", app4Desc:"Verifikon nëse lidhja përballon video me cilësi 4K.",
-  appCTitle:"Videokonferenca", appCDesc:"Vlerëson brezshkallën dhe vonesat për videothirrje.",
-  appOTitle:"Punë nga Shtëpia", appODesc:"Cilësia e lidhjes për aplikacione në cloud dhe punë nga shtëpia.",
-  appClTitle:"Cloud & Shkarkime", appClDesc:"Mat se sa efikas është transferimi i skedarëve të mëdhenj.",
-  appSoTitle:"Rrjete Sociale", appSoDesc:"I përshtatshëm për Instagram, TikTok, Facebook dhe shfletim.",
-  appWTitle:"Shfletim në Web", appWDesc:"Vlerëson lidhjen për uebsajtet e përditshme.",
-  appRunTest:"Kryej testin",
-  detGaming:"Kryej një test për të parë se cilat lojëra (shoqëruese, MMO, strategji) mund t'i luash pa vonesë dhe çfarë optimizimesh (kabllo LAN) nevojiten.",
-  detStream:"Zbulo nëse gjerësia e brezit tënd mjafton për transmetim HD të qetë në Netflix, YouTube dhe platforma të tjera pa buferim.",
-  detFourk:"Kontrollon përshtatshmërinë për transmetim Ultra-HD / 4K (Netflix, Apple TV, YouTube 4K) dhe tregon shpejtësinë e kërkuar të shkarkimit.",
-  detCall:"Ideale për Microsoft Teams, Zoom dhe Google Meet. Tregon nëse videothirrjet HD pa ngecje me disa pjesëmarrës janë të mundshme.",
-  detOffice:"Vlerëson qëndrueshmërinë për qasje në VPN-të e kompanisë, dokumentet në cloud dhe aplikacionet e desktopit të largët.",
-  detCloud:"Mat efikasitetin gjatë shkarkimit të skedarëve të mëdhenj, përditësimeve të lojërave ose rezervimit të të dhënave në cloud.",
-  detSocial:"Tregon se sa shpejt reels, historitë dhe videot në Instagram, TikTok dhe Facebook shfaqen pa u ringarkuar.",
-  detWeb:"Vlerëson kohën e ngarkimit për uebsajtet e përditshme, bankimin online dhe portalet e lajmeve.",
-  diagTitle:"Diagnostika e Rrjetit", diagLatT:"Vonesa (Latenat)", diagLatD:"Mat kohën e përgjigjes dhe ndihmon me vonesat.",
+  qTitle:"Cilësia e Lidhjes", qDefault:"Kryej një test për të vlerësuar lidhjen tuaj.",
+  appsTitle:"Çfarë mund të bëni me lidhjen tuaj?", appsSub:"Rezultatet tuaja analizohen për aktivitete të zakonshme në internet. (Kliko një kuti për detaje)",
+  appGTitle:"Lojëra (Gaming)", appGDesc:"Ping i ulët dhe jitter i pakët janë të rëndësishme për lojërat online.",
+  appSTitle:"Transmetim (Streaming)", appSDesc:"Shpejtësi e mirë për transmetim HD dhe normal.",
+  app4Title:"Transmetim 4K", app4Desc:"Kontrollon nëse lidhja juaj mbështet video 4K.",
+  appCTitle:"Videokonferenca", appCDesc:"Vlerëson gjerësinë e brezit dhe latencën për thirrje video.",
+  appOTitle:"Zyra në Shtëpi", appODesc:"Cilësi e mirë për aplikacione cloud dhe punë në distancë.",
+  appClTitle:"Cloud & Shkarkime", appClDesc:"Mat se sa me efikasitet mund të transferohen skedarët e mëdhenj.",
+  appSoTitle:"Media Sociale", appSoDesc:"E përshtatshme për Instagram, TikTok, Facebook dhe shfletim.",
+  appWTitle:"Shfletim Web", appWDesc:"Vlerëson lidhjen për faqet e përditshme të internetit.",
+  diagTitle:"Diagnostika e Rrjetit", diagLatT:"Latenca", diagLatD:"Mat kohën e përgjigjes dhe ndihmon në identifikimin e problemeve të vonesës.",
   diagStabT:"Qëndrueshmëria", diagStabD:"Jitter tregon nëse lidhja mbetet e qëndrueshme nën ngarkesë.",
-  diagDnsT:"Diagnostika DNS", diagDnsD:"Teston disponueshmërinë dhe kohën e përgjigjes së DNS.",
-  diagIpT:"Diagnostika IP", diagIpD:"Zbulon IP publike, ISP, ASN si dhe statusin IPv4/IPv6.",
-  repTitle:"Raport Profesional Testi", lblRepTestId:"ID e Testit", copy:"Kopjo Rezultatin", share:"Shpërndaj Rezultatin", json:"Eksporto JSON", print:"Printo Raportin", copied:"U Kopjua",
-  histTitle:"Historiku i Testimeve", histRecent:"Matjet e fundit", histClear:"Pastro historikun", thDate:"Data", thDown:"Shkarkim", thUp:"Ngarkim", thPing:"Ping", thQual:"Cilësia", noHistory:"S'ka matje të ruajtura ende.",
-  ftRights:"© 2026 Fasqoo. Të gjitha të drejtat të rezervuara.", ftTrade:"Fasqoo dhe Fasqoo Speed Test janë marka të Fasqoo.", ftAccess:"Qasueshmëria", ftPrivacy:"Politika e privatësisë", ftTerms:"Kushtet e përdorimit", ftNoSell:"Mos i me shit të dhënat e mia", ftSlavery:"Politika kundër skllavërisë moderne",
-  stPing:"Duke matur vonesën...", stDown:"Duke matur shpejtësinë e shkarkimit...", stUp:"Duke matur shpejtësinë e ngarkimit...", stErr:"Testi nuk mund të përfundonte.",
+  diagDnsT:"Diagnostika DNS", diagDnsD:"Kontrollon disponueshmërinë e DNS dhe kohën e përgjigjes.",
+  diagIpT:"Diagnostika IP", diagIpD:"Zbulon IP publike, ISP, ASN dhe statusin IPv4/IPv6.",
+  repTitle:"Raport Profesionist i Testit", lblRepTestId:"ID e Testit", copy:"Kopjo Rezultatin", share:"Shpërndaj Rezultatin", json:"Eksporto JSON", print:"Printo Raportin", copied:"U kopjua",
+  histTitle:"Historiku i Testeve", histRecent:"Matjet e fundit", histClear:"Fshi historikun", thDate:"Data", thDown:"Shkarkim", thUp:"Ngarkim", thPing:"Ping", thQual:"Cilësia", noHistory:"Nuk ka ende teste të ruajtura.",
+  ftRights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.", ftTrade:"Fasqoo dhe Fasqoo Speed Test janë marka tregtare të Fasqoo.", ftAccess:"Paga e aksesueshmërisë", ftPrivacy:"Politika e Privatësisë", ftTerms:"Kushtet e Përdorimit", ftNoSell:"Mos i shit informacionet e mia",
+  stPing:"Duke matur latencën...", stDown:"Duke matur shpejtësinë e shkarkimit...", stUp:"Duke matur shpejtësinë e ngarkimit...", stErr:"Testi nuk mund të përfundonte.",
   stExc:"Shkëlqyeshëm", stGood:"Mirë", stLim:"E kufizuar",
-  q90:"Lidhje e shkëlqyer. Perfekte për lojëra, 4K dhe videothirrje.", q75:"Lidhje shumë e mirë për transmetim HD, lojëra dhe telefonata.", q55:"Lidhje e mirë për aktivitete të përditshme online.", q35:"Lidhje mesatare. Shërbimet me kërkesa të larta mund të jenë të kufizuara.", q0:"Lidhje e dobët. Ju lutemi kontrolloni rrjetin tuaj.",
-  gam85:"Perfekte për lojëra online", gam65:"E mirë për lojëra", gam45:"E luajtshme", gam0:"Mund të shkaktojë vonesa",
-  str85:"Transmetim HD: Shkëlqyeshëm", str65:"Transmetim HD: Mirë", str40:"Transmetim HD: I kufizuar", str0:"Mund të ketë ndërprerje",
-  fk85:"Transmetim 4K: Shkëlqyeshëm", fk65:"Transmetim 4K: Mirë", fk40:"Transmetim 4K: I mundur", fk0:"4K nuk rekomandohet",
-  call85:"Videothirrje: Shkëlqyeshëm", call65:"Videothirrje: Mirë", call40:"Videothirrje: Të kufizuara", call0:"Videothirrjet mund të priten",
-  off85:"E shkëlqyer për punë nga shtëpia", off65:"E mirë për punë nga shtëpia", off40:"E përdorshme", off0:"Mund të jetë e ngadaltë",
-  cld85:"Transferime të mëdha: Shumë e shpejtë", cld65:"Transferim i shpejtë", cld40:"Shpejtësi mesatare", cld0:"Shkarkime shumë të ngadalta",
+  q90:"Lidhje e shkëlqyer. Perfekte për lojëra, transmetim 4K dhe videotelefonata.", q75:"Lidhje shumë e mirë për transmetim HD, lojëra dhe thirrje.", q55:"Lidhje e mirë për aktivitetet e përditshme në internet.", q35:"Lidhje mesatare. Shërbimet e kërkuara mund të jenë të kufizuara.", q0:"Lidhje e dobët. Ju lutemi kontrolloni rrjetin.",
+  gam85:"E shkëlqyer për lojëra online", gam65:"E mirë për lojëra", gam45:"E luajtshme", gam0:"Mund të shkaktojë vonesa",
+  str85:"Transmetim HD: Shkëlqyeshëm", str65:"Transmetim HD: Mirë", str40:"Transmetim HD: E kufizuar", str0:"Transmetimi mund të ndërpritet",
+  fk85:"Transmetim 4K: Shkëlqyeshëm", fk65:"Transmetim 4K: Mirë", fk40:"Transmetim 4K: E mundur", fk0:"4K nuk rekomandohet",
+  call85:"Videotelefonata: Shkëlqyeshëm", call65:"Videotelefonata: Mirë", call40:"Videotelefonata: E kufizuar", call0:"Videotelefonata të çrregullta",
+  off85:"Shkëlqyeshëm për zyrë në shtëpi", off65:"E mirë për zyrë në shtëpi", off40:"E përdorshme", off0:"Mund të jetë e ngadaltë",
+  cld85:"Transferime të mëdha: Shumë të shpejta", cld65:"Transferim i shpejtë", cld40:"Shpejtësi mesatare", cld0:"Shkarkime shumë të ngadalta",
   soc85:"Shkëlqyeshëm", soc65:"Shumë mirë", soc40:"Mirë", soc0:"E kufizuar",
-  web85:"Ngarkim shumë i shpejtë", web65:"Ngarkim i shpejtë", web40:"Ngarkim normal", web0:"Ngarkim i ngadaltë i faqeve",
-  alertRun:"Ju lutemi kryeni më parë një test shpejtësie.", unavail:"E padisponueshme", notDetected:"Nuk u zbulua"
-}
+  web85:"Ngarkim shumë i shpejtë", web65:"Ngarkim i shpejtë", web40:"Ngarkim normal", web0:"Hapje e ngadaltë e faqeve",
+  alertRun:"Ju lutemi kryeni fillimisht një test shpejtësie.", unavail:"E padisponueshme", notDetected:"Nuk u zbulua"
 };
-
-// LANGUAGE SWITCHER LOGIC
-function applyLanguage(lang){
-  if(!translations[lang]) lang = "de";
-  currentLang = lang;
-  const t = translations[lang];
-
-  $("navHome").textContent = t.navHome;
-  $("navFaq").textContent = t.navFaq;
-  $("navStatus").textContent = t.navStatus;
-  $("navDiag").textContent = t.navDiag;
-  $("navAbout").textContent = t.navAbout;
-
-  $("heroTitle").textContent = t.title;
-  $("heroSub").textContent = t.sub;
-  $("serverLabel").textContent = t.server;
-  $("status").textContent = t.ready;
-  $("start").textContent = t.start;
-  $("chartLiveLabel").textContent = t.chartLive;
-  $("chartState").textContent = t.chartWait;
-
-  $("lblMetricPing").textContent = t.ping;
-  $("lblMetricJitter").textContent = t.jitter;
-  $("lblMetricDown").textContent = t.download;
-  $("lblMetricUp").textContent = t.upload;
-
-  $("lblIp").textContent = t.lblIp;
-  $("lblIsp").textContent = t.lblIsp;
-  $("lblLoc").textContent = t.lblLoc;
-  $("lblAsn").textContent = t.lblAsn;
-
-  $("qualityTitle").textContent = t.qTitle;
-  if($("score").textContent === "—") {
-    $("qtext").textContent = t.qDefault;
-  }
-
-  $("appsTitle").textContent = t.appsTitle;
-  $("appsSub").textContent = t.appsSub;
-
-  $("appGamingTitle").textContent = t.appGTitle;
-  $("appGamingDesc").textContent = t.appGDesc;
-  $("appStreamTitle").textContent = t.appSTitle;
-  $("appStreamDesc").textContent = t.appSDesc;
-  $("app4kTitle").textContent = t.app4Title;
-  $("app4kDesc").textContent = t.app4Desc;
-  $("appCallTitle").textContent = t.appCTitle;
-  $("appCallDesc").textContent = t.appCDesc;
-  $("appOfficeTitle").textContent = t.appOTitle;
-  $("appOfficeDesc").textContent = t.appODesc;
-  $("appCloudTitle").textContent = t.appClTitle;
-  $("appCloudDesc").textContent = t.appClDesc;
-  $("appSocialTitle").textContent = t.appSoTitle;
-  $("appSocialDesc").textContent = t.appSoDesc;
-  $("appWebTitle").textContent = t.appWTitle;
-  $("appWebDesc").textContent = t.appWDesc;
-
-  $("gamingDetails").textContent = t.detGaming;
-  $("streamDetails").textContent = t.detStream;
-  $("fourkDetails").textContent = t.detFourk;
-  $("callDetails").textContent = t.detCall;
-  $("officeDetails").textContent = t.detOffice;
-  $("cloudDetails").textContent = t.detCloud;
-  $("socialDetails").textContent = t.detSocial;
-  $("webDetails").textContent = t.detWeb;
-
-  document.querySelectorAll(".app-score span:first-child").forEach(el => {
-    if(el.textContent.includes("Test") || el.textContent.includes("Run") || el.textContent.includes("Kryej") || el.textContent.includes("Esegui") || el.textContent.includes("Lancer") || el.textContent.includes("Ejecutar") || el.textContent.includes("Executar") || el.textContent.includes("Test uitvoeren") || el.textContent.includes("çalıştır") || el.textContent.includes("Test ausführen")){
-      el.textContent = t.appRunTest;
-    }
-  });
-
-  $("diagnosticsTitle").textContent = t.diagTitle;
-  $("diagLatTitle").textContent = t.diagLatT;
-  $("diagLatDesc").textContent = t.diagLatD;
-  $("diagStabTitle").textContent = t.diagStabT;
-  $("diagStabDesc").textContent = t.diagStabD;
-  $("diagDnsTitle").textContent = t.diagDnsT;
-  $("diagDnsDesc").textContent = t.diagDnsD;
-  $("diagIpTitle").textContent = t.diagIpT;
-  $("diagIpDesc").textContent = t.diagIpD;
-
-  $("reportTitle").textContent = t.repTitle;
-  $("lblRepTestId").textContent = t.lblRepTestId;
-  $("lblRepIpv4").textContent = "IPv4";
-  $("lblRepIpv6").textContent = "IPv6";
-  $("lblRepDns").textContent = "DNS";
-  $("copy").textContent = t.copy;
-  $("share").textContent = t.share;
-  $("json").textContent = t.json;
-  $("print").textContent = t.print;
-
-  $("historyTitle").textContent = t.histTitle;
-  $("recentTitle").textContent = t.histRecent;
-  $("clear").textContent = t.histClear;
-  $("thDate").textContent = t.thDate;
-  $("thDown").textContent = t.thDown;
-  $("thUp").textContent = t.thUp;
-  $("thPing").textContent = t.thPing;
-  $("thQual").textContent = t.thQual;
-
-  $("ftRights").textContent = t.ftRights;
-  $("ftTrade").textContent = t.ftTrade;
-  $("ftAccess").textContent = t.ftAccess;
-  $("ftPrivacy").textContent = t.ftPrivacy;
-  $("ftTerms").textContent = t.ftTerms;
-  $("ftNoSell").textContent = t.ftNoSell;
-
-  historyLoad();
-}
-
-$("lang").addEventListener("change", (e) => {
-  applyLanguage(e.target.value);
-  localStorage.setItem("fasqoo_lang", e.target.value);
-});
-
-const savedLang = localStorage.getItem("fasqoo_lang");
-if(savedLang && translations[savedLang]){
-  $("lang").value = savedLang;
-  applyLanguage(savedLang);
-}
-
-resizeCanvas();
-netinfo();
-historyLoad();
-
- // Service Worker registrieren
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('ServiceWorker registriert:', reg.scope))
-      .catch(err => console.log('ServiceWorker Fehler:', err));
-  });
-}
-
-  // SPRACH-WECHSLER (LANGUAGE SWITCHER)
-  const langSelect = $("lang");
-  if(langSelect){
-    langSelect.addEventListener("change", (e) => {
-      currentLang = e.target.value;
-      localStorage.setItem("fasqoo_lang", currentLang);
-    });
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    resizeCanvas();
-    historyLoad();
-    netinfo();
-    measureDns();
-  });
-
-  </script>
- 
+</script>
 </body>
 </html>
