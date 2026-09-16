@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="IT-Diagnose & Netzwerk Tools – Subnet Calculator, Ping, DNS Lookup und IP-Analyse mit Fasqoo.">
+  <meta name="description" content="Professional Fasqoo Network Engineering Toolkit: IPv4/IPv6 subnet calculator, VLSM, CIDR, wildcard, supernetting, overlap detection, DNS, IP diagnostics and network planning.">
   <meta name="robots" content="index, follow">
 
-  <title>IT Diagnostics & Subnet Calculator | Fasqoo</title>
+  <title>Professional Subnet Calculator & Network Engineering Toolkit | Fasqoo</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,60 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 @media(max-width:900px){.tools{grid-template-columns:1fr}.tool.full{grid-column:auto}.info-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.menu-toggle{display:block;margin-left:auto}.main-menu{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:18px;gap:14px;align-items:flex-start}.main-menu.active{display:flex}.menu-extra{width:100%;padding-top:12px;border-top:1px solid var(--line)}.calc-input-row,.inline-form,.vlsm-row{flex-direction:column}.primary-btn,.dark-btn{height:42px}.result-grid{grid-template-columns:1fr}.result{border-right:0}.result:nth-last-child(-n+2){border-bottom:1px solid var(--line)}.result:last-child{border-bottom:0}.hero h1{font-size:28px}.card{padding:18px}}
 @media(max-width:560px){.wrap{width:calc(100% - 20px)}.tool-form{flex-direction:column}.tool-select{width:100%}.info-grid{grid-template-columns:1fr}.foot{flex-direction:column}}
-</style>
+
+/* ===== Fasqoo Network Engineering Pro UI ===== */
+:root{
+  --accent:#ff5a1f;--accent2:#ff7a45;--blue:#3b82f6;--cyan:#06b6d4;
+  --green:#16a36a;--amber:#d97706;--danger:#dc2626;
+  --radius:16px;--shadow2:0 20px 60px rgba(16,24,40,.10);
+}
+body{background:
+ radial-gradient(circle at 10% -10%,rgba(255,90,31,.10),transparent 30%),
+ radial-gradient(circle at 100% 0%,rgba(59,130,246,.08),transparent 28%),
+ var(--bg);transition:background .25s,color .25s}
+header{backdrop-filter:blur(16px);background:color-mix(in srgb,var(--card) 88%,transparent);box-shadow:0 1px 0 var(--line)}
+.brandname{font-weight:800}
+main{padding-top:28px}
+.hero{position:relative;text-align:left;padding:34px 36px;border:1px solid var(--line);border-radius:24px;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--card) 92%,transparent),color-mix(in srgb,var(--soft) 85%,transparent));
+ box-shadow:var(--shadow2);overflow:hidden}
+.hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-90px;top:-130px;
+ background:radial-gradient(circle,rgba(255,90,31,.22),transparent 68%);pointer-events:none}
+.hero h1{font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-2px;max-width:900px}
+.hero p{font-size:16px;max-width:780px;line-height:1.65}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero-badge{border:1px solid var(--line);background:var(--card);padding:7px 10px;border-radius:999px;font-size:11px;color:var(--muted)}
+.pro-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin:18px 0}
+.card,.tool{border-radius:var(--radius);box-shadow:var(--shadow2);transition:transform .18s,box-shadow .18s}
+.card:hover,.tool:hover{box-shadow:0 24px 70px rgba(16,24,40,.13)}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{padding:15px;border:1px solid var(--line);background:var(--card);border-radius:14px}
+.kpi span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+.kpi strong{display:block;margin-top:7px;font-size:19px;font-weight:750;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.section-title{font-weight:800;letter-spacing:-.5px}
+.tool-icon{width:34px;height:34px;border-radius:10px;display:inline-grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,var(--card));}
+.quick-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.quick-nav a{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);text-decoration:none;font-size:11px}
+.quick-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.engine-note{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid color-mix(in srgb,var(--green) 30%,var(--line));
+border-radius:12px;background:color-mix(in srgb,var(--green) 6%,var(--card));font-size:11px;color:var(--muted);line-height:1.5}
+.engine-dot{width:8px;height:8px;background:var(--green);border-radius:50%;margin-top:4px;box-shadow:0 0 0 5px color-mix(in srgb,var(--green) 12%,transparent)}
+.pro-tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pro-tool{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}
+.pro-tool h3{margin:0 0 7px;font-size:14px}
+.pro-tool p{font-size:11px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+.pro-result{margin-top:10px;padding:11px;border-radius:10px;background:var(--soft);font:11px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow:auto;max-height:210px}
+.pro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.pro-actions button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 10px;border-radius:9px;font-size:11px}
+.pro-actions button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.full-width{grid-column:1/-1}
+.status-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:6px}
+.table-wrap{border-radius:12px}
+.data-table th{position:sticky;top:0;z-index:1}
+@media(max-width:950px){.pro-grid{grid-template-columns:1fr}.pro-tool-grid{grid-template-columns:1fr 1fr}.kpi-strip{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.hero{padding:24px 20px}.hero h1{letter-spacing:-1px}.pro-tool-grid{grid-template-columns:1fr}.kpi-strip{grid-template-columns:1fr 1fr}}
+
+.verification-note{display:inline-flex;align-items:center;gap:7px;margin:0 auto 14px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);font-size:11px;font-weight:600}.dark .verification-note{background:var(--card)}\n</style>
 </head>
 <body>
 
@@ -58,7 +111,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
           <option value="tr">Türkçe</option>
           <option value="sq">Shqip</option>
           <option value="ar">العربية</option>
-          <option value="zh">中文</option>
+          <option value="nl">Nederlands</option>
         </select>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode" title="Dark mode">☾</button>
       </div>
@@ -70,12 +123,31 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 <main>
   <div class="wrap">
     <section class="hero">
-      <div class="eyebrow">FASQOO NETWORK TOOLKIT</div>
-      <h1 id="heroTitle">IT Diagnostics & Subnet Calculator</h1>
-      <p id="heroSub">Professional IPv4 subnetting, CIDR analysis and network tools</p>
+      <div class="eyebrow">FASQOO NETWORK ENGINEERING TOOLKIT</div>
+      <h1 id="heroTitle">Professional Subnet Calculator & Network Engineering Tools</h1>
+      <p id="heroSub">Design, validate, troubleshoot and document IPv4/IPv6 networks from one professional workspace.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">⚡ Instant calculations</span>
+        <span class="hero-badge">🔒 Client-side network math</span>
+        <span class="hero-badge">IPv4 + IPv6</span>
+        <span class="hero-badge">VLSM + CIDR</span>
+        <span class="hero-badge">DNS + IP diagnostics</span>
+        <span class="hero-badge">Dark / Light</span>
+      </div>
     </section>
+    <div class="quick-nav" aria-label="Toolkit navigation">
+      <a href="#calculator">Subnet Calculator</a><a href="#planning">VLSM & Split</a>
+      <a href="#protools">Pro Tools</a><a href="#live">Live Diagnostics</a>
+      <a href="#reference">CIDR Reference</a>
+    </div>
+    <div class="kpi-strip" aria-label="Toolkit status">
+      <div class="kpi"><span>Calculation engine</span><strong><i class="status-dot"></i>Ready</strong></div>
+      <div class="kpi"><span>Protocol</span><strong>IPv4 / IPv6</strong></div>
+      <div class="kpi"><span>Privacy</span><strong>Local math</strong></div>
+      <div class="kpi"><span>Toolkit</span><strong>PRO</strong></div>
+    </div>
 
-    <section class="card calculator-card">
+    <section class="card calculator-card" id="calculator">
       <div class="tool-head">
         <div>
           <span class="eyebrow">IPv4 / CIDR</span>
@@ -112,7 +184,12 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       </div>
     </section>
 
-    <section class="card">
+    <div class="engine-note">
+      <span class="engine-dot"></span>
+      <div><strong>Fasqoo calculation engine:</strong> subnet, mask, wildcard, host-range and VLSM calculations run in your browser. Live lookup tools are clearly separated because they require external network requests.</div>
+    </div>
+
+    <section class="card" id="planning">
       <div class="tool-head compact">
         <div>
           <span class="eyebrow">NETWORK PLANNING</span>
@@ -158,7 +235,116 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <div id="ipv6Out" class="info-grid"></div>
     </section>
 
-    <section>
+    
+<section class="card" id="protools">
+  <div class="tool-head compact">
+    <div>
+      <span class="eyebrow">NETWORK ENGINEERING</span>
+      <h2 class="section-title">Professional Network Toolkit</h2>
+      <p>Practical utilities for addressing, routing, troubleshooting and documentation.</p>
+    </div>
+  </div>
+
+  <div class="pro-tool-grid">
+    <article class="pro-tool">
+      <div class="tool-icon">↔</div><h3>CIDR Range → Prefixes</h3>
+      <p>Convert an IPv4 start/end range into the smallest exact CIDR list.</p>
+      <input id="rangeStart" class="tool-input" value="192.168.1.10" placeholder="Start IP">
+      <input id="rangeEnd" class="tool-input" value="192.168.1.42" placeholder="End IP" style="margin-top:7px">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runRange">Convert</button><button id="copyRange">Copy</button></div>
+      <div class="pro-result" id="rangeOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">⇄</div><h3>Exact CIDR Aggregator</h3>
+      <p>Find the smallest aligned summary network covering multiple IPv4 CIDRs.</p>
+      <textarea id="aggregateInput" class="tool-input" rows="4" style="width:100%;resize:vertical" placeholder="10.0.0.0/24&#10;10.0.1.0/24">10.0.0.0/24
+10.0.1.0/24</textarea>
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runAggregate">Aggregate</button><button id="copyAggregate">Copy</button></div>
+      <div class="pro-result" id="aggregateOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">!</div><h3>IP / Subnet Overlap</h3>
+      <p>Check whether two IPv4 networks overlap before deployment.</p>
+      <input id="overlapA" class="tool-input" value="10.10.0.0/24" placeholder="Network A">
+      <input id="overlapB" class="tool-input" value="10.10.0.128/25" placeholder="Network B" style="margin-top:7px">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runOverlap">Check</button></div>
+      <div class="pro-result" id="overlapOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">⌁</div><h3>Wildcard Mask</h3>
+      <p>Convert a CIDR prefix to the wildcard mask used by ACLs and routing statements.</p>
+      <input id="wildInput" class="tool-input" value="192.168.10.0/24" placeholder="192.168.10.0/24">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runWild">Calculate</button><button id="copyWild">Copy</button></div>
+      <div class="pro-result" id="wildOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">01</div><h3>IP / Binary / Hex Converter</h3>
+      <p>Inspect an IPv4 address in decimal, binary, hexadecimal and 32-bit integer form.</p>
+      <input id="convertIp" class="tool-input" value="192.168.1.10" placeholder="IPv4 address">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runConvert">Convert</button><button id="copyConvert">Copy</button></div>
+      <div class="pro-result" id="convertOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">⌕</div><h3>IP Range Membership</h3>
+      <p>Verify whether an IPv4 address belongs to a specific subnet.</p>
+      <input id="memberIp" class="tool-input" value="192.168.1.55" placeholder="IP address">
+      <input id="memberNet" class="tool-input" value="192.168.1.0/24" placeholder="Network" style="margin-top:7px">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runMember">Check</button></div>
+      <div class="pro-result" id="memberOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">☁</div><h3>Cloud / Enterprise Planner</h3>
+      <p>Quick planning reference for common private address spaces and VLAN sizing.</p>
+      <select id="cloudPlan" class="tool-select" style="width:100%">
+        <option value="10.0.0.0/8">10.0.0.0/8 — Private enterprise</option>
+        <option value="172.16.0.0/12">172.16.0.0/12 — Private enterprise</option>
+        <option value="192.168.0.0/16">192.168.0.0/16 — Private LAN</option>
+      </select>
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runCloud">Inspect</button></div>
+      <div class="pro-result" id="cloudOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">▦</div><h3>Subnet Utilization</h3>
+      <p>See address usage for a subnet based on the number of required hosts.</p>
+      <input id="utilNet" class="tool-input" value="192.168.20.0/24" placeholder="Network">
+      <input id="utilHosts" class="tool-input" type="number" min="1" value="120" placeholder="Required hosts" style="margin-top:7px">
+      <div class="pro-actions" style="margin-top:8px"><button class="primary" id="runUtil">Analyze</button></div>
+      <div class="pro-result" id="utilOut">Ready.</div>
+    </article>
+
+    <article class="pro-tool">
+      <div class="tool-icon">▤</div><h3>Export / Documentation</h3>
+      <p>Generate a clean text report from the current subnet calculation for tickets or documentation.</p>
+      <div class="pro-actions">
+        <button class="primary" id="copyReport">Copy Report</button>
+        <button id="downloadReport">Download .txt</button>
+      </div>
+      <div class="pro-result" id="reportOut">Calculate a subnet, then export the result.</div>
+    </article>
+  </div>
+</section>
+
+<section class="card" id="reference">
+  <div class="tool-head compact">
+    <div><span class="eyebrow">REFERENCE</span><h2 class="section-title">CIDR Quick Reference</h2>
+    <p>Common IPv4 prefixes used in enterprise, LAN and point-to-point designs.</p></div>
+  </div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Prefix</th><th>Subnet Mask</th><th>Addresses</th><th>Usable Hosts</th><th>Common Use</th></tr></thead>
+      <tbody id="cidrReferenceBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="live">
       <h2 class="section-title" id="diagToolsTitle">Live IT Tools</h2>
       <p style="font-size:11px;color:var(--muted);margin:-8px 0 14px">Live tools use your browser and external services. Results are measured/returned at test time and may vary by network, server and browser.</p>
       <div class="tools">
@@ -210,7 +396,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
     </div>
     <nav class="fasqoo-footer-links" aria-label="Footer">
       <a href="/accessibility.html" id="ftAccess">Accessibility</a>
-      <a href="/impressum.html" id="ftAccess">Impressum</a>
+      <a href="/impressum.html" id="ftImprint">Impressum</a>
       <a href="/privacy-policy.html" id="ftPrivacy">Privacy Policy</a>
       <a href="/terms.html" id="ftTerms">Terms of Use</a>
       <a href="/do-not-sell.html" id="ftNoSell">Do Not Sell My Personal Info</a>
@@ -220,7 +406,9 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
 <script>
 const $=id=>document.getElementById(id);
-const state={network:null,lang:localStorage.getItem("fasqoo_lang")||"en"};
+const SUPPORTED_LANGS=["de","en","fr","es","it","pt","nl","tr","sq","ar"];
+const savedLang=localStorage.getItem("fasqoo_lang");
+const state={network:null,lang:SUPPORTED_LANGS.includes(savedLang)?savedLang:"en"};
 
 const translations={
 de:{heroTitle:"IT-Diagnose & Subnet Calculator",heroSub:"Professionelle IPv4-Subnetting-, CIDR- und Netzwerk-Tools",calcTitle:"Subnet Calculator",calcSub:"IPv4-Adresse mit CIDR-Präfix eingeben.",ready:"● Bereit",calculate:"Berechnen",splitTitle:"Subnetz-Aufteilung",splitSub:"Berechne gleich große kleinere Subnetze.",generate:"Subnetze erzeugen",vlsmTitle:"VLSM Calculator",vlsmSub:"Erstelle Subnetze mit unterschiedlichen Größen.",vlsmCalc:"VLSM berechnen",ipv6Title:"IPv6 Prefix Helper",ipv6Sub:"IPv6-Adresse normalisieren und Präfix analysieren.",ipv6Run:"IPv6 analysieren",diagToolsTitle:"Live IT-Werkzeuge",copy:"Kopieren",copied:"Kopiert",error:"Ungültige IPv4/CIDR-Eingabe.",lblNetAddr:"Netzwerk-Adresse",lblNetMask:"Subnetzmaske",lblFirstIp:"Erste nutzbare IP",lblLastIp:"Letzte nutzbare IP",lblBroadAddr:"Broadcast-Adresse",lblWildMask:"Wildcard Maske",lblCidr:"CIDR-Präfix",lblTotal:"Adressen gesamt",lblHosts:"Nutzbare Hosts",lblClass:"Adressklasse",lblBinary:"Binäres Netzwerk / Maske",t1Title:"Web-Latenz",t1Desc:"Misst die HTTP-Anfrage-Latenz im Browser.",t2Title:"Browser-Speedtest",t2Desc:"Lädt eine öffentliche Testdatei und schätzt den Durchsatz.",t3Title:"Live DNS Lookup",t3Desc:"Fragt öffentliche DNS-over-HTTPS-Einträge ab.",t4Title:"IP-Analyse",t4Desc:"Zeigt öffentliche IP, ISP und ungefähren Standort.",t5Title:"System- & Browser-Scan",t5Desc:"Liest verfügbare Browser-, Bildschirm- und Netzwerkdaten.",measure:"Messen",query:"Abfragen",analyze:"Analysieren",start:"Speedtest starten",sys:"System-Scan starten",navHome:"Home",navFaq:"FAQ",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",ftAccess:"Barrierefreiheit",ftPrivacy:"Datenschutz",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",ftSlavery:"Richtlinie gegen Sklaverei",ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",ftTrade:"Fasqoo™ und Fasqoo Speed Test sind Marken von Fasqoo."},
@@ -231,6 +419,7 @@ it:{heroTitle:"Diagnostica IT e Calcolatore Subnet",heroSub:"Subnetting IPv4, an
 pt:{heroTitle:"Diagnóstico de TI e Calculadora de Sub-rede",heroSub:"Subnetting IPv4, análise CIDR e ferramentas profissionais de rede",calcTitle:"Calculadora de Sub-rede",calcSub:"Digite um endereço IPv4 com prefixo CIDR.",ready:"● Pronto",calculate:"Calcular",splitTitle:"Divisor de Sub-rede",splitSub:"Divida a rede em sub-redes iguais.",generate:"Gerar Sub-redes",vlsmTitle:"Calculadora VLSM",vlsmSub:"Crie sub-redes de tamanhos variáveis.",vlsmCalc:"Calcular VLSM",ipv6Title:"Assistente de Prefixo IPv6",ipv6Sub:"Normalize um endereço IPv6 e analise o prefixo.",ipv6Run:"Analisar IPv6",diagToolsTitle:"Ferramentas de TI ao Vivo",copy:"Copiar",copied:"Copiado",error:"Entrada IPv4/CIDR inválida.",lblNetAddr:"Endereço de Rede",lblNetMask:"Máscara",lblFirstIp:"Primeiro IP Utilizável",lblLastIp:"Último IP Utilizável",lblBroadAddr:"Broadcast",lblWildMask:"Wildcard",lblCidr:"Prefixo CIDR",lblTotal:"Endereços Totais",lblHosts:"Hosts Utilizáveis",lblClass:"Classe",lblBinary:"Rede / Máscara Binária",t1Title:"Latência Web",t1Desc:"Mede a latência HTTP do navegador.",t2Title:"Teste de Velocidade",t2Desc:"Baixa um recurso público e estima o throughput.",t3Title:"Consulta DNS",t3Desc:"Consulta registros DNS públicos.",t4Title:"Análise de IP",t4Desc:"Mostra IP público, ISP e localização aproximada.",t5Title:"Scan do Sistema e Navegador",t5Desc:"Lê informações disponíveis do navegador e da rede.",measure:"Medir",query:"Consultar",analyze:"Analisar",start:"Iniciar teste",sys:"Executar scan",navHome:"Início",navFaq:"FAQ",navStatus:"Status da Rede",navDiag:"Diagnóstico TI",navAbout:"Sobre",ftAccess:"Acessibilidade",ftPrivacy:"Privacidade",ftTerms:"Termos",ftNoSell:"Não Vender Meus Dados",ftSlavery:"Declaração Anti-Escravidão",ftRights:"© 2026 Fasqoo. Todos os direitos reservados.",ftTrade:"Fasqoo™ e Fasqoo Speed Test são marcas da Fasqoo."},
 tr:{heroTitle:"BT Tanılama ve Alt Ağ Hesaplayıcı",heroSub:"Profesyonel IPv4 subnetting, CIDR analizi ve ağ araçları",calcTitle:"Alt Ağ Hesaplayıcı",calcSub:"CIDR ön ekiyle IPv4 adresi girin.",ready:"● Hazır",calculate:"Hesapla",splitTitle:"Alt Ağ Bölücü",splitSub:"Ağı eşit daha küçük alt ağlara bölün.",generate:"Alt Ağları Oluştur",vlsmTitle:"VLSM Hesaplayıcı",vlsmSub:"Değişken boyutlu alt ağlar oluşturun.",vlsmCalc:"VLSM Hesapla",ipv6Title:"IPv6 Ön Ek Yardımcısı",ipv6Sub:"IPv6 adresini normalleştirin ve ön eki inceleyin.",ipv6Run:"IPv6 Analiz Et",diagToolsTitle:"Canlı BT Araçları",copy:"Kopyala",copied:"Kopyalandı",error:"Geçersiz IPv4/CIDR girdisi.",lblNetAddr:"Ağ Adresi",lblNetMask:"Alt Ağ Maskesi",lblFirstIp:"İlk Kullanılabilir IP",lblLastIp:"Son Kullanılabilir IP",lblBroadAddr:"Broadcast",lblWildMask:"Wildcard Maskesi",lblCidr:"CIDR Ön Eki",lblTotal:"Toplam Adres",lblHosts:"Kullanılabilir Host",lblClass:"Adres Sınıfı",lblBinary:"İkili Ağ / Maske",t1Title:"Web Gecikmesi",t1Desc:"Tarayıcı HTTP gecikmesini ölçer.",t2Title:"Tarayıcı Hız Testi",t2Desc:"Genel bir test dosyası indirerek hızı tahmin eder.",t3Title:"Canlı DNS Sorgusu",t3Desc:"Genel DNS-over-HTTPS kayıtlarını sorgular.",t4Title:"IP Analizi",t4Desc:"Genel IP, ISP ve yaklaşık konumu gösterir.",t5Title:"Sistem ve Tarayıcı Taraması",t5Desc:"Kullanılabilir sistem ve ağ bilgilerini okur.",measure:"Ölç",query:"Sorgula",analyze:"Analiz Et",start:"Hız Testini Başlat",sys:"Sistem Taramasını Başlat",navHome:"Ana Sayfa",navFaq:"SSS",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",ftAccess:"Erişilebilirlik",ftPrivacy:"Gizlilik",ftTerms:"Kullanım Koşulları",ftNoSell:"Bilgilerimi Satma",ftSlavery:"Kölelik Karşıtı Bildirim",ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.",ftTrade:"Fasqoo™ ve Fasqoo Speed Test, Fasqoo'nun ticari markalarıdır."},
 "sq":{heroTitle:"Diagnostikim IT & Kalkulator Subnet",heroSub:"Subnetting IPv4, analizë CIDR dhe mjete profesionale të rrjetit",calcTitle:"Kalkulator Subnet",calcSub:"Vendos një adresë IPv4 me prefiks CIDR.",ready:"● Gati",calculate:"Llogarit",splitTitle:"Ndarja e Subnetit",splitSub:"Ndaje rrjetin në subnet-e të barabarta.",generate:"Krijo Subnet-et",vlsmTitle:"Kalkulator VLSM",vlsmSub:"Krijo subnet-e me madhësi të ndryshme.",vlsmCalc:"Llogarit VLSM",ipv6Title:"Ndihmës i Prefiksit IPv6",ipv6Sub:"Normalizo një adresë IPv6 dhe analizo prefiksin.",ipv6Run:"Analizo IPv6",diagToolsTitle:"Mjete IT Live",copy:"Kopjo",copied:"U kopjua",error:"Hyrje IPv4/CIDR e pavlefshme.",lblNetAddr:"Adresa e Rrjetit",lblNetMask:"Maska e Subnetit",lblFirstIp:"IP e Parë e Përdorshme",lblLastIp:"IP e Fundit e Përdorshme",lblBroadAddr:"Adresa Broadcast",lblWildMask:"Wildcard Mask",lblCidr:"Prefiksi CIDR",lblTotal:"Adresa Gjithsej",lblHosts:"Hoste të Përdorshme",lblClass:"Klasa e Adresës",lblBinary:"Rrjeti / Maska Binare",t1Title:"Latenca Web",t1Desc:"Mat latencën HTTP nga shfletuesi.",t2Title:"Speed Test në Browser",t2Desc:"Shkarkon një skedar publik dhe vlerëson shpejtësinë.",t3Title:"DNS Lookup Live",t3Desc:"Kërkon regjistrime publike DNS-over-HTTPS.",t4Title:"Analizë IP",t4Desc:"Shfaq IP publike, ISP dhe lokacion të përafërt.",t5Title:"Skanim Sistemi & Browser",t5Desc:"Lexon informacionet e disponueshme të sistemit dhe rrjetit.",measure:"Mat",query:"Kërko",analyze:"Analizo",start:"Nis Speedtest",sys:"Nis Skanimin",navHome:"Kryefaqja",navFaq:"FAQ",navStatus:"Statusi i Rrjetit",navDiag:"Diagnostikim IT",navAbout:"Rreth nesh",ftAccess:"Aksesueshmëria",ftPrivacy:"Privatësia",ftTerms:"Kushtet e Përdorimit",ftNoSell:"Mos i Shit të Dhënat e Mia",ftSlavery:"Deklaratë Kundër Skllavërisë",ftRights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",ftTrade:"Fasqoo™ dhe Fasqoo Speed Test janë marka të Fasqoo."},
+nl:{heroTitle:"IT-diagnostiek & Subnet Calculator",heroSub:"Professionele IPv4-subnetting, CIDR-analyse en netwerkgereedschap",calcTitle:"Subnet Calculator",calcSub:"Voer een IPv4-adres met CIDR-prefix in.",ready:"● Gereed",calculate:"Berekenen",splitTitle:"Subnetverdeler",splitSub:"Verdeel het berekende netwerk in kleinere gelijke subnetten.",generate:"Subnetten genereren",vlsmTitle:"VLSM Calculator",vlsmSub:"Maak subnetten met variabele grootte.",vlsmCalc:"VLSM berekenen",ipv6Title:"IPv6 Prefix Helper",ipv6Sub:"Normaliseer een IPv6-adres en analyseer het prefix.",ipv6Run:"IPv6 analyseren",diagToolsTitle:"Live IT-tools",copy:"Kopiëren",copied:"Gekopieerd",error:"Ongeldige IPv4/CIDR-invoer.",lblNetAddr:"Netwerkadres",lblNetMask:"Subnetmasker",lblFirstIp:"Eerste bruikbare IP",lblLastIp:"Laatste bruikbare IP",lblBroadAddr:"Broadcastadres",lblWildMask:"Wildcard-masker",lblCidr:"CIDR-prefix",lblTotal:"Totaal aantal adressen",lblHosts:"Bruikbare hosts",lblClass:"Adresklasse",lblBinary:"Binair netwerk / masker",t1Title:"Weblatentie",t1Desc:"Meet de HTTP-vertraging van de browser.",t2Title:"Browsersnelheidstest",t2Desc:"Downloadt een openbaar testbestand en schat de doorvoer.",t3Title:"Live DNS Lookup",t3Desc:"Vraagt openbare DNS-over-HTTPS-records op.",t4Title:"IP-analyse",t4Desc:"Toont openbaar IP, ISP en geschatte locatie.",t5Title:"Systeem- & browserscan",t5Desc:"Leest beschikbare browser-, scherm- en netwerkgegevens.",measure:"Meten",query:"Opvragen",analyze:"Analyseren",start:"Snelheidstest starten",sys:"Systeemscan starten",navHome:"Home",navFaq:"FAQ",navStatus:"Netwerkstatus",navDiag:"IT-diagnose",navAbout:"Over ons",ftAccess:"Toegankelijkheid",ftPrivacy:"Privacybeleid",ftTerms:"Gebruiksvoorwaarden",ftNoSell:"Mijn gegevens niet verkopen",ftSlavery:"Verklaring tegen slavernij",ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.",ftTrade:"Fasqoo™ en Fasqoo Speed Test zijn handelsmerken van Fasqoo."},
 ar:{heroTitle:"تشخيص تقنية المعلومات وحاسبة الشبكات الفرعية",heroSub:"تقسيم IPv4 وتحليل CIDR وأدوات شبكات احترافية",calcTitle:"حاسبة الشبكة الفرعية",calcSub:"أدخل عنوان IPv4 مع بادئة CIDR.",ready:"● جاهز",calculate:"احسب",splitTitle:"تقسيم الشبكة الفرعية",splitSub:"قسّم الشبكة إلى شبكات فرعية متساوية.",generate:"إنشاء الشبكات",vlsmTitle:"حاسبة VLSM",vlsmSub:"إنشاء شبكات فرعية بأحجام مختلفة.",vlsmCalc:"احسب VLSM",ipv6Title:"مساعد بادئة IPv6",ipv6Sub:"توحيد عنوان IPv6 وتحليل البادئة.",ipv6Run:"تحليل IPv6",diagToolsTitle:"أدوات IT مباشرة",copy:"نسخ",copied:"تم النسخ",error:"إدخال IPv4/CIDR غير صالح.",lblNetAddr:"عنوان الشبكة",lblNetMask:"قناع الشبكة",lblFirstIp:"أول IP قابل للاستخدام",lblLastIp:"آخر IP قابل للاستخدام",lblBroadAddr:"عنوان البث",lblWildMask:"Wildcard Mask",lblCidr:"بادئة CIDR",lblTotal:"إجمالي العناوين",lblHosts:"المضيفون القابلون للاستخدام",lblClass:"فئة العنوان",lblBinary:"الشبكة / القناع الثنائي",t1Title:"زمن استجابة الويب",t1Desc:"قياس زمن طلب HTTP من المتصفح.",t2Title:"اختبار سرعة المتصفح",t2Desc:"تنزيل ملف عام وتقدير سرعة النقل.",t3Title:"بحث DNS مباشر",t3Desc:"الاستعلام عن سجلات DNS العامة.",t4Title:"تحليل IP",t4Desc:"عرض IP العام ومزود الخدمة والموقع التقريبي.",t5Title:"فحص النظام والمتصفح",t5Desc:"قراءة معلومات المتصفح والشاشة والشبكة المتاحة.",measure:"قياس",query:"استعلام",analyze:"تحليل",start:"بدء الاختبار",sys:"بدء الفحص",navHome:"الرئيسية",navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",navDiag:"تشخيص IT",navAbout:"من نحن",ftAccess:"إمكانية الوصول",ftPrivacy:"الخصوصية",ftTerms:"الشروط",ftNoSell:"لا تبيع معلوماتي",ftSlavery:"بيان مكافحة العبودية",ftRights:"© 2026 Fasqoo. جميع الحقوق محفوظة.",ftTrade:"Fasqoo™ وFasqoo Speed Test علامتان تجاريتان لـ Fasqoo."},
 zh:{heroTitle:"IT 诊断与子网计算器",heroSub:"专业 IPv4 子网划分、CIDR 分析和网络工具",calcTitle:"子网计算器",calcSub:"输入带 CIDR 前缀的 IPv4 地址。",ready:"● 就绪",calculate:"计算",splitTitle:"子网拆分",splitSub:"将当前网络拆分为相等的小型子网。",generate:"生成子网",vlsmTitle:"VLSM 计算器",vlsmSub:"创建不同大小的子网。",vlsmCalc:"计算 VLSM",ipv6Title:"IPv6 前缀助手",ipv6Sub:"规范化 IPv6 地址并分析前缀。",ipv6Run:"分析 IPv6",diagToolsTitle:"实时 IT 工具",copy:"复制",copied:"已复制",error:"无效的 IPv4/CIDR 输入。",lblNetAddr:"网络地址",lblNetMask:"子网掩码",lblFirstIp:"第一个可用 IP",lblLastIp:"最后一个可用 IP",lblBroadAddr:"广播地址",lblWildMask:"通配符掩码",lblCidr:"CIDR 前缀",lblTotal:"地址总数",lblHosts:"可用主机",lblClass:"地址类别",lblBinary:"二进制网络 / 掩码",t1Title:"网页延迟",t1Desc:"测量浏览器 HTTP 请求延迟。",t2Title:"浏览器测速",t2Desc:"下载公共测试资源并估算吞吐量。",t3Title:"实时 DNS 查询",t3Desc:"查询公共 DNS-over-HTTPS 记录。",t4Title:"IP 分析",t4Desc:"显示公共 IP、ISP 和大致位置。",t5Title:"系统与浏览器扫描",t5Desc:"读取可用的浏览器、屏幕和网络信息。",measure:"测量",query:"查询",analyze:"分析",start:"开始测速",sys:"运行扫描",navHome:"首页",navFaq:"常见问题",navStatus:"网络状态",navDiag:"IT 诊断",navAbout:"关于我们",ftAccess:"无障碍",ftPrivacy:"隐私政策",ftTerms:"使用条款",ftNoSell:"不要出售我的信息",ftSlavery:"反奴役声明",ftRights:"© 2026 Fasqoo. 保留所有权利。",ftTrade:"Fasqoo™ 和 Fasqoo Speed Test 是 Fasqoo 的商标。"}
 };
@@ -424,6 +613,215 @@ $("runIp").onclick=async()=>{const ip=$("ipInput").value.trim();$("ipOut").textC
 $("runSys").onclick=()=>{const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;$("sysOut").textContent=`User Agent: ${navigator.userAgent}\nScreen: ${screen.width}x${screen.height} (${screen.colorDepth}-bit)\nLanguage: ${navigator.language}\nCPU Cores: ${navigator.hardwareConcurrency||"N/A"}\nNetwork Type: ${c?.effectiveType||"N/A"}\nOnline: ${navigator.onLine?"Yes":"No"}`};
 
 setLanguage(state.lang);calculateSubnet();
+
+/* ===== Fasqoo Pro Network Utilities ===== */
+(function(){
+  const E=id=>document.getElementById(id);
+  const out=(id,text)=>{if(E(id))E(id).textContent=text};
+  const copyText=async text=>{try{await navigator.clipboard.writeText(text);return true}catch(e){return false}};
+
+  function parse4(s){
+    const m=String(s||"").trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\s*\/\s*(\d{1,2})$/);
+    if(!m||!validIp(m[1])||+m[2]>32)return null;
+    return {ip:m[1],cidr:+m[2],n:ipToInt(m[1])};
+  }
+  function netInfo(c){
+    const mask=maskInt(c.cidr),net=(c.n&mask)>>>0,broad=(net|((~mask)>>>0))>>>0,size=2**(32-c.cidr);
+    return {mask,net,broad,size};
+  }
+  function prefixList(start,end){
+    let a=ipToInt(start), b=ipToInt(end);
+    if(a>b)[a,b]=[b,a];
+    const result=[];
+    while(a<=b){
+      let maxSize=a===0?2**32:(a & -a);
+      let remaining=b-a+1;
+      while(maxSize>remaining)maxSize/=2;
+      const prefix=32-Math.log2(maxSize);
+      result.push(intToIp(a)+"/"+prefix);
+      if(maxSize===2**32)break;
+      a+=maxSize;
+    }
+    return result;
+  }
+  function commonPrefix(nums){
+    let min=Math.min(...nums),max=Math.max(...nums),bits=0;
+    for(let p=0;p<=32;p++){
+      const m=maskInt(p);
+      if((min&m)===(max&m))bits=p; else break;
+    }
+    return bits;
+  }
+  function cidrBlocksFromRange(start,end){
+    let a=ipToInt(start), b=ipToInt(end);
+    if(a>b)[a,b]=[b,a];
+    const result=[];
+    while(a<=b){
+      let size = a===0 ? 2**32 : (a & -a);
+      const remaining=b-a+1;
+      while(size>remaining) size/=2;
+      const prefix=32-Math.log2(size);
+      result.push({start:a,end:a+size-1,size,prefix});
+      if(size===2**32) break;
+      a += size;
+    }
+    return result;
+  }
+
+  function exactAggregate(list){
+    const blocks=[];
+    for(const item of list){
+      const c=parse4(item);
+      if(!c) return null;
+      const z=netInfo(c);
+      blocks.push(...cidrBlocksFromRange(intToIp(z.net),intToIp(z.broad)));
+    }
+
+    // Sort and remove blocks fully contained by another block.
+    blocks.sort((a,b)=>a.start-b.start || b.size-a.size);
+    const reduced=[];
+    for(const b of blocks){
+      const prev=reduced[reduced.length-1];
+      if(prev && b.start>=prev.start && b.end<=prev.end) continue;
+      reduced.push(b);
+    }
+
+    // Repeatedly merge adjacent equal-size aligned blocks.
+    let changed=true;
+    while(changed){
+      changed=false;
+      reduced.sort((a,b)=>a.start-b.start);
+      for(let i=0;i<reduced.length-1;i++){
+        const a=reduced[i], b=reduced[i+1];
+        if(a.end+1===b.start && a.size===b.size && (a.start % (a.size*2)===0)){
+          reduced.splice(i,2,{
+            start:a.start,
+            end:b.end,
+            size:a.size*2,
+            prefix:a.prefix-1
+          });
+          changed=true;
+          break;
+        }
+      }
+    }
+    reduced.sort((a,b)=>a.start-b.start);
+    return reduced.map(b=>intToIp(b.start)+"/"+b.prefix);
+  }
+
+  function membership(ip,net){
+    const n=ipToInt(ip),c=parse4(net);if(!validIp(ip)||!c)return null;
+    const z=netInfo(c);return (n>>>0)>=z.net&&(n>>>0)<=z.broad;
+  }
+
+  function fillReference(){
+    const rows=[
+      ["/16","255.255.0.0","65,536","65,534","Large enterprise /16"],
+      ["/20","255.255.240.0","4,096","4,094","Campus / regional"],
+      ["/22","255.255.252.0","1,024","1,022","Large VLAN"],
+      ["/24","255.255.255.0","256","254","Typical LAN/VLAN"],
+      ["/25","255.255.255.128","128","126","Medium segment"],
+      ["/26","255.255.255.192","64","62","Small segment"],
+      ["/27","255.255.255.224","32","30","Small VLAN"],
+      ["/28","255.255.255.240","16","14","Infrastructure"],
+      ["/29","255.255.255.248","8","6","Small infrastructure"],
+      ["/30","255.255.255.252","4","2","Point-to-point"],
+      ["/31","255.255.255.254","2","2 (P2P)","RFC 3021 P2P"],
+      ["/32","255.255.255.255","1","1","Single host"]
+    ];
+    E("cidrReferenceBody").innerHTML=rows.map(r=>"<tr>"+r.map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("");
+  }
+
+  E("runRange")?.addEventListener("click",()=>{
+    const s=E("rangeStart").value.trim(),e=E("rangeEnd").value.trim();
+    if(!validIp(s)||!validIp(e)){out("rangeOut","Invalid IPv4 range.");return}
+    const r=prefixList(s,e);out("rangeOut",r.join("\n")+"\n\n"+r.length+" exact prefix(es).");
+  });
+  E("copyRange")?.addEventListener("click",()=>copyText(E("rangeOut").textContent));
+
+  E("runAggregate")?.addEventListener("click",()=>{
+    const list=E("aggregateInput").value.split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
+    const invalid=list.filter(x=>!parse4(x));
+    if(invalid.length){out("aggregateOut","Invalid CIDR: "+invalid.join(", "));return}
+    const r=exactAggregate(list);
+    out("aggregateOut",r ? r.join("\n") : "Unable to aggregate.");
+  });
+  E("copyAggregate")?.addEventListener("click",()=>copyText(E("aggregateOut").textContent));
+
+  E("runOverlap")?.addEventListener("click",()=>{
+    const a=parse4(E("overlapA").value),b=parse4(E("overlapB").value);
+    if(!a||!b){out("overlapOut","Invalid CIDR input.");return}
+    const A=netInfo(a),B=netInfo(b),yes=A.net<=B.broad&&B.net<=A.broad;
+    out("overlapOut",(yes?"OVERLAP DETECTED":"No overlap")+
+      "\nA: "+intToIp(A.net)+"/"+a.cidr+" → "+intToIp(A.broad)+
+      "\nB: "+intToIp(B.net)+"/"+b.cidr+" → "+intToIp(B.broad));
+  });
+
+  E("runWild")?.addEventListener("click",()=>{
+    const c=parse4(E("wildInput").value);if(!c){out("wildOut","Invalid CIDR.");return}
+    const z=netInfo(c);out("wildOut","Network: "+intToIp(z.net)+"/"+c.cidr+"\nMask: "+intToIp(z.mask)+"\nWildcard: "+intToIp((~z.mask)>>>0));
+  });
+  E("copyWild")?.addEventListener("click",()=>copyText(E("wildOut").textContent));
+
+  E("runConvert")?.addEventListener("click",()=>{
+    const ip=E("convertIp").value.trim();if(!validIp(ip)){out("convertOut","Invalid IPv4.");return}
+    const n=ipToInt(ip);out("convertOut","Decimal: "+ip+"\nBinary: "+binaryIp(n)+"\nHex: 0x"+n.toString(16).padStart(8,"0").toUpperCase()+"\n32-bit unsigned: "+n);
+  });
+  E("copyConvert")?.addEventListener("click",()=>copyText(E("convertOut").textContent));
+
+  E("runMember")?.addEventListener("click",()=>{
+    const yes=membership(E("memberIp").value.trim(),E("memberNet").value.trim());
+    out("memberOut",yes===null?"Invalid input.":(yes?"YES — IP belongs to the subnet.":"NO — IP is outside the subnet."));
+  });
+
+  E("runCloud")?.addEventListener("click",()=>{
+    const c=parse4(E("cloudPlan").value);
+    if(!c){out("cloudOut","Invalid IPv4/CIDR.");return}
+    const z=netInfo(c);
+    const privateRfc1918 =
+      membership("10.0.0.0", intToIp(z.net)+"/"+c.cidr) ||
+      membership("172.16.0.0", intToIp(z.net)+"/"+c.cidr) ||
+      membership("192.168.0.0", intToIp(z.net)+"/"+c.cidr);
+    // A precise RFC1918 test must check the whole subnet, not only one sample IP.
+    const inRfc1918 =
+      z.net >= ipToInt("10.0.0.0") && z.broad <= ipToInt("10.255.255.255") ||
+      z.net >= ipToInt("172.16.0.0") && z.broad <= ipToInt("172.31.255.255") ||
+      z.net >= ipToInt("192.168.0.0") && z.broad <= ipToInt("192.168.255.255");
+    const usable=c.cidr>=31?z.size:Math.max(0,z.size-2);
+    out("cloudOut",
+      "Network: "+intToIp(z.net)+"/"+c.cidr+
+      "\nAddresses: "+z.size.toLocaleString()+
+      "\nUsable hosts: "+usable.toLocaleString()+
+      "\nPrivate RFC1918 space: "+(inRfc1918?"Yes":"No")
+    );
+  });
+
+  E("runUtil")?.addEventListener("click",()=>{
+    const c=parse4(E("utilNet").value),need=Number(E("utilHosts").value);
+    if(!c||!Number.isFinite(need)||need<1){out("utilOut","Invalid network or host requirement.");return}
+    const z=netInfo(c),usable=c.cidr>=31?z.size:z.size-2;
+    const pct=Math.min(100,need/usable*100);
+    out("utilOut","Capacity: "+usable.toLocaleString()+" usable hosts\nRequired: "+need.toLocaleString()+"\nUtilization: "+pct.toFixed(1)+"%\n"+(need<=usable?"Fits inside subnet.":"Does NOT fit — choose a larger subnet."));
+  });
+
+  function reportText(){
+    const fields=[["Network Address","netAddr"],["Subnet Mask","netMask"],["First Usable","firstIp"],["Last Usable","lastIp"],["Broadcast","broadAddr"],["Wildcard","wildMask"],["CIDR","cidrOut"],["Total Addresses","totalOut"],["Usable Hosts","hostsOut"],["Address Class","classOut"]];
+    return "FASQOO NETWORK ENGINEERING REPORT\n================================\nInput: "+E("subnetInput").value+"\n\n"+
+      fields.map(x=>x[0]+": "+E(x[1]).textContent).join("\n")+
+      "\n\nGenerated locally by Fasqoo Network Toolkit.";
+  }
+  E("copyReport")?.addEventListener("click",async()=>{const t=reportText();await copyText(t);out("reportOut",t+"\n\nCopied to clipboard.");});
+  E("downloadReport")?.addEventListener("click",()=>{
+    const blob=new Blob([reportText()],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");
+    const url=URL.createObjectURL(blob);
+    a.href=url;a.download="fasqoo-network-report.txt";
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+
+  fillReference();
+})();
+
 </script>
 
 </body>
