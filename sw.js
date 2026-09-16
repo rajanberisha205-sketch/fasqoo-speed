@@ -1,28 +1,66 @@
-const CACHE = "fasqoo-v3";
-const ASSETS = ["/", "/index.html", "/site.webmanifest", "/fasqoologo.png"];
+const CACHE = "fasqoo-v4";
 
-self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).catch(()=>{}));
+const ASSETS = [
+  "/",
+  "/index.html",
+  "/site.webmanifest",
+  "/fasqoologo.png"
+];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(ASSETS))
+      .catch(() => {})
+  );
+
   self.skipWaiting();
 });
 
-self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE)
+          .map(key => caches.delete(key))
+      )
+    )
   );
+
   self.clients.claim();
 });
 
-self.addEventListener("fetch", e => {
-  const req = e.request;
-  // Speedtest-Requests NIE cachen
-  if(req.url.includes("speed.cloudflare.com") || req.url.includes("ipwho.is")) return;
-  if(req.method !== "GET") return;
-  e.respondWith(
-    fetch(req).then(res => {
-      const copy = res.clone();
-      caches.open(CACHE).then(c => c.put(req, copy)).catch(()=>{});
-      return res;
-    }).catch(() => caches.match(req).then(r => r || caches.match("/index.html")))
+self.addEventListener("fetch", event => {
+  const request = event.request;
+
+  // Speed-test requests niemals cachen
+  if (
+    request.url.includes("speed.cloudflare.com") ||
+    request.url.includes("ipwho.is")
+  ) {
+    return;
+  }
+
+  if (request.method !== "GET") {
+    return;
+  }
+
+  event.respondWith(
+    fetch(request)
+      .then(response => {
+        const copy = response.clone();
+
+        caches.open(CACHE)
+          .then(cache => cache.put(request, copy))
+          .catch(() => {});
+
+        return response;
+      })
+      .catch(() =>
+        caches.match(request).then(response =>
+          response || caches.match("/index.html")
+        )
+      )
   );
 });
