@@ -569,20 +569,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 const $ = id => document.getElementById(id);
 
-/* ---------- TRANSLATIONS ---------- */
-const translations = {
-  const $ = id => document.getElementById(id);
 
-
-window.addEventListener('appinstalled', () => {
-  const installBtn = $('installButton');
-  if (installBtn) installBtn.style.display = 'none';
-});
-
-if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-  const installBtn = $('installButton');
-  if (installBtn) installBtn.style.display = 'none';
-}
 
 en:{navFaq:"FAQ",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",liteBtn:"Fasqoo Lite",download:"Install Fasqoo for Windows",title:"Internet Speed Test",sub:"Precise. Fast. Real-time.",server:"AUTOMATIC SERVER",ready:"Ready to test",start:"Start Speed Test",startAgain:"Test Again",testing:"Testing…",complete:"Test completed",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Live Performance",chartWait:"Waiting",lblIp:"Public IP",lblIsp:"Provider / ISP",lblLoc:"Location",lblAsn:"Network / ASN",qTitle:"Connection Quality",qDefault:"Run a test to evaluate your connection.",appsTitle:"What can you do with your connection?",appsSub:"Your results are analyzed for common online activities.",diagTitle:"Network Diagnostics",diagLatT:"Latency",diagLatD:"Measures response time.",diagStabT:"Stability",diagStabD:"Jitter shows connection stability.",diagDnsT:"DNS Diagnostics",diagDnsD:"Checks DNS resolvers.",diagIpT:"IP Diagnostics",diagIpD:"Detects IP, ISP, ASN.",repTitle:"Professional Test Report",lblRepTestId:"Test ID",copy:"Copy Result",share:"Share Result",json:"Export JSON",print:"Print Report",histTitle:"Test History",histRecent:"Recent measurements",histClear:"Clear history",thDate:"Date",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Quality",noHistory:"No tests recorded yet.",ftRights:"© 2026 Fasqoo. All Rights Reserved.",ftTrade:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.",ftAccess:"Accessibility",ftImprint:"Imprint",ftPrivacy:"Privacy Policy",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",stPing:"Measuring latency…",stDown:"Measuring download…",stUp:"Measuring upload…",stErr:"Test failed.",stExc:"Excellent",stGood:"Good",stLim:"Limited",q90:"Excellent connection.",q75:"Very good connection.",q55:"Good connection.",q35:"Average connection.",q0:"Poor connection.",gam85:"Excellent for gaming",gam65:"Good for gaming",gam45:"Playable",gam0:"May lag",str85:"HD Streaming: Excellent",str65:"HD Streaming: Good",str40:"HD Streaming: Limited",str0:"May buffer",fk85:"4K Streaming: Excellent",fk65:"4K Streaming: Good",fk40:"4K Streaming: Possible",fk0:"4K not recommended",call85:"Video Calls: Excellent",call65:"Video Calls: Good",call40:"Video Calls: Limited",call0:"Calls may suffer",off85:"Excellent for home office",off65:"Good for home office",off40:"Usable",off0:"May be slow",cld85:"Large transfers: Excellent",cld65:"Fast transfers",cld40:"Moderate",cld0:"Slow downloads",soc85:"Excellent",soc65:"Very good",soc40:"Good",soc0:"Limited",web85:"Very fast browsing",web65:"Fast browsing",web40:"Normal browsing",web0:"Slow loading",alertRun:"Please run a speed test first.",unavail:"Unavailable",notDetected:"Not detected",appRunTest:"Run test",copied:"Copied",
   apps:{gaming:{t:"Gaming",d:"Low ping and jitter are important.",det:"See which games you can play without lag."},stream:{t:"Streaming",d:"Good speed for HD streaming.",det:"Check if your bandwidth is enough for HD streaming."},fourk:{t:"4K Streaming",d:"Checks if 4K video works.",det:"Tests suitability for Ultra-HD streaming."},call:{t:"Video Calls",d:"Bandwidth & latency for video calls.",det:"Ideal for Teams, Zoom, Meet."},office:{t:"Home Office",d:"For cloud apps and remote work.",det:"Stability for VPNs and cloud documents."},cloud:{t:"Cloud & Downloads",d:"Efficiency for large transfers.",det:"How fast large files download."},social:{t:"Social Media",d:"For Instagram, TikTok, Facebook.",det:"How fast reels and stories load."},web:{t:"Web Browsing",d:"For everyday websites.",det:"Loading times for daily sites."}}},
