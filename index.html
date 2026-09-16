@@ -1,110 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Theme -->
 <meta name="theme-color" content="#ffffff" id="themeColor">
-
-<!-- Primary SEO -->
-<title>Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo</title>
-
-<meta
-  name="description"
-  content="Free professional internet speed test by Fasqoo. Measure download, upload, ping, jitter and network quality with a real browser-based connection test."
->
-
+<meta name="description" content="Free professional internet speed test by Fasqoo. Measure download, upload, ping and jitter with a real browser-based connection test.">
 <meta name="robots" content="index, follow">
-
+<title>Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo</title>
 <link rel="canonical" href="https://www.fasqoo.com/">
-
-<!-- PWA -->
 <link rel="manifest" href="/site.webmanifest">
-
-<!-- Favicons -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<!-- Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
->
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Fasqoo">
-<meta property="og:title" content="Fasqoo – Professional Internet Speed Test">
-<meta
-  property="og:description"
-  content="Measure download, upload, ping, jitter and network quality with Fasqoo."
->
-<meta property="og:url" content="https://www.fasqoo.com/">
-<meta property="og:image" content="https://www.fasqoo.com/android-chrome-512x512.png">
-<meta property="og:image:alt" content="Fasqoo Professional Internet Speed Test">
-
-<!-- X / Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fasqoo – Professional Internet Speed Test">
-<meta
-  name="twitter:description"
-  content="Measure download, upload, ping, jitter and network quality with Fasqoo."
->
-<meta name="twitter:image" content="https://www.fasqoo.com/android-chrome-512x512.png">
-<meta name="twitter:image:alt" content="Fasqoo Professional Internet Speed Test">
-
-<!-- Structured Data: Organization -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://www.fasqoo.com/#organization",
-  "name": "Fasqoo",
-  "url": "https://www.fasqoo.com/",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://www.fasqoo.com/android-chrome-512x512.png"
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Fasqoo",
+    "url": "https://www.fasqoo.com/",
+    "logo": "https://www.fasqoo.com/android-chrome-512x512.png"
   }
-}
-</script>
-
-<!-- Structured Data: WebSite -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://www.fasqoo.com/#website",
-  "name": "Fasqoo",
-  "url": "https://www.fasqoo.com/",
-  "publisher": {
-    "@id": "https://www.fasqoo.com/#organization"
-  }
-}
-</script>
-
-<!-- Structured Data: WebApplication -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "@id": "https://www.fasqoo.com/#speedtest",
-  "name": "Fasqoo Internet Speed Test",
-  "url": "https://www.fasqoo.com/",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Web Browser",
-  "description": "Professional browser-based internet speed test measuring download, upload, ping, jitter and network quality.",
-  "publisher": {
-    "@id": "https://www.fasqoo.com/#organization"
-  }
-}
-</script>
-
+  </script>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--green:#16a36a;--shadow:0 8px 30px rgba(0,0,0,.06)}
 *{box-sizing:border-box}
@@ -569,8 +488,8 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 const $ = id => document.getElementById(id);
 
-
-
+/* ---------- TRANSLATIONS ---------- */
+const translations = {
 en:{navFaq:"FAQ",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",liteBtn:"Fasqoo Lite",download:"Install Fasqoo for Windows",title:"Internet Speed Test",sub:"Precise. Fast. Real-time.",server:"AUTOMATIC SERVER",ready:"Ready to test",start:"Start Speed Test",startAgain:"Test Again",testing:"Testing…",complete:"Test completed",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Live Performance",chartWait:"Waiting",lblIp:"Public IP",lblIsp:"Provider / ISP",lblLoc:"Location",lblAsn:"Network / ASN",qTitle:"Connection Quality",qDefault:"Run a test to evaluate your connection.",appsTitle:"What can you do with your connection?",appsSub:"Your results are analyzed for common online activities.",diagTitle:"Network Diagnostics",diagLatT:"Latency",diagLatD:"Measures response time.",diagStabT:"Stability",diagStabD:"Jitter shows connection stability.",diagDnsT:"DNS Diagnostics",diagDnsD:"Checks DNS resolvers.",diagIpT:"IP Diagnostics",diagIpD:"Detects IP, ISP, ASN.",repTitle:"Professional Test Report",lblRepTestId:"Test ID",copy:"Copy Result",share:"Share Result",json:"Export JSON",print:"Print Report",histTitle:"Test History",histRecent:"Recent measurements",histClear:"Clear history",thDate:"Date",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Quality",noHistory:"No tests recorded yet.",ftRights:"© 2026 Fasqoo. All Rights Reserved.",ftTrade:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.",ftAccess:"Accessibility",ftImprint:"Imprint",ftPrivacy:"Privacy Policy",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",stPing:"Measuring latency…",stDown:"Measuring download…",stUp:"Measuring upload…",stErr:"Test failed.",stExc:"Excellent",stGood:"Good",stLim:"Limited",q90:"Excellent connection.",q75:"Very good connection.",q55:"Good connection.",q35:"Average connection.",q0:"Poor connection.",gam85:"Excellent for gaming",gam65:"Good for gaming",gam45:"Playable",gam0:"May lag",str85:"HD Streaming: Excellent",str65:"HD Streaming: Good",str40:"HD Streaming: Limited",str0:"May buffer",fk85:"4K Streaming: Excellent",fk65:"4K Streaming: Good",fk40:"4K Streaming: Possible",fk0:"4K not recommended",call85:"Video Calls: Excellent",call65:"Video Calls: Good",call40:"Video Calls: Limited",call0:"Calls may suffer",off85:"Excellent for home office",off65:"Good for home office",off40:"Usable",off0:"May be slow",cld85:"Large transfers: Excellent",cld65:"Fast transfers",cld40:"Moderate",cld0:"Slow downloads",soc85:"Excellent",soc65:"Very good",soc40:"Good",soc0:"Limited",web85:"Very fast browsing",web65:"Fast browsing",web40:"Normal browsing",web0:"Slow loading",alertRun:"Please run a speed test first.",unavail:"Unavailable",notDetected:"Not detected",appRunTest:"Run test",copied:"Copied",
   apps:{gaming:{t:"Gaming",d:"Low ping and jitter are important.",det:"See which games you can play without lag."},stream:{t:"Streaming",d:"Good speed for HD streaming.",det:"Check if your bandwidth is enough for HD streaming."},fourk:{t:"4K Streaming",d:"Checks if 4K video works.",det:"Tests suitability for Ultra-HD streaming."},call:{t:"Video Calls",d:"Bandwidth & latency for video calls.",det:"Ideal for Teams, Zoom, Meet."},office:{t:"Home Office",d:"For cloud apps and remote work.",det:"Stability for VPNs and cloud documents."},cloud:{t:"Cloud & Downloads",d:"Efficiency for large transfers.",det:"How fast large files download."},social:{t:"Social Media",d:"For Instagram, TikTok, Facebook.",det:"How fast reels and stories load."},web:{t:"Web Browsing",d:"For everyday websites.",det:"Loading times for daily sites."}}},
 
