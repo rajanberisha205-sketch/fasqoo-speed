@@ -17,15 +17,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--bg:#fff;--card:#fff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--green:#16a36a;--shadow:0 8px 30px rgba(0,0,0,.06)}
+:root{--bg:#f5f6f8;--card:#fff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--green:#16a36a;--shadow:0 8px 30px rgba(0,0,0,.06)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 button,select{font:inherit}
 button{cursor:pointer}
-.wrap{width:min(1180px,calc(100% - 28px));margin:auto}
+.wrap{width:min(1120px,calc(100% - 48px));margin:auto}
 
-header{height:68px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+header{height:68px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.03)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
 .brand{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .brandmark{width:38px;height:38px;object-fit:contain}
@@ -35,10 +35,10 @@ header{height:68px;background:var(--card);border-bottom:1px solid var(--line);di
 .main-menu a:hover{color:var(--orange)}
 .menu-extra{display:flex;align-items:center;gap:8px}
 .menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;cursor:pointer}
-.install-btn{height:38px;border:1px solid #ffd2c2;border-radius:10px;background:linear-gradient(180deg,#fff,#fff7f3);color:#c63f0f;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:12px;font-weight:600;text-decoration:none;transition:.2s;box-shadow:0 2px 8px rgba(255,90,31,.08)}
-.install-btn:hover{background:#fff1ea;border-color:#ffb89f;color:#a9330b;transform:translateY(-1px)}
+.install-btn{height:40px;border:1px solid #d9dee5;border-radius:10px;background:#fff;color:#1f2937;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:12px;font-weight:600;text-decoration:none;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.install-btn:hover{background:#f8fafc;border-color:#bfc7d1;color:#111827;transform:translateY(-1px)}
 .install-btn:disabled{opacity:.7;cursor:default;transform:none}
-.install-icon{font-size:14px;line-height:1}
+.install-icon{font-size:17px;line-height:1;display:inline-flex;align-items:center}.windows-icon{width:15px;height:15px;display:inline-block;position:relative;background:linear-gradient(90deg,transparent 46%,#fff 46%,#fff 54%,transparent 54%),linear-gradient(0deg,transparent 46%,#fff 46%,#fff 54%,transparent 54%);background-color:#0078d4;border-radius:2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .lite-btn{height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;font-size:12px;font-weight:500;text-decoration:none;transition:.2s}
 .theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px}
 .menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
@@ -174,7 +174,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
       <div class="brandname">Fasqoo</div>
     </div>
     <button id="installButton" class="install-btn" type="button" title="Install Fasqoo for Windows" aria-label="Install Fasqoo for Windows">
-          <span class="install-icon" aria-hidden="true">▣</span><span id="installLabel" data-i18n="download">Fasqoo für Windows installieren</span>
+          <span class="install-icon" aria-hidden="true"><span id="installIcon" class="windows-icon"></span></span><span id="installLabel" data-i18n="download">Fasqoo für Windows installieren</span>
         </button>
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
@@ -766,10 +766,24 @@ function isDesktopDevice(){
   const desktopUA = /Windows NT|Macintosh|X11; Linux x86_64|CrOS/i.test(ua);
   return !mobileUA && desktopUA;
 }
-
+function isSafariDesktop(){
+  const ua = navigator.userAgent || "";
+  return /Macintosh/i.test(ua) && /Safari/i.test(ua) && !/Chrome|CriOS|Edg|OPR|Firefox/i.test(ua);
+}
+function isWindows(){ return /Windows NT/i.test(navigator.userAgent || ""); }
 function updateInstallVisibility(){
   if(!installButton) return;
   installButton.hidden = !isDesktopDevice();
+  if(!isDesktopDevice()) return;
+  const icon = $("installIcon");
+  if(isWindows()){
+    icon.className = "windows-icon";
+  } else {
+    icon.className = "apple-icon";
+    icon.textContent = "⌘";
+  }
+  installLabel.textContent = isSafariDesktop() ? "Fasqoo für macOS installieren" : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
+  installButton.title = installLabel.textContent;
 }
 updateInstallVisibility();
 
@@ -793,6 +807,11 @@ installButton.addEventListener("click", async () => {
     deferredInstallPrompt.prompt();
     const res = await deferredInstallPrompt.userChoice;
     if(res.outcome === "accepted") deferredInstallPrompt = null;
+    return;
+  }
+
+  if(isSafariDesktop()){
+    alert("Safari: Öffne das Teilen-Menü und wähle „Zum Dock hinzufügen“. Damit wird Fasqoo als Web-App auf deinem Mac installiert.");
     return;
   }
 
