@@ -30,7 +30,7 @@ header{height:68px;background:rgba(255,255,255,.96);border-bottom:1px solid var(
 .brand{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .brandmark{width:38px;height:38px;object-fit:contain}
 .brandname{font-size:21px;letter-spacing:-.4px;font-weight:700}
-.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:20px;margin-left:auto}
+.main-menu{display:flex;align-items:center;justify-content:center;gap:20px;position:absolute;left:50%;transform:translateX(-50%);width:max-content}
 .main-menu a{color:var(--text);text-decoration:none;font-size:13px;white-space:nowrap;transition:color .2s}
 .main-menu a:hover{color:var(--orange)}
 .menu-extra{display:flex;align-items:center;gap:8px}
@@ -148,7 +148,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 @media(max-width:760px){
   #installButton{display:none!important}
   .menu-toggle{display:block}
-  .main-menu{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);align-items:flex-start}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;transform:none;width:auto;background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);align-items:flex-start}
   .main-menu.active{display:flex}
   .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);gap:12px}
 }
@@ -743,7 +743,7 @@ function applyLanguage(lang){
   });
 
   const il = $("installLabel");
-  if(il && !il.dataset.installed) il.textContent = t.download;
+  if(il && !il.dataset.installed) updateInstallVisibility();
 
   historyLoad();
   if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
@@ -782,8 +782,22 @@ function updateInstallVisibility(){
     icon.className = "apple-icon";
     icon.textContent = "⌘";
   }
-  installLabel.textContent = isSafariDesktop() ? "Fasqoo für macOS installieren" : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
+  const installTexts = {
+    de: { win:"Fasqoo für Windows installieren", mac:"Fasqoo für macOS installieren", other:"Fasqoo installieren" },
+    en: { win:"Install Fasqoo for Windows", mac:"Install Fasqoo for macOS", other:"Install Fasqoo" },
+    fr: { win:"Installer Fasqoo pour Windows", mac:"Installer Fasqoo pour macOS", other:"Installer Fasqoo" },
+    es: { win:"Instalar Fasqoo para Windows", mac:"Instalar Fasqoo para macOS", other:"Instalar Fasqoo" },
+    it: { win:"Installa Fasqoo per Windows", mac:"Installa Fasqoo per macOS", other:"Installa Fasqoo" },
+    pt: { win:"Instalar Fasqoo para Windows", mac:"Instalar Fasqoo para macOS", other:"Instalar Fasqoo" },
+    nl: { win:"Fasqoo voor Windows installeren", mac:"Fasqoo voor macOS installeren", other:"Fasqoo installeren" },
+    tr: { win:"Fasqoo'yu Windows'a yükle", mac:"Fasqoo'yu macOS'e yükle", other:"Fasqoo'yu yükle" },
+    sq: { win:"Instalo Fasqoo për Windows", mac:"Instalo Fasqoo për macOS", other:"Instalo Fasqoo" },
+    ar: { win:"تثبيت Fasqoo لنظام Windows", mac:"تثبيت Fasqoo لنظام macOS", other:"تثبيت Fasqoo" }
+  };
+  const it = installTexts[currentLang] || installTexts.en;
+  installLabel.textContent = isSafariDesktop() ? it.mac : (isWindows() ? it.win : it.other);
   installButton.title = installLabel.textContent;
+  installButton.setAttribute("aria-label", installLabel.textContent);
 }
 updateInstallVisibility();
 
