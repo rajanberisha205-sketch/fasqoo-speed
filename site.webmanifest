@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "Fasqoo Speed Test",
   "short_name": "Fasqoo",
   "description": "Free internet speed test – download, upload, ping and jitter.",
@@ -26,7 +27,7 @@
       "type": "image/png"
     },
     {
-       "src": "/android-chrome 192x192.png",
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
