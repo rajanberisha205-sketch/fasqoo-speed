@@ -1110,6 +1110,18 @@ applyLanguage(initialLang);
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 
 netinfo();
+
+ 
+const $ = id => document.getElementById(id);
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  const installBtn = $('installButton');
+  if (installBtn) installBtn.style.display = 'none';
+}
+window.addEventListener('appinstalled', () => {
+  const installBtn = $('installButton');
+  if (installBtn) installBtn.style.display = 'none';
+});
 </script>
+
 </body>
 </html>
