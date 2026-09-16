@@ -1,4 +1,4 @@
-const CACHE = "fasqoo-v4";
+const CACHE = "fasqoo-v5";
 
 const ASSETS = [
   "/",
@@ -34,7 +34,7 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   const request = event.request;
 
-  // Speed-test requests niemals cachen
+  // Speed-test requests are never cached.
   if (
     request.url.includes("speed.cloudflare.com") ||
     request.url.includes("ipwho.is")
