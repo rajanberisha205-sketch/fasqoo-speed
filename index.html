@@ -24,7 +24,28 @@
     "logo": "https://www.fasqoo.com/android-chrome-512x512.png"
   }
   </script>
+  <!-- Structured Data: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://www.fasqoo.com/#speedtest",
+  "name": "Fasqoo Internet Speed Test",
+  "url": "https://www.fasqoo.com/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "description": "Professional browser-based internet speed test measuring download, upload, ping, jitter and network quality.",
+  "publisher": {
+    "@id": "https://www.fasqoo.com/#organization"
+  }
+}
+</script>
+
 <style>
+  .mac-icon {
+  /* Füge hier dein Mac-Icon ein oder nutze ein bestehendes */
+  background-image: url('pfad-zum-mac-icon.svg'); 
+}
 :root{--bg:#f5f6f8;--card:#fff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--green:#16a36a;--shadow:0 8px 30px rgba(0,0,0,.06)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -1112,14 +1133,36 @@ applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
 
  
-const $ = id => document.getElementById(id);
-if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-  const installBtn = $('installButton');
-  if (installBtn) installBtn.style.display = 'none';
-}
-window.addEventListener('appinstalled', () => {
-  const installBtn = $('installButton');
-  if (installBtn) installBtn.style.display = 'none';
+document.addEventListener('DOMContentLoaded', () => {
+  const installBtn = document.getElementById('installButton');
+  const installLabel = document.getElementById('installLabel');
+  const installIcon = document.getElementById('installIcon');
+  
+  if (!installBtn) return;
+
+  // 1. Betriebssystem erkennen und Text/Icon anpassen
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (userAgent.includes('mac')) {
+    if (installLabel) installLabel.textContent = 'Fasqoo für Mac installieren';
+    if (installIcon) installIcon.className = 'mac-icon'; // Falls du eine Mac-Klasse hast
+    installBtn.title = 'Install Fasqoo for Mac';
+    installBtn.setAttribute('aria-label', 'Install Fasqoo for Mac');
+  } else if (userAgent.includes('win')) {
+    if (installLabel) installLabel.textContent = 'Fasqoo für Windows installieren';
+    if (installIcon) installIcon.className = 'windows-icon';
+    installBtn.title = 'Install Fasqoo for Windows';
+    installBtn.setAttribute('aria-label', 'Install Fasqoo for Windows');
+  }
+
+  // 2. Prüfen, ob die PWA bereits installiert ist (Standalone-Modus)
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    installBtn.style.display = 'none';
+  }
+
+  // 3. Button ausblenden, sobald die Installation abgeschlossen wurde
+  window.addEventListener('appinstalled', () => {
+    installBtn.style.display = 'none';
+  });
 });
 </script>
 
