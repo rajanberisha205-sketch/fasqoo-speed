@@ -1133,6 +1133,19 @@ applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
 
  
+
+
+  let deferredPrompt;
+
+// 1. Installations-Event des Browsers abfangen
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  const installBtn = document.getElementById('installButton');
+  if (installBtn) installBtn.style.display = 'block';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const installBtn = document.getElementById('installButton');
   const installLabel = document.getElementById('installLabel');
@@ -1140,11 +1153,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (!installBtn) return;
 
-  // 1. Betriebssystem erkennen und Text/Icon anpassen
+  // 2. Betriebssystem erkennen (Windows oder Mac) und Text anpassen
   const userAgent = navigator.userAgent.toLowerCase();
   if (userAgent.includes('mac')) {
     if (installLabel) installLabel.textContent = 'Fasqoo für Mac installieren';
-    if (installIcon) installIcon.className = 'mac-icon'; // Falls du eine Mac-Klasse hast
+    if (installIcon) installIcon.className = 'mac-icon';
     installBtn.title = 'Install Fasqoo for Mac';
     installBtn.setAttribute('aria-label', 'Install Fasqoo for Mac');
   } else if (userAgent.includes('win')) {
@@ -1154,16 +1167,34 @@ document.addEventListener('DOMContentLoaded', () => {
     installBtn.setAttribute('aria-label', 'Install Fasqoo for Windows');
   }
 
-  // 2. Prüfen, ob die PWA bereits installiert ist (Standalone-Modus)
+  // 3. Prüfen, ob die PWA bereits als App geöffnet ist (Standalone-Modus)
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
     installBtn.style.display = 'none';
   }
 
-  // 3. Button ausblenden, sobald die Installation abgeschlossen wurde
-  window.addEventListener('appinstalled', () => {
+  // 4. Klick-Aktion: Installations-Fenster erzwingen
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    if (outcome === 'accepted') {
+      console.log('App wurde erfolgreich installiert');
+    }
+    
+    deferredPrompt = null;
     installBtn.style.display = 'none';
   });
 });
+
+// 5. Button direkt ausblenden, sobald die Installation abgeschlossen wurde
+window.addEventListener('appinstalled', () => {
+  const installBtn = document.getElementById('installButton');
+  if (installBtn) installBtn.style.display = 'none';
+});
+
+
 </script>
 
 </body>
