@@ -521,6 +521,36 @@ ar:{navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",nav
   apps:{gaming:{t:"الألعاب",d:"Ping منخفض مهم.",det:"شاهد الألعاب بدون تأخير."},stream:{t:"البث",d:"سرعة جيدة للـHD.",det:"تحقق من البث HD."},fourk:{t:"بث 4K",d:"يتحقق من فيديو 4K.",det:"اختبار Ultra-HD."},call:{t:"مكالمات الفيديو",d:"النطاق وزمن الاستجابة.",det:"مثالي لـTeams وZoom وMeet."},office:{t:"العمل من المنزل",d:"للسحابة والعمل عن بعد.",det:"استقرار VPN والمستندات."},cloud:{t:"السحابة والتنزيلات",d:"كفاءة النقل.",det:"سرعة التنزيل."},social:{t:"وسائل التواصل",d:"لـInstagram وTikTok.",det:"سرعة المقاطع."},web:{t:"تصفح الويب",d:"للمواقع اليومية.",det:"أوقات التحميل."}}}
 };
 
+/* ---------- COMPLETE UI TRANSLATION PATCH ---------- */
+const extraTranslations = {
+  en:{eyebrow:'FASQOO NETWORK INTELLIGENCE',trust1:'✓ Real browser measurement',trust2:'✓ Cloudflare Edge',trust3:'✓ No artificial fallback values',liveTest:'LIVE CONNECTION TEST',readyPhase:'Ready',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Result',unitMbps:'Mbps',waiting:'Waiting for measurement',basedOn:'Based on download, upload, ping & jitter',notMeasured:'Not measured',networkIntelligence:'NETWORK INTELLIGENCE',understand:'Understand your connection',intelligenceSub:'Fasqoo turns your measurements into practical network insights.',professional:'PROFESSIONAL',latency:'Latency',responseTime:'Response time',stability:'Stability',jitterConsistency:'Jitter consistency',throughput:'Throughput',downloadCapacity:'Download capacity',testServer:'Test server',automaticEdge:'Automatic edge selection',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test ID',measurementReal:'Measuring real network performance',measurementComplete:'Measurement complete',measurementFailed:'Test could not be completed'},
+  de:{eyebrow:'FASQOO NETZWERK-INTELLIGENZ',trust1:'✓ Echte Browser-Messung',trust2:'✓ Cloudflare Edge',trust3:'✓ Keine künstlichen Ersatzwerte',liveTest:'LIVE-VERBINDUNGSTEST',readyPhase:'Bereit',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Ergebnis',unitMbps:'Mbit/s',waiting:'Warten auf Messung',basedOn:'Basierend auf Download, Upload, Ping & Jitter',notMeasured:'Nicht gemessen',networkIntelligence:'NETZWERK-INTELLIGENZ',understand:'Verstehe deine Verbindung',intelligenceSub:'Fasqoo verwandelt deine Messwerte in praktische Netzwerkinformationen.',professional:'PROFESSIONELL',latency:'Latenz',responseTime:'Antwortzeit',stability:'Stabilität',jitterConsistency:'Jitter-Konsistenz',throughput:'Durchsatz',downloadCapacity:'Download-Kapazität',testServer:'Testserver',automaticEdge:'Automatische Edge-Auswahl',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID',measurementReal:'Echte Netzwerkleistung wird gemessen',measurementComplete:'Messung abgeschlossen',measurementFailed:'Der Test konnte nicht abgeschlossen werden'},
+  fr:{eyebrow:'INTELLIGENCE RÉSEAU FASQOO',trust1:'✓ Mesure réelle dans le navigateur',trust2:'✓ Cloudflare Edge',trust3:'✓ Aucune valeur de secours artificielle',liveTest:'TEST DE CONNEXION EN DIRECT',readyPhase:'Prêt',phasePing:'Ping',phaseDownload:'Téléchargement',phaseUpload:'Envoi',phaseResult:'Résultat',unitMbps:'Mbit/s',waiting:'En attente de mesure',basedOn:'Basé sur le téléchargement, l’envoi, le ping et le jitter',notMeasured:'Non mesuré',networkIntelligence:'INTELLIGENCE RÉSEAU',understand:'Comprenez votre connexion',intelligenceSub:'Fasqoo transforme vos mesures en informations réseau pratiques.',professional:'PROFESSIONNEL',latency:'Latence',responseTime:'Temps de réponse',stability:'Stabilité',jitterConsistency:'Régularité du jitter',throughput:'Débit',downloadCapacity:'Capacité de téléchargement',testServer:'Serveur de test',automaticEdge:'Sélection automatique de l’Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID du test',measurementReal:'Mesure réelle des performances réseau',measurementComplete:'Mesure terminée',measurementFailed:'Le test n’a pas pu être terminé'},
+  es:{eyebrow:'INTELIGENCIA DE RED FASQOO',trust1:'✓ Medición real en el navegador',trust2:'✓ Cloudflare Edge',trust3:'✓ Sin valores de respaldo artificiales',liveTest:'PRUEBA DE CONEXIÓN EN VIVO',readyPhase:'Listo',phasePing:'Ping',phaseDownload:'Descarga',phaseUpload:'Subida',phaseResult:'Resultado',unitMbps:'Mbit/s',waiting:'Esperando medición',basedOn:'Basado en descarga, subida, ping y jitter',notMeasured:'No medido',networkIntelligence:'INTELIGENCIA DE RED',understand:'Entiende tu conexión',intelligenceSub:'Fasqoo convierte tus mediciones en información de red práctica.',professional:'PROFESIONAL',latency:'Latencia',responseTime:'Tiempo de respuesta',stability:'Estabilidad',jitterConsistency:'Consistencia del jitter',throughput:'Rendimiento',downloadCapacity:'Capacidad de descarga',testServer:'Servidor de prueba',automaticEdge:'Selección automática de Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID de prueba',measurementReal:'Midiendo el rendimiento real de la red',measurementComplete:'Medición completada',measurementFailed:'No se pudo completar la prueba'},
+  it:{eyebrow:'INTELLIGENZA DI RETE FASQOO',trust1:'✓ Misurazione reale nel browser',trust2:'✓ Cloudflare Edge',trust3:'✓ Nessun valore sostitutivo artificiale',liveTest:'TEST DELLA CONNESSIONE IN DIRETTA',readyPhase:'Pronto',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Risultato',unitMbps:'Mbit/s',waiting:'In attesa della misurazione',basedOn:'Basato su download, upload, ping e jitter',notMeasured:'Non misurato',networkIntelligence:'INTELLIGENZA DI RETE',understand:'Comprendi la tua connessione',intelligenceSub:'Fasqoo trasforma le tue misurazioni in informazioni di rete pratiche.',professional:'PROFESSIONALE',latency:'Latenza',responseTime:'Tempo di risposta',stability:'Stabilità',jitterConsistency:'Coerenza del jitter',throughput:'Velocità',downloadCapacity:'Capacità di download',testServer:'Server di test',automaticEdge:'Selezione Edge automatica',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID test',measurementReal:'Misurazione delle prestazioni reali della rete',measurementComplete:'Misurazione completata',measurementFailed:'Il test non può essere completato'},
+  pt:{eyebrow:'INTELIGÊNCIA DE REDE FASQOO',trust1:'✓ Medição real no navegador',trust2:'✓ Cloudflare Edge',trust3:'✓ Sem valores de substituição artificiais',liveTest:'TESTE DE LIGAÇÃO EM DIRETO',readyPhase:'Pronto',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Resultado',unitMbps:'Mbit/s',waiting:'A aguardar medição',basedOn:'Baseado em download, upload, ping e jitter',notMeasured:'Não medido',networkIntelligence:'INTELIGÊNCIA DE REDE',understand:'Compreenda a sua ligação',intelligenceSub:'A Fasqoo transforma as suas medições em informações de rede práticas.',professional:'PROFISSIONAL',latency:'Latência',responseTime:'Tempo de resposta',stability:'Estabilidade',jitterConsistency:'Consistência do jitter',throughput:'Débito',downloadCapacity:'Capacidade de download',testServer:'Servidor de teste',automaticEdge:'Seleção Edge automática',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID do teste',measurementReal:'A medir o desempenho real da rede',measurementComplete:'Medição concluída',measurementFailed:'Não foi possível concluir o teste'},
+  nl:{eyebrow:'FASQOO NETWERKINTELLIGENTIE',trust1:'✓ Echte browsermeting',trust2:'✓ Cloudflare Edge',trust3:'✓ Geen kunstmatige vervangwaarden',liveTest:'LIVE VERBINDINGSTEST',readyPhase:'Klaar',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Resultaat',unitMbps:'Mbit/s',waiting:'Wachten op meting',basedOn:'Gebaseerd op download, upload, ping en jitter',notMeasured:'Niet gemeten',networkIntelligence:'NETWERKINTELLIGENTIE',understand:'Begrijp je verbinding',intelligenceSub:'Fasqoo zet je metingen om in praktische netwerkinformatie.',professional:'PROFESSIONEEL',latency:'Latentie',responseTime:'Reactietijd',stability:'Stabiliteit',jitterConsistency:'Jitter-consistentie',throughput:'Doorvoer',downloadCapacity:'Downloadcapaciteit',testServer:'Testserver',automaticEdge:'Automatische Edge-selectie',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID',measurementReal:'Echte netwerkprestaties worden gemeten',measurementComplete:'Meting voltooid',measurementFailed:'De test kon niet worden voltooid'},
+  tr:{eyebrow:'FASQOO AĞ ZEKÂSI',trust1:'✓ Gerçek tarayıcı ölçümü',trust2:'✓ Cloudflare Edge',trust3:'✓ Yapay yedek değer yok',liveTest:'CANLI BAĞLANTI TESTİ',readyPhase:'Hazır',phasePing:'Ping',phaseDownload:'İndirme',phaseUpload:'Yükleme',phaseResult:'Sonuç',unitMbps:'Mbit/s',waiting:'Ölçüm bekleniyor',basedOn:'İndirme, yükleme, ping ve jitter değerlerine dayanır',notMeasured:'Ölçülmedi',networkIntelligence:'AĞ ZEKÂSI',understand:'Bağlantınızı anlayın',intelligenceSub:'Fasqoo ölçümlerinizi pratik ağ bilgilerine dönüştürür.',professional:'PROFESYONEL',latency:'Gecikme',responseTime:'Yanıt süresi',stability:'Kararlılık',jitterConsistency:'Jitter tutarlılığı',throughput:'Veri aktarımı',downloadCapacity:'İndirme kapasitesi',testServer:'Test sunucusu',automaticEdge:'Otomatik Edge seçimi',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test Kimliği',measurementReal:'Gerçek ağ performansı ölçülüyor',measurementComplete:'Ölçüm tamamlandı',measurementFailed:'Test tamamlanamadı'},
+  sq:{eyebrow:'INTELIGJENCA E RRJETIT FASQOO',trust1:'✓ Matje reale në shfletues',trust2:'✓ Cloudflare Edge',trust3:'✓ Pa vlera artificiale zëvendësuese',liveTest:'TEST REAL I LIDHJES',readyPhase:'Gati',phasePing:'Ping',phaseDownload:'Shkarkim',phaseUpload:'Ngarkim',phaseResult:'Rezultat',unitMbps:'Mbit/s',waiting:'Në pritje të matjes',basedOn:'Bazuar në shkarkim, ngarkim, ping dhe jitter',notMeasured:'Nuk është matur',networkIntelligence:'INTELIGJENCA E RRJETIT',understand:'Kupto lidhjen tënde',intelligenceSub:'Fasqoo i kthen matjet në informacione praktike për rrjetin.',professional:'PROFESIONAL',latency:'Vonesa',responseTime:'Koha e përgjigjes',stability:'Qëndrueshmëria',jitterConsistency:'Qëndrueshmëria e jitter-it',throughput:'Rrjedha e të dhënave',downloadCapacity:'Kapaciteti i shkarkimit',testServer:'Serveri i testit',automaticEdge:'Zgjedhje automatike e Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID e testit',measurementReal:'Po matet performanca reale e rrjetit',measurementComplete:'Matja përfundoi',measurementFailed:'Testi nuk mund të përfundonte'},
+  ar:{eyebrow:'ذكاء شبكة FASQOO',trust1:'✓ قياس حقيقي عبر المتصفح',trust2:'✓ Cloudflare Edge',trust3:'✓ بدون قيم بديلة اصطناعية',liveTest:'اختبار اتصال مباشر',readyPhase:'جاهز',phasePing:'Ping',phaseDownload:'تنزيل',phaseUpload:'رفع',phaseResult:'النتيجة',unitMbps:'ميغابت/ث',waiting:'بانتظار القياس',basedOn:'استنادًا إلى التنزيل والرفع وPing وJitter',notMeasured:'لم يتم القياس',networkIntelligence:'ذكاء الشبكة',understand:'افهم اتصالك',intelligenceSub:'تحوّل Fasqoo قياساتك إلى معلومات عملية عن الشبكة.',professional:'احترافي',latency:'زمن الاستجابة',responseTime:'وقت الاستجابة',stability:'الاستقرار',jitterConsistency:'اتساق Jitter',throughput:'معدل النقل',downloadCapacity:'سعة التنزيل',testServer:'خادم الاختبار',automaticEdge:'اختيار Edge تلقائيًا',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'معرّف الاختبار',measurementReal:'جارٍ قياس أداء الشبكة الحقيقي',measurementComplete:'اكتمل القياس',measurementFailed:'تعذر إكمال الاختبار'}
+};
+function applyExtraLanguage(lang){
+  const x=extraTranslations[lang]||extraTranslations.en;
+  const map={
+    '.eyebrow':x.eyebrow,'#testPhase':x.readyPhase,'.mini-kicker':x.liveTest,
+    '.hero-trust span:nth-child(1)':x.trust1,'.hero-trust span:nth-child(2)':x.trust2,'.hero-trust span:nth-child(3)':x.trust3,
+    '.phase-step[data-phase="ping"]':x.phasePing,'.phase-step[data-phase="download"]':x.phaseDownload,'.phase-step[data-phase="upload"]':x.phaseUpload,'.phase-step[data-phase="complete"]':x.phaseResult,
+    '.gauge-caption span:last-child':x.waiting,'.quality-meta span:first-child':x.basedOn,'.quality-meta span:last-child':x.notMeasured,
+    '.section-kicker':x.networkIntelligence,'.intelligence-section h2':x.understand,'.intelligence-section .section-sub':x.intelligenceSub,'.section-badge':x.professional,
+    '[id="intelLatency"]':null,'[id="intelStability"]':null,'[id="intelThroughput"]':null
+  };
+  Object.entries(map).forEach(([sel,val])=>{if(val!==null){const el=document.querySelector(sel);if(el)el.textContent=val;}});
+  const cards=[['intelLatency',x.latency,x.responseTime],['intelStability',x.stability,x.jitterConsistency],['intelThroughput',x.throughput,x.downloadCapacity],['intelServer',x.testServer,x.automaticEdge]];
+  const cardsEls=document.querySelectorAll('.intel-card');
+  cards.forEach((c,i)=>{const el=cardsEls[i];if(!el)return;const span=el.querySelector('span');const small=el.querySelector('small');if(span)span.textContent=c[1];if(small)small.textContent=c[2];});
+  const units=document.querySelectorAll('.unit');units.forEach(el=>{if(el.textContent.trim()==='Mbps'||el.textContent.trim()==='Mbit/s'||el.textContent.trim()==='ميغابت/ث')el.textContent=x.unitMbps;});
+}
+
 /* ---------- STATE ---------- */
 let running = false, samples = [], info = {}, last = {}, currentLang = "de", gaugeMax = 100;
 const SPEED_BASE = "https://speed.cloudflare.com";
@@ -901,6 +931,7 @@ function applyLanguage(lang){
   if(il && !il.dataset.installed) il.textContent = t.download;
 
   historyLoad();
+  applyExtraLanguage(lang);
   if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
 }
 
@@ -1000,33 +1031,36 @@ function setTestPhase(phase){
   document.querySelectorAll(".phase-step").forEach(el => el.classList.toggle("active", el.dataset.phase === phase));
   const label = $("testPhase");
   if(label){
-    const labels = {ping:"Measuring latency",download:"Measuring download",upload:"Measuring upload",complete:"Test complete"};
-    label.textContent = labels[phase] || "Ready";
+    const x = extraTranslations[currentLang] || extraTranslations.en;
+    const labels = {ping:x.responseTime,download:x.downloadCapacity,upload:x.throughput,complete:x.phaseResult};
+    label.textContent = labels[phase] || x.readyPhase;
   }
 }
 function setPremiumMetrics(d,u,p,j){
+  const x = extraTranslations[currentLang] || extraTranslations.en;
   if(Number.isFinite(p)) $("intelLatency").textContent = p.toFixed(1)+" ms";
-  if(Number.isFinite(j)) $("intelStability").textContent = j <= 10 ? "Excellent" : j <= 20 ? "Good" : "Variable";
-  if(Number.isFinite(d)) $("intelThroughput").textContent = d.toFixed(1)+" Mbps";
+  if(Number.isFinite(j)) $("intelStability").textContent = j <= 10 ? (translations[currentLang].stExc) : j <= 20 ? (translations[currentLang].stGood) : translations[currentLang].stLim;
+  if(Number.isFinite(d)) $("intelThroughput").textContent = d.toFixed(1)+" "+x.unitMbps;
 }
 function updateQualityLabel(s){
   const el = $("qualityLabel");
   if(!el) return;
-  el.textContent = s>=90 ? "Excellent" : s>=75 ? "Very good" : s>=55 ? "Good" : s>=35 ? "Average" : "Poor";
+  const t = translations[currentLang];
+  el.textContent = s>=90 ? t.stExc : s>=75 ? (t.q75.replace(/connection\.?$/i, "").trim() || t.stGood) : s>=55 ? t.stGood : s>=35 ? t.stLim : t.q0;
 }
 const _originalStart = start;
 start = async function(){
   setTestPhase("ping");
-  if($("measurementHint")) $("measurementHint").textContent = "Measuring real network performance";
+  if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementReal;
   await _originalStart();
   if(last && last.id){
     setTestPhase("complete");
     setPremiumMetrics(last.download,last.upload,last.ping,last.jitter);
     updateQualityLabel(last.quality);
-    if($("measurementHint")) $("measurementHint").textContent = "Measurement complete";
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementComplete;
   }else{
     setTestPhase("ping");
-    if($("measurementHint")) $("measurementHint").textContent = "Test could not be completed";
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementFailed;
   }
 };
 /* Update phase during the existing status changes without replacing the test engine. */
