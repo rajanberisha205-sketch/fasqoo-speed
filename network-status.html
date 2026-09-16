@@ -342,7 +342,192 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
     
     .report-actions button{ width:100%; }
 }
+
+/* === Fasqoo Professional Network Intelligence UI === */
+:root{
+  --fasqoo-accent:#2563eb;
+  --fasqoo-accent2:#7c3aed;
+  --fasqoo-glow:rgba(37,99,235,.16);
+}
+body{
+  background:
+    radial-gradient(circle at 12% -5%, rgba(37,99,235,.10), transparent 32%),
+    radial-gradient(circle at 88% 0%, rgba(124,58,237,.08), transparent 28%),
+    var(--bg);
+}
+body.dark{
+  background:
+    radial-gradient(circle at 12% -5%, rgba(37,99,235,.15), transparent 32%),
+    radial-gradient(circle at 88% 0%, rgba(124,58,237,.12), transparent 28%),
+    var(--bg);
+}
+.navbar{box-shadow:0 8px 30px rgba(16,24,40,.05)}
+.dark .navbar{box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.nav-container{max-width:1280px}
+.logo{transition:transform .2s ease}
+.logo:hover{transform:translateY(-1px)}
+.hero{
+  max-width:1120px;
+  margin:54px auto 34px;
+}
+.hero::before{
+  content:"NETWORK INTELLIGENCE";
+  display:inline-flex;
+  padding:7px 11px;
+  border:1px solid rgba(37,99,235,.18);
+  border-radius:999px;
+  color:var(--primary);
+  background:rgba(37,99,235,.07);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.14em;
+  margin-bottom:2px;
+}
+.hero h1{
+  font-size:clamp(32px,5vw,54px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.hero p{font-size:16px;max-width:760px}
+.status-pill{box-shadow:0 8px 25px rgba(18,183,106,.08)}
+.section-title{margin-top:42px}
+.card{
+  box-shadow:0 14px 42px rgba(16,24,40,.06);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 50px rgba(16,24,40,.09);
+  border-color:rgba(37,99,235,.20);
+}
+.dark .card{box-shadow:0 14px 42px rgba(0,0,0,.20)}
+.health-panel{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(37,99,235,.07),transparent 55%),
+    var(--card);
+}
+.health-panel::after{
+  content:"";
+  position:absolute;
+  width:260px;height:260px;
+  right:-110px;top:-130px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--fasqoo-glow),transparent 68%);
+  pointer-events:none;
+}
+.health-score{
+  border:10px solid rgba(37,99,235,.13);
+  box-shadow:inset 0 0 0 1px var(--border),0 12px 35px rgba(37,99,235,.08);
+}
+.score-fill{background:linear-gradient(90deg,var(--fasqoo-accent),var(--fasqoo-accent2))}
+.check-panel{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(37,99,235,.16);
+}
+.check-btn{
+  box-shadow:0 8px 20px rgba(37,99,235,.20);
+}
+.check-btn:hover{transform:translateY(-1px)}
+.diagnostic-card,.profile-card{min-height:154px}
+.metric{letter-spacing:-.5px}
+.badge{border:1px solid transparent}
+.chart-card{overflow:hidden}
+.chart{
+  background:linear-gradient(to top,rgba(37,99,235,.035),transparent);
+}
+.bar{
+  background:linear-gradient(180deg,var(--fasqoo-accent),var(--fasqoo-accent2));
+}
+.notice,.accuracy{
+  position:relative;
+}
+.notice::before,.accuracy::before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--primary);
+  border-radius:14px 0 0 14px;
+}
+.report-panel textarea{
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace!important;
+}
+.fasqoo-live-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:0 0 8px;
+}
+.fasqoo-live-item{
+  padding:13px 15px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.58);
+  border-radius:14px;
+}
+.dark .fasqoo-live-item{background:rgba(17,24,39,.58)}
+.fasqoo-live-label{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.fasqoo-live-value{margin-top:5px;font-size:14px;font-weight:900}
+.fasqoo-live-dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--green);margin-right:6px;box-shadow:0 0 0 4px rgba(18,183,106,.10)
+}
+@media(max-width:800px){
+  .fasqoo-live-strip{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .hero{margin-top:32px}
+  .hero h1{letter-spacing:-1px}
+  .fasqoo-live-strip{grid-template-columns:1fr}
+  .fasqoo-live-item{padding:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
 </style>
+
+<style id="fasqoo-24h-monitor-css">
+.monitor-panel{margin-top:20px;padding:26px}
+.monitor-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.section-kicker{font-size:11px;letter-spacing:.14em;font-weight:900;color:var(--primary);margin-bottom:7px}
+.monitor-head h2{font-size:24px;margin:0}
+.monitor-head p{margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.55;max-width:760px}
+.monitor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.monitor-toggle{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--border);border-radius:12px;padding:10px 12px;font-size:12px;font-weight:900;cursor:pointer;user-select:none}
+.monitor-toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle-ui{width:38px;height:22px;border-radius:20px;background:var(--border);position:relative;transition:.2s}
+.toggle-ui:after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:white;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.2s}
+.monitor-toggle input:checked + .toggle-ui{background:var(--primary)}
+.monitor-toggle input:checked + .toggle-ui:after{transform:translateX(16px)}
+.monitor-select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:10px 12px;font-weight:800}
+.monitor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.monitor-stat{padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--bg)}
+.monitor-stat span{display:block;color:var(--muted);font-size:11px;font-weight:800}
+.monitor-stat strong{display:block;margin-top:6px;font-size:20px}
+.monitor-chart-wrap{margin-top:16px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--bg)}
+.monitor-chart-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px;font-size:13px}
+.monitor-chart-title span{color:var(--muted);font-size:11px}
+#monitorChart{width:100%;display:block}
+.monitor-note{margin-top:14px;padding:13px 15px;border-radius:12px;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.15);color:var(--muted);font-size:12px;line-height:1.55}
+@media(max-width:800px){
+  .monitor-head{flex-direction:column}
+  .monitor-actions{justify-content:flex-start}
+  .monitor-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .monitor-panel{padding:20px}
+  .monitor-grid{grid-template-columns:1fr 1fr}
+  .monitor-actions{width:100%}
+  .monitor-select{flex:1}
+  .monitor-toggle{flex:1}
+  .monitor-chart-title{align-items:flex-start;flex-direction:column}
+}
+</style>
+
 </head>
 
 <body>
@@ -387,6 +572,26 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
 </header>
 
 <main class="container">
+
+<div class="fasqoo-live-strip" aria-label="Live network summary">
+  <div class="fasqoo-live-item">
+    <div class="fasqoo-live-label">Target</div>
+    <div class="fasqoo-live-value"><span class="fasqoo-live-dot"></span>fasqoo.com</div>
+  </div>
+  <div class="fasqoo-live-item">
+    <div class="fasqoo-live-label">Transport</div>
+    <div class="fasqoo-live-value" id="fasqooLiveTransport">HTTPS</div>
+  </div>
+  <div class="fasqoo-live-item">
+    <div class="fasqoo-live-label">Browser</div>
+    <div class="fasqoo-live-value" id="fasqooLiveBrowser">—</div>
+  </div>
+  <div class="fasqoo-live-item">
+    <div class="fasqoo-live-label">Connection</div>
+    <div class="fasqoo-live-value" id="fasqooLiveConnection">—</div>
+  </div>
+</div>
+
 
 <div class="section-title">
     <h2 data-i18n="healthTitle">Verbindungs-Score</h2>
@@ -448,6 +653,61 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
     <h2 data-i18n="diagnostics">Messwerte</h2>
     <p data-i18n="diagnosticsDesc">Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.</p>
 </div>
+
+
+<section class="monitor-panel card" id="monitorPanel">
+  <div class="monitor-head">
+    <div>
+      <div class="section-kicker">FASQOO 24H MONITOR</div>
+      <h2>24-hour Internet Monitoring</h2>
+      <p>Keep this Fasqoo page open in Chrome to perform periodic real browser checks and build a 24-hour connection history.</p>
+    </div>
+    <div class="monitor-actions">
+      <label class="monitor-toggle">
+        <input type="checkbox" id="monitorToggle" aria-label="Enable 24 hour monitoring">
+        <span class="toggle-ui"></span>
+        <span>Monitoring ON</span>
+      </label>
+      <select id="monitorInterval" class="monitor-select" aria-label="Monitoring interval">
+        <option value="5">Every 5 min</option>
+        <option value="15" selected>Every 15 min</option>
+        <option value="30">Every 30 min</option>
+        <option value="60">Every 60 min</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="monitor-grid">
+    <div class="monitor-stat">
+      <span>Monitoring status</span>
+      <strong id="monitorStatus">OFF</strong>
+    </div>
+    <div class="monitor-stat">
+      <span>Checks in last 24h</span>
+      <strong id="monitorChecks">0</strong>
+    </div>
+    <div class="monitor-stat">
+      <span>Availability</span>
+      <strong id="monitorAvailability">—</strong>
+    </div>
+    <div class="monitor-stat">
+      <span>Last check</span>
+      <strong id="monitorLastCheck">—</strong>
+    </div>
+  </div>
+
+  <div class="monitor-chart-wrap">
+    <div class="monitor-chart-title">
+      <strong>24-hour response history</strong>
+      <span id="monitorChartMeta">No monitoring data yet</span>
+    </div>
+    <canvas id="monitorChart" height="170" aria-label="24 hour response history chart"></canvas>
+  </div>
+
+  <div class="monitor-note">
+    <strong>Important:</strong> Browser monitoring only runs while this page is available to the browser. Chrome, the operating system, battery-saving modes, sleeping tabs, closing the tab, or shutting down the device can pause checks. It is not a server-side 24/7 monitoring service.
+  </div>
+</section>
 
 <div class="diagnostic-grid">
     <div class="card diagnostic-card">
@@ -624,9 +884,43 @@ footer{ border-top:1px solid var(--border); padding:30px 20px; color:var(--muted
       <a href="/do-not-sell.html" id="ftNoSell">Do Not Sell My Personal Info</a>
     </nav>
     </div>
+<div class="fasqoo-footer-note" style="margin-top:8px;font-size:11px;opacity:.85;">Browser-based diagnostics · Results reflect this session and this browser.</div>
 </footer>
 
 <script>
+
+/* === Fasqoo Professional UI helpers === */
+(function(){
+  function set(id, value){
+    const el=document.getElementById(id);
+    if(el && value!=null) el.textContent=value;
+  }
+  function browserName(){
+    const ua=navigator.userAgent;
+    if(/Edg\//.test(ua)) return "Microsoft Edge";
+    if(/OPR\//.test(ua)) return "Opera";
+    if(/Chrome\//.test(ua) && !/Edg\//.test(ua)) return "Google Chrome";
+    if(/Firefox\//.test(ua)) return "Mozilla Firefox";
+    if(/Safari\//.test(ua) && !/Chrome\//.test(ua)) return "Safari";
+    return "Browser";
+  }
+  function updateLive(){
+    set("fasqooLiveBrowser", browserName());
+    const c=navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if(c){
+      set("fasqooLiveConnection", c.effectiveType || c.type || "Available");
+    }else{
+      set("fasqooLiveConnection", navigator.onLine ? "Online" : "Offline");
+    }
+    set("fasqooLiveTransport", location.protocol==="https:" ? "HTTPS" : "HTTP");
+  }
+  updateLive();
+  window.addEventListener("online",updateLive);
+  window.addEventListener("offline",updateLive);
+  const c=navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if(c && c.addEventListener) c.addEventListener("change",updateLive);
+})();
+
 const CONFIG = {
     CHECK_INTERVAL: 30000,
     TIMEOUT: 10000,
@@ -1712,6 +2006,181 @@ window.addEventListener("DOMContentLoaded", () => {
     runFullDiagnosis();
     setInterval(checkFasqoo, CONFIG.CHECK_INTERVAL);
 });
+</script>
+
+
+<script id="fasqoo-24h-monitor-js">
+(function(){
+  const KEY = "fasqoo_24h_monitor_v1";
+  const SETTINGS = "fasqoo_24h_monitor_settings_v1";
+  const DAY = 24 * 60 * 60 * 1000;
+  let timer = null;
+  let running = false;
+
+  const $ = id => document.getElementById(id);
+  const state = () => {
+    try {
+      const x = JSON.parse(localStorage.getItem(KEY) || "[]");
+      return Array.isArray(x) ? x : [];
+    } catch(e){ return []; }
+  };
+  const save = rows => {
+    try { localStorage.setItem(KEY, JSON.stringify(rows)); } catch(e) {}
+  };
+  const clean = rows => rows.filter(x => x && x.t >= Date.now() - DAY);
+  const settings = () => {
+    try { return JSON.parse(localStorage.getItem(SETTINGS) || "{}"); } catch(e){ return {}; }
+  };
+
+  function draw(){
+    const rows = clean(state());
+    save(rows);
+    const canvas = $("monitorChart");
+    if(!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const w = Math.max(300, Math.floor(rect.width || 700));
+    const h = 170;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+
+    const pad = {l:38,r:12,t:15,b:28};
+    const good = rows.filter(x => x.ok && Number.isFinite(x.ms));
+    const maxMs = Math.max(100, ...good.map(x=>x.ms));
+    const minT = Date.now()-DAY, maxT = Date.now();
+
+    ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--border").trim() || "#ddd";
+    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--muted").trim() || "#777";
+    ctx.font = "10px system-ui";
+    for(let i=0;i<4;i++){
+      const y=pad.t+(h-pad.t-pad.b)*(i/3);
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();
+      const val=Math.round(maxMs*(1-i/3));
+      ctx.fillText(val+" ms",4,y+3);
+    }
+    for(let i=0;i<5;i++){
+      const x=pad.l+(w-pad.l-pad.r)*(i/4);
+      const d=new Date(minT+(DAY*i/4));
+      ctx.fillText(d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}),x-18,h-8);
+    }
+
+    if(!rows.length){
+      ctx.fillText("No monitoring data yet",pad.l,h/2);
+      return;
+    }
+
+    const yOf = ms => pad.t + (h-pad.t-pad.b) * (1-Math.min(ms,maxMs)/maxMs);
+    const xOf = t => pad.l + (w-pad.l-pad.r)*((t-minT)/DAY);
+
+    ctx.beginPath();
+    let started=false;
+    rows.forEach(r=>{
+      const x=xOf(r.t);
+      if(r.ok && Number.isFinite(r.ms)){
+        const y=yOf(r.ms);
+        if(!started){ctx.moveTo(x,y);started=true;}else ctx.lineTo(x,y);
+      } else if(started){
+        ctx.stroke();
+        ctx.beginPath();started=false;
+      }
+    });
+    if(started) ctx.stroke();
+
+    rows.forEach(r=>{
+      const x=xOf(r.t);
+      if(x<pad.l || x>w-pad.r) return;
+      const y=r.ok && Number.isFinite(r.ms)?yOf(r.ms):(h-pad.b);
+      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);
+      ctx.fillStyle = r.ok ? (getComputedStyle(document.body).getPropertyValue("--primary").trim() || "#2563eb") : "#e04444";
+      ctx.fill();
+    });
+  }
+
+  function render(){
+    const rows = clean(state());
+    const checks = rows.length;
+    const successes = rows.filter(x=>x.ok).length;
+    $("monitorChecks").textContent = checks;
+    $("monitorAvailability").textContent = checks ? ((successes/checks)*100).toFixed(1)+"%" : "—";
+    $("monitorLastCheck").textContent = rows.length
+      ? new Date(rows[rows.length-1].t).toLocaleString()
+      : "—";
+    const avg = rows.filter(x=>x.ok && Number.isFinite(x.ms));
+    $("monitorChartMeta").textContent = avg.length
+      ? ("Average response: " + Math.round(avg.reduce((a,b)=>a+b.ms,0)/avg.length) + " ms")
+      : "No successful checks yet";
+    $("monitorStatus").textContent = running ? "ON" : "OFF";
+    draw();
+  }
+
+  async function perform(){
+    if(document.hidden || !navigator.onLine || running) return;
+    running = true;
+    render();
+    try{
+      const url = location.origin + location.pathname + "?fasqoo_monitor=" + Date.now();
+      const controller = new AbortController();
+      const timeout = setTimeout(()=>controller.abort(), 15000);
+      const start = performance.now();
+      let ok=false, status=0, error=null;
+      try{
+        const response = await fetch(url,{method:"GET",cache:"no-store",credentials:"same-origin",signal:controller.signal});
+        status=response.status;
+        ok=response.status>=200 && response.status<400;
+      }catch(e){ error=e && e.message ? e.message : "Request failed"; }
+      clearTimeout(timeout);
+      const ms=Math.round(performance.now()-start);
+      const rows=clean(state());
+      rows.push({t:Date.now(),ok,ms,status,error});
+      save(rows);
+    }finally{
+      running=false;
+      render();
+    }
+  }
+
+  function start(){
+    stop();
+    running=true;
+    render();
+    perform();
+    const mins=Math.max(5, Number($("monitorInterval").value)||15);
+    timer=setInterval(perform, mins*60*1000);
+  }
+  function stop(){
+    if(timer) clearInterval(timer);
+    timer=null;
+    running=false;
+    render();
+  }
+
+  $("monitorToggle").addEventListener("change", function(){
+    const s=settings();
+    s.enabled=this.checked;
+    s.interval=Number($("monitorInterval").value)||15;
+    localStorage.setItem(SETTINGS,JSON.stringify(s));
+    this.checked ? start() : stop();
+  });
+  $("monitorInterval").addEventListener("change", function(){
+    const s=settings();
+    s.interval=Number(this.value)||15;
+    localStorage.setItem(SETTINGS,JSON.stringify(s));
+    if($("monitorToggle").checked) start();
+  });
+  document.addEventListener("visibilitychange", function(){
+    if(!document.hidden && $("monitorToggle").checked) perform();
+  });
+  window.addEventListener("online", function(){ if($("monitorToggle").checked) perform(); });
+  window.addEventListener("resize", draw);
+
+  const s=settings();
+  if([5,15,30,60].includes(Number(s.interval))) $("monitorInterval").value=String(s.interval);
+  $("monitorToggle").checked=!!s.enabled;
+  render();
+  if(s.enabled) start();
+})();
 </script>
 
 </body>
