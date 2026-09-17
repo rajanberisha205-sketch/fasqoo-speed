@@ -1,4 +1,4 @@
-const CACHE = "fasqoo-v5";
+const CACHE = "fasqoo-v6";
 
 const ASSETS = [
   "/",
@@ -33,34 +33,71 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   const request = event.request;
+  const url = request.url;
 
-  // Speed-test requests are never cached.
+  // --------------------------------------------------
+  // NEVER CACHE SPEED TEST / NETWORK DIAGNOSTIC DATA
+  // --------------------------------------------------
   if (
-    request.url.includes("speed.cloudflare.com") ||
-    request.url.includes("ipwho.is")
+    url.includes("speed.cloudflare.com") ||
+    url.includes("ipwho.is") ||
+    url.includes("__down") ||
+    url.includes("__up")
   ) {
     return;
   }
 
+  // Only handle GET requests
   if (request.method !== "GET") {
     return;
   }
 
+  // --------------------------------------------------
+  // HTML NAVIGATION
+  // Network first -> Cache fallback
+  // --------------------------------------------------
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const copy = response.clone();
+
+          caches.open(CACHE)
+            .then(cache => cache.put(request, copy))
+            .catch(() => {});
+
+          return response;
+        })
+        .catch(() =>
+          caches.match(request)
+            .then(response =>
+              response || caches.match("/index.html")
+            )
+        )
+    );
+
+    return;
+  }
+
+  // --------------------------------------------------
+  // OTHER STATIC FILES
+  // Network first -> Cache fallback
+  // --------------------------------------------------
   event.respondWith(
     fetch(request)
       .then(response => {
-        const copy = response.clone();
+        if (response && response.ok) {
+          const copy = response.clone();
 
-        caches.open(CACHE)
-          .then(cache => cache.put(request, copy))
-          .catch(() => {});
+          caches.open(CACHE)
+            .then(cache => cache.put(request, copy))
+            .catch(() => {});
+        }
 
         return response;
       })
       .catch(() =>
-        caches.match(request).then(response =>
-          response || caches.match("/index.html")
-        )
+        caches.match(request)
       )
   );
 });
