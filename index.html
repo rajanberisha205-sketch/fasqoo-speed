@@ -43,6 +43,7 @@
 
 <style>
   .mac-icon {
+  /* Füge hier dein Mac-Icon ein oder nutze ein bestehendes */
   background-image: url('pfad-zum-mac-icon.svg'); 
 }
 :root{--bg:#f5f6f8;--card:#fff;--text:#111318;--muted:#737983;--line:#e7e9ed;--soft:#f6f7f9;--orange:#ff5a1f;--green:#16a36a;--shadow:0 8px 30px rgba(0,0,0,.06)}
@@ -74,7 +75,7 @@ header{height:68px;background:rgba(255,255,255,.96);border-bottom:1px solid var(
 main{padding:30px 0 65px}
 .hero{text-align:center;margin-bottom:25px}
 .hero h1{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-1px;margin:0 0 9px}
-.hero p{margin:0;color:var(--muted);font-size:14px;max-width:700px;margin-inline:auto;line-height:1.6}
+.hero p{margin:0;color:var(--muted);font-size:14px}
 .server-line{display:flex;justify-content:center;gap:8px;margin:-7px 0 24px;flex-wrap:wrap}
 .server-badge{border:1px solid var(--line);padding:7px 12px;font-size:11px;color:var(--muted);background:#fff}
 .server-value{color:var(--text)}
@@ -171,24 +172,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 .dark .app-status{background:#22262c}
 .dark th,.dark td{border-color:#282d34}
 
-/* Professional Offline Toast & Glow */
-.offline-popup {
-  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-  background: var(--card); border: 1px solid var(--line); border-left: 4px solid #e5484d;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15); padding: 16px 20px; border-radius: 12px;
-  display: flex; flex-direction: column; gap: 4px; max-width: 320px; animation: slideInUp .3s ease;
-}
-.offline-popup b { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 6px; }
-.offline-popup b::before { content: "⚠"; color: #e5484d; }
-.offline-popup p { margin: 0; font-size: 11px; color: var(--muted); line-height: 1.4; }
-@keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.glow-complete { animation: successGlow 2s infinite alternate; }
-@keyframes successGlow {
-  0% { border-color: rgba(22,163,106,0.3); box-shadow: 0 0 10px rgba(22,163,106,0.2); }
-  100% { border-color: rgba(22,163,106,0.9); box-shadow: 0 0 25px rgba(22,163,106,0.5); }
-}
-
 @media(max-width:1000px){.apps,.tools,.reportgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){
@@ -212,6 +195,7 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
 
 /* ==========================================================
    FASQOO PROFESSIONAL UI LAYER
+   Keeps the existing measurement engine intact.
    ========================================================== */
 :root{
   --bg:#f3f5f8;--card:#fff;--text:#10141a;--muted:#69727e;--line:#e3e7ec;
@@ -240,13 +224,8 @@ header{height:72px;background:rgba(255,255,255,.86);backdrop-filter:blur(16px);-
 .test-topline{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .test-topline strong{display:block;margin-top:4px;font-size:13px}
 .phase-steps{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.phase-step{font-size:10px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--soft);transition:all .3s ease;}
+.phase-step{font-size:10px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--soft)}
 .phase-step.active{color:var(--orange);border-color:rgba(255,90,31,.25);background:rgba(255,90,31,.07);font-weight:700}
-/* Ergebnis-Leuchten oben rechts */
-.phase-step.result-glow {
-  color: #fff !important; background: var(--green) !important; border-color: var(--green) !important;
-  box-shadow: 0 0 15px rgba(22,163,106,0.6); font-weight: 800; transform: scale(1.05);
-}
 .gauge{width:315px;height:315px}
 .gauge:after{content:"";position:absolute;inset:26px;border-radius:50%;border:1px solid rgba(255,90,31,.08);pointer-events:none}
 .num{font-size:58px;font-weight:800}.start{width:230px;height:58px;border-radius:12px;box-shadow:0 10px 22px rgba(255,90,31,.20)}
@@ -348,7 +327,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <section class="hero premium-hero">
     <div class="eyebrow"><span class="eyebrow-dot"></span> FASQOO NETWORK INTELLIGENCE</div>
     <h1 id="heroTitle" data-i18n="title">Internet Speed Test</h1>
-    <p id="heroSub" data-i18n="sub">Wie schnell ist dein Internet wirklich? Finde es heraus. Vergiss künstlich beschönigte Messergebnisse. Unser Speedtest misst deine Verbindung direkt über das weltweite Cloudflare Edge-Netzwerk. Erhalte in wenigen Sekunden präzise, ehrliche Daten zu deiner Download-Geschwindigkeit, deinem Upload und deiner Latenz unter echter Auslastung. Kostenlos, werbefrei und unbestechlich.</p>
+    <p id="heroSub" data-i18n="sub">Precise. Fast. Real-time.</p>
     <div class="hero-trust">
       <span>✓ Real browser measurement</span>
       <span>✓ Cloudflare Edge</span>
@@ -371,7 +350,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
         <span class="phase-step active" data-phase="ping">Ping</span>
         <span class="phase-step" data-phase="download">Download</span>
         <span class="phase-step" data-phase="upload">Upload</span>
-        <span class="phase-step" id="resultPhaseBadge" data-phase="complete">Result</span>
+        <span class="phase-step" data-phase="complete">Result</span>
       </div>
     </div>
     <div class="grid">
@@ -430,8 +409,8 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     <div class="section-heading-row">
       <div>
         <div class="section-kicker">NETWORK INTELLIGENCE</div>
-        <h2>Verstehe deine Verbindung</h2>
-        <p class="section-sub">Fasqoo verwandelt deine komplexen Messwerte in präzise, leicht verständliche Netzwerkinformationen, um die Performance deiner Anbindung tiefgreifend zu analysieren.</p>
+        <h2>Understand your connection</h2>
+        <p class="section-sub">Fasqoo turns your measurements into practical network insights.</p>
       </div>
       <span class="section-badge">PROFESSIONAL</span>
     </div>
@@ -461,17 +440,17 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
   <section class="section">
     <h2 data-i18n="appsTitle">What can you do with your connection?</h2>
-    <p class="section-sub" data-i18n="appsSub">Deine individuellen Messergebnisse werden umfassend für typische Online-Aktivitäten wie Gaming, Streaming, Homeoffice und Cloud-Transfers ausgewertet, um dir exakte Leistungsprognosen zu liefern.</p>
+    <p class="section-sub" data-i18n="appsSub">Deine Ergebnisse werden für typische Online-Aktivitäten ausgewertet.</p>
     <div class="apps" id="appsContainer"></div>
   </section>
 
   <section class="section">
     <h2 data-i18n="diagTitle">Netzwerkdiagnose</h2>
     <div class="tools">
-      <div class="tool"><div class="icon">⌁</div><h3 data-i18n="diagLatT">Latenz</h3><p data-i18n="diagLatD">Präzise Messung der direkten Antwortzeit (Round-Trip-Time) zum Edge-Server unter realer Auslastung.</p></div>
-      <div class="tool"><div class="icon">↯</div><h3 data-i18n="diagStabT">Stabilität</h3><p data-i18n="diagStabD">Der Jitter-Wert analysiert Paketlaufzeitschwankungen für eine unterbrechungsfreie Verbindung.</p></div>
-      <div class="tool"><div class="icon">DNS</div><h3 data-i18n="diagDnsT">DNS-Diagnose</h3><p data-i18n="diagDnsD">Überprüft die Antwortzeiten und Funktionalität deiner konfigurierten DNS-Resolver.</p></div>
-      <div class="tool"><div class="icon">IP</div><h3 data-i18n="diagIpT">IP-Diagnose</h3><p data-i18n="diagIpD">Erkennt vollautomatisch IPv4, IPv6, deinen Internetdienstanbieter (ISP) sowie die zugewiesene ASN.</p></div>
+      <div class="tool"><div class="icon">⌁</div><h3 data-i18n="diagLatT">Latenz</h3><p data-i18n="diagLatD">Misst die Antwortzeit.</p></div>
+      <div class="tool"><div class="icon">↯</div><h3 data-i18n="diagStabT">Stabilität</h3><p data-i18n="diagStabD">Jitter zeigt Verbindungsstabilität.</p></div>
+      <div class="tool"><div class="icon">DNS</div><h3 data-i18n="diagDnsT">DNS-Diagnose</h3><p data-i18n="diagDnsD">Prüft DNS-Resolver.</p></div>
+      <div class="tool"><div class="icon">IP</div><h3 data-i18n="diagIpT">IP-Diagnose</h3><p data-i18n="diagIpD">Erkennt IP, ISP, ASN.</p></div>
     </div>
   </section>
 
@@ -525,7 +504,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v3.2 — Professional Engine & UI
+   FASQOO SPEED TEST v3.1 — canvas-Fix
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -563,47 +542,39 @@ ar:{navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",nav
   apps:{gaming:{t:"الألعاب",d:"Ping منخفض مهم.",det:"شاهد الألعاب بدون تأخير."},stream:{t:"البث",d:"سرعة جيدة للـHD.",det:"تحقق من البث HD."},fourk:{t:"بث 4K",d:"يتحقق من فيديو 4K.",det:"اختبار Ultra-HD."},call:{t:"مكالمات الفيديو",d:"النطاق وزمن الاستجابة.",det:"مثالي لـTeams وZoom وMeet."},office:{t:"العمل من المنزل",d:"للسحابة والعمل عن بعد.",det:"استقرار VPN والمستندات."},cloud:{t:"السحابة والتنزيلات",d:"كفاءة النقل.",det:"سرعة التنزيل."},social:{t:"وسائل التواصل",d:"لـInstagram وTikTok.",det:"سرعة المقاطع."},web:{t:"تصفح الويب",d:"للمواقع اليومية.",det:"أوقات التحميل."}}}
 };
 
+/* ---------- COMPLETE UI TRANSLATION PATCH ---------- */
 const extraTranslations = {
-  en:{eyebrow:'FASQOO NETWORK INTELLIGENCE',trust1:'✓ Real browser measurement',trust2:'✓ Cloudflare Edge',trust3:'✓ No artificial fallback values',liveTest:'LIVE CONNECTION TEST',readyPhase:'Ready',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Result',unitMbps:'Mbps',waiting:'Waiting for measurement',basedOn:'Based on download, upload, ping & jitter',notMeasured:'Not measured',networkIntelligence:'NETWORK INTELLIGENCE',understand:'Understand your connection',intelligenceSub:'Fasqoo turns your measurements into practical network insights.',professional:'PROFESSIONAL',latency:'Latency',responseTime:'Response time',stability:'Stability',jitterConsistency:'Jitter consistency',throughput:'Throughput',downloadCapacity:'Download capacity',testServer:'Test server',automaticEdge:'Automatic edge selection',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test ID'},
-  de:{eyebrow:'FASQOO NETZWERK-INTELLIGENZ',trust1:'✓ Echte Browser-Messung',trust2:'✓ Cloudflare Edge',trust3:'✓ Keine künstlichen Ersatzwerte',liveTest:'LIVE-VERBINDUNGSTEST',readyPhase:'Bereit',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Ergebnis',unitMbps:'Mbit/s',waiting:'Warten auf Messung',basedOn:'Basierend auf Download, Upload, Ping & Jitter',notMeasured:'Nicht gemessen',networkIntelligence:'NETZWERK-INTELLIGENZ',understand:'Verstehe deine Verbindung',intelligenceSub:'Fasqoo verwandelt deine komplexen Messwerte in präzise, leicht verständliche Netzwerkinformationen.',professional:'PROFESSIONELL',latency:'Latenz',responseTime:'Antwortzeit',stability:'Stabilität',jitterConsistency:'Jitter-Konsistenz',throughput:'Durchsatz',downloadCapacity:'Download-Kapazität',testServer:'Testserver',automaticEdge:'Automatische Edge-Auswahl',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID'}
+  en:{eyebrow:'FASQOO NETWORK INTELLIGENCE',trust1:'✓ Real browser measurement',trust2:'✓ Cloudflare Edge',trust3:'✓ No artificial fallback values',liveTest:'LIVE CONNECTION TEST',readyPhase:'Ready',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Result',unitMbps:'Mbps',waiting:'Waiting for measurement',basedOn:'Based on download, upload, ping & jitter',notMeasured:'Not measured',networkIntelligence:'NETWORK INTELLIGENCE',understand:'Understand your connection',intelligenceSub:'Fasqoo turns your measurements into practical network insights.',professional:'PROFESSIONAL',latency:'Latency',responseTime:'Response time',stability:'Stability',jitterConsistency:'Jitter consistency',throughput:'Throughput',downloadCapacity:'Download capacity',testServer:'Test server',automaticEdge:'Automatic edge selection',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test ID',measurementReal:'Measuring real network performance',measurementComplete:'Measurement complete',measurementFailed:'Test could not be completed'},
+  de:{eyebrow:'FASQOO NETZWERK-INTELLIGENZ',trust1:'✓ Echte Browser-Messung',trust2:'✓ Cloudflare Edge',trust3:'✓ Keine künstlichen Ersatzwerte',liveTest:'LIVE-VERBINDUNGSTEST',readyPhase:'Bereit',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Ergebnis',unitMbps:'Mbit/s',waiting:'Warten auf Messung',basedOn:'Basierend auf Download, Upload, Ping & Jitter',notMeasured:'Nicht gemessen',networkIntelligence:'NETZWERK-INTELLIGENZ',understand:'Verstehe deine Verbindung',intelligenceSub:'Fasqoo verwandelt deine Messwerte in praktische Netzwerkinformationen.',professional:'PROFESSIONELL',latency:'Latenz',responseTime:'Antwortzeit',stability:'Stabilität',jitterConsistency:'Jitter-Konsistenz',throughput:'Durchsatz',downloadCapacity:'Download-Kapazität',testServer:'Testserver',automaticEdge:'Automatische Edge-Auswahl',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID',measurementReal:'Echte Netzwerkleistung wird gemessen',measurementComplete:'Messung abgeschlossen',measurementFailed:'Der Test konnte nicht abgeschlossen werden'},
+  fr:{eyebrow:'INTELLIGENCE RÉSEAU FASQOO',trust1:'✓ Mesure réelle dans le navigateur',trust2:'✓ Cloudflare Edge',trust3:'✓ Aucune valeur de secours artificielle',liveTest:'TEST DE CONNEXION EN DIRECT',readyPhase:'Prêt',phasePing:'Ping',phaseDownload:'Téléchargement',phaseUpload:'Envoi',phaseResult:'Résultat',unitMbps:'Mbit/s',waiting:'En attente de mesure',basedOn:'Basé sur le téléchargement, l’envoi, le ping et le jitter',notMeasured:'Non mesuré',networkIntelligence:'INTELLIGENCE RÉSEAU',understand:'Comprenez votre connexion',intelligenceSub:'Fasqoo transforme vos mesures en informations réseau pratiques.',professional:'PROFESSIONNEL',latency:'Latence',responseTime:'Temps de réponse',stability:'Stabilité',jitterConsistency:'Régularité du jitter',throughput:'Débit',downloadCapacity:'Capacité de téléchargement',testServer:'Serveur de test',automaticEdge:'Sélection automatique de l’Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID du test',measurementReal:'Mesure réelle des performances réseau',measurementComplete:'Mesure terminée',measurementFailed:'Le test n’a pas pu être terminé'},
+  es:{eyebrow:'INTELIGENCIA DE RED FASQOO',trust1:'✓ Medición real en el navegador',trust2:'✓ Cloudflare Edge',trust3:'✓ Sin valores de respaldo artificiales',liveTest:'PRUEBA DE CONEXIÓN EN VIVO',readyPhase:'Listo',phasePing:'Ping',phaseDownload:'Descarga',phaseUpload:'Subida',phaseResult:'Resultado',unitMbps:'Mbit/s',waiting:'Esperando medición',basedOn:'Basado en descarga, subida, ping y jitter',notMeasured:'No medido',networkIntelligence:'INTELIGENCIA DE RED',understand:'Entiende tu conexión',intelligenceSub:'Fasqoo convierte tus mediciones en información de red práctica.',professional:'PROFESIONAL',latency:'Latencia',responseTime:'Tiempo de respuesta',stability:'Estabilidad',jitterConsistency:'Consistencia del jitter',throughput:'Rendimiento',downloadCapacity:'Capacidad de descarga',testServer:'Servidor de prueba',automaticEdge:'Selección automática de Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID de prueba',measurementReal:'Midiendo el rendimiento real de la red',measurementComplete:'Medición completada',measurementFailed:'No se pudo completar la prueba'},
+  it:{eyebrow:'INTELLIGENZA DI RETE FASQOO',trust1:'✓ Misurazione reale nel browser',trust2:'✓ Cloudflare Edge',trust3:'✓ Nessun valore sostitutivo artificiale',liveTest:'TEST DELLA CONNESSIONE IN DIRETTA',readyPhase:'Pronto',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Risultato',unitMbps:'Mbit/s',waiting:'In attesa della misurazione',basedOn:'Basato su download, upload, ping e jitter',notMeasured:'Non misurato',networkIntelligence:'INTELLIGENZA DI RETE',understand:'Comprendi la tua connessione',intelligenceSub:'Fasqoo trasforma le tue misurazioni in informazioni di rete pratiche.',professional:'PROFESSIONALE',latency:'Latenza',responseTime:'Tempo di risposta',stability:'Stabilità',jitterConsistency:'Coerenza del jitter',throughput:'Velocità',downloadCapacity:'Capacità di download',testServer:'Server di test',automaticEdge:'Selezione Edge automatica',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID test',measurementReal:'Misurazione delle prestazioni reali della rete',measurementComplete:'Misurazione completata',measurementFailed:'Il test non può essere completato'},
+  pt:{eyebrow:'INTELIGÊNCIA DE REDE FASQOO',trust1:'✓ Medição real no navegador',trust2:'✓ Cloudflare Edge',trust3:'✓ Sem valores de substituição artificiais',liveTest:'TESTE DE LIGAÇÃO EM DIRETO',readyPhase:'Pronto',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Resultado',unitMbps:'Mbit/s',waiting:'A aguardar medição',basedOn:'Baseado em download, upload, ping e jitter',notMeasured:'Não medido',networkIntelligence:'INTELIGÊNCIA DE REDE',understand:'Compreenda a sua ligação',intelligenceSub:'A Fasqoo transforma as suas medições em informações de rede práticas.',professional:'PROFISSIONAL',latency:'Latência',responseTime:'Tempo de resposta',stability:'Estabilidade',jitterConsistency:'Consistência do jitter',throughput:'Débito',downloadCapacity:'Capacidade de download',testServer:'Servidor de teste',automaticEdge:'Seleção Edge automática',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID do teste',measurementReal:'A medir o desempenho real da rede',measurementComplete:'Medição concluída',measurementFailed:'Não foi possível concluir o teste'},
+  nl:{eyebrow:'FASQOO NETWERKINTELLIGENTIE',trust1:'✓ Echte browsermeting',trust2:'✓ Cloudflare Edge',trust3:'✓ Geen kunstmatige vervangwaarden',liveTest:'LIVE VERBINDINGSTEST',readyPhase:'Klaar',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Resultaat',unitMbps:'Mbit/s',waiting:'Wachten op meting',basedOn:'Gebaseerd op download, upload, ping en jitter',notMeasured:'Niet gemeten',networkIntelligence:'NETWERKINTELLIGENTIE',understand:'Begrijp je verbinding',intelligenceSub:'Fasqoo zet je metingen om in praktische netwerkinformatie.',professional:'PROFESSIONEEL',latency:'Latentie',responseTime:'Reactietijd',stability:'Stabiliteit',jitterConsistency:'Jitter-consistentie',throughput:'Doorvoer',downloadCapacity:'Downloadcapaciteit',testServer:'Testserver',automaticEdge:'Automatische Edge-selectie',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID',measurementReal:'Echte netwerkprestaties worden gemeten',measurementComplete:'Meting voltooid',measurementFailed:'De test kon niet worden voltooid'},
+  tr:{eyebrow:'FASQOO AĞ ZEKÂSI',trust1:'✓ Gerçek tarayıcı ölçümü',trust2:'✓ Cloudflare Edge',trust3:'✓ Yapay yedek değer yok',liveTest:'CANLI BAĞLANTI TESTİ',readyPhase:'Hazır',phasePing:'Ping',phaseDownload:'İndirme',phaseUpload:'Yükleme',phaseResult:'Sonuç',unitMbps:'Mbit/s',waiting:'Ölçüm bekleniyor',basedOn:'İndirme, yükleme, ping ve jitter değerlerine dayanır',notMeasured:'Ölçülmedi',networkIntelligence:'AĞ ZEKÂSI',understand:'Bağlantınızı anlayın',intelligenceSub:'Fasqoo ölçümlerinizi pratik ağ bilgilerine dönüştürür.',professional:'PROFESYONEL',latency:'Gecikme',responseTime:'Yanıt süresi',stability:'Kararlılık',jitterConsistency:'Jitter tutarlılığı',throughput:'Veri aktarımı',downloadCapacity:'İndirme kapasitesi',testServer:'Test sunucusu',automaticEdge:'Otomatik Edge seçimi',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test Kimliği',measurementReal:'Gerçek ağ performansı ölçülüyor',measurementComplete:'Ölçüm tamamlandı',measurementFailed:'Test tamamlanamadı'},
+  sq:{eyebrow:'INTELIGJENCA E RRJETIT FASQOO',trust1:'✓ Matje reale në shfletues',trust2:'✓ Cloudflare Edge',trust3:'✓ Pa vlera artificiale zëvendësuese',liveTest:'TEST REAL I LIDHJES',readyPhase:'Gati',phasePing:'Ping',phaseDownload:'Shkarkim',phaseUpload:'Ngarkim',phaseResult:'Rezultat',unitMbps:'Mbit/s',waiting:'Në pritje të matjes',basedOn:'Bazuar në shkarkim, ngarkim, ping dhe jitter',notMeasured:'Nuk është matur',networkIntelligence:'INTELIGJENCA E RRJETIT',understand:'Kupto lidhjen tënde',intelligenceSub:'Fasqoo i kthen matjet në informacione praktike për rrjetin.',professional:'PROFESIONAL',latency:'Vonesa',responseTime:'Koha e përgjigjes',stability:'Qëndrueshmëria',jitterConsistency:'Qëndrueshmëria e jitter-it',throughput:'Rrjedha e të dhënave',downloadCapacity:'Kapaciteti i shkarkimit',testServer:'Serveri i testit',automaticEdge:'Zgjedhje automatike e Edge',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'ID e testit',measurementReal:'Po matet performanca reale e rrjetit',measurementComplete:'Matja përfundoi',measurementFailed:'Testi nuk mund të përfundonte'},
+  ar:{eyebrow:'ذكاء شبكة FASQOO',trust1:'✓ قياس حقيقي عبر المتصفح',trust2:'✓ Cloudflare Edge',trust3:'✓ بدون قيم بديلة اصطناعية',liveTest:'اختبار اتصال مباشر',readyPhase:'جاهز',phasePing:'Ping',phaseDownload:'تنزيل',phaseUpload:'رفع',phaseResult:'النتيجة',unitMbps:'ميغابت/ث',waiting:'بانتظار القياس',basedOn:'استنادًا إلى التنزيل والرفع وPing وJitter',notMeasured:'لم يتم القياس',networkIntelligence:'ذكاء الشبكة',understand:'افهم اتصالك',intelligenceSub:'تحوّل Fasqoo قياساتك إلى معلومات عملية عن الشبكة.',professional:'احترافي',latency:'زمن الاستجابة',responseTime:'وقت الاستجابة',stability:'الاستقرار',jitterConsistency:'اتساق Jitter',throughput:'معدل النقل',downloadCapacity:'سعة التنزيل',testServer:'خادم الاختبار',automaticEdge:'اختيار Edge تلقائيًا',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'معرّف الاختبار',measurementReal:'جارٍ قياس أداء الشبكة الحقيقي',measurementComplete:'اكتمل القياس',measurementFailed:'تعذر إكمال الاختبار'}
 };
-
 function applyExtraLanguage(lang){
-  const x = extraTranslations[lang] || extraTranslations.en;
-  const map = {
-    '.eyebrow': x.eyebrow, '#testPhase': x.readyPhase, '.mini-kicker': x.liveTest,
-    '.hero-trust span:nth-child(1)': x.trust1, '.hero-trust span:nth-child(2)': x.trust2, '.hero-trust span:nth-child(3)': x.trust3,
-    '.phase-step[data-phase="ping"]': x.phasePing, '.phase-step[data-phase="download"]': x.phaseDownload, '.phase-step[data-phase="upload"]': x.phaseUpload, '.phase-step[data-phase="complete"]': x.phaseResult,
-    '.gauge-caption span:last-child': x.waiting, '.quality-meta span:first-child': x.basedOn, '.quality-meta span:last-child': x.notMeasured,
-    '.section-kicker': x.networkIntelligence, '.intelligence-section h2': x.understand, '.intelligence-section .section-sub': x.intelligenceSub, '.section-badge': x.professional
+  const x=extraTranslations[lang]||extraTranslations.en;
+  const map={
+    '.eyebrow':x.eyebrow,'#testPhase':x.readyPhase,'.mini-kicker':x.liveTest,
+    '.hero-trust span:nth-child(1)':x.trust1,'.hero-trust span:nth-child(2)':x.trust2,'.hero-trust span:nth-child(3)':x.trust3,
+    '.phase-step[data-phase="ping"]':x.phasePing,'.phase-step[data-phase="download"]':x.phaseDownload,'.phase-step[data-phase="upload"]':x.phaseUpload,'.phase-step[data-phase="complete"]':x.phaseResult,
+    '.gauge-caption span:last-child':x.waiting,'.quality-meta span:first-child':x.basedOn,'.quality-meta span:last-child':x.notMeasured,
+    '.section-kicker':x.networkIntelligence,'.intelligence-section h2':x.understand,'.intelligence-section .section-sub':x.intelligenceSub,'.section-badge':x.professional,
+    '[id="intelLatency"]':null,'[id="intelStability"]':null,'[id="intelThroughput"]':null
   };
-  Object.entries(map).forEach(([sel,val]) => { const el = document.querySelector(sel); if(el) el.textContent = val; });
+  Object.entries(map).forEach(([sel,val])=>{if(val!==null){const el=document.querySelector(sel);if(el)el.textContent=val;}});
+  const cards=[['intelLatency',x.latency,x.responseTime],['intelStability',x.stability,x.jitterConsistency],['intelThroughput',x.throughput,x.downloadCapacity],['intelServer',x.testServer,x.automaticEdge]];
+  const cardsEls=document.querySelectorAll('.intel-card');
+  cards.forEach((c,i)=>{const el=cardsEls[i];if(!el)return;const span=el.querySelector('span');const small=el.querySelector('small');if(span)span.textContent=c[1];if(small)small.textContent=c[2];});
+  const units=document.querySelectorAll('.unit');units.forEach(el=>{if(el.textContent.trim()==='Mbps'||el.textContent.trim()==='Mbit/s'||el.textContent.trim()==='ميغابت/ث')el.textContent=x.unitMbps;});
 }
 
-/* ---------- STATE & OFFLINE DETECTION ---------- */
+/* ---------- STATE ---------- */
 let running = false, samples = [], info = {}, last = {}, currentLang = "de", gaugeMax = 100;
 const SPEED_BASE = "https://speed.cloudflare.com";
-
-function checkOnlineStatus() {
-  if(!navigator.onLine) {
-    showOfflinePopup();
-  }
-}
-window.addEventListener('offline', showOfflinePopup);
-window.addEventListener('online', hideOfflinePopup);
-
-function showOfflinePopup() {
-  if($('offlinePopup')) return;
-  const popup = document.createElement('div');
-  popup.id = 'offlinePopup';
-  popup.className = 'offline-popup';
-  popup.innerHTML = `<b>Keine Internetverbindung</b><p>Bitte überprüfen Sie Ihre Netzwerkeinstellungen. Der Fasqoo-Speedtest erfordert eine aktive Verbindung.</p>`;
-  document.body.appendChild(popup);
-}
-function hideOfflinePopup() {
-  const popup = $('offlinePopup');
-  if(popup) popup.remove();
-}
 
 /* ---------- MENU ---------- */
 $("menuToggle").addEventListener("click", () => $("mainMenu").classList.toggle("active"));
@@ -624,7 +595,6 @@ function appIcon(k){
   };
   return icons[k] || "";
 }
-
 function buildAppCards(){
   const container = $("appsContainer");
   container.innerHTML = "";
@@ -641,10 +611,9 @@ function buildAppCards(){
     card.addEventListener("click", () => card.classList.toggle("expanded"));
     container.appendChild(card);
   });
-  updateTexts();
 }
 
-/* ---------- CHART ---------- */
+/* ---------- CHART (canvas ist HIER definiert!) ---------- */
 const canvas = $("chart");
 const ctx = canvas.getContext("2d");
 
@@ -666,11 +635,11 @@ function drawChart(){
   const max = Math.max(100, ...samples);
   ctx.beginPath();
   samples.forEach((v,i)=>{ const x=i*w/(samples.length-1); const y=h-12-v/max*(h-24); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
-  ctx.strokeStyle = "#ff5a1f"; ctx.lineWidth = 2.5; ctx.stroke();
+  ctx.strokeStyle = "#2563eb"; ctx.lineWidth = 2.5; ctx.stroke();
 }
 window.addEventListener("resize", resizeCanvas);
 
-/* ---------- THEME ---------- */
+/* ---------- THEME (erst NACH canvas definition aufrufen!) ---------- */
 function applyTheme(dark){
   document.body.classList.toggle("dark", dark);
   $("themeBtn").textContent = dark ? "☀" : "☾";
@@ -691,9 +660,9 @@ function gauge(v){
   $("speed").textContent = v < 10 ? v.toFixed(1) : Math.round(v);
   $("prog").style.strokeDashoffset = c - vis*p;
 }
-function resetGauge(){ gaugeMax = 100; samples = []; gauge(0); drawChart(); $('resultPhaseBadge').classList.remove('result-glow'); }
+function resetGauge(){ gaugeMax = 100; samples = []; gauge(0); drawChart(); }
 
-/* ---------- NETWORK INFO & LEGAL IPv6 ---------- */
+/* ---------- NETWORK INFO ---------- */
 async function netinfo(){
   const t = translations[currentLang];
   try{
@@ -705,23 +674,12 @@ async function netinfo(){
     $("isp").textContent = (d.connection && (d.connection.isp || d.connection.org)) || t.unavail;
     $("loc").textContent = [d.city, d.region, d.country].filter(Boolean).join(", ") || t.unavail;
     $("asn").textContent = (d.connection && d.connection.asn ? "AS"+d.connection.asn+" · " : "") + ((d.connection && d.connection.org) || t.unavail);
-    
-    // Legal & clean IPv4 / IPv6 separation checks
-    if(d.type === "IPv4") {
-      $("ipv4").textContent = d.ip;
-      $("ipv6").textContent = t.notDetected;
-    } else if(d.type === "IPv6") {
-      $("ipv6").textContent = d.ip;
-      $("ipv4").textContent = t.notDetected;
-    } else {
-      $("ipv4").textContent = d.ip.includes(":") ? t.notDetected : d.ip;
-      $("ipv6").textContent = d.ip.includes(":") ? d.ip : t.notDetected;
-    }
+    if(d.type === "IPv4"){ $("ipv4").textContent = d.ip; $("ipv6").textContent = t.notDetected; }
+    if(d.type === "IPv6"){ $("ipv6").textContent = d.ip; $("ipv4").textContent = t.notDetected; }
   }catch(e){
-    ["ip","isp","loc","asn","ipv4","ipv6"].forEach(id => { const el = $(id); if(el) el.textContent = t.unavail; });
+    ["ip","isp","loc","asn"].forEach(id => $(id).textContent = t.unavail);
   }
 }
-
 function measureDns(){
   try{
     const e = performance.getEntriesByType("resource").filter(x => x.name.includes("speed.cloudflare.com") && x.domainLookupEnd>0);
@@ -731,255 +689,513 @@ function measureDns(){
   }catch(e){ $("dns").textContent = "n/v"; }
 }
 
-/* ---------- TIMEOUT HELPER ---------- */
+/* ---------- TIMEOUT ---------- */
 function testTimeout(ms){
   const c = new AbortController();
-  const t = setTimeout(() => c.abort(), ms);
-  return {signal: c.signal, clear: () => clearTimeout(t)};
+  const t = setTimeout(()=>c.abort(), ms);
+  return {signal:c.signal, clear:()=>clearTimeout(t)};
 }
 
-/* ---------- VERIFIED CORRECED PING TEST ---------- */
+/* ---------- PING ---------- */
 async function pingTest(){
   const vals = [];
-  for(let i=0; i<6; i++){
+  for(let i=0;i<8;i++){
     if(!running) break;
     const start = performance.now();
-    const timer = testTimeout(4000);
+    const timer = testTimeout(5000);
     try{
       const r = await fetch(SPEED_BASE+"/__down?bytes=0&r="+Date.now()+Math.random(), {cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal});
       if(!r.ok) throw 0;
       await r.arrayBuffer();
-      const el = performance.now() - start;
-      if(el > 0 && el < 3000) vals.push(el);
+      const el = performance.now()-start;
+      if(el>0 && el<5000) vals.push(el);
     }catch(e){}
     finally{ timer.clear(); }
   }
   if(!vals.length) throw new Error("Ping failed");
-  // Outlier removal for absolute precision
-  vals.sort((a,b) => a-b);
-  const coreVals = vals.length > 2 ? vals.slice(1, vals.length-1) : vals;
-  const ping = coreVals.reduce((a,b)=>a+b, 0) / coreVals.length;
+  const ping = vals.reduce((a,b)=>a+b,0)/vals.length;
   let jitter = 0;
-  for(let i=1; i<coreVals.length; i++) jitter += Math.abs(coreVals[i] - coreVals[i-1]);
-  jitter = coreVals.length > 1 ? jitter / (coreVals.length-1) : 0.5;
+  for(let i=1;i<vals.length;i++) jitter += Math.abs(vals[i]-vals[i-1]);
+  jitter /= Math.max(1, vals.length-1);
   return {ping, jitter};
 }
 
-/* ---------- DOWNLOAD TEST ---------- */
+/* ---------- DOWNLOAD ---------- */
 async function downloadTest(){
   const t = translations[currentLang];
   $("status").textContent = t.stDown;
   $("chartState").textContent = t.download;
   samples = [];
-  const sizes = [1e6, 2e6, 5e6, 15e6, 30e6];
-  let totalBytes = 0, totalSecs = 0;
+  const sizes = [1e6,2e6,5e6,10e6,20e6,40e6];
+  let totalBytes=0, totalSecs=0, ok=0;
   for(const size of sizes){
     if(!running) break;
-    const timer = testTimeout(12000);
+    const timer = testTimeout(15000);
     const start = performance.now();
     try{
       const r = await fetch(SPEED_BASE+"/__down?bytes="+size+"&r="+Date.now()+Math.random(), {cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal});
       if(!r.ok) throw 0;
       const buf = await r.arrayBuffer();
-      const sec = (performance.now() - start) / 1000;
-      if(sec > 0){
-        totalBytes += buf.byteLength;
-        totalSecs += sec;
-        const speedMbps = (buf.byteLength * 8) / (sec * 1e6);
-        samples.push(speedMbps);
-        gauge(speedMbps);
-        drawChart();
-      }
-    }catch(e){
-    }finally{ timer.clear(); }
+      const sec = (performance.now()-start)/1000;
+      const bytes = buf.byteLength;
+      if(bytes<=0 || sec<=0) throw 0;
+      const sp = bytes*8/sec/1e6;
+      totalBytes += bytes; totalSecs += sec; ok++;
+      samples.push(sp); gauge(sp);
+      $("down").textContent = sp.toFixed(1);
+      drawChart();
+    }catch(e){}
+    finally{ timer.clear(); }
   }
-  if(totalSecs === 0) throw new Error("Download failed");
-  return (totalBytes * 8) / (totalSecs * 1e6);
+  if(!ok || !totalSecs) throw new Error("Download failed");
+  return totalBytes*8/totalSecs/1e6;
 }
 
-/* ---------- UPLOAD TEST ---------- */
+/* ---------- UPLOAD ---------- */
 async function uploadTest(){
   const t = translations[currentLang];
   $("status").textContent = t.stUp;
   $("chartState").textContent = t.upload;
   samples = [];
-  const chunk = new Uint8Array(2e6);
-  window.crypto.getRandomValues(chunk);
-  let totalBytes = 0, totalSecs = 0;
-  for(let i=0; i<4; i++){
+  const sizes = [250000,500000,1000000,2000000,5000000,10000000];
+  let totalBytes=0, totalSecs=0, ok=0;
+  for(const size of sizes){
     if(!running) break;
-    const timer = testTimeout(10000);
+    const data = new Uint8Array(size);
+    for(let i=0;i<size;i+=65536) crypto.getRandomValues(data.subarray(i, Math.min(i+65536, size)));
+    const timer = testTimeout(20000);
     const start = performance.now();
     try{
-      const r = await fetch(SPEED_BASE+"/__up?r="+Date.now()+Math.random(), {method:"POST",body:chunk,cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal});
+      const r = await fetch(SPEED_BASE+"/__up?r="+Date.now()+Math.random(), {method:"POST",body:data,cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal});
       if(!r.ok) throw 0;
-      const sec = (performance.now() - start) / 1000;
-      if(sec > 0){
-        totalBytes += chunk.byteLength;
-        totalSecs += sec;
-        const speedMbps = (chunk.byteLength * 8) / (sec * 1e6);
-        samples.push(speedMbps);
-        gauge(speedMbps);
-        drawChart();
-      }
-    }catch(e){
-    }finally{ timer.clear(); }
+      try{ await r.arrayBuffer(); }catch(e){}
+      const sec = (performance.now()-start)/1000;
+      if(sec<=0) throw 0;
+      const sp = size*8/sec/1e6;
+      totalBytes += size; totalSecs += sec; ok++;
+      samples.push(sp); gauge(sp);
+      $("up").textContent = sp.toFixed(1);
+      drawChart();
+    }catch(e){}
+    finally{ timer.clear(); }
   }
-  if(totalSecs === 0) return 0;
-  return (totalBytes * 8) / (totalSecs * 1e6);
+  if(!ok || !totalSecs) throw new Error("Upload failed");
+  return totalBytes*8/totalSecs/1e6;
 }
 
-/* ---------- RUN ENTIRE SPEEDTEST SEQUENCE ---------- */
-async function startTest(){
-  checkOnlineStatus();
-  if(!navigator.onLine) return;
+/* ---------- QUALITY ---------- */
+function quality(d,u,p,j){
+  let s = 100;
+  if(d<5) s-=45; else if(d<25) s-=30; else if(d<50) s-=20; else if(d<100) s-=10;
+  if(u<2) s-=20; else if(u<5) s-=14; else if(u<10) s-=7;
+  if(p>150) s-=30; else if(p>100) s-=24; else if(p>60) s-=15; else if(p>30) s-=7;
+  if(j>50) s-=20; else if(j>30) s-=14; else if(j>15) s-=7;
+  return Math.max(0, Math.min(100, Math.round(s)));
+}
+function showQuality(s){
+  const t = translations[currentLang];
+  $("score").textContent = s+"/100";
+  $("bar").style.width = s+"%";
+  $("qtext").textContent = s>=90?t.q90:s>=75?t.q75:s>=55?t.q55:s>=35?t.q35:t.q0;
+}
+
+/* ---------- APPS EVALUATION ---------- */
+function evaluateApps(d,u,p,j){
+  const t = translations[currentLang];
+  const setScore = (key, prefix, score) => {
+    const status = document.querySelector('[data-app-status="'+key+'"]');
+    const bar = document.querySelector('[data-app-bar="'+key+'"]');
+    const txt = document.querySelector('[data-app-text="'+key+'"]');
+    if(!status || !bar || !txt) return;
+    bar.style.width = score+"%";
+    txt.textContent = score>=85?t[prefix+"85"]:score>=65?t[prefix+"65"]:score>=40?t[prefix+"40"]:t[prefix+"0"];
+    status.className = "app-status";
+    if(score>=80){ status.classList.add("good"); status.textContent = t.stExc; }
+    else if(score>=55){ status.classList.add("medium"); status.textContent = t.stGood; }
+    else { status.classList.add("bad"); status.textContent = t.stLim; }
+  };
+  let g = 100;
+  if(p>20) g-=15; if(p>40) g-=20; if(p>70) g-=25;
+  if(j>10) g-=15; if(j>20) g-=20; if(j>40) g-=20;
+  if(d<10) g-=15; if(u<3) g-=10;
+  setScore("gaming","gam", Math.max(0,Math.min(100,g)));
+  setScore("stream","str", d>=25?100:d>=15?85:d>=10?70:d>=5?50:d>=3?25:10);
+  setScore("fourk","fk", d>=50?100:d>=25?85:d>=15?60:d>=10?35:10);
+  let c = 100; if(d<10) c-=25; if(u<5) c-=25; if(p>50) c-=20; if(j>20) c-=20;
+  setScore("call","call", Math.max(0,Math.min(100,c)));
+  let o = 100; if(d<25) o-=15; if(u<10) o-=15; if(p>70) o-=15; if(j>25) o-=15;
+  setScore("office","off", Math.max(0,Math.min(100,o)));
+  setScore("cloud","cld", d>=100?100:d>=50?85:d>=25?70:d>=10?50:d>=5?30:10);
+  setScore("social","soc", d>=25?100:d>=10?90:d>=5?75:d>=2?50:25);
+  let w = 100; if(d<10) w-=20; if(d<5) w-=20; if(p>100) w-=25; if(j>30) w-=15;
+  setScore("web","web", Math.max(0,Math.min(100,w)));
+}
+
+/* ---------- TEST ID ---------- */
+function createTestID(){ return "FASQOO-"+Math.random().toString(36).slice(2,6).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase(); }
+
+/* ---------- HISTORY ---------- */
+function historyLoad(){
+  const t = translations[currentLang];
+  const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
+  const body = $("history");
+  if(!h.length){ body.innerHTML = '<tr><td colspan="5" class="empty">'+t.noHistory+'</td></tr>'; return; }
+  body.innerHTML = h.map(x => '<tr><td>'+x.date+'</td><td>'+Number(x.d).toFixed(1)+' Mbps</td><td>'+Number(x.u).toFixed(1)+' Mbps</td><td>'+Number(x.p).toFixed(1)+' ms</td><td>'+x.s+'/100</td></tr>').join("");
+}
+function saveHistory(x){
+  const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
+  h.unshift(x);
+  localStorage.setItem("fasqoo_history", JSON.stringify(h.slice(0,20)));
+  historyLoad();
+}
+
+/* ---------- START TEST ---------- */
+async function start(){
   if(running) return;
   running = true;
   const t = translations[currentLang];
-  $("start").textContent = t.testing;
   $("start").disabled = true;
+  $("start").textContent = t.testing;
   resetGauge();
-  
-  // Phase 1: Ping
-  $("testPhase").textContent = t.stPing;
-  document.querySelectorAll(".phase-step").forEach(el => el.classList.remove("active"));
-  document.querySelector('.phase-step[data-phase="ping"]').classList.add("active");
-  
-  let pingRes = {ping: 15, jitter: 1};
+  ["down","up","ping","jitter"].forEach(id => $(id).textContent = "—");
+  $("score").textContent = "—";
+  $("bar").style.width = "0%";
+  document.querySelectorAll(".app-status").forEach(el => { el.className = "app-status"; el.textContent = t.testing; });
+  $("status").textContent = t.stPing;
   try{
-    pingRes = await pingTest();
-    $("ping").textContent = pingRes.ping.toFixed(1);
-    $("jitter").textContent = pingRes.jitter.toFixed(1);
-    $("intelLatency").textContent = pingRes.ping.toFixed(1) + " ms";
-    $("intelStability").textContent = pingRes.jitter.toFixed(1) + " ms";
-  }catch(e){
-    $("ping").textContent = "12.0";
-    $("jitter").textContent = "2.1";
+    if(performance.clearResourceTimings) performance.clearResourceTimings();
+    const p = await pingTest();
+    $("ping").textContent = p.ping.toFixed(1);
+    $("jitter").textContent = p.jitter.toFixed(1);
+    measureDns();
+    const d = await downloadTest();
+    const u = await uploadTest();
+    const s = quality(d,u,p.ping,p.jitter);
+    showQuality(s);
+    evaluateApps(d,u,p.ping,p.jitter);
+    const testID = createTestID();
+    const date = new Date().toLocaleString();
+    last = {id:testID, date:date, download:d, upload:u, ping:p.ping, jitter:p.jitter, quality:s,
+      ip:info.ip||"", isp:(info.connection && (info.connection.isp||info.connection.org))||"",
+      location:$("loc").textContent, asn:$("asn").textContent,
+      ipv4:$("ipv4").textContent, ipv6:$("ipv6").textContent, dns:$("dns").textContent};
+    $("tid").textContent = testID;
+    $("status").textContent = t.complete;
+    $("chartState").textContent = t.complete;
+    saveHistory({date:date, d:d, u:u, p:p.ping, s:s});
+  }catch(err){
+    console.error(err);
+    $("status").textContent = translations[currentLang].stErr;
   }
-
-  // Phase 2: Download
-  if(running){
-    $("testPhase").textContent = t.stDown;
-    document.querySelectorAll(".phase-step").forEach(el => el.classList.remove("active"));
-    document.querySelector('.phase-step[data-phase="download"]').classList.add("active");
-    try{
-      const downSpeed = await downloadTest();
-      $("down").textContent = downSpeed.toFixed(1);
-      $("intelThroughput").textContent = downSpeed.toFixed(1) + " Mbps";
-      last.down = downSpeed;
-    }catch(e){
-      $("down").textContent = "50.0";
-      last.down = 50.0;
-    }
-  }
-
-  // Phase 3: Upload
-  if(running){
-    $("testPhase").textContent = t.stUp;
-    document.querySelectorAll(".phase-step").forEach(el => el.classList.remove("active"));
-    document.querySelector('.phase-step[data-phase="upload"]').classList.add("active");
-    try{
-      const upSpeed = await uploadTest();
-      $("up").textContent = upSpeed.toFixed(1);
-      last.up = upSpeed;
-    }catch(e){
-      $("up").textContent = "20.0";
-      last.up = 20.0;
-    }
-  }
-
-  // Phase 4: Complete & Result Glow Top Right
   running = false;
-  $("start").textContent = t.startAgain;
   $("start").disabled = false;
-  $("testPhase").textContent = t.complete;
-  $("status").textContent = t.complete;
-  $("chartState").textContent = t.complete;
-  
-  document.querySelectorAll(".phase-step").forEach(el => el.classList.remove("active"));
-  const resBadge = $('resultPhaseBadge');
-  resBadge.classList.add("active", "result-glow"); // Leuchtet oben rechts auf!
-
-  measureDns();
-  $("tid").textContent = "FSQ-" + Math.floor(100000 + Math.random() * 900000);
-  
-  evaluateQualityAndApps(last.down || 50, last.up || 20, pingRes.ping);
-  saveHistory(last.down || 50, last.up || 20, pingRes.ping);
+  $("start").textContent = translations[currentLang].startAgain;
 }
+$("start").addEventListener("click", start);
 
-$("start").addEventListener("click", startTest);
-
-/* ---------- QUALITY & APPS EVALUATION ---------- */
-function evaluateQualityAndApps(down, up, ping){
-  const score = Math.min(100, Math.max(10, Math.round((down * 0.5) + (up * 0.2) + (100 - Math.min(ping, 100) * 0.5))));
-  $("score").textContent = score + " / 100";
-  $("bar").style.width = score + "%";
-  $("qualityLabel.textContent") = score > 80 ? "Hervorragend" : score > 50 ? "Gut" : "Eingeschränkt";
-  
-  APP_KEYS.forEach(k => {
-    const stEl = document.querySelector(`[data-app-status="${k}"]`);
-    const barEl = document.querySelector(`[data-app-bar="${k}"] i`) || document.querySelector(`[data-app-bar="${k}"]`);
-    const txtEl = document.querySelector(`[data-app-text="${k}"]`);
-    let rating = "good", width = "90%", text = "Hervorragend";
-    if(down < 10) { rating = "bad"; width = "35%"; text = "Eingeschränkt"; }
-    else if(down < 30) { rating = "medium"; width = "65%"; text = "Gut"; }
-    if(stEl) { stEl.className = "app-status " + rating; stEl.textContent = text; }
-    if(barEl) barEl.style.width = width;
-    if(txtEl) txtEl.textContent = text;
-  });
-}
-
-/* ---------- HISTORY ---------- */
-function saveHistory(down, up, ping){
-  const history = JSON.parse(localStorage.getItem("fasqoo_history") || "[]");
-  history.unshift({date: new Date().toLocaleDateString(), down: down.toFixed(1), up: up.toFixed(1), ping: ping.toFixed(1), qual: "Gut"});
-  if(history.length > 5) history.pop();
-  localStorage.setItem("fasqoo_history", JSON.stringify(history));
-  renderHistory();
-}
-function renderHistory(){
-  const history = JSON.parse(localStorage.getItem("fasqoo_history") || "[]");
-  const tbody = $("history");
-  if(!history.length){ tbody.innerHTML = `<tr><td colspan="5" class="empty">Noch keine Messungen.</td></tr>`; return; }
-  tbody.innerHTML = history.map(h => `<tr><td>${h.date}</td><td>${h.down} Mbps</td><td>${h.up} Mbps</td><td>${h.ping} ms</td><td>${h.qual}</td></tr>`).join("");
-}
-$("clear").addEventListener("click", () => { localStorage.removeItem("fasqoo_history"); renderHistory(); });
-
-/* ---------- LOCALIZATION & TEXT UPDATE ---------- */
-function updateTexts(){
+/* ---------- ACTIONS ---------- */
+$("copy").addEventListener("click", async () => {
   const t = translations[currentLang];
+  if(!last.id){ alert(t.alertRun); return; }
+  const text = "Fasqoo Internet Speed Test\n\nTest ID: "+last.id+"\nDownload: "+last.download.toFixed(1)+" Mbps\nUpload: "+last.upload.toFixed(1)+" Mbps\nPing: "+last.ping.toFixed(1)+" ms\nJitter: "+last.jitter.toFixed(1)+" ms\nQuality: "+last.quality+"/100\n\nISP: "+last.isp+"\nLocation: "+last.location;
+  try{ await navigator.clipboard.writeText(text); $("copy").textContent = t.copied; setTimeout(()=>$("copy").textContent = t.copy,1500); }
+  catch(e){ alert(text); }
+});
+$("share").addEventListener("click", async () => {
+  const t = translations[currentLang];
+  if(!last.id){ alert(t.alertRun); return; }
+  const text = "Fasqoo Speed Test — "+last.download.toFixed(1)+" Mbps down, "+last.upload.toFixed(1)+" Mbps up, "+last.ping.toFixed(1)+" ms ping";
+  if(navigator.share){ try{ await navigator.share({title:"Fasqoo Speed Test", text:text}); }catch(e){} }
+  else $("copy").click();
+});
+$("json").addEventListener("click", () => {
+  const t = translations[currentLang];
+  if(!last.id){ alert(t.alertRun); return; }
+  const blob = new Blob([JSON.stringify(last, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = (last.id||"fasqoo-test")+".json"; a.click();
+  URL.revokeObjectURL(url);
+});
+$("print").addEventListener("click", () => {
+  const t = translations[currentLang];
+  if(!last.id){ alert(t.alertRun); return; }
+  window.print();
+});
+$("clear").addEventListener("click", () => { localStorage.removeItem("fasqoo_history"); historyLoad(); });
+
+/* ---------- LANGUAGE ---------- */
+function applyLanguage(lang){
+  if(!translations[lang]) lang = "de";
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
   document.querySelectorAll("[data-i18n]").forEach(el => {
-    const k = el.getAttribute("data-i18n");
-    if(t[k]) el.textContent = t[k];
+    const key = el.getAttribute("data-i18n");
+    if(t[key]) el.textContent = t[key];
   });
+
   APP_KEYS.forEach(k => {
-    const app = t.apps[k];
-    if(!app) return;
-    const titleEl = document.querySelector(`[data-app-title="${k}"]`);
-    const descEl = document.querySelector(`[data-app-desc="${k}"]`);
-    const detEl = document.querySelector(`[data-app-det="${k}"]`);
-    if(titleEl) titleEl.textContent = app.t;
-    if(descEl) descEl.textContent = app.d;
-    if(detEl) detEl.textContent = app.det;
+    const title = document.querySelector('[data-app-title="'+k+'"]');
+    const desc = document.querySelector('[data-app-desc="'+k+'"]');
+    const det = document.querySelector('[data-app-det="'+k+'"]');
+    const txt = document.querySelector('[data-app-text="'+k+'"]');
+    if(title) title.textContent = t.apps[k].t;
+    if(desc) desc.textContent = t.apps[k].d;
+    if(det) det.textContent = t.apps[k].det;
+    if(txt) txt.textContent = t.appRunTest;
   });
-  applyExtraLanguage(currentLang);
+
+  const il = $("installLabel");
+  if(il && !il.dataset.installed) il.textContent = t.download;
+
+  historyLoad();
+  applyExtraLanguage(lang);
+  if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
 }
 
-$("lang").addEventListener("change", e => {
-  currentLang = e.target.value;
-  updateTexts();
+const langSelect = $("lang");
+langSelect.addEventListener("change", e => {
+  applyLanguage(e.target.value);
+  localStorage.setItem("fasqoo_lang", e.target.value);
 });
 
-/* ---------- INIT ---------- */
-window.addEventListener("load", () => {
-  buildAppCards();
-  resizeCanvas();
-  netinfo();
-  renderHistory();
-  checkOnlineStatus();
-  const darkSaved = localStorage.getItem("fasqoo_dark") === "true";
-  applyTheme(darkSaved);
+/* ---------- PWA INSTALL ---------- */
+let deferredInstallPrompt = null;
+const installButton = $("installButton");
+const installLabel = $("installLabel");
+
+function isDesktopDevice(){
+  const ua = navigator.userAgent || "";
+  const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
+  const desktopUA = /Windows NT|Macintosh|X11; Linux x86_64|CrOS/i.test(ua);
+  return !mobileUA && desktopUA;
+}
+function isSafariDesktop(){
+  const ua = navigator.userAgent || "";
+  return /Macintosh/i.test(ua) && /Safari/i.test(ua) && !/Chrome|CriOS|Edg|OPR|Firefox/i.test(ua);
+}
+function isWindows(){ return /Windows NT/i.test(navigator.userAgent || ""); }
+async function updateInstallVisibility(){
+  if(!installButton) return;
+
+  const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  const locallyInstalled = localStorage.getItem("fasqoo_pwa_installed") === "true";
+
+  if(!isDesktopDevice() || standalone || locallyInstalled){
+    installButton.hidden = true;
+    return;
+  }
+
+  // Detect a PWA that was installed before this page stored the local flag.
+  if(typeof navigator.getInstalledRelatedApps === "function") {
+    try {
+      const relatedApps = await navigator.getInstalledRelatedApps();
+      const fasqooInstalled = relatedApps.some(app => app.platform === "webapp");
+      if(fasqooInstalled){
+        localStorage.setItem("fasqoo_pwa_installed", "true");
+        installButton.hidden = true;
+        return;
+      }
+    } catch(e) {}
+  }
+
+  installButton.hidden = false;
+  const icon = $("installIcon");
+  if(isWindows()){
+    icon.className = "windows-icon";
+  } else {
+    icon.className = "apple-icon";
+    icon.textContent = "⌘";
+  }
+  installLabel.textContent = isSafariDesktop() ? "Fasqoo für macOS installieren" : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
+  installButton.title = installLabel.textContent;
+}
+updateInstallVisibility();
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallVisibility();
 });
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  localStorage.setItem("fasqoo_pwa_installed", "true");
+  installButton.hidden = true;
+});
+
+installButton.addEventListener("click", async () => {
+  if(!isDesktopDevice()) return;
+
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    const res = await deferredInstallPrompt.userChoice;
+    if(res.outcome === "accepted") {
+      localStorage.setItem("fasqoo_pwa_installed", "true");
+      installButton.hidden = true;
+      deferredInstallPrompt = null;
+    }
+    return;
+  }
+
+  if(isSafariDesktop()){
+    alert("Safari: Öffne das Teilen-Menü und wähle „Zum Dock hinzufügen“. Damit wird Fasqoo als Web-App auf deinem Mac installiert.");
+    return;
+  }
+
+  const msg = {
+    de:"Chrome bietet die Installation gerade nicht automatisch an. Öffne das Chrome-Menü (⋮) und wähle „Fasqoo installieren…“.",
+    en:"Chrome is not offering installation automatically. Open the Chrome menu (⋮) and choose “Install Fasqoo…”.",
+    fr:"Chrome ne propose pas l'installation automatiquement. Ouvrez le menu Chrome (⋮) et choisissez « Installer Fasqoo… ».",
+    es:"Chrome no ofrece la instalación automáticamente. Abre el menú de Chrome (⋮) y elige «Instalar Fasqoo…».",
+    it:"Chrome non offre l'installazione automaticamente. Apri il menu Chrome (⋮) e scegli «Installa Fasqoo…».",
+    pt:"O Chrome não oferece a instalação automaticamente. Abra o menu do Chrome (⋮) e escolha «Instalar Fasqoo…».",
+    nl:"Chrome biedt installatie niet automatisch aan. Open het Chrome-menu (⋮) en kies “Fasqoo installeren…”.",
+    tr:"Chrome kurulumu otomatik olarak sunmuyor. Chrome menüsünü (⋮) açıp “Fasqoo'yu yükle…” seçeneğini seçin.",
+    sq:"Chrome nuk e ofron instalimin automatikisht. Hap menunë e Chrome (⋮) dhe zgjidh “Instalo Fasqoo…”.",
+    ar:"لا يعرض Chrome التثبيت تلقائيًا. افتح قائمة Chrome (⋮) واختر «تثبيت Fasqoo…»."
+  }[currentLang] || "Open the Chrome menu and choose Install Fasqoo.";
+  alert(msg);
+});
+
+/* ---------- SERVICE WORKER ---------- */
+if("serviceWorker" in navigator){
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(reg => console.log("SW registered:", reg.scope))
+      .catch(err => console.log("SW error:", err));
+  });
+}
+
+
+/* ---------- PROFESSIONAL UI ENHANCEMENTS ---------- */
+function setTestPhase(phase){
+  document.querySelectorAll(".phase-step").forEach(el => el.classList.toggle("active", el.dataset.phase === phase));
+  const label = $("testPhase");
+  if(label){
+    const x = extraTranslations[currentLang] || extraTranslations.en;
+    const labels = {ping:x.responseTime,download:x.downloadCapacity,upload:x.throughput,complete:x.phaseResult};
+    label.textContent = labels[phase] || x.readyPhase;
+  }
+}
+function setPremiumMetrics(d,u,p,j){
+  const x = extraTranslations[currentLang] || extraTranslations.en;
+  if(Number.isFinite(p)) $("intelLatency").textContent = p.toFixed(1)+" ms";
+  if(Number.isFinite(j)) $("intelStability").textContent = j <= 10 ? (translations[currentLang].stExc) : j <= 20 ? (translations[currentLang].stGood) : translations[currentLang].stLim;
+  if(Number.isFinite(d)) $("intelThroughput").textContent = d.toFixed(1)+" "+x.unitMbps;
+}
+function updateQualityLabel(s){
+  const el = $("qualityLabel");
+  if(!el) return;
+  const t = translations[currentLang];
+  el.textContent = s>=90 ? t.stExc : s>=75 ? (t.q75.replace(/connection\.?$/i, "").trim() || t.stGood) : s>=55 ? t.stGood : s>=35 ? t.stLim : t.q0;
+}
+const _originalStart = start;
+start = async function(){
+  setTestPhase("ping");
+  if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementReal;
+  await _originalStart();
+  if(last && last.id){
+    setTestPhase("complete");
+    setPremiumMetrics(last.download,last.upload,last.ping,last.jitter);
+    updateQualityLabel(last.quality);
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementComplete;
+  }else{
+    setTestPhase("ping");
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementFailed;
+  }
+};
+/* Update phase during the existing status changes without replacing the test engine. */
+const _statusObserver = new MutationObserver(() => {
+  const text = $("status")?.textContent || "";
+  if(/download|descarga|téléchargement|descarga|download/i.test(text)) setTestPhase("download");
+  else if(/upload|envoi|subida|envio|hochladen|yükleme|ngarkim/i.test(text)) setTestPhase("upload");
+  else if(/ping|latency|latenz|latence|latencia|latenza|vonesa/i.test(text)) setTestPhase("ping");
+});
+_statusObserver.observe($("status"),{childList:true,subtree:true,characterData:true});
+
+/* ---------- INIT (Reihenfolge WICHTIG!) ---------- */
+buildAppCards();
+resizeCanvas();
+
+const savedLang = localStorage.getItem("fasqoo_lang");
+const browserLang = (navigator.language || "en").slice(0,2);
+const initialLang = (savedLang && translations[savedLang]) ? savedLang : (translations[browserLang] ? browserLang : "en");
+langSelect.value = initialLang;
+applyLanguage(initialLang);
+
+// ✅ Theme ERST JETZT – canvas ist jetzt definiert!
+applyTheme(localStorage.getItem("fasqoo_dark") === "true");
+
+netinfo();
+
+ 
+
+
+  let deferredPrompt;
+
+// 1. Installations-Event des Browsers abfangen
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  const installBtn = document.getElementById('installButton');
+  if (installBtn) installBtn.style.display = 'block';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const installBtn = document.getElementById('installButton');
+  const installLabel = document.getElementById('installLabel');
+  const installIcon = document.getElementById('installIcon');
+  
+  if (!installBtn) return;
+
+  // 2. Betriebssystem erkennen (Windows oder Mac) und Text anpassen
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (userAgent.includes('mac')) {
+    if (installLabel) installLabel.textContent = 'Fasqoo für Mac installieren';
+    if (installIcon) installIcon.className = 'mac-icon';
+    installBtn.title = 'Install Fasqoo for Mac';
+    installBtn.setAttribute('aria-label', 'Install Fasqoo for Mac');
+  } else if (userAgent.includes('win')) {
+    if (installLabel) installLabel.textContent = 'Fasqoo für Windows installieren';
+    if (installIcon) installIcon.className = 'windows-icon';
+    installBtn.title = 'Install Fasqoo for Windows';
+    installBtn.setAttribute('aria-label', 'Install Fasqoo for Windows');
+  }
+
+  // 3. Prüfen, ob die PWA bereits als App geöffnet ist (Standalone-Modus)
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    installBtn.style.display = 'none';
+  }
+
+  // 4. Klick-Aktion: Installations-Fenster erzwingen
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    if (outcome === 'accepted') {
+      console.log('App wurde erfolgreich installiert');
+    }
+    
+    deferredPrompt = null;
+    installBtn.style.display = 'none';
+  });
+});
+
+// 5. Button direkt ausblenden, sobald die Installation abgeschlossen wurde
+window.addEventListener('appinstalled', () => {
+  const installBtn = document.getElementById('installButton');
+  if (installBtn) installBtn.style.display = 'none';
+});
+
+
 </script>
+
 </body>
 </html>
