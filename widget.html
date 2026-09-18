@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -420,14 +419,19 @@ footer{
       <div class="menu-extra">
         <select id="lang" aria-label="Language">
           <option value="de" selected>Deutsch</option>
-          <option value="fr">Français</option>
           <option value="en">English</option>
-          <option value="it">Italiano</option>
-          <option value="pt">Português</option>
           <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="hi">हिन्दी</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="it">Italiano</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="pl">Polski</option>
+          <option value="pt">Português</option>
+          <option value="ru">Русский</option>
           <option value="tr">Türkçe</option>
-          <option value="sq">Shqip</option>
-          <option value="ar">العربية</option>
+          <option value="uk">Українська</option>
           <option value="zh">中文</option>
         </select>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode" title="Dark mode">☾</button>
@@ -489,7 +493,7 @@ footer{
                   title="Fasqoo Internet Speed Test">
           </iframe>
           <div style="text-align: center; font-family: sans-serif; font-size: 12px; margin-top: 5px;">
-            Powered by <a href="https://www.fasqoo.com/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">Fasqoo.com</a>
+            Powered by <a href="https://fasqoo.com/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">Fasqoo.com</a>
           </div>
         </div>
       </div>
@@ -508,7 +512,7 @@ footer{
           title="Fasqoo Internet Speed Test"&gt;
   &lt;/iframe&gt;
   &lt;div style="text-align: center; font-family: sans-serif; font-size: 12px; margin-top: 5px;"&gt;
-    Powered by &lt;a href="https://www.fasqoo.com/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;"&gt;Fasqoo.com&lt;/a&gt;
+    Powered by &lt;a href="https://fasqoo.com/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;"&gt;Fasqoo.com&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;!-- Fasqoo Speed Test Widget Ende --&gt;</textarea>
@@ -542,193 +546,34 @@ if(menuToggle && mainMenu){
   });
 }
 
-// Language Switcher Redirect Logic
+// Language switcher: translate this page directly (no missing widget-xx.html files)
 const langSelect = document.getElementById("lang");
-if(langSelect){
-  langSelect.addEventListener("change", function(){
-    const selectedLang = this.value;
-    if(selectedLang === "de"){
-      window.location.href = "widget.html";
-    } else {
-      window.location.href = "widget-" + selectedLang + ".html";
-    }
-  });
-}
-
-// Fasqoo 10-language translations
-const translations = {
-  de: {
-    navHome:"Startseite", navSpeed:"Speedtest", navFaq:"FAQ", navWidget:"Widget", navAbout:"Über uns",
-    heroLabel:"Entwickler & Webmaster",
-    heroTitle:"Das offizielle Fasqoo Speed Test Widget",
-    heroText:"Biete deinen Website-Besuchern einen echten Mehrwert: Mit dem Fasqoo-Widget integrierst du einen hochpräzisen, ultraschnellen Internet-Geschwindigkeitstest direkt auf deiner eigenen Plattform.",
-    why:"Warum das Fasqoo Speed Test Widget auf deiner Website?",
-    why1:"Fasqoo ist eine moderne und leistungsstarke Internet Speed Test Website, die darauf ausgelegt ist, die Verbindungsschnelligkeit (Download, Upload und Ping) von Nutzern sekundengenau und extrem zuverlässig zu ermitteln. Wenn du dieses Tool als Widget auf deinem Blog, deiner News-Seite oder deinem Web-Portal einbindest, erhöhst du die Interaktivität und verleihst deiner Seite einen echten Nützlichkeitsfaktor.",
-    why2:"Das Widget arbeitet vollkommen eigenständig, lädt blitzschnell und belastet die Ladezeit deiner eigenen Homepage nicht. Deine Besucher können direkt auf deiner Seite bleiben und müssen keinen externen Dienst aufrufen.",
-    steps:"Detaillierte Anleitung: In 3 Schritten einfügen",
-    step1:"Code kopieren", step1p:"Klicke unten in das HTML-Code-Feld. Der gesamte Einbettungs-Code wird automatisch markiert, sodass du ihn bequem in deine Zwischenablage kopieren kannst.",
-    step2:"Im CMS einfügen", step2p:"Wechsle zu deiner Website-Verwaltung (z. B. WordPress, Blogger oder ein eigener Editor). Füge den Code an der gewünschten Stelle über ein HTML- oder JavaScript-Modul ein.",
-    step3:"Live erleben", step3p:"Speichere die Seite ab. Das Widget verbindet sich sofort sicher mit den Fasqoo-Servern und liefert deinen Lesern einen voll funktionsfähigen Speedtest.",
-    preview:"Live-Vorschau & Embed-Code", previewText:"So sieht das interaktive Widget aus, wenn es bei dir eingebettet ist:",
-    codeLabel:"Dein HTML-Code zum Kopieren:",
-    privacy:"Datenschutzrichtlinie", terms:"Nutzungsbedingungen", rights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",
-    powered:"Powered by", title:"Fasqoo Internet Speed Test", dark:"Dark Mode", light:"Light mode", menu:"Toggle Menu"
-  },
-  fr: {
-    navHome:"Accueil", navSpeed:"Test de vitesse", navFaq:"FAQ", navWidget:"Widget", navAbout:"À propos",
-    heroLabel:"Développeurs & webmasters", heroTitle:"Le widget officiel Fasqoo Speed Test",
-    heroText:"Offrez une vraie valeur ajoutée aux visiteurs de votre site : intégrez un test de vitesse Internet rapide et précis de Fasqoo directement sur votre plateforme.",
-    why:"Pourquoi utiliser le widget Fasqoo Speed Test sur votre site ?",
-    why1:"Fasqoo est un site moderne et performant de test de vitesse Internet conçu pour mesurer avec précision et fiabilité le débit descendant, le débit montant et le ping. En intégrant cet outil comme widget sur votre blog, site d'actualités ou portail web, vous augmentez l'interactivité et l'utilité de votre site.",
-    why2:"Le widget fonctionne de manière autonome, se charge rapidement et n'alourdit pas le temps de chargement de votre page. Vos visiteurs restent sur votre site sans devoir ouvrir un service externe.",
-    steps:"Guide détaillé : intégrer en 3 étapes", step1:"Copier le code", step1p:"Cliquez dans le champ de code HTML ci-dessous. Tout le code d'intégration est automatiquement sélectionné pour être copié facilement.",
-    step2:"Ajouter dans le CMS", step2p:"Ouvrez l'administration de votre site (par exemple WordPress, Blogger ou votre propre éditeur). Ajoutez le code à l'endroit souhaité via un module HTML ou JavaScript.",
-    step3:"Tester en direct", step3p:"Enregistrez la page. Le widget se connecte immédiatement aux serveurs Fasqoo et fournit à vos visiteurs un test de vitesse pleinement fonctionnel.",
-    preview:"Aperçu en direct & code d'intégration", previewText:"Voici à quoi ressemble le widget interactif lorsqu'il est intégré à votre site :", codeLabel:"Votre code HTML à copier :",
-    privacy:"Politique de confidentialité", terms:"Conditions d'utilisation", rights:"© 2026 Fasqoo. Tous droits réservés.", powered:"Propulsé par", title:"Test de vitesse Internet Fasqoo", dark:"Mode sombre", light:"Mode clair", menu:"Ouvrir le menu"
-  },
-  en: {
-    navHome:"Home", navSpeed:"Speed Test", navFaq:"FAQ", navWidget:"Widget", navAbout:"About",
-    heroLabel:"Developers & Webmasters", heroTitle:"The Official Fasqoo Speed Test Widget",
-    heroText:"Give your website visitors real value: integrate a highly accurate, ultra-fast Fasqoo internet speed test directly into your own platform.",
-    why:"Why add the Fasqoo Speed Test Widget to your website?",
-    why1:"Fasqoo is a modern, powerful internet speed test website designed to measure download, upload and ping accurately and reliably. By embedding this tool as a widget on your blog, news site or web portal, you increase interactivity and give your visitors a useful built-in service.",
-    why2:"The widget works independently, loads quickly and does not burden your homepage loading time. Visitors can stay on your site without opening an external service.",
-    steps:"Detailed guide: Add it in 3 steps", step1:"Copy the code", step1p:"Click the HTML code field below. The complete embed code is automatically selected so you can easily copy it to your clipboard.",
-    step2:"Add it in your CMS", step2p:"Open your website management system (for example WordPress, Blogger or your own editor). Add the code where you want it using an HTML or JavaScript module.",
-    step3:"Go live", step3p:"Save the page. The widget securely connects to Fasqoo servers and immediately provides your visitors with a fully functional speed test.",
-    preview:"Live Preview & Embed Code", previewText:"This is what the interactive widget looks like when embedded on your site:", codeLabel:"Your HTML code to copy:",
-    privacy:"Privacy Policy", terms:"Terms of Use", rights:"© 2026 Fasqoo. All rights reserved.", powered:"Powered by", title:"Fasqoo Internet Speed Test", dark:"Dark mode", light:"Light mode", menu:"Toggle menu"
-  },
-  it: {
-    navHome:"Home", navSpeed:"Test velocità", navFaq:"FAQ", navWidget:"Widget", navAbout:"Chi siamo",
-    heroLabel:"Sviluppatori e webmaster", heroTitle:"Il widget ufficiale Fasqoo Speed Test",
-    heroText:"Offri ai visitatori del tuo sito un valore reale: integra un test della velocità Internet Fasqoo, preciso e ultraveloce, direttamente sulla tua piattaforma.",
-    why:"Perché aggiungere il widget Fasqoo Speed Test al tuo sito?",
-    why1:"Fasqoo è un sito moderno e potente per testare la velocità Internet, progettato per misurare download, upload e ping in modo preciso e affidabile. Integrando questo strumento come widget nel tuo blog, sito di notizie o portale web, aumenti l'interattività e l'utilità della tua pagina.",
-    why2:"Il widget funziona in modo autonomo, si carica rapidamente e non appesantisce il caricamento della tua homepage. I visitatori possono restare sul tuo sito senza aprire un servizio esterno.",
-    steps:"Guida dettagliata: inseriscilo in 3 passaggi", step1:"Copia il codice", step1p:"Fai clic nel campo del codice HTML qui sotto. L'intero codice di incorporamento viene selezionato automaticamente per essere copiato facilmente.",
-    step2:"Inseriscilo nel CMS", step2p:"Apri la gestione del tuo sito (ad esempio WordPress, Blogger o il tuo editor). Inserisci il codice nel punto desiderato tramite un modulo HTML o JavaScript.",
-    step3:"Vai online", step3p:"Salva la pagina. Il widget si collega in modo sicuro ai server Fasqoo e offre immediatamente ai visitatori un test di velocità completo.",
-    preview:"Anteprima live e codice embed", previewText:"Ecco come appare il widget interattivo quando viene integrato nel tuo sito:", codeLabel:"Il tuo codice HTML da copiare:",
-    privacy:"Informativa sulla privacy", terms:"Condizioni d'uso", rights:"© 2026 Fasqoo. Tutti i diritti riservati.", powered:"Offerto da", title:"Test velocità Internet Fasqoo", dark:"Modalità scura", light:"Modalità chiara", menu:"Apri menu"
-  },
-  pt: {
-    navHome:"Início", navSpeed:"Teste de velocidade", navFaq:"FAQ", navWidget:"Widget", navAbout:"Sobre",
-    heroLabel:"Desenvolvedores e webmasters", heroTitle:"O widget oficial Fasqoo Speed Test",
-    heroText:"Ofereça valor real aos visitantes do seu site: integre um teste de velocidade da Internet Fasqoo, rápido e preciso, diretamente na sua plataforma.",
-    why:"Por que adicionar o widget Fasqoo Speed Test ao seu site?", why1:"A Fasqoo é um site moderno e potente de teste de velocidade da Internet, criado para medir download, upload e ping com precisão e confiabilidade. Ao integrar esta ferramenta como widget no seu blog, site de notícias ou portal, você aumenta a interatividade e a utilidade da página.",
-    why2:"O widget funciona de forma independente, carrega rapidamente e não prejudica o tempo de carregamento da sua página. Os visitantes podem permanecer no seu site sem abrir um serviço externo.",
-    steps:"Guia detalhado: adicionar em 3 passos", step1:"Copiar o código", step1p:"Clique no campo de código HTML abaixo. Todo o código de incorporação é selecionado automaticamente para facilitar a cópia.",
-    step2:"Adicionar no CMS", step2p:"Abra a administração do seu site (por exemplo, WordPress, Blogger ou seu próprio editor). Adicione o código no local desejado usando um módulo HTML ou JavaScript.",
-    step3:"Publicar", step3p:"Salve a página. O widget conecta-se com segurança aos servidores Fasqoo e oferece imediatamente aos visitantes um teste de velocidade totalmente funcional.",
-    preview:"Pré-visualização ao vivo e código embed", previewText:"Veja como fica o widget interativo quando incorporado ao seu site:", codeLabel:"Seu código HTML para copiar:",
-    privacy:"Política de privacidade", terms:"Termos de uso", rights:"© 2026 Fasqoo. Todos os direitos reservados.", powered:"Desenvolvido por", title:"Teste de velocidade da Internet Fasqoo", dark:"Modo escuro", light:"Modo claro", menu:"Abrir menu"
-  },
-  es: {
-    navHome:"Inicio", navSpeed:"Test de velocidad", navFaq:"FAQ", navWidget:"Widget", navAbout:"Acerca de",
-    heroLabel:"Desarrolladores y webmasters", heroTitle:"El widget oficial Fasqoo Speed Test",
-    heroText:"Ofrece un valor real a los visitantes de tu sitio: integra un test de velocidad de Internet Fasqoo, rápido y preciso, directamente en tu plataforma.",
-    why:"¿Por qué añadir el widget Fasqoo Speed Test a tu sitio?", why1:"Fasqoo es un sitio moderno y potente de prueba de velocidad de Internet diseñado para medir descarga, subida y ping con precisión y fiabilidad. Al integrar esta herramienta como widget en tu blog, sitio de noticias o portal web, aumentas la interactividad y la utilidad de tu página.",
-    why2:"El widget funciona de forma independiente, se carga rápidamente y no afecta al tiempo de carga de tu página. Los visitantes pueden permanecer en tu sitio sin abrir un servicio externo.",
-    steps:"Guía detallada: añadirlo en 3 pasos", step1:"Copiar el código", step1p:"Haz clic en el campo de código HTML de abajo. Todo el código de inserción se selecciona automáticamente para que puedas copiarlo fácilmente.",
-    step2:"Añadir al CMS", step2p:"Abre la administración de tu sitio (por ejemplo WordPress, Blogger o tu propio editor). Añade el código donde quieras mediante un módulo HTML o JavaScript.",
-    step3:"Publicar", step3p:"Guarda la página. El widget se conecta de forma segura a los servidores de Fasqoo y ofrece inmediatamente a tus visitantes un test de velocidad completo.",
-    preview:"Vista previa en vivo y código embed", previewText:"Así se ve el widget interactivo cuando está integrado en tu sitio:", codeLabel:"Tu código HTML para copiar:",
-    privacy:"Política de privacidad", terms:"Términos de uso", rights:"© 2026 Fasqoo. Todos los derechos reservados.", powered:"Desarrollado por", title:"Test de velocidad de Internet Fasqoo", dark:"Modo oscuro", light:"Modo claro", menu:"Abrir menú"
-  },
-  tr: {
-    navHome:"Ana Sayfa", navSpeed:"Hız Testi", navFaq:"SSS", navWidget:"Widget", navAbout:"Hakkımızda",
-    heroLabel:"Geliştiriciler ve web yöneticileri", heroTitle:"Resmî Fasqoo Speed Test Widget'ı",
-    heroText:"Web sitenizin ziyaretçilerine gerçek bir değer sunun: hızlı ve yüksek doğruluklu Fasqoo internet hız testini doğrudan platformunuza entegre edin.",
-    why:"Fasqoo Speed Test Widget'ını neden sitenize eklemelisiniz?", why1:"Fasqoo, indirme, yükleme ve ping değerlerini doğru ve güvenilir şekilde ölçmek için tasarlanmış modern ve güçlü bir internet hız testi sitesidir. Bu aracı blogunuza, haber sitenize veya web portalınıza widget olarak eklemek etkileşimi ve kullanım değerini artırır.",
-    why2:"Widget bağımsız çalışır, hızlı yüklenir ve ana sayfanızın yüklenme süresini olumsuz etkilemez. Ziyaretçiler harici bir hizmet açmadan sitenizde kalabilir.",
-    steps:"Detaylı rehber: 3 adımda ekleyin", step1:"Kodu kopyalayın", step1p:"Aşağıdaki HTML kod alanına tıklayın. Yerleştirme kodunun tamamı otomatik olarak seçilir ve kolayca panoya kopyalanabilir.",
-    step2:"CMS'ye ekleyin", step2p:"Web sitenizin yönetimine girin (örneğin WordPress, Blogger veya kendi editörünüz). Kodu istediğiniz yere HTML veya JavaScript modülüyle ekleyin.",
-    step3:"Yayınlayın", step3p:"Sayfayı kaydedin. Widget güvenli şekilde Fasqoo sunucularına bağlanır ve ziyaretçilerinize tam işlevli bir hız testi sunar.",
-    preview:"Canlı Önizleme ve Embed Kodu", previewText:"Etkileşimli widget sitenize eklendiğinde böyle görünür:", codeLabel:"Kopyalanacak HTML kodunuz:",
-    privacy:"Gizlilik Politikası", terms:"Kullanım Koşulları", rights:"© 2026 Fasqoo. Tüm hakları saklıdır.", powered:"Altyapı:", title:"Fasqoo İnternet Hız Testi", dark:"Karanlık mod", light:"Açık mod", menu:"Menüyü aç"
-  },
-  sq: {
-    navHome:"Ballina", navSpeed:"Testi i shpejtësisë", navFaq:"FAQ", navWidget:"Widget", navAbout:"Rreth nesh",
-    heroLabel:"Zhvillues & webmastera", heroTitle:"Widget-i zyrtar Fasqoo Speed Test",
-    heroText:"Ofroni vlerë të vërtetë për vizitorët e faqes suaj: integroni testin e shpejtësisë së internetit Fasqoo, të shpejtë dhe të saktë, direkt në platformën tuaj.",
-    why:"Pse ta shtoni Fasqoo Speed Test Widget në faqen tuaj?", why1:"Fasqoo është një faqe moderne dhe e fuqishme për testimin e shpejtësisë së internetit, e krijuar për të matur download, upload dhe ping me saktësi dhe besueshmëri. Duke e integruar si widget në blogun, faqen e lajmeve ose portalin tuaj, rritni ndërveprimin dhe dobishmërinë e faqes.",
-    why2:"Widget-i funksionon në mënyrë të pavarur, ngarkohet shpejt dhe nuk rëndon kohën e ngarkimit të faqes suaj. Vizitorët mund të qëndrojnë në faqen tuaj pa hapur një shërbim të jashtëm.",
-    steps:"Udhëzues i detajuar: Shtoje në 3 hapa", step1:"Kopjo kodin", step1p:"Kliko në fushën e kodit HTML më poshtë. I gjithë kodi i integrimit zgjidhet automatikisht që ta kopjosh lehtë.",
-    step2:"Shtoje në CMS", step2p:"Hap menaxhimin e faqes suaj (p.sh. WordPress, Blogger ose editorin tuaj). Shto kodin aty ku dëshiron përmes një moduli HTML ose JavaScript.",
-    step3:"Publikoje", step3p:"Ruaje faqen. Widget-i lidhet në mënyrë të sigurt me serverët e Fasqoo dhe u ofron menjëherë vizitorëve një test shpejtësie plotësisht funksional.",
-    preview:"Parapamje live & kodi për integrim", previewText:"Kështu duket widget-i interaktiv kur integrohet në faqen tuaj:", codeLabel:"Kodi juaj HTML për kopjim:",
-    privacy:"Politika e privatësisë", terms:"Kushtet e përdorimit", rights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.", powered:"Mundësuar nga", title:"Testi i shpejtësisë së internetit Fasqoo", dark:"Modaliteti i errët", light:"Modaliteti i ndriçuar", menu:"Hap menunë"
-  },
-  ar: {
-    navHome:"الرئيسية", navSpeed:"اختبار السرعة", navFaq:"الأسئلة الشائعة", navWidget:"الأداة", navAbout:"من نحن",
-    heroLabel:"للمطورين ومديري المواقع", heroTitle:"أداة Fasqoo الرسمية لاختبار سرعة الإنترنت",
-    heroText:"امنح زوار موقعك قيمة حقيقية: أضف اختبار سرعة الإنترنت من Fasqoo، السريع والدقيق، مباشرة إلى منصتك.",
-    why:"لماذا تضيف أداة Fasqoo لاختبار السرعة إلى موقعك؟", why1:"Fasqoo هو موقع حديث وقوي لاختبار سرعة الإنترنت، صُمم لقياس التنزيل والرفع وPing بدقة وموثوقية. عند دمج الأداة في مدونتك أو موقع الأخبار أو بوابتك الإلكترونية، تحصل على تفاعل أكبر وخدمة مفيدة للزوار.",
-    why2:"تعمل الأداة بشكل مستقل، ويتم تحميلها بسرعة ولا تؤثر سلباً في وقت تحميل صفحتك. ويمكن للزوار البقاء في موقعك دون فتح خدمة خارجية.",
-    steps:"دليل مفصل: الإضافة في 3 خطوات", step1:"نسخ الكود", step1p:"انقر داخل حقل كود HTML أدناه. سيتم تحديد كود التضمين بالكامل تلقائياً لتتمكن من نسخه بسهولة.",
-    step2:"إضافته إلى CMS", step2p:"افتح إدارة موقعك (مثل WordPress أو Blogger أو المحرر الخاص بك). أضف الكود في المكان المطلوب باستخدام وحدة HTML أو JavaScript.",
-    step3:"النشر", step3p:"احفظ الصفحة. تتصل الأداة بأمان بخوادم Fasqoo وتوفر للزوار فوراً اختبار سرعة يعمل بشكل كامل.",
-    preview:"المعاينة المباشرة وكود التضمين", previewText:"هكذا تبدو الأداة التفاعلية عند تضمينها في موقعك:", codeLabel:"كود HTML الخاص بك للنسخ:",
-    privacy:"سياسة الخصوصية", terms:"شروط الاستخدام", rights:"© 2026 Fasqoo. جميع الحقوق محفوظة.", powered:"مدعوم بواسطة", title:"اختبار سرعة الإنترنت من Fasqoo", dark:"الوضع الداكن", light:"الوضع الفاتح", menu:"فتح القائمة"
-  },
-  zh: {
-    navHome:"首页", navSpeed:"测速", navFaq:"常见问题", navWidget:"小工具", navAbout:"关于我们",
-    heroLabel:"开发者与网站管理员", heroTitle:"官方 Fasqoo 网速测试小工具",
-    heroText:"为网站访客提供真正有用的服务：将快速、精准的 Fasqoo 网络测速直接集成到你自己的平台。",
-    why:"为什么要在网站中添加 Fasqoo 网速测试小工具？", why1:"Fasqoo 是一个现代、高性能的网络测速网站，用于准确可靠地测量下载、上传和 Ping。将它作为小工具集成到博客、新闻网站或门户中，可以提升互动性并为访客提供实用功能。",
-    why2:"小工具独立运行、加载迅速，不会增加你主页的加载负担。访客无需打开外部服务即可留在你的网站中完成测试。",
-    steps:"详细指南：3 步完成添加", step1:"复制代码", step1p:"点击下面的 HTML 代码框。完整的嵌入代码会自动选中，方便复制到剪贴板。",
-    step2:"添加到 CMS", step2p:"打开网站管理系统（例如 WordPress、Blogger 或你自己的编辑器），通过 HTML 或 JavaScript 模块将代码放到需要的位置。",
-    step3:"上线使用", step3p:"保存页面。小工具会安全连接 Fasqoo 服务器，并立即为访客提供完整可用的网速测试。",
-    preview:"实时预览与嵌入代码", previewText:"将互动小工具嵌入网站后，它会显示如下：", codeLabel:"可复制的 HTML 代码：",
-    privacy:"隐私政策", terms:"使用条款", rights:"© 2026 Fasqoo。保留所有权利。", powered:"技术支持", title:"Fasqoo 网络测速", dark:"深色模式", light:"浅色模式", menu:"打开菜单"
-  }
+const T = {
+ de:{home:"Startseite",speed:"Speedtest",faq:"FAQ",widget:"Widget",about:"Über uns",label:"Entwickler & Webmaster",title:"Das offizielle Fasqoo Speed Test Widget",intro:"Biete deinen Website-Besuchern einen echten Mehrwert: Mit dem Fasqoo-Widget integrierst du einen hochpräzisen, ultraschnellen Internet-Geschwindigkeitstest direkt auf deiner eigenen Plattform.",why:"Warum das Fasqoo Speed Test Widget auf deiner Website?",p1:"Fasqoo ist eine moderne und leistungsstarke Internet Speed Test Website, die darauf ausgelegt ist, die Verbindungsschnelligkeit (Download, Upload und Ping) von Nutzern sekundengenau und extrem zuverlässig zu ermitteln. Wenn du dieses Tool als Widget auf deinem Blog, deiner News-Seite oder deinem Web-Portal einbindest, erhöhst du die Interaktivität und verleihst deiner Seite einen echten Nützlichkeitsfaktor.",p2:"Das Widget arbeitet vollkommen eigenständig, lädt blitzschnell und belastet die Ladezeit deiner eigenen Homepage nicht. Deine Besucher können direkt auf deiner Seite bleiben und müssen keinen externen Dienst aufrufen.",steps:"Detaillierte Anleitung: In 3 Schritten einfügen",s1:"Code kopieren",s1p:"Klicke unten in das HTML-Code-Feld. Der gesamte Einbettungs-Code wird automatisch markiert, sodass du ihn bequem in deine Zwischenablage kopieren kannst.",s2:"Im CMS einfügen",s2p:"Wechsle zu deiner Website-Verwaltung (z. B. WordPress, Blogger oder ein eigener Editor). Füge den Code an der gewünschten Stelle über ein HTML- oder JavaScript-Modul ein.",s3:"Live erleben",s3p:"Speichere die Seite ab. Das Widget verbindet sich sofort sicher mit den Fasqoo-Servern und liefert deinen Lesern einen voll funktionsfähigen Speedtest.",preview:"Live-Vorschau & Embed-Code",previewp:"So sieht das interaktive Widget aus, wenn es bei dir eingebettet ist:",code:"Dein HTML-Code zum Kopieren:",privacy:"Datenschutzrichtlinie",terms:"Nutzungsbedingungen",rights:"© 2026 Fasqoo. Alle Rechte vorbehalten."},
+ fr:{home:"Accueil",speed:"Test de vitesse",faq:"FAQ",widget:"Widget",about:"À propos",label:"Développeurs & webmasters",title:"Le widget officiel Fasqoo Speed Test",intro:"Offrez une vraie valeur ajoutée à vos visiteurs : intégrez un test de vitesse Internet Fasqoo rapide et précis directement sur votre plateforme.",why:"Pourquoi utiliser le widget Fasqoo Speed Test sur votre site ?",p1:"Fasqoo est un site moderne et performant conçu pour mesurer le téléchargement, l’envoi et le ping avec précision et fiabilité. Intégrez cet outil à votre blog, site d’actualités ou portail pour offrir une fonction utile à vos visiteurs.",p2:"Le widget fonctionne de manière autonome, se charge rapidement et n’alourdit pas votre page. Vos visiteurs restent sur votre site sans ouvrir un service externe.",steps:"Guide détaillé : intégrer en 3 étapes",s1:"Copier le code",s1p:"Cliquez dans le champ HTML ci-dessous. Le code complet est sélectionné automatiquement pour être copié facilement.",s2:"Ajouter au CMS",s2p:"Ouvrez la gestion de votre site et ajoutez le code à l’endroit souhaité via un module HTML ou JavaScript.",s3:"Tester en direct",s3p:"Enregistrez la page. Le widget se connecte aux serveurs Fasqoo et fournit un test de vitesse complet.",preview:"Aperçu en direct & code d’intégration",previewp:"Voici à quoi ressemble le widget interactif intégré à votre site :",code:"Votre code HTML à copier :",privacy:"Politique de confidentialité",terms:"Conditions d’utilisation",rights:"© 2026 Fasqoo. Tous droits réservés."},
+ en:{home:"Home",speed:"Speed Test",faq:"FAQ",widget:"Widget",about:"About",label:"Developers & Webmasters",title:"The Official Fasqoo Speed Test Widget",intro:"Give your website visitors real value: integrate a highly accurate, ultra-fast Fasqoo internet speed test directly into your own platform.",why:"Why add the Fasqoo Speed Test Widget to your website?",p1:"Fasqoo is a modern, powerful internet speed test designed to measure download, upload and ping accurately and reliably. Embed it on your blog, news site or web portal to add an interactive and useful service.",p2:"The widget works independently, loads quickly and does not burden your page. Visitors can stay on your site without opening an external service.",steps:"Detailed guide: Add it in 3 steps",s1:"Copy the code",s1p:"Click the HTML code field below. The complete embed code is automatically selected for easy copying.",s2:"Add it to your CMS",s2p:"Open your website management system and add the code where you want it using an HTML or JavaScript module.",s3:"Go live",s3p:"Save the page. The widget connects securely to Fasqoo servers and provides a fully functional speed test.",preview:"Live Preview & Embed Code",previewp:"This is what the interactive widget looks like when embedded on your site:",code:"Your HTML code to copy:",privacy:"Privacy Policy",terms:"Terms of Use",rights:"© 2026 Fasqoo. All rights reserved."},
+ it:{home:"Home",speed:"Test velocità",faq:"FAQ",widget:"Widget",about:"Chi siamo",label:"Sviluppatori e webmaster",title:"Il widget ufficiale Fasqoo Speed Test",intro:"Offri ai visitatori un vero valore: integra il test di velocità Internet Fasqoo, rapido e preciso, direttamente sulla tua piattaforma.",why:"Perché aggiungere il widget Fasqoo Speed Test al tuo sito?",p1:"Fasqoo è un sito moderno e potente per testare la velocità Internet, progettato per misurare download, upload e ping in modo preciso e affidabile.",p2:"Il widget funziona in modo autonomo, si carica rapidamente e non appesantisce la pagina. I visitatori possono restare sul tuo sito.",steps:"Guida dettagliata: inseriscilo in 3 passaggi",s1:"Copia il codice",s1p:"Fai clic nel campo HTML qui sotto. L’intero codice viene selezionato automaticamente.",s2:"Inseriscilo nel CMS",s2p:"Apri la gestione del sito e inserisci il codice nel punto desiderato tramite HTML o JavaScript.",s3:"Vai online",s3p:"Salva la pagina. Il widget si collega ai server Fasqoo e offre un test completo.",preview:"Anteprima live e codice embed",previewp:"Ecco come appare il widget interattivo integrato nel sito:",code:"Il tuo codice HTML da copiare:",privacy:"Informativa sulla privacy",terms:"Condizioni d’uso",rights:"© 2026 Fasqoo. Tutti i diritti riservati."},
+ pt:{home:"Início",speed:"Teste de velocidade",faq:"FAQ",widget:"Widget",about:"Sobre",label:"Desenvolvedores e webmasters",title:"O widget oficial Fasqoo Speed Test",intro:"Ofereça valor real aos visitantes: integre um teste de velocidade da Internet Fasqoo, rápido e preciso, diretamente na sua plataforma.",why:"Por que adicionar o widget Fasqoo ao seu site?",p1:"A Fasqoo é um site moderno de teste de velocidade criado para medir download, upload e ping com precisão e confiabilidade.",p2:"O widget funciona de forma independente, carrega rapidamente e não prejudica o carregamento da página.",steps:"Guia detalhado: adicionar em 3 passos",s1:"Copiar o código",s1p:"Clique no campo HTML abaixo. Todo o código é selecionado automaticamente.",s2:"Adicionar ao CMS",s2p:"Abra a administração do site e adicione o código no local desejado usando HTML ou JavaScript.",s3:"Publicar",s3p:"Salve a página. O widget conecta-se aos servidores Fasqoo e oferece um teste completo.",preview:"Pré-visualização ao vivo e código embed",previewp:"Veja como fica o widget interativo incorporado ao seu site:",code:"Seu código HTML para copiar:",privacy:"Política de privacidade",terms:"Termos de uso",rights:"© 2026 Fasqoo. Todos os direitos reservados."},
+ es:{home:"Inicio",speed:"Test de velocidad",faq:"FAQ",widget:"Widget",about:"Acerca de",label:"Desarrolladores y webmasters",title:"El widget oficial Fasqoo Speed Test",intro:"Ofrece valor real a tus visitantes: integra un test de velocidad de Internet Fasqoo rápido y preciso directamente en tu plataforma.",why:"¿Por qué añadir el widget Fasqoo a tu sitio?",p1:"Fasqoo es un sitio moderno de prueba de velocidad diseñado para medir descarga, subida y ping con precisión y fiabilidad.",p2:"El widget funciona de forma independiente, se carga rápidamente y no afecta al tiempo de carga de tu página.",steps:"Guía detallada: añadirlo en 3 pasos",s1:"Copiar el código",s1p:"Haz clic en el campo HTML. Todo el código se selecciona automáticamente.",s2:"Añadir al CMS",s2p:"Abre la administración de tu sitio y añade el código donde quieras mediante HTML o JavaScript.",s3:"Publicar",s3p:"Guarda la página. El widget se conecta a los servidores Fasqoo y ofrece un test completo.",preview:"Vista previa en vivo y código embed",previewp:"Así se ve el widget interactivo integrado en tu sitio:",code:"Tu código HTML para copiar:",privacy:"Política de privacidad",terms:"Términos de uso",rights:"© 2026 Fasqoo. Todos los derechos reservados."},
+ tr:{home:"Ana Sayfa",speed:"Hız Testi",faq:"SSS",widget:"Widget",about:"Hakkımızda",label:"Geliştiriciler ve web yöneticileri",title:"Resmî Fasqoo Speed Test Widget'ı",intro:"Web sitenizin ziyaretçilerine gerçek değer sunun: hızlı ve doğru Fasqoo internet hız testini doğrudan platformunuza ekleyin.",why:"Fasqoo widget'ını neden sitenize eklemelisiniz?",p1:"Fasqoo, indirme, yükleme ve ping değerlerini doğru ve güvenilir şekilde ölçmek için tasarlanmış modern bir internet hız testidir.",p2:"Widget bağımsız çalışır, hızlı yüklenir ve sayfanızı yavaşlatmaz.",steps:"Detaylı rehber: 3 adımda ekleyin",s1:"Kodu kopyalayın",s1p:"Aşağıdaki HTML alanına tıklayın. Kodun tamamı otomatik seçilir.",s2:"CMS'ye ekleyin",s2p:"Site yönetiminizi açın ve kodu HTML veya JavaScript modülüyle istediğiniz yere ekleyin.",s3:"Yayınlayın",s3p:"Sayfayı kaydedin. Widget Fasqoo sunucularına bağlanır ve tam işlevli hız testi sunar.",preview:"Canlı Önizleme ve Embed Kodu",previewp:"Widget sitenize eklendiğinde böyle görünür:",code:"Kopyalanacak HTML kodunuz:",privacy:"Gizlilik Politikası",terms:"Kullanım Koşulları",rights:"© 2026 Fasqoo. Tüm hakları saklıdır."},
+ sq:{home:"Ballina",speed:"Testi i shpejtësisë",faq:"FAQ",widget:"Widget",about:"Rreth nesh",label:"Zhvillues & webmastera",title:"Widget-i zyrtar Fasqoo Speed Test",intro:"Ofroni vlerë të vërtetë për vizitorët: integroni testin e shpejtësisë së internetit Fasqoo, të shpejtë dhe të saktë, direkt në platformën tuaj.",why:"Pse ta shtoni Fasqoo Speed Test Widget në faqen tuaj?",p1:"Fasqoo është një faqe moderne dhe e fuqishme për testimin e shpejtësisë së internetit, e krijuar për të matur download, upload dhe ping me saktësi dhe besueshmëri.",p2:"Widget-i funksionon në mënyrë të pavarur, ngarkohet shpejt dhe nuk rëndon faqen tuaj.",steps:"Udhëzues i detajuar: Shtoje në 3 hapa",s1:"Kopjo kodin",s1p:"Kliko në fushën e kodit HTML. I gjithë kodi zgjidhet automatikisht për kopjim.",s2:"Shtoje në CMS",s2p:"Hap menaxhimin e faqes dhe shto kodin aty ku dëshiron përmes HTML ose JavaScript.",s3:"Publikoje",s3p:"Ruaje faqen. Widget-i lidhet me serverët Fasqoo dhe ofron test të plotë të shpejtësisë.",preview:"Parapamje live & kodi për integrim",previewp:"Kështu duket widget-i interaktiv kur integrohet në faqen tuaj:",code:"Kodi juaj HTML për kopjim:",privacy:"Politika e privatësisë",terms:"Kushtet e përdorimit",rights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara."},
+ ar:{home:"الرئيسية",speed:"اختبار السرعة",faq:"الأسئلة الشائعة",widget:"الأداة",about:"من نحن",label:"للمطورين ومديري المواقع",title:"أداة Fasqoo الرسمية لاختبار سرعة الإنترنت",intro:"امنح زوار موقعك قيمة حقيقية: أضف اختبار سرعة الإنترنت من Fasqoo، السريع والدقيق، مباشرة إلى منصتك.",why:"لماذا تضيف أداة Fasqoo إلى موقعك؟",p1:"Fasqoo هو موقع حديث لاختبار سرعة الإنترنت لقياس التنزيل والرفع وPing بدقة وموثوقية.",p2:"تعمل الأداة بشكل مستقل ويتم تحميلها بسرعة ولا تثقل صفحتك.",steps:"دليل مفصل: الإضافة في 3 خطوات",s1:"نسخ الكود",s1p:"انقر في حقل HTML أدناه. سيتم تحديد الكود بالكامل تلقائياً.",s2:"إضافته إلى CMS",s2p:"افتح إدارة موقعك وأضف الكود في المكان المطلوب باستخدام HTML أو JavaScript.",s3:"النشر",s3p:"احفظ الصفحة. تتصل الأداة بخوادم Fasqoo وتوفر اختبار سرعة كاملاً.",preview:"المعاينة المباشرة وكود التضمين",previewp:"هكذا تبدو الأداة التفاعلية عند تضمينها في موقعك:",code:"كود HTML الخاص بك للنسخ:",privacy:"سياسة الخصوصية",terms:"شروط الاستخدام",rights:"© 2026 Fasqoo. جميع الحقوق محفوظة."},
+ zh:{home:"首页",speed:"测速",faq:"常见问题",widget:"小工具",about:"关于我们",label:"开发者与网站管理员",title:"官方 Fasqoo 网速测试小工具",intro:"为网站访客提供真正有用的服务：将快速、精准的 Fasqoo 网络测速直接集成到你自己的平台。",why:"为什么要在网站中添加 Fasqoo 网速测试小工具？",p1:"Fasqoo 是一个现代、高性能的网络测速网站，用于准确可靠地测量下载、上传和 Ping。",p2:"小工具独立运行、加载迅速，不会增加你页面的加载负担。",steps:"详细指南：3 步完成添加",s1:"复制代码",s1p:"点击下面的 HTML 代码框。完整代码会自动选中，方便复制。",s2:"添加到 CMS",s2p:"打开网站管理系统，通过 HTML 或 JavaScript 模块将代码放到需要的位置。",s3:"上线使用",s3p:"保存页面。小工具会安全连接 Fasqoo 服务器并提供完整测速。",preview:"实时预览与嵌入代码",previewp:"将互动小工具嵌入网站后，它会显示如下：",code:"可复制的 HTML 代码：",privacy:"隐私政策",terms:"使用条款",rights:"© 2026 Fasqoo。保留所有权利。"}
 };
-
-function applyTranslations(lang){
-  const t = translations[lang] || translations.de;
-  document.documentElement.lang = lang;
-  if(lang === "ar") document.documentElement.dir = "rtl";
-  else document.documentElement.dir = "ltr";
-
-  const map = {
-    navHome: document.querySelector('.main-menu a:nth-child(1)'),
-    navSpeed: document.querySelector('.main-menu a:nth-child(2)'),
-    navFaq: document.querySelector('.main-menu a:nth-child(3)'),
-    navWidget: document.querySelector('.main-menu a:nth-child(4)'),
-    navAbout: document.querySelector('.main-menu a:nth-child(5)'),
-    heroLabel: document.querySelector('.hero-label'),
-    heroTitle: document.querySelector('.hero h1'),
-    heroText: document.querySelector('.hero p'),
-    why: document.querySelector('.widget-section:nth-of-type(1) h2'),
-    steps: document.querySelector('.widget-section:nth-of-type(1) h2:nth-of-type(2)'),
-    preview: document.querySelector('.widget-section:nth-of-type(2) h2'),
-    previewText: document.querySelector('.widget-section:nth-of-type(2) > p'),
-    codeLabel: document.querySelector('label[for="widgetCode"]'),
-    privacy: document.querySelector('.footer-links a:nth-child(1)'),
-    terms: document.querySelector('.footer-links a:nth-child(2)')
-  };
-  Object.keys(map).forEach(k => { if(map[k] && t[k]) map[k].textContent = t[k]; });
-
-  const whyPs = document.querySelectorAll('.widget-section:nth-of-type(1) > p');
-  if(whyPs[0]) whyPs[0].textContent = t.why1;
-  if(whyPs[1]) whyPs[1].textContent = t.why2;
-
-  const cards = document.querySelectorAll('.step-card');
-  if(cards[0]) { cards[0].querySelector('h3').textContent=t.step1; cards[0].querySelector('p').textContent=t.step1p; }
-  if(cards[1]) { cards[1].querySelector('h3').textContent=t.step2; cards[1].querySelector('p').textContent=t.step2p; }
-  if(cards[2]) { cards[2].querySelector('h3').textContent=t.step3; cards[2].querySelector('p').textContent=t.step3p; }
-
-  const rights = document.querySelector('.footer-copy span');
-  if(rights) rights.textContent = t.rights;
-  const iframe = document.querySelector('iframe');
-  if(iframe) iframe.title = t.title;
-
-  document.title = lang === "de" ? "Fasqoo Speed Test Widget – Internet Speedtest für deine Website" : "Fasqoo Speed Test Widget";
-  localStorage.setItem("fasqoo_lang", lang);
+function translatePage(lang){
+ const t=T[lang]||T.de; const q=s=>document.querySelector(s), qa=s=>document.querySelectorAll(s);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+ const nav=qa('.main-menu a'); if(nav.length>=5){[t.home,t.speed,t.faq,t.widget,t.about].forEach((x,i)=>nav[i].textContent=x)}
+ const set=(s,v)=>{const e=q(s);if(e)e.textContent=v};
+ set('.hero-label',t.label);set('.hero h1',t.title);set('.hero p',t.intro);
+ const secs=qa('.widget-section'); if(secs[0]){setIn=secs[0].querySelectorAll('h2'); if(setIn[0])setIn[0].textContent=t.why; const ps=secs[0].querySelectorAll(':scope > p'); if(ps[0])ps[0].textContent=t.p1;if(ps[1])ps[1].textContent=t.p2;if(setIn[1])setIn[1].textContent=t.steps;}
+ const cards=qa('.step-card'); [[t.s1,t.s1p],[t.s2,t.s2p],[t.s3,t.s3p]].forEach((a,i)=>{if(cards[i]){cards[i].querySelector('h3').textContent=a[0];cards[i].querySelector('p').textContent=a[1]}});
+ if(secs[1]){const h=secs[1].querySelector('h2');if(h)h.textContent=t.preview;const p=secs[1].querySelector(':scope > p');if(p)p.textContent=t.previewp;const l=secs[1].querySelector('label');if(l)l.textContent=t.code}
+ set('.footer-links a:nth-child(1)',t.privacy);set('.footer-links a:nth-child(2)',t.terms);set('.footer-copy span',t.rights);
+ localStorage.setItem('fasqoo_widget_lang',lang);
 }
+if(langSelect){langSelect.addEventListener('change',()=>translatePage(langSelect.value));}
+const initialLang=localStorage.getItem('fasqoo_widget_lang')||'de'; if(langSelect){langSelect.value=T[initialLang]?initialLang:'de';} translatePage(langSelect?langSelect.value:'de');
 
 // Dark Mode Toggle
 const themeBtn = document.getElementById("themeBtn");
@@ -750,12 +595,6 @@ if(localStorage.getItem("fasqoo_dark") === "true"){
   document.body.classList.add("dark");
 }
 updateTheme();
-
-const savedLang = localStorage.getItem("fasqoo_lang") || "de";
-if(langSelect){
-  langSelect.value = translations[savedLang] ? savedLang : "de";
-}
-applyTranslations(langSelect ? langSelect.value : "de");
 </script>
 
 </body>
