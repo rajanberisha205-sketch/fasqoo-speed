@@ -1,224 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Do Not Sell or Share My Personal Information – Fasqoo</title>
-
-    <meta name="description" content="Fasqoo Do Not Sell or Share My Personal Information – Learn how to exercise applicable privacy choices and opt out of certain data sharing.">
-
-    <style>
-:root {
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-color: #f8fafc; 
-  --text-muted: #94a3b8;
-  --accent-color: #38bdf8;
-  --border-color: #334155;
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://www.fasqoo.com/do-not-sell.html" rel="canonical"/>
+<title>Do Not Sell or Share My Personal Information – Fasqoo</title><meta content="Fasqoo Do Not Sell or Share My Personal Information – Learn how to exercise applicable privacy choices and opt out of certain data sharing." name="description"/><style>
+:root{
+  --bg:#070b12;--panel:#0d1420;--panel2:#111b2a;--text:#f5f7fb;
+  --muted:#a9b4c5;--line:#243247;--accent:#ff5a1f;--accent2:#ff7a45;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+background:radial-gradient(circle at 50% -10%,rgba(255,90,31,.10),transparent 35%),var(--bg);
+color:var(--text);line-height:1.7}
+a{color:#ff8a61;text-decoration:none}a:hover{text-decoration:underline}
+.site-header{position:sticky;top:0;z-index:1000;background:rgba(7,11,18,.88);
+backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{max-width:1240px;margin:auto;padding:14px 22px;display:flex;
+align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.18rem;color:#fff}
+.brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:900;
+box-shadow:0 8px 25px rgba(255,90,31,.22)}
+.main-nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.main-nav a{color:#dce4ef;font-size:.94rem}
+.lang-select{background:#101a28;color:#fff;border:1px solid #2b394d;border-radius:9px;
+padding:8px 10px;outline:none}
+.hero{max-width:1100px;margin:0 auto;padding:72px 22px 34px;text-align:center}
+.eyebrow{display:inline-flex;padding:6px 11px;border:1px solid rgba(255,90,31,.3);
+border-radius:999px;color:#ff9b78;background:rgba(255,90,31,.08);font-size:.78rem;font-weight:700}
+.hero h1{font-size:clamp(2rem,5vw,3.45rem);line-height:1.08;margin:18px auto 14px;
+max-width:900px;letter-spacing:-.035em}
+.hero p{max-width:760px;margin:auto;color:var(--muted);font-size:1.04rem}
+.layout{max-width:1180px;margin:0 auto;padding:18px 22px 70px;display:grid;
+grid-template-columns:260px minmax(0,1fr);gap:28px}
+.toc{position:sticky;top:88px;align-self:start;background:rgba(13,20,32,.82);
+border:1px solid var(--line);border-radius:16px;padding:18px}
+.toc-title{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#7f8da2;font-weight:800;margin-bottom:12px}
+.toc a{display:block;color:#c9d3e2;padding:7px 8px;border-radius:8px;font-size:.9rem}
+.toc a:hover{background:#162235;text-decoration:none;color:#fff}
+.content-box{background:linear-gradient(180deg,rgba(17,27,42,.96),rgba(13,20,32,.96));
+border:1px solid var(--line);border-radius:18px;padding:34px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.updated{color:#8492a6;font-size:.9rem;margin:0 0 28px}
+.content-box h2{font-size:1.25rem;color:#fff;margin:34px 0 10px;padding-top:8px;scroll-margin-top:100px}
+.content-box p,.content-box li{color:var(--muted)}
+.content-box ul{padding-left:24px}
+.contact{margin-top:20px;padding:18px;border-radius:13px;background:#0a111c;border:1px solid var(--line)}
+.site-footer{border-top:1px solid var(--line);background:#050910}
+.footer-inner{max-width:1240px;margin:auto;padding:26px 22px;display:flex;justify-content:space-between;
+gap:18px;align-items:center;flex-wrap:wrap}
+.footer-copy{color:#8492a6;font-size:.86rem}
+.footer-nav{display:flex;gap:15px;flex-wrap:wrap}.footer-nav a{color:#94a1b3;font-size:.86rem}
+@media(max-width:850px){
+ .header-inner{align-items:flex-start;flex-direction:column}
+ .main-nav{gap:10px}
+ .layout{grid-template-columns:1fr}
+ .toc{position:static}
+ .content-box{padding:24px}
 }
-a { color: var(--accent-color); text-decoration: none; }
-a:hover { text-decoration: underline; }
-header {
-  border-bottom: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  background-color: rgba(15, 23, 42, .95);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
+@media(max-width:560px){
+ .hero{padding-top:48px}.layout{padding-left:14px;padding-right:14px}
+ .content-box{padding:20px;border-radius:14px}.hero h1{font-size:2rem}
 }
-header > div {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo { display:flex; align-items:center; gap:.5rem; font-weight:bold; font-size:1.25rem; }
-nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
-nav a { color:var(--text-color); }
-select {
-  background:var(--card-bg);
-  color:var(--text-color);
-  border:1px solid var(--border-color);
-  padding:.4rem .8rem;
-  border-radius:6px;
-  cursor:pointer;
-}
-main { max-width:900px; margin:2rem auto; padding:0 1.5rem; }
-.content-box {
-  background-color:var(--card-bg);
-  border:1px solid var(--border-color);
-  border-radius:12px;
-  padding:2.5rem;
-  box-shadow:0 10px 25px -5px rgba(0,0,0,.3);
-}
-h1 { margin-top:0; color:#fff; border-bottom:1px solid var(--border-color); padding-bottom:.75rem; }
-h2 { color:var(--accent-color); margin-top:1.8rem; font-size:1.25rem; }
-p, li { color:var(--text-muted); }
-li { margin-bottom:.5rem; }
-.contact {
-  background: rgba(15,23,42,.45);
-  border:1px solid var(--border-color);
-  border-radius:10px;
-  padding:1rem 1.25rem;
-  margin-top: 1.5rem;
-}
-footer {
-  border-top:1px solid var(--border-color);
-  margin-top:4rem;
-  padding:2rem;
-  background-color:#0b1120;
-}
-footer > div {
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-}
-.footer-copy { color:var(--text-muted); font-size:.875rem; }
-footer nav { display:flex; gap:1.2rem; }
-footer nav a { color:var(--text-muted); font-size:.9rem; }
-@media(max-width:800px) {
-  header > div { flex-direction:column; gap:1rem; align-items:flex-start; }
-  nav { gap:.8rem; }
-}
-@media(max-width:600px) {
-  header { padding:1rem; }
-  main { padding:0 1rem; }
-  .content-box { padding:1.5rem; }
-}
-</style>
-</head>
-
-<body>
-<header>
-  <div>
-    <div class="logo"><div>⌁</div><div>Fasqoo</div></div>
-    <nav aria-label="Main navigation">
-      <a href="/" data-i18n="home">Home</a>
-      <a href="/faq.html" data-i18n="faq">FAQ</a>
-      <a href="/network-status.html" data-i18n="network">Network Status</a>
-      <a href="/subnet-calculator.html" data-i18n="diagnostics">IT Diagnostics</a>
-      <a href="/about.html" data-i18n="about">About Us</a>
-      <select id="lang-select" aria-label="Language">
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="nl">Nederlands</option>
-        <option value="tr">Türkçe</option>
-        <option value="sq">Shqip</option>
-        <option value="ar">العربية</option>
-      </select>
-    </nav>
-  </div>
+</style></head><body>
+<header class="site-header">
+<div class="header-inner">
+<a aria-label="Fasqoo Home" class="brand" href="/">
+<span class="brand-mark">F</span><span>Fasqoo</span>
+</a>
+<nav aria-label="Main navigation" class="main-nav">
+<a data-i18n="home" href="/">Home</a>
+<a data-i18n="faq" href="/faq.html">FAQ</a>
+<a data-i18n="network" href="/network-status.html">Network Status</a>
+<a data-i18n="diagnostics" href="/subnet-calculator.html">IT Diagnostics</a>
+<a data-i18n="about" href="/about.html">About Us</a>
+<select aria-label="Language" class="lang-select" id="lang-select"><option value="en">English</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="sq">Shqip</option><option value="ar">العربية</option></select>
+</nav>
+</div>
 </header>
-
-<main>
-  <div class="content-box">
-    <h1 data-i18n="h1">Do Not Sell or Share My Personal Information – Fasqoo</h1>
-    <p><strong data-i18n="updatedLabel">Last updated:</strong> September 3, 2026</p>
-
-    <p data-i18n="intro1">At Fasqoo, we respect your privacy and your right to control how your personal information is used.</p>
-    <p data-i18n="intro2">This page explains how you may request that Fasqoo does not sell or share your personal information where applicable under relevant privacy laws.</p>
-
-    <h2 data-i18n="sec1Title">1. Your Privacy Choices</h2>
-    <p data-i18n="sec1Text1">Depending on your location and applicable privacy laws, you may have the right to request that your personal information is not sold or shared for purposes such as targeted advertising.</p>
-    <p data-i18n="sec1Text2">You may also have the right to limit certain types of data processing or withdraw consent for non-essential cookies and similar technologies.</p>
-
-    <h2 data-i18n="sec2Title">2. Information That May Be Processed</h2>
-    <p data-i18n="sec2Text">When you use the Fasqoo website or Internet Speed Test, certain technical information may be processed, including:</p>
-    <ul>
-      <li data-i18n="p1">IP address</li>
-      <li data-i18n="p2">Approximate location</li>
-      <li data-i18n="p3">Internet Service Provider (ISP)</li>
-      <li data-i18n="p4">Browser and device information</li>
-      <li data-i18n="p5">Network information</li>
-      <li data-i18n="p6">Website usage information</li>
-      <li data-i18n="p7">Speed test results</li>
-      <li data-i18n="p8">Cookies or similar technologies, where applicable</li>
-    </ul>
-    <p data-i18n="sec2Footer">The specific information processed depends on the features and services used on the website.</p>
-
-    <h2 data-i18n="sec3Title">3. Advertising and Third-Party Services</h2>
-    <p data-i18n="sec3Text1">Fasqoo may use third-party services for advertising, analytics, hosting, technical functionality, or other website services.</p>
-    <p data-i18n="sec3Text2">Some third-party services may process information through cookies or similar technologies.</p>
-    <p data-i18n="sec3Text3">Where required by applicable law, Fasqoo will provide appropriate choices or obtain consent before using non-essential cookies or similar technologies.</p>
-
-    <h2 data-i18n="sec4Title">4. How to Submit a Request</h2>
-    <p data-i18n="sec4Text1">If you wish to request that Fasqoo does not sell or share your personal information, you may contact us using the contact information provided on the Fasqoo website.</p>
-    <p data-i18n="sec4Text2">When submitting a request, please include:</p>
-    <ul>
-      <li data-i18n="r1">The subject: <strong>Do Not Sell or Share My Personal Information Request</strong></li>
-      <li data-i18n="r2">The email address or other information necessary to identify and process your request</li>
-      <li data-i18n="r3">A clear description of your request</li>
-    </ul>
-    <p data-i18n="sec4Footer">We may request additional information when reasonably necessary to verify and process your request.</p>
-
-    <h2 data-i18n="sec5Title">5. Opting Out of Cookies and Advertising</h2>
-    <p data-i18n="sec5Text">You may also be able to control certain types of tracking by:</p>
-    <ul>
-      <li data-i18n="o1">Adjusting your browser privacy settings</li>
-      <li data-i18n="o2">Blocking or deleting cookies</li>
-      <li data-i18n="o3">Using available cookie preference tools on the Fasqoo website, if provided</li>
-      <li data-i18n="o4">Adjusting advertising preferences offered by relevant third-party providers</li>
-    </ul>
-    <p data-i18n="sec5Footer">Please note that disabling certain cookies may affect some website functionality.</p>
-
-    <h2 data-i18n="sec6Title">6. Authorized Agents</h2>
-    <p data-i18n="sec6Text1">Where permitted by applicable law, you may use an authorized agent to submit a privacy request on your behalf.</p>
-    <p data-i18n="sec6Text2">We may request reasonable information to verify the identity and authority of the authorized agent before processing the request.</p>
-
-    <h2 data-i18n="sec7Title">7. Non-Discrimination</h2>
-    <p data-i18n="sec7Text1">Fasqoo will not unlawfully discriminate against users for exercising applicable privacy rights.</p>
-    <p data-i18n="sec7Text2">However, some features or services may require certain technical information in order to function correctly.</p>
-
-    <h2 data-i18n="sec8Title">8. Changes to This Page</h2>
-    <p data-i18n="sec8Text1">Fasqoo may update this page from time to time to reflect changes in our services, privacy practices, or applicable legal requirements.</p>
-    <p data-i18n="sec8Text2">The latest version will be published on this page with an updated revision date.</p>
-
-    <h2 data-i18n="sec9Title">9. Contact</h2>
-    <p data-i18n="sec9Text">For questions or requests regarding your personal information, please contact:</p>
-
-    <div class="contact">
-      <p><strong>Fasqoo™</strong></p>
-      <p><strong>Professional Internet Speed Test</strong></p>
-      <p><strong>Email:</strong> <a href="mailto:mcomfortstore14@gmail.com">mcomfortstore14@gmail.com</a></p>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div>
-    <div class="footer-copy">
-      <div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
-      <div data-i18n="trademarks">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/accessibility.html" data-i18n="accessibility">Accessibility</a>
-      <a href="/privacy-policy.html" data-i18n="privacy">Privacy Policy</a>
-      <a href="/terms.html" data-i18n="terms">Terms of Use</a>
-      <a href="/do-not-sell.html" data-i18n="dns">Do Not Sell My Info</a>
-      <a href="/impressum.html" data-i18n="imprint">Imprint</a>
-    </nav>
-  </div>
+<section class="hero">
+<span class="eyebrow">FASQOO PRIVACY CHOICE</span>
+<h1 data-i18n="h1">Do Not Sell or Share My Personal Information – Fasqoo</h1>
+<p data-i18n="intro1">At Fasqoo, we respect your privacy and your right to control how your personal information is used.</p>
+</section>
+<div class="layout"><aside class="toc"><div class="toc-title">On this page</div><div class="toc-links"><a data-i18n="sec1Title" href="#sec-sec1Title">1. Your Privacy Choices</a><a data-i18n="sec2Title" href="#sec-sec2Title">2. Information That May Be Processed</a><a data-i18n="sec3Title" href="#sec-sec3Title">3. Advertising and Third-Party Services</a><a data-i18n="sec4Title" href="#sec-sec4Title">4. How to Submit a Request</a><a data-i18n="sec5Title" href="#sec-sec5Title">5. Opting Out of Cookies and Advertising</a><a data-i18n="sec6Title" href="#sec-sec6Title">6. Authorized Agents</a><a data-i18n="sec7Title" href="#sec-sec7Title">7. Non-Discrimination</a><a data-i18n="sec8Title" href="#sec-sec8Title">8. Changes to This Page</a><a data-i18n="sec9Title" href="#sec-sec9Title">9. Contact</a></div></aside><article class="content-box">
+<h1 data-i18n="h1">Do Not Sell or Share My Personal Information – Fasqoo</h1>
+<p><strong data-i18n="updatedLabel">Last updated:</strong> September 3, 2026</p>
+<p data-i18n="intro1">At Fasqoo, we respect your privacy and your right to control how your personal information is used.</p>
+<p data-i18n="intro2">This page explains how you may request that Fasqoo does not sell or share your personal information where applicable under relevant privacy laws.</p>
+<h2 data-i18n="sec1Title" id="sec-sec1Title">1. Your Privacy Choices</h2>
+<p data-i18n="sec1Text1">Depending on your location and applicable privacy laws, you may have the right to request that your personal information is not sold or shared for purposes such as targeted advertising.</p>
+<p data-i18n="sec1Text2">You may also have the right to limit certain types of data processing or withdraw consent for non-essential cookies and similar technologies.</p>
+<h2 data-i18n="sec2Title" id="sec-sec2Title">2. Information That May Be Processed</h2>
+<p data-i18n="sec2Text">When you use the Fasqoo website or Internet Speed Test, certain technical information may be processed, including:</p>
+<ul>
+<li data-i18n="p1">IP address</li>
+<li data-i18n="p2">Approximate location</li>
+<li data-i18n="p3">Internet Service Provider (ISP)</li>
+<li data-i18n="p4">Browser and device information</li>
+<li data-i18n="p5">Network information</li>
+<li data-i18n="p6">Website usage information</li>
+<li data-i18n="p7">Speed test results</li>
+<li data-i18n="p8">Cookies or similar technologies, where applicable</li>
+</ul>
+<p data-i18n="sec2Footer">The specific information processed depends on the features and services used on the website.</p>
+<h2 data-i18n="sec3Title" id="sec-sec3Title">3. Advertising and Third-Party Services</h2>
+<p data-i18n="sec3Text1">Fasqoo may use third-party services for advertising, analytics, hosting, technical functionality, or other website services.</p>
+<p data-i18n="sec3Text2">Some third-party services may process information through cookies or similar technologies.</p>
+<p data-i18n="sec3Text3">Where required by applicable law, Fasqoo will provide appropriate choices or obtain consent before using non-essential cookies or similar technologies.</p>
+<h2 data-i18n="sec4Title" id="sec-sec4Title">4. How to Submit a Request</h2>
+<p data-i18n="sec4Text1">If you wish to request that Fasqoo does not sell or share your personal information, you may contact us using the contact information provided on the Fasqoo website.</p>
+<p data-i18n="sec4Text2">When submitting a request, please include:</p>
+<ul>
+<li data-i18n="r1">The subject: <strong>Do Not Sell or Share My Personal Information Request</strong></li>
+<li data-i18n="r2">The email address or other information necessary to identify and process your request</li>
+<li data-i18n="r3">A clear description of your request</li>
+</ul>
+<p data-i18n="sec4Footer">We may request additional information when reasonably necessary to verify and process your request.</p>
+<h2 data-i18n="sec5Title" id="sec-sec5Title">5. Opting Out of Cookies and Advertising</h2>
+<p data-i18n="sec5Text">You may also be able to control certain types of tracking by:</p>
+<ul>
+<li data-i18n="o1">Adjusting your browser privacy settings</li>
+<li data-i18n="o2">Blocking or deleting cookies</li>
+<li data-i18n="o3">Using available cookie preference tools on the Fasqoo website, if provided</li>
+<li data-i18n="o4">Adjusting advertising preferences offered by relevant third-party providers</li>
+</ul>
+<p data-i18n="sec5Footer">Please note that disabling certain cookies may affect some website functionality.</p>
+<h2 data-i18n="sec6Title" id="sec-sec6Title">6. Authorized Agents</h2>
+<p data-i18n="sec6Text1">Where permitted by applicable law, you may use an authorized agent to submit a privacy request on your behalf.</p>
+<p data-i18n="sec6Text2">We may request reasonable information to verify the identity and authority of the authorized agent before processing the request.</p>
+<h2 data-i18n="sec7Title" id="sec-sec7Title">7. Non-Discrimination</h2>
+<p data-i18n="sec7Text1">Fasqoo will not unlawfully discriminate against users for exercising applicable privacy rights.</p>
+<p data-i18n="sec7Text2">However, some features or services may require certain technical information in order to function correctly.</p>
+<h2 data-i18n="sec8Title" id="sec-sec8Title">8. Changes to This Page</h2>
+<p data-i18n="sec8Text1">Fasqoo may update this page from time to time to reflect changes in our services, privacy practices, or applicable legal requirements.</p>
+<p data-i18n="sec8Text2">The latest version will be published on this page with an updated revision date.</p>
+<h2 data-i18n="sec9Title" id="sec-sec9Title">9. Contact</h2>
+<p data-i18n="sec9Text">For questions or requests regarding your personal information, please contact:</p>
+<div class="contact">
+<p><strong>Fasqoo™</strong></p>
+<p><strong>Professional Internet Speed Test</strong></p>
+<p><strong>Email:</strong> <a href="mailto:mcomfortstore14@gmail.com">mcomfortstore14@gmail.com</a></p>
+</div>
+</article></div>
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-copy">
+<div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
+<div data-i18n="trademarks">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.</div>
+</div>
+<nav aria-label="Footer" class="footer-nav">
+<a data-i18n="accessibility" href="/accessibility.html">Accessibility</a>
+<a data-i18n="privacy" href="/privacy-policy.html">Privacy Policy</a>
+<a data-i18n="terms" href="/terms.html">Terms of Use</a>
+<a data-i18n="dns" href="/do-not-sell.html">Do Not Sell My Info</a>
+<a data-i18n="imprint" href="/impressum.html">Imprint</a>
+</nav>
+</div>
 </footer>
-
 <script>
 const T = {
 en:{
@@ -655,6 +594,4 @@ if (selector) {
 
 const savedLang = localStorage.getItem("fasqoo-language") || (navigator.language || "en").slice(0, 2).toLowerCase();
 applyLanguage(T[savedLang] ? savedLang : "en");
-</script>
-</body>
-</html>
+</script></body></html>
