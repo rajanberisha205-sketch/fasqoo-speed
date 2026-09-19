@@ -1,182 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Use – Fasqoo</title>
-    <style>
-        :root {
-            --bg-color: #030712;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --accent: #3b82f6;
-            --border: rgba(255, 255, 255, 0.08);
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-        }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-        .wrapper {
-            max-width: 680px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .back-nav {
-            margin-bottom: 30px;
-        }
-        .back-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s ease;
-        }
-        .back-nav a:hover {
-            color: var(--accent);
-        }
-        header {
-            margin-bottom: 36px;
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin: 0 0 12px 0;
-            color: #ffffff;
-        }
-        .last-updated {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            color: #ffffff;
-            margin-top: 40px;
-            margin-bottom: 14px;
-        }
-        p {
-            margin: 0 0 16px 0;
-            color: #d1d5db;
-            font-size: 1rem;
-        }
-        ul {
-            margin: 0 0 20px 0;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-            color: #d1d5db;
-            font-size: 1rem;
-        }
-        footer {
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Mobile Optimizations */
-        @media (max-width: 480px) {
-            .wrapper {
-                margin: 20px auto;
-                padding: 0 16px;
-            }
-            h1 {
-                font-size: 1.65rem;
-            }
-            h2 {
-                font-size: 1.15rem;
-                margin-top: 32px;
-            }
-            p, li {
-                font-size: 0.95rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Use – Fasqoo</title>
+<meta name="description" content="Professional Terms of Use for Fasqoo Internet Speed Test and network diagnostic services.">
+<link rel="canonical" href="https://www.fasqoo.com/terms.html">
+<style>
+:root{
+  --bg:#07090d;--panel:#0d1118;--panel2:#111722;--text:#f4f7fb;
+  --muted:#9aa6b5;--line:#202938;--accent:#ff5a1f;--accent2:#ff7a45;
+  --max:1180px;--radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 15% 0%,#171d27 0,#07090d 38%,#05070a 100%);
+color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.72}
+a{color:#ff9a73;text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(7,9,13,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)}
+.header-inner{max-width:var(--max);margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;letter-spacing:.2px}
+.brand-mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:900;box-shadow:0 8px 24px rgba(255,90,31,.25)}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav a{color:#c7d0dc;font-size:.92rem}
+nav a:hover{color:#fff;text-decoration:none}
+select{background:#111722;color:#e9eef5;border:1px solid #2a3443;border-radius:10px;padding:8px 10px}
+main{max-width:var(--max);margin:0 auto;padding:46px 22px 80px}
+.hero{padding:34px 0 30px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#ff9a73;font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.hero h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;margin:14px 0 16px;letter-spacing:-.04em}
+.hero p{max-width:850px;color:var(--muted);font-size:1.06rem;margin:0}
+.meta{margin-top:18px;color:#7f8b9b;font-size:.9rem}
+.layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:26px;align-items:start}
+.toc{position:sticky;top:90px;background:rgba(13,17,24,.78);border:1px solid var(--line);border-radius:16px;padding:18px}
+.toc strong{display:block;margin-bottom:10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:#dce3ec}
+.toc a{display:block;color:#9eabba;font-size:.88rem;padding:6px 0}
+.toc a:hover{color:#fff;text-decoration:none}
+.content{background:linear-gradient(180deg,rgba(17,23,34,.96),rgba(10,14,20,.96));border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,4vw,48px);box-shadow:0 22px 70px rgba(0,0,0,.24)}
+.notice{border:1px solid rgba(255,90,31,.3);background:rgba(255,90,31,.07);border-radius:14px;padding:16px 18px;margin:0 0 30px;color:#dce4ee}
+h2{font-size:1.35rem;line-height:1.3;margin:38px 0 12px;scroll-margin-top:100px}
+h3{font-size:1.05rem;margin:24px 0 8px}
+p{margin:10px 0 16px;color:#c8d1dc}
+ul{color:#c8d1dc;padding-left:23px}
+li{margin:7px 0}
+strong{color:#f4f7fb}
+.contact-card{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.contact-item{background:#0b1017;border:1px solid var(--line);border-radius:14px;padding:16px}
+.contact-item span{display:block;color:#7f8b9b;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.contact-item a{font-weight:700;word-break:break-word}
+footer{border-top:1px solid var(--line);background:#06080c}
+.footer-inner{max-width:var(--max);margin:auto;padding:28px 22px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-copy{color:#7f8b9b;font-size:.85rem}
+.footer-links{display:flex;gap:15px;flex-wrap:wrap}
+.footer-links a{color:#9eabba;font-size:.85rem}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .toc{position:relative;top:auto}
+  .contact-card{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .header-inner{align-items:flex-start}
+  nav{gap:10px}
+  nav a{font-size:.82rem}
+  main{padding:28px 14px 55px}
+  .hero{padding-top:18px}
+  .content{padding:22px}
+}
+</style>
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="back-nav">
-            <a href="/">&larr; Back to Speed Test</a>
-        </nav>
-        <main>
-            <header>
-                <h1>Terms of Use – Fasqoo</h1>
-                <div class="last-updated">Last updated: September 2026</div>
-            </header>
-            <p>Welcome to Fasqoo. By accessing or using the Fasqoo Internet Speed Test website, you agree to these Terms of Use. If you do not agree with these terms, please do not use the service.</p>
-            <h2>1. Use of the Service</h2>
-            <p>Fasqoo provides an Internet speed testing and network diagnostic service. The service may measure and display information such as:</p>
-            <ul>
-                <li>Download speed</li>
-                <li>Upload speed</li>
-                <li>Ping</li>
-                <li>Jitter</li>
-                <li>Internet Service Provider (ISP)</li>
-                <li>Network information</li>
-                <li>Approximate location</li>
-                <li>Connection quality</li>
-            </ul>
-            <p>The results are provided for informational and diagnostic purposes.</p>
-            <h2>2. Speed Test Results</h2>
-            <p>Internet speed results can vary depending on many factors, including your Internet connection, Wi-Fi signal, device, browser, network traffic, server location and Internet Service Provider. Fasqoo does not guarantee that speed test results will always represent the maximum speed available from your Internet Service Provider. Speed test results should therefore not be considered a guarantee of the speed or quality of your Internet service.</p>
-            <h2>3. Acceptable Use</h2>
-            <p>You agree to use Fasqoo only for lawful purposes. You must not:</p>
-            <ul>
-                <li>Attempt to damage or disrupt the Fasqoo service</li>
-                <li>Abuse or overload the speed test infrastructure</li>
-                <li>Use automated systems to generate excessive traffic</li>
-                <li>Attempt to gain unauthorized access to Fasqoo systems</li>
-                <li>Interfere with the operation of the website</li>
-                <li>Use the service for illegal activities</li>
-            </ul>
-            <p>Fasqoo reserves the right to restrict access to users who abuse the service or violate these Terms of Use.</p>
-            <h2>4. Availability</h2>
-            <p>Fasqoo aims to provide a reliable service but does not guarantee that the website or speed test will always be available. The service may occasionally be unavailable due to maintenance, technical problems, server issues, network interruptions or circumstances beyond our control.</p>
-            <h2>5. Third-Party Services</h2>
-            <p>Fasqoo may use third-party services for hosting, network measurements, IP information, analytics, advertising and other technical functions. The availability and operation of third-party services are outside the direct control of Fasqoo.</p>
-            <h2>6. Privacy</h2>
-            <p>Your use of Fasqoo is also subject to our Privacy Policy, which explains how information may be processed when you use the website. You can read the Privacy Policy on the Fasqoo website.</p>
-            <h2>7. Intellectual Property</h2>
-            <p>The Fasqoo name, logo, website design, software, graphics, text and other original content are protected by applicable intellectual property laws. You may not copy, reproduce, modify, distribute or commercially exploit Fasqoo content without prior permission, except where permitted by applicable law.</p>
-            <p><strong>Fasqoo™</strong> and <strong>Fasqoo Internet Speed Test</strong> are trademarks of Fasqoo and may only be used with permission.</p>
-            <h2>8. Disclaimer</h2>
-            <p>Fasqoo is provided on an "as is" and "as available" basis. To the extent permitted by applicable law, Fasqoo makes no guarantees regarding the accuracy, completeness, reliability or availability of the service or its results.</p>
-            <h2>9. Limitation of Liability</h2>
-            <p>To the extent permitted by applicable law, Fasqoo shall not be responsible for losses or damages resulting from the use of, or inability to use, the website or speed test service. This includes, where legally permitted, indirect, incidental or consequential damages.</p>
-            <h2>10. Changes to These Terms</h2>
-            <p>Fasqoo may update these Terms of Use from time to time. When changes are made, the updated version will be published on this page together with a new revision date. Your continued use of Fasqoo after changes are published constitutes acceptance of the updated Terms of Use, to the extent permitted by applicable law.</p>
-            <h2>11. Contact</h2>
-            <p>If you have questions regarding these Terms of Use, please contact Fasqoo through the contact information provided on the website.</p>
-            <footer>
-                <strong>Fasqoo™</strong> Professional Internet Speed Test<br>
-                &copy; 2026 Fasqoo. All Rights Reserved.
-            </footer>
-        </main>
+<header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Fasqoo home">
+      <span class="brand-mark">F</span><span>Fasqoo</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/network-status.html">Network Status</a>
+      <a href="/subnet-calculator.html">IT Diagnostics</a>
+      <a href="/about.html">About Us</a>
+      <select aria-label="Language" onchange="if(this.value!=='en') alert('This Terms of Use page is currently available in English.');">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="nl">Nederlands</option>
+        <option value="tr">Türkçe</option>
+        <option value="sq">Shqip</option>
+        <option value="ar">العربية</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">Fasqoo Legal</div>
+    <h1>Terms of Use</h1>
+    <p>These Terms of Use explain the rules and conditions that apply when you access or use the Fasqoo Internet Speed Test, network diagnostic tools, website features and related services.</p>
+    <div class="meta"><strong>Last updated:</strong> September 2026</div>
+  </section>
+
+  <div class="layout">
+    <aside class="toc" aria-label="Table of contents">
+      <strong>On this page</strong>
+      <a href="#acceptance">1. Acceptance of Terms</a>
+      <a href="#service">2. Use of the Service</a>
+      <a href="#results">3. Speed Test Results</a>
+      <a href="#diagnostics">4. Network Diagnostics</a>
+      <a href="#acceptable">5. Acceptable Use</a>
+      <a href="#availability">6. Availability</a>
+      <a href="#third-party">7. Third-Party Services</a>
+      <a href="#privacy">8. Privacy and Data</a>
+      <a href="#intellectual">9. Intellectual Property</a>
+      <a href="#user-content">10. User Communications</a>
+      <a href="#security">11. Security and Abuse</a>
+      <a href="#disclaimer">12. Disclaimer</a>
+      <a href="#liability">13. Limitation of Liability</a>
+      <a href="#changes">14. Changes to These Terms</a>
+      <a href="#law">15. Applicable Law</a>
+      <a href="#contact">16. Contact</a>
+    </aside>
+
+    <article class="content">
+      <div class="notice">
+        <strong>Important:</strong> Fasqoo provides speed-test and network-diagnostic information for informational and technical purposes. Test results can vary because of your device, browser, Wi-Fi, network traffic, server conditions and Internet Service Provider. Nothing on this page is a guarantee of a particular Internet speed or service quality.
+      </div>
+
+      <h2 id="acceptance">1. Acceptance of Terms</h2>
+      <p>Welcome to Fasqoo. By accessing, browsing or using the Fasqoo website or any Fasqoo Internet Speed Test and network diagnostic feature, you acknowledge that you have read, understood and agree to be bound by these Terms of Use and by the policies referenced in them.</p>
+      <p>If you do not agree with these Terms of Use, you should not use the relevant Fasqoo services. If you use Fasqoo on behalf of an organization, you confirm that you are authorized to accept these Terms on its behalf.</p>
+
+      <h2 id="service">2. Use of the Service</h2>
+      <p>Fasqoo provides Internet speed testing, connection analysis and network diagnostic tools. Depending on the feature being used, the service may measure or display information such as:</p>
+      <ul>
+        <li>download and upload throughput;</li>
+        <li>ping, latency and jitter;</li>
+        <li>Internet Service Provider or network information;</li>
+        <li>connection and browser-related information;</li>
+        <li>approximate network or geographic information where technically available;</li>
+        <li>connection quality indicators and diagnostic information; and</li>
+        <li>other technical measurements required to operate or improve the requested tool.</li>
+      </ul>
+      <p>The service is intended for ordinary personal, educational, technical and diagnostic use. Results are informational and should be interpreted in the context of the conditions under which the test was performed.</p>
+
+      <h2 id="results">3. Speed Test Results</h2>
+      <p>Internet speed measurements are affected by many factors, including your access connection, Wi-Fi signal strength, Ethernet configuration, device performance, browser capabilities, background traffic, local network congestion, server capacity, routing and your Internet Service Provider.</p>
+      <p>For these reasons, Fasqoo does not guarantee that a test result will equal the maximum speed advertised by your ISP, the speed available under another connection method, or the speed measured by another testing service. Repeating a test at a different time, on another device, or using another connection method may produce different results.</p>
+      <p>Fasqoo does not represent a speed-test result as a contractual measurement of your ISP's service unless expressly stated otherwise in a separate written agreement.</p>
+
+      <h2 id="diagnostics">4. Network Diagnostics</h2>
+      <p>Fasqoo may provide diagnostic information designed to help users understand common network conditions. Diagnostic indicators and explanations are general technical guidance and should not be treated as a professional guarantee, network-service commitment, or substitute for assistance from your ISP or qualified network administrator.</p>
+      <p>Where a diagnostic feature identifies a possible issue, the information should be considered an indication for further investigation rather than proof of the cause. Fasqoo cannot control the configuration, availability or performance of networks, routers, ISPs or third-party infrastructure outside its systems.</p>
+
+      <h2 id="acceptable">5. Acceptable Use</h2>
+      <p>You agree to use Fasqoo only in a lawful and responsible manner. You must not:</p>
+      <ul>
+        <li>attempt to damage, disable or disrupt the Fasqoo website or measurement infrastructure;</li>
+        <li>abuse, overload or intentionally exhaust service resources;</li>
+        <li>generate excessive automated traffic that interferes with normal service operation;</li>
+        <li>attempt unauthorized access to systems, accounts, servers, APIs or infrastructure;</li>
+        <li>probe, scan or test systems in a way that is intended to bypass security controls;</li>
+        <li>introduce malware, malicious code or other harmful material;</li>
+        <li>interfere with another user's access to the service;</li>
+        <li>misrepresent Fasqoo or falsely claim an affiliation with Fasqoo; or</li>
+        <li>use the service for activities that violate applicable law or third-party rights.</li>
+      </ul>
+      <p>Fasqoo may take reasonable technical measures to protect the availability, security and integrity of its services, including limiting or blocking abusive traffic where appropriate.</p>
+
+      <h2 id="availability">6. Availability</h2>
+      <p>Fasqoo aims to provide a reliable and useful service, but continuous or uninterrupted availability cannot be guaranteed. The website or individual features may be temporarily unavailable because of maintenance, upgrades, technical failures, network interruptions, third-party service outages, security incidents or circumstances outside Fasqoo's reasonable control.</p>
+      <p>Fasqoo may modify, suspend or discontinue individual features when reasonably necessary for security, maintenance, technical development or operational reasons.</p>
+
+      <h2 id="third-party">7. Third-Party Services</h2>
+      <p>Some Fasqoo features may depend on third-party infrastructure or services, including hosting, measurement infrastructure, IP or network information, analytics, advertising, content delivery and other technical providers.</p>
+      <p>Third-party services operate under their own terms and privacy practices. Fasqoo does not control the independent operation of third-party systems and cannot guarantee their availability, accuracy or continued operation. Relevant third-party processing is described, where applicable, in the Fasqoo Privacy Policy.</p>
+
+      <h2 id="privacy">8. Privacy and Data</h2>
+      <p>Your use of Fasqoo may involve the processing of technical information necessary to operate the website and requested services. Depending on the feature and configuration, this may include IP address, browser or device information, network information, test measurements and other technical data.</p>
+      <p>The processing of personal information is governed by the <a href="/privacy-policy.html">Fasqoo Privacy Policy</a>. Where applicable, users may also have privacy choices described on the <a href="/do-not-sell.html">Do Not Sell or Share My Personal Information</a> page.</p>
+      <p>Fasqoo's privacy practices are intended to be described transparently and applied in accordance with applicable data-protection requirements. Kosovo's Law No. 06/L-082 on Protection of Personal Data establishes rights and responsibilities concerning personal-data protection and states that the law is aligned with the EU General Data Protection Regulation framework.</p>
+
+      <h2 id="intellectual">9. Intellectual Property</h2>
+      <p>The Fasqoo name, logo, website design, software, interface elements, graphics, text and other original materials are protected by applicable intellectual-property laws and rights.</p>
+      <p>Except where permitted by applicable law or expressly authorized by Fasqoo, you may not copy, reproduce, republish, modify, distribute, sell, license, publicly display or commercially exploit Fasqoo materials in a manner that suggests unauthorized affiliation or ownership.</p>
+      <p><strong>Fasqoo™</strong> and <strong>Fasqoo Internet Speed Test</strong> are identifiers of Fasqoo. Any authorized use must not create a false impression of sponsorship, partnership or endorsement.</p>
+
+      <h2 id="user-content">10. User Communications</h2>
+      <p>If you contact Fasqoo by email, telephone, WhatsApp or another available communication channel, you are responsible for providing information that is accurate and appropriate for the purpose of your request.</p>
+      <p>Do not send passwords, payment-card information, authentication codes or other highly sensitive credentials through ordinary support communications unless Fasqoo specifically provides a secure method for doing so.</p>
+      <p>Fasqoo may use information you voluntarily provide to respond to your request, provide support, investigate technical issues and maintain appropriate records, subject to the applicable privacy practices described in the Privacy Policy.</p>
+
+      <h2 id="security">11. Security and Abuse</h2>
+      <p>Users must not attempt to circumvent security mechanisms, exploit vulnerabilities, gain unauthorized access, interfere with infrastructure, or use Fasqoo as a platform for attacks against other systems.</p>
+      <p>If you believe you have discovered a security problem affecting Fasqoo, please report it through the contact information below and provide enough technical information for the issue to be investigated. Do not intentionally exploit or disclose a vulnerability in a way that could cause harm while reporting it.</p>
+
+      <h2 id="disclaimer">12. Disclaimer</h2>
+      <p>Fasqoo is provided on an <strong>“as is”</strong> and <strong>“as available”</strong> basis, to the extent permitted by applicable law. Fasqoo does not guarantee that the service will be uninterrupted, error-free, completely accurate, secure at all times, or suitable for every particular purpose.</p>
+      <p>Technical measurements and diagnostic explanations are provided in good faith for informational purposes. Users remain responsible for how they interpret and act on the information provided by the service.</p>
+
+      <h2 id="liability">13. Limitation of Liability</h2>
+      <p>To the extent permitted by applicable law, Fasqoo will not be responsible for losses or damages arising from or related to the use of, inability to use, interruption of, or reliance on the website or its speed-test and diagnostic services.</p>
+      <p>This includes, where legally permitted, indirect, incidental, special or consequential losses, loss of data, loss of business opportunity, loss of revenue, or costs arising from reliance on a measurement or diagnostic result.</p>
+      <p>Nothing in these Terms is intended to exclude or limit liability where such exclusion or limitation is not permitted by mandatory applicable law, or to remove rights that users cannot legally waive.</p>
+
+      <h2 id="changes">14. Changes to These Terms</h2>
+      <p>Fasqoo may update these Terms of Use from time to time to reflect changes to the service, technology, legal requirements or operational practices. When material changes are made, the updated version will be published on this page with a revised “Last updated” date.</p>
+      <p>Your continued use of Fasqoo after updated Terms become effective constitutes acceptance of the revised Terms to the extent permitted by applicable law. If you do not agree with a material change, you should stop using the affected service.</p>
+
+      <h2 id="law">15. Applicable Law</h2>
+      <p>These Terms are intended to be interpreted in accordance with applicable law. Fasqoo operates from Kosovo, and mandatory provisions of applicable Kosovo law may apply to the relationship between Fasqoo and users, subject to any mandatory consumer or other legal protections that apply to a particular user.</p>
+      <p>Nothing in these Terms is intended to deprive consumers or other users of mandatory rights that cannot lawfully be excluded or limited.</p>
+      <p>Kosovo maintains legislation governing information-society services, electronic transactions and personal-data protection; the applicable legal framework may change over time.</p>
+
+      <h2 id="contact">16. Contact</h2>
+      <p>If you have questions about these Terms of Use, the Fasqoo service, a technical issue, or a legal/privacy matter, you can contact Fasqoo directly using the following details:</p>
+
+      <div class="contact-card">
+        <div class="contact-item">
+          <span>Telephone</span>
+          <a href="tel:+38348195878">+383 48 195 878</a>
+        </div>
+        <div class="contact-item">
+          <span>Email</span>
+          <a href="mailto:mcomfortstore14@gmail.com">mcomfortstore14@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span>Website</span>
+          <a href="https://www.fasqoo.com/">www.fasqoo.com</a>
+        </div>
+      </div>
+
+      <p style="margin-top:22px">For privacy-specific requests, please also review the <a href="/privacy-policy.html">Privacy Policy</a>. For accessibility-related requests, please visit the <a href="/accessibility.html">Accessibility Statement</a>.</p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      <strong>Fasqoo™</strong> Professional Internet Speed Test<br>
+      © 2026 Fasqoo. All Rights Reserved.
     </div>
+    <nav class="footer-links" aria-label="Legal navigation">
+      <a href="/accessibility.html">Accessibility</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/do-not-sell.html">Do Not Sell</a>
+      <a href="/impressum.html">Imprint</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
