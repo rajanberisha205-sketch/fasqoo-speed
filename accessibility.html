@@ -1,144 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Accessibility Statement – Fasqoo</title>
-
-    <meta name="description" content="Fasqoo Accessibility Statement – Learn about our commitment to making the Fasqoo Internet Speed Test accessible and easy to use for everyone.">
-
-    <style>
-:root {
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-color: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent-color: #38bdf8;
-  --border-color: #334155;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility Statement – Fasqoo</title>
+<meta name="description" content="Fasqoo Accessibility Statement – Learn about our commitment to making the Fasqoo Internet Speed Test accessible and easy to use for everyone.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#08090b">
+<link rel="canonical" href="https://www.fasqoo.com/accessibility.html">
+<style>
+:root{--bg:#08090b;--surface:#101216;--surface2:#15181e;--text:#f5f7fa;--muted:#9aa3ad;--accent:#ff5a1f;--border:#252a31;--max:1180px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--text);background:radial-gradient(900px 420px at 50% -120px,rgba(255,90,31,.11),transparent 65%),var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.72}
+a{color:inherit;text-decoration:none}a:hover{color:var(--accent)}
+.site-header{position:sticky;top:0;z-index:1000;background:rgba(8,9,11,.88);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.header-inner{width:min(var(--max),calc(100% - 32px));min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;letter-spacing:-.5px}
+.logo-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;color:#fff;background:linear-gradient(135deg,#ff5a1f,#ff7a45);box-shadow:0 8px 24px rgba(255,90,31,.22);font-weight:900}
+.logo-text span{color:var(--accent)}
+.main-nav{display:flex;align-items:center;justify-content:flex-end;gap:6px;min-width:0;flex-wrap:wrap}
+.main-nav a{padding:9px 11px;border-radius:9px;color:#cbd0d6;font-size:13px;font-weight:600;white-space:nowrap}
+.main-nav a:hover{color:#fff;background:rgba(255,255,255,.055)}
+#lang-select{min-height:36px;max-width:130px;padding:7px 10px;border:1px solid var(--border);border-radius:9px;color:#e8ebee;background:var(--surface2);cursor:pointer}
+.page{width:min(var(--max),calc(100% - 32px));margin:auto}
+.hero{padding:70px 0 30px;text-align:center}
+.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid rgba(255,90,31,.24);border-radius:999px;color:#ff9b78;background:rgba(255,90,31,.07);font-size:11px;font-weight:800;letter-spacing:.9px;text-transform:uppercase}
+.hero h1{max-width:850px;margin:18px auto 10px;font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-2px}
+.hero h1 span{color:var(--accent)}
+.hero p{max-width:760px;margin:auto;color:var(--muted);font-size:16px}
+.content-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start;padding:24px 0 70px}
+.toc{position:sticky;top:96px;padding:16px;border:1px solid var(--border);border-radius:16px;background:rgba(16,18,22,.84);box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.toc-title{margin:0 0 10px;color:#fff;font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.toc a{display:block;padding:7px 8px;border-radius:8px;color:var(--muted);font-size:12px}
+.toc a:hover{color:#fff;background:rgba(255,255,255,.045)}
+.content-card{min-width:0;padding:34px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(180deg,rgba(21,24,30,.96),rgba(14,16,20,.96));box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.meta-pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:rgba(255,255,255,.025);font-size:11px}
+.content-card h1{margin:0 0 8px;font-size:clamp(30px,4vw,46px);line-height:1.1;letter-spacing:-1.3px}
+.content-card h2{margin:34px 0 10px;color:#fff;font-size:22px;line-height:1.25;scroll-margin-top:100px}
+.content-card h2:before{content:"";display:inline-block;width:4px;height:20px;margin:0 9px 0 0;border-radius:4px;background:var(--accent);vertical-align:-2px}
+.content-card p,.content-card li{color:var(--muted)}
+.content-card ul{padding-left:22px}
+.content-card li{margin:7px 0}
+.contact{margin-top:14px;padding:18px 20px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.025)}
+.contact a{color:#ff8b67}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:28px 0;background:#090a0d}
+.footer-inner{width:min(var(--max),calc(100% - 32px));margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer-copy{color:var(--muted);font-size:12px}
+.footer-copy div+div{margin-top:4px}
+.footer-nav{display:flex;gap:6px;flex-wrap:wrap}
+.footer-nav a{padding:7px 9px;color:var(--muted);font-size:12px;border-radius:8px}
+.footer-nav a:hover{color:#fff;background:rgba(255,255,255,.045)}
+@media(max-width:900px){
+  .header-inner{align-items:flex-start;flex-direction:column;padding:14px 0}
+  .main-nav{justify-content:flex-start}
+  .content-layout{grid-template-columns:1fr}
+  .toc{position:static}
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-a { color: var(--accent-color); text-decoration: none; }
-a:hover { text-decoration: underline; }
-header {
-  border-bottom: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  background-color: rgba(15, 23, 42, .95);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
-}
-header > div {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo { display:flex; align-items:center; gap:.5rem; font-weight:bold; font-size:1.25rem; }
-nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
-nav a { color:var(--text-color); }
-select {
-  background:var(--card-bg);
-  color:var(--text-color);
-  border:1px solid var(--border-color);
-  padding:.4rem .8rem;
-  border-radius:6px;
-  cursor:pointer;
-}
-main { max-width:900px; margin:2rem auto; padding:0 1.5rem; }
-.content-box {
-  background-color:var(--card-bg);
-  border:1px solid var(--border-color);
-  border-radius:12px;
-  padding:2.5rem;
-  box-shadow:0 10px 25px -5px rgba(0,0,0,.3);
-}
-h1 { margin-top:0; color:#fff; border-bottom:1px solid var(--border-color); padding-bottom:.75rem; }
-h2 { color:var(--accent-color); margin-top:1.8rem; font-size:1.25rem; }
-p, li { color:var(--text-muted); }
-li { margin-bottom:.5rem; }
-.contact {
-  background: rgba(15,23,42,.45);
-  border:1px solid var(--border-color);
-  border-radius:10px;
-  padding:1rem 1.25rem;
-}
-footer {
-  border-top:1px solid var(--border-color);
-  margin-top:4rem;
-  padding:2rem;
-  background-color:#0b1120;
-}
-footer > div {
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-}
-.footer-copy { color:var(--text-muted); font-size:.875rem; }
-footer nav { display:flex; gap:1.2rem; }
-footer nav a { color:var(--text-muted); font-size:.9rem; }
-@media(max-width:800px) {
-  header > div { flex-direction:column; gap:1rem; align-items:flex-start; }
-  nav { gap:.8rem; }
-}
-@media(max-width:600px) {
-  header { padding:1rem; }
-  main { padding:0 1rem; }
-  .content-box { padding:1.5rem; }
+@media(max-width:600px){
+  .page,.header-inner,.footer-inner{width:min(100% - 20px,1180px)}
+  .hero{padding:46px 0 18px}
+  .content-card{padding:22px 18px;border-radius:16px}
+  .content-card h2{font-size:20px}
+  .main-nav{gap:3px}
+  .main-nav a{font-size:12px;padding:8px 8px}
 }
 </style>
 </head>
-
 <body>
-<header>
-  <div>
-    <div class="logo"><div>⌁</div><div>Fasqoo</div></div>
-    <nav aria-label="Main navigation">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/" aria-label="Fasqoo Home">
+      <div class="logo-mark">F</div>
+      <div class="logo-text">Fas<span>qoo</span></div>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
       <a href="/" data-i18n="home">Home</a>
       <a href="/faq.html" data-i18n="faq">FAQ</a>
       <a href="/network-status.html" data-i18n="network">Network Status</a>
       <a href="/subnet-calculator.html" data-i18n="diagnostics">IT Diagnostics</a>
       <a href="/about.html" data-i18n="about">About Us</a>
       <select id="lang-select" aria-label="Language">
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="nl">Nederlands</option>
-        <option value="tr">Türkçe</option>
-        <option value="sq">Shqip</option>
-        <option value="ar">العربية</option>
-      </select>
+<option value="en">English</option>
+<option value="de">Deutsch</option>
+<option value="fr">Français</option>
+<option value="es">Español</option>
+<option value="it">Italiano</option>
+<option value="pt">Português</option>
+<option value="nl">Nederlands</option>
+<option value="tr">Türkçe</option>
+<option value="sq">Shqip</option>
+<option value="ar">العربية</option>
+</select>
     </nav>
   </div>
 </header>
 
-<main>
+<main class="page">
+  <section class="hero">
+    <div class="eyebrow">Fasqoo Accessibility</div>
+    <h1>Accessibility <span>Statement</span></h1>
+    <p>Making the Fasqoo Internet Speed Test easier to use and accessible to as many people as possible.</p>
+  </section>
+
+  <section class="content-layout">
+    <aside class="toc" aria-label="Accessibility sections">
+      <div class="toc-title">On this page</div>
+      <a href="#sec-commitment" data-i18n="commitment">Our Commitment</a><a href="#sec-features" data-i18n="features">Accessibility Features</a><a href="#sec-speed" data-i18n="speed">Speed Test Accessibility</a><a href="#sec-keyboard" data-i18n="keyboard">Keyboard Navigation</a><a href="#sec-readers" data-i18n="readers">Screen Readers</a><a href="#sec-mobile" data-i18n="mobile">Mobile Accessibility</a><a href="#sec-browser" data-i18n="browser">Browser and Assistive Technology Support</a><a href="#sec-continuous" data-i18n="continuous">Continuous Improvement</a><a href="#sec-feedback" data-i18n="feedback">Feedback</a><a href="#sec-contact" data-i18n="contact">Contact</a>
+    </aside>
+    <article class="content-card">
+      
   <div class="content-box">
     <h1 data-i18n="h1">Accessibility Statement – Fasqoo</h1>
     <p><strong data-i18n="updatedLabel">Last updated:</strong> September 3, 2026</p>
 
     <p data-i18n="intro">Fasqoo is committed to making its website accessible and easy to use for as many people as possible, regardless of their device, abilities, or the technology they use to access the internet.</p>
 
-    <h2 data-i18n="commitment">Our Commitment</h2>
+    <h2 id="sec-commitment" data-i18n="commitment">Our Commitment</h2>
     <p data-i18n="commitmentText">We continuously work to improve the accessibility, usability, and overall experience of the Fasqoo website. Our goal is to provide a website that can be used by people with different needs, including users who rely on assistive technologies such as screen readers, keyboard navigation, or browser accessibility features.</p>
 
-    <h2 data-i18n="features">Accessibility Features</h2>
+    <h2 id="sec-features" data-i18n="features">Accessibility Features</h2>
     <p data-i18n="aims">Fasqoo aims to provide:</p>
     <ul>
       <li data-i18n="f1">Clear and readable text</li>
@@ -151,11 +133,11 @@ footer nav a { color:var(--text-muted); font-size:.9rem; }
       <li data-i18n="f8">Accessible navigation and website structure</li>
     </ul>
 
-    <h2 data-i18n="speed">Speed Test Accessibility</h2>
+    <h2 id="sec-speed" data-i18n="speed">Speed Test Accessibility</h2>
     <p data-i18n="speedText1">The Fasqoo Internet Speed Test is designed to be easy to operate. Important controls, including starting and stopping a test, are presented as interactive buttons.</p>
     <p data-i18n="speedText2">Test results such as download speed, upload speed, ping, and jitter are displayed in a clear format. We are continuously working to improve the accessibility of the speed-test interface and its results.</p>
 
-    <h2 data-i18n="keyboard">Keyboard Navigation</h2>
+    <h2 id="sec-keyboard" data-i18n="keyboard">Keyboard Navigation</h2>
     <p data-i18n="keyboardText">Where possible, Fasqoo supports navigation using a keyboard without requiring a mouse. Users can use standard keyboard controls such as:</p>
     <ul>
       <li><strong>Tab</strong> <span data-i18n="tab">to move between interactive elements</span></li>
@@ -163,20 +145,20 @@ footer nav a { color:var(--text-muted); font-size:.9rem; }
       <li><strong>Enter</strong> <span data-i18n="or">or</span> <strong>Space</strong> <span data-i18n="activate">to activate buttons and links</span></li>
     </ul>
 
-    <h2 data-i18n="readers">Screen Readers</h2>
+    <h2 id="sec-readers" data-i18n="readers">Screen Readers</h2>
     <p data-i18n="readersText1">We aim to structure the website so that important information and interactive elements can be understood by commonly used screen-reader software.</p>
     <p data-i18n="readersText2">We continue to improve labels, headings, navigation elements, and status information to provide a better experience for screen-reader users.</p>
 
-    <h2 data-i18n="mobile">Mobile Accessibility</h2>
+    <h2 id="sec-mobile" data-i18n="mobile">Mobile Accessibility</h2>
     <p data-i18n="mobileText">Fasqoo is designed to work across different screen sizes, including smartphones and tablets. The website automatically adapts its layout to provide a usable experience on smaller screens.</p>
 
-    <h2 data-i18n="browser">Browser and Assistive Technology Support</h2>
+    <h2 id="sec-browser" data-i18n="browser">Browser and Assistive Technology Support</h2>
     <p data-i18n="browserText">Fasqoo aims to support current versions of commonly used browsers and accessibility technologies. Because browsers, operating systems, and assistive technologies can behave differently, some parts of the website may not work identically in every environment.</p>
 
-    <h2 data-i18n="continuous">Continuous Improvement</h2>
+    <h2 id="sec-continuous" data-i18n="continuous">Continuous Improvement</h2>
     <p data-i18n="continuousText">Accessibility is an ongoing process. We regularly review the Fasqoo website and make improvements where possible. As new accessibility technologies and standards develop, we will continue working to improve the experience for all users.</p>
 
-    <h2 data-i18n="feedback">Feedback</h2>
+    <h2 id="sec-feedback" data-i18n="feedback">Feedback</h2>
     <p data-i18n="feedbackText">If you experience an accessibility problem while using Fasqoo, we would appreciate your feedback. Please contact us and describe:</p>
     <ul>
       <li data-i18n="fb1">The page where the problem occurred</li>
@@ -186,7 +168,7 @@ footer nav a { color:var(--text-muted); font-size:.9rem; }
     </ul>
     <p data-i18n="feedbackHelp">Your feedback helps us identify problems and improve the website.</p>
 
-    <h2 data-i18n="contact">Contact</h2>
+    <h2 id="sec-contact" data-i18n="contact">Contact</h2>
     <p data-i18n="contactText">For accessibility questions, feedback, or assistance, please contact:</p>
     <div class="contact">
       <p><strong>Fasqoo – Professional Internet Speed Test</strong></p>
@@ -194,15 +176,18 @@ footer nav a { color:var(--text-muted); font-size:.9rem; }
       <p><strong data-i18n="websiteLabel">Website:</strong> <a href="https://www.fasqoo.com">Fasqoo</a></p>
     </div>
   </div>
+
+    </article>
+  </section>
 </main>
 
 <footer>
-  <div>
+  <div class="footer-inner">
     <div class="footer-copy">
       <div>© 2026 Fasqoo. <span data-i18n="rights">All rights reserved.</span></div>
       <div data-i18n="trademarks">Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.</div>
     </div>
-    <nav aria-label="Footer">
+    <nav class="footer-nav" aria-label="Footer">
       <a href="/accessibility.html" data-i18n="accessibility">Accessibility</a>
       <a href="/privacy-policy.html" data-i18n="privacy">Privacy Policy</a>
       <a href="/terms.html" data-i18n="terms">Terms of Use</a>
@@ -397,6 +382,5 @@ if (selector) {
 const savedLang = localStorage.getItem("fasqoo-language") || (navigator.language || "en").slice(0, 2).toLowerCase();
 applyLanguage(T[savedLang] ? savedLang : "en");
 </script>
-
 </body>
 </html>
