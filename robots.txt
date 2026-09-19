@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fasqoo.com
+Sitemap: https://www.fasqoo.com/sitemap.xml
