@@ -79,7 +79,7 @@ main{padding:30px 0 65px}
 .gauge{width:295px;height:295px;margin:auto;position:relative}
 .gauge svg{width:100%;height:100%;transform:rotate(-135deg)}
 .ring{fill:none;stroke:#edf0f4;stroke-width:13;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:204}
-.progress{fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:816;transition:.18s linear}
+.progress{fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:816;transition:none}.gauge-needle{transform-box:fill-box;transform-origin:150px 150px;transition:none}.gauge-needle line{stroke:var(--text);stroke-width:4;stroke-linecap:round}.gauge-needle circle{fill:var(--card);stroke:var(--orange);stroke-width:4}
 .center{position:absolute;inset:0;display:grid;place-content:center}
 .num{font-size:52px;line-height:1;font-weight:700;letter-spacing:-2px}
 .unit{font-size:13px;color:var(--muted);margin-top:7px}
@@ -298,6 +298,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 @media(max-width:1279px){.fasqoo-ad-side{display:none}}
 @media(max-width:760px){.fasqoo-ad-center{min-height:90px;margin:20px 0 0;border-radius:10px}}
 @media(max-width:560px){.fasqoo-ad-center{min-height:80px}.fasqoo-ad-label{font-size:7px}}
+.fasqoo-network-strip{border-bottom:1px solid var(--line);background:var(--card);padding:13px 0}.fasqoo-network-strip .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.fasqoo-network-strip strong{font-size:11px;letter-spacing:1px}.fasqoo-network-strip>div>span{font-size:11px;color:var(--muted)}.strip-points{display:flex;gap:10px;flex-wrap:wrap}.strip-points span{font-size:10px;color:var(--muted)}.strip-server{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.8px;color:var(--muted)}.strip-server b{font-size:10px;color:var(--text);letter-spacing:0}.dark .fasqoo-network-strip{background:var(--card)}@media(max-width:760px){.fasqoo-network-strip .wrap{gap:7px}.strip-server{margin-left:0;width:100%}.strip-points{width:100%}}
 </style>
 </head>
 <body>
@@ -313,7 +314,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     </button>
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
     <div id="fasqoo-widget-container"></div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" data-i18n-aria="menu">☰</button>
     <nav class="main-menu" id="mainMenu">
       <a href="faq.html" data-i18n="navFaq">FAQ</a>
       <a href="network-status.html" data-i18n="navStatus">Netzwerk-Status</a>
@@ -332,24 +333,33 @@ footer{margin-top:45px}.foot{align-items:flex-start}
           <option value="sq">Shqip</option>
           <option value="ar">العربية</option>
         </select>
-        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode" data-i18n-aria="darkMode">☾</button>
       </div>
     </nav>
   </div>
 </header>
 
+<div class="fasqoo-network-strip" aria-label="Fasqoo Network Intelligence">
+  <div class="wrap">
+    <strong data-i18n="stripTitle">FASQOO NETWORK INTELLIGENCE</strong>
+    <span data-i18n="stripSub">Check download, upload, ping and jitter.</span>
+    <div class="strip-points"><span data-i18n="strip1">✓ Real browser measurement</span><span data-i18n="strip2">✓ Cloudflare Edge</span><span data-i18n="strip3">✓ No artificial fallback values</span><span data-i18n="strip4">✓ No account required</span></div>
+    <div class="strip-server"><span data-i18n="stripServer">AUTOMATIC SERVER</span><b>Cloudflare Edge</b></div>
+  </div>
+</div>
+
 <main>
 <div class="wrap">
 
   <section class="hero premium-hero">
-    <div class="eyebrow"><span class="eyebrow-dot"></span> FASQOO NETWORK INTELLIGENCE</div>
+    <div class="eyebrow" data-i18n="eyebrow"><span class="eyebrow-dot"></span> FASQOO NETWORK INTELLIGENCE</div>
     <h1 id="heroTitle" data-i18n="title">Free Internet Speed Test – Download, Upload, Ping &amp; Jitter</h1>
     <p id="heroSub" data-i18n="sub">Measure your real browser connection with download, upload, ping and jitter.</p>
     <div class="hero-trust">
-      <span>✓ Real browser measurement</span>
-      <span>✓ Cloudflare Speed Test endpoints</span>
-      <span>✓ No artificial fallback values</span>
-      <span>✓ No account required</span>
+      <span data-i18n="trust1">✓ Real browser measurement</span>
+      <span data-i18n="trust2">✓ Cloudflare Edge</span>
+      <span data-i18n="trust3">✓ No artificial fallback values</span>
+      <span data-i18n="trust4">✓ No account required</span>
     </div>
   </section>
 
@@ -361,14 +371,14 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <section class="card test-card">
     <div class="test-topline">
       <div>
-        <span class="mini-kicker">LIVE CONNECTION TEST</span>
+        <span class="mini-kicker" data-i18n="liveTest">LIVE CONNECTION TEST</span>
         <strong id="testPhase">Ready</strong>
       </div>
       <div class="phase-steps" aria-label="Test phases">
-        <span class="phase-step active" data-phase="ping">Ping</span>
-        <span class="phase-step" data-phase="download">Download</span>
-        <span class="phase-step" data-phase="upload">Upload</span>
-        <span class="phase-step" data-phase="complete">Result</span>
+        <span class="phase-step active" data-phase="ping" data-i18n="phasePing">Ping</span>
+        <span class="phase-step" data-phase="download" data-i18n="phaseDownload">Download</span>
+        <span class="phase-step" data-phase="upload" data-i18n="phaseUpload">Upload</span>
+        <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
       </div>
     </div>
     <div class="grid">
@@ -380,6 +390,10 @@ footer{margin-top:45px}.foot{align-items:flex-start}
             </linearGradient></defs>
             <circle class="ring" cx="150" cy="150" r="130"></circle>
             <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+            <g id="needle" class="gauge-needle" transform="rotate(-135 150 150)">
+              <line x1="150" y1="150" x2="150" y2="39"></line>
+              <circle cx="150" cy="150" r="7"></circle>
+            </g>
           </svg>
           <div class="center">
             <div id="speed" class="num">0</div>
@@ -417,13 +431,13 @@ footer{margin-top:45px}.foot{align-items:flex-start}
       <div class="bar"><i id="bar"></i></div>
       <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div><div id="qualityDetail" class="quality-detail"></div>
       <div class="quality-meta">
-        <span><i class="mini-dot"></i> Based on download, upload, ping &amp; jitter</span>
-        <span id="qualityLabel">Not measured</span>
+        <span><i class="mini-dot"></i> <span data-i18n="basedOn">Based on download, upload, ping &amp; jitter</span></span>
+        <span id="qualityLabel" data-i18n="notMeasured">Not measured</span>
       </div>
     </div>
   </section>
 
-  <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
+  <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement" data-i18n-aria="ad">
     <span class="fasqoo-ad-label"></span>
     <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
       <script>
@@ -442,32 +456,32 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <section class="section intelligence-section">
     <div class="section-heading-row">
       <div>
-        <div class="section-kicker">NETWORK INTELLIGENCE</div>
-        <h2>Understand your connection</h2>
-        <p class="section-sub">Fasqoo turns your measurements into practical network insights.</p>
+        <div class="section-kicker" data-i18n="networkIntelligence">NETWORK INTELLIGENCE</div>
+        <h2 data-i18n="understand">Understand your connection</h2>
+        <p class="section-sub" data-i18n="intelligenceSub">Fasqoo turns your measurements into practical network insights.</p>
       </div>
-      <span class="section-badge">PROFESSIONAL</span>
+      <span class="section-badge" data-i18n="professional">PROFESSIONAL</span>
     </div>
     <div class="intelligence-grid">
       <div class="intel-card">
         <div class="intel-icon">↔</div>
-        <div><span>Latency</span><strong id="intelLatency">—</strong></div>
-        <small>Response time</small>
+        <div><span data-i18n="latency">Latency</span><strong id="intelLatency">—</strong></div>
+        <small data-i18n="responseTime">Response time</small>
       </div>
       <div class="intel-card">
         <div class="intel-icon">≈</div>
-        <div><span>Stability</span><strong id="intelStability">—</strong></div>
-        <small>Jitter consistency</small>
+        <div><span data-i18n="stability">Stability</span><strong id="intelStability">—</strong></div>
+        <small data-i18n="jitterConsistency">Jitter consistency</small>
       </div>
       <div class="intel-card">
         <div class="intel-icon">↓</div>
-        <div><span>Throughput</span><strong id="intelThroughput">—</strong></div>
-        <small>Download capacity</small>
+        <div><span data-i18n="throughput">Throughput</span><strong id="intelThroughput">—</strong></div>
+        <small data-i18n="downloadCapacity">Download capacity</small>
       </div>
       <div class="intel-card">
         <div class="intel-icon">◎</div>
-        <div><span>Test server</span><strong id="intelServer">Cloudflare</strong></div>
-        <small>Automatic edge selection</small>
+        <div><span data-i18n="testServer">Test server</span><strong id="intelServer">Cloudflare</strong></div>
+        <small data-i18n="automaticEdge">Automatic edge selection</small>
       </div>
     </div>
   </section>
@@ -475,11 +489,11 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <section class="section methodology-section" id="methodology">
     <div class="section-heading-row">
       <div>
-        <div class="section-kicker">HOW FASQOO MEASURES</div>
+        <div class="section-kicker" data-i18n="howMeasures">HOW FASQOO MEASURES</div>
         <h2 data-i18n="methodTitle">How your connection is measured</h2>
         <p class="section-sub" data-i18n="methodSub">Fasqoo measures the connection from your browser to the measurement infrastructure and reports the values it actually receives.</p>
       </div>
-      <span class="section-badge">TRANSPARENT</span>
+      <span class="section-badge" data-i18n="transparent">TRANSPARENT</span>
     </div>
     <div class="method-grid">
       <div class="method-card"><span class="method-num">01</span><h3 data-i18n="method1T">Latency &amp; jitter</h3><p data-i18n="method1D">Multiple small requests are timed. Ping is based on the measured response times; jitter describes the variation between measurements.</p></div>
@@ -560,7 +574,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <div id="widgetProvider" class="widget-provider">Provider: —</div>
 </div>
 
-<div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
+<div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement" data-i18n-aria="ad">
   <span class="fasqoo-ad-label"></span>
   <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
     <script>
@@ -594,7 +608,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v3.2 — 15s phases, 2s pauses, real measurement
+   FASQOO SPEED TEST v3.2 — 13s phases, 2s pauses, real measurement
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -604,7 +618,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const translations = {
 en:{navFaq:"FAQ",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Install Fasqoo for Windows",title:"Free Internet Speed Test – Download, Upload, Ping & Jitter",sub:"Measure your real browser connection with download, upload, ping and jitter.",server:"AUTOMATIC SERVER",ready:"Ready to test",start:"Start Speed Test",startAgain:"Test Again",testing:"Testing…",complete:"Test completed",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Live Performance",chartWait:"Waiting",lblIp:"Public IP",lblIsp:"Provider / ISP",lblLoc:"Location",lblAsn:"Network / ASN",qTitle:"Connection Quality",qDefault:"Run a test to evaluate your connection.",appsTitle:"What can you do with your connection?",appsSub:"Fasqoo turns your measured download, upload, ping and jitter into practical guidance for gaming, streaming, video calls, home office, downloads, social media and web browsing.",diagTitle:"Network Diagnostics",diagLatT:"Latency",diagLatD:"Measures response time.",diagStabT:"Stability",diagStabD:"Jitter shows connection stability.",diagDnsT:"DNS Diagnostics",diagDnsD:"Checks DNS resolvers.",diagIpT:"IP Diagnostics",diagIpD:"Detects IP, ISP, ASN.",repTitle:"Professional Test Report",lblRepTestId:"Test ID",copy:"Copy Result",share:"Share Result",json:"Export JSON",print:"Print Report",histTitle:"Test History",histRecent:"Recent measurements",histClear:"Clear history",thDate:"Date",thProvider:"Provider",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Quality",noHistory:"No tests recorded yet.",ftRights:"© 2026 Fasqoo. All Rights Reserved.",ftTrade:"Fasqoo and Fasqoo Speed Test are trademarks of Fasqoo.",ftAccess:"Accessibility",ftImprint:"Imprint",ftPrivacy:"Privacy Policy",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",stPing:"Measuring latency…",stDown:"Measuring download…",stUp:"Measuring upload…",stErr:"Test failed.",stExc:"Excellent",stGood:"Good",stLim:"Limited",q90:"Excellent connection.",q75:"Very good connection.",q55:"Good connection.",q35:"Average connection.",q0:"Poor connection.",gam85:"Excellent for gaming",gam65:"Good for gaming",gam45:"Playable",gam0:"May lag",str85:"HD Streaming: Excellent",str65:"HD Streaming: Good",str40:"HD Streaming: Limited",str0:"May buffer",fk85:"4K Streaming: Excellent",fk65:"4K Streaming: Good",fk40:"4K Streaming: Possible",fk0:"4K not recommended",call85:"Video Calls: Excellent",call65:"Video Calls: Good",call40:"Video Calls: Limited",call0:"Calls may suffer",off85:"Excellent for home office",off65:"Good for home office",off40:"Usable",off0:"May be slow",cld85:"Large transfers: Excellent",cld65:"Fast transfers",cld40:"Moderate",cld0:"Slow downloads",soc85:"Excellent",soc65:"Very good",soc40:"Good",soc0:"Limited",web85:"Very fast browsing",web65:"Fast browsing",web40:"Normal browsing",web0:"Slow loading",alertRun:"Please run a speed test first.",unavail:"Unavailable",notDetected:"Not detected",appRunTest:"Run test",copied:"Copied",
   apps:{gaming:{t:"Gaming",d:"Low ping and jitter are important.",det:"See which games you can play without lag."},stream:{t:"Streaming",d:"Good speed for HD streaming.",det:"Check if your bandwidth is enough for HD streaming."},fourk:{t:"4K Streaming",d:"Checks if 4K video works.",det:"Tests suitability for Ultra-HD streaming."},call:{t:"Video Calls",d:"Bandwidth & latency for video calls.",det:"Ideal for Teams, Zoom, Meet."},office:{t:"Home Office",d:"For cloud apps and remote work.",det:"Stability for VPNs and cloud documents."},cloud:{t:"Cloud & Downloads",d:"Efficiency for large transfers.",det:"How fast large files download."},social:{t:"Social Media",d:"For Instagram, TikTok, Facebook.",det:"How fast reels and stories load."},web:{t:"Web Browsing",d:"For everyday websites.",det:"Loading times for daily sites."}}},
-de:{navFaq:"FAQ",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",liteBtn:"Fasqoo Lite",widgetBtn:"Speed-Widget",download:"Fasqoo für Windows installieren",title:"Internet-Speedtest",sub:"Präzise. Schnell. Echtzeit.",server:"AUTOMATISCHER SERVER",ready:"Bereit zum Testen",start:"Speedtest starten",startAgain:"Test erneut starten",testing:"Test läuft…",complete:"Test abgeschlossen",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Echtzeit-Leistung",chartWait:"Wartet",lblIp:"Öffentliche IP",lblIsp:"Anbieter / ISP",lblLoc:"Standort",lblAsn:"Netzwerk / ASN",qTitle:"Verbindungsqualität",qDefault:"Führe einen Test aus, um deine Verbindung zu bewerten.",appsTitle:"Was kannst du mit deiner Verbindung machen?",appsSub:"Fasqoo übersetzt deine gemessenen Werte in konkrete Alltagsszenarien: Gaming, Streaming, Videocalls, Homeoffice, Downloads, Social Media und Web-Surfen. Die Einschätzung basiert auf Download, Upload, Ping und Jitter – nicht auf einer pauschalen Vermutung.",diagTitle:"Netzwerkdiagnose",diagLatT:"Latenz",diagLatD:"Misst die Antwortzeit.",diagStabT:"Stabilität",diagStabD:"Jitter zeigt Verbindungsstabilität.",diagDnsT:"DNS-Diagnose",diagDnsD:"Prüft DNS-Resolver.",diagIpT:"IP-Diagnose",diagIpD:"Erkennt IP, ISP, ASN.",repTitle:"Professioneller Testbericht",lblRepTestId:"Test ID",copy:"Ergebnis kopieren",share:"Ergebnis teilen",json:"JSON exportieren",print:"Bericht drucken",histTitle:"Testverlauf",histRecent:"Letzte Messungen",histClear:"Verlauf löschen",thDate:"Datum",thProvider:"Anbieter",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualität",noHistory:"Noch keine Messungen.",ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",ftTrade:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo.",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftPrivacy:"Datenschutz",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",stPing:"Latenz wird gemessen…",stDown:"Download wird gemessen…",stUp:"Upload wird gemessen…",stErr:"Test fehlgeschlagen.",stExc:"Hervorragend",stGood:"Gut",stLim:"Eingeschränkt",q90:"Hervorragende Verbindung.",q75:"Sehr gute Verbindung.",q55:"Gute Verbindung.",q35:"Durchschnittliche Verbindung.",q0:"Schlechte Verbindung.",gam85:"Perfekt für Online-Gaming",gam65:"Gut für Gaming",gam45:"Spielbar",gam0:"Kann zu Verzögerungen führen",str85:"HD-Streaming: Hervorragend",str65:"HD-Streaming: Gut",str40:"HD-Streaming: Eingeschränkt",str0:"Streaming kann puffern",fk85:"4K-Streaming: Hervorragend",fk65:"4K-Streaming: Gut",fk40:"4K-Streaming: Möglich",fk0:"4K nicht empfohlen",call85:"Videocalls: Hervorragend",call65:"Videocalls: Gut",call40:"Videocalls: Eingeschränkt",call0:"Videocalls gestört",off85:"Hervorragend für Homeoffice",off65:"Gut für Homeoffice",off40:"Nutzbar",off0:"Möglicherweise langsam",cld85:"Große Transfers: Sehr schnell",cld65:"Schnelle Übertragung",cld40:"Mäßig",cld0:"Downloads langsam",soc85:"Hervorragend",soc65:"Sehr gut",soc40:"Good",soc0:"Eingeschränkt",web85:"Sehr schnelles Laden",web65:"Schnelles Laden",web40:"Normales Laden",web0:"Langsamer Aufbau",alertRun:"Bitte führe zuerst einen Speedtest aus.",unavail:"Nicht verfügbar",notDetected:"Nicht erkannt",appRunTest:"Test ausführen",copied:"Kopiert",
+de:{navFaq:"FAQ",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",liteBtn:"Fasqoo Lite",widgetBtn:"Speed-Widget",download:"Fasqoo für Windows installieren",title:"Internet-Speedtest",sub:"Präzise. Schnell. Echtzeit.",server:"AUTOMATISCHER SERVER",ready:"Bereit zum Testen",start:"Speedtest starten",startAgain:"Test erneut starten",testing:"Test läuft…",complete:"Test abgeschlossen",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Echtzeit-Leistung",chartWait:"Wartet",lblIp:"Öffentliche IP",lblIsp:"Anbieter / ISP",lblLoc:"Standort",lblAsn:"Netzwerk / ASN",qTitle:"Verbindungsqualität",qDefault:"Führe einen Test aus, um deine Verbindung zu bewerten.",appsTitle:"Was kannst du mit deiner Verbindung machen?",appsSub:"Fasqoo übersetzt deine gemessenen Werte in konkrete Alltagsszenarien: Gaming, Streaming, Videocalls, Homeoffice, Downloads, Social Media und Web-Surfen. Die Einschätzung basiert auf Download, Upload, Ping und Jitter – nicht auf einer pauschalen Vermutung.",diagTitle:"Netzwerkdiagnose",diagLatT:"Latenz",diagLatD:"Misst die Antwortzeit.",diagStabT:"Stabilität",diagStabD:"Jitter zeigt Verbindungsstabilität.",diagDnsT:"DNS-Diagnose",diagDnsD:"Prüft DNS-Resolver.",diagIpT:"IP-Diagnose",diagIpD:"Erkennt IP, ISP, ASN.",repTitle:"Professioneller Testbericht",lblRepTestId:"Test ID",copy:"Ergebnis kopieren",share:"Ergebnis teilen",json:"JSON exportieren",print:"Bericht drucken",histTitle:"Testverlauf",histRecent:"Letzte Messungen",histClear:"Verlauf löschen",thDate:"Datum",thProvider:"Provider",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualität",noHistory:"Noch keine Messungen.",ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",ftTrade:"Fasqoo und Fasqoo Speed Test sind Marken von Fasqoo.",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftPrivacy:"Datenschutz",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",stPing:"Latenz wird gemessen…",stDown:"Download wird gemessen…",stUp:"Upload wird gemessen…",stErr:"Test fehlgeschlagen.",stExc:"Hervorragend",stGood:"Gut",stLim:"Eingeschränkt",q90:"Hervorragende Verbindung.",q75:"Sehr gute Verbindung.",q55:"Gute Verbindung.",q35:"Durchschnittliche Verbindung.",q0:"Schlechte Verbindung.",gam85:"Perfekt für Online-Gaming",gam65:"Gut für Gaming",gam45:"Spielbar",gam0:"Kann zu Verzögerungen führen",str85:"HD-Streaming: Hervorragend",str65:"HD-Streaming: Gut",str40:"HD-Streaming: Eingeschränkt",str0:"Streaming kann puffern",fk85:"4K-Streaming: Hervorragend",fk65:"4K-Streaming: Gut",fk40:"4K-Streaming: Möglich",fk0:"4K nicht empfohlen",call85:"Videocalls: Hervorragend",call65:"Videocalls: Gut",call40:"Videocalls: Eingeschränkt",call0:"Videocalls gestört",off85:"Hervorragend für Homeoffice",off65:"Gut für Homeoffice",off40:"Nutzbar",off0:"Möglicherweise langsam",cld85:"Große Transfers: Sehr schnell",cld65:"Schnelle Übertragung",cld40:"Mäßig",cld0:"Downloads langsam",soc85:"Hervorragend",soc65:"Sehr gut",soc40:"Good",soc0:"Eingeschränkt",web85:"Sehr schnelles Laden",web65:"Schnelles Laden",web40:"Normales Laden",web0:"Langsamer Aufbau",alertRun:"Bitte führe zuerst einen Speedtest aus.",unavail:"Nicht verfügbar",notDetected:"Nicht erkannt",appRunTest:"Test ausführen",copied:"Kopiert",
   apps:{gaming:{t:"Gaming",d:"Niedriger Ping und Jitter sind wichtig.",det:"Zeigt, welche Spiele ohne Lag laufen."},stream:{t:"Streaming",d:"Gute Geschwindigkeit für HD-Streaming.",det:"Prüft, ob HD-Streaming flüssig läuft."},fourk:{t:"4K Streaming",d:"Prüft, ob 4K-Video möglich ist.",det:"Eignet sich für Ultra-HD-Streaming."},call:{t:"Videokonferenzen",d:"Bandbreite & Latenz für Videocalls.",det:"Ideal für Teams, Zoom, Meet."},office:{t:"Homeoffice",d:"Für Cloud-Anwendungen und Homeoffice.",det:"Stabilität für VPNs und Cloud-Dokumente."},cloud:{t:"Cloud & Downloads",d:"Effizienz bei großen Übertragungen.",det:"Wie schnell große Dateien laden."},social:{t:"Social Media",d:"Für Instagram, TikTok, Facebook.",det:"Wie schnell Reels und Stories laden."},web:{t:"Web-Surfen",d:"Für tägliche Webseiten.",det:"Ladezeiten für Alltagsseiten."}}},
 fr:{navFaq:"FAQ",navStatus:"État du réseau",navDiag:"Diagnostic IT",navAbout:"À propos",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Installer Fasqoo pour Windows",title:"Test de vitesse Internet",sub:"Précis. Rapide. En temps réel.",server:"SERVEUR AUTOMATIQUE",ready:"Prêt à tester",start:"Lancer le test",startAgain:"Relancer",testing:"Test en cours…",complete:"Test terminé",ping:"Ping",jitter:"Jitter",download:"Téléchargement",upload:"Envoi",chartLive:"Performance en direct",chartWait:"En attente",lblIp:"IP publique",lblIsp:"Fournisseur / FAI",lblLoc:"Localisation",lblAsn:"Réseau / ASN",qTitle:"Qualité de connexion",qDefault:"Lancez un test pour évaluer votre connexion.",appsTitle:"Que pouvez-vous faire ?",appsSub:"Vos résultats sont analysés.",diagTitle:"Diagnostic réseau",diagLatT:"Latence",diagLatD:"Mesure le temps de réponse.",diagStabT:"Stabilité",diagStabD:"Le jitter montre la stabilité.",diagDnsT:"Diagnostic DNS",diagDnsD:"Vérifie les résolveurs DNS.",diagIpT:"Diagnostic IP",diagIpD:"Détecte IP, FAI, ASN.",repTitle:"Rapport professionnel",lblRepTestId:"ID",copy:"Copier",share:"Partager",json:"Exporter JSON",print:"Imprimer",histTitle:"Historique",histRecent:"Mesures récentes",histClear:"Effacer",thDate:"Date",thDown:"Téléchargement",thUp:"Envoi",thPing:"Ping",thQual:"Qualité",noHistory:"Aucun test enregistré.",ftRights:"© 2026 Fasqoo. Tous droits réservés.",ftTrade:"Fasqoo est une marque de Fasqoo.",ftAccess:"Accessibilité",ftImprint:"Mentions légales",ftPrivacy:"Confidentialité",ftTerms:"Conditions",ftNoSell:"Ne pas vendre mes données",stPing:"Mesure de la latence…",stDown:"Mesure du téléchargement…",stUp:"Mesure de l'envoi…",stErr:"Échec.",stExc:"Excellent",stGood:"Bon",stLim:"Limité",q90:"Excellente connexion.",q75:"Très bonne connexion.",q55:"Bonne connexion.",q35:"Connexion moyenne.",q0:"Connexion faible.",gam85:"Excellent pour le jeu",gam65:"Bon pour le jeu",gam45:"Jouable",gam0:"Peut causer du lag",str85:"Streaming HD : Excellent",str65:"Streaming HD : Bon",str40:"Streaming HD : Limité",str0:"Risque de buffer",fk85:"Streaming 4K : Excellent",fk65:"Streaming 4K : Bon",fk40:"Streaming 4K : Possible",fk0:"4K non recommandé",call85:"Appels vidéo : Excellent",call65:"Appels vidéo : Bon",call40:"Appels vidéo : Limité",call0:"Appels altérés",off85:"Excellent pour télétravail",off65:"Bon pour télétravail",off40:"Utilisable",off0:"Peut être lent",cld85:"Gros transferts : Très rapide",cld65:"Transfert rapide",cld40:"Modéré",cld0:"Téléchargements lents",soc85:"Excellent",soc65:"Très bon",soc40:"Bon",soc0:"Limité",web85:"Chargement très rapide",web65:"Chargement rapide",web40:"Chargement normal",web0:"Chargement lent",alertRun:"Lancez d'abord un test.",unavail:"Indisponible",notDetected:"Non détecté",appRunTest:"Lancer",copied:"Copié",
   apps:{gaming:{t:"Jeux",d:"Ping et jitter bas importants.",det:"Voir les jeux sans lag."},stream:{t:"Streaming",d:"Bonne vitesse pour le HD.",det:"Vérifier si le HD est fluide."},fourk:{t:"Streaming 4K",d:"Vérifie la vidéo 4K.",det:"Teste le streaming Ultra-HD."},call:{t:"Visio",d:"Bande passante & latence.",det:"Idéal pour Teams, Zoom, Meet."},office:{t:"Télétravail",d:"Pour le cloud et le télétravail.",det:"Stabilité VPN et documents cloud."},cloud:{t:"Cloud & Téléchargements",d:"Efficacité des gros transferts.",det:"Vitesse de téléchargement."},social:{t:"Réseaux sociaux",d:"Pour Instagram, TikTok, Facebook.",det:"Vitesse de chargement des reels."},web:{t:"Navigation",d:"Pour les sites du quotidien.",det:"Temps de chargement."}}},
@@ -614,7 +628,7 @@ it:{navFaq:"FAQ",navStatus:"Stato rete",navDiag:"Diagnostica IT",navAbout:"Chi s
   apps:{gaming:{t:"Gaming",d:"Ping e jitter bassi importanti.",det:"Vedi giochi senza lag."},stream:{t:"Streaming",d:"Buona velocità HD.",det:"Verifica HD fluido."},fourk:{t:"Streaming 4K",d:"Verifica video 4K.",det:"Test Ultra-HD."},call:{t:"Videoconferenze",d:"Banda e latenza.",det:"Ideale per Teams, Zoom, Meet."},office:{t:"Smart Working",d:"Per cloud e lavoro remoto.",det:"Stabilità VPN e documenti."},cloud:{t:"Cloud e Download",d:"Efficienza trasferimenti.",det:"Velocità download."},social:{t:"Social Media",d:"Per Instagram, TikTok, Facebook.",det:"Velocità reel."},web:{t:"Navigazione",d:"Per siti quotidiani.",det:"Tempi di caricamento."}}},
 pt:{navFaq:"FAQ",navStatus:"Estado da Rede",navDiag:"Diagnóstico TI",navAbout:"Sobre",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Instalar Fasqoo para Windows",title:"Teste de Velocidade Internet",sub:"Preciso. Rápido. Em tempo real.",server:"SERVIDOR AUTOMÁTICO",ready:"Pronto",start:"Iniciar teste",startAgain:"Repetir",testing:"A testar…",complete:"Concluído",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Desempenho",chartWait:"Aguarda",lblIp:"IP Público",lblIsp:"Fornecedor / ISP",lblLoc:"Localização",lblAsn:"Rede / ASN",qTitle:"Qualidade",qDefault:"Execute um teste para avaliar a ligação.",appsTitle:"O que pode fazer?",appsSub:"Os resultados são analisados.",diagTitle:"Diagnóstico de Rede",diagLatT:"Latência",diagLatD:"Mede o tempo de resposta.",diagStabT:"Estabilidade",diagStabD:"O jitter mostra estabilidade.",diagDnsT:"Diagnóstico DNS",diagDnsD:"Verifica os DNS.",diagIpT:"Diagnóstico IP",diagIpD:"Deteta IP, ISP, ASN.",repTitle:"Relatório profissional",lblRepTestId:"ID",copy:"Copiar",share:"Partilhar",json:"Exportar JSON",print:"Imprimir",histTitle:"Histórico",histRecent:"Recentes",histClear:"Limpar",thDate:"Data",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualidade",noHistory:"Sem testes guardados.",ftRights:"© 2026 Fasqoo. Todos os direitos reservados.",ftTrade:"Fasqoo é uma marca da Fasqoo.",ftAccess:"Acessibilidade",ftImprint:"Informação legal",ftPrivacy:"Privacidade",ftTerms:"Termos",ftNoSell:"Não vender os meus dados",stPing:"A medir latência…",stDown:"A medir download…",stUp:"A medir upload…",stErr:"Falhou.",stExc:"Excelente",stGood:"Bom",stLim:"Limitado",q90:"Ligação excelente.",q75:"Muito boa ligação.",q55:"Boa ligação.",q35:"Ligação média.",q0:"Ligação fraca.",gam85:"Excelente para jogos",gam65:"Bom para jogos",gam45:"Jogável",gam0:"Pode atrasar",str85:"HD: Excelente",str65:"HD: Bom",str40:"HD: Limitado",str0:"Pode parar",fk85:"4K: Excelente",fk65:"4K: Bom",fk40:"4K: Possível",fk0:"4K não recomendado",call85:"Videochamadas: Excelente",call65:"Videochamadas: Boas",call40:"Videochamadas: Limitadas",call0:"Podem falhar",off85:"Excelente para teletrabalho",off65:"Bom para teletrabalho",off40:"Utilizável",off0:"Pode ser lento",cld85:"Transferências: Muito rápido",cld65:"Transferências rápidas",cld40:"Moderado",cld0:"Downloads lentos",soc85:"Excelente",soc65:"Muito bom",soc40:"Bom",soc0:"Limitado",web85:"Carregamento muito rápido",web65:"Carregamento rápido",web40:"Normal",web0:"Lento",alertRun:"Execute primeiro um teste.",unavail:"Indisponível",notDetected:"Não detetado",appRunTest:"Executar",copied:"Copiado",
   apps:{gaming:{t:"Jogos",d:"Ping e jitter baixos importantes.",det:"Ver jogos sem lag."},stream:{t:"Streaming",d:"Boa velocidade HD.",det:"Verificar HD fluido."},fourk:{t:"Streaming 4K",d:"Verifica vídeo 4K.",det:"Teste Ultra-HD."},call:{t:"Videochamadas",d:"Largura de banda e latência.",det:"Ideal para Teams, Zoom, Meet."},office:{t:"Teletrabalho",d:"Para nuvem e trabalho remoto.",det:"Estabilidade VPN e documentos."},cloud:{t:"Nuvem e Downloads",d:"Eficiência em transferências.",det:"Velocidade de download."},social:{t:"Redes Sociais",d:"Para Instagram, TikTok, Facebook.",det:"Velocidade de reels."},web:{t:"Navegação",d:"Para sites diários.",det:"Tempos de carregamento."}}},
-nl:{navFaq:"FAQ",navStatus:"Netwerkstatus",navDiag:"IT-Diagnose",navAbout:"Over ons",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Fasqoo voor Windows installeren",title:"Internetsnelheidstest",sub:"Nauwkeurig. Snel. Realtime.",server:"AUTOMATISCHE SERVER",ready:"Klaar",start:"Start test",startAgain:"Opnieuw",testing:"Bezig…",complete:"Voltooid",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Live",chartWait:"Wachten",lblIp:"Openbaar IP",lblIsp:"Provider / ISP",lblLoc:"Locatie",lblAsn:"Netwerk / ASN",qTitle:"Kwaliteit",qDefault:"Voer een test uit om te beoordelen.",appsTitle:"Wat kun je doen?",appsSub:"Je resultaten worden geanalyseerd.",diagTitle:"Netwerkdiagnose",diagLatT:"Latentie",diagLatD:"Meet reactietijd.",diagStabT:"Stabiliteit",diagStabD:"Jitter toont stabiliteit.",diagDnsT:"DNS-diagnose",diagDnsD:"Controleert DNS.",diagIpT:"IP-diagnose",diagIpD:"Detecteert IP, ISP, ASN.",repTitle:"Professioneel rapport",lblRepTestId:"ID",copy:"Kopiëren",share:"Delen",json:"JSON exporteren",print:"Afdrukken",histTitle:"Geschiedenis",histRecent:"Recent",histClear:"Wissen",thDate:"Datum",thProvider:"Anbieter",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Kwaliteit",noHistory:"Nog geen tests.",ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.",ftTrade:"Fasqoo is een merk van Fasqoo.",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftPrivacy:"Privacy",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",stPing:"Latentie meten…",stDown:"Download meten…",stUp:"Upload meten…",stErr:"Mislukt.",stExc:"Uitstekend",stGood:"Goed",stLim:"Beperkt",q90:"Uitstekende verbinding.",q75:"Zeer goede verbinding.",q55:"Goede verbinding.",q35:"Gemiddelde verbinding.",q0:"Slechte verbinding.",gam85:"Uitstekend voor gaming",gam65:"Goed voor gaming",gam45:"Speelbaar",gam0:"Kan laggen",str85:"HD: Uitstekend",str65:"HD: Goed",str40:"HD: Beperkt",str0:"Kan bufferen",fk85:"4K: Uitstekend",fk65:"4K: Goed",fk40:"4K: Mogelijk",fk0:"4K niet aanbevolen",call85:"Videobellen: Uitstekend",call65:"Videobellen: Goed",call40:"Videobellen: Beperkt",call0:"Kan storen",off85:"Uitstekend voor thuiswerk",off65:"Goed voor thuiswerk",off40:"Bruikbaar",off0:"Kan traag zijn",cld85:"Grote overdrachten: Zeer snel",cld65:"Snelle overdracht",cld40:"Matig",cld0:"Trage downloads",soc85:"Uitstekend",soc65:"Zeer goed",soc40:"Goed",soc0:"Beperkt",web85:"Zeer snel laden",web65:"Snel laden",web40:"Normaal",web0:"Traag",alertRun:"Voer eerst een test uit.",unavail:"Niet beschikbaar",notDetected:"Niet gedetecteerd",appRunTest:"Start",copied:"Gekopieerd",
+nl:{navFaq:"FAQ",navStatus:"Netwerkstatus",navDiag:"IT-Diagnose",navAbout:"Over ons",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Fasqoo voor Windows installeren",title:"Internetsnelheidstest",sub:"Nauwkeurig. Snel. Realtime.",server:"AUTOMATISCHE SERVER",ready:"Klaar",start:"Start test",startAgain:"Opnieuw",testing:"Bezig…",complete:"Voltooid",ping:"Ping",jitter:"Jitter",download:"Download",upload:"Upload",chartLive:"Live",chartWait:"Wachten",lblIp:"Openbaar IP",lblIsp:"Provider / ISP",lblLoc:"Locatie",lblAsn:"Netwerk / ASN",qTitle:"Kwaliteit",qDefault:"Voer een test uit om te beoordelen.",appsTitle:"Wat kun je doen?",appsSub:"Je resultaten worden geanalyseerd.",diagTitle:"Netwerkdiagnose",diagLatT:"Latentie",diagLatD:"Meet reactietijd.",diagStabT:"Stabiliteit",diagStabD:"Jitter toont stabiliteit.",diagDnsT:"DNS-diagnose",diagDnsD:"Controleert DNS.",diagIpT:"IP-diagnose",diagIpD:"Detecteert IP, ISP, ASN.",repTitle:"Professioneel rapport",lblRepTestId:"ID",copy:"Kopiëren",share:"Delen",json:"JSON exporteren",print:"Afdrukken",histTitle:"Geschiedenis",histRecent:"Recent",histClear:"Wissen",thDate:"Datum",thProvider:"Provider",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Kwaliteit",noHistory:"Nog geen tests.",ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.",ftTrade:"Fasqoo is een merk van Fasqoo.",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftPrivacy:"Privacy",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",stPing:"Latentie meten…",stDown:"Download meten…",stUp:"Upload meten…",stErr:"Mislukt.",stExc:"Uitstekend",stGood:"Goed",stLim:"Beperkt",q90:"Uitstekende verbinding.",q75:"Zeer goede verbinding.",q55:"Goede verbinding.",q35:"Gemiddelde verbinding.",q0:"Slechte verbinding.",gam85:"Uitstekend voor gaming",gam65:"Goed voor gaming",gam45:"Speelbaar",gam0:"Kan laggen",str85:"HD: Uitstekend",str65:"HD: Goed",str40:"HD: Beperkt",str0:"Kan bufferen",fk85:"4K: Uitstekend",fk65:"4K: Goed",fk40:"4K: Mogelijk",fk0:"4K niet aanbevolen",call85:"Videobellen: Uitstekend",call65:"Videobellen: Goed",call40:"Videobellen: Beperkt",call0:"Kan storen",off85:"Uitstekend voor thuiswerk",off65:"Goed voor thuiswerk",off40:"Bruikbaar",off0:"Kan traag zijn",cld85:"Grote overdrachten: Zeer snel",cld65:"Snelle overdracht",cld40:"Matig",cld0:"Trage downloads",soc85:"Uitstekend",soc65:"Zeer goed",soc40:"Goed",soc0:"Beperkt",web85:"Zeer snel laden",web65:"Snel laden",web40:"Normaal",web0:"Traag",alertRun:"Voer eerst een test uit.",unavail:"Niet beschikbaar",notDetected:"Niet gedetecteerd",appRunTest:"Start",copied:"Gekopieerd",
   apps:{gaming:{t:"Gaming",d:"Lage ping en jitter belangrijk.",det:"Bekijk games zonder lag."},stream:{t:"Streaming",d:"Goede snelheid HD.",det:"Controleer HD-streaming."},fourk:{t:"4K Streaming",d:"Controleert 4K-video.",det:"Test Ultra-HD."},call:{t:"Videobellen",d:"Bandbreedte en latentie.",det:"Ideaal voor Teams, Zoom, Meet."},office:{t:"Thuiswerken",d:"Voor cloud en thuiswerk.",det:"Stabiliteit VPN en cloud."},cloud:{t:"Cloud & Downloads",d:"Efficiëntie overdrachten.",det:"Downloadsnelheid."},social:{t:"Sociale Media",d:"Voor Instagram, TikTok, Facebook.",det:"Snelheid reels."},web:{t:"Websurfen",d:"Voor dagelijkse sites.",det:"Laadtijden."}}},
 tr:{navFaq:"SSS",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",download:"Fasqoo'yu Windows için yükle",title:"İnternet Hız Testi",sub:"Hassas. Hızlı. Gerçek zamanlı.",server:"OTOMATİK SUNUCU",ready:"Hazır",start:"Testi başlat",startAgain:"Tekrar",testing:"Test ediliyor…",complete:"Tamamlandı",ping:"Ping",jitter:"Jitter",download:"İndirme",upload:"Yükleme",chartLive:"Canlı",chartWait:"Bekliyor",lblIp:"Açık IP",lblIsp:"Sağlayıcı / ISP",lblLoc:"Konum",lblAsn:"Ağ / ASN",qTitle:"Kalite",qDefault:"Bağlantınızı değerlendirmek için test yapın.",appsTitle:"Ne yapabilirsiniz?",appsSub:"Sonuçlarınız analiz edilir.",diagTitle:"Ağ Tanılama",diagLatT:"Gecikme",diagLatD:"Yanıt süresini ölçer.",diagStabT:"Kararlılık",diagStabD:"Jitter kararlılığı gösterir.",diagDnsT:"DNS Tanılama",diagDnsD:"DNS sunucularını kontrol eder.",diagIpT:"IP Tanılama",diagIpD:"IP, ISP, ASN tespit eder.",repTitle:"Profesyonel Rapor",lblRepTestId:"ID",copy:"Kopyala",share:"Paylaş",json:"JSON",print:"Yazdır",histTitle:"Geçmiş",histRecent:"Son ölçümler",histClear:"Temizle",thDate:"Tarih",thDown:"İndirme",thUp:"Yükleme",thPing:"Ping",thQual:"Kalite",noHistory:"Kayıt yok.",ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.",ftTrade:"Fasqoo, Fasqoo'nun markasıdır.",ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftPrivacy:"Gizlilik",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma",stPing:"Gecikme ölçülüyor…",stDown:"İndirme ölçülüyor…",stUp:"Yükleme ölçülüyor…",stErr:"Başarısız.",stExc:"Mükemmel",stGood:"İyi",stLim:"Sınırlı",q90:"Mükemmel bağlantı.",q75:"Çok iyi bağlantı.",q55:"İyi bağlantı.",q35:"Ortalama bağlantı.",q0:"Zayıf bağlantı.",gam85:"Oyun için mükemmel",gam65:"Oyun için iyi",gam45:"Oynanabilir",gam0:"Gecikme olabilir",str85:"HD: Mükemmel",str65:"HD: İyi",str40:"HD: Sınırlı",str0:"Donabilir",fk85:"4K: Mükemmel",fk65:"4K: İyi",fk40:"4K: Mümkün",fk0:"4K önerilmez",call85:"Görüşme: Mükemmel",call65:"Görüşme: İyi",call40:"Görüşme: Sınırlı",call0:"Bozulabilir",off85:"Evden çalışma için mükemmel",off65:"Evden çalışma için iyi",off40:"Kullanılabilir",off0:"Yavaş olabilir",cld85:"Transferler: Çok hızlı",cld65:"Hızlı",cld40:"Orta",cld0:"Yavaş",soc85:"Mükemmel",soc65:"Çok iyi",soc40:"İyi",soc0:"Sınırlı",web85:"Çok hızlı",web65:"Hızlı",web40:"Normal",web0:"Yavaş",alertRun:"Önce test yapın.",unavail:"Kullanılamıyor",notDetected:"Tespit edilmedi",appRunTest:"Çalıştır",copied:"Kopylandı",
   apps:{gaming:{t:"Oyun",d:"Düşük ping önemli.",det:"Gecikmesiz oyunları gör."},stream:{t:"Yayın",d:"HD için iyi hız.",det:"HD akıcılığını kontrol et."},fourk:{t:"4K Yayın",d:"4K kontrolü.",det:"Ultra-HD test."},call:{t:"Görüşme",d:"Bant genişliği ve gecikme.",det:"Teams, Zoom, Meet için ideal."},office:{t:"Evden Çalışma",d:"Bulut ve uzaktan çalışma.",det:"VPN ve bulut stabilitesi."},cloud:{t:"Bulut ve İndirme",d:"Transfer verimliliği.",det:"İndirme hızı."},social:{t:"Sosyal Medya",d:"Instagram, TikTok, Facebook.",det:"Reels hızı."},web:{t:"Gezinti",d:"Günlük siteler.",det:"Yükleme süreleri."}}},
@@ -637,6 +651,20 @@ const extraTranslations = {
   ar:{eyebrow:'ذكاء شبكة FASQOO',trust1:'✓ قياس حقيقي عبر المتصفح',trust2:'✓ Cloudflare Edge',trust3:'✓ بدون قيم بديلة اصطناعية',liveTest:'اختبار اتصال مباشر',readyPhase:'جاهز',phasePing:'Ping',phaseDownload:'تنزيل',phaseUpload:'رفع',phaseResult:'النتيجة',unitMbps:'ميغابت/ث',waiting:'بانتظار القياس',basedOn:'استنادًا إلى التنزيل والرفع وPing وJitter',notMeasured:'لم يتم القياس',networkIntelligence:'ذكاء الشبكة',understand:'افهم اتصالك',intelligenceSub:'تحوّل Fasqoo قياساتك إلى معلومات عملية عن الشبكة.',professional:'احترافي',latency:'زمن الاستجابة',responseTime:'وقت الاستجابة',stability:'الاستقرار',jitterConsistency:'اتساق Jitter',throughput:'معدل النقل',downloadCapacity:'سعة التنزيل',testServer:'خادم الاختبار',automaticEdge:'اختيار Edge تلقائيًا',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'معرّف الاختبار',measurementReal:'جارٍ قياس أداء الشبكة الحقيقي',measurementComplete:'اكتمل القياس',measurementFailed:'تعذر إكمال الاختبار'}
 };
 
+const uiTranslations = {
+  en:{metaTitle:'Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo',metaDescription:'Measure your real browser connection with download, upload, ping and jitter.',widgetTitle:'Fasqoo Speed Widget',widgetLive:'Live result',widgetDownload:'Mbps download',widgetQuality:'Quality',widgetRun:'Run speed test',widgetProvider:'Provider',menu:'Menu',darkMode:'Dark mode',ad:'Advertisement'},
+  de:{metaTitle:'Kostenloser Internet-Speedtest | Fasqoo',metaDescription:'Miss Download, Upload, Ping und Jitter direkt im Browser mit Fasqoo.',widgetTitle:'Fasqoo Speed Widget',widgetLive:'Live-Ergebnis',widgetDownload:'Mbit/s Download',widgetQuality:'Qualität',widgetRun:'Speedtest starten',widgetProvider:'Anbieter',menu:'Menü',darkMode:'Dunkelmodus',ad:'Werbung'},
+  fr:{metaTitle:'Test de vitesse Internet gratuit | Fasqoo',metaDescription:'Mesurez le téléchargement, l’envoi, le ping et le jitter avec Fasqoo.',widgetTitle:'Widget de vitesse Fasqoo',widgetLive:'Résultat en direct',widgetDownload:'Mbit/s téléchargement',widgetQuality:'Qualité',widgetRun:'Lancer le test',widgetProvider:'Fournisseur',menu:'Menu',darkMode:'Mode sombre',ad:'Publicité'},
+  es:{metaTitle:'Test de velocidad de Internet gratis | Fasqoo',metaDescription:'Mide descarga, subida, ping y jitter directamente en tu navegador con Fasqoo.',widgetTitle:'Widget de velocidad Fasqoo',widgetLive:'Resultado en directo',widgetDownload:'Mbit/s descarga',widgetQuality:'Calidad',widgetRun:'Iniciar prueba',widgetProvider:'Proveedor',menu:'Menú',darkMode:'Modo oscuro',ad:'Publicidad'},
+  it:{metaTitle:'Test di velocità Internet gratuito | Fasqoo',metaDescription:'Misura download, upload, ping e jitter direttamente dal browser con Fasqoo.',widgetTitle:'Widget velocità Fasqoo',widgetLive:'Risultato in tempo reale',widgetDownload:'Mbit/s download',widgetQuality:'Qualità',widgetRun:'Avvia test',widgetProvider:'Provider',menu:'Menu',darkMode:'Modalità scura',ad:'Pubblicità'},
+  pt:{metaTitle:'Teste de velocidade da Internet grátis | Fasqoo',metaDescription:'Meça download, upload, ping e jitter diretamente no navegador com a Fasqoo.',widgetTitle:'Widget de velocidade Fasqoo',widgetLive:'Resultado ao vivo',widgetDownload:'Mbit/s download',widgetQuality:'Qualidade',widgetRun:'Iniciar teste',widgetProvider:'Fornecedor',menu:'Menu',darkMode:'Modo escuro',ad:'Publicidade'},
+  nl:{metaTitle:'Gratis internet snelheidstest | Fasqoo',metaDescription:'Meet download, upload, ping en jitter rechtstreeks in je browser met Fasqoo.',widgetTitle:'Fasqoo snelheid-widget',widgetLive:'Live resultaat',widgetDownload:'Mbit/s download',widgetQuality:'Kwaliteit',widgetRun:'Snelheidstest starten',widgetProvider:'Provider',menu:'Menu',darkMode:'Donkere modus',ad:'Advertentie'},
+  tr:{metaTitle:'Ücretsiz İnternet Hız Testi | Fasqoo',metaDescription:'Fasqoo ile tarayıcınızdan indirme, yükleme, ping ve jitter değerlerini ölçün.',widgetTitle:'Fasqoo Hız Widgetı',widgetLive:'Canlı sonuç',widgetDownload:'Mbit/s indirme',widgetQuality:'Kalite',widgetRun:'Hız testini başlat',widgetProvider:'Sağlayıcı',menu:'Menü',darkMode:'Karanlık mod',ad:'Reklam'},
+  sq:{metaTitle:'Test falas i shpejtësisë së internetit | Fasqoo',metaDescription:'Mat shkarkimin, ngarkimin, ping-un dhe jitter-in drejtpërdrejt në shfletues me Fasqoo.',widgetTitle:'Widget i shpejtësisë Fasqoo',widgetLive:'Rezultat në kohë reale',widgetDownload:'Mbit/s shkarkim',widgetQuality:'Cilësia',widgetRun:'Fillo testin',widgetProvider:'Ofruesi',menu:'Menyja',darkMode:'Modaliteti i errët',ad:'Reklamë'},
+  ar:{metaTitle:'اختبار سرعة الإنترنت المجاني | Fasqoo',metaDescription:'قس سرعة التنزيل والرفع وPing وJitter مباشرة من المتصفح مع Fasqoo.',widgetTitle:'أداة سرعة Fasqoo',widgetLive:'النتيجة المباشرة',widgetDownload:'ميغابت/ث تنزيل',widgetQuality:'الجودة',widgetRun:'بدء اختبار السرعة',widgetProvider:'المزوّد',menu:'القائمة',darkMode:'الوضع الداكن',ad:'إعلان'}
+};
+Object.keys(uiTranslations).forEach(k=>Object.assign(extraTranslations[k],uiTranslations[k]));
+
 const pageTranslations = {
   en:{title:"Free Internet Speed Test",sub:"Check download, upload, ping and jitter.",methodTitle:"How your connection is measured",methodSub:"Fasqoo measures your connection directly from your browser and reports the values it actually receives.",method1T:"Latency & jitter",method1D:"Multiple small requests are timed. Ping uses the measured response times, while jitter describes their variation.",method2T:"Download",method2D:"Your browser downloads real data from the test endpoint. Speed is calculated from bytes received and elapsed time.",method3T:"Upload",method3D:"Your browser sends real data to the test endpoint. Speed is calculated from bytes sent and elapsed time.",method4T:"Why results vary",method4D:"Wi-Fi, device load, VPNs, ISP congestion, routing and distance to the test edge can affect results.",methodNote:"Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
   de:{title:"Kostenloser Internet-Speedtest",sub:"Prüfe Download, Upload, Ping und Jitter.",methodTitle:"So wird deine Verbindung gemessen",methodSub:"Fasqoo misst deine Verbindung direkt im Browser und zeigt die tatsächlich gemessenen Werte an.",method1T:"Latenz & Jitter",method1D:"Mehrere kleine Anfragen werden gemessen. Der Ping basiert auf den Antwortzeiten, der Jitter beschreibt deren Schwankung.",method2T:"Download",method2D:"Dein Browser lädt echte Daten vom Test-Endpunkt. Die Geschwindigkeit wird aus empfangenen Bytes und Messdauer berechnet.",method3T:"Upload",method3D:"Dein Browser sendet echte Daten an den Test-Endpunkt. Die Geschwindigkeit wird aus gesendeten Bytes und Messdauer berechnet.",method4T:"Warum Ergebnisse schwanken",method4D:"WLAN, Geräteauslastung, VPNs, Netzauslastung des Anbieters, Routing und die Entfernung zum Testserver können das Ergebnis beeinflussen.",methodNote:"Messinfrastruktur: Cloudflare-Speed-Test-Endpunkte. Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt."},
@@ -650,24 +678,92 @@ const pageTranslations = {
   ar:{title:"اختبار سرعة الإنترنت المجاني",sub:"تحقق من التنزيل والرفع وPing وJitter.",methodTitle:"كيف يتم قياس اتصالك",methodSub:"تقيس Fasqoo اتصالك مباشرة من المتصفح وتعرض القيم التي يتم قياسها فعليًا.",method1T:"زمن الاستجابة وJitter",method1D:"يتم قياس عدة طلبات صغيرة. يعتمد Ping على أزمنة الاستجابة المقاسة، بينما يصف Jitter مقدار التغير بينها.",method2T:"التنزيل",method2D:"يقوم المتصفح بتنزيل بيانات حقيقية من نقطة الاختبار. تُحسب السرعة من البيانات المستلمة والوقت المنقضي.",method3T:"الرفع",method3D:"يرسل المتصفح بيانات حقيقية إلى نقطة الاختبار. تُحسب السرعة من البيانات المرسلة والوقت المنقضي.",method4T:"لماذا تختلف النتائج",method4D:"يمكن أن يؤثر Wi-Fi وحمل الجهاز وVPN وازدحام مزود الخدمة والتوجيه والمسافة إلى خادم الاختبار على النتيجة.",methodNote:"بنية القياس: نقاط اختبار Cloudflare Speed Test. Fasqoo منصة مستقلة لا تمثل منتجًا رسميًا من Cloudflare."}
 };
 
+
+Object.assign(extraTranslations.en,{trust4:'✓ No account required',stripTitle:'FASQOO NETWORK INTELLIGENCE',stripSub:'Check download, upload, ping and jitter.',strip1:'✓ Real browser measurement',strip2:'✓ Cloudflare Edge',strip3:'✓ No artificial fallback values',strip4:'✓ No account required',stripServer:'AUTOMATIC SERVER',howMeasures:'HOW FASQOO MEASURES',transparent:'TRANSPARENT'});
+Object.assign(extraTranslations.de,{trust4:'✓ Kein Konto erforderlich',stripTitle:'FASQOO NETZWERK-INTELLIGENZ',stripSub:'Download, Upload, Ping und Jitter prüfen.',strip1:'✓ Echte Browser-Messung',strip2:'✓ Cloudflare Edge',strip3:'✓ Keine künstlichen Ersatzwerte',strip4:'✓ Kein Konto erforderlich',stripServer:'AUTOMATISCHER SERVER',howMeasures:'SO MISST FASQOO',transparent:'TRANSPARENT'});
+Object.assign(extraTranslations.fr,{trust4:'✓ Aucun compte requis',stripTitle:'INTELLIGENCE RÉSEAU FASQOO',stripSub:'Vérifiez le téléchargement, l’envoi, le ping et le jitter.',strip1:'✓ Mesure réelle dans le navigateur',strip2:'✓ Cloudflare Edge',strip3:'✓ Aucune valeur de secours artificielle',strip4:'✓ Aucun compte requis',stripServer:'SERVEUR AUTOMATIQUE',howMeasures:'COMMENT FASQOO MESURE',transparent:'TRANSPARENT'});
+Object.assign(extraTranslations.es,{trust4:'✓ No se requiere cuenta',stripTitle:'INTELIGENCIA DE RED FASQOO',stripSub:'Comprueba descarga, subida, ping y jitter.',strip1:'✓ Medición real en el navegador',strip2:'✓ Cloudflare Edge',strip3:'✓ Sin valores de respaldo artificiales',strip4:'✓ No se requiere cuenta',stripServer:'SERVIDOR AUTOMÁTICO',howMeasures:'CÓMO MIDE FASQOO',transparent:'TRANSPARENTE'});
+Object.assign(extraTranslations.it,{trust4:'✓ Nessun account richiesto',stripTitle:'INTELLIGENZA DI RETE FASQOO',stripSub:'Controlla download, upload, ping e jitter.',strip1:'✓ Misurazione reale nel browser',strip2:'✓ Cloudflare Edge',strip3:'✓ Nessun valore sostitutivo artificiale',strip4:'✓ Nessun account richiesto',stripServer:'SERVER AUTOMATICO',howMeasures:'COME MISURA FASQOO',transparent:'TRASPARENTE'});
+Object.assign(extraTranslations.pt,{trust4:'✓ Não é necessária conta',stripTitle:'INTELIGÊNCIA DE REDE FASQOO',stripSub:'Verifique download, upload, ping e jitter.',strip1:'✓ Medição real no navegador',strip2:'✓ Cloudflare Edge',strip3:'✓ Sem valores de substituição artificiais',strip4:'✓ Não é necessária conta',stripServer:'SERVIDOR AUTOMÁTICO',howMeasures:'COMO A FASQOO MEDE',transparent:'TRANSPARENTE'});
+Object.assign(extraTranslations.nl,{trust4:'✓ Geen account vereist',stripTitle:'FASQOO NETWERKINTELLIGENTIE',stripSub:'Controleer download, upload, ping en jitter.',strip1:'✓ Echte browsermeting',strip2:'✓ Cloudflare Edge',strip3:'✓ Geen kunstmatige vervangwaarden',strip4:'✓ Geen account vereist',stripServer:'AUTOMATISCHE SERVER',howMeasures:'HOE FASQOO MEET',transparent:'TRANSPARANT'});
+Object.assign(extraTranslations.tr,{trust4:'✓ Hesap gerekmez',stripTitle:'FASQOO AĞ ZEKÂSI',stripSub:'İndirme, yükleme, ping ve jitter değerlerini kontrol edin.',strip1:'✓ Gerçek tarayıcı ölçümü',strip2:'✓ Cloudflare Edge',strip3:'✓ Yapay yedek değer yok',strip4:'✓ Hesap gerekmez',stripServer:'OTOMATİK SUNUCU',howMeasures:'FASQOO NASIL ÖLÇER',transparent:'ŞEFFAF'});
+Object.assign(extraTranslations.sq,{trust4:'✓ Nuk kërkohet llogari',stripTitle:'INTELIGJENCA E RRJETIT FASQOO',stripSub:'Kontrollo shkarkimin, ngarkimin, ping-un dhe jitter-in.',strip1:'✓ Matje reale në shfletues',strip2:'✓ Cloudflare Edge',strip3:'✓ Pa vlera artificiale zëvendësuese',strip4:'✓ Nuk kërkohet llogari',stripServer:'SERVER AUTOMATIK',howMeasures:'SI MAT FASQOO',transparent:'TRANSPARENTE'});
+Object.assign(extraTranslations.ar,{trust4:'✓ لا حاجة إلى حساب',stripTitle:'ذكاء شبكة FASQOO',stripSub:'تحقق من التنزيل والرفع وPing وJitter.',strip1:'✓ قياس حقيقي عبر المتصفح',strip2:'✓ Cloudflare Edge',strip3:'✓ بدون قيم بديلة اصطناعية',strip4:'✓ لا حاجة إلى حساب',stripServer:'الخادم التلقائي',howMeasures:'كيف تقيس FASQOO',transparent:'شفاف'});
+
 function applyExtraLanguage(lang){
   const x=extraTranslations[lang]||extraTranslations.en;
   const map={
     '.eyebrow':x.eyebrow,'#testPhase':x.readyPhase,'.mini-kicker':x.liveTest,
     '.hero-trust span:nth-child(1)':x.trust1,'.hero-trust span:nth-child(2)':x.trust2,'.hero-trust span:nth-child(3)':x.trust3,
     '.phase-step[data-phase="ping"]':x.phasePing,'.phase-step[data-phase="download"]':x.phaseDownload,'.phase-step[data-phase="upload"]':x.phaseUpload,'.phase-step[data-phase="complete"]':x.phaseResult,
-    '.gauge-caption span:last-child':x.waiting,'.quality-meta span:first-child':x.basedOn,'.quality-meta span:last-child':x.notMeasured,
-    '.section-kicker':x.networkIntelligence,'.intelligence-section h2':x.understand,'.intelligence-section .section-sub':x.intelligenceSub,'.section-badge':x.professional
+    '.gauge-caption span:last-child':x.waiting,'.quality-meta span:last-child':x.notMeasured,
+    '.intelligence-section .section-kicker':x.networkIntelligence,'.intelligence-section h2':x.understand,'.intelligence-section .section-sub':x.intelligenceSub,'.intelligence-section .section-badge':x.professional,'.methodology-section .section-kicker':x.howMeasures,'.methodology-section .section-badge':x.transparent
   };
-  Object.entries(map).forEach(([sel,val])=>{if(val!==null){const el=document.querySelector(sel);if(el)el.textContent=val;}});
+  Object.entries(map).forEach(([sel,val])=>{if(val!==null){const el=document.querySelector(sel);if(!el)return;if(sel==='.eyebrow'){el.innerHTML='<span class="eyebrow-dot"></span> ' + val;}else el.textContent=val;}});
   const cards=[['intelLatency',x.latency,x.responseTime],['intelStability',x.stability,x.jitterConsistency],['intelThroughput',x.throughput,x.downloadCapacity],['intelServer',x.testServer,x.automaticEdge]];
   const cardsEls=document.querySelectorAll('.intel-card');
   cards.forEach((c,i)=>{const el=cardsEls[i];if(!el)return;const span=el.querySelector('span');const small=el.querySelector('small');if(span)span.textContent=c[1];if(small)small.textContent=c[2];});
   const units=document.querySelectorAll('.unit');units.forEach(el=>{if(el.textContent.trim()==='Mbps'||el.textContent.trim()==='Mbit/s'||el.textContent.trim()==='ميغابت/ث')el.textContent=x.unitMbps;});
 }
 
+
+/* ==========================================================
+   FASQOO COMPLETE UI TRANSLATION LAYER
+   Covers every visible string that is not already handled by
+   data-i18n / extraTranslations.
+   ========================================================== */
+const completeUITranslations = {
+  en:{waiting:"Waiting for measurement",basedOn:"Based on download, upload, ping & jitter",live:"Live result",downloadUnit:"Mbps download",ping:"Ping",jitter:"Jitter",upload:"Upload",quality:"Quality",run:"Run speed test",provider:"Provider",close:"Close",testPhases:"Test phases"},
+  de:{waiting:"Warten auf Messung",basedOn:"Basierend auf Download, Upload, Ping & Jitter",live:"Live-Ergebnis",downloadUnit:"Mbit/s Download",ping:"Ping",jitter:"Jitter",upload:"Upload",quality:"Qualität",run:"Speedtest starten",provider:"Anbieter",close:"Schließen",testPhases:"Testphasen"},
+  fr:{waiting:"En attente de la mesure",basedOn:"Basé sur téléchargement, envoi, ping et jitter",live:"Résultat en direct",downloadUnit:"Mbit/s téléchargement",ping:"Ping",jitter:"Jitter",upload:"Envoi",quality:"Qualité",run:"Lancer le test",provider:"Fournisseur",close:"Fermer",testPhases:"Phases du test"},
+  es:{waiting:"Esperando la medición",basedOn:"Basado en descarga, subida, ping y jitter",live:"Resultado en directo",downloadUnit:"Mbit/s descarga",ping:"Ping",jitter:"Jitter",upload:"Subida",quality:"Calidad",run:"Iniciar prueba",provider:"Proveedor",close:"Cerrar",testPhases:"Fases del test"},
+  it:{waiting:"In attesa della misurazione",basedOn:"Basato su download, upload, ping e jitter",live:"Risultato live",downloadUnit:"Mbit/s download",ping:"Ping",jitter:"Jitter",upload:"Upload",quality:"Qualità",run:"Avvia test",provider:"Provider",close:"Chiudi",testPhases:"Fasi del test"},
+  pt:{waiting:"A aguardar medição",basedOn:"Com base em download, upload, ping e jitter",live:"Resultado em direto",downloadUnit:"Mbit/s download",ping:"Ping",jitter:"Jitter",upload:"Upload",quality:"Qualidade",run:"Executar teste",provider:"Fornecedor",close:"Fechar",testPhases:"Fases do teste"},
+  nl:{waiting:"Wachten op meting",basedOn:"Gebaseerd op download, upload, ping en jitter",live:"Live resultaat",downloadUnit:"Mbit/s download",ping:"Ping",jitter:"Jitter",upload:"Upload",quality:"Kwaliteit",run:"Snelheidstest starten",provider:"Provider",close:"Sluiten",testPhases:"Testfasen"},
+  tr:{waiting:"Ölçüm bekleniyor",basedOn:"İndirme, yükleme, ping ve jitter değerlerine göre",live:"Canlı sonuç",downloadUnit:"Mbit/s indirme",ping:"Ping",jitter:"Jitter",upload:"Yükleme",quality:"Kalite",run:"Hız testini başlat",provider:"Sağlayıcı",close:"Kapat",testPhases:"Test aşamaları"},
+  sq:{waiting:"Duke pritur matjen",basedOn:"Bazuar në shkarkim, ngarkim, ping dhe jitter",live:"Rezultat në kohë reale",downloadUnit:"Mbit/s shkarkim",ping:"Ping",jitter:"Jitter",upload:"Ngarkim",quality:"Cilësia",run:"Fillo testin",provider:"Ofruesi",close:"Mbyll",testPhases:"Fazat e testit"},
+  ar:{waiting:"في انتظار القياس",basedOn:"استنادًا إلى التنزيل والرفع وPing وJitter",live:"النتيجة المباشرة",downloadUnit:"ميغابت/ث للتنزيل",ping:"Ping",jitter:"Jitter",upload:"الرفع",quality:"الجودة",run:"بدء اختبار السرعة",provider:"مزود الخدمة",close:"إغلاق",testPhases:"مراحل الاختبار"}
+};
+
+function applyCompleteUITranslation(lang){
+  const x = completeUITranslations[lang] || completeUITranslations.en;
+
+  const hint = $("measurementHint");
+  if(hint && !running) hint.textContent = x.waiting;
+
+  const meta = document.querySelector(".quality-meta span:first-child");
+  if(meta) meta.innerHTML = '<i class="mini-dot"></i> ' + x.basedOn;
+
+  const widget = $("speedWidget");
+  if(widget){
+    const head = widget.querySelector(".speed-widget-head");
+    const headSpan = head ? head.querySelector("span") : null;
+    const mainSpan = widget.querySelector(".speed-widget-main span");
+    const cells = widget.querySelectorAll(".speed-widget-grid div span");
+
+    if(headSpan) headSpan.textContent = x.live;
+    if(mainSpan) mainSpan.textContent = x.downloadUnit;
+    if(cells[0]) cells[0].textContent = x.ping;
+    if(cells[1]) cells[1].textContent = x.jitter;
+    if(cells[2]) cells[2].textContent = x.upload;
+    if(cells[3]) cells[3].textContent = x.quality;
+    if($("widgetRun")) $("widgetRun").textContent = x.run;
+    if($("widgetClose")) $("widgetClose").setAttribute("aria-label", x.close);
+
+    const provider = $("widgetProvider");
+    if(provider){
+      const current = last && last.isp ? last.isp : "—";
+      provider.textContent = x.provider + ": " + current;
+    }
+  }
+
+  const phases = document.querySelector(".phase-steps");
+  if(phases) phases.setAttribute("aria-label", x.testPhases);
+}
+
 /* ---------- STATE ---------- */
 let running = false, samples = [], info = {}, last = {}, currentLang = "en", gaugeMax = 100;
+let gaugeDisplay = 0, gaugeTarget = 0, gaugeRaf = 0;
 const SPEED_BASE = "https://speed.cloudflare.com";
 
 /* ---------- MENU ---------- */
@@ -743,17 +839,38 @@ function applyTheme(dark){
 }
 $("themeBtn").addEventListener("click", () => applyTheme(!document.body.classList.contains("dark")));
 
-/* ---------- GAUGE ---------- */
+/* ---------- SMOOTH GAUGE / OOKLA-STYLE LIVE NEEDLE ---------- */
 function getGaugeMax(v){ return v<=100?100:v<=300?300:v<=500?500:v<=1000?1000:v<=2500?2500:v<=5000?5000:10000; }
-function gauge(v){
-  if(!Number.isFinite(v)) return;
-  gaugeMax = Math.max(gaugeMax, getGaugeMax(v));
-  const p = Math.max(0, Math.min(v/gaugeMax, 1));
-  const c = 816, vis = c*.75;
-  $("speed").textContent = v < 10 ? v.toFixed(1) : Math.round(v);
-  $("prog").style.strokeDashoffset = c - vis*p;
+function animateGauge(){
+  const diff = gaugeTarget - gaugeDisplay;
+  if(Math.abs(diff) < 0.03){ gaugeDisplay = gaugeTarget; }
+  else { gaugeDisplay += diff * (1 - Math.exp(-0.18)); }
+  const p = Math.max(0, Math.min(gaugeDisplay / gaugeMax, 1));
+  const c = 816, vis = c * .75;
+  $("speed").textContent = gaugeDisplay < 10 ? gaugeDisplay.toFixed(1) : Math.round(gaugeDisplay);
+  $("prog").style.strokeDashoffset = c - vis * p;
+  const angle = 270 * p;
+  const needle = $("needle");
+  if(needle) needle.setAttribute("transform", `rotate(${angle} 150 150)`);
+  if(Math.abs(diff) >= 0.03) gaugeRaf = requestAnimationFrame(animateGauge);
+  else gaugeRaf = 0;
 }
-function resetGauge(){ gaugeMax = 100; samples = []; gauge(0); drawChart(); }
+function gauge(v){
+  if(!Number.isFinite(v) || v < 0) return;
+  if(v > gaugeMax * .92) gaugeMax = getGaugeMax(v);
+  // The gauge is a smoothed live display; the metric cards still show the actual measured samples.
+  gaugeTarget = Math.max(0, Math.min(v, gaugeMax));
+  if(!gaugeRaf) gaugeRaf = requestAnimationFrame(animateGauge);
+}
+function resetGauge(){
+  if(gaugeRaf) cancelAnimationFrame(gaugeRaf);
+  gaugeRaf = 0; gaugeMax = 100; gaugeDisplay = 0; gaugeTarget = 0; samples = [];
+  const prog = $("prog"), needle = $("needle");
+  if(prog) prog.style.strokeDashoffset = 816;
+  if(needle) needle.setAttribute("transform", "rotate(-135 150 150)");
+  $("speed").textContent = "0";
+  drawChart();
+}
 
 /* ---------- NETWORK INFO ---------- */
 async function netinfo(){
@@ -802,7 +919,7 @@ async function timedFetch(url, options={}, timeoutMs=12000){
 }
 
 /* ==========================================================
-   MEASUREMENT ENGINE v5 — 15 s real phases, 2 s pauses
+   MEASUREMENT ENGINE v5 — 13 s real phases, 2 s pauses
    - Ping: 8 real requests, median + jitter
    - Download: adaptive multi-round until >= 15 s elapsed
    - Pause: exactly 2000 ms
@@ -812,7 +929,7 @@ async function timedFetch(url, options={}, timeoutMs=12000){
    ========================================================== */
 const MEASUREMENT_V5 = {
   version: "5.0",
-  phaseMs: 15000,          // mind. 15 s pro Phase
+  phaseMs: 13000,          // target: about 13 s of real measurement per phase
   sliceMs: 3000,           // max. 3 s pro Runde, dann neue Messung
   maxDownloadBytes: 800 * 1024 * 1024,
   maxUploadBytes: 400 * 1024 * 1024,
@@ -934,41 +1051,25 @@ async function downloadTest(){
   $("chartState").textContent = t.download;
   samples = [];
 
-  // Sanfte Kalibrierung (kurz) – nur als Startschätzung, kein Fake
-  let estimated = 20;
-  try{
-    const cal = await parallelDownload(2 * 1024 * 1024, 2, 5000);
-    const est = cal.bytes * 8 / cal.seconds / 1e6;
-    if(Number.isFinite(est) && est > 0) estimated = est;
-  }catch(e){/* fallback bleibt 20 Mbps als reine Startschätzung */}
-
-  const streams = chooseStreams(estimated);
-  gauge(estimated);
-  $("down").textContent = estimated.toFixed(1);
-  $("intelThroughput").textContent = estimated.toFixed(1) + " " + x.unitMbps;
-  samples.push(estimated);
-  drawChart();
-
+  // Real measurement only: no calibration estimate is displayed or used as a result.
+  // Start with a small real payload, then adapt the payload size from measured throughput.
+  const streams = 4;
+  let bytesPerStream = 128 * 1024;
   const startTime = performance.now();
   const measured = [];
   const TARGET = MEASUREMENT_V5.phaseMs;
 
-  // Mehrere Runden, bis insgesamt >= 15 s gemessen wurden
   while(running){
     const elapsed = performance.now() - startTime;
     if(elapsed >= TARGET) break;
 
     const remaining = TARGET - elapsed;
-    const roundMs = Math.min(remaining, MEASUREMENT_V5.sliceMs);
-    const totalBytes = clampNumber(
-      Math.ceil((estimated * 1e6 / 8) * (roundMs / 1000)),
-      1 * 1024 * 1024,
-      MEASUREMENT_V5.maxDownloadBytes
-    );
-    const perStream = Math.max(512 * 1024, Math.ceil(totalBytes / streams));
+    const roundMs = Math.min(2500, remaining);
+    const totalBytes = clampNumber(Math.ceil(bytesPerStream * streams), 256 * 1024, MEASUREMENT_V5.maxDownloadBytes);
+    const perStream = Math.max(128 * 1024, Math.ceil(totalBytes / streams));
 
     try{
-      const result = await parallelDownload(perStream, streams, roundMs + 5000);
+      const result = await parallelDownload(perStream, streams, Math.max(3500, roundMs + 1500));
       const sp = result.bytes * 8 / result.seconds / 1e6;
       if(Number.isFinite(sp) && sp > 0){
         measured.push(sp);
@@ -977,10 +1078,12 @@ async function downloadTest(){
         $("down").textContent = sp.toFixed(1);
         $("intelThroughput").textContent = sp.toFixed(1) + " " + x.unitMbps;
         drawChart();
-        // Schätzung für nächste Runde verfeinern
-        estimated = estimated * 0.4 + sp * 0.6;
+        // Only real measured throughput is used to size the next real request.
+        bytesPerStream = clampNumber(Math.ceil((sp * 1e6 / 8) * (Math.min(2500, TARGET - (performance.now()-startTime)) / 1000) / streams), 128 * 1024, 32 * 1024 * 1024);
       }
-    }catch(e){ /* eine Runde ist ausgefallen – weiter */ }
+    }catch(e){
+      // A failed round does not create a value. Continue while the real phase remains active.
+    }
   }
 
   if(!measured.length) throw new Error("Download measurement failed");
@@ -990,23 +1093,14 @@ async function downloadTest(){
 /* ---------- UPLOAD PHASE (>= 15 s) ---------- */
 async function uploadTest(){
   const t = translations[currentLang];
+  const x = extraTranslations[currentLang] || extraTranslations.en;
   $("status").textContent = t.stUp;
   $("chartState").textContent = t.upload;
   samples = [];
 
-  let estimated = 10;
-  try{
-    const cal = await parallelUpload(256 * 1024, 2, 6000);
-    const est = cal.bytes * 8 / cal.seconds / 1e6;
-    if(Number.isFinite(est) && est > 0) estimated = est;
-  }catch(e){}
-
-  const streams = chooseStreams(estimated, 6);
-  gauge(estimated);
-  $("up").textContent = estimated.toFixed(1);
-  samples.push(estimated);
-  drawChart();
-
+  // Real measurement only: no synthetic starting speed is shown.
+  const streams = 3;
+  let bytesPerStream = 64 * 1024;
   const startTime = performance.now();
   const measured = [];
   const TARGET = MEASUREMENT_V5.phaseMs;
@@ -1016,16 +1110,11 @@ async function uploadTest(){
     if(elapsed >= TARGET) break;
 
     const remaining = TARGET - elapsed;
-    const roundMs = Math.min(remaining, MEASUREMENT_V5.sliceMs);
-    const totalBytes = clampNumber(
-      Math.ceil((estimated * 1e6 / 8) * (roundMs / 1000)),
-      512 * 1024,
-      MEASUREMENT_V5.maxUploadBytes
-    );
-    const perStream = Math.max(256 * 1024, Math.ceil(totalBytes / streams));
+    const roundMs = Math.min(2500, remaining);
+    const perStream = clampNumber(bytesPerStream, 64 * 1024, 16 * 1024 * 1024);
 
     try{
-      const result = await parallelUpload(perStream, streams, roundMs + 6000);
+      const result = await parallelUpload(perStream, streams, Math.max(4500, roundMs + 2000));
       const sp = result.bytes * 8 / result.seconds / 1e6;
       if(Number.isFinite(sp) && sp > 0){
         measured.push(sp);
@@ -1033,9 +1122,12 @@ async function uploadTest(){
         gauge(sp);
         $("up").textContent = sp.toFixed(1);
         drawChart();
-        estimated = estimated * 0.4 + sp * 0.6;
+        // Only real measured throughput is used to size the next real request.
+        bytesPerStream = clampNumber(Math.ceil((sp * 1e6 / 8) * (Math.min(2500, TARGET - (performance.now()-startTime)) / 1000) / streams), 64 * 1024, 16 * 1024 * 1024);
       }
-    }catch(e){}
+    }catch(e){
+      // A failed round does not create a value. Continue while the real phase remains active.
+    }
   }
 
   if(!measured.length) throw new Error("Upload measurement failed");
@@ -1269,10 +1361,16 @@ $("clear").addEventListener("click", () => { localStorage.removeItem("fasqoo_his
 function applyLanguage(lang){
   if(!translations[lang]) lang = "en";
   currentLang = lang;
-  const t = { ...translations[lang], ...(pageTranslations[lang] || {}) };
+  const t = { ...translations[lang], ...(extraTranslations[lang] || {}), ...(pageTranslations[lang] || {}) };
   t.apps = { ...(translations[lang].apps || {}), ...(pageTranslations[lang]?.apps || {}) };
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  const metaTitle = t.metaTitle || t.title || "Fasqoo Internet Speed Test";
+  const metaDescription = t.metaDescription || t.sub || "Measure download, upload, ping and jitter with Fasqoo.";
+  document.title = metaTitle;
+  const desc = document.querySelector('meta[name="description"]');
+  if(desc) desc.setAttribute("content", metaDescription);
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { const key=el.getAttribute("data-i18n-aria"); if(t[key]) el.setAttribute("aria-label",t[key]); });
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
@@ -1295,6 +1393,7 @@ function applyLanguage(lang){
 
   historyLoad();
   applyExtraLanguage(lang);
+  applyCompleteUITranslation(lang);
   if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
 }
 
@@ -1397,7 +1496,8 @@ function updateWidget(){
   $("widgetJitter").textContent=Number(last.jitter).toFixed(1)+" ms";
   $("widgetUpload").textContent=Number(last.upload).toFixed(1)+" Mbps";
   $("widgetQuality").textContent=Number(last.quality)+"/100";
-  $("widgetProvider").textContent="Provider: "+(last.isp||"—");
+  const wx = extraTranslations[currentLang] || extraTranslations.en;
+  $("widgetProvider").textContent = (wx.widgetProvider || "Provider") + ": " + (last.isp || "—");
 }
 $("widgetClose")?.addEventListener("click",()=>widget.hidden=true);
 $("widgetRun")?.addEventListener("click",async()=>{
