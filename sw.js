@@ -1,10 +1,15 @@
-const CACHE = "fasqoo-v6";
+const CACHE = "fasqoo-v7";
 
 const ASSETS = [
   "/",
   "/index.html",
   "/site.webmanifest",
-  "/fasqoologo.png"
+  "/fasqoologo.png",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/apple-touch-icon.png",
+  "/android-chrome-192x192.png",
+  "/android-chrome-512x512.png"
 ];
 
 self.addEventListener("install", event => {
@@ -31,31 +36,24 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
+function isMeasurement(url) {
+  return url.hostname === "speed.cloudflare.com" ||
+         url.hostname === "ipwho.is" ||
+         url.pathname.includes("/__down") ||
+         url.pathname.includes("/__up");
+}
+
 self.addEventListener("fetch", event => {
   const request = event.request;
-  const url = request.url;
+  const url = new URL(request.url);
 
-  // --------------------------------------------------
-  // NEVER CACHE SPEED TEST / NETWORK DIAGNOSTIC DATA
-  // --------------------------------------------------
-  if (
-    url.includes("speed.cloudflare.com") ||
-    url.includes("ipwho.is") ||
-    url.includes("__down") ||
-    url.includes("__up")
-  ) {
+  // Niemals Speedtest- oder IP-Messdaten cachen/intercepten.
+  if (isMeasurement(url) || request.method !== "GET") {
     return;
   }
 
-  // Only handle GET requests
-  if (request.method !== "GET") {
-    return;
-  }
-
-  // --------------------------------------------------
-  // HTML NAVIGATION
-  // Network first -> Cache fallback
-  // --------------------------------------------------
+  // Navigation:
+  // Netzwerk zuerst, Cache als Offline-Fallback.
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -69,24 +67,25 @@ self.addEventListener("fetch", event => {
           return response;
         })
         .catch(() =>
-          caches.match(request)
-            .then(response =>
-              response || caches.match("/index.html")
-            )
+          caches.match(request).then(response =>
+            response || caches.match("/index.html")
+          )
         )
     );
 
     return;
   }
 
-  // --------------------------------------------------
-  // OTHER STATIC FILES
-  // Network first -> Cache fallback
-  // --------------------------------------------------
+  // Statische Dateien:
+  // Netzwerk zuerst, Cache als Fallback.
   event.respondWith(
     fetch(request)
       .then(response => {
-        if (response && response.ok) {
+        if (
+          response &&
+          response.ok &&
+          url.origin === self.location.origin
+        ) {
           const copy = response.clone();
 
           caches.open(CACHE)
