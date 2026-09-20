@@ -340,8 +340,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 /* ==========================================================
    FASQOO AD BANNERS — 3 RESPONSIVE SLOTS
-   Only the advertising containers are added; the speed-test
-   and existing page functionality remain unchanged.
    ========================================================== */
 .fasqoo-ad{
   position:relative;
@@ -392,7 +390,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   align-items:center;
   justify-content:center;
 }
-/* Side ads are shown only when there is enough outer gutter space. */
 @media(min-width:1280px){
   .fasqoo-ad-side{display:flex}
   .fasqoo-ad-left{left:max(8px,calc((100vw - 1180px)/2 - 170px))}
@@ -411,6 +408,156 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 @media(max-width:560px){
   .fasqoo-ad-center{min-height:80px}
   .fasqoo-ad-label{font-size:7px}
+}
+
+/* ==========================================================
+   MOBILE OPTIMIZATION — nur für Handy, Desktop unverändert
+   ========================================================== */
+@media(max-width:640px){
+
+  /* Hero-Bereich kompakt machen */
+  .premium-hero{padding:14px 0 4px;margin-bottom:0;text-align:left}
+  .premium-hero h1{font-size:22px;letter-spacing:-.8px;margin:10px 0 5px;line-height:1.2}
+  .premium-hero p{font-size:12px;line-height:1.45;margin:0}
+  .eyebrow{font-size:9px;padding:5px 9px;letter-spacing:.9px;gap:6px}
+  .eyebrow-dot{width:6px;height:6px}
+
+  /* Trust badges → kompakte Inline-Chips, horizontal scrollbar */
+  .hero-trust{
+    display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;
+    margin-top:10px;padding-bottom:4px;
+    scrollbar-width:none;-ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;
+    justify-content:flex-start;
+  }
+  .hero-trust::-webkit-scrollbar{display:none}
+  .hero-trust span{
+    width:auto!important;flex:0 0 auto;
+    padding:5px 9px;font-size:9.5px;border-radius:999px;
+    white-space:nowrap;line-height:1.2;
+  }
+
+  /* Server-Zeile kompakt */
+  .server-line{gap:6px;margin:6px 0 12px;justify-content:flex-start}
+  .server-badge{font-size:9.5px;padding:5px 9px}
+  .live-dot{width:5px;height:5px}
+
+  /* Karte & Gauge verkleinern */
+  .card{padding:14px 12px;border-radius:14px}
+  .test-card:before{height:2px}
+  .test-topline{padding-bottom:12px;margin-bottom:14px;gap:10px}
+  .test-topline strong{font-size:12px}
+  .mini-kicker{font-size:9px}
+  .phase-step{font-size:9px;padding:4px 8px}
+  .gauge{width:210px;height:210px;margin:0 auto}
+  .gauge:after{inset:17px}
+  .num{font-size:40px;letter-spacing:-1.5px}
+  .unit{font-size:10px;margin-top:4px;letter-spacing:2px}
+  .status{font-size:11px;margin-top:-4px;min-height:16px}
+  .gauge-caption{font-size:9px;margin-top:6px;gap:5px}
+  .start{width:100%;max-width:300px;height:46px;font-size:13px;margin-top:12px;border-radius:10px}
+
+  /* Metriken */
+  .metrics{margin-top:14px}
+  .metric{padding:12px 10px}
+  .metric .icon{width:26px;height:26px;font-size:11px}
+  .label{font-size:10.5px}
+  .value{font-size:19px}
+  .small{font-size:10px}
+
+  /* Chart */
+  .chart{padding:12px;margin-top:10px}
+  .charthead{font-size:11px;margin-bottom:6px}
+  .charthead span{font-size:10px}
+  canvas{height:110px}
+
+  /* Info-Karten */
+  .info-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .info{padding:11px}
+  .info .label{font-size:9px;letter-spacing:.3px}
+  .info .iv{font-size:11.5px;margin-top:4px}
+
+  /* Quality */
+  .quality{padding:13px;margin-top:12px}
+  .qscore{font-size:20px}
+  .qtext{font-size:11px;line-height:1.55}
+  .quality-detail{font-size:11px;line-height:1.55}
+  .quality-meta{font-size:9px;flex-direction:column;gap:4px;margin-top:9px}
+
+  /* Sections */
+  .section{margin-top:26px}
+  .section h2{font-size:17px;letter-spacing:-.3px}
+  .section-sub{font-size:11px}
+  .section-kicker{font-size:9px;letter-spacing:1.2px}
+  .section-badge{font-size:8px;padding:5px 8px}
+
+  /* Intelligence Grid */
+  .intelligence-grid{gap:8px}
+  .intel-card{padding:11px;column-gap:9px;border-radius:11px}
+  .intel-icon{width:30px;height:30px;font-size:12px;border-radius:9px}
+  .intel-card span{font-size:9px}
+  .intel-card strong{font-size:13.5px;margin-top:2px}
+  .intel-card small{display:none}
+
+  /* Methodik */
+  .method-grid{grid-template-columns:1fr;gap:9px}
+  .method-card{padding:13px;min-height:auto;border-radius:11px}
+  .method-num{width:26px;height:26px;font-size:10px;border-radius:7px}
+  .method-card h3{font-size:13px;margin:11px 0 5px}
+  .method-card p{font-size:11px;line-height:1.55}
+  .method-note{font-size:10.5px;padding:11px 13px;margin-top:9px;line-height:1.55}
+
+  /* App-Karten */
+  .apps,.tools{gap:9px}
+  .app,.tool{padding:13px;border-radius:11px}
+  .app-icon{width:34px;height:34px;border-radius:9px}
+  .app-status{font-size:9px;padding:4px 7px}
+  .app h3,.tool h3{font-size:12.5px;margin:10px 0 5px}
+  .app p,.tool p{font-size:10.5px;line-height:1.5}
+  .app-score{font-size:10.5px;margin-top:10px}
+
+  /* Report */
+  .report{padding:13px;border-radius:11px}
+  .reportgrid{grid-template-columns:1fr 1fr;gap:8px}
+  .r{padding:9px;border-radius:8px}
+  .r b{font-size:9px}
+  .r span{font-size:12px;margin-top:4px}
+  .actions{gap:6px;margin-top:12px}
+  .action{padding:7px 10px;font-size:10.5px;border-radius:8px}
+
+  /* History */
+  .history{border-radius:11px}
+  .hhead{padding:12px 13px}
+  .hhead h2{font-size:13px}
+  th,td{padding:9px 12px;font-size:11px}
+
+  /* Werbung */
+  .fasqoo-ad-center{min-height:70px;margin:16px 0 0;border-radius:10px}
+  .fasqoo-ad-label{font-size:7px}
+
+  /* Footer */
+  footer{padding:16px 0;font-size:10px;margin-top:30px}
+  .fasqoo-footer-copy div:first-child{font-size:10px}
+  .fasqoo-footer-links{gap:6px 12px}
+
+  /* Widget kompakter */
+  .speed-widget{right:10px;left:10px;bottom:10px;width:auto;padding:13px}
+  #widgetSpeed{font-size:32px}
+  .speed-widget-main{padding:10px 0 8px}
+
+  /* Layout-Ränder */
+  .wrap{width:calc(100% - 22px)}
+  main{padding:12px 0 40px}
+}
+
+/* Sehr kleine Handys */
+@media(max-width:380px){
+  .premium-hero h1{font-size:20px}
+  .gauge{width:180px;height:180px}
+  .num{font-size:34px}
+  .hero-trust span{font-size:9px;padding:4px 8px}
+  .info-grid{grid-template-columns:1fr}
+  .intelligence-grid{grid-template-columns:1fr}
 }
 
 </style>
@@ -678,22 +825,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <button id="widgetRun" class="widget-run" type="button">Run speed test</button>
   <div id="widgetProvider" class="widget-provider">Provider: —</div>
 </div>
- <!-- FASQOO AD 3 — CENTER -->
-  <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
-    <span class="fasqoo-ad-label"></span>
-    <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
-      <script>
-  atOptions = {
-    'key' : 'd8a4bf9bc4c98da4c03e854cf1efd68c',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/d8a4bf9bc4c98da4c03e854cf1efd68c/invoke.js"></script>
-    </div>
-  </div>
+
 <footer>
   <div class="wrap foot">
     <div class="fasqoo-footer-copy">
@@ -934,11 +1066,7 @@ async function timedFetch(url, options={}, timeoutMs=12000){
   }finally{ timer.clear(); }
 }
 
-/* ---------- MEASUREMENT ENGINE v4 ----------
-   Real browser measurement with adaptive calibration, parallel streams,
-   robust aggregation and bounded memory use. No estimated/fallback result
-   is returned when a phase cannot produce enough real samples.
--------------------------------------------------------------------------- */
+/* ---------- MEASUREMENT ENGINE v4 ---------- */
 const MEASUREMENT_V4 = {
   version: "4.0",
   base: SPEED_BASE,
@@ -1246,7 +1374,6 @@ async function start(){
   resetGauge();
   ["down","up","ping","jitter"].forEach(id => $(id).textContent = "—");
   
-  // Intelligence Grid auf Startwerte zurücksetzen
   $("intelLatency").textContent = "—";
   $("intelStability").textContent = "—";
   $("intelThroughput").textContent = "—";
@@ -1261,23 +1388,19 @@ async function start(){
   try{
     if(performance.clearResourceTimings) performance.clearResourceTimings();
     
-    // 1. PING & JITTER TEST
     const p = await pingTest();
     $("ping").textContent = p.ping.toFixed(1);
     $("jitter").textContent = p.jitter.toFixed(1);
     
-    // Intelligence Grid direkt nach Ping aktualisieren
     $("intelLatency").textContent = p.ping.toFixed(1) + " ms";
     $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " + (p.jitter <= 10 ? t.stExc : p.jitter <= 20 ? t.stGood : t.stLim);
 
     measureDns();
     setTestPhase("download");
 
-    // 2. DOWNLOAD TEST
     const d = await downloadTest();
     setTestPhase("upload");
 
-    // 3. UPLOAD TEST
     const u = await uploadTest();
     
     setTestPhase("complete");
@@ -1541,7 +1664,6 @@ const initialLang = (savedLang && supportedLangs.includes(savedLang)) ? savedLan
 langSelect.value = initialLang;
 applyLanguage(initialLang);
 
-// Country-based language fallback is applied only when the visitor has not manually chosen a language.
 const countryLanguageMap = {US:"en",GB:"en",CA:"en",AU:"en",NZ:"en",ES:"es",MX:"es",AR:"es",CL:"es",CO:"es",PE:"es",DE:"de",AT:"de",CH:"de",FR:"fr",BE:"fr",IT:"it",PT:"pt",BR:"pt",NL:"nl",TR:"tr",AL:"sq",XK:"sq",KS:"sq",SA:"ar",AE:"ar",QA:"ar",JO:"ar",EG:"ar",MA:"ar",DZ:"ar",TN:"ar"};
 if(!savedLang){
   window.addEventListener("fasqoo-country-detected", e => {
