@@ -392,7 +392,12 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   align-items:center;
   justify-content:center;
 }
-/* Keep side ads out of the content area on narrower screens. */
+/* Side ads are shown only when there is enough outer gutter space. */
+@media(min-width:1280px){
+  .fasqoo-ad-side{display:flex}
+  .fasqoo-ad-left{left:max(8px,calc((100vw - 1180px)/2 - 170px))}
+  .fasqoo-ad-right{right:max(8px,calc((100vw - 1180px)/2 - 170px))}
+}
 @media(max-width:1279px){
   .fasqoo-ad-side{display:none}
 }
@@ -415,7 +420,16 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 <aside class="fasqoo-ad fasqoo-ad-side fasqoo-ad-left" aria-label="Advertisement">
   <span class="fasqoo-ad-label">Advertisement</span>
   <div class="fasqoo-ad-inner" id="fasqoo-ad-left">
-    <!-- Paste your ad-network banner code here -->
+   <script>
+  atOptions = {
+    'key' : '82f4dc162703c8569f37d8920486bbbf',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/82f4dc162703c8569f37d8920486bbbf/invoke.js"></script>
   </div>
 </aside>
 
@@ -423,7 +437,16 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 <aside class="fasqoo-ad fasqoo-ad-side fasqoo-ad-right" aria-label="Advertisement">
   <span class="fasqoo-ad-label">Advertisement</span>
   <div class="fasqoo-ad-inner" id="fasqoo-ad-right">
-    <!-- Paste your ad-network banner code here -->
+   <script>
+  atOptions = {
+    'key' : '82f4dc162703c8569f37d8920486bbbf',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/82f4dc162703c8569f37d8920486bbbf/invoke.js"></script>
   </div>
 </aside>
 
@@ -554,7 +577,16 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
     <span class="fasqoo-ad-label">Advertisement</span>
     <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
-      <!-- Paste your ad-network banner code here -->
+      <script>
+  atOptions = {
+    'key' : 'd8a4bf9bc4c98da4c03e854cf1efd68c',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/d8a4bf9bc4c98da4c03e854cf1efd68c/invoke.js"></script>
     </div>
   </div>
 
