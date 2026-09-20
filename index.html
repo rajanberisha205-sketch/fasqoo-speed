@@ -803,6 +803,115 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   }
   .history tbody tr:has(.empty) td::before{ display: none; }
 }
+
+
+  /* =========================================================
+   FASQOO – DARK MODE
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  html {
+    color-scheme: dark;
+    background: #0f1115;
+  }
+
+  body {
+    background: #0f1115 !important;
+    color: #f5f7fa !important;
+  }
+
+  /* Hauptbereiche */
+  main,
+  section,
+  header,
+  footer,
+  nav {
+    background-color: #0f1115;
+    color: #f5f7fa;
+  }
+
+  /* Karten */
+  .card,
+  .result-card,
+  .stat-card,
+  .speed-card,
+  .test-card,
+  .info-card {
+    background-color: #181b21 !important;
+    color: #f5f7fa !important;
+    border-color: #2b3038 !important;
+  }
+
+  /* Texte */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  label {
+    color: inherit;
+  }
+
+  /* Eingabefelder */
+  input,
+  select,
+  textarea {
+    background-color: #181b21 !important;
+    color: #f5f7fa !important;
+    border-color: #343a43 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9aa3af !important;
+  }
+
+  /* Buttons */
+  button {
+    color: inherit;
+  }
+
+  /* Links */
+  a {
+    color: #7db7ff;
+  }
+
+  /* Tabellen */
+  table {
+    background-color: #181b21;
+    color: #f5f7fa;
+  }
+
+  th,
+  td {
+    border-color: #343a43;
+  }
+
+  /* Trennlinien */
+  hr {
+    border-color: #2b3038;
+  }
+
+  /* SVG */
+  svg {
+    color: currentColor;
+  }
+
+  /* Bilder nicht abdunkeln */
+  img {
+    filter: none;
+  }
+
+  /* Auswahl */
+  ::selection {
+    background: #3b82f6;
+    color: #ffffff;
+  }
+}
 </style>
 </head>
 <body>
