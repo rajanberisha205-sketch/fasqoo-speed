@@ -39,8 +39,6 @@
   "logo": "https://www.fasqoo.com/android-chrome-512x512.png"
 }
 </script>
-
-<!-- Structured Data: WebApplication -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,12 +49,9 @@
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web Browser",
   "description": "Professional browser-based internet speed test measuring download, upload, ping, jitter and network quality.",
-  "publisher": {
-    "@id": "https://www.fasqoo.com/#organization"
-  }
+  "publisher": { "@id": "https://www.fasqoo.com/#organization" }
 }
 </script>
-
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -68,7 +63,6 @@
   "inLanguage":"en"
 }
 </script>
-
 <style>
   .mac-icon{width:18px;height:18px;display:inline-block;position:relative}
 .mac-icon::before{content:'⌘';font-size:17px;line-height:18px;color:currentColor}
@@ -342,7 +336,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 .widget-provider{font-size:9px;color:var(--muted);margin-top:9px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ==========================================================
-   FASQOO AD BANNERS — 3 RESPONSIVE SLOTS
+   FASQOO AD BANNERS — RESPONSIVE SLOTS
    ========================================================== */
 .fasqoo-ad{
   position:relative;
@@ -370,16 +364,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   opacity:.65;
   text-transform:uppercase;
 }
-.fasqoo-ad-side{
-  position:fixed;
-  top:50%;
-  transform:translateY(-50%);
-  width:160px;
-  height:600px;
-  z-index:900;
-}
-.fasqoo-ad-left{left:10px}
-.fasqoo-ad-right{right:10px}
 .fasqoo-ad-center{
   width:100%;
   min-height:120px;
@@ -393,36 +377,42 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   align-items:center;
   justify-content:center;
 }
-@media(min-width:1280px){
-  .fasqoo-ad-side{display:flex}
-  .fasqoo-ad-left{left:max(8px,calc((100vw - 1180px)/2 - 170px))}
-  .fasqoo-ad-right{right:max(8px,calc((100vw - 1180px)/2 - 170px))}
+
+.fasqoo-ad-bottom{
+  width:100%;
+  min-height:110px;
+  margin:26px 0 0;
 }
-@media(max-width:1279px){
-  .fasqoo-ad-side{display:none}
+.fasqoo-ad-bottom .fasqoo-ad-inner{
+  padding:14px 0;
 }
+
 @media(max-width:760px){
   .fasqoo-ad-center{
     min-height:90px;
     margin:20px 0 0;
     border-radius:10px;
   }
+  .fasqoo-ad-bottom{
+    min-height:90px;
+    margin:22px 0 0;
+    border-radius:10px;
+  }
 }
 @media(max-width:560px){
   .fasqoo-ad-center{min-height:80px}
+  .fasqoo-ad-bottom{min-height:80px}
   .fasqoo-ad-label{font-size:7px}
 }
 
 /* ==========================================================
-   MOBILE OPTIMIZATION — nur für Handy, Desktop unverändert
+   MOBILE OPTIMIZATION — nur für Handy
    ========================================================== */
 @media(max-width:640px){
 
-  /* Hero-Bereich und Server-Zeile auf Handy ausblenden */
   .premium-hero{display:none!important}
   .server-line{display:none!important}
 
-  /* Karte & Gauge verkleinern */
   .card{padding:14px 12px;border-radius:14px}
   .test-card:before{height:2px}
   .test-topline{padding-bottom:12px;margin-bottom:14px;gap:10px}
@@ -437,7 +427,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .gauge-caption{font-size:9px;margin-top:6px;gap:5px}
   .start{width:100%;max-width:300px;height:46px;font-size:13px;margin-top:12px;border-radius:10px}
 
-  /* Metriken */
   .metrics{margin-top:14px}
   .metric{padding:12px 10px}
   .metric .icon{width:26px;height:26px;font-size:11px}
@@ -445,33 +434,28 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .value{font-size:19px}
   .small{font-size:10px}
 
-  /* Chart */
   .chart{padding:12px;margin-top:10px}
   .charthead{font-size:11px;margin-bottom:6px}
   .charthead span{font-size:10px}
   canvas{height:110px}
 
-  /* Info-Karten */
   .info-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
   .info{padding:11px}
   .info .label{font-size:9px;letter-spacing:.3px}
   .info .iv{font-size:11.5px;margin-top:4px}
 
-  /* Quality */
   .quality{padding:13px;margin-top:12px}
   .qscore{font-size:20px}
   .qtext{font-size:11px;line-height:1.55}
   .quality-detail{font-size:11px;line-height:1.55}
   .quality-meta{font-size:9px;flex-direction:column;gap:4px;margin-top:9px}
 
-  /* Sections */
   .section{margin-top:26px}
   .section h2{font-size:17px;letter-spacing:-.3px}
   .section-sub{font-size:11px}
   .section-kicker{font-size:9px;letter-spacing:1.2px}
   .section-badge{font-size:8px;padding:5px 8px}
 
-  /* Intelligence Grid */
   .intelligence-grid{gap:8px}
   .intel-card{padding:11px;column-gap:9px;border-radius:11px}
   .intel-icon{width:30px;height:30px;font-size:12px;border-radius:9px}
@@ -479,7 +463,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .intel-card strong{font-size:13.5px;margin-top:2px}
   .intel-card small{display:none}
 
-  /* Methodik */
   .method-grid{grid-template-columns:1fr;gap:9px}
   .method-card{padding:13px;min-height:auto;border-radius:11px}
   .method-num{width:26px;height:26px;font-size:10px;border-radius:7px}
@@ -487,7 +470,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .method-card p{font-size:11px;line-height:1.55}
   .method-note{font-size:10.5px;padding:11px 13px;margin-top:9px;line-height:1.55}
 
-  /* App-Karten */
   .apps,.tools{gap:9px}
   .app,.tool{padding:13px;border-radius:11px}
   .app-icon{width:34px;height:34px;border-radius:9px}
@@ -496,7 +478,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .app p,.tool p{font-size:10.5px;line-height:1.5}
   .app-score{font-size:10.5px;margin-top:10px}
 
-  /* Report */
   .report{padding:13px;border-radius:11px}
   .reportgrid{grid-template-columns:1fr 1fr;gap:8px}
   .r{padding:9px;border-radius:8px}
@@ -505,32 +486,24 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .actions{gap:6px;margin-top:12px}
   .action{padding:7px 10px;font-size:10.5px;border-radius:8px}
 
-  /* History – Tabelle scrollbar */
-  .history{border-radius:11px}
   .hhead{padding:12px 13px}
   .hhead h2{font-size:13px}
   th,td{padding:9px 12px;font-size:11px}
-  table{min-width:560px}
 
-  /* Werbung */
   .fasqoo-ad-center{min-height:70px;margin:16px 0 0;border-radius:10px}
   .fasqoo-ad-label{font-size:7px}
 
-  /* Footer */
   footer{padding:16px 0;font-size:10px;margin-top:30px}
   .fasqoo-footer-copy div:first-child{font-size:10px}
   .fasqoo-footer-links{gap:6px 12px}
 
-  /* Widget kompakter */
   .speed-widget{right:10px;left:10px;bottom:10px;width:auto;padding:13px}
   #widgetSpeed{font-size:32px}
   .speed-widget-main{padding:10px 0 8px}
 
-  /* Layout-Ränder */
   .wrap{width:calc(100% - 22px)}
   main{padding:12px 0 40px}
 
-  /* Header kompakter */
   header{height:60px}
   .main-menu{top:60px}
   .brandmark{width:34px;height:34px}
@@ -540,15 +513,12 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .theme-btn{width:32px;height:32px;font-size:15px}
   .menu-extra select{padding:6px 9px;font-size:11px}
 
-  /* Touch-freundliche Buttons */
   .action{min-height:36px}
   .phase-step{padding:5px 9px}
 
-  /* Section-Sub-Text ausblenden wo zu viel */
   .methodology-section .section-sub{display:none}
 }
 
-/* Sehr kleine Handys */
 @media(max-width:380px){
   .gauge{width:180px;height:180px}
   .num{font-size:34px}
@@ -562,22 +532,11 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 }
 
 /* ==========================================================
-   FASQOO BOTTOM AD — über dem Footer (alle Viewports)
-   ========================================================== */
-.fasqoo-ad-bottom{
-  width:100%;
-  min-height:120px;
-  margin:26px 0 0;
-}
-
-/* ==========================================================
    FASQOO MOBILE APP EXPERIENCE
-   Nur Smartphones — Desktop bleibt unverändert
    ========================================================== */
 @media (max-width:700px){
 
   :root{ --radius:20px; }
-
   html{ -webkit-text-size-adjust:100%; }
 
   body{
@@ -589,12 +548,9 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   }
 
   .wrap{ width:100%; padding:0 16px; }
-
-  /* Hero & Server-Zeile weg → App-Look */
   .premium-hero,
   .server-line{ display:none !important; }
 
-  /* ---------- Header wie App-Bar ---------- */
   header{
     height:auto;
     min-height:64px;
@@ -635,7 +591,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
   main{ padding:0 0 30px; }
 
-  /* ---------- Testkarte = Hauptpanel ---------- */
   .card{
     padding:18px 16px;
     border-radius:20px;
@@ -660,7 +615,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     border-radius:10px;
   }
 
-  /* ---------- Gauge größer ---------- */
   .gauge{ width:250px; height:250px; }
   .gauge:after{ inset:22px; }
   .num{ font-size:52px; letter-spacing:-2px; }
@@ -677,7 +631,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     margin-top:16px;
   }
 
-  /* ---------- Metriken größer ---------- */
   .metrics{ margin-top:18px; border-radius:16px; }
   .metric{ padding:16px 14px; }
   .metric .icon{ width:32px; height:32px; font-size:13px; }
@@ -685,19 +638,16 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .value{ font-size:24px; }
   .value .small{ font-size:11px; margin-left:3px; }
 
-  /* ---------- Chart ---------- */
   .chart{ padding:14px; margin-top:14px; border-radius:16px; }
   .charthead{ font-size:13px; margin-bottom:8px; }
   .charthead span{ font-size:11px; }
   canvas{ height:140px; }
 
-  /* ---------- Info-Karten ---------- */
   .info-grid{ grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
   .info{ padding:14px; border-radius:14px; }
   .info .label{ font-size:10px; letter-spacing:.6px; }
   .info .iv{ font-size:13px; margin-top:6px; }
 
-  /* ---------- Quality ---------- */
   .quality{ padding:16px; margin-top:14px; border-radius:16px; }
   .qtop span{ font-size:14px; }
   .qscore{ font-size:26px; }
@@ -710,7 +660,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     flex-direction:column;
   }
 
-  /* ---------- Sections ---------- */
   .section{ margin-top:30px; }
   .section h2{ font-size:20px; letter-spacing:-.4px; margin-bottom:12px; }
   .section-sub{ font-size:13px; line-height:1.6; margin:-4px 0 14px; }
@@ -718,7 +667,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .section-badge{ font-size:9px; padding:6px 10px; }
   .section-heading-row{ flex-direction:column; align-items:flex-start; gap:8px; }
 
-  /* ---------- App-Karten: 1 Spalte, groß ---------- */
   .apps{ grid-template-columns:1fr; gap:12px; }
   .app{ padding:18px; border-radius:18px; }
   .app-icon{ width:46px; height:46px; font-size:22px; border-radius:14px; }
@@ -728,14 +676,12 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .app-score{ font-size:13px; margin-top:14px; }
   .app-details{ font-size:12.5px; }
 
-  /* ---------- Tools: 1 Spalte ---------- */
   .tools{ grid-template-columns:1fr; gap:12px; }
   .tool{ padding:18px; border-radius:18px; }
   .tool .icon{ width:40px; height:40px; font-size:15px; }
   .tool h3{ font-size:15px; }
   .tool p{ font-size:13px; line-height:1.55; }
 
-  /* ---------- Report ---------- */
   .report{ padding:16px; border-radius:18px; }
   .reportgrid{ grid-template-columns:1fr 1fr; gap:10px; }
   .r{ padding:12px; border-radius:12px; }
@@ -750,35 +696,29 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     border-radius:12px;
   }
 
-  /* ---------- History ---------- */
   .history{ border-radius:18px; }
   .hhead{ padding:16px; flex-wrap:wrap; gap:10px; }
   .hhead h2{ font-size:16px; }
   .hhead .action{ flex:0 0 auto; min-height:40px; font-size:12px; }
-  th, td{ padding:12px 14px; font-size:13px; }
-  table{ min-width:560px; }
 
-  /* ---------- Werbung ---------- */
   .fasqoo-ad-center{
     min-height:100px;
     margin:20px 0 0;
     border-radius:16px;
   }
   .fasqoo-ad-bottom{
-    min-height:100px;
-    margin:24px 0 0;
+    min-height:80px;
+    margin:22px 0 0;
     border-radius:16px;
   }
   .fasqoo-ad-label{ font-size:9px; }
 
-  /* ---------- Footer ---------- */
   footer{ padding:22px 0 28px; font-size:12px; margin-top:26px; }
   .foot{ flex-direction:column; gap:14px; }
   .fasqoo-footer-copy div:first-child{ font-size:13px; }
   .fasqoo-footer-links{ gap:10px 18px; }
   .fasqoo-footer-links a{ font-size:12.5px; }
 
-  /* ---------- Widget ---------- */
   .speed-widget{
     right:12px; left:12px; bottom:12px;
     width:auto; padding:16px; border-radius:20px;
@@ -786,17 +726,86 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   #widgetSpeed{ font-size:38px; }
 }
 
-/* Sehr kleine Handys */
 @media (max-width:380px){
   .gauge{ width:210px; height:210px; }
   .num{ font-size:44px; }
   .info-grid{ grid-template-columns:1fr 1fr; }
 }
 
+/* ==========================================================
+   TESTVERLAUF — responsive Karten auf dem Handy
+   ========================================================== */
+@media (max-width: 700px){
+  .history{ overflow: visible; }
+
+  .history table{
+    min-width: 0;
+    width: 100%;
+    display: block;
+  }
+  .history thead{ display: none; }
+  .history tbody{ display: block; }
+
+  .history tbody tr{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .history tbody tr:last-child{ border-bottom: 0; }
+
+  .history tbody td{
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .history tbody td::before{
+    content: attr(data-label);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .history tbody td:nth-child(1){
+    grid-column: 1 / -1;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .history tbody td:nth-child(1)::before{ display: none; }
+
+  .history tbody td:nth-child(2){
+    grid-column: 1 / -1;
+  }
+
+  .history tbody tr:has(.empty){
+    display: block;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .history tbody tr:has(.empty) td{
+    align-items: center;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .history tbody tr:has(.empty) td::before{ display: none; }
+}
 </style>
 </head>
 <body>
-
 
 <header>
   <div class="wrap nav">
@@ -804,7 +813,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
       <img src="/fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
       <div class="brandname">Fasqoo</div>
     </div>
-    <button id="installButton" class="install-btn" type="button" title="Install Fasqoo for Windows" aria-label="Install Fasqoo for Windows">
+    <button id="installButton" class="install-btn" type="button" title="Install Fasqoo for Windows" aria-label="Install Fasqoo for Windows" hidden>
       <span class="install-icon" aria-hidden="true"><span id="installIcon" class="windows-icon"></span></span><span id="installLabel" data-i18n="download">Install Fasqoo for Windows</span>
     </button>
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
@@ -919,8 +928,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     </div>
   </section>
 
-
-  <!-- FASQOO AD 3 — CENTER -->
+  <!-- FASQOO AD — CENTER -->
   <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
     <span class="fasqoo-ad-label"></span>
     <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
@@ -1033,22 +1041,20 @@ footer{margin-top:45px}.foot{align-items:flex-start}
     </div>
   </section>
 
-  <!-- ==========================================================
-       FASQOO AD — BOTTOM (direkt über dem Footer)
-       ========================================================== -->
+  <!-- FASQOO AD — BOTTOM (direkt über dem Footer) -->
   <div class="fasqoo-ad fasqoo-ad-bottom" aria-label="Advertisement">
     <span class="fasqoo-ad-label">Advertisement</span>
     <div class="fasqoo-ad-inner" id="fasqoo-ad-bottom">
-     <script>
-  atOptions = {
-    'key' : 'cfacbbb1ab06c0706c5a623d70d8f5e7',
-    'format' : 'iframe',
-    'height' : 300,
-    'width' : 160,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/cfacbbb1ab06c0706c5a623d70d8f5e7/invoke.js"></script>
+      <script>
+        atOptions = {
+          'key' : 'e9bcdd636ed6a2aab2bb0b7547ce5e3e',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/e9bcdd636ed6a2aab2bb0b7547ce5e3e/invoke.js"></script>
     </div>
   </div>
 
@@ -1097,7 +1103,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v3.1 — canvas-Fix
+   FASQOO SPEED TEST v3.2
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -1135,7 +1141,6 @@ ar:{navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",nav
   apps:{gaming:{t:"الألعاب",d:"Ping منخفض مهم.",det:"شاهد الألعاب بدون تأخير."},stream:{t:"البث",d:"سرعة جيدة للـHD.",det:"تحقق من البث HD."},fourk:{t:"بث 4K",d:"يتحقق من فيديو 4K.",det:"اختبار Ultra-HD."},call:{t:"مكالمات الفيديو",d:"النطاق وزمن الاستجابة.",det:"مثالي لـTeams وZoom وMeet."},office:{t:"العمل من المنزل",d:"للسحابة والعمل عن بعد.",det:"استقرار VPN والمستندات."},cloud:{t:"السحابة والتنزيلات",d:"كفاءة النقل.",det:"سرعة التنزيل."},social:{t:"وسائل التواصل",d:"لـInstagram وTikTok.",det:"سرعة المقاطع."},web:{t:"تصفح الويب",d:"للمواقع اليومية.",det:"أوقات التحميل."}}}
 };
 
-/* ---------- COMPLETE UI TRANSLATION PATCH ---------- */
 const extraTranslations = {
   en:{eyebrow:'FASQOO NETWORK INTELLIGENCE',trust1:'✓ Real browser measurement',trust2:'✓ Cloudflare Edge',trust3:'✓ No artificial fallback values',liveTest:'LIVE CONNECTION TEST',readyPhase:'Ready',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Result',unitMbps:'Mbps',waiting:'Waiting for measurement',basedOn:'Based on download, upload, ping & jitter',notMeasured:'Not measured',networkIntelligence:'NETWORK INTELLIGENCE',understand:'Understand your connection',intelligenceSub:'Fasqoo turns your measurements into practical network insights.',professional:'PROFESSIONAL',latency:'Latency',responseTime:'Response time',stability:'Stability',jitterConsistency:'Jitter consistency',throughput:'Throughput',downloadCapacity:'Download capacity',testServer:'Test server',automaticEdge:'Automatic edge selection',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test ID',measurementReal:'Measuring real network performance',measurementComplete:'Measurement complete',measurementFailed:'Test could not be completed'},
   de:{eyebrow:'FASQOO NETZWERK-INTELLIGENZ',trust1:'✓ Echte Browser-Messung',trust2:'✓ Cloudflare Edge',trust3:'✓ Keine künstlichen Ersatzwerte',liveTest:'LIVE-VERBINDUNGSTEST',readyPhase:'Bereit',phasePing:'Ping',phaseDownload:'Download',phaseUpload:'Upload',phaseResult:'Ergebnis',unitMbps:'Mbit/s',waiting:'Warten auf Messung',basedOn:'Basierend auf Download, Upload, Ping & Jitter',notMeasured:'Nicht gemessen',networkIntelligence:'NETZWERK-INTELLIGENZ',understand:'Verstehe deine Verbindung',intelligenceSub:'Fasqoo verwandelt deine Messwerte in praktische Netzwerkinformationen.',professional:'PROFESSIONELL',latency:'Latenz',responseTime:'Antwortzeit',stability:'Stabilität',jitterConsistency:'Jitter-Konsistenz',throughput:'Durchsatz',downloadCapacity:'Download-Kapazität',testServer:'Testserver',automaticEdge:'Automatische Edge-Auswahl',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'Test-ID',measurementReal:'Echte Netzwerkleistung wird gemessen',measurementComplete:'Messung abgeschlossen',measurementFailed:'Der Test konnte nicht abgeschlossen werden'},
@@ -1149,7 +1154,6 @@ const extraTranslations = {
   ar:{eyebrow:'ذكاء شبكة FASQOO',trust1:'✓ قياس حقيقي عبر المتصفح',trust2:'✓ Cloudflare Edge',trust3:'✓ بدون قيم بديلة اصطناعية',liveTest:'اختبار اتصال مباشر',readyPhase:'جاهز',phasePing:'Ping',phaseDownload:'تنزيل',phaseUpload:'رفع',phaseResult:'النتيجة',unitMbps:'ميغابت/ث',waiting:'بانتظار القياس',basedOn:'استنادًا إلى التنزيل والرفع وPing وJitter',notMeasured:'لم يتم القياس',networkIntelligence:'ذكاء الشبكة',understand:'افهم اتصالك',intelligenceSub:'تحوّل Fasqoo قياساتك إلى معلومات عملية عن الشبكة.',professional:'احترافي',latency:'زمن الاستجابة',responseTime:'وقت الاستجابة',stability:'الاستقرار',jitterConsistency:'اتساق Jitter',throughput:'معدل النقل',downloadCapacity:'سعة التنزيل',testServer:'خادم الاختبار',automaticEdge:'اختيار Edge تلقائيًا',dnsShort:'DNS',ipv4:'IPv4',ipv6:'IPv6',testId:'معرّف الاختبار',measurementReal:'جارٍ قياس أداء الشبكة الحقيقي',measurementComplete:'اكتمل القياس',measurementFailed:'تعذر إكمال الاختبار'}
 };
 
-/* ---------- COMPLETE PAGE TRANSLATIONS ---------- */
 const pageTranslations = {
   en:{title:"Free Internet Speed Test",sub:"Check download, upload, ping and jitter.",methodTitle:"How your connection is measured",methodSub:"Fasqoo measures your connection directly from your browser and reports the values it actually receives.",method1T:"Latency & jitter",method1D:"Multiple small requests are timed. Ping uses the measured response times, while jitter describes their variation.",method2T:"Download",method2D:"Your browser downloads real data from the test endpoint. Speed is calculated from bytes received and elapsed time.",method3T:"Upload",method3D:"Your browser sends real data to the test endpoint. Speed is calculated from bytes sent and elapsed time.",method4T:"Why results vary",method4D:"Wi-Fi, device load, VPNs, ISP congestion, routing and distance to the test edge can affect results.",methodNote:"Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
   de:{title:"Kostenloser Internet-Speedtest",sub:"Prüfe Download, Upload, Ping und Jitter.",methodTitle:"So wird deine Verbindung gemessen",methodSub:"Fasqoo misst deine Verbindung direkt im Browser und zeigt die tatsächlich gemessenen Werte an.",method1T:"Latenz & Jitter",method1D:"Mehrere kleine Anfragen werden gemessen. Der Ping basiert auf den Antwortzeiten, der Jitter beschreibt deren Schwankung.",method2T:"Download",method2D:"Dein Browser lädt echte Daten vom Test-Endpunkt. Die Geschwindigkeit wird aus empfangenen Bytes und Messdauer berechnet.",method3T:"Upload",method3D:"Dein Browser sendet echte Daten an den Test-Endpunkt. Die Geschwindigkeit wird aus gesendeten Bytes und Messdauer berechnet.",method4T:"Warum Ergebnisse schwanken",method4D:"WLAN, Geräteauslastung, VPNs, Netzauslastung des Anbieters, Routing und die Entfernung zum Testserver können das Ergebnis beeinflussen.",methodNote:"Messinfrastruktur: Cloudflare-Speed-Test-Endpunkte. Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt."},
@@ -1318,7 +1322,6 @@ async function timedFetch(url, options={}, timeoutMs=12000){
   }finally{ timer.clear(); }
 }
 
-/* ---------- MEASUREMENT ENGINE v4 ---------- */
 const MEASUREMENT_V4 = {
   version: "4.0",
   base: SPEED_BASE,
@@ -1580,8 +1583,21 @@ function historyLoad(){
   const t = translations[currentLang];
   const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
   const body = $("history");
-  if(!h.length){ body.innerHTML = '<tr><td colspan="6" class="empty">'+t.noHistory+'</td></tr>'; return; }
-  body.innerHTML = h.map(x => '<tr><td>'+x.date+'</td><td>'+((x.isp||"—").replace(/[<>&"]/g,m=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[m])))+'</td><td>'+Number(x.d).toFixed(1)+' Mbps</td><td>'+Number(x.u).toFixed(1)+' Mbps</td><td>'+Number(x.p).toFixed(1)+' ms</td><td>'+x.s+'/100</td></tr>').join("");
+  if(!h.length){
+    body.innerHTML = '<tr><td colspan="6" class="empty">'+t.noHistory+'</td></tr>';
+    return;
+  }
+  const esc = s => String(s||"").replace(/[<>&"]/g, m => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[m]));
+  body.innerHTML = h.map(x =>
+    '<tr>'
+    + '<td data-label="'+t.thDate+'" colspan="6">'+esc(x.date)+'</td>'
+    + '<td data-label="'+t.thProvider+'">'+esc(x.isp||"—")+'</td>'
+    + '<td data-label="'+t.thDown+'">'+Number(x.d).toFixed(1)+' Mbps</td>'
+    + '<td data-label="'+t.thUp+'">'+Number(x.u).toFixed(1)+' Mbps</td>'
+    + '<td data-label="'+t.thPing+'">'+Number(x.p).toFixed(1)+' ms</td>'
+    + '<td data-label="'+t.thQual+'">'+x.s+'/100</td>'
+    + '</tr>'
+  ).join("");
 }
 function saveHistory(x){
   const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
@@ -1590,7 +1606,7 @@ function saveHistory(x){
   historyLoad();
 }
 
-/* ---------- PREMIUM METRICS / INTELLIGENCE GRID ---------- */
+/* ---------- PREMIUM METRICS ---------- */
 function setPremiumMetrics(d,u,p,j){
   const x = extraTranslations[currentLang] || extraTranslations.en;
   if(Number.isFinite(p)) $("intelLatency").textContent = p.toFixed(1)+" ms";
@@ -1625,7 +1641,7 @@ async function start(){
   $("start").textContent = t.testing;
   resetGauge();
   ["down","up","ping","jitter"].forEach(id => $(id).textContent = "—");
-  
+
   $("intelLatency").textContent = "—";
   $("intelStability").textContent = "—";
   $("intelThroughput").textContent = "—";
@@ -1639,11 +1655,11 @@ async function start(){
 
   try{
     if(performance.clearResourceTimings) performance.clearResourceTimings();
-    
+
     const p = await pingTest();
     $("ping").textContent = p.ping.toFixed(1);
     $("jitter").textContent = p.jitter.toFixed(1);
-    
+
     $("intelLatency").textContent = p.ping.toFixed(1) + " ms";
     $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " + (p.jitter <= 10 ? t.stExc : p.jitter <= 20 ? t.stGood : t.stLim);
 
@@ -1654,7 +1670,7 @@ async function start(){
     setTestPhase("upload");
 
     const u = await uploadTest();
-    
+
     setTestPhase("complete");
     const s = quality(d,u,p.ping,p.jitter);
     showQuality(s,d,u,p.ping,p.jitter);
@@ -1766,7 +1782,10 @@ langSelect.addEventListener("change", e => {
   localStorage.setItem("fasqoo_lang", chosen);
 });
 
-/* ---------- PWA INSTALL ---------- */
+/* ==========================================================
+   PWA INSTALL — Erkennung, ob Fasqoo bereits installiert ist
+   ========================================================== */
+
 let deferredInstallPrompt = null;
 const installButton = $("installButton");
 const installLabel = $("installLabel");
@@ -1782,87 +1801,139 @@ function isSafariDesktop(){
   return /Macintosh/i.test(ua) && /Safari/i.test(ua) && !/Chrome|CriOS|Edg|OPR|Firefox/i.test(ua);
 }
 function isWindows(){ return /Windows NT/i.test(navigator.userAgent || ""); }
+
+function hideInstallButton(){
+  if(!installButton) return;
+  installButton.hidden = true;
+  installButton.style.display = "none";
+}
+function showInstallButton(){
+  if(!installButton) return;
+  installButton.hidden = false;
+  installButton.style.display = "";
+}
+
 async function updateInstallVisibility(){
   if(!installButton) return;
 
-  const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  // 1) Läuft die Seite bereits als installierte PWA?
+  const standalone =
+       window.matchMedia("(display-mode: standalone)").matches
+    || window.matchMedia("(display-mode: window-controls-overlay)").matches
+    || window.matchMedia("(display-mode: minimal-ui)").matches
+    || window.navigator.standalone === true;
+
+  // 2) Wurde die PWA in einer früheren Sitzung installiert?
   const locallyInstalled = localStorage.getItem("fasqoo_pwa_installed") === "true";
 
-  if(!isDesktopDevice() || standalone || locallyInstalled){
-    installButton.hidden = true;
+  // 3) Hat der Browser eine installierte "verwandte" Web-App gefunden?
+  let apiInstalled = false;
+  if (typeof navigator.getInstalledRelatedApps === "function") {
+    try {
+      const relatedApps = await navigator.getInstalledRelatedApps();
+      apiInstalled = Array.isArray(relatedApps) && relatedApps.length > 0;
+      if (apiInstalled) {
+        localStorage.setItem("fasqoo_pwa_installed", "true");
+      }
+    } catch(e) { /* ignore */ }
+  }
+
+  // 4) Auf Mobilgeräten nie anzeigen
+  const desktop = isDesktopDevice();
+
+  // Wenn eines der Kriterien zutrifft → Button endgültig ausblenden
+  if (!desktop || standalone || locallyInstalled || apiInstalled) {
+    hideInstallButton();
     return;
   }
 
-  if(typeof navigator.getInstalledRelatedApps === "function") {
-    try {
-      const relatedApps = await navigator.getInstalledRelatedApps();
-      const fasqooInstalled = relatedApps.some(app => app.platform === "webapp");
-      if(fasqooInstalled){
-        localStorage.setItem("fasqoo_pwa_installed", "true");
-        installButton.hidden = true;
-        return;
-      }
-    } catch(e) {}
-  }
+  // Button anzeigen (Desktop + nicht installiert)
+  showInstallButton();
 
-  installButton.hidden = false;
   const icon = $("installIcon");
-  if(isWindows()){
-    icon.className = "windows-icon";
-  } else {
-    icon.className = "apple-icon";
-    icon.textContent = "⌘";
+  if (icon) {
+    if (isWindows()) {
+      icon.className = "windows-icon";
+      icon.textContent = "";
+    } else {
+      icon.className = "mac-icon";
+      icon.textContent = "";
+    }
   }
-  installLabel.textContent = isSafariDesktop() ? "Fasqoo für macOS installieren" : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
-  installButton.title = installLabel.textContent;
+  if (installLabel) {
+    installLabel.textContent = isSafariDesktop()
+      ? "Fasqoo für macOS installieren"
+      : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
+  }
+  installButton.title = installLabel ? installLabel.textContent : "";
+  installButton.setAttribute("aria-label", installLabel ? installLabel.textContent : "");
 }
-updateInstallVisibility();
+
+/* Live-Umschaltung: Wenn sich der Display-Modus ändert */
+["(display-mode: standalone)","(display-mode: window-controls-overlay)","(display-mode: minimal-ui)"].forEach(q => {
+  const mq = window.matchMedia(q);
+  if (mq.addEventListener) mq.addEventListener("change", () => updateInstallVisibility());
+  else if (mq.addListener) mq.addListener(() => updateInstallVisibility());
+});
 
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredInstallPrompt = e;
+
+  // Nur anzeigen, wenn nicht schon installiert
+  const alreadyInstalled =
+       localStorage.getItem("fasqoo_pwa_installed") === "true"
+    || window.matchMedia("(display-mode: standalone)").matches
+    || window.navigator.standalone === true;
+
+  if (alreadyInstalled) {
+    hideInstallButton();
+    return;
+  }
   updateInstallVisibility();
 });
 
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
   localStorage.setItem("fasqoo_pwa_installed", "true");
-  installButton.hidden = true;
+  hideInstallButton();
 });
 
-installButton.addEventListener("click", async () => {
-  if(!isDesktopDevice()) return;
+if (installButton) {
+  installButton.addEventListener("click", async () => {
+    if(!isDesktopDevice()) return;
 
-  if(deferredInstallPrompt){
-    deferredInstallPrompt.prompt();
-    const res = await deferredInstallPrompt.userChoice;
-    if(res.outcome === "accepted") {
-      localStorage.setItem("fasqoo_pwa_installed", "true");
-      installButton.hidden = true;
-      deferredInstallPrompt = null;
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      const res = await deferredInstallPrompt.userChoice;
+      if(res.outcome === "accepted") {
+        localStorage.setItem("fasqoo_pwa_installed", "true");
+        hideInstallButton();
+        deferredInstallPrompt = null;
+      }
+      return;
     }
-    return;
-  }
 
-  if(isSafariDesktop()){
-    alert("Safari: Öffne das Teilen-Menü und wähle „Zum Dock hinzufügen“. Damit wird Fasqoo als Web-App auf deinem Mac installiert.");
-    return;
-  }
+    if(isSafariDesktop()){
+      alert("Safari: Öffne das Teilen-Menü und wähle „Zum Dock hinzufügen“. Damit wird Fasqoo als Web-App auf deinem Mac installiert.");
+      return;
+    }
 
-  const msg = {
-    de:"Chrome bietet die Installation gerade nicht automatisch an. Öffne das Chrome-Menü (⋮) und wähle „Fasqoo installieren…“.",
-    en:"Chrome is not offering installation automatically. Open the Chrome menu (⋮) and choose “Install Fasqoo…”.",
-    fr:"Chrome ne propose pas l'installation automatiquement. Ouvrez le menu Chrome (⋮) et choisissez « Installer Fasqoo… ».",
-    es:"Chrome no ofrece la instalación automáticamente. Abre el menú de Chrome (⋮) y elige «Instalar Fasqoo…».",
-    it:"Chrome non offre l'installazione automaticamente. Apri il menu Chrome (⋮) e scegli «Installa Fasqoo…».",
-    pt:"O Chrome não oferece a instalação automaticamente. Abra o menu do Chrome (⋮) e escolha «Instalar Fasqoo…».",
-    nl:"Chrome biedt installatie niet automatisch aan. Open het Chrome-menu (⋮) en kies “Fasqoo installeren…”.",
-    tr:"Chrome kurulumu otomatik olarak sunmuyor. Chrome menüsünü (⋮) açıp “Fasqoo'yu yükle…” seçeneğini seçin.",
-    sq:"Chrome nuk e ofron instalimin automatikisht. Hap menunë e Chrome (⋮) dhe zgjidh “Instalo Fasqoo…”.",
-    ar:"لا يعرض Chrome التثبيت تلقائيًا. افتح قائمة Chrome (⋮) واختر «تثبيت Fasqoo…»."
-  }[currentLang] || "Open the Chrome menu and choose Install Fasqoo.";
-  alert(msg);
-});
+    const msg = {
+      de:"Chrome bietet die Installation gerade nicht automatisch an. Öffne das Chrome-Menü (⋮) und wähle „Fasqoo installieren…“.",
+      en:"Chrome is not offering installation automatically. Open the Chrome menu (⋮) and choose “Install Fasqoo…”.",
+      fr:"Chrome ne propose pas l'installation automatiquement. Ouvrez le menu Chrome (⋮) et choisissez « Installer Fasqoo… ».",
+      es:"Chrome no ofrece la instalación automáticamente. Abre el menú de Chrome (⋮) y elige «Instalar Fasqoo…».",
+      it:"Chrome non offre l'installazione automaticamente. Apri il menu Chrome (⋮) e scegli «Installa Fasqoo…».",
+      pt:"O Chrome não oferece a instalação automaticamente. Abra o menu do Chrome (⋮) e escolha «Instalar Fasqoo…».",
+      nl:"Chrome biedt installatie niet automatisch aan. Open het Chrome-menu (⋮) en kies “Fasqoo installeren…”.",
+      tr:"Chrome kurulumu otomatik olarak sunmuyor. Chrome menüsünü (⋮) açıp “Fasqoo'yu yükle…” seçeneğini seçin.",
+      sq:"Chrome nuk e ofron instalimin automatikisht. Hap menunë e Chrome (⋮) dhe zgjidh “Instalo Fasqoo…”.",
+      ar:"لا يعرض Chrome التثبيت تلقائيًا. افتح قائمة Chrome (⋮) واختر «تثبيت Fasqoo…»."
+    }[currentLang] || "Open the Chrome menu and choose Install Fasqoo.";
+    alert(msg);
+  });
+}
 
 /* ---------- SPEED WIDGET ---------- */
 const widget=$("speedWidget");
@@ -1883,7 +1954,7 @@ $("widgetRun")?.addEventListener("click",async()=>{
   widget.hidden=false;
 });
 
-/* ---------- OPTIONAL WIDGET: lazy-load after first paint ---------- */
+/* ---------- OPTIONAL WIDGET: lazy-load ---------- */
 window.addEventListener("load",()=>{
   const loadWidget=()=>{
     if(document.querySelector('script[data-fasqoo-widget]')) return;
@@ -1929,49 +2000,9 @@ applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 
 netinfo();
 
-/* ---------- PWA INSTALL HELPER ---------- */
+/* ---------- PWA INSTALL INIT ---------- */
 document.addEventListener('DOMContentLoaded', () => {
-  const installBtn = document.getElementById('installButton');
-  const installLabel = document.getElementById('installLabel');
-  const installIcon = document.getElementById('installIcon');
-  
-  if (!installBtn) return;
-
-  const userAgent = navigator.userAgent.toLowerCase();
-  if (userAgent.includes('mac')) {
-    if (installLabel) installLabel.textContent = 'Fasqoo für Mac installieren';
-    if (installIcon) installIcon.className = 'mac-icon';
-    installBtn.title = 'Install Fasqoo for Mac';
-    installBtn.setAttribute('aria-label', 'Install Fasqoo for Mac');
-  } else if (userAgent.includes('win')) {
-    if (installLabel) installLabel.textContent = 'Fasqoo für Windows installieren';
-    if (installIcon) installIcon.className = 'windows-icon';
-    installBtn.title = 'Install Fasqoo for Windows';
-    installBtn.setAttribute('aria-label', 'Install Fasqoo for Windows');
-  }
-
-  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true || localStorage.getItem('fasqoo_pwa_installed') === 'true') {
-    installBtn.style.display = 'none';
-  }
-
-  installBtn.addEventListener('click', async () => {
-    if (!deferredInstallPrompt) return;
-    
-    deferredInstallPrompt.prompt();
-    const { outcome } = await deferredInstallPrompt.userChoice;
-    
-    if (outcome === 'accepted') {
-      console.log('App wurde erfolgreich installiert');
-    }
-    
-    deferredInstallPrompt = null;
-    installBtn.style.display = 'none';
-  });
-});
-
-window.addEventListener('appinstalled', () => {
-  const installBtn = document.getElementById('installButton');
-  if (installBtn) installBtn.style.display = 'none';
+  updateInstallVisibility();
 });
 </script>
 
