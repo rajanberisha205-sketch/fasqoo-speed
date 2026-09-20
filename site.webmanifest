@@ -1,14 +1,18 @@
 {
   "id": "/",
-  "name": "Fasqoo Speed Test",
+  "name": "Fasqoo Internet Speed Test",
   "short_name": "Fasqoo",
   "description": "Free internet speed test – check download, upload, ping and jitter with Fasqoo.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "any",
   "background_color": "#ffffff",
-  "theme_color": "#ff5a1f",
+  "theme_color": "#ffffff",
   "lang": "en",
   "dir": "ltr",
   "icons": [
