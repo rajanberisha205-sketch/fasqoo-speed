@@ -415,32 +415,9 @@ footer{margin-top:45px}.foot{align-items:flex-start}
    ========================================================== */
 @media(max-width:640px){
 
-  /* Hero-Bereich kompakt machen */
-  .premium-hero{padding:14px 0 4px;margin-bottom:0;text-align:left}
-  .premium-hero h1{font-size:22px;letter-spacing:-.8px;margin:10px 0 5px;line-height:1.2}
-  .premium-hero p{font-size:12px;line-height:1.45;margin:0}
-  .eyebrow{font-size:9px;padding:5px 9px;letter-spacing:.9px;gap:6px}
-  .eyebrow-dot{width:6px;height:6px}
-
-  /* Trust badges → kompakte Inline-Chips, horizontal scrollbar */
-  .hero-trust{
-    display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;
-    margin-top:10px;padding-bottom:4px;
-    scrollbar-width:none;-ms-overflow-style:none;
-    -webkit-overflow-scrolling:touch;
-    justify-content:flex-start;
-  }
-  .hero-trust::-webkit-scrollbar{display:none}
-  .hero-trust span{
-    width:auto!important;flex:0 0 auto;
-    padding:5px 9px;font-size:9.5px;border-radius:999px;
-    white-space:nowrap;line-height:1.2;
-  }
-
-  /* Server-Zeile kompakt */
-  .server-line{gap:6px;margin:6px 0 12px;justify-content:flex-start}
-  .server-badge{font-size:9.5px;padding:5px 9px}
-  .live-dot{width:5px;height:5px}
+  /* Hero-Bereich und Server-Zeile auf Handy ausblenden */
+  .premium-hero{display:none!important}
+  .server-line{display:none!important}
 
   /* Karte & Gauge verkleinern */
   .card{padding:14px 12px;border-radius:14px}
@@ -525,11 +502,12 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .actions{gap:6px;margin-top:12px}
   .action{padding:7px 10px;font-size:10.5px;border-radius:8px}
 
-  /* History */
+  /* History – Tabelle scrollbar */
   .history{border-radius:11px}
   .hhead{padding:12px 13px}
   .hhead h2{font-size:13px}
   th,td{padding:9px 12px;font-size:11px}
+  table{min-width:560px}
 
   /* Werbung */
   .fasqoo-ad-center{min-height:70px;margin:16px 0 0;border-radius:10px}
@@ -548,16 +526,36 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   /* Layout-Ränder */
   .wrap{width:calc(100% - 22px)}
   main{padding:12px 0 40px}
+
+  /* Header kompakter */
+  header{height:60px}
+  .main-menu{top:60px}
+  .brandmark{width:34px;height:34px}
+  .brandname{font-size:19px}
+  .lite-btn{height:32px;padding:0 10px;font-size:11px}
+  .menu-toggle{padding:5px 10px;font-size:18px}
+  .theme-btn{width:32px;height:32px;font-size:15px}
+  .menu-extra select{padding:6px 9px;font-size:11px}
+
+  /* Touch-freundliche Buttons */
+  .action{min-height:36px}
+  .phase-step{padding:5px 9px}
+
+  /* Section-Sub-Text ausblenden wo zu viel */
+  .methodology-section .section-sub{display:none}
 }
 
 /* Sehr kleine Handys */
 @media(max-width:380px){
-  .premium-hero h1{font-size:20px}
   .gauge{width:180px;height:180px}
   .num{font-size:34px}
-  .hero-trust span{font-size:9px;padding:4px 8px}
   .info-grid{grid-template-columns:1fr}
   .intelligence-grid{grid-template-columns:1fr}
+  .reportgrid{grid-template-columns:1fr}
+  .card{padding:12px 10px}
+  .metric{padding:10px 8px}
+  .value{font-size:17px}
+  .action{padding:6px 9px;font-size:10px}
 }
 
 </style>
