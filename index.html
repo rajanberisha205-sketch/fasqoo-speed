@@ -17,6 +17,9 @@
 <meta name="twitter:title" content="Free Internet Speed Test | Fasqoo">
 <meta name="twitter:description" content="Measure download, upload, ping and jitter with Fasqoo.">
 <meta name="robots" content="index, follow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo</title>
 <link rel="canonical" href="https://www.fasqoo.com/">
 <link rel="manifest" href="/site.webmanifest">
@@ -558,6 +561,238 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .action{padding:6px 9px;font-size:10px}
 }
 
+/* ==========================================================
+   FASQOO BOTTOM AD — über dem Footer (alle Viewports)
+   ========================================================== */
+.fasqoo-ad-bottom{
+  width:100%;
+  min-height:120px;
+  margin:26px 0 0;
+}
+
+/* ==========================================================
+   FASQOO MOBILE APP EXPERIENCE
+   Nur Smartphones — Desktop bleibt unverändert
+   ========================================================== */
+@media (max-width:700px){
+
+  :root{ --radius:20px; }
+
+  html{ -webkit-text-size-adjust:100%; }
+
+  body{
+    background:#eef1f5;
+    font-size:16px;
+    padding-bottom:env(safe-area-inset-bottom);
+    overscroll-behavior-y:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .wrap{ width:100%; padding:0 16px; }
+
+  /* Hero & Server-Zeile weg → App-Look */
+  .premium-hero,
+  .server-line{ display:none !important; }
+
+  /* ---------- Header wie App-Bar ---------- */
+  header{
+    height:auto;
+    min-height:64px;
+    padding:10px 0;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .nav{ gap:10px; }
+  .brandmark{ width:36px; height:36px; }
+  .brandname{ font-size:20px; }
+  .lite-btn{ height:42px; padding:0 14px; font-size:13px; border-radius:12px; }
+  .menu-toggle{
+    height:42px; width:42px; padding:0;
+    font-size:20px; border-radius:12px;
+    display:grid; place-items:center;
+  }
+  .main-menu{
+    top:64px;
+    padding:18px 16px;
+    gap:6px;
+    border-radius:0 0 20px 20px;
+  }
+  .main-menu a{
+    font-size:16px;
+    padding:12px 4px;
+    width:100%;
+    border-bottom:1px solid var(--line);
+  }
+  .menu-extra{ padding-top:14px; gap:10px; }
+  .menu-extra select{
+    flex:1; height:46px;
+    font-size:14px; padding:0 12px;
+    border-radius:12px;
+  }
+  .theme-btn{ width:46px; height:46px; font-size:18px; border-radius:12px; }
+
+  main{ padding:0 0 30px; }
+
+  /* ---------- Testkarte = Hauptpanel ---------- */
+  .card{
+    padding:18px 16px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+  }
+  .test-card{ margin-top:14px; }
+  .test-topline{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+    padding-bottom:14px;
+    margin-bottom:16px;
+  }
+  .test-topline strong{ font-size:15px; }
+  .mini-kicker{ font-size:10px; letter-spacing:1.4px; }
+  .phase-steps{ width:100%; justify-content:space-between; gap:4px; }
+  .phase-step{
+    flex:1;
+    text-align:center;
+    font-size:11px;
+    padding:7px 4px;
+    border-radius:10px;
+  }
+
+  /* ---------- Gauge größer ---------- */
+  .gauge{ width:250px; height:250px; }
+  .gauge:after{ inset:22px; }
+  .num{ font-size:52px; letter-spacing:-2px; }
+  .unit{ font-size:12px; margin-top:6px; letter-spacing:2px; }
+  .status{ font-size:14px; min-height:20px; margin-top:-4px; }
+  .gauge-caption{ font-size:11px; margin-top:8px; }
+  .start{
+    width:100%;
+    max-width:none;
+    height:56px;
+    font-size:16px;
+    font-weight:700;
+    border-radius:16px;
+    margin-top:16px;
+  }
+
+  /* ---------- Metriken größer ---------- */
+  .metrics{ margin-top:18px; border-radius:16px; }
+  .metric{ padding:16px 14px; }
+  .metric .icon{ width:32px; height:32px; font-size:13px; }
+  .label{ font-size:12px; }
+  .value{ font-size:24px; }
+  .value .small{ font-size:11px; margin-left:3px; }
+
+  /* ---------- Chart ---------- */
+  .chart{ padding:14px; margin-top:14px; border-radius:16px; }
+  .charthead{ font-size:13px; margin-bottom:8px; }
+  .charthead span{ font-size:11px; }
+  canvas{ height:140px; }
+
+  /* ---------- Info-Karten ---------- */
+  .info-grid{ grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .info{ padding:14px; border-radius:14px; }
+  .info .label{ font-size:10px; letter-spacing:.6px; }
+  .info .iv{ font-size:13px; margin-top:6px; }
+
+  /* ---------- Quality ---------- */
+  .quality{ padding:16px; margin-top:14px; border-radius:16px; }
+  .qtop span{ font-size:14px; }
+  .qscore{ font-size:26px; }
+  .qtext{ font-size:13px; line-height:1.6; }
+  .quality-detail{ font-size:13px; line-height:1.6; }
+  .quality-meta{
+    font-size:11px;
+    gap:6px;
+    margin-top:12px;
+    flex-direction:column;
+  }
+
+  /* ---------- Sections ---------- */
+  .section{ margin-top:30px; }
+  .section h2{ font-size:20px; letter-spacing:-.4px; margin-bottom:12px; }
+  .section-sub{ font-size:13px; line-height:1.6; margin:-4px 0 14px; }
+  .section-kicker{ font-size:10px; }
+  .section-badge{ font-size:9px; padding:6px 10px; }
+  .section-heading-row{ flex-direction:column; align-items:flex-start; gap:8px; }
+
+  /* ---------- App-Karten: 1 Spalte, groß ---------- */
+  .apps{ grid-template-columns:1fr; gap:12px; }
+  .app{ padding:18px; border-radius:18px; }
+  .app-icon{ width:46px; height:46px; font-size:22px; border-radius:14px; }
+  .app-status{ font-size:11px; padding:6px 10px; }
+  .app h3{ font-size:16px; margin:14px 0 6px; }
+  .app p{ font-size:13px; line-height:1.55; }
+  .app-score{ font-size:13px; margin-top:14px; }
+  .app-details{ font-size:12.5px; }
+
+  /* ---------- Tools: 1 Spalte ---------- */
+  .tools{ grid-template-columns:1fr; gap:12px; }
+  .tool{ padding:18px; border-radius:18px; }
+  .tool .icon{ width:40px; height:40px; font-size:15px; }
+  .tool h3{ font-size:15px; }
+  .tool p{ font-size:13px; line-height:1.55; }
+
+  /* ---------- Report ---------- */
+  .report{ padding:16px; border-radius:18px; }
+  .reportgrid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .r{ padding:12px; border-radius:12px; }
+  .r b{ font-size:10px; }
+  .r span{ font-size:14px; margin-top:6px; }
+  .actions{ gap:8px; margin-top:14px; }
+  .action{
+    flex:1 1 calc(50% - 4px);
+    min-height:46px;
+    font-size:13px;
+    padding:10px 12px;
+    border-radius:12px;
+  }
+
+  /* ---------- History ---------- */
+  .history{ border-radius:18px; }
+  .hhead{ padding:16px; flex-wrap:wrap; gap:10px; }
+  .hhead h2{ font-size:16px; }
+  .hhead .action{ flex:0 0 auto; min-height:40px; font-size:12px; }
+  th, td{ padding:12px 14px; font-size:13px; }
+  table{ min-width:560px; }
+
+  /* ---------- Werbung ---------- */
+  .fasqoo-ad-center{
+    min-height:100px;
+    margin:20px 0 0;
+    border-radius:16px;
+  }
+  .fasqoo-ad-bottom{
+    min-height:100px;
+    margin:24px 0 0;
+    border-radius:16px;
+  }
+  .fasqoo-ad-label{ font-size:9px; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:22px 0 28px; font-size:12px; margin-top:26px; }
+  .foot{ flex-direction:column; gap:14px; }
+  .fasqoo-footer-copy div:first-child{ font-size:13px; }
+  .fasqoo-footer-links{ gap:10px 18px; }
+  .fasqoo-footer-links a{ font-size:12.5px; }
+
+  /* ---------- Widget ---------- */
+  .speed-widget{
+    right:12px; left:12px; bottom:12px;
+    width:auto; padding:16px; border-radius:20px;
+  }
+  #widgetSpeed{ font-size:38px; }
+}
+
+/* Sehr kleine Handys */
+@media (max-width:380px){
+  .gauge{ width:210px; height:210px; }
+  .num{ font-size:44px; }
+  .info-grid{ grid-template-columns:1fr 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -797,6 +1032,25 @@ footer{margin-top:45px}.foot{align-items:flex-start}
       </table>
     </div>
   </section>
+
+  <!-- ==========================================================
+       FASQOO AD — BOTTOM (direkt über dem Footer)
+       ========================================================== -->
+  <div class="fasqoo-ad fasqoo-ad-bottom" aria-label="Advertisement">
+    <span class="fasqoo-ad-label">Advertisement</span>
+    <div class="fasqoo-ad-inner" id="fasqoo-ad-bottom">
+      <script>
+        atOptions = {
+          'key' : 'HIER_DEINEN_ZWEITEN_AD_KEY_EINTRAGEN',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/HIER_DEINEN_ZWEITEN_AD_KEY_EINTRAGEN/invoke.js"></script>
+    </div>
+  </div>
 
 </div>
 </main>
