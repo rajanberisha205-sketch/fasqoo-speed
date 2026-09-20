@@ -1,4 +1,4 @@
-const CACHE = "fasqoo-v7";
+const CACHE = "fasqoo-v8";
 
 const ASSETS = [
   "/",
@@ -37,23 +37,22 @@ self.addEventListener("activate", event => {
 });
 
 function isMeasurement(url) {
-  return url.hostname === "speed.cloudflare.com" ||
-         url.hostname === "ipwho.is" ||
-         url.pathname.includes("/__down") ||
-         url.pathname.includes("/__up");
+  return (
+    url.hostname === "speed.cloudflare.com" ||
+    url.hostname === "ipwho.is" ||
+    url.pathname.includes("/__down") ||
+    url.pathname.includes("/__up")
+  );
 }
 
 self.addEventListener("fetch", event => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // Niemals Speedtest- oder IP-Messdaten cachen/intercepten.
   if (isMeasurement(url) || request.method !== "GET") {
     return;
   }
 
-  // Navigation:
-  // Netzwerk zuerst, Cache als Offline-Fallback.
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -76,8 +75,6 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Statische Dateien:
-  // Netzwerk zuerst, Cache als Fallback.
   event.respondWith(
     fetch(request)
       .then(response => {
@@ -95,8 +92,6 @@ self.addEventListener("fetch", event => {
 
         return response;
       })
-      .catch(() =>
-        caches.match(request)
-      )
+      .catch(() => caches.match(request))
   );
 });
