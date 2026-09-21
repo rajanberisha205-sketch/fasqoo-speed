@@ -659,13 +659,17 @@ footer{
     addMessage(clean,"user");
     const typing=addTyping();
     try{
-     const res=await fetch("https://vercel.app",{
+    try{
+      const res=await fetch("/api/gemini-chat",{
         method:"POST",
         headers:{"Content-Type":"application/json","Accept":"application/json"},
         body:JSON.stringify({
           message:clean,
           language:currentLanguage(),
           history:history.slice(-10)
+        })
+      });
+      const data=await res.json().catch(()=>({}));
         })
       });
       const data=await res.json().catch(()=>({}));
