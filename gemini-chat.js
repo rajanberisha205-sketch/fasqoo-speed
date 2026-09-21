@@ -62,6 +62,12 @@ function googleError(data, status) {
 }
 
 export default async function handler(req, res) {
+   res.setHeader("Access-Control-Allow-Origin", "https://fasqoo.com");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return json(res, 405, { error: "Method not allowed.", code: "METHOD_NOT_ALLOWED" });
