@@ -7,8 +7,10 @@
  * The key stays server-side and is never exposed to visitors.
  */
 
-const MODEL = "gemini-3.8-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+
+const MODEL = "gemini-1.5-flash"; 
+const GEMINI_URL = `https://googleapis.com{MODEL}:generateContent`;
+
 
 const FASQOO_SUPPORT_INSTRUCTIONS = `
 You are Fasqoo AI Support, the technical support assistant embedded on Fasqoo.
