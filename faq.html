@@ -1317,8 +1317,71 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-<!-- HubSpot Chat & Support -->
-<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/149383403.js"></script>
-<!-- End HubSpot Chat & Support -->
+
+<div id="gemini-chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: sans-serif; z-index: 10000;">
+    <div style="background: #171; color: white; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; font-weight: bold;">
+        Fasqoo KI Assistent
+    </div>
+    <div id="chat-output" style="height: 250px; overflow-y: auto; padding: 10px; font-size: 14px; line-height: 1.4;">
+        <p style="color: #666; margin: 0;">Frag mich etwas!</p>
+    </div>
+    <div style="display: flex; border-top: 1px solid #eee;">
+        <input type="text" id="chat-input" placeholder="Frage eingeben..." style="flex: 1; padding: 10px; border: none; border-bottom-left-radius: 10px; outline: none;">
+        <button id="send-btn" style="background: #171; color: white; border: none; padding: 10px 15px; border-bottom-right-radius: 10px; cursor: pointer;">Senden</button>
+    </div>
+</div>
+
+
+<script type="module">
+  // Importiert das performante, offizielle Google GenAI SDK
+  import { GoogleGenAI } from "https://esm.run";
+
+ 
+  const API_KEY = "AQ.Ab8RN6K7E6eva75oqge95FrpVOTyJaygrpd2fePPfBfXTMA8KA"; 
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
+
+  const chatOutput = document.getElementById("chat-output");
+  const chatInput = document.getElementById("chat-input");
+  const sendBtn = document.getElementById("send-btn");
+
+  async function askGemini() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    chatOutput.innerHTML += `<p><b>Du:</b> ${text}</p>`;
+    chatInput.value = "";
+    chatOutput.scrollTop = chatOutput.scrollHeight;
+
+    const responseBox = document.createElement("p");
+    responseBox.innerHTML = "<b>Gemini:</b> ";
+    chatOutput.appendChild(responseBox);
+
+    try {
+      // 1. Modell: "gemini-2.0-flash" ist die schnellste Generation mit der geringsten Latenz (TTFB)
+      // 2. Methode: "generateContentStream" sorgt dafür, dass das erste Wort SOFORT erscheint
+      const responseStream = await ai.models.generateContentStream({
+        model: "gemini-2.0-flash",
+        contents: [text],
+        config: {
+          // Halte die System-Anweisung extrem kurz. Je länger sie ist, desto langsamer startet die Antwort.
+          systemInstruction: "Antworte extrem kurz, maximal 1-2 Sätze. Du hilfst auf der Website Fasqoo."
+        }
+      });
+
+      for await (const chunk of responseStream) {
+        // Schreibt die Wörter in Echtzeit auf den Bildschirm (wie beim Tippen)
+        responseBox.innerHTML += chunk.text;
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+      }
+    } catch (error) {
+      console.error("Fehler:", error);
+      responseBox.innerHTML += "<span style='color: red;'> Fehler bei der schnellen Übertragung.</span>";
+    }
+  }
+
+  sendBtn.addEventListener("click", askGemini);
+  chatInput.addEventListener("keypress", (e) => { if (e.key === "Enter") askGemini(); });
+</script>
+
 </body>
 </html>
