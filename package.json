@@ -1,9 +1,15 @@
 {
-  "name":"fasqoo-network-backend",
-  "version":"1.0.0",
-  "private":true,
-  "description":"Server-side real network diagnostics for Fasqoo",
-  "main":"server.js",
-  "scripts":{"start":"node server.js"},
-  "dependencies":{"express":"^5.1.0","express-rate-limit":"^8.1.0"}
+  "name": "fasqoo-network-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Server-side real network diagnostics for Fasqoo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0"
+  }
 }
