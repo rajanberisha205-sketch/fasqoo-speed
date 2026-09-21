@@ -87,6 +87,14 @@
         "@type": "Answer",
         "text": "Slow upload performance can have several causes. Your Internet plan may provide a lower upload rate than its download rate, while Wi-Fi conditions, router settings, congestion, background cloud backups or other devices can reduce the measured result further. First check the advertised upload capacity of your plan, then repeat the test with a wired Ethernet connection if available and with other heavy network activity paused. If the upload result remains consistently far below the expected range at different times, the pattern may be worth discussing with your Internet provider. One isolated test should not by itself be treated as proof of a provider-side fault."
       }
+,
+    {
+      "@type": "Question",
+      "name": "Is Fasqoo a Cloudflare service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Fasqoo is an independent Internet speed testing and network tools service. Fasqoo is not owned, operated, sponsored, or endorsed by Cloudflare. Depending on the measurement configuration, Fasqoo may use selected Cloudflare network infrastructure or measurement endpoints for network measurements. Using such infrastructure does not mean that Fasqoo is a Cloudflare product or that Cloudflare endorses Fasqoo."
+      }
     }
   ]
 }
@@ -290,6 +298,79 @@ header{
   font-size:16px;
 }
 
+
+/* MEASUREMENT TRANSPARENCY */
+.transparency-card{
+  margin:0 auto 42px;
+  padding:24px 26px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--card),var(--soft));
+  box-shadow:var(--shadow);
+}
+.transparency-top{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+.transparency-icon{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:rgba(255,90,31,.11);
+  color:var(--orange);
+  font-size:20px;
+  font-weight:700;
+}
+.transparency-card h2{
+  margin:0 0 7px;
+  font-size:20px;
+  letter-spacing:-.4px;
+}
+.transparency-card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+.transparency-points{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.transparency-point{
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+}
+.transparency-point strong{
+  display:block;
+  color:var(--text);
+  font-size:13px;
+  margin-bottom:4px;
+}
+.transparency-point span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+.transparency-note{
+  margin-top:16px !important;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:12px !important;
+}
+@media(max-width:700px){
+  .transparency-card{padding:20px 18px;margin-bottom:32px}
+  .transparency-points{grid-template-columns:1fr}
+}
+
 /* FAQ */
 .section-title{
   text-align:center;
@@ -435,12 +516,6 @@ footer{
 @media(max-width:600px){
   .hero{ padding:50px 0 35px; }
   .hero h1{ letter-spacing:-1.3px; }
-  .ai-top{ flex-wrap:wrap; }
-  .powered{ width:100%; margin-left:68px; }
-  .ai-messages{ height:380px; padding:16px; }
-  .ai-message{ max-width:92%; }
-  .ai-form{ flex-direction:column; }
-  .ai-form button{ width:100%; }
 }
 </style>
 </head>
@@ -500,6 +575,45 @@ footer{
       <p data-i18n="heroText">
         Find answers to common Internet and network questions or ask our
         technical support for professional troubleshooting assistance.
+      </p>
+    </div>
+  </section>
+
+  <!-- MEASUREMENT TRANSPARENCY -->
+  <section class="container" aria-labelledby="transparencyTitle">
+    <div class="transparency-card">
+      <div class="transparency-top">
+        <div class="transparency-icon" aria-hidden="true">✓</div>
+        <div>
+          <h2 id="transparencyTitle" data-i18n="transparencyTitle">How Fasqoo works</h2>
+          <p data-i18n="transparencyText">
+            Fasqoo is an independent Internet speed testing and network tools service.
+            Fasqoo is not owned, operated, sponsored, or endorsed by Cloudflare.
+            Depending on the measurement configuration, Fasqoo may use selected Cloudflare
+            network infrastructure or measurement endpoints to perform network measurements.
+            The Fasqoo website, interface, measurement logic, result presentation and other
+            Fasqoo features are provided as part of the Fasqoo service.
+          </p>
+        </div>
+      </div>
+
+      <div class="transparency-points">
+        <div class="transparency-point">
+          <strong data-i18n="transparencyFasqoo">Fasqoo</strong>
+          <span data-i18n="transparencyFasqooText">Independent website, interface and speed-test service.</span>
+        </div>
+        <div class="transparency-point">
+          <strong data-i18n="transparencyInfra">Measurement infrastructure</strong>
+          <span data-i18n="transparencyInfraText">Selected network endpoints may be provided by Cloudflare where applicable.</span>
+        </div>
+        <div class="transparency-point">
+          <strong data-i18n="transparencyRelation">No implied affiliation</strong>
+          <span data-i18n="transparencyRelationText">Using measurement infrastructure does not mean Fasqoo is a Cloudflare product or that Cloudflare endorses Fasqoo.</span>
+        </div>
+      </div>
+
+      <p class="transparency-note" data-i18n="transparencyNote">
+        This explanation is provided for transparency. It does not by itself determine the legal terms applicable to any third-party service or replace review of the relevant provider terms, trademark rules and applicable law.
       </p>
     </div>
   </section>
@@ -591,6 +705,16 @@ footer{
           Slow upload performance can have several causes. Your Internet plan may provide a lower upload rate than its download rate, while Wi-Fi conditions, router settings, congestion, background cloud backups or other devices can reduce the measured result further. First check the advertised upload capacity of your plan, then repeat the test with a wired Ethernet connection if available and with other heavy network activity paused. If the upload result remains consistently far below the expected range at different times, the pattern may be worth discussing with your Internet provider. One isolated test should not by itself be treated as proof of a provider-side fault.
          </div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span data-i18n="q9">Is Fasqoo a Cloudflare service?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer" data-i18n="a9">
+          No. Fasqoo is an independent Internet speed testing and network tools service. Fasqoo is not owned, operated, sponsored, or endorsed by Cloudflare. Depending on the measurement configuration, Fasqoo may use selected Cloudflare network infrastructure or measurement endpoints to perform network measurements. Using such infrastructure does not mean that Fasqoo is a Cloudflare product or that Cloudflare endorses Fasqoo. The purpose of the explanation is to make the relationship between the Fasqoo service and measurement infrastructure clear to visitors.
+        </div>
+      </div>
     </div>
   </section>
 
@@ -646,6 +770,17 @@ const translations = {
     footerTerms:"Nutzungsbedingungen",
     footerDoNotSell:"Meine persönlichen Daten nicht verkaufen",
     footerAccessibility:"Barrierefreiheit",
+    transparencyTitle:"Wie Fasqoo funktioniert",
+    transparencyText:"Fasqoo ist ein unabhängiger Internet-Speedtest- und Netzwerkdienst. Fasqoo gehört nicht zu Cloudflare, wird nicht von Cloudflare betrieben, gesponsert oder empfohlen. Je nach Messkonfiguration kann Fasqoo ausgewählte Cloudflare-Netzwerkinfrastruktur oder Mess-Endpunkte für Netzwerk-Messungen verwenden. Die Fasqoo-Website, Benutzeroberfläche, Messlogik, Ergebnisdarstellung und weitere Fasqoo-Funktionen werden als Teil des Fasqoo-Dienstes bereitgestellt.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Unabhängige Website, Benutzeroberfläche und Speedtest-Dienst.",
+    transparencyInfra:"Messinfrastruktur",
+    transparencyInfraText:"Ausgewählte Netzwerk-Endpunkte können, sofern zutreffend, von Cloudflare bereitgestellt werden.",
+    transparencyRelation:"Keine implizite Verbindung",
+    transparencyRelationText:"Die Nutzung von Messinfrastruktur bedeutet nicht, dass Fasqoo ein Cloudflare-Produkt ist oder von Cloudflare unterstützt wird.",
+    transparencyNote:"Diese Erklärung dient der Transparenz. Sie legt nicht selbst die rechtlichen Bedingungen eines Drittanbieterdienstes fest und ersetzt keine Prüfung der geltenden Anbieterbedingungen, Markenregeln und gesetzlichen Vorgaben.",
+    q9:"Ist Fasqoo ein Cloudflare-Dienst?",
+    a9:"Nein. Fasqoo ist ein unabhängiger Dienst für Internet-Speedtests und Netzwerktools. Fasqoo gehört nicht zu Cloudflare und wird nicht von Cloudflare betrieben, gesponsert oder empfohlen. Je nach Messkonfiguration kann Fasqoo ausgewählte Cloudflare-Netzwerkinfrastruktur oder Mess-Endpunkte für Netzwerk-Messungen verwenden. Die Nutzung dieser Infrastruktur bedeutet nicht, dass Fasqoo ein Cloudflare-Produkt ist oder von Cloudflare unterstützt wird.",
     q1:"Was ist ein Internet-Speedtest?",
     a1:"Ein Internet-Speedtest misst mehrere wichtige Eigenschaften deiner Verbindung: Download-Geschwindigkeit, Upload-Geschwindigkeit, Ping (Latenz) und Jitter. Download und Upload zeigen, wie viele Daten deine Verbindung übertragen kann, während Ping angibt, wie schnell eine Anfrage einen Testserver erreicht und eine Antwort zurückkommt. Jitter beschreibt, wie stark diese Antwortzeiten schwanken. Für aussagekräftige Ergebnisse solltest du große Downloads oder Streams während des Tests vermeiden und möglichst auch einen Vergleich über Ethernet und WLAN durchführen.",
     q2:"Was ist Download-Geschwindigkeit?",
@@ -684,6 +819,17 @@ const translations = {
     footerTerms:"Terms of Use",
     footerDoNotSell:"Do Not Sell My Personal Information",
     footerAccessibility:"Accessibility",
+    transparencyTitle:"How Fasqoo works",
+    transparencyText:"Fasqoo is an independent Internet speed testing and network tools service. Fasqoo is not owned, operated, sponsored, or endorsed by Cloudflare. Depending on the measurement configuration, Fasqoo may use selected Cloudflare network infrastructure or measurement endpoints to perform network measurements. The Fasqoo website, interface, measurement logic, result presentation and other Fasqoo features are provided as part of the Fasqoo service.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Independent website, interface and speed-test service.",
+    transparencyInfra:"Measurement infrastructure",
+    transparencyInfraText:"Selected network endpoints may be provided by Cloudflare where applicable.",
+    transparencyRelation:"No implied affiliation",
+    transparencyRelationText:"Using measurement infrastructure does not mean Fasqoo is a Cloudflare product or that Cloudflare endorses Fasqoo.",
+    transparencyNote:"This explanation is provided for transparency. It does not by itself determine the legal terms applicable to any third-party service or replace review of the relevant provider terms, trademark rules and applicable law.",
+    q9:"Is Fasqoo a Cloudflare service?",
+    a9:"No. Fasqoo is an independent Internet speed testing and network tools service. Fasqoo is not owned, operated, sponsored, or endorsed by Cloudflare. Depending on the measurement configuration, Fasqoo may use selected Cloudflare network infrastructure or measurement endpoints to perform network measurements. Using such infrastructure does not mean that Fasqoo is a Cloudflare product or that Cloudflare endorses Fasqoo.",
     q1:"What is an Internet speed test?",
     a1:"An Internet speed test measures several important characteristics of your connection, including download speed, upload speed, ping (latency) and jitter. Download and upload describe how much data your connection can transfer over time, while ping measures how quickly a small request reaches the test server and returns. Jitter describes how much the response time varies from one measurement to another. For a meaningful result, close heavy downloads or streams, use a stable connection, and, when possible, compare Ethernet with Wi-Fi so you can distinguish wireless limitations from the Internet connection itself.",
     q2:"What is download speed?",
@@ -722,6 +868,17 @@ const translations = {
     footerTerms:"Conditions d'utilisation",
     footerDoNotSell:"Ne pas vendre mes informations personnelles",
     footerAccessibility:"Accessibilité",
+    transparencyTitle:"Comment fonctionne Fasqoo",
+    transparencyText:"Fasqoo est un service indépendant de test de vitesse Internet et d"outils réseau. Fasqoo n"appartient pas à Cloudflare, n"est pas exploité, sponsorisé ou recommandé par Cloudflare. Selon la configuration de mesure, Fasqoo peut utiliser certaines infrastructures réseau ou certains points de mesure de Cloudflare pour effectuer des mesures réseau. Le site Fasqoo, son interface, sa logique de mesure, la présentation des résultats et ses autres fonctions sont fournis dans le cadre du service Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Site, interface et service de test de vitesse indépendants.",
+    transparencyInfra:"Infrastructure de mesure",
+    transparencyInfraText:"Certains points réseau peuvent être fournis par Cloudflare lorsque cela s"applique.",
+    transparencyRelation:"Aucune affiliation implicite",
+    transparencyRelationText:"L"utilisation d"une infrastructure de mesure ne signifie pas que Fasqoo est un produit Cloudflare ou que Cloudflare le recommande.",
+    transparencyNote:"Cette explication est fournie à des fins de transparence. Elle ne détermine pas à elle seule les conditions juridiques applicables à un service tiers et ne remplace pas l"examen des conditions du fournisseur, des règles de marque et du droit applicable.",
+    q9:"Fasqoo est-il un service Cloudflare ?",
+    a9:"Non. Fasqoo est un service indépendant de test de vitesse Internet et d"outils réseau. Fasqoo n"appartient pas à Cloudflare et n"est pas exploité, sponsorisé ou recommandé par Cloudflare. Selon la configuration, Fasqoo peut utiliser certaines infrastructures ou certains points de mesure de Cloudflare. Cela ne signifie pas que Fasqoo est un produit Cloudflare ou que Cloudflare le recommande.",
     q1:"Qu'est-ce qu'un test de vitesse Internet ?",
     a1:"Un test de vitesse Internet mesure plusieurs caractéristiques importantes de votre connexion : débit descendant, débit montant, ping (latence) et jitter. Le téléchargement et l'envoi indiquent la quantité de données que votre connexion peut transférer, tandis que le ping mesure le temps nécessaire à une requête pour atteindre un serveur de test et recevoir une réponse. Le jitter indique les variations de ce délai. Pour obtenir un résultat représentatif, évitez les téléchargements ou flux importants pendant le test et, si possible, comparez le Wi-Fi avec une connexion Ethernet.",
     q2:"Qu'est-ce que le débit descendant ?",
@@ -760,6 +917,17 @@ const translations = {
     footerTerms:"Términos de uso",
     footerDoNotSell:"No vender mi información personal",
     footerAccessibility:"Accesibilidad",
+    transparencyTitle:"Cómo funciona Fasqoo",
+    transparencyText:"Fasqoo es un servicio independiente de pruebas de velocidad de Internet y herramientas de red. Fasqoo no pertenece a Cloudflare ni está operado, patrocinado o respaldado por Cloudflare. Según la configuración de medición, Fasqoo puede utilizar determinada infraestructura de red o puntos de medición de Cloudflare para realizar mediciones. El sitio web, la interfaz, la lógica de medición, la presentación de resultados y las demás funciones de Fasqoo forman parte del servicio Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Sitio, interfaz y servicio de prueba de velocidad independientes.",
+    transparencyInfra:"Infraestructura de medición",
+    transparencyInfraText:"Algunos puntos de red pueden ser proporcionados por Cloudflare cuando corresponda.",
+    transparencyRelation:"Sin afiliación implícita",
+    transparencyRelationText:"Utilizar infraestructura de medición no significa que Fasqoo sea un producto de Cloudflare ni que Cloudflare lo respalde.",
+    transparencyNote:"Esta explicación se proporciona por transparencia. Por sí sola no determina las condiciones legales aplicables a un servicio de terceros ni sustituye la revisión de las condiciones del proveedor, las reglas de marca y la legislación aplicable.",
+    q9:"¿Es Fasqoo un servicio de Cloudflare?",
+    a9:"No. Fasqoo es un servicio independiente de pruebas de velocidad de Internet y herramientas de red. Fasqoo no pertenece a Cloudflare ni está operado, patrocinado o respaldado por Cloudflare. Según la configuración, Fasqoo puede utilizar determinada infraestructura o puntos de medición de Cloudflare. Esto no significa que Fasqoo sea un producto de Cloudflare ni que Cloudflare lo respalde.",
     q1:"¿Qué es una prueba de velocidad de Internet?",
     a1:"Una prueba de velocidad de Internet mide varias características importantes de tu conexión: velocidad de descarga, velocidad de subida, ping (latencia) y jitter. La descarga y la subida indican cuántos datos puede transferir tu conexión, mientras que el ping mide cuánto tarda una solicitud en llegar al servidor de prueba y volver. El jitter muestra cuánto varía ese tiempo de respuesta. Para obtener un resultado representativo, evita descargas o transmisiones pesadas durante la prueba y, si es posible, compara Wi-Fi con Ethernet.",
     q2:"¿Qué es la velocidad de descarga?",
@@ -798,6 +966,17 @@ const translations = {
     footerTerms:"Termini di utilizzo",
     footerDoNotSell:"Non vendere le mie informazioni personali",
     footerAccessibility:"Accessibilità",
+    transparencyTitle:"Come funziona Fasqoo",
+    transparencyText:"Fasqoo è un servizio indipendente per testare la velocità Internet e utilizzare strumenti di rete. Fasqoo non è di proprietà di Cloudflare e non è gestito, sponsorizzato o approvato da Cloudflare. A seconda della configurazione della misurazione, Fasqoo può utilizzare infrastrutture di rete o endpoint di misurazione selezionati di Cloudflare per effettuare misurazioni. Il sito, l"interfaccia, la logica di misurazione, la presentazione dei risultati e le altre funzioni di Fasqoo fanno parte del servizio Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Sito, interfaccia e servizio di speed test indipendenti.",
+    transparencyInfra:"Infrastruttura di misurazione",
+    transparencyInfraText:"Alcuni endpoint di rete possono essere forniti da Cloudflare, ove applicabile.",
+    transparencyRelation:"Nessuna affiliazione implicita",
+    transparencyRelationText:"L"uso dell"infrastruttura di misurazione non significa che Fasqoo sia un prodotto Cloudflare o che Cloudflare lo approvi.",
+    transparencyNote:"Questa spiegazione è fornita per trasparenza. Da sola non determina le condizioni legali applicabili a un servizio di terze parti e non sostituisce la verifica dei termini del fornitore, delle regole sui marchi e della legge applicabile.",
+    q9:"Fasqoo è un servizio Cloudflare?",
+    a9:"No. Fasqoo è un servizio indipendente per test di velocità Internet e strumenti di rete. Fasqoo non appartiene a Cloudflare e non è gestito, sponsorizzato o approvato da Cloudflare. A seconda della configurazione, Fasqoo può utilizzare alcune infrastrutture o endpoint di misurazione Cloudflare. Ciò non significa che Fasqoo sia un prodotto Cloudflare o che Cloudflare lo approvi.",
     q1:"Cos'è un test della velocità Internet?",
     a1:"Un test della velocità Internet misura diverse caratteristiche importanti della connessione: velocità di download, velocità di upload, ping (latenza) e jitter. Download e upload indicano quanti dati la connessione può trasferire, mentre il ping misura il tempo necessario a una richiesta per raggiungere un server di test e ricevere una risposta. Il jitter mostra quanto varia questo tempo. Per risultati più rappresentativi, evita grandi download o streaming durante il test e, quando possibile, confronta Wi-Fi ed Ethernet.",
     q2:"Cos'è la velocità di download?",
@@ -836,6 +1015,17 @@ const translations = {
     footerTerms:"Termos de Utilização",
     footerDoNotSell:"Não vender as minhas informações pessoais",
     footerAccessibility:"Acessibilidade",
+    transparencyTitle:"Como a Fasqoo funciona",
+    transparencyText:"A Fasqoo é um serviço independente de testes de velocidade da Internet e ferramentas de rede. A Fasqoo não pertence à Cloudflare nem é operada, patrocinada ou recomendada pela Cloudflare. Dependendo da configuração da medição, a Fasqoo pode utilizar determinada infraestrutura de rede ou endpoints de medição da Cloudflare para realizar medições. O site, a interface, a lógica de medição, a apresentação dos resultados e outras funções da Fasqoo fazem parte do serviço Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Site, interface e serviço de teste de velocidade independentes.",
+    transparencyInfra:"Infraestrutura de medição",
+    transparencyInfraText:"Alguns endpoints de rede podem ser fornecidos pela Cloudflare quando aplicável.",
+    transparencyRelation:"Sem afiliação implícita",
+    transparencyRelationText:"A utilização de infraestrutura de medição não significa que a Fasqoo seja um produto Cloudflare ou que tenha o apoio da Cloudflare.",
+    transparencyNote:"Esta explicação é fornecida para transparência. Por si só, não determina as condições legais aplicáveis a um serviço de terceiros nem substitui a análise dos termos do fornecedor, das regras de marca e da legislação aplicável.",
+    q9:"A Fasqoo é um serviço da Cloudflare?",
+    a9:"Não. A Fasqoo é um serviço independente de testes de velocidade da Internet e ferramentas de rede. A Fasqoo não pertence à Cloudflare nem é operada, patrocinada ou recomendada pela Cloudflare. Dependendo da configuração, pode utilizar alguma infraestrutura ou endpoints de medição da Cloudflare. Isso não significa que a Fasqoo seja um produto Cloudflare ou que tenha o apoio da Cloudflare.",
     q1:"O que é um teste de velocidade da Internet?",
     a1:"Um teste de velocidade da Internet mede várias características importantes da ligação: velocidade de download, velocidade de upload, ping (latência) e jitter. Download e upload indicam a quantidade de dados que a ligação consegue transferir, enquanto o ping mede o tempo necessário para um pedido chegar ao servidor de teste e receber uma resposta. O jitter mostra quanto esse tempo varia. Para obter resultados representativos, evite grandes downloads ou transmissões durante o teste e, se possível, compare Wi-Fi com Ethernet.",
     q2:"O que é a velocidade de download?",
@@ -874,6 +1064,17 @@ const translations = {
     footerTerms:"Gebruiksvoorwaarden",
     footerDoNotSell:"Verkoop mijn persoonlijke gegevens niet",
     footerAccessibility:"Toegankelijkheid",
+    transparencyTitle:"Hoe Fasqoo werkt",
+    transparencyText:"Fasqoo is een onafhankelijke dienst voor internetsnelheidstests en netwerktools. Fasqoo is geen eigendom van Cloudflare en wordt niet door Cloudflare beheerd, gesponsord of onderschreven. Afhankelijk van de meetconfiguratie kan Fasqoo geselecteerde Cloudflare-netwerkinfrastructuur of meetendpoints gebruiken voor netwerkmetingen. De Fasqoo-website, interface, meetlogica, resultaatweergave en andere functies worden als onderdeel van de Fasqoo-dienst aangeboden.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Onafhankelijke website, interface en snelheidstestdienst.",
+    transparencyInfra:"Meetinfrastructuur",
+    transparencyInfraText:"Bepaalde netwerkendpoints kunnen, waar van toepassing, door Cloudflare worden geleverd.",
+    transparencyRelation:"Geen impliciete verbondenheid",
+    transparencyRelationText:"Het gebruik van meetinfrastructuur betekent niet dat Fasqoo een Cloudflare-product is of door Cloudflare wordt ondersteund.",
+    transparencyNote:"Deze uitleg wordt gegeven voor transparantie. Hiermee worden niet zelfstandig de juridische voorwaarden van een dienst van derden bepaald en dit vervangt geen controle van de voorwaarden van de provider, merkrichtlijnen en toepasselijke wetgeving.",
+    q9:"Is Fasqoo een Cloudflare-dienst?",
+    a9:"Nee. Fasqoo is een onafhankelijke dienst voor internetsnelheidstests en netwerktools. Fasqoo is geen eigendom van Cloudflare en wordt niet door Cloudflare beheerd, gesponsord of onderschreven. Afhankelijk van de configuratie kan Fasqoo bepaalde Cloudflare-infrastructuur of meetendpoints gebruiken. Dat betekent niet dat Fasqoo een Cloudflare-product is of door Cloudflare wordt ondersteund.",
     q1:"Wat is een internetsnelheidstest?",
     a1:"Een internetsnelheidstest meet verschillende belangrijke eigenschappen van je verbinding: downloadsnelheid, uploadsnelheid, ping (latentie) en jitter. Download en upload geven aan hoeveel gegevens je verbinding kan overdragen, terwijl ping meet hoe lang een verzoek naar een testserver gaat en terugkomt. Jitter laat zien hoeveel die reactietijd varieert. Voor een representatief resultaat kun je grote downloads en streams tijdens de test beter pauzeren en, indien mogelijk, Wi-Fi met Ethernet vergelijken.",
     q2:"Wat is downloadsnelheid?",
@@ -912,6 +1113,17 @@ const translations = {
     footerTerms:"Kullanım Koşulları",
     footerDoNotSell:"Kişisel bilgilerimi satma",
     footerAccessibility:"Erişilebilirlik",
+    transparencyTitle:"Fasqoo nasıl çalışır?",
+    transparencyText:"Fasqoo, bağımsız bir internet hız testi ve ağ araçları hizmetidir. Fasqoo Cloudflare"a ait değildir, Cloudflare tarafından işletilmez, sponsor edilmez veya desteklenmez. Ölçüm yapılandırmasına bağlı olarak Fasqoo, ağ ölçümlerini gerçekleştirmek için seçilmiş Cloudflare ağ altyapısını veya ölçüm uç noktalarını kullanabilir. Fasqoo web sitesi, arayüzü, ölçüm mantığı, sonuç sunumu ve diğer Fasqoo özellikleri Fasqoo hizmetinin parçasıdır.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Bağımsız web sitesi, arayüz ve hız testi hizmeti.",
+    transparencyInfra:"Ölçüm altyapısı",
+    transparencyInfraText:"Uygun olduğu durumlarda bazı ağ uç noktaları Cloudflare tarafından sağlanabilir.",
+    transparencyRelation:"Dolaylı bir bağlılık yoktur",
+    transparencyRelationText:"Ölçüm altyapısının kullanılması Fasqoo"nun bir Cloudflare ürünü olduğu veya Cloudflare tarafından desteklendiği anlamına gelmez.",
+    transparencyNote:"Bu açıklama şeffaflık amacıyla sunulmaktadır. Tek başına üçüncü taraf bir hizmet için geçerli hukuki şartları belirlemez ve sağlayıcı şartlarının, marka kurallarının ve uygulanabilir yasaların incelenmesinin yerine geçmez.",
+    q9:"Fasqoo bir Cloudflare hizmeti midir?",
+    a9:"Hayır. Fasqoo bağımsız bir internet hız testi ve ağ araçları hizmetidir. Fasqoo Cloudflare"a ait değildir ve Cloudflare tarafından işletilmez, sponsor edilmez veya desteklenmez. Yapılandırmaya bağlı olarak Fasqoo bazı Cloudflare ağ altyapılarını veya ölçüm uç noktalarını kullanabilir. Bu, Fasqoo"nun bir Cloudflare ürünü olduğu veya Cloudflare tarafından desteklendiği anlamına gelmez.",
     q1:"İnternet hız testi nedir?",
     a1:"İnternet hız testi bağlantınızın indirme hızı, yükleme hızı, ping (gecikme) ve jitter gibi önemli özelliklerini ölçer. İndirme ve yükleme, bağlantınızın ne kadar veri aktarabildiğini gösterirken ping, küçük bir isteğin test sunucusuna gidip yanıt olarak dönmesinin ne kadar sürdüğünü ölçer. Jitter ise bu yanıt sürelerinin ne kadar değiştiğini gösterir. Daha anlamlı sonuçlar için test sırasında büyük indirme veya yayınları durdurun ve mümkünse Wi-Fi ile Ethernet sonuçlarını karşılaştırın.",
     q2:"İndirme hızı nedir?",
@@ -950,6 +1162,17 @@ const translations = {
     footerTerms:"Kushtet e Përdorimit",
     footerDoNotSell:"Mos i shit të dhënat e mia personale",
     footerAccessibility:"Qasshmëria",
+    transparencyTitle:"Si funksionon Fasqoo",
+    transparencyText:"Fasqoo është një shërbim i pavarur për testimin e shpejtësisë së internetit dhe mjeteve të rrjetit. Fasqoo nuk është në pronësi të Cloudflare dhe nuk operohet, sponsorizohet apo miratohet nga Cloudflare. Në varësi të konfigurimit të matjes, Fasqoo mund të përdorë infrastrukturë të zgjedhur të rrjetit ose endpoint-e matjeje të Cloudflare për të kryer matje të rrjetit. Faqja, ndërfaqja, logjika e matjes, paraqitja e rezultateve dhe funksionet e tjera të Fasqoo ofrohen si pjesë e shërbimit Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"Faqe, ndërfaqe dhe shërbim i pavarur për testimin e shpejtësisë.",
+    transparencyInfra:"Infrastruktura e matjes",
+    transparencyInfraText:"Disa endpoint-e të rrjetit mund të ofrohen nga Cloudflare kur kjo është e zbatueshme.",
+    transparencyRelation:"Pa lidhje të nënkuptuar",
+    transparencyRelationText:"Përdorimi i infrastrukturës së matjes nuk do të thotë se Fasqoo është produkt i Cloudflare ose se mbështetet nga Cloudflare.",
+    transparencyNote:"Ky shpjegim jepet për transparencë. Vetë ai nuk përcakton kushtet ligjore për një shërbim të palës së tretë dhe nuk zëvendëson shqyrtimin e kushteve të ofruesit, rregullave të markës dhe ligjit në fuqi.",
+    q9:"A është Fasqoo një shërbim i Cloudflare?",
+    a9:"Jo. Fasqoo është një shërbim i pavarur për testimin e shpejtësisë së internetit dhe mjeteve të rrjetit. Fasqoo nuk është në pronësi të Cloudflare dhe nuk operohet, sponsorizohet apo miratohet nga Cloudflare. Në varësi të konfigurimit, Fasqoo mund të përdorë infrastrukturë ose endpoint-e matjeje të Cloudflare. Kjo nuk do të thotë se Fasqoo është produkt i Cloudflare ose se mbështetet nga Cloudflare.",
     q1:"Çfarë është një test i shpejtësisë së internetit?",
     a1:"Një test i shpejtësisë së internetit mat disa karakteristika të rëndësishme të lidhjes suaj: shpejtësinë e shkarkimit, shpejtësinë e ngarkimit, ping-un (latencën) dhe jitter-in. Download dhe upload tregojnë sa të dhëna mund të transferojë lidhja, ndërsa ping-u mat sa kohë i duhet një kërkese të arrijë te serveri i testimit dhe të kthehet përgjigjja. Jitter tregon sa ndryshon kjo kohë. Për rezultate më përfaqësuese, shmangni shkarkimet ose transmetimet e mëdha gjatë testit dhe, nëse mundeni, krahasoni Wi-Fi me Ethernet.",
     q2:"Çfarë është shpejtësia e shkarkimit?",
@@ -988,6 +1211,17 @@ const translations = {
     footerTerms:"شروط الاستخدام",
     footerDoNotSell:"عدم بيع معلوماتي الشخصية",
     footerAccessibility:"إمكانية الوصول",
+    transparencyTitle:"كيف تعمل Fasqoo",
+    transparencyText:"Fasqoo هي خدمة مستقلة لاختبار سرعة الإنترنت وأدوات الشبكات. Fasqoo ليست مملوكة لشركة Cloudflare ولا تديرها أو ترعاها أو تؤيدها Cloudflare. وبحسب إعداد القياس، قد تستخدم Fasqoo بعض بنية شبكة Cloudflare أو نقاط القياس التابعة لها لإجراء قياسات الشبكة. ويُقدَّم موقع Fasqoo وواجهته ومنطق القياس وطريقة عرض النتائج والميزات الأخرى كجزء من خدمة Fasqoo.",
+    transparencyFasqoo:"Fasqoo",
+    transparencyFasqooText:"موقع وواجهة وخدمة اختبار سرعة مستقلة.",
+    transparencyInfra:"بنية القياس",
+    transparencyInfraText:"قد توفر Cloudflare بعض نقاط الشبكة عند انطباق ذلك.",
+    transparencyRelation:"لا توجد علاقة ضمنية",
+    transparencyRelationText:"استخدام بنية القياس لا يعني أن Fasqoo منتج تابع لـ Cloudflare أو أن Cloudflare تؤيد Fasqoo.",
+    transparencyNote:"يُقدَّم هذا الشرح من أجل الشفافية. ولا يحدد بمفرده الشروط القانونية المطبقة على خدمة تابعة لجهة خارجية، ولا يحل محل مراجعة شروط المزود وقواعد العلامات التجارية والقانون المعمول به.",
+    q9:"هل Fasqoo خدمة تابعة لـ Cloudflare؟",
+    a9:"لا. Fasqoo هي خدمة مستقلة لاختبار سرعة الإنترنت وأدوات الشبكات. Fasqoo ليست مملوكة لشركة Cloudflare ولا تديرها أو ترعاها أو تؤيدها Cloudflare. وبحسب الإعداد، قد تستخدم Fasqoo بعض بنية شبكة Cloudflare أو نقاط القياس التابعة لها. وهذا لا يعني أن Fasqoo منتج تابع لـ Cloudflare أو أن Cloudflare تؤيد Fasqoo.",
     q1:"ما هو اختبار سرعة الإنترنت؟",
     a1:"يقيس اختبار سرعة الإنترنت عدة خصائص مهمة للاتصال، منها سرعة التنزيل وسرعة الرفع وPing (زمن الاستجابة) وJitter. يوضح التنزيل والرفع كمية البيانات التي يمكن للاتصال نقلها، بينما يقيس Ping الزمن الذي تستغرقه طلبات صغيرة للوصول إلى خادم الاختبار والعودة. أما Jitter فيوضح مقدار تغير زمن الاستجابة. للحصول على نتيجة أكثر تمثيلاً، تجنب التنزيلات أو عمليات البث الكبيرة أثناء الاختبار، وقارن بين Wi‑Fi وEthernet إذا أمكن.",
     q2:"ما هي سرعة التنزيل؟",
