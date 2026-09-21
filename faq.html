@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -1507,7 +1508,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       const data=await res.json().catch(()=>({}));
       typing.remove();
-      if(!res.ok) throw new Error(data.error||"The AI support service is temporarily unavailable.");
+      if(!res.ok){
+        const detail=data.code ? ` (${data.code})` : "";
+        throw new Error((data.error||"The AI support service is temporarily unavailable.")+detail);
+      }
       if(data.interactionId) previousInteractionId=data.interactionId;
       addMessage(data.reply||"I couldn't generate a response. Please try again.","ai");
     }catch(err){
