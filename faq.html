@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -1509,14 +1508,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const data=await res.json().catch(()=>({}));
       typing.remove();
       if(!res.ok){
-        const detail=data.code ? ` (${data.code})` : "";
-        throw new Error((data.error||"The AI support service is temporarily unavailable.")+detail);
+        const detail = data.code ? ` [${data.code}]` : "";
+        throw new Error((data.error || "The AI support service is temporarily unavailable.") + detail);
       }
       if(data.interactionId) previousInteractionId=data.interactionId;
       addMessage(data.reply||"I couldn't generate a response. Please try again.","ai");
     }catch(err){
       typing.remove();
-      addMessage("AI support is temporarily unavailable. Please try again in a moment or use the FAQ above.","ai");
+      const msg = err && err.message ? err.message : "AI support is temporarily unavailable.";
+      addMessage(msg,"ai");
       console.error("Fasqoo Gemini:",err);
     }finally{
       busy=false; send.disabled=false; input.disabled=false; input.focus();
