@@ -1318,70 +1318,167 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<div id="gemini-chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: sans-serif; z-index: 10000;">
-    <div style="background: #171; color: white; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; font-weight: bold;">
-        Fasqoo KI Assistent
+ <style>
+        /* --- HIER BESTIMMST DU DAS AUSSEHEN (CSS) --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Das Chat-Fenster passt sich der Breite deiner Website an */
+        .chat-container {
+            width: 100%;
+            max-width: 800px; /* Schön groß und lesbar */
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 80vh; /* Nutzt 80% der Bildschirmhöhe */
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Sprechblasen-Design */
+        .message {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .user-message {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .bot-message {
+            background: #e9ecef;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        #send-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            margin-left: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #send-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">🌐 Dein Internet-Geschwindigkeits-Berater</div>
+    <div class="chat-messages" id="chat-box">
+        <div class="message bot-message">Hallo! Ich bin dein Experte für Ping, Upload und Download. Frag mich einfach alles oder nenne mir deine Speedtest-Werte!</div>
     </div>
-    <div id="chat-output" style="height: 250px; overflow-y: auto; padding: 10px; font-size: 14px; line-height: 1.4;">
-        <p style="color: #666; margin: 0;">Frag mich etwas!</p>
-    </div>
-    <div style="display: flex; border-top: 1px solid #eee;">
-        <input type="text" id="chat-input" placeholder="Frage eingeben..." style="flex: 1; padding: 10px; border: none; border-bottom-left-radius: 10px; outline: none;">
-        <button id="send-btn" style="background: #171; color: white; border: none; padding: 10px 15px; border-bottom-right-radius: 10px; cursor: pointer;">Senden</button>
+    <div class="chat-input-area">
+        <input type="text" id="user-input" placeholder="Schreibe eine Nachricht (z.B. Was ist ein guter Ping?)...">
+        <button id="send-btn" onclick="sendMessage()">Senden</button>
     </div>
 </div>
 
+<script>
+    // --- HIER WIRD DIE KI VERBUNDEN (JavaScript) ---
+    const API_KEY = "AQ.Ab8RN6K7E6eva75oqge95FrpVOTyJaygrpd2fePPfBfXTMA8KA"; // <-- Setze hier deinen Schlüssel ein!
+    const API_URL = `https://googleapis.com{API_KEY}`;
 
-<script type="module">
-  // Importiert das performante, offizielle Google GenAI SDK
-  import { GoogleGenAI } from "https://esm.run";
+    // System-Anweisung, damit die KI weiß, wie sie sich verhalten soll
+    const systemInstruction = "Du bist ein Experte für Internetleitungen. Erkläre Begriffe wie Ping, Upload, Download einfach. Bewerte Speedtest-Werte direkt für Gaming oder Streaming.";
 
- 
-  const API_KEY = "AQ.Ab8RN6K7E6eva75oqge95FrpVOTyJaygrpd2fePPfBfXTMA8KA"; 
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+    async function sendMessage() {
+        const inputField = document.getElementById("user-input");
+        const chatBox = document.getElementById("chat-box");
+        const userText = inputField.value.trim();
 
-  const chatOutput = document.getElementById("chat-output");
-  const chatInput = document.getElementById("chat-input");
-  const sendBtn = document.getElementById("send-btn");
+        if (!userText) return;
 
-  async function askGemini() {
-    const text = chatInput.value.trim();
-    if (!text) return;
+        // 1. Nachricht des Nutzers anzeigen
+        chatBox.innerHTML += `<div class="message user-message">${userText}</div>`;
+        inputField.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-    chatOutput.innerHTML += `<p><b>Du:</b> ${text}</p>`;
-    chatInput.value = "";
-    chatOutput.scrollTop = chatOutput.scrollHeight;
+        // 2. Lade-Anzeige für die KI
+        const botDivId = "bot-" + Date.now();
+        chatBox.innerHTML += `<div class="message bot-message" id="${botDivId}">Überlege...</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-    const responseBox = document.createElement("p");
-    responseBox.innerHTML = "<b>Gemini:</b> ";
-    chatOutput.appendChild(responseBox);
+        try {
+            // 3. Anfrage an Google Gemini senden
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: systemInstruction + "\n\nNutzer fragt: " + userText }] }]
+                })
+            });
 
-    try {
-      // 1. Modell: "gemini-2.0-flash" ist die schnellste Generation mit der geringsten Latenz (TTFB)
-      // 2. Methode: "generateContentStream" sorgt dafür, dass das erste Wort SOFORT erscheint
-      const responseStream = await ai.models.generateContentStream({
-        model: "gemini-2.0-flash",
-        contents: [text],
-        config: {
-          // Halte die System-Anweisung extrem kurz. Je länger sie ist, desto langsamer startet die Antwort.
-          systemInstruction: "Antworte extrem kurz, maximal 1-2 Sätze. Du hilfst auf der Website Fasqoo."
+            const data = await response.json();
+            const reply = data.candidates[0].content.parts[0].text;
+
+            // 4. Antwort anzeigen
+            document.getElementById(botDivId).innerText = reply;
+        } catch (error) {
+            document.getElementById(botDivId).innerText = "Ups, da gab es einen Fehler bei der Verbindung. Prüfe deinen API-Schlüssel.";
+            console.error(error);
         }
-      });
-
-      for await (const chunk of responseStream) {
-        // Schreibt die Wörter in Echtzeit auf den Bildschirm (wie beim Tippen)
-        responseBox.innerHTML += chunk.text;
-        chatOutput.scrollTop = chatOutput.scrollHeight;
-      }
-    } catch (error) {
-      console.error("Fehler:", error);
-      responseBox.innerHTML += "<span style='color: red;'> Fehler bei der schnellen Übertragung.</span>";
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
-  }
 
-  sendBtn.addEventListener("click", askGemini);
-  chatInput.addEventListener("keypress", (e) => { if (e.key === "Enter") askGemini(); });
+    // Erlaubt das Absenden mit der Enter-Taste
+    document.getElementById("user-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") sendMessage();
+    });
 </script>
-
 </body>
 </html>
