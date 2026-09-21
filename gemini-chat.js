@@ -7,10 +7,8 @@
  * The key stays server-side and is never exposed to visitors.
  */
 
-
-const MODEL = "gemini-1.5-flash"; 
-const GEMINI_URL = `https://googleapis.com{MODEL}:generateContent`;
-
+const MODEL = "gemini-2.5-flash";
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const FASQOO_SUPPORT_INSTRUCTIONS = `
 You are Fasqoo AI Support, the technical support assistant embedded on Fasqoo.
@@ -62,12 +60,6 @@ function googleError(data, status) {
 }
 
 export default async function handler(req, res) {
-   res.setHeader("Access-Control-Allow-Origin", "https://fasqoo.com");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return json(res, 405, { error: "Method not allowed.", code: "METHOD_NOT_ALLOWED" });
@@ -104,7 +96,6 @@ export default async function handler(req, res) {
 
   const contents = [];
 
-  // Keep a small, clean conversation history in the request.
   for (const item of history.slice(-10)) {
     if (!item || (item.role !== "user" && item.role !== "model")) continue;
     if (typeof item.text !== "string" || !item.text.trim()) continue;
