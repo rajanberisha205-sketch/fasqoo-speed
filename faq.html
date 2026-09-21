@@ -1319,5 +1319,227 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+
+<!-- FASQOO GEMINI AI SUPPORT CHAT — additive integration; existing page content remains unchanged -->
+<style id="fasqoo-gemini-chat-styles">
+  #fasqooGeminiFab{
+    position:fixed;right:22px;bottom:22px;z-index:3000;
+    width:58px;height:58px;border:0;border-radius:18px;
+    background:linear-gradient(135deg,#ff6a2a,#ff4f16);
+    color:#fff;cursor:pointer;box-shadow:0 14px 38px rgba(255,90,31,.34);
+    display:grid;place-items:center;font-size:25px;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  #fasqooGeminiFab:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(255,90,31,.42)}
+  #fasqooGeminiFab:focus-visible{outline:3px solid rgba(255,90,31,.35);outline-offset:4px}
+  #fasqooGeminiFab .fg-ai{font-size:16px;font-weight:800;letter-spacing:-.5px}
+  #fasqooGeminiPanel{
+    position:fixed;right:22px;bottom:92px;z-index:2999;
+    width:min(410px,calc(100vw - 28px));height:min(650px,calc(100vh - 120px));
+    display:none;flex-direction:column;overflow:hidden;
+    background:var(--card,#fff);color:var(--text,#17191d);
+    border:1px solid var(--line,#e5e7eb);border-radius:22px;
+    box-shadow:0 24px 70px rgba(0,0,0,.22);
+    animation:fgChatIn .2s ease;
+  }
+  #fasqooGeminiPanel.fg-open{display:flex}
+  @keyframes fgChatIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+  .fg-chat-head{
+    display:flex;align-items:center;gap:12px;padding:15px 16px;
+    border-bottom:1px solid var(--line,#e5e7eb);
+    background:linear-gradient(135deg,var(--card,#fff),var(--soft,#f0f2f5));
+  }
+  .fg-chat-avatar{
+    width:40px;height:40px;flex:0 0 40px;border-radius:13px;
+    display:grid;place-items:center;color:#fff;font-weight:800;
+    background:linear-gradient(135deg,#ff6a2a,#ff4f16);
+    box-shadow:0 7px 18px rgba(255,90,31,.22);
+  }
+  .fg-chat-title{min-width:0;flex:1}
+  .fg-chat-title strong{display:block;font-size:14px;line-height:1.2}
+  .fg-chat-title span{display:flex;align-items:center;gap:6px;margin-top:4px;color:var(--muted,#6b7280);font-size:11px}
+  .fg-online{width:7px;height:7px;border-radius:50%;background:#22c55e}
+  .fg-chat-close{
+    width:34px;height:34px;border:1px solid var(--line,#e5e7eb);border-radius:10px;
+    background:var(--card,#fff);color:var(--text,#17191d);cursor:pointer;font-size:20px;line-height:1;
+  }
+  .fg-chat-body{flex:1;min-height:0;overflow:auto;padding:16px;background:var(--bg,#f7f8fa)}
+  .fg-msg{display:flex;margin:0 0 12px}
+  .fg-msg.user{justify-content:flex-end}
+  .fg-bubble{
+    max-width:86%;padding:11px 13px;border-radius:15px;
+    font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;
+  }
+  .fg-msg.ai .fg-bubble{
+    background:var(--card,#fff);border:1px solid var(--line,#e5e7eb);
+    border-top-left-radius:5px;box-shadow:0 4px 14px rgba(0,0,0,.045);
+  }
+  .fg-msg.user .fg-bubble{
+    background:#ff5a1f;color:#fff;border-top-right-radius:5px;
+  }
+  .fg-quick{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+  .fg-quick button{
+    border:1px solid var(--line,#e5e7eb);background:var(--card,#fff);color:var(--text,#17191d);
+    border-radius:999px;padding:7px 10px;font-size:11px;cursor:pointer;
+  }
+  .fg-quick button:hover{border-color:#ff5a1f;color:#ff5a1f}
+  .fg-typing{display:inline-flex;align-items:center;gap:4px}
+  .fg-typing i{width:5px;height:5px;border-radius:50%;background:var(--muted,#6b7280);animation:fgDot 1s infinite}
+  .fg-typing i:nth-child(2){animation-delay:.15s}.fg-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes fgDot{0%,70%,100%{opacity:.3;transform:translateY(0)}35%{opacity:1;transform:translateY(-2px)}}
+  .fg-chat-foot{padding:11px;border-top:1px solid var(--line,#e5e7eb);background:var(--card,#fff)}
+  .fg-input-wrap{display:flex;align-items:flex-end;gap:8px}
+  #fgGeminiInput{
+    flex:1;min-width:0;resize:none;max-height:110px;min-height:42px;
+    border:1px solid var(--line,#e5e7eb);border-radius:13px;
+    padding:11px 12px;background:var(--soft,#f0f2f5);color:var(--text,#17191d);
+    font:inherit;font-size:13px;outline:none;
+  }
+  #fgGeminiInput:focus{border-color:#ff5a1f;box-shadow:0 0 0 3px rgba(255,90,31,.10)}
+  #fgGeminiSend{
+    width:42px;height:42px;flex:0 0 42px;border:0;border-radius:13px;
+    background:#ff5a1f;color:#fff;cursor:pointer;font-size:17px;
+  }
+  #fgGeminiSend:disabled{opacity:.55;cursor:not-allowed}
+  .fg-chat-note{text-align:center;margin-top:7px;color:var(--muted,#6b7280);font-size:9.5px;line-height:1.35}
+  .fg-chat-note a{color:inherit}
+  @media(max-width:600px){
+    #fasqooGeminiFab{right:15px;bottom:15px}
+    #fasqooGeminiPanel{right:10px;bottom:82px;width:calc(100vw - 20px);height:min(680px,calc(100vh - 100px));border-radius:20px}
+  }
+</style>
+
+<button id="fasqooGeminiFab" type="button" aria-label="Open Fasqoo AI Support" title="Fasqoo AI Support">
+  <span class="fg-ai">AI</span>
+</button>
+
+<section id="fasqooGeminiPanel" aria-label="Fasqoo AI Support" aria-hidden="true">
+  <div class="fg-chat-head">
+    <div class="fg-chat-avatar" aria-hidden="true">F</div>
+    <div class="fg-chat-title">
+      <strong>Fasqoo AI Support</strong>
+      <span><i class="fg-online"></i> Gemini-powered technical assistant</span>
+    </div>
+    <button class="fg-chat-close" id="fgGeminiClose" type="button" aria-label="Close chat">×</button>
+  </div>
+
+  <div class="fg-chat-body" id="fgGeminiMessages">
+    <div class="fg-msg ai">
+      <div class="fg-bubble">Hi! I’m Fasqoo AI Support. I can help you understand download, upload, ping, jitter, Wi‑Fi and common connection problems.</div>
+    </div>
+    <div class="fg-quick" id="fgGeminiQuick">
+      <button type="button" data-prompt="What is ping and what is a good result?">Ping</button>
+      <button type="button" data-prompt="Why is my Wi-Fi slower than my Internet plan?">Slow Wi-Fi</button>
+      <button type="button" data-prompt="Why is my gaming ping high?">Gaming</button>
+      <button type="button" data-prompt="How can I get a more reliable speed-test result?">Test tips</button>
+    </div>
+  </div>
+
+  <div class="fg-chat-foot">
+    <div class="fg-input-wrap">
+      <textarea id="fgGeminiInput" rows="1" maxlength="1200" placeholder="Ask Fasqoo AI a question…" aria-label="Message"></textarea>
+      <button id="fgGeminiSend" type="button" aria-label="Send message">➤</button>
+    </div>
+    <div class="fg-chat-note">Powered by Google Gemini • Fasqoo is an independent service.</div>
+  </div>
+</section>
+
+<script id="fasqoo-gemini-chat-script">
+(function(){
+  "use strict";
+  const fab=document.getElementById("fasqooGeminiFab");
+  const panel=document.getElementById("fasqooGeminiPanel");
+  const closeBtn=document.getElementById("fgGeminiClose");
+  const input=document.getElementById("fgGeminiInput");
+  const send=document.getElementById("fgGeminiSend");
+  const messages=document.getElementById("fgGeminiMessages");
+  const quick=document.getElementById("fgGeminiQuick");
+  let previousInteractionId=null;
+  let busy=false;
+
+  function openChat(){
+    panel.classList.add("fg-open");
+    panel.setAttribute("aria-hidden","false");
+    setTimeout(()=>input.focus(),80);
+  }
+  function closeChat(){
+    panel.classList.remove("fg-open");
+    panel.setAttribute("aria-hidden","true");
+  }
+  function addMessage(text,who){
+    const row=document.createElement("div");
+    row.className="fg-msg "+(who==="user"?"user":"ai");
+    const bubble=document.createElement("div");
+    bubble.className="fg-bubble";
+    bubble.textContent=text;
+    row.appendChild(bubble);
+    messages.appendChild(row);
+    messages.scrollTop=messages.scrollHeight;
+    return row;
+  }
+  function addTyping(){
+    const row=document.createElement("div");
+    row.className="fg-msg ai";
+    row.innerHTML='<div class="fg-bubble"><span class="fg-typing"><i></i><i></i><i></i></span></div>';
+    messages.appendChild(row);
+    messages.scrollTop=messages.scrollHeight;
+    return row;
+  }
+  function currentLanguage(){
+    const el=document.getElementById("lang");
+    return el && el.value ? el.value : (document.documentElement.lang||"en");
+  }
+  async function ask(prompt){
+    if(busy || !prompt.trim()) return;
+    busy=true; send.disabled=true; input.disabled=true;
+    if(quick) quick.remove();
+    addMessage(prompt.trim(),"user");
+    const typing=addTyping();
+    try{
+      const res=await fetch("/api/gemini-chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          message:prompt.trim(),
+          language:currentLanguage(),
+          previousInteractionId:previousInteractionId
+        })
+      });
+      const data=await res.json().catch(()=>({}));
+      typing.remove();
+      if(!res.ok) throw new Error(data.error||"The AI support service is temporarily unavailable.");
+      if(data.interactionId) previousInteractionId=data.interactionId;
+      addMessage(data.reply||"I couldn't generate a response. Please try again.","ai");
+    }catch(err){
+      typing.remove();
+      addMessage("AI support is temporarily unavailable. Please try again in a moment or use the FAQ above.","ai");
+      console.error("Fasqoo Gemini:",err);
+    }finally{
+      busy=false; send.disabled=false; input.disabled=false; input.focus();
+    }
+  }
+
+  fab.addEventListener("click",openChat);
+  closeBtn.addEventListener("click",closeChat);
+  send.addEventListener("click",()=>ask(input.value).then(()=>{input.value="";}));
+  input.addEventListener("keydown",e=>{
+    if(e.key==="Enter" && !e.shiftKey){e.preventDefault();const v=input.value;input.value="";ask(v);}
+  });
+  input.addEventListener("input",()=>{
+    input.style.height="auto";
+    input.style.height=Math.min(input.scrollHeight,110)+"px";
+  });
+  if(quick){
+    quick.addEventListener("click",e=>{
+      const btn=e.target.closest("button");
+      if(btn) ask(btn.dataset.prompt||"");
+    });
+  }
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape" && panel.classList.contains("fg-open")) closeChat();
+  });
+})();
+</script>
+
 </body>
 </html>
