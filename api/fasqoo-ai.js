@@ -221,7 +221,7 @@ function extractResponseText(data) {
   return parts.join("\n").trim();
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
 
