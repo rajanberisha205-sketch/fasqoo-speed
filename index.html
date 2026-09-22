@@ -1421,36 +1421,36 @@ function isDesktopDevice(){
   const desktopUA = /Windows NT|Macintosh|X11; Linux x86_64|CrOS/i.test(ua);
   return !mobileUA && desktopUA;
 }
-function isSafariDesktop(){
-  const ua = navigator.userAgent || "";
-  return /Macintosh/i.test(ua) && /Safari/i.test(ua) && !/Chrome|CriOS|Edg|OPR|Firefox/i.test(ua);
+function isStandalonePwa(){
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
 }
 function isWindows(){ return /Windows NT/i.test(navigator.userAgent || ""); }
 async function updateInstallVisibility(){
   if(!installButton) return;
-  const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-  const locallyInstalled = localStorage.getItem("fasqoo_pwa_installed") === "true";
-  if(!isDesktopDevice() || standalone || locallyInstalled){
+  if(!isDesktopDevice() || isStandalonePwa()){
     installButton.hidden = true;
     return;
   }
-  if(typeof navigator.getInstalledRelatedApps === "function") {
-    try {
-      const relatedApps = await navigator.getInstalledRelatedApps();
-      const fasqooInstalled = relatedApps.some(app => app.platform === "webapp");
+  if(typeof navigator.getInstalledRelatedApps === "function"){
+    try{
+      const apps = await navigator.getInstalledRelatedApps();
+      const fasqooInstalled = apps.some(app => app.platform === "webapp" && (!app.url || /fasqoo\.com/i.test(app.url)));
       if(fasqooInstalled){
-        localStorage.setItem("fasqoo_pwa_installed", "true");
+        localStorage.setItem("fasqoo_pwa_installed","true");
         installButton.hidden = true;
         return;
       }
-    } catch(e) {}
+    }catch(e){}
+  }
+  if(localStorage.getItem("fasqoo_pwa_installed") === "true"){
+    installButton.hidden = true;
+    return;
   }
   installButton.hidden = false;
-  installLabel.textContent = isSafariDesktop() ? "Fasqoo für macOS installieren" : (isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren");
+  installLabel.textContent = isWindows() ? "Fasqoo für Windows installieren" : "Fasqoo installieren";
   installButton.title = installLabel.textContent;
 }
 updateInstallVisibility();
-
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredInstallPrompt = e;
@@ -1458,40 +1458,29 @@ window.addEventListener("beforeinstallprompt", e => {
 });
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
-  localStorage.setItem("fasqoo_pwa_installed", "true");
-  installButton.hidden = true;
+  localStorage.setItem("fasqoo_pwa_installed","true");
+  if(installButton) installButton.hidden = true;
 });
-installButton.addEventListener("click", async () => {
+installButton?.addEventListener("click", async () => {
   if(!isDesktopDevice()) return;
   if(deferredInstallPrompt){
     deferredInstallPrompt.prompt();
     const res = await deferredInstallPrompt.userChoice;
-    if(res.outcome === "accepted") {
-      localStorage.setItem("fasqoo_pwa_installed", "true");
+    if(res.outcome === "accepted"){
+      localStorage.setItem("fasqoo_pwa_installed","true");
       installButton.hidden = true;
-      deferredInstallPrompt = null;
     }
-    return;
-  }
-  if(isSafariDesktop()){
-    alert("Safari: Öffne das Teilen-Menü und wähle „Zum Dock hinzufügen“. Damit wird Fasqoo als Web-App auf deinem Mac installiert.");
+    deferredInstallPrompt = null;
     return;
   }
   const msg = {
     de:"Chrome bietet die Installation gerade nicht automatisch an. Öffne das Chrome-Menü (⋮) und wähle „Fasqoo installieren…“.",
     en:"Chrome is not offering installation automatically. Open the Chrome menu (⋮) and choose “Install Fasqoo…”.",
     fr:"Chrome ne propose pas l'installation automatiquement. Ouvrez le menu Chrome (⋮) et choisissez « Installer Fasqoo… ».",
-    es:"Chrome no ofrece la instalación automáticamente. Abre el menú de Chrome (⋮) y elige «Instalar Fasqoo…».",
-    it:"Chrome non offre l'installazione automaticamente. Apri il menu Chrome (⋮) e scegli «Installa Fasqoo…».",
-    pt:"O Chrome não oferece a instalação automaticamente. Abra o menu do Chrome (⋮) e escolha «Instalar Fasqoo…».",
-    nl:"Chrome biedt installatie niet automatisch aan. Open het Chrome-menu (⋮) en kies “Fasqoo installeren…”.",
-    tr:"Chrome kurulumu otomatik olarak sunmuyor. Chrome menüsünü (⋮) açıp “Fasqoo'yu yükle…” seçeneğini seçin.",
-    sq:"Chrome nuk e ofron instalimin automatikisht. Hap menunë e Chrome (⋮) dhe zgjidh “Instalo Fasqoo…”.",
-    ar:"لا يعرض Chrome التثبيت تلقائيًا. افتح قائمة Chrome (⋮) واختر «تثبيت Fasqoo…»."
+    es:"Chrome no ofrece la instalación automáticamente. Abre el menú de Chrome (⋮) y elige «Instalar Fasqoo…»."
   }[currentLang] || "Open the Chrome menu and choose Install Fasqoo.";
   alert(msg);
 });
-
 /* ---------- SPEED WIDGET ---------- */
 const widget=$("speedWidget");
 function updateWidget(){
