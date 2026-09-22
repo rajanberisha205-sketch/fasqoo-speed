@@ -5,7 +5,7 @@
  * OPENAI_API_KEY
  *
  * API endpoint:
- * /api/fasqoo-ai
+ * /api/fasqoo-ai 
  */
 
 const MODEL = "gpt-5.6-luna";
