@@ -299,12 +299,11 @@ module.exports = async function handler(req, res) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`
       },
-      body: JSON.stringify({
-        model: MODEL,
-        input,
-        max_output_tokens: 700,
-        temperature: 0.3
-      })
+     body: JSON.stringify({
+  model: MODEL,
+  input,
+  max_output_tokens: 700
+})
     });
 
     const data = await response.json();
