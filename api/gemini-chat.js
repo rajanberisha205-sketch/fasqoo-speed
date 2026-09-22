@@ -1,41 +1,33 @@
 /**
- * Fasqoo AI Support - Vercel Streaming Function
+ * Fasqoo AI Support - Vercel Serverless Function
  *
  * Required Vercel Environment Variable:
  *   GEMINI_API_KEY
  *
- * The API key NEVER goes to the browser.
+ * IMPORTANT:
+ * The Gemini API key stays server-side.
+ * Never put the key into HTML, frontend JavaScript or GitHub.
  */
 
 const MODEL = "gemini-3.6-flash";
 
 const GEMINI_URL =
-  `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse`;
+  `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const MAX_MESSAGE_LENGTH = 1200;
 const MAX_HISTORY_ITEMS = 8;
 const MAX_HISTORY_TEXT_LENGTH = 1500;
-const MAX_OUTPUT_TOKENS = 350;
+const MAX_OUTPUT_TOKENS = 700;
 
 const FASQOO_SUPPORT_INSTRUCTIONS = `
-You are Fasqoo AI Support, the technical support assistant on Fasqoo.
+You are Fasqoo AI Support, the technical support assistant embedded on Fasqoo.
 
-Help visitors with:
-- Internet speed tests
-- download speed
-- upload speed
-- ping / latency
-- jitter
-- Wi-Fi
-- gaming latency
-- video calls
-- streaming
-- basic network troubleshooting
+Help visitors with Internet speed tests, download, upload, ping/latency, jitter,
+Wi-Fi, gaming latency and basic network troubleshooting.
 
 Reply in the visitor's requested language.
 
-Be concise, professional and technically accurate.
-Prefer short answers that are easy to read.
+Be concise, professional and technically careful.
 
 Never claim access to the visitor's:
 - device
@@ -44,7 +36,7 @@ Never claim access to the visitor's:
 - ISP
 - live connection
 - live network
-- live test results
+- test results
 
 unless the visitor explicitly provides the information.
 
@@ -56,39 +48,59 @@ Never invent:
 - diagnoses
 - network conditions
 
-A speed test to one server cannot exactly reproduce the route to every
+Explain that a test to one server cannot exactly reproduce the route to every
 game server, website, streaming service or other Internet destination.
 
-Fasqoo FAQ facts:
-
-- Download is data transferred from the Internet to the device.
-- Upload is data transferred from the device to the Internet.
-- Ping is round-trip response time to a particular test server.
-- Ping is normally measured in milliseconds.
-- Jitter is variation in response timing.
-- High jitter can affect gaming, calls and real-time applications.
-- Download results can depend on server, routing, Wi-Fi, device performance
-  and network congestion.
-- Upload results can depend on plan limits, Wi-Fi, router settings,
-  congestion, backups and other devices.
-- Slow Wi-Fi does not necessarily mean slow Internet service.
-- Ethernet testing can help determine whether Wi-Fi contributes to a problem.
-- High gaming ping can result from server distance, routing, congestion,
-  Wi-Fi interference or heavy network traffic.
-- Repeated comparable tests are more useful than one isolated result.
-
-Fasqoo is independent and is not owned, operated, sponsored or endorsed
-by Cloudflare.
+Fasqoo is independent and is not owned, operated, sponsored or endorsed by Cloudflare.
 
 Depending on configuration, Fasqoo may use selected Cloudflare infrastructure
 or measurement endpoints.
+
+One isolated speed test does not by itself prove an ISP fault.
+
+Fasqoo FAQ facts:
+
+- Speed tests measure download, upload, ping/latency and jitter.
+- Download is data transferred from the Internet to the device.
+- Download results can depend on the test server, routing, Wi-Fi,
+  device performance and network congestion.
+- Upload is data transferred from the device to the Internet.
+- Upload results can be affected by plan limits, Wi-Fi, router settings,
+  congestion, backups and other devices.
+- Ping is round-trip response time to a particular test server,
+  normally measured in milliseconds.
+- Jitter is variation in response timing and can affect calls,
+  streaming and gaming.
+- Slow Wi-Fi does not necessarily mean slow Internet service.
+- Distance, walls, interference, channel congestion, router placement
+  and device capabilities can affect Wi-Fi.
+- An Ethernet comparison can help determine whether Wi-Fi is contributing
+  to a problem.
+- High gaming ping can come from server distance, routing, congestion,
+  Wi-Fi interference or heavy traffic.
+- Repeated comparable tests, preferably including Ethernet,
+  are more useful than one isolated result.
 `;
 
-function sendJson(res, status, body) {
-  res.status(status);
+function json(res, status, body) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
-  return res.end(JSON.stringify(body));
+
+  return res.status(status).json(body);
+}
+
+function extractText(data) {
+  const parts = data?.candidates?.[0]?.content?.parts;
+
+  if (!Array.isArray(parts)) {
+    return "";
+  }
+
+  return parts
+    .filter(part => typeof part?.text === "string")
+    .map(part => part.text)
+    .join("\n")
+    .trim();
 }
 
 function getSafeLanguage(value) {
@@ -151,40 +163,31 @@ function sanitizeHistory(history) {
   return result;
 }
 
-function extractChunkText(data) {
-  const parts = data?.candidates?.[0]?.content?.parts;
-
-  if (!Array.isArray(parts)) {
-    return "";
-  }
-
-  return parts
-    .filter(part => typeof part?.text === "string")
-    .map(part => part.text)
-    .join("");
-}
-
 export default async function handler(req, res) {
-
-  // ---------------------------------------------------------
-  // METHOD CHECK
-  // ---------------------------------------------------------
-
+  /*
+   * Only POST requests are allowed.
+   */
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
 
-    return sendJson(res, 405, {
+    return json(res, 405, {
       error: "Method not allowed.",
       code: "METHOD_NOT_ALLOWED"
     });
   }
 
-  // ---------------------------------------------------------
-  // API KEY
-  // ---------------------------------------------------------
-
+  /*
+   * Gemini API key must exist in Vercel Environment Variables.
+   */
   const apiKey = process.env.GEMINI_API_KEY;
 
+  /*
+   * SAFE ENVIRONMENT DIAGNOSTIC
+   *
+   * This NEVER logs the API key itself.
+   * It only tells us whether the running Vercel Function
+   * can actually see the environment variable.
+   */
   console.log("Fasqoo Gemini ENV CHECK:", {
     exists: typeof apiKey === "string",
     hasValue: Boolean(apiKey && apiKey.trim()),
@@ -194,17 +197,15 @@ export default async function handler(req, res) {
   if (!apiKey || !apiKey.trim()) {
     console.error("GEMINI_API_KEY is missing.");
 
-    return sendJson(res, 503, {
-      error:
-        "Gemini AI is temporarily unavailable. Please try again later.",
+    return json(res, 503, {
+      error: "Gemini AI is temporarily unavailable.",
       code: "MISSING_GEMINI_API_KEY"
     });
   }
 
-  // ---------------------------------------------------------
-  // BODY
-  // ---------------------------------------------------------
-
+  /*
+   * Read request body.
+   */
   let body = req.body || {};
 
   if (typeof body === "string") {
@@ -215,32 +216,41 @@ export default async function handler(req, res) {
     }
   }
 
+  /*
+   * Validate visitor message.
+   */
   const message =
     typeof body.message === "string"
       ? body.message.trim()
       : "";
 
   if (!message) {
-    return sendJson(res, 400, {
+    return json(res, 400, {
       error: "Please enter a message.",
       code: "EMPTY_MESSAGE"
     });
   }
 
   if (message.length > MAX_MESSAGE_LENGTH) {
-    return sendJson(res, 413, {
+    return json(res, 413, {
       error: "Message is too long.",
       code: "MESSAGE_TOO_LONG"
     });
   }
 
+  /*
+   * Determine requested language.
+   */
   const language = getSafeLanguage(body.language);
+
+  /*
+   * Sanitize conversation history.
+   */
   const history = sanitizeHistory(body.history);
 
-  // ---------------------------------------------------------
-  // GEMINI CONTENT
-  // ---------------------------------------------------------
-
+  /*
+   * Build Gemini conversation.
+   */
   const contents = [...history];
 
   contents.push({
@@ -254,6 +264,9 @@ export default async function handler(req, res) {
     ]
   });
 
+  /*
+   * Gemini request.
+   */
   const requestBody = {
     system_instruction: {
       parts: [
@@ -267,16 +280,11 @@ export default async function handler(req, res) {
 
     generationConfig: {
       maxOutputTokens: MAX_OUTPUT_TOKENS,
-      temperature: 0.2
+      temperature: 0.35
     }
   };
 
-  // ---------------------------------------------------------
-  // CALL GEMINI STREAM
-  // ---------------------------------------------------------
-
   try {
-
     const response = await fetch(GEMINI_URL, {
       method: "POST",
 
@@ -288,22 +296,20 @@ export default async function handler(req, res) {
       body: JSON.stringify(requestBody)
     });
 
-    // -------------------------------------------------------
-    // GEMINI ERROR
-    // -------------------------------------------------------
+    const raw = await response.text();
 
+    let data = {};
+
+    try {
+      data = raw ? JSON.parse(raw) : {};
+    } catch {
+      data = {};
+    }
+
+    /*
+     * Gemini returned an error.
+     */
     if (!response.ok) {
-
-      const raw = await response.text();
-
-      let data = {};
-
-      try {
-        data = raw ? JSON.parse(raw) : {};
-      } catch {
-        data = {};
-      }
-
       console.error("Gemini API error:", {
         status: response.status,
         providerStatus: data?.error?.status,
@@ -311,151 +317,39 @@ export default async function handler(req, res) {
         providerMessage: data?.error?.message
       });
 
-      return sendJson(res, 502, {
-        error:
-          "The AI service is temporarily unavailable. Please try again.",
+      return json(res, 502, {
+        error: "The AI service is temporarily unavailable. Please try again.",
         code: "GEMINI_API_ERROR"
       });
     }
 
-    // -------------------------------------------------------
-    // STREAM HEADERS
-    // -------------------------------------------------------
+    /*
+     * Extract Gemini response.
+     */
+    const reply = extractText(data);
 
-    res.statusCode = 200;
+    if (!reply) {
+      console.error("Gemini returned no text response.");
 
-    res.setHeader(
-      "Content-Type",
-      "text/plain; charset=utf-8"
-    );
-
-    res.setHeader(
-      "Cache-Control",
-      "no-cache, no-store, must-revalidate"
-    );
-
-    res.setHeader(
-      "X-Accel-Buffering",
-      "no"
-    );
-
-    // -------------------------------------------------------
-    // READ GEMINI SSE STREAM
-    // -------------------------------------------------------
-
-    const reader = response.body?.getReader();
-
-    if (!reader) {
-      console.error("Gemini returned no readable stream.");
-
-      return res.end(
-        "\n[ERROR: EMPTY_GEMINI_STREAM]"
-      );
-    }
-
-    const decoder = new TextDecoder();
-
-    let buffer = "";
-    let totalText = "";
-
-    try {
-
-      while (true) {
-
-        const { value, done } = await reader.read();
-
-        if (done) {
-          break;
-        }
-
-        buffer += decoder.decode(value, {
-          stream: true
-        });
-
-        const events = buffer.split("\n");
-
-        buffer = events.pop() || "";
-
-        for (const line of events) {
-
-          const trimmed = line.trim();
-
-          if (!trimmed.startsWith("data:")) {
-            continue;
-          }
-
-          const jsonText = trimmed.slice(5).trim();
-
-          if (!jsonText || jsonText === "[DONE]") {
-            continue;
-          }
-
-          let chunk;
-
-          try {
-            chunk = JSON.parse(jsonText);
-          } catch {
-            continue;
-          }
-
-          const text = extractChunkText(chunk);
-
-          if (!text) {
-            continue;
-          }
-
-          totalText += text;
-
-          // Send text immediately to browser.
-          res.write(text);
-        }
-      }
-
-      // Flush remaining decoder data.
-      const remaining = decoder.decode();
-
-      if (remaining) {
-        buffer += remaining;
-      }
-
-      console.log(
-        "Fasqoo Gemini stream completed:",
-        {
-          characters: totalText.length
-        }
-      );
-
-      res.end();
-
-    } catch (streamError) {
-
-      console.error(
-        "Gemini streaming error:",
-        streamError
-      );
-
-      if (!res.writableEnded) {
-        res.end();
-      }
-    }
-
-  } catch (error) {
-
-    console.error(
-      "Gemini request failed:",
-      error
-    );
-
-    if (!res.headersSent) {
-      return sendJson(res, 500, {
-        error:
-          "The AI service could not be reached. Please try again.",
-        code: "GEMINI_REQUEST_FAILED"
+      return json(res, 502, {
+        error: "The AI service returned an empty response. Please try again.",
+        code: "EMPTY_GEMINI_RESPONSE"
       });
     }
 
-    if (!res.writableEnded) {
-      res.end();
-    }
+    /*
+     * Successful response.
+     */
+    return json(res, 200, {
+      reply
+    });
+
+  } catch (error) {
+    console.error("Gemini request failed:", error);
+
+    return json(res, 500, {
+      error: "The AI service could not be reached. Please try again.",
+      code: "GEMINI_REQUEST_FAILED"
+    });
   }
 }
