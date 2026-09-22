@@ -344,46 +344,56 @@ border-radius:12px;background:color-mix(in srgb,var(--green) 6%,var(--card));fon
   </div>
 </section>
 
-<section id="live">
-      <h2 class="section-title" id="diagToolsTitle">Live IT Tools</h2>
-      <p style="font-size:11px;color:var(--muted);margin:-8px 0 14px">Live tools use your browser and external services. Results are measured/returned at test time and may vary by network, server and browser.</p>
-      <div class="tools">
-        <div class="tool">
-          <h3>⚡ <span id="t1Title">Web Latency</span></h3>
-          <p id="t1Desc">Measures approximate browser request latency; cross-origin results depend on the target server.</p>
-          <div class="tool-form"><input id="pingUrl" class="tool-input" value="https://cloudflare.com"><button class="tool-btn" id="runPing">Measure</button></div>
-          <div class="console" id="pingOut">> Ready...</div>
-        </div>
-        <div class="tool">
-          <h3>🚀 <span id="t2Title">Browser Speed Test</span></h3>
-          <p id="t2Desc">Downloads a public test asset and estimates throughput; results depend on the test CDN and your connection.</p>
-          <div class="tool-form"><button class="tool-btn" id="runSpeed" style="width:100%;">Start Speedtest</button></div>
-          <div class="console" id="speedOut">> Ready...</div>
-        </div>
-        <div class="tool">
-          <h3>🔍 <span id="t3Title">Live DNS Lookup</span></h3>
-          <p id="t3Desc">Queries live public DNS-over-HTTPS records.</p>
-          <div class="tool-form">
-            <input id="dnsDomain" class="tool-input" value="google.com">
-            <select id="dnsType" class="tool-select"><option>A</option><option>AAAA</option><option>MX</option><option>TXT</option><option>NS</option><option>CNAME</option></select>
-            <button class="tool-btn" id="runDns">Query</button>
-          </div>
-          <div class="console" id="dnsOut">> Ready...</div>
-        </div>
-        <div class="tool">
-          <h3>📍 <span id="t4Title">IP Analysis</span></h3>
-          <p id="t4Desc">Shows public IP, ISP and approximate location from a live external lookup.</p>
-          <div class="tool-form"><input id="ipInput" class="tool-input" placeholder="Leave blank for own IP"><button class="tool-btn" id="runIp">Analyze</button></div>
-          <div class="console" id="ipOut">> Ready...</div>
-        </div>
-        <div class="tool full">
-          <h3>💻 <span id="t5Title">System & Browser Scan</span></h3>
-          <p id="t5Desc">Reads information directly available from your browser/device; it does not invent values.</p>
-          <div class="tool-form"><button class="tool-btn" id="runSys">Run System Scan</button></div>
-          <div class="console" id="sysOut">> Ready...</div>
-        </div>
-      </div>
-    </section>
+<section id="live" class="pro-diagnostics">
+  <div class="diag-hero">
+    <div>
+      <span class="eyebrow">NETWORK DIAGNOSTICS</span>
+      <h2 class="section-title">Professional Live Diagnostics</h2>
+      <p>Real measurements only. Network tests use live endpoints and report exactly what the browser can measure. No generated or placeholder values.</p>
+    </div>
+    <div class="diag-badge">LIVE DATA</div>
+  </div>
+
+  <div class="tools core-tools">
+    <div class="tool featured-tool">
+      <div class="tool-kicker">01 · LATENCY</div>
+      <h3>Web Latency / RTT</h3>
+      <p>Measures round-trip HTTP request time to Cloudflare's edge. This is not ICMP ping and is labeled accordingly.</p>
+      <div class="tool-form"><input id="pingUrl" class="tool-input" value="https://speed.cloudflare.com/cdn-cgi/trace"><button class="tool-btn" id="runPing">Measure RTT</button></div>
+      <div class="console" id="pingOut">&gt; Ready...</div>
+    </div>
+    <div class="tool featured-tool">
+      <div class="tool-kicker">02 · THROUGHPUT</div>
+      <h3>Real Browser Speed Test</h3>
+      <p>Uses Cloudflare's public speed-test endpoints for real download and upload traffic. Test duration is bounded to prevent hanging.</p>
+      <div class="speed-progress"><div id="speedBar"></div></div>
+      <div class="speed-phase" id="speedPhase">Ready</div>
+      <div class="tool-form"><button class="tool-btn" id="runSpeed" style="width:100%;">Start Real Speed Test</button></div>
+      <div class="speed-results" id="speedOut">&gt; Ready...</div>
+    </div>
+    <div class="tool">
+      <div class="tool-kicker">03 · DNS</div><h3>Live DNS Lookup</h3>
+      <p>Queries Google's public DNS-over-HTTPS resolver and returns live records.</p>
+      <div class="tool-form"><input id="dnsDomain" class="tool-input" value="google.com"><select id="dnsType" class="tool-select"><option>A</option><option>AAAA</option><option>MX</option><option>TXT</option><option>NS</option><option>CNAME</option><option>PTR</option></select><button class="tool-btn" id="runDns">Query</button></div>
+      <div class="console" id="dnsOut">&gt; Ready...</div>
+    </div>
+    <div class="tool">
+      <div class="tool-kicker">04 · IDENTITY</div><h3>Public IP / ASN</h3>
+      <p>Reads your public IP and network identity from a live endpoint.</p>
+      <div class="tool-form"><button class="tool-btn" id="runIp">Analyze My IP</button></div>
+      <div class="console" id="ipOut">&gt; Ready...</div>
+    </div>
+    <div class="tool full">
+      <div class="tool-kicker">05 · CLIENT</div><h3>System & Browser Scan</h3>
+      <p>Only reports values exposed by the current browser. Missing APIs are shown as unavailable.</p>
+      <div class="tool-form"><button class="tool-btn" id="runSys">Run System Scan</button></div>
+      <div class="console" id="sysOut">&gt; Ready...</div>
+    </div>
+  </div>
+
+  <div class="diag-section-head"><span class="eyebrow">20 ADDITIONAL TOOLS</span><h2 class="section-title">Network & IT Utility Suite</h2><p>Tools are grouped by what they can actually verify in a browser. Network requests that depend on CORS or external APIs are clearly marked.</p></div>
+  <div class="tools additional-tools" id="additionalTools"></div>
+</section>
   </div>
 </main>
 
@@ -606,11 +616,7 @@ $("themeBtn").onclick=()=>{document.body.classList.toggle("dark");localStorage.s
 if(localStorage.getItem("fasqoo_dark")==="true"){document.body.classList.add("dark");$("themeBtn").textContent="☀"}
 $("lang").addEventListener("change",e=>setLanguage(e.target.value));
 
-$("runPing").onclick=async()=>{let url=$("pingUrl").value.trim();if(!/^https?:\/\//i.test(url))url="https://"+url;$("pingOut").textContent="> Measuring "+url+"...";for(let i=1;i<=3;i++){const st=performance.now();try{await fetch(url,{mode:"no-cors",cache:"no-store"});$("pingOut").textContent+=`\n[${i}] ${(performance.now()-st).toFixed(1)} ms`}catch{$("pingOut").textContent+=`\n[${i}] CORS / connection blocked`}}};
-$("runSpeed").onclick=async()=>{const url="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js?fasqoo="+Date.now();$("speedOut").textContent="> Download test running...";const st=performance.now();try{const r=await fetch(url,{cache:"no-store"}),b=await r.blob(),sec=(performance.now()-st)/1000,mbps=b.size*8/sec/1048576;$("speedOut").textContent=`Downloaded: ${(b.size/1024).toFixed(1)} KB\nDuration: ${sec.toFixed(2)} s\nEstimated: ${mbps.toFixed(2)} Mbit/s`}catch{$("speedOut").textContent="> Speed test failed."}};
-$("runDns").onclick=async()=>{const d=$("dnsDomain").value.trim(),type=$("dnsType").value;$("dnsOut").textContent="> Querying DNS...";try{const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(d)}&type=${type}`),j=await r.json();$("dnsOut").textContent=j.Answer?.length?j.Answer.map(a=>`Type ${a.type} | TTL ${a.TTL}s\n${a.data}`).join("\n\n"):"> No records found."}catch{$("dnsOut").textContent="> DNS query failed."}};
-$("runIp").onclick=async()=>{const ip=$("ipInput").value.trim();$("ipOut").textContent="> Fetching IP data...";try{const r=await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`),d=await r.json();if(d.success===false)throw Error(d.message);$("ipOut").textContent=`IP: ${d.ip}\nType: ${d.type}\nCountry: ${d.country} (${d.country_code})\nCity: ${d.city}\nISP: ${d.connection?.isp||"N/A"}\nASN: ${d.connection?.asn||"N/A"}`}catch(e){$("ipOut").textContent="> IP lookup failed."}};
-$("runSys").onclick=()=>{const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;$("sysOut").textContent=`User Agent: ${navigator.userAgent}\nScreen: ${screen.width}x${screen.height} (${screen.colorDepth}-bit)\nLanguage: ${navigator.language}\nCPU Cores: ${navigator.hardwareConcurrency||"N/A"}\nNetwork Type: ${c?.effectiveType||"N/A"}\nOnline: ${navigator.onLine?"Yes":"No"}`};
+/* Live diagnostics are initialized in the professional diagnostics module below. */
 
 setLanguage(state.lang);calculateSubnet();
 
@@ -824,5 +830,94 @@ setLanguage(state.lang);calculateSubnet();
 
 </script>
 
+
+<style>
+.pro-diagnostics{margin-top:34px}.diag-hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:24px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(245,248,252,.92));box-shadow:0 12px 32px rgba(15,23,42,.06);margin-bottom:18px}.diag-hero p,.diag-section-head p{max-width:760px;color:var(--muted);margin:7px 0 0}.diag-badge{font:700 11px/1 system-ui;letter-spacing:.12em;padding:9px 11px;border-radius:999px;border:1px solid #b8e0c5;background:#effbf2;color:#176b32;white-space:nowrap}.tool-kicker{font:700 10px/1.2 system-ui;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}.featured-tool{border-top:3px solid currentColor}.speed-progress{height:5px;border-radius:999px;background:rgba(127,127,127,.16);overflow:hidden;margin:13px 0 7px}.speed-progress div{height:100%;width:0%;background:currentColor;transition:width .2s ease}.speed-phase{font:600 11px system-ui;color:var(--muted);min-height:17px}.speed-results{white-space:pre-wrap;font:600 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(15,23,42,.045);padding:12px;border-radius:12px;margin-top:10px;min-height:70px}.diag-section-head{margin:30px 0 14px}.additional-tools .tool h3{margin-top:0}.additional-tools .tool textarea{min-height:90px;resize:vertical}.tool-output{white-space:pre-wrap;font:500 12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(15,23,42,.045);padding:11px;border-radius:11px;margin-top:10px;max-height:260px;overflow:auto}.mini-note{font-size:10px;color:var(--muted);margin-top:7px}.tool-actions{display:flex;gap:8px;flex-wrap:wrap}.tool-actions>*{flex:1}.pro-diagnostics .tool:hover{transform:none!important}.pro-diagnostics .tool-btn{cursor:pointer}@media(max-width:700px){.diag-hero{padding:18px;display:block}.diag-badge{display:inline-block;margin-top:14px}.additional-tools{grid-template-columns:1fr!important}}
+body.dark .diag-hero{background:linear-gradient(135deg,#111827,#0b1220);border-color:#263244}.dark .diag-badge{background:#10251a;color:#7ee29a;border-color:#275c37}.dark .speed-results,.dark .tool-output{background:rgba(255,255,255,.045)}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id), out=(id,t)=>{if($(id))$(id).textContent=t};
+  const CF='https://speed.cloudflare.com', DNS='https://dns.google/resolve';
+  const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const toolDefs=[
+    ['DNS','Reverse DNS','Resolve an IP address to PTR records using public DNS-over-HTTPS.','<input id="t-rdns" class="tool-input" placeholder="1.1.1.1"><button class="tool-btn" id="b-rdns">Lookup</button>','rdns'],
+    ['IP','RDAP Lookup','Query live Regional Internet Registry data for an IP or ASN.','<input id="t-rdap" class="tool-input" placeholder="8.8.8.8"><button class="tool-btn" id="b-rdap">Lookup</button>','rdap'],
+    ['HTTP','HTTP Endpoint Test','Measure an HTTP endpoint when the target permits browser CORS.','<input id="t-http" class="tool-input" placeholder="https://example.com"><button class="tool-btn" id="b-http">Test</button>','http'],
+    ['HTTP','Response Headers','Read status and headers from a CORS-enabled endpoint.','<input id="t-head" class="tool-input" placeholder="https://example.com"><button class="tool-btn" id="b-head">Inspect</button>','headers'],
+    ['WEB','URL Inspector','Parse scheme, host, port, path, query and hash locally.','<input id="t-url" class="tool-input" value="https://example.com:443/path?q=1#test"><button class="tool-btn" id="b-url">Parse</button>','url'],
+    ['DATA','JSON Formatter','Validate and pretty-print JSON locally in the browser.','<textarea id="t-json" class="tool-input">{"device":"router","status":"online","mtu":1500}</textarea><button class="tool-btn" id="b-json">Format</button>','json'],
+    ['AUTH','JWT Decoder','Decode JWT header and payload locally. Signature is not verified.','<input id="t-jwt" class="tool-input" placeholder="eyJ..."><button class="tool-btn" id="b-jwt">Decode</button>','jwt'],
+    ['CRYPTO','SHA-256','Create a real SHA-256 hash using the browser Web Crypto API.','<textarea id="t-sha" class="tool-input" placeholder="Text to hash"></textarea><button class="tool-btn" id="b-sha">Hash</button>','sha'],
+    ['DEV','Base64 Encode / Decode','Encode or decode UTF-8 text locally.','<textarea id="t-b64" class="tool-input" placeholder="Text"></textarea><div class="tool-actions"><button class="tool-btn" id="b-enc">Encode</button><button class="tool-btn" id="b-dec">Decode</button></div>','b64'],
+    ['DEV','UUID Generator','Generate standards-compliant UUID v4 values with crypto.randomUUID().','<button class="tool-btn" id="b-uuid" style="width:100%">Generate UUID</button>','uuid'],
+    ['TIME','Unix Timestamp','Convert Unix seconds/milliseconds to an exact local and UTC date.','<input id="t-time" class="tool-input" placeholder="1750000000"><button class="tool-btn" id="b-time">Convert</button>','time'],
+    ['NETWORK','MAC Address Validator','Validate and normalize common MAC address formats.','<input id="t-mac" class="tool-input" placeholder="00:11:22:33:44:55"><button class="tool-btn" id="b-mac">Validate</button>','mac'],
+    ['IPv4','IPv4 Converter','Convert an IPv4 address to binary, hexadecimal and unsigned 32-bit form.','<input id="t-ip4" class="tool-input" value="192.168.1.1"><button class="tool-btn" id="b-ip4">Convert</button>','ip4'],
+    ['IPv4','CIDR Membership','Check whether an IPv4 address belongs to a CIDR network.','<input id="t-member" class="tool-input" placeholder="192.168.1.50 in 192.168.1.0/24"><button class="tool-btn" id="b-member">Check</button>','member'],
+    ['IPv4','Wildcard Mask','Calculate wildcard mask from an IPv4 CIDR prefix.','<input id="t-wild" class="tool-input" value="192.168.10.0/24"><button class="tool-btn" id="b-wild">Calculate</button>','wild'],
+    ['IPv4','IP Range to CIDR','Convert a start/end IPv4 range into the exact minimal CIDR list.','<div class="tool-form"><input id="t-r1" class="tool-input" placeholder="10.0.0.0"><input id="t-r2" class="tool-input" placeholder="10.0.0.255"></div><button class="tool-btn" id="b-range">Calculate</button>','range'],
+    ['IPv6','IPv6 Analyzer','Normalize an IPv6 address and inspect prefix/host bit counts.','<input id="t-ip6" class="tool-input" placeholder="2001:db8::1/64"><button class="tool-btn" id="b-ip6">Analyze</button>','ip6'],
+    ['NETWORK','Private / Reserved IP Check','Classify common IPv4 private, loopback, link-local and documentation ranges.','<input id="t-class" class="tool-input" placeholder="192.168.1.10"><button class="tool-btn" id="b-class">Check</button>','class'],
+    ['NETWORK','MTU / MSS Calculator','Calculate a TCP MSS from MTU and IP version.','<div class="tool-form"><input id="t-mtu" class="tool-input" value="1500"><select id="t-ver" class="tool-select"><option value="4">IPv4</option><option value="6">IPv6</option></select></div><button class="tool-btn" id="b-mtu">Calculate MSS</button>','mtu'],
+    ['NETWORK','Bandwidth Transfer Time','Calculate transfer time from data size and link speed.','<div class="tool-form"><input id="t-size" class="tool-input" placeholder="100"><input id="t-speed" class="tool-input" placeholder="1000"></div><select id="t-unit" class="tool-select"><option value="GB">GB</option><option value="MB">MB</option></select><button class="tool-btn" id="b-bw">Calculate</button>','bw'],
+    ['IPv4','Subnet Capacity','Calculate total addresses and usable hosts for any CIDR prefix.','<input id="t-cap" class="tool-input" value="192.168.1.0/24"><button class="tool-btn" id="b-cap">Calculate</button>','cap'],
+    ['DHCP','DHCP Scope Planner','Calculate a practical DHCP pool inside an IPv4 subnet while reserving gateway and network/broadcast addresses.','<div class="tool-form"><input id="t-dhcp" class="tool-input" value="192.168.10.0/24"><input id="t-res" class="tool-input" value="10" placeholder="Reserved hosts"></div><button class="tool-btn" id="b-dhcp">Plan Scope</button>','dhcp'],
+    ['VLAN','VLAN Range Planner','Validate a VLAN ID and show the standard 802.1Q usable range.','<input id="t-vlan" class="tool-input" value="100"><button class="tool-btn" id="b-vlan">Check VLAN</button>','vlan'],
+    ['NETWORK','Well-Known Port Lookup','Look up common TCP/UDP service names locally; no network request is made.','<input id="t-port" class="tool-input" placeholder="443"><button class="tool-btn" id="b-port">Lookup</button>','port'],
+    ['NETWORK','TCP MSS / Path MTU Helper','Estimate the MSS needed for common encapsulation overheads from a base MTU.','<div class="tool-form"><input id="t-pmtu" class="tool-input" value="1500"><select id="t-over" class="tool-select"><option value="0">No tunnel</option><option value="20">GRE / IPv4 overhead</option><option value="50">IPsec-like overhead</option><option value="40">IPv6-in-IPv4</option></select></div><button class="tool-btn" id="b-pmtu">Calculate</button>','pmtu']
+  ];
+  $('additionalTools').innerHTML=toolDefs.map((d,i)=>`<div class="tool"><div class="tool-kicker">${esc(d[0])} · ${String(i+6).padStart(2,'0')}</div><h3>${esc(d[1])}</h3><p>${esc(d[2])}</p><div class="tool-form">${d[3]}</div><div class="tool-output" id="o-${d[4]}">> Ready...</div></div>`).join('');
+
+  async function withTimeout(p,ms){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);try{return await p(c.signal)}finally{clearTimeout(t)}}
+  function parse4(s){const m=String(s).trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})(?:\/(\d{1,2}))?$/);if(!m)throw Error('Invalid IPv4');const a=m[1].split('.').map(Number);if(a.some(x=>x>255))throw Error('Invalid IPv4');return {n:(((a[0]*256+a[1])*256+a[2])*256+a[3])>>>0,p:m[2]===undefined?32:Number(m[2])}}
+  function ip4(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
+  function mask(p){return p===0?0:(0xffffffff<<(32-p))>>>0}
+  function cidrRange(start,end){let a=parse4(start).n,b=parse4(end).n;if(a>b)[a,b]=[b,a];const r=[];while(a<=b){let max=32; if(a!==0){const tz=31-Math.clz32(a & -a);max=32-tz}const remain=b-a+1;const fit=31-Math.floor(Math.log2(remain));const p=Math.max(max,fit);r.push(ip4(a)+'/'+p);if(p===0)break;const size=2**(32-p);a=(a+size)>>>0;if(a===0)break}return r}
+  function b64u(s){return decodeURIComponent(atob(s.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(s.length/4)*4,'=')).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))}
+
+  $('runPing').onclick=async()=>{let url=$('pingUrl').value.trim();if(!/^https?:\/\//i.test(url))url='https://'+url;out('pingOut','> Measuring real HTTP RTT...');let a=[];for(let i=1;i<=8;i++){const st=performance.now();try{await withTimeout(sig=>fetch(url,{cache:'no-store',mode:'cors',signal:sig}),4000);a.push(performance.now()-st);out('pingOut',`> Sample ${i}/8: ${a.at(-1).toFixed(1)} ms\n`+a.map((v,j)=>`[${j+1}] ${v.toFixed(1)} ms`).join('\n'))}catch(e){out('pingOut',`> Sample ${i}: blocked/failed (${e.name==='AbortError'?'timeout':'CORS or network error'}).\n`+a.map((v,j)=>`[${j+1}] ${v.toFixed(1)} ms`).join('\n'))}}if(a.length)out('pingOut',`> Median RTT: ${a.slice().sort((x,y)=>x-y)[Math.floor(a.length/2)].toFixed(1)} ms\n> ${a.length}/8 successful requests\n> Type: HTTP RTT, not ICMP ping`)};
+
+  let speedBusy=false;
+  async function dl(bytes,signal){const r=await fetch(`${CF}/__down?bytes=${bytes}&fasqoo=${Date.now()}-${Math.random()}`,{cache:'no-store',signal});if(!r.ok)throw Error('HTTP '+r.status);let n=0;const rd=r.body?.getReader();if(rd){for(;;){const x=await rd.read();if(x.done)break;n+=x.value.byteLength}}else n=(await r.arrayBuffer()).byteLength;return n}
+  async function up(bytes,signal){const data=new Uint8Array(bytes);const r=await fetch(`${CF}/__up?fasqoo=${Date.now()}-${Math.random()}`,{method:'POST',body:data,cache:'no-store',signal,headers:{'Content-Type':'application/octet-stream'}});if(!r.ok)throw Error('HTTP '+r.status);return bytes}
+  $('runSpeed').onclick=async()=>{if(speedBusy)return;speedBusy=true;$('runSpeed').disabled=true;let totalDown=0,totalUp=0;const started=performance.now();const bar=x=>$('speedBar').style.width=x+'%';try{bar(4);$('speedPhase').textContent='Testing latency...';let l=[];for(let i=0;i<5;i++){const st=performance.now();await fetch(CF+'/cdn-cgi/trace?fasqoo='+Date.now(),{cache:'no-store'});l.push(performance.now()-st)}const med=l.slice().sort((a,b)=>a-b)[2];bar(15);$('speedPhase').textContent='Downloading from Cloudflare edge...';const ds=performance.now();const ac1=new AbortController(),tm1=setTimeout(()=>ac1.abort(),8000);const sizes=[2e6,5e6,10e6,20e6];let results=[];for(let i=0;i<sizes.length;i++){const t=performance.now();try{const n=await dl(sizes[i],ac1.signal);const sec=(performance.now()-t)/1000;results.push(n*8/sec/1e6);totalDown+=n;bar(15+(i+1)*15)}catch(e){if(i===0)throw e;break}}clearTimeout(tm1);if(!results.length)throw Error('No download data');const down=results.sort((a,b)=>a-b)[Math.floor(results.length*.5)];$('speedPhase').textContent='Uploading real traffic...';const ac2=new AbortController(),tm2=setTimeout(()=>ac2.abort(),8000);let ups=[];for(let i=0;i<3;i++){const t=performance.now();try{const n=await up(2e6,ac2.signal);const sec=(performance.now()-t)/1000;ups.push(n*8/sec/1e6);totalUp+=n;bar(75+(i+1)*7)}catch(e){if(i===0)throw e;break}}clearTimeout(tm2);if(!ups.length)throw Error('No upload data');const upload=ups.slice().sort((a,b)=>a-b)[Math.floor(ups.length/2)];bar(100);$('speedPhase').textContent='Complete';out('speedOut',`Download: ${down.toFixed(2)} Mbps\nUpload: ${upload.toFixed(2)} Mbps\nHTTP RTT median: ${med.toFixed(1)} ms\nMeasured download bytes: ${(totalDown/1048576).toFixed(1)} MiB\nMeasured upload bytes: ${(totalUp/1048576).toFixed(1)} MiB\nDuration: ${((performance.now()-started)/1000).toFixed(1)} s\nServer: Cloudflare edge\nMethod: real transferred bytes; no estimate from file size`)}catch(e){bar(0);$('speedPhase').textContent='Test failed safely';out('speedOut',`> No trustworthy result produced.\n> ${e.name==='AbortError'?'A request timed out.':'Reason: '+e.message}\n> Nothing was replaced with a fake value.`)}finally{speedBusy=false;$('runSpeed').disabled=false}};
+
+  $('runDns').onclick=async()=>{const d=$('dnsDomain').value.trim(),t=$('dnsType').value;out('dnsOut','> Querying live DNS...');try{const j=await (await fetch(`${DNS}?name=${encodeURIComponent(d)}&type=${t}&_=${Date.now()}`)).json();out('dnsOut',j.Answer?.length?j.Answer.map(a=>`Type ${a.type} | TTL ${a.TTL}s\n${a.data}`).join('\n\n'):`> No ${t} answer returned.\nStatus: ${j.Status??'N/A'}`)}catch(e){out('dnsOut','> DNS query failed: '+e.message)}};
+  $('runIp').onclick=async()=>{out('ipOut','> Fetching public network identity...');try{const d=await (await fetch(CF+'/meta?_='+Date.now())).json();out('ipOut',`IP: ${d.clientIp||'Unavailable'}\nASN/Organization: ${d.asOrganization||'Unavailable'}\nColo: ${d.colo||'Unavailable'}\nCity: ${d.city||'Unavailable'}\nRegion: ${d.region||'Unavailable'}`)}catch(e){out('ipOut','> Live IP metadata failed: '+e.message)}};
+  $('runSys').onclick=()=>{const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;out('sysOut',`User Agent: ${navigator.userAgent}\nPlatform: ${navigator.platform||'Unavailable'}\nScreen: ${screen.width}x${screen.height} (${screen.colorDepth}-bit)\nLanguage: ${navigator.language}\nCPU Cores: ${navigator.hardwareConcurrency||'Unavailable'}\nMemory: ${navigator.deviceMemory?navigator.deviceMemory+' GB':'Unavailable'}\nNetwork Type: ${c?.effectiveType||'Unavailable'}\nDownlink hint: ${c?.downlink?c.downlink+' Mbps':'Unavailable'}\nOnline: ${navigator.onLine?'Yes':'No'}`)};
+
+  const handlers={
+    rdns:async()=>{const v=$('t-rdns').value.trim();try{const j=await(await fetch(`${DNS}?name=${encodeURIComponent(v)}&type=PTR`)).json();out('o-rdns',j.Answer?.map(x=>x.data).join('\n')||'No PTR record returned.')}catch(e){out('o-rdns','Lookup failed: '+e.message)}},
+    rdap:async()=>{const v=$('t-rdap').value.trim();try{const j=await(await fetch(`https://rdap.org/ip/${encodeURIComponent(v)}`)).json();out('o-rdap',`Handle: ${j.handle||'N/A'}\nName: ${j.name||'N/A'}\nCountry: ${j.country||'N/A'}\nStart: ${j.startAddress||'N/A'}\nEnd: ${j.endAddress||'N/A'}\nEntities: ${(j.entities||[]).length}`)}catch(e){out('o-rdap','RDAP lookup failed: '+e.message)}},
+    http:async()=>{const v=$('t-http').value.trim();const st=performance.now();try{const r=await withTimeout(sig=>fetch(v,{cache:'no-store',signal:sig}),6000);out('o-http',`Status: ${r.status} ${r.statusText}\nOK: ${r.ok?'Yes':'No'}\nTime: ${(performance.now()-st).toFixed(1)} ms\nType: ${r.headers.get('content-type')||'Unavailable'}`)}catch(e){out('o-http','Request failed. Common causes: CORS, TLS, DNS, firewall or timeout. '+e.message)}},
+    headers:async()=>{const v=$('t-head').value.trim();try{const r=await withTimeout(sig=>fetch(v,{method:'HEAD',cache:'no-store',signal:sig}),6000);const h=[];r.headers.forEach((v,k)=>h.push(k+': '+v));out('o-headers',`Status: ${r.status}\n`+h.join('\n'))}catch(e){out('o-headers','Headers unavailable: target may block CORS/HEAD. '+e.message)}},
+    url:()=>{try{const u=new URL($('t-url').value);out('o-url',`Protocol: ${u.protocol}\nHost: ${u.hostname}\nPort: ${u.port||'(default)'}\nPath: ${u.pathname}\nQuery: ${u.search||'(none)'}\nHash: ${u.hash||'(none)'}`)}catch(e){out('o-url','Invalid URL.')}},
+    json:()=>{try{out('o-json',JSON.stringify(JSON.parse($('t-json').value),null,2))}catch(e){out('o-json','Invalid JSON: '+e.message)}},
+    jwt:()=>{try{const p=$('t-jwt').value.split('.');if(p.length!==3)throw Error('JWT must contain 3 segments');out('o-jwt','Header:\n'+JSON.stringify(JSON.parse(b64u(p[0])),null,2)+'\n\nPayload:\n'+JSON.stringify(JSON.parse(b64u(p[1])),null,2)+'\n\nSignature: present (not verified)')}catch(e){out('o-jwt','Invalid/unsupported JWT: '+e.message)}},
+    sha:async()=>{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode($('t-sha').value));out('o-sha',Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''))},
+    b64:()=>{try{const v=$('t-b64').value;out('o-b64',v)}catch(e){out('o-b64',e.message)}},
+    uuid:()=>out('o-uuid',crypto.randomUUID()),
+    time:()=>{const n=Number($('t-time').value);if(!Number.isFinite(n))return out('o-time','Enter a Unix timestamp.');const ms=String(Math.trunc(n)).length>10?n:n*1000;const d=new Date(ms);out('o-time',`UTC: ${d.toISOString()}\nLocal: ${d.toString()}\nMilliseconds: ${ms}`)},
+    mac:()=>{const v=$('t-mac').value.trim().replace(/[-.]/g,':').toUpperCase();const ok=/^([0-9A-F]{2}:){5}[0-9A-F]{2}$/.test(v);out('o-mac',ok?`Valid MAC\nNormalized: ${v}\nType: ${parseInt(v.slice(0,2),16)&1?'Multicast':'Unicast'} / ${parseInt(v.slice(0,2),16)&2?'Locally administered':'Universally administered'}`:'Invalid MAC format')},
+    ip4:()=>{try{const {n}=parse4($('t-ip4').value);out('o-ip4',`Decimal: ${n}\nHex: 0x${n.toString(16).padStart(8,'0').toUpperCase()}\nBinary: ${[24,16,8,0].map(s=>(n>>>s&255).toString(2).padStart(8,'0')).join('.')}\nNormalized: ${ip4(n)}`)}catch(e){out('o-ip4',e.message)}},
+    member:()=>{try{const m=$('t-member').value.match(/^(.+)\s+in\s+(.+)$/i);if(!m)throw Error('Use: IP in NETWORK/CIDR');const a=parse4(m[1]).n,n=parse4(m[2]),ok=(a&mask(n.p))===(n.n&mask(n.p));out('o-member',ok?`${m[1]} belongs to ${m[2]}`:`${m[1]} is outside ${m[2]}`)}catch(e){out('o-member',e.message)}},
+    wild:()=>{try{const n=parse4($('t-wild').value),w=(~mask(n.p))>>>0;out('o-wild',`Wildcard: ${ip4(w)}\nPrefix: /${n.p}\nSubnet mask: ${ip4(mask(n.p))}`)}catch(e){out('o-wild',e.message)}},
+    range:()=>{try{out('o-range',cidrRange($('t-r1').value,$('t-r2').value).join('\n'))}catch(e){out('o-range',e.message)}},
+    ip6:()=>{try{let [a,p]= $('t-ip6').value.trim().split('/');p=Number(p||128);if(!a.includes(':')||p<0||p>128)throw Error('Invalid IPv6/prefix');const groups=a.split('::');let left=groups[0]?groups[0].split(':'):[],right=groups[1]?groups[1].split(':'):[];if(groups.length>2)throw Error('Invalid IPv6');if(groups.length===1&&left.length!==8)throw Error('IPv6 must have 8 groups or ::');const fill=8-left.length-right.length;if(fill<0)throw Error('Too many groups');const all=[...left,...Array(fill).fill('0'),...right].map(x=>x||'0').map(x=>parseInt(x,16));if(all.some(x=>!Number.isInteger(x)||x<0||x>65535))throw Error('Invalid IPv6 group');const norm=all.map(x=>x.toString(16).padStart(4,'0')).join(':');const bits=all.map(x=>x.toString(2).padStart(16,'0')).join('');const net=bits.slice(0,p)+'0'.repeat(128-p);const ng=[];for(let i=0;i<8;i++)ng.push(parseInt(net.slice(i*16,i*16+16),2).toString(16).padStart(4,'0'));out('o-ip6',`Normalized: ${norm}\nNetwork prefix: ${ng.join(':')}/${p}\nPrefix bits: ${p}\nHost bits: ${128-p}`)}catch(e){out('o-ip6',e.message)}},
+    class:()=>{try{const {n}=parse4($('t-class').value);const a=n>>>24;let type='Public / not in listed special range';if(a===10|| (a===172&&((n>>>16&255)>=16&&(n>>>16&255)<=31)) || (a===192&&(n>>>16&255)===168))type='Private RFC1918';else if(a===127)type='Loopback';else if(a===169&&(n>>>16&255)===254)type='Link-local';else if(a===100&&(n>>>16&255)>=64&&(n>>>16&255)<=127)type='Carrier-grade NAT';else if(a===192&&(n>>>16&255)===0&&(n>>>8&255)===0)type='Documentation';out('o-class',`Address: ${ip4(n)}\nClassification: ${type}`)}catch(e){out('o-class',e.message)}},
+    mtu:()=>{const m=Number($('t-mtu').value),v=$('t-ver').value;if(!Number.isFinite(m)||m<576)return out('o-mtu','Enter a valid MTU.');const h=v==='4'?20:40;out('o-mtu',`IP header: ${h} bytes\nTCP MSS: ${m-h-20} bytes\nMTU: ${m}`)},
+    bw:()=>{const size=Number($('t-size').value),speed=Number($('t-speed').value),unit=$('t-unit').value;if(!(size>0&&speed>0))return out('o-bw','Enter positive values.');const bits=size*(unit==='GB'?1e9:1e6)*8,sec=bits/(speed*1e6);out('o-bw',`Transfer time: ${sec<60?sec.toFixed(2)+' s':(sec/60).toFixed(2)+' min'}\nData: ${size} ${unit}\nLink: ${speed} Mbps`)},
+    cap:()=>{try{const n=parse4($('t-cap').value),total=2**(32-n.p),usable=n.p===31?2:n.p===32?1:Math.max(0,total-2);out('o-cap',`Network: ${ip4(n.n)}/${n.p}\nTotal addresses: ${total}\nUsable hosts: ${usable}\nFirst: ${n.p<31?ip4((n.n+1)>>>0):ip4(n.n)}\nLast: ${n.p<31?ip4((n.n+total-2)>>>0):ip4((n.n+total-1)>>>0)}`)}catch(e){out('o-cap',e.message)}},
+    dhcp:()=>{try{const n=parse4($('t-dhcp').value),r=Math.max(0,Math.floor(Number($('t-res').value)||0)),total=2**(32-n.p);if(n.p>=31)throw Error('Use a subnet of /30 or larger for a DHCP scope.');const first=(n.n+1)>>>0,last=(n.n+total-2)>>>0,poolStart=Math.min(last,first+r);out('o-dhcp',`Network: ${ip4(n.n)}/${n.p}\nGateway suggestion: ${ip4(first)}\nReserved first ${r} host(s): ${ip4(first)} - ${ip4((poolStart-1)>>>0)}\nDHCP pool: ${ip4(poolStart)} - ${ip4(last)}\nPool size: ${Math.max(0,last-poolStart+1)}`)}catch(e){out('o-dhcp',e.message)}},
+    vlan:()=>{const n=Number($('t-vlan').value);if(!Number.isInteger(n)||n<1||n>4094)return out('o-vlan','Invalid VLAN ID. Standard VLAN IDs are 1-4094.');out('o-vlan',`VLAN ${n} is within the standard 802.1Q ID range.\nRange: 1-4094\nNote: VLAN 0 and 4095 are reserved.`)},
+    port:()=>{const n=Number($('t-port').value),m={20:'FTP-data (TCP)',21:'FTP (TCP)',22:'SSH (TCP)',23:'Telnet (TCP)',25:'SMTP (TCP)',53:'DNS (TCP/UDP)',67:'DHCP server (UDP)',68:'DHCP client (UDP)',80:'HTTP (TCP)',110:'POP3 (TCP)',123:'NTP (UDP)',143:'IMAP (TCP)',161:'SNMP (UDP)',162:'SNMP Trap (UDP)',389:'LDAP (TCP/UDP)',443:'HTTPS (TCP)',445:'SMB (TCP)',465:'SMTPS (TCP)',587:'SMTP submission (TCP)',636:'LDAPS (TCP)',853:'DNS over TLS (TCP)',993:'IMAPS (TCP)',995:'POP3S (TCP)',1433:'Microsoft SQL Server (TCP)',3306:'MySQL (TCP)',3389:'RDP (TCP)',5060:'SIP (TCP/UDP)',5061:'SIP-TLS (TCP)',8080:'HTTP alternate (TCP)'};out('o-port',m[n]||`No common service mapping in the built-in reference for port ${n}.`);},
+    pmtu:()=>{const mtu=Number($('t-pmtu').value),over=Number($('t-over').value);if(!(mtu>0&&over>=0&&over<mtu))return out('o-pmtu','Enter a valid MTU/overhead.');out('o-pmtu',`Base MTU: ${mtu}\nEncapsulation overhead: ${over} bytes\nEffective inner MTU: ${mtu-over}\nRecommended IPv4 TCP MSS: ${Math.max(0,mtu-over-40)}\nRecommended IPv6 TCP MSS: ${Math.max(0,mtu-over-60)}`)}
+  };
+  Object.entries(handlers).forEach(([k,fn])=>{const b=$('b-'+k);if(b)b.onclick=fn});
+  $('b-enc').onclick=()=>{try{out('o-b64',btoa(unescape(encodeURIComponent($('t-b64').value))))}catch(e){out('o-b64',e.message)}};
+  $('b-dec').onclick=()=>{try{out('o-b64',decodeURIComponent(escape(atob($('t-b64').value))))}catch(e){out('o-b64','Invalid Base64')}};
+})();
+</script>
 </body>
 </html>
