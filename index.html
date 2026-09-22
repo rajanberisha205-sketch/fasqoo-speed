@@ -682,7 +682,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v3.2 — 13s phases, 2s pauses, real measurement
+   FASQOO SPEED TEST v3.2 — 8s adaptive phases, 2s pauses, real measurement
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -931,7 +931,7 @@ async function timedFetch(url, options={}, timeoutMs=12000){
 }
 
 /* ==========================================================
-   MEASUREMENT ENGINE v5 — 13 s real phases, 2 s pauses
+   MEASUREMENT ENGINE v7 — 13 s real phases, 2 s pauses
    - Ping: 8 real requests, median + jitter
    - Download: adaptive multi-round until >= 15 s elapsed
    - Pause: exactly 2000 ms
@@ -939,12 +939,9 @@ async function timedFetch(url, options={}, timeoutMs=12000){
    - No fabricated values: if a phase cannot produce real samples,
      the test reports a failure instead of inventing numbers.
    ========================================================== */
-const MEASUREMENT_V5 = {
-  version: "5.0",
-  phaseMs: 13000,          // target: about 13 s of real measurement per phase
-  sliceMs: 3000,           // max. 3 s pro Runde, dann neue Messung
-  maxDownloadBytes: 800 * 1024 * 1024,
-  maxUploadBytes: 400 * 1024 * 1024,
+const MEASUREMENT_V7 = {
+  version: "7.0",
+  phaseMs: 8000,
   maxStreams: 8
 };
 
@@ -990,46 +987,21 @@ async function pingTest(){
   return {ping,jitter,samples:vals};
 }
 
-/* ---------- DOWNLOAD HELPERS ---------- */
+/* ---------- DOWNLOAD / UPLOAD HELPERS — ENGINE v7 ---------- */
 async function readResponseBytes(response,signal){
-  if(!response.body){
-    const b=await response.arrayBuffer();
-    return b.byteLength;
-  }
-  const reader=response.body.getReader();
-  let bytes=0;
+  if(!response.body){ const b=await response.arrayBuffer(); return b.byteLength; }
+  const reader=response.body.getReader(); let bytes=0;
   try{
     while(running){
       if(signal?.aborted) throw new DOMException("Aborted","AbortError");
       const part=await reader.read();
       if(part.done) break;
-      bytes+=part.value?.byteLength||0;
+      bytes += part.value?.byteLength || 0;
     }
   }finally{ try{reader.releaseLock();}catch(e){} }
   return bytes;
 }
-async function parallelDownload(bytesPerStream,streams,timeoutMs){
-  const jobs=Array.from({length:streams},async()=>{
-    const timer=testTimeout(timeoutMs);
-    const started=performance.now();
-    try{
-      const r=await fetch(SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+"&v=5&r="+Date.now()+Math.random(),{
-        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
-      });
-      if(!r.ok) throw new Error("HTTP "+r.status);
-      const bytes=await readResponseBytes(r,timer.signal);
-      const seconds=(performance.now()-started)/1000;
-      if(bytes<=0||seconds<=0) throw new Error("Empty download");
-      return {bytes,seconds};
-    }finally{timer.clear();}
-  });
-  const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled").map(x=>x.value);
-  if(!good.length) throw new Error("Download failed");
-  return {bytes:good.reduce((a,x)=>a+x.bytes,0),seconds:Math.max(...good.map(x=>x.seconds)),streams:good.length,perStream:good};
-}
 
-/* ---------- UPLOAD HELPERS ---------- */
 function makeUploadBuffer(bytes){
   const data=new Uint8Array(bytes);
   if(window.crypto?.getRandomValues){
@@ -1037,115 +1009,110 @@ function makeUploadBuffer(bytes){
   }else data.fill(83);
   return data;
 }
-async function parallelUpload(bytesPerStream,streams,timeoutMs){
-  const jobs=Array.from({length:streams},()=>{
-    const data=makeUploadBuffer(bytesPerStream);
-    const started=performance.now();
-    return timedFetch(SPEED_BASE+"/__up?v=5&r="+Date.now()+Math.random(),{
-      method:"POST",body:data,headers:{"Content-Type":"application/octet-stream"}
-    },timeoutMs).then(async x=>{
-      try{await x.r.arrayBuffer();}catch(e){}
-      const seconds=(performance.now()-started)/1000;
-      return {bytes:bytesPerStream,seconds};
-    });
+
+/* All streams in a round start together. Throughput uses the wall-clock
+   duration of the complete round, so download and upload use the same
+   aggregation rule. Failed/aborted streams are not counted. */
+async function parallelDownload(bytesPerStream,streams,timeoutMs){
+  const wallStart=performance.now();
+  const jobs=Array.from({length:streams},async()=>{
+    const timer=testTimeout(timeoutMs);
+    try{
+      const r=await fetch(SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+"&v=7&r="+Date.now()+Math.random(),{
+        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
+      });
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      const bytes=await readResponseBytes(r,timer.signal);
+      if(bytes<=0) throw new Error("Empty download");
+      return bytes;
+    }finally{timer.clear();}
   });
   const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled" && x.value.bytes>0 && x.value.seconds>0).map(x=>x.value);
-  if(!good.length) throw new Error("Upload failed");
-  return {bytes:good.reduce((a,x)=>a+x.bytes,0),seconds:Math.max(...good.map(x=>x.seconds)),streams:good.length,perStream:good};
+  const good=results.filter(x=>x.status==="fulfilled" && x.value>0).map(x=>x.value);
+  const seconds=(performance.now()-wallStart)/1000;
+  if(!good.length || seconds<=0) throw new Error("Download failed");
+  return {bytes:good.reduce((a,x)=>a+x,0),seconds,streams:good.length};
 }
 
-/* ---------- DOWNLOAD PHASE (>= 15 s) ---------- */
+async function parallelUpload(bytesPerStream,streams,timeoutMs){
+  /* Buffer creation happens before the timed network round. This prevents
+     client-side allocation/crypto work from being interpreted as network speed. */
+  const payload=makeUploadBuffer(bytesPerStream);
+  const wallStart=performance.now();
+  const jobs=Array.from({length:streams},async()=>{
+    const timer=testTimeout(timeoutMs);
+    try{
+      const r=await fetch(SPEED_BASE+"/__up?v=7&r="+Date.now()+Math.random(),{
+        method:"POST",body:payload,headers:{"Content-Type":"application/octet-stream"},
+        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
+      });
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      try{await r.arrayBuffer();}catch(e){}
+      return bytesPerStream;
+    }finally{timer.clear();}
+  });
+  const results=await Promise.allSettled(jobs);
+  const good=results.filter(x=>x.status==="fulfilled" && x.value>0).map(x=>x.value);
+  const seconds=(performance.now()-wallStart)/1000;
+  if(!good.length || seconds<=0) throw new Error("Upload failed");
+  return {bytes:good.reduce((a,x)=>a+x,0),seconds,streams:good.length};
+}
+
+function nextPayloadBytes(mbps,remainingMs,streams,minBytes,maxBytes){
+  const seconds=Math.max(0.25,Math.min(2.5,remainingMs/1000));
+  const targetBytes=Math.ceil((mbps*1000000/8)*seconds*1.20/Math.max(1,streams));
+  return clampNumber(targetBytes,minBytes,maxBytes);
+}
+
+/* ---------- DOWNLOAD PHASE — adaptive 2→8 streams ---------- */
 async function downloadTest(){
-  const t = translations[currentLang];
-  const x = extraTranslations[currentLang] || extraTranslations.en;
-  $("status").textContent = t.stDown;
-  $("chartState").textContent = t.download;
-  samples = [];
-
-  // Real measurement only: no calibration estimate is displayed or used as a result.
-  // Start with a small real payload, then adapt the payload size from measured throughput.
-  const streams = 4;
-  let bytesPerStream = 128 * 1024;
-  const startTime = performance.now();
-  const measured = [];
-  const TARGET = MEASUREMENT_V5.phaseMs;
-
+  const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
+  $("status").textContent=t.stDown; $("chartState").textContent=t.download; samples=[];
+  const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
+  const measured=[]; let mbps=25; let streams=2; let bytesPerStream=512*1024;
   while(running){
-    const elapsed = performance.now() - startTime;
-    if(elapsed >= TARGET) break;
-
-    const remaining = TARGET - elapsed;
-    const roundMs = Math.min(2500, remaining);
-    const totalBytes = clampNumber(Math.ceil(bytesPerStream * streams), 256 * 1024, MEASUREMENT_V5.maxDownloadBytes);
-    const perStream = Math.max(128 * 1024, Math.ceil(totalBytes / streams));
-
+    const elapsed=performance.now()-startTime; if(elapsed>=TARGET) break;
+    const remaining=TARGET-elapsed;
+    streams=chooseStreams(mbps,MEASUREMENT_V7.maxStreams);
+    bytesPerStream=nextPayloadBytes(mbps,remaining,streams,256*1024,32*1024*1024);
+    const timeout=Math.max(5000,Math.min(7000,remaining+2500));
     try{
-      const result = await parallelDownload(perStream, streams, Math.max(3500, roundMs + 1500));
-      const sp = result.bytes * 8 / result.seconds / 1e6;
-      if(Number.isFinite(sp) && sp > 0){
-        measured.push(sp);
-        samples.push(sp);
-        gauge(sp);
-        $("down").textContent = sp.toFixed(1);
-        $("intelThroughput").textContent = sp.toFixed(1) + " " + x.unitMbps;
-        drawChart();
-        // Only real measured throughput is used to size the next real request.
-        bytesPerStream = clampNumber(Math.ceil((sp * 1e6 / 8) * (Math.min(2500, TARGET - (performance.now()-startTime)) / 1000) / streams), 128 * 1024, 32 * 1024 * 1024);
+      const r=await parallelDownload(bytesPerStream,streams,timeout);
+      const sp=r.bytes*8/r.seconds/1e6;
+      if(Number.isFinite(sp)&&sp>0){
+        measured.push(sp); samples.push(sp); mbps=sp;
+        gauge(sp); $("down").textContent=sp.toFixed(1); $("intelThroughput").textContent=sp.toFixed(1)+" "+x.unitMbps; drawChart();
       }
-    }catch(e){
-      // A failed round does not create a value. Continue while the real phase remains active.
-    }
+    }catch(e){ if(performance.now()-startTime>=TARGET) break; }
   }
-
-  if(!measured.length) throw new Error("Download measurement failed");
-  return robustMedian(measured);
+  if(measured.length<2) throw new Error("Download measurement failed");
+  return robustMedian(measured.slice(-Math.max(3,Math.floor(measured.length*0.7))));
 }
 
-/* ---------- UPLOAD PHASE (>= 15 s) ---------- */
+/* ---------- UPLOAD PHASE — adaptive 2→8 streams ---------- */
 async function uploadTest(){
-  const t = translations[currentLang];
-  const x = extraTranslations[currentLang] || extraTranslations.en;
-  $("status").textContent = t.stUp;
-  $("chartState").textContent = t.upload;
-  samples = [];
-
-  // Real measurement only: no synthetic starting speed is shown.
-  const streams = 3;
-  let bytesPerStream = 64 * 1024;
-  const startTime = performance.now();
-  const measured = [];
-  const TARGET = MEASUREMENT_V5.phaseMs;
-
+  const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
+  $("status").textContent=t.stUp; $("chartState").textContent=t.upload; samples=[];
+  const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
+  const measured=[]; let mbps=25; let streams=2; let bytesPerStream=512*1024;
   while(running){
-    const elapsed = performance.now() - startTime;
-    if(elapsed >= TARGET) break;
-
-    const remaining = TARGET - elapsed;
-    const roundMs = Math.min(2500, remaining);
-    const perStream = clampNumber(bytesPerStream, 64 * 1024, 16 * 1024 * 1024);
-
+    const elapsed=performance.now()-startTime; if(elapsed>=TARGET) break;
+    const remaining=TARGET-elapsed;
+    streams=chooseStreams(mbps,MEASUREMENT_V7.maxStreams);
+    bytesPerStream=nextPayloadBytes(mbps,remaining,streams,256*1024,32*1024*1024);
+    const timeout=Math.max(5500,Math.min(8000,remaining+3000));
     try{
-      const result = await parallelUpload(perStream, streams, Math.max(4500, roundMs + 2000));
-      const sp = result.bytes * 8 / result.seconds / 1e6;
-      if(Number.isFinite(sp) && sp > 0){
-        measured.push(sp);
-        samples.push(sp);
-        gauge(sp);
-        $("up").textContent = sp.toFixed(1);
-        drawChart();
-        // Only real measured throughput is used to size the next real request.
-        bytesPerStream = clampNumber(Math.ceil((sp * 1e6 / 8) * (Math.min(2500, TARGET - (performance.now()-startTime)) / 1000) / streams), 64 * 1024, 16 * 1024 * 1024);
+      const r=await parallelUpload(bytesPerStream,streams,timeout);
+      const sp=r.bytes*8/r.seconds/1e6;
+      if(Number.isFinite(sp)&&sp>0){
+        measured.push(sp); samples.push(sp); mbps=sp;
+        gauge(sp); $("up").textContent=sp.toFixed(1); drawChart();
       }
-    }catch(e){
-      // A failed round does not create a value. Continue while the real phase remains active.
-    }
+    }catch(e){ if(performance.now()-startTime>=TARGET) break; }
   }
-
-  if(!measured.length) throw new Error("Upload measurement failed");
-  return robustMedian(measured);
+  if(measured.length<2) throw new Error("Upload measurement failed");
+  return robustMedian(measured.slice(-Math.max(3,Math.floor(measured.length*0.7))));
 }
-
 /* ---------- QUALITY ---------- */
 function quality(d,u,p,j){
   let s = 100;
