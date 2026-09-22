@@ -178,11 +178,21 @@ export default async function handler(req, res) {
 
   /*
    * Gemini API key must exist in Vercel Environment Variables.
-   *
-   * IMPORTANT:
-   * Never replace this with the actual key.
    */
   const apiKey = process.env.GEMINI_API_KEY;
+
+  /*
+   * SAFE ENVIRONMENT DIAGNOSTIC
+   *
+   * This NEVER logs the API key itself.
+   * It only tells us whether the running Vercel Function
+   * can actually see the environment variable.
+   */
+  console.log("Fasqoo Gemini ENV CHECK:", {
+    exists: typeof apiKey === "string",
+    hasValue: Boolean(apiKey && apiKey.trim()),
+    length: typeof apiKey === "string" ? apiKey.length : 0
+  });
 
   if (!apiKey || !apiKey.trim()) {
     console.error("GEMINI_API_KEY is missing.");
@@ -307,10 +317,6 @@ export default async function handler(req, res) {
         providerMessage: data?.error?.message
       });
 
-      /*
-       * Do NOT expose Google's internal error message
-       * to the visitor.
-       */
       return json(res, 502, {
         error: "The AI service is temporarily unavailable. Please try again.",
         code: "GEMINI_API_ERROR"
@@ -323,9 +329,7 @@ export default async function handler(req, res) {
     const reply = extractText(data);
 
     if (!reply) {
-      console.error(
-        "Gemini returned no text response."
-      );
+      console.error("Gemini returned no text response.");
 
       return json(res, 502, {
         error: "The AI service returned an empty response. Please try again.",
@@ -341,9 +345,6 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    /*
-     * Network/server error.
-     */
     console.error("Gemini request failed:", error);
 
     return json(res, 500, {
