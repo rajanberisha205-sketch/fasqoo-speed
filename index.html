@@ -298,63 +298,13 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 .fasqoo-ad-side{position:fixed;top:50%;transform:translateY(-50%);width:160px;height:600px;z-index:900}
 .fasqoo-ad-left{left:10px}
 .fasqoo-ad-right{right:10px}
-.fasqoo-ad-center{width:100%;min-height:120px;margin:26px 0 2px}
+.fasqoo-ad-center,.fasqoo-ad-bottom{width:100%;min-height:120px;margin:26px 0 2px}
 .fasqoo-ad-inner{width:100%;height:100%;min-height:inherit;display:flex;align-items:center;justify-content:center}
 @media(min-width:1280px){.fasqoo-ad-side{display:flex}.fasqoo-ad-left{left:max(8px,calc((100vw - 1180px)/2 - 170px))}.fasqoo-ad-right{right:max(8px,calc((100vw - 1180px)/2 - 170px))}}
 @media(max-width:1279px){.fasqoo-ad-side{display:none}}
-@media(max-width:760px){.fasqoo-ad-center{min-height:90px;margin:20px 0 0;border-radius:10px}}
-@media(max-width:560px){.fasqoo-ad-center{min-height:80px}.fasqoo-ad-label{font-size:7px}}
+@media(max-width:760px){.fasqoo-ad-center,.fasqoo-ad-bottom{min-height:90px;margin:20px 0 0;border-radius:10px}}
+@media(max-width:560px){.fasqoo-ad-center,.fasqoo-ad-bottom{min-height:80px}.fasqoo-ad-label{font-size:7px}}
 .fasqoo-network-strip{border-bottom:1px solid var(--line);background:var(--card);padding:13px 0}.fasqoo-network-strip .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.fasqoo-network-strip strong{font-size:11px;letter-spacing:1px}.fasqoo-network-strip>div>span{font-size:11px;color:var(--muted)}.strip-points{display:flex;gap:10px;flex-wrap:wrap}.strip-points span{font-size:10px;color:var(--muted)}.strip-server{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.8px;color:var(--muted)}.strip-server b{font-size:10px;color:var(--text);letter-spacing:0}.dark .fasqoo-network-strip{background:var(--card)}@media(max-width:760px){.fasqoo-network-strip .wrap{gap:7px}.strip-server{margin-left:0;width:100%}.strip-points{width:100%}}
-
-/* ==========================================================
-   FASQOO PRO VISUAL SYSTEM v6
-   ========================================================== */
-:root{
-  --bg:#f4f5f7;
-  --card:#ffffff;
-  --text:#111318;
-  --muted:#6f7682;
-  --line:#e4e7ec;
-  --soft:#f7f8fa;
-  --orange:#ff5a1f;
-  --orange-soft:#fff1eb;
-  --green:#16a36a;
-  --shadow:0 6px 24px rgba(16,24,40,.055);
-}
-.dark{
-  --bg:#080b0f;
-  --card:#11161c;
-  --text:#f4f6f8;
-  --muted:#98a2ae;
-  --line:#27303a;
-  --soft:#0d1217;
-  --orange:#ff6a32;
-  --orange-soft:#2a1710;
-  --green:#35c88a;
-  --shadow:0 10px 28px rgba(0,0,0,.24);
-}
-body{background:var(--bg);color:var(--text)}
-.card,.test-card,.report-card,.history-card,.intel-card,.network-card{
-  box-shadow:var(--shadow);
-  border-color:var(--line);
-}
-.bar{background:var(--soft)!important}
-.app-status.good{background:color-mix(in srgb,var(--green) 13%,var(--card))!important}
-.gauge-wrap,.gauge,.result-card,.metric-card,.chart-card{box-shadow:none!important}
-.result-card:hover,.metric-card:hover,.card:hover{transform:none!important}
-.speed-hero{max-width:860px;margin:0 auto 18px}
-.test-card{background:var(--card)}
-.gauge{max-width:285px;max-height:285px}
-@media(max-width:900px){.gauge{max-width:255px;max-height:255px}}
-@media(max-width:640px){
-  .gauge{max-width:225px;max-height:225px}
-  .card,.test-card{box-shadow:0 4px 18px rgba(16,24,40,.045)}
-  .dark .card,.dark .test-card{box-shadow:0 6px 20px rgba(0,0,0,.22)}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-}
-
 </style>
 </head>
 <body>
@@ -622,7 +572,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="fasqoo-ad fasqoo-ad-center" aria-label="Advertisement">
   <span class="fasqoo-ad-label"></span>
-  <div class="fasqoo-ad-inner" id="fasqoo-ad-center">
+  <div class="fasqoo-ad-inner" id="fasqoo-ad-bottom">
     <script>
   atOptions = {
     'key' : 'd8a4bf9bc4c98da4c03e854cf1efd68c',
@@ -644,7 +594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fasqoo-footer-copy">
       <div data-i18n="ftRights">© 2026 Fasqoo. All rights reserved.</div>
       <div>
-        Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.
+        Measurement infrastructure uses the Cloudflare Edge network for browser-based testing.
         </div>
         <div>
         Fasqoo is an independent speed-test platform and is not an official Cloudflare product.
@@ -663,7 +613,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v3.2 — 13s phases, 2s pauses, real measurement
+   FASQOO SPEED TEST v6 — fast adaptive real measurement
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -886,7 +836,7 @@ async function netinfo(){
     ["ip","isp","loc","asn"].forEach(id => $(id).textContent = t.unavail);
   }
 }
-function measureDns(){ /* Browser resource DNS timing; not a dedicated resolver benchmark. */
+function measureDns(){
   try{
     const e = performance.getEntriesByType("resource").filter(x => x.name.includes("speed.cloudflare.com") && x.domainLookupEnd>0);
     if(!e.length){ $("dns").textContent = "n/v"; return; }
@@ -913,188 +863,469 @@ async function timedFetch(url, options={}, timeoutMs=12000){
 
 /* ==========================================================
    FASQOO MEASUREMENT ENGINE v6
-   - Real browser measurements only
-   - Short adaptive phases (fast on fast links, enough samples on slow links)
-   - Dynamic stream count after warm-up
-   - Bounded upload memory
-   - HTTP latency is explicitly not ICMP ping
-   - No synthetic result values
+   Real browser measurement against Cloudflare Speed Test.
+   - Fast adaptive phases: about 6 s download + 6 s upload
+   - Ping: 8 real requests
+   - Adaptive concurrency: 2 → 3 → 4 → 5 → 6 → 8 streams
+   - No fabricated values or synthetic speed estimates
+   - Each displayed throughput sample comes from transferred bytes / elapsed time
    ========================================================== */
 const MEASUREMENT_V6 = {
-  version:"6.0",
-  minPhaseMs:5500,
-  maxPhaseMs:8500,
-  warmupMs:900,
-  roundMs:1600,
-  maxDownloadBytes:800*1024*1024,
-  maxUploadBytes:300*1024*1024,
-  maxStreams:8
+  version: "6.0",
+  phaseMs: 6000,
+  roundMs: 1800,
+  maxStreams: 8,
+  minDownloadBytes: 256 * 1024,
+  maxDownloadBytes: 64 * 1024 * 1024,
+  minUploadBytes: 128 * 1024,
+  maxUploadBytes: 32 * 1024 * 1024
 };
 
-function percentile(values,q){
+function percentile(values, q){
   if(!values.length) return NaN;
   const a=[...values].sort((x,y)=>x-y);
-  const p=(a.length-1)*q, lo=Math.floor(p), hi=Math.ceil(p);
-  return lo===hi ? a[lo] : a[lo]+(a[hi]-a[lo])*(p-lo);
+  const pos=(a.length-1)*q;
+  const lo=Math.floor(pos), hi=Math.ceil(pos);
+  return lo===hi ? a[lo] : a[lo] + (a[hi]-a[lo])*(pos-lo);
 }
-function robustMedian(values){ return percentile(values,.5); }
+function robustMedian(values){ return percentile(values,0.5); }
 function clampNumber(v,min,max){ return Math.max(min,Math.min(max,v)); }
+
 function chooseStreams(mbps,max=MEASUREMENT_V6.maxStreams){
-  if(mbps>=2500) return Math.min(8,max);
-  if(mbps>=1000) return Math.min(6,max);
-  if(mbps>=300) return Math.min(5,max);
-  if(mbps>=100) return Math.min(4,max);
-  if(mbps>=25) return Math.min(3,max);
-  return 2;
+  if(mbps >= 2500) return Math.min(8,max);
+  if(mbps >= 1000) return Math.min(6,max);
+  if(mbps >= 300) return Math.min(5,max);
+  if(mbps >= 100) return Math.min(4,max);
+  if(mbps >= 25) return Math.min(3,max);
+  return Math.min(2,max);
 }
 
+/* ---------- PING ---------- */
 async function pingTest(){
   const vals=[];
   for(let i=0;i<8 && running;i++){
+    const timer=testTimeout(4500);
+    const started=performance.now();
     try{
-      const started=performance.now();
-      const timer=testTimeout(3500);
-      const r=await fetch(SPEED_BASE+"/__down?bytes=0&v=6&t="+Date.now()+Math.random(),{
+      const r=await fetch(SPEED_BASE+"/__down?bytes=0&v=6&t="+Date.now()+"-"+Math.random(),{
         cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
       });
-      await r.arrayBuffer(); timer.clear();
+      await r.arrayBuffer();
       const ms=performance.now()-started;
-      if(r.ok && ms>0 && ms<3500) vals.push(ms);
-    }catch(e){}
+      if(r.ok && Number.isFinite(ms) && ms>0 && ms<4500) vals.push(ms);
+    }catch(e){} finally{
+      timer.clear();
+    }
   }
-  if(vals.length<5) throw new Error("Latency measurement failed");
+  if(vals.length < 5) throw new Error("Ping measurement failed");
+  const ping=robustMedian(vals);
   const deltas=[];
   for(let i=1;i<vals.length;i++) deltas.push(Math.abs(vals[i]-vals[i-1]));
-  return {ping:robustMedian(vals),jitter:robustMedian(deltas),samples:vals};
+  return {ping,jitter:robustMedian(deltas),samples:vals};
 }
 
+/* ---------- DOWNLOAD HELPERS ---------- */
 async function readResponseBytes(response,signal){
-  if(!response.body) return (await response.arrayBuffer()).byteLength;
+  if(!response.body){
+    const b=await response.arrayBuffer();
+    return b.byteLength;
+  }
   const reader=response.body.getReader();
   let bytes=0;
   try{
-    while(running && !signal?.aborted){
+    while(running){
+      if(signal?.aborted) throw new DOMException("Aborted","AbortError");
       const part=await reader.read();
       if(part.done) break;
       bytes += part.value?.byteLength || 0;
     }
-  }finally{try{reader.releaseLock()}catch(e){}}
+  }finally{
+    try{reader.releaseLock();}catch(e){}
+  }
   return bytes;
 }
 
 async function parallelDownload(bytesPerStream,streams,timeoutMs){
   const jobs=Array.from({length:streams},async()=>{
-    const timer=testTimeout(timeoutMs), started=performance.now();
+    const timer=testTimeout(timeoutMs);
+    const started=performance.now();
     try{
-      const r=await fetch(SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+
-        "&v=6&r="+Date.now()+Math.random(),{
+      const r=await fetch(SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+"&v=6&r="+Date.now()+"-"+Math.random(),{
         cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
       });
       if(!r.ok) throw new Error("HTTP "+r.status);
       const bytes=await readResponseBytes(r,timer.signal);
       const seconds=(performance.now()-started)/1000;
-      if(bytes<=0||seconds<=0) throw new Error("Empty download");
+      if(bytes<=0 || seconds<=0) throw new Error("Empty download");
       return {bytes,seconds};
-    }finally{timer.clear()}
+    }finally{
+      timer.clear();
+    }
   });
   const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled" && x.value.bytes>0).map(x=>x.value);
+  const good=results.filter(x=>x.status==="fulfilled").map(x=>x.value);
   if(!good.length) throw new Error("Download failed");
-  return {bytes:good.reduce((a,x)=>a+x.bytes,0),seconds:Math.max(...good.map(x=>x.seconds)),streams:good.length};
+  return {
+    bytes:good.reduce((a,x)=>a+x.bytes,0),
+    seconds:Math.max(...good.map(x=>x.seconds)),
+    streams:good.length
+  };
 }
 
-/* Bounded upload allocation: one buffer per stream, capped at 4 MiB.
-   The same buffer is reused for each round instead of allocating huge payloads. */
-const UPLOAD_CHUNK=4*1024*1024;
-let uploadBuffer=null;
-function getUploadBuffer(bytes){
-  const size=Math.min(UPLOAD_CHUNK,Math.max(64*1024,bytes));
-  if(!uploadBuffer || uploadBuffer.byteLength!==size){
-    uploadBuffer=new Uint8Array(size);
-    if(window.crypto?.getRandomValues){
-      for(let i=0;i<size;i+=65536) crypto.getRandomValues(uploadBuffer.subarray(i,Math.min(i+65536,size)));
-    }else uploadBuffer.fill(83);
-  }
-  return uploadBuffer;
+/* ---------- UPLOAD HELPERS ---------- */
+function makeUploadBuffer(bytes){
+  const data=new Uint8Array(bytes);
+  // Random-looking payload prevents accidental content optimization.
+  if(window.crypto?.getRandomValues){
+    for(let i=0;i<bytes;i+=65536){
+      crypto.getRandomValues(data.subarray(i,Math.min(i+65536,bytes)));
+    }
+  }else data.fill(83);
+  return data;
 }
+
 async function parallelUpload(bytesPerStream,streams,timeoutMs){
-  const payload=getUploadBuffer(bytesPerStream);
   const jobs=Array.from({length:streams},async()=>{
-    const timer=testTimeout(timeoutMs), started=performance.now();
+    const data=makeUploadBuffer(bytesPerStream);
+    const timer=testTimeout(timeoutMs);
+    const started=performance.now();
     try{
-      const r=await fetch(SPEED_BASE+"/__up?v=6&r="+Date.now()+Math.random(),{
-        method:"POST",body:payload,headers:{"Content-Type":"application/octet-stream"},
-        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
+      const r=await fetch(SPEED_BASE+"/__up?v=6&r="+Date.now()+"-"+Math.random(),{
+        method:"POST",
+        body:data,
+        headers:{"Content-Type":"application/octet-stream"},
+        cache:"no-store",
+        mode:"cors",
+        credentials:"omit",
+        signal:timer.signal
       });
       if(!r.ok) throw new Error("HTTP "+r.status);
-      try{await r.arrayBuffer()}catch(e){}
+      try{await r.arrayBuffer();}catch(e){}
       const seconds=(performance.now()-started)/1000;
-      return {bytes:payload.byteLength,seconds};
-    }finally{timer.clear()}
+      if(seconds<=0) throw new Error("Invalid upload timing");
+      return {bytes:bytesPerStream,seconds};
+    }finally{
+      timer.clear();
+    }
   });
   const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled" && x.value.bytes>0).map(x=>x.value);
+  const good=results.filter(x=>x.status==="fulfilled").map(x=>x.value);
   if(!good.length) throw new Error("Upload failed");
-  return {bytes:good.reduce((a,x)=>a+x.bytes,0),seconds:Math.max(...good.map(x=>x.seconds)),streams:good.length};
+  return {
+    bytes:good.reduce((a,x)=>a+x.bytes,0),
+    seconds:Math.max(...good.map(x=>x.seconds)),
+    streams:good.length
+  };
 }
 
-async function adaptivePhase(kind){
-  const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
-  const isDown=kind==="download";
-  $( "status" ).textContent=isDown?t.stDown:t.stUp;
-  $( "chartState" ).textContent=isDown?t.download:t.upload;
+/* ---------- DOWNLOAD PHASE ---------- */
+async function downloadTest(){
+  const t=translations[currentLang];
+  const x=extraTranslations[currentLang] || extraTranslations.en;
+  $("status").textContent=t.stDown;
+  $("chartState").textContent=t.download;
   samples=[];
 
+  const startTime=performance.now();
+  const measured=[];
   let streams=2;
-  let payload=isDown?256*1024:Math.min(UPLOAD_CHUNK,512*1024);
-  let started=performance.now(), measured=[], lastMbps=0, stable=0;
+  let bytesPerStream=512*1024;
+  let consecutiveGood=0;
+  let consecutiveWeak=0;
 
-  while(running){
-    const elapsed=performance.now()-started;
-    if(elapsed>=MEASUREMENT_V6.maxPhaseMs) break;
-    const remaining=MEASUREMENT_V6.maxPhaseMs-elapsed;
-    const round=Math.min(MEASUREMENT_V6.roundMs,remaining);
+  while(running && performance.now()-startTime < MEASUREMENT_V6.phaseMs){
+    const remaining=MEASUREMENT_V6.phaseMs-(performance.now()-startTime);
+    const targetRound=Math.min(MEASUREMENT_V6.roundMs,remaining);
+    const timeout=Math.max(3500,targetRound+1800);
+
     try{
-      const result=isDown
-        ? await parallelDownload(clampNumber(payload,128*1024,32*1024*1024),streams,Math.max(3000,round+1200))
-        : await parallelUpload(clampNumber(payload,64*1024,UPLOAD_CHUNK),streams,Math.max(3500,round+1400));
+      const result=await parallelDownload(bytesPerStream,streams,timeout);
       const sp=result.bytes*8/result.seconds/1e6;
-      if(Number.isFinite(sp)&&sp>0){
-        measured.push(sp); samples.push(sp); lastMbps=sp;
-        gauge(sp);
-        if(isDown){
-          $( "down" ).textContent=sp.toFixed(1);
-          $( "intelThroughput" ).textContent=sp.toFixed(1)+" "+x.unitMbps;
-        }else $( "up" ).textContent=sp.toFixed(1);
-        drawChart();
+      if(!Number.isFinite(sp) || sp<=0) throw new Error("Invalid download result");
 
-        const nextStreams=chooseStreams(sp);
-        if(nextStreams!==streams){ streams=nextStreams; stable=0; }
-        else stable++;
+      measured.push(sp);
+      samples.push(sp);
+      gauge(sp);
+      $("down").textContent=sp.toFixed(1);
+      $("intelThroughput").textContent=sp.toFixed(1)+" "+x.unitMbps;
+      drawChart();
 
-        const targetBytes=Math.ceil((sp*1e6/8)*(Math.min(MEASUREMENT_V6.roundMs,remaining)/1000)/streams);
-        payload=isDown
-          ? clampNumber(targetBytes,256*1024,32*1024*1024)
-          : clampNumber(targetBytes,64*1024,UPLOAD_CHUNK);
+      // Ramp concurrency only from measured throughput.
+      const suggested=chooseStreams(sp);
+      if(suggested>streams) streams=Math.min(suggested,MEASUREMENT_V6.maxStreams);
+      else if(suggested<streams && sp<streams*8) streams=Math.max(2,suggested);
 
-        // Stop early only after enough real samples have stabilized.
-        if(elapsed>=MEASUREMENT_V6.minPhaseMs && stable>=3 && measured.length>=4){
-          const recent=measured.slice(-3);
-          const avg=recent.reduce((a,b)=>a+b,0)/recent.length;
-          const spread=Math.max(...recent)-Math.min(...recent);
-          if(avg>0 && spread/avg<0.08) break;
-        }
+      const targetBytes=Math.ceil((sp*1e6/8)*(Math.min(MEASUREMENT_V6.roundMs,MEASUREMENT_V6.phaseMs-(performance.now()-startTime))/1000));
+      bytesPerStream=clampNumber(
+        Math.ceil(targetBytes/streams),
+        MEASUREMENT_V6.minDownloadBytes,
+        MEASUREMENT_V6.maxDownloadBytes
+      );
+
+      consecutiveGood++;
+      consecutiveWeak=0;
+      if(consecutiveGood>=2 && streams<MEASUREMENT_V6.maxStreams && sp>=100){
+        streams=Math.min(MEASUREMENT_V6.maxStreams,streams+1);
+        consecutiveGood=0;
       }
     }catch(e){
-      // Failed rounds do not become measurements. Continue while the phase has time left.
-      if(performance.now()-started>=MEASUREMENT_V6.maxPhaseMs) break;
+      consecutiveWeak++;
+      consecutiveGood=0;
+      // A failed real round contributes no value; retry with a smaller real request.
+      bytesPerStream=clampNumber(Math.floor(bytesPerStream*0.65),MEASUREMENT_V6.minDownloadBytes,MEASUREMENT_V6.maxDownloadBytes);
+      if(consecutiveWeak>=2 && streams>2) streams--;
     }
   }
-  if(!measured.length) throw new Error(kind+" measurement failed");
-  return robustMedian(measured);
+
+  if(measured.length<2) throw new Error("Download measurement failed");
+  // Ignore the slowest warm-up sample; report the median of the remaining real samples.
+  const stable=measured.length>=4 ? measured.slice(1) : measured;
+  return robustMedian(stable);
 }
-async function downloadTest(){ return adaptivePhase("download"); }
-async function uploadTest(){ return adaptivePhase("upload"); }
+
+/* ---------- UPLOAD PHASE ---------- */
+async function uploadTest(){
+  const t=translations[currentLang];
+  const x=extraTranslations[currentLang] || extraTranslations.en;
+  $("status").textContent=t.stUp;
+  $("chartState").textContent=t.upload;
+  samples=[];
+
+  const startTime=performance.now();
+  const measured=[];
+  let streams=2;
+  let bytesPerStream=256*1024;
+  let consecutiveGood=0;
+  let consecutiveWeak=0;
+
+  while(running && performance.now()-startTime < MEASUREMENT_V6.phaseMs){
+    const remaining=MEASUREMENT_V6.phaseMs-(performance.now()-startTime);
+    const targetRound=Math.min(MEASUREMENT_V6.roundMs,remaining);
+    const timeout=Math.max(4500,targetRound+2500);
+
+    try{
+      const result=await parallelUpload(bytesPerStream,streams,timeout);
+      const sp=result.bytes*8/result.seconds/1e6;
+      if(!Number.isFinite(sp) || sp<=0) throw new Error("Invalid upload result");
+
+      measured.push(sp);
+      samples.push(sp);
+      gauge(sp);
+      $("up").textContent=sp.toFixed(1);
+      drawChart();
+
+      const suggested=chooseStreams(sp);
+      if(suggested>streams) streams=Math.min(suggested,MEASUREMENT_V6.maxStreams);
+      else if(suggested<streams && sp<streams*8) streams=Math.max(2,suggested);
+
+      const targetBytes=Math.ceil((sp*1e6/8)*(Math.min(MEASUREMENT_V6.roundMs,MEASUREMENT_V6.phaseMs-(performance.now()-startTime))/1000));
+      bytesPerStream=clampNumber(
+        Math.ceil(targetBytes/streams),
+        MEASUREMENT_V6.minUploadBytes,
+        MEASUREMENT_V6.maxUploadBytes
+      );
+
+      consecutiveGood++;
+      consecutiveWeak=0;
+      if(consecutiveGood>=2 && streams<MEASUREMENT_V6.maxStreams && sp>=100){
+        streams=Math.min(MEASUREMENT_V6.maxStreams,streams+1);
+        consecutiveGood=0;
+      }
+    }catch(e){
+      consecutiveWeak++;
+      consecutiveGood=0;
+      bytesPerStream=clampNumber(Math.floor(bytesPerStream*0.65),MEASUREMENT_V6.minUploadBytes,MEASUREMENT_V6.maxUploadBytes);
+      if(consecutiveWeak>=2 && streams>2) streams--;
+    }
+  }
+
+  if(measured.length<2) throw new Error("Upload measurement failed");
+  const stable=measured.length>=4 ? measured.slice(1) : measured;
+  return robustMedian(stable);
+}
+
+/* ---------- QUALITY ---------- */
+function quality(d,u,p,j){
+  let s = 100;
+  if(d<5) s-=45; else if(d<25) s-=30; else if(d<50) s-=20; else if(d<100) s-=10;
+  if(u<2) s-=20; else if(u<5) s-=14; else if(u<10) s-=7;
+  if(p>150) s-=30; else if(p>100) s-=24; else if(p>60) s-=15; else if(p>30) s-=7;
+  if(j>50) s-=20; else if(j>30) s-=14; else if(j>15) s-=7;
+  return Math.max(0, Math.min(100, Math.round(s)));
+}
+function connectionAssessment(d,u,p,j){
+  const t = translations[currentLang];
+  const grade = d>=100 && u>=10 && p<=30 && j<=10 ? "excellent" :
+                d>=50 && u>=5 && p<=60 && j<=20 ? "good" :
+                d>=20 && u>=2 && p<=100 && j<=30 ? "medium" : "bad";
+  const title = grade==="excellent" ? t.stExc : grade==="good" ? t.stGood : grade==="medium" ? t.stLim : t.q0;
+  let detail = "";
+  if(grade==="excellent") detail = `Download ${d.toFixed(1)} Mbps, Upload ${u.toFixed(1)} Mbps, Ping ${p.toFixed(1)} ms and Jitter ${j.toFixed(1)} ms indicate a strong, responsive connection for demanding everyday use.`;
+  else if(grade==="good") detail = `Your measured speeds are suitable for most everyday use. ${p.toFixed(1)} ms ping and ${j.toFixed(1)} ms jitter indicate generally responsive performance, with some variation under load.`;
+  else if(grade==="medium") detail = `The connection is usable, but one or more measured values may affect demanding activities. Download ${d.toFixed(1)} Mbps, Upload ${u.toFixed(1)} Mbps, Ping ${p.toFixed(1)} ms, Jitter ${j.toFixed(1)} ms.`;
+  else detail = `The measured connection has a limiting value. Download ${d.toFixed(1)} Mbps, Upload ${u.toFixed(1)} Mbps, Ping ${p.toFixed(1)} ms, Jitter ${j.toFixed(1)} ms. Results can vary with Wi-Fi, device load and network congestion.`;
+  return {grade,title,detail};
+}
+function showQuality(s,d,u,p,j){
+  const t = translations[currentLang];
+  $("score").textContent = s+"/100";
+  $("bar").style.width = s+"%";
+  $("qtext").textContent = s>=90?t.q90:s>=75?t.q75:s>=55?t.q55:s>=35?t.q35:t.q0;
+  const a=connectionAssessment(d,u,p,j);
+  $("qualityLabel").textContent=a.title;
+  $("qualityLabel").className="connection-grade "+a.grade;
+  const detail=$("qualityDetail"); if(detail) detail.textContent=a.detail;
+}
+
+/* ---------- APPS EVALUATION ---------- */
+function evaluateApps(d,u,p,j){
+  const t = translations[currentLang];
+  const setScore = (key, prefix, score) => {
+    const status = document.querySelector('[data-app-status="'+key+'"]');
+    const bar = document.querySelector('[data-app-bar="'+key+'"]');
+    const txt = document.querySelector('[data-app-text="'+key+'"]');
+    if(!status || !bar || !txt) return;
+    bar.style.width = score+"%";
+    txt.textContent = score>=85?t[prefix+"85"]:score>=65?t[prefix+"65"]:score>=40?t[prefix+"40"]:t[prefix+"0"];
+    status.className = "app-status";
+    if(score>=80){ status.classList.add("good"); status.textContent = t.stExc; }
+    else if(score>=55){ status.classList.add("medium"); status.textContent = t.stGood; }
+    else { status.classList.add("bad"); status.textContent = t.stLim; }
+  };
+  let g = 100;
+  if(p>20) g-=15; if(p>40) g-=20; if(p>70) g-=25;
+  if(j>10) g-=15; if(j>20) g-=20; if(j>40) g-=20;
+  if(d<10) g-=15; if(u<3) g-=10;
+  setScore("gaming","gam", Math.max(0,Math.min(100,g)));
+  setScore("stream","str", d>=25?100:d>=15?85:d>=10?70:d>=5?50:d>=3?25:10);
+  setScore("fourk","fk", d>=50?100:d>=25?85:d>=15?60:d>=10?35:10);
+  let c = 100; if(d<10) c-=25; if(u<5) c-=25; if(p>50) c-=20; if(j>20) c-=20;
+  setScore("call","call", Math.max(0,Math.min(100,c)));
+  let o = 100; if(d<25) o-=15; if(u<10) o-=15; if(p>70) o-=15; if(j>25) o-=15;
+  setScore("office","off", Math.max(0,Math.min(100,o)));
+  setScore("cloud","cld", d>=100?100:d>=50?85:d>=25?70:d>=10?50:d>=5?30:10);
+  setScore("social","soc", d>=25?100:d>=10?90:d>=5?75:d>=2?50:25);
+  let w = 100; if(d<10) w-=20; if(d<5) w-=20; if(p>100) w-=25; if(j>30) w-=15;
+  setScore("web","web", Math.max(0,Math.min(100,w)));
+}
+
+function createTestID(){ return "FASQOO-"+Math.random().toString(36).slice(2,6).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase(); }
+
+/* ---------- HISTORY ---------- */
+function historyLoad(){
+  const t = translations[currentLang];
+  const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
+  const body = $("history");
+  if(!h.length){ body.innerHTML = '<tr><td colspan="6" class="empty">'+t.noHistory+'</td></tr>'; return; }
+  body.innerHTML = h.map(x => '<tr><td>'+x.date+'</td><td>'+((x.isp||"—").replace(/[<>&"]/g,m=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[m])))+'</td><td>'+Number(x.d).toFixed(1)+' Mbps</td><td>'+Number(x.u).toFixed(1)+' Mbps</td><td>'+Number(x.p).toFixed(1)+' ms</td><td>'+x.s+'/100</td></tr>').join("");
+}
+function saveHistory(x){
+  const h = JSON.parse(localStorage.getItem("fasqoo_history")||"[]");
+  h.unshift(x);
+  localStorage.setItem("fasqoo_history", JSON.stringify(h.slice(0,20)));
+  historyLoad();
+}
+
+function setPremiumMetrics(d,u,p,j){
+  const x = extraTranslations[currentLang] || extraTranslations.en;
+  if(Number.isFinite(p)) $("intelLatency").textContent = p.toFixed(1)+" ms";
+  if(Number.isFinite(j)) $("intelStability").textContent = j.toFixed(1)+" ms · "+(j <= 10 ? translations[currentLang].stExc : j <= 20 ? translations[currentLang].stGood : translations[currentLang].stLim);
+  if(Number.isFinite(d)) $("intelThroughput").textContent = d.toFixed(1)+" "+x.unitMbps;
+  if(Number.isFinite(d) && Number.isFinite(u)) $("intelThroughput").parentElement.title = "Download "+d.toFixed(1)+" "+x.unitMbps+" · Upload "+u.toFixed(1)+" "+x.unitMbps;
+}
+
+function setTestPhase(phase){
+  document.querySelectorAll(".phase-step").forEach(el => el.classList.toggle("active", el.dataset.phase === phase));
+  const label = $("testPhase");
+  if(label){
+    const x = extraTranslations[currentLang] || extraTranslations.en;
+    const labels = {ping:x.responseTime,download:x.downloadCapacity,upload:x.throughput,complete:x.phaseResult};
+    label.textContent = labels[phase] || x.readyPhase;
+  }
+}
+function updateQualityLabel(s){
+  const el = $("qualityLabel");
+  if(!el) return;
+  const t = translations[currentLang];
+  el.textContent = s>=90 ? t.stExc : s>=75 ? (t.q75.replace(/connection\.?$/i, "").trim() || t.stGood) : s>=55 ? t.stGood : s>=35 ? t.stLim : t.q0;
+}
+
+/* ---------- START TEST ---------- */
+async function start(){
+  if(running) return;
+  running = true;
+  const t = translations[currentLang];
+  $("start").disabled = true;
+  $("start").textContent = t.testing;
+  resetGauge();
+  ["down","up","ping","jitter"].forEach(id => $(id).textContent = "—");
+  $("intelLatency").textContent = "—";
+  $("intelStability").textContent = "—";
+  $("intelThroughput").textContent = "—";
+  $("score").textContent = "—";
+  $("bar").style.width = "0%";
+  document.querySelectorAll(".app-status").forEach(el => { el.className = "app-status"; el.textContent = t.testing; });
+  $("status").textContent = t.stPing;
+  setTestPhase("ping");
+  if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementReal;
+
+  try{
+    if(performance.clearResourceTimings) performance.clearResourceTimings();
+
+    // 1) PING
+    const p = await pingTest();
+    $("ping").textContent = p.ping.toFixed(1);
+    $("jitter").textContent = p.jitter.toFixed(1);
+    $("intelLatency").textContent = p.ping.toFixed(1) + " ms";
+    $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " + (p.jitter <= 10 ? t.stExc : p.jitter <= 20 ? t.stGood : t.stLim);
+    measureDns();
+
+    // Short transition before download
+    setTestPhase("download");
+    $("status").textContent = t.testing;
+    await sleep(500);
+
+    // 2) DOWNLOAD (adaptive real phase)
+    const d = await downloadTest();
+
+    // Short transition before upload
+    setTestPhase("upload");
+    $("status").textContent = t.testing;
+    await sleep(500);
+
+    // 3) UPLOAD (adaptive real phase)
+    const u = await uploadTest();
+
+    setTestPhase("complete");
+    const s = quality(d,u,p.ping,p.jitter);
+    showQuality(s,d,u,p.ping,p.jitter);
+    evaluateApps(d,u,p.ping,p.jitter);
+    setPremiumMetrics(d,u,p.ping,p.jitter);
+    updateQualityLabel(s);
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementComplete;
+
+    const testID = createTestID();
+    const date = new Date().toLocaleString();
+    last = {id:testID, date:date, download:d, upload:u, ping:p.ping, jitter:p.jitter, quality:s,
+      ip:info.ip||"", isp:(info.connection && (info.connection.isp||info.connection.org))||"",
+      location:$("loc").textContent, asn:$("asn").textContent,
+      ipv4:$("ipv4").textContent, ipv6:$("ipv6").textContent, dns:$("dns").textContent};
+    $("tid").textContent = testID;
+    $("status").textContent = t.complete;
+    $("chartState").textContent = t.complete;
+    saveHistory({date:date, d:d, u:u, p:p.ping, j:p.jitter, s:s, isp:last.isp||"—"});
+    updateWidget();
+  }catch(err){
+    console.error(err);
+    $("status").textContent = translations[currentLang].stErr;
+    setTestPhase("ping");
+    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementFailed;
+  }
+  running = false;
+  $("start").disabled = false;
+  $("start").textContent = translations[currentLang].startAgain;
+}
+$("start").addEventListener("click", start);
 
 /* ---------- STATUS OBSERVER ---------- */
 const _statusObserver = new MutationObserver(() => {
