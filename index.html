@@ -64,9 +64,11 @@ header{height:68px;background:rgba(255,255,255,.96);border-bottom:1px solid var(
 .menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;cursor:pointer}
 
 .lite-btn{height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;font-size:12px;font-weight:500;text-decoration:none;transition:.2s}
+.install-btn{height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}.install-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.install-btn:active{transform:translateY(1px)}.install-btn[hidden]{display:none}.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}.win-icon i{display:block;background:currentColor}.install-btn .install-label{line-height:1}
 .lite-btn:hover{background:var(--soft);border-color:#bfc7d1}
 .theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px}
 .menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
+@media(max-width:900px){.install-btn{display:none!important}}
 main{padding:30px 0 65px}
 .hero{text-align:center;margin-bottom:25px}
 .hero h1{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-1px;margin:0 0 9px}
@@ -385,6 +387,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
+    </button>
     <div id="fasqoo-widget-container"></div>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
     <nav class="main-menu" id="mainMenu">
@@ -674,6 +680,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
+/* ---------- CLEAN DESKTOP INSTALL ---------- */
+let deferredInstallPrompt = null;
+const installButton = document.getElementById("installButton");
+
+function isWindowsDesktop(){
+  return /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
+}
+
+function isStandalone(){
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function updateInstallButton(){
+  if(!installButton) return;
+  installButton.hidden = !isWindowsDesktop() || isStandalone();
+}
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButton();
+});
+
+installButton?.addEventListener("click", async () => {
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    try{ await deferredInstallPrompt.userChoice; }catch(e){}
+    deferredInstallPrompt = null;
+    updateInstallButton();
+    return;
+  }
+  alert((installTranslations[currentLang] || installTranslations.en).installApp + " is available in Chrome/Edge via the install icon in the address bar or browser menu.");
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
+
+updateInstallButton();
+
 /* ==========================================================
    FASQOO SPEED TEST v7.2 — adaptive phases, real measurement
    - Phase duration: 8 s per direction (see MEASUREMENT_V7.phaseMs)
@@ -1384,6 +1431,19 @@ $("print").addEventListener("click", () => {
   window.print();
 });
 $("clear").addEventListener("click", () => { localStorage.removeItem("fasqoo_history"); historyLoad(); });
+
+const installTranslations = {
+  en:{installApp:"Install for Windows"},
+  de:{installApp:"Für Windows installieren"},
+  fr:{installApp:"Installer pour Windows"},
+  es:{installApp:"Instalar para Windows"},
+  it:{installApp:"Installa per Windows"},
+  pt:{installApp:"Instalar para Windows"},
+  nl:{installApp:"Installeren voor Windows"},
+  tr:{installApp:"Windows için yükle"},
+  sq:{installApp:"Instalo për Windows"},
+  ar:{installApp:"التثبيت لنظام Windows"}
+};
 
 const staticUiTranslations = {
   en:{widgetTitle:"Fasqoo Speed Widget",widgetLive:"Live result",widgetDownload:"Mbps download",widgetRun:"Run speed test",providerLabel:"Provider",ftPowered:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",ftIndependent:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
