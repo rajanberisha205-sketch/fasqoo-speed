@@ -65,14 +65,16 @@ ${language || "en"}
       },
 
       ...safeHistory
-        .filter(x =>
-          x &&
-          (x.role === "user" || x.role === "assistant") &&
-          typeof x.content === "string"
+        .filter(
+          x =>
+            x &&
+            (x.role === "user" || x.role === "assistant") &&
+            typeof x.content === "string" &&
+            x.content.trim()
         )
         .map(x => ({
           role: x.role,
-          content: x.content
+          content: x.content.trim()
         })),
 
       {
@@ -85,12 +87,10 @@ ${language || "en"}
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${apiKey}`
         },
-
         body: JSON.stringify({
           model: "openai/gpt-oss-20b",
           messages,
@@ -100,7 +100,22 @@ ${language || "en"}
       }
     );
 
-    const data = await response.json();
+    const rawText = await response.text();
+
+    let data;
+
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      console.error("Groq returned invalid JSON:", rawText);
+
+      return res.status(502).json({
+        error: "Invalid response from AI service"
+      });
+    }
+
+    // Very important for debugging
+    console.log("Groq response:", JSON.stringify(data));
 
     if (!response.ok) {
       console.error("Groq API error:", {
@@ -113,14 +128,27 @@ ${language || "en"}
       });
     }
 
-    const answer =
-      data?.choices?.[0]?.message?.content?.trim();
+    const choice = data?.choices?.[0];
+
+    let answer = choice?.message?.content;
+
+    // Some model responses may put text in a different field.
+    if (!answer && typeof choice?.text === "string") {
+      answer = choice.text;
+    }
+
+    if (typeof answer === "string") {
+      answer = answer.trim();
+    }
 
     if (!answer) {
-      console.error("Groq returned no answer:", data);
+      console.error(
+        "Groq returned no usable answer:",
+        JSON.stringify(data, null, 2)
+      );
 
       return res.status(502).json({
-        error: "AI returned an empty response"
+        error: "Fasqoo AI returned an empty response."
       });
     }
 
