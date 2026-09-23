@@ -1542,6 +1542,176 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+<script>
+(function(){
+  "use strict";
 
+  // ===== KONFIGURATION =====
+  const PING_ENDPOINT = "/api/ping";   // dein eigener Endpunkt (siehe Teil 2)
+  const PING_COUNT = 5;                 // Anzahl der Messungen
+  const PING_TIMEOUT = 4000;            // Timeout pro Messung in ms
+
+  // ===== HILFSFUNKTION: Einzelne Latenzmessung =====
+  async function measureOnce(){
+    const start = performance.now();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), PING_TIMEOUT);
+    try {
+      await fetch(PING_ENDPOINT + "?t=" + Date.now(), {
+        method: "HEAD",
+        cache: "no-store",
+        signal: controller.signal
+      });
+      const end = performance.now();
+      return Math.round(end - start);
+    } catch (e) {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // ===== HILFSFUNKTION: Kompletter Latenztest =====
+  async function runPingTest(){
+    const results = [];
+    for (let i = 0; i < PING_COUNT; i++){
+      const ms = await measureOnce();
+      if (ms !== null) results.push(ms);
+      await new Promise(r => setTimeout(r, 150)); // kleine Pause
+    }
+    if (results.length === 0){
+      return { error: "Keine Messung möglich" };
+    }
+    const avg = Math.round(results.reduce((a,b) => a+b, 0) / results.length);
+    const min = Math.min(...results);
+    const max = Math.max(...results);
+    const jitter = max - min;
+    return { avg, min, max, jitter, samples: results };
+  }
+
+  // ===== SCHLÜSSELWÖRTER, DIE EINEN TEST AUSLÖSEN =====
+  const PING_KEYWORDS = [
+    "ping", "messen", "test", "testen", "latenz", "latency",
+    "ms", "millisekunden", "reaktionszeit", "response time",
+    "lag", "verzögerung", "hoher ping", "ping zu hoch"
+  ];
+
+  function containsPingIntent(text){
+    const lower = text.toLowerCase();
+    return PING_KEYWORDS.some(k => lower.includes(k));
+  }
+
+  // ===== DEN ORIGINALEN SEND-BUTTON ÜBERWACHEN =====
+  // Wir hängen uns an den bestehenden Chat, ohne ihn zu verändern.
+  const input = document.getElementById("fgGeminiInput");
+  const send  = document.getElementById("fgGeminiSend");
+  const messages = document.getElementById("fgGeminiMessages");
+
+  if (!input || !send || !messages) return;
+
+  // Wir speichern das Original-Verhalten und ergänzen es
+  const originalSendHandler = send.onclick;
+
+  send.onclick = async function(e){
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Wenn Ping-Absicht erkannt → Test durchführen
+    if (containsPingIntent(text)){
+      // Nachricht des Nutzers anzeigen
+      const userRow = document.createElement("div");
+      userRow.className = "fg-msg user";
+      userRow.innerHTML = '<div class="fg-bubble"></div>';
+      userRow.querySelector(".fg-bubble").textContent = text;
+      messages.appendChild(userRow);
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+
+      // Ladeanzeige
+      const loadRow = document.createElement("div");
+      loadRow.className = "fg-msg ai";
+      loadRow.innerHTML = '<div class="fg-bubble">⏳ Führe Latenztest durch…</div>';
+      messages.appendChild(loadRow);
+      messages.scrollTop = messages.scrollHeight;
+
+      // Test ausführen
+      const result = await runPingTest();
+      loadRow.remove();
+
+      if (result.error){
+        const errRow = document.createElement("div");
+        errRow.className = "fg-msg ai";
+        errRow.innerHTML = '<div class="fg-bubble"></div>';
+        errRow.querySelector(".fg-bubble").textContent =
+          "Der Latenztest konnte nicht durchgeführt werden. Bitte versuche es erneut.";
+        messages.appendChild(errRow);
+        return;
+      }
+
+      // Ergebnis als Systemhinweis an die KI übergeben
+      const enrichedMessage =
+        text +
+        "\n\n[LATENZTEST-ERGEBNIS] " +
+        "Durchschnitt: " + result.avg + " ms, " +
+        "Min: " + result.min + " ms, " +
+        "Max: " + result.max + " ms, " +
+        "Jitter: " + result.jitter + " ms, " +
+        "Messungen: " + result.samples.join(", ") + " ms";
+
+      // Jetzt die KI mit den echten Werten aufrufen
+      await callFasqooAI(enrichedMessage, messages);
+      return;
+    }
+
+    // Kein Ping → normales Verhalten (Original-Code bleibt aktiv)
+    if (typeof originalSendHandler === "function"){
+      originalSendHandler.call(this, e);
+    }
+  };
+
+  // ===== KI-AUFRUF (kopiert aus deinem bestehenden Script) =====
+  async function callFasqooAI(prompt, messagesEl){
+    const typingRow = document.createElement("div");
+    typingRow.className = "fg-msg ai";
+    typingRow.innerHTML = '<div class="fg-bubble"><span class="fg-typing"><i></i><i></i><i></i></span></div>';
+    messagesEl.appendChild(typingRow);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    try {
+      const langEl = document.getElementById("lang");
+      const lang = langEl ? langEl.value : "de";
+
+      const res = await fetch("/api/fasqoo-ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: prompt,
+          language: lang,
+          history: []
+        })
+      });
+
+      const data = await res.json();
+      typingRow.remove();
+
+      const row = document.createElement("div");
+      row.className = "fg-msg ai";
+      row.innerHTML = '<div class="fg-bubble"></div>';
+      row.querySelector(".fg-bubble").textContent =
+        data.reply || data.answer || "Keine Antwort erhalten.";
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    } catch (err){
+      typingRow.remove();
+      const row = document.createElement("div");
+      row.className = "fg-msg ai";
+      row.innerHTML = '<div class="fg-bubble">Der AI-Dienst ist momentan nicht erreichbar.</div>';
+      messagesEl.appendChild(row);
+    }
+  }
+
+})();
+</script>
 </body>
 </html>
