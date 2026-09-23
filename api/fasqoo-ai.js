@@ -92,7 +92,7 @@ ${language || "en"}
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
+          model: "llama-3.1-70b-versatile", // Gültiges Groq Modell
           messages,
           temperature: 0.3,
           max_completion_tokens: 700
@@ -137,11 +137,6 @@ ${language || "en"}
       answer = answer.trim();
     }
 
-    console.log(
-      "GROQ CONTENT:",
-      JSON.stringify(answer)
-    );
-
     if (!answer) {
       console.error(
         "Groq returned no usable answer:",
@@ -153,7 +148,6 @@ ${language || "en"}
       });
     }
 
-    // Liefert sowohl 'reply' als auch 'answer' für maximale Kompatibilität zurück
     return res.status(200).json({
       reply: answer,
       answer: answer
