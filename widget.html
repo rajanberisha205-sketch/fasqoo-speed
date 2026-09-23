@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0a0a0c" id="themeColorMeta">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Fasqoo Lite">
+  
+  <title>Fast & Free Internet Speed Test | Fasqoo Lite</title>
+  <meta name="description" content="Test your internet speed instantly with Fasqoo Lite. Accurate download, upload, ping, and jitter measurements powered by global edge CDNs.">
+  <meta name="keywords" content="internet speed test, broadband speed test, wifi speed test, check internet speed, fasqoo lite, ping test, Fasqoo">
+  <link rel="canonical" href="https://lite.fasqoo.com/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lite.fasqoo.com/">
+  <meta property="og:title" content="Fast & Free Internet Speed Test | Fasqoo Lite">
+  <meta property="og:description" content="Check your download speed, upload speed, and latency instantly with our lightweight internet speed test.">
+  <meta property="og:image" content="https://lite.fasqoo.com/fasqoologo.png">
+  <link rel="preload" as="image" href="fasqoologo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://speed.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root[data-theme="dark"]{--bg:#0a0a0a;--surface:#111;--surface2:#1a1a1a;--bg-raised:#0f0f0f;--bg-card:#141414;--border:#222;--text:#e5e5e5;--text2:#888;--accent:#ef4444;--accent2:#dc2626;--good:#10b981;--warn:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;--pink:#ff90b3}
+:root[data-theme="light"]{--bg:#f8fafc;--surface:#fff;--surface2:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text2:#64748b;--accent:#dc2626;--accent2:#b91c1c;--good:#059669;--warn:#d97706;--blue:#2563eb;--purple:#7c3aed;--pink:#db2777}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+
+/* Nav */
+nav{border-bottom:1px solid var(--border);padding:14px 0}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:20px;font-size:14px;align-items:center}
+.nav-links a{color:var(--text2);transition:color .2s}
+.nav-links a:hover{color:var(--text);text-decoration:none}
+.nav-right{display:flex;gap:10px;align-items:center}
+.theme-toggle{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center;transition:border-color .2s}
+.theme-toggle:hover{border-color:var(--accent)}
+
+/* Hero */
+.hero{text-align:center;padding:60px 0 40px}
+.hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text2);font-size:17px;max-width:540px;margin:0 auto 32px}
+.trust-row{display:flex;justify-content:center;gap:20px;margin-top:20px;font-size:13px;color:var(--text2);flex-wrap:wrap}
+.trust-row span{display:flex;align-items:center;gap:5px}
+
+/* Speedtest Card */
+.speedtest-section{margin:20px 0 50px}
+.speedtest-card{max-width:600px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.speedometer{width:min(260px,70vw);aspect-ratio:1;margin:0 auto 16px;position:relative;display:grid;place-items:center}
+.speedometer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.speedometer .bg{fill:none;stroke:var(--border);stroke-width:8}
+.speedometer .fg{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .8s ease,stroke .3s}
+.speed-value{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.speed-num{font-size:48px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.speed-unit{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;margin-top:4px}
+.speed-caption{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+
+.status-text{text-align:center;font-size:11px;font-weight:800;color:var(--text2);letter-spacing:.8px;margin-bottom:10px}
+.progress-bar-wrapper{height:5px;border-radius:99px;background:rgba(127,127,127,.15);overflow:hidden;margin-bottom:18px}
+.progress-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#fb7185);border-radius:99px;transition:width .12s linear}
+
+.details-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.detail-box{padding:14px 8px;border:1px solid var(--border);border-radius:14px;background:rgba(127,127,127,.04);text-align:center}
+.detail-label{font-size:9px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase}
+.detail-value{margin-top:6px;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.detail-value span{font-size:9px;color:var(--text2);font-weight:600;margin-left:2px}
+
+.controls{text-align:center}
+.restart-btn{border:0;border-radius:999px;background:var(--text);color:var(--bg);padding:12px 28px;font-size:11px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;transition:transform .12s,opacity .12s}
+.restart-btn:hover{transform:translateY(-1px)}
+.restart-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Features */
+.features{padding:60px 0;border-top:1px solid var(--border)}
+.features h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:8px}
+.features .subtitle{text-align:center;color:var(--text2);font-size:16px;margin-bottom:32px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.feature-card{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;min-height:175px;transition:border-color .2s,transform .2s}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.feature-card .icon{font-size:26px;margin-bottom:12px}
+.feature-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.feature-card p{font-size:13px;color:var(--text2);flex:1}
+
+/* Widget Demo */
+.widget-demo{padding:60px 0;border-top:1px solid var(--border)}
+.widget-demo h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:8px}
+.widget-demo .subtitle{text-align:center;color:var(--text2);font-size:16px;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.widget-preview{max-width:700px;margin:0 auto;position:relative;min-height:340px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.widget-mock-header{padding:12px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.widget-mock-dots{display:flex;gap:6px}
+.widget-mock-dots div{width:12px;height:12px;border-radius:50%}
+.widget-mock-url{flex:1;text-align:center;font-size:12px;color:var(--text2)}
+.widget-mock-body{padding:30px 40px;min-height:220px}
+.widget-mock-line{height:14px;background:var(--border);border-radius:4px;margin-bottom:10px}
+.widget-badge-preview{position:absolute;bottom:20px;right:20px}
+.widget-badge-preview .badge{width:56px;height:56px;border-radius:50%;background:var(--surface);border:2px solid var(--good);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
+.widget-badge-preview .badge:hover{transform:scale(1.06)}
+.widget-badge-preview .badge span{font-size:16px;font-weight:800;color:var(--good)}
+
+/* Widget Code */
+.code-box{max-width:700px;margin:24px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;font-family:monospace;font-size:13px;color:var(--text2);overflow-x:auto}
+.code-box code{color:var(--text)}
+.code-box .tag{color:var(--accent)}
+.code-box .attr{color:var(--blue)}
+.code-box .val{color:var(--good)}
+
+/* FAQ */
+.faq{padding:60px 0;border-top:1px solid var(--border)}
+.faq h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:24px}
+.faq-grid{max-width:650px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.faq-item h4{font-size:15px;font-weight:600;margin-bottom:4px}
+.faq-item p{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:30px 0;text-align:center;font-size:13px;color:var(--text2)}
+footer a{margin:0 10px}
+
+/* Responsive */
+@media(max-width:600px){
+  .details-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+  .hero{padding:40px 0 30px}
+  .speedtest-card{padding:20px 16px}
+  .speed-num{font-size:38px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">⚡ Fasqoo<span>.com</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#widget">Widget</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://fasqoo.com">Main Site</a>
+    </div>
+    <div class="nav-right">
+      <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>How fast is your<br><em>Internet connection</em>?</h1>
+      <p>Free browser-based speed test in seconds. No sign-up. Instant results with download, upload, ping and jitter.</p>
+      <div class="trust-row">
+        <span>⚡ Real measurement</span>
+        <span>🔒 No account required</span>
+        <span>🌍 Cloudflare Edge</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speedtest -->
+  <section class="speedtest-section">
+    <div class="container">
+      <div class="speedtest-card">
+        <div class="speedometer">
+          <svg viewBox="0 0 120 120">
+            <circle class="bg" cx="60" cy="60" r="52"></circle>
+            <circle class="fg" id="speedArc" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7" stroke="var(--accent)"></circle>
+          </svg>
+          <div class="speed-value">
+            <div class="speed-num" id="speed">0</div>
+            <div class="speed-unit">Mbps</div>
+            <div class="speed-caption" id="speedCaption">Starting test...</div>
+          </div>
+        </div>
+
+        <div class="status-text" id="status">Starting test...</div>
+        <div class="progress-bar-wrapper" id="progressWrapper"><div class="progress-bar-fill" id="progressBar"></div></div>
+
+        <div class="details-grid" id="detailsGrid">
+          <div class="detail-box"><div class="detail-label">Latency</div><div class="detail-value" id="pingVal">-<span>ms</span></div></div>
+          <div class="detail-box"><div class="detail-label">Jitter</div><div class="detail-value" id="jitterVal">-<span>ms</span></div></div>
+          <div class="detail-box"><div class="detail-label">Download</div><div class="detail-value" id="downVal">-<span>Mbps</span></div></div>
+          <div class="detail-box"><div class="detail-label">Upload</div><div class="detail-value" id="upVal">-<span>Mbps</span></div></div>
+        </div>
+
+        <div class="controls">
+          <button id="restartBtn" class="restart-btn" onclick="startSpeedTest()" style="display:none">Test Again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>What Fasqoo measures</h2>
+      <p class="subtitle">Real browser-based measurement through Cloudflare Edge. No invented fallback speed values are shown.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">⬇️</div>
+          <h3>Download Speed</h3>
+          <p>How fast data travels from the internet to your device. Measured with real HTTP streams against Cloudflare edge servers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">⬆️</div>
+          <h3>Upload Speed</h3>
+          <p>How fast your device can send data. Measured with real XHR uploads and progress tracking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">⏱️</div>
+          <h3>Latency &amp; Jitter</h3>
+          <p>Response time and its variation. Critical for gaming, video calls and real-time applications.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🌍</div>
+          <h3>Cloudflare Edge</h3>
+          <p>Measurement against Cloudflare's global network. No fake numbers, no simulated results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Widget Demo -->
+  <section class="widget-demo" id="widget">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:32px">
+        <span style="display:inline-block;padding:4px 16px;background:var(--accent);color:#fff;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px">NEW: EMBEDDABLE WIDGET</span>
+        <h2>Show your speed on your website</h2>
+        <p class="subtitle">A small code snippet — and your visitors see their connection speed instantly. Built on the same real measurement engine.</p>
+      </div>
+
+      <!-- Live Widget Preview -->
+      <div class="widget-preview">
+        <div class="widget-mock-header">
+          <div class="widget-mock-dots">
+            <div style="background:#ef4444"></div>
+            <div style="background:#f59e0b"></div>
+            <div style="background:#10b981"></div>
+          </div>
+          <div class="widget-mock-url">www.example-website.com</div>
+        </div>
+        <div class="widget-mock-body">
+          <div class="widget-mock-line" style="width:60%"></div>
+          <div class="widget-mock-line" style="width:90%"></div>
+          <div class="widget-mock-line" style="width:75%"></div>
+          <div class="widget-mock-line" style="width:85%;margin-bottom:20px"></div>
+          <div style="height:40px;width:140px;background:var(--accent);border-radius:8px;opacity:0.3"></div>
+        </div>
+        <!-- Demo Badge -->
+        <div class="widget-badge-preview">
+          <div class="badge" onclick="document.getElementById('widgetPanel').classList.toggle('visible')">
+            <span>87</span>
+          </div>
+          <div id="widgetPanel" style="position:absolute;bottom:66px;right:0;width:280px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.4);display:none;overflow:hidden">
+            <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+              <div style="font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px">⚡ Fasqoo Speed</div>
+              <button style="width:24px;height:24px;border-radius:50%;border:none;background:var(--surface2);color:var(--text2);cursor:pointer;font-size:14px" onclick="document.getElementById('widgetPanel').style.display='none'">✕</button>
+            </div>
+            <div style="padding:14px 16px">
+              <div style="font-size:28px;font-weight:800;color:var(--good)">87 <span style="font-size:11px;color:var(--text2)">Mbps</span></div>
+              <div style="font-size:11px;color:var(--text2);margin-top:6px">Download · Ping 12 ms · Upload 45 Mbps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code -->
+      <div class="code-box">
+        <code><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://lite.fasqoo.com/widget.js"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-accent</span>=<span class="val">"#ef4444"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-theme</span>=<span class="val">"auto"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-autostart</span>=<span class="val">"true"</span><span class="tag">&gt;&lt;/script&gt;</span></code>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>Is the speed test really free?</h4>
+          <p>Yes, 100% free. No account, no credit card, no sign-up. Just open the page and the test starts automatically.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How accurate is the measurement?</h4>
+          <p>Fasqoo uses the same Cloudflare speed-test endpoints as many professional tools. The values are based on real transferred bytes and real elapsed time. No numbers are invented or simulated.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What is jitter?</h4>
+          <p>Jitter measures how much the network response time varies from one measurement to the next. Low jitter means a stable, consistent connection — important for gaming and video calls.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I embed the widget on my website?</h4>
+          <p>Yes. Add one script tag and the widget appears as a floating badge. You can choose the accent color, theme and position. See the code example above.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Why does the result vary between tests?</h4>
+          <p>Wi-Fi signal, device load, VPNs, ISP congestion and distance to the test edge can affect results. Running the test multiple times gives a clearer picture of your connection's normal range.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Fasqoo. All rights reserved.</div>
+    <div style="margin-top:8px">
+      <a href="https://www.fasqoo.com/privacy-policy.html">Privacy Policy</a>
+      <a href="https://www.fasqoo.com">Fasqoo.com</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const $ = id => document.getElementById(id);
+  let isRunning = false;
+  let deferredPrompt = null;
+
+  const SPEED_HOST = "https://speed.cloudflare.com";
+  const DOWN_BYTES = 8 * 1024 * 1024;
+  const UP_BYTES = 4 * 1024 * 1024;
+  const MIN_STREAMS = 4;
+  const MAX_STREAMS = 12;
+  const MIN_PHASE_SECONDS = 3.2;
+  const MAX_PHASE_SECONDS = 6.0;
+  const WARMUP_SECONDS = 0.8;
+  const SAMPLE_MS = 100;
+  const ADAPT_INTERVAL_MS = 700;
+  const MIN_STABLE_SAMPLES = 5;
+  const TARGET_BYTES = 64 * 1024 * 1024;
+  const MAX_TEST_BYTES = 512 * 1024 * 1024;
+  const TICK_MS = SAMPLE_MS;
+  const RATE_WINDOW_MS = 1800;
+  const DISPLAY_MEDIAN_SAMPLES = 5;
+
+  function toggleTheme(){
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", newTheme);
+    $("themeColorMeta").setAttribute("content", newTheme === "dark" ? "#0a0a0c" : "#f8fafc");
+    localStorage.setItem("fasqoo_theme", newTheme);
+    updateThemeIcon(newTheme);
+  }
+
+  function updateThemeIcon(theme){
+    const icon = $("themeIcon");
+    if(theme === "light"){
+      icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    } else {
+      icon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("fasqoo_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    updateThemeIcon(savedTheme);
+
+    setTimeout(() => {
+      if (!isRunning) startSpeedTest();
+    }, 800);
+  });
+
+  function setProgress(percent, statusText){
+    $("status").textContent = statusText;
+    $("progressBar").style.width = Math.min(100, Math.max(0, percent)) + "%";
+  }
+
+  function formatMbps(mbps){
+    if (!Number.isFinite(mbps)) return "0.0";
+    if (mbps < 100) return mbps.toFixed(1);
+    return Math.round(mbps).toString();
+  }
+
+  function updateSpeedArc(mbps){
+    const arc = $("speedArc");
+    if(!arc || !Number.isFinite(mbps) || mbps < 0){
+      if(arc) arc.style.strokeDashoffset = "326.7";
+      return;
+    }
+    const maxMbps = 1000;
+    const ratio = Math.min(1, Math.log10(1 + mbps) / Math.log10(1 + maxMbps));
+    const circumference = 326.7;
+    const offset = circumference * (1 - ratio);
+    arc.style.strokeDashoffset = offset.toFixed(1);
+    arc.style.stroke = ratio > 0.7 ? "#10b981" : ratio > 0.4 ? "#f59e0b" : "#ef4444";
+  }
+
+  function makeRandomBody(size){
+    const body = new Uint8Array(size);
+    const chunkSize = 65536;
+    for(let offset = 0; offset < size; offset += chunkSize){
+      crypto.getRandomValues(body.subarray(offset, Math.min(offset + chunkSize, size)));
+    }
+    return body;
+  }
+
+  function median(values){
+    const a = values.filter(Number.isFinite).slice().sort((x,y)=>x-y);
+    if(!a.length) return NaN;
+    const m = Math.floor(a.length / 2);
+    return a.length % 2 ? a[m] : (a[m-1] + a[m]) / 2;
+  }
+
+  function percentile(values, p){
+    const a = values.filter(Number.isFinite).slice().sort((x,y)=>x-y);
+    if(!a.length) return NaN;
+    const i = (a.length - 1) * p;
+    const lo = Math.floor(i), hi = Math.ceil(i);
+    return lo === hi ? a[lo] : a[lo] + (a[hi] - a[lo]) * (i - lo);
+  }
+
+  function createRateTracker(){
+    const buf = [];
+    return {
+      reset(){ buf.length = 0; },
+      push(totalBytes, nowMs, warmTime){
+        buf.push({t: nowMs, b: totalBytes});
+        const cutoff = nowMs - RATE_WINDOW_MS;
+        while(buf.length > 2 && buf[0].t < cutoff) buf.shift();
+        if(!warmTime || buf.length < 3) return NaN;
+        const samples = buf.filter(s => s.t >= warmTime);
+        if(samples.length < 3) return NaN;
+        const first = samples[0];
+        const last = samples[samples.length - 1];
+        const dbytes = last.b - first.b;
+        const dtime = (last.t - first.t) / 1000;
+        if(dtime <= 0.5 || dbytes <= 0) return NaN;
+        return (dbytes * 8) / dtime / 1e6;
+      }
+    };
+  }
+
+  function chooseStreams(estimatedMbps){
+    if(!Number.isFinite(estimatedMbps) || estimatedMbps <= 0) return MIN_STREAMS;
+    if(estimatedMbps < 100) return 4;
+    if(estimatedMbps < 300) return 5;
+    if(estimatedMbps < 700) return 6;
+    if(estimatedMbps < 1500) return 8;
+    if(estimatedMbps < 3000) return 10;
+    return MAX_STREAMS;
+  }
+
+  function stableEnough(samples){
+    if(samples.length < MIN_STABLE_SAMPLES) return false;
+    const recent = samples.slice(-MIN_STABLE_SAMPLES);
+    const med = median(recent);
+    if(!Number.isFinite(med) || med <= 0) return false;
+    const p10 = percentile(recent, 0.10);
+    const p90 = percentile(recent, 0.90);
+    return ((p90 - p10) / med) <= 0.18;
+  }
+
+  async function measurePing(){
+    const PING_SAMPLES = 8;
+    const urls = [];
+    const wall = [];
+
+    if(performance.clearResourceTimings) performance.clearResourceTimings();
+
+    for(let i = 0; i < PING_SAMPLES; i++){
+      const url = SPEED_HOST + "/__down?bytes=0&r=" + crypto.randomUUID();
+      urls.push(url);
+      const t0 = performance.now();
+
+      const response = await fetch(url, {
+        method: "GET",
+        cache: "no-store",
+        credentials: "omit"
+      });
+
+      if(!response.ok) throw new Error("Ping endpoint returned HTTP " + response.status);
+      await response.arrayBuffer();
+      wall.push(performance.now() - t0);
+
+      if(i < PING_SAMPLES - 1) await new Promise(r => setTimeout(r, 35));
+    }
+
+    await new Promise(r => setTimeout(r, 50));
+
+    const timed = urls.map(url => {
+      const entry = performance.getEntriesByName(url).pop();
+      if(!entry || !(entry.requestStart > 0) || !(entry.responseStart > entry.requestStart)) return null;
+
+      let ms = entry.responseStart - entry.requestStart;
+      const st = (entry.serverTiming || []).find(s => s.name === "cfRequestDuration");
+      if(st && Number.isFinite(st.duration) && st.duration >= 0 && st.duration < ms){
+        ms -= st.duration;
+      }
+      return ms;
+    });
+
+    const allTimed = timed.every(v => v !== null);
+    const samples = (allTimed ? timed : wall).slice(1).filter(v => Number.isFinite(v));
+
+    if(samples.length < 3) throw new Error("Not enough latency samples");
+
+    const ping = median(samples);
+
+    let diffSum = 0;
+    for(let i = 1; i < samples.length; i++){
+      diffSum += Math.abs(samples[i] - samples[i - 1]);
+    }
+
+    const jitter = samples.length > 1 ? diffSum / (samples.length - 1) : 0;
+
+    return { ping, jitter, samples };
+  }
+
+  async function measureDownload(){
+    const controller = new AbortController();
+    const started = performance.now();
+    let totalBytes = 0;
+    let warm = null;
+    let end = null;
+    let streamCount = MIN_STREAMS;
+    let workers = [];
+    let recentRates = [];
+    let completed = false;
+    let lastAdapt = started;
+
+    const rateTracker = createRateTracker();
+
+    const ticker = setInterval(() => {
+      const now = performance.now();
+      const elapsed = (now - started) / 1000;
+
+      if(!warm && elapsed >= WARMUP_SECONDS){
+        warm = {bytes: totalBytes, time: now};
+        rateTracker.reset();
+      }
+
+      const rate = rateTracker.push(totalBytes, now, warm ? warm.time : 0);
+
+      if(Number.isFinite(rate) && rate > 0){
+        recentRates.push(rate);
+        if(recentRates.length > 12) recentRates.shift();
+
+        const win = Math.min(DISPLAY_MEDIAN_SAMPLES, recentRates.length);
+        const displayRate = median(recentRates.slice(-win));
+
+        if(Number.isFinite(displayRate) && displayRate > 0){
+          $("speed").textContent = formatMbps(displayRate);
+          updateSpeedArc(displayRate);
+        }
+      }
+
+      if(
+        now - lastAdapt >= ADAPT_INTERVAL_MS &&
+        recentRates.length >= 2 &&
+        streamCount < MAX_STREAMS &&
+        !completed
+      ){
+        const estimate = median(recentRates.slice(-4));
+        const desired = chooseStreams(estimate);
+
+        if(desired > streamCount){
+          const oldCount = streamCount;
+          streamCount = Math.min(MAX_STREAMS, desired);
+
+          for(let i = oldCount; i < streamCount; i++){
+            workers.push(worker(i));
+          }
+        }
+
+        lastAdapt = now;
+      }
+
+      const phaseSeconds = (now - started) / 1000;
+      const stable = stableEnough(recentRates);
+      const enoughData = totalBytes >= TARGET_BYTES;
+      const hardCap = totalBytes >= MAX_TEST_BYTES;
+
+      if(
+        !completed &&
+        phaseSeconds >= MIN_PHASE_SECONDS &&
+        (
+          (stable && enoughData) ||
+          phaseSeconds >= MAX_PHASE_SECONDS ||
+          hardCap
+        )
+      ){
+        completed = true;
+        end = {bytes: totalBytes, time: now};
+        controller.abort();
+        return;
+      }
+
+      const progress = Math.min(
+        98,
+        18 + (phaseSeconds / MAX_PHASE_SECONDS) * 42
+      );
+
+      setProgress(
+        progress,
+        "Measuring Download... " + streamCount + " connections"
+      );
+    }, TICK_MS);
+
+    async function worker(streamIndex){
+      let requestIndex = 0;
+
+      while(!controller.signal.aborted){
+        const url = SPEED_HOST + "/__down?bytes=" + DOWN_BYTES +
+          "&stream=" + streamIndex +
+          "&request=" + (requestIndex++) +
+          "&r=" + crypto.randomUUID();
+
+        try{
+          const response = await fetch(url, {
+            method: "GET",
+            cache: "no-store",
+            credentials: "omit",
+            signal: controller.signal
+          });
+
+          if(!response.ok || !response.body){
+            throw new Error(
+              "Download endpoint unavailable (HTTP " + response.status + ")"
+            );
+          }
+
+          const reader = response.body.getReader();
+
+          while(true){
+            const {done, value} = await reader.read();
+
+            if(done) break;
+
+            totalBytes += value.byteLength;
+
+            if(totalBytes >= MAX_TEST_BYTES){
+              controller.abort();
+              break;
+            }
+          }
+        }catch(err){
+          if(controller.signal.aborted) return;
+          throw err;
+        }
+      }
+    }
+
+    try{
+      for(let i = 0; i < MIN_STREAMS; i++){
+        workers.push(worker(i));
+      }
+
+      await new Promise(resolve => {
+        const check = () => {
+          if(controller.signal.aborted){
+            resolve();
+          }else{
+            setTimeout(check, 25);
+          }
+        };
+        check();
+      });
+
+      await Promise.allSettled(workers);
+    }finally{
+      clearInterval(ticker);
+      controller.abort();
+    }
+
+    if(!end) end = {bytes: totalBytes, time: performance.now()};
+
+    const from = warm || {bytes: 0, time: started};
+    const bytes = end.bytes - from.bytes;
+    const seconds = (end.time - from.time) / 1000;
+
+    if(bytes <= 0 || seconds <= 0){
+      throw new Error("No download data received");
+    }
+
+    return (bytes * 8) / seconds / 1e6;
+  }
+
+  async function measureUpload(){
+    const started = performance.now();
+    let totalBytes = 0;
+    let warm = null;
+    let end = null;
+    let stopped = false;
+    let activeRequests = new Set();
+    let recentRates = [];
+    let streamCount = MIN_STREAMS;
+    let workers = [];
+    let lastAdapt = started;
+
+    const rateTracker = createRateTracker();
+
+    const body = makeRandomBody(UP_BYTES);
+
+    const ticker = setInterval(() => {
+      const now = performance.now();
+      const elapsed = (now - started) / 1000;
+
+      if(!warm && elapsed >= WARMUP_SECONDS){
+        warm = {bytes: totalBytes, time: now};
+        rateTracker.reset();
+      }
+
+      const rate = rateTracker.push(totalBytes, now, warm ? warm.time : 0);
+
+      if(Number.isFinite(rate) && rate > 0){
+        recentRates.push(rate);
+        if(recentRates.length > 12) recentRates.shift();
+
+        const win = Math.min(DISPLAY_MEDIAN_SAMPLES, recentRates.length);
+        const displayRate = median(recentRates.slice(-win));
+
+        if(Number.isFinite(displayRate) && displayRate > 0){
+          $("speed").textContent = formatMbps(displayRate);
+          updateSpeedArc(displayRate);
+          $("upVal").innerHTML = formatMbps(displayRate) + "<span>Mbps</span>";
+        }
+      }
+
+      if(
+        now - lastAdapt >= ADAPT_INTERVAL_MS &&
+        recentRates.length >= 2 &&
+        streamCount < MAX_STREAMS &&
+        !stopped
+      ){
+        const estimate = median(recentRates.slice(-4));
+        const desired = Math.min(
+          MAX_STREAMS,
+          Math.max(MIN_STREAMS, chooseStreams(estimate))
+        );
+
+        if(desired > streamCount){
+          const oldCount = streamCount;
+          streamCount = desired;
+
+          for(let i = oldCount; i < streamCount; i++){
+            workers.push(worker(i));
+          }
+        }
+
+        lastAdapt = now;
+      }
+
+      const phaseSeconds = (now - started) / 1000;
+      const stable = stableEnough(recentRates);
+      const enoughData = totalBytes >= TARGET_BYTES;
+      const hardCap = totalBytes >= MAX_TEST_BYTES;
+
+      if(
+        !end &&
+        phaseSeconds >= MIN_PHASE_SECONDS &&
+        (
+          (stable && enoughData) ||
+          phaseSeconds >= MAX_PHASE_SECONDS ||
+          hardCap
+        )
+      ){
+        end = {bytes: totalBytes, time: now};
+        stopped = true;
+        activeRequests.forEach(x => x.abort());
+        return;
+      }
+
+      setProgress(
+        58 + Math.min(40, (phaseSeconds / MAX_PHASE_SECONDS) * 40),
+        "Measuring Upload... " + streamCount + " connections"
+      );
+    }, TICK_MS);
+
+    function sendOne(streamIndex, requestIndex){
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        let lastLoaded = 0;
+
+        activeRequests.add(xhr);
+
+        xhr.open(
+          "POST",
+          SPEED_HOST + "/__up?bytes=" + UP_BYTES +
+          "&stream=" + streamIndex +
+          "&request=" + requestIndex +
+          "&r=" + crypto.randomUUID()
+        );
+
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/octet-stream"
+        );
+
+        xhr.upload.onprogress = (e) => {
+          if(e.lengthComputable){
+            const delta = e.loaded - lastLoaded;
+
+            if(delta > 0){
+              totalBytes += delta;
+              lastLoaded = e.loaded;
+            }
+          }
+        };
+
+        xhr.onload = () => {
+          if(lastLoaded < body.byteLength){
+            totalBytes += body.byteLength - lastLoaded;
+            lastLoaded = body.byteLength;
+          }
+
+          activeRequests.delete(xhr);
+
+          if(xhr.status >= 200 && xhr.status < 300){
+            resolve();
+          }else if(stopped){
+            resolve();
+          }else{
+            reject(
+              new Error(
+                "Upload endpoint returned HTTP " + xhr.status
+              )
+            );
+          }
+        };
+
+        xhr.onerror = () => {
+          activeRequests.delete(xhr);
+
+          if(stopped){
+            resolve();
+          }else{
+            reject(new Error("Upload request failed"));
+          }
+        };
+
+        xhr.onabort = () => {
+          activeRequests.delete(xhr);
+          resolve();
+        };
+
+        xhr.send(body);
+      });
+    }
+
+    async function worker(streamIndex){
+      let requestIndex = 0;
+
+      while(!stopped){
+        await sendOne(streamIndex, requestIndex++);
+      }
+    }
+
+    try{
+      for(let i = 0; i < MIN_STREAMS; i++){
+        workers.push(worker(i));
+      }
+
+      await new Promise(resolve => {
+        const check = () => {
+          if(stopped){
+            resolve();
+          }else{
+            setTimeout(check, 25);
+          }
+        };
+        check();
+      });
+
+      await Promise.allSettled(workers);
+    }finally{
+      clearInterval(ticker);
+      stopped = true;
+      activeRequests.forEach(x => x.abort());
+    }
+
+    if(!end) end = {bytes: totalBytes, time: performance.now()};
+
+    const from = warm || {bytes: 0, time: started};
+    const bytes = end.bytes - from.bytes;
+    const seconds = (end.time - from.time) / 1000;
+
+    if(bytes <= 0 || seconds <= 0){
+      throw new Error("No upload data accepted");
+    }
+
+    return (bytes * 8) / seconds / 1e6;
+  }
+
+  async function startSpeedTest(){
+    if(isRunning) return;
+    isRunning = true;
+    $("speedCaption").textContent = "Measuring...";
+    $("restartBtn").style.display = "none";
+    $("progressWrapper").style.display = "block";
+    $("speed").textContent = "0";
+    $("pingVal").innerHTML = "-<span>ms</span>";
+    $("jitterVal").innerHTML = "-<span>ms</span>";
+    $("downVal").innerHTML = "-<span>Mbps</span>";
+    $("upVal").innerHTML = "-<span>Mbps</span>";
+
+    let phase = "Ping";
+    try{
+      setProgress(8, "Measuring Ping...");
+      $("speedCaption").textContent = "Measuring ping...";
+      const latency = await measurePing();
+      $("pingVal").innerHTML = latency.ping.toFixed(latency.ping < 10 ? 1 : 0) + "<span>ms</span>";
+      $("jitterVal").innerHTML = latency.jitter.toFixed(1) + "<span>ms</span>";
+
+      phase = "Download";
+      setProgress(25, "Measuring Download...");
+      $("speedCaption").textContent = "Measuring download...";
+      const downloadMbps = await measureDownload();
+      $("speed").textContent = formatMbps(downloadMbps);
+      updateSpeedArc(downloadMbps);
+      $("downVal").innerHTML = formatMbps(downloadMbps) + "<span>Mbps</span>";
+
+      $("upVal").innerHTML = "-<span>Mbps</span>";
+      setProgress(62, "Measuring Upload...");
+
+      phase = "Upload";
+      $("speedCaption").textContent = "Measuring upload...";
+      const uploadMbps = await measureUpload();
+      $("upVal").innerHTML = formatMbps(uploadMbps) + "<span>Mbps</span>";
+
+      $("speed").textContent = formatMbps(downloadMbps);
+      updateSpeedArc(downloadMbps);
+      setProgress(100, "Test Complete");
+      $("speedCaption").textContent = "Download speed";
+
+      setTimeout(() => {
+        $("progressWrapper").style.display = "none";
+      }, 400);
+
+      $("restartBtn").style.display = "inline-block";
+
+    }catch(err){
+      console.error("Speed test error (" + phase + "):", err);
+      $("speed").textContent = "—";
+      $("pingVal").innerHTML = "—<span>ms</span>";
+      $("jitterVal").innerHTML = "—<span>ms</span>";
+      $("downVal").innerHTML = "—<span>Mbps</span>";
+      $("upVal").innerHTML = "—<span>Mbps</span>";
+      setProgress(100, "Measurement could not be completed");
+      $("speedCaption").textContent = "Measurement unavailable";
+      $("progressWrapper").style.display = "none";
+      $("restartBtn").style.display = "inline-block";
+    }finally{
+      isRunning = false;
+    }
+  }
+</script>
+
+</body>
+</html>
