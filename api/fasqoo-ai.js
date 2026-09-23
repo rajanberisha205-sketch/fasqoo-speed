@@ -92,10 +92,10 @@ ${language || "en"}
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "llama-3.1-8b-instant", // Absolut stabiles Standardmodell
+          model: "llama-3.1-8b-instant", // Gültiger und aktiver Modell-ID
           messages,
           temperature: 0.3,
-          max_tokens: 700
+          max_completion_tokens: 700
         })
       }
     );
