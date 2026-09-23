@@ -1,978 +1,1414 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark"> 
+<!doctype html>
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="theme-color" content="#0a0a0c" id="themeColorMeta">
-  <meta name="color-scheme" content="dark light">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Fasqoo Lite">
-  
-  <title>Fast & Free Internet Speed Test | Fasqoo Lite</title>
-  <meta name="description" content="Test your internet speed instantly with Fasqoo Lite. Accurate download, upload, ping, and jitter measurements powered by global edge CDNs.">
-  <meta name="keywords" content="internet speed test, broadband speed test, wifi speed test, check internet speed, fasqoo lite, ping test, Fasqoo">
-  <link rel="canonical" href="https://lite.fasqoo.com/">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lite.fasqoo.com/">
-  <meta property="og:title" content="Fast & Free Internet Speed Test | Fasqoo Lite">
-  <meta property="og:description" content="Check your download speed, upload speed, and latency instantly with our lightweight internet speed test.">
-  <meta property="og:image" content="https://lite.fasqoo.com/fasqoologo.png">
-  <link rel="preload" as="image" href="fasqoologo.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <link rel="preconnect" href="https://speed.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fasqoo Widget Builder</title>
 <style>
-:root[data-theme="dark"]{--bg:#0a0a0a;--surface:#111;--surface2:#1a1a1a;--bg-raised:#0f0f0f;--bg-card:#141414;--border:#222;--text:#e5e5e5;--text2:#888;--accent:#ef4444;--accent2:#dc2626;--good:#10b981;--warn:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;--pink:#ff90b3}
-:root[data-theme="light"]{--bg:#f8fafc;--surface:#fff;--surface2:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text2:#64748b;--accent:#dc2626;--accent2:#b91c1c;--good:#059669;--warn:#d97706;--blue:#2563eb;--purple:#7c3aed;--pink:#db2777}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:0 20px}
+:root{
+  --a:#ff6a2a;
+  --bg:#0a0a0f;--surface:#15151c;--surface-2:#1d1d26;
+  --border:#26262f;--border-hi:#34343f;
+  --text:#e8e8ee;--text-2:#9494a3;--text-3:#5a5a68;
+  --success:#22c55e;--warn:#eab308;
+  --radius:12px;--shadow:0 8px 24px rgba(0,0,0,.4);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+body.light{
+  --bg:#f4f4f6;--surface:#fff;--surface-2:#fafafb;
+  --border:#e5e5ea;--border-hi:#d4d4dc;
+  --text:#0e0e14;--text-2:#62626e;--text-3:#96969e;
+  --shadow:0 4px 16px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);font-size:15px;line-height:1.5;
+  color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;
+  transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+svg{display:block;flex-shrink:0}
 
-/* Nav */
-nav{border-bottom:1px solid var(--border);padding:14px 0}
-nav .container{display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
-.logo span{color:var(--accent)}
-.nav-links{display:flex;gap:20px;font-size:14px;align-items:center}
-.nav-links a{color:var(--text2);transition:color .2s}
-.nav-links a:hover{color:var(--text);text-decoration:none}
-.nav-right{display:flex;gap:10px;align-items:center}
-.theme-toggle{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center;transition:border-color .2s}
-.theme-toggle:hover{border-color:var(--accent)}
+/* Header */
+header{position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border)}
+.hi{display:flex;align-items:center;gap:16px;height:64px;
+  max-width:1200px;margin:0 auto;padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.brand-mark{width:28px;height:28px;border-radius:7px;background:var(--a);
+  display:grid;place-items:center;color:#fff}
+.brand-mark svg{width:15px;height:15px}
+.nav{display:flex;gap:24px;margin-left:24px}
+.nav a{font-size:14px;color:var(--text-2);transition:color .15s}
+.nav a:hover{color:var(--text)}
+.spacer{flex:1}
+.icon-btn,select.lang{height:36px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--text);padding:0 12px;
+  font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.icon-btn{width:36px;padding:0;display:grid;place-items:center}
+.icon-btn svg{width:16px;height:16px}
+.icon-btn:hover,select.lang:hover{border-color:var(--border-hi)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:44px;padding:0 20px;border-radius:10px;border:1px solid transparent;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--a);color:#fff}
+.btn-primary:hover{background:#f05a17}
+.btn-secondary{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn-secondary:hover{border-color:var(--border-hi)}
+.btn svg{width:16px;height:16px}
 
 /* Hero */
-.hero{text-align:center;padding:60px 0 40px}
-.hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero p{color:var(--text2);font-size:17px;max-width:540px;margin:0 auto 32px}
-.trust-row{display:flex;justify-content:center;gap:20px;margin-top:20px;font-size:13px;color:var(--text2);flex-wrap:wrap}
-.trust-row span{display:flex;align-items:center;gap:5px}
+.hero{padding:72px 0 48px;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--a);padding:6px 12px;
+  border:1px solid color-mix(in srgb,var(--a) 40%,transparent);
+  border-radius:100px;margin-bottom:20px;
+  background:color-mix(in srgb,var(--a) 8%,transparent)}
+.hero h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;
+  letter-spacing:-.03em;margin:0 0 16px;line-height:1.1}
+.hero p{font-size:17px;color:var(--text-2);max-width:620px;margin:0 auto 32px}
+.hero .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-/* Speedtest Card */
-.speedtest-section{margin:20px 0 50px}
-.speedtest-card{max-width:600px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-.speedometer{width:min(260px,70vw);aspect-ratio:1;margin:0 auto 16px;position:relative;display:grid;place-items:center}
-.speedometer svg{width:100%;height:100%;transform:rotate(-90deg)}
-.speedometer .bg{fill:none;stroke:var(--border);stroke-width:8}
-.speedometer .fg{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .8s ease,stroke .3s}
-.speed-value{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.speed-num{font-size:48px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
-.speed-unit{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;margin-top:4px}
-.speed-caption{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+/* Builder */
+.builder{display:grid;grid-template-columns:380px 1fr;gap:24px;
+  padding:32px 0 80px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;position:sticky;top:88px;
+  max-height:calc(100vh - 100px);overflow-y:auto}
+.panel-title{font-size:15px;font-weight:700;margin:0 0 4px}
+.panel-sub{font-size:13px;color:var(--text-2);margin:0 0 20px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--text-2);
+  margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.field input[type=text],.field select{width:100%;height:40px;background:var(--bg);
+  border:1px solid var(--border);border-radius:8px;padding:0 12px;
+  color:var(--text);font:inherit;font-size:14px;outline:none;transition:border-color .15s}
+.field input:focus,.field select:focus{border-color:var(--a)}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.chip{padding:10px;border:1px solid var(--border);background:var(--bg);
+  border-radius:8px;color:var(--text-2);font:inherit;font-size:13px;font-weight:600;
+  cursor:pointer;text-align:center;transition:all .15s}
+.chip:hover{border-color:var(--border-hi);color:var(--text)}
+.chip.active{background:var(--a);color:#fff;border-color:var(--a)}
+.range-row{display:flex;align-items:center;gap:10px}
+.range-row input[type=range]{flex:1;accent-color:var(--a);height:4px}
+.range-val{min-width:56px;text-align:right;font-size:12px;font-weight:700;
+  color:var(--text-2);font-family:var(--mono)}
+.color-row{display:flex;gap:8px}
+.color-row input[type=color]{width:44px;height:40px;padding:3px;
+  border:1px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer}
+.color-row input[type=text]{flex:1}
+.checkbox{display:flex;align-items:center;gap:10px;padding:8px 0;
+  font-size:13.5px;cursor:pointer;color:var(--text)}
+.checkbox input{width:16px;height:16px;accent-color:var(--a)}
+.panel-actions{margin-top:20px}
+.panel-actions .btn{width:100%}
 
-.status-text{text-align:center;font-size:11px;font-weight:800;color:var(--text2);letter-spacing:.8px;margin-bottom:10px}
-.progress-bar-wrapper{height:5px;border-radius:99px;background:rgba(127,127,127,.15);overflow:hidden;margin-bottom:18px}
-.progress-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#fb7185);border-radius:99px;transition:width .12s linear}
+/* Preview */
+.preview-wrap{display:flex;flex-direction:column;gap:20px;min-width:0}
+.card-surface{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden}
+.card-header{padding:16px 20px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.card-header h2{margin:0;font-size:15px;font-weight:700}
+.card-header p{margin:4px 0 0;font-size:13px;color:var(--text-2)}
+.device-switch{display:flex;gap:4px;background:var(--bg);padding:3px;border-radius:8px}
+.device-switch button{border:0;background:transparent;color:var(--text-2);
+  padding:6px 10px;border-radius:6px;font:inherit;font-size:12px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s}
+.device-switch button.active{background:var(--surface-2);color:var(--text)}
+.device-switch svg{width:13px;height:13px}
+.stage{padding:32px;display:flex;align-items:center;justify-content:center;
+  background:var(--bg);min-height:600px}
+.shell{width:100%;max-width:760px;overflow:hidden;background:var(--surface);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  transition:max-width .3s,border-radius .3s,box-shadow .3s}
 
-.details-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.detail-box{padding:14px 8px;border:1px solid var(--border);border-radius:14px;background:rgba(127,127,127,.04);text-align:center}
-.detail-label{font-size:9px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase}
-.detail-value{margin-top:6px;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
-.detail-value span{font-size:9px;color:var(--text2);font-weight:600;margin-left:2px}
+/* ============ FASQOO WIDGET ============ */
+.fw{font-family:var(--font);background:#0d0d12;color:#ececf2;
+  padding:20px;display:flex;flex-direction:column;gap:16px;font-size:14px}
+.fw.light{background:#fff;color:#0d0d12}
+.fw-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.fw-brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;min-width:0}
+.fw-brand span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fw-brand-icon{width:26px;height:26px;border-radius:6px;background:#ff6a2a;
+  color:#fff;display:grid;place-items:center;flex-shrink:0}
+.fw-brand-icon svg{width:14px;height:14px}
+.fw-status{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:#4ade80;flex-shrink:0}
+.fw-status .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 0 3px color-mix(in srgb,#22c55e 20%,transparent)}
+.fw.testing .fw-status{color:#ff9558}
+.fw.testing .fw-status .dot{background:#ff6a2a;animation:fw-pulse 1.2s infinite}
+@keyframes fw-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.fw.light .fw-status{color:#16a34a}
+.fw.light.testing .fw-status{color:#ea580c}
 
-.controls{text-align:center}
-.restart-btn{border:0;border-radius:999px;background:var(--text);color:var(--bg);padding:12px 28px;font-size:11px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;transition:transform .12s,opacity .12s}
-.restart-btn:hover{transform:translateY(-1px)}
-.restart-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.fw-main{display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:24px 16px;background:#14141b;border-radius:12px;border:1px solid #21212a}
+.fw.light .fw-main{background:#fafafb;border-color:#ececf1}
+.fw-label{font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:#6a6a78}
+.fw.light .fw-label{color:#8b8b9e}
+.fw-speed{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums;display:flex;align-items:baseline;
+  gap:8px;color:#ececf2}
+.fw.light .fw-speed{color:#0d0d12}
+.fw-speed .unit{font-size:16px;font-weight:500;letter-spacing:0;color:#6a6a78}
+.fw.light .fw-speed .unit{color:#8b8b9e}
+.fw-speed.done{color:#4ade80}
+.fw.light .fw-speed.done{color:#16a34a}
+.fw-start{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:42px;padding:0 24px;border-radius:100px;border:0;background:#ff6a2a;
+  color:#fff;font:inherit;font-weight:600;font-size:13.5px;cursor:pointer;
+  transition:all .15s;letter-spacing:.01em}
+.fw-start:hover:not(:disabled){background:#f05a17}
+.fw-start:disabled{opacity:.6;cursor:not-allowed}
+.fw-start svg{width:13px;height:13px}
 
-/* Features */
-.features{padding:60px 0;border-top:1px solid var(--border)}
-.features h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:8px}
-.features .subtitle{text-align:center;color:var(--text2);font-size:16px;margin-bottom:32px}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.feature-card{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;min-height:175px;transition:border-color .2s,transform .2s}
-.feature-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.feature-card .icon{font-size:26px;margin-bottom:12px}
-.feature-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
-.feature-card p{font-size:13px;color:var(--text2);flex:1}
+.fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fw-stat{padding:12px 10px;border-radius:10px;background:#14141b;
+  border:1px solid #21212a;text-align:center;min-width:0}
+.fw.light .fw-stat{background:#fafafb;border-color:#ececf1}
+.fw-stat-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;
+  line-height:1.1;color:#ececf2}
+.fw.light .fw-stat-value{color:#0d0d12}
+.fw-stat-status{font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;margin-top:3px;color:#6a6a78}
+.fw.light .fw-stat-status{color:#8b8b9e}
+.fw-stat-status.good,.fw-stat-status.stable,.fw-stat-status.done{color:#4ade80}
+.fw.light .fw-stat-status.good,.fw.light .fw-stat-status.stable,
+.fw.light .fw-stat-status.done{color:#16a34a}
+.fw-stat-label{font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:#4a4a58;margin-top:4px}
+.fw.light .fw-stat-label{color:#a0a0af}
 
-/* Widget Demo */
-.widget-demo{padding:60px 0;border-top:1px solid var(--border)}
-.widget-demo h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:8px}
-.widget-demo .subtitle{text-align:center;color:var(--text2);font-size:16px;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
-.widget-preview{max-width:700px;margin:0 auto;position:relative;min-height:340px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.widget-mock-header{padding:12px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.widget-mock-dots{display:flex;gap:6px}
-.widget-mock-dots div{width:12px;height:12px;border-radius:50%}
-.widget-mock-url{flex:1;text-align:center;font-size:12px;color:var(--text2)}
-.widget-mock-body{padding:30px 40px;min-height:220px}
-.widget-mock-line{height:14px;background:var(--border);border-radius:4px;margin-bottom:10px}
-.widget-badge-preview{position:absolute;bottom:20px;right:20px}
-.widget-badge-preview .badge{width:56px;height:56px;border-radius:50%;background:var(--surface);border:2px solid var(--good);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
-.widget-badge-preview .badge:hover{transform:scale(1.06)}
-.widget-badge-preview .badge span{font-size:16px;font-weight:800;color:var(--good)}
+.fw-info{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;
+  border:1px solid #21212a;background:#14141b}
+.fw.light .fw-info{background:#fafafb;border-color:#ececf1}
+.fw-info-row{display:flex;justify-content:space-between;gap:12px;
+  padding:10px 14px;font-size:12.5px;border-bottom:1px solid #21212a;
+  align-items:flex-start}
+.fw.light .fw-info-row{border-bottom-color:#ececf1}
+.fw-info-row:last-child{border-bottom:0}
+.fw-info-row .k{color:#6a6a78;font-weight:500;flex-shrink:0}
+.fw.light .fw-info-row .k{color:#8b8b9e}
+.fw-info-row .v{color:#ececf2;font-weight:600;text-align:right;
+  font-family:var(--mono);font-size:12px;word-break:break-word}
+.fw.light .fw-info-row .v{color:#0d0d12}
+.fw-info-row .v .sub{display:block;color:#6a6a78;font-weight:400;
+  font-size:11px;font-family:var(--font);margin-top:2px}
+.fw.light .fw-info-row .v .sub{color:#8b8b9e}
 
-/* Widget Code */
-.code-box{max-width:700px;margin:24px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;font-family:monospace;font-size:13px;color:var(--text2);overflow-x:auto}
-.code-box code{color:var(--text)}
-.code-box .tag{color:var(--accent)}
-.code-box .attr{color:var(--blue)}
-.code-box .val{color:var(--good)}
+.fw-foot{font-size:11px;color:#6a6a78;text-align:center;line-height:1.5;
+  padding-top:10px;border-top:1px solid #21212a}
+.fw.light .fw-foot{color:#8b8b9e;border-top-color:#ececf1}
+.fw-foot b{color:#ececf2;font-weight:600}
+.fw.light .fw-foot b{color:#0d0d12}
+.fw-foot a{color:#ff6a2a;font-weight:600}
+.fw-foot a:hover{text-decoration:underline}
 
-/* FAQ */
-.faq{padding:60px 0;border-top:1px solid var(--border)}
-.faq h2{text-align:center;font-size:28px;font-weight:700;margin-bottom:24px}
-.faq-grid{max-width:650px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.faq-item{padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
-.faq-item h4{font-size:15px;font-weight:600;margin-bottom:4px}
-.faq-item p{font-size:13px;color:var(--text2);line-height:1.5}
+/* Code block */
+.code-block-wrap{position:relative}
+.code-block{background:#0b0b10;border-radius:10px;padding:16px 16px 16px 16px;
+  font-family:var(--mono);font-size:12px;line-height:1.6;color:#d5d5e0;
+  overflow:auto;max-height:320px;white-space:pre;margin:0;
+  border:1px solid var(--border)}
+.copy-btn{position:absolute;top:12px;right:12px;height:32px;padding:0 12px;
+  border-radius:6px;border:1px solid #333;background:#1a1a22;color:#fff;
+  font:inherit;font-size:12px;font-weight:600;cursor:pointer;
+  transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.copy-btn:hover{background:var(--a);border-color:var(--a)}
+.copy-btn svg{width:12px;height:12px}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{padding:20px;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;
+  background:color-mix(in srgb,var(--a) 15%,transparent);color:var(--a);
+  font-size:11px;font-weight:700;margin-bottom:12px;
+  border:1px solid color-mix(in srgb,var(--a) 30%,transparent)}
+.step h3{margin:0 0 6px;font-size:14px;font-weight:700}
+.step p{margin:0;font-size:13px;color:var(--text-2);line-height:1.5}
+
+/* Sections */
+section.section{padding:72px 0;border-top:1px solid var(--border)}
+.section-head{text-align:center;max-width:640px;margin:0 auto 48px}
+.section-head h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1.15;margin:0 0 16px}
+.section-head p{font-size:16px;color:var(--text-2);margin:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feature{padding:24px;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;transition:border-color .15s}
+.feature:hover{border-color:var(--border-hi)}
+.feature-icon{width:40px;height:40px;border-radius:10px;
+  background:color-mix(in srgb,var(--a) 12%,transparent);color:var(--a);
+  display:grid;place-items:center;margin-bottom:16px}
+.feature-icon svg{width:20px;height:20px}
+.feature h3{margin:0 0 8px;font-size:15px;font-weight:700}
+.feature p{margin:0;font-size:14px;color:var(--text-2);line-height:1.55}
+
+/* CTA */
+.cta{text-align:center;padding:80px 0;border-top:1px solid var(--border)}
+.cta h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;
+  letter-spacing:-.03em;margin:0 0 16px;line-height:1.15}
+.cta p{font-size:16px;color:var(--text-2);max-width:560px;margin:0 auto 32px}
 
 /* Footer */
-footer{border-top:1px solid var(--border);padding:30px 0;text-align:center;font-size:13px;color:var(--text2)}
-footer a{margin:0 10px}
+footer{padding:48px 0 24px;border-top:1px solid var(--border);
+  font-size:13px;color:var(--text-2)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;
+  padding-bottom:32px}
+.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--text);margin:0 0 16px}
+.foot-col p{margin:0;font-size:13px;color:var(--text-2);line-height:1.6;max-width:300px}
+.foot-col a{display:block;padding:4px 0;color:var(--text-2);font-size:13px;
+  transition:color .15s}
+.foot-col a:hover{color:var(--text)}
+.foot-bottom{padding-top:24px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12px;color:var(--text-3)}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);
+  background:var(--surface-2);color:var(--text);padding:12px 18px;
+  border-radius:10px;border:1px solid var(--border-hi);font-size:13.5px;
+  font-weight:600;box-shadow:var(--shadow);z-index:2000;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;align-items:center;gap:8px}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{width:16px;height:16px;color:var(--success)}
 
 /* Responsive */
-@media(max-width:600px){
-  .details-grid{grid-template-columns:repeat(2,1fr)}
-  .nav-links{display:none}
-  .hero{padding:40px 0 30px}
-  .speedtest-card{padding:20px 16px}
-  .speed-num{font-size:38px}
+@media (max-width:900px){
+  .builder{grid-template-columns:1fr}
+  .panel{position:static;max-height:none}
+  .nav{display:none}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .grid-3,.foot-grid{grid-template-columns:1fr}
+  .device-switch{display:none}
+  .stage{padding:16px;min-height:480px}
+  .fw{padding:16px;gap:12px}
+  .fw-speed{font-size:40px}
+  .hero{padding:48px 0 32px}
+  .section{padding:56px 0}
+  .hi{padding:0 16px;gap:8px}
+  .container{padding:0 16px}
+  .nav a{font-size:13px}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="container">
-    <div class="logo">⚡ Fasqoo<span>.com</span></div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#widget">Widget</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://fasqoo.com">Main Site</a>
+<header>
+  <div class="hi">
+    <a class="brand" href="https://www.fasqoo.com/">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </span>
+      <span>Fasqoo</span>
+    </a>
+    <nav class="nav">
+      <a href="#builder" data-i18n="navCreate">Widget erstellen</a>
+      <a href="#features" data-i18n="navFeatures">Funktionen</a>
+      <a href="#how" data-i18n="navHow">Anleitung</a>
+      <a href="https://www.fasqoo.com/" target="_blank" rel="noopener" data-i18n="navSite">Fasqoo.com</a>
+    </nav>
+    <div class="spacer"></div>
+    <select id="lang" class="lang" aria-label="Language">
+      <option value="de">DE</option><option value="en">EN</option>
+      <option value="es">ES</option><option value="fr">FR</option>
+      <option value="it">IT</option><option value="pt">PT</option>
+      <option value="nl">NL</option><option value="tr">TR</option>
+      <option value="sq">SQ</option><option value="pl">PL</option>
+    </select>
+    <button class="icon-btn" id="theme" aria-label="Theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <section class="hero">
+    <span class="eyebrow" data-i18n="eyebrow">Fasqoo Widget Builder</span>
+    <h1 data-i18n="heroTitle">Fasqoo Speed Test Widget</h1>
+    <p data-i18n="heroText">Erstelle ein professionelles Speed-Test-Widget für deine Website. Echte Messung direkt im Browser, ohne Installation, mit Live-Ergebnissen.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#builder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span data-i18n="heroCta">Widget erstellen</span>
+      </a>
+      <a class="btn btn-secondary" href="https://lite.fasqoo.com/" target="_blank" rel="noopener">
+        <span data-i18n="heroTry">Fasqoo Lite testen</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
     </div>
-    <div class="nav-right">
-      <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      </button>
+  </section>
+
+  <section id="builder" class="builder">
+    <!-- Panel -->
+    <aside class="panel">
+      <h2 class="panel-title" data-i18n="panelTitle">Konfigurator</h2>
+      <p class="panel-sub" data-i18n="panelSub">Passe das Widget an. Änderungen werden live übernommen.</p>
+
+      <div class="field">
+        <label data-i18n="presetLabel">Layout-Vorlage</label>
+        <div class="chips" id="presets">
+          <button type="button" class="chip active" data-preset="clean" data-i18n="presetClean">Clean</button>
+          <button type="button" class="chip" data-preset="compact" data-i18n="presetCompact">Kompakt</button>
+          <button type="button" class="chip" data-preset="wide" data-i18n="presetWide">Breit</button>
+          <button type="button" class="chip" data-preset="minimal" data-i18n="presetMinimal">Minimal</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="titleLabel">Widget-Titel</label>
+        <input type="text" id="title" value="Fasqoo Internet Speed Test" maxlength="60">
+      </div>
+
+      <div class="field">
+        <label data-i18n="themeLabel">Design</label>
+        <select id="widgetTheme">
+          <option value="dark" data-i18n="themeDark">Dunkel</option>
+          <option value="light" data-i18n="themeLight">Hell</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label data-i18n="accentLabel">Akzentfarbe</label>
+        <div class="color-row">
+          <input type="color" id="color" value="#ff6a2a">
+          <input type="text" id="hex" value="#ff6a2a" maxlength="7">
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="widthLabel">Breite</label>
+        <div class="range-row">
+          <input type="range" id="width" min="320" max="1000" step="20" value="760">
+          <span class="range-val" id="wv">760px</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="radiusLabel">Eckenradius</label>
+        <div class="range-row">
+          <input type="range" id="radius" min="0" max="28" step="2" value="12">
+          <span class="range-val" id="rv">12px</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="shadowLabel">Schatten</label>
+        <div class="range-row">
+          <input type="range" id="shadowLevel" min="0" max="3" step="1" value="2">
+          <span class="range-val" id="shv">Mittel</span>
+        </div>
+      </div>
+
+      <label class="checkbox"><input type="checkbox" id="autoStart"><span data-i18n="autoStartLabel">Test automatisch starten</span></label>
+      <label class="checkbox"><input type="checkbox" id="showFooter" checked><span data-i18n="showFooterLabel">Footer-Hinweis anzeigen</span></label>
+
+      <div class="panel-actions">
+        <button type="button" class="btn btn-primary" id="copyTop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span data-i18n="copyBtn">Code kopieren</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Preview & Code -->
+    <div class="preview-wrap">
+      <div class="card-surface">
+        <div class="card-header">
+          <div>
+            <h2 data-i18n="previewTitle">Live-Vorschau</h2>
+            <p data-i18n="previewSub">Klicke auf „Test starten", um eine echte Messung durchzuführen.</p>
+          </div>
+          <div class="device-switch" id="deviceSwitch">
+            <button type="button" data-device="desktop" class="active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Desktop
+            </button>
+            <button type="button" data-device="tablet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              Tablet
+            </button>
+            <button type="button" data-device="mobile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              Mobile
+            </button>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="shell" id="shell"></div>
+        </div>
+      </div>
+
+      <div class="card-surface" id="codeCard">
+        <div class="card-header">
+          <div>
+            <h2 data-i18n="codeTitle">Einbettungscode</h2>
+            <p data-i18n="codeSub">Füge diesen Code in deine Website ein.</p>
+          </div>
+        </div>
+        <div style="padding:20px">
+          <div class="code-block-wrap">
+            <pre class="code-block" id="codeBlock"></pre>
+            <button type="button" class="copy-btn" id="copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="copyBtn">Kopieren</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps" id="how">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3 data-i18n="step1h">Anpassen</h3>
+          <p data-i18n="step1p">Wähle Layout, Farbe und Größe aus.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3 data-i18n="step2h">Kopieren</h3>
+          <p data-i18n="step2p">Ein Klick kopiert den fertigen Code.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3 data-i18n="step3h">Einbetten</h3>
+          <p data-i18n="step3p">Code auf deiner Website einfügen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <h2 data-i18n="featuresTitle">Funktionen</h2>
+      <p data-i18n="featuresSub">Alles, was ein modernes Speed-Test-Widget braucht.</p>
+    </div>
+    <div class="grid-3">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3 data-i18n="f1h">Echte Messung</h3>
+        <p data-i18n="f1p">Direkte Messung über Cloudflare-Edge-Server – keine Schätzwerte.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 data-i18n="f2h">Live-Ergebnisse</h3>
+        <p data-i18n="f2p">Latenz, Jitter, Download und Upload werden während des Tests aktualisiert.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3 data-i18n="f3h">Anpassbar</h3>
+        <p data-i18n="f3p">Farben, Größe, Design und Inhalt lassen sich flexibel einstellen.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <h3 data-i18n="f4h">Responsive</h3>
+        <p data-i18n="f4p">Funktioniert auf Desktop, Tablet und Smartphone.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3 data-i18n="f5h">Ein-Klick-Export</h3>
+        <p data-i18n="f5p">Ein Klick kopiert den gesamten Code in die Zwischenablage.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 data-i18n="f6h">Kein Tracking</h3>
+        <p data-i18n="f6p">Alles läuft direkt im Browser – keine Cookies, keine Speicherung.</p>
+      </div>
     </div>
   </div>
-</nav>
+</section>
 
-<main>
-<div class="wrap">
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>How fast is your<br><em>Internet connection</em>?</h1>
-      <p>Free browser-based speed test in seconds. No sign-up. Instant results with download, upload, ping and jitter.</p>
-      <div class="trust-row">
-        <span>⚡ Real measurement</span>
-        <span>🔒 No account required</span>
-        <span>🌍 Cloudflare Edge</span>
+<section class="section" id="technology" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-head">
+      <h2 data-i18n="techTitle">Verstehe deine Verbindung</h2>
+      <p data-i18n="techSub">Was die Messwerte bedeuten.</p>
+    </div>
+    <div class="grid-3">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3 data-i18n="t1h">Download</h3>
+        <p data-i18n="t1p">Empfangsgeschwindigkeit – wichtig für Streaming, Surfen und Updates.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h3 data-i18n="t2h">Upload</h3>
+        <p data-i18n="t2p">Sendegeschwindigkeit – wichtig für Backups, Uploads und Videoanrufe.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3 data-i18n="t3h">Ping & Latenz</h3>
+        <p data-i18n="t3p">Antwortzeit in Millisekunden – kritisch für Gaming und Live-Kommunikation.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 data-i18n="t4h">Jitter</h3>
+        <p data-i18n="t4p">Schwankung zwischen Latenzmessungen. Hohe Werte beeinträchtigen Sprache und Video.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3 data-i18n="t5h">Netzwerk-Info</h3>
+        <p data-i18n="t5p">IP-Adresse, Internetanbieter und Standort werden automatisch ermittelt.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+        <h3 data-i18n="t6h">Test-Server</h3>
+        <p data-i18n="t6p">Die Messung läuft über Cloudflare-Edge-Server mit niedriger Latenz.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Speedtest -->
-  <section class="speedtest-section">
-    <div class="container">
-      <div class="speedtest-card">
-        <div class="speedometer">
-          <svg viewBox="0 0 120 120">
-            <circle class="bg" cx="60" cy="60" r="52"></circle>
-            <circle class="fg" id="speedArc" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7" stroke="var(--accent)"></circle>
-          </svg>
-          <div class="speed-value">
-            <div class="speed-num" id="speed">0</div>
-            <div class="speed-unit">Mbps</div>
-            <div class="speed-caption" id="speedCaption">Starting test...</div>
-          </div>
-        </div>
-
-        <div class="status-text" id="status">Starting test...</div>
-        <div class="progress-bar-wrapper" id="progressWrapper"><div class="progress-bar-fill" id="progressBar"></div></div>
-
-        <div class="details-grid" id="detailsGrid">
-          <div class="detail-box"><div class="detail-label">Latency</div><div class="detail-value" id="pingVal">-<span>ms</span></div></div>
-          <div class="detail-box"><div class="detail-label">Jitter</div><div class="detail-value" id="jitterVal">-<span>ms</span></div></div>
-          <div class="detail-box"><div class="detail-label">Download</div><div class="detail-value" id="downVal">-<span>Mbps</span></div></div>
-          <div class="detail-box"><div class="detail-label">Upload</div><div class="detail-value" id="upVal">-<span>Mbps</span></div></div>
-        </div>
-
-        <div class="controls">
-          <button id="restartBtn" class="restart-btn" onclick="startSpeedTest()" style="display:none">Test Again</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2>What Fasqoo measures</h2>
-      <p class="subtitle">Real browser-based measurement through Cloudflare Edge. No invented fallback speed values are shown.</p>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="icon">⬇️</div>
-          <h3>Download Speed</h3>
-          <p>How fast data travels from the internet to your device. Measured with real HTTP streams against Cloudflare edge servers.</p>
-        </div>
-        <div class="feature-card">
-          <div class="icon">⬆️</div>
-          <h3>Upload Speed</h3>
-          <p>How fast your device can send data. Measured with real XHR uploads and progress tracking.</p>
-        </div>
-        <div class="feature-card">
-          <div class="icon">⏱️</div>
-          <h3>Latency &amp; Jitter</h3>
-          <p>Response time and its variation. Critical for gaming, video calls and real-time applications.</p>
-        </div>
-        <div class="feature-card">
-          <div class="icon">🌍</div>
-          <h3>Cloudflare Edge</h3>
-          <p>Measurement against Cloudflare's global network. No fake numbers, no simulated results.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Widget Demo -->
-  <section class="widget-demo" id="widget">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:32px">
-        <span style="display:inline-block;padding:4px 16px;background:var(--accent);color:#fff;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px">NEW: EMBEDDABLE WIDGET</span>
-        <h2>Show your speed on your website</h2>
-        <p class="subtitle">A small code snippet — and your visitors see their connection speed instantly. Built on the same real measurement engine.</p>
-      </div>
-
-      <!-- Live Widget Preview -->
-      <div class="widget-preview">
-        <div class="widget-mock-header">
-          <div class="widget-mock-dots">
-            <div style="background:#ef4444"></div>
-            <div style="background:#f59e0b"></div>
-            <div style="background:#10b981"></div>
-          </div>
-          <div class="widget-mock-url">www.example-website.com</div>
-        </div>
-        <div class="widget-mock-body">
-          <div class="widget-mock-line" style="width:60%"></div>
-          <div class="widget-mock-line" style="width:90%"></div>
-          <div class="widget-mock-line" style="width:75%"></div>
-          <div class="widget-mock-line" style="width:85%;margin-bottom:20px"></div>
-          <div style="height:40px;width:140px;background:var(--accent);border-radius:8px;opacity:0.3"></div>
-        </div>
-        <!-- Demo Badge -->
-        <div class="widget-badge-preview">
-          <div class="badge" onclick="document.getElementById('widgetPanel').classList.toggle('visible')">
-            <span>87</span>
-          </div>
-          <div id="widgetPanel" style="position:absolute;bottom:66px;right:0;width:280px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.4);display:none;overflow:hidden">
-            <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-              <div style="font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px">⚡ Fasqoo Speed</div>
-              <button style="width:24px;height:24px;border-radius:50%;border:none;background:var(--surface2);color:var(--text2);cursor:pointer;font-size:14px" onclick="document.getElementById('widgetPanel').style.display='none'">✕</button>
-            </div>
-            <div style="padding:14px 16px">
-              <div style="font-size:28px;font-weight:800;color:var(--good)">87 <span style="font-size:11px;color:var(--text2)">Mbps</span></div>
-              <div style="font-size:11px;color:var(--text2);margin-top:6px">Download · Ping 12 ms · Upload 45 Mbps</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Code -->
-      <div class="code-box">
-        <code><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://lite.fasqoo.com/widget.js"</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-accent</span>=<span class="val">"#ef4444"</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-theme</span>=<span class="val">"auto"</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">data-autostart</span>=<span class="val">"true"</span><span class="tag">&gt;&lt;/script&gt;</span></code>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <h2>Frequently asked questions</h2>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h4>Is the speed test really free?</h4>
-          <p>Yes, 100% free. No account, no credit card, no sign-up. Just open the page and the test starts automatically.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How accurate is the measurement?</h4>
-          <p>Fasqoo uses the same Cloudflare speed-test endpoints as many professional tools. The values are based on real transferred bytes and real elapsed time. No numbers are invented or simulated.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What is jitter?</h4>
-          <p>Jitter measures how much the network response time varies from one measurement to the next. Low jitter means a stable, consistent connection — important for gaming and video calls.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I embed the widget on my website?</h4>
-          <p>Yes. Add one script tag and the widget appears as a floating badge. You can choose the accent color, theme and position. See the code example above.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Why does the result vary between tests?</h4>
-          <p>Wi-Fi signal, device load, VPNs, ISP congestion and distance to the test edge can affect results. Running the test multiple times gives a clearer picture of your connection's normal range.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-</main>
+<section class="cta">
+  <div class="container">
+    <h2 data-i18n="ctaTitle">Bereit für dein eigenes Widget?</h2>
+    <p data-i18n="ctaText">Kostenlos, ohne Konto, mit Fasqoo-Kennzeichnung.</p>
+    <a class="btn btn-primary" href="#builder" data-i18n="ctaBtn">Jetzt erstellen</a>
+  </div>
+</section>
 
 <footer>
   <div class="container">
-    <div>© 2026 Fasqoo. All rights reserved.</div>
-    <div style="margin-top:8px">
-      <a href="https://www.fasqoo.com/privacy-policy.html">Privacy Policy</a>
-      <a href="https://www.fasqoo.com">Fasqoo.com</a>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Fasqoo</h4>
+        <p data-i18n="footerDesc">Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footerSpeed">Speed Tests</h4>
+        <a href="https://www.fasqoo.com/">Internet Speed Test</a>
+        <a href="https://lite.fasqoo.com/">Fasqoo Lite</a>
+        <a href="https://www.fasqoo.com/widget.html">Widget</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footerTools">Netzwerk-Tools</h4>
+        <a href="https://www.fasqoo.com/network-status.html">Network Status</a>
+        <a href="https://www.fasqoo.com/it-diagnose.html">IT Diagnose</a>
+        <a href="https://www.fasqoo.com/dns-test.html">DNS Test</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footerCompany">Unternehmen</h4>
+        <a href="https://www.fasqoo.com/about.html" data-i18n="navAbout">Über uns</a>
+        <a href="https://www.fasqoo.com/faq.html">FAQ</a>
+        <a href="https://www.fasqoo.com/privacy-policy.html" data-i18n="navPrivacy">Datenschutz</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Fasqoo</div>
+      <div data-i18n="footerNote">Messung über Cloudflare Edge · Fasqoo ist eine unabhängige Plattform.</div>
     </div>
   </div>
 </footer>
 
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span data-i18n="toastMsg">Kopiert</span>
+</div>
 
 <script>
-  const $ = id => document.getElementById(id);
-  let isRunning = false;
-  let deferredPrompt = null;
+/* ===================== ICONS (SVG) ===================== */
+const I = {
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>'
+};
 
-  const SPEED_HOST = "https://speed.cloudflare.com";
-  const DOWN_BYTES = 8 * 1024 * 1024;
-  const UP_BYTES = 4 * 1024 * 1024;
-  const MIN_STREAMS = 4;
-  const MAX_STREAMS = 12;
-  const MIN_PHASE_SECONDS = 3.2;
-  const MAX_PHASE_SECONDS = 6.0;
-  const WARMUP_SECONDS = 0.8;
-  const SAMPLE_MS = 100;
-  const ADAPT_INTERVAL_MS = 700;
-  const MIN_STABLE_SAMPLES = 5;
-  const TARGET_BYTES = 64 * 1024 * 1024;
-  const MAX_TEST_BYTES = 512 * 1024 * 1024;
-  const TICK_MS = SAMPLE_MS;
-  const RATE_WINDOW_MS = 1800;
-  const DISPLAY_MEDIAN_SAMPLES = 5;
+/* ===================== i18n ===================== */
+const I18N = {
+de:{navCreate:"Widget erstellen",navFeatures:"Funktionen",navHow:"Anleitung",navSite:"Fasqoo.com",navAbout:"Über uns",navPrivacy:"Datenschutz",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+heroText:"Erstelle ein professionelles Speed-Test-Widget für deine Website. Echte Messung direkt im Browser, ohne Installation, mit Live-Ergebnissen.",
+heroCta:"Widget erstellen",heroTry:"Fasqoo Lite testen",
+panelTitle:"Konfigurator",panelSub:"Passe das Widget an. Änderungen werden live übernommen.",
+presetLabel:"Layout-Vorlage",presetClean:"Clean",presetCompact:"Kompakt",presetWide:"Breit",presetMinimal:"Minimal",
+titleLabel:"Widget-Titel",themeLabel:"Design",themeDark:"Dunkel",themeLight:"Hell",accentLabel:"Akzentfarbe",
+widthLabel:"Breite",radiusLabel:"Eckenradius",shadowLabel:"Schatten",
+shadowNone:"Kein",shadowSoft:"Weich",shadowMed:"Mittel",shadowStrong:"Stark",
+autoStartLabel:"Test automatisch starten",showFooterLabel:"Footer-Hinweis anzeigen",copyBtn:"Kopieren",
+previewTitle:"Live-Vorschau",previewSub:"Klicke auf „Test starten“, um eine echte Messung durchzuführen.",
+codeTitle:"Einbettungscode",codeSub:"Füge diesen Code in deine Website ein.",
+step1h:"Anpassen",step1p:"Wähle Layout, Farbe und Größe aus.",
+step2h:"Kopieren",step2p:"Ein Klick kopiert den fertigen Code.",
+step3h:"Einbetten",step3p:"Code auf deiner Website einfügen.",
+featuresTitle:"Funktionen",featuresSub:"Alles, was ein modernes Speed-Test-Widget braucht.",
+f1h:"Echte Messung",f1p:"Direkte Messung über Cloudflare-Edge-Server – keine Schätzwerte.",
+f2h:"Live-Ergebnisse",f2p:"Latenz, Jitter, Download und Upload werden während des Tests aktualisiert.",
+f3h:"Anpassbar",f3p:"Farben, Größe, Design und Inhalt lassen sich flexibel einstellen.",
+f4h:"Responsive",f4p:"Funktioniert auf Desktop, Tablet und Smartphone.",
+f5h:"Ein-Klick-Export",f5p:"Ein Klick kopiert den gesamten Code in die Zwischenablage.",
+f6h:"Kein Tracking",f6p:"Alles läuft direkt im Browser – keine Cookies, keine Speicherung.",
+techTitle:"Verstehe deine Verbindung",techSub:"Was die Messwerte bedeuten.",
+t1h:"Download",t1p:"Empfangsgeschwindigkeit – wichtig für Streaming, Surfen und Updates.",
+t2h:"Upload",t2p:"Sendegeschwindigkeit – wichtig für Backups, Uploads und Videoanrufe.",
+t3h:"Ping & Latenz",t3p:"Antwortzeit in Millisekunden – kritisch für Gaming und Live-Kommunikation.",
+t4h:"Jitter",t4p:"Schwankung zwischen Latenzmessungen. Hohe Werte beeinträchtigen Sprache und Video.",
+t5h:"Netzwerk-Info",t5p:"IP-Adresse, Internetanbieter und Standort werden automatisch ermittelt.",
+t6h:"Test-Server",t6p:"Die Messung läuft über Cloudflare-Edge-Server mit niedriger Latenz.",
+ctaTitle:"Bereit für dein eigenes Widget?",ctaText:"Kostenlos, ohne Konto, mit Fasqoo-Kennzeichnung.",
+ctaBtn:"Jetzt erstellen",footerDesc:"Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",
+footerSpeed:"Speed Tests",footerTools:"Netzwerk-Tools",footerCompany:"Unternehmen",
+footerNote:"Messung über Cloudflare Edge · Fasqoo ist eine unabhängige Plattform.",toastMsg:"Kopiert"},
+en:{navCreate:"Create Widget",navFeatures:"Features",navHow:"Guide",navSite:"Fasqoo.com",navAbout:"About",navPrivacy:"Privacy",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+heroText:"Create a professional speed-test widget for your website. Real measurement in the browser, no installation, with live results.",
+heroCta:"Create your widget",heroTry:"Try Fasqoo Lite",
+panelTitle:"Configurator",panelSub:"Customize the widget. Changes apply live.",
+presetLabel:"Layout preset",presetClean:"Clean",presetCompact:"Compact",presetWide:"Wide",presetMinimal:"Minimal",
+titleLabel:"Widget title",themeLabel:"Theme",themeDark:"Dark",themeLight:"Light",accentLabel:"Accent color",
+widthLabel:"Width",radiusLabel:"Corner radius",shadowLabel:"Shadow",
+shadowNone:"None",shadowSoft:"Soft",shadowMed:"Medium",shadowStrong:"Strong",
+autoStartLabel:"Auto-start test",showFooterLabel:"Show footer note",copyBtn:"Copy",
+previewTitle:"Live preview",previewSub:"Click \"Start test\" to run a real measurement.",
+codeTitle:"Embed code",codeSub:"Paste this code into your website.",
+step1h:"Customize",step1p:"Choose layout, color and size.",
+step2h:"Copy",step2p:"One click copies the ready-to-use code.",
+step3h:"Embed",step3p:"Paste into your website.",
+featuresTitle:"Features",featuresSub:"Everything a modern speed-test widget needs.",
+f1h:"Real measurement",f1p:"Direct measurement via Cloudflare Edge — no estimates.",
+f2h:"Live results",f2p:"Latency, jitter, download and upload update during the test.",
+f3h:"Customizable",f3p:"Colors, size, theme and content are fully configurable.",
+f4h:"Responsive",f4p:"Works on desktop, tablet and smartphone.",
+f5h:"One-click export",f5p:"One click copies the complete code to your clipboard.",
+f6h:"No tracking",f6p:"Everything runs in the browser — no cookies, no storage.",
+techTitle:"Understand your connection",techSub:"What the measurements mean.",
+t1h:"Download",t1p:"Receive speed — important for streaming, browsing and updates.",
+t2h:"Upload",t2p:"Send speed — important for backups, uploads and video calls.",
+t3h:"Ping & latency",t3p:"Response time in milliseconds — critical for gaming and live communication.",
+t4h:"Jitter",t4p:"Variation between latency samples. High values hurt voice and video.",
+t5h:"Network info",t5p:"IP address, ISP and location are detected automatically.",
+t6h:"Test server",t6p:"Measurement runs via low-latency Cloudflare Edge servers.",
+ctaTitle:"Ready for your own widget?",ctaText:"Free, no account, with Fasqoo attribution.",
+ctaBtn:"Create now",footerDesc:"Independent, browser-based internet speed testing and network tools.",
+footerSpeed:"Speed Tests",footerTools:"Network Tools",footerCompany:"Company",
+footerNote:"Measurement via Cloudflare Edge · Fasqoo is an independent platform.",toastMsg:"Copied"},
+es:{navCreate:"Crear widget",navFeatures:"Funciones",navHow:"Guía",navSite:"Fasqoo.com",navAbout:"Acerca",navPrivacy:"Privacidad",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget de Fasqoo Speed Test",
+heroText:"Crea un widget de prueba de velocidad profesional para tu web. Medición real en el navegador, sin instalación, con resultados en vivo.",
+heroCta:"Crear widget",heroTry:"Probar Fasqoo Lite",
+panelTitle:"Configurador",panelSub:"Personaliza el widget. Los cambios se aplican en vivo.",
+presetLabel:"Plantilla",presetClean:"Limpio",presetCompact:"Compacto",presetWide:"Ancho",presetMinimal:"Mínimo",
+titleLabel:"Título",themeLabel:"Tema",themeDark:"Oscuro",themeLight:"Claro",accentLabel:"Color de acento",
+widthLabel:"Ancho",radiusLabel:"Radio",shadowLabel:"Sombra",
+shadowNone:"Ninguna",shadowSoft:"Suave",shadowMed:"Media",shadowStrong:"Fuerte",
+autoStartLabel:"Iniciar test automáticamente",showFooterLabel:"Mostrar nota al pie",copyBtn:"Copiar",
+previewTitle:"Vista previa",previewSub:"Haz clic en \"Iniciar test\" para una medición real.",
+codeTitle:"Código de inserción",codeSub:"Pega este código en tu web.",
+step1h:"Personaliza",step1p:"Elige diseño, color y tamaño.",
+step2h:"Copia",step2p:"Un clic copia el código listo.",
+step3h:"Inserta",step3p:"Pega en tu web.",
+featuresTitle:"Funciones",featuresSub:"Todo lo que un widget moderno necesita.",
+f1h:"Medición real",f1p:"Medición directa vía Cloudflare Edge — sin estimaciones.",
+f2h:"Resultados en vivo",f2p:"Latencia, jitter, descarga y subida se actualizan durante el test.",
+f3h:"Personalizable",f3p:"Colores, tamaño, tema y contenido configurables.",
+f4h:"Responsive",f4p:"Funciona en escritorio, tablet y móvil.",
+f5h:"Exportación en 1 clic",f5p:"Un clic copia el código completo.",
+f6h:"Sin tracking",f6p:"Todo funciona en el navegador — sin cookies.",
+techTitle:"Entiende tu conexión",techSub:"Qué significan las medidas.",
+t1h:"Descarga",t1p:"Velocidad de recepción — importante para streaming.",
+t2h:"Subida",t2p:"Velocidad de envío — importante para backups y videollamadas.",
+t3h:"Ping y latencia",t3p:"Tiempo de respuesta en ms — crítico para juegos.",
+t4h:"Jitter",t4p:"Variación entre muestras de latencia.",
+t5h:"Info de red",t5p:"IP, ISP y ubicación se detectan automáticamente.",
+t6h:"Servidor de test",t6p:"Medición vía servidores Cloudflare Edge.",
+ctaTitle:"¿Listo para tu widget?",ctaText:"Gratis, sin cuenta, con atribución Fasqoo.",
+ctaBtn:"Crear ahora",footerDesc:"Pruebas de velocidad y herramientas de red independientes.",
+footerSpeed:"Pruebas de velocidad",footerTools:"Herramientas de red",footerCompany:"Empresa",
+footerNote:"Medición vía Cloudflare Edge · Fasqoo es una plataforma independiente.",toastMsg:"Copiado"},
+fr:{navCreate:"Créer widget",navFeatures:"Fonctions",navHow:"Guide",navSite:"Fasqoo.com",navAbout:"À propos",navPrivacy:"Confidentialité",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+heroText:"Créez un widget de test de vitesse professionnel pour votre site. Mesure réelle dans le navigateur, sans installation, avec résultats en direct.",
+heroCta:"Créer le widget",heroTry:"Essayer Fasqoo Lite",
+panelTitle:"Configurateur",panelSub:"Personnalisez le widget. Modifications en direct.",
+presetLabel:"Modèle",presetClean:"Épuré",presetCompact:"Compact",presetWide:"Large",presetMinimal:"Minimal",
+titleLabel:"Titre",themeLabel:"Thème",themeDark:"Sombre",themeLight:"Clair",accentLabel:"Couleur d'accent",
+widthLabel:"Largeur",radiusLabel:"Rayon",shadowLabel:"Ombre",
+shadowNone:"Aucune",shadowSoft:"Douce",shadowMed:"Moyenne",shadowStrong:"Forte",
+autoStartLabel:"Démarrer le test automatiquement",showFooterLabel:"Afficher la note de bas",copyBtn:"Copier",
+previewTitle:"Aperçu",previewSub:"Cliquez sur « Démarrer » pour une mesure réelle.",
+codeTitle:"Code d'intégration",codeSub:"Collez ce code dans votre site.",
+step1h:"Personnaliser",step1p:"Choisissez mise en page, couleur et taille.",
+step2h:"Copier",step2p:"Un clic copie le code prêt.",
+step3h:"Intégrer",step3p:"Collez dans votre site.",
+featuresTitle:"Fonctions",featuresSub:"Tout ce dont un widget moderne a besoin.",
+f1h:"Mesure réelle",f1p:"Mesure directe via Cloudflare Edge — pas d'estimations.",
+f2h:"Résultats en direct",f2p:"Latence, jitter, débit descendant et montant mis à jour.",
+f3h:"Personnalisable",f3p:"Couleurs, taille, thème et contenu configurables.",
+f4h:"Responsive",f4p:"Fonctionne sur ordinateur, tablette et mobile.",
+f5h:"Export en 1 clic",f5p:"Un clic copie le code complet.",
+f6h:"Sans tracking",f6p:"Tout fonctionne dans le navigateur — sans cookies.",
+techTitle:"Comprendre votre connexion",techSub:"Signification des mesures.",
+t1h:"Débit descendant",t1p:"Vitesse de réception — essentiel pour le streaming.",
+t2h:"Débit montant",t2p:"Vitesse d'envoi — essentiel pour sauvegardes et visio.",
+t3h:"Ping et latence",t3p:"Temps de réponse en ms — crucial pour le jeu.",
+t4h:"Jitter",t4p:"Variation entre mesures de latence.",
+t5h:"Info réseau",t5p:"IP, FAI et localisation détectés automatiquement.",
+t6h:"Serveur de test",t6p:"Mesure via serveurs Cloudflare Edge.",
+ctaTitle:"Prêt pour votre widget ?",ctaText:"Gratuit, sans compte, attribution Fasqoo incluse.",
+ctaBtn:"Créer maintenant",footerDesc:"Tests de vitesse et outils réseau indépendants basés navigateur.",
+footerSpeed:"Tests de vitesse",footerTools:"Outils réseau",footerCompany:"Entreprise",
+footerNote:"Mesure via Cloudflare Edge · Fasqoo est une plateforme indépendante.",toastMsg:"Copié"},
+it:{navCreate:"Crea widget",navFeatures:"Funzioni",navHow:"Guida",navSite:"Fasqoo.com",navAbout:"Chi siamo",navPrivacy:"Privacy",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+heroText:"Crea un widget di speed test professionale per il tuo sito. Misurazione reale nel browser, senza installazione, con risultati live.",
+heroCta:"Crea widget",heroTry:"Prova Fasqoo Lite",
+panelTitle:"Configuratore",panelSub:"Personalizza il widget. Modifiche live.",
+presetLabel:"Modello",presetClean:"Pulito",presetCompact:"Compatto",presetWide:"Largo",presetMinimal:"Minimo",
+titleLabel:"Titolo",themeLabel:"Tema",themeDark:"Scuro",themeLight:"Chiaro",accentLabel:"Colore accento",
+widthLabel:"Larghezza",radiusLabel:"Raggio",shadowLabel:"Ombra",
+shadowNone:"Nessuna",shadowSoft:"Morbida",shadowMed:"Media",shadowStrong:"Forte",
+autoStartLabel:"Avvia test automaticamente",showFooterLabel:"Mostra nota a piè",copyBtn:"Copia",
+previewTitle:"Anteprima",previewSub:"Clicca su \"Avvia test\" per una misurazione reale.",
+codeTitle:"Codice di incorporamento",codeSub:"Incolla questo codice nel tuo sito.",
+step1h:"Personalizza",step1p:"Scegli layout, colore e dimensione.",
+step2h:"Copia",step2p:"Un clic copia il codice pronto.",
+step3h:"Incorpora",step3p:"Incolla nel tuo sito.",
+featuresTitle:"Funzioni",featuresSub:"Tutto ciò che serve a un widget moderno.",
+f1h:"Misurazione reale",f1p:"Misurazione diretta via Cloudflare Edge — niente stime.",
+f2h:"Risultati live",f2p:"Latenza, jitter, download e upload aggiornati durante il test.",
+f3h:"Personalizzabile",f3p:"Colori, dimensione, tema e contenuto configurabili.",
+f4h:"Responsive",f4p:"Funziona su desktop, tablet e smartphone.",
+f5h:"Export in 1 clic",f5p:"Un clic copia il codice completo.",
+f6h:"Nessun tracking",f6p:"Tutto funziona nel browser — senza cookie.",
+techTitle:"Comprendi la tua connessione",techSub:"Cosa significano le misurazioni.",
+t1h:"Download",t1p:"Velocità di ricezione — importante per streaming.",
+t2h:"Upload",t2p:"Velocità di invio — importante per backup e videochiamate.",
+t3h:"Ping e latenza",t3p:"Tempo di risposta in ms — critico per il gaming.",
+t4h:"Jitter",t4p:"Variazione tra misure di latenza.",
+t5h:"Info di rete",t5p:"IP, ISP e posizione rilevati automaticamente.",
+t6h:"Server di test",t6p:"Misurazione via server Cloudflare Edge.",
+ctaTitle:"Pronto per il tuo widget?",ctaText:"Gratis, senza account, con attribuzione Fasqoo.",
+ctaBtn:"Crea ora",footerDesc:"Test di velocità e strumenti di rete indipendenti.",
+footerSpeed:"Test di velocità",footerTools:"Strumenti di rete",footerCompany:"Azienda",
+footerNote:"Misurazione via Cloudflare Edge · Fasqoo è una piattaforma indipendente.",toastMsg:"Copiato"},
+pt:{navCreate:"Criar widget",navFeatures:"Recursos",navHow:"Guia",navSite:"Fasqoo.com",navAbout:"Sobre",navPrivacy:"Privacidade",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+heroText:"Crie um widget de teste de velocidade profissional. Medição real no navegador, sem instalação, com resultados ao vivo.",
+heroCta:"Criar widget",heroTry:"Testar Fasqoo Lite",
+panelTitle:"Configurador",panelSub:"Personalize o widget. Alterações ao vivo.",
+presetLabel:"Modelo",presetClean:"Limpo",presetCompact:"Compacto",presetWide:"Largo",presetMinimal:"Mínimo",
+titleLabel:"Título",themeLabel:"Tema",themeDark:"Escuro",themeLight:"Claro",accentLabel:"Cor de destaque",
+widthLabel:"Largura",radiusLabel:"Raio",shadowLabel:"Sombra",
+shadowNone:"Nenhuma",shadowSoft:"Suave",shadowMed:"Média",shadowStrong:"Forte",
+autoStartLabel:"Iniciar teste automaticamente",showFooterLabel:"Mostrar nota de rodapé",copyBtn:"Copiar",
+previewTitle:"Pré-visualização",previewSub:"Clique em \"Iniciar\" para uma medição real.",
+codeTitle:"Código de incorporação",codeSub:"Cole este código no seu site.",
+step1h:"Personalizar",step1p:"Escolha layout, cor e tamanho.",
+step2h:"Copiar",step2p:"Um clique copia o código pronto.",
+step3h:"Incorporar",step3p:"Cole no seu site.",
+featuresTitle:"Recursos",featuresSub:"Tudo que um widget moderno precisa.",
+f1h:"Medição real",f1p:"Medição direta via Cloudflare Edge — sem estimativas.",
+f2h:"Resultados ao vivo",f2p:"Latência, jitter, download e upload atualizados durante o teste.",
+f3h:"Personalizável",f3p:"Cores, tamanho, tema e conteúdo configuráveis.",
+f4h:"Responsivo",f4p:"Funciona em desktop, tablet e celular.",
+f5h:"Exportação em 1 clique",f5p:"Um clique copia o código completo.",
+f6h:"Sem rastreamento",f6p:"Tudo funciona no navegador — sem cookies.",
+techTitle:"Entenda sua conexão",techSub:"O que as medições significam.",
+t1h:"Download",t1p:"Velocidade de recebimento — importante para streaming.",
+t2h:"Upload",t2p:"Velocidade de envio — importante para backups e chamadas.",
+t3h:"Ping e latência",t3p:"Tempo de resposta em ms — crítico para jogos.",
+t4h:"Jitter",t4p:"Variação entre medidas de latência.",
+t5h:"Info de rede",t5p:"IP, provedor e localização detectados automaticamente.",
+t6h:"Servidor de teste",t6p:"Medição via servidores Cloudflare Edge.",
+ctaTitle:"Pronto para seu widget?",ctaText:"Grátis, sem conta, com atribuição Fasqoo.",
+ctaBtn:"Criar agora",footerDesc:"Testes de velocidade e ferramentas de rede independentes.",
+footerSpeed:"Testes de velocidade",footerTools:"Ferramentas de rede",footerCompany:"Empresa",
+footerNote:"Medição via Cloudflare Edge · Fasqoo é uma plataforma independente.",toastMsg:"Copiado"},
+nl:{navCreate:"Widget maken",navFeatures:"Functies",navHow:"Handleiding",navSite:"Fasqoo.com",navAbout:"Over ons",navPrivacy:"Privacy",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+heroText:"Maak een professionele speedtest-widget voor je website. Echte meting in de browser, zonder installatie, met live resultaten.",
+heroCta:"Widget maken",heroTry:"Fasqoo Lite proberen",
+panelTitle:"Configurator",panelSub:"Pas de widget aan. Wijzigingen direct toegepast.",
+presetLabel:"Layout",presetClean:"Schoon",presetCompact:"Compact",presetWide:"Breed",presetMinimal:"Minimaal",
+titleLabel:"Titel",themeLabel:"Thema",themeDark:"Donker",themeLight:"Licht",accentLabel:"Accentkleur",
+widthLabel:"Breedte",radiusLabel:"Hoekradius",shadowLabel:"Schaduw",
+shadowNone:"Geen",shadowSoft:"Zacht",shadowMed:"Middel",shadowStrong:"Sterk",
+autoStartLabel:"Test automatisch starten",showFooterLabel:"Footer-noot tonen",copyBtn:"Kopiëren",
+previewTitle:"Live voorbeeld",previewSub:"Klik op \"Test starten\" voor een echte meting.",
+codeTitle:"Insluitcode",codeSub:"Plak deze code in je website.",
+step1h:"Aanpassen",step1p:"Kies layout, kleur en grootte.",
+step2h:"Kopiëren",step2p:"Één klik kopieert de kant-en-klare code.",
+step3h:"Insluiten",step3p:"Plak in je website.",
+featuresTitle:"Functies",featuresSub:"Alles wat een moderne speedtest-widget nodig heeft.",
+f1h:"Echte meting",f1p:"Directe meting via Cloudflare Edge — geen schattingen.",
+f2h:"Live resultaten",f2p:"Latentie, jitter, download en upload tijdens de test.",
+f3h:"Aanpasbaar",f3p:"Kleuren, grootte, thema en inhoud instelbaar.",
+f4h:"Responsive",f4p:"Werkt op desktop, tablet en smartphone.",
+f5h:"1-klik export",f5p:"Eén klik kopieert de complete code.",
+f6h:"Geen tracking",f6p:"Alles werkt in de browser — geen cookies.",
+techTitle:"Begrijp je verbinding",techSub:"Wat de metingen betekenen.",
+t1h:"Download",t1p:"Ontvangstsnelheid — belangrijk voor streaming.",
+t2h:"Upload",t2p:"Verzendsnelheid — belangrijk voor backups en videogesprekken.",
+t3h:"Ping en latentie",t3p:"Reactietijd in ms — cruciaal voor gaming.",
+t4h:"Jitter",t4p:"Variatie tussen latentiemetingen.",
+t5h:"Netwerk-info",t5p:"IP, provider en locatie automatisch gedetecteerd.",
+t6h:"Testserver",t6p:"Meting via Cloudflare Edge-servers.",
+ctaTitle:"Klaar voor je widget?",ctaText:"Gratis, geen account, met Fasqoo-attributie.",
+ctaBtn:"Nu maken",footerDesc:"Onafhankelijke, browsergebaseerde internetsnelheidstests en netwerktools.",
+footerSpeed:"Snelheidstests",footerTools:"Netwerktools",footerCompany:"Bedrijf",
+footerNote:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform.",toastMsg:"Gekopieerd"},
+tr:{navCreate:"Widget oluştur",navFeatures:"Özellikler",navHow:"Kılavuz",navSite:"Fasqoo.com",navAbout:"Hakkında",navPrivacy:"Gizlilik",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+heroText:"Web siteniz için profesyonel bir hız testi widget'ı oluşturun. Tarayıcıda gerçek ölçüm, kurulum gerektirmez.",
+heroCta:"Widget oluştur",heroTry:"Fasqoo Lite'ı dene",
+panelTitle:"Yapılandırıcı",panelSub:"Widget'ı özelleştirin. Değişiklikler canlı uygulanır.",
+presetLabel:"Şablon",presetClean:"Temiz",presetCompact:"Kompakt",presetWide:"Geniş",presetMinimal:"Minimal",
+titleLabel:"Başlık",themeLabel:"Tema",themeDark:"Koyu",themeLight:"Açık",accentLabel:"Vurgu rengi",
+widthLabel:"Genişlik",radiusLabel:"Köşe yarıçapı",shadowLabel:"Gölge",
+shadowNone:"Yok",shadowSoft:"Yumuşak",shadowMed:"Orta",shadowStrong:"Güçlü",
+autoStartLabel:"Testi otomatik başlat",showFooterLabel:"Alt notu göster",copyBtn:"Kopyala",
+previewTitle:"Canlı önizleme",previewSub:"Gerçek ölçüm için \"Testi başlat\"a tıklayın.",
+codeTitle:"Yerleştirme kodu",codeSub:"Bu kodu sitenize yapıştırın.",
+step1h:"Özelleştir",step1p:"Düzen, renk ve boyutu seçin.",
+step2h:"Kopyala",step2p:"Bir tıklama hazır kodu kopyalar.",
+step3h:"Yerleştir",step3p:"Sitenize yapıştırın.",
+featuresTitle:"Özellikler",featuresSub:"Modern bir hız testi widget'ının ihtiyacı olan her şey.",
+f1h:"Gerçek ölçüm",f1p:"Cloudflare Edge üzerinden doğrudan ölçüm — tahmin yok.",
+f2h:"Canlı sonuçlar",f2p:"Gecikme, jitter, indirme ve yükleme test sırasında güncellenir.",
+f3h:"Özelleştirilebilir",f3p:"Renkler, boyut, tema ve içerik yapılandırılabilir.",
+f4h:"Duyarlı",f4p:"Masaüstü, tablet ve telefonda çalışır.",
+f5h:"Tek tıkla dışa aktar",f5p:"Bir tıklama tüm kodu kopyalar.",
+f6h:"Takip yok",f6p:"Her şey tarayıcıda çalışır — çerez yok.",
+techTitle:"Bağlantınızı anlayın",techSub:"Ölçümlerin anlamı.",
+t1h:"İndirme",t1p:"Alım hızı — yayın için önemli.",
+t2h:"Yükleme",t2p:"Gönderme hızı — yedekleme ve görüşmeler için önemli.",
+t3h:"Ping ve gecikme",t3p:"ms cinsinden yanıt süresi — oyun için kritik.",
+t4h:"Jitter",t4p:"Gecikme örnekleri arasındaki değişim.",
+t5h:"Ağ bilgisi",t5p:"IP, ISS ve konum otomatik algılanır.",
+t6h:"Test sunucusu",t6p:"Cloudflare Edge sunucuları üzerinden ölçüm.",
+ctaTitle:"Widget'ınıza hazır mısınız?",ctaText:"Ücretsiz, hesap gerekmez, Fasqoo atfı ile.",
+ctaBtn:"Şimdi oluştur",footerDesc:"Bağımsız, tarayıcı tabanlı internet hız testi ve ağ araçları.",
+footerSpeed:"Hız testleri",footerTools:"Ağ araçları",footerCompany:"Şirket",
+footerNote:"Ölçüm Cloudflare Edge üzerinden · Fasqoo bağımsız bir platformdur.",toastMsg:"Kopyalandı"},
+sq:{navCreate:"Krijo widget",navFeatures:"Funksione",navHow:"Udhëzues",navSite:"Fasqoo.com",navAbout:"Rreth",navPrivacy:"Privatësi",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget-i Fasqoo Speed Test",
+heroText:"Krijo një widget profesional për test shpejtësie për faqen tënde. Matje reale në shfletues, pa instalim, me rezultate live.",
+heroCta:"Krijo widget",heroTry:"Provo Fasqoo Lite",
+panelTitle:"Konfiguruesi",panelSub:"Përshtat widget-in. Ndryshimet aplikohen live.",
+presetLabel:"Modeli",presetClean:"Pastër",presetCompact:"Kompakt",presetWide:"Gjerë",presetMinimal:"Minimal",
+titleLabel:"Titulli",themeLabel:"Tema",themeDark:"Errët",themeLight:"Ndritshme",accentLabel:"Ngjyra kryesore",
+widthLabel:"Gjerësia",radiusLabel:"Rrezja",shadowLabel:"Hija",
+shadowNone:"Asnjë",shadowSoft:"Butë",shadowMed:"Mesatare",shadowStrong:"Fortë",
+autoStartLabel:"Nis testin automatikisht",showFooterLabel:"Shfaq shënimin e fundit",copyBtn:"Kopjo",
+previewTitle:"Parapamje live",previewSub:"Kliko \"Nis testin\" për një matje reale.",
+codeTitle:"Kodi i integrimit",codeSub:"Ngjit këtë kod në faqen tënde.",
+step1h:"Përshtat",step1p:"Zgjidh planin, ngjyrën dhe madhësinë.",
+step2h:"Kopjo",step2p:"Një klik kopjon kodin e gatshëm.",
+step3h:"Integro",step3p:"Ngjit në faqen tënde.",
+featuresTitle:"Funksionet",featuresSub:"Gjithçka që një widget modern ka nevojë.",
+f1h:"Matje reale",f1p:"Matje e drejtpërdrejtë përmes Cloudflare Edge — pa vlerësime.",
+f2h:"Rezultate live",f2p:"Latenca, jitter, shkarkimi dhe ngarkimi përditësohen gjatë testit.",
+f3h:"I personalizueshëm",f3p:"Ngjyrat, madhësia, tema dhe përmbajtja konfigurohen.",
+f4h:"Responsive",f4p:"Punon në desktop, tablet dhe telefon.",
+f5h:"Eksport me 1 klik",f5p:"Një klik kopjon të gjithë kodin.",
+f6h:"Pa gjurmim",f6p:"Gjithçka funksionon në shfletues — pa cookies.",
+techTitle:"Kupto lidhjen tënde",techSub:"Çfarë nënkuptojnë matjet.",
+t1h:"Shkarkim",t1p:"Shpejtësia e marrjes — e rëndësishme për streaming.",
+t2h:"Ngarkim",t2p:"Shpejtësia e dërgimit — e rëndësishme për backup.",
+t3h:"Ping dhe latenca",t3p:"Koha e përgjigjes në ms — kritike për lojëra.",
+t4h:"Jitter",t4p:"Variacioni midis matjeve të latencës.",
+t5h:"Info rrjeti",t5p:"IP, ISP dhe vendndodhja zbulohen automatikisht.",
+t6h:"Serveri i testit",t6p:"Matje përmes serverëve Cloudflare Edge.",
+ctaTitle:"Gati për widget-in tënd?",ctaText:"Falas, pa llogari, me atribuim Fasqoo.",
+ctaBtn:"Krijo tani",footerDesc:"Teste të pavarura shpejtësie dhe mjete rrjeti në shfletues.",
+footerSpeed:"Teste shpejtësie",footerTools:"Mjete rrjeti",footerCompany:"Kompania",
+footerNote:"Matje përmes Cloudflare Edge · Fasqoo është platformë e pavarur.",toastMsg:"U kopjua"},
+pl:{navCreate:"Utwórz widget",navFeatures:"Funkcje",navHow:"Poradnik",navSite:"Fasqoo.com",navAbout:"O nas",navPrivacy:"Prywatność",
+eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+heroText:"Stwórz profesjonalny widget testu prędkości dla swojej strony. Prawdziwy pomiar w przeglądarce, bez instalacji, z wynikami na żywo.",
+heroCta:"Utwórz widget",heroTry:"Wypróbuj Fasqoo Lite",
+panelTitle:"Konfigurator",panelSub:"Dostosuj widget. Zmiany stosowane na żywo.",
+presetLabel:"Szablon",presetClean:"Czysty",presetCompact:"Kompaktowy",presetWide:"Szeroki",presetMinimal:"Minimalny",
+titleLabel:"Tytuł",themeLabel:"Motyw",themeDark:"Ciemny",themeLight:"Jasny",accentLabel:"Kolor akcentu",
+widthLabel:"Szerokość",radiusLabel:"Promień",shadowLabel:"Cień",
+shadowNone:"Brak",shadowSoft:"Miękki",shadowMed:"Średni",shadowStrong:"Mocny",
+autoStartLabel:"Auto-start testu",showFooterLabel:"Pokaż stopkę",copyBtn:"Kopiuj",
+previewTitle:"Podgląd na żywo",previewSub:"Kliknij \"Start testu\", aby wykonać prawdziwy pomiar.",
+codeTitle:"Kod do osadzenia",codeSub:"Wklej ten kod na swojej stronie.",
+step1h:"Dostosuj",step1p:"Wybierz układ, kolor i rozmiar.",
+step2h:"Kopiuj",step2p:"Jedno kliknięcie kopiuje gotowy kod.",
+step3h:"Osadź",step3p:"Wklej na swojej stronie.",
+featuresTitle:"Funkcje",featuresSub:"Wszystko, czego potrzebuje nowoczesny widget.",
+f1h:"Prawdziwy pomiar",f1p:"Bezpośredni pomiar przez Cloudflare Edge — bez szacunków.",
+f2h:"Wyniki na żywo",f2p:"Opóźnienie, jitter, pobieranie i wysyłanie aktualizowane podczas testu.",
+f3h:"Konfigurowalny",f3p:"Kolory, rozmiar, motyw i treść konfigurowalne.",
+f4h:"Responsywny",f4p:"Działa na komputerze, tablecie i telefonie.",
+f5h:"Eksport 1 klikiem",f5p:"Jedno kliknięcie kopiuje cały kod.",
+f6h:"Bez śledzenia",f6p:"Wszystko działa w przeglądarce — bez cookies.",
+techTitle:"Zrozum swoje połączenie",techSub:"Co oznaczają pomiary.",
+t1h:"Pobieranie",t1p:"Prędkość odbioru — ważna dla streamingu.",
+t2h:"Wysyłanie",t2p:"Prędkość wysyłania — ważna dla backupów i wideorozmów.",
+t3h:"Ping i opóźnienie",t3p:"Czas odpowiedzi w ms — krytyczny dla gier.",
+t4h:"Jitter",t4p:"Zmienność pomiarów opóźnienia.",
+t5h:"Info o sieci",t5p:"IP, dostawca i lokalizacja wykrywane automatycznie.",
+t6h:"Serwer testowy",t6p:"Pomiar przez serwery Cloudflare Edge.",
+ctaTitle:"Gotowy na swój widget?",ctaText:"Za darmo, bez konta, z atrybucją Fasqoo.",
+ctaBtn:"Utwórz teraz",footerDesc:"Niezależne, przeglądarkowe testy prędkości i narzędzia sieciowe.",
+footerSpeed:"Testy prędkości",footerTools:"Narzędzia sieciowe",footerCompany:"Firma",
+footerNote:"Pomiar przez Cloudflare Edge · Fasqoo to niezależna platforma.",toastMsg:"Skopiowano"}
+};
 
-  function toggleTheme(){
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    html.setAttribute("data-theme", newTheme);
-    $("themeColorMeta").setAttribute("content", newTheme === "dark" ? "#0a0a0c" : "#f8fafc");
-    localStorage.setItem("fasqoo_theme", newTheme);
-    updateThemeIcon(newTheme);
-  }
+/* ===================== WIDGET THEME COLORS ===================== */
+const WIDGET_DARK = { bg:'#0d0d12', card:'#14141b', border:'#21212a',
+  text:'#ececf2', textDim:'#6a6a78', textDim2:'#4a4a58', footBorder:'#21212a' };
+const WIDGET_LIGHT = { bg:'#ffffff', card:'#fafafb', border:'#ececf1',
+  text:'#0d0d12', textDim:'#8b8b9e', textDim2:'#a0a0af', footBorder:'#ececf1' };
 
-  function updateThemeIcon(theme){
-    const icon = $("themeIcon");
-    if(theme === "light"){
-      icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-    } else {
-      icon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+/* ===================== WIDGET HTML BUILDER ===================== */
+function widgetHTML(){
+  const dark = state.widgetTheme !== 'light';
+  const th = dark ? '' : ' light';
+  const t = esc(state.title);
+  const accent = state.color;
+  const showFoot = state.showFooter;
+  const footHTML = showFoot ? `
+    <div class="fw-foot">
+      Real measurement, not an estimate. <b>Fasqoo</b> measures your connection directly in the browser. · <a href="https://www.fasqoo.com/" target="_blank" rel="noopener">Fasqoo.com</a>
+    </div>` : '';
+  return `<div class="fw${th}" style="--fwa:${accent}">
+    <div class="fw-head">
+      <div class="fw-brand">
+        <span class="fw-brand-icon">${I.bolt}</span>
+        <span>${t}</span>
+      </div>
+      <span class="fw-status"><span class="dot"></span><span data-fw="status">Live</span></span>
+    </div>
+    <div class="fw-main">
+      <div class="fw-label">Live throughput</div>
+      <div class="fw-speed">
+        <span class="fw-speed-num" data-fw="speed">0.0</span>
+        <span class="unit">Mbps</span>
+      </div>
+      <button type="button" class="fw-start" data-fw="btn">${I.play}<span data-fw="btn-label">Start Test</span></button>
+    </div>
+    <div class="fw-stats">
+      <div class="fw-stat">
+        <div class="fw-stat-value" data-fw="latency">--</div>
+        <div class="fw-stat-status" data-fw="latency-status">Waiting</div>
+        <div class="fw-stat-label">Latency</div>
+      </div>
+      <div class="fw-stat">
+        <div class="fw-stat-value" data-fw="jitter">--</div>
+        <div class="fw-stat-status" data-fw="jitter-status">Waiting</div>
+        <div class="fw-stat-label">Jitter</div>
+      </div>
+      <div class="fw-stat">
+        <div class="fw-stat-value" data-fw="upload">--</div>
+        <div class="fw-stat-status" data-fw="upload-status">Waiting</div>
+        <div class="fw-stat-label">Upload</div>
+      </div>
+    </div>
+    <div class="fw-info">
+      <div class="fw-info-row"><span class="k">IP Address</span><span class="v" data-fw="ip">—</span></div>
+      <div class="fw-info-row"><span class="k">Network</span><span class="v"><span data-fw="isp">—</span><span class="sub" data-fw="location"></span></span></div>
+      <div class="fw-info-row"><span class="k">Test server</span><span class="v">Cloudflare Edge<span class="sub" data-fw="asn"></span></span></div>
+    </div>
+    ${footHTML}
+  </div>`;
+}
+
+/* ===================== REAL MEASUREMENT (self-contained) ===================== */
+async function fasqooMeasure(cb){
+  const log = (k,v)=>{ try{cb(k,v)}catch(e){} };
+
+  // 1) IP / ISP / Location
+  try {
+    const r = await fetch('https://ipwho.is/', { cache:'no-store' });
+    const d = await r.json();
+    if (d && d.success !== false) {
+      log('ip', d.ip || '—');
+      const conn = d.connection || {};
+      log('isp', conn.isp || conn.org || '—');
+      log('location', [d.city, d.country].filter(Boolean).join(', '));
+      log('asn', conn.asn ? ('ASN ' + conn.asn) : '');
     }
-  }
+  } catch(e){ log('ip','—'); }
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("fasqoo_theme") || "dark";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    updateThemeIcon(savedTheme);
-
-    setTimeout(() => {
-      if (!isRunning) startSpeedTest();
-    }, 800);
-  });
-
-  function setProgress(percent, statusText){
-    $("status").textContent = statusText;
-    $("progressBar").style.width = Math.min(100, Math.max(0, percent)) + "%";
-  }
-
-  function formatMbps(mbps){
-    if (!Number.isFinite(mbps)) return "0.0";
-    if (mbps < 100) return mbps.toFixed(1);
-    return Math.round(mbps).toString();
-  }
-
-  function updateSpeedArc(mbps){
-    const arc = $("speedArc");
-    if(!arc || !Number.isFinite(mbps) || mbps < 0){
-      if(arc) arc.style.strokeDashoffset = "326.7";
-      return;
-    }
-    const maxMbps = 1000;
-    const ratio = Math.min(1, Math.log10(1 + mbps) / Math.log10(1 + maxMbps));
-    const circumference = 326.7;
-    const offset = circumference * (1 - ratio);
-    arc.style.strokeDashoffset = offset.toFixed(1);
-    arc.style.stroke = ratio > 0.7 ? "#10b981" : ratio > 0.4 ? "#f59e0b" : "#ef4444";
-  }
-
-  function makeRandomBody(size){
-    const body = new Uint8Array(size);
-    const chunkSize = 65536;
-    for(let offset = 0; offset < size; offset += chunkSize){
-      crypto.getRandomValues(body.subarray(offset, Math.min(offset + chunkSize, size)));
-    }
-    return body;
-  }
-
-  function median(values){
-    const a = values.filter(Number.isFinite).slice().sort((x,y)=>x-y);
-    if(!a.length) return NaN;
-    const m = Math.floor(a.length / 2);
-    return a.length % 2 ? a[m] : (a[m-1] + a[m]) / 2;
-  }
-
-  function percentile(values, p){
-    const a = values.filter(Number.isFinite).slice().sort((x,y)=>x-y);
-    if(!a.length) return NaN;
-    const i = (a.length - 1) * p;
-    const lo = Math.floor(i), hi = Math.ceil(i);
-    return lo === hi ? a[lo] : a[lo] + (a[hi] - a[lo]) * (i - lo);
-  }
-
-  function createRateTracker(){
-    const buf = [];
-    return {
-      reset(){ buf.length = 0; },
-      push(totalBytes, nowMs, warmTime){
-        buf.push({t: nowMs, b: totalBytes});
-        const cutoff = nowMs - RATE_WINDOW_MS;
-        while(buf.length > 2 && buf[0].t < cutoff) buf.shift();
-        if(!warmTime || buf.length < 3) return NaN;
-        const samples = buf.filter(s => s.t >= warmTime);
-        if(samples.length < 3) return NaN;
-        const first = samples[0];
-        const last = samples[samples.length - 1];
-        const dbytes = last.b - first.b;
-        const dtime = (last.t - first.t) / 1000;
-        if(dtime <= 0.5 || dbytes <= 0) return NaN;
-        return (dbytes * 8) / dtime / 1e6;
-      }
-    };
-  }
-
-  function chooseStreams(estimatedMbps){
-    if(!Number.isFinite(estimatedMbps) || estimatedMbps <= 0) return MIN_STREAMS;
-    if(estimatedMbps < 100) return 4;
-    if(estimatedMbps < 300) return 5;
-    if(estimatedMbps < 700) return 6;
-    if(estimatedMbps < 1500) return 8;
-    if(estimatedMbps < 3000) return 10;
-    return MAX_STREAMS;
-  }
-
-  function stableEnough(samples){
-    if(samples.length < MIN_STABLE_SAMPLES) return false;
-    const recent = samples.slice(-MIN_STABLE_SAMPLES);
-    const med = median(recent);
-    if(!Number.isFinite(med) || med <= 0) return false;
-    const p10 = percentile(recent, 0.10);
-    const p90 = percentile(recent, 0.90);
-    return ((p90 - p10) / med) <= 0.18;
-  }
-
-  async function measurePing(){
-    const PING_SAMPLES = 8;
-    const urls = [];
-    const wall = [];
-
-    if(performance.clearResourceTimings) performance.clearResourceTimings();
-
-    for(let i = 0; i < PING_SAMPLES; i++){
-      const url = SPEED_HOST + "/__down?bytes=0&r=" + crypto.randomUUID();
-      urls.push(url);
+  // 2) Latency: 5 samples
+  const pings = [];
+  for (let i = 0; i < 5; i++) {
+    try {
       const t0 = performance.now();
+      await fetch('https://speed.cloudflare.com/__down?bytes=1&r=' + Math.random(), { cache:'no-store' });
+      pings.push(performance.now() - t0);
+    } catch(e){}
+  }
+  if (pings.length) {
+    const avg = pings.reduce((a,b)=>a+b,0) / pings.length;
+    const jit = Math.sqrt(pings.reduce((a,b)=>a+Math.pow(b-avg,2),0) / pings.length);
+    log('latency', avg);
+    log('jitter', jit);
+  }
 
-      const response = await fetch(url, {
-        method: "GET",
-        cache: "no-store",
-        credentials: "omit"
-      });
-
-      if(!response.ok) throw new Error("Ping endpoint returned HTTP " + response.status);
-      await response.arrayBuffer();
-      wall.push(performance.now() - t0);
-
-      if(i < PING_SAMPLES - 1) await new Promise(r => setTimeout(r, 35));
-    }
-
-    await new Promise(r => setTimeout(r, 50));
-
-    const timed = urls.map(url => {
-      const entry = performance.getEntriesByName(url).pop();
-      if(!entry || !(entry.requestStart > 0) || !(entry.responseStart > entry.requestStart)) return null;
-
-      let ms = entry.responseStart - entry.requestStart;
-      const st = (entry.serverTiming || []).find(s => s.name === "cfRequestDuration");
-      if(st && Number.isFinite(st.duration) && st.duration >= 0 && st.duration < ms){
-        ms -= st.duration;
+  // 3) Download with streaming
+  try {
+    const bytes = 25000000;
+    const t0 = performance.now();
+    const r = await fetch('https://speed.cloudflare.com/__down?bytes=' + bytes + '&r=' + Math.random(), { cache:'no-store' });
+    if (r.body && r.body.getReader) {
+      const reader = r.body.getReader();
+      let received = 0, last = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        received += value.length;
+        const now = performance.now();
+        if (now - last > 200) {
+          const el = (now - t0) / 1000;
+          if (el > 0.4) log('download', received * 8 / el / 1e6);
+          last = now;
+        }
       }
-      return ms;
+      const el = (performance.now() - t0) / 1000;
+      log('download', received * 8 / el / 1e6);
+    } else {
+      const blob = await r.blob();
+      const el = (performance.now() - t0) / 1000;
+      log('download', blob.size * 8 / el / 1e6);
+    }
+  } catch(e){ log('download', 0); }
+
+  // 4) Upload
+  try {
+    const bytes = 3000000;
+    const payload = new Uint8Array(bytes);
+    const t0 = performance.now();
+    await fetch('https://speed.cloudflare.com/__up?r=' + Math.random(), {
+      method:'POST', body: payload, cache:'no-store'
     });
+    const el = (performance.now() - t0) / 1000;
+    log('upload', bytes * 8 / el / 1e6);
+  } catch(e){ log('upload', 0); }
+}
 
-    const allTimed = timed.every(v => v !== null);
-    const samples = (allTimed ? timed : wall).slice(1).filter(v => Number.isFinite(v));
+/* ===================== WIDGET INIT ===================== */
+function initWidget(root){
+  const btn = root.querySelector('[data-fw="btn"]');
+  const btnLabel = root.querySelector('[data-fw="btn-label"]');
+  const statusEl = root.querySelector('[data-fw="status"]');
+  const speedWrap = root.querySelector('.fw-speed');
+  const speedNum = root.querySelector('[data-fw="speed"]');
+  const set = (k,v)=>{ const el = root.querySelector('[data-fw="'+k+'"]'); if (el) el.textContent = v; };
+  const setStatus = (k,v,cls)=>{ const el = root.querySelector('[data-fw="'+k+'"]'); if (el){ el.textContent = v; el.className = 'fw-stat-status' + (cls ? ' '+cls : ''); } };
+  let running = false;
 
-    if(samples.length < 3) throw new Error("Not enough latency samples");
-
-    const ping = median(samples);
-
-    let diffSum = 0;
-    for(let i = 1; i < samples.length; i++){
-      diffSum += Math.abs(samples[i] - samples[i - 1]);
-    }
-
-    const jitter = samples.length > 1 ? diffSum / (samples.length - 1) : 0;
-
-    return { ping, jitter, samples };
+  function resetUI(){
+    root.classList.add('testing');
+    if (statusEl) statusEl.textContent = 'Testing';
+    speedWrap && speedWrap.classList.remove('done');
+    set('speed','0.0');
+    set('latency','--'); setStatus('latency-status','Waiting');
+    set('jitter','--'); setStatus('jitter-status','Waiting');
+    set('upload','--'); setStatus('upload-status','Waiting');
+    set('ip','—'); set('isp','—'); set('location',''); set('asn','');
+    if (btnLabel) btnLabel.textContent = 'Testing…';
+    if (btn) btn.disabled = true;
   }
 
-  async function measureDownload(){
-    const controller = new AbortController();
-    const started = performance.now();
-    let totalBytes = 0;
-    let warm = null;
-    let end = null;
-    let streamCount = MIN_STREAMS;
-    let workers = [];
-    let recentRates = [];
-    let completed = false;
-    let lastAdapt = started;
-
-    const rateTracker = createRateTracker();
-
-    const ticker = setInterval(() => {
-      const now = performance.now();
-      const elapsed = (now - started) / 1000;
-
-      if(!warm && elapsed >= WARMUP_SECONDS){
-        warm = {bytes: totalBytes, time: now};
-        rateTracker.reset();
-      }
-
-      const rate = rateTracker.push(totalBytes, now, warm ? warm.time : 0);
-
-      if(Number.isFinite(rate) && rate > 0){
-        recentRates.push(rate);
-        if(recentRates.length > 12) recentRates.shift();
-
-        const win = Math.min(DISPLAY_MEDIAN_SAMPLES, recentRates.length);
-        const displayRate = median(recentRates.slice(-win));
-
-        if(Number.isFinite(displayRate) && displayRate > 0){
-          $("speed").textContent = formatMbps(displayRate);
-          updateSpeedArc(displayRate);
+  async function run(){
+    if (running) return;
+    running = true;
+    resetUI();
+    try {
+      await fasqooMeasure((k,v)=>{
+        if (k === 'ip') set('ip', v);
+        else if (k === 'isp') set('isp', v);
+        else if (k === 'location') set('location', v);
+        else if (k === 'asn') set('asn', v);
+        else if (k === 'latency'){
+          set('latency', Math.round(v) + 'ms');
+          setStatus('latency-status', v < 60 ? 'Good' : v < 120 ? 'Fair' : 'Slow', 'good');
         }
-      }
-
-      if(
-        now - lastAdapt >= ADAPT_INTERVAL_MS &&
-        recentRates.length >= 2 &&
-        streamCount < MAX_STREAMS &&
-        !completed
-      ){
-        const estimate = median(recentRates.slice(-4));
-        const desired = chooseStreams(estimate);
-
-        if(desired > streamCount){
-          const oldCount = streamCount;
-          streamCount = Math.min(MAX_STREAMS, desired);
-
-          for(let i = oldCount; i < streamCount; i++){
-            workers.push(worker(i));
-          }
+        else if (k === 'jitter'){
+          set('jitter', v.toFixed(1) + 'ms');
+          setStatus('jitter-status', v < 5 ? 'Stable' : v < 15 ? 'Fair' : 'Unstable', 'stable');
         }
-
-        lastAdapt = now;
-      }
-
-      const phaseSeconds = (now - started) / 1000;
-      const stable = stableEnough(recentRates);
-      const enoughData = totalBytes >= TARGET_BYTES;
-      const hardCap = totalBytes >= MAX_TEST_BYTES;
-
-      if(
-        !completed &&
-        phaseSeconds >= MIN_PHASE_SECONDS &&
-        (
-          (stable && enoughData) ||
-          phaseSeconds >= MAX_PHASE_SECONDS ||
-          hardCap
-        )
-      ){
-        completed = true;
-        end = {bytes: totalBytes, time: now};
-        controller.abort();
-        return;
-      }
-
-      const progress = Math.min(
-        98,
-        18 + (phaseSeconds / MAX_PHASE_SECONDS) * 42
-      );
-
-      setProgress(
-        progress,
-        "Measuring Download... " + streamCount + " connections"
-      );
-    }, TICK_MS);
-
-    async function worker(streamIndex){
-      let requestIndex = 0;
-
-      while(!controller.signal.aborted){
-        const url = SPEED_HOST + "/__down?bytes=" + DOWN_BYTES +
-          "&stream=" + streamIndex +
-          "&request=" + (requestIndex++) +
-          "&r=" + crypto.randomUUID();
-
-        try{
-          const response = await fetch(url, {
-            method: "GET",
-            cache: "no-store",
-            credentials: "omit",
-            signal: controller.signal
-          });
-
-          if(!response.ok || !response.body){
-            throw new Error(
-              "Download endpoint unavailable (HTTP " + response.status + ")"
-            );
-          }
-
-          const reader = response.body.getReader();
-
-          while(true){
-            const {done, value} = await reader.read();
-
-            if(done) break;
-
-            totalBytes += value.byteLength;
-
-            if(totalBytes >= MAX_TEST_BYTES){
-              controller.abort();
-              break;
-            }
-          }
-        }catch(err){
-          if(controller.signal.aborted) return;
-          throw err;
+        else if (k === 'download'){
+          if (speedNum) speedNum.textContent = v.toFixed(1);
         }
-      }
-    }
-
-    try{
-      for(let i = 0; i < MIN_STREAMS; i++){
-        workers.push(worker(i));
-      }
-
-      await new Promise(resolve => {
-        const check = () => {
-          if(controller.signal.aborted){
-            resolve();
-          }else{
-            setTimeout(check, 25);
-          }
-        };
-        check();
+        else if (k === 'upload'){
+          set('upload', v.toFixed(1));
+          setStatus('upload-status', 'Done', 'done');
+        }
       });
-
-      await Promise.allSettled(workers);
-    }finally{
-      clearInterval(ticker);
-      controller.abort();
+    } catch(e){ console.error(e); }
+    // Finished
+    root.classList.remove('testing');
+    if (statusEl) statusEl.textContent = 'Live';
+    speedWrap && speedWrap.classList.add('done');
+    if (btnLabel) btnLabel.textContent = 'Retest';
+    if (btn){
+      btn.disabled = false;
+      btn.innerHTML = I.refresh + '<span data-fw="btn-label">Retest</span>';
     }
-
-    if(!end) end = {bytes: totalBytes, time: performance.now()};
-
-    const from = warm || {bytes: 0, time: started};
-    const bytes = end.bytes - from.bytes;
-    const seconds = (end.time - from.time) / 1000;
-
-    if(bytes <= 0 || seconds <= 0){
-      throw new Error("No download data received");
-    }
-
-    return (bytes * 8) / seconds / 1e6;
+    running = false;
   }
 
-  async function measureUpload(){
-    const started = performance.now();
-    let totalBytes = 0;
-    let warm = null;
-    let end = null;
-    let stopped = false;
-    let activeRequests = new Set();
-    let recentRates = [];
-    let streamCount = MIN_STREAMS;
-    let workers = [];
-    let lastAdapt = started;
+  if (btn) btn.addEventListener('click', run);
+  if (state.autoStart) setTimeout(run, 400);
+}
 
-    const rateTracker = createRateTracker();
+/* ===================== STATE ===================== */
+const state = {
+  preset:'clean',
+  title:'Fasqoo Internet Speed Test',
+  widgetTheme:'dark',
+  color:'#ff6a2a',
+  width:760,
+  radius:12,
+  shadowLevel:2,
+  showFooter:true,
+  autoStart:false,
+  device:'desktop'
+};
 
-    const body = makeRandomBody(UP_BYTES);
+const PRESETS = {
+  clean:   { width:760, radius:12, shadowLevel:2 },
+  compact: { width:560, radius:10, shadowLevel:1 },
+  wide:    { width:920, radius:14, shadowLevel:2 },
+  minimal: { width:640, radius:8,  shadowLevel:0 }
+};
 
-    const ticker = setInterval(() => {
-      const now = performance.now();
-      const elapsed = (now - started) / 1000;
+const SHADOWS = ['none',
+  '0 4px 12px rgba(0,0,0,.15)',
+  '0 8px 24px rgba(0,0,0,.35)',
+  '0 16px 48px rgba(0,0,0,.5)'];
 
-      if(!warm && elapsed >= WARMUP_SECONDS){
-        warm = {bytes: totalBytes, time: now};
-        rateTracker.reset();
-      }
+const $ = id => document.getElementById(id);
+const esc = v => String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-      const rate = rateTracker.push(totalBytes, now, warm ? warm.time : 0);
+/* ===================== THEME ===================== */
+function setBodyTheme(light){
+  document.body.classList.toggle('light', light);
+  $('theme').innerHTML = light
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  localStorage.setItem('fasqoo-theme', light ? 'light' : 'dark');
+}
+setBodyTheme(localStorage.getItem('fasqoo-theme') === 'light');
+$('theme').onclick = () => setBodyTheme(!document.body.classList.contains('light'));
 
-      if(Number.isFinite(rate) && rate > 0){
-        recentRates.push(rate);
-        if(recentRates.length > 12) recentRates.shift();
+/* ===================== i18n ===================== */
+function applyLang(lang){
+  const dict = I18N[lang] || I18N.en;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if (dict[k] !== undefined) el.textContent = dict[k];
+  });
+  localStorage.setItem('fasqoo-lang', lang);
+}
+$('lang').addEventListener('change', e => applyLang(e.target.value));
+const savedLang = localStorage.getItem('fasqoo-lang') || 'de';
+$('lang').value = savedLang;
+applyLang(savedLang);
 
-        const win = Math.min(DISPLAY_MEDIAN_SAMPLES, recentRates.length);
-        const displayRate = median(recentRates.slice(-win));
+/* ===================== WIDGET RENDER ===================== */
+function renderWidget(){
+  const shell = $('shell');
+  const maxW = state.device === 'mobile' ? Math.min(state.width, 400)
+             : state.device === 'tablet' ? Math.min(state.width, 640)
+             : state.width;
+  shell.style.maxWidth = maxW + 'px';
+  shell.style.borderRadius = state.radius + 'px';
+  shell.style.boxShadow = SHADOWS[state.shadowLevel];
 
-        if(Number.isFinite(displayRate) && displayRate > 0){
-          $("speed").textContent = formatMbps(displayRate);
-          updateSpeedArc(displayRate);
-          $("upVal").innerHTML = formatMbps(displayRate) + "<span>Mbps</span>";
-        }
-      }
+  shell.innerHTML = widgetHTML();
+  const root = shell.querySelector('.fw');
+  initWidget(root);
 
-      if(
-        now - lastAdapt >= ADAPT_INTERVAL_MS &&
-        recentRates.length >= 2 &&
-        streamCount < MAX_STREAMS &&
-        !stopped
-      ){
-        const estimate = median(recentRates.slice(-4));
-        const desired = Math.min(
-          MAX_STREAMS,
-          Math.max(MIN_STREAMS, chooseStreams(estimate))
-        );
+  buildCode(maxW);
+}
 
-        if(desired > streamCount){
-          const oldCount = streamCount;
-          streamCount = desired;
+/* ===================== EXPORT CODE ===================== */
+function buildCode(maxW){
+  const shadow = SHADOWS[state.shadowLevel];
+  const accent = state.color;
+  const radius = state.radius;
+  const title = esc(state.title);
+  const theme = state.widgetTheme;
 
-          for(let i = oldCount; i < streamCount; i++){
-            workers.push(worker(i));
-          }
-        }
+  // Serialize widget HTML
+  const widgetEl = document.createElement('div');
+  widgetEl.innerHTML = widgetHTML();
+  const widgetHtmlStr = widgetEl.firstElementChild.outerHTML;
 
-        lastAdapt = now;
-      }
+  // Widget CSS (compact) - uses CSS variables for accent
+  const css = `.fasqoo-widget{--fwa:${accent};display:block;width:100%;max-width:${maxW}px;margin:0 auto;border-radius:${radius}px;overflow:hidden;box-shadow:${shadow};font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,sans-serif}
+.fasqoo-widget .fw{background:#0d0d12;color:#ececf2;padding:20px;display:flex;flex-direction:column;gap:16px;font-size:14px;line-height:1.5}
+.fasqoo-widget .fw.light{background:#fff;color:#0d0d12}
+.fasqoo-widget .fw-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.fasqoo-widget .fw-brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;min-width:0}
+.fasqoo-widget .fw-brand span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fasqoo-widget .fw-brand-icon{width:26px;height:26px;border-radius:6px;background:var(--fwa);color:#fff;display:grid;place-items:center;flex-shrink:0}
+.fasqoo-widget .fw-brand-icon svg{width:14px;height:14px}
+.fasqoo-widget .fw-status{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4ade80;flex-shrink:0}
+.fasqoo-widget .fw-status .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.fasqoo-widget .fw.testing .fw-status{color:#ff9558}
+.fasqoo-widget .fw.testing .fw-status .dot{background:var(--fwa);animation:fw-pulse 1.2s infinite}
+@keyframes fw-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.fasqoo-widget .fw.light .fw-status{color:#16a34a}
+.fasqoo-widget .fw.light.testing .fw-status{color:#ea580c}
+.fasqoo-widget .fw-main{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 16px;background:#14141b;border-radius:12px;border:1px solid #21212a}
+.fasqoo-widget .fw.light .fw-main{background:#fafafb;border-color:#ececf1}
+.fasqoo-widget .fw-label{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6a6a78}
+.fasqoo-widget .fw.light .fw-label{color:#8b8b9e}
+.fasqoo-widget .fw-speed{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px;color:#ececf2}
+.fasqoo-widget .fw.light .fw-speed{color:#0d0d12}
+.fasqoo-widget .fw-speed .unit{font-size:16px;font-weight:500;letter-spacing:0;color:#6a6a78}
+.fasqoo-widget .fw.light .fw-speed .unit{color:#8b8b9e}
+.fasqoo-widget .fw-speed.done{color:#4ade80}
+.fasqoo-widget .fw.light .fw-speed.done{color:#16a34a}
+.fasqoo-widget .fw-start{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 24px;border-radius:100px;border:0;background:var(--fwa);color:#fff;font:inherit;font-weight:600;font-size:13.5px;cursor:pointer;transition:all .15s;letter-spacing:.01em}
+.fasqoo-widget .fw-start:hover:not(:disabled){filter:brightness(.92)}
+.fasqoo-widget .fw-start:disabled{opacity:.6;cursor:not-allowed}
+.fasqoo-widget .fw-start svg{width:13px;height:13px}
+.fasqoo-widget .fw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fasqoo-widget .fw-stat{padding:12px 10px;border-radius:10px;background:#14141b;border:1px solid #21212a;text-align:center;min-width:0}
+.fasqoo-widget .fw.light .fw-stat{background:#fafafb;border-color:#ececf1}
+.fasqoo-widget .fw-stat-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1;color:#ececf2}
+.fasqoo-widget .fw.light .fw-stat-value{color:#0d0d12}
+.fasqoo-widget .fw-stat-status{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:3px;color:#6a6a78}
+.fasqoo-widget .fw.light .fw-stat-status{color:#8b8b9e}
+.fasqoo-widget .fw-stat-status.good,.fasqoo-widget .fw-stat-status.stable,.fasqoo-widget .fw-stat-status.done{color:#4ade80}
+.fasqoo-widget .fw.light .fw-stat-status.good,.fasqoo-widget .fw.light .fw-stat-status.stable,.fasqoo-widget .fw.light .fw-stat-status.done{color:#16a34a}
+.fasqoo-widget .fw-stat-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a4a58;margin-top:4px}
+.fasqoo-widget .fw.light .fw-stat-label{color:#a0a0af}
+.fasqoo-widget .fw-info{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid #21212a;background:#14141b}
+.fasqoo-widget .fw.light .fw-info{background:#fafafb;border-color:#ececf1}
+.fasqoo-widget .fw-info-row{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;font-size:12.5px;border-bottom:1px solid #21212a;align-items:flex-start}
+.fasqoo-widget .fw.light .fw-info-row{border-bottom-color:#ececf1}
+.fasqoo-widget .fw-info-row:last-child{border-bottom:0}
+.fasqoo-widget .fw-info-row .k{color:#6a6a78;font-weight:500;flex-shrink:0}
+.fasqoo-widget .fw.light .fw-info-row .k{color:#8b8b9e}
+.fasqoo-widget .fw-info-row .v{color:#ececf2;font-weight:600;text-align:right;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-word}
+.fasqoo-widget .fw.light .fw-info-row .v{color:#0d0d12}
+.fasqoo-widget .fw-info-row .v .sub{display:block;color:#6a6a78;font-weight:400;font-size:11px;font-family:inherit;margin-top:2px}
+.fasqoo-widget .fw.light .fw-info-row .v .sub{color:#8b8b9e}
+.fasqoo-widget .fw-foot{font-size:11px;color:#6a6a78;text-align:center;line-height:1.5;padding-top:10px;border-top:1px solid #21212a}
+.fasqoo-widget .fw.light .fw-foot{color:#8b8b9e;border-top-color:#ececf1}
+.fasqoo-widget .fw-foot b{color:#ececf2;font-weight:600}
+.fasqoo-widget .fw.light .fw-foot b{color:#0d0d12}
+.fasqoo-widget .fw-foot a{color:var(--fwa);font-weight:600;text-decoration:none}
+.fasqoo-widget .fw-foot a:hover{text-decoration:underline}
+@media (max-width:520px){.fasqoo-widget .fw{padding:16px;gap:12px}.fasqoo-widget .fw-speed{font-size:40px}}`;
 
-      const phaseSeconds = (now - started) / 1000;
-      const stable = stableEnough(recentRates);
-      const enoughData = totalBytes >= TARGET_BYTES;
-      const hardCap = totalBytes >= MAX_TEST_BYTES;
+  // Widget JS: inline measure + init
+  const js = `(function(){
+${fasqooMeasure.toString()}
+${initWidget.toString()}
+document.querySelectorAll('.fasqoo-widget .fw').forEach(function(w){initWidget(w)});
+})();`;
 
-      if(
-        !end &&
-        phaseSeconds >= MIN_PHASE_SECONDS &&
-        (
-          (stable && enoughData) ||
-          phaseSeconds >= MAX_PHASE_SECONDS ||
-          hardCap
-        )
-      ){
-        end = {bytes: totalBytes, time: now};
-        stopped = true;
-        activeRequests.forEach(x => x.abort());
-        return;
-      }
+  const code = `<!-- Fasqoo Speed Test Widget -->
+<style>${css}</style>
+<div class="fasqoo-widget">
+${widgetHtmlStr}
+</div>
+<script>${js}<\/script>
+<!-- Fasqoo.com · https://www.fasqoo.com/ -->`;
 
-      setProgress(
-        58 + Math.min(40, (phaseSeconds / MAX_PHASE_SECONDS) * 40),
-        "Measuring Upload... " + streamCount + " connections"
-      );
-    }, TICK_MS);
+  $('codeBlock').textContent = code;
+}
 
-    function sendOne(streamIndex, requestIndex){
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        let lastLoaded = 0;
+/* ===================== CONTROLS ===================== */
+$('title').addEventListener('input', e => { state.title = e.target.value.trim() || 'Fasqoo Internet Speed Test'; renderWidget(); });
+$('widgetTheme').addEventListener('change', e => { state.widgetTheme = e.target.value; renderWidget(); });
+$('color').addEventListener('input', e => { state.color = e.target.value; $('hex').value = e.target.value; renderWidget(); });
+$('hex').addEventListener('input', e => {
+  const v = e.target.value;
+  if (/^#[0-9a-fA-F]{6}$/.test(v)){ state.color = v; $('color').value = v; renderWidget(); }
+});
+$('width').addEventListener('input', e => { state.width = +e.target.value; $('wv').textContent = state.width + 'px'; renderWidget(); });
+$('radius').addEventListener('input', e => { state.radius = +e.target.value; $('rv').textContent = state.radius + 'px'; renderWidget(); });
+$('shadowLevel').addEventListener('input', e => {
+  state.shadowLevel = +e.target.value;
+  const lang = $('lang').value;
+  const labels = [I18N[lang].shadowNone, I18N[lang].shadowSoft, I18N[lang].shadowMed, I18N[lang].shadowStrong];
+  $('shv').textContent = labels[state.shadowLevel];
+  renderWidget();
+});
+$('autoStart').addEventListener('change', e => { state.autoStart = e.target.checked; });
+$('showFooter').addEventListener('change', e => { state.showFooter = e.target.checked; renderWidget(); });
 
-        activeRequests.add(xhr);
+/* Presets */
+$('presets').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  b.classList.add('active');
+  const p = PRESETS[b.dataset.preset];
+  if (!p) return;
+  state.width = p.width;
+  state.radius = p.radius;
+  state.shadowLevel = p.shadowLevel;
+  $('width').value = p.width; $('wv').textContent = p.width + 'px';
+  $('radius').value = p.radius; $('rv').textContent = p.radius + 'px';
+  $('shadowLevel').value = p.shadowLevel;
+  const lang = $('lang').value;
+  const labels = [I18N[lang].shadowNone, I18N[lang].shadowSoft, I18N[lang].shadowMed, I18N[lang].shadowStrong];
+  $('shv').textContent = labels[p.shadowLevel];
+  renderWidget();
+});
 
-        xhr.open(
-          "POST",
-          SPEED_HOST + "/__up?bytes=" + UP_BYTES +
-          "&stream=" + streamIndex +
-          "&request=" + requestIndex +
-          "&r=" + crypto.randomUUID()
-        );
+/* Device switch */
+$('deviceSwitch').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#deviceSwitch button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  state.device = b.dataset.device;
+  renderWidget();
+});
 
-        xhr.setRequestHeader(
-          "Content-Type",
-          "application/octet-stream"
-        );
-
-        xhr.upload.onprogress = (e) => {
-          if(e.lengthComputable){
-            const delta = e.loaded - lastLoaded;
-
-            if(delta > 0){
-              totalBytes += delta;
-              lastLoaded = e.loaded;
-            }
-          }
-        };
-
-        xhr.onload = () => {
-          if(lastLoaded < body.byteLength){
-            totalBytes += body.byteLength - lastLoaded;
-            lastLoaded = body.byteLength;
-          }
-
-          activeRequests.delete(xhr);
-
-          if(xhr.status >= 200 && xhr.status < 300){
-            resolve();
-          }else if(stopped){
-            resolve();
-          }else{
-            reject(
-              new Error(
-                "Upload endpoint returned HTTP " + xhr.status
-              )
-            );
-          }
-        };
-
-        xhr.onerror = () => {
-          activeRequests.delete(xhr);
-
-          if(stopped){
-            resolve();
-          }else{
-            reject(new Error("Upload request failed"));
-          }
-        };
-
-        xhr.onabort = () => {
-          activeRequests.delete(xhr);
-          resolve();
-        };
-
-        xhr.send(body);
-      });
-    }
-
-    async function worker(streamIndex){
-      let requestIndex = 0;
-
-      while(!stopped){
-        await sendOne(streamIndex, requestIndex++);
-      }
-    }
-
-    try{
-      for(let i = 0; i < MIN_STREAMS; i++){
-        workers.push(worker(i));
-      }
-
-      await new Promise(resolve => {
-        const check = () => {
-          if(stopped){
-            resolve();
-          }else{
-            setTimeout(check, 25);
-          }
-        };
-        check();
-      });
-
-      await Promise.allSettled(workers);
-    }finally{
-      clearInterval(ticker);
-      stopped = true;
-      activeRequests.forEach(x => x.abort());
-    }
-
-    if(!end) end = {bytes: totalBytes, time: performance.now()};
-
-    const from = warm || {bytes: 0, time: started};
-    const bytes = end.bytes - from.bytes;
-    const seconds = (end.time - from.time) / 1000;
-
-    if(bytes <= 0 || seconds <= 0){
-      throw new Error("No upload data accepted");
-    }
-
-    return (bytes * 8) / seconds / 1e6;
+/* Copy */
+async function doCopy(){
+  const text = $('codeBlock').textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
   }
+  const t = $('toast');
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 1600);
+}
+$('copy').addEventListener('click', doCopy);
+$('copyTop').addEventListener('click', () => {
+  doCopy();
+  $('codeBlock').scrollIntoView({ behavior:'smooth', block:'center' });
+});
 
-  async function startSpeedTest(){
-    if(isRunning) return;
-    isRunning = true;
-    $("speedCaption").textContent = "Measuring...";
-    $("restartBtn").style.display = "none";
-    $("progressWrapper").style.display = "block";
-    $("speed").textContent = "0";
-    $("pingVal").innerHTML = "-<span>ms</span>";
-    $("jitterVal").innerHTML = "-<span>ms</span>";
-    $("downVal").innerHTML = "-<span>Mbps</span>";
-    $("upVal").innerHTML = "-<span>Mbps</span>";
+/* Re-render footer labels when language changes */
+const origApplyLang = applyLang;
+applyLang = function(lang){
+  origApplyLang.call(this, lang);
+  // Update shadow label
+  const labels = [I18N[lang].shadowNone, I18N[lang].shadowSoft, I18N[lang].shadowMed, I18N[lang].shadowStrong];
+  $('shv').textContent = labels[state.shadowLevel];
+};
 
-    let phase = "Ping";
-    try{
-      setProgress(8, "Measuring Ping...");
-      $("speedCaption").textContent = "Measuring ping...";
-      const latency = await measurePing();
-      $("pingVal").innerHTML = latency.ping.toFixed(latency.ping < 10 ? 1 : 0) + "<span>ms</span>";
-      $("jitterVal").innerHTML = latency.jitter.toFixed(1) + "<span>ms</span>";
-
-      phase = "Download";
-      setProgress(25, "Measuring Download...");
-      $("speedCaption").textContent = "Measuring download...";
-      const downloadMbps = await measureDownload();
-      $("speed").textContent = formatMbps(downloadMbps);
-      updateSpeedArc(downloadMbps);
-      $("downVal").innerHTML = formatMbps(downloadMbps) + "<span>Mbps</span>";
-
-      $("upVal").innerHTML = "-<span>Mbps</span>";
-      setProgress(62, "Measuring Upload...");
-
-      phase = "Upload";
-      $("speedCaption").textContent = "Measuring upload...";
-      const uploadMbps = await measureUpload();
-      $("upVal").innerHTML = formatMbps(uploadMbps) + "<span>Mbps</span>";
-
-      $("speed").textContent = formatMbps(downloadMbps);
-      updateSpeedArc(downloadMbps);
-      setProgress(100, "Test Complete");
-      $("speedCaption").textContent = "Download speed";
-
-      setTimeout(() => {
-        $("progressWrapper").style.display = "none";
-      }, 400);
-
-      $("restartBtn").style.display = "inline-block";
-
-    }catch(err){
-      console.error("Speed test error (" + phase + "):", err);
-      $("speed").textContent = "—";
-      $("pingVal").innerHTML = "—<span>ms</span>";
-      $("jitterVal").innerHTML = "—<span>ms</span>";
-      $("downVal").innerHTML = "—<span>Mbps</span>";
-      $("upVal").innerHTML = "—<span>Mbps</span>";
-      setProgress(100, "Measurement could not be completed");
-      $("speedCaption").textContent = "Measurement unavailable";
-      $("progressWrapper").style.display = "none";
-      $("restartBtn").style.display = "inline-block";
-    }finally{
-      isRunning = false;
-    }
-  }
+/* ===================== INIT ===================== */
+renderWidget();
 </script>
-
 </body>
 </html>
