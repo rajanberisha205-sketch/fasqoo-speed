@@ -114,17 +114,6 @@ ${language || "en"}
       });
     }
 
-    // Very important for debugging
-  console.log(
-  "GROQ CONTENT:",
-  JSON.stringify(data?.choices?.[0]?.message?.content)
-);
-
-console.log(
-  "GROQ CHOICE:",
-  JSON.stringify(data?.choices?.[0])
-);
-
     if (!response.ok) {
       console.error("Groq API error:", {
         status: response.status,
@@ -140,7 +129,6 @@ console.log(
 
     let answer = choice?.message?.content;
 
-    // Some model responses may put text in a different field.
     if (!answer && typeof choice?.text === "string") {
       answer = choice.text;
     }
@@ -148,6 +136,11 @@ console.log(
     if (typeof answer === "string") {
       answer = answer.trim();
     }
+
+    console.log(
+      "GROQ CONTENT:",
+      JSON.stringify(answer)
+    );
 
     if (!answer) {
       console.error(
@@ -161,7 +154,7 @@ console.log(
     }
 
     return res.status(200).json({
-      answer
+      answer: answer
     });
 
   } catch (error) {
