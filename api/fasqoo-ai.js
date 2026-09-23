@@ -92,7 +92,7 @@ ${language || "en"}
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "openai/gpt-oss-20b",
+          model: "llama-3.3-70b-versatile",
           messages,
           temperature: 0.3,
           max_completion_tokens: 700
@@ -153,7 +153,9 @@ ${language || "en"}
       });
     }
 
+    // Liefert sowohl 'reply' als auch 'answer' für maximale Kompatibilität zurück
     return res.status(200).json({
+      reply: answer,
       answer: answer
     });
 
