@@ -92,10 +92,12 @@ ${language || "en"}
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "llama-3.1-8b-instant", // Gültiger und aktiver Modell-ID
+          model: "openai/gpt-oss-20b",
           messages,
           temperature: 0.3,
-          max_completion_tokens: 700
+          max_completion_tokens: 700,
+          reasoning_effort: "low",
+          include_reasoning: false
         })
       }
     );
