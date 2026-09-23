@@ -115,7 +115,15 @@ ${language || "en"}
     }
 
     // Very important for debugging
-    console.log("Groq response:", JSON.stringify(data));
+  console.log(
+  "GROQ CONTENT:",
+  JSON.stringify(data?.choices?.[0]?.message?.content)
+);
+
+console.log(
+  "GROQ CHOICE:",
+  JSON.stringify(data?.choices?.[0])
+);
 
     if (!response.ok) {
       console.error("Groq API error:", {
