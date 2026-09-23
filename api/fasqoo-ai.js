@@ -92,10 +92,10 @@ ${language || "en"}
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "llama-3.1-70b-versatile", // Gültiges Groq Modell
+          model: "llama-3.1-8b-instant", // Absolut stabiles Standardmodell
           messages,
           temperature: 0.3,
-          max_completion_tokens: 700
+          max_tokens: 700
         })
       }
     );
@@ -115,7 +115,7 @@ ${language || "en"}
     }
 
     if (!response.ok) {
-      console.error("Groq API error:", {
+      console.error("Groq API error details:", {
         status: response.status,
         data
       });
