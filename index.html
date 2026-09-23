@@ -85,7 +85,7 @@ main{padding:30px 0 65px}
 .gauge{width:295px;height:295px;margin:auto;position:relative}
 .gauge svg{width:100%;height:100%;transform:rotate(-135deg)}
 .ring{fill:none;stroke:#edf0f4;stroke-width:13;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:204}
-.progress{fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:816;transition:.18s linear}
+.progress{fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:816;stroke-dashoffset:816;transition:stroke-dashoffset .45s cubic-bezier(.22,.61,.36,1)}
 .center{position:absolute;inset:0;display:grid;place-content:center}
 .num{font-size:52px;line-height:1;font-weight:700;letter-spacing:-2px}
 .unit{font-size:13px;color:var(--muted);margin-top:7px}
@@ -682,10 +682,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 /* ==========================================================
-   FASQOO SPEED TEST v7.1 — adaptive phases, real measurement
+   FASQOO SPEED TEST v7.2 — adaptive phases, real measurement
    - Phase duration: 8 s per direction (see MEASUREMENT_V7.phaseMs)
    - Pauses: 2 s before download and 2 s before upload
-   - Round 1 of each phase = warm-up, not counted
+   - Warm-up runs BEFORE the timed phase (not inside it)
    - No fabricated values: too few samples -> test fails honestly
    ========================================================== */
 
@@ -853,13 +853,14 @@ let gaugeNumberRaf = 0;
 let gaugeNumberDisplay = 0;
 let gaugeNumberTarget = 0;
 
+/* Smoother easing: lower constant = smoother (was 0.22) */
 function animateGaugeNumber(){
   const diff = gaugeNumberTarget - gaugeNumberDisplay;
-  if(Math.abs(diff) < 0.05){
+  if(Math.abs(diff) < 0.03){
     gaugeNumberDisplay = gaugeNumberTarget;
     gaugeNumberRaf = 0;
   }else{
-    gaugeNumberDisplay += diff * (1 - Math.exp(-0.22));
+    gaugeNumberDisplay += diff * (1 - Math.exp(-0.11));
     gaugeNumberRaf = requestAnimationFrame(animateGaugeNumber);
   }
   const n = gaugeNumberDisplay;
@@ -932,14 +933,14 @@ async function timedFetch(url, options={}, timeoutMs=12000){
 }
 
 /* ==========================================================
-   MEASUREMENT ENGINE v7.1 — adaptive phases, real measurement
+   MEASUREMENT ENGINE v7.2 — adaptive phases, real measurement
    - Ping: 8 real requests with warm-up + median + jitter
-   - Download: adaptive multi-round, round 1 = warm-up (not counted)
-   - Upload: adaptive multi-round, round 1 = warm-up (not counted)
+   - Download: warm-up BEFORE timed phase, then adaptive rounds
+   - Upload: warm-up BEFORE timed phase, then adaptive rounds
    - No fabricated values: too few samples -> honest failure
    ========================================================== */
 const MEASUREMENT_V7 = {
-  version: "7.1",
+  version: "7.2",
   phaseMs: 8000,
   maxStreams: 8
 };
@@ -953,7 +954,6 @@ function percentile(values, q){
 }
 function robustMedian(values){ return percentile(values,0.5); }
 
-/* FIXED: was referencing non-existent MEASUREMENT_V5 */
 function chooseStreams(mbps, max = MEASUREMENT_V7.maxStreams){
   if(mbps >= 2500) return Math.min(8, max);
   if(mbps >= 1000) return Math.min(6, max);
@@ -964,9 +964,22 @@ function chooseStreams(mbps, max = MEASUREMENT_V7.maxStreams){
 }
 function clampNumber(v,min,max){ return Math.max(min,Math.min(max,v)); }
 
-/* ---------- PING (FIXED: warm-up + pause between samples) ---------- */
+/* ---------- PING ---------- */
 async function pingTest(){
-  // Warm-up: do NOT measure, only establish DNS/TCP/TLS
+  // 1) Verbindungstest
+  try{
+    const probe = testTimeout(4000);
+    const r = await fetch(SPEED_BASE+"/__down?bytes=1&v=7&t="+Date.now(), {
+      cache:"no-store", mode:"cors", credentials:"omit", signal:probe.signal
+    });
+    probe.clear();
+    if(!r.ok) throw new Error("HTTP "+r.status);
+  }catch(e){
+    if(e.name === "AbortError") throw new Error("Cloudflare-Endpunkt nicht erreichbar (Timeout). Adblocker aktiv?");
+    throw new Error("Cloudflare-Endpunkt blockiert: "+e.message+". Adblocker oder DNS-Filter deaktivieren.");
+  }
+
+  // 2) Warm-up (nicht gemessen)
   try{
     const warm = testTimeout(4000);
     await fetch(SPEED_BASE+"/__down?bytes=0&v=7&warm=1&t="+Date.now(), {
@@ -977,6 +990,7 @@ async function pingTest(){
     console.warn("Ping warm-up failed (continuing):", e.message);
   }
 
+  // 3) Echte Messung
   const vals=[];
   for(let i=0;i<8 && running;i++){
     try{
@@ -994,7 +1008,7 @@ async function pingTest(){
       console.warn("Ping sample failed:", e.message);
     }
   }
-  if(vals.length<5) throw new Error("Ping measurement failed ("+vals.length+"/8 samples)");
+  if(vals.length<5) throw new Error("Ping fehlgeschlagen ("+vals.length+"/8 Samples). Endpunkt blockiert oder Netzwerk instabil.");
   const ping=robustMedian(vals);
   const deltas=[];
   for(let i=1;i<vals.length;i++) deltas.push(Math.abs(vals[i]-vals[i-1]));
@@ -1002,7 +1016,7 @@ async function pingTest(){
   return {ping,jitter,samples:vals};
 }
 
-/* ---------- DOWNLOAD / UPLOAD HELPERS — ENGINE v7.1 ---------- */
+/* ---------- DOWNLOAD / UPLOAD HELPERS ---------- */
 async function readResponseBytes(response,signal){
   if(!response.body){ const b=await response.arrayBuffer(); return b.byteLength; }
   const reader=response.body.getReader(); let bytes=0;
@@ -1076,34 +1090,46 @@ function nextPayloadBytes(mbps,remainingMs,streams,minBytes,maxBytes){
   return clampNumber(targetBytes,minBytes,maxBytes);
 }
 
-/* ---------- DOWNLOAD PHASE (FIXED: round 1 = warm-up) ---------- */
+/* ---------- DOWNLOAD PHASE (warm-up OUTSIDE the timed phase) ---------- */
 async function downloadTest(){
   const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
   $("status").textContent=t.stDown; $("chartState").textContent=t.download; samples=[];
+
+  // Warm-up OUTSIDE the timed phase (only to estimate a starting size)
+  let mbps = 25;
+  try{
+    const warm = await parallelDownload(512*1024, 2, 5000);
+    const warmMbps = warm.bytes*8/warm.seconds/1e6;
+    if(Number.isFinite(warmMbps) && warmMbps > 0){
+      mbps = warmMbps;
+      console.log("Download warm-up:", warmMbps.toFixed(2), "Mbps (nicht gewertet)");
+    }
+  }catch(e){
+    console.warn("Download warm-up failed (starting with 25 Mbps estimate):", e.message);
+  }
+
+  // Now the timed phase starts
   const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
-  const measured=[]; let mbps=25; let streams=2; let bytesPerStream=512*1024;
-  let round=0;
+  const measured=[];
+  let streams=2, bytesPerStream=512*1024;
 
   while(running){
     const elapsed=performance.now()-startTime;
     if(elapsed>=TARGET) break;
     const remaining=TARGET-elapsed;
     streams=chooseStreams(mbps, MEASUREMENT_V7.maxStreams);
-    bytesPerStream=nextPayloadBytes(mbps,remaining,streams,256*1024,32*1024*1024);
-    const timeout=Math.max(5000,Math.min(7000,remaining+2500));
+    bytesPerStream=nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
+    const timeout=Math.max(4000, Math.min(7000, remaining+2000));
     try{
-      const r=await parallelDownload(bytesPerStream,streams,timeout);
+      const r=await parallelDownload(bytesPerStream, streams, timeout);
       const sp=r.bytes*8/r.seconds/1e6;
-      round++;
-      // Round 1 = warm-up (DNS/TCP/TLS) — not counted
-      if(round > 1 && Number.isFinite(sp) && sp>0){
-        measured.push(sp); samples.push(sp); mbps=sp;
+      if(Number.isFinite(sp) && sp>0){
+        measured.push(sp); samples.push(sp);
+        mbps = sp;
         gauge(sp);
         $("down").textContent=sp.toFixed(1);
         $("intelThroughput").textContent=sp.toFixed(1)+" "+x.unitMbps;
         drawChart();
-      } else if(round === 1 && Number.isFinite(sp) && sp>0){
-        mbps = Math.max(mbps, sp);
       }
     }catch(e){
       console.warn("Download round failed:", e.message);
@@ -1111,36 +1137,49 @@ async function downloadTest(){
       await sleep(150);
     }
   }
-  if(measured.length<2) throw new Error("Download measurement failed ("+measured.length+" valid samples)");
-  return robustMedian(measured.slice(-Math.max(3,Math.floor(measured.length*0.7))));
+  if(measured.length < 1) throw new Error("Download measurement failed (0 valid samples)");
+  return robustMedian(measured);
 }
 
-/* ---------- UPLOAD PHASE (FIXED: round 1 = warm-up) ---------- */
+/* ---------- UPLOAD PHASE (warm-up OUTSIDE the timed phase) ---------- */
 async function uploadTest(){
   const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
   $("status").textContent=t.stUp; $("chartState").textContent=t.upload; samples=[];
+
+  // Warm-up OUTSIDE the timed phase
+  let mbps = 25;
+  try{
+    const warm = await parallelUpload(512*1024, 2, 5000);
+    const warmMbps = warm.bytes*8/warm.seconds/1e6;
+    if(Number.isFinite(warmMbps) && warmMbps > 0){
+      mbps = warmMbps;
+      console.log("Upload warm-up:", warmMbps.toFixed(2), "Mbps (nicht gewertet)");
+    }
+  }catch(e){
+    console.warn("Upload warm-up failed (starting with 25 Mbps estimate):", e.message);
+  }
+
+  // Timed phase
   const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
-  const measured=[]; let mbps=25; let streams=2; let bytesPerStream=512*1024;
-  let round=0;
+  const measured=[];
+  let streams=2, bytesPerStream=512*1024;
 
   while(running){
     const elapsed=performance.now()-startTime;
     if(elapsed>=TARGET) break;
     const remaining=TARGET-elapsed;
     streams=chooseStreams(mbps, MEASUREMENT_V7.maxStreams);
-    bytesPerStream=nextPayloadBytes(mbps,remaining,streams,256*1024,32*1024*1024);
-    const timeout=Math.max(5500,Math.min(8000,remaining+3000));
+    bytesPerStream=nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
+    const timeout=Math.max(4500, Math.min(8000, remaining+2500));
     try{
-      const r=await parallelUpload(bytesPerStream,streams,timeout);
+      const r=await parallelUpload(bytesPerStream, streams, timeout);
       const sp=r.bytes*8/r.seconds/1e6;
-      round++;
-      if(round > 1 && Number.isFinite(sp) && sp>0){
-        measured.push(sp); samples.push(sp); mbps=sp;
+      if(Number.isFinite(sp) && sp>0){
+        measured.push(sp); samples.push(sp);
+        mbps = sp;
         gauge(sp);
         $("up").textContent=sp.toFixed(1);
         drawChart();
-      } else if(round === 1 && Number.isFinite(sp) && sp>0){
-        mbps = Math.max(mbps, sp);
       }
     }catch(e){
       console.warn("Upload round failed:", e.message);
@@ -1148,9 +1187,10 @@ async function uploadTest(){
       await sleep(150);
     }
   }
-  if(measured.length<2) throw new Error("Upload measurement failed ("+measured.length+" valid samples)");
-  return robustMedian(measured.slice(-Math.max(3,Math.floor(measured.length*0.7))));
+  if(measured.length < 1) throw new Error("Upload measurement failed (0 valid samples)");
+  return robustMedian(measured);
 }
+
 /* ---------- QUALITY ---------- */
 function quality(d,u,p,j){
   let s = 100;
@@ -1321,10 +1361,11 @@ async function start(){
     saveHistory({date:date, d:d, u:u, p:p.ping, j:p.jitter, s:s, isp:last.isp||"—"});
     updateWidget();
   }catch(err){
-    console.error(err);
-    $("status").textContent = translations[currentLang].stErr;
+    console.error("FASQOO TEST FAILED:", err);
+    const errMsg = err && err.message ? err.message : translations[currentLang].stErr;
+    $("status").textContent = errMsg;
     setTestPhase("ping");
-    if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementFailed;
+    if($("measurementHint")) $("measurementHint").textContent = "Tipp: Deaktiviere Adblocker (uBlock, AdBlock Plus, Brave Shields) und lade die Seite neu.";
   }
   running = false;
   $("start").disabled = false;
