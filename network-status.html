@@ -4,214 +4,220 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
-
 <title id="seoTitle">Fasqoo Website Status – Real-time Network & Uptime</title>
-<meta name="description" id="seoDesc" content="Measure fasqoo.com reachability, response time, and latency directly in your browser. Realistic network diagnostics without simulation.">
+<meta name="description" id="seoDesc" content="Measure fasqoo.com reachability, response time, and latency directly in your browser.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.fasqoo.com/network-status.html">
-
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.fasqoo.com/network-status.html">
 <meta property="og:title" content="Fasqoo Website Status & Network Analysis">
 <meta property="og:description" content="Real-time analysis of your connection and fasqoo.com server response times.">
 <meta property="og:image" content="https://www.fasqoo.com/og-image.png">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fasqoo Website Status">
 <meta name="twitter:description" content="Real-time connection analysis to fasqoo.com.">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Fasqoo Website Status","url":"https://fasqoo.com/network-status.html","description":"Real-time network status, latency, and uptime measurement for fasqoo.com.","publisher":{"@type":"Organization","name":"Fasqoo","url":"https://fasqoo.com"}}
 </script>
-
 <style>
-/* ============================================================
-   DESIGN SYSTEM
-   ============================================================ */
 :root{
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --border-strong:#cbd5e1;
-  --primary:#2563eb;
-  --primary-2:#1d4ed8;
-  --accent:#7c3aed;
-  --green:#10b981;
-  --green-2:#059669;
-  --red:#ef4444;
-  --yellow:#f59e0b;
-  --radius-sm:10px;
-  --radius-md:16px;
-  --radius-lg:22px;
-  --radius-full:999px;
+  --bg:#f5f7fb;--card:#ffffff;--text:#0f172a;--muted:#64748b;
+  --border:#e2e8f0;--border-strong:#cbd5e1;--primary:#2563eb;--primary-2:#1d4ed8;
+  --accent:#7c3aed;--green:#10b981;--green-2:#059669;--red:#ef4444;--yellow:#f59e0b;
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;--radius-full:999px;
   --shadow-sm:0 1px 3px rgba(15,23,42,.06);
   --shadow-md:0 4px 14px rgba(15,23,42,.06);
   --shadow-lg:0 14px 40px rgba(15,23,42,.08);
 }
 body.dark{
-  --bg:#0a0f1e;
-  --card:#111827;
-  --text:#f1f5f9;
-  --muted:#94a3b8;
-  --border:#1e293b;
-  --border-strong:#334155;
-  --primary:#3b82f6;
-  --primary-2:#60a5fa;
-  --accent:#a78bfa;
-  --green:#34d399;
-  --green-2:#10b981;
-  --red:#f87171;
-  --yellow:#fbbf24;
+  --bg:#0a0f1e;--card:#111827;--text:#f1f5f9;--muted:#94a3b8;
+  --border:#1e293b;--border-strong:#334155;--primary:#3b82f6;--primary-2:#60a5fa;
+  --accent:#a78bfa;--green:#34d399;--green-2:#10b981;--red:#f87171;--yellow:#fbbf24;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  background:
-    radial-gradient(ellipse 1200px 600px at 12% -10%, rgba(37,99,235,.08), transparent 50%),
-    radial-gradient(ellipse 1000px 500px at 88% -5%, rgba(124,58,237,.06), transparent 45%),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  transition:background-color .3s ease, color .3s ease;
+  background:radial-gradient(ellipse 1200px 600px at 12% -10%,rgba(37,99,235,.08),transparent 50%),
+             radial-gradient(ellipse 1000px 500px at 88% -5%,rgba(124,58,237,.06),transparent 45%),var(--bg);
+  color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;
 }
 body.dark{
-  background:
-    radial-gradient(ellipse 1200px 600px at 12% -10%, rgba(59,130,246,.12), transparent 50%),
-    radial-gradient(ellipse 1000px 500px at 88% -5%, rgba(167,139,250,.08), transparent 45%),
-    var(--bg);
+  background:radial-gradient(ellipse 1200px 600px at 12% -10%,rgba(59,130,246,.12),transparent 50%),
+             radial-gradient(ellipse 1000px 500px at 88% -5%,rgba(167,139,250,.08),transparent 45%),var(--bg);
 }
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 ::selection{background:var(--primary);color:#fff}
 
+.wrap{width:min(1200px,calc(100% - 48px));margin:auto}
+
 /* ============================================================
-   HEADER
+   HEADER mit ZENTRIERTEM Menü
    ============================================================ */
-.wrap{width:min(1120px,calc(100% - 48px));margin:auto}
-header.main-header{height:72px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035)}
+header.main-header{
+  height:72px;
+  background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  position:sticky;top:0;z-index:1000;
+  box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035);
+}
 body.dark header.main-header{background:color-mix(in srgb,#12161b 92%,transparent)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+
+/* Flex-Struktur: brand (links) — lite-btn — menu (MITTE) — extra (rechts) */
+.nav{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
 .brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .brandmark{width:40px;height:40px;object-fit:contain}
 .brandname{font-size:22px;letter-spacing:-.7px;font-weight:800;color:var(--text)}
-.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto}
-.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s;position:relative}
-.main-menu a:hover{color:var(--primary)}
-.main-menu a::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:var(--primary);transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
-.main-menu a:hover::after{transform:scaleX(1)}
-.main-menu a.active{color:var(--primary)}
-.main-menu a.active::after{transform:scaleX(1)}
 
-.lite-btn{height:35px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
-.lite-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
-.lite-btn:active{transform:translateY(1px)}
-
-.install-btn{height:35px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
-.install-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lite-btn,
+.install-btn{
+  height:35px;border:1px solid var(--border);border-radius:8px;
+  background:var(--card);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;
+  text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s;
+  flex-shrink:0;
+}
+.lite-btn:hover,.install-btn:hover{
+  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
+  border-color:var(--border-strong);
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
 .install-btn[hidden]{display:none}
 .win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
 .win-icon i{display:block;background:currentColor}
 
-.menu-extra{display:flex;align-items:center;gap:8px}
+/* ZENTRIERTES MENÜ: flex:1 + justify-content:center */
+.main-menu{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  min-width:0;
+}
+.main-menu > a{
+  color:var(--text);text-decoration:none;
+  font-size:13px;font-weight:500;white-space:nowrap;
+  transition:color .2s;position:relative;
+  padding:4px 0;
+}
+.main-menu > a:hover{color:var(--primary)}
+.main-menu > a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;
+  height:2px;border-radius:2px;background:var(--primary);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform .2s ease;
+}
+.main-menu > a:hover::after,.main-menu > a.active::after{transform:scaleX(1)}
+.main-menu > a.active{color:var(--primary)}
 
-/* Language control – fixed for dark mode */
+.menu-extra{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+
 .lang-control{
   display:flex;align-items:center;justify-content:center;gap:7px;
   padding:0 10px;height:35px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--card);
-  color:var(--text);
+  border:1px solid var(--border);border-radius:8px;
+  background:var(--card);color:var(--text);
   transition:background .2s,border-color .2s,box-shadow .2s;
 }
-.lang-control:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lang-control:hover{
+  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
+  border-color:var(--border-strong);
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
 .lang-icon{font-size:14px;line-height:1;color:var(--text);display:inline-block}
 .lang-control select{
   min-width:76px;height:33px;border:0;outline:0;
-  background:transparent;
-  color:var(--text);
-  padding:0 14px 0 0;
-  font-size:12px;font-weight:500;
-  cursor:pointer;
-  color-scheme:light;
+  background:transparent;color:var(--text);
+  padding:0 14px 0 0;font-size:12px;font-weight:500;
+  cursor:pointer;color-scheme:light;
 }
 body.dark .lang-control select{color-scheme:dark}
 body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .lang-control select option{background:#fff;color:#0f172a}
 
-.theme-btn{width:35px;height:35px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;transition:background .2s,border-color .2s,box-shadow .2s}
-.theme-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
-
-.menu-toggle{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
+.theme-btn{
+  width:35px;height:35px;padding:0;
+  border:1px solid var(--border);border-radius:8px;
+  background:var(--card);color:var(--text);
+  display:grid;place-items:center;font-size:16px;
+  transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.theme-btn:hover{
+  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
+  border-color:var(--border-strong);
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+.menu-toggle{
+  display:none;background:transparent;
+  border:1px solid var(--border);border-radius:8px;
+  padding:6px 12px;font-size:20px;color:var(--text);
+}
 
 @media(max-width:900px){.install-btn{display:none!important}}
 @media(max-width:760px){
   header.main-header{height:auto;min-height:68px}
-  .menu-toggle{display:block}
-  .main-menu{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);align-items:flex-start}
+  .menu-toggle{display:block;order:3;margin-left:auto}
+  .main-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    padding:20px;gap:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+    align-items:flex-start;
+    flex:none;
+  }
   .main-menu.active{display:flex}
-  .main-menu a::after{display:none}
-  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);gap:12px}
+  .main-menu > a::after{display:none}
+  .menu-extra{
+    width:100%;justify-content:flex-start;
+    margin-top:10px;padding-top:10px;
+    border-top:1px solid var(--border);gap:12px;
+  }
 }
 
 /* ============================================================
-   HERO – fixed centering
+   HERO
    ============================================================ */
 .hero{
-  max-width:900px;
-  margin:56px auto 40px;
-  padding:0 24px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  max-width:900px;margin:56px auto 40px;padding:0 24px;
+  text-align:center;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
 }
 .hero-kicker{
   display:inline-flex;align-items:center;gap:8px;
   padding:7px 13px;border-radius:var(--radius-full);
   border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);
   background:color-mix(in srgb,var(--primary) 6%,transparent);
-  color:var(--primary);
-  font-size:11px;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;
-  margin-bottom:18px;
+  color:var(--primary);font-size:11px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;
 }
 .hero-kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 25%,transparent)}
 .hero .status-pill{margin-bottom:22px}
-.hero h1{
-  font-size:clamp(32px,5vw,52px);
-  line-height:1.05;
-  letter-spacing:-1.8px;
-  font-weight:800;
-  margin:0 0 18px 0;
-  width:100%;
-}
-.hero p{
-  margin:0;
-  max-width:680px;
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.65;
-}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-1.8px;font-weight:800;margin:0 0 18px 0;width:100%}
+.hero p{margin:0;max-width:680px;color:var(--muted);font-size:16px;line-height:1.65}
 
-/* ============================================================
-   STATUS PILL
-   ============================================================ */
 .status-pill{
   display:inline-flex;align-items:center;gap:10px;
   padding:10px 18px;border-radius:var(--radius-full);
   background:color-mix(in srgb,var(--green) 10%,transparent);
-  color:var(--green-2);
-  font-size:13px;font-weight:800;
+  color:var(--green-2);font-size:13px;font-weight:800;
   border:1px solid color-mix(in srgb,var(--green) 25%,transparent);
   transition:all .3s ease;
 }
@@ -224,9 +230,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .status-pill.idle{background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--muted);border-color:var(--border)}
 .status-pill.idle .status-dot{background:var(--muted);animation:none}
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
 .container{max-width:1120px;margin:auto;padding:0 24px 80px}
 .section-title{margin:44px 0 16px;text-align:center}
 .section-title h2{font-size:22px;letter-spacing:-.5px;font-weight:800}
@@ -235,7 +238,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-md);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
 .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--primary) 20%,var(--border))}
 
-/* Info banner */
 .info-banner{padding:20px;margin-bottom:20px;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 6%,transparent),color-mix(in srgb,var(--accent) 4%,transparent));border-color:color-mix(in srgb,var(--primary) 20%,var(--border))}
 .info-banner-inner{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
 .info-banner-icon{font-size:32px}
@@ -245,9 +247,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .info-banner-text div{margin-bottom:4px}
 .info-banner-text div:last-child{margin-bottom:0}
 
-/* ============================================================
-   LIVE STRIP
-   ============================================================ */
 .fasqoo-live-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 20px}
 .fasqoo-live-item{padding:14px 16px;border:1px solid var(--border);background:var(--card);border-radius:var(--radius-md)}
 .fasqoo-live-label{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
@@ -255,9 +254,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .fasqoo-live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 .fasqoo-live-server{color:var(--green-2)}
 
-/* ============================================================
-   HEALTH SCORE
-   ============================================================ */
 .health-panel{margin-top:20px;padding:32px;display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
 .health-panel::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 4%,transparent),transparent 55%);pointer-events:none}
 .health-ring-wrap{position:relative;width:180px;height:180px;margin:auto;display:grid;place-items:center}
@@ -269,9 +265,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .health-details h2{font-size:24px;letter-spacing:-.5px;color:var(--text)}
 .health-details p{margin-top:10px;color:var(--muted);line-height:1.65;font-size:14px}
 
-/* ============================================================
-   OVERVIEW
-   ============================================================ */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .overview-card{padding:20px;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .card-label{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
@@ -279,32 +272,22 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .card-small{margin-top:6px;color:var(--muted);font-size:11px}
 .sparkline{width:100%;height:36px;margin-top:12px;display:block}
 
-/* ============================================================
-   CHECK PANEL
-   ============================================================ */
 .check-panel{margin-top:20px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
 .check-info{display:flex;align-items:center;gap:18px;flex:1;min-width:0}
-.big-status{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--green) 12%,transparent);color:var(--green);font-size:26px;font-weight:900;flex-shrink:0;transition:all .3s ease}
+.big-status{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--green) 12%,transparent);color:var(--green);font-size:26px;font-weight:900;flex-shrink:0}
 .big-status.error{background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red)}
 .big-status.warning{background:color-mix(in srgb,var(--yellow) 12%,transparent);color:var(--yellow)}
 .big-status.idle{background:color-mix(in srgb,var(--muted) 12%,transparent);color:var(--muted)}
 .check-title{font-size:17px;font-weight:800;color:var(--text)}
 .check-subtitle{color:var(--muted);margin-top:5px;font-size:13px}
-
-.btn-primary{border:0;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:14px 22px;font-weight:800;font-size:14px;letter-spacing:.02em;box-shadow:0 8px 22px color-mix(in srgb,var(--primary) 30%,transparent);transition:all .2s ease;white-space:nowrap}
+.btn-primary{border:0;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:14px 22px;font-weight:800;font-size:14px;box-shadow:0 8px 22px color-mix(in srgb,var(--primary) 30%,transparent);transition:all .2s ease;white-space:nowrap}
 .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 28px color-mix(in srgb,var(--primary) 40%,transparent)}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
 
-/* ============================================================
-   DIAGNOSTIC
-   ============================================================ */
 .diagnostic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .diagnostic-card{padding:22px;position:relative}
 .diagnostic-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.diagnostic-name{font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:6px;color:var(--text)}
-.info-tip{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--border);color:var(--muted);font-size:9px;font-weight:900;cursor:help;position:relative}
-.info-tip::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);background:var(--text);color:var(--card);padding:8px 12px;border-radius:8px;font-size:11px;font-weight:600;line-height:1.5;width:220px;text-align:left;opacity:0;visibility:hidden;transition:.15s ease;z-index:100;pointer-events:none;box-shadow:var(--shadow-lg)}
-.info-tip:hover::after{opacity:1;visibility:visible}
+.diagnostic-name{font-weight:800;font-size:13px;color:var(--text)}
 .metric{font-size:28px;font-weight:900;margin-top:16px;letter-spacing:-1px;color:var(--text)}
 .metric-unit{font-size:13px;color:var(--muted);font-weight:700;margin-left:4px}
 .percentiles{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -312,14 +295,11 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .pctl-label{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:.08em}
 .pctl-value{font-size:13px;font-weight:800;margin-top:3px;color:var(--text)}
 .metric-description{margin-top:12px;color:var(--muted);font-size:11px;line-height:1.5}
-.badge{display:inline-flex;align-items:center;gap:5px;border-radius:var(--radius-full);padding:5px 10px;font-size:11px;font-weight:800;background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--muted);border:1px solid transparent;transition:all .2s ease}
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:var(--radius-full);padding:5px 10px;font-size:11px;font-weight:800;background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--muted);border:1px solid transparent}
 .badge.good{color:var(--green-2);background:color-mix(in srgb,var(--green) 10%,transparent);border-color:color-mix(in srgb,var(--green) 20%,transparent)}
 .badge.warning{color:var(--yellow);background:color-mix(in srgb,var(--yellow) 10%,transparent);border-color:color-mix(in srgb,var(--yellow) 20%,transparent)}
 .badge.error{color:var(--red);background:color-mix(in srgb,var(--red) 10%,transparent);border-color:color-mix(in srgb,var(--red) 20%,transparent)}
 
-/* ============================================================
-   TIMING
-   ============================================================ */
 .timing-card{padding:24px;margin-top:16px}
 .timing-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
 .timing-header h3{font-size:16px;font-weight:800;color:var(--text)}
@@ -327,21 +307,15 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .waterfall{display:flex;flex-direction:column;gap:10px}
 .wf-row{display:grid;grid-template-columns:120px 1fr 70px;gap:14px;align-items:center;font-size:12px}
 .wf-label{color:var(--muted);font-weight:700}
-.wf-bar-wrap{height:20px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden;position:relative}
+.wf-bar-wrap{height:20px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden}
 .wf-bar{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:var(--radius-sm);transition:width .6s cubic-bezier(.34,1.2,.64,1)}
-.wf-value{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.wf-value{text-align:right;font-weight:800;color:var(--text)}
 
-/* ============================================================
-   PROFILE
-   ============================================================ */
 .profile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .profile-card{padding:18px}
 .profile-label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 .profile-value{margin-top:8px;font-size:16px;font-weight:800;word-break:break-word;line-height:1.3;color:var(--text)}
 
-/* ============================================================
-   PROBLEMS
-   ============================================================ */
 .problem-list{display:flex;flex-direction:column;gap:12px}
 .problem{overflow:hidden}
 .problem summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -357,9 +331,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .explanation h4{font-size:12px;margin-bottom:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}
 .explanation p{color:var(--muted);font-size:13px;line-height:1.6}
 
-/* ============================================================
-   TEST SUITE
-   ============================================================ */
 .test-suite{padding:8px 22px}
 .test-row{display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
 .test-row:last-child{border-bottom:0}
@@ -370,24 +341,17 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .test-detail{color:var(--muted);font-size:12px;margin-top:3px}
 .test-value{font-weight:800;font-size:13px;color:var(--text)}
 
-/* ============================================================
-   CHART
-   ============================================================ */
 .chart-card{padding:24px;margin-top:16px}
 .chart-header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .chart-header h3{font-size:16px;font-weight:800;color:var(--text)}
 .chart-header span{color:var(--muted);font-size:12px}
 .period-tabs{display:inline-flex;gap:4px;padding:4px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)}
-.period-tab{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:800;color:var(--muted);transition:all .2s ease}
+.period-tab{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:800;color:var(--muted)}
 .period-tab.active{background:var(--card);color:var(--primary);box-shadow:var(--shadow-sm)}
 .chart{height:240px;margin-top:8px;display:flex;align-items:flex-end;gap:3px;border-bottom:1px solid var(--border);padding:8px 4px 0;overflow:hidden}
-.bar{flex:1;min-width:3px;max-width:16px;background:linear-gradient(180deg,var(--primary),var(--accent));border-radius:4px 4px 0 0;opacity:.85;transition:opacity .2s ease,transform .2s ease}
-.bar:hover{opacity:1;transform:translateY(-2px)}
+.bar{flex:1;min-width:3px;max-width:16px;background:linear-gradient(180deg,var(--primary),var(--accent));border-radius:4px 4px 0 0;opacity:.85}
 .no-data{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 
-/* ============================================================
-   TIMELINE
-   ============================================================ */
 .incident-timeline{padding:24px;margin-top:16px}
 .timeline-list{position:relative;padding-left:32px;margin-top:8px}
 .timeline-list::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--border);border-radius:2px}
@@ -399,39 +363,29 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .timeline-title{font-size:14px;font-weight:800;color:var(--text)}
 .timeline-desc{font-size:12px;color:var(--muted);line-height:1.5}
 
-/* ============================================================
-   REPORT
-   ============================================================ */
 .report-panel{padding:24px}
 .report-actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn-secondary{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text);padding:11px 18px;font-weight:700;font-size:13px;transition:all .2s ease}
-.btn-secondary:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
-.report-preview{width:100%;min-height:220px;margin-top:18px;resize:vertical;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;background:var(--bg);color:var(--text);font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;line-height:1.6}
+.btn-secondary{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text);padding:11px 18px;font-weight:700;font-size:13px}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary)}
+.report-preview{width:100%;min-height:220px;margin-top:18px;resize:vertical;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;background:var(--bg);color:var(--text);font-family:monospace;font-size:12px;line-height:1.6}
 
-/* ============================================================
-   NOTICE
-   ============================================================ */
 .notice{padding:18px 22px;position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--muted);font-size:13px;line-height:1.6;margin-top:16px}
 .notice::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md)}
 .notice strong{color:var(--text)}
 
-/* ============================================================
-   24H MONITOR
-   ============================================================ */
 .monitor-panel{padding:28px;margin-top:20px}
 .monitor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
 .section-kicker{font-size:11px;letter-spacing:.14em;font-weight:900;color:var(--primary);margin-bottom:7px;text-transform:uppercase}
-.monitor-head h2{font-size:22px;font-weight:800;letter-spacing:-.4px;color:var(--text)}
+.monitor-head h2{font-size:22px;font-weight:800;color:var(--text)}
 .monitor-head p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.55;max-width:640px}
 .monitor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.monitor-toggle{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;background:var(--card);color:var(--text);transition:border-color .2s ease}
-.monitor-toggle:hover{border-color:var(--primary)}
+.monitor-toggle{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;background:var(--card);color:var(--text)}
 .monitor-toggle input{position:absolute;opacity:0;pointer-events:none}
 .toggle-ui{width:38px;height:22px;border-radius:20px;background:var(--border);position:relative;transition:.2s}
 .toggle-ui::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.2s}
 .monitor-toggle input:checked + .toggle-ui{background:var(--primary)}
 .monitor-toggle input:checked + .toggle-ui::after{transform:translateX(16px)}
-.monitor-select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:var(--radius-sm);padding:10px 12px;font-weight:700;font-size:13px;cursor:pointer}
+.monitor-select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:var(--radius-sm);padding:10px 12px;font-weight:700;font-size:13px}
 .monitor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
 .monitor-stat{padding:16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)}
 .monitor-stat span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
@@ -445,28 +399,19 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .monitor-note strong{color:var(--text)}
 .monitor-note-title{color:var(--text);font-weight:800;display:block;margin-bottom:8px}
 
-/* ============================================================
-   ACCURACY
-   ============================================================ */
 .accuracy{margin-top:20px;padding:22px;border-radius:var(--radius-md);background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 15%,transparent);position:relative}
 .accuracy::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md)}
 .accuracy strong{display:block;margin-bottom:8px;font-weight:800;color:var(--text)}
 .accuracy p{color:var(--muted);font-size:13px;line-height:1.6}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;color:var(--muted);font-size:11px;margin-top:45px}
 .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
 .fasqoo-footer-copy{display:flex;flex-direction:column;gap:8px;line-height:1.55;max-width:520px}
 .fasqoo-footer-copy div:first-child{font-weight:600;color:var(--text)}
 .fasqoo-footer-links{display:flex;flex-wrap:wrap;gap:10px 20px}
-.fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82;transition:opacity .2s ease}
+.fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82}
 .fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media(max-width:1000px){
   .grid,.profile-grid{grid-template-columns:repeat(2,1fr)}
   .diagnostic-grid{grid-template-columns:repeat(2,1fr)}
@@ -500,27 +445,23 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   .period-tab{flex:1;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
 <header class="main-header">
   <div class="wrap nav">
     <div class="brand">
       <img src="/fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
       <div class="brandname">Fasqoo</div>
     </div>
-
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
     <button id="installButton" class="install-btn" type="button" hidden>
       <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span class="install-label" data-i18n="installApp">Install for Windows</span>
     </button>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
     <nav class="main-menu" id="mainMenu">
       <a href="faq.html" data-i18n="navFaq">FAQ</a>
       <a href="network-status.html" class="active" data-i18n="navStatus">Network Status</a>
@@ -543,40 +484,38 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
             <option value="ar">العربية</option>
           </select>
         </div>
-        <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle theme">☾</button>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme">☾</button>
       </div>
     </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-kicker"><span class="hero-kicker-dot"></span> <span data-i18n="heroKicker">Network Intelligence</span></div>
-  <div class="status-pill idle" id="mainStatusPill" role="status" aria-live="polite">
+  <div class="status-pill idle" id="mainStatusPill">
     <span class="status-dot"></span>
     <span id="mainStatusText" data-i18n="idle">READY — START THE MEASUREMENT</span>
   </div>
   <h1 data-i18n="pageTitle">Fasqoo Website Status</h1>
-  <p data-i18n="pageDescription">Shows how fast and reliably your browser currently reaches fasqoo.com. Every value here is a real measurement from this session — nothing is simulated or guessed.</p>
+  <p data-i18n="pageDescription">Shows how fast and reliably your browser currently reaches fasqoo.com.</p>
 </section>
 
 <main class="container">
 
-<!-- INFO BANNER -->
 <div class="card info-banner">
   <div class="info-banner-inner">
     <div class="info-banner-icon">🌐</div>
     <div class="info-banner-content">
-      <div class="info-banner-title" data-i18n="infoTitle">This page shows two perspectives on fasqoo.com</div>
+      <div class="info-banner-title" data-i18n="infoTitle">Two perspectives on fasqoo.com</div>
       <div class="info-banner-text">
-        <div>🟢 <strong style="color:var(--text);" data-i18n="infoServerLabel">Server status:</strong> <span data-i18n="infoServerText">Runs true 24/7 independent of you — measured from GitHub servers every 10 minutes.</span></div>
-        <div>🔵 <strong style="color:var(--text);" data-i18n="infoUserLabel">Your measurement:</strong> <span data-i18n="infoUserText">Tests your own connection — right now, in your browser.</span></div>
+        <div>🟢 <strong style="color:var(--text);" data-i18n="infoServerLabel">Server status:</strong> <span data-i18n="infoServerText">Runs 24/7 on GitHub servers every 10 minutes.</span></div>
+        <div>🔵 <strong style="color:var(--text);" data-i18n="infoUserLabel">Your measurement:</strong> <span data-i18n="infoUserText">Tests your own connection right now.</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- LIVE STRIP -->
 <div class="fasqoo-live-strip">
   <div class="fasqoo-live-item">
     <div class="fasqoo-live-label" data-i18n="liveTarget">Target</div>
@@ -596,7 +535,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </div>
 
-<!-- HEALTH SCORE -->
 <div class="section-title">
   <h2 data-i18n="healthTitle">Connection Score</h2>
   <p data-i18n="healthDesc">Calculated only from measurements this browser can actually perform.</p>
@@ -620,11 +558,10 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
   <div class="health-details">
     <h2 id="healthTitleDynamic" data-i18n="healthWaitingTitle">Waiting for measurement…</h2>
-    <p id="healthDescriptionDynamic" data-i18n="healthWaitingDesc">Click "Run Full Measurement" to perform a real network measurement. All values are based exclusively on actually measurable data.</p>
+    <p id="healthDescriptionDynamic" data-i18n="healthWaitingDesc">Click "Run Full Measurement" to perform a real network measurement.</p>
   </div>
 </div>
 
-<!-- OVERVIEW -->
 <div class="section-title">
   <h2 data-i18n="overview">Overview</h2>
   <p data-i18n="overviewDesc">24/7 server data (GitHub) + your own measurements.</p>
@@ -635,29 +572,28 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
     <div class="card-label" data-i18n="observedUptime">Server Availability</div>
     <div class="card-value" id="uptimeValue">—</div>
     <div class="card-small" data-i18n="observedUptimeSub">Measured 24/7 by GitHub</div>
-    <canvas class="sparkline" id="sparkUptime" aria-hidden="true"></canvas>
+    <canvas class="sparkline" id="sparkUptime"></canvas>
   </div>
   <div class="card overview-card">
     <div class="card-label" data-i18n="checks24h">Server Checks 24h</div>
     <div class="card-value" id="checksValue">0</div>
     <div class="card-small" data-i18n="checks24hSub">Checked every 10 minutes</div>
-    <canvas class="sparkline" id="sparkChecks" aria-hidden="true"></canvas>
+    <canvas class="sparkline" id="sparkChecks"></canvas>
   </div>
   <div class="card overview-card">
     <div class="card-label" data-i18n="currentResponse">Server Response Time</div>
     <div class="card-value" id="responseValue">—</div>
     <div class="card-small">GitHub → fasqoo.com</div>
-    <canvas class="sparkline" id="sparkResponse" aria-hidden="true"></canvas>
+    <canvas class="sparkline" id="sparkResponse"></canvas>
   </div>
   <div class="card overview-card">
     <div class="card-label" data-i18n="lastChecked">Last Checked</div>
     <div class="card-value" id="lastChecked">—</div>
     <div class="card-small" id="lastCheckedDate">—</div>
-    <canvas class="sparkline" id="sparkLastCheck" aria-hidden="true"></canvas>
+    <canvas class="sparkline" id="sparkLastCheck"></canvas>
   </div>
 </div>
 
-<!-- CHECK PANEL -->
 <div class="card check-panel">
   <div class="check-info">
     <div class="big-status idle" id="bigStatus">◐</div>
@@ -669,7 +605,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   <button class="btn-primary" id="checkBtn" data-i18n="runCheck">Run Full Measurement</button>
 </div>
 
-<!-- DIAGNOSTICS -->
 <div class="section-title">
   <h2 data-i18n="diagnostics">Your Measurements</h2>
   <p data-i18n="diagnosticsDesc">Collected directly from this visitor's current connection.</p>
@@ -677,10 +612,7 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 
 <div class="diagnostic-grid">
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="latency">Latency</span></div>
-      <span class="badge" id="latencyBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="latency">Latency</div><span class="badge" id="latencyBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="latencyValue">—</span><span class="metric-unit">ms</span></div>
     <div class="percentiles">
       <div class="pctl-item"><div class="pctl-label">P50</div><div class="pctl-value" id="latencyP50">—</div></div>
@@ -689,12 +621,8 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
     </div>
     <div class="metric-description" data-i18n="latencyDesc">Median (P50), 95th and 99th percentile of all measurements.</div>
   </div>
-
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="jitter">Jitter</span></div>
-      <span class="badge" id="jitterBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="jitter">Jitter</div><span class="badge" id="jitterBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="jitterValue">—</span><span class="metric-unit">ms</span></div>
     <div class="percentiles">
       <div class="pctl-item"><div class="pctl-label">P50</div><div class="pctl-value" id="jitterP50">—</div></div>
@@ -703,45 +631,28 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
     </div>
     <div class="metric-description" data-i18n="jitterDesc">Variation of response time between requests.</div>
   </div>
-
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="failureRate">Failure Rate</span></div>
-      <span class="badge" id="failureBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="failureRate">Failure Rate</div><span class="badge" id="failureBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="failureValue">—</span><span class="metric-unit">%</span></div>
     <div class="metric-description" data-i18n="failureRateDesc">Percentage of failed requests during measurement.</div>
   </div>
-
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="httpResponse">HTTP Response</span></div>
-      <span class="badge" id="httpBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="httpResponse">HTTP Response</div><span class="badge" id="httpBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="httpValue">—</span></div>
     <div class="metric-description" data-i18n="httpResponseDesc">Last HTTP status returned by fasqoo.com.</div>
   </div>
-
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="httpsLabel">HTTPS</span></div>
-      <span class="badge" id="httpsBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="httpsLabel">HTTPS</div><span class="badge" id="httpsBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="httpsValue">—</span></div>
     <div class="metric-description" data-i18n="httpsDesc">Encrypted connection to the server.</div>
   </div>
-
   <div class="card diagnostic-card">
-    <div class="diagnostic-top">
-      <div class="diagnostic-name"><span data-i18n="networkApi">Browser Network API</span></div>
-      <span class="badge" id="networkApiBadge" data-i18n="badgeWaiting">Waiting</span>
-    </div>
+    <div class="diagnostic-top"><div class="diagnostic-name" data-i18n="networkApi">Browser Network API</div><span class="badge" id="networkApiBadge" data-i18n="badgeWaiting">Waiting</span></div>
     <div class="metric"><span id="effectiveTypeValue">—</span></div>
     <div class="metric-description" data-i18n="networkApiDesc">Connection info exposed by the browser.</div>
   </div>
 </div>
 
-<!-- TIMING -->
 <div class="section-title">
   <h2 data-i18n="timingTitle">Request Timing</h2>
   <p data-i18n="timingDesc">Where time is actually spent during connection setup.</p>
@@ -760,7 +671,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </div>
 
-<!-- PROFILE -->
 <div class="section-title">
   <h2 data-i18n="networkProfile">Device & Connection Profile</h2>
   <p data-i18n="networkProfileDesc">Technical information your browser provides itself.</p>
@@ -777,7 +687,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   <div class="card profile-card"><div class="profile-label" data-i18n="windowSize">Window Size</div><div class="profile-value" id="screenValue">—</div></div>
 </div>
 
-<!-- PROBLEMS -->
 <div class="section-title">
   <h2 data-i18n="problemTitle">Findings</h2>
   <p data-i18n="problemDesc">Only things this measurement actually shows — with explanation.</p>
@@ -799,7 +708,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </div>
 
-<!-- TEST SUITE -->
 <div class="section-title">
   <h2 data-i18n="testSuite">Test Overview</h2>
   <p data-i18n="testSuiteDesc">Technical test results from this browser session.</p>
@@ -830,13 +738,12 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 
 <div class="notice">
   <strong data-i18n="limitTitle">What this page can't do:</strong>
-  <span data-i18n="limitText">A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity. This page deliberately shows only what is actually measurable over HTTP.</span>
+  <span data-i18n="limitText">A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity.</span>
 </div>
 
-<!-- BROWSER MONITOR -->
 <div class="section-title">
   <h2 data-i18n="monitorTitle">24-Hour Monitoring</h2>
-  <p data-i18n="monitorDesc">Server monitor runs automatically. Optional browser monitor for additional own history data.</p>
+  <p data-i18n="monitorDesc">Server monitor runs automatically. Optional browser monitor for additional data.</p>
 </div>
 
 <section class="monitor-panel card">
@@ -844,11 +751,11 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
     <div>
       <div class="section-kicker">👤 <span data-i18n="browserMonitorKicker">YOUR BROWSER MONITOR</span></div>
       <h2 data-i18n="monitorHeadline">Your Personal Browser Monitor</h2>
-      <p data-i18n="monitorSub">Activate this optional monitor to observe your own connection over hours. The server status above already runs automatically — this is about YOUR session.</p>
+      <p data-i18n="monitorSub">Activate this optional monitor to observe your own connection over hours.</p>
     </div>
     <div class="monitor-actions">
       <label class="monitor-toggle">
-        <input type="checkbox" id="monitorToggle" aria-label="Enable monitoring">
+        <input type="checkbox" id="monitorToggle">
         <span class="toggle-ui"></span>
         <span data-i18n="monitorOn">Monitoring ON</span>
       </label>
@@ -860,14 +767,12 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
       </select>
     </div>
   </div>
-
   <div class="monitor-grid">
     <div class="monitor-stat"><span data-i18n="monitorStatusLabel">Status</span><strong id="monitorStatus">OFF</strong></div>
     <div class="monitor-stat"><span data-i18n="monitorChecksLabel">Checks 24h</span><strong id="monitorChecks">0</strong></div>
     <div class="monitor-stat"><span data-i18n="monitorAvailLabel">Availability</span><strong id="monitorAvailability">—</strong></div>
     <div class="monitor-stat"><span data-i18n="monitorLastLabel">Last Check</span><strong id="monitorLastCheck">—</strong></div>
   </div>
-
   <div class="monitor-chart-wrap">
     <div class="monitor-chart-title">
       <strong data-i18n="monitorChartTitle">Response History (24h)</strong>
@@ -875,15 +780,13 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
     </div>
     <canvas id="monitorChart" height="170"></canvas>
   </div>
-
   <div class="monitor-note">
     <strong class="monitor-note-title" data-i18n="monitorNoteTitle">ℹ️ Two different monitors:</strong>
-    <div>✅ <strong style="color:var(--green-2);" data-i18n="monitorNoteServer">Server monitor (above):</strong> <span data-i18n="monitorNoteServerText">Runs true 24/7 on GitHub servers — independent of you. Checks fasqoo.com every 10 minutes and stores the history.</span></div>
-    <div style="margin-top:6px;">👤 <strong style="color:var(--primary);" data-i18n="monitorNoteBrowser">Browser monitor (here):</strong> <span data-i18n="monitorNoteBrowserText">This section shows your own connection. It only runs while you keep this page open — as a personal add-on tool.</span></div>
+    <div>✅ <strong style="color:var(--green-2);" data-i18n="monitorNoteServer">Server monitor (above):</strong> <span data-i18n="monitorNoteServerText">Runs 24/7 on GitHub servers, every 10 minutes.</span></div>
+    <div style="margin-top:6px;">👤 <strong style="color:var(--primary);" data-i18n="monitorNoteBrowser">Browser monitor (here):</strong> <span data-i18n="monitorNoteBrowserText">Runs only while you keep this page open.</span></div>
   </div>
 </section>
 
-<!-- SERVER CHART -->
 <div class="section-title">
   <h2 data-i18n="responseHistory">Server History</h2>
   <p data-i18n="responseHistoryDesc">24/7 measurements from GitHub servers, loaded from history.json.</p>
@@ -892,7 +795,7 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 <div class="card chart-card">
   <div class="chart-header">
     <h3 data-i18n="last24h">Server Response Times</h3>
-    <div class="period-tabs" role="tablist">
+    <div class="period-tabs">
       <button class="period-tab active" data-period="24h">24 h</button>
       <button class="period-tab" data-period="7d">7 d</button>
       <button class="period-tab" data-period="30d">30 d</button>
@@ -907,7 +810,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </div>
 
-<!-- TIMELINE -->
 <div class="section-title">
   <h2 data-i18n="incidents">Server Incident Timeline</h2>
   <p data-i18n="incidentsDesc">Chronological list of all 24/7 server checks.</p>
@@ -923,7 +825,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </div>
 
-<!-- REPORT -->
 <div class="section-title">
   <h2 data-i18n="reportTitle">Report</h2>
   <p data-i18n="reportDesc">Compact summary to copy, save or share.</p>
@@ -933,20 +834,19 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   <div class="report-actions">
     <button class="btn-secondary" id="copyReportBtn" data-i18n="copyReport">Copy Report</button>
     <button class="btn-secondary" id="downloadTxtBtn" data-i18n="downloadReport">Download TXT</button>
-    <button class="btn-secondary" id="downloadJsonBtn">Export JSON</button>
-    <button class="btn-secondary" id="downloadCsvBtn">Export CSV</button>
+    <button class="btn-secondary" id="downloadJsonBtn" data-i18n="downloadJson">Export JSON</button>
+    <button class="btn-secondary" id="downloadCsvBtn" data-i18n="downloadCsv">Export CSV</button>
   </div>
   <textarea class="report-preview" id="reportPreview" readonly></textarea>
 </div>
 
 <div class="accuracy">
   <strong data-i18n="accuracyTitle">Measurement accuracy and limitations</strong>
-  <p data-i18n="accuracyText">These measurements describe only the path between your browser and fasqoo.com. They do not automatically prove that your ISP, a router, or a DNS setting is responsible for a problem.</p>
+  <p data-i18n="accuracyText">These measurements describe only the path between your browser and fasqoo.com.</p>
 </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
 <div class="wrap foot">
     <div class="fasqoo-footer-copy">
@@ -954,8 +854,7 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
       <div data-i18n="ftPowered">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</div>
       <div data-i18n="ftIndependent">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
     </div>
-
-    <nav class="fasqoo-footer-links" aria-label="Footer navigation">
+    <nav class="fasqoo-footer-links">
       <a href="/accessibility.html" data-i18n="ftAccess">Accessibility</a>
       <a href="/impressum.html" data-i18n="ftImprint">Imprint</a>
       <a href="/privacy-policy.html" data-i18n="ftPrivacy">Privacy Policy</a>
@@ -967,236 +866,739 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 
 <script>
 /* ============================================================
-   TRANSLATIONS
+   TRANSLATIONS — ALL 10 LANGUAGES, COMPLETE
    ============================================================ */
 const TRANSLATIONS = {
   en:{
-    liteBtn:"Fasqoo Lite", installApp:"Install for Windows",
-    navFaq:"FAQ", navStatus:"Network Status", navDiag:"IT Diagnostics", navAbout:"About Us", navWidget:"Widget",
-    heroKicker:"Network Intelligence",
-    idle:"READY — START THE MEASUREMENT",
-    running:"MEASUREMENT RUNNING...",
-    reachable:"FASQOO.COM IS REACHABLE", failed:"CHECK FAILED",
+    liteBtn:"Fasqoo Lite",installApp:"Install for Windows",
+    navFaq:"FAQ",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",navWidget:"Widget",
+    heroKicker:"Network Intelligence",idle:"READY — START THE MEASUREMENT",running:"MEASUREMENT RUNNING...",
+    reachable:"FASQOO.COM IS REACHABLE",failed:"CHECK FAILED",
     pageTitle:"Fasqoo Website Status",
-    pageDescription:"Shows how fast and reliably your browser currently reaches fasqoo.com. Every value here is a real measurement from this session — nothing is simulated or guessed.",
-    infoTitle:"This page shows two perspectives on fasqoo.com",
-    infoServerLabel:"Server status:", infoServerText:"Runs true 24/7 independent of you — measured from GitHub servers every 10 minutes.",
-    infoUserLabel:"Your measurement:", infoUserText:"Tests your own connection — right now, in your browser.",
-    liveTarget:"Target", liveServer:"Server Status", liveBrowser:"Browser", liveConnection:"Your Connection",
-    loadingData:"Loading 24/7 data…", pleaseWait:"Please wait.",
-    healthTitle:"Connection Score",
-    healthDesc:"Calculated only from measurements this browser can actually perform.",
-    healthWaitingTitle:"Waiting for measurement…",
-    healthWaitingDesc:'Click "Run Full Measurement" to perform a real network measurement.',
-    overview:"Overview", overviewDesc:"24/7 server data (GitHub) + your own measurements.",
-    observedUptime:"Server Availability", observedUptimeSub:"Measured 24/7 by GitHub",
-    checks24h:"Server Checks 24h", checks24hSub:"Checked every 10 minutes",
-    currentResponse:"Server Response Time", lastChecked:"Last Checked",
-    checkTitleReady:"Ready to measure",
-    checkSubtitleReady:"Click below to run the real network measurement",
-    checkTitleAnalyzing:"Analyzing connection…",
-    checkSubtitleAnalyzing:"Real browser measurement in progress",
-    checkTitleSuccess:"fasqoo.com is reachable",
-    checkTitleFail:"Check failed",
-    realMeasurement:"Real browser measurement",
-    runCheck:"Run Full Measurement", runningBtn:"Measuring…",
-    diagnostics:"Your Measurements", diagnosticsDesc:"Collected directly from this visitor's current connection.",
-    latency:"Latency", latencyDesc:"Median (P50), 95th and 99th percentile of all measurements.",
-    jitter:"Jitter", jitterDesc:"Variation of response time between requests.",
-    failureRate:"Failure Rate", failureRateDesc:"Percentage of failed requests during measurement.",
-    httpResponse:"HTTP Response", httpResponseDesc:"Last HTTP status returned by fasqoo.com.",
-    httpsLabel:"HTTPS", httpsDesc:"Encrypted connection to the server.",
-    networkApi:"Browser Network API", networkApiDesc:"Connection info exposed by the browser.",
-    timingTitle:"Request Timing", timingTitle2:"Connection Setup in Detail",
-    timingDesc:"Where time is actually spent during connection setup.",
-    networkProfile:"Device & Connection Profile", networkProfileDesc:"Technical information your browser provides itself.",
-    connType:"Connection Type", downlink:"Estimated Downlink", rtt:"Browser RTT", saveData:"Data Saver",
-    onlineStateLabel:"Online State", protocol:"Protocol", browser:"Browser", windowSize:"Window Size",
-    problemTitle:"Findings", problemDesc:"Only things this measurement actually shows — with explanation.",
-    noMeasurementTitle:"No measurement yet", noMeasurementSub:"Start the measurement to see findings",
-    testSuite:"Test Overview", testSuiteDesc:"Technical test results from this browser session.",
-    testInternetName:"Browser Online State", testHttpName:"fasqoo.com Reachability",
-    testHttpsName:"HTTPS Transport", testStabilityName:"Connection Stability",
-    limitTitle:"What this page can't do:",
-    limitText:"A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity. This page deliberately shows only what is actually measurable over HTTP.",
-    monitorTitle:"24-Hour Monitoring",
-    monitorDesc:"Server monitor runs automatically. Optional browser monitor for additional own history data.",
-    browserMonitorKicker:"YOUR BROWSER MONITOR",
-    monitorHeadline:"Your Personal Browser Monitor",
-    monitorSub:"Activate this optional monitor to observe your own connection over hours. The server status above already runs automatically — this is about YOUR session.",
-    monitorOn:"Monitoring ON", monitorStatusLabel:"Status", monitorChecksLabel:"Checks 24h",
-    monitorAvailLabel:"Availability", monitorLastLabel:"Last Check",
-    monitorChartTitle:"Response History (24h)",
-    monitorNoteTitle:"ℹ️ Two different monitors:",
-    monitorNoteServer:"Server monitor (above):",
-    monitorNoteServerText:"Runs true 24/7 on GitHub servers — independent of you. Checks fasqoo.com every 10 minutes and stores the history.",
-    monitorNoteBrowser:"Browser monitor (here):",
-    monitorNoteBrowserText:"This section shows your own connection. It only runs while you keep this page open — as a personal add-on tool.",
-    responseHistory:"Server History",
-    responseHistoryDesc:"24/7 measurements from GitHub servers, loaded from history.json.",
-    last24h:"Server Response Times", noData:"No server data yet.",
-    incidents:"Server Incident Timeline", incidentsDesc:"Chronological list of all 24/7 server checks.",
-    reportTitle:"Report", reportDesc:"Compact summary to copy, save or share.",
-    copyReport:"Copy Report", copied:"Copied", downloadReport:"Download TXT",
-    accuracyTitle:"Measurement accuracy and limitations",
-    accuracyText:"These measurements describe only the path between your browser and fasqoo.com. They do not automatically prove that your ISP, a router, or a DNS setting is responsible for a problem.",
+    pageDescription:"Shows how fast and reliably your browser currently reaches fasqoo.com.",
+    infoTitle:"Two perspectives on fasqoo.com",
+    infoServerLabel:"Server status:",infoServerText:"Runs 24/7 on GitHub servers every 10 minutes.",
+    infoUserLabel:"Your measurement:",infoUserText:"Tests your own connection right now.",
+    liveTarget:"Target",liveServer:"Server Status",liveBrowser:"Browser",liveConnection:"Your Connection",
+    loadingData:"Loading 24/7 data…",pleaseWait:"Please wait.",
+    healthTitle:"Connection Score",healthDesc:"Calculated only from measurements this browser can actually perform.",
+    healthWaitingTitle:"Waiting for measurement…",healthWaitingDesc:'Click "Run Full Measurement" to perform a real network measurement.',
+    overview:"Overview",overviewDesc:"24/7 server data (GitHub) + your own measurements.",
+    observedUptime:"Server Availability",observedUptimeSub:"Measured 24/7 by GitHub",
+    checks24h:"Server Checks 24h",checks24hSub:"Checked every 10 minutes",
+    currentResponse:"Server Response Time",lastChecked:"Last Checked",
+    checkTitleReady:"Ready to measure",checkSubtitleReady:"Click below to run the real network measurement",
+    checkTitleAnalyzing:"Analyzing connection…",checkSubtitleAnalyzing:"Real browser measurement in progress",
+    checkTitleSuccess:"fasqoo.com is reachable",checkTitleFail:"Check failed",realMeasurement:"Real browser measurement",
+    runCheck:"Run Full Measurement",runningBtn:"Measuring…",
+    diagnostics:"Your Measurements",diagnosticsDesc:"Collected directly from this visitor's current connection.",
+    latency:"Latency",latencyDesc:"Median (P50), 95th and 99th percentile of all measurements.",
+    jitter:"Jitter",jitterDesc:"Variation of response time between requests.",
+    failureRate:"Failure Rate",failureRateDesc:"Percentage of failed requests during measurement.",
+    httpResponse:"HTTP Response",httpResponseDesc:"Last HTTP status returned by fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Encrypted connection to the server.",
+    networkApi:"Browser Network API",networkApiDesc:"Connection info exposed by the browser.",
+    timingTitle:"Request Timing",timingTitle2:"Connection Setup in Detail",timingDesc:"Where time is actually spent during connection setup.",
+    networkProfile:"Device & Connection Profile",networkProfileDesc:"Technical information your browser provides itself.",
+    connType:"Connection Type",downlink:"Estimated Downlink",rtt:"Browser RTT",saveData:"Data Saver",
+    onlineStateLabel:"Online State",protocol:"Protocol",browser:"Browser",windowSize:"Window Size",
+    problemTitle:"Findings",problemDesc:"Only things this measurement actually shows — with explanation.",
+    noMeasurementTitle:"No measurement yet",noMeasurementSub:"Start the measurement to see findings",
+    testSuite:"Test Overview",testSuiteDesc:"Technical test results from this browser session.",
+    testInternetName:"Browser Online State",testHttpName:"fasqoo.com Reachability",testHttpsName:"HTTPS Transport",testStabilityName:"Connection Stability",
+    limitTitle:"What this page can't do:",limitText:"A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity.",
+    monitorTitle:"24-Hour Monitoring",monitorDesc:"Server monitor runs automatically. Optional browser monitor for additional data.",
+    browserMonitorKicker:"YOUR BROWSER MONITOR",monitorHeadline:"Your Personal Browser Monitor",
+    monitorSub:"Activate this optional monitor to observe your own connection over hours.",
+    monitorOn:"Monitoring ON",monitorStatusLabel:"Status",monitorChecksLabel:"Checks 24h",
+    monitorAvailLabel:"Availability",monitorLastLabel:"Last Check",monitorChartTitle:"Response History (24h)",
+    monitorNoteTitle:"ℹ️ Two different monitors:",monitorNoteServer:"Server monitor (above):",monitorNoteServerText:"Runs 24/7 on GitHub servers, every 10 minutes.",
+    monitorNoteBrowser:"Browser monitor (here):",monitorNoteBrowserText:"Runs only while you keep this page open.",
+    responseHistory:"Server History",responseHistoryDesc:"24/7 measurements from GitHub servers, loaded from history.json.",
+    last24h:"Server Response Times",noData:"No server data yet.",
+    incidents:"Server Incident Timeline",incidentsDesc:"Chronological list of all 24/7 server checks.",
+    reportTitle:"Report",reportDesc:"Compact summary to copy, save or share.",
+    copyReport:"Copy Report",copied:"Copied",downloadReport:"Download TXT",downloadJson:"Export JSON",downloadCsv:"Export CSV",
+    accuracyTitle:"Measurement accuracy and limitations",accuracyText:"These measurements describe only the path between your browser and fasqoo.com.",
     ftRights:"© 2026 Fasqoo. All rights reserved.",
     ftPowered:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
     ftIndependent:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
-    ftAccess:"Accessibility", ftImprint:"Imprint", ftPrivacy:"Privacy Policy", ftTerms:"Terms of Use", ftNoSell:"Do Not Sell My Data",
-    badgeWaiting:"Waiting", badgeGood:"Good", badgeElevated:"Elevated", badgeHigh:"High",
-    badgeStable:"Stable", badgeFluctuating:"Fluctuating", badgeOK:"OK", badgeFailed:"Failed",
-    badgeAvailable:"Available", badgeRestricted:"Restricted", badgeSecure:"Secure", badgeUnsecure:"Insecure",
-    notAvailable:"Not available", active:"Active", inactive:"Inactive", online:"Online", offline:"Offline",
-    scoreExcellent:"Excellent Connection", scoreExcellentDesc:"Measurements show a stable, fast connection to fasqoo.com.",
-    scoreGood:"Good Connection", scoreGoodDesc:"Overall normal, single values slightly elevated.",
-    scoreWarning:"Connection should be checked", scoreWarningDesc:"At least one measurement indicates degraded performance.",
-    scoreBad:"Significant issue detected", scoreBadDesc:"Multiple values indicate connection issues.",
-    every5:"Every 5 min", every15:"Every 15 min", every30:"Every 30 min", every60:"Every 60 min",
-    probOfflineTitle:"No Internet Connection", probOfflineEv:"Browser reports offline status.",
-    probLatencyTitle:"Elevated Response Time",
-    probJitterTitle:"Fluctuating Response Times",
-    probFailureTitle:"Repeated Failed Requests",
-    probHttpsTitle:"HTTPS Not Active",
-    probNoneTitle:"No Issues Detected",
-    probNotEnoughTitle:"Not Enough Data",
-    reachableCheck:"Reachable", failedCheck:"Failed"
+    ftAccess:"Accessibility",ftImprint:"Imprint",ftPrivacy:"Privacy Policy",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Data",
+    badgeWaiting:"Waiting",badgeGood:"Good",badgeElevated:"Elevated",badgeHigh:"High",
+    badgeStable:"Stable",badgeFluctuating:"Fluctuating",badgeOK:"OK",badgeFailed:"Failed",
+    badgeAvailable:"Available",badgeRestricted:"Restricted",badgeSecure:"Secure",badgeUnsecure:"Insecure",
+    notAvailable:"Not available",active:"Active",inactive:"Inactive",online:"Online",offline:"Offline",
+    scoreExcellent:"Excellent Connection",scoreExcellentDesc:"Measurements show a stable, fast connection to fasqoo.com.",
+    scoreGood:"Good Connection",scoreGoodDesc:"Overall normal, single values slightly elevated.",
+    scoreWarning:"Connection should be checked",scoreWarningDesc:"At least one measurement indicates degraded performance.",
+    scoreBad:"Significant issue detected",scoreBadDesc:"Multiple values indicate connection issues.",
+    every5:"Every 5 min",every15:"Every 15 min",every30:"Every 30 min",every60:"Every 60 min",
+    probOfflineTitle:"No Internet Connection",probOfflineEv:"Browser reports offline status.",
+    probLatencyTitle:"Elevated Response Time",probJitterTitle:"Fluctuating Response Times",
+    probFailureTitle:"Repeated Failed Requests",probHttpsTitle:"HTTPS Not Active",
+    probNoneTitle:"No Issues Detected",probNotEnoughTitle:"Not Enough Data",
+    reachableCheck:"Reachable",failedCheck:"Failed"
   },
   de:{
-    liteBtn:"Fasqoo Lite", installApp:"Für Windows installieren",
-    navFaq:"FAQ", navStatus:"Netzwerk-Status", navDiag:"IT-Diagnose", navAbout:"Über uns", navWidget:"Widget",
-    heroKicker:"Netzwerk-Intelligenz",
-    idle:"BEREIT — STARTE DIE MESSUNG",
-    running:"MESSUNG LÄUFT...",
-    reachable:"FASQOO.COM IST ERREICHBAR", failed:"PRÜFUNG FEHLGESCHLAGEN",
+    liteBtn:"Fasqoo Lite",installApp:"Für Windows installieren",
+    navFaq:"FAQ",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",navWidget:"Widget",
+    heroKicker:"Netzwerk-Intelligenz",idle:"BEREIT — STARTE DIE MESSUNG",running:"MESSUNG LÄUFT...",
+    reachable:"FASQOO.COM IST ERREICHBAR",failed:"PRÜFUNG FEHLGESCHLAGEN",
     pageTitle:"Fasqoo Website-Status",
-    pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.",
-    infoTitle:"Diese Seite zeigt zwei Perspektiven auf fasqoo.com",
-    infoServerLabel:"Server-Status:", infoServerText:"Läuft echtes 24/7 unabhängig von dir — gemessen von GitHub-Servern aus, alle 10 Minuten.",
-    infoUserLabel:"Deine Messung:", infoUserText:"Testet deine eigene Verbindung — direkt jetzt, in deinem Browser.",
-    liveTarget:"Ziel", liveServer:"Server-Status", liveBrowser:"Browser", liveConnection:"Deine Verbindung",
-    loadingData:"Lade 24/7-Daten…", pleaseWait:"Bitte warten.",
-    healthTitle:"Verbindungs-Score",
-    healthDesc:"Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.",
-    healthWaitingTitle:"Warte auf Messung…",
-    healthWaitingDesc:'Klicke auf „Vollständige Messung starten", um eine echte Netzwerkmessung durchzuführen.',
-    overview:"Übersicht", overviewDesc:"24/7-Server-Daten (GitHub) + deine eigenen Messungen.",
-    observedUptime:"Server-Erreichbarkeit", observedUptimeSub:"24/7 gemessen von GitHub",
-    checks24h:"Server-Checks 24h", checks24hSub:"Alle 10 Minuten geprüft",
-    currentResponse:"Server-Antwortzeit", lastChecked:"Zuletzt geprüft",
-    checkTitleReady:"Bereit für die Messung",
-    checkSubtitleReady:"Klicke unten, um die echte Netzwerkmessung zu starten",
-    checkTitleAnalyzing:"Verbindung wird analysiert…",
-    checkSubtitleAnalyzing:"Echte Browser-Messung läuft",
-    checkTitleSuccess:"fasqoo.com ist erreichbar",
-    checkTitleFail:"Prüfung fehlgeschlagen",
-    realMeasurement:"Echte Browser-Messung",
-    runCheck:"Vollständige Messung starten", runningBtn:"Messung läuft…",
-    diagnostics:"Deine Messwerte", diagnosticsDesc:"Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.",
-    latency:"Latenz", latencyDesc:"Median (P50), 95. und 99. Perzentil aller Messungen.",
-    jitter:"Jitter", jitterDesc:"Variation der Antwortzeit zwischen den Anfragen.",
-    failureRate:"Fehlerrate", failureRateDesc:"Anteil fehlgeschlagener Anfragen während der Messung.",
-    httpResponse:"HTTP-Antwort", httpResponseDesc:"Letzter HTTP-Status, den fasqoo.com zurückgegeben hat.",
-    httpsLabel:"HTTPS", httpsDesc:"Verschlüsselte Verbindung zum Server.",
-    networkApi:"Browser-Netzwerkdaten", networkApiDesc:"Vom Browser offengelegte Verbindungsinformation.",
-    timingTitle:"Request-Timing", timingTitle2:"Verbindungsaufbau im Detail",
-    timingDesc:"Wo die Zeit im Verbindungsaufbau tatsächlich verbraucht wird.",
-    networkProfile:"Geräte- & Verbindungsprofil", networkProfileDesc:"Technische Angaben, die dein Browser selbst bereitstellt.",
-    connType:"Verbindungstyp", downlink:"Gesch. Downlink", rtt:"Browser-RTT", saveData:"Datensparmodus",
-    onlineStateLabel:"Online-Status", protocol:"Protokoll", browser:"Browser", windowSize:"Fenstergröße",
-    problemTitle:"Auffälligkeiten", problemDesc:"Nur Dinge, die diese Messung tatsächlich belegt — mit Erklärung.",
-    noMeasurementTitle:"Noch keine Messung", noMeasurementSub:"Starte die Messung, um Auffälligkeiten zu sehen",
-    testSuite:"Testübersicht", testSuiteDesc:"Technische Testergebnisse dieser Browser-Sitzung.",
-    testInternetName:"Browser-Online-Status", testHttpName:"Erreichbarkeit fasqoo.com",
-    testHttpsName:"HTTPS-Transport", testStabilityName:"Verbindungsstabilität",
-    limitTitle:"Was diese Seite nicht kann:",
-    limitText:"Ein Browser kann keinen echten Paketverlust (ICMP), kein Traceroute und keine ISP-Identität ermitteln. Diese Seite zeigt deshalb bewusst nur das, was per HTTP tatsächlich messbar ist.",
-    monitorTitle:"24-Stunden-Monitoring",
-    monitorDesc:"Server-Monitor läuft automatisch. Optionaler Browser-Monitor für zusätzliche eigene Verlaufsdaten.",
-    browserMonitorKicker:"DEIN BROWSER-MONITOR",
-    monitorHeadline:"Dein persönlicher Browser-Monitor",
-    monitorSub:"Aktiviere diesen optionalen Monitor, um deine eigene Verbindung über Stunden zu beobachten. Der Server-Status oben läuft bereits automatisch — hier geht es um DEINE Sitzung.",
-    monitorOn:"Monitoring AN", monitorStatusLabel:"Status", monitorChecksLabel:"Prüfungen 24h",
-    monitorAvailLabel:"Erreichbarkeit", monitorLastLabel:"Letzte Prüfung",
-    monitorChartTitle:"Antwortzeit-Verlauf (24 Std.)",
-    monitorNoteTitle:"ℹ️ Zwei verschiedene Monitore:",
-    monitorNoteServer:"Server-Monitor (oben):",
-    monitorNoteServerText:"Läuft echtes 24/7 auf GitHub-Servern — unabhängig von dir. Prüft fasqoo.com alle 10 Minuten und speichert den Verlauf.",
-    monitorNoteBrowser:"Browser-Monitor (hier):",
-    monitorNoteBrowserText:"Dieser Bereich zeigt deine eigene Verbindung. Er läuft nur, solange du diese Seite geöffnet lässt — als persönliches Zusatz-Tool.",
-    responseHistory:"Server-Verlauf",
-    responseHistoryDesc:"24/7-Messungen von GitHub-Servern, aus history.json geladen.",
-    last24h:"Server-Antwortzeiten", noData:"Noch keine Server-Daten.",
-    incidents:"Server-Vorfalls-Timeline", incidentsDesc:"Chronologische Auflistung aller 24/7-Server-Checks.",
-    reportTitle:"Bericht", reportDesc:"Kompakte Zusammenfassung zum Kopieren, Speichern oder Teilen.",
-    copyReport:"Bericht kopieren", copied:"Kopiert", downloadReport:"TXT herunterladen",
-    accuracyTitle:"Messgenauigkeit und Grenzen",
-    accuracyText:"Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com. Sie beweisen nicht automatisch, dass dein Internetanbieter, ein Router oder eine DNS-Einstellung für ein Problem verantwortlich ist.",
+    pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht.",
+    infoTitle:"Zwei Perspektiven auf fasqoo.com",
+    infoServerLabel:"Server-Status:",infoServerText:"Läuft 24/7 auf GitHub-Servern, alle 10 Minuten.",
+    infoUserLabel:"Deine Messung:",infoUserText:"Testet deine eigene Verbindung – direkt jetzt.",
+    liveTarget:"Ziel",liveServer:"Server-Status",liveBrowser:"Browser",liveConnection:"Deine Verbindung",
+    loadingData:"Lade 24/7-Daten…",pleaseWait:"Bitte warten.",
+    healthTitle:"Verbindungs-Score",healthDesc:"Berechnet ausschließlich aus den Messungen dieses Browsers.",
+    healthWaitingTitle:"Warte auf Messung…",healthWaitingDesc:'Klicke auf „Vollständige Messung starten", um eine echte Netzwerkmessung durchzuführen.',
+    overview:"Übersicht",overviewDesc:"24/7-Server-Daten (GitHub) + deine eigenen Messungen.",
+    observedUptime:"Server-Erreichbarkeit",observedUptimeSub:"24/7 gemessen von GitHub",
+    checks24h:"Server-Checks 24h",checks24hSub:"Alle 10 Minuten geprüft",
+    currentResponse:"Server-Antwortzeit",lastChecked:"Zuletzt geprüft",
+    checkTitleReady:"Bereit für die Messung",checkSubtitleReady:"Klicke unten, um die echte Netzwerkmessung zu starten",
+    checkTitleAnalyzing:"Verbindung wird analysiert…",checkSubtitleAnalyzing:"Echte Browser-Messung läuft",
+    checkTitleSuccess:"fasqoo.com ist erreichbar",checkTitleFail:"Prüfung fehlgeschlagen",realMeasurement:"Echte Browser-Messung",
+    runCheck:"Vollständige Messung starten",runningBtn:"Messung läuft…",
+    diagnostics:"Deine Messwerte",diagnosticsDesc:"Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.",
+    latency:"Latenz",latencyDesc:"Median (P50), 95. und 99. Perzentil aller Messungen.",
+    jitter:"Jitter",jitterDesc:"Variation der Antwortzeit zwischen den Anfragen.",
+    failureRate:"Fehlerrate",failureRateDesc:"Anteil fehlgeschlagener Anfragen während der Messung.",
+    httpResponse:"HTTP-Antwort",httpResponseDesc:"Letzter HTTP-Status, den fasqoo.com zurückgegeben hat.",
+    httpsLabel:"HTTPS",httpsDesc:"Verschlüsselte Verbindung zum Server.",
+    networkApi:"Browser-Netzwerkdaten",networkApiDesc:"Vom Browser offengelegte Verbindungsinformation.",
+    timingTitle:"Request-Timing",timingTitle2:"Verbindungsaufbau im Detail",timingDesc:"Wo die Zeit im Verbindungsaufbau tatsächlich verbraucht wird.",
+    networkProfile:"Geräte- & Verbindungsprofil",networkProfileDesc:"Technische Angaben, die dein Browser selbst bereitstellt.",
+    connType:"Verbindungstyp",downlink:"Gesch. Downlink",rtt:"Browser-RTT",saveData:"Datensparmodus",
+    onlineStateLabel:"Online-Status",protocol:"Protokoll",browser:"Browser",windowSize:"Fenstergröße",
+    problemTitle:"Auffälligkeiten",problemDesc:"Nur Dinge, die diese Messung tatsächlich belegt.",
+    noMeasurementTitle:"Noch keine Messung",noMeasurementSub:"Starte die Messung, um Auffälligkeiten zu sehen",
+    testSuite:"Testübersicht",testSuiteDesc:"Technische Testergebnisse dieser Browser-Sitzung.",
+    testInternetName:"Browser-Online-Status",testHttpName:"Erreichbarkeit fasqoo.com",testHttpsName:"HTTPS-Transport",testStabilityName:"Verbindungsstabilität",
+    limitTitle:"Was diese Seite nicht kann:",limitText:"Ein Browser kann keinen echten Paketverlust (ICMP), kein Traceroute und keine ISP-Identität ermitteln.",
+    monitorTitle:"24-Stunden-Monitoring",monitorDesc:"Server-Monitor läuft automatisch. Optionaler Browser-Monitor für zusätzliche Daten.",
+    browserMonitorKicker:"DEIN BROWSER-MONITOR",monitorHeadline:"Dein persönlicher Browser-Monitor",
+    monitorSub:"Aktiviere diesen optionalen Monitor, um deine eigene Verbindung über Stunden zu beobachten.",
+    monitorOn:"Monitoring AN",monitorStatusLabel:"Status",monitorChecksLabel:"Prüfungen 24h",
+    monitorAvailLabel:"Erreichbarkeit",monitorLastLabel:"Letzte Prüfung",monitorChartTitle:"Antwortzeit-Verlauf (24 Std.)",
+    monitorNoteTitle:"ℹ️ Zwei verschiedene Monitore:",monitorNoteServer:"Server-Monitor (oben):",monitorNoteServerText:"Läuft 24/7 auf GitHub-Servern, alle 10 Minuten.",
+    monitorNoteBrowser:"Browser-Monitor (hier):",monitorNoteBrowserText:"Läuft nur, solange du diese Seite geöffnet lässt.",
+    responseHistory:"Server-Verlauf",responseHistoryDesc:"24/7-Messungen von GitHub-Servern, aus history.json geladen.",
+    last24h:"Server-Antwortzeiten",noData:"Noch keine Server-Daten.",
+    incidents:"Server-Vorfalls-Timeline",incidentsDesc:"Chronologische Auflistung aller 24/7-Server-Checks.",
+    reportTitle:"Bericht",reportDesc:"Kompakte Zusammenfassung zum Kopieren, Speichern oder Teilen.",
+    copyReport:"Bericht kopieren",copied:"Kopiert",downloadReport:"TXT herunterladen",downloadJson:"JSON exportieren",downloadCsv:"CSV exportieren",
+    accuracyTitle:"Messgenauigkeit und Grenzen",accuracyText:"Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com.",
     ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",
     ftPowered:"Betrieben über das Cloudflare-Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",
     ftIndependent:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.",
-    ftAccess:"Barrierefreiheit", ftImprint:"Impressum", ftPrivacy:"Datenschutz", ftTerms:"Nutzungsbedingungen", ftNoSell:"Daten nicht verkaufen",
-    badgeWaiting:"Wartet", badgeGood:"Gut", badgeElevated:"Erhöht", badgeHigh:"Hoch",
-    badgeStable:"Stabil", badgeFluctuating:"Schwankend", badgeOK:"OK", badgeFailed:"Fehler",
-    badgeAvailable:"Verfügbar", badgeRestricted:"Eingeschränkt", badgeSecure:"Sicher", badgeUnsecure:"Unsicher",
-    notAvailable:"Nicht verfügbar", active:"Aktiv", inactive:"Inaktiv", online:"Online", offline:"Offline",
-    scoreExcellent:"Sehr gute Verbindung", scoreExcellentDesc:"Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com.",
-    scoreGood:"Gute Verbindung", scoreGoodDesc:"Insgesamt unauffällig, einzelne Werte sind leicht erhöht.",
-    scoreWarning:"Verbindung sollte geprüft werden", scoreWarningDesc:"Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin.",
-    scoreBad:"Deutliche Auffälligkeit erkannt", scoreBadDesc:"Mehrere Messwerte deuten auf ein Verbindungsproblem hin.",
-    every5:"Alle 5 Min", every15:"Alle 15 Min", every30:"Alle 30 Min", every60:"Alle 60 Min",
-    probOfflineTitle:"Keine Internetverbindung", probOfflineEv:"Der Browser meldet einen Offline-Status.",
-    probLatencyTitle:"Erhöhte Antwortzeit",
-    probJitterTitle:"Schwankende Antwortzeiten",
-    probFailureTitle:"Wiederholte fehlgeschlagene Anfragen",
-    probHttpsTitle:"HTTPS ist nicht aktiv",
-    probNoneTitle:"Keine Auffälligkeit erkannt",
-    probNotEnoughTitle:"Noch nicht genug Daten",
-    reachableCheck:"Erreichbar", failedCheck:"Fehlgeschlagen"
+    ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftPrivacy:"Datenschutz",ftTerms:"Nutzungsbedingungen",ftNoSell:"Daten nicht verkaufen",
+    badgeWaiting:"Wartet",badgeGood:"Gut",badgeElevated:"Erhöht",badgeHigh:"Hoch",
+    badgeStable:"Stabil",badgeFluctuating:"Schwankend",badgeOK:"OK",badgeFailed:"Fehler",
+    badgeAvailable:"Verfügbar",badgeRestricted:"Eingeschränkt",badgeSecure:"Sicher",badgeUnsecure:"Unsicher",
+    notAvailable:"Nicht verfügbar",active:"Aktiv",inactive:"Inaktiv",online:"Online",offline:"Offline",
+    scoreExcellent:"Sehr gute Verbindung",scoreExcellentDesc:"Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com.",
+    scoreGood:"Gute Verbindung",scoreGoodDesc:"Insgesamt unauffällig, einzelne Werte sind leicht erhöht.",
+    scoreWarning:"Verbindung sollte geprüft werden",scoreWarningDesc:"Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin.",
+    scoreBad:"Deutliche Auffälligkeit erkannt",scoreBadDesc:"Mehrere Messwerte deuten auf ein Verbindungsproblem hin.",
+    every5:"Alle 5 Min",every15:"Alle 15 Min",every30:"Alle 30 Min",every60:"Alle 60 Min",
+    probOfflineTitle:"Keine Internetverbindung",probOfflineEv:"Der Browser meldet einen Offline-Status.",
+    probLatencyTitle:"Erhöhte Antwortzeit",probJitterTitle:"Schwankende Antwortzeiten",
+    probFailureTitle:"Wiederholte fehlgeschlagene Anfragen",probHttpsTitle:"HTTPS ist nicht aktiv",
+    probNoneTitle:"Keine Auffälligkeit erkannt",probNotEnoughTitle:"Noch nicht genug Daten",
+    reachableCheck:"Erreichbar",failedCheck:"Fehlgeschlagen"
+  },
+  fr:{
+    liteBtn:"Fasqoo Lite",installApp:"Installer pour Windows",
+    navFaq:"FAQ",navStatus:"État du réseau",navDiag:"Diagnostic IT",navAbout:"À propos",navWidget:"Widget",
+    heroKicker:"Intelligence Réseau",idle:"PRÊT — DÉMARREZ LA MESURE",running:"MESURE EN COURS...",
+    reachable:"FASQOO.COM EST ACCESSIBLE",failed:"ÉCHEC DE LA VÉRIFICATION",
+    pageTitle:"État du site Fasqoo",
+    pageDescription:"Montre la rapidité et la fiabilité avec lesquelles votre navigateur atteint fasqoo.com.",
+    infoTitle:"Deux perspectives sur fasqoo.com",
+    infoServerLabel:"Statut serveur:",infoServerText:"Tourne 24/7 sur les serveurs GitHub, toutes les 10 minutes.",
+    infoUserLabel:"Votre mesure:",infoUserText:"Teste votre propre connexion maintenant.",
+    liveTarget:"Cible",liveServer:"Statut du serveur",liveBrowser:"Navigateur",liveConnection:"Votre connexion",
+    loadingData:"Chargement des données 24/7…",pleaseWait:"Veuillez patienter.",
+    healthTitle:"Score de connexion",healthDesc:"Calculé uniquement à partir des mesures que ce navigateur peut réellement effectuer.",
+    healthWaitingTitle:"En attente de mesure…",healthWaitingDesc:'Cliquez sur « Lancer la mesure complète » pour effectuer une vraie mesure réseau.',
+    overview:"Aperçu",overviewDesc:"Données serveur 24/7 (GitHub) + vos propres mesures.",
+    observedUptime:"Disponibilité serveur",observedUptimeSub:"Mesurée 24/7 par GitHub",
+    checks24h:"Vérifications serveur 24h",checks24hSub:"Vérifié toutes les 10 minutes",
+    currentResponse:"Temps de réponse serveur",lastChecked:"Dernière vérification",
+    checkTitleReady:"Prêt à mesurer",checkSubtitleReady:"Cliquez ci-dessous pour lancer la vraie mesure réseau",
+    checkTitleAnalyzing:"Analyse de la connexion…",checkSubtitleAnalyzing:"Mesure réelle du navigateur en cours",
+    checkTitleSuccess:"fasqoo.com est accessible",checkTitleFail:"Échec de la vérification",realMeasurement:"Mesure réelle du navigateur",
+    runCheck:"Lancer la mesure complète",runningBtn:"Mesure…",
+    diagnostics:"Vos mesures",diagnosticsDesc:"Collectées directement depuis la connexion actuelle de ce visiteur.",
+    latency:"Latence",latencyDesc:"Médiane (P50), 95e et 99e percentile de toutes les mesures.",
+    jitter:"Gigue",jitterDesc:"Variation du temps de réponse entre les requêtes.",
+    failureRate:"Taux d'échec",failureRateDesc:"Pourcentage de requêtes échouées pendant la mesure.",
+    httpResponse:"Réponse HTTP",httpResponseDesc:"Dernier statut HTTP retourné par fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Connexion chiffrée au serveur.",
+    networkApi:"API réseau du navigateur",networkApiDesc:"Informations de connexion exposées par le navigateur.",
+    timingTitle:"Chronométrage des requêtes",timingTitle2:"Détail de la connexion",timingDesc:"Où le temps est réellement passé pendant la connexion.",
+    networkProfile:"Profil appareil & connexion",networkProfileDesc:"Informations techniques fournies par votre navigateur.",
+    connType:"Type de connexion",downlink:"Débit descendant estimé",rtt:"RTT du navigateur",saveData:"Économie de données",
+    onlineStateLabel:"État en ligne",protocol:"Protocole",browser:"Navigateur",windowSize:"Taille de la fenêtre",
+    problemTitle:"Constats",problemDesc:"Uniquement ce que cette mesure montre réellement — avec explication.",
+    noMeasurementTitle:"Aucune mesure pour l'instant",noMeasurementSub:"Démarrez la mesure pour voir les constats",
+    testSuite:"Aperçu des tests",testSuiteDesc:"Résultats techniques de cette session de navigateur.",
+    testInternetName:"État en ligne du navigateur",testHttpName:"Accessibilité de fasqoo.com",testHttpsName:"Transport HTTPS",testStabilityName:"Stabilité de la connexion",
+    limitTitle:"Ce que cette page ne peut pas faire :",limitText:"Un navigateur ne peut pas déterminer la perte réelle de paquets (ICMP), le traceroute ou l'identité du FAI.",
+    monitorTitle:"Surveillance 24 heures",monitorDesc:"Le moniteur serveur fonctionne automatiquement. Moniteur navigateur optionnel.",
+    browserMonitorKicker:"VOTRE MONITEUR NAVIGATEUR",monitorHeadline:"Votre moniteur navigateur personnel",
+    monitorSub:"Activez ce moniteur optionnel pour observer votre propre connexion pendant des heures.",
+    monitorOn:"Surveillance ON",monitorStatusLabel:"Statut",monitorChecksLabel:"Vérifications 24h",
+    monitorAvailLabel:"Disponibilité",monitorLastLabel:"Dernière vérification",monitorChartTitle:"Historique (24h)",
+    monitorNoteTitle:"ℹ️ Deux moniteurs différents :",monitorNoteServer:"Moniteur serveur (ci-dessus) :",monitorNoteServerText:"Tourne 24/7 sur les serveurs GitHub, toutes les 10 minutes.",
+    monitorNoteBrowser:"Moniteur navigateur (ici) :",monitorNoteBrowserText:"Tourne uniquement tant que vous gardez cette page ouverte.",
+    responseHistory:"Historique serveur",responseHistoryDesc:"Mesures 24/7 des serveurs GitHub, chargées depuis history.json.",
+    last24h:"Temps de réponse serveur",noData:"Pas encore de données serveur.",
+    incidents:"Chronologie des incidents serveur",incidentsDesc:"Liste chronologique de toutes les vérifications 24/7.",
+    reportTitle:"Rapport",reportDesc:"Résumé compact à copier, enregistrer ou partager.",
+    copyReport:"Copier le rapport",copied:"Copié",downloadReport:"Télécharger TXT",downloadJson:"Exporter JSON",downloadCsv:"Exporter CSV",
+    accuracyTitle:"Précision de la mesure et limites",accuracyText:"Ces mesures décrivent uniquement le chemin entre votre navigateur et fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Tous droits réservés.",
+    ftPowered:"Propulsé par le réseau Cloudflare Edge pour garantir des performances et une précision maximales.",
+    ftIndependent:"Fasqoo est une plateforme indépendante et n'est pas un produit officiel de Cloudflare.",
+    ftAccess:"Accessibilité",ftImprint:"Mentions légales",ftPrivacy:"Confidentialité",ftTerms:"Conditions",ftNoSell:"Ne pas vendre mes données",
+    badgeWaiting:"En attente",badgeGood:"Bon",badgeElevated:"Élevé",badgeHigh:"Très élevé",
+    badgeStable:"Stable",badgeFluctuating:"Fluctuant",badgeOK:"OK",badgeFailed:"Échec",
+    badgeAvailable:"Disponible",badgeRestricted:"Restreint",badgeSecure:"Sécurisé",badgeUnsecure:"Non sécurisé",
+    notAvailable:"Non disponible",active:"Actif",inactive:"Inactif",online:"En ligne",offline:"Hors ligne",
+    scoreExcellent:"Excellente connexion",scoreExcellentDesc:"Les mesures montrent une connexion stable et rapide.",
+    scoreGood:"Bonne connexion",scoreGoodDesc:"Globalement normal, valeurs individuelles légèrement élevées.",
+    scoreWarning:"Connexion à vérifier",scoreWarningDesc:"Au moins une mesure indique des performances dégradées.",
+    scoreBad:"Problème important détecté",scoreBadDesc:"Plusieurs valeurs indiquent des problèmes de connexion.",
+    every5:"Toutes les 5 min",every15:"Toutes les 15 min",every30:"Toutes les 30 min",every60:"Toutes les 60 min",
+    probOfflineTitle:"Pas de connexion Internet",probOfflineEv:"Le navigateur signale un état hors ligne.",
+    probLatencyTitle:"Temps de réponse élevé",probJitterTitle:"Temps de réponse fluctuants",
+    probFailureTitle:"Requêtes échouées répétées",probHttpsTitle:"HTTPS non actif",
+    probNoneTitle:"Aucun problème détecté",probNotEnoughTitle:"Données insuffisantes",
+    reachableCheck:"Accessible",failedCheck:"Échec"
+  },
+  es:{
+    liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
+    navFaq:"FAQ",navStatus:"Estado de red",navDiag:"Diagnóstico TI",navAbout:"Sobre nosotros",navWidget:"Widget",
+    heroKicker:"Inteligencia de Red",idle:"LISTO — INICIA LA MEDICIÓN",running:"MEDICIÓN EN CURSO...",
+    reachable:"FASQOO.COM ES ACCESIBLE",failed:"VERIFICACIÓN FALLIDA",
+    pageTitle:"Estado del sitio Fasqoo",
+    pageDescription:"Muestra con qué rapidez y fiabilidad tu navegador alcanza fasqoo.com.",
+    infoTitle:"Dos perspectivas sobre fasqoo.com",
+    infoServerLabel:"Estado del servidor:",infoServerText:"Funciona 24/7 en servidores GitHub, cada 10 minutos.",
+    infoUserLabel:"Tu medición:",infoUserText:"Prueba tu propia conexión ahora mismo.",
+    liveTarget:"Objetivo",liveServer:"Estado del servidor",liveBrowser:"Navegador",liveConnection:"Tu conexión",
+    loadingData:"Cargando datos 24/7…",pleaseWait:"Por favor espera.",
+    healthTitle:"Puntuación de conexión",healthDesc:"Calculada solo a partir de mediciones que este navegador puede realizar.",
+    healthWaitingTitle:"Esperando medición…",healthWaitingDesc:'Haz clic en "Iniciar medición completa" para realizar una medición real.',
+    overview:"Resumen",overviewDesc:"Datos del servidor 24/7 (GitHub) + tus propias mediciones.",
+    observedUptime:"Disponibilidad del servidor",observedUptimeSub:"Medida 24/7 por GitHub",
+    checks24h:"Comprobaciones 24h",checks24hSub:"Verificado cada 10 minutos",
+    currentResponse:"Tiempo de respuesta del servidor",lastChecked:"Última comprobación",
+    checkTitleReady:"Listo para medir",checkSubtitleReady:"Haz clic abajo para iniciar la medición real",
+    checkTitleAnalyzing:"Analizando conexión…",checkSubtitleAnalyzing:"Medición real en curso",
+    checkTitleSuccess:"fasqoo.com es accesible",checkTitleFail:"Verificación fallida",realMeasurement:"Medición real del navegador",
+    runCheck:"Iniciar medición completa",runningBtn:"Midiendo…",
+    diagnostics:"Tus mediciones",diagnosticsDesc:"Recogidas directamente de la conexión actual de este visitante.",
+    latency:"Latencia",latencyDesc:"Mediana (P50), percentil 95 y 99 de todas las mediciones.",
+    jitter:"Jitter",jitterDesc:"Variación del tiempo de respuesta entre solicitudes.",
+    failureRate:"Tasa de fallos",failureRateDesc:"Porcentaje de solicitudes fallidas durante la medición.",
+    httpResponse:"Respuesta HTTP",httpResponseDesc:"Último estado HTTP devuelto por fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Conexión cifrada al servidor.",
+    networkApi:"API de red del navegador",networkApiDesc:"Información de conexión expuesta por el navegador.",
+    timingTitle:"Tiempos de solicitud",timingTitle2:"Detalle de la conexión",timingDesc:"Dónde se gasta realmente el tiempo durante la conexión.",
+    networkProfile:"Perfil del dispositivo y conexión",networkProfileDesc:"Información técnica que tu navegador proporciona.",
+    connType:"Tipo de conexión",downlink:"Downlink estimado",rtt:"RTT del navegador",saveData:"Ahorro de datos",
+    onlineStateLabel:"Estado en línea",protocol:"Protocolo",browser:"Navegador",windowSize:"Tamaño de ventana",
+    problemTitle:"Hallazgos",problemDesc:"Solo lo que esta medición realmente muestra — con explicación.",
+    noMeasurementTitle:"Aún sin medición",noMeasurementSub:"Inicia la medición para ver hallazgos",
+    testSuite:"Resumen de pruebas",testSuiteDesc:"Resultados técnicos de esta sesión del navegador.",
+    testInternetName:"Estado en línea del navegador",testHttpName:"Accesibilidad de fasqoo.com",testHttpsName:"Transporte HTTPS",testStabilityName:"Estabilidad de la conexión",
+    limitTitle:"Lo que esta página no puede hacer:",limitText:"Un navegador no puede determinar la pérdida real de paquetes (ICMP), traceroute ni la identidad del ISP.",
+    monitorTitle:"Monitorización 24 horas",monitorDesc:"El monitor del servidor funciona automáticamente. Monitor de navegador opcional.",
+    browserMonitorKicker:"TU MONITOR DE NAVEGADOR",monitorHeadline:"Tu monitor personal del navegador",
+    monitorSub:"Activa este monitor opcional para observar tu propia conexión durante horas.",
+    monitorOn:"Monitorización ON",monitorStatusLabel:"Estado",monitorChecksLabel:"Comprobaciones 24h",
+    monitorAvailLabel:"Disponibilidad",monitorLastLabel:"Última comprobación",monitorChartTitle:"Historial (24h)",
+    monitorNoteTitle:"ℹ️ Dos monitores diferentes:",monitorNoteServer:"Monitor del servidor (arriba):",monitorNoteServerText:"Funciona 24/7 en servidores GitHub, cada 10 minutos.",
+    monitorNoteBrowser:"Monitor del navegador (aquí):",monitorNoteBrowserText:"Solo funciona mientras mantengas esta página abierta.",
+    responseHistory:"Historial del servidor",responseHistoryDesc:"Mediciones 24/7 de servidores GitHub, cargadas desde history.json.",
+    last24h:"Tiempos de respuesta del servidor",noData:"Aún no hay datos del servidor.",
+    incidents:"Cronología de incidentes",incidentsDesc:"Lista cronológica de todas las comprobaciones 24/7.",
+    reportTitle:"Informe",reportDesc:"Resumen compacto para copiar, guardar o compartir.",
+    copyReport:"Copiar informe",copied:"Copiado",downloadReport:"Descargar TXT",downloadJson:"Exportar JSON",downloadCsv:"Exportar CSV",
+    accuracyTitle:"Precisión y limitaciones de la medición",accuracyText:"Estas mediciones describen solo el camino entre tu navegador y fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Todos los derechos reservados.",
+    ftPowered:"Funciona con la red Cloudflare Edge para ofrecer el máximo rendimiento y precisión.",
+    ftIndependent:"Fasqoo es una plataforma independiente y no es un producto oficial de Cloudflare.",
+    ftAccess:"Accesibilidad",ftImprint:"Aviso legal",ftPrivacy:"Privacidad",ftTerms:"Términos",ftNoSell:"No vender mis datos",
+    badgeWaiting:"Esperando",badgeGood:"Bueno",badgeElevated:"Elevado",badgeHigh:"Alto",
+    badgeStable:"Estable",badgeFluctuating:"Fluctuante",badgeOK:"OK",badgeFailed:"Fallido",
+    badgeAvailable:"Disponible",badgeRestricted:"Restringido",badgeSecure:"Seguro",badgeUnsecure:"Inseguro",
+    notAvailable:"No disponible",active:"Activo",inactive:"Inactivo",online:"En línea",offline:"Fuera de línea",
+    scoreExcellent:"Conexión excelente",scoreExcellentDesc:"Las mediciones muestran una conexión estable y rápida.",
+    scoreGood:"Buena conexión",scoreGoodDesc:"En general normal, valores individuales ligeramente elevados.",
+    scoreWarning:"Se debe revisar la conexión",scoreWarningDesc:"Al menos una medición indica rendimiento degradado.",
+    scoreBad:"Problema significativo detectado",scoreBadDesc:"Múltiples valores indican problemas de conexión.",
+    every5:"Cada 5 min",every15:"Cada 15 min",every30:"Cada 30 min",every60:"Cada 60 min",
+    probOfflineTitle:"Sin conexión a Internet",probOfflineEv:"El navegador informa estado sin conexión.",
+    probLatencyTitle:"Tiempo de respuesta elevado",probJitterTitle:"Tiempos de respuesta fluctuantes",
+    probFailureTitle:"Solicitudes fallidas repetidas",probHttpsTitle:"HTTPS no activo",
+    probNoneTitle:"No se detectaron problemas",probNotEnoughTitle:"Datos insuficientes",
+    reachableCheck:"Accesible",failedCheck:"Fallido"
+  },
+  it:{
+    liteBtn:"Fasqoo Lite",installApp:"Installa per Windows",
+    navFaq:"FAQ",navStatus:"Stato rete",navDiag:"Diagnostica IT",navAbout:"Chi siamo",navWidget:"Widget",
+    heroKicker:"Intelligenza di Rete",idle:"PRONTO — AVVIA LA MISURAZIONE",running:"MISURAZIONE IN CORSO...",
+    reachable:"FASQOO.COM È RAGGIUNGIBILE",failed:"VERIFICA FALLITA",
+    pageTitle:"Stato del sito Fasqoo",
+    pageDescription:"Mostra quanto velocemente e affidabilmente il tuo browser raggiunge fasqoo.com.",
+    infoTitle:"Due prospettive su fasqoo.com",
+    infoServerLabel:"Stato server:",infoServerText:"Funziona 24/7 sui server GitHub, ogni 10 minuti.",
+    infoUserLabel:"La tua misurazione:",infoUserText:"Testa la tua connessione adesso.",
+    liveTarget:"Target",liveServer:"Stato server",liveBrowser:"Browser",liveConnection:"La tua connessione",
+    loadingData:"Caricamento dati 24/7…",pleaseWait:"Attendere prego.",
+    healthTitle:"Punteggio connessione",healthDesc:"Calcolato solo dalle misurazioni che questo browser può eseguire.",
+    healthWaitingTitle:"In attesa di misurazione…",healthWaitingDesc:'Fai clic su "Avvia misurazione completa" per eseguire una vera misurazione.',
+    overview:"Panoramica",overviewDesc:"Dati server 24/7 (GitHub) + le tue misurazioni.",
+    observedUptime:"Disponibilità server",observedUptimeSub:"Misurata 24/7 da GitHub",
+    checks24h:"Verifiche 24h",checks24hSub:"Verificato ogni 10 minuti",
+    currentResponse:"Tempo di risposta server",lastChecked:"Ultima verifica",
+    checkTitleReady:"Pronto a misurare",checkSubtitleReady:"Fai clic sotto per avviare la misurazione reale",
+    checkTitleAnalyzing:"Analisi della connessione…",checkSubtitleAnalyzing:"Misurazione reale in corso",
+    checkTitleSuccess:"fasqoo.com è raggiungibile",checkTitleFail:"Verifica fallita",realMeasurement:"Misurazione reale del browser",
+    runCheck:"Avvia misurazione completa",runningBtn:"Misurazione…",
+    diagnostics:"Le tue misurazioni",diagnosticsDesc:"Raccolte direttamente dalla connessione attuale di questo visitatore.",
+    latency:"Latenza",latencyDesc:"Mediana (P50), 95° e 99° percentile di tutte le misurazioni.",
+    jitter:"Jitter",jitterDesc:"Variazione del tempo di risposta tra le richieste.",
+    failureRate:"Tasso di errore",failureRateDesc:"Percentuale di richieste fallite durante la misurazione.",
+    httpResponse:"Risposta HTTP",httpResponseDesc:"Ultimo stato HTTP restituito da fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Connessione crittografata al server.",
+    networkApi:"API Rete Browser",networkApiDesc:"Informazioni di connessione esposte dal browser.",
+    timingTitle:"Timing richieste",timingTitle2:"Dettaglio della connessione",timingDesc:"Dove viene effettivamente speso il tempo durante la connessione.",
+    networkProfile:"Profilo dispositivo e connessione",networkProfileDesc:"Informazioni tecniche fornite dal tuo browser.",
+    connType:"Tipo di connessione",downlink:"Downlink stimato",rtt:"RTT del browser",saveData:"Risparmio dati",
+    onlineStateLabel:"Stato online",protocol:"Protocollo",browser:"Browser",windowSize:"Dimensione finestra",
+    problemTitle:"Riscontri",problemDesc:"Solo ciò che questa misurazione mostra realmente — con spiegazione.",
+    noMeasurementTitle:"Nessuna misurazione",noMeasurementSub:"Avvia la misurazione per vedere i riscontri",
+    testSuite:"Panoramica test",testSuiteDesc:"Risultati tecnici di questa sessione del browser.",
+    testInternetName:"Stato online browser",testHttpName:"Raggiungibilità fasqoo.com",testHttpsName:"Trasporto HTTPS",testStabilityName:"Stabilità della connessione",
+    limitTitle:"Cosa questa pagina non può fare:",limitText:"Un browser non può determinare la perdita reale di pacchetti (ICMP), traceroute o identità ISP.",
+    monitorTitle:"Monitoraggio 24 ore",monitorDesc:"Il monitor del server funziona automaticamente. Monitor browser opzionale.",
+    browserMonitorKicker:"IL TUO MONITOR BROWSER",monitorHeadline:"Il tuo monitor browser personale",
+    monitorSub:"Attiva questo monitor opzionale per osservare la tua connessione per ore.",
+    monitorOn:"Monitoraggio ON",monitorStatusLabel:"Stato",monitorChecksLabel:"Verifiche 24h",
+    monitorAvailLabel:"Disponibilità",monitorLastLabel:"Ultima verifica",monitorChartTitle:"Cronologia (24h)",
+    monitorNoteTitle:"ℹ️ Due monitor diversi:",monitorNoteServer:"Monitor server (sopra):",monitorNoteServerText:"Funziona 24/7 sui server GitHub, ogni 10 minuti.",
+    monitorNoteBrowser:"Monitor browser (qui):",monitorNoteBrowserText:"Funziona solo mentre tieni aperta questa pagina.",
+    responseHistory:"Cronologia server",responseHistoryDesc:"Misurazioni 24/7 dai server GitHub, caricate da history.json.",
+    last24h:"Tempi di risposta server",noData:"Ancora nessun dato server.",
+    incidents:"Timeline incidenti server",incidentsDesc:"Elenco cronologico di tutte le verifiche 24/7.",
+    reportTitle:"Rapporto",reportDesc:"Riepilogo compatto da copiare, salvare o condividere.",
+    copyReport:"Copia rapporto",copied:"Copiato",downloadReport:"Scarica TXT",downloadJson:"Esporta JSON",downloadCsv:"Esporta CSV",
+    accuracyTitle:"Precisione e limiti della misurazione",accuracyText:"Queste misurazioni descrivono solo il percorso tra il tuo browser e fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Tutti i diritti riservati.",
+    ftPowered:"Supportato dalla rete Cloudflare Edge per garantire prestazioni e precisione massime.",
+    ftIndependent:"Fasqoo è una piattaforma indipendente e non è un prodotto ufficiale Cloudflare.",
+    ftAccess:"Accessibilità",ftImprint:"Note legali",ftPrivacy:"Privacy",ftTerms:"Termini",ftNoSell:"Non vendere i miei dati",
+    badgeWaiting:"In attesa",badgeGood:"Buono",badgeElevated:"Elevato",badgeHigh:"Alto",
+    badgeStable:"Stabile",badgeFluctuating:"Variabile",badgeOK:"OK",badgeFailed:"Fallito",
+    badgeAvailable:"Disponibile",badgeRestricted:"Limitato",badgeSecure:"Sicuro",badgeUnsecure:"Non sicuro",
+    notAvailable:"Non disponibile",active:"Attivo",inactive:"Inattivo",online:"Online",offline:"Offline",
+    scoreExcellent:"Connessione eccellente",scoreExcellentDesc:"Le misurazioni mostrano una connessione stabile e veloce.",
+    scoreGood:"Buona connessione",scoreGoodDesc:"Nel complesso normale, singoli valori leggermente elevati.",
+    scoreWarning:"Verificare la connessione",scoreWarningDesc:"Almeno una misurazione indica prestazioni ridotte.",
+    scoreBad:"Problema significativo rilevato",scoreBadDesc:"Valori multipli indicano problemi di connessione.",
+    every5:"Ogni 5 min",every15:"Ogni 15 min",every30:"Ogni 30 min",every60:"Ogni 60 min",
+    probOfflineTitle:"Nessuna connessione Internet",probOfflineEv:"Il browser segnala stato offline.",
+    probLatencyTitle:"Tempo di risposta elevato",probJitterTitle:"Tempi di risposta variabili",
+    probFailureTitle:"Richieste fallite ripetute",probHttpsTitle:"HTTPS non attivo",
+    probNoneTitle:"Nessun problema rilevato",probNotEnoughTitle:"Dati insufficienti",
+    reachableCheck:"Raggiungibile",failedCheck:"Fallito"
+  },
+  pt:{
+    liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
+    navFaq:"FAQ",navStatus:"Estado da Rede",navDiag:"Diagnóstico TI",navAbout:"Sobre",navWidget:"Widget",
+    heroKicker:"Inteligência de Rede",idle:"PRONTO — INICIE A MEDIÇÃO",running:"MEDIÇÃO EM CURSO...",
+    reachable:"FASQOO.COM ESTÁ ACESSÍVEL",failed:"VERIFICAÇÃO FALHOU",
+    pageTitle:"Estado do site Fasqoo",
+    pageDescription:"Mostra com que rapidez e fiabilidade o seu navegador alcança fasqoo.com.",
+    infoTitle:"Duas perspetivas sobre fasqoo.com",
+    infoServerLabel:"Estado do servidor:",infoServerText:"Funciona 24/7 nos servidores GitHub, a cada 10 minutos.",
+    infoUserLabel:"A sua medição:",infoUserText:"Testa a sua própria ligação agora.",
+    liveTarget:"Alvo",liveServer:"Estado do servidor",liveBrowser:"Navegador",liveConnection:"A sua ligação",
+    loadingData:"A carregar dados 24/7…",pleaseWait:"Aguarde por favor.",
+    healthTitle:"Pontuação da ligação",healthDesc:"Calculada apenas a partir de medições que este navegador pode realmente efetuar.",
+    healthWaitingTitle:"A aguardar medição…",healthWaitingDesc:'Clique em "Iniciar medição completa" para efetuar uma medição real.',
+    overview:"Visão geral",overviewDesc:"Dados do servidor 24/7 (GitHub) + as suas próprias medições.",
+    observedUptime:"Disponibilidade do servidor",observedUptimeSub:"Medida 24/7 pelo GitHub",
+    checks24h:"Verificações 24h",checks24hSub:"Verificado a cada 10 minutos",
+    currentResponse:"Tempo de resposta do servidor",lastChecked:"Última verificação",
+    checkTitleReady:"Pronto para medir",checkSubtitleReady:"Clique abaixo para iniciar a medição real",
+    checkTitleAnalyzing:"A analisar ligação…",checkSubtitleAnalyzing:"Medição real em curso",
+    checkTitleSuccess:"fasqoo.com está acessível",checkTitleFail:"Verificação falhou",realMeasurement:"Medição real do navegador",
+    runCheck:"Iniciar medição completa",runningBtn:"A medir…",
+    diagnostics:"As suas medições",diagnosticsDesc:"Recolhidas diretamente da ligação atual deste visitante.",
+    latency:"Latência",latencyDesc:"Mediana (P50), percentil 95 e 99 de todas as medições.",
+    jitter:"Jitter",jitterDesc:"Variação do tempo de resposta entre pedidos.",
+    failureRate:"Taxa de falhas",failureRateDesc:"Percentagem de pedidos falhados durante a medição.",
+    httpResponse:"Resposta HTTP",httpResponseDesc:"Último estado HTTP devolvido por fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Ligação encriptada ao servidor.",
+    networkApi:"API de Rede do Navegador",networkApiDesc:"Informações de ligação expostas pelo navegador.",
+    timingTitle:"Tempo de pedidos",timingTitle2:"Detalhe da ligação",timingDesc:"Onde o tempo é realmente gasto durante a ligação.",
+    networkProfile:"Perfil do dispositivo e ligação",networkProfileDesc:"Informações técnicas fornecidas pelo seu navegador.",
+    connType:"Tipo de ligação",downlink:"Downlink estimado",rtt:"RTT do navegador",saveData:"Poupança de dados",
+    onlineStateLabel:"Estado online",protocol:"Protocolo",browser:"Navegador",windowSize:"Tamanho da janela",
+    problemTitle:"Constatações",problemDesc:"Apenas o que esta medição realmente mostra — com explicação.",
+    noMeasurementTitle:"Ainda sem medição",noMeasurementSub:"Inicie a medição para ver constatações",
+    testSuite:"Visão geral dos testes",testSuiteDesc:"Resultados técnicos desta sessão do navegador.",
+    testInternetName:"Estado online do navegador",testHttpName:"Acessibilidade de fasqoo.com",testHttpsName:"Transporte HTTPS",testStabilityName:"Estabilidade da ligação",
+    limitTitle:"O que esta página não pode fazer:",limitText:"Um navegador não pode determinar perda real de pacotes (ICMP), traceroute ou identidade do ISP.",
+    monitorTitle:"Monitorização 24 horas",monitorDesc:"O monitor do servidor funciona automaticamente. Monitor de navegador opcional.",
+    browserMonitorKicker:"O SEU MONITOR DE NAVEGADOR",monitorHeadline:"O seu monitor pessoal do navegador",
+    monitorSub:"Ative este monitor opcional para observar a sua própria ligação durante horas.",
+    monitorOn:"Monitorização ON",monitorStatusLabel:"Estado",monitorChecksLabel:"Verificações 24h",
+    monitorAvailLabel:"Disponibilidade",monitorLastLabel:"Última verificação",monitorChartTitle:"Histórico (24h)",
+    monitorNoteTitle:"ℹ️ Dois monitores diferentes:",monitorNoteServer:"Monitor do servidor (acima):",monitorNoteServerText:"Funciona 24/7 nos servidores GitHub, a cada 10 minutos.",
+    monitorNoteBrowser:"Monitor do navegador (aqui):",monitorNoteBrowserText:"Funciona apenas enquanto mantiver esta página aberta.",
+    responseHistory:"Histórico do servidor",responseHistoryDesc:"Medições 24/7 dos servidores GitHub, carregadas de history.json.",
+    last24h:"Tempos de resposta do servidor",noData:"Ainda sem dados do servidor.",
+    incidents:"Cronologia de incidentes",incidentsDesc:"Lista cronológica de todas as verificações 24/7.",
+    reportTitle:"Relatório",reportDesc:"Resumo compacto para copiar, guardar ou partilhar.",
+    copyReport:"Copiar relatório",copied:"Copiado",downloadReport:"Descarregar TXT",downloadJson:"Exportar JSON",downloadCsv:"Exportar CSV",
+    accuracyTitle:"Precisão e limites da medição",accuracyText:"Estas medições descrevem apenas o caminho entre o seu navegador e fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Todos os direitos reservados.",
+    ftPowered:"Suportado pela rede Cloudflare Edge para garantir o máximo desempenho e precisão.",
+    ftIndependent:"A Fasqoo é uma plataforma independente e não é um produto oficial da Cloudflare.",
+    ftAccess:"Acessibilidade",ftImprint:"Informação legal",ftPrivacy:"Privacidade",ftTerms:"Termos",ftNoSell:"Não vender os meus dados",
+    badgeWaiting:"A aguardar",badgeGood:"Bom",badgeElevated:"Elevado",badgeHigh:"Alto",
+    badgeStable:"Estável",badgeFluctuating:"Oscilante",badgeOK:"OK",badgeFailed:"Falhou",
+    badgeAvailable:"Disponível",badgeRestricted:"Restrito",badgeSecure:"Seguro",badgeUnsecure:"Inseguro",
+    notAvailable:"Não disponível",active:"Ativo",inactive:"Inativo",online:"Online",offline:"Offline",
+    scoreExcellent:"Ligação excelente",scoreExcellentDesc:"As medições mostram uma ligação estável e rápida.",
+    scoreGood:"Boa ligação",scoreGoodDesc:"Globalmente normal, valores individuais ligeiramente elevados.",
+    scoreWarning:"A ligação deve ser verificada",scoreWarningDesc:"Pelo menos uma medição indica desempenho degradado.",
+    scoreBad:"Problema significativo detetado",scoreBadDesc:"Vários valores indicam problemas de ligação.",
+    every5:"A cada 5 min",every15:"A cada 15 min",every30:"A cada 30 min",every60:"A cada 60 min",
+    probOfflineTitle:"Sem ligação à Internet",probOfflineEv:"O navegador reporta estado offline.",
+    probLatencyTitle:"Tempo de resposta elevado",probJitterTitle:"Tempos de resposta oscilantes",
+    probFailureTitle:"Pedidos falhados repetidos",probHttpsTitle:"HTTPS não ativo",
+    probNoneTitle:"Nenhum problema detetado",probNotEnoughTitle:"Dados insuficientes",
+    reachableCheck:"Acessível",failedCheck:"Falhou"
+  },
+  nl:{
+    liteBtn:"Fasqoo Lite",installApp:"Installeren voor Windows",
+    navFaq:"FAQ",navStatus:"Netwerkstatus",navDiag:"IT-diagnose",navAbout:"Over ons",navWidget:"Widget",
+    heroKicker:"Netwerkintelligentie",idle:"KLAAR — START DE METING",running:"METING LOOPT...",
+    reachable:"FASQOO.COM IS BEREIKBAAR",failed:"CONTROLE MISLUKT",
+    pageTitle:"Fasqoo Website Status",
+    pageDescription:"Toont hoe snel en betrouwbaar je browser fasqoo.com bereikt.",
+    infoTitle:"Twee perspectieven op fasqoo.com",
+    infoServerLabel:"Serverstatus:",infoServerText:"Draait 24/7 op GitHub-servers, elke 10 minuten.",
+    infoUserLabel:"Jouw meting:",infoUserText:"Test je eigen verbinding nu.",
+    liveTarget:"Doel",liveServer:"Serverstatus",liveBrowser:"Browser",liveConnection:"Jouw verbinding",
+    loadingData:"24/7-gegevens laden…",pleaseWait:"Even geduld.",
+    healthTitle:"Verbindingsscore",healthDesc:"Alleen berekend uit metingen die deze browser daadwerkelijk kan uitvoeren.",
+    healthWaitingTitle:"Wachten op meting…",healthWaitingDesc:'Klik op "Volledige meting starten" om een echte netwerkmeting uit te voeren.',
+    overview:"Overzicht",overviewDesc:"24/7 servergegevens (GitHub) + je eigen metingen.",
+    observedUptime:"Serverbeschikbaarheid",observedUptimeSub:"24/7 gemeten door GitHub",
+    checks24h:"Servercontroles 24u",checks24hSub:"Elke 10 minuten gecontroleerd",
+    currentResponse:"Serverreactietijd",lastChecked:"Laatst gecontroleerd",
+    checkTitleReady:"Klaar om te meten",checkSubtitleReady:"Klik hieronder om de echte netwerkmeting te starten",
+    checkTitleAnalyzing:"Verbinding analyseren…",checkSubtitleAnalyzing:"Echte browsermeting loopt",
+    checkTitleSuccess:"fasqoo.com is bereikbaar",checkTitleFail:"Controle mislukt",realMeasurement:"Echte browsermeting",
+    runCheck:"Volledige meting starten",runningBtn:"Meten…",
+    diagnostics:"Jouw metingen",diagnosticsDesc:"Rechtstreeks verzameld van de huidige verbinding van deze bezoeker.",
+    latency:"Latentie",latencyDesc:"Mediaan (P50), 95e en 99e percentiel van alle metingen.",
+    jitter:"Jitter",jitterDesc:"Variatie van reactietijd tussen verzoeken.",
+    failureRate:"Foutpercentage",failureRateDesc:"Percentage mislukte verzoeken tijdens de meting.",
+    httpResponse:"HTTP-respons",httpResponseDesc:"Laatste HTTP-status geretourneerd door fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Versleutelde verbinding met de server.",
+    networkApi:"Browser Network API",networkApiDesc:"Verbindingsinfo blootgesteld door de browser.",
+    timingTitle:"Verzoektiming",timingTitle2:"Verbindingsopbouw in detail",timingDesc:"Waar de tijd werkelijk wordt besteed tijdens de verbinding.",
+    networkProfile:"Apparaat- en verbindingsprofiel",networkProfileDesc:"Technische info die je browser zelf verstrekt.",
+    connType:"Verbindingstype",downlink:"Geschatte downlink",rtt:"Browser-RTT",saveData:"Databesparing",
+    onlineStateLabel:"Online status",protocol:"Protocol",browser:"Browser",windowSize:"Venstergrootte",
+    problemTitle:"Bevindingen",problemDesc:"Alleen wat deze meting werkelijk toont — met uitleg.",
+    noMeasurementTitle:"Nog geen meting",noMeasurementSub:"Start de meting om bevindingen te zien",
+    testSuite:"Testoverzicht",testSuiteDesc:"Technische testresultaten van deze browsersessie.",
+    testInternetName:"Browser online status",testHttpName:"Bereikbaarheid fasqoo.com",testHttpsName:"HTTPS-transport",testStabilityName:"Verbindingsstabiliteit",
+    limitTitle:"Wat deze pagina niet kan:",limitText:"Een browser kan geen echt pakketverlies (ICMP), traceroute of ISP-identiteit bepalen.",
+    monitorTitle:"24-uurs monitoring",monitorDesc:"Servermonitor draait automatisch. Optionele browsermonitor.",
+    browserMonitorKicker:"JOUW BROWSERMONITOR",monitorHeadline:"Je persoonlijke browsermonitor",
+    monitorSub:"Activeer deze optionele monitor om je eigen verbinding urenlang te observeren.",
+    monitorOn:"Monitoring AAN",monitorStatusLabel:"Status",monitorChecksLabel:"Controles 24u",
+    monitorAvailLabel:"Beschikbaarheid",monitorLastLabel:"Laatste controle",monitorChartTitle:"Geschiedenis (24u)",
+    monitorNoteTitle:"ℹ️ Twee verschillende monitors:",monitorNoteServer:"Servermonitor (boven):",monitorNoteServerText:"Draait 24/7 op GitHub-servers, elke 10 minuten.",
+    monitorNoteBrowser:"Browsermonitor (hier):",monitorNoteBrowserText:"Draait alleen zolang je deze pagina openhoudt.",
+    responseHistory:"Servergeschiedenis",responseHistoryDesc:"24/7-metingen van GitHub-servers, geladen uit history.json.",
+    last24h:"Serverreactietijden",noData:"Nog geen servergegevens.",
+    incidents:"Serverincident-tijdlijn",incidentsDesc:"Chronologische lijst van alle 24/7-servercontroles.",
+    reportTitle:"Rapport",reportDesc:"Compacte samenvatting om te kopiëren, op te slaan of te delen.",
+    copyReport:"Rapport kopiëren",copied:"Gekopieerd",downloadReport:"TXT downloaden",downloadJson:"JSON exporteren",downloadCsv:"CSV exporteren",
+    accuracyTitle:"Meetnauwkeurigheid en beperkingen",accuracyText:"Deze metingen beschrijven alleen het pad tussen je browser en fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.",
+    ftPowered:"Aangedreven door het Cloudflare Edge-netwerk voor maximale prestaties en meetnauwkeurigheid.",
+    ftIndependent:"Fasqoo is een onafhankelijk snelheidstestplatform en geen officieel Cloudflare-product.",
+    ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftPrivacy:"Privacy",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",
+    badgeWaiting:"Wachten",badgeGood:"Goed",badgeElevated:"Verhoogd",badgeHigh:"Hoog",
+    badgeStable:"Stabiel",badgeFluctuating:"Schommelend",badgeOK:"OK",badgeFailed:"Mislukt",
+    badgeAvailable:"Beschikbaar",badgeRestricted:"Beperkt",badgeSecure:"Veilig",badgeUnsecure:"Onveilig",
+    notAvailable:"Niet beschikbaar",active:"Actief",inactive:"Inactief",online:"Online",offline:"Offline",
+    scoreExcellent:"Uitstekende verbinding",scoreExcellentDesc:"Metingen tonen een stabiele, snelle verbinding.",
+    scoreGood:"Goede verbinding",scoreGoodDesc:"Over het algemeen normaal, enkele waarden licht verhoogd.",
+    scoreWarning:"Verbinding moet worden gecontroleerd",scoreWarningDesc:"Ten minste één meting wijst op verminderde prestaties.",
+    scoreBad:"Belangrijk probleem gedetecteerd",scoreBadDesc:"Meerdere waarden wijzen op verbindingsproblemen.",
+    every5:"Elke 5 min",every15:"Elke 15 min",every30:"Elke 30 min",every60:"Elke 60 min",
+    probOfflineTitle:"Geen internetverbinding",probOfflineEv:"Browser meldt offline status.",
+    probLatencyTitle:"Verhoogde reactietijd",probJitterTitle:"Schommelende reactietijden",
+    probFailureTitle:"Herhaald mislukte verzoeken",probHttpsTitle:"HTTPS niet actief",
+    probNoneTitle:"Geen problemen gedetecteerd",probNotEnoughTitle:"Onvoldoende gegevens",
+    reachableCheck:"Bereikbaar",failedCheck:"Mislukt"
+  },
+  tr:{
+    liteBtn:"Fasqoo Lite",installApp:"Windows için yükle",
+    navFaq:"SSS",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",navWidget:"Widget",
+    heroKicker:"Ağ Zekâsı",idle:"HAZIR — ÖLÇÜMÜ BAŞLAT",running:"ÖLÇÜM SÜRÜYOR...",
+    reachable:"FASQOO.COM ERİŞİLEBİLİR",failed:"KONTROL BAŞARISIZ",
+    pageTitle:"Fasqoo Web Sitesi Durumu",
+    pageDescription:"Tarayıcınızın fasqoo.com'a ne kadar hızlı ve güvenilir ulaştığını gösterir.",
+    infoTitle:"fasqoo.com'a iki bakış açısı",
+    infoServerLabel:"Sunucu durumu:",infoServerText:"GitHub sunucularında 24/7 çalışır, her 10 dakikada bir.",
+    infoUserLabel:"Ölçümünüz:",infoUserText:"Kendi bağlantınızı şimdi test edin.",
+    liveTarget:"Hedef",liveServer:"Sunucu Durumu",liveBrowser:"Tarayıcı",liveConnection:"Bağlantınız",
+    loadingData:"24/7 verileri yükleniyor…",pleaseWait:"Lütfen bekleyin.",
+    healthTitle:"Bağlantı Puanı",healthDesc:"Yalnızca bu tarayıcının gerçekten gerçekleştirebileceği ölçümlerden hesaplanır.",
+    healthWaitingTitle:"Ölçüm bekleniyor…",healthWaitingDesc:'Gerçek bir ağ ölçümü için "Tam Ölçümü Başlat"a tıklayın.',
+    overview:"Genel Bakış",overviewDesc:"24/7 sunucu verileri (GitHub) + kendi ölçümleriniz.",
+    observedUptime:"Sunucu Kullanılabilirliği",observedUptimeSub:"GitHub tarafından 24/7 ölçülür",
+    checks24h:"24 saatlik sunucu kontrolleri",checks24hSub:"Her 10 dakikada kontrol edilir",
+    currentResponse:"Sunucu Yanıt Süresi",lastChecked:"Son Kontrol",
+    checkTitleReady:"Ölçüme hazır",checkSubtitleReady:"Gerçek ağ ölçümünü başlatmak için aşağıya tıklayın",
+    checkTitleAnalyzing:"Bağlantı analiz ediliyor…",checkSubtitleAnalyzing:"Gerçek tarayıcı ölçümü sürüyor",
+    checkTitleSuccess:"fasqoo.com erişilebilir",checkTitleFail:"Kontrol başarısız",realMeasurement:"Gerçek tarayıcı ölçümü",
+    runCheck:"Tam Ölçümü Başlat",runningBtn:"Ölçülüyor…",
+    diagnostics:"Ölçümleriniz",diagnosticsDesc:"Doğrudan bu ziyaretçinin mevcut bağlantısından alındı.",
+    latency:"Gecikme",latencyDesc:"Tüm ölçümlerin medyanı (P50), 95. ve 99. yüzdelik dilimi.",
+    jitter:"Jitter",jitterDesc:"İstekler arasındaki yanıt süresi değişimi.",
+    failureRate:"Hata Oranı",failureRateDesc:"Ölçüm sırasında başarısız isteklerin yüzdesi.",
+    httpResponse:"HTTP Yanıtı",httpResponseDesc:"fasqoo.com tarafından döndürülen son HTTP durumu.",
+    httpsLabel:"HTTPS",httpsDesc:"Sunucuya şifreli bağlantı.",
+    networkApi:"Tarayıcı Ağ API'si",networkApiDesc:"Tarayıcı tarafından açıklanan bağlantı bilgileri.",
+    timingTitle:"İstek Zamanlaması",timingTitle2:"Bağlantı Kurulumu Detayı",timingDesc:"Bağlantı sırasında zamanın gerçekte nerede harcandığı.",
+    networkProfile:"Cihaz ve Bağlantı Profili",networkProfileDesc:"Tarayıcınızın kendisinin sağladığı teknik bilgiler.",
+    connType:"Bağlantı Tipi",downlink:"Tahmini İndirme",rtt:"Tarayıcı RTT",saveData:"Veri Tasarrufu",
+    onlineStateLabel:"Çevrimiçi Durumu",protocol:"Protokol",browser:"Tarayıcı",windowSize:"Pencere Boyutu",
+    problemTitle:"Bulgular",problemDesc:"Yalnızca bu ölçümün gerçekten gösterdiği şeyler — açıklamayla.",
+    noMeasurementTitle:"Henüz ölçüm yok",noMeasurementSub:"Bulguları görmek için ölçümü başlatın",
+    testSuite:"Test Genel Bakışı",testSuiteDesc:"Bu tarayıcı oturumunun teknik test sonuçları.",
+    testInternetName:"Tarayıcı çevrimiçi durumu",testHttpName:"fasqoo.com erişilebilirliği",testHttpsName:"HTTPS aktarımı",testStabilityName:"Bağlantı kararlılığı",
+    limitTitle:"Bu sayfanın yapamayacağı şeyler:",limitText:"Bir tarayıcı gerçek paket kaybını (ICMP), traceroute'u veya ISP kimliğini belirleyemez.",
+    monitorTitle:"24 Saatlik İzleme",monitorDesc:"Sunucu izleyicisi otomatik çalışır. İsteğe bağlı tarayıcı izleyicisi.",
+    browserMonitorKicker:"TARAYICI İZLEYİCİNİZ",monitorHeadline:"Kişisel Tarayıcı İzleyiciniz",
+    monitorSub:"Kendi bağlantınızı saatler boyunca gözlemlemek için bu isteğe bağlı izleyiciyi etkinleştirin.",
+    monitorOn:"İzleme AÇIK",monitorStatusLabel:"Durum",monitorChecksLabel:"24s kontroller",
+    monitorAvailLabel:"Kullanılabilirlik",monitorLastLabel:"Son kontrol",monitorChartTitle:"Geçmiş (24s)",
+    monitorNoteTitle:"ℹ️ İki farklı izleyici:",monitorNoteServer:"Sunucu izleyicisi (yukarıda):",monitorNoteServerText:"GitHub sunucularında 24/7 çalışır, her 10 dakikada bir.",
+    monitorNoteBrowser:"Tarayıcı izleyicisi (burada):",monitorNoteBrowserText:"Yalnızca bu sayfayı açık tuttuğunuz sürece çalışır.",
+    responseHistory:"Sunucu Geçmişi",responseHistoryDesc:"history.json'dan yüklenen GitHub sunucularından 24/7 ölçümler.",
+    last24h:"Sunucu Yanıt Süreleri",noData:"Henüz sunucu verisi yok.",
+    incidents:"Sunucu Olay Zaman Çizelgesi",incidentsDesc:"Tüm 24/7 sunucu kontrollerinin kronolojik listesi.",
+    reportTitle:"Rapor",reportDesc:"Kopyalamak, kaydetmek veya paylaşmak için kompakt özet.",
+    copyReport:"Raporu kopyala",copied:"Kopyalandı",downloadReport:"TXT indir",downloadJson:"JSON dışa aktar",downloadCsv:"CSV dışa aktar",
+    accuracyTitle:"Ölçüm doğruluğu ve sınırlamalar",accuracyText:"Bu ölçümler yalnızca tarayıcınız ile fasqoo.com arasındaki yolu açıklar.",
+    ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.",
+    ftPowered:"Maksimum performans ve ölçüm doğruluğu için Cloudflare Edge ağı tarafından desteklenir.",
+    ftIndependent:"Fasqoo bağımsız bir hız testi platformudur ve resmi bir Cloudflare ürünü değildir.",
+    ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftPrivacy:"Gizlilik",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma",
+    badgeWaiting:"Bekliyor",badgeGood:"İyi",badgeElevated:"Yüksek",badgeHigh:"Çok yüksek",
+    badgeStable:"Kararlı",badgeFluctuating:"Dalgalı",badgeOK:"Tamam",badgeFailed:"Başarısız",
+    badgeAvailable:"Mevcut",badgeRestricted:"Kısıtlı",badgeSecure:"Güvenli",badgeUnsecure:"Güvensiz",
+    notAvailable:"Mevcut değil",active:"Etkin",inactive:"Devre dışı",online:"Çevrimiçi",offline:"Çevrimdışı",
+    scoreExcellent:"Mükemmel bağlantı",scoreExcellentDesc:"Ölçümler fasqoo.com'a kararlı ve hızlı bir bağlantı gösteriyor.",
+    scoreGood:"İyi bağlantı",scoreGoodDesc:"Genel olarak normal, tek değerler hafif yüksek.",
+    scoreWarning:"Bağlantı kontrol edilmeli",scoreWarningDesc:"En az bir ölçüm bozulmuş performansa işaret ediyor.",
+    scoreBad:"Önemli sorun tespit edildi",scoreBadDesc:"Birden fazla değer bağlantı sorunlarına işaret ediyor.",
+    every5:"Her 5 dk",every15:"Her 15 dk",every30:"Her 30 dk",every60:"Her 60 dk",
+    probOfflineTitle:"İnternet bağlantısı yok",probOfflineEv:"Tarayıcı çevrimdışı durumu bildiriyor.",
+    probLatencyTitle:"Yüksek yanıt süresi",probJitterTitle:"Dalgalı yanıt süreleri",
+    probFailureTitle:"Tekrarlanan başarısız istekler",probHttpsTitle:"HTTPS etkin değil",
+    probNoneTitle:"Sorun tespit edilmedi",probNotEnoughTitle:"Yetersiz veri",
+    reachableCheck:"Erişilebilir",failedCheck:"Başarısız"
+  },
+  sq:{
+    liteBtn:"Fasqoo Lite",installApp:"Instalo për Windows",
+    navFaq:"FAQ",navStatus:"Statusi i rrjetit",navDiag:"Diagnostika IT",navAbout:"Rreth nesh",navWidget:"Widget",
+    heroKicker:"Inteligjenca e Rrjetit",idle:"GATI — FILLO MATJEN",running:"MATJA PO KRYHET...",
+    reachable:"FASQOO.COM ËSHTË I ARRITSHËM",failed:"KONTROLLI DËSHTOI",
+    pageTitle:"Statusi i faqes Fasqoo",
+    pageDescription:"Tregon sa shpejt dhe me besueshmëri shfletuesi juaj arrin fasqoo.com.",
+    infoTitle:"Dy perspektiva mbi fasqoo.com",
+    infoServerLabel:"Statusi i serverit:",infoServerText:"Punon 24/7 në serverët GitHub, çdo 10 minuta.",
+    infoUserLabel:"Matja juaj:",infoUserText:"Teston lidhjen tuaj tani.",
+    liveTarget:"Objektivi",liveServer:"Statusi i serverit",liveBrowser:"Shfletuesi",liveConnection:"Lidhja juaj",
+    loadingData:"Po ngarkohen të dhënat 24/7…",pleaseWait:"Ju lutem prisni.",
+    healthTitle:"Rezultati i lidhjes",healthDesc:"Llogaritur vetëm nga matjet që ky shfletues mund të kryejë realisht.",
+    healthWaitingTitle:"Në pritje të matjes…",healthWaitingDesc:'Klikoni "Fillo matjen e plotë" për të kryer një matje reale rrjeti.',
+    overview:"Përmbledhje",overviewDesc:"Të dhënat e serverit 24/7 (GitHub) + matjet tuaja.",
+    observedUptime:"Disponueshmëria e serverit",observedUptimeSub:"Matur 24/7 nga GitHub",
+    checks24h:"Kontrollime serveri 24h",checks24hSub:"Kontrolluar çdo 10 minuta",
+    currentResponse:"Koha e përgjigjes së serverit",lastChecked:"Kontrolluar së fundmi",
+    checkTitleReady:"Gati për matje",checkSubtitleReady:"Klikoni më poshtë për të nisur matjen reale",
+    checkTitleAnalyzing:"Po analizohet lidhja…",checkSubtitleAnalyzing:"Matja reale e shfletuesit po kryhet",
+    checkTitleSuccess:"fasqoo.com është i arritshëm",checkTitleFail:"Kontrolli dështoi",realMeasurement:"Matje reale e shfletuesit",
+    runCheck:"Fillo matjen e plotë",runningBtn:"Po matet…",
+    diagnostics:"Matjet tuaja",diagnosticsDesc:"Mbledhur drejtpërdrejt nga lidhja aktuale e këtij vizitori.",
+    latency:"Vonesa",latencyDesc:"Mesatarja (P50), përqindja 95 dhe 99 e të gjitha matjeve.",
+    jitter:"Jitter",jitterDesc:"Ndryshimi i kohës së përgjigjes midis kërkesave.",
+    failureRate:"Shkalla e dështimit",failureRateDesc:"Përqindja e kërkesave të dështuara gjatë matjes.",
+    httpResponse:"Përgjigjja HTTP",httpResponseDesc:"Statusi i fundit HTTP i kthyer nga fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"Lidhje e kriptuar me serverin.",
+    networkApi:"API e Rrjetit të Shfletuesit",networkApiDesc:"Informacione lidhjeje të ekspozuara nga shfletuesi.",
+    timingTitle:"Kohëmatja e kërkesave",timingTitle2:"Detajet e lidhjes",timingDesc:"Ku shpenzohet vërtet koha gjatë lidhjes.",
+    networkProfile:"Profili i pajisjes dhe lidhjes",networkProfileDesc:"Informacione teknike që shfletuesi juaj ofron vetë.",
+    connType:"Lloji i lidhjes",downlink:"Shkarkimi i vlerësuar",rtt:"RTT e shfletuesit",saveData:"Kursimi i të dhënave",
+    onlineStateLabel:"Statusi online",protocol:"Protokolli",browser:"Shfletuesi",windowSize:"Madhësia e dritares",
+    problemTitle:"Gjetjet",problemDesc:"Vetëm ato që kjo matje tregon vërtet — me shpjegim.",
+    noMeasurementTitle:"Ende pa matje",noMeasurementSub:"Filloni matjen për të parë gjetjet",
+    testSuite:"Përmbledhje testesh",testSuiteDesc:"Rezultatet teknike të këtij sesioni të shfletuesit.",
+    testInternetName:"Statusi online i shfletuesit",testHttpName:"Arritshmëria e fasqoo.com",testHttpsName:"Transporti HTTPS",testStabilityName:"Qëndrueshmëria e lidhjes",
+    limitTitle:"Çfarë nuk mund të bëjë kjo faqe:",limitText:"Një shfletues nuk mund të përcaktojë humbjen reale të paketave (ICMP), traceroute ose identitetin e ISP-së.",
+    monitorTitle:"Monitorimi 24 orësh",monitorDesc:"Monitori i serverit funksionon automatikisht. Monitor i shfletuesit opsional.",
+    browserMonitorKicker:"MONITORI JUAJ I SHFLETUESIT",monitorHeadline:"Monitori juaj personal i shfletuesit",
+    monitorSub:"Aktivizoni këtë monitor opsional për të vëzhguar lidhjen tuaj me orë të tëra.",
+    monitorOn:"Monitorimi ON",monitorStatusLabel:"Statusi",monitorChecksLabel:"Kontrollime 24h",
+    monitorAvailLabel:"Disponueshmëria",monitorLastLabel:"Kontrolli i fundit",monitorChartTitle:"Historiku (24h)",
+    monitorNoteTitle:"ℹ️ Dy monitorë të ndryshëm:",monitorNoteServer:"Monitor i serverit (lart):",monitorNoteServerText:"Punon 24/7 në serverët GitHub, çdo 10 minuta.",
+    monitorNoteBrowser:"Monitor i shfletuesit (këtu):",monitorNoteBrowserText:"Punon vetëm sa kohë e mbani këtë faqe të hapur.",
+    responseHistory:"Historiku i serverit",responseHistoryDesc:"Matjet 24/7 nga serverët GitHub, të ngarkuara nga history.json.",
+    last24h:"Kohët e përgjigjes së serverit",noData:"Ende pa të dhëna serveri.",
+    incidents:"Kronologjia e incidenteve",incidentsDesc:"Lista kronologjike e të gjitha kontrollimeve 24/7.",
+    reportTitle:"Raport",reportDesc:"Përmbledhje kompakte për kopjim, ruajtje ose ndarje.",
+    copyReport:"Kopjo raportin",copied:"U kopjua",downloadReport:"Shkarko TXT",downloadJson:"Eksporto JSON",downloadCsv:"Eksporto CSV",
+    accuracyTitle:"Saktësia dhe kufizimet e matjes",accuracyText:"Këto matje përshkruajnë vetëm rrugën midis shfletuesit tuaj dhe fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",
+    ftPowered:"Fuqizuar nga rrjeti Cloudflare Edge për performancë dhe saktësi maksimale të matjes.",
+    ftIndependent:"Fasqoo është një platformë e pavarur dhe nuk është produkt zyrtar i Cloudflare.",
+    ftAccess:"Qasueshmëria",ftImprint:"Impresum",ftPrivacy:"Privatësia",ftTerms:"Kushtet",ftNoSell:"Mos shit të dhënat e mia",
+    badgeWaiting:"Në pritje",badgeGood:"Mirë",badgeElevated:"E ngritur",badgeHigh:"E lartë",
+    badgeStable:"Stabile",badgeFluctuating:"Luhatshme",badgeOK:"Në rregull",badgeFailed:"Dështoi",
+    badgeAvailable:"Në dispozicion",badgeRestricted:"E kufizuar",badgeSecure:"E sigurt",badgeUnsecure:"E pasigurt",
+    notAvailable:"Nuk është në dispozicion",active:"Aktiv",inactive:"Joaktiv",online:"Online",offline:"Offline",
+    scoreExcellent:"Lidhje e shkëlqyer",scoreExcellentDesc:"Matjet tregojnë një lidhje të qëndrueshme dhe të shpejtë.",
+    scoreGood:"Lidhje e mirë",scoreGoodDesc:"Në përgjithësi normale, vlera individuale paksa të ngritura.",
+    scoreWarning:"Lidhja duhet kontrolluar",scoreWarningDesc:"Të paktën një matje tregon performancë të degradimit.",
+    scoreBad:"Problem i rëndësishëm u zbulua",scoreBadDesc:"Vlera të shumta tregojnë probleme lidhjeje.",
+    every5:"Çdo 5 min",every15:"Çdo 15 min",every30:"Çdo 30 min",every60:"Çdo 60 min",
+    probOfflineTitle:"Nuk ka lidhje interneti",probOfflineEv:"Shfletuesi raporton status offline.",
+    probLatencyTitle:"Kohë e ngritur përgjigjeje",probJitterTitle:"Kohë përgjigjeje të luhatshme",
+    probFailureTitle:"Kërkesa të përsëritura të dështuara",probHttpsTitle:"HTTPS nuk është aktiv",
+    probNoneTitle:"Asnjë problem i zbuluar",probNotEnoughTitle:"Të dhëna të pamjaftueshme",
+    reachableCheck:"I arritshëm",failedCheck:"Dështoi"
+  },
+  ar:{
+    liteBtn:"Fasqoo Lite",installApp:"التثبيت لنظام Windows",
+    navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",navDiag:"تشخيص IT",navAbout:"من نحن",navWidget:"Widget",
+    heroKicker:"ذكاء الشبكة",idle:"جاهز — ابدأ القياس",running:"جارٍ القياس...",
+    reachable:"موقع FASQOO.COM متاح",failed:"فشل التحقق",
+    pageTitle:"حالة موقع Fasqoo",
+    pageDescription:"يظهر مدى سرعة وموثوقية وصول متصفحك إلى fasqoo.com.",
+    infoTitle:"منظوران لـ fasqoo.com",
+    infoServerLabel:"حالة الخادم:",infoServerText:"يعمل 24/7 على خوادم GitHub، كل 10 دقائق.",
+    infoUserLabel:"قياسك:",infoUserText:"اختبر اتصالك الآن.",
+    liveTarget:"الهدف",liveServer:"حالة الخادم",liveBrowser:"المتصفح",liveConnection:"اتصالك",
+    loadingData:"جارٍ تحميل البيانات 24/7…",pleaseWait:"الرجاء الانتظار.",
+    healthTitle:"درجة الاتصال",healthDesc:"يُحسب فقط من القياسات التي يمكن لهذا المتصفح تنفيذها فعليًا.",
+    healthWaitingTitle:"بانتظار القياس…",healthWaitingDesc:'انقر على "بدء القياس الكامل" لإجراء قياس شبكة حقيقي.',
+    overview:"نظرة عامة",overviewDesc:"بيانات الخادم 24/7 (GitHub) + قياساتك الخاصة.",
+    observedUptime:"توفر الخادم",observedUptimeSub:"يُقاس 24/7 بواسطة GitHub",
+    checks24h:"فحوصات الخادم 24 ساعة",checks24hSub:"يتم الفحص كل 10 دقائق",
+    currentResponse:"زمن استجابة الخادم",lastChecked:"آخر فحص",
+    checkTitleReady:"جاهز للقياس",checkSubtitleReady:"انقر أدناه لبدء قياس الشبكة الحقيقي",
+    checkTitleAnalyzing:"جارٍ تحليل الاتصال…",checkSubtitleAnalyzing:"قياس المتصفح الحقيقي قيد التنفيذ",
+    checkTitleSuccess:"fasqoo.com متاح",checkTitleFail:"فشل التحقق",realMeasurement:"قياس حقيقي للمتصفح",
+    runCheck:"بدء القياس الكامل",runningBtn:"جارٍ القياس…",
+    diagnostics:"قياساتك",diagnosticsDesc:"تم جمعها مباشرة من اتصال هذا الزائر الحالي.",
+    latency:"زمن الاستجابة",latencyDesc:"الوسيط (P50)، المئين 95 و 99 لجميع القياسات.",
+    jitter:"الاضطراب",jitterDesc:"الاختلاف في زمن الاستجابة بين الطلبات.",
+    failureRate:"معدل الفشل",failureRateDesc:"نسبة الطلبات الفاشلة أثناء القياس.",
+    httpResponse:"استجابة HTTP",httpResponseDesc:"آخر حالة HTTP أرجعها fasqoo.com.",
+    httpsLabel:"HTTPS",httpsDesc:"اتصال مشفر بالخادم.",
+    networkApi:"واجهة شبكة المتصفح",networkApiDesc:"معلومات الاتصال التي يعرضها المتصفح.",
+    timingTitle:"توقيت الطلب",timingTitle2:"تفاصيل إعداد الاتصال",timingDesc:"أين يُستهلك الوقت فعليًا أثناء الاتصال.",
+    networkProfile:"ملف الجهاز والاتصال",networkProfileDesc:"معلومات تقنية يوفرها متصفحك بنفسه.",
+    connType:"نوع الاتصال",downlink:"التنزيل المقدر",rtt:"RTT المتصفح",saveData:"موفر البيانات",
+    onlineStateLabel:"الحالة عبر الإنترنت",protocol:"البروتوكول",browser:"المتصفح",windowSize:"حجم النافذة",
+    problemTitle:"النتائج",problemDesc:"فقط ما يُظهره هذا القياس فعلاً — مع شرح.",
+    noMeasurementTitle:"لا يوجد قياس بعد",noMeasurementSub:"ابدأ القياس لرؤية النتائج",
+    testSuite:"نظرة عامة على الاختبارات",testSuiteDesc:"النتائج التقنية لهذه الجلسة.",
+    testInternetName:"حالة المتصفح عبر الإنترنت",testHttpName:"إمكانية الوصول إلى fasqoo.com",testHttpsName:"نقل HTTPS",testStabilityName:"استقرار الاتصال",
+    limitTitle:"ما لا تستطيع هذه الصفحة فعله:",limitText:"لا يمكن للمتصفح تحديد فقدان الحزم الحقيقي (ICMP)، أو traceroute، أو هوية مزود الخدمة.",
+    monitorTitle:"مراقبة 24 ساعة",monitorDesc:"مراقب الخادم يعمل تلقائيًا. مراقب المتصفح اختياري.",
+    browserMonitorKicker:"مراقب المتصفح الخاص بك",monitorHeadline:"مراقب المتصفح الشخصي",
+    monitorSub:"فعّل هذا المراقب الاختياري لمراقبة اتصالك على مدار ساعات.",
+    monitorOn:"المراقبة مفعلة",monitorStatusLabel:"الحالة",monitorChecksLabel:"فحوصات 24 ساعة",
+    monitorAvailLabel:"التوفر",monitorLastLabel:"آخر فحص",monitorChartTitle:"السجل (24 ساعة)",
+    monitorNoteTitle:"ℹ️ مراقبان مختلفان:",monitorNoteServer:"مراقب الخادم (أعلاه):",monitorNoteServerText:"يعمل 24/7 على خوادم GitHub، كل 10 دقائق.",
+    monitorNoteBrowser:"مراقب المتصفح (هنا):",monitorNoteBrowserText:"يعمل فقط طالما تُبقي هذه الصفحة مفتوحة.",
+    responseHistory:"سجل الخادم",responseHistoryDesc:"قياسات 24/7 من خوادم GitHub، محملة من history.json.",
+    last24h:"أوقات استجابة الخادم",noData:"لا توجد بيانات خادم بعد.",
+    incidents:"الجدول الزمني للحوادث",incidentsDesc:"قائمة زمنية لجميع فحوصات الخادم 24/7.",
+    reportTitle:"تقرير",reportDesc:"ملخص مضغوط للنسخ أو الحفظ أو المشاركة.",
+    copyReport:"نسخ التقرير",copied:"تم النسخ",downloadReport:"تنزيل TXT",downloadJson:"تصدير JSON",downloadCsv:"تصدير CSV",
+    accuracyTitle:"دقة القياس والقيود",accuracyText:"تصف هذه القياسات فقط المسار بين متصفحك و fasqoo.com.",
+    ftRights:"© 2026 Fasqoo. جميع الحقوق محفوظة.",
+    ftPowered:"مدعوم بشبكة Cloudflare Edge لأقصى أداء ودقة في القياس.",
+    ftIndependent:"Fasqoo منصة مستقلة وليست منتجًا رسميًا من Cloudflare.",
+    ftAccess:"إمكانية الوصول",ftImprint:"بيانات الناشر",ftPrivacy:"الخصوصية",ftTerms:"الشروط",ftNoSell:"لا تبيع بياناتي",
+    badgeWaiting:"في الانتظار",badgeGood:"جيد",badgeElevated:"مرتفع",badgeHigh:"عالي",
+    badgeStable:"مستقر",badgeFluctuating:"متذبذب",badgeOK:"سليم",badgeFailed:"فشل",
+    badgeAvailable:"متاح",badgeRestricted:"مقيد",badgeSecure:"آمن",badgeUnsecure:"غير آمن",
+    notAvailable:"غير متاح",active:"نشط",inactive:"غير نشط",online:"متصل",offline:"غير متصل",
+    scoreExcellent:"اتصال ممتاز",scoreExcellentDesc:"تُظهر القياسات اتصالاً مستقرًا وسريعًا.",
+    scoreGood:"اتصال جيد",scoreGoodDesc:"طبيعي إجمالاً، بعض القيم مرتفعة قليلاً.",
+    scoreWarning:"يجب فحص الاتصال",scoreWarningDesc:"تشير قيمة واحدة على الأقل إلى أداء متدهور.",
+    scoreBad:"تم اكتشاف مشكلة كبيرة",scoreBadDesc:"تشير قيم متعددة إلى مشاكل في الاتصال.",
+    every5:"كل 5 دقائق",every15:"كل 15 دقيقة",every30:"كل 30 دقيقة",every60:"كل 60 دقيقة",
+    probOfflineTitle:"لا يوجد اتصال بالإنترنت",probOfflineEv:"يُبلغ المتصفح بحالة عدم الاتصال.",
+    probLatencyTitle:"زمن استجابة مرتفع",probJitterTitle:"أوقات استجابة متذبذبة",
+    probFailureTitle:"طلبات فاشلة متكررة",probHttpsTitle:"HTTPS غير نشط",
+    probNoneTitle:"لم يتم اكتشاف مشاكل",probNotEnoughTitle:"بيانات غير كافية",
+    reachableCheck:"متاح",failedCheck:"فشل"
   }
 };
 
-/* Fallback: Für alle anderen Sprachen wird Englisch verwendet */
 const SUPPORTED_LANGS = ["en","de","fr","es","it","pt","nl","tr","sq","ar"];
 const FALLBACK_LANG = "en";
-
 let currentLanguage = "en";
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
 const $ = id => document.getElementById(id);
 const TARGET_URL = window.location.origin + window.location.pathname;
 
 function t(key){
   const dict = TRANSLATIONS[currentLanguage] || TRANSLATIONS[FALLBACK_LANG];
-  if(dict[key] !== undefined) return dict[key];
-  return TRANSLATIONS[FALLBACK_LANG][key] !== undefined ? TRANSLATIONS[FALLBACK_LANG][key] : key;
+  return dict[key] !== undefined ? dict[key] : (TRANSLATIONS[FALLBACK_LANG][key] || key);
 }
 
 function applyLanguage(lang){
   if(!SUPPORTED_LANGS.includes(lang)) lang = FALLBACK_LANG;
-  // Wenn keine Übersetzung vorhanden → Englisch als Basis
   if(!TRANSLATIONS[lang]) lang = FALLBACK_LANG;
-
   currentLanguage = lang;
   localStorage.setItem("fasqoo_language", lang);
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     const val = t(key);
     if(val && val !== key) el.textContent = val;
   });
-
   const sel = $("languageSelect");
   if(sel) sel.value = lang;
 }
 
-/* ============================================================
-   THEME
-   ============================================================ */
 function applyTheme(){
   const theme = localStorage.getItem("fasqoo_theme") || "light";
   document.body.classList.toggle("dark", theme === "dark");
@@ -1204,9 +1606,6 @@ function applyTheme(){
   if(btn) btn.textContent = theme === "dark" ? "☀" : "☾";
 }
 
-/* ============================================================
-   STATE
-   ============================================================ */
 const CONFIG = {
   TIMEOUT: 10000,
   DIAGNOSTIC_REQUESTS: 8,
@@ -1243,9 +1642,6 @@ function detectBrowser(){
   return "Browser";
 }
 
-/* ============================================================
-   SERVER-HISTORY (GitHub Actions)
-   ============================================================ */
 async function loadServerHistory(){
   try{
     const r = await fetch("/history.json?t=" + Date.now(), { cache: "no-store" });
@@ -1279,9 +1675,6 @@ function updateLiveServerStatus(){
   el.style.color = "";
 }
 
-/* ============================================================
-   MAIN DIAGNOSIS
-   ============================================================ */
 async function timedFetch(url){
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
@@ -1301,21 +1694,17 @@ async function runFullDiagnosis(){
   if(!btn) return;
   btn.disabled = true;
   btn.textContent = t("runningBtn");
-
   setMainChecking();
   resetBadges();
-
   const measurements = [];
   for(let i=0; i<CONFIG.DIAGNOSTIC_REQUESTS; i++){
     const url = TARGET_URL + "?fasqoo_diag=" + Date.now() + "_" + i;
     measurements.push(await timedFetch(url));
     await sleep(180);
   }
-
   analyzeMeasurements(measurements);
   updateNetworkProfile();
   updateMainResult(measurements[measurements.length-1]);
-
   btn.disabled = false;
   btn.textContent = t("runCheck");
 }
@@ -1332,14 +1721,7 @@ function analyzeMeasurements(results){
   const jitter = computeJitter(times);
   const failureRate = Math.round((failed.length / results.length) * 100);
   const latest = results[results.length - 1];
-
-  Object.assign(latestDiagnostics, {
-    latency, jitter, failureRate,
-    httpStatus: latest ? latest.status : null,
-    success: successful.length > 0,
-    p50, p95, p99, samples: times
-  });
-
+  Object.assign(latestDiagnostics, { latency, jitter, failureRate, httpStatus: latest ? latest.status : null, success: successful.length > 0, p50, p95, p99, samples: times });
   $("latencyValue").textContent = latency ?? "—";
   $("jitterValue").textContent = jitter ?? "—";
   $("failureValue").textContent = failureRate;
@@ -1347,7 +1729,6 @@ function analyzeMeasurements(results){
   $("latencyP50").textContent = p50 !== null ? p50 : "—";
   $("latencyP95").textContent = p95 !== null ? p95 : "—";
   $("latencyP99").textContent = p99 !== null ? p99 : "—";
-
   setMetricBadge("latencyBadge",
     latency === null ? "error" : latency <= 80 ? "good" : latency <= 150 ? "warning" : "error",
     latency === null ? "—" : latency <= 80 ? t("badgeGood") : latency <= 150 ? t("badgeElevated") : t("badgeHigh"));
@@ -1358,7 +1739,6 @@ function analyzeMeasurements(results){
     failureRate === 0 ? "good" : failureRate <= 10 ? "warning" : "error",
     failureRate === 0 ? "0%" : failureRate + "%");
   setMetricBadge("httpBadge", latest?.ok ? "good" : "error", latest?.ok ? t("badgeOK") : t("badgeFailed"));
-
   updateHealthScore();
   renderProblems();
   updateTestResults(results);
@@ -1394,14 +1774,11 @@ function updateHealthScore(){
   if(location.protocol !== "https:") score -= 10;
   score = Math.max(0, Math.min(100, score));
   d.score = score;
-
   const circumference = 2 * Math.PI * 80;
   const offset = circumference * (1 - score / 100);
-  const ring = $("healthRingFill");
-  ring.style.strokeDasharray = circumference;
-  ring.style.strokeDashoffset = offset;
+  $("healthRingFill").style.strokeDasharray = circumference;
+  $("healthRingFill").style.strokeDashoffset = offset;
   $("healthScore").textContent = score;
-
   let titleKey, descKey;
   if(score >= 90){ titleKey = "scoreExcellent"; descKey = "scoreExcellentDesc"; }
   else if(score >= 75){ titleKey = "scoreGood"; descKey = "scoreGoodDesc"; }
@@ -1414,38 +1791,14 @@ function updateHealthScore(){
 function renderProblems(){
   const d = latestDiagnostics;
   const problems = [];
-  const isDe = currentLanguage === "de";
-
-  if(!navigator.onLine)
-    problems.push({title:t("probOfflineTitle"), type:"error",
-      evidence: isDe ? "Der Browser meldet einen Offline-Status." : "Browser reports offline status.",
-      meaning: isDe ? "Prüfe WLAN/Kabel, den Router und andere Geräte." : "Check Wi-Fi/cable, router, and other devices."});
-  if(d.latency !== null && d.latency > 150)
-    problems.push({title:t("probLatencyTitle"), type: d.latency > 300 ? "error" : "warning",
-      evidence: d.latency + " ms — " + (isDe ? "durchschnittliche Antwortzeit." : "average response time."),
-      meaning: isDe ? "Die Anfragen dauern länger als üblich." : "Requests take longer than usual."});
-  if(d.jitter !== null && d.jitter > 30)
-    problems.push({title:t("probJitterTitle"), type: d.jitter > 50 ? "error" : "warning",
-      evidence: d.jitter + " ms — " + (isDe ? "Schwankung zwischen den Anfragen." : "variation between requests."),
-      meaning: isDe ? "Kann Videoanrufe und Gaming beeinträchtigen." : "Can affect video calls and gaming."});
-  if(d.failureRate !== null && d.failureRate > 10)
-    problems.push({title:t("probFailureTitle"), type: d.failureRate > 25 ? "error" : "warning",
-      evidence: d.failureRate + "% " + (isDe ? "der Testanfragen sind fehlgeschlagen." : "of test requests failed."),
-      meaning: isDe ? "Im Browser beobachtete Fehlerrate." : "Observed failure rate in browser."});
-  if(location.protocol !== "https:")
-    problems.push({title:t("probHttpsTitle"), type:"error",
-      evidence: isDe ? "Diese Seite wird über HTTP ausgeliefert." : "This page is served over HTTP.",
-      meaning: isDe ? "Ohne HTTPS ist die Verbindung nicht verschlüsselt." : "Connection is not encrypted."});
-  if(d.latency !== null && d.jitter !== null && d.failureRate !== null
-     && d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine)
-    problems.push({title:t("probNoneTitle"), type:"good",
-      evidence: isDe ? "Alle Messwerte liegen im unauffälligen Bereich." : "All measurements are within normal ranges.",
-      meaning: isDe ? "Diese Sitzung zeigt keine Probleme." : "This session shows no issues."});
-  if(!problems.length)
-    problems.push({title:t("probNotEnoughTitle"), type:"warning",
-      evidence: isDe ? "Die Messung lief noch nicht vollständig durch." : "Measurement hasn't completed fully.",
-      meaning: isDe ? "Für eine verlässliche Einschätzung sind mehrere Messpunkte nötig." : "Multiple data points are required."});
-
+  if(!navigator.onLine) problems.push({title:t("probOfflineTitle"), type:"error", evidence:t("probOfflineEv")});
+  if(d.latency !== null && d.latency > 150) problems.push({title:t("probLatencyTitle"), type: d.latency > 300 ? "error" : "warning", evidence: d.latency + " ms"});
+  if(d.jitter !== null && d.jitter > 30) problems.push({title:t("probJitterTitle"), type: d.jitter > 50 ? "error" : "warning", evidence: d.jitter + " ms"});
+  if(d.failureRate !== null && d.failureRate > 10) problems.push({title:t("probFailureTitle"), type: d.failureRate > 25 ? "error" : "warning", evidence: d.failureRate + "%"});
+  if(location.protocol !== "https:") problems.push({title:t("probHttpsTitle"), type:"error", evidence: "HTTP"});
+  if(d.latency !== null && d.jitter !== null && d.failureRate !== null && d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine)
+    problems.push({title:t("probNoneTitle"), type:"good", evidence: t("badgeOK")});
+  if(!problems.length) problems.push({title:t("probNotEnoughTitle"), type:"warning", evidence: t("badgeWaiting")});
   const container = $("problemList");
   container.innerHTML = "";
   problems.forEach(problem => {
@@ -1465,7 +1818,6 @@ function renderProblems(){
             ${problem.type === "good" ? "OK" : problem.type === "error" ? "!" : "i"}
           </span>
         </summary>
-        <div class="problem-body"><div class="explanation"><h4>Details</h4><p>${escapeHTML(problem.meaning)}</p></div></div>
       </details>`;
     container.appendChild(wrapper);
   });
@@ -1560,13 +1912,8 @@ function updateMainResult(result){
   $("bigStatus").textContent = result.ok ? "✓" : "!";
   $("checkTitle").textContent = result.ok ? t("checkTitleSuccess") : t("checkTitleFail");
   $("checkSubtitle").textContent = (result.error ? result.error + " — " : "") + t("realMeasurement");
-  $("lastChecked").textContent = "—";
-  $("lastCheckedDate").textContent = "—";
 }
 
-/* ============================================================
-   OVERVIEW STATS + SPARKLINES
-   ============================================================ */
 function updateOverviewStats(){
   const cutoff = Date.now() - CONFIG.DAY_MS;
   const last24 = serverHistory.filter(x => x.t >= cutoff);
@@ -1585,7 +1932,6 @@ function updateOverviewStats(){
   const last = last24[last24.length - 1];
   $("lastChecked").textContent = new Date(last.t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   $("lastCheckedDate").textContent = new Date(last.t).toLocaleDateString();
-
   drawSparkline("sparkResponse", last24.slice(-30).map(x => x.ms).filter(Number.isFinite));
   const uptimeSeries = last24.map((_, i) => {
     const s = last24.slice(0, i+1).filter(x => x.ok).length;
@@ -1625,9 +1971,6 @@ function drawSparkline(canvasId, values){
   ctx.fillStyle = gradient; ctx.globalAlpha = 0.15; ctx.fill(); ctx.globalAlpha = 1;
 }
 
-/* ============================================================
-   CHART
-   ============================================================ */
 function getFilteredServerHistory(){
   const now = Date.now();
   let cutoff;
@@ -1672,9 +2015,6 @@ document.querySelectorAll(".period-tab").forEach(tab => {
   });
 });
 
-/* ============================================================
-   TIMELINE
-   ============================================================ */
 function renderTimeline(){
   const rows = serverHistory.slice().reverse().slice(0, 15);
   const container = $("timelineList");
@@ -1694,9 +2034,6 @@ function renderTimeline(){
   });
 }
 
-/* ============================================================
-   REPORT
-   ============================================================ */
 function generateReport(){
   const d = latestDiagnostics;
   const cutoff = Date.now() - CONFIG.DAY_MS;
@@ -1709,9 +2046,8 @@ function generateReport(){
     "Browser:         " + detectBrowser(),
     "Online:          " + (navigator.onLine ? "Yes" : "No"),
     "HTTPS:           " + (location.protocol === "https:" ? "Yes" : "No"),
-    "Protocol:        " + (d.protocol || "—"),
     "",
-    "--- 24/7 SERVER MONITOR (GitHub) ---",
+    "--- 24/7 SERVER MONITOR ---",
     "Uptime 24h:      " + serverUptime + "%",
     "Server checks:   " + last24.length,
     "",
@@ -1736,9 +2072,6 @@ function downloadFile(content, name, type){
   URL.revokeObjectURL(url);
 }
 
-/* ============================================================
-   BROWSER 24H MONITOR
-   ============================================================ */
 (function(){
   let timer = null;
   let running = false;
@@ -1872,9 +2205,6 @@ function downloadFile(content, name, type){
   if(s.enabled) start();
 })();
 
-/* ============================================================
-   EVENT LISTENERS
-   ============================================================ */
 $("themeBtn").addEventListener("click", () => {
   const dark = document.body.classList.contains("dark");
   localStorage.setItem(CONFIG.THEME_KEY, dark ? "light" : "dark");
@@ -1885,20 +2215,22 @@ $("themeBtn").addEventListener("click", () => {
 
 $("languageSelect").addEventListener("change", function(){
   applyLanguage(this.value);
-  // Re-render dynamic UI with new language
   updateNetworkProfile();
   if(latestDiagnostics.score !== null){
     updateHealthScore();
     renderProblems();
-    updateTestResults([{ok:true,ms:latestDiagnostics.latency||0,status:latestDiagnostics.httpStatus||200}]);
-    if(latestDiagnostics.timing){
-      // keep timing visible
-    }
   }
   renderChart();
   renderTimeline();
   generateReport();
   updateLiveServerStatus();
+  if(latestDiagnostics.score === null){
+    $("healthTitleDynamic").textContent = t("healthWaitingTitle");
+    $("healthDescriptionDynamic").textContent = t("healthWaitingDesc");
+  }
+  $("checkTitle").textContent = t("checkTitleReady");
+  $("checkSubtitle").textContent = t("checkSubtitleReady");
+  $("checkBtn").textContent = t("runCheck");
 });
 
 $("menuToggle").addEventListener("click", e => {
@@ -1909,7 +2241,6 @@ document.addEventListener("click", e => {
   const menu = $("mainMenu");
   if(menu && !menu.contains(e.target) && e.target !== $("menuToggle")) menu.classList.remove("active");
 });
-document.querySelectorAll(".main-menu a").forEach(a => a.addEventListener("click", () => $("mainMenu").classList.remove("active")));
 
 $("checkBtn").addEventListener("click", () => runFullDiagnosis());
 
@@ -1933,7 +2264,6 @@ $("downloadCsvBtn").addEventListener("click", () => {
   downloadFile([header, ...lines].join("\n"), "fasqoo-server-history-" + Date.now() + ".csv", "text/csv");
 });
 
-$("installButton")?.addEventListener("click", () => {});
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   const btn = $("installButton");
@@ -1944,9 +2274,6 @@ window.addEventListener("appinstalled", () => {
   if(btn) btn.hidden = true;
 });
 
-/* ============================================================
-   LIVE STRIP
-   ============================================================ */
 (function(){
   function update(){
     $("fasqooLiveBrowser").textContent = detectBrowser();
@@ -1958,30 +2285,16 @@ window.addEventListener("appinstalled", () => {
   window.addEventListener("offline", update);
 })();
 
-/* ============================================================
-   INIT
-   ============================================================ */
 window.addEventListener("DOMContentLoaded", async () => {
   applyTheme();
-
-  // Language: saved → else English (default)
   const savedLang = localStorage.getItem(CONFIG.LANGUAGE_KEY);
   const initialLang = (savedLang && SUPPORTED_LANGS.includes(savedLang)) ? savedLang : "en";
   applyLanguage(initialLang);
-
-  // Server data (24/7 GitHub)
   await loadServerHistory();
-
-  // Network profile (HTTPS badge, browser info)
   updateNetworkProfile();
-
-  // Initial UI state
-  updateMainResult({ ok: true, ms: 0, status: 200, error: null });
   resetBadges();
   updateNetworkProfile();
   generateReport();
-
-  // Auto reload server data
   setInterval(loadServerHistory, 60000);
   document.addEventListener("visibilitychange", () => {
     if(!document.hidden) loadServerHistory();
