@@ -15,16 +15,16 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 5
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '20'
 
       - name: Run monitor check
         run: node scripts/monitor.js
@@ -34,11 +34,17 @@ jobs:
           git config user.name  "Fasqoo Monitor"
           git config user.email "monitor@fasqoo.com"
           git add history.json
-          git diff --staged --quiet || git commit -m "check $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "check $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-          for i in 1 2 3; do
+          for i in 1 2 3 4 5; do
             git pull --rebase --no-verify origin main && \
-            git push --no-verify origin main && break
+            git push --no-verify origin main && exit 0
             echo "Retry $i..."
-            sleep 3
+            sleep 5
           done
+          echo "Push failed after 5 retries"
+          exit 1
