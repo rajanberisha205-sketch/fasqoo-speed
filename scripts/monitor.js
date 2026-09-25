@@ -9,8 +9,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const HISTORY_FILE = path.join(__dirname, "..", "history.json");
 const TARGET_URL = "https://fasqoo.com/";
 const TIMEOUT_MS = 15000;
-const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-const MAX_ENTRIES = 2500;
+
+// 30 Tage aufbewahren, damit der 30d-Tab im Frontend gefüllt ist
+const MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+// 30 Tage × 144 Checks/Tag ≈ 4320 → Puffer auf 5000
+const MAX_ENTRIES = 5000;
 
 async function loadHistory() {
   try {
