@@ -2,7 +2,7 @@ name: Fasqoo 24/7 Monitor
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -19,12 +19,12 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Run monitor check
         run: node scripts/monitor.js
