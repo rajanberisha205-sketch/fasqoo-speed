@@ -19,18 +19,22 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
 
       - name: Run monitor check
+        id: monitor
         run: node scripts/monitor.js
+        continue-on-error: true
 
       - name: Commit & push history
+        if: always()
         run: |
+          set -e
           git config user.name  "Fasqoo Monitor"
           git config user.email "monitor@fasqoo.com"
           git add history.json
@@ -39,7 +43,6 @@ jobs:
             exit 0
           fi
           git commit -m "check $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-
           for i in 1 2 3 4 5; do
             git pull --rebase --no-verify origin main && \
             git push --no-verify origin main && exit 0
