@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
 
 <title id="seoTitle">Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime</title>
 <meta name="description" id="seoDesc" content="Messe die Erreichbarkeit, Antwortzeit und Latenz von fasqoo.com direkt in deinem Browser. Realistische Netzwerk-Diagnose ohne Simulation.">
@@ -71,9 +71,6 @@ body.dark{
   --green-2:#10b981;
   --red:#f87171;
   --yellow:#fbbf24;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.3);
-  --shadow-md:0 4px 14px rgba(0,0,0,.35);
-  --shadow-lg:0 14px 40px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -86,7 +83,6 @@ body{
   color:var(--text);
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
 }
 body.dark{
   background:
@@ -99,377 +95,172 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 ::selection{background:var(--primary);color:#fff}
 
 /* ============================================================
-   NAVBAR
+   HEADER (identisch zu index.html)
    ============================================================ */
-.navbar{
-  position:sticky;top:0;z-index:1000;
-  background:color-mix(in srgb,var(--card) 85%, transparent);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--border);
-  box-shadow:var(--shadow-sm);
-}
-.nav-container{
-  max-width:1280px;margin:auto;padding:14px 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
-.logo{
-  font-size:22px;font-weight:900;letter-spacing:-.6px;
-  display:flex;align-items:center;gap:8px;
-  transition:transform .2s ease;
-}
-.logo:hover{transform:translateY(-1px)}
-.logo span{color:var(--primary)}
-.brandmark-img{height:32px;width:auto;object-fit:contain}
-.nav-links{display:flex;align-items:center;gap:26px}
-.nav-links a{
-  color:var(--muted);font-size:14px;font-weight:600;
-  transition:color .2s ease;position:relative;
-}
-.nav-links a::after{
-  content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;
-  background:var(--primary);border-radius:2px;
-  transform:scaleX(0);transform-origin:center;
-  transition:transform .2s ease;
-}
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.wrap{width:min(1120px,calc(100% - 48px));margin:auto}
+header{height:72px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+.brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.brandmark{width:40px;height:40px;object-fit:contain}
+.brandname{font-size:22px;letter-spacing:-.7px;font-weight:800}
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto}
+.main-menu a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s;position:relative}
+.main-menu a:hover{color:var(--primary)}
+.main-menu a:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:var(--primary);transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+.main-menu a:hover:after{transform:scaleX(1)}
+.main-menu a.active::after{transform:scaleX(1)}
 
-.nav-actions{display:flex;align-items:center;gap:8px}
-.lang-select{
-  height:38px;border:1px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--card);color:var(--text);padding:0 12px;
-  font-weight:600;font-size:13px;cursor:pointer;
-  transition:border-color .2s ease;
-}
-.lang-select:hover{border-color:var(--border-strong)}
-.theme-btn{
-  height:38px;width:40px;border:1px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--card);color:var(--text);font-size:16px;
-  display:grid;place-items:center;transition:all .2s ease;
-}
-.theme-btn:hover{border-color:var(--primary);color:var(--primary)}
-.mobile-btn{
-  display:none;border:1px solid var(--border);background:var(--card);color:var(--text);
-  width:40px;height:40px;border-radius:var(--radius-sm);font-size:20px;
+.lite-btn{height:35px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.lite-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lite-btn:active{transform:translateY(1px)}
+
+.install-btn{height:35px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.install-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.install-btn:active{transform:translateY(1px)}
+.install-btn[hidden]{display:none}
+.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
+.win-icon i{display:block;background:currentColor}
+
+.menu-extra{display:flex;align-items:center;gap:8px}
+.lang-control{display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;height:35px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);transition:background .2s,border-color .2s,box-shadow .2s}
+.lang-control:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lang-icon{font-size:14px;line-height:1;color:currentColor;display:inline-block}
+.lang-control select{min-width:76px;height:33px;border:0;outline:0;background:transparent;color:var(--text);padding:0 14px 0 0;font-size:12px;font-weight:500;cursor:pointer}
+
+.theme-btn{width:35px;height:35px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;transition:background .2s,border-color .2s,box-shadow .2s}
+.theme-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+
+.menu-toggle{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
+
+@media(max-width:900px){.install-btn{display:none!important}}
+@media(max-width:760px){
+  header{height:auto;min-height:68px}
+  .menu-toggle{display:block}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);align-items:flex-start}
+  .main-menu.active{display:flex}
+  .main-menu a::after{display:none}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);gap:12px}
 }
 
 /* ============================================================
    HERO
    ============================================================ */
-.hero{
-  max-width:1000px;margin:56px auto 36px;padding:0 24px;
-  text-align:center;position:relative;
-}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 13px;border-radius:var(--radius-full);
-  border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);
-  background:color-mix(in srgb,var(--primary) 6%,transparent);
-  color:var(--primary);
-  font-size:11px;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;
-  margin-bottom:14px;
-}
-.hero-kicker-dot{
-  width:6px;height:6px;border-radius:50%;background:var(--primary);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 25%,transparent);
-}
-.hero h1{
-  font-size:clamp(32px,5vw,52px);line-height:1.05;
-  letter-spacing:-1.8px;font-weight:800;
-  max-width:880px;margin:0 auto;
-}
-.hero p{
-  margin:16px auto 0;max-width:720px;
-  color:var(--muted);font-size:16px;line-height:1.65;
-}
+.hero{max-width:1000px;margin:56px auto 36px;padding:0 24px;text-align:center;position:relative}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--radius-full);border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);background:color-mix(in srgb,var(--primary) 6%,transparent);color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.hero-kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 25%,transparent)}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-1.8px;font-weight:800;max-width:880px;margin:0 auto}
+.hero p{margin:16px auto 0;max-width:720px;color:var(--muted);font-size:16px;line-height:1.65}
 
 /* ============================================================
-   STATUS PILL (pulsierend)
+   STATUS PILL
    ============================================================ */
-.status-pill{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:10px 18px;border-radius:var(--radius-full);
-  background:color-mix(in srgb,var(--green) 10%,transparent);
-  color:var(--green-2);
-  font-size:13px;font-weight:800;
-  border:1px solid color-mix(in srgb,var(--green) 25%,transparent);
-  box-shadow:0 4px 18px color-mix(in srgb,var(--green) 10%,transparent);
-  transition:all .3s ease;
-}
-.status-dot{
-  width:9px;height:9px;background:var(--green);border-radius:50%;
-  animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite;
-}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 15%,transparent)}
-  50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--green) 0%,transparent)}
-}
-.status-pill.warning{
-  background:color-mix(in srgb,var(--yellow) 10%,transparent);
-  color:var(--yellow);
-  border-color:color-mix(in srgb,var(--yellow) 25%,transparent);
-  box-shadow:0 4px 18px color-mix(in srgb,var(--yellow) 10%,transparent);
-}
+.status-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:var(--radius-full);background:color-mix(in srgb,var(--green) 10%,transparent);color:var(--green-2);font-size:13px;font-weight:800;border:1px solid color-mix(in srgb,var(--green) 25%,transparent);box-shadow:0 4px 18px color-mix(in srgb,var(--green) 10%,transparent);transition:all .3s ease}
+.status-dot{width:9px;height:9px;background:var(--green);border-radius:50%;animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 15%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--green) 0%,transparent)}}
+.status-pill.warning{background:color-mix(in srgb,var(--yellow) 10%,transparent);color:var(--yellow);border-color:color-mix(in srgb,var(--yellow) 25%,transparent);box-shadow:0 4px 18px color-mix(in srgb,var(--yellow) 10%,transparent)}
 .status-pill.warning .status-dot{background:var(--yellow)}
-.status-pill.error{
-  background:color-mix(in srgb,var(--red) 10%,transparent);
-  color:var(--red);
-  border-color:color-mix(in srgb,var(--red) 25%,transparent);
-  box-shadow:0 4px 18px color-mix(in srgb,var(--red) 10%,transparent);
-}
+.status-pill.error{background:color-mix(in srgb,var(--red) 10%,transparent);color:var(--red);border-color:color-mix(in srgb,var(--red) 25%,transparent);box-shadow:0 4px 18px color-mix(in srgb,var(--red) 10%,transparent)}
 .status-pill.error .status-dot{background:var(--red)}
-.status-pill.idle{
-  background:color-mix(in srgb,var(--muted) 10%,transparent);
-  color:var(--muted);
-  border-color:var(--border);
-  box-shadow:none;
-}
-.status-pill.idle .status-dot{
-  background:var(--muted);animation:none;
-}
+.status-pill.idle{background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--muted);border-color:var(--border);box-shadow:none}
+.status-pill.idle .status-dot{background:var(--muted);animation:none}
 
 /* ============================================================
    LAYOUT
    ============================================================ */
-.container{max-width:1280px;margin:auto;padding:0 24px 80px}
+.container{max-width:1120px;margin:auto;padding:0 24px 80px}
 .section-title{margin:44px 0 16px;text-align:center}
 .section-title h2{font-size:22px;letter-spacing:-.5px;font-weight:800}
 .section-title p{color:var(--muted);margin-top:6px;font-size:14px}
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-md);
-  box-shadow:var(--shadow-md);
-  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
-}
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-lg);
-  border-color:color-mix(in srgb,var(--primary) 20%,var(--border));
-}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-md);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--primary) 20%,var(--border))}
 
 /* ============================================================
    LIVE STRIP
    ============================================================ */
-.fasqoo-live-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:12px;margin:0 0 20px;
-}
-.fasqoo-live-item{
-  padding:14px 16px;
-  border:1px solid var(--border);
-  background:color-mix(in srgb,var(--card) 70%,transparent);
-  border-radius:var(--radius-md);
-  backdrop-filter:blur(10px);
-}
-.fasqoo-live-label{
-  font-size:10px;color:var(--muted);font-weight:800;
-  text-transform:uppercase;letter-spacing:.08em;
-}
-.fasqoo-live-value{
-  margin-top:6px;font-size:14px;font-weight:800;
-  display:flex;align-items:center;gap:8px;
-}
-.fasqoo-live-dot{
-  display:inline-block;width:7px;height:7px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 15%,transparent);
-  animation:pulse 2s infinite;
-}
+.fasqoo-live-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 20px}
+.fasqoo-live-item{padding:14px 16px;border:1px solid var(--border);background:color-mix(in srgb,var(--card) 70%,transparent);border-radius:var(--radius-md);backdrop-filter:blur(10px)}
+.fasqoo-live-label{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.fasqoo-live-value{margin-top:6px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px}
+.fasqoo-live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 15%,transparent);animation:pulse 2s infinite}
+.fasqoo-live-server{color:var(--green-2);font-weight:800}
 
 /* ============================================================
-   HEALTH SCORE (SVG Ring)
+   HEALTH SCORE
    ============================================================ */
-.health-panel{
-  margin-top:20px;padding:32px;
-  display:grid;grid-template-columns:220px 1fr;
-  gap:40px;align-items:center;
-  position:relative;overflow:hidden;
-}
-.health-panel::before{
-  content:"";position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 4%,transparent),transparent 55%);
-  pointer-events:none;
-}
-.health-ring-wrap{
-  position:relative;width:180px;height:180px;margin:auto;
-  display:grid;place-items:center;
-}
-.health-ring-svg{
-  position:absolute;inset:0;width:100%;height:100%;
-  transform:rotate(-90deg);
-}
-.health-ring-track{
-  fill:none;stroke:var(--border);stroke-width:12;
-}
-.health-ring-fill{
-  fill:none;stroke:url(#healthGradient);stroke-width:12;
-  stroke-linecap:round;
-  stroke-dasharray:502.65;
-  stroke-dashoffset:502.65;
-  transition:stroke-dashoffset 1s cubic-bezier(.34,1.2,.64,1);
-}
-.health-score-number{
-  font-size:48px;font-weight:900;letter-spacing:-2px;
-  line-height:1;position:relative;z-index:2;
-}
-.health-score-label{
-  color:var(--muted);font-size:12px;font-weight:700;
-  margin-top:4px;position:relative;z-index:2;
-  text-align:center;
-}
+.health-panel{margin-top:20px;padding:32px;display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.health-panel::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 4%,transparent),transparent 55%);pointer-events:none}
+.health-ring-wrap{position:relative;width:180px;height:180px;margin:auto;display:grid;place-items:center}
+.health-ring-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.health-ring-track{fill:none;stroke:var(--border);stroke-width:12}
+.health-ring-fill{fill:none;stroke:url(#healthGradient);stroke-width:12;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:502.65;transition:stroke-dashoffset 1s cubic-bezier(.34,1.2,.64,1)}
+.health-score-number{font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1;position:relative;z-index:2}
+.health-score-label{color:var(--muted);font-size:12px;font-weight:700;margin-top:4px;position:relative;z-index:2;text-align:center}
 .health-details h2{font-size:24px;letter-spacing:-.5px}
 .health-details p{margin-top:10px;color:var(--muted);line-height:1.65;font-size:14px}
 
 /* ============================================================
-   OVERVIEW mit Sparklines
+   OVERVIEW
    ============================================================ */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.overview-card{
-  padding:20px;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;
-}
-.card-label{
-  color:var(--muted);font-size:12px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.05em;
-}
+.overview-card{padding:20px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card-label{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .card-value{margin-top:10px;font-size:28px;font-weight:900;letter-spacing:-1px}
 .card-small{margin-top:6px;color:var(--muted);font-size:11px}
-.sparkline{
-  width:100%;height:36px;margin-top:12px;display:block;
-}
+.sparkline{width:100%;height:36px;margin-top:12px;display:block}
 
 /* ============================================================
    CHECK PANEL
    ============================================================ */
-.check-panel{
-  margin-top:20px;padding:24px;
-  display:flex;justify-content:space-between;align-items:center;gap:20px;
-}
+.check-panel{margin-top:20px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
 .check-info{display:flex;align-items:center;gap:18px;flex:1;min-width:0}
-.big-status{
-  width:56px;height:56px;border-radius:50%;
-  display:grid;place-items:center;
-  background:color-mix(in srgb,var(--green) 12%,transparent);
-  color:var(--green);font-size:26px;font-weight:900;flex-shrink:0;
-  transition:all .3s ease;
-}
+.big-status{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--green) 12%,transparent);color:var(--green);font-size:26px;font-weight:900;flex-shrink:0;transition:all .3s ease}
 .big-status.error{background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red)}
 .big-status.warning{background:color-mix(in srgb,var(--yellow) 12%,transparent);color:var(--yellow)}
 .big-status.idle{background:color-mix(in srgb,var(--muted) 12%,transparent);color:var(--muted)}
 .check-title{font-size:17px;font-weight:800}
 .check-subtitle{color:var(--muted);margin-top:5px;font-size:13px}
 
-.btn-primary{
-  border:0;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--primary),var(--primary-2));
-  color:#fff;padding:14px 22px;
-  font-weight:800;font-size:14px;letter-spacing:.02em;
-  box-shadow:0 8px 22px color-mix(in srgb,var(--primary) 30%,transparent);
-  transition:all .2s ease;white-space:nowrap;
-}
-.btn-primary:hover:not(:disabled){
-  transform:translateY(-2px);
-  box-shadow:0 12px 28px color-mix(in srgb,var(--primary) 40%,transparent);
-}
+.btn-primary{border:0;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:14px 22px;font-weight:800;font-size:14px;letter-spacing:.02em;box-shadow:0 8px 22px color-mix(in srgb,var(--primary) 30%,transparent);transition:all .2s ease;white-space:nowrap}
+.btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 28px color-mix(in srgb,var(--primary) 40%,transparent)}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
 
 /* ============================================================
-   DIAGNOSTIC CARDS mit Tooltips + Percentiles
+   DIAGNOSTIC
    ============================================================ */
 .diagnostic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .diagnostic-card{padding:22px;position:relative}
-.diagnostic-top{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-}
-.diagnostic-name{
-  font-weight:800;font-size:13px;
-  display:inline-flex;align-items:center;gap:6px;
-}
-.info-tip{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:15px;height:15px;border-radius:50%;
-  background:var(--border);color:var(--muted);
-  font-size:9px;font-weight:900;cursor:help;
-  position:relative;
-}
-.info-tip::after{
-  content:attr(data-tip);
-  position:absolute;left:50%;bottom:calc(100% + 10px);
-  transform:translateX(-50%);
-  background:var(--text);color:var(--card);
-  padding:8px 12px;border-radius:8px;
-  font-size:11px;font-weight:600;line-height:1.5;
-  width:220px;text-align:left;
-  opacity:0;visibility:hidden;transition:.15s ease;
-  z-index:100;pointer-events:none;
-  box-shadow:var(--shadow-lg);
-}
+.diagnostic-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.diagnostic-name{font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.info-tip{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--border);color:var(--muted);font-size:9px;font-weight:900;cursor:help;position:relative}
+.info-tip::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);background:var(--text);color:var(--card);padding:8px 12px;border-radius:8px;font-size:11px;font-weight:600;line-height:1.5;width:220px;text-align:left;opacity:0;visibility:hidden;transition:.15s ease;z-index:100;pointer-events:none;box-shadow:var(--shadow-lg)}
 .info-tip:hover::after{opacity:1;visibility:visible}
 
 .metric{font-size:28px;font-weight:900;margin-top:16px;letter-spacing:-1px}
 .metric-unit{font-size:13px;color:var(--muted);font-weight:700;margin-left:4px}
-
-.percentiles{
-  margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
-}
+.percentiles{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .pctl-item{text-align:center}
 .pctl-label{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:.08em}
 .pctl-value{font-size:13px;font-weight:800;margin-top:3px;color:var(--text)}
+.metric-description{margin-top:12px;color:var(--muted);font-size:11px;line-height:1.5}
 
-.metric-description{
-  margin-top:12px;color:var(--muted);font-size:11px;line-height:1.5;
-}
-
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  border-radius:var(--radius-full);padding:5px 10px;
-  font-size:11px;font-weight:800;
-  background:color-mix(in srgb,var(--muted) 10%,transparent);
-  color:var(--muted);border:1px solid transparent;
-  transition:all .2s ease;
-}
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:var(--radius-full);padding:5px 10px;font-size:11px;font-weight:800;background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--muted);border:1px solid transparent;transition:all .2s ease}
 .badge.good{color:var(--green-2);background:color-mix(in srgb,var(--green) 10%,transparent);border-color:color-mix(in srgb,var(--green) 20%,transparent)}
 .badge.warning{color:var(--yellow);background:color-mix(in srgb,var(--yellow) 10%,transparent);border-color:color-mix(in srgb,var(--yellow) 20%,transparent)}
 .badge.error{color:var(--red);background:color-mix(in srgb,var(--red) 10%,transparent);border-color:color-mix(in srgb,var(--red) 20%,transparent)}
 
 /* ============================================================
-   TIMING WATERFALL
+   TIMING
    ============================================================ */
 .timing-card{padding:24px;margin-top:16px}
-.timing-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;margin-bottom:20px;flex-wrap:wrap;
-}
+.timing-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
 .timing-header h3{font-size:16px;font-weight:800}
-.timing-protocol{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:6px 11px;border-radius:var(--radius-full);
-  background:color-mix(in srgb,var(--accent) 10%,transparent);
-  color:var(--accent);font-size:11px;font-weight:800;
-  border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);
-}
+.timing-protocol{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:var(--radius-full);background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);font-size:11px;font-weight:800;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent)}
 .waterfall{display:flex;flex-direction:column;gap:10px}
-.wf-row{
-  display:grid;grid-template-columns:120px 1fr 70px;
-  gap:14px;align-items:center;font-size:12px;
-}
+.wf-row{display:grid;grid-template-columns:120px 1fr 70px;gap:14px;align-items:center;font-size:12px}
 .wf-label{color:var(--muted);font-weight:700}
-.wf-bar-wrap{
-  height:20px;background:var(--bg);border-radius:var(--radius-sm);
-  overflow:hidden;position:relative;
-}
-.wf-bar{
-  height:100%;width:0;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  border-radius:var(--radius-sm);
-  transition:width .6s cubic-bezier(.34,1.2,.64,1);
-}
+.wf-bar-wrap{height:20px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden;position:relative}
+.wf-bar{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:var(--radius-sm);transition:width .6s cubic-bezier(.34,1.2,.64,1)}
 .wf-value{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
 
 /* ============================================================
@@ -477,41 +268,24 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
    ============================================================ */
 .profile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .profile-card{padding:18px}
-.profile-label{
-  color:var(--muted);font-size:11px;font-weight:800;
-  text-transform:uppercase;letter-spacing:.05em;
-}
-.profile-value{
-  margin-top:8px;font-size:16px;font-weight:800;
-  word-break:break-word;line-height:1.3;
-}
+.profile-label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.profile-value{margin-top:8px;font-size:16px;font-weight:800;word-break:break-word;line-height:1.3}
 
 /* ============================================================
    PROBLEMS
    ============================================================ */
 .problem-list{display:flex;flex-direction:column;gap:12px}
 .problem{overflow:hidden}
-.problem summary{
-  cursor:pointer;list-style:none;padding:18px 22px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-}
+.problem summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .problem summary::-webkit-details-marker{display:none}
 .problem-heading{display:flex;align-items:center;gap:14px;min-width:0}
-.problem-icon{
-  width:38px;height:38px;border-radius:12px;
-  display:grid;place-items:center;font-weight:900;flex-shrink:0;
-  background:color-mix(in srgb,var(--yellow) 12%,transparent);
-  color:var(--yellow);
-}
+.problem-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:900;flex-shrink:0;background:color-mix(in srgb,var(--yellow) 12%,transparent);color:var(--yellow)}
 .problem.error .problem-icon{background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red)}
 .problem.good .problem-icon{background:color-mix(in srgb,var(--green) 12%,transparent);color:var(--green)}
 .problem-name{font-weight:800;font-size:14px}
 .problem-severity{font-size:12px;font-weight:600;color:var(--muted);margin-top:3px}
 .problem-body{padding:0 22px 22px;border-top:1px solid var(--border);margin-top:0}
-.explanation{
-  border:1px solid var(--border);border-radius:var(--radius-sm);
-  padding:16px;margin-top:16px;
-}
+.explanation{border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-top:16px}
 .explanation h4{font-size:12px;margin-bottom:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}
 .explanation p{color:var(--muted);font-size:13px;line-height:1.6}
 
@@ -519,18 +293,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
    TEST SUITE
    ============================================================ */
 .test-suite{padding:8px 22px}
-.test-row{
-  display:grid;grid-template-columns:32px 1fr auto;
-  gap:14px;align-items:center;
-  padding:16px 0;border-bottom:1px solid var(--border);
-}
+.test-row{display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
 .test-row:last-child{border-bottom:0}
-.test-icon{
-  width:26px;height:26px;border-radius:50%;
-  display:grid;place-items:center;
-  background:color-mix(in srgb,var(--muted) 15%,transparent);
-  color:var(--muted);font-size:12px;font-weight:900;
-}
+.test-icon{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted);font-size:12px;font-weight:900}
 .test-icon.good{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green-2)}
 .test-icon.error{background:color-mix(in srgb,var(--red) 15%,transparent);color:var(--red)}
 .test-name{font-weight:800;font-size:14px}
@@ -538,72 +303,28 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .test-value{font-weight:800;font-size:13px;font-variant-numeric:tabular-nums}
 
 /* ============================================================
-   CHART mit Zeitraum-Tabs
+   CHART
    ============================================================ */
 .chart-card{padding:24px;margin-top:16px}
-.chart-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;flex-wrap:wrap;margin-bottom:18px;
-}
+.chart-header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .chart-header h3{font-size:16px;font-weight:800}
 .chart-header span{color:var(--muted);font-size:12px}
-.period-tabs{
-  display:inline-flex;gap:4px;padding:4px;
-  background:var(--bg);border-radius:var(--radius-sm);
-  border:1px solid var(--border);
-}
-.period-tab{
-  padding:7px 14px;border-radius:7px;
-  font-size:12px;font-weight:800;color:var(--muted);
-  transition:all .2s ease;
-}
-.period-tab.active{
-  background:var(--card);color:var(--primary);
-  box-shadow:var(--shadow-sm);
-}
-.chart{
-  height:240px;margin-top:8px;
-  display:flex;align-items:flex-end;gap:3px;
-  border-bottom:1px solid var(--border);
-  padding:8px 4px 0;overflow:hidden;
-}
-.bar{
-  flex:1;min-width:3px;max-width:16px;
-  background:linear-gradient(180deg,var(--primary),var(--accent));
-  border-radius:4px 4px 0 0;opacity:.85;
-  transition:opacity .2s ease,transform .2s ease;
-}
+.period-tabs{display:inline-flex;gap:4px;padding:4px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.period-tab{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:800;color:var(--muted);transition:all .2s ease}
+.period-tab.active{background:var(--card);color:var(--primary);box-shadow:var(--shadow-sm)}
+.chart{height:240px;margin-top:8px;display:flex;align-items:flex-end;gap:3px;border-bottom:1px solid var(--border);padding:8px 4px 0;overflow:hidden}
+.bar{flex:1;min-width:3px;max-width:16px;background:linear-gradient(180deg,var(--primary),var(--accent));border-radius:4px 4px 0 0;opacity:.85;transition:opacity .2s ease,transform .2s ease}
 .bar:hover{opacity:1;transform:translateY(-2px)}
-.no-data{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--muted);font-size:14px;
-}
+.no-data{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 
 /* ============================================================
-   INCIDENT TIMELINE
+   TIMELINE
    ============================================================ */
-.incident-timeline{
-  padding:24px;margin-top:16px;
-}
-.timeline-list{
-  position:relative;padding-left:32px;
-  margin-top:8px;
-}
-.timeline-list::before{
-  content:"";position:absolute;left:11px;top:8px;bottom:8px;
-  width:2px;background:var(--border);border-radius:2px;
-}
-.timeline-item{
-  position:relative;padding:12px 0;
-  display:flex;flex-direction:column;gap:4px;
-}
-.timeline-item::before{
-  content:"";position:absolute;left:-27px;top:16px;
-  width:12px;height:12px;border-radius:50%;
-  background:var(--green);border:3px solid var(--card);
-  box-shadow:0 0 0 1px var(--green);
-}
+.incident-timeline{padding:24px;margin-top:16px}
+.timeline-list{position:relative;padding-left:32px;margin-top:8px}
+.timeline-list::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--border);border-radius:2px}
+.timeline-item{position:relative;padding:12px 0;display:flex;flex-direction:column;gap:4px}
+.timeline-item::before{content:"";position:absolute;left:-27px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--green);border:3px solid var(--card);box-shadow:0 0 0 1px var(--green)}
 .timeline-item.error::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
 .timeline-item.warning::before{background:var(--yellow);box-shadow:0 0 0 1px var(--yellow)}
 .timeline-time{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
@@ -615,141 +336,63 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
    ============================================================ */
 .report-panel{padding:24px}
 .report-actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn-secondary{
-  border:1px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--card);color:var(--text);
-  padding:11px 18px;font-weight:700;font-size:13px;
-  transition:all .2s ease;
-}
-.btn-secondary:hover{
-  border-color:var(--primary);color:var(--primary);
-  transform:translateY(-1px);
-}
-.report-preview{
-  width:100%;min-height:220px;margin-top:18px;
-  resize:vertical;border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:16px;
-  background:var(--bg);color:var(--text);
-  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
-  font-size:12px;line-height:1.6;
-}
+.btn-secondary{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text);padding:11px 18px;font-weight:700;font-size:13px;transition:all .2s ease}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+.report-preview{width:100%;min-height:220px;margin-top:18px;resize:vertical;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;background:var(--bg);color:var(--text);font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;line-height:1.6}
 
 /* ============================================================
    NOTICE
    ============================================================ */
-.notice{
-  padding:18px 22px;position:relative;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius-md);color:var(--muted);
-  font-size:13px;line-height:1.6;margin-top:16px;
-}
-.notice::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md);
-}
+.notice{padding:18px 22px;position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--muted);font-size:13px;line-height:1.6;margin-top:16px}
+.notice::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md)}
 .notice strong{color:var(--text)}
 
 /* ============================================================
    24H MONITOR
    ============================================================ */
 .monitor-panel{padding:28px;margin-top:20px}
-.monitor-head{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  gap:24px;flex-wrap:wrap;
-}
-.section-kicker{
-  font-size:11px;letter-spacing:.14em;font-weight:900;
-  color:var(--primary);margin-bottom:7px;text-transform:uppercase;
-}
+.monitor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.section-kicker{font-size:11px;letter-spacing:.14em;font-weight:900;color:var(--primary);margin-bottom:7px;text-transform:uppercase}
 .monitor-head h2{font-size:22px;font-weight:800;letter-spacing:-.4px}
 .monitor-head p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.55;max-width:640px}
 .monitor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.monitor-toggle{
-  display:inline-flex;align-items:center;gap:10px;
-  border:1px solid var(--border);border-radius:var(--radius-sm);
-  padding:10px 14px;font-size:12px;font-weight:800;
-  cursor:pointer;user-select:none;
-  transition:border-color .2s ease;
-}
+.monitor-toggle{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;transition:border-color .2s ease}
 .monitor-toggle:hover{border-color:var(--primary)}
 .monitor-toggle input{position:absolute;opacity:0;pointer-events:none}
-.toggle-ui{
-  width:38px;height:22px;border-radius:20px;
-  background:var(--border);position:relative;transition:.2s;
-}
-.toggle-ui::after{
-  content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;
-  border-radius:50%;background:#fff;
-  box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.2s;
-}
+.toggle-ui{width:38px;height:22px;border-radius:20px;background:var(--border);position:relative;transition:.2s}
+.toggle-ui::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.2s}
 .monitor-toggle input:checked + .toggle-ui{background:var(--primary)}
 .monitor-toggle input:checked + .toggle-ui::after{transform:translateX(16px)}
-.monitor-select{
-  border:1px solid var(--border);background:var(--card);color:var(--text);
-  border-radius:var(--radius-sm);padding:10px 12px;font-weight:700;font-size:13px;
-  cursor:pointer;
-}
-.monitor-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:12px;margin-top:22px;
-}
-.monitor-stat{
-  padding:16px;border:1px solid var(--border);
-  border-radius:var(--radius-sm);background:var(--bg);
-}
-.monitor-stat span{
-  display:block;color:var(--muted);font-size:11px;
-  font-weight:800;text-transform:uppercase;letter-spacing:.05em;
-}
+.monitor-select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:var(--radius-sm);padding:10px 12px;font-weight:700;font-size:13px;cursor:pointer}
+.monitor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.monitor-stat{padding:16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)}
+.monitor-stat span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 .monitor-stat strong{display:block;margin-top:8px;font-size:20px;font-weight:900}
-.monitor-chart-wrap{
-  margin-top:18px;padding:18px;border:1px solid var(--border);
-  border-radius:var(--radius-md);background:var(--bg);
-}
-.monitor-chart-title{
-  display:flex;justify-content:space-between;gap:12px;
-  align-items:center;margin-bottom:12px;font-size:13px;flex-wrap:wrap;
-}
+.monitor-chart-wrap{margin-top:18px;padding:18px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg)}
+.monitor-chart-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;font-size:13px;flex-wrap:wrap}
 .monitor-chart-title span{color:var(--muted);font-size:11px}
 #monitorChart{width:100%;display:block}
-.monitor-note{
-  margin-top:16px;padding:14px 16px;border-radius:var(--radius-sm);
-  background:color-mix(in srgb,var(--primary) 6%,transparent);
-  border:1px solid color-mix(in srgb,var(--primary) 15%,transparent);
-  color:var(--muted);font-size:12px;line-height:1.55;
-}
+.monitor-note{margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);background:linear-gradient(135deg,color-mix(in srgb,var(--green) 8%,transparent),color-mix(in srgb,var(--primary) 6%,transparent));border:1px solid color-mix(in srgb,var(--green) 25%,transparent);color:var(--muted);font-size:12.5px;line-height:1.65}
 .monitor-note strong{color:var(--text)}
 
 /* ============================================================
    ACCURACY
    ============================================================ */
-.accuracy{
-  margin-top:20px;padding:22px;border-radius:var(--radius-md);
-  background:color-mix(in srgb,var(--primary) 5%,transparent);
-  border:1px solid color-mix(in srgb,var(--primary) 15%,transparent);
-  position:relative;
-}
-.accuracy::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md);
-}
+.accuracy{margin-top:20px;padding:22px;border-radius:var(--radius-md);background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 15%,transparent);position:relative}
+.accuracy::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);border-radius:var(--radius-md) 0 0 var(--radius-md)}
 .accuracy strong{display:block;margin-bottom:8px;font-weight:800}
 .accuracy p{color:var(--muted);font-size:13px;line-height:1.6}
 
 /* ============================================================
-   FOOTER
+   FOOTER (identisch zu index.html)
    ============================================================ */
-footer{
-  border-top:1px solid var(--border);
-  padding:32px 24px;color:var(--muted);font-size:12px;
-}
-.footer-inner{
-  max-width:1280px;margin:auto;
-  display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
-}
-.fasqoo-footer-links{display:flex;gap:20px;flex-wrap:wrap}
-.fasqoo-footer-links a{transition:color .2s ease}
-.fasqoo-footer-links a:hover{color:var(--primary)}
+footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;color:var(--muted);font-size:11px;margin-top:45px;box-shadow:0 -1px 0 rgba(16,24,40,.025)}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.fasqoo-footer-copy{display:flex;flex-direction:column;gap:8px;line-height:1.55;max-width:520px}
+.fasqoo-footer-copy div:first-child{font-weight:600;color:var(--text)}
+.fasqoo-footer-links{display:flex;flex-wrap:wrap;gap:10px 20px}
+.fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82;transition:opacity .2s ease}
+.fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
 
 /* ============================================================
    RESPONSIVE
@@ -760,17 +403,6 @@ footer{
   .health-panel{grid-template-columns:1fr;text-align:center}
   .health-ring-wrap{margin:0 auto}
   .monitor-grid{grid-template-columns:repeat(2,1fr)}
-  .mobile-btn{display:grid;place-items:center}
-  .nav-links{
-    position:absolute;top:100%;left:0;right:0;
-    background:var(--card);border-bottom:1px solid var(--border);
-    padding:20px;display:none;flex-direction:column;
-    align-items:flex-start;gap:16px;
-    box-shadow:var(--shadow-lg);
-  }
-  .nav-links.open{display:flex}
-  .nav-links a{font-size:16px;width:100%;padding:8px 0}
-  .nav-links a::after{display:none}
 }
 @media(max-width:700px){
   .hero{margin-top:32px}
@@ -783,63 +415,75 @@ footer{
   .btn-primary{width:100%}
   .test-row{grid-template-columns:32px 1fr;gap:12px}
   .test-value{grid-column:2;margin-top:2px;text-align:left}
-  .footer-inner{flex-direction:column;text-align:center;align-items:center}
+  .foot{flex-direction:column;text-align:left}
   .wf-row{grid-template-columns:90px 1fr 60px;font-size:11px}
   .report-actions{flex-direction:column}
   .btn-secondary{width:100%}
   .monitor-grid{grid-template-columns:1fr 1fr}
   .monitor-panel{padding:20px}
-  .percentiles{gap:6px}
 }
 @media(max-width:480px){
+  .wrap{width:calc(100% - 24px)}
   .fasqoo-live-strip{grid-template-columns:1fr}
   .monitor-grid{grid-template-columns:1fr}
   .period-tabs{width:100%}
   .period-tab{flex:1;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.001ms!important;
-    scroll-behavior:auto!important;
-  }
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="logo">
-      <img src="fasqoologo.png" alt="Fasqoo Logo" class="brandmark-img">
-      <span>Fasqoo</span>
-    </a>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html" data-i18n="home">Startseite</a>
-      <a href="faq.html" data-i18n="faq">FAQ</a>
-      <a href="subnet-calculator.html" data-i18n="networkStatus">IT-Diagnose</a>
-      <a href="about.html" data-i18n="about">Über uns</a>
+<!-- ============================================================
+     HEADER (identisch zu index.html)
+     ============================================================ -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <img src="/fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
+      <div class="brandname">Fasqoo</div>
     </div>
-    <div class="nav-actions">
-      <select class="lang-select" id="languageSelect" aria-label="Language">
-        <option value="de">Deutsch</option>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="es">Español</option>
-        <option value="tr">Türkçe</option>
-        <option value="sq">Shqip</option>
-        <option value="ar">العربية</option>
-      </select>
-      <button class="theme-btn" id="themeBtn" aria-label="Theme">☾</button>
-      <button class="mobile-btn" id="mobileBtn" aria-label="Menu">☰</button>
-    </div>
-  </div>
-</nav>
 
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <nav class="main-menu" id="mainMenu">
+      <a href="faq.html" data-i18n="navFaq">FAQ</a>
+      <a href="network-status.html" class="active" data-i18n="navStatus">Netzwerk-Status</a>
+      <a href="subnet-calculator.html" data-i18n="navDiag">IT-Diagnose</a>
+      <a href="about.html" data-i18n="navAbout">Über uns</a>
+      <a href="widget.html" data-i18n="navWidget">Widget</a>
+      <div class="menu-extra">
+        <div class="lang-control">
+          <span class="lang-icon" aria-hidden="true">◎</span>
+          <select id="languageSelect" aria-label="Language">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+            <option value="tr">Türkçe</option>
+            <option value="sq">Shqip</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <header class="hero">
   <div class="hero-kicker"><span class="hero-kicker-dot"></span> Network Intelligence</div>
   <div class="status-pill idle" id="mainStatusPill" role="status" aria-live="polite">
@@ -852,21 +496,37 @@ footer{
 
 <main class="container">
 
+<!-- Server-Status-Info -->
+<div class="card" style="padding:20px;margin-bottom:20px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(124,58,237,.04));border-color:rgba(37,99,235,.2);">
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+    <div style="font-size:32px;">🌐</div>
+    <div style="flex:1;min-width:240px;">
+      <div style="font-weight:800;font-size:15px;margin-bottom:6px;">
+        Diese Seite zeigt zwei Perspektiven auf fasqoo.com
+      </div>
+      <div style="color:var(--muted);font-size:13px;line-height:1.65;">
+        <div style="margin-bottom:4px;">🟢 <strong style="color:var(--text);">Server-Status:</strong> Läuft <strong style="color:var(--green-2);">echtes 24/7</strong> unabhängig von dir — gemessen von GitHub-Servern aus, alle 10 Minuten.</div>
+        <div>🔵 <strong style="color:var(--text);">Deine Messung:</strong> Testet deine eigene Verbindung — direkt jetzt, in deinem Browser.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="fasqoo-live-strip" aria-label="Live network summary">
   <div class="fasqoo-live-item">
     <div class="fasqoo-live-label">Target</div>
     <div class="fasqoo-live-value"><span class="fasqoo-live-dot"></span>fasqoo.com</div>
   </div>
   <div class="fasqoo-live-item">
-    <div class="fasqoo-live-label">Transport</div>
-    <div class="fasqoo-live-value" id="fasqooLiveTransport">—</div>
+    <div class="fasqoo-live-label">Server-Status</div>
+    <div class="fasqoo-live-value fasqoo-live-server" id="fasqooLiveServer">Lade 24/7-Daten…</div>
   </div>
   <div class="fasqoo-live-item">
     <div class="fasqoo-live-label">Browser</div>
     <div class="fasqoo-live-value" id="fasqooLiveBrowser">—</div>
   </div>
   <div class="fasqoo-live-item">
-    <div class="fasqoo-live-label">Connection</div>
+    <div class="fasqoo-live-label">Deine Verbindung</div>
     <div class="fasqoo-live-value" id="fasqooLiveConnection">—</div>
   </div>
 </div>
@@ -900,26 +560,26 @@ footer{
 
 <div class="section-title">
   <h2 data-i18n="overview">Übersicht</h2>
-  <p data-i18n="overviewDesc">Echte Messungen, gesammelt von diesem Browser.</p>
+  <p data-i18n="overviewDesc">24/7-Server-Daten (GitHub) + deine eigenen Messungen.</p>
 </div>
 
 <div class="grid">
   <div class="card overview-card">
-    <div class="card-label" data-i18n="observedUptime">Beobachtete Erreichbarkeit</div>
+    <div class="card-label" data-i18n="observedUptime">Server-Erreichbarkeit</div>
     <div class="card-value" id="uptimeValue">—</div>
-    <div class="card-small" data-i18n="thisBrowser">Dieser Browser / letzte 24 Std.</div>
+    <div class="card-small">24/7 gemessen von GitHub</div>
     <canvas class="sparkline" id="sparkUptime" aria-hidden="true"></canvas>
   </div>
   <div class="card overview-card">
-    <div class="card-label" data-i18n="checks24h">Prüfungen in 24 Std.</div>
+    <div class="card-label" data-i18n="checks24h">Server-Checks 24h</div>
     <div class="card-value" id="checksValue">0</div>
-    <div class="card-small" data-i18n="localHistory">Lokaler Browser-Verlauf</div>
+    <div class="card-small">Alle 10 Minuten geprüft</div>
     <canvas class="sparkline" id="sparkChecks" aria-hidden="true"></canvas>
   </div>
   <div class="card overview-card">
-    <div class="card-label" data-i18n="currentResponse">Aktuelle Antwortzeit</div>
+    <div class="card-label" data-i18n="currentResponse">Server-Antwortzeit</div>
     <div class="card-value" id="responseValue">—</div>
-    <div class="card-small">Browser → fasqoo.com</div>
+    <div class="card-small">GitHub → fasqoo.com</div>
     <canvas class="sparkline" id="sparkResponse" aria-hidden="true"></canvas>
   </div>
   <div class="card overview-card">
@@ -942,7 +602,7 @@ footer{
 </div>
 
 <div class="section-title">
-  <h2 data-i18n="diagnostics">Messwerte</h2>
+  <h2 data-i18n="diagnostics">Deine Messwerte</h2>
   <p data-i18n="diagnosticsDesc">Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.</p>
 </div>
 
@@ -1035,26 +695,10 @@ footer{
     <span class="timing-protocol" id="protocolBadge">Protocol: —</span>
   </div>
   <div class="waterfall">
-    <div class="wf-row">
-      <div class="wf-label">DNS Lookup</div>
-      <div class="wf-bar-wrap"><div class="wf-bar" id="wfDns"></div></div>
-      <div class="wf-value" id="wfDnsVal">—</div>
-    </div>
-    <div class="wf-row">
-      <div class="wf-label">TCP Connect</div>
-      <div class="wf-bar-wrap"><div class="wf-bar" id="wfTcp"></div></div>
-      <div class="wf-value" id="wfTcpVal">—</div>
-    </div>
-    <div class="wf-row">
-      <div class="wf-label">TLS Handshake</div>
-      <div class="wf-bar-wrap"><div class="wf-bar" id="wfTls"></div></div>
-      <div class="wf-value" id="wfTlsVal">—</div>
-    </div>
-    <div class="wf-row">
-      <div class="wf-label">TTFB</div>
-      <div class="wf-bar-wrap"><div class="wf-bar" id="wfTtfb"></div></div>
-      <div class="wf-value" id="wfTtfbVal">—</div>
-    </div>
+    <div class="wf-row"><div class="wf-label">DNS Lookup</div><div class="wf-bar-wrap"><div class="wf-bar" id="wfDns"></div></div><div class="wf-value" id="wfDnsVal">—</div></div>
+    <div class="wf-row"><div class="wf-label">TCP Connect</div><div class="wf-bar-wrap"><div class="wf-bar" id="wfTcp"></div></div><div class="wf-value" id="wfTcpVal">—</div></div>
+    <div class="wf-row"><div class="wf-label">TLS Handshake</div><div class="wf-bar-wrap"><div class="wf-bar" id="wfTls"></div></div><div class="wf-value" id="wfTlsVal">—</div></div>
+    <div class="wf-row"><div class="wf-label">TTFB</div><div class="wf-bar-wrap"><div class="wf-bar" id="wfTtfb"></div></div><div class="wf-value" id="wfTtfbVal">—</div></div>
   </div>
 </div>
 
@@ -1130,15 +774,15 @@ footer{
 
 <div class="section-title">
   <h2 data-i18n="monitorTitle">24-Stunden-Monitoring</h2>
-  <p data-i18n="monitorDesc">Lass diese Seite geöffnet, um eine kontinuierliche Verbindungshistorie aufzubauen.</p>
+  <p data-i18n="monitorDesc">Server-Monitor läuft automatisch. Optionaler Browser-Monitor für zusätzliche eigene Verlaufsdaten.</p>
 </div>
 
 <section class="monitor-panel card" id="monitorPanel">
   <div class="monitor-head">
     <div>
-      <div class="section-kicker">FASQOO 24H MONITOR</div>
-      <h2 data-i18n="monitorHeadline">Automatisches Monitoring</h2>
-      <p data-i18n="monitorSub">Führe in regelmäßigen Abständen echte Messungen durch und speichere den Verlauf lokal in diesem Browser.</p>
+      <div class="section-kicker">👤 DEIN BROWSER-MONITOR</div>
+      <h2 data-i18n="monitorHeadline">Dein persönlicher Browser-Monitor</h2>
+      <p data-i18n="monitorSub">Aktiviere diesen optionalen Monitor, um deine eigene Verbindung über Stunden zu beobachten. Der Server-Status oben läuft bereits automatisch — hier geht es um DEINE Sitzung.</p>
     </div>
     <div class="monitor-actions">
       <label class="monitor-toggle">
@@ -1171,19 +815,22 @@ footer{
   </div>
 
   <div class="monitor-note">
-    <strong>Hinweis:</strong>
-    <span data-i18n="monitorNote">Browser-Monitoring läuft nur, solange diese Seite geöffnet ist. Chrome, das Betriebssystem oder Energiesparmodus können Prüfungen pausieren. Es ist kein serverseitiger 24/7-Überwachungsdienst.</span>
+    <strong>ℹ️ Zwei verschiedene Monitore:</strong>
+    <div style="margin-top:8px;">
+      <div>✅ <strong style="color:var(--green-2);">Server-Monitor (oben):</strong> Läuft <strong>echtes 24/7</strong> auf GitHub-Servern — unabhängig von dir. Prüft fasqoo.com alle 10 Minuten und speichert den Verlauf.</div>
+      <div style="margin-top:6px;">👤 <strong style="color:var(--primary);">Browser-Monitor (hier):</strong> Dieser Bereich zeigt <strong>deine eigene</strong> Verbindung. Er läuft nur, solange du diese Seite geöffnet lässt — als persönliches Zusatz-Tool.</div>
+    </div>
   </div>
 </section>
 
 <div class="section-title">
-  <h2 data-i18n="responseHistory">Antwortzeit-Verlauf</h2>
-  <p data-i18n="responseHistoryDesc">Echte Prüfungen, lokal in diesem Browser gespeichert.</p>
+  <h2 data-i18n="responseHistory">Server-Verlauf</h2>
+  <p>24/7-Messungen von GitHub-Servern, aus <code>history.json</code> geladen.</p>
 </div>
 
 <div class="card chart-card">
   <div class="chart-header">
-    <h3 data-i18n="last24h">Antwortzeiten</h3>
+    <h3 data-i18n="last24h">Server-Antwortzeiten</h3>
     <div class="period-tabs" role="tablist">
       <button class="period-tab active" data-period="24h" role="tab">24 Std.</button>
       <button class="period-tab" data-period="7d" role="tab">7 Tage</button>
@@ -1195,21 +842,21 @@ footer{
     <span id="chartMeta">—</span>
   </div>
   <div class="chart" id="chart">
-    <div class="no-data" data-i18n="noData">Noch keine Messungen vorhanden.</div>
+    <div class="no-data" data-i18n="noData">Lade Server-Daten…</div>
   </div>
 </div>
 
 <div class="section-title">
-  <h2 data-i18n="incidents">Vorfalls-Timeline</h2>
-  <p data-i18n="incidentsDesc">Chronologische Auflistung aller beobachteten Ereignisse.</p>
+  <h2 data-i18n="incidents">Server-Vorfalls-Timeline</h2>
+  <p>Chronologische Auflistung aller 24/7-Server-Checks.</p>
 </div>
 
 <div class="card incident-timeline">
   <div class="timeline-list" id="timelineList">
     <div class="timeline-item">
       <div class="timeline-time">—</div>
-      <div class="timeline-title" data-i18n="noIncidentsTitle">Keine Vorfälle erfasst</div>
-      <div class="timeline-desc" data-i18n="noIncidentsText">Starte die Messung, um Ereignisse zu protokollieren.</div>
+      <div class="timeline-title">Lade Server-Daten…</div>
+      <div class="timeline-desc">Bitte warten.</div>
     </div>
   </div>
 </div>
@@ -1236,13 +883,18 @@ footer{
 
 </main>
 
+<!-- ============================================================
+     FOOTER (identisch zu index.html)
+     ============================================================ -->
 <footer>
-  <div class="footer-inner">
-    <div>
-      © 2026 Fasqoo. <span data-i18n="rights">Alle Rechte vorbehalten.</span>
-      <div style="margin-top:6px;font-size:11px;opacity:.75;" data-i18n="footerNote">Browser-basierte Diagnose · Ergebnisse gelten für diese Sitzung und diesen Browser.</div>
+<div class="wrap foot">
+    <div class="fasqoo-footer-copy">
+      <div data-i18n="ftRights">© 2026 Fasqoo. Alle Rechte vorbehalten.</div>
+      <div>Betrieben über das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.</div>
+      <div>Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.</div>
     </div>
-    <nav class="fasqoo-footer-links" aria-label="Footer">
+
+    <nav class="fasqoo-footer-links" aria-label="Footer navigation">
       <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
       <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
       <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
@@ -1254,7 +906,10 @@ footer{
 
 <script>
 /* ============================================================
-   Fasqoo Network Status — Professional Edition v2.0
+   Fasqoo Network Status — Professional Edition v2.1
+   + Server-Monitor (GitHub Actions history.json)
+   + Header/Footer wie index.html
+   + resetBadges Bug gefixt
    ============================================================ */
 
 const CONFIG = {
@@ -1273,231 +928,90 @@ const $ = id => document.getElementById(id);
 const TARGET_URL = window.location.origin + window.location.pathname;
 
 /* ============================================================
-   TRANSLATIONS
+   SERVER-DATA (von GitHub Actions)
    ============================================================ */
-const TRANSLATIONS = {
-  de: {
-    metaTitle:"Fasqoo Website-Status – Echtzeit Netzwerkmessung & Uptime",
-    home:"Startseite", faq:"FAQ", networkStatus:"IT-Diagnose", about:"Über uns",
-    idle:"BEREIT — STARTE DIE MESSUNG", running:"MESSUNG LÄUFT...",
-    statusReachable:"FASQOO.COM IST ERREICHBAR", statusFailed:"PRÜFUNG FEHLGESCHLAGEN",
-    pageTitle:"Fasqoo Website-Status",
-    pageDescription:"Zeigt, wie schnell und zuverlässig dein Browser gerade fasqoo.com erreicht. Alle Werte hier sind echte Messungen aus dieser Sitzung — nichts wird simuliert oder geraten.",
-    healthTitle:"Verbindungs-Score",
-    healthDesc:"Berechnet ausschließlich aus den Messungen, die dieser Browser tatsächlich durchführen kann.",
-    overview:"Übersicht", overviewDesc:"Echte Messungen, gesammelt von diesem Browser.",
-    observedUptime:"Beobachtete Erreichbarkeit", thisBrowser:"Dieser Browser / letzte 24 Std.",
-    checks24h:"Prüfungen in 24 Std.", localHistory:"Lokaler Browser-Verlauf",
-    currentResponse:"Aktuelle Antwortzeit", lastChecked:"Zuletzt geprüft",
-    checkTitleReady:"Bereit für die Messung",
-    checkSubtitleReady:"Klicke unten, um die echte Netzwerkmessung zu starten",
-    checkTitleAnalyzing:"Verbindung wird analysiert...",
-    checkSubtitleAnalyzing:"Echte Browser-Messung läuft",
-    checkTitleSuccess:"fasqoo.com ist erreichbar",
-    checkTitleFail:"Prüfung fehlgeschlagen",
-    realMeasurement:"Echte Browser-Messung",
-    runCheck:"Vollständige Messung starten", runningBtn:"Messung läuft...",
-    diagnostics:"Messwerte", diagnosticsDesc:"Direkt aus der aktuellen Verbindung dieses Besuchers erhoben.",
-    latency:"Latenz", latencyDesc:"Median, 95. und 99. Perzentil aller Messungen.",
-    jitter:"Jitter", jitterDesc:"Variation der Antwortzeit zwischen den Anfragen.",
-    failureRate:"Fehlerrate", failureRateDesc:"Anteil fehlgeschlagener Anfragen während der Messung.",
-    httpResponse:"HTTP-Antwort", httpResponseDesc:"Letzter HTTP-Status, den fasqoo.com zurückgegeben hat.",
-    httpsDesc:"Verschlüsselte Verbindung zum Server.",
-    networkApi:"Browser-Netzwerkdaten", networkApiDesc:"Vom Browser offengelegte Verbindungsinformation.",
-    timingTitle:"Request-Timing", timingTitle2:"Verbindungsaufbau im Detail",
-    timingDesc:"Wo die Zeit im Verbindungsaufbau tatsächlich verbraucht wird — aus dem Browser-Timing.",
-    networkProfile:"Geräte- & Verbindungsprofil", networkProfileDesc:"Technische Angaben, die dein Browser selbst bereitstellt.",
-    connType:"Verbindungstyp", downlink:"Gesch. Downlink", rtt:"Browser-RTT", saveData:"Datensparmodus",
-    onlineStateLabel:"Online-Status", protocol:"Protokoll", browser:"Browser", windowSize:"Fenstergröße",
-    problemTitle:"Auffälligkeiten", problemDesc:"Nur Dinge, die diese Messung tatsächlich belegt — mit Erklärung.",
-    testSuite:"Testübersicht", testSuiteDesc:"Technische Testergebnisse dieser Browser-Sitzung.",
-    testInternetName:"Browser-Online-Status", testHttpName:"Erreichbarkeit fasqoo.com",
-    testHttpsName:"HTTPS-Transport", testStabilityName:"Verbindungsstabilität",
-    limitTitle:"Was diese Seite nicht kann:",
-    limitText:"Ein Browser kann keinen echten Paketverlust (ICMP), kein Traceroute und keine ISP-Identität ermitteln. Diese Seite zeigt deshalb bewusst nur das, was per HTTP tatsächlich messbar ist.",
-    monitorTitle:"24-Stunden-Monitoring", monitorDesc:"Lass diese Seite geöffnet, um eine kontinuierliche Verbindungshistorie aufzubauen.",
-    monitorHeadline:"Automatisches Monitoring", monitorSub:"Führe in regelmäßigen Abständen echte Messungen durch und speichere den Verlauf lokal in diesem Browser.",
-    monitorOn:"Monitoring AN", monitorStatusLabel:"Status", monitorChecksLabel:"Prüfungen 24h",
-    monitorAvailLabel:"Erreichbarkeit", monitorLastLabel:"Letzte Prüfung",
-    monitorChartTitle:"Antwortzeit-Verlauf (24 Std.)",
-    monitorNote:"Browser-Monitoring läuft nur, solange diese Seite geöffnet ist. Chrome, das Betriebssystem oder Energiesparmodus können Prüfungen pausieren. Es ist kein serverseitiger 24/7-Überwachungsdienst.",
-    responseHistory:"Antwortzeit-Verlauf", responseHistoryDesc:"Echte Prüfungen, lokal in diesem Browser gespeichert.",
-    last24h:"Antwortzeiten", noData:"Noch keine Messungen vorhanden.",
-    incidents:"Vorfalls-Timeline", incidentsDesc:"Chronologische Auflistung aller beobachteten Ereignisse.",
-    reportTitle:"Bericht", reportDesc:"Kompakte Zusammenfassung zum Kopieren, Speichern oder Teilen.",
-    copyReport:"Bericht kopieren", copied:"Kopiert", downloadReport:"TXT herunterladen",
-    accuracyTitle:"Messgenauigkeit und Grenzen",
-    accuracyText:"Diese Messungen beschreiben ausschließlich den Weg zwischen deinem Browser und fasqoo.com. Sie beweisen nicht automatisch, dass dein Internetanbieter, ein Router oder eine DNS-Einstellung für ein Problem verantwortlich ist.",
-    rights:"Alle Rechte vorbehalten.",
-    footerNote:"Browser-basierte Diagnose · Ergebnisse gelten für diese Sitzung und diesen Browser.",
-    ftAccess:"Barrierefreiheit", ftImprint:"Impressum", ftPrivacy:"Datenschutz", ftTerms:"Nutzungsbedingungen", ftNoSell:"Daten nicht verkaufen",
-    badgeWaiting:"Wartet", badgeGood:"Gut", badgeElevated:"Erhöht", badgeHigh:"Hoch",
-    badgeStable:"Stabil", badgeFluctuating:"Schwankend", badgeOK:"OK", badgeFailed:"Fehler",
-    badgeAvailable:"Verfügbar", badgeRestricted:"Eingeschränkt", badgeSecure:"Sicher", badgeUnsecure:"Unsicher",
-    scoreExcellent:"Sehr gute Verbindung", scoreExcellentDesc:"Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com.",
-    scoreGood:"Gute Verbindung", scoreGoodDesc:"Insgesamt unauffällig, einzelne Werte sind leicht erhöht.",
-    scoreWarning:"Verbindung sollte geprüft werden", scoreWarningDesc:"Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin.",
-    scoreBad:"Deutliche Auffälligkeit erkannt", scoreBadDesc:"Mehrere Messwerte deuten auf ein Verbindungsproblem hin.",
-    scoreWaiting:"Warte auf Messung", scoreWaitingDesc:"Klicke auf „Vollständige Messung starten\", um eine echte Netzwerkmessung durchzuführen.",
-    notAvailable:"Nicht verfügbar", active:"Aktiv", inactive:"Inaktiv", online:"Online", offline:"Offline",
-    probOfflineTitle:"Keine Internetverbindung", probOfflineEv:"Der Browser meldet einen Offline-Status.", probOfflineMeaning:"Prüfe WLAN/Kabel, den Router und ob andere Geräte im selben Netz betroffen sind.",
-    probLatencyTitle:"Erhöhte Antwortzeit", probLatencyEv:"durchschnittliche Antwortzeit.", probLatencyMeaning:"Die Anfragen an fasqoo.com dauern länger als üblich.",
-    probJitterTitle:"Schwankende Antwortzeiten", probJitterEv:"Schwankung zwischen den Anfragen.", probJitterMeaning:"Große Schwankungen können Videoanrufe, Gaming oder Remote-Verbindungen beeinträchtigen.",
-    probFailureTitle:"Wiederholte fehlgeschlagene Anfragen", probFailureEv:"der Testanfragen sind fehlgeschlagen.", probFailureMeaning:"Im Browser beobachtete Fehlerrate, kein bestätigter Paketverlust im Netzwerk.",
-    probHttpsTitle:"HTTPS ist nicht aktiv", probHttpsEv:"Diese Seite wird über HTTP ausgeliefert.", probHttpsMeaning:"Ohne HTTPS ist die Verbindung nicht verschlüsselt.",
-    probNoneTitle:"Keine Auffälligkeit erkannt", probNoneEv:"Alle Messwerte liegen im unauffälligen Bereich.", probNoneMeaning:"Diese Sitzung zeigt keine Latenz-, Jitter- oder Fehlerprobleme.",
-    probNotEnoughTitle:"Noch nicht genug Daten", probNotEnoughEv:"Die Messung lief noch nicht vollständig durch.", probNotEnoughMeaning:"Für eine verlässliche Einschätzung sind mehrere Messpunkte nötig.",
-    noIncidentsTitle:"Keine Vorfälle erfasst", noIncidentsText:"Starte die Messung, um Ereignisse zu protokollieren."
-  },
-  en: {
-    metaTitle:"Fasqoo Website Status – Real-time Network & Uptime",
-    home:"Home", faq:"FAQ", networkStatus:"Website Status", about:"About",
-    idle:"READY — START THE MEASUREMENT", running:"MEASUREMENT RUNNING...",
-    statusReachable:"FASQOO.COM IS REACHABLE", statusFailed:"CHECK FAILED",
-    pageTitle:"Fasqoo Website Status",
-    pageDescription:"Shows how fast and reliably your browser currently reaches fasqoo.com. Every value here is a real measurement from this session — nothing is simulated or guessed.",
-    healthTitle:"Connection Score",
-    healthDesc:"Calculated only from measurements this browser can actually perform.",
-    overview:"Overview", overviewDesc:"Real measurements collected by this browser.",
-    observedUptime:"Observed Uptime", thisBrowser:"This browser / last 24 hours",
-    checks24h:"Checks in 24h", localHistory:"Local browser history",
-    currentResponse:"Current Response", lastChecked:"Last Checked",
-    checkTitleReady:"Ready to measure",
-    checkSubtitleReady:"Click below to run the real network measurement",
-    checkTitleAnalyzing:"Analyzing connection...",
-    checkSubtitleAnalyzing:"Real browser measurement in progress",
-    checkTitleSuccess:"fasqoo.com is reachable",
-    checkTitleFail:"Check failed",
-    realMeasurement:"Real browser measurement",
-    runCheck:"Run Full Measurement", runningBtn:"Measuring...",
-    diagnostics:"Measurements", diagnosticsDesc:"Collected directly from this visitor's current connection.",
-    latency:"Latency", latencyDesc:"Median, 95th and 99th percentile of all measurements.",
-    jitter:"Jitter", jitterDesc:"Variation between consecutive response times.",
-    failureRate:"Failure Rate", failureRateDesc:"Percentage of failed requests during measurement.",
-    httpResponse:"HTTP Response", httpResponseDesc:"Last HTTP status returned by fasqoo.com.",
-    httpsDesc:"Encrypted connection to the server.",
-    networkApi:"Browser Network API", networkApiDesc:"Connection info exposed by the browser.",
-    timingTitle:"Request Timing", timingTitle2:"Connection setup breakdown",
-    timingDesc:"Where time is actually spent during connection setup — from browser timing.",
-    networkProfile:"Device & Connection Profile", networkProfileDesc:"Technical information your browser provides itself.",
-    connType:"Connection Type", downlink:"Estimated Downlink", rtt:"Browser RTT", saveData:"Data Saver",
-    onlineStateLabel:"Online State", protocol:"Protocol", browser:"Browser", windowSize:"Window Size",
-    problemTitle:"Findings", problemDesc:"Only things this measurement actually shows — with explanation.",
-    testSuite:"Test Overview", testSuiteDesc:"Technical test results from this browser session.",
-    testInternetName:"Browser Online State", testHttpName:"fasqoo.com Reachability",
-    testHttpsName:"HTTPS Transport", testStabilityName:"Connection Stability",
-    limitTitle:"What this page can't do:",
-    limitText:"A browser cannot determine real packet loss (ICMP), traceroute, or ISP identity. This page deliberately shows only what is actually measurable over HTTP.",
-    monitorTitle:"24-Hour Monitoring", monitorDesc:"Keep this page open to build a continuous connection history.",
-    monitorHeadline:"Automatic Monitoring", monitorSub:"Run periodic real measurements and store the history locally in this browser.",
-    monitorOn:"Monitoring ON", monitorStatusLabel:"Status", monitorChecksLabel:"Checks 24h",
-    monitorAvailLabel:"Availability", monitorLastLabel:"Last Check",
-    monitorChartTitle:"Response History (24h)",
-    monitorNote:"Browser monitoring only runs while this page is open. Chrome, the OS or battery-saving modes can pause checks. It is not a server-side 24/7 monitoring service.",
-    responseHistory:"Response Time History", responseHistoryDesc:"Real checks, stored locally in this browser.",
-    last24h:"Response times", noData:"No measurements yet.",
-    incidents:"Incident Timeline", incidentsDesc:"Chronological list of all observed events.",
-    reportTitle:"Report", reportDesc:"Compact summary to copy, save or share.",
-    copyReport:"Copy Report", copied:"Copied", downloadReport:"Download TXT",
-    accuracyTitle:"Measurement accuracy and limitations",
-    accuracyText:"These measurements describe only the path between your browser and fasqoo.com. They do not automatically prove that your ISP, a router, or a DNS setting is responsible for a problem.",
-    rights:"All rights reserved.",
-    footerNote:"Browser-based diagnostics · Results apply to this session and this browser.",
-    ftAccess:"Accessibility", ftImprint:"Imprint", ftPrivacy:"Privacy Policy", ftTerms:"Terms of Use", ftNoSell:"Do Not Sell My Data",
-    badgeWaiting:"Waiting", badgeGood:"Good", badgeElevated:"Elevated", badgeHigh:"High",
-    badgeStable:"Stable", badgeFluctuating:"Fluctuating", badgeOK:"OK", badgeFailed:"Failed",
-    badgeAvailable:"Available", badgeRestricted:"Restricted", badgeSecure:"Secure", badgeUnsecure:"Insecure",
-    scoreExcellent:"Excellent Connection", scoreExcellentDesc:"Measurements show a stable, fast connection to fasqoo.com.",
-    scoreGood:"Good Connection", scoreGoodDesc:"Overall normal, single values slightly elevated.",
-    scoreWarning:"Connection should be checked", scoreWarningDesc:"At least one measurement indicates degraded performance.",
-    scoreBad:"Significant issue detected", scoreBadDesc:"Multiple values indicate connection issues.",
-    scoreWaiting:"Waiting for measurement", scoreWaitingDesc:"Click \"Run Full Measurement\" to perform a real network measurement.",
-    notAvailable:"Not available", active:"Active", inactive:"Inactive", online:"Online", offline:"Offline",
-    probOfflineTitle:"No Internet Connection", probOfflineEv:"Browser reports offline status.", probOfflineMeaning:"Check Wi-Fi/cable, router, and other devices in the same network.",
-    probLatencyTitle:"Elevated Response Time", probLatencyEv:"average response time.", probLatencyMeaning:"Requests to fasqoo.com take longer than usual.",
-    probJitterTitle:"Fluctuating Response Times", probJitterEv:"variation between requests.", probJitterMeaning:"High jitter affects real-time video calls, gaming, or remote connections.",
-    probFailureTitle:"Repeated Failed Requests", probFailureEv:"of test requests failed.", probFailureMeaning:"Observed failure rate in browser, not confirmed ICMP packet loss.",
-    probHttpsTitle:"HTTPS Not Active", probHttpsEv:"This page is served over unencrypted HTTP.", probHttpsMeaning:"Connection is unencrypted.",
-    probNoneTitle:"No Issues Detected", probNoneEv:"All measurements are within normal ranges.", probNoneMeaning:"This session shows no latency, jitter, or failure issues.",
-    probNotEnoughTitle:"Not Enough Data", probNotEnoughEv:"Measurement hasn't completed fully.", probNotEnoughMeaning:"Multiple data points are required for accurate results.",
-    noIncidentsTitle:"No incidents recorded", noIncidentsText:"Start the measurement to log events."
+let serverHistory = [];
+let serverLastSync = null;
+
+async function loadServerHistory(){
+  try{
+    const r = await fetch("/history.json?t=" + Date.now(), { cache: "no-store" });
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    if(!Array.isArray(data)){
+      console.warn("[Server-Monitor] history.json ist kein Array");
+      return;
+    }
+    serverHistory = data;
+    serverLastSync = Date.now();
+    console.log(`[Server-Monitor] ${data.length} Einträge geladen`);
+
+    updateOverviewStats();
+    renderChart();
+    renderTimeline();
+    updateLiveServerStatus();
+
+  }catch(e){
+    console.warn("[Server-Monitor] Konnte /history.json nicht laden:", e.message);
+    const srv = $("fasqooLiveServer");
+    if(srv){ srv.textContent = "Nicht verfügbar"; srv.style.color = "var(--muted)"; }
   }
-};
-
-/* Fallback für andere Sprachen → EN (kann später erweitert werden) */
-const SUPPORTED_LANGS = ["de","en","fr","it","pt","es","tr","sq","ar"];
-
-let currentLanguage = localStorage.getItem(CONFIG.LANGUAGE_KEY) || detectBrowserLang();
-
-function detectBrowserLang(){
-  const langs = navigator.languages || [navigator.language || "en"];
-  for(const l of langs){
-    const code = String(l).slice(0,2).toLowerCase();
-    if(SUPPORTED_LANGS.includes(code)) return code;
-  }
-  return "en";
 }
 
-function t(key){
-  const dict = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
-  return dict[key] || TRANSLATIONS.en[key] || key;
-}
-
-function applyLanguage(lang){
-  if(!SUPPORTED_LANGS.includes(lang)) lang = "en";
-  currentLanguage = lang;
-  localStorage.setItem(CONFIG.LANGUAGE_KEY, lang);
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
-  const metaTitle = t("metaTitle");
-  if(metaTitle){ document.title = metaTitle; $("seoTitle").textContent = metaTitle; }
-
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    const val = t(key);
-    if(val && val !== key) el.textContent = val;
-  });
-
-  $("languageSelect").value = lang;
+function updateLiveServerStatus(){
+  const el = $("fasqooLiveServer");
+  if(!el) return;
+  const cutoff = Date.now() - CONFIG.DAY_MS;
+  const last24 = serverHistory.filter(x => x.t >= cutoff);
+  if(!last24.length){
+    el.textContent = "Keine Daten";
+    return;
+  }
+  const successes = last24.filter(x => x.ok).length;
+  const uptime = ((successes / last24.length) * 100).toFixed(1);
+  el.textContent = `${uptime}% · ${last24.length} Checks`;
 }
 
 /* ============================================================
-   STATE
+   THEME
    ============================================================ */
-let latestDiagnostics = {
-  latency:null, jitter:null, failureRate:null, httpStatus:null,
-  success:false, score:null,
-  p50:null, p95:null, p99:null,
-  samples:[],
-  protocol:null,
-  timing:null
-};
+function applyTheme(){
+  const theme = localStorage.getItem(CONFIG.THEME_KEY) || "light";
+  document.body.classList.toggle("dark", theme === "dark");
+  $("themeBtn").textContent = theme === "dark" ? "☀" : "☾";
+}
+$("themeBtn").addEventListener("click", () => {
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem(CONFIG.THEME_KEY, dark ? "light" : "dark");
+  applyTheme();
+  drawMonitorChart();
+  renderChart();
+});
 
-let currentPeriod = "24h";
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const menuToggle = $("menuToggle"), mainMenu = $("mainMenu");
+menuToggle.addEventListener("click", e => { e.stopPropagation(); mainMenu.classList.toggle("active"); });
+document.addEventListener("click", e => {
+  if(!mainMenu.contains(e.target) && !menuToggle.contains(e.target)) mainMenu.classList.remove("active");
+});
+document.querySelectorAll(".main-menu a").forEach(a => a.addEventListener("click", () => mainMenu.classList.remove("active")));
 
 /* ============================================================
    UTILITIES
    ============================================================ */
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
 function escapeHTML(str){
   return String(str).replace(/[&<>'"]/g,
     tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
 }
-
 function percentile(sorted, q){
   if(!sorted.length) return NaN;
   const pos = (sorted.length - 1) * q;
   const lo = Math.floor(pos), hi = Math.ceil(pos);
   return lo === hi ? sorted[lo] : sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
 }
-
-function formatMs(ms){
-  if(!Number.isFinite(ms)) return "—";
-  return ms < 10 ? ms.toFixed(1) + " ms" : Math.round(ms) + " ms";
-}
-
 function detectBrowser(){
   const ua = navigator.userAgent;
   if(/Edg\//.test(ua)) return "Edge";
@@ -1510,32 +1024,7 @@ function detectBrowser(){
 }
 
 /* ============================================================
-   THEME
-   ============================================================ */
-function applyTheme(){
-  const theme = localStorage.getItem(CONFIG.THEME_KEY) || "light";
-  document.body.classList.toggle("dark", theme === "dark");
-  $("themeBtn").textContent = theme === "dark" ? "☀" : "☾";
-}
-
-$("themeBtn").addEventListener("click", () => {
-  const dark = document.body.classList.contains("dark");
-  localStorage.setItem(CONFIG.THEME_KEY, dark ? "light" : "dark");
-  applyTheme();
-  drawMonitorChart();
-});
-
-/* ============================================================
-   MOBILE MENU
-   ============================================================ */
-const mobileBtn = $("mobileBtn"), navLinks = $("navLinks");
-mobileBtn.addEventListener("click", e => { e.stopPropagation(); navLinks.classList.toggle("open"); });
-document.addEventListener("click", e => {
-  if(!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) navLinks.classList.remove("open");
-});
-
-/* ============================================================
-   HISTORY (localStorage)
+   BROWSER-LOCAL HISTORY
    ============================================================ */
 function getHistory(){
   try{
@@ -1574,12 +1063,23 @@ async function timedFetch(url){
 }
 
 /* ============================================================
+   STATE
+   ============================================================ */
+let latestDiagnostics = {
+  latency:null, jitter:null, failureRate:null, httpStatus:null,
+  success:false, score:null,
+  p50:null, p95:null, p99:null,
+  samples:[], protocol:null, timing:null
+};
+let currentPeriod = "24h";
+
+/* ============================================================
    FULL DIAGNOSIS
    ============================================================ */
 async function runFullDiagnosis(){
   const btn = $("checkBtn");
   btn.disabled = true;
-  btn.textContent = t("runningBtn");
+  btn.textContent = "Messung läuft...";
 
   setMainChecking();
   resetBadges();
@@ -1593,7 +1093,6 @@ async function runFullDiagnosis(){
 
   analyzeMeasurements(measurements);
 
-  // Save last result to history
   const last = measurements[measurements.length-1];
   const history = cleanHistory();
   history.push({
@@ -1605,17 +1104,11 @@ async function runFullDiagnosis(){
   });
   saveHistory(history);
 
-  updateOverviewStats();
-  renderChart();
-  renderTimeline();
-  generateReport();
   updateNetworkProfile();
-
-  // Update main status
   updateMainResult(last);
 
   btn.disabled = false;
-  btn.textContent = t("runCheck");
+  btn.textContent = "Vollständige Messung starten";
 }
 
 /* ============================================================
@@ -1626,7 +1119,6 @@ function analyzeMeasurements(results){
   const failed = results.filter(r => !r.ok);
   const times = successful.map(r => r.ms).filter(Number.isFinite);
 
-  // Percentiles
   const sorted = [...times].sort((a,b) => a - b);
   const p50 = sorted.length ? Math.round(percentile(sorted, 0.50)) : null;
   const p95 = sorted.length ? Math.round(percentile(sorted, 0.95)) : null;
@@ -1645,30 +1137,27 @@ function analyzeMeasurements(results){
     samples: times
   });
 
-  // Update UI values
   $("latencyValue").textContent = latency ?? "—";
   $("jitterValue").textContent = jitter ?? "—";
   $("failureValue").textContent = failureRate;
   $("httpValue").textContent = latest?.status ? "HTTP " + latest.status : "—";
-
   $("latencyP50").textContent = p50 !== null ? p50 : "—";
   $("latencyP95").textContent = p95 !== null ? p95 : "—";
   $("latencyP99").textContent = p99 !== null ? p99 : "—";
 
-  // Badges
   setMetricBadge("latencyBadge",
     latency === null ? "error" : latency <= 80 ? "good" : latency <= 150 ? "warning" : "error",
-    latency === null ? "—" : latency <= 80 ? t("badgeGood") : latency <= 150 ? t("badgeElevated") : t("badgeHigh"));
+    latency === null ? "—" : latency <= 80 ? "Gut" : latency <= 150 ? "Erhöht" : "Hoch");
 
   setMetricBadge("jitterBadge",
     jitter === null ? "error" : jitter <= 15 ? "good" : jitter <= 30 ? "warning" : "error",
-    jitter === null ? "—" : jitter <= 15 ? t("badgeStable") : jitter <= 30 ? t("badgeFluctuating") : t("badgeHigh"));
+    jitter === null ? "—" : jitter <= 15 ? "Stabil" : jitter <= 30 ? "Schwankend" : "Hoch");
 
   setMetricBadge("failureBadge",
     failureRate === 0 ? "good" : failureRate <= 10 ? "warning" : "error",
     failureRate === 0 ? "0%" : failureRate + "%");
 
-  setMetricBadge("httpBadge", latest?.ok ? "good" : "error", latest?.ok ? t("badgeOK") : t("badgeFailed"));
+  setMetricBadge("httpBadge", latest?.ok ? "good" : "error", latest?.ok ? "OK" : "Fehler");
 
   updateHealthScore();
   renderProblems();
@@ -1684,7 +1173,7 @@ function computeJitter(times){
 }
 
 /* ============================================================
-   HEALTH SCORE (SVG Ring)
+   HEALTH SCORE
    ============================================================ */
 function updateHealthScore(){
   const d = latestDiagnostics;
@@ -1711,20 +1200,18 @@ function updateHealthScore(){
   score = Math.max(0, Math.min(100, score));
   d.score = score;
 
-  // Update SVG ring
   const circumference = 2 * Math.PI * 80;
   const offset = circumference * (1 - score / 100);
   const ring = $("healthRingFill");
   ring.style.strokeDasharray = circumference;
   ring.style.strokeDashoffset = offset;
-
   $("healthScore").textContent = score;
 
   let title, desc;
-  if(score >= 90){ title = t("scoreExcellent"); desc = t("scoreExcellentDesc"); }
-  else if(score >= 75){ title = t("scoreGood"); desc = t("scoreGoodDesc"); }
-  else if(score >= 50){ title = t("scoreWarning"); desc = t("scoreWarningDesc"); }
-  else{ title = t("scoreBad"); desc = t("scoreBadDesc"); }
+  if(score >= 90){ title = "Sehr gute Verbindung"; desc = "Die Messungen zeigen eine stabile, schnelle Verbindung zu fasqoo.com."; }
+  else if(score >= 75){ title = "Gute Verbindung"; desc = "Insgesamt unauffällig, einzelne Werte sind leicht erhöht."; }
+  else if(score >= 50){ title = "Verbindung prüfen"; desc = "Mindestens ein Messwert deutet auf eine beeinträchtigte Verbindung hin."; }
+  else { title = "Deutliche Auffälligkeit"; desc = "Mehrere Messwerte deuten auf ein Verbindungsproblem hin."; }
 
   $("healthTitleDynamic").textContent = title;
   $("healthDescriptionDynamic").textContent = desc;
@@ -1733,41 +1220,29 @@ function updateHealthScore(){
 /* ============================================================
    PROBLEMS
    ============================================================ */
-function createProblem(title, type, evidence, meaning){
-  return { title, type, evidence, meaning };
-}
-
 function renderProblems(){
   const d = latestDiagnostics;
   const problems = [];
 
-  if(!navigator.onLine){
-    problems.push(createProblem(t("probOfflineTitle"), "error", t("probOfflineEv"), t("probOfflineMeaning")));
-  }
-  if(d.latency !== null && d.latency > 150){
-    problems.push(createProblem(t("probLatencyTitle"), d.latency > 300 ? "error" : "warning", d.latency + " ms — " + t("probLatencyEv"), t("probLatencyMeaning")));
-  }
-  if(d.jitter !== null && d.jitter > 30){
-    problems.push(createProblem(t("probJitterTitle"), d.jitter > 50 ? "error" : "warning", d.jitter + " ms — " + t("probJitterEv"), t("probJitterMeaning")));
-  }
-  if(d.failureRate !== null && d.failureRate > 10){
-    problems.push(createProblem(t("probFailureTitle"), d.failureRate > 25 ? "error" : "warning", d.failureRate + "% — " + t("probFailureEv"), t("probFailureMeaning")));
-  }
-  if(location.protocol !== "https:"){
-    problems.push(createProblem(t("probHttpsTitle"), "error", t("probHttpsEv"), t("probHttpsMeaning")));
-  }
+  if(!navigator.onLine)
+    problems.push({title:"Keine Internetverbindung", type:"error", evidence:"Der Browser meldet einen Offline-Status.", meaning:"Prüfe WLAN/Kabel, den Router und ob andere Geräte im selben Netz betroffen sind."});
+  if(d.latency !== null && d.latency > 150)
+    problems.push({title:"Erhöhte Antwortzeit", type: d.latency > 300 ? "error" : "warning", evidence: d.latency + " ms — durchschnittliche Antwortzeit.", meaning:"Die Anfragen an fasqoo.com dauern länger als üblich."});
+  if(d.jitter !== null && d.jitter > 30)
+    problems.push({title:"Schwankende Antwortzeiten", type: d.jitter > 50 ? "error" : "warning", evidence: d.jitter + " ms — Schwankung zwischen den Anfragen.", meaning:"Große Schwankungen können Videoanrufe, Gaming oder Remote-Verbindungen beeinträchtigen."});
+  if(d.failureRate !== null && d.failureRate > 10)
+    problems.push({title:"Wiederholte fehlgeschlagene Anfragen", type: d.failureRate > 25 ? "error" : "warning", evidence: d.failureRate + "% der Testanfragen sind fehlgeschlagen.", meaning:"Im Browser beobachtete Fehlerrate, kein bestätigter Paketverlust im Netzwerk."});
+  if(location.protocol !== "https:")
+    problems.push({title:"HTTPS ist nicht aktiv", type:"error", evidence:"Diese Seite wird über HTTP ausgeliefert.", meaning:"Ohne HTTPS ist die Verbindung nicht verschlüsselt."});
   if(d.latency !== null && d.jitter !== null && d.failureRate !== null
-     && d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine){
-    problems.push(createProblem(t("probNoneTitle"), "good", t("probNoneEv"), t("probNoneMeaning")));
-  }
-  if(!problems.length){
-    problems.push(createProblem(t("probNotEnoughTitle"), "warning", t("probNotEnoughEv"), t("probNotEnoughMeaning")));
-  }
+     && d.latency <= 150 && d.jitter <= 30 && d.failureRate === 0 && navigator.onLine)
+    problems.push({title:"Keine Auffälligkeit erkannt", type:"good", evidence:"Alle Messwerte liegen im unauffälligen Bereich.", meaning:"Diese Sitzung zeigt keine Latenz-, Jitter- oder Fehlerprobleme."});
+  if(!problems.length)
+    problems.push({title:"Noch nicht genug Daten", type:"warning", evidence:"Die Messung lief noch nicht vollständig durch.", meaning:"Für eine verlässliche Einschätzung sind mehrere Messpunkte nötig."});
 
   d.problems = problems;
   const container = $("problemList");
   container.innerHTML = "";
-
   problems.forEach(problem => {
     const wrapper = document.createElement("div");
     wrapper.className = "card problem " + problem.type;
@@ -1786,10 +1261,7 @@ function renderProblems(){
           </span>
         </summary>
         <div class="problem-body">
-          <div class="explanation">
-            <h4>Details</h4>
-            <p>${escapeHTML(problem.meaning)}</p>
-          </div>
+          <div class="explanation"><h4>Details</h4><p>${escapeHTML(problem.meaning)}</p></div>
         </div>
       </details>`;
     container.appendChild(wrapper);
@@ -1806,20 +1278,18 @@ function setMetricBadge(id, type, text){
   el.textContent = text;
 }
 function resetBadges(){
-  ["latencyBadge","jitterBadge","failureBadge","httpBadge","httpsBadge","networkApiBadge"]
-    .forEach(id => setMetricBadge(id, "", t("badgeWaiting")));
+  ["latencyBadge","jitterBadge","failureBadge","httpBadge"]
+    .forEach(id => setMetricBadge(id, "", "Wartet"));
+  // httpsBadge + networkApiBadge werden von updateNetworkProfile gesetzt — NICHT überschreiben!
 }
 
 /* ============================================================
-   TIMING (PerformanceResourceTiming)
+   TIMING
    ============================================================ */
 function extractTimingInfo(){
   try{
-    const entries = performance.getEntriesByType("resource")
-      .filter(e => e.name.includes(location.hostname) && e.initiatorType !== "fetch" || e.name.includes("fasqoo_diag"));
     const entriesAll = performance.getEntriesByType("resource")
       .filter(e => e.name.includes(location.hostname));
-
     const relevant = entriesAll.filter(e => e.responseStart > 0);
     if(!relevant.length) return;
     const latest = relevant[relevant.length - 1];
@@ -1829,19 +1299,16 @@ function extractTimingInfo(){
     const tls = latest.secureConnectionStart > 0 ? latest.connectEnd - latest.secureConnectionStart : 0;
     const ttfb = latest.responseStart - latest.requestStart;
     const protocol = latest.nextHopProtocol || "—";
-
     const maxVal = Math.max(dns, tcp, tls, ttfb, 1);
 
     $("wfDns").style.width = Math.round((dns / maxVal) * 100) + "%";
     $("wfTcp").style.width = Math.round((tcp / maxVal) * 100) + "%";
     $("wfTls").style.width = Math.round((tls / maxVal) * 100) + "%";
     $("wfTtfb").style.width = Math.round((ttfb / maxVal) * 100) + "%";
-
     $("wfDnsVal").textContent = dns >= 0 ? Math.round(dns) + " ms" : "—";
     $("wfTcpVal").textContent = tcp >= 0 ? Math.round(tcp) + " ms" : "—";
     $("wfTlsVal").textContent = tls >= 0 ? Math.round(tls) + " ms" : "—";
     $("wfTtfbVal").textContent = ttfb >= 0 ? Math.round(ttfb) + " ms" : "—";
-
     $("protocolBadge").textContent = "Protocol: " + protocol;
     latestDiagnostics.protocol = protocol;
     latestDiagnostics.timing = { dns, tcp, tls, ttfb };
@@ -1853,20 +1320,19 @@ function extractTimingInfo(){
    ============================================================ */
 function updateNetworkProfile(){
   const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-
-  $("connectionType").textContent = conn?.type || t("notAvailable");
-  $("effectiveTypeValue").textContent = conn?.effectiveType || t("notAvailable");
-  $("downlinkValue").textContent = Number.isFinite(conn?.downlink) ? conn.downlink + " Mbps" : t("notAvailable");
-  $("browserRtt").textContent = Number.isFinite(conn?.rtt) ? conn.rtt + " ms" : t("notAvailable");
-  $("saveDataValue").textContent = conn ? (conn.saveData ? t("active") : t("inactive")) : t("notAvailable");
-  $("onlineState").textContent = navigator.onLine ? t("online") : t("offline");
+  $("connectionType").textContent = conn?.type || "Nicht verfügbar";
+  $("effectiveTypeValue").textContent = conn?.effectiveType || "Nicht verfügbar";
+  $("downlinkValue").textContent = Number.isFinite(conn?.downlink) ? conn.downlink + " Mbps" : "Nicht verfügbar";
+  $("browserRtt").textContent = Number.isFinite(conn?.rtt) ? conn.rtt + " ms" : "Nicht verfügbar";
+  $("saveDataValue").textContent = conn ? (conn.saveData ? "Aktiv" : "Inaktiv") : "Nicht verfügbar";
+  $("onlineState").textContent = navigator.onLine ? "Online" : "Offline";
   $("protocolValue").textContent = location.protocol === "https:" ? "HTTPS" : "HTTP";
   $("browserValue").textContent = detectBrowser();
   $("screenValue").textContent = window.innerWidth + " × " + window.innerHeight;
 
-  setMetricBadge("networkApiBadge", conn ? "good" : "warning", conn ? t("badgeAvailable") : t("badgeRestricted"));
+  setMetricBadge("networkApiBadge", conn ? "good" : "warning", conn ? "Verfügbar" : "Eingeschränkt");
   setMetricBadge("httpsBadge", location.protocol === "https:" ? "good" : "error",
-    location.protocol === "https:" ? t("badgeSecure") : t("badgeUnsecure"));
+    location.protocol === "https:" ? "Sicher" : "Unsicher");
   $("httpsValue").textContent = location.protocol === "https:" ? "TLS Active" : "HTTP";
 }
 
@@ -1877,16 +1343,14 @@ function updateTestResults(results){
   const success = results.filter(x => x.ok).length;
   const total = results.length;
   const failure = total ? Math.round(((total - success) / total) * 100) : 100;
-
-  setTest("testInternet", navigator.onLine, navigator.onLine ? t("online") : t("offline"), navigator.onLine ? "✓" : "!");
+  setTest("testInternet", navigator.onLine, navigator.onLine ? "Online" : "Offline", navigator.onLine ? "✓" : "!");
   setTest("testHttp", success > 0, success + "/" + total + " OK", success + "/" + total);
   setTest("testHttps", location.protocol === "https:",
-    location.protocol === "https:" ? t("badgeSecure") : "HTTP",
+    location.protocol === "https:" ? "Sicher" : "HTTP",
     location.protocol === "https:" ? "✓" : "!");
   const stable = failure === 0 && (latestDiagnostics.jitter === null || latestDiagnostics.jitter <= 30);
-  setTest("testStability", stable, failure === 0 ? t("badgeStable") : failure + "% Fehler", failure === 0 ? "✓" : "!");
+  setTest("testStability", stable, failure === 0 ? "Stabil" : failure + "% Fehler", failure === 0 ? "✓" : "!");
 }
-
 function setTest(prefix, good, detail, value){
   const icon = $(prefix + "Icon");
   icon.className = "test-icon " + (good ? "good" : "error");
@@ -1901,25 +1365,21 @@ function setTest(prefix, good, detail, value){
 function setMainChecking(){
   const pill = $("mainStatusPill");
   pill.className = "status-pill warning";
-  $("mainStatusText").textContent = t("running");
+  $("mainStatusText").textContent = "MESSUNG LÄUFT...";
   $("bigStatus").className = "big-status warning";
   $("bigStatus").textContent = "…";
-  $("checkTitle").textContent = t("checkTitleAnalyzing");
-  $("checkSubtitle").textContent = t("checkSubtitleAnalyzing");
+  $("checkTitle").textContent = "Verbindung wird analysiert...";
+  $("checkSubtitle").textContent = "Echte Browser-Messung läuft";
 }
-
 function updateMainResult(result){
   const pill = $("mainStatusPill");
   pill.className = result.ok ? "status-pill" : "status-pill error";
-  $("mainStatusText").textContent = result.ok ? t("statusReachable") : t("statusFailed");
-
+  $("mainStatusText").textContent = result.ok ? "FASQOO.COM IST ERREICHBAR" : "PRÜFUNG FEHLGESCHLAGEN";
   const big = $("bigStatus");
   big.className = result.ok ? "big-status" : "big-status error";
   big.textContent = result.ok ? "✓" : "!";
-
-  $("checkTitle").textContent = result.ok ? t("checkTitleSuccess") : t("checkTitleFail");
-  $("checkSubtitle").textContent = (result.error ? result.error + " — " : "") + t("realMeasurement");
-  $("responseValue").textContent = result.ms + " ms";
+  $("checkTitle").textContent = result.ok ? "fasqoo.com ist erreichbar" : "Prüfung fehlgeschlagen";
+  $("checkSubtitle").textContent = (result.error ? result.error + " — " : "") + "Echte Browser-Messung";
   $("lastChecked").textContent = "Jetzt";
   $("lastCheckedDate").textContent = new Date().toLocaleTimeString();
 }
@@ -1928,43 +1388,47 @@ function updateMainResult(result){
    OVERVIEW STATS + SPARKLINES
    ============================================================ */
 function updateOverviewStats(){
-  const history = cleanHistory();
-  const total = history.length;
-  if(!total){
+  const history = serverHistory.slice();
+  const cutoff = Date.now() - CONFIG.DAY_MS;
+  const last24 = history.filter(x => x.t >= cutoff);
+
+  if(!last24.length){
     $("uptimeValue").textContent = "—";
     $("checksValue").textContent = "0";
+    $("responseValue").textContent = "—";
     drawSparkline("sparkUptime", []);
     drawSparkline("sparkChecks", []);
     drawSparkline("sparkResponse", []);
     drawSparkline("sparkLastCheck", []);
     return;
   }
-  const successes = history.filter(x => x.success).length;
-  const uptime = Math.round((successes / total) * 100);
+
+  const successes = last24.filter(x => x.ok).length;
+  const uptime = ((successes / last24.length) * 100).toFixed(2);
+  const avgMs = Math.round(last24.reduce((a, x) => a + (x.ms || 0), 0) / last24.length);
 
   $("uptimeValue").textContent = uptime + "%";
-  $("checksValue").textContent = total;
+  $("checksValue").textContent = last24.length;
+  $("responseValue").textContent = avgMs + " ms";
 
-  // Sparklines
-  const responses = history.slice(-30).map(x => x.responseMs).filter(Number.isFinite);
+  const last = last24[last24.length - 1];
+  $("lastChecked").textContent = new Date(last.t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  $("lastCheckedDate").textContent = new Date(last.t).toLocaleDateString();
+
+  const responses = last24.slice(-30).map(x => x.ms).filter(Number.isFinite);
   drawSparkline("sparkResponse", responses);
 
-  // Uptime-Sparkline: rolling uptime
   const uptimeSeries = [];
-  for(let i = 0; i < history.length; i += Math.max(1, Math.floor(history.length / 30))){
-    const slice = history.slice(0, i + 1);
-    const s = slice.filter(x => x.success).length;
+  for(let i = 0; i < last24.length; i++){
+    const slice = last24.slice(0, i + 1);
+    const s = slice.filter(x => x.ok).length;
     uptimeSeries.push(slice.length ? (s / slice.length) * 100 : 0);
   }
-  drawSparkline("sparkUptime", uptimeSeries);
+  const step = Math.max(1, Math.floor(uptimeSeries.length / 30));
+  drawSparkline("sparkUptime", uptimeSeries.filter((_, i) => i % step === 0));
 
-  // Checks-Sparkline: kumulativ
-  const checkSeries = history.map((_, i) => i + 1);
-  drawSparkline("sparkChecks", checkSeries);
-
-  // Last check: 1 wenn erfolgreich, 0 wenn nicht
-  const lastSeries = history.slice(-30).map(x => x.success ? 1 : 0);
-  drawSparkline("sparkLastCheck", lastSeries);
+  drawSparkline("sparkChecks", last24.map((_, i) => i + 1));
+  drawSparkline("sparkLastCheck", last24.slice(-30).map(x => x.ok ? 1 : 0));
 }
 
 function drawSparkline(canvasId, values){
@@ -1979,30 +1443,23 @@ function drawSparkline(canvasId, values){
   const ctx = canvas.getContext("2d");
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
-
   if(!values || values.length < 2) return;
-
   const min = Math.min(...values);
   const max = Math.max(...values);
   const range = max - min || 1;
-
   const gradient = ctx.createLinearGradient(0, 0, 0, h);
   gradient.addColorStop(0, getComputedStyle(document.documentElement).getPropertyValue("--primary").trim() || "#2563eb");
   gradient.addColorStop(1, "transparent");
-
   ctx.beginPath();
   values.forEach((v, i) => {
     const x = (i / (values.length - 1)) * w;
     const y = h - ((v - min) / range) * (h - 4) - 2;
-    if(i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+    if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
   });
   ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim() || "#2563eb";
   ctx.lineWidth = 2;
   ctx.lineJoin = "round";
   ctx.stroke();
-
-  // Fill
   ctx.lineTo(w, h);
   ctx.lineTo(0, h);
   ctx.closePath();
@@ -2013,31 +1470,30 @@ function drawSparkline(canvasId, values){
 }
 
 /* ============================================================
-   CHART (24h / 7d / 30d)
+   CHART (Server-Daten)
    ============================================================ */
-function getFilteredHistory(){
-  const history = cleanHistory();
+function getFilteredServerHistory(){
   const now = Date.now();
   let cutoff;
   if(currentPeriod === "24h") cutoff = now - CONFIG.DAY_MS;
   else if(currentPeriod === "7d") cutoff = now - 7 * CONFIG.DAY_MS;
   else cutoff = now - 30 * CONFIG.DAY_MS;
-  return history.filter(x => x.timestamp >= cutoff);
+  return serverHistory.filter(x => x.t >= cutoff);
 }
 
 function renderChart(){
   const chart = $("chart");
-  const rows = getFilteredHistory();
+  const rows = getFilteredServerHistory();
   chart.innerHTML = "";
 
   if(!rows.length){
-    chart.innerHTML = '<div class="no-data">' + t("noData") + '</div>';
+    chart.innerHTML = '<div class="no-data">Noch keine Server-Daten vorhanden.</div>';
     $("chartInfo").textContent = "—";
     $("chartMeta").textContent = "—";
     return;
   }
 
-  const maxMs = Math.max(...rows.map(x => x.responseMs), 100);
+  const maxMs = Math.max(...rows.map(x => x.ms), 100);
   const limit = 60;
   const step = Math.max(1, Math.floor(rows.length / limit));
   const shown = rows.filter((_, i) => i % step === 0).slice(-limit);
@@ -2045,19 +1501,18 @@ function renderChart(){
   shown.forEach(item => {
     const bar = document.createElement("div");
     bar.className = "bar";
-    const h = Math.max(6, Math.min(100, Math.round((item.responseMs / maxMs) * 100)));
+    const h = Math.max(6, Math.min(100, Math.round(((item.ms || 0) / maxMs) * 100)));
     bar.style.height = h + "%";
-    if(!item.success) bar.style.background = "linear-gradient(180deg,var(--red),#b91c1c)";
-    bar.title = new Date(item.timestamp).toLocaleString() + " — " + item.responseMs + " ms";
+    if(!item.ok) bar.style.background = "linear-gradient(180deg,var(--red),#b91c1c)";
+    bar.title = new Date(item.t).toLocaleString() + " — " + (item.ms || "—") + " ms";
     chart.appendChild(bar);
   });
 
-  const avg = Math.round(rows.reduce((a, x) => a + x.responseMs, 0) / rows.length);
-  $("chartInfo").textContent = rows.length + " Messungen";
+  const avg = Math.round(rows.reduce((a, x) => a + (x.ms || 0), 0) / rows.length);
+  $("chartInfo").textContent = rows.length + " Server-Checks";
   $("chartMeta").textContent = "Ø " + avg + " ms · max " + maxMs + " ms";
 }
 
-/* Period-Tabs */
 document.querySelectorAll(".period-tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".period-tab").forEach(t => t.classList.remove("active"));
@@ -2068,35 +1523,31 @@ document.querySelectorAll(".period-tab").forEach(tab => {
 });
 
 /* ============================================================
-   TIMELINE
+   TIMELINE (Server-Daten)
    ============================================================ */
 function renderTimeline(){
-  const history = cleanHistory();
+  const rows = serverHistory.slice().reverse().slice(0, 15);
   const container = $("timelineList");
   container.innerHTML = "";
 
-  if(!history.length){
+  if(!rows.length){
     container.innerHTML = `
       <div class="timeline-item">
         <div class="timeline-time">—</div>
-        <div class="timeline-title">${t("noIncidentsTitle")}</div>
-        <div class="timeline-desc">${t("noIncidentsText")}</div>
+        <div class="timeline-title">Keine Server-Daten</div>
+        <div class="timeline-desc">history.json konnte nicht geladen werden.</div>
       </div>`;
     return;
   }
 
-  // Show last 15 events, newest first
-  const recent = [...history].reverse().slice(0, 15);
-
-  recent.forEach(item => {
+  rows.forEach(item => {
     const div = document.createElement("div");
-    div.className = "timeline-item" + (item.success ? "" : (item.responseMs > 500 ? " error" : " warning"));
-    const time = new Date(item.timestamp).toLocaleString();
-    const title = item.success ? "Erreichbar" : "Fehlgeschlagen";
-    const desc = item.success
-      ? `${item.responseMs} ms — HTTP ${item.httpStatus}`
-      : `${item.error || "Fehler"} — Timeout nach ${item.responseMs} ms`;
-
+    div.className = "timeline-item" + (item.ok ? "" : (item.ms > 500 ? " error" : " warning"));
+    const time = new Date(item.t).toLocaleString();
+    const title = item.ok ? "Erreichbar (GitHub-Check)" : "Fehlgeschlagen";
+    const desc = item.ok
+      ? `${item.ms} ms — HTTP ${item.status}`
+      : `${item.error || "Fehler"} — Timeout nach ${item.ms} ms`;
     div.innerHTML = `
       <div class="timeline-time">${time}</div>
       <div class="timeline-title">${title}</div>
@@ -2110,36 +1561,31 @@ function renderTimeline(){
    ============================================================ */
 function generateReport(){
   const d = latestDiagnostics;
-  const history = cleanHistory();
-  const successes = history.filter(x => x.success).length;
-  const uptime = history.length ? Math.round((successes / history.length) * 100) : null;
+  const cutoff = Date.now() - CONFIG.DAY_MS;
+  const last24 = serverHistory.filter(x => x.t >= cutoff);
+  const serverSuccesses = last24.filter(x => x.ok).length;
+  const serverUptime = last24.length ? ((serverSuccesses / last24.length) * 100).toFixed(2) : "N/A";
 
   const lines = [
     "=== FASQOO WEBSITE STATUS REPORT ===",
-    "Zeit:        " + new Date().toISOString(),
-    "Ziel:        " + TARGET_URL,
-    "Browser:     " + detectBrowser(),
-    "Online:      " + (navigator.onLine ? "Ja" : "Nein"),
-    "HTTPS:       " + (location.protocol === "https:" ? "Ja" : "Nein"),
-    "Protocol:    " + (d.protocol || "—"),
+    "Zeit:            " + new Date().toISOString(),
+    "Ziel:            " + TARGET_URL,
+    "Browser:         " + detectBrowser(),
+    "Online:          " + (navigator.onLine ? "Ja" : "Nein"),
+    "HTTPS:           " + (location.protocol === "https:" ? "Ja" : "Nein"),
+    "Protocol:        " + (d.protocol || "—"),
     "",
-    "--- MESSWERTE ---",
-    "Score:       " + (d.score !== null ? d.score + "/100" : "N/A"),
-    "Latenz P50:  " + (d.p50 !== null ? d.p50 + " ms" : "N/A"),
-    "Latenz P95:  " + (d.p95 !== null ? d.p95 + " ms" : "N/A"),
-    "Latenz P99:  " + (d.p99 !== null ? d.p99 + " ms" : "N/A"),
-    "Jitter:      " + (d.jitter !== null ? d.jitter + " ms" : "N/A"),
-    "Fehlerrate:  " + (d.failureRate !== null ? d.failureRate + "%" : "N/A"),
+    "--- 24/7 SERVER-MONITOR (GitHub) ---",
+    "Uptime 24h:      " + serverUptime + "%",
+    "Server-Checks:   " + last24.length,
     "",
-    "--- TIMING ---",
-    "DNS:         " + (d.timing?.dns !== undefined ? Math.round(d.timing.dns) + " ms" : "—"),
-    "TCP:         " + (d.timing?.tcp !== undefined ? Math.round(d.timing.tcp) + " ms" : "—"),
-    "TLS:         " + (d.timing?.tls !== undefined ? Math.round(d.timing.tls) + " ms" : "—"),
-    "TTFB:        " + (d.timing?.ttfb !== undefined ? Math.round(d.timing.ttfb) + " ms" : "—"),
-    "",
-    "--- VERLAUF ---",
-    "Prüfungen:   " + history.length,
-    "Uptime:      " + (uptime !== null ? uptime + "%" : "N/A"),
+    "--- DEINE MESSUNG ---",
+    "Score:           " + (d.score !== null ? d.score + "/100" : "N/A"),
+    "Latenz P50:      " + (d.p50 !== null ? d.p50 + " ms" : "N/A"),
+    "Latenz P95:      " + (d.p95 !== null ? d.p95 + " ms" : "N/A"),
+    "Latenz P99:      " + (d.p99 !== null ? d.p99 + " ms" : "N/A"),
+    "Jitter:          " + (d.jitter !== null ? d.jitter + " ms" : "N/A"),
+    "Fehlerrate:      " + (d.failureRate !== null ? d.failureRate + "%" : "N/A"),
     "====================================="
   ];
 
@@ -2151,11 +1597,10 @@ $("copyReportBtn").addEventListener("click", function(){
   ta.select();
   navigator.clipboard.writeText(ta.value).then(() => {
     const old = this.textContent;
-    this.textContent = t("copied");
+    this.textContent = "Kopiert";
     setTimeout(() => this.textContent = old, 1500);
   });
 });
-
 $("downloadTxtBtn").addEventListener("click", () => {
   downloadFile($("reportPreview").value, "fasqoo-status-" + Date.now() + ".txt", "text/plain");
 });
@@ -2165,26 +1610,23 @@ $("downloadJsonBtn").addEventListener("click", () => {
     target: TARGET_URL,
     browser: detectBrowser(),
     diagnostics: latestDiagnostics,
-    history: cleanHistory()
+    serverHistory: serverHistory
   };
   downloadFile(JSON.stringify(data, null, 2), "fasqoo-status-" + Date.now() + ".json", "application/json");
 });
 $("downloadCsvBtn").addEventListener("click", () => {
-  const rows = cleanHistory();
   const header = "timestamp,date,success,response_ms,http_status,error";
-  const lines = rows.map(r =>
-    [r.timestamp, new Date(r.timestamp).toISOString(), r.success, r.responseMs, r.httpStatus, (r.error || "")].join(","));
-  downloadFile([header, ...lines].join("\n"), "fasqoo-status-" + Date.now() + ".csv", "text/csv");
+  const lines = serverHistory.map(r =>
+    [r.t, new Date(r.t).toISOString(), r.ok, r.ms, r.status, (r.error || "")].join(","));
+  downloadFile([header, ...lines].join("\n"), "fasqoo-server-history-" + Date.now() + ".csv", "text/csv");
 });
 
 function downloadFile(content, name, type){
   const blob = new Blob([content], { type: type + ";charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
@@ -2197,22 +1639,18 @@ function downloadFile(content, name, type){
     $("fasqooLiveBrowser").textContent = detectBrowser();
     const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     $("fasqooLiveConnection").textContent = c?.effectiveType || (navigator.onLine ? "Online" : "Offline");
-    $("fasqooLiveTransport").textContent = location.protocol === "https:" ? "HTTPS/TLS" : "HTTP";
   }
   update();
   window.addEventListener("online", update);
   window.addEventListener("offline", update);
-  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if(c?.addEventListener) c.addEventListener("change", update);
 })();
 
 /* ============================================================
-   24H MONITOR
+   BROWSER-24H-MONITOR
    ============================================================ */
 (function(){
   let timer = null;
   let running = false;
-
   const state = () => {
     try{
       const x = JSON.parse(localStorage.getItem(CONFIG.MONITOR_KEY) || "[]");
@@ -2234,9 +1672,7 @@ function downloadFile(content, name, type){
     $("monitorAvailability").textContent = rows.length ? ((successes / rows.length) * 100).toFixed(1) + "%" : "—";
     $("monitorLastCheck").textContent = rows.length ? new Date(rows[rows.length-1].t).toLocaleTimeString() : "—";
     const good = rows.filter(x => x.ok && Number.isFinite(x.ms));
-    $("monitorChartMeta").textContent = good.length
-      ? "Ø " + Math.round(good.reduce((a, b) => a + b.ms, 0) / good.length) + " ms"
-      : "—";
+    $("monitorChartMeta").textContent = good.length ? "Ø " + Math.round(good.reduce((a, b) => a + b.ms, 0) / good.length) + " ms" : "—";
     $("monitorStatus").textContent = running ? "ON" : "OFF";
     drawMonitorChart();
   }
@@ -2248,8 +1684,7 @@ function downloadFile(content, name, type){
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     const w = Math.max(300, Math.floor(rect.width || 700));
     const h = 170;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
+    canvas.width = w * dpr; canvas.height = h * dpr;
     const ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
@@ -2259,37 +1694,30 @@ function downloadFile(content, name, type){
     const good = rows.filter(x => x.ok && Number.isFinite(x.ms));
     const maxMs = Math.max(100, ...good.map(x => x.ms));
     const minT = Date.now() - CONFIG.DAY_MS;
-    const maxT = Date.now();
 
     const borderColor = getComputedStyle(document.body).getPropertyValue("--border").trim() || "#ddd";
     const mutedColor = getComputedStyle(document.body).getPropertyValue("--muted").trim() || "#777";
     const primaryColor = getComputedStyle(document.body).getPropertyValue("--primary").trim() || "#2563eb";
 
-    // Grid
     ctx.strokeStyle = borderColor;
     ctx.fillStyle = mutedColor;
     ctx.font = "10px system-ui";
     for(let i = 0; i < 4; i++){
       const y = pad.t + (h - pad.t - pad.b) * (i / 3);
       ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
-      const val = Math.round(maxMs * (1 - i / 3));
-      ctx.fillText(val + " ms", 4, y + 3);
+      ctx.fillText(Math.round(maxMs * (1 - i / 3)) + " ms", 4, y + 3);
     }
     for(let i = 0; i < 5; i++){
       const x = pad.l + (w - pad.l - pad.r) * (i / 4);
       const d = new Date(minT + (CONFIG.DAY_MS * i / 4));
       ctx.fillText(d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }), x - 18, h - 8);
     }
-
     if(!rows.length){
       ctx.fillText("Keine Monitoring-Daten", pad.l, h / 2);
       return;
     }
-
     const yOf = ms => pad.t + (h - pad.t - pad.b) * (1 - Math.min(ms, maxMs) / maxMs);
     const xOf = t => pad.l + (w - pad.l - pad.r) * ((t - minT) / CONFIG.DAY_MS);
-
-    // Line
     ctx.beginPath();
     let started = false;
     rows.forEach(r => {
@@ -2298,13 +1726,9 @@ function downloadFile(content, name, type){
         const y = yOf(r.ms);
         if(!started){ ctx.moveTo(x, y); started = true; }
         else ctx.lineTo(x, y);
-      } else if(started){
-        ctx.stroke(); ctx.beginPath(); started = false;
-      }
+      } else if(started){ ctx.stroke(); ctx.beginPath(); started = false; }
     });
     if(started) ctx.stroke();
-
-    // Dots
     rows.forEach(r => {
       const x = xOf(r.t);
       if(x < pad.l || x > w - pad.r) return;
@@ -2390,19 +1814,19 @@ function downloadFile(content, name, type){
 /* ============================================================
    EVENT LISTENERS
    ============================================================ */
-$("checkBtn").addEventListener("click", () => {
-  runFullDiagnosis();
-});
+$("checkBtn").addEventListener("click", () => runFullDiagnosis());
 
 $("languageSelect").addEventListener("change", function(){
-  applyLanguage(this.value);
-  // Re-render dynamic parts
+  localStorage.setItem(CONFIG.LANGUAGE_KEY, this.value);
+  // Sprache wird vom browser-seitigen i18n-System im head-Bereich gehandhabt;
+  // hier nur Re-Render der dynamischen Teile:
   if(latestDiagnostics.score !== null){
     updateHealthScore();
     renderProblems();
   }
   updateNetworkProfile();
   updateOverviewStats();
+  renderChart();
   renderTimeline();
   generateReport();
 });
@@ -2410,29 +1834,31 @@ $("languageSelect").addEventListener("change", function(){
 /* ============================================================
    INIT
    ============================================================ */
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   applyTheme();
-  applyLanguage(currentLanguage);
+
+  // Server-Daten laden (von GitHub Actions)
+  await loadServerHistory();
+
+  // Browser-Profil + UI initialisieren
   updateNetworkProfile();
-  updateOverviewStats();
-  renderTimeline();
-  generateReport();
+  updateMainResult({ ok: true, ms: 0, status: 200, error: null });
+
+  // Badges auf "Wartet" setzen (aber HTTPS + Network NICHT überschreiben)
   resetBadges();
+  updateNetworkProfile(); // setzt HTTPS + Network korrekt
 
-  // Load & render previous history
-  const history = cleanHistory();
-  if(history.length){
-    renderChart();
-  }
+  generateReport();
 
-  // Auto-run a light check on first load (but NOT full diagnosis)
-  // This is respectful of user bandwidth & battery.
-  setTimeout(() => {
-    $("responseValue").textContent = "—";
-  }, 200);
+  // Server-Daten alle 60 Sek neu laden (im Hintergrund)
+  setInterval(loadServerHistory, 60000);
+
+  // Auch bei Tab-Rückkehr neu laden
+  document.addEventListener("visibilitychange", () => {
+    if(!document.hidden) loadServerHistory();
+  });
 });
 
-// Redraw sparklines on resize
 window.addEventListener("resize", () => {
   updateOverviewStats();
 });
