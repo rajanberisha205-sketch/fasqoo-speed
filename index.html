@@ -228,7 +228,6 @@ canvas{width:100%;height:155px}
 .action:hover{background:var(--soft)}
 .method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.method-card{position:relative;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px;min-height:190px}.method-num{display:inline-flex;width:34px;height:34px;border-radius:9px;align-items:center;justify-content:center;background:var(--soft);color:var(--orange);font-size:11px;font-weight:800}.method-card h3{margin:18px 0 8px;font-size:14px}.method-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}.method-note{margin-top:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);font-size:12px;color:var(--muted);line-height:1.6}
 
-/* Trust row – now sits BELOW the test card, small and subtle */
 .hero-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin:22px 0 0;font-size:11px;color:var(--muted);line-height:1.5}
 .hero-trust span{display:inline-flex;align-items:center;gap:6px}
 .hero-trust span::before{content:"✓";color:var(--green);font-weight:700;font-size:12px;line-height:1}
@@ -272,7 +271,6 @@ footer{background:var(--card);border-top:1px solid var(--line);padding:23px 0;co
   .metric{padding:13px}
   .info-grid,.apps,.tools,.reportgrid{grid-template-columns:1fr 1fr}
   .foot{flex-direction:column;gap:7px}
-  /* Trust row: single horizontal scroll line instead of stacked blocks */
   .hero-trust{
     flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;
     gap:14px;margin-top:16px;padding:0 4px 6px;
@@ -473,6 +471,47 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 #heroTitle {
   font-weight: 400 !important;
 }
+
+/* ==========================================================
+   FASQOO EXTENDED METRICS (6 Kacheln)
+   - Packet Loss + Bufferbloat
+   ========================================================== */
+.metrics{grid-template-columns:repeat(3,1fr)}
+.metric:nth-child(2n){border-right:1px solid var(--line)}
+.metric:nth-child(3n){border-right:0}
+.metric:nth-child(n+3){border-bottom:1px solid var(--line)}
+.metric:nth-child(n+4){border-bottom:0}
+
+/* Farbige Zwischenstände */
+.value span.val-measuring{
+  color:#5b7cfa;
+  transition:color .25s ease;
+}
+.value span.val-good{color:#16a36a;transition:color .35s ease}
+.value span.val-medium{color:#e6a500;transition:color .35s ease}
+.value span.val-bad{color:#e5484d;transition:color .35s ease}
+
+/* Puls-Effekt: einmalig pro Ping-Sample */
+@keyframes fasqooPulseSync{
+  0%  {transform:scale(1);   color:var(--orange); box-shadow:0 0 0 0 rgba(37,99,235,.35)}
+  45% {transform:scale(1.42); color:#2563eb;      box-shadow:0 0 0 6px rgba(37,99,235,0)}
+  100%{transform:scale(1);   color:var(--orange); box-shadow:0 0 0 0 rgba(37,99,235,0)}
+}
+.icon.pulse-sync{
+  animation-name:fasqooPulseSync;
+  animation-timing-function:ease-out;
+  animation-iteration-count:1;
+  animation-fill-mode:both;
+  will-change:transform;
+}
+
+@media(max-width:900px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric:nth-child(3n){border-right:1px solid var(--line)}
+  .metric:nth-child(2n){border-right:0}
+  .metric:nth-child(n+4){border-bottom:1px solid var(--line)}
+  .metric:nth-child(n+5){border-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -572,10 +611,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div>
         <div class="metrics">
-          <div class="metric"><div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" aria-hidden="true">◌</span></div><div class="value"><span id="ping">—</span><span class="small">ms</span></div></div>
-          <div class="metric"><div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div><div class="value"><span id="jitter">—</span><span class="small">ms</span></div></div>
-          <div class="metric"><div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div><div class="value"><span id="down">—</span><span class="small">Mbps</span></div></div>
-          <div class="metric"><div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div><div class="value"><span id="up">—</span><span class="small">Mbps</span></div></div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" id="pingIcon" aria-hidden="true">◌</span></div>
+            <div class="value"><span id="ping">—</span><span class="small">ms</span></div>
+          </div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div>
+            <div class="value"><span id="jitter">—</span><span class="small">ms</span></div>
+          </div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="packetLoss">Packet Loss</span><span class="icon" aria-hidden="true">⊘</span></div>
+            <div class="value"><span id="loss">—</span><span class="small">%</span></div>
+          </div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div>
+            <div class="value"><span id="down">—</span><span class="small">Mbps</span></div>
+          </div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
+            <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
+          </div>
+          <div class="metric">
+            <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
+            <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
+            <div class="metric-reading" id="bloatGrade"></div>
+          </div>
         </div>
         <div class="chart">
           <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
@@ -827,11 +887,8 @@ window.addEventListener("appinstalled", () => {
 updateInstallButton();
 
 /* ==========================================================
-   FASQOO SPEED TEST v7.2 — adaptive phases, real measurement
-   - Phase duration: 8 s per direction (see MEASUREMENT_V7.phaseMs)
-   - Pauses: 2 s before download and 2 s before upload
-   - Warm-up runs BEFORE the timed phase (not inside it)
-   - No fabricated values: too few samples -> test fails honestly
+   FASQOO SPEED TEST v7.3 — adaptive phases, bufferbloat,
+   packet loss, colored metrics, sample-synced pulse, live graph
    ========================================================== */
 
 const $ = id => document.getElementById(id);
@@ -887,10 +944,29 @@ const pageTranslations = {
   ar:{title:"اختبار سرعة الإنترنت المجاني",methodTitle:"كيف يتم قياس اتصالك",methodSub:"تقيس Fasqoo اتصالك مباشرة من المتصفح وتعرض القيم التي يتم قياسها فعليًا.",method1T:"زمن الاستجابة وJitter",method1D:"يتم قياس عدة طلبات صغيرة. يعتمد Ping على أزمنة الاستجابة المقاسة، بينما يصف Jitter مقدار التغير بينها.",method2T:"التنزيل",method2D:"يقوم المتصفح بتنزيل بيانات حقيقية من نقطة الاختبار. تُحسب السرعة من البيانات المستلمة والوقت المنقضي.",method3T:"الرفع",method3D:"يرسل المتصفح بيانات حقيقية إلى نقطة الاختبار. تُحسب السرعة من البيانات المرسلة والوقت المنقضي.",method4T:"لماذا تختلف النتائج",method4D:"يمكن أن يؤثر Wi-Fi وحمل الجهاز وVPN وازدحام مزود الخدمة والتوجيه والمسافة إلى خادم الاختبار على النتيجة.",methodNote:"بنية القياس: نقاط اختبار Cloudflare Speed Test. Fasqoo منصة مستقلة لا تمثل منتجًا رسميًا من Cloudflare."}
 };
 
+/* ---------- NEUE METRIK-LABELS (Packet Loss, Bufferbloat) ---------- */
+const metricTranslations = {
+  en:{packetLoss:"Packet Loss",bufferbloat:"Bufferbloat",bbGradeA:"A · Excellent",bbGradeB:"B · Good",bbGradeC:"C · Fair",bbGradeD:"D · Poor"},
+  de:{packetLoss:"Paketverlust",bufferbloat:"Bufferbloat",bbGradeA:"A · Hervorragend",bbGradeB:"B · Gut",bbGradeC:"C · Mäßig",bbGradeD:"D · Schlecht"},
+  fr:{packetLoss:"Perte de paquets",bufferbloat:"Bufferbloat",bbGradeA:"A · Excellent",bbGradeB:"B · Bon",bbGradeC:"C · Moyen",bbGradeD:"D · Faible"},
+  es:{packetLoss:"Pérdida de paquetes",bufferbloat:"Bufferbloat",bbGradeA:"A · Excelente",bbGradeB:"B · Bueno",bbGradeC:"C · Aceptable",bbGradeD:"D · Malo"},
+  it:{packetLoss:"Perdita pacchetti",bufferbloat:"Bufferbloat",bbGradeA:"A · Eccellente",bbGradeB:"B · Buono",bbGradeC:"C · Discreto",bbGradeD:"D · Scarso"},
+  pt:{packetLoss:"Perda de pacotes",bufferbloat:"Bufferbloat",bbGradeA:"A · Excelente",bbGradeB:"B · Bom",bbGradeC:"C · Razoável",bbGradeD:"D · Fraco"},
+  nl:{packetLoss:"Pakketverlies",bufferbloat:"Bufferbloat",bbGradeA:"A · Uitstekend",bbGradeB:"B · Goed",bbGradeC:"C · Redelijk",bbGradeD:"D · Slecht"},
+  tr:{packetLoss:"Paket Kaybı",bufferbloat:"Bufferbloat",bbGradeA:"A · Mükemmel",bbGradeB:"B · İyi",bbGradeC:"C · Orta",bbGradeD:"D · Zayıf"},
+  sq:{packetLoss:"Humbje paketash",bufferbloat:"Bufferbloat",bbGradeA:"A · Shkëlqyeshëm",bbGradeB:"B · Mirë",bbGradeC:"C · Mesatar",bbGradeD:"D · Dobët"},
+  ar:{packetLoss:"فقدان الحزم",bufferbloat:"Bufferbloat",bbGradeA:"A · ممتاز",bbGradeB:"B · جيد",bbGradeC:"C · مقبول",bbGradeD:"D · ضعيف"}
+};
+
+let lastBloatMs = null;
+
+function tx(key){
+  return (metricTranslations[currentLang] && metricTranslations[currentLang][key])
+      || metricTranslations.en[key] || key;
+}
+
 function applyExtraLanguage(lang){
   const x = extraTranslations[lang] || extraTranslations.en;
-  // Wichtig: .eyebrow NICHT überschreiben (enthält Dot + data-i18n-Span).
-  // Trust-Badges werden bereits über data-i18n gesetzt.
   const map = {
     '#testPhase': x.readyPhase,
     '.mini-kicker': x.liveTest,
@@ -968,7 +1044,7 @@ function buildAppCards(){
   });
 }
 
-/* ---------- CHART ---------- */
+/* ---------- CHART (Farbverlauf + Glow + Skala) ---------- */
 const canvas = $("chart");
 const ctx = canvas.getContext("2d");
 function resizeCanvas(){
@@ -982,14 +1058,58 @@ function drawChart(){
   if(!canvas || !canvas.clientWidth) return;
   const w = canvas.clientWidth, h = canvas.clientHeight;
   ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle = document.body.classList.contains("dark") ? "#2b3037" : "#edf1f5";
+
+  const isDark = document.body.classList.contains("dark");
+  const gridColor = isDark ? "#2b3037" : "#edf1f5";
+  const scaleColor = isDark ? "#6b7280" : "#9aa1ab";
+
+  // Horizontale Grid-Linien
+  ctx.strokeStyle = gridColor;
   ctx.lineWidth = 1;
   for(let i=1;i<5;i++){ const y=i*h/5; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
-  if(samples.length < 2) return;
+
+  // Skala oben rechts (immer sichtbar, auch ohne Samples)
   const max = Math.max(100, ...samples);
+  ctx.fillStyle = scaleColor;
+  ctx.font = "10px Inter, system-ui, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "top";
+  ctx.fillText(max.toFixed(0) + " Mbps", w - 6, 6);
+
+  if(samples.length < 2) return;
+
+  // Punkte berechnen
+  const pts = samples.map((v,i) => ({
+    x: i*w/(samples.length-1),
+    y: h-12-v/max*(h-24)
+  }));
+
+  // Fläche unter der Kurve (Gradient)
   ctx.beginPath();
-  samples.forEach((v,i)=>{ const x=i*w/(samples.length-1); const y=h-12-v/max*(h-24); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
-  ctx.strokeStyle = "#2563eb"; ctx.lineWidth = 2.5; ctx.stroke();
+  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+  ctx.lineTo(w, h);
+  ctx.lineTo(0, h);
+  ctx.closePath();
+  const fillGrad = ctx.createLinearGradient(0,0,0,h);
+  fillGrad.addColorStop(0, "rgba(37,99,235,.22)");
+  fillGrad.addColorStop(1, "rgba(37,99,235,0)");
+  ctx.fillStyle = fillGrad;
+  ctx.fill();
+
+  // Linie mit Gradient + Glow
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+  const lineGrad = ctx.createLinearGradient(0,0,0,h);
+  lineGrad.addColorStop(0, "#2563eb");
+  lineGrad.addColorStop(1, "rgba(37,99,235,.35)");
+  ctx.strokeStyle = lineGrad;
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.shadowColor = "rgba(37,99,235,.45)";
+  ctx.shadowBlur = 8;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
 }
 window.addEventListener("resize", resizeCanvas);
 
@@ -1080,9 +1200,9 @@ function testTimeout(ms){
 }
 
 /* ==========================================================
-   MEASUREMENT ENGINE v7.2
+   MEASUREMENT ENGINE v7.3
    ========================================================== */
-const MEASUREMENT_V7 = { version: "7.2", phaseMs: 8000, maxStreams: 8 };
+const MEASUREMENT_V7 = { version: "7.3", phaseMs: 8000, maxStreams: 8 };
 
 function percentile(values, q){
   if(!values.length) return NaN;
@@ -1092,7 +1212,6 @@ function percentile(values, q){
   return lo===hi ? a[lo] : a[lo] + (a[hi]-a[lo])*(pos-lo);
 }
 function robustMedian(values){ return percentile(values,0.5); }
-
 function chooseStreams(mbps, max = MEASUREMENT_V7.maxStreams){
   if(mbps >= 2500) return Math.min(8, max);
   if(mbps >= 1000) return Math.min(6, max);
@@ -1103,56 +1222,113 @@ function chooseStreams(mbps, max = MEASUREMENT_V7.maxStreams){
 }
 function clampNumber(v,min,max){ return Math.max(min,Math.min(max,v)); }
 
-async function pingTest(){
-  // Robust real latency test:
-  // - still measures only real Cloudflare Edge responses
-  // - no synthetic/fallback values
-  // - retries the endpoint instead of failing after a single 4s timeout
+/* ---------- FARB-LOGIK ---------- */
+function colorPing(v){ return v<=15?"val-good":v<=50?"val-medium":"val-bad"; }
+function colorJitter(v){ return v<=5?"val-good":v<=15?"val-medium":"val-bad"; }
+function colorDownload(v){ return v>=100?"val-good":v>=25?"val-medium":"val-bad"; }
+function colorUpload(v){ return v>=20?"val-good":v>=5?"val-medium":"val-bad"; }
+function colorLoss(v){ return v<0.5?"val-good":v<2.5?"val-medium":"val-bad"; }
+
+function setMeasuring(id){
+  const el=$(id); if(!el) return;
+  el.classList.remove("val-good","val-medium","val-bad");
+  el.classList.add("val-measuring");
+}
+function setFinal(id, cls){
+  const el=$(id); if(!el) return;
+  el.classList.remove("val-measuring");
+  if(cls) el.classList.add(cls);
+}
+
+/* ---------- PULS-EFFEKT (Sample-synchron) ---------- */
+let pulseTimer = null;
+function pulseOnce(ms){
+  const icon = document.getElementById("pingIcon");
+  if(!icon) return;
+  // Dauer skaliert mit gemessener Latenz, geclamped zwischen 300–900ms
+  const dur = Math.max(300, Math.min(900, ms * 12));
+  icon.style.animationDuration = dur + "ms";
+  // Animation neu starten (Reflow-Trick)
+  icon.classList.remove("pulse-sync");
+  void icon.offsetWidth;
+  icon.classList.add("pulse-sync");
+  if(pulseTimer) clearTimeout(pulseTimer);
+  pulseTimer = setTimeout(() => {
+    icon.classList.remove("pulse-sync");
+    pulseTimer = null;
+  }, dur + 50);
+}
+function stopPingPulse(){
+  const icon = document.getElementById("pingIcon");
+  if(!icon) return;
+  if(pulseTimer){ clearTimeout(pulseTimer); pulseTimer = null; }
+  icon.classList.remove("pulse-sync");
+  icon.style.animationDuration = "";
+}
+
+/* ---------- BUFFERBLOAT ---------- */
+function displayBufferbloat(bloatMs){
+  lastBloatMs = bloatMs;
+  const el = $("bloat"), gradeEl = $("bloatGrade");
+  if(!el) return;
+  if(!Number.isFinite(bloatMs)){
+    el.textContent = "—";
+    el.classList.remove("val-good","val-medium","val-bad","val-measuring");
+    if(gradeEl) gradeEl.textContent = "";
+    return;
+  }
+  el.textContent = Math.round(bloatMs);
+  let cls, gradeKey;
+  if(bloatMs < 30){ cls="val-good"; gradeKey="bbGradeA"; }
+  else if(bloatMs < 60){ cls="val-good"; gradeKey="bbGradeB"; }
+  else if(bloatMs < 200){ cls="val-medium"; gradeKey="bbGradeC"; }
+  else { cls="val-bad"; gradeKey="bbGradeD"; }
+  setFinal("bloat", cls);
+  if(gradeEl) gradeEl.textContent = tx(gradeKey);
+}
+
+/* ---------- PING + PACKET LOSS ---------- */
+async function pingTest(opts = {}){
+  const onSample = opts.onSample || (()=>{});
   const vals = [];
   const MAX_ATTEMPTS = 10;
+  let attempts = 0;
 
   for(let i=0; i<MAX_ATTEMPTS && running; i++){
+    attempts++;
     try{
       const started = performance.now();
       const timer = testTimeout(9000);
       const r = await fetch(
         SPEED_BASE+"/__down?bytes=1&v=7&fasqoo=1&t="+Date.now()+"-"+Math.random(),
-        {
-          cache:"no-store",
-          mode:"cors",
-          credentials:"omit",
-          signal:timer.signal
-        }
+        { cache:"no-store", mode:"cors", credentials:"omit", signal:timer.signal }
       );
-
       if(!r.ok) throw new Error("HTTP "+r.status);
-      // Consume the real response so the timing includes the complete tiny probe.
       await r.arrayBuffer();
       timer.clear();
-
       const ms = performance.now() - started;
-      if(Number.isFinite(ms) && ms > 0 && ms < 9000) vals.push(ms);
+      if(Number.isFinite(ms) && ms > 0 && ms < 9000){
+        vals.push(ms);
+        onSample(ms);
+      }
     }catch(e){
       console.warn("Cloudflare latency probe failed:", e?.message || e);
     }
-
     if(i < MAX_ATTEMPTS-1) await sleep(80);
   }
 
-  // A real result requires multiple successful measurements.
-  // We accept 3+ valid samples to tolerate transient packet/filter loss.
-  if(vals.length < 3){
-    throw new Error("MEASUREMENT_UNAVAILABLE");
-  }
+  if(vals.length < 3) throw new Error("MEASUREMENT_UNAVAILABLE");
 
   const ping = robustMedian(vals);
   const deltas = [];
   for(let i=1;i<vals.length;i++) deltas.push(Math.abs(vals[i]-vals[i-1]));
   const jitter = deltas.length ? robustMedian(deltas) : 0;
+  const packetLoss = attempts > 0 ? ((attempts - vals.length) / attempts) * 100 : 0;
 
-  return {ping,jitter,samples:vals};
+  return { ping, jitter, samples: vals, packetLoss, attempts };
 }
 
+/* ---------- DOWNLOAD / UPLOAD HELPERS ---------- */
 async function readResponseBytes(response,signal){
   if(!response.body){ const b=await response.arrayBuffer(); return b.byteLength; }
   const reader=response.body.getReader(); let bytes=0;
@@ -1226,6 +1402,27 @@ function nextPayloadBytes(mbps,remainingMs,streams,minBytes,maxBytes){
   return clampNumber(targetBytes,minBytes,maxBytes);
 }
 
+/* ---------- BUFFERBLOAT PROBE (parallel zur Volllast) ---------- */
+async function bufferbloatProbe(shouldContinue, sink){
+  await sleep(180);
+  while(shouldContinue() && running){
+    try{
+      const started = performance.now();
+      const timer = testTimeout(2500);
+      const r = await fetch(SPEED_BASE+"/__down?bytes=1&v=7&bb=1&t="+Date.now()+"-"+Math.random(),{
+        cache:"no-store", mode:"cors", credentials:"omit", signal:timer.signal
+      });
+      timer.clear();
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      await r.arrayBuffer();
+      const ms = performance.now()-started;
+      if(Number.isFinite(ms) && ms>0 && ms<2500) sink.push(ms);
+    }catch(e){}
+    await sleep(300);
+  }
+}
+
+/* ---------- DOWNLOAD-TEST (mit Bufferbloat-Probe) ---------- */
 async function downloadTest(){
   const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
   $("status").textContent=t.stDown; $("chartState").textContent=t.download; samples=[];
@@ -1244,7 +1441,11 @@ async function downloadTest(){
 
   const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
   const measured=[];
+  const loadedLatencies=[];
   let streams=2, bytesPerStream=512*1024;
+
+  let probing = true;
+  const probeTask = bufferbloatProbe(() => probing, loadedLatencies);
 
   while(running){
     const elapsed=performance.now()-startTime;
@@ -1270,12 +1471,17 @@ async function downloadTest(){
       await sleep(150);
     }
   }
+
+  probing = false;
+  try{ await probeTask; }catch(e){}
+
   if(measured.length < 1) throw new Error("Download measurement failed (0 valid samples)");
-  return robustMedian(measured);
+  return { speed: robustMedian(measured), loadedLatencies };
 }
 
+/* ---------- UPLOAD-TEST (mit Bufferbloat-Probe) ---------- */
 async function uploadTest(){
-  const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
+  const t=translations[currentLang];
   $("status").textContent=t.stUp; $("chartState").textContent=t.upload; samples=[];
 
   let mbps = 25;
@@ -1292,7 +1498,11 @@ async function uploadTest(){
 
   const TARGET=MEASUREMENT_V7.phaseMs, startTime=performance.now();
   const measured=[];
+  const loadedLatencies=[];
   let streams=2, bytesPerStream=512*1024;
+
+  let probing = true;
+  const probeTask = bufferbloatProbe(() => probing, loadedLatencies);
 
   while(running){
     const elapsed=performance.now()-startTime;
@@ -1317,16 +1527,25 @@ async function uploadTest(){
       await sleep(150);
     }
   }
+
+  probing = false;
+  try{ await probeTask; }catch(e){}
+
   if(measured.length < 1) throw new Error("Upload measurement failed (0 valid samples)");
-  return robustMedian(measured);
+  return { speed: robustMedian(measured), loadedLatencies };
 }
 
-function quality(d,u,p,j){
+/* ---------- QUALITÄT ---------- */
+function quality(d,u,p,j,loss=0,bloat=null){
   let s = 100;
   if(d<5) s-=45; else if(d<25) s-=30; else if(d<50) s-=20; else if(d<100) s-=10;
   if(u<2) s-=20; else if(u<5) s-=14; else if(u<10) s-=7;
   if(p>150) s-=30; else if(p>100) s-=24; else if(p>60) s-=15; else if(p>30) s-=7;
   if(j>50) s-=20; else if(j>30) s-=14; else if(j>15) s-=7;
+  if(loss>=5) s-=40; else if(loss>=2) s-=25; else if(loss>=0.5) s-=10; else if(loss>0) s-=3;
+  if(bloat!==null){
+    if(bloat>=200) s-=20; else if(bloat>=100) s-=12; else if(bloat>=60) s-=6; else if(bloat>=30) s-=3;
+  }
   return Math.max(0, Math.min(100, Math.round(s)));
 }
 function connectionAssessment(d,u,p,j){
@@ -1353,7 +1572,7 @@ function showQuality(s,d,u,p,j){
   const detail=$("qualityDetail"); if(detail) detail.textContent=a.detail;
 }
 
-function evaluateApps(d,u,p,j){
+function evaluateApps(d,u,p,j,loss=0,bloat=null){
   const t = translations[currentLang];
   const setScore = (key, prefix, score) => {
     const status = document.querySelector('[data-app-status="'+key+'"]');
@@ -1371,6 +1590,10 @@ function evaluateApps(d,u,p,j){
   if(p>20) g-=15; if(p>40) g-=20; if(p>70) g-=25;
   if(j>10) g-=15; if(j>20) g-=20; if(j>40) g-=20;
   if(d<10) g-=15; if(u<3) g-=10;
+  if(loss>=2) g-=20; else if(loss>=0.5) g-=10;
+  if(bloat!==null){
+    if(bloat>=200) g-=25; else if(bloat>=100) g-=15; else if(bloat>=60) g-=8;
+  }
   setScore("gaming","gam", Math.max(0,Math.min(100,g)));
   setScore("stream","str", d>=25?100:d>=15?85:d>=10?70:d>=5?50:d>=3?25:10);
   setScore("fourk","fk", d>=50?100:d>=25?85:d>=15?60:d>=10?35:10);
@@ -1424,6 +1647,7 @@ function updateQualityLabel(s){
   el.textContent = s>=90 ? t.stExc : s>=75 ? (t.q75.replace(/connection\.?$/i, "").trim() || t.stGood) : s>=55 ? t.stGood : s>=35 ? t.stLim : t.q0;
 }
 
+/* ---------- START ---------- */
 async function start(){
   if(running) return;
   running = true;
@@ -1431,12 +1655,14 @@ async function start(){
   $("start").disabled = true;
   $("start").textContent = t.testing;
   resetGauge();
-  ["down","up","ping","jitter"].forEach(id => $(id).textContent = "—");
+  ["down","up","ping","jitter","loss","bloat"].forEach(id => $(id).textContent = "—");
   $("intelLatency").textContent = "—";
   $("intelStability").textContent = "—";
   $("intelThroughput").textContent = "—";
   $("score").textContent = "—";
   $("bar").style.width = "0%";
+  const gradeEl = $("bloatGrade"); if(gradeEl) gradeEl.textContent = "";
+  lastBloatMs = null;
   document.querySelectorAll(".app-status").forEach(el => { el.className = "app-status"; el.textContent = t.testing; });
   $("status").textContent = t.stPing;
   setTestPhase("ping");
@@ -1445,36 +1671,60 @@ async function start(){
   try{
     if(performance.clearResourceTimings) performance.clearResourceTimings();
 
-    const p = await pingTest();
+    /* ---- PING + PACKET LOSS ---- */
+    ["ping","jitter","loss","bloat","down","up"].forEach(setMeasuring);
+    const p = await pingTest({ onSample: pulseOnce });
+    stopPingPulse();
+
     $("ping").textContent = p.ping.toFixed(1);
+    setFinal("ping", colorPing(p.ping));
     $("jitter").textContent = p.jitter.toFixed(1);
+    setFinal("jitter", colorJitter(p.jitter));
+    $("loss").textContent = p.packetLoss < 10 ? p.packetLoss.toFixed(1) : Math.round(p.packetLoss);
+    setFinal("loss", colorLoss(p.packetLoss));
+
     $("intelLatency").textContent = p.ping.toFixed(1) + " ms";
-    $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " + (p.jitter <= 10 ? t.stExc : p.jitter <= 20 ? t.stGood : t.stLim);
+    $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " +
+      (p.jitter<=10 ? t.stExc : p.jitter<=20 ? t.stGood : t.stLim);
     measureDns();
 
+    /* ---- DOWNLOAD ---- */
     setTestPhase("download");
     $("status").textContent = t.testing;
     await sleep(2000);
+    const dRes = await downloadTest();
+    const d = dRes.speed;
+    $("down").textContent = d.toFixed(1);
+    setFinal("down", colorDownload(d));
 
-    const d = await downloadTest();
-
+    /* ---- UPLOAD ---- */
     setTestPhase("upload");
     $("status").textContent = t.testing;
     await sleep(2000);
+    const uRes = await uploadTest();
+    const u = uRes.speed;
+    $("up").textContent = u.toFixed(1);
+    setFinal("up", colorUpload(u));
 
-    const u = await uploadTest();
+    /* ---- BUFFERBLOAT ---- */
+    const allLoaded = [...dRes.loadedLatencies, ...uRes.loadedLatencies].filter(Number.isFinite);
+    const loadedPing = allLoaded.length >= 3 ? robustMedian(allLoaded) : null;
+    const bloatMs = loadedPing !== null ? Math.max(0, loadedPing - p.ping) : null;
+    displayBufferbloat(bloatMs);
 
+    /* ---- AUSWERTUNG ---- */
     setTestPhase("complete");
-    const s = quality(d,u,p.ping,p.jitter);
-    showQuality(s,d,u,p.ping,p.jitter);
-    evaluateApps(d,u,p.ping,p.jitter);
-    setPremiumMetrics(d,u,p.ping,p.jitter);
+    const s = quality(d, u, p.ping, p.jitter, p.packetLoss, bloatMs);
+    showQuality(s, d, u, p.ping, p.jitter);
+    evaluateApps(d, u, p.ping, p.jitter, p.packetLoss, bloatMs);
+    setPremiumMetrics(d, u, p.ping, p.jitter);
     updateQualityLabel(s);
     if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementComplete;
 
     const testID = createTestID();
     const date = new Date().toLocaleString();
-    last = {id:testID, date:date, download:d, upload:u, ping:p.ping, jitter:p.jitter, quality:s,
+    last = {id:testID, date:date, download:d, upload:u, ping:p.ping, jitter:p.jitter,
+      packetLoss:p.packetLoss, bufferbloat:bloatMs, quality:s,
       ip:info.ip||"", isp:(info.connection && (info.connection.isp||info.connection.org))||"",
       location:$("loc").textContent, asn:$("asn").textContent,
       ipv4:$("ipv4").textContent, ipv6:$("ipv6").textContent, dns:$("dns").textContent};
@@ -1485,10 +1735,9 @@ async function start(){
     updateWidget();
   }catch(err){
     console.error("FASQOO TEST FAILED:", err);
-    // Never show technical timeout/DNS/adblocker diagnostics in the main UI.
-    // Never invent or estimate a result when the real measurement cannot be completed.
+    stopPingPulse();
     const tNow = translations[currentLang];
-    $("status").textContent = tNow.measurementUnavailable || tNow.measurementFailed || tNow.stErr || "Measurement unavailable.";
+    $("status").textContent = tNow.measurementUnavailable || tNow.stErr;
     setTestPhase("ping");
     if($("measurementHint")) $("measurementHint").textContent =
       (extraTranslations[currentLang]||extraTranslations.en).measurementRetry ||
@@ -1511,7 +1760,7 @@ _statusObserver.observe($("status"),{childList:true,subtree:true,characterData:t
 $("copy").addEventListener("click", async () => {
   const t = translations[currentLang];
   if(!last.id){ alert(t.alertRun); return; }
-  const text = "Fasqoo Internet Speed Test\n\nTest ID: "+last.id+"\nDownload: "+last.download.toFixed(1)+" Mbps\nUpload: "+last.upload.toFixed(1)+" Mbps\nPing: "+last.ping.toFixed(1)+" ms\nJitter: "+last.jitter.toFixed(1)+" ms\nQuality: "+last.quality+"/100\n\nISP: "+last.isp+"\nLocation: "+last.location;
+  const text = "Fasqoo Internet Speed Test\n\nTest ID: "+last.id+"\nDownload: "+last.download.toFixed(1)+" Mbps\nUpload: "+last.upload.toFixed(1)+" Mbps\nPing: "+last.ping.toFixed(1)+" ms\nJitter: "+last.jitter.toFixed(1)+" ms\nPacket Loss: "+(last.packetLoss||0).toFixed(1)+" %\nBufferbloat: "+(last.bufferbloat!==null?Math.round(last.bufferbloat)+" ms":"n/a")+"\nQuality: "+last.quality+"/100\n\nISP: "+last.isp+"\nLocation: "+last.location;
   try{ await navigator.clipboard.writeText(text); $("copy").textContent = t.copied; setTimeout(()=>$("copy").textContent = t.copy,1500); }
   catch(e){ alert(text); }
 });
@@ -1567,7 +1816,7 @@ const staticUiTranslations = {
 function applyLanguage(lang){
   if(!translations[lang]) lang = "en";
   currentLang = lang;
-  const t = { ...translations[lang], ...(extraTranslations[lang] || {}), ...(pageTranslations[lang] || {}), ...(staticUiTranslations[lang] || staticUiTranslations.en) };
+  const t = { ...translations[lang], ...(extraTranslations[lang] || {}), ...(pageTranslations[lang] || {}), ...(staticUiTranslations[lang] || staticUiTranslations.en), ...(metricTranslations[lang] || metricTranslations.en) };
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   document.title = `${t.title || translations[lang].title || "Internet Speed Test"} | Fasqoo`;
@@ -1591,6 +1840,7 @@ function applyLanguage(lang){
   historyLoad();
   applyExtraLanguage(lang);
   if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
+  if(lastBloatMs !== null) displayBufferbloat(lastBloatMs);
 }
 
 const supportedLangs = Object.keys(translations);
