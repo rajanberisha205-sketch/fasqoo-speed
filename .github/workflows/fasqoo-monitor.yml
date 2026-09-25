@@ -1,0 +1,38 @@
+name: Fasqoo 24/7 Monitor
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fasqoo-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run monitor check
+        run: node scripts/monitor.js
+
+      - name: Commit & push history
+        run: |
+          git config user.name  "Fasqoo Monitor"
+          git config user.email "monitor@fasqoo.com"
+          git add history.json
+          git diff --staged --quiet || git commit -m "check $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
