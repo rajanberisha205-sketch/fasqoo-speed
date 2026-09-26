@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https:">
 <title id="seoTitle">Fasqoo Website Status – Real-time Network & Uptime</title>
 <meta name="description" id="seoDesc" content="Measure fasqoo.com reachability, response time, and latency directly in your browser.">
 <meta name="robots" content="index, follow">
@@ -1146,38 +1146,73 @@ body.dark .site-footer{background:rgba(14,17,22,.88)}
     targetEl.value=target;
     startEl.disabled=true;
     reset();
+
+    // 1) PC / browser state
     setStep("Pc","running",d.running,"");
-    if(!navigator.onLine){ setStep("Pc","fail",d.fail,d.offline); startEl.disabled=false; return; }
+    if(!navigator.onLine){
+      setStep("Pc","fail",d.fail,d.offline);
+      startEl.disabled=false;
+      return;
+    }
     setStep("Pc","ok",d.ok,d.online);
 
+    // 2) Router / local gateway
+    // A public HTTPS page cannot reliably probe private HTTP gateways.
+    // We deliberately report this as unverified instead of a false failure.
     setStep("Router","running",d.running,"");
     let routerVerified=false, routerDetail="";
-    const gateways=["http://192.168.0.1/","http://192.168.1.1/","http://192.168.178.1/"];
+    const gateways=["https://192.168.0.1/","https://192.168.1.1/","https://192.168.178.1/"];
     for(const gw of gateways){
       try{
-        const r=await request(gw,{mode:"no-cors"},4500);
-        if(r && r.response){ routerVerified=true; routerDetail=gw.replace(/^https?:\/\//,"").replace(/\/$/,"")+" · "+r.ms+" ms"; break; }
-      }catch(e){ routerDetail=e&&e.message?e.message:"Browser blocked local request"; }
+        const r=await request(gw,{mode:"no-cors"},3000);
+        if(r&&r.response){
+          routerVerified=true;
+          routerDetail=gw.replace(/^https?:\/\//,"").replace(/\/$/,"")+" · "+r.ms+" ms";
+          break;
+        }
+      }catch(e){
+        routerDetail=e&&e.message?e.message:"Browser blocked local request";
+      }
     }
     if(routerVerified) setStep("Router","ok",d.ok,d.routerOk+" "+routerDetail);
     else setStep("Router","warn",d.warn,d.routerUnverified);
 
+    // 3) DNS + Internet reachability
+    // DNS is checked explicitly through DNS-over-HTTPS, then the target itself is reached.
     setStep("Dns","running",d.running,"");
     try{
-      const r=await request(targetUrl(),{mode:"no-cors"},7000);
-      if(r&&r.response){ setStep("Dns","ok",d.ok,d.dnsOk+" · "+r.ms+" ms"); }
-      else setStep("Dns","fail",d.fail,d.dnsFail);
-    }catch(e){ setStep("Dns","fail",d.fail,d.dnsFail); }
+      const dnsName=encodeURIComponent(target);
+      const dns=await request("https://cloudflare-dns.com/dns-query?name="+dnsName+"&type=A",{
+        headers:{"Accept":"application/dns-json"},
+        mode:"cors"
+      },5000);
+      const dnsData=await dns.response.json();
+      const answers=Array.isArray(dnsData.Answer)?dnsData.Answer:[];
+      const addresses=answers.filter(a=>a&&a.type===1&&a.data).map(a=>a.data);
+      if(!addresses.length) throw new Error("DNS resolution returned no A record");
 
+      const targetResult=await request(targetUrl(),{mode:"no-cors"},7000);
+      if(targetResult&&targetResult.response){
+        setStep("Dns","ok",d.ok,d.dnsOk+" · "+addresses.slice(0,2).join(", ")+" · "+targetResult.ms+" ms");
+      }else{
+        setStep("Dns","warn",d.warn,d.dnsOk+" · DNS resolved, but the target response could not be verified.");
+      }
+    }catch(e){
+      setStep("Dns","fail",d.fail,d.dnsFail);
+    }
+
+    // 4) Provider / public IP metadata
     setStep("Provider","running",d.running,"");
     try{
-      const r=await request("https://ipwho.is/",{headers:{"Accept":"application/json"}},7000);
+      const r=await request("https://ipwho.is/",{headers:{"Accept":"application/json"},mode:"cors"},7000);
       const data=await r.response.json();
       if(data && data.success!==false){
         const parts=[data.connection&&data.connection.isp,data.connection&&data.connection.org,data.ip].filter(Boolean);
         setStep("Provider","ok",d.ok,d.providerOk+" · "+(parts.join(" · ")||"—"));
       }else setStep("Provider","warn",d.warn,d.providerUnavailable);
-    }catch(e){ setStep("Provider","warn",d.warn,d.providerUnavailable); }
+    }catch(e){
+      setStep("Provider","warn",d.warn,d.providerUnavailable);
+    }
     startEl.disabled=false;
   }
 
