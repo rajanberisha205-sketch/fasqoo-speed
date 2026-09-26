@@ -980,6 +980,9 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
   .shared-footer .footer-brand{grid-column:auto}
 }
 
+
+/* Live malware database result */
+#malwareStatus{word-break:break-word;}
 </style>
 
 <style id="dark-language-fix">
@@ -1454,325 +1457,338 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 
 <script>
 /* ============================================================
-   FASQOO ANTIVIRUS SCANNER — Single-File Version
+   FASQOO ANTIVIRUS SCANNER — Secure browser-side logic
    ============================================================ */
 'use strict';
 
-/* ---------- DOM-REFS ---------- */
-const els = {
-  // Tabs
-  tabs:          document.querySelectorAll('.tab-btn'),
-  panels:        document.querySelectorAll('.tab-panel'),
+(function () {
+  const $ = id => document.getElementById(id);
+  const qsa = sel => Array.from(document.querySelectorAll(sel));
 
-  // URL-Scanner
-  urlInput:      document.getElementById('urlInput'),
-  scanUrlBtn:    document.getElementById('scanUrlBtn'),
-  urlError:      document.getElementById('urlError'),
-  urlChips:      document.querySelectorAll('.chip[data-url]'),
+  const els = {
+    tabs: qsa('.tab-btn'),
+    panels: qsa('.tab-panel'),
+    urlInput: $('urlInput'),
+    scanUrlBtn: $('scanUrlBtn'),
+    urlError: $('urlError'),
+    urlChips: qsa('.chip[data-url]'),
+    dropZone: $('dropZone'),
+    fileInput: $('fileInput'),
+    fileInfo: $('fileInfo'),
+    fileName: $('fileName'),
+    fileSize: $('fileSize'),
+    hashLoading: $('hashLoading'),
+    hashResult: $('hashResult'),
+    hashValue: $('hashValue'),
+    copyHashBtn: $('copyHashBtn'),
+    copyHashLabel: $('copyHashLabel'),
+    openVtBtn: $('openVtBtn'),
+    fileError: $('fileError')
+  };
 
-  // File-Hash
-  dropZone:      document.getElementById('dropZone'),
-  fileInput:     document.getElementById('fileInput'),
-  fileInfo:      document.getElementById('fileInfo'),
-  fileName:      document.getElementById('fileName'),
-  fileSize:      document.getElementById('fileSize'),
-  hashLoading:   document.getElementById('hashLoading'),
-  hashResult:    document.getElementById('hashResult'),
-  hashValue:     document.getElementById('hashValue'),
-  copyHashBtn:   document.getElementById('copyHashBtn'),
-  copyHashLabel: document.getElementById('copyHashLabel'),
-  openVtBtn:     document.getElementById('openVtBtn'),
-  fileError:     document.getElementById('fileError')
-};
+  const VT_SEARCH = 'https://www.virustotal.com/gui/search/';
+  const VT_FILE = 'https://www.virustotal.com/gui/file/';
+  const MIN_HASH_MS = 650;
+  const MB_ENDPOINT = 'https://mb-api.abuse.ch/api/v1/';
 
-/* ---------- KONSTANTEN ---------- */
-const VT_URL_SEARCH = 'https://www.virustotal.com/gui/search/';
-const VT_URL_FILE   = 'https://www.virustotal.com/gui/file/';
-const MIN_HASH_MS   = 900;
+  /* Optional Fasqoo backend. If configured, it should proxy MalwareBazaar
+     server-side and keep the Auth-Key out of the browser. */
+  const MB_PROXY = typeof window.FASQOO_MALWAREBAZAAR_ENDPOINT === 'string'
+    ? window.FASQOO_MALWAREBAZAAR_ENDPOINT.trim()
+    : '';
 
-/* ============================================================
-   HILFSFUNKTIONEN
-   ============================================================ */
-
-/**
- * Bereinigt eine URL zu einer reinen Domain.
- *   "https://www.Example.com/path?x=1"  →  "example.com"
- */
-function cleanUrl(raw) {
-  let s = String(raw || '').trim().toLowerCase();
-  s = s.replace(/^https?:\/\//, '');
-  s = s.replace(/^www\./, '');
-  s = s.split('/')[0];
-  s = s.split('?')[0];
-  s = s.split('#')[0];
-  s = s.replace(/\.$/, '');
-  return s;
-}
-
-/**
- * Validiert eine Domain.
- */
-function isValidDomain(domain) {
-  if (!domain || domain.length > 253) return false;
-  return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(domain);
-}
-
-/**
- * Formatiert Bytes in lesbare Größe.
- */
-function formatBytes(bytes) {
-  if (bytes === 0) return '0 B';
-  const k = 1024;
-  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
-}
-
-/**
- * Zeigt eine Fehlermeldung.
- */
-function showError(el, message) {
-  if (!el) return;
-  el.textContent = message;
-  el.classList.add('show');
-  clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove('show'), 4500);
-}
-
-/**
- * Blendet eine Fehlermeldung aus.
- */
-function hideError(el) {
-  if (!el) return;
-  el.classList.remove('show');
-  clearTimeout(el._t);
-}
-
-/**
- * Öffnet eine URL in einem neuen Tab.
- */
-function openInNewTab(url) {
-  window.open(url, '_blank', 'noopener,noreferrer');
-}
-
-/**
- * Echter SHA-256-Hash via Web Crypto API.
- */
-async function computeSHA256(file) {
-  const buffer = await file.arrayBuffer();
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-/**
- * Erzwingt eine Mindestdauer für eine Promise (für Ladeanimation).
- */
-function atLeast(ms, promise) {
-  const start = Date.now();
-  return promise.then(result => {
-    const elapsed = Date.now() - start;
-    const remaining = Math.max(0, ms - elapsed);
-    return new Promise(resolve => setTimeout(() => resolve(result), remaining));
-  });
-}
-
-/* ============================================================
-   TAB-SYSTEM
-   ============================================================ */
-function switchTab(name) {
-  els.tabs.forEach(tab => {
-    const isActive = tab.dataset.tab === name;
-    tab.classList.toggle('active', isActive);
-    tab.setAttribute('aria-selected', String(isActive));
-  });
-  els.panels.forEach(panel => {
-    panel.classList.toggle('active', panel.dataset.panel === name);
-  });
-}
-
-els.tabs.forEach(tab => {
-  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-});
-
-/* ============================================================
-   URL-SCANNER
-   ============================================================ */
-function scanUrl() {
-  hideError(els.urlError);
-
-  const raw = els.urlInput.value;
-  const domain = cleanUrl(raw);
-
-  if (!domain) {
-    showError(els.urlError, 'Bitte gib eine Website-URL ein.');
-    els.urlInput.focus();
-    return;
+  function cleanUrl(raw) {
+    let s = String(raw || '').trim().toLowerCase();
+    s = s.replace(/^https?:\/\//i, '');
+    s = s.replace(/^www\./i, '');
+    s = s.split('/')[0].split('?')[0].split('#')[0].replace(/\.$/, '');
+    return s;
   }
 
-  if (!isValidDomain(domain)) {
-    showError(els.urlError, 'Ungültige Domain. Beispiel: example.com');
-    els.urlInput.focus();
-    return;
+  function isValidDomain(domain) {
+    if (!domain || domain.length > 253) return false;
+    return /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(domain);
   }
 
-  const originalHTML = els.scanUrlBtn.innerHTML;
-  els.scanUrlBtn.disabled = true;
-  els.scanUrlBtn.innerHTML = `
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-         stroke-linecap="round" stroke-linejoin="round"
-         style="animation:spin .8s linear infinite" aria-hidden="true">
-      <path d="M21 12a9 9 0 1 1-6.2-8.5"/>
-    </svg>
-    Öffne VirusTotal…
-  `;
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes < 0) return '—';
+    if (bytes === 0) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    return (bytes / Math.pow(1024, i)).toFixed(i === 0 ? 0 : 2).replace(/\.00$/, '') + ' ' + units[i];
+  }
 
-  setTimeout(() => {
-    openInNewTab(VT_URL_SEARCH + encodeURIComponent(domain));
+  function showError(el, message) {
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => el.classList.remove('show'), 5000);
+  }
+
+  function hideError(el) {
+    if (!el) return;
+    el.classList.remove('show');
+    clearTimeout(el._timer);
+  }
+
+  function openInNewTab(url) {
+    if (!url) return null;
+    try { return window.open(url, '_blank', 'noopener,noreferrer'); }
+    catch (_) { return null; }
+  }
+
+  function atLeast(ms, promise) {
+    const start = Date.now();
+    return Promise.resolve(promise).then(result => {
+      const remaining = Math.max(0, ms - (Date.now() - start));
+      return new Promise(resolve => setTimeout(() => resolve(result), remaining));
+    });
+  }
+
+  async function computeSHA256(file) {
+    if (!file || !file.arrayBuffer) throw new Error('FILE_READ_UNAVAILABLE');
+    if (!window.crypto || !window.crypto.subtle) throw new Error('WEB_CRYPTO_UNAVAILABLE');
+    const buffer = await file.arrayBuffer();
+    const digest = await window.crypto.subtle.digest('SHA-256', buffer);
+    return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function switchTab(name) {
+    els.tabs.forEach(tab => {
+      const active = tab.dataset.tab === name;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    els.panels.forEach(panel => panel.classList.toggle('active', panel.dataset.panel === name));
+  }
+
+  /* ---------- URL SCANNER ---------- */
+  function scanUrl() {
+    if (!els.urlInput || !els.scanUrlBtn) return;
+    hideError(els.urlError);
+    const domain = cleanUrl(els.urlInput.value);
+
+    if (!domain) {
+      showError(els.urlError, 'Bitte gib eine Website-URL ein.');
+      try { els.urlInput.focus(); } catch (_) {}
+      return;
+    }
+    if (!isValidDomain(domain)) {
+      showError(els.urlError, 'Ungültige Domain. Beispiel: example.com');
+      try { els.urlInput.focus(); } catch (_) {}
+      return;
+    }
+
+    /* VirusTotal officially supports GUI search for domains/URLs. */
+    const target = VT_SEARCH + encodeURIComponent(domain);
+    const originalHTML = els.scanUrlBtn.innerHTML;
+    els.scanUrlBtn.disabled = true;
+    els.scanUrlBtn.innerHTML = '<span style="animation:spin .8s linear infinite;display:inline-block">↻</span> Öffne VirusTotal…';
+
+    const popup = openInNewTab(target);
+    if (!popup) {
+      showError(els.urlError, 'Der neue Tab konnte nicht geöffnet werden. Bitte erlaube Pop-ups für Fasqoo.');
+    }
     setTimeout(() => {
       els.scanUrlBtn.disabled = false;
       els.scanUrlBtn.innerHTML = originalHTML;
-    }, 1200);
-  }, 280);
-}
-
-els.scanUrlBtn.addEventListener('click', scanUrl);
-
-els.urlInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    scanUrl();
+    }, 700);
   }
-});
 
-els.urlInput.addEventListener('input', () => hideError(els.urlError));
+  /* ---------- MALWAREBAZAAR ---------- */
+  function createMalwareStatus() {
+    if (!els.hashResult) return null;
+    let box = $('malwareStatus');
+    if (box) return box;
+    box = document.createElement('div');
+    box.id = 'malwareStatus';
+    box.setAttribute('role', 'status');
+    box.setAttribute('aria-live', 'polite');
+    box.style.cssText = 'margin-top:12px;padding:12px 14px;border-radius:10px;font-size:12.5px;font-weight:700;line-height:1.5;border:1px solid #232b3d;background:#0e131f;color:#a8b0be;';
+    els.hashResult.appendChild(box);
+    return box;
+  }
 
-els.urlChips.forEach(chip => {
-  chip.addEventListener('click', () => {
-    els.urlInput.value = chip.dataset.url;
+  function setMalwareStatus(type, text) {
+    const box = createMalwareStatus();
+    if (!box) return;
+    const styles = {
+      loading: ['rgba(59,130,246,.08)', 'rgba(59,130,246,.25)', '#60a5fa'],
+      clean: ['rgba(16,185,129,.08)', 'rgba(16,185,129,.28)', '#34d399'],
+      threat: ['rgba(239,68,68,.10)', 'rgba(239,68,68,.35)', '#f87171'],
+      unknown: ['rgba(245,158,11,.08)', 'rgba(245,158,11,.28)', '#fbbf24']
+    };
+    const s = styles[type] || styles.unknown;
+    box.style.background = s[0];
+    box.style.borderColor = s[1];
+    box.style.color = s[2];
+    box.textContent = text;
+  }
+
+  async function malwareBazaarLookup(hash) {
+    setMalwareStatus('loading', 'Live-Abgleich mit MalwareBazaar…');
+
+    /* A browser must not contain an abuse.ch Auth-Key. Use a Fasqoo proxy
+       when available. Direct browser access is attempted only when no proxy
+       is configured; current MalwareBazaar API may reject it without Auth-Key. */
+    const endpoint = MB_PROXY || MB_ENDPOINT;
+    const body = new FormData();
+    body.append('query', 'get_info');
+    body.append('hash', hash);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body,
+        credentials: MB_PROXY ? 'same-origin' : 'omit',
+        cache: 'no-store',
+        headers: MB_PROXY ? { 'Accept': 'application/json' } : undefined
+      });
+      if (!response.ok) throw new Error('HTTP_' + response.status);
+      const data = await response.json();
+      const status = String(data && data.query_status || '').toLowerCase();
+
+      if (status === 'ok') {
+        setMalwareStatus('threat', '⚠️ Bedrohung erkannt! Diese Datei ist als bekannte Schadsoftware registriert.');
+        return { status: 'threat', data };
+      }
+      if (status === 'unknown_hash') {
+        setMalwareStatus('clean', '✅ Unauffällig. Dieser Fingerabdruck ist in MalwareBazaar nicht als bekannte Schadsoftware registriert.');
+        return { status: 'clean', data };
+      }
+      throw new Error(status || 'UNKNOWN_API_RESPONSE');
+    } catch (err) {
+      /* Never claim a file is clean when the database could not be reached. */
+      setMalwareStatus('unknown', 'ℹ️ Live-Abgleich derzeit nicht verfügbar. Der SHA-256-Hash wurde lokal berechnet; bitte für einen Tiefenscan VirusTotal öffnen.');
+      return { status: 'unavailable', error: err };
+    }
+  }
+
+  /* ---------- FILE SCANNER ---------- */
+  let activeFileToken = 0;
+
+  async function handleFile(file) {
+    if (!file || !els.fileInfo) return;
+    const token = ++activeFileToken;
+    hideError(els.fileError);
+    els.fileInfo.classList.remove('hidden');
+    els.fileName.textContent = file.name || 'Unbenannte Datei';
+    els.fileSize.textContent = formatBytes(file.size) + '  ·  ' + (file.type || 'unbekannter Typ');
+    els.hashResult.classList.remove('show');
+    els.hashLoading.classList.add('show');
+    els.hashValue.textContent = '—';
+    els.copyHashLabel.textContent = 'Kopieren';
+    els.copyHashBtn.classList.remove('success');
+    els.openVtBtn.dataset.hash = '';
+    const oldStatus = $('malwareStatus');
+    if (oldStatus) oldStatus.remove();
+
+    try {
+      const hash = await atLeast(MIN_HASH_MS, computeSHA256(file));
+      if (token !== activeFileToken) return;
+      els.hashLoading.classList.remove('show');
+      els.hashValue.textContent = hash;
+      els.hashResult.classList.add('show');
+      els.openVtBtn.dataset.hash = hash;
+      void malwareBazaarLookup(hash);
+    } catch (_) {
+      if (token !== activeFileToken) return;
+      els.hashLoading.classList.remove('show');
+      showError(els.fileError, 'Datei konnte nicht gelesen oder lokal gehasht werden.');
+    }
+  }
+
+  /* ---------- SAFE EVENT BINDING ---------- */
+  els.tabs.forEach(tab => tab && tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+  if (els.scanUrlBtn) els.scanUrlBtn.addEventListener('click', scanUrl);
+  if (els.urlInput) {
+    els.urlInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); scanUrl(); }
+    });
+    els.urlInput.addEventListener('input', () => hideError(els.urlError));
+  }
+  els.urlChips.forEach(chip => chip.addEventListener('click', () => {
+    if (!els.urlInput) return;
+    els.urlInput.value = chip.dataset.url || '';
     hideError(els.urlError);
-    els.urlInput.focus();
-  });
-});
+    try { els.urlInput.focus(); } catch (_) {}
+  }));
 
-/* ============================================================
-   FILE-HASH-SCANNER
-   ============================================================ */
-async function handleFile(file) {
-  if (!file) return;
-  hideError(els.fileError);
+  if (els.dropZone && els.fileInput) {
+    els.dropZone.addEventListener('click', () => els.fileInput.click());
+    els.dropZone.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); els.fileInput.click(); }
+    });
+    els.fileInput.addEventListener('change', e => {
+      const file = e.target && e.target.files ? e.target.files[0] : null;
+      if (file) void handleFile(file);
+      e.target.value = '';
+    });
 
-  els.fileInfo.classList.remove('hidden');
-  els.fileName.textContent = file.name || 'Unbenannte Datei';
-  els.fileSize.textContent = formatBytes(file.size) + '  ·  ' + (file.type || 'unbekannter Typ');
-  els.hashResult.classList.remove('show');
-  els.hashLoading.classList.add('show');
-  els.hashValue.textContent = '—';
-  els.copyHashLabel.textContent = 'Kopieren';
-  els.copyHashBtn.classList.remove('success');
-  els.openVtBtn.dataset.hash = '';
-
-  try {
-    const hash = await atLeast(MIN_HASH_MS, computeSHA256(file));
-
-    els.hashLoading.classList.remove('show');
-    els.hashValue.textContent = hash;
-    els.hashResult.classList.add('show');
-    els.openVtBtn.dataset.hash = hash;
-  } catch (err) {
-    console.error('Hash-Berechnung fehlgeschlagen:', err);
-    els.hashLoading.classList.remove('show');
-    showError(els.fileError, 'Datei konnte nicht gelesen werden.');
-  }
-}
-
-/* Drop-Zone Klick */
-els.dropZone.addEventListener('click', () => els.fileInput.click());
-
-els.dropZone.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    els.fileInput.click();
-  }
-});
-
-els.fileInput.addEventListener('change', e => {
-  const file = e.target.files && e.target.files[0];
-  if (file) handleFile(file);
-  e.target.value = '';
-});
-
-/* Drag & Drop */
-['dragenter', 'dragover'].forEach(evtName => {
-  els.dropZone.addEventListener(evtName, e => {
-    e.preventDefault();
-    e.stopPropagation();
-    els.dropZone.classList.add('drag');
-  });
-});
-
-['dragleave', 'drop'].forEach(evtName => {
-  els.dropZone.addEventListener(evtName, e => {
-    e.preventDefault();
-    e.stopPropagation();
-    els.dropZone.classList.remove('drag');
-  });
-});
-
-els.dropZone.addEventListener('drop', e => {
-  const dt = e.dataTransfer;
-  if (!dt || !dt.files || !dt.files.length) return;
-  handleFile(dt.files[0]);
-});
-
-/* Verhindere, dass Datei-Drops außerhalb der Zone navigieren */
-['dragover', 'drop'].forEach(evtName => {
-  window.addEventListener(evtName, e => {
-    if (!els.dropZone.contains(e.target)) {
+    ['dragenter', 'dragover'].forEach(name => els.dropZone.addEventListener(name, e => {
       e.preventDefault();
+      e.stopPropagation();
+      els.dropZone.classList.add('drag');
+    }));
+    ['dragleave', 'drop'].forEach(name => els.dropZone.addEventListener(name, e => {
+      e.preventDefault();
+      e.stopPropagation();
+      els.dropZone.classList.remove('drag');
+    }));
+    els.dropZone.addEventListener('drop', e => {
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (files && files.length) void handleFile(files[0]);
+    });
+  }
+
+  ['dragover', 'drop'].forEach(name => window.addEventListener(name, e => {
+    if (els.dropZone && !els.dropZone.contains(e.target)) e.preventDefault();
+  }));
+
+  if (els.copyHashBtn) els.copyHashBtn.addEventListener('click', async () => {
+    const hash = els.hashValue ? els.hashValue.textContent.trim() : '';
+    if (!/^[a-f0-9]{64}$/i.test(hash)) return;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(hash);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = hash;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      els.copyHashLabel.textContent = 'Kopiert!';
+      els.copyHashBtn.classList.add('success');
+      setTimeout(() => {
+        els.copyHashLabel.textContent = 'Kopieren';
+        els.copyHashBtn.classList.remove('success');
+      }, 1600);
+    } catch (_) {
+      const range = document.createRange();
+      range.selectNodeContents(els.hashValue);
+      const selection = window.getSelection();
+      if (selection) { selection.removeAllRanges(); selection.addRange(range); }
     }
   });
-});
 
-/* Hash kopieren */
-els.copyHashBtn.addEventListener('click', async () => {
-  const hash = els.hashValue.textContent;
-  if (!hash || hash === '—') return;
+  if (els.openVtBtn) els.openVtBtn.addEventListener('click', () => {
+    const hash = String(els.openVtBtn.dataset.hash || '');
+    if (!/^[a-f0-9]{64}$/i.test(hash)) return;
+    openInNewTab(VT_FILE + encodeURIComponent(hash) + '/detection');
+  });
 
-  try {
-    await navigator.clipboard.writeText(hash);
-    els.copyHashLabel.textContent = 'Kopiert!';
-    els.copyHashBtn.classList.add('success');
-    setTimeout(() => {
-      els.copyHashLabel.textContent = 'Kopieren';
-      els.copyHashBtn.classList.remove('success');
-    }, 1600);
-  } catch (err) {
-    /* Fallback: Text manuell markieren */
-    const range = document.createRange();
-    range.selectNodeContents(els.hashValue);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-});
-
-/* Hash in VirusTotal öffnen */
-els.openVtBtn.addEventListener('click', () => {
-  const hash = els.openVtBtn.dataset.hash;
-  if (!hash) return;
-  openInNewTab(VT_URL_FILE + encodeURIComponent(hash));
-});
-
-/* ============================================================
-   INITIALISIERUNG
-   ============================================================ */
-(function init() {
+  /* No scan is started automatically. This keeps GitHub Actions/headless
+     page loads free of network side effects and user-interaction errors. */
   switchTab('url');
-  // Auto-Focus auf URL-Feld nach kurzer Verzögerung
-  setTimeout(() => {
-    if (window.innerWidth > 640) els.urlInput.focus();
-  }, 300);
+  if (window.innerWidth > 640 && els.urlInput) {
+    setTimeout(() => { try { els.urlInput.focus(); } catch (_) {} }, 300);
+  }
 })();
 </script>
 
