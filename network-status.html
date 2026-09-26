@@ -473,6 +473,30 @@ body.dark .site-footer{background:rgba(14,17,22,.88)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
+
+/* ============================================================
+   CONNECTION DIAGNOSTIC — isolated, optional, workflow-safe
+   ============================================================ */
+.diagnostic-card{margin:0 0 28px;border:1px solid var(--line);background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.diagnostic-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+.diagnostic-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--primary);margin-bottom:6px}
+.diagnostic-title{margin:0;font-size:25px;line-height:1.15;color:var(--text)}
+.diagnostic-sub{margin:7px 0 0;color:var(--muted);line-height:1.6}
+.diagnostic-target{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.diagnostic-target input{flex:1 1 300px;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--soft);color:var(--text);font:inherit}
+.diagnostic-target button{border:0;border-radius:12px;padding:12px 18px;background:var(--primary);color:#fff;font-weight:800;cursor:pointer}
+.diagnostic-target button:disabled{opacity:.55;cursor:wait}
+.diagnostic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.diagnostic-step{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--soft);min-height:140px}
+.diagnostic-step .step-icon{font-size:24px;margin-bottom:9px}.diagnostic-step h3{margin:0 0 6px;font-size:15px;color:var(--text)}
+.diagnostic-status{font-size:13px;font-weight:800;color:var(--muted)}.diagnostic-detail{margin-top:7px;font-size:12px;line-height:1.5;color:var(--muted)}
+.diagnostic-step.running{outline:2px solid color-mix(in srgb,var(--primary) 25%,transparent)}
+.diagnostic-step.ok .diagnostic-status{color:var(--green-2,#16a36a)}
+.diagnostic-step.warn .diagnostic-status{color:#b7791f}.diagnostic-step.fail .diagnostic-status{color:#dc2626}
+.diagnostic-note{margin-top:14px;padding:11px 13px;border-radius:11px;background:var(--soft);color:var(--muted);font-size:12px;line-height:1.55}
+@media(max-width:800px){.diagnostic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.diagnostic-head{display:block}}
+@media(max-width:520px){.diagnostic-grid{grid-template-columns:1fr}.diagnostic-card{padding:16px}.diagnostic-title{font-size:21px}}
+
 </style>
 </head>
 <body>
@@ -934,6 +958,31 @@ body.dark .site-footer{background:rgba(14,17,22,.88)}
   </div>
 </section>
 
+<!-- ============================================================
+     CONNECTION DIAGNOSTIC
+     Optional for visitors; never required by server monitoring/history.
+     ============================================================ -->
+<section class="diagnostic-card" id="connectionDiagnostic" aria-labelledby="diagnosticTitle">
+  <div class="diagnostic-head">
+    <div>
+      <div class="diagnostic-kicker" data-diag-i18n="kicker">CONNECTION DIAGNOSTIC</div>
+      <h2 class="diagnostic-title" id="diagnosticTitle" data-diag-i18n="title">Internet Error Diagnosis</h2>
+      <p class="diagnostic-sub" data-diag-i18n="sub">Check your connection step by step: PC → Router → DNS → Provider.</p>
+    </div>
+  </div>
+  <div class="diagnostic-target">
+    <input id="diagnosticTarget" type="text" inputmode="url" autocomplete="url" spellcheck="false" value="fasqoo.com" data-diag-i18n-placeholder="targetPlaceholder" aria-label="Test target">
+    <button id="diagnosticStart" type="button" data-diag-i18n="start">Start diagnosis</button>
+  </div>
+  <div class="diagnostic-grid" aria-live="polite">
+    <article class="diagnostic-step" id="diagStepPc"><div class="step-icon">💻</div><h3 data-diag-i18n="pc">PC / Browser</h3><div class="diagnostic-status" id="diagPcStatus" data-diag-i18n="waiting">Waiting</div><div class="diagnostic-detail" id="diagPcDetail">—</div></article>
+    <article class="diagnostic-step" id="diagStepRouter"><div class="step-icon">📡</div><h3 data-diag-i18n="router">Router</h3><div class="diagnostic-status" id="diagRouterStatus" data-diag-i18n="waiting">Waiting</div><div class="diagnostic-detail" id="diagRouterDetail">—</div></article>
+    <article class="diagnostic-step" id="diagStepDns"><div class="step-icon">🌐</div><h3 data-diag-i18n="dns">DNS / Internet</h3><div class="diagnostic-status" id="diagDnsStatus" data-diag-i18n="waiting">Waiting</div><div class="diagnostic-detail" id="diagDnsDetail">—</div></article>
+    <article class="diagnostic-step" id="diagStepProvider"><div class="step-icon">🏢</div><h3 data-diag-i18n="provider">Provider</h3><div class="diagnostic-status" id="diagProviderStatus" data-diag-i18n="waiting">Waiting</div><div class="diagnostic-detail" id="diagProviderDetail">—</div></article>
+  </div>
+  <div class="diagnostic-note" data-diag-i18n="note">Router checks are browser-limited. A blocked local-network request is reported as “unverified” rather than incorrectly declaring your router offline.</div>
+</section>
+
 <div class="section-title">
   <h2 data-i18n="responseHistory">Server History</h2>
   <p data-i18n="responseHistoryDesc">24/7 measurements from GitHub servers, loaded from history.json.</p>
@@ -1042,6 +1091,113 @@ body.dark .site-footer{background:rgba(14,17,22,.88)}
     </div>
   </div>
 </footer>
+
+
+<script>
+/* ============================================================
+   OPTIONAL CONNECTION DIAGNOSTIC
+   IMPORTANT: This module never gates history.json, server monitoring,
+   existing measurements, reports, or exports.
+   ============================================================ */
+(function(){
+  "use strict";
+  const DIAG_TRANSLATIONS={
+    en:{kicker:"CONNECTION DIAGNOSTIC",title:"Internet Error Diagnosis",sub:"Check your connection step by step: PC → Router → DNS → Provider.",targetPlaceholder:"Test target (default: fasqoo.com)",start:"Start diagnosis",pc:"PC / Browser",router:"Router",dns:"DNS / Internet",provider:"Provider",waiting:"Waiting",running:"Checking…",ok:"OK",warn:"Unverified",fail:"Problem",offline:"Browser reports offline.",online:"Browser is online.",routerOk:"Local gateway responded.",routerUnverified:"Browser security prevented a reliable local-router check.",routerNone:"No local gateway could be verified from this browser.",dnsOk:"Target is reachable; DNS/network path is working.",dnsFail:"Target request failed or could not be completed.",providerOk:"Provider detected",providerUnavailable:"Provider lookup unavailable.",note:"Router checks are browser-limited. A blocked local-network request is reported as “unverified” rather than incorrectly declaring your router offline.",defaultTarget:"fasqoo.com"},
+    de:{kicker:"VERBINDUNGSDIAGNOSE",title:"Internet-Fehlerdiagnose",sub:"Prüfe deine Verbindung Schritt für Schritt: PC → Router → DNS → Provider.",targetPlaceholder:"Testziel (Standard: fasqoo.com)",start:"Diagnose starten",pc:"PC / Browser",router:"Router",dns:"DNS / Internet",provider:"Provider",waiting:"Warten",running:"Prüfung…",ok:"OK",warn:"Nicht verifiziert",fail:"Problem",offline:"Browser meldet offline.",online:"Browser ist online.",routerOk:"Lokaler Gateway hat geantwortet.",routerUnverified:"Die Browsersicherheit verhindert eine zuverlässige Router-Prüfung.",routerNone:"Kein lokaler Gateway konnte über diesen Browser verifiziert werden.",dnsOk:"Ziel erreichbar; DNS/Netzwerkpfad funktioniert.",dnsFail:"Zielanfrage fehlgeschlagen oder nicht abgeschlossen.",providerOk:"Provider erkannt",providerUnavailable:"Provider-Abfrage nicht verfügbar.",note:"Router-Prüfungen sind im Browser eingeschränkt. Eine blockierte lokale Anfrage wird als „nicht verifiziert“ gemeldet und nicht fälschlich als Router-Ausfall bewertet.",defaultTarget:"fasqoo.com"},
+    fr:{kicker:"DIAGNOSTIC DE CONNEXION",title:"Diagnostic des problèmes Internet",sub:"Vérifiez votre connexion étape par étape : PC → Routeur → DNS → Fournisseur.",targetPlaceholder:"Cible (par défaut : fasqoo.com)",start:"Lancer le diagnostic",pc:"PC / Navigateur",router:"Routeur",dns:"DNS / Internet",provider:"Fournisseur",waiting:"En attente",running:"Vérification…",ok:"OK",warn:"Non vérifié",fail:"Problème",offline:"Le navigateur indique hors ligne.",online:"Le navigateur est en ligne.",routerOk:"La passerelle locale a répondu.",routerUnverified:"La sécurité du navigateur empêche une vérification fiable du routeur.",routerNone:"Aucune passerelle locale n’a pu être vérifiée.",dnsOk:"La cible est accessible ; DNS/réseau fonctionne.",dnsFail:"La requête cible a échoué ou n’a pas pu aboutir.",providerOk:"Fournisseur détecté",providerUnavailable:"Recherche du fournisseur indisponible.",note:"Les vérifications du routeur sont limitées par le navigateur. Une requête locale bloquée est signalée comme non vérifiée.",defaultTarget:"fasqoo.com"},
+    es:{kicker:"DIAGNÓSTICO DE CONEXIÓN",title:"Diagnóstico de problemas de Internet",sub:"Comprueba tu conexión paso a paso: PC → Router → DNS → Proveedor.",targetPlaceholder:"Destino (predeterminado: fasqoo.com)",start:"Iniciar diagnóstico",pc:"PC / Navegador",router:"Router",dns:"DNS / Internet",provider:"Proveedor",waiting:"Esperando",running:"Comprobando…",ok:"OK",warn:"No verificado",fail:"Problema",offline:"El navegador indica que estás sin conexión.",online:"El navegador está conectado.",routerOk:"El gateway local respondió.",routerUnverified:"La seguridad del navegador impide verificar el router de forma fiable.",routerNone:"No se pudo verificar ningún gateway local.",dnsOk:"El destino responde; DNS/ruta de red funciona.",dnsFail:"La solicitud al destino falló o no pudo completarse.",providerOk:"Proveedor detectado",providerUnavailable:"Consulta del proveedor no disponible.",note:"Las comprobaciones del router están limitadas por el navegador. Una solicitud local bloqueada se muestra como no verificada.",defaultTarget:"fasqoo.com"},
+    it:{kicker:"DIAGNOSTICA CONNESSIONE",title:"Diagnosi dei problemi Internet",sub:"Controlla la connessione passo dopo passo: PC → Router → DNS → Provider.",targetPlaceholder:"Destinazione (predefinita: fasqoo.com)",start:"Avvia diagnosi",pc:"PC / Browser",router:"Router",dns:"DNS / Internet",provider:"Provider",waiting:"In attesa",running:"Controllo…",ok:"OK",warn:"Non verificato",fail:"Problema",offline:"Il browser segnala offline.",online:"Il browser è online.",routerOk:"Il gateway locale ha risposto.",routerUnverified:"La sicurezza del browser impedisce una verifica affidabile del router.",routerNone:"Nessun gateway locale verificabile.",dnsOk:"La destinazione è raggiungibile; DNS/rete funzionano.",dnsFail:"La richiesta alla destinazione è fallita.",providerOk:"Provider rilevato",providerUnavailable:"Ricerca provider non disponibile.",note:"I controlli del router sono limitati dal browser. Una richiesta locale bloccata viene indicata come non verificata.",defaultTarget:"fasqoo.com"},
+    pt:{kicker:"DIAGNÓSTICO DE CONEXÃO",title:"Diagnóstico de problemas de Internet",sub:"Verifique a conexão passo a passo: PC → Roteador → DNS → Provedor.",targetPlaceholder:"Destino (padrão: fasqoo.com)",start:"Iniciar diagnóstico",pc:"PC / Navegador",router:"Roteador",dns:"DNS / Internet",provider:"Provedor",waiting:"Aguardando",running:"Verificando…",ok:"OK",warn:"Não verificado",fail:"Problema",offline:"O navegador informa offline.",online:"O navegador está online.",routerOk:"O gateway local respondeu.",routerUnverified:"A segurança do navegador impediu uma verificação confiável do roteador.",routerNone:"Nenhum gateway local pôde ser verificado.",dnsOk:"O destino está acessível; DNS/rede funcionando.",dnsFail:"A solicitação ao destino falhou.",providerOk:"Provedor detectado",providerUnavailable:"Consulta do provedor indisponível.",note:"As verificações do roteador são limitadas pelo navegador. Uma solicitação local bloqueada aparece como não verificada.",defaultTarget:"fasqoo.com"},
+    nl:{kicker:"VERBINDINGSDIAGNOSE",title:"Internet-probleemdiagnose",sub:"Controleer je verbinding stap voor stap: pc → router → DNS → provider.",targetPlaceholder:"Doel (standaard: fasqoo.com)",start:"Diagnose starten",pc:"Pc / Browser",router:"Router",dns:"DNS / Internet",provider:"Provider",waiting:"Wachten",running:"Controleren…",ok:"OK",warn:"Niet geverifieerd",fail:"Probleem",offline:"Browser meldt offline.",online:"Browser is online.",routerOk:"Lokale gateway reageerde.",routerUnverified:"Browserbeveiliging verhindert een betrouwbare routercontrole.",routerNone:"Geen lokale gateway kon worden geverifieerd.",dnsOk:"Doel bereikbaar; DNS/netwerk werkt.",dnsFail:"Doelverzoek mislukt.",providerOk:"Provider gevonden",providerUnavailable:"Providercontrole niet beschikbaar.",note:"Routercontroles zijn beperkt door de browser. Een geblokkeerd lokaal verzoek wordt als niet geverifieerd gemeld.",defaultTarget:"fasqoo.com"},
+    tr:{kicker:"BAĞLANTI TANILAMA",title:"İnternet Hata Tanılama",sub:"Bağlantınızı adım adım kontrol edin: PC → Yönlendirici → DNS → Sağlayıcı.",targetPlaceholder:"Hedef (varsayılan: fasqoo.com)",start:"Tanılamayı başlat",pc:"PC / Tarayıcı",router:"Yönlendirici",dns:"DNS / İnternet",provider:"Sağlayıcı",waiting:"Bekliyor",running:"Kontrol ediliyor…",ok:"TAMAM",warn:"Doğrulanamadı",fail:"Sorun",offline:"Tarayıcı çevrimdışı bildiriyor.",online:"Tarayıcı çevrimiçi.",routerOk:"Yerel ağ geçidi yanıt verdi.",routerUnverified:"Tarayıcı güvenliği yönlendiricinin güvenilir şekilde kontrolünü engelledi.",routerNone:"Yerel ağ geçidi doğrulanamadı.",dnsOk:"Hedef erişilebilir; DNS/ağ yolu çalışıyor.",dnsFail:"Hedef isteği başarısız oldu.",providerOk:"Sağlayıcı algılandı",providerUnavailable:"Sağlayıcı sorgusu kullanılamıyor.",note:"Yönlendirici kontrolleri tarayıcı tarafından sınırlıdır. Engellenen yerel istek doğrulanamadı olarak gösterilir.",defaultTarget:"fasqoo.com"},
+    sq:{kicker:"DIAGNOSTIKIMI I LIDHJES",title:"Diagnostikimi i problemeve të internetit",sub:"Kontrollo lidhjen hap pas hapi: PC → Router → DNS → Ofruesi.",targetPlaceholder:"Destinacioni (parazgjedhur: fasqoo.com)",start:"Nis diagnostikimin",pc:"PC / Shfletuesi",router:"Router",dns:"DNS / Internet",provider:"Ofruesi",waiting:"Në pritje",running:"Duke kontrolluar…",ok:"OK",warn:"I pa verifikuar",fail:"Problem",offline:"Shfletuesi raporton offline.",online:"Shfletuesi është online.",routerOk:"Gateway lokal u përgjigj.",routerUnverified:"Siguria e shfletuesit pengoi një kontroll të besueshëm të routerit.",routerNone:"Nuk u verifikua asnjë gateway lokal.",dnsOk:"Destinacioni është i arritshëm; DNS/rrjeti funksionon.",dnsFail:"Kërkesa për destinacionin dështoi.",providerOk:"Ofruesi u zbulua",providerUnavailable:"Kontrolli i ofruesit nuk është i disponueshëm.",note:"Kontrollet e routerit kufizohen nga shfletuesi. Një kërkesë lokale e bllokuar shfaqet si e pa verifikuar.",defaultTarget:"fasqoo.com"},
+    ar:{kicker:"تشخيص الاتصال",title:"تشخيص مشاكل الإنترنت",sub:"افحص اتصالك خطوة بخطوة: الكمبيوتر ← الموجّه ← DNS ← مزود الخدمة.",targetPlaceholder:"الهدف (الافتراضي: fasqoo.com)",start:"بدء التشخيص",pc:"الكمبيوتر / المتصفح",router:"الموجّه",dns:"DNS / الإنترنت",provider:"مزود الخدمة",waiting:"في الانتظار",running:"جارٍ الفحص…",ok:"جيد",warn:"غير متحقق",fail:"مشكلة",offline:"المتصفح يبلّغ بعدم الاتصال.",online:"المتصفح متصل.",routerOk:"استجاب البوابة المحلية.",routerUnverified:"منع أمان المتصفح التحقق الموثوق من الموجّه.",routerNone:"تعذر التحقق من أي بوابة محلية.",dnsOk:"الهدف متاح؛ يعمل DNS ومسار الشبكة.",dnsFail:"فشل طلب الهدف أو تعذر إكماله.",providerOk:"تم اكتشاف مزود الخدمة",providerUnavailable:"تعذر الاستعلام عن مزود الخدمة.",note:"فحوصات الموجّه محدودة بسبب المتصفح. يتم عرض الطلب المحلي المحظور كغير متحقق بدلاً من اعتباره عطلاً.",defaultTarget:"fasqoo.com"}
+  };
+  const supported=["en","de","fr","es","it","pt","nl","tr","sq","ar"];
+  const dt=()=>DIAG_TRANSLATIONS[supported.includes(document.documentElement.lang)?document.documentElement.lang:"en"]||DIAG_TRANSLATIONS.en;
+  const byId=id=>document.getElementById(id);
+  const targetEl=byId("diagnosticTarget");
+  const startEl=byId("diagnosticStart");
+  if(!targetEl||!startEl) return;
+
+  function getTarget(){
+    const raw=String(targetEl.value||"").trim();
+    if(!raw) return "fasqoo.com";
+    return raw.replace(/^https?:\/\//i,"").split(/[/?#]/)[0].trim()||"fasqoo.com";
+  }
+  function targetUrl(){ return "https://"+getTarget()+"/"; }
+  function setStep(name,state,status,detail){
+    const card=byId("diagStep"+name), st=byId("diag"+name+"Status"), de=byId("diag"+name+"Detail");
+    if(card){ card.classList.remove("running","ok","warn","fail"); if(state) card.classList.add(state); }
+    if(st) st.textContent=status;
+    if(de) de.textContent=detail||"—";
+  }
+  function reset(){
+    const d=dt();
+    ["Pc","Router","Dns","Provider"].forEach(n=>setStep(n,"",d.waiting,"—"));
+  }
+  async function request(url,opts={},timeout=7000){
+    const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),timeout), started=performance.now();
+    try{ const response=await fetch(url,Object.assign({cache:"no-store",signal:controller.signal},opts)); return {response,ms:Math.round(performance.now()-started)}; }
+    finally{ clearTimeout(timer); }
+  }
+  async function diagnose(){
+    const d=dt(), target=getTarget();
+    targetEl.value=target;
+    startEl.disabled=true;
+    reset();
+    setStep("Pc","running",d.running,"");
+    if(!navigator.onLine){ setStep("Pc","fail",d.fail,d.offline); startEl.disabled=false; return; }
+    setStep("Pc","ok",d.ok,d.online);
+
+    setStep("Router","running",d.running,"");
+    let routerVerified=false, routerDetail="";
+    const gateways=["http://192.168.0.1/","http://192.168.1.1/","http://192.168.178.1/"];
+    for(const gw of gateways){
+      try{
+        const r=await request(gw,{mode:"no-cors"},4500);
+        if(r && r.response){ routerVerified=true; routerDetail=gw.replace(/^https?:\/\//,"").replace(/\/$/,"")+" · "+r.ms+" ms"; break; }
+      }catch(e){ routerDetail=e&&e.message?e.message:"Browser blocked local request"; }
+    }
+    if(routerVerified) setStep("Router","ok",d.ok,d.routerOk+" "+routerDetail);
+    else setStep("Router","warn",d.warn,d.routerUnverified);
+
+    setStep("Dns","running",d.running,"");
+    try{
+      const r=await request(targetUrl(),{mode:"no-cors"},7000);
+      if(r&&r.response){ setStep("Dns","ok",d.ok,d.dnsOk+" · "+r.ms+" ms"); }
+      else setStep("Dns","fail",d.fail,d.dnsFail);
+    }catch(e){ setStep("Dns","fail",d.fail,d.dnsFail); }
+
+    setStep("Provider","running",d.running,"");
+    try{
+      const r=await request("https://ipwho.is/",{headers:{"Accept":"application/json"}},7000);
+      const data=await r.response.json();
+      if(data && data.success!==false){
+        const parts=[data.connection&&data.connection.isp,data.connection&&data.connection.org,data.ip].filter(Boolean);
+        setStep("Provider","ok",d.ok,d.providerOk+" · "+(parts.join(" · ")||"—"));
+      }else setStep("Provider","warn",d.warn,d.providerUnavailable);
+    }catch(e){ setStep("Provider","warn",d.warn,d.providerUnavailable); }
+    startEl.disabled=false;
+  }
+
+  function applyDiagLanguage(){
+    const d=dt();
+    document.querySelectorAll("[data-diag-i18n]").forEach(el=>{const k=el.getAttribute("data-diag-i18n");if(d[k])el.textContent=d[k];});
+    document.querySelectorAll("[data-diag-i18n-placeholder]").forEach(el=>{const k=el.getAttribute("data-diag-i18n-placeholder");if(d[k])el.placeholder=d[k];});
+    const note=document.querySelector(".diagnostic-note"); if(note&&d.note) note.textContent=d.note;
+  }
+  startEl.addEventListener("click",()=>{ diagnose().catch(()=>{ startEl.disabled=false; }); });
+  targetEl.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); diagnose().catch(()=>{ startEl.disabled=false; }); }});
+  window.FasqooDiagnosis={getTarget,diagnose,reset,applyLanguage:applyDiagLanguage};
+  const languageSelect=byId("languageSelect");
+  if(languageSelect) languageSelect.addEventListener("change",()=>setTimeout(applyDiagLanguage,0));
+  const langObserver=new MutationObserver(()=>applyDiagLanguage());
+  langObserver.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  applyDiagLanguage();
+  reset();
+})();
+</script>
 
 <script>
 const TRANSLATIONS = {
