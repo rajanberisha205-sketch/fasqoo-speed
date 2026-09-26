@@ -27,6 +27,7 @@
   --bg:#f5f7fb;--card:#ffffff;--text:#0f172a;--muted:#64748b;
   --border:#e2e8f0;--border-strong:#cbd5e1;--primary:#2563eb;--primary-2:#1d4ed8;
   --accent:#7c3aed;--green:#10b981;--green-2:#059669;--red:#ef4444;--yellow:#f59e0b;
+  --orange:#ff5a1f;--soft:#f6f7f9;--line:#e7e9ed;
   --radius-sm:10px;--radius-md:16px;--radius-lg:22px;--radius-full:999px;
   --shadow-sm:0 1px 3px rgba(15,23,42,.06);
   --shadow-md:0 4px 14px rgba(15,23,42,.06);
@@ -36,6 +37,7 @@ body.dark{
   --bg:#0a0f1e;--card:#111827;--text:#f1f5f9;--muted:#94a3b8;
   --border:#1e293b;--border-strong:#334155;--primary:#3b82f6;--primary-2:#60a5fa;
   --accent:#a78bfa;--green:#34d399;--green-2:#10b981;--red:#f87171;--yellow:#fbbf24;
+  --soft:#1b1f25;--line:#2a2f36;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -55,28 +57,39 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 .wrap{width:min(1200px,calc(100% - 48px));margin:auto;padding-left:16px;padding-right:16px}
 
+/* ============================================================
+   HEADER + MEGA MENU (identisch zu index.html)
+   ============================================================ */
 header.main-header{
   height:72px;
-  background:color-mix(in srgb,var(--card) 92%,transparent);
+  background:rgba(255,255,255,.86);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;
   position:sticky;top:0;z-index:1000;
   box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035);
 }
-body.dark header.main-header{background:color-mix(in srgb,#12161b 92%,transparent)}
+body.dark header.main-header{background:rgba(14,17,22,.88)}
 
-.nav{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  width:100%;
-}
+.nav{display:flex;align-items:center;gap:16px;width:100%}
 .brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.brandmark{width:40px;height:40px;object-fit:contain}
-.brandname{font-size:22px;letter-spacing:-.7px;font-weight:800;color:var(--text)}
+a.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit}
+.brandmark{width:40px;height:40px;border-radius:11px;display:block;box-shadow:0 6px 16px rgba(255,90,31,.28);transition:box-shadow .25s ease,transform .25s ease;object-fit:contain}
+a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:translateY(-1px)}
+.brandname{font-size:22px;font-weight:800;letter-spacing:-.7px;color:#ff5a1f}
 
-.lite-btn,
+.lite-btn,.lite-btn:visited{
+  height:37px;border:0;border-radius:10px;
+  background:linear-gradient(135deg,#ff5a1f 0%,#ff8b61 100%);
+  color:#fff!important;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 15px;font-size:12px;font-weight:600;letter-spacing:.1px;
+  white-space:nowrap;text-decoration:none;flex-shrink:0;
+  box-shadow:0 6px 18px rgba(255,90,31,.30),inset 0 1px 0 rgba(255,255,255,.20);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.lite-btn::before{content:"⚡";font-size:13px;line-height:1;display:inline-block;transform:translateY(-.5px);filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.lite-btn:hover,.lite-btn:focus{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,90,31,.42);filter:brightness(1.05);color:#fff!important}
+
 .install-btn{
   height:35px;border:1px solid var(--border);border-radius:8px;
   background:var(--card);color:var(--text);
@@ -85,136 +98,108 @@ body.dark header.main-header{background:color-mix(in srgb,#12161b 92%,transparen
   text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s;
   flex-shrink:0;
 }
-.lite-btn:hover,.install-btn:hover{
-  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
-  border-color:var(--border-strong);
-  box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
+.install-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
 .install-btn[hidden]{display:none}
 .win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
 .win-icon i{display:block;background:currentColor}
 
-/* ── Menü: zentriert, aber nicht zu weit außen ── */
-.main-menu{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;      /* zentriert wie auf der Startseite */
-  gap:56px;                    /* etwas mehr Abstand zwischen den Links */
-  min-width:0;
-  padding:0 20px;              /* wenig Innenabstand, damit es mittig bleibt */
-}
-.main-menu > a{
-  color:var(--text);text-decoration:none;
-  font-size:13px;font-weight:500;white-space:nowrap;
-  transition:color .2s;position:relative;
-  padding:4px 0;
-}
-.main-menu > a:hover{color:var(--primary)}
-.main-menu > a::after{
-  content:"";position:absolute;left:0;right:0;bottom:-4px;
-  height:2px;border-radius:2px;background:var(--primary);
-  transform:scaleX(0);transform-origin:center;
-  transition:transform .2s ease;
-}
-.main-menu > a:hover::after,.main-menu > a.active::after{transform:scaleX(1)}
-.main-menu > a.active{color:var(--primary)}
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;flex:1;padding:0}
+.main-menu>a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s;position:relative;padding:8px 0}
+.main-menu>a:hover{color:#ff5a1f}
+.main-menu>a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:#ff5a1f;transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+.main-menu>a:hover::after,.main-menu>a.active::after{transform:scaleX(1)}
+.main-menu>a.active{color:#ff5a1f;font-weight:700}
 
-.menu-extra{
-  display:flex;align-items:center;gap:8px;flex-shrink:0;
-}
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown-toggle{appearance:none;border:0;background:transparent;color:var(--text);font:inherit;font-size:13px;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;padding:8px 0;cursor:pointer}
+.nav-dropdown-toggle:hover{color:#ff5a1f}
+.nav-chevron{font-size:12px;line-height:1;transition:transform .22s ease}
+.nav-dropdown:hover .nav-chevron,.nav-dropdown.open .nav-chevron{transform:rotate(180deg)}
 
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 16px);left:50%;width:100%;
+  max-width:650px;min-width:560px;padding:18px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  background:rgba(255,255,255,.95);border:1px solid rgba(16,24,40,.10);
+  border-radius:18px;box-shadow:0 24px 70px rgba(16,24,40,.16),0 6px 22px rgba(16,24,40,.06);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate(-50%,-8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+  z-index:1200;
+}
+.nav-dropdown-menu:before{
+  content:"";position:absolute;top:-7px;left:50%;width:13px;height:13px;
+  transform:translateX(-50%) rotate(45deg);
+  background:rgba(255,255,255,.95);
+  border-left:1px solid rgba(16,24,40,.10);
+  border-top:1px solid rgba(16,24,40,.10);
+}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown.open .nav-dropdown-menu{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+}
+.nav-mega-column{min-width:0}
+.nav-dropdown-section{padding:2px 8px 9px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.nav-mega-item{
+  display:flex!important;align-items:flex-start;gap:12px;width:100%;
+  padding:11px 10px!important;border-radius:12px;color:var(--text)!important;
+  text-decoration:none;transition:background .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.nav-mega-item+.nav-mega-item{margin-top:3px}
+.nav-mega-icon{
+  width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;
+  border-radius:10px;background:var(--soft);border:1px solid var(--line);
+  font-size:0;line-height:0;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.nav-mega-copy{min-width:0;padding-top:1px}
+.nav-mega-title{display:block;font-size:12px;line-height:1.25;font-weight:700;color:var(--text);transition:color .18s ease}
+.nav-mega-desc{display:block;margin-top:4px;font-size:10px;line-height:1.45;color:var(--muted);font-weight:400}
+.nav-mega-item:after{display:none!important}
+.nav-mega-item:hover{
+  background:linear-gradient(135deg,rgba(255,90,31,.07),rgba(255,255,255,.72));
+  color:#ff5a1f!important;transform:translateX(3px);box-shadow:0 7px 18px rgba(16,24,40,.06);
+}
+.nav-mega-item:hover .nav-mega-icon{background:rgba(255,90,31,.10);border-color:rgba(255,90,31,.20);box-shadow:0 0 0 3px rgba(255,90,31,.05);transform:translateY(-1px)}
+.nav-mega-item:hover .nav-mega-title{color:#ff5a1f}
+.nav-dropdown-menu a{position:static}
+.nav-mega-icon svg{width:20px;height:20px;display:block;flex:0 0 auto;color:#52525b;transition:color .18s ease,transform .18s ease}
+.nav-mega-item:hover .nav-mega-icon svg{color:#ff5a1f;transform:scale(1.05)}
+body.dark .nav-dropdown-menu{background:rgba(21,24,29,.96);border-color:rgba(255,255,255,.10);box-shadow:0 26px 75px rgba(0,0,0,.45),0 7px 25px rgba(0,0,0,.25)}
+body.dark .nav-dropdown-menu:before{background:rgba(21,24,29,.96);border-color:rgba(255,255,255,.10)}
+body.dark .nav-mega-item:hover{background:linear-gradient(135deg,rgba(255,90,31,.11),rgba(255,255,255,.025));box-shadow:0 8px 22px rgba(0,0,0,.18)}
+body.dark .nav-mega-icon svg{color:#a1a1aa}
+body.dark .nav-mega-item:hover .nav-mega-icon svg{color:#ff5a1f}
+
+.menu-extra{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .lang-control{
   display:flex;align-items:center;justify-content:center;gap:7px;
-  padding:0 10px;height:35px;
-  border:1px solid var(--border);border-radius:8px;
+  padding:0 10px;height:35px;border:1px solid var(--border);border-radius:8px;
   background:var(--card);color:var(--text);
   transition:background .2s,border-color .2s,box-shadow .2s;
 }
-.lang-control:hover{
-  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
-  border-color:var(--border-strong);
-  box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
+.lang-control:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
 .lang-icon{font-size:14px;line-height:1;color:var(--text);display:inline-block}
-.lang-control select{
-  min-width:76px;height:33px;border:0;outline:0;
-  background:transparent;color:var(--text);
-  padding:0 14px 0 0;font-size:12px;font-weight:500;
-  cursor:pointer;color-scheme:light;
-}
+.lang-control select{min-width:76px;height:33px;border:0;outline:0;background:transparent;color:var(--text);padding:0 14px 0 0;font-size:12px;font-weight:500;cursor:pointer;color-scheme:light}
 body.dark .lang-control select{color-scheme:dark}
 body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .lang-control select option{background:#fff;color:#0f172a}
 
-.theme-btn{
-  width:35px;height:35px;padding:0;
-  border:1px solid var(--border);border-radius:8px;
-  background:var(--card);color:var(--text);
-  display:grid;place-items:center;font-size:16px;
-  transition:background .2s,border-color .2s,box-shadow .2s;
-}
-.theme-btn:hover{
-  background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);
-  border-color:var(--border-strong);
-  box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
-.menu-toggle{
-  display:none;background:transparent;
-  border:1px solid var(--border);border-radius:8px;
-  padding:6px 12px;font-size:20px;color:var(--text);
-}
+.theme-btn{width:35px;height:35px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px;transition:background .2s,border-color .2s,box-shadow .2s}
+.theme-btn:hover{background:color-mix(in srgb,var(--card) 92%,var(--primary) 8%);border-color:var(--border-strong);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
 
-@media(max-width:900px){.install-btn{display:none!important}}
-@media(max-width:760px){
-  header.main-header{height:auto;min-height:68px}
-  .menu-toggle{display:block;order:3;margin-left:auto}
-  .main-menu{
-    display:none;
-    flex-direction:column;
-    position:absolute;top:100%;left:0;right:0;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    padding:20px;gap:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,.1);
-    align-items:flex-start;
-    flex:none;
-  }
-  .main-menu.active{display:flex}
-  .main-menu > a::after{display:none}
-  .menu-extra{
-    width:100%;justify-content:flex-start;
-    margin-top:10px;padding-top:10px;
-    border-top:1px solid var(--border);gap:12px;
-  }
-}
-
-.hero{
-  max-width:900px;margin:56px auto 40px;padding:0 24px;
-  text-align:center;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 13px;border-radius:var(--radius-full);
-  border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);
-  background:color-mix(in srgb,var(--primary) 6%,transparent);
-  color:var(--primary);font-size:11px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;
-}
+/* ============================================================
+   EXISTING PAGE STYLES (Hero, Cards, Charts, Monitoring)
+   ============================================================ */
+.hero{max-width:900px;margin:56px auto 40px;padding:0 24px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--radius-full);border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);background:color-mix(in srgb,var(--primary) 6%,transparent);color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
 .hero-kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 25%,transparent)}
 .hero .status-pill{margin-bottom:22px}
 .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-1.8px;font-weight:800;margin:0 0 18px 0;width:100%}
 .hero p{margin:0;max-width:680px;color:var(--muted);font-size:16px;line-height:1.65}
 
-.status-pill{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:10px 18px;border-radius:var(--radius-full);
-  background:color-mix(in srgb,var(--green) 10%,transparent);
-  color:var(--green-2);font-size:13px;font-weight:800;
-  border:1px solid color-mix(in srgb,var(--green) 25%,transparent);
-  transition:all .3s ease;
-}
+.status-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:var(--radius-full);background:color-mix(in srgb,var(--green) 10%,transparent);color:var(--green-2);font-size:13px;font-weight:800;border:1px solid color-mix(in srgb,var(--green) 25%,transparent);transition:all .3s ease}
 .status-dot{width:9px;height:9px;background:var(--green);border-radius:50%;animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 15%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--green) 0%,transparent)}}
 .status-pill.warning{background:color-mix(in srgb,var(--yellow) 10%,transparent);color:var(--yellow);border-color:color-mix(in srgb,var(--yellow) 25%,transparent)}
@@ -321,9 +306,6 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .problem-name{font-weight:800;font-size:14px;color:var(--text)}
 .problem-severity{font-size:12px;font-weight:600;color:var(--muted);margin-top:3px}
 .problem-body{padding:0 22px 22px;border-top:1px solid var(--border)}
-.explanation{border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-top:16px}
-.explanation h4{font-size:12px;margin-bottom:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}
-.explanation p{color:var(--muted);font-size:13px;line-height:1.6}
 
 .test-suite{padding:8px 22px}
 .test-row{display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
@@ -398,20 +380,69 @@ body.dark .lang-control select option{background:#111827;color:#f1f5f9}
 .accuracy strong{display:block;margin-bottom:8px;font-weight:800;color:var(--text)}
 .accuracy p{color:var(--muted);font-size:13px;line-height:1.6}
 
-footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;color:var(--muted);font-size:11px;margin-top:45px}
-.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
-.fasqoo-footer-copy{display:flex;flex-direction:column;gap:8px;line-height:1.55;max-width:520px}
-.fasqoo-footer-copy div:first-child{font-weight:600;color:var(--text)}
-.fasqoo-footer-links{display:flex;flex-wrap:wrap;gap:10px 20px}
-.fasqoo-footer-links a{color:inherit;text-decoration:none;opacity:.82}
-.fasqoo-footer-links a:hover{opacity:1;text-decoration:underline}
+/* ============================================================
+   FOOTER (identisch zu index.html)
+   ============================================================ */
+.site-footer{margin-top:45px;padding:42px 0 22px;background:var(--card);border-top:1px solid var(--border);color:var(--muted)}
+.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1.15fr 1fr;gap:42px;padding-bottom:34px}
+.footer-brand-name{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text);margin-bottom:12px}
+.footer-brand p{max-width:290px;margin:0;font-size:11px;line-height:1.7;color:var(--muted)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.footer-column h4{margin:0 0 7px;color:var(--text);font-size:12px;font-weight:700}
+.footer-column a{color:var(--muted);font-size:11px;line-height:1.5;text-decoration:none;transition:color .18s ease}
+.footer-column a:hover{color:#ff5a1f}
+.footer-bottom{border-top:1px solid var(--border);padding-top:18px;padding-bottom:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;font-size:10px;line-height:1.5;color:var(--muted)}
+.footer-copyright{color:var(--text);font-size:11px;font-weight:600}
+.footer-cloudflare{display:flex;flex-direction:column;align-items:center;gap:3px;max-width:760px}
+.footer-powered,.footer-disclaimer{display:block;color:var(--muted);font-size:9px;line-height:1.55;font-weight:400}
+.footer-disclaimer{opacity:.78}
+body.dark .site-footer{background:rgba(14,17,22,.88)}
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1050px){.nav-dropdown-menu{min-width:520px}}
+@media(max-width:900px){
+  .install-btn{display:none!important}
+  .main-menu{gap:15px}
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+  .footer-brand{grid-column:1/-1}
+}
 @media(max-width:1000px){
   .grid,.profile-grid{grid-template-columns:repeat(2,1fr)}
   .diagnostic-grid{grid-template-columns:repeat(2,1fr)}
   .health-panel{grid-template-columns:1fr;text-align:center}
   .health-ring-wrap{margin:0 auto}
   .monitor-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  header.main-header{height:auto;min-height:68px}
+  .menu-toggle{display:block;order:3;margin-left:auto}
+  .main-menu{
+    display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:var(--card);border-bottom:1px solid var(--border);
+    padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);
+    align-items:flex-start;flex:none;margin-left:0;
+  }
+  .main-menu.active{display:flex}
+  .main-menu>a::after{display:none}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);gap:12px}
+  .nav-dropdown{width:100%;display:block}
+  .nav-dropdown-toggle{width:100%;justify-content:space-between;padding:2px 0}
+  .nav-dropdown-menu{
+    position:static;width:100%;min-width:0;max-width:none;margin-top:8px;
+    transform:none!important;grid-template-columns:1fr;gap:8px;
+    box-shadow:none;border-radius:12px;padding:9px;
+    opacity:0;visibility:hidden;pointer-events:none;max-height:0;overflow:hidden;
+    transition:opacity .18s ease,max-height .22s ease,visibility .18s ease;
+  }
+  .nav-dropdown-menu:before{display:none}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:0;visibility:hidden;pointer-events:none;max-height:0}
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;max-height:900px}
+  .nav-mega-column{width:100%}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:700px){
   .hero{margin-top:32px}
@@ -424,7 +455,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   .btn-primary{width:100%}
   .test-row{grid-template-columns:32px 1fr;gap:12px}
   .test-value{grid-column:2;margin-top:2px;text-align:left}
-  .foot{flex-direction:column;text-align:left}
   .wf-row{grid-template-columns:90px 1fr 60px;font-size:11px}
   .report-actions{flex-direction:column}
   .btn-secondary{width:100%}
@@ -437,6 +467,8 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   .monitor-grid{grid-template-columns:1fr}
   .period-tabs{width:100%}
   .period-tab{flex:1;text-align:center}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
@@ -445,24 +477,145 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 </head>
 <body>
 
+<!-- ============================================================
+     HEADER (identisch zu index.html, aktiver Punkt = Netzwerk-Status)
+     ============================================================ -->
 <header class="main-header">
   <div class="wrap nav">
     <div class="brand">
-      <img src="/fasqoologo.png" alt="Fasqoo Logo" class="brandmark">
-      <div class="brandname">Fasqoo</div>
+      <a href="index.html" class="brand" aria-label="Fasqoo">
+        <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
+          <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
+          <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
+        </svg>
+        <div class="brandname">Fasqoo</div>
+      </a>
     </div>
+
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
-    <button id="installButton" class="install-btn" type="button" hidden>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
       <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span class="install-label" data-i18n="installApp">Install for Windows</span>
     </button>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
-    <nav class="main-menu" id="mainMenu">
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" data-i18n="navSpeedtest">Speedtest</a>
+
+      <div class="nav-dropdown" id="toolsDropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
+          <span class="nav-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="nav-dropdown-menu" role="menu">
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
+
+            <a class="nav-mega-item" href="network-status.html" role="menuitem" aria-current="page">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
+                <span class="nav-mega-desc" data-i18n="navStatusDesc">Live-Erreichbarkeit &amp; Leitungs-Diagnose</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="widget.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.6"/>
+                  <rect x="13" y="3" width="8" height="5" rx="1.6"/>
+                  <rect x="13" y="10" width="8" height="11" rx="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
+                <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/>
+                  <line x1="6.5" y1="11" x2="10.5" y2="11"/>
+                  <line x1="8.5" y1="9" x2="8.5" y2="13"/>
+                  <circle cx="16" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="18" cy="12.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navGaming">Gaming- &amp; Ping-Monitor</span>
+                <span class="nav-mega-desc" data-i18n="navGamingDesc">Live-Ping &amp; Gaming-Performance überwachen</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
+
+            <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
+                <span class="nav-mega-desc" data-i18n="navSecurityDesc">HTTP-Sicherheitsheader in Echtzeit prüfen</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.4 9h17.2"/>
+                  <path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/>
+                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
+                <span class="nav-mega-desc" data-i18n="navDnsDesc">Globale DNS-Ausbreitung visuell tracken</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="3" width="15" height="18" rx="2.2"/>
+                  <rect x="7.5" y="6" width="9" height="3.4" rx="0.9"/>
+                  <circle cx="9" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="9" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
+                <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <a href="faq.html" data-i18n="navFaq">FAQ</a>
-      <a href="network-status.html" class="active" data-i18n="navStatus">Network Status</a>
-      <a href="subnet-calculator.html" data-i18n="navDiag">IT Diagnostics</a>
-      <a href="about.html" data-i18n="navAbout">About Us</a>
-      <a href="widget.html" data-i18n="navWidget">Widget</a>
+      <a href="about.html" data-i18n="navAbout">Über uns</a>
+
       <div class="menu-extra">
         <div class="lang-control">
           <span class="lang-icon" aria-hidden="true">◎</span>
@@ -485,6 +638,9 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
   </div>
 </header>
 
+<!-- ============================================================
+     MAIN CONTENT (unverändert)
+     ============================================================ -->
 <section class="hero">
   <div class="hero-kicker"><span class="hero-kicker-dot"></span> <span data-i18n="heroKicker">Network Intelligence</span></div>
   <div class="status-pill idle" id="mainStatusPill">
@@ -841,20 +997,52 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:23px 0;
 
 </main>
 
-<footer>
-<div class="wrap foot">
-    <div class="fasqoo-footer-copy">
-      <div data-i18n="ftRights">© 2026 Fasqoo. All rights reserved.</div>
-      <div data-i18n="ftPowered">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</div>
-      <div data-i18n="ftIndependent">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
+<!-- ============================================================
+     FOOTER (identisch zu index.html)
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Fasqoo</div>
+        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
+        <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
+        <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
+        <a href="widget.html" data-i18n="footerWidget">Widget</a>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerCompany">Unternehmen</h4>
+        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
+        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
+      </div>
     </div>
-    <nav class="fasqoo-footer-links">
-      <a href="/accessibility.html" data-i18n="ftAccess">Accessibility</a>
-      <a href="/impressum.html" data-i18n="ftImprint">Imprint</a>
-      <a href="/privacy-policy.html" data-i18n="ftPrivacy">Privacy Policy</a>
-      <a href="/terms.html" data-i18n="ftTerms">Terms of Use</a>
-      <a href="/do-not-sell.html" data-i18n="ftNoSell">Do Not Sell My Data</a>
-    </nav>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright" data-i18n="footerCopyright">© 2026 Fasqoo</span>
+      <div class="footer-cloudflare">
+        <span class="footer-powered" data-i18n="footerBranding">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</span>
+        <span class="footer-disclaimer" data-i18n="footerDisclaimer">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</span>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -863,6 +1051,24 @@ const TRANSLATIONS = {
   en:{
     liteBtn:"Fasqoo Lite",installApp:"Install for Windows",
     navFaq:"FAQ",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",
+    navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",
+    navStatusDesc:"Live reachability & line diagnostics",
+    navWidgetDesc:"Free test widget for other websites",
+    navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"Check HTTP security headers in real time",
+    navDns:"Visual DNS Test",navDnsDesc:"Track global DNS propagation visually",
+    navSubnet:"Subnet Calculator",navSubnetDesc:"Calculate IP ranges and subnet masks",
+    footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",
+    footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",
+    footerGaming:"Gaming & Ping Monitor",footerITDiagnose:"IT Diagnostics",
+    footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+    footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+    footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
     heroKicker:"Network Intelligence",idle:"READY — START THE MEASUREMENT",running:"MEASUREMENT RUNNING...",
     reachable:"FASQOO.COM IS REACHABLE",failed:"CHECK FAILED",
     pageTitle:"Fasqoo Website Status",
@@ -933,6 +1139,24 @@ const TRANSLATIONS = {
   de:{
     liteBtn:"Fasqoo Lite",installApp:"Für Windows installieren",
     navFaq:"FAQ",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Tools & IT-Diagnose",
+    navSectionNetwork:"Netzwerk & Speed",navSectionDiag:"IT-Diagnose & Security",
+    navStatusDesc:"Live-Erreichbarkeit & Leitungs-Diagnose",
+    navWidgetDesc:"Kostenloses Test-Widget für andere Websites",
+    navGaming:"Gaming- & Ping-Monitor",navGamingDesc:"Live-Ping & Gaming-Performance überwachen",
+    navSecurity:"Security Analyzer",navSecurityDesc:"HTTP-Sicherheitsheader in Echtzeit prüfen",
+    navDns:"Visual DNS Test",navDnsDesc:"Globale DNS-Ausbreitung visuell tracken",
+    navSubnet:"Subnetz-Rechner",navSubnetDesc:"IP-Bereiche und Masken kalkulieren",
+    footerBrand:"Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",
+    footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Netzwerk-Tools",footerNetworkStatus:"Network Status",
+    footerGaming:"Gaming- & Ping-Monitor",footerITDiagnose:"IT Diagnose",
+    footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+    footerCompany:"Unternehmen",footerAbout:"Über uns",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Unterstützt durch das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",
+    footerDisclaimer:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.",
     heroKicker:"Netzwerk-Intelligenz",idle:"BEREIT — STARTE DIE MESSUNG",running:"MESSUNG LÄUFT...",
     reachable:"FASQOO.COM IST ERREICHBAR",failed:"PRÜFUNG FEHLGESCHLAGEN",
     pageTitle:"Fasqoo Website-Status",
@@ -1003,6 +1227,24 @@ const TRANSLATIONS = {
   fr:{
     liteBtn:"Fasqoo Lite",installApp:"Installer pour Windows",
     navFaq:"FAQ",navStatus:"État du réseau",navDiag:"Diagnostic IT",navAbout:"À propos",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Outils & diagnostic",
+    navSectionNetwork:"Réseau & vitesse",navSectionDiag:"Diagnostic IT & sécurité",
+    navStatusDesc:"Accessibilité en direct & diagnostic de ligne",
+    navWidgetDesc:"Widget de test gratuit pour d'autres sites",
+    navGaming:"Moniteur Gaming & Ping",navGamingDesc:"Surveillance en direct du ping et des performances",
+    navSecurity:"Analyseur de sécurité",navSecurityDesc:"Vérifier les en-têtes de sécurité HTTP en direct",
+    navDns:"Test DNS visuel",navDnsDesc:"Suivre visuellement la propagation DNS mondiale",
+    navSubnet:"Calculateur de sous-réseau",navSubnetDesc:"Calculer les plages IP et les masques",
+    footerBrand:"Fasqoo - Tests de vitesse Internet indépendants dans le navigateur et outils réseau.",
+    footerSpeedTests:"Tests de vitesse",footerInternetSpeed:"Test de vitesse Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Outils réseau",footerNetworkStatus:"État du réseau",
+    footerGaming:"Moniteur Gaming & Ping",footerITDiagnose:"Diagnostic IT",
+    footerSecurity:"Analyseur de sécurité",footerDns:"Test DNS visuel",
+    footerCompany:"Entreprise",footerAbout:"À propos",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Mesure via le réseau Cloudflare Edge · Fasqoo est une plateforme indépendante.",
+    footerDisclaimer:"Fasqoo est une plateforme de test de vitesse indépendante et n'est pas un produit officiel Cloudflare.",
     heroKicker:"Intelligence Réseau",idle:"PRÊT — DÉMARREZ LA MESURE",running:"MESURE EN COURS...",
     reachable:"FASQOO.COM EST ACCESSIBLE",failed:"ÉCHEC DE LA VÉRIFICATION",
     pageTitle:"État du site Fasqoo",
@@ -1073,6 +1315,24 @@ const TRANSLATIONS = {
   es:{
     liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
     navFaq:"FAQ",navStatus:"Estado de red",navDiag:"Diagnóstico TI",navAbout:"Sobre nosotros",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Herramientas y diagnóstico",
+    navSectionNetwork:"Red y velocidad",navSectionDiag:"Diagnóstico TI y seguridad",
+    navStatusDesc:"Accesibilidad en vivo y diagnóstico de línea",
+    navWidgetDesc:"Widget de prueba gratuito para otros sitios web",
+    navGaming:"Monitor Gaming y Ping",navGamingDesc:"Monitor de ping y rendimiento en juegos en vivo",
+    navSecurity:"Analizador de seguridad",navSecurityDesc:"Comprobar cabeceras de seguridad HTTP en tiempo real",
+    navDns:"Prueba DNS visual",navDnsDesc:"Rastrear visualmente la propagación DNS global",
+    navSubnet:"Calculadora de subredes",navSubnetDesc:"Calcular rangos IP y máscaras",
+    footerBrand:"Fasqoo - Pruebas de velocidad de Internet independientes desde el navegador y herramientas de red.",
+    footerSpeedTests:"Pruebas de velocidad",footerInternetSpeed:"Test de velocidad de Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Herramientas de red",footerNetworkStatus:"Estado de red",
+    footerGaming:"Monitor Gaming y Ping",footerITDiagnose:"Diagnóstico TI",
+    footerSecurity:"Analizador de seguridad",footerDns:"Prueba DNS visual",
+    footerCompany:"Empresa",footerAbout:"Sobre nosotros",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Medición mediante Cloudflare Edge · Fasqoo es una plataforma independiente.",
+    footerDisclaimer:"Fasqoo es una plataforma de test de velocidad independiente y no es un producto oficial de Cloudflare.",
     heroKicker:"Inteligencia de Red",idle:"LISTO — INICIA LA MEDICIÓN",running:"MEDICIÓN EN CURSO...",
     reachable:"FASQOO.COM ES ACCESIBLE",failed:"VERIFICACIÓN FALLIDA",
     pageTitle:"Estado del sitio Fasqoo",
@@ -1143,6 +1403,24 @@ const TRANSLATIONS = {
   it:{
     liteBtn:"Fasqoo Lite",installApp:"Installa per Windows",
     navFaq:"FAQ",navStatus:"Stato rete",navDiag:"Diagnostica IT",navAbout:"Chi siamo",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Strumenti e diagnostica",
+    navSectionNetwork:"Rete e velocità",navSectionDiag:"Diagnostica IT e sicurezza",
+    navStatusDesc:"Raggiungibilità live e diagnostica di linea",
+    navWidgetDesc:"Widget di test gratuito per altri siti web",
+    navGaming:"Monitor Gaming & Ping",navGamingDesc:"Monitor ping e prestazioni gaming in tempo reale",
+    navSecurity:"Analizzatore di sicurezza",navSecurityDesc:"Verifica in tempo reale degli header di sicurezza HTTP",
+    navDns:"Test DNS visivo",navDnsDesc:"Traccia visivamente la propagazione DNS globale",
+    navSubnet:"Calcolatore subnet",navSubnetDesc:"Calcola intervalli IP e maschere",
+    footerBrand:"Fasqoo - Test di velocità Internet indipendenti dal browser e strumenti di rete.",
+    footerSpeedTests:"Speed Test",footerInternetSpeed:"Speed Test Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Strumenti di rete",footerNetworkStatus:"Stato della rete",
+    footerGaming:"Monitor Gaming & Ping",footerITDiagnose:"Diagnostica IT",
+    footerSecurity:"Analizzatore di sicurezza",footerDns:"Test DNS visivo",
+    footerCompany:"Azienda",footerAbout:"Chi siamo",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Misurazione tramite Cloudflare Edge · Fasqoo è una piattaforma indipendente.",
+    footerDisclaimer:"Fasqoo è una piattaforma di speed test indipendente e non è un prodotto ufficiale Cloudflare.",
     heroKicker:"Intelligenza di Rete",idle:"PRONTO — AVVIA LA MISURAZIONE",running:"MISURAZIONE IN CORSO...",
     reachable:"FASQOO.COM È RAGGIUNGIBILE",failed:"VERIFICA FALLITA",
     pageTitle:"Stato del sito Fasqoo",
@@ -1213,6 +1491,24 @@ const TRANSLATIONS = {
   pt:{
     liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
     navFaq:"FAQ",navStatus:"Estado da Rede",navDiag:"Diagnóstico TI",navAbout:"Sobre",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Ferramentas e diagnóstico",
+    navSectionNetwork:"Rede e velocidade",navSectionDiag:"Diagnóstico de TI e segurança",
+    navStatusDesc:"Acessibilidade em direto e diagnóstico de linha",
+    navWidgetDesc:"Widget de teste gratuito para outros sites",
+    navGaming:"Monitor de Gaming e Ping",navGamingDesc:"Monitor de ping e desempenho em jogos em direto",
+    navSecurity:"Analisador de segurança",navSecurityDesc:"Verificar cabeçalhos de segurança HTTP em tempo real",
+    navDns:"Teste DNS visual",navDnsDesc:"Acompanhar visualmente a propagação DNS global",
+    navSubnet:"Calculadora de sub-rede",navSubnetDesc:"Calcular intervalos IP e máscaras",
+    footerBrand:"Fasqoo - Testes de velocidade da Internet independentes no navegador e ferramentas de rede.",
+    footerSpeedTests:"Testes de velocidade",footerInternetSpeed:"Teste de velocidade da Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Ferramentas de rede",footerNetworkStatus:"Status da rede",
+    footerGaming:"Monitor de Gaming e Ping",footerITDiagnose:"Diagnóstico de TI",
+    footerSecurity:"Analisador de segurança",footerDns:"Teste DNS visual",
+    footerCompany:"Empresa",footerAbout:"Sobre nós",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Medição via Cloudflare Edge · A Fasqoo é uma plataforma independente.",
+    footerDisclaimer:"A Fasqoo é uma plataforma de teste de velocidade independente e não é um produto oficial da Cloudflare.",
     heroKicker:"Inteligência de Rede",idle:"PRONTO — INICIE A MEDIÇÃO",running:"MEDIÇÃO EM CURSO...",
     reachable:"FASQOO.COM ESTÁ ACESSÍVEL",failed:"VERIFICAÇÃO FALHOU",
     pageTitle:"Estado do site Fasqoo",
@@ -1283,6 +1579,24 @@ const TRANSLATIONS = {
   nl:{
     liteBtn:"Fasqoo Lite",installApp:"Installeren voor Windows",
     navFaq:"FAQ",navStatus:"Netwerkstatus",navDiag:"IT-diagnose",navAbout:"Over ons",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Tools & IT-diagnose",
+    navSectionNetwork:"Netwerk & snelheid",navSectionDiag:"IT-diagnose & beveiliging",
+    navStatusDesc:"Live bereikbaarheid & lijndiagnose",
+    navWidgetDesc:"Gratis testwidget voor andere websites",
+    navGaming:"Gaming- & Ping-monitor",navGamingDesc:"Live ping- en gameprestatiemonitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"HTTP-beveiligingsheaders in realtime controleren",
+    navDns:"Visuele DNS-test",navDnsDesc:"Volg wereldwijde DNS-propagatie visueel",
+    navSubnet:"Subnetcalculator",navSubnetDesc:"IP-bereiken en maskers berekenen",
+    footerBrand:"Fasqoo - Onafhankelijke browsergebaseerde internetsnelheidstests en netwerktools.",
+    footerSpeedTests:"Snelheidstests",footerInternetSpeed:"Internetsnelheidstest",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Netwerktools",footerNetworkStatus:"Netwerkstatus",
+    footerGaming:"Gaming- & Ping-monitor",footerITDiagnose:"IT-diagnose",
+    footerSecurity:"Security Analyzer",footerDns:"Visuele DNS-test",
+    footerCompany:"Bedrijf",footerAbout:"Over ons",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform.",
+    footerDisclaimer:"Fasqoo is een onafhankelijk speedtest-platform en geen officieel Cloudflare-product.",
     heroKicker:"Netwerkintelligentie",idle:"KLAAR — START DE METING",running:"METING LOOPT...",
     reachable:"FASQOO.COM IS BEREIKBAAR",failed:"CONTROLE MISLUKT",
     pageTitle:"Fasqoo Website Status",
@@ -1353,6 +1667,24 @@ const TRANSLATIONS = {
   tr:{
     liteBtn:"Fasqoo Lite",installApp:"Windows için yükle",
     navFaq:"SSS",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Araçlar ve Tanılama",
+    navSectionNetwork:"Ağ ve Hız",navSectionDiag:"BT Tanılama ve Güvenlik",
+    navStatusDesc:"Canlı erişilebilirlik ve hat tanılama",
+    navWidgetDesc:"Diğer web siteleri için ücretsiz test widget'ı",
+    navGaming:"Oyun ve Ping Monitörü",navGamingDesc:"Canlı ping ve oyun performansı izleme",
+    navSecurity:"Güvenlik Analizörü",navSecurityDesc:"HTTP güvenlik başlıklarını gerçek zamanlı kontrol et",
+    navDns:"Görsel DNS Testi",navDnsDesc:"Küresel DNS yayılımını görsel olarak takip et",
+    navSubnet:"Alt Ağ Hesaplayıcı",navSubnetDesc:"IP aralıklarını ve maskeleri hesapla",
+    footerBrand:"Fasqoo - Bağımsız, tarayıcı tabanlı internet hız testleri ve ağ araçları.",
+    footerSpeedTests:"Hız Testleri",footerInternetSpeed:"İnternet Hız Testi",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Ağ Araçları",footerNetworkStatus:"Ağ Durumu",
+    footerGaming:"Oyun ve Ping Monitörü",footerITDiagnose:"BT Tanılama",
+    footerSecurity:"Güvenlik Analizörü",footerDns:"Görsel DNS Testi",
+    footerCompany:"Şirket",footerAbout:"Hakkımızda",footerFaq:"SSS",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Cloudflare Edge üzerinden ölçüm · Fasqoo bağımsız bir platformdur.",
+    footerDisclaimer:"Fasqoo bağımsız bir hız testi platformudur ve resmi bir Cloudflare ürünü değildir.",
     heroKicker:"Ağ Zekâsı",idle:"HAZIR — ÖLÇÜMÜ BAŞLAT",running:"ÖLÇÜM SÜRÜYOR...",
     reachable:"FASQOO.COM ERİŞİLEBİLİR",failed:"KONTROL BAŞARISIZ",
     pageTitle:"Fasqoo Web Sitesi Durumu",
@@ -1423,6 +1755,24 @@ const TRANSLATIONS = {
   sq:{
     liteBtn:"Fasqoo Lite",installApp:"Instalo për Windows",
     navFaq:"FAQ",navStatus:"Statusi i rrjetit",navDiag:"Diagnostika IT",navAbout:"Rreth nesh",navWidget:"Widget",
+    navSpeedtest:"Speedtest",navTools:"Mjete & Diagnostikë",
+    navSectionNetwork:"Rrjeti & Shpejtësia",navSectionDiag:"Diagnostikë IT & Siguri",
+    navStatusDesc:"Arritshmëri live & diagnostikim linje",
+    navWidgetDesc:"Widget falas testimi për faqe të tjera",
+    navGaming:"Monitor Loje & Ping",navGamingDesc:"Monitor ping dhe performancë lojërash në kohë reale",
+    navSecurity:"Analizuesi i Sigurisë",navSecurityDesc:"Kontrollo header-at e sigurisë HTTP në kohë reale",
+    navDns:"Testi Vizual DNS",navDnsDesc:"Ndjek përhapjen globale të DNS vizualisht",
+    navSubnet:"Llogaritësi i Nënrrjetit",navSubnetDesc:"Llogarit intervalet IP dhe maskat",
+    footerBrand:"Fasqoo - Teste të pavarura të shpejtësisë së internetit në shfletues dhe mjete rrjeti.",
+    footerSpeedTests:"Teste Shpejtësie",footerInternetSpeed:"Testi i Shpejtësisë së Internetit",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Mjete Rrjeti",footerNetworkStatus:"Statusi i Rrjetit",
+    footerGaming:"Monitor Loje & Ping",footerITDiagnose:"Diagnostikë IT",
+    footerSecurity:"Analizuesi i Sigurisë",footerDns:"Testi Vizual DNS",
+    footerCompany:"Kompania",footerAbout:"Rreth nesh",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Matje përmes Cloudflare Edge · Fasqoo është një platformë e pavarur.",
+    footerDisclaimer:"Fasqoo është platformë e pavarur e testimit të shpejtësisë dhe nuk është produkt zyrtar i Cloudflare.",
     heroKicker:"Inteligjenca e Rrjetit",idle:"GATI — FILLO MATJEN",running:"MATJA PO KRYHET...",
     reachable:"FASQOO.COM ËSHTË I ARRITSHËM",failed:"KONTROLLI DËSHTOI",
     pageTitle:"Statusi i faqes Fasqoo",
@@ -1493,6 +1843,24 @@ const TRANSLATIONS = {
   ar:{
     liteBtn:"Fasqoo Lite",installApp:"التثبيت لنظام Windows",
     navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",navDiag:"تشخيص IT",navAbout:"من نحن",navWidget:"Widget",
+    navSpeedtest:"اختبار السرعة",navTools:"الأدوات والتشخيص",
+    navSectionNetwork:"الشبكة والسرعة",navSectionDiag:"تشخيص تقنية المعلومات والأمان",
+    navStatusDesc:"إمكانية الوصول المباشر وتشخيص الخط",
+    navWidgetDesc:"أداة اختبار مجانية للمواقع الأخرى",
+    navGaming:"مراقب الألعاب والبنغ",navGamingDesc:"مراقبة البنغ وأداء الألعاب المباشر",
+    navSecurity:"محلل الأمان",navSecurityDesc:"فحص رؤوس أمان HTTP في الوقت الفعلي",
+    navDns:"اختبار DNS المرئي",navDnsDesc:"تتبع انتشار DNS العالمي بصريًا",
+    navSubnet:"حاسبة الشبكات الفرعية",navSubnetDesc:"حساب نطاقات IP والأقنعة",
+    footerBrand:"Fasqoo - اختبارات سرعة إنترنت مستقلة عبر المتصفح وأدوات الشبكات.",
+    footerSpeedTests:"اختبارات السرعة",footerInternetSpeed:"اختبار سرعة الإنترنت",
+    footerLite:"Fasqoo Lite",footerWidget:"الأداة",
+    footerNetworkTools:"أدوات الشبكة",footerNetworkStatus:"حالة الشبكة",
+    footerGaming:"مراقب الألعاب والبنغ",footerITDiagnose:"تشخيص تقنية المعلومات",
+    footerSecurity:"محلل الأمان",footerDns:"اختبار DNS المرئي",
+    footerCompany:"الشركة",footerAbout:"من نحن",footerFaq:"الأسئلة الشائعة",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"القياس عبر Cloudflare Edge · Fasqoo منصة مستقلة.",
+    footerDisclaimer:"Fasqoo منصة اختبار سرعة مستقلة وليست منتجًا رسميًا من Cloudflare.",
     heroKicker:"ذكاء الشبكة",idle:"جاهز — ابدأ القياس",running:"جارٍ القياس...",
     reachable:"موقع FASQOO.COM متاح",failed:"فشل التحقق",
     pageTitle:"حالة موقع Fasqoo",
@@ -1640,13 +2008,11 @@ async function loadServerHistory(){
     const data = await r.json();
     if(!Array.isArray(data)) return;
     serverHistory = data;
-    console.log(`[Server-Monitor] ${data.length} entries loaded`);
     updateOverviewStats();
     renderChart();
     renderTimeline();
     updateLiveServerStatus();
   }catch(e){
-    console.warn("[Server-Monitor] Failed to load /history.json:", e.message);
     const srv = $("fasqooLiveServer");
     if(srv){ srv.textContent = t("notAvailable"); srv.style.color = "var(--muted)"; }
     const chart = $("chart");
@@ -2196,6 +2562,31 @@ function downloadFile(content, name, type){
   if(s.enabled) start();
 })();
 
+/* ============================================================
+   MEGA-MENU DROPDOWN HANDLER
+   ============================================================ */
+const toolsDropdown = $("toolsDropdown");
+const toolsToggle = toolsDropdown ? toolsDropdown.querySelector(".nav-dropdown-toggle") : null;
+if(toolsToggle){
+  toolsToggle.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = toolsDropdown.classList.toggle("open");
+    toolsToggle.setAttribute("aria-expanded", String(open));
+  });
+  toolsDropdown.querySelectorAll(".nav-dropdown-menu a").forEach(a => a.addEventListener("click", () => {
+    toolsDropdown.classList.remove("open");
+    toolsToggle.setAttribute("aria-expanded","false");
+    $("mainMenu").classList.remove("active");
+    $("menuToggle").setAttribute("aria-expanded","false");
+  }));
+  document.addEventListener("click", e => {
+    if(!toolsDropdown.contains(e.target)){
+      toolsDropdown.classList.remove("open");
+      toolsToggle.setAttribute("aria-expanded","false");
+    }
+  });
+}
+
 $("themeBtn").addEventListener("click", () => {
   const dark = document.body.classList.contains("dark");
   localStorage.setItem(CONFIG.THEME_KEY, dark ? "light" : "dark");
@@ -2226,11 +2617,17 @@ $("languageSelect").addEventListener("change", function(){
 
 $("menuToggle").addEventListener("click", e => {
   e.stopPropagation();
-  $("mainMenu").classList.toggle("active");
+  const open = $("mainMenu").classList.toggle("active");
+  $("menuToggle").setAttribute("aria-expanded", String(open));
 });
 document.addEventListener("click", e => {
   const menu = $("mainMenu");
-  if(menu && !menu.contains(e.target) && e.target !== $("menuToggle")) menu.classList.remove("active");
+  if(menu && !menu.contains(e.target) && e.target !== $("menuToggle") && !toolsDropdown.contains(e.target)){
+    menu.classList.remove("active");
+    $("menuToggle").setAttribute("aria-expanded","false");
+    toolsDropdown.classList.remove("open");
+    toolsToggle.setAttribute("aria-expanded","false");
+  }
 });
 
 $("checkBtn").addEventListener("click", () => runFullDiagnosis());
@@ -2267,9 +2664,11 @@ window.addEventListener("appinstalled", () => {
 
 (function(){
   function update(){
-    $("fasqooLiveBrowser").textContent = detectBrowser();
+    const b = $("fasqooLiveBrowser");
+    if(b) b.textContent = detectBrowser();
     const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    $("fasqooLiveConnection").textContent = c?.effectiveType || (navigator.onLine ? t("online") : t("offline"));
+    const conn = $("fasqooLiveConnection");
+    if(conn) conn.textContent = c?.effectiveType || (navigator.onLine ? t("online") : t("offline"));
   }
   update();
   window.addEventListener("online", update);
@@ -2284,7 +2683,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadServerHistory();
   updateNetworkProfile();
   resetBadges();
-  updateNetworkProfile();
   generateReport();
   setInterval(loadServerHistory, 60000);
   document.addEventListener("visibilitychange", () => {
