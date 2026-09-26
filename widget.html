@@ -10,7 +10,6 @@
 <meta name="application-name" content="Fasqoo Widget Builder">
 <meta name="theme-color" content="#ff6426">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fasqoo Widget Builder – Create a Free Internet Speed Test Widget">
 <meta property="og:description" content="Create a professional, responsive Fasqoo internet speed test widget for your website. Customize the design, colors, size and options, then copy the embed code.">
@@ -18,13 +17,11 @@
 <meta property="og:site_name" content="Fasqoo">
 <meta property="og:locale" content="en_US">
 
-<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fasqoo Widget Builder – Create a Free Internet Speed Test Widget">
 <meta name="twitter:description" content="Create a professional, responsive Fasqoo internet speed test widget for your website. Customize the design, colors, size and options, then copy the embed code.">
 <meta name="twitter:url" content="https://www.fasqoo.com/widget.html">
 
-<!-- Google / language hints -->
 <meta name="language" content="en">
 <meta http-equiv="content-language" content="en">
 
@@ -57,59 +54,207 @@ button{font-family:inherit}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 svg{display:block;flex-shrink:0}
 
-/* Header */
-header{position:sticky;top:0;z-index:100;
-  background:color-mix(in srgb,var(--bg) 85%,transparent);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border)}
-.hi{display:flex;align-items:center;gap:16px;height:64px;
-  max-width:1200px;margin:0 auto;padding:0 24px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
-.brand-mark{width:28px;height:28px;border-radius:7px;background:var(--a);
-  display:grid;place-items:center;color:#fff}
-.brand-mark svg{width:15px;height:15px}
-.nav{display:flex;gap:24px;margin-left:24px}
-.nav a{font-size:14px;color:var(--text-2);transition:color .15s}
-.nav a:hover{color:var(--text)}
-.spacer{flex:1}
-.icon-btn,select.lang{height:36px;border:1px solid var(--border);border-radius:8px;
-  background:var(--surface);color:var(--text);padding:0 12px;
-  font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
-.icon-btn{width:36px;padding:0;display:grid;place-items:center}
-.icon-btn svg{width:16px;height:16px}
-.icon-btn:hover,select.lang:hover{border-color:var(--border-hi)}
+/* ==========================================================
+   HEADER / MEGA MENU
+   ========================================================== */
+header{position:sticky;top:0;z-index:1000;height:72px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035)}
+.hi{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
 
+a.brand,a.brand:visited,a.brand:hover,a.brand:focus,a.brand:active{
+  color:#ff5a1f;text-decoration:none;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.brandmark{width:40px;height:40px;border-radius:11px;display:block;
+  box-shadow:0 6px 16px rgba(255,90,31,.28);
+  transition:box-shadow .25s ease,transform .25s ease}
+a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:translateY(-1px)}
+.brandname{font-size:22px;font-weight:800;letter-spacing:-.7px;color:#ff5a1f}
+
+.lite-btn,.lite-btn:visited{
+  height:37px;border:0;border-radius:10px;
+  background:linear-gradient(135deg,#ff5a1f 0%,#ff8b61 100%);
+  color:#fff!important;display:inline-flex;align-items:center;justify-content:center;
+  gap:7px;padding:0 15px;font-size:12px;font-weight:600;letter-spacing:.1px;
+  white-space:nowrap;text-decoration:none;
+  box-shadow:0 6px 18px rgba(255,90,31,.30),inset 0 1px 0 rgba(255,255,255,.20);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+  flex-shrink:0;position:relative}
+.lite-btn::before{content:"⚡";font-size:13px;line-height:1;
+  display:inline-block;transform:translateY(-.5px);
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.lite-btn:hover,.lite-btn:focus{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(255,90,31,.42),inset 0 1px 0 rgba(255,255,255,.28);
+  filter:brightness(1.05);color:#fff!important}
+
+.install-btn{height:35px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;
+  transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;cursor:pointer}
+.install-btn:hover{background:var(--surface-2);border-color:var(--border-hi);
+  box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.install-btn[hidden]{display:none}
+.win-icon{width:15px;height:15px;display:grid;
+  grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
+.win-icon i{display:block;background:currentColor}
+.install-btn .install-label{line-height:1}
+
+.menu-toggle{display:none;background:transparent;border:1px solid var(--border);
+  border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text);cursor:pointer}
+
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto}
+.main-menu>a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500;
+  white-space:nowrap;transition:color .2s;position:relative}
+.main-menu>a:hover{color:var(--a)}
+.main-menu>a.active{color:var(--a);font-weight:700}
+
+.menu-extra{display:flex;align-items:center;gap:8px}
+.lang-control{height:35px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--text);display:flex;align-items:center;
+  justify-content:center;gap:7px;padding:0 10px;
+  transition:background .2s,border-color .2s,box-shadow .2s}
+.lang-control:hover{background:var(--surface-2);border-color:var(--border-hi);
+  box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lang-icon{font-size:14px;line-height:1;color:currentColor;display:inline-block}
+.lang-control select{min-width:88px;height:33px;border:0;outline:0;
+  background:transparent;color:var(--text);padding:0 14px 0 0;
+  font-size:12px;font-weight:500;cursor:pointer}
+.theme-btn{width:35px;height:35px;padding:0;border:1px solid var(--border);
+  border-radius:8px;background:var(--surface);color:var(--text);
+  display:grid;place-items:center;font-size:16px;cursor:pointer;
+  transition:background .2s,border-color .2s,box-shadow .2s}
+.theme-btn:hover{background:var(--surface-2);border-color:var(--border-hi);
+  box-shadow:0 3px 10px rgba(0,0,0,.05)}
+
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown-toggle{appearance:none;border:0;background:transparent;color:var(--text);
+  font:inherit;font-size:13px;font-weight:500;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;padding:8px 0;cursor:pointer}
+.nav-dropdown-toggle:hover{color:var(--a)}
+.nav-chevron{font-size:12px;line-height:1;transition:transform .22s ease}
+.nav-dropdown:hover .nav-chevron,.nav-dropdown.open .nav-chevron{transform:rotate(180deg)}
+
+.nav-dropdown-menu{position:absolute;top:calc(100% + 16px);left:50%;width:100%;
+  max-width:650px;min-width:560px;padding:18px;display:grid;
+  grid-template-columns:1fr 1fr;gap:20px;
+  background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border:1px solid var(--border);border-radius:18px;
+  box-shadow:0 24px 70px rgba(16,24,40,.16),0 6px 22px rgba(16,24,40,.06);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate(-50%,-8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease;z-index:1200}
+body.light .nav-dropdown-menu{background:rgba(255,255,255,.95)}
+body.light .nav-dropdown-menu:before{background:rgba(255,255,255,.95)}
+.nav-dropdown-menu:before{content:"";position:absolute;top:-7px;left:50%;
+  width:13px;height:13px;transform:translateX(-50%) rotate(45deg);
+  background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;
+  pointer-events:auto;transform:translate(-50%,0)}
+.nav-mega-column{min-width:0}
+.nav-dropdown-section{padding:2px 8px 9px;color:var(--text-2);font-size:9px;
+  font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.nav-mega-item{display:flex!important;align-items:flex-start;gap:12px;width:100%;
+  padding:11px 10px!important;border-radius:12px;color:var(--text)!important;
+  text-decoration:none;transition:background .18s ease,color .18s ease,
+  transform .18s ease,box-shadow .18s ease}
+.nav-mega-item+.nav-mega-item{margin-top:3px}
+.nav-mega-icon{width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;
+  border-radius:10px;background:var(--surface-2);border:1px solid var(--border);
+  font-size:0;line-height:0;transition:background .18s ease,border-color .18s ease,
+  box-shadow .18s ease,transform .18s ease}
+.nav-mega-icon svg{width:20px;height:20px;display:block;flex:0 0 auto;
+  color:#52525b;transition:color .18s ease,transform .18s ease}
+body:not(.light) .nav-mega-icon svg{color:#a1a1aa}
+.nav-mega-copy{min-width:0;padding-top:1px}
+.nav-mega-title{display:block;font-size:12px;line-height:1.25;font-weight:700;
+  color:var(--text);transition:color .18s ease}
+.nav-mega-desc{display:block;margin-top:4px;font-size:10px;line-height:1.45;
+  color:var(--text-2);font-weight:400;transition:color .18s ease}
+.nav-mega-item:hover{background:linear-gradient(135deg,rgba(255,90,31,.07),rgba(255,255,255,.02));
+  color:var(--a)!important;transform:translateX(3px);
+  box-shadow:0 7px 18px rgba(16,24,40,.06)}
+.nav-mega-item:hover .nav-mega-icon{background:rgba(255,90,31,.10);
+  border-color:rgba(255,90,31,.20);box-shadow:0 0 0 3px rgba(255,90,31,.05);
+  transform:translateY(-1px)}
+.nav-mega-item:hover .nav-mega-icon svg{color:var(--a);transform:scale(1.05)}
+.nav-mega-item:hover .nav-mega-title{color:var(--a)}
+
+@media(max-width:1050px){.nav-dropdown-menu{min-width:520px}}
+@media(max-width:900px){
+  .main-menu{gap:15px}
+  .install-btn{display:none!important}
+}
+@media(max-width:760px){
+  .menu-toggle{display:block}
+  .main-menu{display:none;flex-direction:column;position:absolute;top:72px;
+    left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);
+    padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);
+    align-items:flex-start;z-index:1100}
+  .main-menu.active{display:flex}
+  .nav-dropdown{width:100%;display:block}
+  .nav-dropdown-toggle{width:100%;justify-content:space-between;padding:2px 0}
+  .nav-dropdown-menu{position:static;width:100%;min-width:0;max-width:none;
+    margin-top:8px;transform:none!important;grid-template-columns:1fr;gap:8px;
+    box-shadow:none;border-radius:12px;padding:9px;opacity:0;visibility:hidden;
+    pointer-events:none;max-height:0;overflow:hidden;
+    transition:opacity .18s ease,max-height .22s ease,visibility .18s ease}
+  .nav-dropdown-menu:before{display:none}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:0;visibility:hidden;
+    pointer-events:none;max-height:0}
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;
+    pointer-events:auto;max-height:900px}
+  .nav-mega-column{width:100%}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;
+    padding-top:10px;border-top:1px solid var(--border);gap:12px}
+  .hi{padding:0 16px;gap:8px}
+  .brandname{font-size:19px}
+  .brandmark{width:34px;height:34px}
+}
+@media(max-width:600px){
+  .lite-btn{font-size:11px;padding:0 12px;height:34px}
+  .lite-btn::before{font-size:12px}
+}
+
+/* ==========================================================
+   WIDGET BUILDER
+   ========================================================== */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  height:44px;padding:0 20px;border-radius:10px;border:1px solid transparent;
-  font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
-.btn-primary{background:var(--a);color:#fff}
-.btn-primary:hover{background:#f05a17}
+  height:44px;padding:0 20px;border-radius:9px;border:1px solid transparent;
+  font:inherit;font-weight:500;font-size:14px;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--a);color:#fff;box-shadow:0 1px 2px rgba(16,24,40,.08)}
+.btn-primary:hover{background:#f05a17;box-shadow:0 5px 16px rgba(16,24,40,.10)}
 .btn-secondary{background:var(--surface);border-color:var(--border);color:var(--text)}
 .btn-secondary:hover{border-color:var(--border-hi)}
 .btn svg{width:16px;height:16px}
 
-/* Hero */
-.hero{padding:72px 0 48px;text-align:center}
-.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;
+.hero{padding:76px 0 48px;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.1em;
   text-transform:uppercase;color:var(--a);padding:6px 12px;
   border:1px solid color-mix(in srgb,var(--a) 40%,transparent);
   border-radius:100px;margin-bottom:20px;
   background:color-mix(in srgb,var(--a) 8%,transparent)}
-.hero h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;
-  letter-spacing:-.03em;margin:0 0 16px;line-height:1.1}
+.hero h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:600;
+  letter-spacing:-.025em;margin:0 0 16px;line-height:1.1}
 .hero p{font-size:17px;color:var(--text-2);max-width:620px;margin:0 auto 32px}
 .hero .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-/* Builder */
 .builder{display:grid;grid-template-columns:380px 1fr;gap:24px;
   padding:32px 0 80px;align-items:start}
 .panel{background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);padding:24px;position:sticky;top:88px;
-  max-height:calc(100vh - 100px);overflow-y:auto}
-.panel-title{font-size:15px;font-weight:700;margin:0 0 4px}
+  max-height:calc(100vh - 100px);overflow-y:auto;
+  box-shadow:0 1px 2px rgba(16,24,40,.03)}
+.panel-title{font-size:15px;font-weight:600;margin:0 0 4px}
 .panel-sub{font-size:13px;color:var(--text-2);margin:0 0 20px}
 .field{margin-bottom:16px}
-.field label{display:block;font-size:11px;font-weight:700;color:var(--text-2);
+.field label{display:block;font-size:11px;font-weight:500;color:var(--text-2);
   margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
 .field input[type=text],.field select{width:100%;height:40px;background:var(--bg);
   border:1px solid var(--border);border-radius:8px;padding:0 12px;
@@ -117,13 +262,13 @@ header{position:sticky;top:0;z-index:100;
 .field input:focus,.field select:focus{border-color:var(--a)}
 .chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .chip{padding:10px;border:1px solid var(--border);background:var(--bg);
-  border-radius:8px;color:var(--text-2);font:inherit;font-size:13px;font-weight:600;
+  border-radius:8px;color:var(--text-2);font:inherit;font-size:13px;font-weight:500;
   cursor:pointer;text-align:center;transition:all .15s}
 .chip:hover{border-color:var(--border-hi);color:var(--text)}
 .chip.active{background:var(--a);color:#fff;border-color:var(--a)}
 .range-row{display:flex;align-items:center;gap:10px}
 .range-row input[type=range]{flex:1;accent-color:var(--a);height:4px}
-.range-val{min-width:56px;text-align:right;font-size:12px;font-weight:700;
+.range-val{min-width:56px;text-align:right;font-size:12px;font-weight:600;
   color:var(--text-2);font-family:var(--mono)}
 .color-row{display:flex;gap:8px}
 .color-row input[type=color]{width:44px;height:40px;padding:3px;
@@ -135,17 +280,17 @@ header{position:sticky;top:0;z-index:100;
 .panel-actions{margin-top:20px}
 .panel-actions .btn{width:100%}
 
-/* Preview */
 .preview-wrap{display:flex;flex-direction:column;gap:20px;min-width:0}
 .card-surface{background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden}
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 1px 2px rgba(16,24,40,.03)}
 .card-header{padding:16px 20px;border-bottom:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.card-header h2{margin:0;font-size:15px;font-weight:700}
+.card-header h2{margin:0;font-size:15px;font-weight:600}
 .card-header p{margin:4px 0 0;font-size:13px;color:var(--text-2)}
 .device-switch{display:flex;gap:4px;background:var(--bg);padding:3px;border-radius:8px}
 .device-switch button{border:0;background:transparent;color:var(--text-2);
-  padding:6px 10px;border-radius:6px;font:inherit;font-size:12px;font-weight:600;
+  padding:6px 10px;border-radius:6px;font:inherit;font-size:12px;font-weight:500;
   cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s}
 .device-switch button.active{background:var(--surface-2);color:var(--text)}
 .device-switch svg{width:13px;height:13px}
@@ -240,70 +385,94 @@ header{position:sticky;top:0;z-index:100;
 .fw-foot a{color:#ff6a2a;font-weight:600}
 .fw-foot a:hover{text-decoration:underline}
 
-/* Code block */
 .code-block-wrap{position:relative}
-.code-block{background:#0b0b10;border-radius:10px;padding:16px 16px 16px 16px;
+.code-block{background:#0b0b10;border-radius:10px;padding:16px;
   font-family:var(--mono);font-size:12px;line-height:1.6;color:#d5d5e0;
   overflow:auto;max-height:320px;white-space:pre;margin:0;
   border:1px solid var(--border)}
 .copy-btn{position:absolute;top:12px;right:12px;height:32px;padding:0 12px;
   border-radius:6px;border:1px solid #333;background:#1a1a22;color:#fff;
-  font:inherit;font-size:12px;font-weight:600;cursor:pointer;
+  font:inherit;font-size:12px;font-weight:500;cursor:pointer;
   transition:all .15s;display:inline-flex;align-items:center;gap:6px}
 .copy-btn:hover{background:var(--a);border-color:var(--a)}
 .copy-btn svg{width:12px;height:12px}
 
-/* Steps */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .step{padding:20px;background:var(--surface);border:1px solid var(--border);
-  border-radius:12px}
+  border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.03)}
 .step-num{display:inline-flex;align-items:center;justify-content:center;
   width:24px;height:24px;border-radius:50%;
   background:color-mix(in srgb,var(--a) 15%,transparent);color:var(--a);
-  font-size:11px;font-weight:700;margin-bottom:12px;
+  font-size:11px;font-weight:600;margin-bottom:12px;
   border:1px solid color-mix(in srgb,var(--a) 30%,transparent)}
-.step h3{margin:0 0 6px;font-size:14px;font-weight:700}
+.step h3{margin:0 0 6px;font-size:14px;font-weight:600}
 .step p{margin:0;font-size:13px;color:var(--text-2);line-height:1.5}
 
-/* Sections */
 section.section{padding:72px 0;border-top:1px solid var(--border)}
 .section-head{text-align:center;max-width:640px;margin:0 auto 48px}
-.section-head h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;
+.section-head h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:600;
   letter-spacing:-.03em;line-height:1.15;margin:0 0 16px}
 .section-head p{font-size:16px;color:var(--text-2);margin:0}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .feature{padding:24px;background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;transition:border-color .15s}
+  border-radius:12px;transition:border-color .15s;box-shadow:0 1px 2px rgba(16,24,40,.03)}
 .feature:hover{border-color:var(--border-hi)}
 .feature-icon{width:40px;height:40px;border-radius:10px;
   background:color-mix(in srgb,var(--a) 12%,transparent);color:var(--a);
   display:grid;place-items:center;margin-bottom:16px}
 .feature-icon svg{width:20px;height:20px}
-.feature h3{margin:0 0 8px;font-size:15px;font-weight:700}
+.feature h3{margin:0 0 8px;font-size:15px;font-weight:600}
 .feature p{margin:0;font-size:14px;color:var(--text-2);line-height:1.55}
 
-/* CTA */
 .cta{text-align:center;padding:80px 0;border-top:1px solid var(--border)}
-.cta h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;
+.cta h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:600;
   letter-spacing:-.03em;margin:0 0 16px;line-height:1.15}
 .cta p{font-size:16px;color:var(--text-2);max-width:560px;margin:0 auto 32px}
 
-/* Footer */
-footer{padding:48px 0 24px;border-top:1px solid var(--border);
-  font-size:13px;color:var(--text-2)}
-.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;
-  padding-bottom:32px}
-.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--text);margin:0 0 16px}
-.foot-col p{margin:0;font-size:13px;color:var(--text-2);line-height:1.6;max-width:300px}
-.foot-col a{display:block;padding:4px 0;color:var(--text-2);font-size:13px;
-  transition:color .15s}
-.foot-col a:hover{color:var(--text)}
-.foot-bottom{padding-top:24px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12px;color:var(--text-3)}
+/* ==========================================================
+   SITE FOOTER (like index.html)
+   ========================================================== */
+.site-footer{margin-top:45px;padding:42px 0 22px;background:var(--surface);border-top:1px solid var(--border);color:var(--text-2);font-size:13px}
+.site-footer .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1.15fr 1fr;gap:42px;padding-bottom:34px}
+.footer-brand-name{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text);margin-bottom:12px}
+.footer-brand p{max-width:290px;margin:0;font-size:12px;line-height:1.7;color:var(--text-2)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.footer-column h4{margin:0 0 7px;color:var(--text);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.footer-column a{color:var(--text-2);font-size:12px;line-height:1.5;text-decoration:none;transition:color .18s ease}
+.footer-column a:hover{color:var(--a)}
+.footer-bottom{
+  border-top:1px solid var(--border);
+  padding-top:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  text-align:center;
+  font-size:11px;
+  line-height:1.5;
+  color:var(--text-2);
+}
+.footer-copyright{color:var(--text);font-size:12px;font-weight:600}
+.footer-cloudflare{display:flex;flex-direction:column;align-items:center;gap:3px;max-width:760px}
+.footer-powered,.footer-disclaimer{display:block;color:var(--text-2);font-size:10px;line-height:1.55;font-weight:400}
+.footer-disclaimer{opacity:.78}
 
-/* Toast */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:760px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);
   background:var(--surface-2);color:var(--text);padding:12px 18px;
   border-radius:10px;border:1px solid var(--border-hi);font-size:13.5px;
@@ -313,56 +482,81 @@ footer{padding:48px 0 24px;border-top:1px solid var(--border);
 .toast.show{transform:translate(-50%,0)}
 .toast svg{width:16px;height:16px;color:var(--success)}
 
-/* Responsive */
 @media (max-width:900px){
   .builder{grid-template-columns:1fr}
   .panel{position:static;max-height:none}
-  .nav{display:none}
   .grid-3{grid-template-columns:1fr 1fr}
-  .foot-grid{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr}
 }
 @media (max-width:600px){
-  .grid-3,.foot-grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
   .device-switch{display:none}
   .stage{padding:16px;min-height:480px}
   .fw{padding:16px;gap:12px}
   .fw-speed{font-size:40px}
-  .hero{padding:48px 0 32px}
+  .hero{padding:52px 0 32px}
   .section{padding:56px 0}
-  .hi{padding:0 16px;gap:8px}
   .container{padding:0 16px}
-  .nav a{font-size:13px}
+  .site-footer .wrap{padding:0 16px}
 }
 
-/* ---------- OPENWIDGET-INSPIRED PROFESSIONAL PASS ---------- */
-:root{
-  --a:#ff6426;
-  --font:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Arial,sans-serif;
+/* ==========================================================
+   INSTALL GUIDE
+   ========================================================== */
+.fasqoo-install-section{padding:92px 0 70px;background:var(--bg)}
+.fasqoo-install-head{max-width:780px;margin:0 auto 38px;text-align:center}
+.fasqoo-install-head.small{margin-bottom:24px}
+.fasqoo-install-eyebrow{display:inline-block;font-size:11px;line-height:1.2;letter-spacing:.12em;font-weight:600;color:#ff6426;margin-bottom:12px}
+.fasqoo-install-head h2,.fasqoo-why h2{margin:0;font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-.035em;font-weight:600;color:var(--text)}
+.fasqoo-install-head p{margin:15px auto 0;max-width:650px;font-size:15px;line-height:1.7;color:var(--text-2);font-weight:400}
+.fasqoo-install-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 auto 42px;max-width:1100px}
+.fasqoo-install-step{padding:25px;border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:0 1px 2px rgba(16,24,40,.03)}
+.fasqoo-step-number{font-size:12px;font-weight:600;letter-spacing:.08em;color:#ff6426;margin-bottom:18px}
+.fasqoo-install-step h3{font-size:17px;font-weight:600;margin:0 0 8px;color:var(--text)}
+.fasqoo-install-step p{font-size:14px;line-height:1.65;color:var(--text-2);margin:0;font-weight:400}
+.fasqoo-platforms{max-width:1100px;margin:0 auto;border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;box-shadow:0 1px 3px rgba(16,24,40,.04)}
+.fasqoo-platform-tabs{display:flex;gap:4px;overflow-x:auto;padding:8px;border-bottom:1px solid var(--border);scrollbar-width:thin}
+.fasqoo-platform-tab{flex:0 0 auto;border:0;background:transparent;border-radius:9px;padding:10px 14px;font:500 13px inherit;color:var(--text-2);cursor:pointer;white-space:nowrap}
+.fasqoo-platform-tab:hover{background:var(--surface-2);color:var(--text)}
+.fasqoo-platform-tab.active{background:#fff0e9;color:#d94d17;font-weight:600}
+.fasqoo-platform-content{display:none;padding:30px 32px 32px}
+.fasqoo-platform-content.active{display:block}
+.fasqoo-platform-content h3{margin:0 0 15px;font-size:20px;font-weight:600;color:var(--text)}
+.fasqoo-platform-content p,.fasqoo-platform-content li{font-size:14px;line-height:1.7;color:var(--text-2);font-weight:400}
+.fasqoo-platform-content ol{margin:0;padding-left:21px}
+.fasqoo-platform-content li{padding:3px 0}
+.fasqoo-platform-content code{padding:2px 5px;border-radius:5px;background:var(--surface-2);font-size:.92em}
+.fasqoo-note{margin:18px 0 0;padding:12px 14px;border-left:2px solid #ff6426;background:rgba(255,100,38,.05);border-radius:0 8px 8px 0}
+.fasqoo-benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:42px auto 55px;max-width:1100px}
+.fasqoo-benefit{display:flex;gap:12px;padding:20px;border:1px solid var(--border);border-radius:13px;background:var(--surface)}
+.fasqoo-benefit-icon{width:31px;height:31px;display:grid;place-items:center;flex:0 0 31px;border-radius:9px;background:#fff0e9;color:#ff6426;font-weight:600}
+.fasqoo-benefit h3{font-size:14px;font-weight:600;margin:0 0 5px;color:var(--text)}
+.fasqoo-benefit p{font-size:12px;line-height:1.55;color:var(--text-2);margin:0}
+.fasqoo-why{max-width:1100px;margin:0 auto 55px;padding:32px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(135deg,rgba(255,100,38,.055),transparent);display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.fasqoo-why h2{font-size:27px}
+.fasqoo-why>p{font-size:14px;line-height:1.75;color:var(--text-2);margin:0}
+.fasqoo-faq{max-width:850px;margin:0 auto}
+.fasqoo-faq details{border-top:1px solid var(--border);padding:0}
+.fasqoo-faq details:last-child{border-bottom:1px solid var(--border)}
+.fasqoo-faq summary{list-style:none;cursor:pointer;padding:19px 35px 19px 2px;position:relative;font-size:15px;font-weight:500;color:var(--text)}
+.fasqoo-faq summary::-webkit-details-marker{display:none}
+.fasqoo-faq summary:after{content:"+";position:absolute;right:5px;top:15px;font-size:22px;font-weight:300;color:var(--text-2)}
+.fasqoo-faq details[open] summary:after{content:"−"}
+.fasqoo-faq details p{font-size:14px;line-height:1.7;color:var(--text-2);margin:0;padding:0 35px 19px 2px}
+@media(max-width:850px){
+ .fasqoo-install-steps{grid-template-columns:1fr}
+ .fasqoo-benefits{grid-template-columns:1fr 1fr}
+ .fasqoo-why{grid-template-columns:1fr;gap:18px}
 }
-body{font-size:14px;letter-spacing:-.005em}
-.brand{font-weight:600}
-.icon-btn,select.lang{font-weight:500}
-.btn{font-weight:500}
-.eyebrow{font-weight:600}
-.hero h1{font-weight:600;letter-spacing:-.025em}
-.panel-title,.card-header h2{font-weight:600}
-.field label{font-weight:500}
-.chip{font-weight:500}
-.range-val{font-weight:600}
-.device-switch button{font-weight:500}
-.step-num{font-weight:600}
-.step h3,.feature h3{font-weight:600}
-.section-head h2,.cta h2{font-weight:600}
-.foot-col h4{font-weight:600}
-.copy-btn{font-weight:500}
-.hero{padding-top:76px}
-.panel,.card-surface,.step,.feature{box-shadow:0 1px 2px rgba(16,24,40,.03)}
-.btn{border-radius:9px}
-.btn-primary{box-shadow:0 1px 2px rgba(16,24,40,.08)}
-.btn-primary:hover{box-shadow:0 5px 16px rgba(16,24,40,.10)}
-@media(max-width:600px){.hero h1{letter-spacing:-.02em}.hero{padding-top:52px}}
-
+@media(max-width:600px){
+ .fasqoo-install-section{padding:65px 0 45px}
+ .fasqoo-install-head h2{font-size:30px}
+ .fasqoo-platform-content{padding:24px 20px}
+ .fasqoo-benefits{grid-template-columns:1fr}
+ .fasqoo-why{padding:24px}
+ .fasqoo-why h2{font-size:24px}
+ .fasqoo-platform-tabs{padding:7px}
+}
 </style>
 
 <script type="application/ld+json">
@@ -382,94 +576,164 @@ body{font-size:14px;letter-spacing:-.005em}
   }
 }
 </script>
-
-
-<style>
-/* Fasqoo installation guide */
-.fasqoo-install-section{padding:92px 0 70px;background:var(--bg,#fff)}
-.fasqoo-install-head{max-width:780px;margin:0 auto 38px;text-align:center}
-.fasqoo-install-head.small{margin-bottom:24px}
-.fasqoo-install-eyebrow{display:inline-block;font-size:11px;line-height:1.2;letter-spacing:.12em;font-weight:600;color:#ff6426;margin-bottom:12px}
-.fasqoo-install-head h2,.fasqoo-why h2{margin:0;font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-.035em;font-weight:600;color:var(--text,#111)}
-.fasqoo-install-head p{margin:15px auto 0;max-width:650px;font-size:15px;line-height:1.7;color:var(--muted,#667085);font-weight:400}
-.fasqoo-install-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 auto 42px;max-width:1100px}
-.fasqoo-install-step{padding:25px;border:1px solid rgba(16,24,40,.08);border-radius:14px;background:rgba(255,255,255,.72);box-shadow:0 1px 2px rgba(16,24,40,.03)}
-.fasqoo-step-number{font-size:12px;font-weight:600;letter-spacing:.08em;color:#ff6426;margin-bottom:18px}
-.fasqoo-install-step h3{font-size:17px;font-weight:600;margin:0 0 8px;color:var(--text,#111)}
-.fasqoo-install-step p{font-size:14px;line-height:1.65;color:var(--muted,#667085);margin:0;font-weight:400}
-.fasqoo-platforms{max-width:1100px;margin:0 auto;border:1px solid rgba(16,24,40,.09);border-radius:16px;background:rgba(255,255,255,.8);overflow:hidden;box-shadow:0 1px 3px rgba(16,24,40,.04)}
-.fasqoo-platform-tabs{display:flex;gap:4px;overflow-x:auto;padding:8px;border-bottom:1px solid rgba(16,24,40,.08);scrollbar-width:thin}
-.fasqoo-platform-tab{flex:0 0 auto;border:0;background:transparent;border-radius:9px;padding:10px 14px;font:500 13px inherit;color:var(--muted,#667085);cursor:pointer;white-space:nowrap}
-.fasqoo-platform-tab:hover{background:rgba(16,24,40,.04);color:var(--text,#111)}
-.fasqoo-platform-tab.active{background:#fff0e9;color:#d94d17;font-weight:600}
-.fasqoo-platform-content{display:none;padding:30px 32px 32px}
-.fasqoo-platform-content.active{display:block}
-.fasqoo-platform-content h3{margin:0 0 15px;font-size:20px;font-weight:600;color:var(--text,#111)}
-.fasqoo-platform-content p,.fasqoo-platform-content li{font-size:14px;line-height:1.7;color:var(--muted,#667085);font-weight:400}
-.fasqoo-platform-content ol{margin:0;padding-left:21px}
-.fasqoo-platform-content li{padding:3px 0}
-.fasqoo-platform-content code{padding:2px 5px;border-radius:5px;background:rgba(16,24,40,.05);font-size:.92em}
-.fasqoo-note{margin:18px 0 0;padding:12px 14px;border-left:2px solid #ff6426;background:rgba(255,100,38,.05);border-radius:0 8px 8px 0}
-.fasqoo-benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:42px auto 55px;max-width:1100px}
-.fasqoo-benefit{display:flex;gap:12px;padding:20px;border:1px solid rgba(16,24,40,.07);border-radius:13px;background:rgba(255,255,255,.62)}
-.fasqoo-benefit-icon{width:31px;height:31px;display:grid;place-items:center;flex:0 0 31px;border-radius:9px;background:#fff0e9;color:#ff6426;font-weight:600}
-.fasqoo-benefit h3{font-size:14px;font-weight:600;margin:0 0 5px;color:var(--text,#111)}
-.fasqoo-benefit p{font-size:12px;line-height:1.55;color:var(--muted,#667085);margin:0}
-.fasqoo-why{max-width:1100px;margin:0 auto 55px;padding:32px;border:1px solid rgba(16,24,40,.08);border-radius:16px;background:linear-gradient(135deg,rgba(255,100,38,.055),rgba(255,255,255,.75));display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
-.fasqoo-why h2{font-size:27px}
-.fasqoo-why>p{font-size:14px;line-height:1.75;color:var(--muted,#667085);margin:0}
-.fasqoo-faq{max-width:850px;margin:0 auto}
-.fasqoo-faq details{border-top:1px solid rgba(16,24,40,.09);padding:0}
-.fasqoo-faq details:last-child{border-bottom:1px solid rgba(16,24,40,.09)}
-.fasqoo-faq summary{list-style:none;cursor:pointer;padding:19px 35px 19px 2px;position:relative;font-size:15px;font-weight:500;color:var(--text,#111)}
-.fasqoo-faq summary::-webkit-details-marker{display:none}
-.fasqoo-faq summary:after{content:"+";position:absolute;right:5px;top:15px;font-size:22px;font-weight:300;color:#667085}
-.fasqoo-faq details[open] summary:after{content:"−"}
-.fasqoo-faq details p{font-size:14px;line-height:1.7;color:var(--muted,#667085);margin:0;padding:0 35px 19px 2px}
-@media(max-width:850px){
- .fasqoo-install-steps{grid-template-columns:1fr}
- .fasqoo-benefits{grid-template-columns:1fr 1fr}
- .fasqoo-why{grid-template-columns:1fr;gap:18px}
-}
-@media(max-width:600px){
- .fasqoo-install-section{padding:65px 0 45px}
- .fasqoo-install-head h2{font-size:30px}
- .fasqoo-platform-content{padding:24px 20px}
- .fasqoo-benefits{grid-template-columns:1fr}
- .fasqoo-why{padding:24px}
- .fasqoo-why h2{font-size:24px}
- .fasqoo-platform-tabs{padding:7px}
-}
-</style>
-
 </head>
 <body class="light">
 
 <header>
   <div class="hi">
-    <a class="brand" href="https://www.fasqoo.com/">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      </span>
-      <span>Fasqoo</span>
+    <a class="brand" href="index.html" aria-label="Fasqoo">
+      <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
+        <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
+        <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
+      </svg>
+      <span class="brandname">Fasqoo</span>
     </a>
-    <nav class="nav">
-      <a href="#builder" data-i18n="navCreate">Widget erstellen</a>
-      <a href="#features" data-i18n="navFeatures">Funktionen</a>
-      <a href="#how" data-i18n="navHow">Anleitung</a>
-      <a href="https://www.fasqoo.com/" target="_blank" rel="noopener" data-i18n="navSite">Fasqoo.com</a>
-    </nav>
-    <div class="spacer"></div>
-    <select id="lang" class="lang" aria-label="Language" data-i18n-aria="ariaLanguage">
-      <option value="de">DE</option><option value="en">EN</option>
-      <option value="es">ES</option><option value="fr">FR</option>
-      <option value="it">IT</option><option value="pt">PT</option>
-      <option value="nl">NL</option><option value="tr">TR</option>
-      <option value="sq">SQ</option><option value="pl">PL</option>
-    </select>
-    <button class="icon-btn" id="theme" aria-label="Theme" data-i18n-aria="ariaTheme">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
     </button>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" data-i18n="navSpeedtest">Speedtest</a>
+
+      <div class="nav-dropdown" id="toolsDropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
+          <span class="nav-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="nav-dropdown-menu" role="menu">
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
+
+            <a class="nav-mega-item" href="network-status.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
+                <span class="nav-mega-desc" data-i18n="navStatusDesc">Live-Erreichbarkeit &amp; Leitungs-Diagnose</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="widget.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.6"/>
+                  <rect x="13" y="3" width="8" height="5" rx="1.6"/>
+                  <rect x="13" y="10" width="8" height="11" rx="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
+                <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/>
+                  <line x1="6.5" y1="11" x2="10.5" y2="11"/>
+                  <line x1="8.5" y1="9" x2="8.5" y2="13"/>
+                  <circle cx="16" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="18" cy="12.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navGaming">Gaming- &amp; Ping-Monitor</span>
+                <span class="nav-mega-desc" data-i18n="navGamingDesc">Live-Ping &amp; Gaming-Performance überwachen</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
+
+            <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
+                <span class="nav-mega-desc" data-i18n="navSecurityDesc">HTTP-Sicherheitsheader in Echtzeit prüfen</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.4 9h17.2"/>
+                  <path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/>
+                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
+                <span class="nav-mega-desc" data-i18n="navDnsDesc">Globale DNS-Ausbreitung visuell tracken</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="3" width="15" height="18" rx="2.2"/>
+                  <rect x="7.5" y="6" width="9" height="3.4" rx="0.9"/>
+                  <circle cx="9" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="9" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
+                <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="widget.html" class="active" data-i18n="navWidgetTop">Widget</a>
+      <a href="faq.html" data-i18n="navFaq">FAQ</a>
+      <a href="about.html" data-i18n="navAbout">Über uns</a>
+
+      <div class="menu-extra">
+        <div class="lang-control">
+          <span class="lang-icon" aria-hidden="true">◎</span>
+          <select id="lang" aria-label="Language" data-i18n-aria="ariaLanguage">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+            <option value="tr">Türkçe</option>
+            <option value="sq">Shqip</option>
+            <option value="pl">Polski</option>
+          </select>
+        </div>
+        <button id="theme" class="theme-btn" type="button" aria-label="Theme" data-i18n-aria="ariaTheme">☾</button>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -491,7 +755,6 @@ body{font-size:14px;letter-spacing:-.005em}
   </section>
 
   <section id="builder" class="builder">
-    <!-- Panel -->
     <aside class="panel">
       <h2 class="panel-title" data-i18n="panelTitle">Konfigurator</h2>
       <p class="panel-sub" data-i18n="panelSub">Passe das Widget an. Änderungen werden live übernommen.</p>
@@ -562,7 +825,6 @@ body{font-size:14px;letter-spacing:-.005em}
       </div>
     </aside>
 
-    <!-- Preview & Code -->
     <div class="preview-wrap">
       <div class="card-surface">
         <div class="card-header">
@@ -719,9 +981,8 @@ body{font-size:14px;letter-spacing:-.005em}
   </div>
 </section>
 
-
 <section class="fasqoo-install-section" id="how-to-install">
-  <div class="wrap">
+  <div class="container">
     <div class="fasqoo-install-head">
       <span class="fasqoo-install-eyebrow" data-i18n="installEyebrow">EASY INSTALLATION</span>
       <h2 data-i18n="installTitle">How to add the Fasqoo Speed Test to your website</h2>
@@ -882,35 +1143,48 @@ body{font-size:14px;letter-spacing:-.005em}
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h4>Fasqoo</h4>
-        <p data-i18n="footerDesc">Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Fasqoo</div>
+        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
       </div>
-      <div class="foot-col">
-        <h4 data-i18n="footerSpeed">Speed Tests</h4>
-        <a href="https://www.fasqoo.com/" data-i18n="footerInternet">Internet Speed Test</a>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
+        <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
         <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
-        <a href="https://www.fasqoo.com/widget.html" data-i18n="footerWidget">Widget</a>
+        <a href="widget.html" data-i18n="footerWidget">Widget</a>
       </div>
-      <div class="foot-col">
-        <h4 data-i18n="footerTools">Netzwerk-Tools</h4>
-        <a href="https://www.fasqoo.com/network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
-        <a href="https://www.fasqoo.com/it-diagnose.html" data-i18n="footerITDiagnose">IT Diagnose</a>
-      
+
+      <div class="footer-column">
+        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
       </div>
-      <div class="foot-col">
+
+      <div class="footer-column">
         <h4 data-i18n="footerCompany">Unternehmen</h4>
-        <a href="https://www.fasqoo.com/about.html" data-i18n="navAbout">Über uns</a>
-        <a href="https://www.fasqoo.com/faq.html" data-i18n="footerFAQ">FAQ</a>
-        <a href="https://www.fasqoo.com/privacy-policy.html" data-i18n="navPrivacy">Datenschutz</a>
+        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
+        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
       </div>
     </div>
-    <div class="foot-bottom">
-      <div>© 2026 Fasqoo</div>
-      <div data-i18n="footerNote">Messung über Cloudflare Edge · Fasqoo ist eine unabhängige Plattform.</div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright" data-i18n="footerCopyright">© 2026 Fasqoo</span>
+      <div class="footer-cloudflare">
+        <span class="footer-powered" data-i18n="footerBranding">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</span>
+        <span class="footer-disclaimer" data-i18n="footerDisclaimer">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -921,19 +1195,187 @@ body{font-size:14px;letter-spacing:-.005em}
 </div>
 
 <script>
-/* ===================== ICONS (SVG) ===================== */
+/* ===================== MENU / HEADER LOGIC ===================== */
+(function(){
+  const menuToggle = document.getElementById("menuToggle");
+  const mainMenu = document.getElementById("mainMenu");
+  menuToggle?.addEventListener("click", () => {
+    const open = mainMenu.classList.toggle("active");
+    menuToggle.setAttribute("aria-expanded", String(open));
+  });
+  document.querySelectorAll(".main-menu > a").forEach(a => a.addEventListener("click", () => {
+    mainMenu.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded","false");
+    const dd = document.getElementById("toolsDropdown");
+    if(dd) dd.classList.remove("open");
+  }));
+
+  const toolsDropdown = document.getElementById("toolsDropdown");
+  const toolsToggle = toolsDropdown?.querySelector(".nav-dropdown-toggle");
+  toolsToggle?.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = toolsDropdown.classList.toggle("open");
+    toolsToggle.setAttribute("aria-expanded", String(open));
+  });
+  toolsDropdown?.querySelectorAll(".nav-dropdown-menu a").forEach(a => a.addEventListener("click", () => {
+    toolsDropdown.classList.remove("open");
+    toolsToggle?.setAttribute("aria-expanded","false");
+    mainMenu.classList.remove("active");
+    menuToggle?.setAttribute("aria-expanded","false");
+  }));
+  document.addEventListener("click", e => {
+    if(toolsDropdown && !toolsDropdown.contains(e.target)){
+      toolsDropdown.classList.remove("open");
+      toolsToggle?.setAttribute("aria-expanded","false");
+    }
+  });
+
+  let deferredInstallPrompt = null;
+  const installButton = document.getElementById("installButton");
+  const isWindowsDesktop = () => /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
+  const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  function updateInstallButton(){
+    if(!installButton) return;
+    installButton.hidden = !isWindowsDesktop() || isStandalone();
+  }
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    updateInstallButton();
+  });
+  installButton?.addEventListener("click", async () => {
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{ await deferredInstallPrompt.userChoice; }catch(e){}
+      deferredInstallPrompt = null;
+      updateInstallButton();
+    }
+  });
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    updateInstallButton();
+  });
+  updateInstallButton();
+})();
+
+/* ===================== ICONS ===================== */
 const I = {
   bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
   refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>'
 };
 
-/* ===================== i18n ===================== */
-const INSTALL_I18N = {"de":{"installEyebrow":"EINFACHE EINBINDUNG","installTitle":"So fügst du den Fasqoo Speed Test in deine Website ein","installIntro":"Erstelle dein Widget im Konfigurator, prüfe die Vorschau auf Desktop oder Mobilgerät, kopiere den vollständigen Einbettungscode und füge ihn in einen HTML-, Embed-, Custom-HTML-, Code- oder Custom-Liquid-Bereich deiner Website ein. Nach dem Einfügen bleibt das Widget responsive.","stepCreateTitle":"Widget erstellen","stepCreateText":"Wähle Layout, Farben, Größe, Eckenradius, Schatten und weitere Einstellungen im Builder aus. Die Vorschau zeigt deine Änderungen direkt an.","stepCopyTitle":"Einbettungscode kopieren","stepCopyText":"Klicke auf „Copy Embed Code“. Der erzeugte Code enthält die von dir ausgewählten Widget-Einstellungen.","stepPasteTitle":"Auf deiner Website einfügen","stepPasteText":"Füge den Code dort ein, wo der Fasqoo Speed Test erscheinen soll. Je nach Plattform heißt der Bereich HTML, Embed, Custom HTML, Code oder Custom Liquid.","installTabsLabel":"Anleitungen zur Website-Einbindung","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Andere","wpTitle":"Fasqoo in WordPress einfügen","wp1":"Öffne die WordPress-Seite oder den Beitrag, auf dem der Speed Test erscheinen soll.","wp2":"Füge einen Block „Benutzerdefiniertes HTML“ hinzu.","wp3":"Kopiere den Einbettungscode aus dem Fasqoo Widget Builder und füge ihn in den Block ein.","wp4":"Prüfe die Vorschau und klicke auf „Veröffentlichen“.","wpNote":"Bei WordPress.com oder verwaltetem WordPress können HTML- und Script-Berechtigungen je nach Tarif oder Einrichtung eingeschränkt sein.","htmlTitle":"Fasqoo in eine HTML-Website einfügen","html1":"Öffne die HTML-Datei der Seite, auf der das Widget erscheinen soll.","html2":"Kopiere den erzeugten Fasqoo-Einbettungscode.","html3":"Füge ihn innerhalb von <body> an der gewünschten Stelle ein.","html4":"Speichere die Datei und öffne die Seite im Browser.","wixTitle":"Fasqoo in Wix einfügen","wix1":"Öffne den Wix Editor.","wix2":"Füge ein Element „Embed Code / HTML Embed“ hinzu.","wix3":"Füge den Fasqoo-Einbettungscode in den HTML-Bereich ein.","wix4":"Passe die Größe bei Bedarf an und veröffentliche deine Website.","webflowTitle":"Fasqoo in Webflow einfügen","webflow1":"Öffne den Webflow Designer.","webflow2":"Füge im gewünschten Bereich ein „Embed“-Element hinzu.","webflow3":"Füge den erzeugten Fasqoo-Code ein.","webflow4":"Speichere deine Änderungen und veröffentliche die Website.","squarespaceTitle":"Fasqoo in Squarespace einfügen","squarespace1":"Bearbeite die Seite, auf der der Speed Test erscheinen soll.","squarespace2":"Füge einen „Code Block“ hinzu.","squarespace3":"Füge deinen Fasqoo-Einbettungscode in den Block ein.","squarespace4":"Speichere die Seite und veröffentliche deine Änderungen.","shopifyTitle":"Fasqoo in Shopify einfügen","shopify1":"Öffne den Shopify Theme- oder Seiteneditor, in dem benutzerdefiniertes HTML/Liquid unterstützt wird.","shopify2":"Füge einen „Custom Liquid“- oder passenden HTML-Bereich hinzu.","shopify3":"Füge den erzeugten Fasqoo-Widget-Code ein.","shopify4":"Speichere die Seite und prüfe die Vorschau vor der Veröffentlichung.","shopifyNote":"Verfügbare Theme-Blöcke und Script-Berechtigungen können sich je nach Shopify-Theme unterscheiden.","otherTitle":"Andere Website-Baukästen","otherText":"Suche nach einem Bereich wie „HTML Embed“, „Custom HTML“, „Code“ oder „Embed“. Füge dort den Fasqoo-Code ein und platziere das Widget an der gewünschten Stelle.","whyEyebrow":"WARUM FASQOO HINZUFÜGEN?","whyTitle":"Gib deinen Besuchern einen einfachen Weg, ihre Verbindung zu testen","whyText":"Mit dem Fasqoo Widget können Website-Betreiber einen Internet-Speed-Test direkt auf ihren Seiten anbieten. Besucher können den Test durchführen, ohne die Website verlassen zu müssen, während du das Erscheinungsbild über den Builder bestimmst.","faqEyebrow":"WIDGET-FAQ","faqTitle":"Häufig gestellte Fragen","faqQ1":"Funktioniert das Widget auf Mobilgeräten?","faqA1":"Ja. Das Widget ist für responsive Layouts ausgelegt und kann auf Desktop- und Mobil-Websites eingebettet werden.","faqQ2":"Kann ich die Widget-Farben ändern?","faqA2":"Ja. Passe die verfügbaren Designeinstellungen im Builder an und erstelle anschließend einen neuen Einbettungscode.","faqQ3":"Muss ich den Speed Test selbst programmieren?","faqA3":"Nein. Der Builder erzeugt den Widget-Code für dich. Du musst ihn nur in einen von deiner Plattform unterstützten Embed- oder HTML-Bereich einfügen.","faqQ4":"Ist der Speed Test eine echte Messung?","faqA4":"Das Fasqoo Widget ist für browserbasierte Netzwerkmessungen vorgesehen. Die tatsächlichen Ergebnisse können je nach Gerät, Browser, Netzwerk, WLAN-Bedingungen und Route zum Messdienst variieren.","faqQ5":"Kann ich das Widget auf mehreren Websites verwenden?","faqA5":"Der erzeugte Einbettungscode kann auf Websites eingesetzt werden, auf denen du eigenes HTML oder Embed-Code einfügen darfst. Prüfe dabei immer die Regeln deiner Plattform."},"en":{"installEyebrow":"EASY INSTALLATION","installTitle":"How to add the Fasqoo Speed Test to your website","installIntro":"Build your widget in the configurator, preview it on desktop or mobile, copy the complete embed code, and paste it into an HTML, Embed, Custom HTML, Code, or Custom Liquid area supported by your website platform. The widget remains responsive after it is embedded.","stepCreateTitle":"Create your widget","stepCreateText":"Choose the layout, colors, size, corner radius, shadow and other settings in the builder. The preview updates as you customize it.","stepCopyTitle":"Copy the embed code","stepCopyText":"Click “Copy Embed Code”. The generated code contains the widget settings you selected.","stepPasteTitle":"Add it to your website","stepPasteText":"Paste the code where you want the Fasqoo Speed Test to appear. Depending on the platform, this may be called HTML, Embed, Custom HTML, Code or Custom Liquid.","installTabsLabel":"Website installation guides","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Other","wpTitle":"How to add Fasqoo to WordPress","wp1":"Open the WordPress page or post where you want the speed test to appear.","wp2":"Add a “Custom HTML” block.","wp3":"Copy the embed code from the Fasqoo Widget Builder and paste it into the block.","wp4":"Preview the page and click “Publish”.","wpNote":"On WordPress.com or managed WordPress hosting, available HTML and script permissions can vary by plan or setup.","htmlTitle":"How to add Fasqoo to an HTML website","html1":"Open the HTML file for the page where you want the widget.","html2":"Copy the generated Fasqoo embed code.","html3":"Paste it inside <body> where the widget should appear.","html4":"Save the file and open the page in your browser.","wixTitle":"How to add Fasqoo to Wix","wix1":"Open your Wix Editor.","wix2":"Add an “Embed Code / HTML Embed” element.","wix3":"Paste the Fasqoo embed code into the HTML embed area.","wix4":"Resize the element if needed, then publish your site.","webflowTitle":"How to add Fasqoo to Webflow","webflow1":"Open your Webflow Designer.","webflow2":"Add an “Embed” element to the desired section.","webflow3":"Paste the generated Fasqoo code.","webflow4":"Save and publish your site.","squarespaceTitle":"How to add Fasqoo to Squarespace","squarespace1":"Edit the page where the speed test should appear.","squarespace2":"Add a “Code Block”.","squarespace3":"Paste your Fasqoo embed code into the block.","squarespace4":"Save the page and publish your changes.","shopifyTitle":"How to add Fasqoo to Shopify","shopify1":"Open the Shopify theme or page editor where custom HTML/Liquid is supported.","shopify2":"Add a “Custom Liquid” or appropriate HTML section.","shopify3":"Paste the generated Fasqoo widget code.","shopify4":"Save and preview the page before publishing.","shopifyNote":"Available theme blocks and script permissions can differ between Shopify themes.","otherTitle":"Other website builders","otherText":"Look for an “HTML Embed”, “Custom HTML”, “Code”, or “Embed” element in your website builder. Paste the Fasqoo code there and place the widget where you want it.","whyEyebrow":"WHY ADD FASQOO?","whyTitle":"Give visitors an easy way to test their connection","whyText":"The Fasqoo widget lets website owners place an internet speed test directly on their pages. Visitors can access the test without leaving the website, while you control the widget’s appearance through the builder.","faqEyebrow":"WIDGET FAQ","faqTitle":"Frequently asked questions","faqQ1":"Does the widget work on mobile devices?","faqA1":"Yes. The widget is designed for responsive layouts and can be embedded on desktop and mobile websites.","faqQ2":"Can I change the widget colors?","faqA2":"Yes. Use the builder to customize the available visual settings and then generate a new embed code.","faqQ3":"Do I need to build the speed test myself?","faqA3":"No. The builder generates the widget code for you. You only need to add the generated code to a supported embed or HTML area.","faqQ4":"Is the speed test a real measurement?","faqA4":"The Fasqoo widget is intended to perform browser-based network measurements. Actual results can vary depending on the visitor’s device, browser, network, Wi-Fi conditions and route to the measurement service.","faqQ5":"Can I use the widget on more than one website?","faqA5":"The generated embed code can be placed on websites where you are permitted to add custom HTML or embed code. Always check the rules of the platform you use."},"es":{"installEyebrow":"INSTALACIÓN FÁCIL","installTitle":"Cómo añadir Fasqoo Speed Test a tu sitio web","installIntro":"Crea el widget en el configurador, comprueba la vista previa en ordenador o móvil, copia el código de inserción completo y pégalo en un área HTML, Embed, HTML personalizado, Code o Custom Liquid compatible con tu plataforma. El widget seguirá siendo responsive.","stepCreateTitle":"Crea tu widget","stepCreateText":"Elige el diseño, los colores, el tamaño, el radio de las esquinas, la sombra y otras opciones en el constructor.","stepCopyTitle":"Copia el código de inserción","stepCopyText":"Haz clic en «Copy Embed Code». El código generado incluye las opciones que seleccionaste.","stepPasteTitle":"Añádelo a tu sitio","stepPasteText":"Pega el código donde quieras mostrar Fasqoo Speed Test. Según la plataforma, el área puede llamarse HTML, Embed, HTML personalizado, Code o Custom Liquid.","installTabsLabel":"Guías de instalación","wpTitle":"Cómo añadir Fasqoo a WordPress","wp1":"Abre la página o entrada de WordPress donde quieras mostrar el test.","wp2":"Añade un bloque «HTML personalizado».","wp3":"Copia el código del Fasqoo Widget Builder y pégalo en el bloque.","wp4":"Previsualiza la página y pulsa «Publicar».","wpNote":"En WordPress.com o alojamientos gestionados, los permisos de HTML y scripts pueden variar según el plan o la configuración.","htmlTitle":"Cómo añadir Fasqoo a un sitio HTML","html1":"Abre el archivo HTML de la página donde quieras el widget.","html2":"Copia el código de inserción de Fasqoo.","html3":"Pégalo dentro de <body> donde deba aparecer el widget.","html4":"Guarda el archivo y abre la página en el navegador.","wixTitle":"Cómo añadir Fasqoo a Wix","wix1":"Abre Wix Editor.","wix2":"Añade un elemento «Embed Code / HTML Embed».","wix3":"Pega el código de Fasqoo en el área HTML.","wix4":"Ajusta el tamaño si es necesario y publica el sitio.","webflowTitle":"Cómo añadir Fasqoo a Webflow","webflow1":"Abre Webflow Designer.","webflow2":"Añade un elemento «Embed» en la sección deseada.","webflow3":"Pega el código generado de Fasqoo.","webflow4":"Guarda y publica el sitio.","squarespaceTitle":"Cómo añadir Fasqoo a Squarespace","squarespace1":"Edita la página donde debe aparecer el test.","squarespace2":"Añade un «Code Block».","squarespace3":"Pega el código de Fasqoo en el bloque.","squarespace4":"Guarda y publica los cambios.","shopifyTitle":"Cómo añadir Fasqoo a Shopify","shopify1":"Abre el editor del tema o de la página donde se admita HTML/Liquid personalizado.","shopify2":"Añade una sección «Custom Liquid» o HTML adecuada.","shopify3":"Pega el código del widget Fasqoo.","shopify4":"Guarda y comprueba la vista previa antes de publicar.","shopifyNote":"Los bloques y permisos de scripts disponibles pueden variar según el tema de Shopify.","otherTitle":"Otros constructores web","otherText":"Busca un elemento «HTML Embed», «Custom HTML», «Code» o «Embed». Pega allí el código de Fasqoo y coloca el widget donde quieras.","whyEyebrow":"¿POR QUÉ AÑADIR FASQOO?","whyTitle":"Ofrece a tus visitantes una forma sencilla de probar su conexión","whyText":"El widget de Fasqoo permite colocar un test de velocidad de Internet directamente en tus páginas. Los visitantes pueden probar su conexión sin salir de tu sitio.","faqEyebrow":"PREGUNTAS DEL WIDGET","faqTitle":"Preguntas frecuentes","faqQ1":"¿Funciona el widget en móviles?","faqA1":"Sí. Está diseñado para diseños responsive y puede integrarse en sitios de escritorio y móviles.","faqQ2":"¿Puedo cambiar los colores?","faqA2":"Sí. Personaliza las opciones visuales disponibles y genera un nuevo código.","faqQ3":"¿Tengo que programar el test?","faqA3":"No. El constructor genera el código del widget. Solo debes insertarlo en un área HTML o Embed compatible.","faqQ4":"¿La prueba es una medición real?","faqA4":"El widget está diseñado para realizar mediciones de red desde el navegador. Los resultados pueden variar según el dispositivo, navegador, red, Wi‑Fi y ruta hasta el servicio de medición.","faqQ5":"¿Puedo usarlo en varias webs?","faqA5":"El código puede colocarse en sitios donde tengas permiso para añadir HTML o código Embed. Comprueba siempre las reglas de tu plataforma.","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Other"},"fr":{"installEyebrow":"INSTALLATION FACILE","installTitle":"Comment ajouter Fasqoo Speed Test à votre site web","installIntro":"Créez le widget dans le configurateur, vérifiez l’aperçu sur ordinateur ou mobile, copiez le code d’intégration complet et collez-le dans une zone HTML, Embed, HTML personnalisé, Code ou Custom Liquid prise en charge par votre plateforme.","stepCreateTitle":"Créer votre widget","stepCreateText":"Choisissez la mise en page, les couleurs, la taille, le rayon des coins, l’ombre et les autres options.","stepCopyTitle":"Copier le code d’intégration","stepCopyText":"Cliquez sur « Copy Embed Code ». Le code généré contient les réglages sélectionnés.","stepPasteTitle":"L’ajouter à votre site","stepPasteText":"Collez le code à l’endroit où vous souhaitez afficher Fasqoo Speed Test.","installTabsLabel":"Guides d’installation","wpTitle":"Ajouter Fasqoo à WordPress","wp1":"Ouvrez la page ou l’article WordPress où le test doit apparaître.","wp2":"Ajoutez un bloc « HTML personnalisé ».","wp3":"Copiez le code du Fasqoo Widget Builder et collez-le dans le bloc.","wp4":"Prévisualisez puis cliquez sur « Publier ».","wpNote":"Sur WordPress.com ou un hébergement géré, les permissions HTML et scripts peuvent varier.","htmlTitle":"Ajouter Fasqoo à un site HTML","html1":"Ouvrez le fichier HTML de la page.","html2":"Copiez le code d’intégration Fasqoo.","html3":"Collez-le dans <body> à l’endroit souhaité.","html4":"Enregistrez le fichier et ouvrez la page dans le navigateur.","wixTitle":"Ajouter Fasqoo à Wix","wix1":"Ouvrez Wix Editor.","wix2":"Ajoutez un élément « Embed Code / HTML Embed ».","wix3":"Collez le code Fasqoo dans la zone HTML.","wix4":"Ajustez la taille si nécessaire et publiez.","webflowTitle":"Ajouter Fasqoo à Webflow","webflow1":"Ouvrez Webflow Designer.","webflow2":"Ajoutez un élément « Embed ».","webflow3":"Collez le code Fasqoo généré.","webflow4":"Enregistrez et publiez.","squarespaceTitle":"Ajouter Fasqoo à Squarespace","squarespace1":"Modifiez la page concernée.","squarespace2":"Ajoutez un « Code Block ».","squarespace3":"Collez le code Fasqoo.","squarespace4":"Enregistrez et publiez.","shopifyTitle":"Ajouter Fasqoo à Shopify","shopify1":"Ouvrez l’éditeur de thème ou de page compatible HTML/Liquid.","shopify2":"Ajoutez une section « Custom Liquid » ou HTML.","shopify3":"Collez le code du widget Fasqoo.","shopify4":"Enregistrez et vérifiez l’aperçu avant publication.","shopifyNote":"Les blocs et permissions peuvent varier selon le thème Shopify.","otherTitle":"Autres constructeurs de sites","otherText":"Recherchez un élément « HTML Embed », « Custom HTML », « Code » ou « Embed », puis collez-y le code Fasqoo.","whyEyebrow":"POURQUOI AJOUTER FASQOO ?","whyTitle":"Offrez à vos visiteurs un moyen simple de tester leur connexion","whyText":"Le widget Fasqoo permet d’ajouter un test de vitesse Internet directement à vos pages. Les visiteurs peuvent effectuer le test sans quitter votre site.","faqEyebrow":"FAQ DU WIDGET","faqTitle":"Questions fréquentes","faqQ1":"Le widget fonctionne-t-il sur mobile ?","faqA1":"Oui. Il est conçu pour les mises en page responsives.","faqQ2":"Puis-je changer les couleurs ?","faqA2":"Oui. Utilisez le configurateur pour modifier les options visuelles.","faqQ3":"Dois-je programmer le test moi-même ?","faqA3":"Non. Le générateur crée le code du widget.","faqQ4":"Le test est-il une mesure réelle ?","faqA4":"Le widget est destiné aux mesures réseau dans le navigateur. Les résultats peuvent varier selon l’appareil, le navigateur, le réseau, le Wi‑Fi et le routage.","faqQ5":"Puis-je utiliser le widget sur plusieurs sites ?","faqA5":"Oui, là où vous êtes autorisé à ajouter du HTML ou du code Embed.","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Other"},"it":{"installEyebrow":"INSTALLAZIONE SEMPLICE","installTitle":"Come aggiungere Fasqoo Speed Test al tuo sito web","installIntro":"Crea il widget nel configuratore, visualizza l’anteprima su desktop o mobile, copia il codice embed completo e incollalo in un’area HTML, Embed, HTML personalizzato, Code o Custom Liquid supportata dalla tua piattaforma. Il widget rimane responsive dopo l’inserimento.","stepCreateTitle":"Crea il tuo widget","stepCreateText":"Scegli layout, colori, dimensioni, raggio degli angoli, ombra e altre impostazioni nel builder. L’anteprima si aggiorna mentre lo personalizzi.","stepCopyTitle":"Copia il codice embed","stepCopyText":"Fai clic su “Copy Embed Code”. Il codice generato contiene le impostazioni del widget selezionate.","stepPasteTitle":"Aggiungilo al tuo sito","stepPasteText":"Incolla il codice nel punto in cui vuoi mostrare Fasqoo Speed Test. A seconda della piattaforma, l’area può chiamarsi HTML, Embed, Custom HTML, Code o Custom Liquid.","installTabsLabel":"Guide all’installazione del sito","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Altro","wpTitle":"Come aggiungere Fasqoo a WordPress","wp1":"Apri la pagina o il post di WordPress in cui vuoi visualizzare lo speed test.","wp2":"Aggiungi un blocco “HTML personalizzato”.","wp3":"Copia il codice embed dal Fasqoo Widget Builder e incollalo nel blocco.","wp4":"Visualizza l’anteprima della pagina e fai clic su “Pubblica”.","wpNote":"Su WordPress.com o con hosting WordPress gestito, i permessi HTML e script disponibili possono variare in base al piano o alla configurazione.","htmlTitle":"Come aggiungere Fasqoo a un sito HTML","html1":"Apri il file HTML della pagina in cui vuoi inserire il widget.","html2":"Copia il codice embed generato da Fasqoo.","html3":"Incollalo all’interno di <body> nel punto in cui deve apparire il widget.","html4":"Salva il file e apri la pagina nel browser.","wixTitle":"Come aggiungere Fasqoo a Wix","wix1":"Apri Wix Editor.","wix2":"Aggiungi un elemento “Embed Code / HTML Embed”.","wix3":"Incolla il codice embed di Fasqoo nell’area HTML.","wix4":"Ridimensiona l’elemento se necessario e pubblica il sito.","webflowTitle":"Come aggiungere Fasqoo a Webflow","webflow1":"Apri Webflow Designer.","webflow2":"Aggiungi un elemento “Embed” nella sezione desiderata.","webflow3":"Incolla il codice Fasqoo generato.","webflow4":"Salva e pubblica il sito.","squarespaceTitle":"Come aggiungere Fasqoo a Squarespace","squarespace1":"Modifica la pagina in cui deve apparire lo speed test.","squarespace2":"Aggiungi un “Code Block”.","squarespace3":"Incolla il codice embed di Fasqoo nel blocco.","squarespace4":"Salva la pagina e pubblica le modifiche.","shopifyTitle":"Come aggiungere Fasqoo a Shopify","shopify1":"Apri l’editor del tema o della pagina Shopify in cui è supportato HTML/Liquid personalizzato.","shopify2":"Aggiungi una sezione “Custom Liquid” o un’area HTML appropriata.","shopify3":"Incolla il codice del widget Fasqoo generato.","shopify4":"Salva e controlla l’anteprima prima di pubblicare.","shopifyNote":"I blocchi del tema e i permessi per gli script disponibili possono variare in base al tema Shopify.","otherTitle":"Altri website builder","otherText":"Cerca un elemento “HTML Embed”, “Custom HTML”, “Code” o “Embed” nel tuo website builder. Incolla lì il codice Fasqoo e posiziona il widget dove desideri.","whyEyebrow":"PERCHÉ AGGIUNGERE FASQOO?","whyTitle":"Offri ai visitatori un modo semplice per testare la loro connessione","whyText":"Il widget Fasqoo permette ai proprietari di siti web di inserire uno speed test Internet direttamente nelle proprie pagine. I visitatori possono eseguire il test senza lasciare il sito, mentre tu controlli l’aspetto del widget tramite il builder.","faqEyebrow":"FAQ DEL WIDGET","faqTitle":"Domande frequenti","faqQ1":"Il widget funziona sui dispositivi mobili?","faqA1":"Sì. Il widget è progettato per layout responsive e può essere incorporato su siti desktop e mobili.","faqQ2":"Posso cambiare i colori del widget?","faqA2":"Sì. Usa il builder per personalizzare le impostazioni visive disponibili e genera quindi un nuovo codice embed.","faqQ3":"Devo creare da solo lo speed test?","faqA3":"No. Il builder genera il codice del widget per te. Devi solo aggiungere il codice generato in un’area Embed o HTML supportata.","faqQ4":"Lo speed test è una misurazione reale?","faqA4":"Il widget Fasqoo è progettato per eseguire misurazioni di rete dal browser. I risultati effettivi possono variare in base al dispositivo, al browser, alla rete, alle condizioni Wi‑Fi e al percorso verso il servizio di misurazione.","faqQ5":"Posso usare il widget su più siti web?","faqA5":"Il codice embed generato può essere inserito nei siti in cui hai il permesso di aggiungere HTML o codice embed. Controlla sempre le regole della piattaforma che utilizzi."},"pt":{"installEyebrow":"INSTALAÇÃO FÁCIL","installTitle":"Como adicionar o Fasqoo Speed Test ao seu site","installIntro":"Crie o widget no configurador, visualize a prévia no desktop ou celular, copie o código de incorporação completo e cole-o em uma área de HTML, Embed, HTML personalizado, Code ou Custom Liquid compatível com a sua plataforma. O widget continua responsivo depois de incorporado.","stepCreateTitle":"Crie o seu widget","stepCreateText":"Escolha o layout, as cores, o tamanho, o raio dos cantos, a sombra e outras configurações no builder. A prévia é atualizada conforme você personaliza.","stepCopyTitle":"Copie o código de incorporação","stepCopyText":"Clique em “Copy Embed Code”. O código gerado contém as configurações selecionadas do widget.","stepPasteTitle":"Adicione ao seu site","stepPasteText":"Cole o código onde deseja exibir o Fasqoo Speed Test. Dependendo da plataforma, a área pode se chamar HTML, Embed, Custom HTML, Code ou Custom Liquid.","installTabsLabel":"Guias de instalação no site","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Outro","wpTitle":"Como adicionar o Fasqoo ao WordPress","wp1":"Abra a página ou publicação do WordPress onde deseja mostrar o teste de velocidade.","wp2":"Adicione um bloco “HTML personalizado”.","wp3":"Copie o código de incorporação do Fasqoo Widget Builder e cole-o no bloco.","wp4":"Visualize a página e clique em “Publicar”.","wpNote":"No WordPress.com ou em hospedagem WordPress gerenciada, as permissões de HTML e scripts disponíveis podem variar conforme o plano ou a configuração.","htmlTitle":"Como adicionar o Fasqoo a um site HTML","html1":"Abra o arquivo HTML da página onde deseja o widget.","html2":"Copie o código de incorporação gerado pelo Fasqoo.","html3":"Cole-o dentro de <body> no local onde o widget deve aparecer.","html4":"Salve o arquivo e abra a página no navegador.","wixTitle":"Como adicionar o Fasqoo ao Wix","wix1":"Abra o Wix Editor.","wix2":"Adicione um elemento “Embed Code / HTML Embed”.","wix3":"Cole o código de incorporação do Fasqoo na área HTML.","wix4":"Redimensione o elemento se necessário e publique o site.","webflowTitle":"Como adicionar o Fasqoo ao Webflow","webflow1":"Abra o Webflow Designer.","webflow2":"Adicione um elemento “Embed” à seção desejada.","webflow3":"Cole o código Fasqoo gerado.","webflow4":"Salve e publique o site.","squarespaceTitle":"Como adicionar o Fasqoo ao Squarespace","squarespace1":"Edite a página onde o teste deve aparecer.","squarespace2":"Adicione um “Code Block”.","squarespace3":"Cole o código de incorporação do Fasqoo no bloco.","squarespace4":"Salve a página e publique as alterações.","shopifyTitle":"Como adicionar o Fasqoo ao Shopify","shopify1":"Abra o editor do tema ou da página do Shopify onde HTML/Liquid personalizado é compatível.","shopify2":"Adicione uma seção “Custom Liquid” ou uma área HTML apropriada.","shopify3":"Cole o código do widget Fasqoo gerado.","shopify4":"Salve e visualize antes de publicar.","shopifyNote":"Os blocos do tema e as permissões de script disponíveis podem variar conforme o tema do Shopify.","otherTitle":"Outros criadores de sites","otherText":"Procure um elemento “HTML Embed”, “Custom HTML”, “Code” ou “Embed” no seu criador de sites. Cole o código Fasqoo nessa área e coloque o widget onde quiser.","whyEyebrow":"POR QUE ADICIONAR O FASQOO?","whyTitle":"Ofereça aos visitantes uma forma fácil de testar a conexão","whyText":"O widget Fasqoo permite que proprietários de sites coloquem um teste de velocidade da Internet diretamente nas páginas. Os visitantes podem testar a conexão sem sair do site, enquanto você controla a aparência do widget pelo builder.","faqEyebrow":"FAQ DO WIDGET","faqTitle":"Perguntas frequentes","faqQ1":"O widget funciona em dispositivos móveis?","faqA1":"Sim. O widget foi projetado para layouts responsivos e pode ser incorporado em sites para desktop e dispositivos móveis.","faqQ2":"Posso alterar as cores do widget?","faqA2":"Sim. Use o builder para personalizar as configurações visuais disponíveis e gere um novo código de incorporação.","faqQ3":"Preciso criar o teste de velocidade sozinho?","faqA3":"Não. O builder gera o código do widget para você. Basta adicionar o código gerado a uma área HTML ou Embed compatível.","faqQ4":"O teste de velocidade é uma medição real?","faqA4":"O widget Fasqoo foi projetado para realizar medições de rede baseadas no navegador. Os resultados podem variar conforme o dispositivo, navegador, rede, condições de Wi‑Fi e rota até o serviço de medição.","faqQ5":"Posso usar o widget em mais de um site?","faqA5":"O código de incorporação gerado pode ser usado em sites onde você tem permissão para adicionar HTML ou código Embed. Verifique sempre as regras da plataforma utilizada."},"nl":{"installEyebrow":"EENVOUDIGE INSTALLATIE","installTitle":"Zo voeg je Fasqoo Speed Test toe aan je website","installIntro":"Bouw de widget in de configurator, bekijk de preview op desktop of mobiel, kopieer de volledige embedcode en plak die in een HTML-, Embed-, Custom HTML-, Code- of Custom Liquid-gedeelte dat door je websiteplatform wordt ondersteund. De widget blijft responsive na het insluiten.","stepCreateTitle":"Maak je widget","stepCreateText":"Kies de lay-out, kleuren, grootte, hoekradius, schaduw en andere instellingen in de builder. De preview wordt direct bijgewerkt.","stepCopyTitle":"Kopieer de embedcode","stepCopyText":"Klik op “Copy Embed Code”. De gegenereerde code bevat de instellingen die je hebt gekozen.","stepPasteTitle":"Plaats hem op je website","stepPasteText":"Plak de code waar je de Fasqoo Speed Test wilt tonen. Afhankelijk van het platform kan dit HTML, Embed, Custom HTML, Code of Custom Liquid heten.","installTabsLabel":"Handleidingen voor website-installatie","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Overig","wpTitle":"Fasqoo toevoegen aan WordPress","wp1":"Open de WordPress-pagina of het bericht waar je de snelheidstest wilt tonen.","wp2":"Voeg een blok “Aangepaste HTML” toe.","wp3":"Kopieer de embedcode uit de Fasqoo Widget Builder en plak die in het blok.","wp4":"Bekijk de pagina en klik op “Publiceren”.","wpNote":"Bij WordPress.com of beheerde WordPress-hosting kunnen de beschikbare HTML- en scriptrechten per abonnement of configuratie verschillen.","htmlTitle":"Fasqoo toevoegen aan een HTML-website","html1":"Open het HTML-bestand van de pagina waarop de widget moet komen.","html2":"Kopieer de gegenereerde Fasqoo-embedcode.","html3":"Plak deze binnen <body> op de gewenste plek.","html4":"Sla het bestand op en open de pagina in je browser.","wixTitle":"Fasqoo toevoegen aan Wix","wix1":"Open Wix Editor.","wix2":"Voeg een element “Embed Code / HTML Embed” toe.","wix3":"Plak de Fasqoo-embedcode in het HTML-gedeelte.","wix4":"Pas indien nodig het formaat aan en publiceer je website.","webflowTitle":"Fasqoo toevoegen aan Webflow","webflow1":"Open Webflow Designer.","webflow2":"Voeg een “Embed”-element toe aan de gewenste sectie.","webflow3":"Plak de gegenereerde Fasqoo-code.","webflow4":"Sla de wijzigingen op en publiceer de website.","squarespaceTitle":"Fasqoo toevoegen aan Squarespace","squarespace1":"Bewerk de pagina waarop de snelheidstest moet verschijnen.","squarespace2":"Voeg een “Code Block” toe.","squarespace3":"Plak je Fasqoo-embedcode in het blok.","squarespace4":"Sla de pagina op en publiceer de wijzigingen.","shopifyTitle":"Fasqoo toevoegen aan Shopify","shopify1":"Open de Shopify-thema- of pagina-editor waar aangepaste HTML/Liquid wordt ondersteund.","shopify2":"Voeg een “Custom Liquid”- of passend HTML-gedeelte toe.","shopify3":"Plak de gegenereerde Fasqoo-widgetcode.","shopify4":"Sla op en bekijk de preview voordat je publiceert.","shopifyNote":"Beschikbare themablokken en scriptrechten kunnen per Shopify-thema verschillen.","otherTitle":"Andere websitebouwers","otherText":"Zoek in je websitebouwer naar een element zoals “HTML Embed”, “Custom HTML”, “Code” of “Embed”. Plak daar de Fasqoo-code en plaats de widget waar je wilt.","whyEyebrow":"WAAROM FASQOO TOEVOEGEN?","whyTitle":"Geef bezoekers een eenvoudige manier om hun verbinding te testen","whyText":"Met de Fasqoo-widget kunnen website-eigenaren een internetsnelheidstest rechtstreeks op hun pagina’s plaatsen. Bezoekers kunnen testen zonder de website te verlaten, terwijl jij het uiterlijk via de builder bepaalt.","faqEyebrow":"WIDGET-FAQ","faqTitle":"Veelgestelde vragen","faqQ1":"Werkt de widget op mobiele apparaten?","faqA1":"Ja. De widget is ontworpen voor responsive layouts en kan op desktop- en mobiele websites worden ingesloten.","faqQ2":"Kan ik de kleuren van de widget wijzigen?","faqA2":"Ja. Pas de beschikbare visuele instellingen aan in de builder en genereer daarna nieuwe embedcode.","faqQ3":"Moet ik de snelheidstest zelf bouwen?","faqA3":"Nee. De builder genereert de widgetcode voor je. Je hoeft de code alleen toe te voegen aan een ondersteund HTML- of Embed-gedeelte.","faqQ4":"Is de snelheidstest een echte meting?","faqA4":"De Fasqoo-widget is bedoeld om browsergebaseerde netwerkmetingen uit te voeren. Werkelijke resultaten kunnen verschillen door het apparaat, de browser, het netwerk, de wifi-omstandigheden en de route naar de meetservice.","faqQ5":"Kan ik de widget op meerdere websites gebruiken?","faqA5":"De gegenereerde embedcode kan worden geplaatst op websites waar je aangepaste HTML of embedcode mag toevoegen. Controleer altijd de regels van het platform dat je gebruikt."},"tr":{"installEyebrow":"KOLAY KURULUM","installTitle":"Fasqoo Speed Test web sitenize nasıl eklenir","installIntro":"Widget’ınızı yapılandırıcıda oluşturun, masaüstü veya mobil önizlemesini kontrol edin, oluşturulan tam embed kodunu kopyalayın ve web platformunuzun desteklediği HTML, Embed, Custom HTML, Code veya Custom Liquid alanına yapıştırın. Widget, eklendikten sonra da responsive kalır.","stepCreateTitle":"Widget’ınızı oluşturun","stepCreateText":"Builder’da düzeni, renkleri, boyutu, köşe yarıçapını, gölgeyi ve diğer ayarları seçin. Önizleme özelleştirme sırasında güncellenir.","stepCopyTitle":"Embed kodunu kopyalayın","stepCopyText":"“Copy Embed Code” düğmesine tıklayın. Oluşturulan kod seçtiğiniz widget ayarlarını içerir.","stepPasteTitle":"Web sitenize ekleyin","stepPasteText":"Kodu Fasqoo Speed Test’in görünmesini istediğiniz yere yapıştırın. Platforma göre bu alan HTML, Embed, Custom HTML, Code veya Custom Liquid olarak adlandırılabilir.","installTabsLabel":"Web sitesi kurulum kılavuzları","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Diğer","wpTitle":"Fasqoo WordPress’e nasıl eklenir","wp1":"Speed Test’in görünmesini istediğiniz WordPress sayfasını veya yazısını açın.","wp2":"“Custom HTML” bloğu ekleyin.","wp3":"Fasqoo Widget Builder’dan embed kodunu kopyalayıp bloğa yapıştırın.","wp4":"Sayfayı önizleyin ve “Publish” düğmesine tıklayın.","wpNote":"WordPress.com veya yönetilen WordPress barındırmada kullanılabilir HTML ve script izinleri plana veya kuruluma göre değişebilir.","htmlTitle":"Fasqoo HTML sitesine nasıl eklenir","html1":"Widget’ı eklemek istediğiniz sayfanın HTML dosyasını açın.","html2":"Oluşturulan Fasqoo embed kodunu kopyalayın.","html3":"Kodu widget’ın görünmesini istediğiniz yerde <body> içine yapıştırın.","html4":"Dosyayı kaydedin ve sayfayı tarayıcıda açın.","wixTitle":"Fasqoo Wix’e nasıl eklenir","wix1":"Wix Editor’ü açın.","wix2":"“Embed Code / HTML Embed” öğesi ekleyin.","wix3":"Fasqoo embed kodunu HTML alanına yapıştırın.","wix4":"Gerekirse öğenin boyutunu ayarlayın ve sitenizi yayınlayın.","webflowTitle":"Fasqoo Webflow’a nasıl eklenir","webflow1":"Webflow Designer’ı açın.","webflow2":"İstediğiniz bölüme bir “Embed” öğesi ekleyin.","webflow3":"Oluşturulan Fasqoo kodunu yapıştırın.","webflow4":"Değişiklikleri kaydedin ve sitenizi yayınlayın.","squarespaceTitle":"Fasqoo Squarespace’e nasıl eklenir","squarespace1":"Speed Test’in görüneceği sayfayı düzenleyin.","squarespace2":"Bir “Code Block” ekleyin.","squarespace3":"Fasqoo embed kodunuzu bloğa yapıştırın.","squarespace4":"Sayfayı kaydedin ve değişiklikleri yayınlayın.","shopifyTitle":"Fasqoo Shopify’a nasıl eklenir","shopify1":"Özel HTML/Liquid desteklenen Shopify tema veya sayfa düzenleyicisini açın.","shopify2":"“Custom Liquid” veya uygun bir HTML bölümü ekleyin.","shopify3":"Oluşturulan Fasqoo widget kodunu yapıştırın.","shopify4":"Kaydedin ve yayınlamadan önce önizlemeyi kontrol edin.","shopifyNote":"Kullanılabilir tema blokları ve script izinleri Shopify temasına göre değişebilir.","otherTitle":"Diğer web sitesi oluşturucuları","otherText":"Web sitesi oluşturucunuzda “HTML Embed”, “Custom HTML”, “Code” veya “Embed” öğesini bulun. Fasqoo kodunu bu alana yapıştırın ve widget’ı istediğiniz yere yerleştirin.","whyEyebrow":"NEDEN FASQOO EKLEMELİSİNİZ?","whyTitle":"Ziyaretçilerinize bağlantılarını test etmek için kolay bir yol sunun","whyText":"Fasqoo widget’ı, web sitesi sahiplerinin internet hız testini doğrudan sayfalarına eklemesini sağlar. Ziyaretçiler siteden ayrılmadan test yapabilir; widget görünümünü ise builder üzerinden kontrol edebilirsiniz.","faqEyebrow":"WIDGET SSS","faqTitle":"Sık sorulan sorular","faqQ1":"Widget mobil cihazlarda çalışır mı?","faqA1":"Evet. Widget responsive düzenler için tasarlanmıştır ve masaüstü ile mobil sitelere eklenebilir.","faqQ2":"Widget renklerini değiştirebilir miyim?","faqA2":"Evet. Builder’da kullanılabilir görsel ayarları özelleştirin ve ardından yeni bir embed kodu oluşturun.","faqQ3":"Speed Test’i kendim oluşturmam gerekiyor mu?","faqA3":"Hayır. Builder widget kodunu sizin için oluşturur. Oluşturulan kodu desteklenen bir HTML veya Embed alanına eklemeniz yeterlidir.","faqQ4":"Speed Test gerçek bir ölçüm mü?","faqA4":"Fasqoo widget’ı tarayıcı tabanlı ağ ölçümleri yapmak üzere tasarlanmıştır. Gerçek sonuçlar cihaz, tarayıcı, ağ, Wi‑Fi koşulları ve ölçüm hizmetine giden rotaya göre değişebilir.","faqQ5":"Widget’ı birden fazla web sitesinde kullanabilir miyim?","faqA5":"Oluşturulan embed kodu, özel HTML veya embed kodu eklemenize izin verilen web sitelerinde kullanılabilir. Kullandığınız platformun kurallarını her zaman kontrol edin."},"sq":{"installEyebrow":"INSTALIM I LEHTË","installTitle":"Si të shtoni Fasqoo Speed Test në faqen tuaj","installIntro":"Krijoni widget-in në konfigurues, shikoni paraprakisht në desktop ose celular, kopjoni kodin e plotë të embed-it dhe vendoseni në një hapësirë HTML, Embed, Custom HTML, Code ose Custom Liquid që mbështetet nga platforma juaj. Widget-i mbetet responsive pas integrimit.","stepCreateTitle":"Krijoni widget-in tuaj","stepCreateText":"Zgjidhni paraqitjen, ngjyrat, madhësinë, rrumbullakimin e qosheve, hijen dhe cilësimet e tjera në builder. Parapamja përditësohet gjatë personalizimit.","stepCopyTitle":"Kopjoni kodin e embed-it","stepCopyText":"Klikoni “Copy Embed Code”. Kodi i krijuar përmban cilësimet e widget-it që keni zgjedhur.","stepPasteTitle":"Shtojeni në faqen tuaj","stepPasteText":"Vendoseni kodin aty ku dëshironi të shfaqet Fasqoo Speed Test. Në varësi të platformës, hapësira mund të quhet HTML, Embed, Custom HTML, Code ose Custom Liquid.","installTabsLabel":"Udhëzues për instalimin në faqe","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Tjetër","wpTitle":"Si të shtoni Fasqoo në WordPress","wp1":"Hapni faqen ose postimin e WordPress ku dëshironi të shfaqet testi i shpejtësisë.","wp2":"Shtoni një bllok “Custom HTML”.","wp3":"Kopjoni kodin e embed-it nga Fasqoo Widget Builder dhe vendoseni në bllok.","wp4":"Shikoni paraprakisht faqen dhe klikoni “Publish”.","wpNote":"Në WordPress.com ose hostim të menaxhuar WordPress, lejet për HTML dhe skripte mund të ndryshojnë sipas planit ose konfigurimit.","htmlTitle":"Si të shtoni Fasqoo në një faqe HTML","html1":"Hapni skedarin HTML të faqes ku dëshironi widget-in.","html2":"Kopjoni kodin e krijuar të embed-it të Fasqoo.","html3":"Vendoseni brenda <body> aty ku duhet të shfaqet widget-i.","html4":"Ruajeni skedarin dhe hapeni faqen në shfletues.","wixTitle":"Si të shtoni Fasqoo në Wix","wix1":"Hapni Wix Editor.","wix2":"Shtoni një element “Embed Code / HTML Embed”.","wix3":"Vendoseni kodin e embed-it të Fasqoo në hapësirën HTML.","wix4":"Ndryshoni madhësinë nëse nevojitet dhe publikoni faqen.","webflowTitle":"Si të shtoni Fasqoo në Webflow","webflow1":"Hapni Webflow Designer.","webflow2":"Shtoni një element “Embed” në seksionin e dëshiruar.","webflow3":"Vendosni kodin e krijuar të Fasqoo.","webflow4":"Ruani dhe publikoni faqen.","squarespaceTitle":"Si të shtoni Fasqoo në Squarespace","squarespace1":"Redaktoni faqen ku duhet të shfaqet testi i shpejtësisë.","squarespace2":"Shtoni një “Code Block”.","squarespace3":"Vendosni kodin e embed-it të Fasqoo në bllok.","squarespace4":"Ruani faqen dhe publikoni ndryshimet.","shopifyTitle":"Si të shtoni Fasqoo në Shopify","shopify1":"Hapni editorin e temës ose faqes Shopify ku mbështetet HTML/Liquid i personalizuar.","shopify2":"Shtoni një seksion “Custom Liquid” ose një hapësirë HTML të përshtatshme.","shopify3":"Vendosni kodin e krijuar të widget-it Fasqoo.","shopify4":"Ruajeni dhe shikoni paraprakisht faqen para publikimit.","shopifyNote":"Blloqet e disponueshme të temës dhe lejet për skriptet mund të ndryshojnë sipas temës së Shopify.","otherTitle":"Krijues të tjerë faqesh","otherText":"Kërkoni një element “HTML Embed”, “Custom HTML”, “Code” ose “Embed” në krijuesin e faqes suaj. Vendosni aty kodin e Fasqoo dhe poziciononi widget-in ku dëshironi.","whyEyebrow":"PSE TË SHTONI FASQOO?","whyTitle":"Jepuni vizitorëve një mënyrë të thjeshtë për të testuar lidhjen e tyre","whyText":"Widget-i Fasqoo u lejon pronarëve të faqeve të vendosin një test të shpejtësisë së internetit drejtpërdrejt në faqet e tyre. Vizitorët mund ta kryejnë testin pa u larguar nga faqja, ndërsa ju kontrolloni pamjen përmes builder-it.","faqEyebrow":"FAQ E WIDGET-IT","faqTitle":"Pyetje të shpeshta","faqQ1":"A funksionon widget-i në pajisjet mobile?","faqA1":"Po. Widget-i është krijuar për paraqitje responsive dhe mund të vendoset në faqe desktop dhe mobile.","faqQ2":"A mund t’i ndryshoj ngjyrat e widget-it?","faqA2":"Po. Përdorni builder-in për të personalizuar cilësimet vizuale dhe më pas krijoni një kod të ri embed.","faqQ3":"A duhet ta ndërtoj vetë testin e shpejtësisë?","faqA3":"Jo. Builder-i e krijon kodin e widget-it për ju. Thjesht shtoni kodin e krijuar në një hapësirë HTML ose Embed të mbështetur.","faqQ4":"A është testi i shpejtësisë një matje reale?","faqA4":"Widget-i Fasqoo është krijuar për të kryer matje të rrjetit nga shfletuesi. Rezultatet reale mund të ndryshojnë sipas pajisjes, shfletuesit, rrjetit, kushteve Wi‑Fi dhe rrugës drejt shërbimit të matjes.","faqQ5":"A mund ta përdor widget-in në më shumë se një faqe?","faqA5":"Kodi i krijuar mund të vendoset në faqet ku ju lejohet të shtoni HTML ose kod embed. Kontrolloni gjithmonë rregullat e platformës që përdorni."},"pl":{"installEyebrow":"ŁATWA INSTALACJA","installTitle":"Jak dodać Fasqoo Speed Test do swojej strony","installIntro":"Utwórz widget w konfiguratorze, sprawdź podgląd na komputerze lub telefonie, skopiuj pełny kod osadzania i wklej go w obsługiwanym przez platformę obszarze HTML, Embed, Custom HTML, Code lub Custom Liquid. Po osadzeniu widget pozostaje responsywny.","stepCreateTitle":"Utwórz swój widget","stepCreateText":"Wybierz układ, kolory, rozmiar, promień zaokrąglenia, cień i inne ustawienia w builderze. Podgląd aktualizuje się podczas konfiguracji.","stepCopyTitle":"Skopiuj kod osadzania","stepCopyText":"Kliknij „Copy Embed Code”. Wygenerowany kod zawiera wybrane ustawienia widgetu.","stepPasteTitle":"Dodaj go do swojej strony","stepPasteText":"Wklej kod w miejscu, w którym ma pojawić się Fasqoo Speed Test. W zależności od platformy obszar może nazywać się HTML, Embed, Custom HTML, Code lub Custom Liquid.","installTabsLabel":"Instrukcje instalacji na stronie","platformWordPress":"WordPress","platformHTML":"HTML","platformWix":"Wix","platformWebflow":"Webflow","platformSquarespace":"Squarespace","platformShopify":"Shopify","platformOther":"Inne","wpTitle":"Jak dodać Fasqoo do WordPress","wp1":"Otwórz stronę lub wpis WordPress, na którym ma pojawić się test prędkości.","wp2":"Dodaj blok „Własny HTML”.","wp3":"Skopiuj kod osadzania z Fasqoo Widget Builder i wklej go do bloku.","wp4":"Wyświetl podgląd strony i kliknij „Opublikuj”.","wpNote":"W WordPress.com lub na zarządzanym hostingu WordPress dostępne uprawnienia HTML i skryptów mogą różnić się w zależności od planu lub konfiguracji.","htmlTitle":"Jak dodać Fasqoo do strony HTML","html1":"Otwórz plik HTML strony, na której ma znaleźć się widget.","html2":"Skopiuj wygenerowany kod osadzania Fasqoo.","html3":"Wklej go wewnątrz <body> w miejscu, w którym ma pojawić się widget.","html4":"Zapisz plik i otwórz stronę w przeglądarce.","wixTitle":"Jak dodać Fasqoo do Wix","wix1":"Otwórz Wix Editor.","wix2":"Dodaj element „Embed Code / HTML Embed”.","wix3":"Wklej kod osadzania Fasqoo w obszarze HTML.","wix4":"W razie potrzeby zmień rozmiar elementu i opublikuj stronę.","webflowTitle":"Jak dodać Fasqoo do Webflow","webflow1":"Otwórz Webflow Designer.","webflow2":"Dodaj element „Embed” w wybranej sekcji.","webflow3":"Wklej wygenerowany kod Fasqoo.","webflow4":"Zapisz i opublikuj stronę.","squarespaceTitle":"Jak dodać Fasqoo do Squarespace","squarespace1":"Edytuj stronę, na której ma pojawić się test prędkości.","squarespace2":"Dodaj „Code Block”.","squarespace3":"Wklej kod osadzania Fasqoo do bloku.","squarespace4":"Zapisz stronę i opublikuj zmiany.","shopifyTitle":"Jak dodać Fasqoo do Shopify","shopify1":"Otwórz edytor motywu lub strony Shopify, w którym obsługiwany jest niestandardowy HTML/Liquid.","shopify2":"Dodaj sekcję „Custom Liquid” lub odpowiedni obszar HTML.","shopify3":"Wklej wygenerowany kod widgetu Fasqoo.","shopify4":"Zapisz i sprawdź podgląd przed publikacją.","shopifyNote":"Dostępne bloki motywu i uprawnienia skryptów mogą różnić się w zależności od motywu Shopify.","otherTitle":"Inne kreatory stron","otherText":"Poszukaj w kreatorze elementu „HTML Embed”, „Custom HTML”, „Code” lub „Embed”. Wklej tam kod Fasqoo i umieść widget w wybranym miejscu.","whyEyebrow":"DLACZEGO DODAĆ FASQOO?","whyTitle":"Daj odwiedzającym łatwy sposób na sprawdzenie połączenia","whyText":"Widget Fasqoo pozwala właścicielom stron umieścić test prędkości Internetu bezpośrednio na swoich stronach. Odwiedzający mogą wykonać test bez opuszczania witryny, a wygląd widgetu kontrolujesz w builderze.","faqEyebrow":"FAQ WIDGETU","faqTitle":"Najczęściej zadawane pytania","faqQ1":"Czy widget działa na urządzeniach mobilnych?","faqA1":"Tak. Widget został zaprojektowany z myślą o responsywnych układach i może być osadzony na stronach desktopowych i mobilnych.","faqQ2":"Czy mogę zmienić kolory widgetu?","faqA2":"Tak. Dostosuj dostępne ustawienia wizualne w builderze, a następnie wygeneruj nowy kod osadzania.","faqQ3":"Czy muszę samodzielnie tworzyć test prędkości?","faqA3":"Nie. Builder generuje kod widgetu za Ciebie. Wystarczy dodać wygenerowany kod do obsługiwanego obszaru HTML lub Embed.","faqQ4":"Czy test prędkości jest rzeczywistym pomiarem?","faqA4":"Widget Fasqoo jest przeznaczony do wykonywania pomiarów sieciowych w przeglądarce. Rzeczywiste wyniki mogą zależeć od urządzenia, przeglądarki, sieci, warunków Wi‑Fi i trasy do usługi pomiarowej.","faqQ5":"Czy mogę używać widgetu na więcej niż jednej stronie?","faqA5":"Wygenerowany kod osadzania można umieścić na stronach, na których masz zgodę na dodawanie własnego HTML lub kodu Embed. Zawsze sprawdzaj zasady używanej platformy."}};
+/* ===================== MENU I18N ===================== */
+const MENU_I18N = {
+  de:{navSpeedtest:"Speedtest",navTools:"Tools & IT-Diagnose",navSectionNetwork:"Netzwerk & Speed",navSectionDiag:"IT-Diagnose & Security",
+    navStatus:"Netzwerk-Status",navStatusDesc:"Live-Erreichbarkeit & Leitungs-Diagnose",
+    navWidget:"Speed-Widget",navWidgetDesc:"Kostenloses Test-Widget für andere Websites",
+    navGaming:"Gaming- & Ping-Monitor",navGamingDesc:"Live-Ping & Gaming-Performance überwachen",
+    navSecurity:"Security Analyzer",navSecurityDesc:"HTTP-Sicherheitsheader in Echtzeit prüfen",
+    navDns:"Visual DNS Test",navDnsDesc:"Globale DNS-Ausbreitung visuell tracken",
+    navSubnet:"Subnetz-Rechner",navSubnetDesc:"IP-Bereiche und Masken kalkulieren",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Über uns",
+    liteBtn:"Fasqoo Lite",installApp:"Für Windows installieren"},
+  en:{navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",
+    navStatus:"Network Status",navStatusDesc:"Live reachability & line diagnostics",
+    navWidget:"Speed Widget",navWidgetDesc:"Free test widget for other websites",
+    navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"Check HTTP security headers in real time",
+    navDns:"Visual DNS Test",navDnsDesc:"Track global DNS propagation visually",
+    navSubnet:"Subnet Calculator",navSubnetDesc:"Calculate IP ranges and subnet masks",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"About Us",
+    liteBtn:"Fasqoo Lite",installApp:"Install for Windows"},
+  es:{navSpeedtest:"Speedtest",navTools:"Herramientas y diagnóstico",navSectionNetwork:"Red y velocidad",navSectionDiag:"Diagnóstico TI y seguridad",
+    navStatus:"Estado de red",navStatusDesc:"Alcance en vivo y diagnóstico de línea",
+    navWidget:"Widget de velocidad",navWidgetDesc:"Widget de prueba gratis para otras webs",
+    navGaming:"Monitor Gaming y Ping",navGamingDesc:"Monitor de ping y rendimiento en juegos",
+    navSecurity:"Analizador de seguridad",navSecurityDesc:"Comprueba cabeceras HTTP en tiempo real",
+    navDns:"Prueba DNS visual",navDnsDesc:"Sigue la propagación DNS global",
+    navSubnet:"Calculadora de subredes",navSubnetDesc:"Calcula rangos IP y máscaras",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Sobre nosotros",
+    liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows"},
+  fr:{navSpeedtest:"Speedtest",navTools:"Outils & diagnostic",navSectionNetwork:"Réseau & vitesse",navSectionDiag:"Diagnostic IT & sécurité",
+    navStatus:"État du réseau",navStatusDesc:"Joignabilité en direct & diagnostic",
+    navWidget:"Widget de vitesse",navWidgetDesc:"Widget de test gratuit pour d'autres sites",
+    navGaming:"Moniteur Gaming & Ping",navGamingDesc:"Surveillance du ping et des performances de jeu",
+    navSecurity:"Analyseur de sécurité",navSecurityDesc:"Vérifie les en-têtes HTTP en temps réel",
+    navDns:"Test DNS visuel",navDnsDesc:"Suivre la propagation DNS mondiale",
+    navSubnet:"Calculateur de sous-réseau",navSubnetDesc:"Calculer les plages IP et masques",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"À propos",
+    liteBtn:"Fasqoo Lite",installApp:"Installer pour Windows"},
+  it:{navSpeedtest:"Speedtest",navTools:"Strumenti e diagnostica",navSectionNetwork:"Rete e velocità",navSectionDiag:"Diagnostica IT e sicurezza",
+    navStatus:"Stato della rete",navStatusDesc:"Raggiungibilità live e diagnostica linea",
+    navWidget:"Widget velocità",navWidgetDesc:"Widget di test gratuito per altri siti",
+    navGaming:"Monitor Gaming & Ping",navGamingDesc:"Monitor ping e prestazioni gaming",
+    navSecurity:"Analizzatore di sicurezza",navSecurityDesc:"Controlla header HTTP in tempo reale",
+    navDns:"Test DNS visivo",navDnsDesc:"Traccia propagazione DNS globale",
+    navSubnet:"Calcolatore subnet",navSubnetDesc:"Calcola range IP e maschere",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Chi siamo",
+    liteBtn:"Fasqoo Lite",installApp:"Installa per Windows"},
+  pt:{navSpeedtest:"Speedtest",navTools:"Ferramentas e diagnóstico",navSectionNetwork:"Rede e velocidade",navSectionDiag:"Diagnóstico TI e segurança",
+    navStatus:"Status da rede",navStatusDesc:"Alcance ao vivo e diagnóstico de linha",
+    navWidget:"Widget de velocidade",navWidgetDesc:"Widget de teste grátis para outros sites",
+    navGaming:"Monitor de Gaming e Ping",navGamingDesc:"Monitor de ping e desempenho em jogos",
+    navSecurity:"Analisador de segurança",navSecurityDesc:"Verifica cabeçalhos HTTP em tempo real",
+    navDns:"Teste DNS visual",navDnsDesc:"Rastreia propagação DNS global",
+    navSubnet:"Calculadora de sub-rede",navSubnetDesc:"Calcula faixas IP e máscaras",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Sobre nós",
+    liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows"},
+  nl:{navSpeedtest:"Speedtest",navTools:"Tools & Diagnose",navSectionNetwork:"Netwerk & snelheid",navSectionDiag:"IT-diagnose & beveiliging",
+    navStatus:"Netwerkstatus",navStatusDesc:"Live bereikbaarheid & lijndiagnose",
+    navWidget:"Snelheidswidget",navWidgetDesc:"Gratis testwidget voor andere websites",
+    navGaming:"Gaming- & Ping-monitor",navGamingDesc:"Live ping- en gameprestatiemonitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"Controleer HTTP-headers in realtime",
+    navDns:"Visuele DNS-test",navDnsDesc:"Volg wereldwijde DNS-propagatie",
+    navSubnet:"Subnetcalculator",navSubnetDesc:"Bereken IP-bereiken en maskers",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Over ons",
+    liteBtn:"Fasqoo Lite",installApp:"Installeren voor Windows"},
+  tr:{navSpeedtest:"Speedtest",navTools:"Araçlar ve Tanılama",navSectionNetwork:"Ağ ve Hız",navSectionDiag:"BT Tanılama ve Güvenlik",
+    navStatus:"Ağ Durumu",navStatusDesc:"Canlı erişilebilirlik ve hat tanılama",
+    navWidget:"Hız Widget'ı",navWidgetDesc:"Diğer siteler için ücretsiz test widget'ı",
+    navGaming:"Oyun ve Ping Monitörü",navGamingDesc:"Canlı ping ve oyun performansı",
+    navSecurity:"Güvenlik Analizörü",navSecurityDesc:"HTTP başlıklarını gerçek zamanlı kontrol et",
+    navDns:"Görsel DNS Testi",navDnsDesc:"Küresel DNS yayılımını izle",
+    navSubnet:"Alt Ağ Hesaplayıcı",navSubnetDesc:"IP aralıkları ve maskeleri hesapla",
+    navWidgetTop:"Widget",navFaq:"SSS",navAbout:"Hakkımızda",
+    liteBtn:"Fasqoo Lite",installApp:"Windows için yükle"},
+  sq:{navSpeedtest:"Speedtest",navTools:"Mjete & Diagnostikë",navSectionNetwork:"Rrjeti & Shpejtësia",navSectionDiag:"Diagnostikë IT & Siguri",
+    navStatus:"Statusi i Rrjetit",navStatusDesc:"Arritshmëri live & diagnostikë linje",
+    navWidget:"Widget Shpejtësie",navWidgetDesc:"Widget test falas për faqe të tjera",
+    navGaming:"Monitor Loje & Ping",navGamingDesc:"Monitor ping dhe performancë lojërash",
+    navSecurity:"Analizuesi i Sigurisë",navSecurityDesc:"Kontrollo header-a HTTP në kohë reale",
+    navDns:"Testi Vizual DNS",navDnsDesc:"Gjurmo përhapjen globale DNS",
+    navSubnet:"Llogaritësi i Nënrrjetit",navSubnetDesc:"Llogarit intervalet IP dhe maskat",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"Rreth nesh",
+    liteBtn:"Fasqoo Lite",installApp:"Instalo për Windows"},
+  pl:{navSpeedtest:"Speedtest",navTools:"Narzędzia i diagnostyka",navSectionNetwork:"Sieć i prędkość",navSectionDiag:"Diagnostyka IT i bezpieczeństwo",
+    navStatus:"Stan sieci",navStatusDesc:"Dostępność na żywo i diagnostyka linii",
+    navWidget:"Widget prędkości",navWidgetDesc:"Darmowy widget testowy dla innych stron",
+    navGaming:"Monitor gier i ping",navGamingDesc:"Monitor ping i wydajności gier",
+    navSecurity:"Analizator bezpieczeństwa",navSecurityDesc:"Sprawdź nagłówki HTTP w czasie rzeczywistym",
+    navDns:"Wizualny test DNS",navDnsDesc:"Śledź globalną propagację DNS",
+    navSubnet:"Kalkulator podsieci",navSubnetDesc:"Oblicz zakresy IP i maski",
+    navWidgetTop:"Widget",navFaq:"FAQ",navAbout:"O nas",
+    liteBtn:"Fasqoo Lite",installApp:"Zainstaluj dla Windows"}
+};
 
+/* ===================== INSTALL I18N ===================== */
+const INSTALL_I18N = {
+de:{installEyebrow:"EINFACHE EINBINDUNG",installTitle:"So fügst du den Fasqoo Speed Test in deine Website ein",installIntro:"Erstelle dein Widget im Konfigurator, prüfe die Vorschau auf Desktop oder Mobilgerät, kopiere den vollständigen Einbettungscode und füge ihn in einen HTML-, Embed-, Custom-HTML-, Code- oder Custom-Liquid-Bereich deiner Website ein.",stepCreateTitle:"Widget erstellen",stepCreateText:"Wähle Layout, Farben, Größe, Eckenradius, Schatten und weitere Einstellungen im Builder aus.",stepCopyTitle:"Einbettungscode kopieren",stepCopyText:"Klicke auf „Copy Embed Code“. Der erzeugte Code enthält die von dir ausgewählten Widget-Einstellungen.",stepPasteTitle:"Auf deiner Website einfügen",stepPasteText:"Füge den Code dort ein, wo der Fasqoo Speed Test erscheinen soll.",installTabsLabel:"Anleitungen zur Website-Einbindung",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Andere",wpTitle:"Fasqoo in WordPress einfügen",wp1:"Öffne die WordPress-Seite oder den Beitrag, auf dem der Speed Test erscheinen soll.",wp2:"Füge einen Block „Benutzerdefiniertes HTML“ hinzu.",wp3:"Kopiere den Einbettungscode aus dem Fasqoo Widget Builder und füge ihn in den Block ein.",wp4:"Prüfe die Vorschau und klicke auf „Veröffentlichen“.",wpNote:"Bei WordPress.com oder verwaltetem WordPress können HTML- und Script-Berechtigungen je nach Tarif eingeschränkt sein.",htmlTitle:"Fasqoo in eine HTML-Website einfügen",html1:"Öffne die HTML-Datei der Seite, auf der das Widget erscheinen soll.",html2:"Kopiere den erzeugten Fasqoo-Einbettungscode.",html3:"Füge ihn innerhalb von <body> an der gewünschten Stelle ein.",html4:"Speichere die Datei und öffne die Seite im Browser.",wixTitle:"Fasqoo in Wix einfügen",wix1:"Öffne den Wix Editor.",wix2:"Füge ein Element „Embed Code / HTML Embed“ hinzu.",wix3:"Füge den Fasqoo-Einbettungscode in den HTML-Bereich ein.",wix4:"Passe die Größe bei Bedarf an und veröffentliche deine Website.",webflowTitle:"Fasqoo in Webflow einfügen",webflow1:"Öffne den Webflow Designer.",webflow2:"Füge im gewünschten Bereich ein „Embed“-Element hinzu.",webflow3:"Füge den erzeugten Fasqoo-Code ein.",webflow4:"Speichere deine Änderungen und veröffentliche die Website.",squarespaceTitle:"Fasqoo in Squarespace einfügen",squarespace1:"Bearbeite die Seite, auf der der Speed Test erscheinen soll.",squarespace2:"Füge einen „Code Block“ hinzu.",squarespace3:"Füge deinen Fasqoo-Einbettungscode in den Block ein.",squarespace4:"Speichere die Seite und veröffentliche deine Änderungen.",shopifyTitle:"Fasqoo in Shopify einfügen",shopify1:"Öffne den Shopify Theme- oder Seiteneditor, in dem benutzerdefiniertes HTML/Liquid unterstützt wird.",shopify2:"Füge einen „Custom Liquid“- oder passenden HTML-Bereich hinzu.",shopify3:"Füge den erzeugten Fasqoo-Widget-Code ein.",shopify4:"Speichere die Seite und prüfe die Vorschau vor der Veröffentlichung.",shopifyNote:"Verfügbare Theme-Blöcke und Script-Berechtigungen können sich je nach Shopify-Theme unterscheiden.",otherTitle:"Andere Website-Baukästen",otherText:"Suche nach einem Bereich wie „HTML Embed“, „Custom HTML“, „Code“ oder „Embed“.",whyEyebrow:"WARUM FASQOO HINZUFÜGEN?",whyTitle:"Gib deinen Besuchern einen einfachen Weg, ihre Verbindung zu testen",whyText:"Mit dem Fasqoo Widget können Website-Betreiber einen Internet-Speed-Test direkt auf ihren Seiten anbieten.",faqEyebrow:"WIDGET-FAQ",faqTitle:"Häufig gestellte Fragen",faqQ1:"Funktioniert das Widget auf Mobilgeräten?",faqA1:"Ja. Das Widget ist für responsive Layouts ausgelegt.",faqQ2:"Kann ich die Widget-Farben ändern?",faqA2:"Ja. Passe die verfügbaren Designeinstellungen im Builder an und erstelle anschließend einen neuen Einbettungscode.",faqQ3:"Muss ich den Speed Test selbst programmieren?",faqA3:"Nein. Der Builder erzeugt den Widget-Code für dich.",faqQ4:"Ist der Speed Test eine echte Messung?",faqA4:"Das Fasqoo Widget ist für browserbasierte Netzwerkmessungen vorgesehen. Die tatsächlichen Ergebnisse können variieren.",faqQ5:"Kann ich das Widget auf mehreren Websites verwenden?",faqA5:"Der erzeugte Einbettungscode kann auf Websites eingesetzt werden, auf denen du eigenes HTML einfügen darfst."},
+en:{installEyebrow:"EASY INSTALLATION",installTitle:"How to add the Fasqoo Speed Test to your website",installIntro:"Build your widget in the configurator, preview it on desktop or mobile, copy the complete embed code, and paste it into an HTML, Embed, Custom HTML, Code, or Custom Liquid area supported by your website platform. The widget remains responsive after it is embedded.",stepCreateTitle:"Create your widget",stepCreateText:"Choose the layout, colors, size, corner radius, shadow and other settings in the builder. The preview updates as you customize it.",stepCopyTitle:"Copy the embed code",stepCopyText:"Click “Copy Embed Code”. The generated code contains the widget settings you selected.",stepPasteTitle:"Add it to your website",stepPasteText:"Paste the code where you want the Fasqoo Speed Test to appear.",installTabsLabel:"Website installation guides",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Other",wpTitle:"How to add Fasqoo to WordPress",wp1:"Open the WordPress page or post where you want the speed test to appear.",wp2:"Add a “Custom HTML” block.",wp3:"Copy the embed code from the Fasqoo Widget Builder and paste it into the block.",wp4:"Preview the page and click “Publish”.",wpNote:"On WordPress.com or managed WordPress hosting, available HTML and script permissions can vary by plan or setup.",htmlTitle:"How to add Fasqoo to an HTML website",html1:"Open the HTML file for the page where you want the widget.",html2:"Copy the generated Fasqoo embed code.",html3:"Paste it inside <body> where the widget should appear.",html4:"Save the file and open the page in your browser.",wixTitle:"How to add Fasqoo to Wix",wix1:"Open your Wix Editor.",wix2:"Add an “Embed Code / HTML Embed” element.",wix3:"Paste the Fasqoo embed code into the HTML embed area.",wix4:"Resize the element if needed, then publish your site.",webflowTitle:"How to add Fasqoo to Webflow",webflow1:"Open your Webflow Designer.",webflow2:"Add an “Embed” element to the desired section.",webflow3:"Paste the generated Fasqoo code.",webflow4:"Save and publish your site.",squarespaceTitle:"How to add Fasqoo to Squarespace",squarespace1:"Edit the page where the speed test should appear.",squarespace2:"Add a “Code Block”.",squarespace3:"Paste your Fasqoo embed code into the block.",squarespace4:"Save the page and publish your changes.",shopifyTitle:"How to add Fasqoo to Shopify",shopify1:"Open the Shopify theme or page editor where custom HTML/Liquid is supported.",shopify2:"Add a “Custom Liquid” or appropriate HTML section.",shopify3:"Paste the generated Fasqoo widget code.",shopify4:"Save and preview the page before publishing.",shopifyNote:"Available theme blocks and script permissions can differ between Shopify themes.",otherTitle:"Other website builders",otherText:"Look for an “HTML Embed”, “Custom HTML”, “Code”, or “Embed” element in your website builder.",whyEyebrow:"WHY ADD FASQOO?",whyTitle:"Give visitors an easy way to test their connection",whyText:"The Fasqoo widget lets website owners place an internet speed test directly on their pages.",faqEyebrow:"WIDGET FAQ",faqTitle:"Frequently asked questions",faqQ1:"Does the widget work on mobile devices?",faqA1:"Yes. The widget is designed for responsive layouts and can be embedded on desktop and mobile websites.",faqQ2:"Can I change the widget colors?",faqA2:"Yes. Use the builder to customize the available visual settings and then generate a new embed code.",faqQ3:"Do I need to build the speed test myself?",faqA3:"No. The builder generates the widget code for you.",faqQ4:"Is the speed test a real measurement?",faqA4:"The Fasqoo widget is intended to perform browser-based network measurements. Actual results can vary.",faqQ5:"Can I use the widget on more than one website?",faqA5:"The generated embed code can be placed on websites where you are permitted to add custom HTML or embed code."},
+es:{installEyebrow:"INSTALACIÓN FÁCIL",installTitle:"Cómo añadir Fasqoo Speed Test a tu sitio web",installIntro:"Crea el widget en el configurador, comprueba la vista previa, copia el código de inserción completo y pégalo en un área HTML, Embed, HTML personalizado, Code o Custom Liquid compatible con tu plataforma.",stepCreateTitle:"Crea tu widget",stepCreateText:"Elige el diseño, los colores, el tamaño, el radio de las esquinas, la sombra y otras opciones en el constructor.",stepCopyTitle:"Copia el código de inserción",stepCopyText:"Haz clic en «Copy Embed Code». El código generado incluye las opciones que seleccionaste.",stepPasteTitle:"Añádelo a tu sitio",stepPasteText:"Pega el código donde quieras mostrar Fasqoo Speed Test.",installTabsLabel:"Guías de instalación",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Otro",wpTitle:"Cómo añadir Fasqoo a WordPress",wp1:"Abre la página o entrada de WordPress donde quieras mostrar el test.",wp2:"Añade un bloque «HTML personalizado».",wp3:"Copia el código del Fasqoo Widget Builder y pégalo en el bloque.",wp4:"Previsualiza la página y pulsa «Publicar».",wpNote:"En WordPress.com o alojamientos gestionados, los permisos de HTML y scripts pueden variar.",htmlTitle:"Cómo añadir Fasqoo a un sitio HTML",html1:"Abre el archivo HTML de la página donde quieras el widget.",html2:"Copia el código de inserción de Fasqoo.",html3:"Pégalo dentro de <body> donde deba aparecer el widget.",html4:"Guarda el archivo y abre la página en el navegador.",wixTitle:"Cómo añadir Fasqoo a Wix",wix1:"Abre Wix Editor.",wix2:"Añade un elemento «Embed Code / HTML Embed».",wix3:"Pega el código de Fasqoo en el área HTML.",wix4:"Ajusta el tamaño si es necesario y publica el sitio.",webflowTitle:"Cómo añadir Fasqoo a Webflow",webflow1:"Abre Webflow Designer.",webflow2:"Añade un elemento «Embed» en la sección deseada.",webflow3:"Pega el código generado de Fasqoo.",webflow4:"Guarda y publica el sitio.",squarespaceTitle:"Cómo añadir Fasqoo a Squarespace",squarespace1:"Edita la página donde debe aparecer el test.",squarespace2:"Añade un «Code Block».",squarespace3:"Pega el código de Fasqoo en el bloque.",squarespace4:"Guarda y publica los cambios.",shopifyTitle:"Cómo añadir Fasqoo a Shopify",shopify1:"Abre el editor del tema o de la página donde se admita HTML/Liquid personalizado.",shopify2:"Añade una sección «Custom Liquid» o HTML adecuada.",shopify3:"Pega el código del widget Fasqoo.",shopify4:"Guarda y comprueba la vista previa antes de publicar.",shopifyNote:"Los bloques y permisos de scripts disponibles pueden variar según el tema de Shopify.",otherTitle:"Otros constructores web",otherText:"Busca un elemento «HTML Embed», «Custom HTML», «Code» o «Embed».",whyEyebrow:"¿POR QUÉ AÑADIR FASQOO?",whyTitle:"Ofrece a tus visitantes una forma sencilla de probar su conexión",whyText:"El widget de Fasqoo permite colocar un test de velocidad de Internet directamente en tus páginas.",faqEyebrow:"PREGUNTAS DEL WIDGET",faqTitle:"Preguntas frecuentes",faqQ1:"¿Funciona el widget en móviles?",faqA1:"Sí. Está diseñado para diseños responsive.",faqQ2:"¿Puedo cambiar los colores?",faqA2:"Sí. Personaliza las opciones visuales disponibles y genera un nuevo código.",faqQ3:"¿Tengo que programar el test?",faqA3:"No. El constructor genera el código del widget.",faqQ4:"¿La prueba es una medición real?",faqA4:"El widget está diseñado para realizar mediciones de red desde el navegador.",faqQ5:"¿Puedo usarlo en varias webs?",faqA5:"El código puede colocarse en sitios donde tengas permiso para añadir HTML o código Embed."},
+fr:{installEyebrow:"INSTALLATION FACILE",installTitle:"Comment ajouter Fasqoo Speed Test à votre site web",installIntro:"Créez le widget dans le configurateur, vérifiez l'aperçu, copiez le code d'intégration complet et collez-le dans une zone HTML, Embed, HTML personnalisé, Code ou Custom Liquid.",stepCreateTitle:"Créer votre widget",stepCreateText:"Choisissez la mise en page, les couleurs, la taille, le rayon des coins, l'ombre et les autres options.",stepCopyTitle:"Copier le code d'intégration",stepCopyText:"Cliquez sur « Copy Embed Code » pour copier le code.",stepPasteTitle:"L'ajouter à votre site",stepPasteText:"Collez le code à l'endroit où vous souhaitez afficher Fasqoo Speed Test.",installTabsLabel:"Guides d'installation",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Autre",wpTitle:"Ajouter Fasqoo à WordPress",wp1:"Ouvrez la page ou l'article WordPress.",wp2:"Ajoutez un bloc « HTML personnalisé ».",wp3:"Copiez le code et collez-le dans le bloc.",wp4:"Prévisualisez puis cliquez sur « Publier ».",wpNote:"Les permissions HTML et scripts peuvent varier.",htmlTitle:"Ajouter Fasqoo à un site HTML",html1:"Ouvrez le fichier HTML de la page.",html2:"Copiez le code d'intégration Fasqoo.",html3:"Collez-le dans <body>.",html4:"Enregistrez le fichier et ouvrez la page.",wixTitle:"Ajouter Fasqoo à Wix",wix1:"Ouvrez Wix Editor.",wix2:"Ajoutez un élément « Embed Code / HTML Embed ».",wix3:"Collez le code Fasqoo dans la zone HTML.",wix4:"Ajustez la taille si nécessaire.",webflowTitle:"Ajouter Fasqoo à Webflow",webflow1:"Ouvrez Webflow Designer.",webflow2:"Ajoutez un élément « Embed ».",webflow3:"Collez le code Fasqoo généré.",webflow4:"Enregistrez et publiez.",squarespaceTitle:"Ajouter Fasqoo à Squarespace",squarespace1:"Modifiez la page concernée.",squarespace2:"Ajoutez un « Code Block ».",squarespace3:"Collez le code Fasqoo.",squarespace4:"Enregistrez et publiez.",shopifyTitle:"Ajouter Fasqoo à Shopify",shopify1:"Ouvrez l'éditeur de thème ou de page.",shopify2:"Ajoutez une section « Custom Liquid » ou HTML.",shopify3:"Collez le code du widget Fasqoo.",shopify4:"Enregistrez et vérifiez l'aperçu.",shopifyNote:"Les blocs et permissions peuvent varier.",otherTitle:"Autres constructeurs de sites",otherText:"Recherchez un élément « HTML Embed », « Custom HTML », « Code » ou « Embed ».",whyEyebrow:"POURQUOI AJOUTER FASQOO ?",whyTitle:"Offrez à vos visiteurs un moyen simple de tester leur connexion",whyText:"Le widget Fasqoo permet d'ajouter un test de vitesse Internet directement à vos pages.",faqEyebrow:"FAQ DU WIDGET",faqTitle:"Questions fréquentes",faqQ1:"Le widget fonctionne-t-il sur mobile ?",faqA1:"Oui. Il est conçu pour les mises en page responsives.",faqQ2:"Puis-je changer les couleurs ?",faqA2:"Oui. Utilisez le configurateur pour modifier les options visuelles.",faqQ3:"Dois-je programmer le test moi-même ?",faqA3:"Non. Le générateur crée le code du widget.",faqQ4:"Le test est-il une mesure réelle ?",faqA4:"Le widget est destiné aux mesures réseau dans le navigateur.",faqQ5:"Puis-je utiliser le widget sur plusieurs sites ?",faqA5:"Oui, là où vous êtes autorisé à ajouter du HTML ou du code Embed."},
+it:{installEyebrow:"INSTALLAZIONE SEMPLICE",installTitle:"Come aggiungere Fasqoo Speed Test al tuo sito web",installIntro:"Crea il widget nel configuratore, visualizza l'anteprima, copia il codice embed completo e incollalo in un'area HTML, Embed, Custom HTML, Code o Custom Liquid.",stepCreateTitle:"Crea il tuo widget",stepCreateText:"Scegli layout, colori, dimensioni, raggio degli angoli, ombra e altre impostazioni.",stepCopyTitle:"Copia il codice embed",stepCopyText:"Fai clic su \"Copy Embed Code\".",stepPasteTitle:"Aggiungilo al tuo sito",stepPasteText:"Incolla il codice dove vuoi mostrare Fasqoo Speed Test.",installTabsLabel:"Guide all'installazione",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Altro",wpTitle:"Come aggiungere Fasqoo a WordPress",wp1:"Apri la pagina o il post di WordPress.",wp2:"Aggiungi un blocco \"HTML personalizzato\".",wp3:"Copia il codice e incollalo nel blocco.",wp4:"Visualizza l'anteprima e clicca su \"Pubblica\".",wpNote:"I permessi HTML e script possono variare.",htmlTitle:"Come aggiungere Fasqoo a un sito HTML",html1:"Apri il file HTML della pagina.",html2:"Copia il codice embed generato da Fasqoo.",html3:"Incollalo dentro <body>.",html4:"Salva e apri la pagina nel browser.",wixTitle:"Come aggiungere Fasqoo a Wix",wix1:"Apri Wix Editor.",wix2:"Aggiungi un elemento \"Embed Code / HTML Embed\".",wix3:"Incolla il codice embed nell'area HTML.",wix4:"Ridimensiona se necessario e pubblica.",webflowTitle:"Come aggiungere Fasqoo a Webflow",webflow1:"Apri Webflow Designer.",webflow2:"Aggiungi un elemento \"Embed\".",webflow3:"Incolla il codice Fasqoo generato.",webflow4:"Salva e pubblica.",squarespaceTitle:"Come aggiungere Fasqoo a Squarespace",squarespace1:"Modifica la pagina.",squarespace2:"Aggiungi un \"Code Block\".",squarespace3:"Incolla il codice embed.",squarespace4:"Salva e pubblica.",shopifyTitle:"Come aggiungere Fasqoo a Shopify",shopify1:"Apri l'editor del tema.",shopify2:"Aggiungi una sezione \"Custom Liquid\".",shopify3:"Incolla il codice del widget.",shopify4:"Salva e controlla l'anteprima.",shopifyNote:"I blocchi e i permessi possono variare.",otherTitle:"Altri website builder",otherText:"Cerca un elemento \"HTML Embed\", \"Custom HTML\", \"Code\" o \"Embed\".",whyEyebrow:"PERCHÉ AGGIUNGERE FASQOO?",whyTitle:"Offri ai visitatori un modo semplice per testare la loro connessione",whyText:"Il widget Fasqoo permette di inserire uno speed test Internet direttamente nelle proprie pagine.",faqEyebrow:"FAQ DEL WIDGET",faqTitle:"Domande frequenti",faqQ1:"Il widget funziona sui dispositivi mobili?",faqA1:"Sì. Il widget è progettato per layout responsive.",faqQ2:"Posso cambiare i colori del widget?",faqA2:"Sì. Usa il builder per personalizzare le impostazioni visive.",faqQ3:"Devo creare da solo lo speed test?",faqA3:"No. Il builder genera il codice del widget per te.",faqQ4:"Lo speed test è una misurazione reale?",faqA4:"Il widget Fasqoo è progettato per eseguire misurazioni di rete dal browser.",faqQ5:"Posso usare il widget su più siti web?",faqA5:"Il codice embed può essere inserito nei siti in cui hai il permesso di aggiungere HTML."},
+pt:{installEyebrow:"INSTALAÇÃO FÁCIL",installTitle:"Como adicionar o Fasqoo Speed Test ao seu site",installIntro:"Crie o widget no configurador, visualize a prévia, copie o código de incorporação completo e cole-o em uma área de HTML, Embed, HTML personalizado, Code ou Custom Liquid.",stepCreateTitle:"Crie o seu widget",stepCreateText:"Escolha o layout, as cores, o tamanho, o raio dos cantos, a sombra e outras configurações.",stepCopyTitle:"Copie o código de incorporação",stepCopyText:"Clique em \"Copy Embed Code\".",stepPasteTitle:"Adicione ao seu site",stepPasteText:"Cole o código onde deseja exibir o Fasqoo Speed Test.",installTabsLabel:"Guias de instalação",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Outro",wpTitle:"Como adicionar o Fasqoo ao WordPress",wp1:"Abra a página ou publicação do WordPress.",wp2:"Adicione um bloco \"HTML personalizado\".",wp3:"Copie o código e cole-o no bloco.",wp4:"Visualize a página e clique em \"Publicar\".",wpNote:"As permissões de HTML e scripts podem variar.",htmlTitle:"Como adicionar o Fasqoo a um site HTML",html1:"Abra o arquivo HTML da página.",html2:"Copie o código de incorporação.",html3:"Cole-o dentro de <body>.",html4:"Salve e abra a página no navegador.",wixTitle:"Como adicionar o Fasqoo ao Wix",wix1:"Abra o Wix Editor.",wix2:"Adicione um elemento \"Embed Code / HTML Embed\".",wix3:"Cole o código na área HTML.",wix4:"Redimensione se necessário e publique.",webflowTitle:"Como adicionar o Fasqoo ao Webflow",webflow1:"Abra o Webflow Designer.",webflow2:"Adicione um elemento \"Embed\".",webflow3:"Cole o código Fasqoo gerado.",webflow4:"Salve e publique.",squarespaceTitle:"Como adicionar o Fasqoo ao Squarespace",squarespace1:"Edite a página.",squarespace2:"Adicione um \"Code Block\".",squarespace3:"Cole o código.",squarespace4:"Salve e publique.",shopifyTitle:"Como adicionar o Fasqoo ao Shopify",shopify1:"Abra o editor do tema.",shopify2:"Adicione uma seção \"Custom Liquid\".",shopify3:"Cole o código do widget.",shopify4:"Salve e visualize antes de publicar.",shopifyNote:"Os blocos e permissões podem variar.",otherTitle:"Outros criadores de sites",otherText:"Procure um elemento \"HTML Embed\", \"Custom HTML\", \"Code\" ou \"Embed\".",whyEyebrow:"POR QUE ADICIONAR O FASQOO?",whyTitle:"Ofereça aos visitantes uma forma fácil de testar a conexão",whyText:"O widget Fasqoo permite que proprietários de sites coloquem um teste de velocidade da Internet diretamente nas páginas.",faqEyebrow:"FAQ DO WIDGET",faqTitle:"Perguntas frequentes",faqQ1:"O widget funciona em dispositivos móveis?",faqA1:"Sim. O widget foi projetado para layouts responsivos.",faqQ2:"Posso alterar as cores do widget?",faqA2:"Sim. Use o builder para personalizar as configurações visuais.",faqQ3:"Preciso criar o teste de velocidade sozinho?",faqA3:"Não. O builder gera o código do widget para você.",faqQ4:"O teste de velocidade é uma medição real?",faqA4:"O widget Fasqoo foi projetado para realizar medições de rede baseadas no navegador.",faqQ5:"Posso usar o widget em mais de um site?",faqA5:"O código pode ser usado em sites onde você tem permissão para adicionar HTML."},
+nl:{installEyebrow:"EENVOUDIGE INSTALLATIE",installTitle:"Zo voeg je Fasqoo Speed Test toe aan je website",installIntro:"Bouw de widget in de configurator, bekijk de preview, kopieer de volledige embedcode en plak die in een HTML-, Embed-, Custom HTML-, Code- of Custom Liquid-gedeelte.",stepCreateTitle:"Maak je widget",stepCreateText:"Kies de lay-out, kleuren, grootte, hoekradius, schaduw en andere instellingen.",stepCopyTitle:"Kopieer de embedcode",stepCopyText:"Klik op \"Copy Embed Code\".",stepPasteTitle:"Plaats hem op je website",stepPasteText:"Plak de code waar je de Fasqoo Speed Test wilt tonen.",installTabsLabel:"Handleidingen voor website-installatie",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Overig",wpTitle:"Fasqoo toevoegen aan WordPress",wp1:"Open de WordPress-pagina.",wp2:"Voeg een blok \"Aangepaste HTML\" toe.",wp3:"Kopieer de embedcode en plak die in het blok.",wp4:"Bekijk de pagina en klik op \"Publiceren\".",wpNote:"HTML- en scriptrechten kunnen verschillen.",htmlTitle:"Fasqoo toevoegen aan een HTML-website",html1:"Open het HTML-bestand.",html2:"Kopieer de gegenereerde Fasqoo-embedcode.",html3:"Plak deze binnen <body>.",html4:"Sla het bestand op en open de pagina.",wixTitle:"Fasqoo toevoegen aan Wix",wix1:"Open Wix Editor.",wix2:"Voeg een element \"Embed Code / HTML Embed\" toe.",wix3:"Plak de embedcode in het HTML-gedeelte.",wix4:"Pas indien nodig het formaat aan en publiceer.",webflowTitle:"Fasqoo toevoegen aan Webflow",webflow1:"Open Webflow Designer.",webflow2:"Voeg een \"Embed\"-element toe.",webflow3:"Plak de gegenereerde Fasqoo-code.",webflow4:"Sla op en publiceer.",squarespaceTitle:"Fasqoo toevoegen aan Squarespace",squarespace1:"Bewerk de pagina.",squarespace2:"Voeg een \"Code Block\" toe.",squarespace3:"Plak je embedcode.",squarespace4:"Sla op en publiceer.",shopifyTitle:"Fasqoo toevoegen aan Shopify",shopify1:"Open de Shopify-thema-editor.",shopify2:"Voeg een \"Custom Liquid\"-gedeelte toe.",shopify3:"Plak de gegenereerde widgetcode.",shopify4:"Sla op en bekijk de preview.",shopifyNote:"Themablokken en scriptrechten kunnen verschillen.",otherTitle:"Andere websitebouwers",otherText:"Zoek naar een element zoals \"HTML Embed\", \"Custom HTML\", \"Code\" of \"Embed\".",whyEyebrow:"WAAROM FASQOO TOEVOEGEN?",whyTitle:"Geef bezoekers een eenvoudige manier om hun verbinding te testen",whyText:"Met de Fasqoo-widget kunnen website-eigenaren een internetsnelheidstest rechtstreeks op hun pagina's plaatsen.",faqEyebrow:"WIDGET-FAQ",faqTitle:"Veelgestelde vragen",faqQ1:"Werkt de widget op mobiele apparaten?",faqA1:"Ja. De widget is ontworpen voor responsive layouts.",faqQ2:"Kan ik de kleuren van de widget wijzigen?",faqA2:"Ja. Pas de beschikbare visuele instellingen aan in de builder.",faqQ3:"Moet ik de snelheidstest zelf bouwen?",faqA3:"Nee. De builder genereert de widgetcode voor je.",faqQ4:"Is de snelheidstest een echte meting?",faqA4:"De Fasqoo-widget is bedoeld om browsergebaseerde netwerkmetingen uit te voeren.",faqQ5:"Kan ik de widget op meerdere websites gebruiken?",faqA5:"De embedcode kan worden geplaatst op websites waar je aangepaste HTML mag toevoegen."},
+tr:{installEyebrow:"KOLAY KURULUM",installTitle:"Fasqoo Speed Test web sitenize nasıl eklenir",installIntro:"Widget'ınızı yapılandırıcıda oluşturun, önizlemesini kontrol edin, tam embed kodunu kopyalayın ve HTML, Embed, Custom HTML, Code veya Custom Liquid alanına yapıştırın.",stepCreateTitle:"Widget'ınızı oluşturun",stepCreateText:"Builder'da düzeni, renkleri, boyutu, köşe yarıçapını ve diğer ayarları seçin.",stepCopyTitle:"Embed kodunu kopyalayın",stepCopyText:"\"Copy Embed Code\" düğmesine tıklayın.",stepPasteTitle:"Web sitenize ekleyin",stepPasteText:"Kodu Fasqoo Speed Test'in görünmesini istediğiniz yere yapıştırın.",installTabsLabel:"Web sitesi kurulum kılavuzları",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Diğer",wpTitle:"Fasqoo WordPress'e nasıl eklenir",wp1:"WordPress sayfasını açın.",wp2:"\"Custom HTML\" bloğu ekleyin.",wp3:"Embed kodunu kopyalayıp bloğa yapıştırın.",wp4:"Önizleyin ve \"Publish\" düğmesine tıklayın.",wpNote:"HTML ve script izinleri değişebilir.",htmlTitle:"Fasqoo HTML sitesine nasıl eklenir",html1:"HTML dosyasını açın.",html2:"Embed kodunu kopyalayın.",html3:"<body> içine yapıştırın.",html4:"Dosyayı kaydedin ve sayfayı açın.",wixTitle:"Fasqoo Wix'e nasıl eklenir",wix1:"Wix Editor'ü açın.",wix2:"\"Embed Code / HTML Embed\" öğesi ekleyin.",wix3:"Embed kodunu HTML alanına yapıştırın.",wix4:"Gerekirse boyutu ayarlayın ve yayınlayın.",webflowTitle:"Fasqoo Webflow'a nasıl eklenir",webflow1:"Webflow Designer'ı açın.",webflow2:"\"Embed\" öğesi ekleyin.",webflow3:"Kodu yapıştırın.",webflow4:"Kaydedin ve yayınlayın.",squarespaceTitle:"Fasqoo Squarespace'e nasıl eklenir",squarespace1:"Sayfayı düzenleyin.",squarespace2:"\"Code Block\" ekleyin.",squarespace3:"Kodu yapıştırın.",squarespace4:"Kaydedin ve yayınlayın.",shopifyTitle:"Fasqoo Shopify'a nasıl eklenir",shopify1:"Tema düzenleyicisini açın.",shopify2:"\"Custom Liquid\" ekleyin.",shopify3:"Widget kodunu yapıştırın.",shopify4:"Kaydedin ve önizleyin.",shopifyNote:"Tema blokları ve izinler değişebilir.",otherTitle:"Diğer web sitesi oluşturucuları",otherText:"\"HTML Embed\", \"Custom HTML\", \"Code\" veya \"Embed\" öğesini bulun.",whyEyebrow:"NEDEN FASQOO EKLEMELİSİNİZ?",whyTitle:"Ziyaretçilerinize bağlantılarını test etmek için kolay bir yol sunun",whyText:"Fasqoo widget'ı, web sitesi sahiplerinin internet hız testini doğrudan sayfalarına eklemesini sağlar.",faqEyebrow:"WIDGET SSS",faqTitle:"Sık sorulan sorular",faqQ1:"Widget mobil cihazlarda çalışır mı?",faqA1:"Evet. Widget responsive düzenler için tasarlanmıştır.",faqQ2:"Widget renklerini değiştirebilir miyim?",faqA2:"Evet. Builder'da görsel ayarları özelleştirin.",faqQ3:"Speed Test'i kendim oluşturmam gerekiyor mu?",faqA3:"Hayır. Builder widget kodunu sizin için oluşturur.",faqQ4:"Speed Test gerçek bir ölçüm mü?",faqA4:"Widget tarayıcı tabanlı ağ ölçümleri yapmak üzere tasarlanmıştır.",faqQ5:"Widget'ı birden fazla sitede kullanabilir miyim?",faqA5:"Embed kodu izin verilen sitelerde kullanılabilir."},
+sq:{installEyebrow:"INSTALIM I LEHTË",installTitle:"Si të shtoni Fasqoo Speed Test në faqen tuaj",installIntro:"Krijoni widget-in në konfigurues, shikoni paraprakisht, kopjoni kodin e plotë të embed-it dhe vendoseni në një hapësirë HTML, Embed, Custom HTML, Code ose Custom Liquid.",stepCreateTitle:"Krijoni widget-in tuaj",stepCreateText:"Zgjidhni paraqitjen, ngjyrat, madhësinë, rrumbullakimin, hijen dhe cilësimet e tjera.",stepCopyTitle:"Kopjoni kodin e embed-it",stepCopyText:"Klikoni \"Copy Embed Code\".",stepPasteTitle:"Shtojeni në faqen tuaj",stepPasteText:"Vendoseni kodin aty ku dëshironi të shfaqet Fasqoo Speed Test.",installTabsLabel:"Udhëzues për instalimin",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Tjetër",wpTitle:"Si të shtoni Fasqoo në WordPress",wp1:"Hapni faqen ose postimin.",wp2:"Shtoni një bllok \"Custom HTML\".",wp3:"Kopjoni kodin dhe vendoseni në bllok.",wp4:"Shikoni paraprakisht dhe klikoni \"Publish\".",wpNote:"Lejet për HTML dhe skripte mund të ndryshojnë.",htmlTitle:"Si të shtoni Fasqoo në një faqe HTML",html1:"Hapni skedarin HTML.",html2:"Kopjoni kodin e embed-it.",html3:"Vendoseni brenda <body>.",html4:"Ruajeni skedarin dhe hapeni faqen.",wixTitle:"Si të shtoni Fasqoo në Wix",wix1:"Hapni Wix Editor.",wix2:"Shtoni një element \"Embed Code / HTML Embed\".",wix3:"Vendoseni kodin në hapësirën HTML.",wix4:"Ndryshoni madhësinë dhe publikoni.",webflowTitle:"Si të shtoni Fasqoo në Webflow",webflow1:"Hapni Webflow Designer.",webflow2:"Shtoni një element \"Embed\".",webflow3:"Vendosni kodin e krijuar.",webflow4:"Ruani dhe publikoni.",squarespaceTitle:"Si të shtoni Fasqoo në Squarespace",squarespace1:"Redaktoni faqen.",squarespace2:"Shtoni një \"Code Block\".",squarespace3:"Vendosni kodin në bllok.",squarespace4:"Ruani dhe publikoni.",shopifyTitle:"Si të shtoni Fasqoo në Shopify",shopify1:"Hapni editorin e temës.",shopify2:"Shtoni një seksion \"Custom Liquid\".",shopify3:"Vendosni kodin e widget-it.",shopify4:"Ruajeni dhe shikoni paraprakisht.",shopifyNote:"Blloqet dhe lejet mund të ndryshojnë.",otherTitle:"Krijues të tjerë faqesh",otherText:"Kërkoni një element \"HTML Embed\", \"Custom HTML\", \"Code\" ose \"Embed\".",whyEyebrow:"PSE TË SHTONI FASQOO?",whyTitle:"Jepuni vizitorëve një mënyrë të thjeshtë për të testuar lidhjen e tyre",whyText:"Widget-i Fasqoo u lejon pronarëve të faqeve të vendosin një test të shpejtësisë së internetit drejtpërdrejt në faqet e tyre.",faqEyebrow:"FAQ E WIDGET-IT",faqTitle:"Pyetje të shpeshta",faqQ1:"A funksionon widget-i në pajisjet mobile?",faqA1:"Po. Widget-i është krijuar për paraqitje responsive.",faqQ2:"A mund t'i ndryshoj ngjyrat e widget-it?",faqA2:"Po. Përdorni builder-in për të personalizuar cilësimet vizuale.",faqQ3:"A duhet ta ndërtoj vetë testin e shpejtësisë?",faqA3:"Jo. Builder-i e krijon kodin e widget-it për ju.",faqQ4:"A është testi i shpejtësisë një matje reale?",faqA4:"Widget-i Fasqoo është krijuar për të kryer matje të rrjetit nga shfletuesi.",faqQ5:"A mund ta përdor widget-in në më shumë se një faqe?",faqA5:"Kodi i krijuar mund të vendoset në faqet ku ju lejohet të shtoni HTML."},
+pl:{installEyebrow:"ŁATWA INSTALACJA",installTitle:"Jak dodać Fasqoo Speed Test do swojej strony",installIntro:"Utwórz widget w konfiguratorze, sprawdź podgląd, skopiuj pełny kod osadzania i wklej go w obsługiwanym przez platformę obszarze HTML, Embed, Custom HTML, Code lub Custom Liquid.",stepCreateTitle:"Utwórz swój widget",stepCreateText:"Wybierz układ, kolory, rozmiar, promień zaokrąglenia, cień i inne ustawienia.",stepCopyTitle:"Skopiuj kod osadzania",stepCopyText:"Kliknij „Copy Embed Code”.",stepPasteTitle:"Dodaj go do swojej strony",stepPasteText:"Wklej kod w miejscu, w którym ma pojawić się Fasqoo Speed Test.",installTabsLabel:"Instrukcje instalacji na stronie",platformWordPress:"WordPress",platformHTML:"HTML",platformWix:"Wix",platformWebflow:"Webflow",platformSquarespace:"Squarespace",platformShopify:"Shopify",platformOther:"Inne",wpTitle:"Jak dodać Fasqoo do WordPress",wp1:"Otwórz stronę lub wpis WordPress.",wp2:"Dodaj blok „Własny HTML”.",wp3:"Skopiuj kod i wklej go do bloku.",wp4:"Wyświetl podgląd i kliknij „Opublikuj”.",wpNote:"Uprawnienia HTML i skryptów mogą się różnić.",htmlTitle:"Jak dodać Fasqoo do strony HTML",html1:"Otwórz plik HTML strony.",html2:"Skopiuj wygenerowany kod osadzania.",html3:"Wklej go wewnątrz <body>.",html4:"Zapisz plik i otwórz stronę.",wixTitle:"Jak dodać Fasqoo do Wix",wix1:"Otwórz Wix Editor.",wix2:"Dodaj element „Embed Code / HTML Embed”.",wix3:"Wklej kod osadzania w obszarze HTML.",wix4:"Zmień rozmiar i opublikuj stronę.",webflowTitle:"Jak dodać Fasqoo do Webflow",webflow1:"Otwórz Webflow Designer.",webflow2:"Dodaj element „Embed”.",webflow3:"Wklej wygenerowany kod Fasqoo.",webflow4:"Zapisz i opublikuj stronę.",squarespaceTitle:"Jak dodać Fasqoo do Squarespace",squarespace1:"Edytuj stronę.",squarespace2:"Dodaj „Code Block”.",squarespace3:"Wklej kod osadzania.",squarespace4:"Zapisz stronę i opublikuj zmiany.",shopifyTitle:"Jak dodać Fasqoo do Shopify",shopify1:"Otwórz edytor motywu.",shopify2:"Dodaj sekcję „Custom Liquid”.",shopify3:"Wklej wygenerowany kod widgetu.",shopify4:"Zapisz i sprawdź podgląd.",shopifyNote:"Bloki motywu i uprawnienia mogą się różnić.",otherTitle:"Inne kreatory stron",otherText:"Poszukaj elementu „HTML Embed”, „Custom HTML”, „Code” lub „Embed”.",whyEyebrow:"DLACZEGO DODAĆ FASQOO?",whyTitle:"Daj odwiedzającym łatwy sposób na sprawdzenie połączenia",whyText:"Widget Fasqoo pozwala właścicielom stron umieścić test prędkości Internetu bezpośrednio na swoich stronach.",faqEyebrow:"FAQ WIDGETU",faqTitle:"Najczęściej zadawane pytania",faqQ1:"Czy widget działa na urządzeniach mobilnych?",faqA1:"Tak. Widget został zaprojektowany z myślą o responsywnych układach.",faqQ2:"Czy mogę zmienić kolory widgetu?",faqA2:"Tak. Dostosuj dostępne ustawienia wizualne w builderze.",faqQ3:"Czy muszę samodzielnie tworzyć test prędkości?",faqA3:"Nie. Builder generuje kod widgetu za Ciebie.",faqQ4:"Czy test prędkości jest rzeczywistym pomiarem?",faqA4:"Widget Fasqoo jest przeznaczony do wykonywania pomiarów sieciowych w przeglądarce.",faqQ5:"Czy mogę używać widgetu na więcej niż jednej stronie?",faqA5:"Wygenerowany kod można umieścić na stronach, na których masz zgodę na dodawanie własnego HTML."}
+};
+
+/* ===================== MAIN I18N ===================== */
 const I18N = {
-de:{navCreate:"Widget erstellen",navFeatures:"Funktionen",navHow:"Anleitung",navSite:"Fasqoo.com",navAbout:"Über uns",navPrivacy:"Datenschutz",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+de:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
 heroText:"Erstelle ein professionelles Speed-Test-Widget für deine Website. Echte Messung direkt im Browser, ohne Installation, mit Live-Ergebnissen.",
 heroCta:"Widget erstellen",heroTry:"Fasqoo Lite testen",
 panelTitle:"Konfigurator",panelSub:"Passe das Widget an. Änderungen werden live übernommen.",
@@ -962,11 +1404,19 @@ t4h:"Jitter",t4p:"Schwankung zwischen Latenzmessungen. Hohe Werte beeinträchtig
 t5h:"Netzwerk-Info",t5p:"IP-Adresse, Internetanbieter und Standort werden automatisch ermittelt.",
 t6h:"Test-Server",t6p:"Die Messung läuft über Cloudflare-Edge-Server mit niedriger Latenz.",
 ctaTitle:"Bereit für dein eigenes Widget?",ctaText:"Kostenlos, ohne Konto, mit Fasqoo-Kennzeichnung.",
-ctaBtn:"Jetzt erstellen",footerDesc:"Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",
-footerSpeed:"Speed Tests",footerTools:"Netzwerk-Tools",footerCompany:"Unternehmen",
-footerNote:"Messung über Cloudflare Edge · Fasqoo ist eine unabhängige Plattform.",toastMsg:"Kopiert"},
-en:{navCreate:"Create Widget",navFeatures:"Features",navHow:"Guide",navSite:"Fasqoo.com",navAbout:"About",navPrivacy:"Privacy",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+ctaBtn:"Jetzt erstellen",
+footerBrand:"Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",
+footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Netzwerk-Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming- & Ping-Monitor",
+footerITDiagnose:"IT Diagnose",footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+footerCompany:"Unternehmen",footerAbout:"Über uns",footerFaq:"FAQ",
+ftPrivacy:"Datenschutz",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",
+ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Kopiert"},
+en:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
 heroText:"Create a professional speed-test widget for your website. Real measurement in the browser, no installation, with live results.",
 heroCta:"Create your widget",heroTry:"Try Fasqoo Lite",
 panelTitle:"Configurator",panelSub:"Customize the widget. Changes apply live.",
@@ -995,11 +1445,19 @@ t4h:"Jitter",t4p:"Variation between latency samples. High values hurt voice and 
 t5h:"Network info",t5p:"IP address, ISP and location are detected automatically.",
 t6h:"Test server",t6p:"Measurement runs via low-latency Cloudflare Edge servers.",
 ctaTitle:"Ready for your own widget?",ctaText:"Free, no account, with Fasqoo attribution.",
-ctaBtn:"Create now",footerDesc:"Independent, browser-based internet speed testing and network tools.",
-footerSpeed:"Speed Tests",footerTools:"Network Tools",footerCompany:"Company",
-footerNote:"Measurement via Cloudflare Edge · Fasqoo is an independent platform.",toastMsg:"Copied"},
-es:{navCreate:"Crear widget",navFeatures:"Funciones",navHow:"Guía",navSite:"Fasqoo.com",navAbout:"Acerca",navPrivacy:"Privacidad",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget de Fasqoo Speed Test",
+ctaBtn:"Create now",
+footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",
+footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming & Ping Monitor",
+footerITDiagnose:"IT Diagnostics",footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",
+ftPrivacy:"Privacy Policy",ftAccess:"Accessibility",ftImprint:"Imprint",
+ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Copied"},
+es:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget de Fasqoo Speed Test",
 heroText:"Crea un widget de prueba de velocidad profesional para tu web. Medición real en el navegador, sin instalación, con resultados en vivo.",
 heroCta:"Crear widget",heroTry:"Probar Fasqoo Lite",
 panelTitle:"Configurador",panelSub:"Personaliza el widget. Los cambios se aplican en vivo.",
@@ -1028,11 +1486,19 @@ t4h:"Jitter",t4p:"Variación entre muestras de latencia.",
 t5h:"Info de red",t5p:"IP, ISP y ubicación se detectan automáticamente.",
 t6h:"Servidor de test",t6p:"Medición vía servidores Cloudflare Edge.",
 ctaTitle:"¿Listo para tu widget?",ctaText:"Gratis, sin cuenta, con atribución Fasqoo.",
-ctaBtn:"Crear ahora",footerDesc:"Pruebas de velocidad y herramientas de red independientes.",
-footerSpeed:"Pruebas de velocidad",footerTools:"Herramientas de red",footerCompany:"Empresa",
-footerNote:"Medición vía Cloudflare Edge · Fasqoo es una plataforma independiente.",toastMsg:"Copiado"},
-fr:{navCreate:"Créer widget",navFeatures:"Fonctions",navHow:"Guide",navSite:"Fasqoo.com",navAbout:"À propos",navPrivacy:"Confidentialité",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+ctaBtn:"Crear ahora",
+footerBrand:"Fasqoo - Pruebas de velocidad de Internet independientes desde el navegador y herramientas de red.",
+footerSpeedTests:"Pruebas de velocidad",footerInternetSpeed:"Test de velocidad de Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Herramientas de red",footerNetworkStatus:"Estado de red",footerGaming:"Monitor Gaming y Ping",
+footerITDiagnose:"Diagnóstico de TI",footerSecurity:"Analizador de seguridad",footerDns:"Prueba DNS visual",
+footerCompany:"Empresa",footerAbout:"Sobre nosotros",footerFaq:"FAQ",
+ftPrivacy:"Privacidad",ftAccess:"Accesibilidad",ftImprint:"Aviso legal",
+ftTerms:"Términos de uso",ftNoSell:"No vender mis datos",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Copiado"},
+fr:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
 heroText:"Créez un widget de test de vitesse professionnel pour votre site. Mesure réelle dans le navigateur, sans installation, avec résultats en direct.",
 heroCta:"Créer le widget",heroTry:"Essayer Fasqoo Lite",
 panelTitle:"Configurateur",panelSub:"Personnalisez le widget. Modifications en direct.",
@@ -1061,11 +1527,19 @@ t4h:"Jitter",t4p:"Variation entre mesures de latence.",
 t5h:"Info réseau",t5p:"IP, FAI et localisation détectés automatiquement.",
 t6h:"Serveur de test",t6p:"Mesure via serveurs Cloudflare Edge.",
 ctaTitle:"Prêt pour votre widget ?",ctaText:"Gratuit, sans compte, attribution Fasqoo incluse.",
-ctaBtn:"Créer maintenant",footerDesc:"Tests de vitesse et outils réseau indépendants basés navigateur.",
-footerSpeed:"Tests de vitesse",footerTools:"Outils réseau",footerCompany:"Entreprise",
-footerNote:"Mesure via Cloudflare Edge · Fasqoo est une plateforme indépendante.",toastMsg:"Copié"},
-it:{navCreate:"Crea widget",navFeatures:"Funzioni",navHow:"Guida",navSite:"Fasqoo.com",navAbout:"Chi siamo",navPrivacy:"Privacy",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+ctaBtn:"Créer maintenant",
+footerBrand:"Fasqoo - Tests de vitesse Internet indépendants dans le navigateur et outils réseau.",
+footerSpeedTests:"Tests de vitesse",footerInternetSpeed:"Test de vitesse Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Outils réseau",footerNetworkStatus:"État du réseau",footerGaming:"Moniteur Gaming & Ping",
+footerITDiagnose:"Diagnostic informatique",footerSecurity:"Analyseur de sécurité",footerDns:"Test DNS visuel",
+footerCompany:"Entreprise",footerAbout:"À propos",footerFaq:"FAQ",
+ftPrivacy:"Confidentialité",ftAccess:"Accessibilité",ftImprint:"Mentions légales",
+ftTerms:"Conditions d'utilisation",ftNoSell:"Ne pas vendre mes données",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Copié"},
+it:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
 heroText:"Crea un widget di speed test professionale per il tuo sito. Misurazione reale nel browser, senza installazione, con risultati live.",
 heroCta:"Crea widget",heroTry:"Prova Fasqoo Lite",
 panelTitle:"Configuratore",panelSub:"Personalizza il widget. Modifiche live.",
@@ -1094,11 +1568,19 @@ t4h:"Jitter",t4p:"Variazione tra misure di latenza.",
 t5h:"Info di rete",t5p:"IP, ISP e posizione rilevati automaticamente.",
 t6h:"Server di test",t6p:"Misurazione via server Cloudflare Edge.",
 ctaTitle:"Pronto per il tuo widget?",ctaText:"Gratis, senza account, con attribuzione Fasqoo.",
-ctaBtn:"Crea ora",footerDesc:"Test di velocità e strumenti di rete indipendenti.",
-footerSpeed:"Test di velocità",footerTools:"Strumenti di rete",footerCompany:"Azienda",
-footerNote:"Misurazione via Cloudflare Edge · Fasqoo è una piattaforma indipendente.",toastMsg:"Copiato"},
-pt:{navCreate:"Criar widget",navFeatures:"Recursos",navHow:"Guia",navSite:"Fasqoo.com",navAbout:"Sobre",navPrivacy:"Privacidade",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+ctaBtn:"Crea ora",
+footerBrand:"Fasqoo - Test di velocità Internet indipendenti dal browser e strumenti di rete.",
+footerSpeedTests:"Speed Test",footerInternetSpeed:"Speed Test Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Strumenti di rete",footerNetworkStatus:"Stato della rete",footerGaming:"Monitor Gaming & Ping",
+footerITDiagnose:"Diagnostica IT",footerSecurity:"Analizzatore di sicurezza",footerDns:"Test DNS visivo",
+footerCompany:"Azienda",footerAbout:"Chi siamo",footerFaq:"FAQ",
+ftPrivacy:"Privacy",ftAccess:"Accessibilità",ftImprint:"Note legali",
+ftTerms:"Termini di utilizzo",ftNoSell:"Non vendere i miei dati",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Copiato"},
+pt:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
 heroText:"Crie um widget de teste de velocidade profissional. Medição real no navegador, sem instalação, com resultados ao vivo.",
 heroCta:"Criar widget",heroTry:"Testar Fasqoo Lite",
 panelTitle:"Configurador",panelSub:"Personalize o widget. Alterações ao vivo.",
@@ -1127,11 +1609,19 @@ t4h:"Jitter",t4p:"Variação entre medidas de latência.",
 t5h:"Info de rede",t5p:"IP, provedor e localização detectados automaticamente.",
 t6h:"Servidor de teste",t6p:"Medição via servidores Cloudflare Edge.",
 ctaTitle:"Pronto para seu widget?",ctaText:"Grátis, sem conta, com atribuição Fasqoo.",
-ctaBtn:"Criar agora",footerDesc:"Testes de velocidade e ferramentas de rede independentes.",
-footerSpeed:"Testes de velocidade",footerTools:"Ferramentas de rede",footerCompany:"Empresa",
-footerNote:"Medição via Cloudflare Edge · Fasqoo é uma plataforma independente.",toastMsg:"Copiado"},
-nl:{navCreate:"Widget maken",navFeatures:"Functies",navHow:"Handleiding",navSite:"Fasqoo.com",navAbout:"Over ons",navPrivacy:"Privacy",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+ctaBtn:"Criar agora",
+footerBrand:"Fasqoo - Testes de velocidade da Internet independentes no navegador e ferramentas de rede.",
+footerSpeedTests:"Testes de velocidade",footerInternetSpeed:"Teste de velocidade da Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Ferramentas de rede",footerNetworkStatus:"Status da rede",footerGaming:"Monitor de Gaming e Ping",
+footerITDiagnose:"Diagnóstico de TI",footerSecurity:"Analisador de segurança",footerDns:"Teste DNS visual",
+footerCompany:"Empresa",footerAbout:"Sobre nós",footerFaq:"FAQ",
+ftPrivacy:"Privacidade",ftAccess:"Acessibilidade",ftImprint:"Informação legal",
+ftTerms:"Termos de utilização",ftNoSell:"Não vender os meus dados",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Copiado"},
+nl:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
 heroText:"Maak een professionele speedtest-widget voor je website. Echte meting in de browser, zonder installatie, met live resultaten.",
 heroCta:"Widget maken",heroTry:"Fasqoo Lite proberen",
 panelTitle:"Configurator",panelSub:"Pas de widget aan. Wijzigingen direct toegepast.",
@@ -1160,11 +1650,19 @@ t4h:"Jitter",t4p:"Variatie tussen latentiemetingen.",
 t5h:"Netwerk-info",t5p:"IP, provider en locatie automatisch gedetecteerd.",
 t6h:"Testserver",t6p:"Meting via Cloudflare Edge-servers.",
 ctaTitle:"Klaar voor je widget?",ctaText:"Gratis, geen account, met Fasqoo-attributie.",
-ctaBtn:"Nu maken",footerDesc:"Onafhankelijke, browsergebaseerde internetsnelheidstests en netwerktools.",
-footerSpeed:"Snelheidstests",footerTools:"Netwerktools",footerCompany:"Bedrijf",
-footerNote:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform.",toastMsg:"Gekopieerd"},
-tr:{navCreate:"Widget oluştur",navFeatures:"Özellikler",navHow:"Kılavuz",navSite:"Fasqoo.com",navAbout:"Hakkında",navPrivacy:"Gizlilik",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
+ctaBtn:"Nu maken",
+footerBrand:"Fasqoo - Onafhankelijke browsergebaseerde internetsnelheidstests en netwerktools.",
+footerSpeedTests:"Snelheidstests",footerInternetSpeed:"Internetsnelheidstest",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Netwerktools",footerNetworkStatus:"Netwerkstatus",footerGaming:"Gaming- & Ping-monitor",
+footerITDiagnose:"IT-diagnose",footerSecurity:"Security Analyzer",footerDns:"Visuele DNS-test",
+footerCompany:"Bedrijf",footerAbout:"Over ons",footerFaq:"FAQ",
+ftPrivacy:"Privacy",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",
+ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Gekopieerd"},
+tr:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Fasqoo Speed Test Widget",
 heroText:"Web siteniz için profesyonel bir hız testi widget'ı oluşturun. Tarayıcıda gerçek ölçüm, kurulum gerektirmez.",
 heroCta:"Widget oluştur",heroTry:"Fasqoo Lite'ı dene",
 panelTitle:"Yapılandırıcı",panelSub:"Widget'ı özelleştirin. Değişiklikler canlı uygulanır.",
@@ -1193,11 +1691,19 @@ t4h:"Jitter",t4p:"Gecikme örnekleri arasındaki değişim.",
 t5h:"Ağ bilgisi",t5p:"IP, ISS ve konum otomatik algılanır.",
 t6h:"Test sunucusu",t6p:"Cloudflare Edge sunucuları üzerinden ölçüm.",
 ctaTitle:"Widget'ınıza hazır mısınız?",ctaText:"Ücretsiz, hesap gerekmez, Fasqoo atfı ile.",
-ctaBtn:"Şimdi oluştur",footerDesc:"Bağımsız, tarayıcı tabanlı internet hız testi ve ağ araçları.",
-footerSpeed:"Hız testleri",footerTools:"Ağ araçları",footerCompany:"Şirket",
-footerNote:"Ölçüm Cloudflare Edge üzerinden · Fasqoo bağımsız bir platformdur.",toastMsg:"Kopyalandı"},
-sq:{navCreate:"Krijo widget",navFeatures:"Funksione",navHow:"Udhëzues",navSite:"Fasqoo.com",navAbout:"Rreth",navPrivacy:"Privatësi",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget-i Fasqoo Speed Test",
+ctaBtn:"Şimdi oluştur",
+footerBrand:"Fasqoo - Bağımsız, tarayıcı tabanlı internet hız testleri ve ağ araçları.",
+footerSpeedTests:"Hız Testleri",footerInternetSpeed:"İnternet Hız Testi",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Ağ Araçları",footerNetworkStatus:"Ağ Durumu",footerGaming:"Oyun ve Ping Monitörü",
+footerITDiagnose:"BT Tanılama",footerSecurity:"Güvenlik Analizörü",footerDns:"Görsel DNS Testi",
+footerCompany:"Şirket",footerAbout:"Hakkımızda",footerFaq:"SSS",
+ftPrivacy:"Gizlilik",ftAccess:"Erişilebilirlik",ftImprint:"Künye",
+ftTerms:"Kullanım Şartları",ftNoSell:"Verilerimi satma",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Kopyalandı"},
+sq:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget-i Fasqoo Speed Test",
 heroText:"Krijo një widget profesional për test shpejtësie për faqen tënde. Matje reale në shfletues, pa instalim, me rezultate live.",
 heroCta:"Krijo widget",heroTry:"Provo Fasqoo Lite",
 panelTitle:"Konfiguruesi",panelSub:"Përshtat widget-in. Ndryshimet aplikohen live.",
@@ -1226,11 +1732,19 @@ t4h:"Jitter",t4p:"Variacioni midis matjeve të latencës.",
 t5h:"Info rrjeti",t5p:"IP, ISP dhe vendndodhja zbulohen automatikisht.",
 t6h:"Serveri i testit",t6p:"Matje përmes serverëve Cloudflare Edge.",
 ctaTitle:"Gati për widget-in tënd?",ctaText:"Falas, pa llogari, me atribuim Fasqoo.",
-ctaBtn:"Krijo tani",footerDesc:"Teste të pavarura shpejtësie dhe mjete rrjeti në shfletues.",
-footerSpeed:"Teste shpejtësie",footerTools:"Mjete rrjeti",footerCompany:"Kompania",
-footerNote:"Matje përmes Cloudflare Edge · Fasqoo është platformë e pavarur.",toastMsg:"U kopjua"},
-pl:{navCreate:"Utwórz widget",navFeatures:"Funkcje",navHow:"Poradnik",navSite:"Fasqoo.com",navAbout:"O nas",navPrivacy:"Prywatność",
-eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
+ctaBtn:"Krijo tani",
+footerBrand:"Fasqoo - Teste të pavarura shpejtësie interneti në shfletues dhe mjete rrjeti.",
+footerSpeedTests:"Teste Shpejtësie",footerInternetSpeed:"Testi i Shpejtësisë së Internetit",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Mjete Rrjeti",footerNetworkStatus:"Statusi i Rrjetit",footerGaming:"Monitor Loje & Ping",
+footerITDiagnose:"Diagnostikë IT",footerSecurity:"Analizuesi i Sigurisë",footerDns:"Testi Vizual DNS",
+footerCompany:"Kompania",footerAbout:"Rreth nesh",footerFaq:"FAQ",
+ftPrivacy:"Privatësia",ftAccess:"Qasueshmëria",ftImprint:"Impresum",
+ftTerms:"Kushtet e Përdorimit",ftNoSell:"Mos shit të dhënat e mia",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"U kopjua"},
+pl:{eyebrow:"Fasqoo Widget Builder",heroTitle:"Widget Fasqoo Speed Test",
 heroText:"Stwórz profesjonalny widget testu prędkości dla swojej strony. Prawdziwy pomiar w przeglądarce, bez instalacji, z wynikami na żywo.",
 heroCta:"Utwórz widget",heroTry:"Wypróbuj Fasqoo Lite",
 panelTitle:"Konfigurator",panelSub:"Dostosuj widget. Zmiany stosowane na żywo.",
@@ -1259,20 +1773,47 @@ t4h:"Jitter",t4p:"Zmienność pomiarów opóźnienia.",
 t5h:"Info o sieci",t5p:"IP, dostawca i lokalizacja wykrywane automatycznie.",
 t6h:"Serwer testowy",t6p:"Pomiar przez serwery Cloudflare Edge.",
 ctaTitle:"Gotowy na swój widget?",ctaText:"Za darmo, bez konta, z atrybucją Fasqoo.",
-ctaBtn:"Utwórz teraz",footerDesc:"Niezależne, przeglądarkowe testy prędkości i narzędzia sieciowe.",
-footerSpeed:"Testy prędkości",footerTools:"Narzędzia sieciowe",footerCompany:"Firma",
-footerNote:"Pomiar przez Cloudflare Edge · Fasqoo to niezależna platforma.",toastMsg:"Skopiowano"}
+ctaBtn:"Utwórz teraz",
+footerBrand:"Fasqoo - Niezależne, przeglądarkowe testy prędkości Internetu i narzędzia sieciowe.",
+footerSpeedTests:"Testy prędkości",footerInternetSpeed:"Test prędkości Internetu",footerLite:"Fasqoo Lite",footerWidget:"Widget",
+footerNetworkTools:"Narzędzia sieciowe",footerNetworkStatus:"Stan sieci",footerGaming:"Monitor gier i ping",
+footerITDiagnose:"Diagnostyka IT",footerSecurity:"Analizator bezpieczeństwa",footerDns:"Wizualny test DNS",
+footerCompany:"Firma",footerAbout:"O nas",footerFaq:"FAQ",
+ftPrivacy:"Prywatność",ftAccess:"Dostępność",ftImprint:"Impressum",
+ftTerms:"Warunki użytkowania",ftNoSell:"Nie sprzedawaj moich danych",
+footerCopyright:"© 2026 Fasqoo",
+footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+toastMsg:"Skopiowano"}
 };
 
-const UI_I18N = {"de":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Mobil","footerInternet":"Internet Speed Test","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Netzwerkstatus","footerITDiagnose":"IT-Diagnose","footerFAQ":"FAQ","ariaLanguage":"Sprache","ariaTheme":"Darstellung","metaTitle":"Fasqoo Widget Builder – Kostenloses Internet-Speed-Test-Widget erstellen","metaDescription":"Erstelle ein professionelles, responsives Fasqoo Internet-Speed-Test-Widget für deine Website. Passe Design, Farben und Größe an und kopiere den Einbettungscode."},"en":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Mobile","footerInternet":"Internet Speed Test","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Network Status","footerITDiagnose":"IT Diagnostics","footerFAQ":"FAQ","ariaLanguage":"Language","ariaTheme":"Theme","metaTitle":"Fasqoo Widget Builder – Create a Free Internet Speed Test Widget","metaDescription":"Create a professional, responsive Fasqoo internet speed test widget for your website. Customize the design, colors and size, then copy the embed code."},"es":{"deviceDesktop":"Escritorio","deviceTablet":"Tableta","deviceMobile":"Móvil","footerInternet":"Test de velocidad de Internet","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Estado de la red","footerITDiagnose":"Diagnóstico de TI","footerFAQ":"Preguntas frecuentes","ariaLanguage":"Idioma","ariaTheme":"Tema","metaTitle":"Fasqoo Widget Builder – Crea un widget gratuito de test de velocidad","metaDescription":"Crea un widget profesional y responsive de Fasqoo para medir la velocidad de Internet en tu sitio web. Personaliza el diseño, los colores y el tamaño y copia el código de inserción."},"fr":{"deviceDesktop":"Ordinateur","deviceTablet":"Tablette","deviceMobile":"Mobile","footerInternet":"Test de vitesse Internet","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"État du réseau","footerITDiagnose":"Diagnostic informatique","footerFAQ":"FAQ","ariaLanguage":"Langue","ariaTheme":"Thème","metaTitle":"Fasqoo Widget Builder – Créez un widget gratuit de test de vitesse Internet","metaDescription":"Créez un widget Fasqoo professionnel et responsive pour tester la vitesse Internet sur votre site. Personnalisez le design, les couleurs et la taille, puis copiez le code d’intégration."},"it":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Mobile","footerInternet":"Test velocità Internet","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Stato della rete","footerITDiagnose":"Diagnostica IT","footerFAQ":"FAQ","ariaLanguage":"Lingua","ariaTheme":"Tema","metaTitle":"Fasqoo Widget Builder – Crea un widget gratuito per il test della velocità Internet","metaDescription":"Crea un widget Fasqoo professionale e responsive per testare la velocità Internet sul tuo sito. Personalizza design, colori e dimensioni e copia il codice di integrazione."},"pt":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Celular","footerInternet":"Teste de velocidade da Internet","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Status da rede","footerITDiagnose":"Diagnóstico de TI","footerFAQ":"FAQ","ariaLanguage":"Idioma","ariaTheme":"Tema","metaTitle":"Fasqoo Widget Builder – Crie um widget gratuito de teste de velocidade","metaDescription":"Crie um widget profissional e responsivo do Fasqoo para testar a velocidade da Internet no seu site. Personalize o design, as cores e o tamanho e copie o código de incorporação."},"nl":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Mobiel","footerInternet":"Internetsnelheidstest","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Netwerkstatus","footerITDiagnose":"IT-diagnose","footerFAQ":"Veelgestelde vragen","ariaLanguage":"Taal","ariaTheme":"Thema","metaTitle":"Fasqoo Widget Builder – Maak een gratis widget voor een internetsnelheidstest","metaDescription":"Maak een professionele, responsive Fasqoo-widget voor een internetsnelheidstest op je website. Pas ontwerp, kleuren en grootte aan en kopieer de embedcode."},"tr":{"deviceDesktop":"Masaüstü","deviceTablet":"Tablet","deviceMobile":"Mobil","footerInternet":"İnternet Hız Testi","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Ağ Durumu","footerITDiagnose":"BT Tanılama","footerFAQ":"SSS","ariaLanguage":"Dil","ariaTheme":"Tema","metaTitle":"Fasqoo Widget Builder – Ücretsiz İnternet Hız Testi Widget’ı Oluşturun","metaDescription":"Web siteniz için profesyonel ve responsive bir Fasqoo internet hız testi widget’ı oluşturun. Tasarımı, renkleri ve boyutu özelleştirin ve embed kodunu kopyalayın."},"sq":{"deviceDesktop":"Desktop","deviceTablet":"Tablet","deviceMobile":"Celular","footerInternet":"Testi i shpejtësisë së internetit","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Statusi i rrjetit","footerITDiagnose":"Diagnostikim IT","footerFAQ":"Pyetje të shpeshta","ariaLanguage":"Gjuha","ariaTheme":"Tema","metaTitle":"Fasqoo Widget Builder – Krijoni një widget falas për testin e shpejtësisë së internetit","metaDescription":"Krijoni një widget profesional dhe responsive të Fasqoo për testimin e shpejtësisë së internetit në faqen tuaj. Personalizoni dizajnin, ngjyrat dhe madhësinë dhe kopjoni kodin e embed-it."},"pl":{"deviceDesktop":"Komputer","deviceTablet":"Tablet","deviceMobile":"Telefon","footerInternet":"Test prędkości Internetu","footerLite":"Fasqoo Lite","footerWidget":"Widget","footerNetworkStatus":"Stan sieci","footerITDiagnose":"Diagnostyka IT","footerFAQ":"FAQ","ariaLanguage":"Język","ariaTheme":"Motyw","metaTitle":"Fasqoo Widget Builder – Utwórz darmowy widget testu prędkości Internetu","metaDescription":"Utwórz profesjonalny, responsywny widget Fasqoo do testowania prędkości Internetu na swojej stronie. Dostosuj wygląd, kolory i rozmiar, a następnie skopiuj kod osadzania."}};
+/* ===================== UI I18N ===================== */
+const UI_I18N = {
+  de:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Mobil",ariaLanguage:"Sprache",ariaTheme:"Darstellung",metaTitle:"Fasqoo Widget Builder – Kostenloses Internet-Speed-Test-Widget erstellen",metaDescription:"Erstelle ein professionelles, responsives Fasqoo Internet-Speed-Test-Widget für deine Website."},
+  en:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Mobile",ariaLanguage:"Language",ariaTheme:"Theme",metaTitle:"Fasqoo Widget Builder – Create a Free Internet Speed Test Widget",metaDescription:"Create a professional, responsive Fasqoo internet speed test widget for your website."},
+  es:{deviceDesktop:"Escritorio",deviceTablet:"Tableta",deviceMobile:"Móvil",ariaLanguage:"Idioma",ariaTheme:"Tema",metaTitle:"Fasqoo Widget Builder – Crea un widget gratuito de test de velocidad",metaDescription:"Crea un widget profesional y responsive de Fasqoo."},
+  fr:{deviceDesktop:"Ordinateur",deviceTablet:"Tablette",deviceMobile:"Mobile",ariaLanguage:"Langue",ariaTheme:"Thème",metaTitle:"Fasqoo Widget Builder – Créez un widget gratuit de test de vitesse Internet",metaDescription:"Créez un widget Fasqoo professionnel et responsive."},
+  it:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Mobile",ariaLanguage:"Lingua",ariaTheme:"Tema",metaTitle:"Fasqoo Widget Builder – Crea un widget gratuito per il test della velocità Internet",metaDescription:"Crea un widget Fasqoo professionale e responsive."},
+  pt:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Celular",ariaLanguage:"Idioma",ariaTheme:"Tema",metaTitle:"Fasqoo Widget Builder – Crie um widget gratuito de teste de velocidade",metaDescription:"Crie um widget profissional e responsivo do Fasqoo."},
+  nl:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Mobiel",ariaLanguage:"Taal",ariaTheme:"Thema",metaTitle:"Fasqoo Widget Builder – Maak een gratis widget voor een internetsnelheidstest",metaDescription:"Maak een professionele, responsive Fasqoo-widget."},
+  tr:{deviceDesktop:"Masaüstü",deviceTablet:"Tablet",deviceMobile:"Mobil",ariaLanguage:"Dil",ariaTheme:"Tema",metaTitle:"Fasqoo Widget Builder – Ücretsiz İnternet Hız Testi Widget'ı Oluşturun",metaDescription:"Web siteniz için profesyonel ve responsive bir Fasqoo widget'ı oluşturun."},
+  sq:{deviceDesktop:"Desktop",deviceTablet:"Tablet",deviceMobile:"Celular",ariaLanguage:"Gjuha",ariaTheme:"Tema",metaTitle:"Fasqoo Widget Builder – Krijoni një widget falas për testin e shpejtësisë",metaDescription:"Krijoni një widget profesional dhe responsive të Fasqoo."},
+  pl:{deviceDesktop:"Komputer",deviceTablet:"Tablet",deviceMobile:"Telefon",ariaLanguage:"Język",ariaTheme:"Motyw",metaTitle:"Fasqoo Widget Builder – Utwórz darmowy widget testu prędkości Internetu",metaDescription:"Utwórz profesjonalny, responsywny widget Fasqoo."}
+};
 
-const WIDGET_I18N = {"de":{"live":"Live","throughput":"Aktueller Durchsatz","start":"Test starten","waiting":"Warten","latency":"Latenz","jitter":"Jitter","upload":"Upload","ip":"IP-Adresse","network":"Netzwerk","server":"Testserver","testing":"Test läuft","retest":"Erneut testen","good":"Gut","fair":"Mittel","slow":"Langsam","stable":"Stabil","unstable":"Instabil","done":"Fertig","foot":"Echte Messung, kein Schätzwert. Fasqoo misst deine Verbindung direkt im Browser."},"en":{"live":"Live","throughput":"Live throughput","start":"Start Test","waiting":"Waiting","latency":"Latency","jitter":"Jitter","upload":"Upload","ip":"IP Address","network":"Network","server":"Test server","testing":"Testing","retest":"Retest","good":"Good","fair":"Fair","slow":"Slow","stable":"Stable","unstable":"Unstable","done":"Done","foot":"Real measurement, not an estimate. Fasqoo measures your connection directly in the browser."},"es":{"live":"En vivo","throughput":"Rendimiento en vivo","start":"Iniciar prueba","waiting":"Esperando","latency":"Latencia","jitter":"Jitter","upload":"Subida","ip":"Dirección IP","network":"Red","server":"Servidor de prueba","testing":"Probando","retest":"Repetir prueba","good":"Buena","fair":"Media","slow":"Lenta","stable":"Estable","unstable":"Inestable","done":"Listo","foot":"Medición real, no una estimación. Fasqoo mide tu conexión directamente en el navegador."},"fr":{"live":"En direct","throughput":"Débit en direct","start":"Lancer le test","waiting":"En attente","latency":"Latence","jitter":"Jitter","upload":"Envoi","ip":"Adresse IP","network":"Réseau","server":"Serveur de test","testing":"Test en cours","retest":"Retester","good":"Bonne","fair":"Moyenne","slow":"Lente","stable":"Stable","unstable":"Instable","done":"Terminé","foot":"Mesure réelle, pas une estimation. Fasqoo mesure votre connexion directement dans le navigateur."},"it":{"live":"In tempo reale","throughput":"Velocità in tempo reale","start":"Avvia test","waiting":"In attesa","latency":"Latenza","jitter":"Jitter","upload":"Upload","ip":"Indirizzo IP","network":"Rete","server":"Server di test","testing":"Test in corso","retest":"Ripeti test","good":"Buona","fair":"Media","slow":"Lenta","stable":"Stabile","unstable":"Instabile","done":"Completato","foot":"Misurazione reale, non una stima. Fasqoo misura la tua connessione direttamente nel browser."},"pt":{"live":"Ao vivo","throughput":"Desempenho em tempo real","start":"Iniciar teste","waiting":"Aguardando","latency":"Latência","jitter":"Jitter","upload":"Upload","ip":"Endereço IP","network":"Rede","server":"Servidor de teste","testing":"Testando","retest":"Testar novamente","good":"Boa","fair":"Média","slow":"Lenta","stable":"Estável","unstable":"Instável","done":"Concluído","foot":"Medição real, não uma estimativa. O Fasqoo mede sua conexão diretamente no navegador."},"nl":{"live":"Live","throughput":"Live doorvoer","start":"Test starten","waiting":"Wachten","latency":"Latentie","jitter":"Jitter","upload":"Upload","ip":"IP-adres","network":"Netwerk","server":"Testserver","testing":"Bezig met testen","retest":"Opnieuw testen","good":"Goed","fair":"Gemiddeld","slow":"Langzaam","stable":"Stabiel","unstable":"Instabiel","done":"Klaar","foot":"Echte meting, geen schatting. Fasqoo meet je verbinding rechtstreeks in de browser."},"tr":{"live":"Canlı","throughput":"Canlı hız","start":"Testi Başlat","waiting":"Bekliyor","latency":"Gecikme","jitter":"Jitter","upload":"Yükleme","ip":"IP Adresi","network":"Ağ","server":"Test sunucusu","testing":"Test ediliyor","retest":"Tekrar Test Et","good":"İyi","fair":"Orta","slow":"Yavaş","stable":"Kararlı","unstable":"Kararsız","done":"Tamamlandı","foot":"Gerçek ölçüm, tahmin değil. Fasqoo bağlantınızı doğrudan tarayıcıda ölçer."},"sq":{"live":"Live","throughput":"Shpejtësia në kohë reale","start":"Fillo testin","waiting":"Në pritje","latency":"Latenca","jitter":"Jitter","upload":"Ngarkimi","ip":"Adresa IP","network":"Rrjeti","server":"Serveri i testit","testing":"Po testohet","retest":"Testo përsëri","good":"Mirë","fair":"Mesatare","slow":"E ngadaltë","stable":"E qëndrueshme","unstable":"E paqëndrueshme","done":"Përfundoi","foot":"Matje reale, jo vlerësim. Fasqoo e mat lidhjen tuaj drejtpërdrejt në shfletues."},"pl":{"live":"Na żywo","throughput":"Przepustowość na żywo","start":"Uruchom test","waiting":"Oczekiwanie","latency":"Opóźnienie","jitter":"Jitter","upload":"Wysyłanie","ip":"Adres IP","network":"Sieć","server":"Serwer testowy","testing":"Testowanie","retest":"Testuj ponownie","good":"Dobre","fair":"Średnie","slow":"Wolne","stable":"Stabilne","unstable":"Niestabilne","done":"Gotowe","foot":"Rzeczywisty pomiar, nie szacunek. Fasqoo mierzy Twoje połączenie bezpośrednio w przeglądarce."}};
-
-/* ===================== WIDGET THEME COLORS ===================== */
-const WIDGET_DARK = { bg:'#0d0d12', card:'#14141b', border:'#21212a',
-  text:'#ececf2', textDim:'#6a6a78', textDim2:'#4a4a58', footBorder:'#21212a' };
-const WIDGET_LIGHT = { bg:'#ffffff', card:'#fafafb', border:'#ececf1',
-  text:'#0d0d12', textDim:'#8b8b9e', textDim2:'#a0a0af', footBorder:'#ececf1' };
+/* ===================== WIDGET I18N ===================== */
+const WIDGET_I18N = {
+  de:{live:"Live",throughput:"Aktueller Durchsatz",start:"Test starten",waiting:"Warten",latency:"Latenz",jitter:"Jitter",upload:"Upload",ip:"IP-Adresse",network:"Netzwerk",server:"Testserver",testing:"Test läuft",retest:"Erneut testen",good:"Gut",fair:"Mittel",slow:"Langsam",stable:"Stabil",unstable:"Instabil",done:"Fertig",foot:"Echte Messung, kein Schätzwert. Fasqoo misst deine Verbindung direkt im Browser."},
+  en:{live:"Live",throughput:"Live throughput",start:"Start Test",waiting:"Waiting",latency:"Latency",jitter:"Jitter",upload:"Upload",ip:"IP Address",network:"Network",server:"Test server",testing:"Testing",retest:"Retest",good:"Good",fair:"Fair",slow:"Slow",stable:"Stable",unstable:"Unstable",done:"Done",foot:"Real measurement, not an estimate. Fasqoo measures your connection directly in the browser."},
+  es:{live:"En vivo",throughput:"Rendimiento en vivo",start:"Iniciar prueba",waiting:"Esperando",latency:"Latencia",jitter:"Jitter",upload:"Subida",ip:"Dirección IP",network:"Red",server:"Servidor de prueba",testing:"Probando",retest:"Repetir prueba",good:"Buena",fair:"Media",slow:"Lenta",stable:"Estable",unstable:"Inestable",done:"Listo",foot:"Medición real, no una estimación. Fasqoo mide tu conexión directamente en el navegador."},
+  fr:{live:"En direct",throughput:"Débit en direct",start:"Lancer le test",waiting:"En attente",latency:"Latence",jitter:"Jitter",upload:"Envoi",ip:"Adresse IP",network:"Réseau",server:"Serveur de test",testing:"Test en cours",retest:"Retester",good:"Bonne",fair:"Moyenne",slow:"Lente",stable:"Stable",unstable:"Instable",done:"Terminé",foot:"Mesure réelle, pas une estimation. Fasqoo mesure votre connexion directement dans le navigateur."},
+  it:{live:"In tempo reale",throughput:"Velocità in tempo reale",start:"Avvia test",waiting:"In attesa",latency:"Latenza",jitter:"Jitter",upload:"Upload",ip:"Indirizzo IP",network:"Rete",server:"Server di test",testing:"Test in corso",retest:"Ripeti test",good:"Buona",fair:"Media",slow:"Lenta",stable:"Stabile",unstable:"Instabile",done:"Completato",foot:"Misurazione reale, non una stima."},
+  pt:{live:"Ao vivo",throughput:"Desempenho em tempo real",start:"Iniciar teste",waiting:"Aguardando",latency:"Latência",jitter:"Jitter",upload:"Upload",ip:"Endereço IP",network:"Rede",server:"Servidor de teste",testing:"Testando",retest:"Testar novamente",good:"Boa",fair:"Média",slow:"Lenta",stable:"Estável",unstable:"Instável",done:"Concluído",foot:"Medição real, não uma estimativa."},
+  nl:{live:"Live",throughput:"Live doorvoer",start:"Test starten",waiting:"Wachten",latency:"Latentie",jitter:"Jitter",upload:"Upload",ip:"IP-adres",network:"Netwerk",server:"Testserver",testing:"Bezig met testen",retest:"Opnieuw testen",good:"Goed",fair:"Gemiddeld",slow:"Langzaam",stable:"Stabiel",unstable:"Instabiel",done:"Klaar",foot:"Echte meting, geen schatting."},
+  tr:{live:"Canlı",throughput:"Canlı hız",start:"Testi Başlat",waiting:"Bekliyor",latency:"Gecikme",jitter:"Jitter",upload:"Yükleme",ip:"IP Adresi",network:"Ağ",server:"Test sunucusu",testing:"Test ediliyor",retest:"Tekrar Test Et",good:"İyi",fair:"Orta",slow:"Yavaş",stable:"Kararlı",unstable:"Kararsız",done:"Tamamlandı",foot:"Gerçek ölçüm, tahmin değil."},
+  sq:{live:"Live",throughput:"Shpejtësia në kohë reale",start:"Fillo testin",waiting:"Në pritje",latency:"Latenca",jitter:"Jitter",upload:"Ngarkimi",ip:"Adresa IP",network:"Rrjeti",server:"Serveri i testit",testing:"Po testohet",retest:"Testo përsëri",good:"Mirë",fair:"Mesatare",slow:"E ngadaltë",stable:"E qëndrueshme",unstable:"E paqëndrueshme",done:"Përfundoi",foot:"Matje reale, jo vlerësim."},
+  pl:{live:"Na żywo",throughput:"Przepustowość na żywo",start:"Uruchom test",waiting:"Oczekiwanie",latency:"Opóźnienie",jitter:"Jitter",upload:"Wysyłanie",ip:"Adres IP",network:"Sieć",server:"Serwer testowy",testing:"Testowanie",retest:"Testuj ponownie",good:"Dobre",fair:"Średnie",slow:"Wolne",stable:"Stabilne",unstable:"Niestabilne",done:"Gotowe",foot:"Rzeczywisty pomiar, nie szacunek."}
+};
 
 /* ===================== WIDGET HTML BUILDER ===================== */
 function widgetHTML(){
@@ -1328,11 +1869,10 @@ function widgetHTML(){
   </div>`;
 }
 
-/* ===================== REAL MEASUREMENT (self-contained) ===================== */
+/* ===================== REAL MEASUREMENT ===================== */
 async function fasqooMeasure(cb){
   const log = (k,v)=>{ try{cb(k,v)}catch(e){} };
 
-  // 1) IP / ISP / Location
   try {
     const r = await fetch('https://ipwho.is/', { cache:'no-store' });
     const d = await r.json();
@@ -1345,7 +1885,6 @@ async function fasqooMeasure(cb){
     }
   } catch(e){ log('ip','—'); }
 
-  // 2) Latency: 5 samples
   const pings = [];
   for (let i = 0; i < 5; i++) {
     try {
@@ -1361,7 +1900,6 @@ async function fasqooMeasure(cb){
     log('jitter', jit);
   }
 
-  // 3) Download with streaming
   try {
     const bytes = 25000000;
     const t0 = performance.now();
@@ -1389,7 +1927,6 @@ async function fasqooMeasure(cb){
     }
   } catch(e){ log('download', 0); }
 
-  // 4) Upload
   try {
     const bytes = 3000000;
     const payload = new Uint8Array(bytes);
@@ -1454,7 +1991,6 @@ function initWidget(root){
         }
       });
     } catch(e){ console.error(e); }
-    // Finished
     root.classList.remove('testing');
     if (statusEl) statusEl.textContent = wt.live;
     speedWrap && speedWrap.classList.add('done');
@@ -1502,9 +2038,7 @@ const esc = v => String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 /* ===================== THEME ===================== */
 function setBodyTheme(light){
   document.body.classList.toggle('light', light);
-  $('theme').innerHTML = light
-    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
-    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  $('theme').textContent = light ? '☀' : '☾';
   localStorage.setItem('fasqoo-theme', light ? 'light' : 'dark');
 }
 const savedTheme=localStorage.getItem('fasqoo-theme'); setBodyTheme(savedTheme ? savedTheme === 'light' : true);
@@ -1513,7 +2047,11 @@ $('theme').onclick = () => setBodyTheme(!document.body.classList.contains('light
 /* ===================== i18n ===================== */
 function applyLang(lang){
   const safeLang = UI_I18N[lang] ? lang : 'en';
-  const dict = Object.assign({}, I18N.en, I18N[safeLang] || {}, INSTALL_I18N.en, INSTALL_I18N[safeLang] || {}, UI_I18N.en, UI_I18N[safeLang] || {});
+  const dict = Object.assign({},
+    I18N.en, I18N[safeLang] || {},
+    INSTALL_I18N.en, INSTALL_I18N[safeLang] || {},
+    UI_I18N.en, UI_I18N[safeLang] || {},
+    MENU_I18N.en, MENU_I18N[safeLang] || {});
   document.documentElement.lang = safeLang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k = el.getAttribute('data-i18n');
@@ -1564,15 +2102,11 @@ function buildCode(maxW){
   const shadow = SHADOWS[state.shadowLevel];
   const accent = state.color;
   const radius = state.radius;
-  const title = esc(state.title);
-  const theme = state.widgetTheme;
 
-  // Serialize widget HTML
   const widgetEl = document.createElement('div');
   widgetEl.innerHTML = widgetHTML();
   const widgetHtmlStr = widgetEl.firstElementChild.outerHTML;
 
-  // Widget CSS (compact) - uses CSS variables for accent
   const css = `.fasqoo-widget{--fwa:${accent};display:block;width:100%;max-width:${maxW}px;margin:0 auto;border-radius:${radius}px;overflow:hidden;box-shadow:${shadow};font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,sans-serif}
 .fasqoo-widget .fw{background:#0d0d12;color:#ececf2;padding:20px;display:flex;flex-direction:column;gap:16px;font-size:14px;line-height:1.5}
 .fasqoo-widget .fw.light{background:#fff;color:#0d0d12}
@@ -1632,14 +2166,12 @@ function buildCode(maxW){
 .fasqoo-widget .fw-foot a:hover{text-decoration:underline}
 @media (max-width:520px){.fasqoo-widget .fw{padding:16px;gap:12px}.fasqoo-widget .fw-speed{font-size:40px}}`;
 
-  // Widget JS: inline measure + init
   const js = `(function(){
 ${fasqooMeasure.toString()}
 ${initWidget.toString()}
 document.querySelectorAll('.fasqoo-widget .fw').forEach(function(w){initWidget(w)});
 })();`;
 
-  // Compact the generated embed without changing its behavior.
   const compactCSS = css.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\s+/g,' ').replace(/\s*([{}:;,])\s*/g,'$1').trim();
   const compactHTML = widgetHtmlStr.replace(/>\s+</g,'><').trim();
   const compactJS = js
@@ -1673,7 +2205,6 @@ $('shadowLevel').addEventListener('input', e => {
 $('autoStart').addEventListener('change', e => { state.autoStart = e.target.checked; });
 $('showFooter').addEventListener('change', e => { state.showFooter = e.target.checked; renderWidget(); });
 
-/* Presets */
 $('presets').addEventListener('click', e => {
   const b = e.target.closest('.chip'); if (!b) return;
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
@@ -1692,7 +2223,6 @@ $('presets').addEventListener('click', e => {
   renderWidget();
 });
 
-/* Device switch */
 $('deviceSwitch').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   document.querySelectorAll('#deviceSwitch button').forEach(x => x.classList.remove('active'));
@@ -1701,7 +2231,6 @@ $('deviceSwitch').addEventListener('click', e => {
   renderWidget();
 });
 
-/* Copy */
 async function doCopy(){
   const text = $('codeBlock').textContent;
   try {
@@ -1722,11 +2251,9 @@ $('copyTop').addEventListener('click', () => {
   $('codeBlock').scrollIntoView({ behavior:'smooth', block:'center' });
 });
 
-/* Re-render footer labels when language changes */
 const origApplyLang = applyLang;
 applyLang = function(lang){
   origApplyLang.call(this, lang);
-  // Update shadow label and refresh the preview/embed code in the selected language.
   const labels = [I18N[lang].shadowNone, I18N[lang].shadowSoft, I18N[lang].shadowMed, I18N[lang].shadowStrong];
   $('shv').textContent = labels[state.shadowLevel];
   renderWidget();
