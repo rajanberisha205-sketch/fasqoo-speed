@@ -89,6 +89,9 @@
 </script>
 
 <style>
+/* ============================================================
+   FASQOO SECURITY ANALYZER – ORIGINAL STYLES
+   ============================================================ */
 :root{
   --a:#ff6a2a;--a-hover:#f05a17;
   --bg:#0a0a0f;--surface:#15151c;--surface-2:#1d1d26;
@@ -115,28 +118,136 @@ button{font-family:inherit}
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
 svg{display:block;flex-shrink:0}
 
-header{position:sticky;top:0;z-index:100;
-  background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border)}
-.hi{display:flex;align-items:center;gap:16px;height:64px;
-  max-width:1180px;margin:0 auto;padding:0 24px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
-.brand-logo{height:32px;width:auto;display:block;max-width:160px;object-fit:contain}
-.brand-mark{width:28px;height:28px;border-radius:7px;background:var(--a);
-  display:grid;place-items:center;color:#fff}
-.brand-mark svg{width:15px;height:15px}
-.nav{display:flex;gap:20px;margin-left:24px;flex-wrap:wrap}
-.nav a{font-size:14px;color:var(--text-2);transition:color .15s;white-space:nowrap}
-.nav a:hover{color:var(--text)}
-.spacer{flex:1}
-.icon-btn,select.lang{height:36px;border:1px solid var(--border);border-radius:8px;
-  background:var(--surface);color:var(--text);padding:0 10px;
-  font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
-.icon-btn{width:36px;padding:0;display:grid;place-items:center}
-.icon-btn svg{width:16px;height:16px}
-.icon-btn:hover,select.lang:hover{border-color:var(--border-hi)}
+/* ============================================================
+   NEW FASQOO HEADER + MEGA MENU (wie index.html)
+   ============================================================ */
+.main-header{
+  height:72px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  position:sticky;top:0;z-index:1000;
+  box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035);
+}
+.main-header .wrap{width:min(1180px,calc(100% - 48px));margin:auto;padding-left:16px;padding-right:16px}
+.main-header .nav{display:flex;align-items:center;gap:16px;width:100%;margin:0}
 
+.brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+a.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit}
+.brandmark{width:40px;height:40px;border-radius:11px;display:block;box-shadow:0 6px 16px rgba(255,90,31,.28);transition:box-shadow .25s ease,transform .25s ease;object-fit:contain}
+a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:translateY(-1px)}
+.brandname{font-size:22px;font-weight:800;letter-spacing:-.7px;color:#ff5a1f}
+
+.lite-btn,.lite-btn:visited{
+  height:37px;border:0;border-radius:10px;
+  background:linear-gradient(135deg,#ff5a1f 0%,#ff8b61 100%);
+  color:#fff!important;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 15px;font-size:12px;font-weight:600;letter-spacing:.1px;
+  white-space:nowrap;text-decoration:none;flex-shrink:0;
+  box-shadow:0 6px 18px rgba(255,90,31,.30),inset 0 1px 0 rgba(255,255,255,.20);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.lite-btn::before{content:"⚡";font-size:13px;line-height:1;display:inline-block;transform:translateY(-.5px);filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.lite-btn:hover,.lite-btn:focus{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,90,31,.42);filter:brightness(1.05);color:#fff!important}
+
+.install-btn{
+  height:35px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;
+  text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s;
+  flex-shrink:0;cursor:pointer;
+}
+.install-btn:hover{background:var(--surface-2);border-color:var(--border-hi);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.install-btn[hidden]{display:none}
+.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
+.win-icon i{display:block;background:currentColor}
+
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto;flex:1;padding:0}
+.main-menu>a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s;position:relative;padding:8px 0}
+.main-menu>a:hover{color:#ff5a1f}
+.main-menu>a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:#ff5a1f;transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+.main-menu>a:hover::after,.main-menu>a.active::after{transform:scaleX(1)}
+.main-menu>a.active{color:#ff5a1f;font-weight:700}
+
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown-toggle{appearance:none;border:0;background:transparent;color:var(--text);font:inherit;font-size:13px;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;padding:8px 0;cursor:pointer}
+.nav-dropdown-toggle:hover{color:#ff5a1f}
+.nav-chevron{font-size:12px;line-height:1;transition:transform .22s ease}
+.nav-dropdown:hover .nav-chevron,.nav-dropdown.open .nav-chevron{transform:rotate(180deg)}
+
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 16px);left:50%;width:100%;
+  max-width:650px;min-width:560px;padding:18px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border:1px solid var(--border);
+  border-radius:18px;box-shadow:0 24px 70px rgba(16,24,40,.16),0 6px 22px rgba(16,24,40,.06);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate(-50%,-8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+  z-index:1200;
+}
+.nav-dropdown-menu:before{
+  content:"";position:absolute;top:-7px;left:50%;width:13px;height:13px;
+  transform:translateX(-50%) rotate(45deg);
+  background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border-left:1px solid var(--border);
+  border-top:1px solid var(--border);
+}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown.open .nav-dropdown-menu{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+}
+.nav-mega-column{min-width:0}
+.nav-dropdown-section{padding:2px 8px 9px;color:var(--text-2);font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.nav-mega-item{
+  display:flex!important;align-items:flex-start;gap:12px;width:100%;
+  padding:11px 10px!important;border-radius:12px;color:var(--text)!important;
+  text-decoration:none;transition:background .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.nav-mega-item+.nav-mega-item{margin-top:3px}
+.nav-mega-icon{
+  width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;
+  border-radius:10px;background:var(--surface-2);border:1px solid var(--border);
+  font-size:0;line-height:0;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.nav-mega-copy{min-width:0;padding-top:1px}
+.nav-mega-title{display:block;font-size:12px;line-height:1.25;font-weight:700;color:var(--text);transition:color .18s ease}
+.nav-mega-desc{display:block;margin-top:4px;font-size:10px;line-height:1.45;color:var(--text-2);font-weight:400}
+.nav-mega-item:after{display:none!important}
+.nav-mega-item:hover{
+  background:linear-gradient(135deg,rgba(255,90,31,.07),rgba(255,255,255,.02));
+  color:#ff5a1f!important;transform:translateX(3px);box-shadow:0 7px 18px rgba(16,24,40,.06);
+}
+.nav-mega-item:hover .nav-mega-icon{background:rgba(255,90,31,.10);border-color:rgba(255,90,31,.20);box-shadow:0 0 0 3px rgba(255,90,31,.05);transform:translateY(-1px)}
+.nav-mega-item:hover .nav-mega-title{color:#ff5a1f}
+.nav-dropdown-menu a{position:static}
+.nav-mega-icon svg{width:20px;height:20px;display:block;flex:0 0 auto;color:var(--text-2);transition:color .18s ease,transform .18s ease}
+.nav-mega-item:hover .nav-mega-icon svg{color:#ff5a1f;transform:scale(1.05)}
+
+.menu-extra{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang-control{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:0 10px;height:35px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--text);
+  transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.lang-control:hover{background:var(--surface-2);border-color:var(--border-hi);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lang-icon{font-size:14px;line-height:1;color:var(--text);display:inline-block}
+.lang-control select{min-width:76px;height:33px;border:0;outline:0;background:transparent;color:var(--text);padding:0 14px 0 0;font-size:12px;font-weight:500;cursor:pointer;color-scheme:dark}
+body.light .lang-control select{color-scheme:light}
+.lang-control select option{background:var(--surface);color:var(--text)}
+
+.theme-btn{width:35px;height:35px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);display:grid;place-items:center;font-size:16px;transition:background .2s,border-color .2s,box-shadow .2s}
+.theme-btn:hover{background:var(--surface-2);border-color:var(--border-hi);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text);cursor:pointer}
+
+/* ============================================================
+   ORIGINAL ANALYZER STYLES
+   ============================================================ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
   height:46px;padding:0 22px;border-radius:10px;border:1px solid transparent;
   font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
@@ -309,19 +420,23 @@ section.section{padding:80px 0;border-top:1px solid var(--border)}
 .cta p{font-size:16px;color:var(--text-2);max-width:560px;margin:0 auto 32px}
 .cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-footer{padding:48px 0 24px;border-top:1px solid var(--border);
-  font-size:13px;color:var(--text-2)}
-.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;
-  padding-bottom:32px}
-.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--text);margin:0 0 16px}
-.foot-col p{margin:0;font-size:13px;color:var(--text-2);line-height:1.6;max-width:300px}
-.foot-col a{display:block;padding:4px 0;color:var(--text-2);font-size:13px;
-  transition:color .15s}
-.foot-col a:hover{color:var(--text)}
-.foot-bottom{padding-top:24px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12px;color:var(--text-3)}
+/* ============================================================
+   NEW FASQOO 4-COLUMN FOOTER (wie index.html)
+   ============================================================ */
+.site-footer{margin-top:45px;padding:42px 0 22px;background:var(--surface);border-top:1px solid var(--border);color:var(--text-2)}
+.site-footer .wrap{width:min(1180px,calc(100% - 48px));margin:auto;padding-left:16px;padding-right:16px}
+.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1.15fr 1fr;gap:42px;padding-bottom:34px}
+.footer-brand-name{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text);margin-bottom:12px}
+.footer-brand p{max-width:290px;margin:0;font-size:11px;line-height:1.7;color:var(--text-2)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.footer-column h4{margin:0 0 7px;color:var(--text);font-size:12px;font-weight:700}
+.footer-column a{color:var(--text-2);font-size:11px;line-height:1.5;text-decoration:none;transition:color .18s ease}
+.footer-column a:hover{color:#ff5a1f}
+.footer-bottom{border-top:1px solid var(--border);padding-top:18px;padding-bottom:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;font-size:10px;line-height:1.5;color:var(--text-2)}
+.footer-copyright{color:var(--text);font-size:11px;font-weight:600}
+.footer-cloudflare{display:flex;flex-direction:column;align-items:center;gap:3px;max-width:760px}
+.footer-powered,.footer-disclaimer{display:block;color:var(--text-2);font-size:9px;line-height:1.55;font-weight:400}
+.footer-disclaimer{opacity:.78}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);
   background:var(--surface-2);color:var(--text);padding:12px 18px;
@@ -332,16 +447,52 @@ footer{padding:48px 0 24px;border-top:1px solid var(--border);
 .toast.show{transform:translate(-50%,0)}
 .toast svg{width:16px;height:16px;color:var(--success)}
 
-@media (max-width:1000px){
-  .nav{display:none}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1050px){.nav-dropdown-menu{min-width:520px}}
+@media(max-width:1000px){
   .grid-3{grid-template-columns:1fr 1fr}
-  .foot-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+  .footer-brand{grid-column:1/-1}
 }
-@media (max-width:640px){
-  .grid-3,.foot-grid{grid-template-columns:1fr}
+@media(max-width:900px){
+  .install-btn{display:none!important}
+  .main-menu{gap:15px}
+}
+@media(max-width:760px){
+  .main-header{height:auto;min-height:68px}
+  .menu-toggle{display:block;order:3;margin-left:auto}
+  .main-menu{
+    display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    padding:20px;gap:15px;box-shadow:0 10px 20px rgba(0,0,0,.1);
+    align-items:flex-start;flex:none;margin-left:0;
+  }
+  .main-menu.active{display:flex}
+  .main-menu>a::after{display:none}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);gap:12px}
+  .nav-dropdown{width:100%;display:block}
+  .nav-dropdown-toggle{width:100%;justify-content:space-between;padding:2px 0}
+  .nav-dropdown-menu{
+    position:static;width:100%;min-width:0;max-width:none;margin-top:8px;
+    transform:none!important;grid-template-columns:1fr;gap:8px;
+    box-shadow:none;border-radius:12px;padding:9px;
+    opacity:0;visibility:hidden;pointer-events:none;max-height:0;overflow:hidden;
+    transition:opacity .18s ease,max-height .22s ease,visibility .18s ease;
+  }
+  .nav-dropdown-menu:before{display:none}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:0;visibility:hidden;pointer-events:none;max-height:0}
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;max-height:900px}
+  .nav-mega-column{width:100%}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .grid-3{grid-template-columns:1fr}
   .hero{padding:48px 0 24px}
   .section{padding:56px 0}
-  .hi{padding:0 16px;gap:8px}
   .container{padding:0 16px}
   .url-row{flex-direction:column}
   #analyzeBtn{width:100%}
@@ -351,41 +502,173 @@ footer{padding:48px 0 24px;border-top:1px solid var(--border);
   .result-row{grid-template-columns:1fr;gap:10px}
   .result-weight{margin-left:0}
   .report-actions .btn{min-width:0}
-  .brand-logo{height:26px;max-width:130px}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
 }
 </style>
 </head>
 <body class="light">
 
-<!-- ===================== HEADER ===================== -->
-<header>
-  <div class="hi">
-    <a class="brand" href="index.html" aria-label="Fasqoo">
-      <img src="fasqoologo.png" alt="Fasqoo" class="brand-logo">
-    </a>
-    <nav class="nav">
-      <a href="faq.html" data-i18n="navFaq">FAQ</a>
-      <a href="network-status.html" data-i18n="navStatus">Network Status</a>
-      <a href="subnet-calculator.html" data-i18n="navDiag">IT Diagnostics</a>
-      <a href="about.html" data-i18n="navAbout">About Us</a>
-      <a href="widget.html" data-i18n="navWidget">Widget</a>
-    </nav>
-    <div class="spacer"></div>
-    <select id="lang" class="lang" aria-label="Language">
-      <option value="de">DE</option>
-      <option value="en">EN</option>
-      <option value="es">ES</option>
-      <option value="fr">FR</option>
-      <option value="it">IT</option>
-      <option value="pt">PT</option>
-      <option value="nl">NL</option>
-      <option value="tr">TR</option>
-      <option value="sq">SQ</option>
-      <option value="pl">PL</option>
-    </select>
-    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<!-- ============================================================
+     HEADER – IDENTISCH ZU index.html
+     ============================================================ -->
+<header class="main-header">
+  <div class="wrap nav">
+    <div class="brand">
+      <a href="index.html" class="brand" aria-label="Fasqoo">
+        <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
+          <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
+          <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
+        </svg>
+        <div class="brandname">Fasqoo</div>
+      </a>
+    </div>
+
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="install-label" data-i18n="installApp">Install for Windows</span>
     </button>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" data-i18n="navSpeedtest">Speedtest</a>
+
+      <div class="nav-dropdown" id="toolsDropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
+          <span class="nav-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="nav-dropdown-menu" role="menu">
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
+
+            <a class="nav-mega-item" href="network-status.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
+                <span class="nav-mega-desc" data-i18n="navStatusDesc">Live-Erreichbarkeit &amp; Leitungs-Diagnose</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="widget.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.6"/>
+                  <rect x="13" y="3" width="8" height="5" rx="1.6"/>
+                  <rect x="13" y="10" width="8" height="11" rx="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
+                <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/>
+                  <line x1="6.5" y1="11" x2="10.5" y2="11"/>
+                  <line x1="8.5" y1="9" x2="8.5" y2="13"/>
+                  <circle cx="16" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="18" cy="12.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navGaming">Gaming- &amp; Ping-Monitor</span>
+                <span class="nav-mega-desc" data-i18n="navGamingDesc">Live-Ping &amp; Gaming-Performance überwachen</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
+
+            <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem" aria-current="page">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
+                <span class="nav-mega-desc" data-i18n="navSecurityDesc">HTTP-Sicherheitsheader in Echtzeit prüfen</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.4 9h17.2"/>
+                  <path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/>
+                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
+                <span class="nav-mega-desc" data-i18n="navDnsDesc">Globale DNS-Ausbreitung visuell tracken</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="3" width="15" height="18" rx="2.2"/>
+                  <rect x="7.5" y="6" width="9" height="3.4" rx="0.9"/>
+                  <circle cx="9" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="9" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
+                <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="faq.html" data-i18n="navFaq">FAQ</a>
+      <a href="about.html" data-i18n="navAbout">Über uns</a>
+
+      <div class="menu-extra">
+        <div class="lang-control">
+          <span class="lang-icon" aria-hidden="true">◎</span>
+          <select id="lang" aria-label="Language">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+            <option value="tr">Türkçe</option>
+            <option value="sq">Shqip</option>
+            <option value="pl">Polski</option>
+          </select>
+        </div>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Theme">☾</button>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -515,35 +798,51 @@ footer{padding:48px 0 24px;border-top:1px solid var(--border);
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h4>Fasqoo</h4>
-        <p data-i18n="footerDesc">Independent, browser-based internet speed testing and network tools.</p>
+<!-- ============================================================
+     FOOTER – IDENTISCH ZU index.html
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Fasqoo</div>
+        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
       </div>
-      <div class="foot-col">
-        <h4 data-i18n="footerSpeed">Speed Tests</h4>
-        <a href="index.html" data-i18n="footerInternet">Internet Speed Test</a>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
+        <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
         <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
         <a href="widget.html" data-i18n="footerWidget">Widget</a>
       </div>
-      <div class="foot-col">
-        <h4 data-i18n="footerTools">Network Tools</h4>
-        <a href="network-status.html" data-i18n="navStatus">Network Status</a>
-        <a href="security-checker.html" data-i18n="footerSecurity">Security Checker</a>
-        <a href="subnet-calculator.html" data-i18n="navDiag">IT Diagnostics</a>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
       </div>
-      <div class="foot-col">
-        <h4 data-i18n="footerCompany">Company</h4>
-        <a href="about.html" data-i18n="navAbout">About Us</a>
-        <a href="faq.html" data-i18n="navFaq">FAQ</a>
-        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy</a>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerCompany">Unternehmen</h4>
+        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
+        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
       </div>
     </div>
-    <div class="foot-bottom">
-      <div>© 2026 Fasqoo</div>
-      <div data-i18n="footerNote">Analysis via Cloudflare Edge · Fasqoo is an independent platform.</div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright" data-i18n="footerCopyright">© 2026 Fasqoo</span>
+      <div class="footer-cloudflare">
+        <span class="footer-powered" data-i18n="footerBranding">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</span>
+        <span class="footer-disclaimer" data-i18n="footerDisclaimer">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -569,74 +868,288 @@ const FALLBACK_PROXIES = [
 ];
 
 /* ===================================================================
-   TRANSLATIONS – 10 languages (DE, EN, ES, FR, IT, PT, NL, TR, SQ, PL)
+   SITE-NAV TRANSLATIONS (Mega Menu + Footer) – additiv zu den
+   bestehenden Sprachpaketen unten.
+   =================================================================== */
+const SITE_NAV = {
+  en:{
+    navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",
+    navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",
+    navStatus:"Network Status",navStatusDesc:"Live reachability & line diagnostics",
+    navWidget:"Speed Widget",navWidgetDesc:"Free test widget for other websites",
+    navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"Check HTTP security headers in real time",
+    navDns:"Visual DNS Test",navDnsDesc:"Track global DNS propagation visually",
+    navSubnet:"Subnet Calculator",navSubnetDesc:"Calculate IP ranges and subnet masks",
+    navFaq:"FAQ",navAbout:"About Us",liteBtn:"Fasqoo Lite",installApp:"Install for Windows",
+    footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",
+    footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",
+    footerGaming:"Gaming & Ping Monitor",footerITDiagnose:"IT Diagnostics",
+    footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+    footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",
+    footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",
+    ftPrivacy:"Privacy Policy",ftAccess:"Accessibility",ftImprint:"Imprint",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Data"
+  },
+  de:{
+    navSpeedtest:"Speedtest",navTools:"Tools & IT-Diagnose",
+    navSectionNetwork:"Netzwerk & Speed",navSectionDiag:"IT-Diagnose & Security",
+    navStatus:"Netzwerk-Status",navStatusDesc:"Live-Erreichbarkeit & Leitungs-Diagnose",
+    navWidget:"Speed-Widget",navWidgetDesc:"Kostenloses Test-Widget für andere Websites",
+    navGaming:"Gaming- & Ping-Monitor",navGamingDesc:"Live-Ping & Gaming-Performance überwachen",
+    navSecurity:"Security Analyzer",navSecurityDesc:"HTTP-Sicherheitsheader in Echtzeit prüfen",
+    navDns:"Visual DNS Test",navDnsDesc:"Globale DNS-Ausbreitung visuell tracken",
+    navSubnet:"Subnetz-Rechner",navSubnetDesc:"IP-Bereiche und Masken kalkulieren",
+    navFaq:"FAQ",navAbout:"Über uns",liteBtn:"Fasqoo Lite",installApp:"Für Windows installieren",
+    footerBrand:"Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",
+    footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Netzwerk-Tools",footerNetworkStatus:"Network Status",
+    footerGaming:"Gaming- & Ping-Monitor",footerITDiagnose:"IT Diagnose",
+    footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",
+    footerCompany:"Unternehmen",footerAbout:"Über uns",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Unterstützt durch das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",
+    footerDisclaimer:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.",
+    ftPrivacy:"Datenschutz",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen"
+  },
+  fr:{
+    navSpeedtest:"Speedtest",navTools:"Outils & diagnostic",
+    navSectionNetwork:"Réseau & vitesse",navSectionDiag:"Diagnostic IT & sécurité",
+    navStatus:"État du réseau",navStatusDesc:"Accessibilité en direct & diagnostic de ligne",
+    navWidget:"Widget de vitesse",navWidgetDesc:"Widget de test gratuit pour d'autres sites",
+    navGaming:"Moniteur Gaming & Ping",navGamingDesc:"Surveillance en direct du ping et des performances",
+    navSecurity:"Analyseur de sécurité",navSecurityDesc:"Vérifier les en-têtes de sécurité HTTP en direct",
+    navDns:"Test DNS visuel",navDnsDesc:"Suivre visuellement la propagation DNS mondiale",
+    navSubnet:"Calculateur de sous-réseau",navSubnetDesc:"Calculer les plages IP et les masques",
+    navFaq:"FAQ",navAbout:"À propos",liteBtn:"Fasqoo Lite",installApp:"Installer pour Windows",
+    footerBrand:"Fasqoo - Tests de vitesse Internet indépendants dans le navigateur et outils réseau.",
+    footerSpeedTests:"Tests de vitesse",footerInternetSpeed:"Test de vitesse Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Outils réseau",footerNetworkStatus:"État du réseau",
+    footerGaming:"Moniteur Gaming & Ping",footerITDiagnose:"Diagnostic IT",
+    footerSecurity:"Analyseur de sécurité",footerDns:"Test DNS visuel",
+    footerCompany:"Entreprise",footerAbout:"À propos",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Mesure via le réseau Cloudflare Edge · Fasqoo est une plateforme indépendante.",
+    footerDisclaimer:"Fasqoo est une plateforme de test de vitesse indépendante et n'est pas un produit officiel Cloudflare.",
+    ftPrivacy:"Confidentialité",ftAccess:"Accessibilité",ftImprint:"Mentions légales",ftTerms:"Conditions",ftNoSell:"Ne pas vendre mes données"
+  },
+  es:{
+    navSpeedtest:"Speedtest",navTools:"Herramientas y diagnóstico",
+    navSectionNetwork:"Red y velocidad",navSectionDiag:"Diagnóstico TI y seguridad",
+    navStatus:"Estado de red",navStatusDesc:"Accesibilidad en vivo y diagnóstico de línea",
+    navWidget:"Widget de velocidad",navWidgetDesc:"Widget de prueba gratuito para otros sitios web",
+    navGaming:"Monitor Gaming y Ping",navGamingDesc:"Monitor de ping y rendimiento en juegos en vivo",
+    navSecurity:"Analizador de seguridad",navSecurityDesc:"Comprobar cabeceras de seguridad HTTP en tiempo real",
+    navDns:"Prueba DNS visual",navDnsDesc:"Rastrear visualmente la propagación DNS global",
+    navSubnet:"Calculadora de subredes",navSubnetDesc:"Calcular rangos IP y máscaras",
+    navFaq:"FAQ",navAbout:"Sobre nosotros",liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
+    footerBrand:"Fasqoo - Pruebas de velocidad de Internet independientes desde el navegador y herramientas de red.",
+    footerSpeedTests:"Pruebas de velocidad",footerInternetSpeed:"Test de velocidad de Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Herramientas de red",footerNetworkStatus:"Estado de red",
+    footerGaming:"Monitor Gaming y Ping",footerITDiagnose:"Diagnóstico TI",
+    footerSecurity:"Analizador de seguridad",footerDns:"Prueba DNS visual",
+    footerCompany:"Empresa",footerAbout:"Sobre nosotros",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Medición mediante Cloudflare Edge · Fasqoo es una plataforma independiente.",
+    footerDisclaimer:"Fasqoo es una plataforma de test de velocidad independiente y no es un producto oficial de Cloudflare.",
+    ftPrivacy:"Privacidad",ftAccess:"Accesibilidad",ftImprint:"Aviso legal",ftTerms:"Términos",ftNoSell:"No vender mis datos"
+  },
+  it:{
+    navSpeedtest:"Speedtest",navTools:"Strumenti e diagnostica",
+    navSectionNetwork:"Rete e velocità",navSectionDiag:"Diagnostica IT e sicurezza",
+    navStatus:"Stato rete",navStatusDesc:"Raggiungibilità live e diagnostica di linea",
+    navWidget:"Widget velocità",navWidgetDesc:"Widget di test gratuito per altri siti web",
+    navGaming:"Monitor Gaming & Ping",navGamingDesc:"Monitor ping e prestazioni gaming in tempo reale",
+    navSecurity:"Analizzatore di sicurezza",navSecurityDesc:"Verifica in tempo reale degli header di sicurezza HTTP",
+    navDns:"Test DNS visivo",navDnsDesc:"Traccia visivamente la propagazione DNS globale",
+    navSubnet:"Calcolatore subnet",navSubnetDesc:"Calcola intervalli IP e maschere",
+    navFaq:"FAQ",navAbout:"Chi siamo",liteBtn:"Fasqoo Lite",installApp:"Installa per Windows",
+    footerBrand:"Fasqoo - Test di velocità Internet indipendenti dal browser e strumenti di rete.",
+    footerSpeedTests:"Speed Test",footerInternetSpeed:"Speed Test Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Strumenti di rete",footerNetworkStatus:"Stato della rete",
+    footerGaming:"Monitor Gaming & Ping",footerITDiagnose:"Diagnostica IT",
+    footerSecurity:"Analizzatore di sicurezza",footerDns:"Test DNS visivo",
+    footerCompany:"Azienda",footerAbout:"Chi siamo",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Misurazione tramite Cloudflare Edge · Fasqoo è una piattaforma indipendente.",
+    footerDisclaimer:"Fasqoo è una piattaforma di speed test indipendente e non è un prodotto ufficiale Cloudflare.",
+    ftPrivacy:"Privacy",ftAccess:"Accessibilità",ftImprint:"Note legali",ftTerms:"Termini",ftNoSell:"Non vendere i miei dati"
+  },
+  pt:{
+    navSpeedtest:"Speedtest",navTools:"Ferramentas e diagnóstico",
+    navSectionNetwork:"Rede e velocidade",navSectionDiag:"Diagnóstico de TI e segurança",
+    navStatus:"Status da rede",navStatusDesc:"Acessibilidade em direto e diagnóstico de linha",
+    navWidget:"Widget de velocidade",navWidgetDesc:"Widget de teste gratuito para outros sites",
+    navGaming:"Monitor de Gaming e Ping",navGamingDesc:"Monitor de ping e desempenho em jogos em direto",
+    navSecurity:"Analisador de segurança",navSecurityDesc:"Verificar cabeçalhos de segurança HTTP em tempo real",
+    navDns:"Teste DNS visual",navDnsDesc:"Acompanhar visualmente a propagação DNS global",
+    navSubnet:"Calculadora de sub-rede",navSubnetDesc:"Calcular intervalos IP e máscaras",
+    navFaq:"FAQ",navAbout:"Sobre",liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",
+    footerBrand:"Fasqoo - Testes de velocidade da Internet independentes no navegador e ferramentas de rede.",
+    footerSpeedTests:"Testes de velocidade",footerInternetSpeed:"Teste de velocidade da Internet",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Ferramentas de rede",footerNetworkStatus:"Status da rede",
+    footerGaming:"Monitor de Gaming e Ping",footerITDiagnose:"Diagnóstico de TI",
+    footerSecurity:"Analisador de segurança",footerDns:"Teste DNS visual",
+    footerCompany:"Empresa",footerAbout:"Sobre nós",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Medição via Cloudflare Edge · A Fasqoo é uma plataforma independente.",
+    footerDisclaimer:"A Fasqoo é uma plataforma de teste de velocidade independente e não é um produto oficial da Cloudflare.",
+    ftPrivacy:"Privacidade",ftAccess:"Acessibilidade",ftImprint:"Informação legal",ftTerms:"Termos",ftNoSell:"Não vender os meus dados"
+  },
+  nl:{
+    navSpeedtest:"Speedtest",navTools:"Tools & Diagnose",
+    navSectionNetwork:"Netwerk & snelheid",navSectionDiag:"IT-diagnose & beveiliging",
+    navStatus:"Netwerkstatus",navStatusDesc:"Live bereikbaarheid & lijndiagnose",
+    navWidget:"Snelheidswidget",navWidgetDesc:"Gratis testwidget voor andere websites",
+    navGaming:"Gaming- & Ping-monitor",navGamingDesc:"Live ping- en gameprestatiemonitor",
+    navSecurity:"Security Analyzer",navSecurityDesc:"HTTP-beveiligingsheaders in realtime controleren",
+    navDns:"Visuele DNS-test",navDnsDesc:"Volg wereldwijde DNS-propagatie visueel",
+    navSubnet:"Subnetcalculator",navSubnetDesc:"IP-bereiken en maskers berekenen",
+    navFaq:"FAQ",navAbout:"Over ons",liteBtn:"Fasqoo Lite",installApp:"Installeren voor Windows",
+    footerBrand:"Fasqoo - Onafhankelijke browsergebaseerde internetsnelheidstests en netwerktools.",
+    footerSpeedTests:"Snelheidstests",footerInternetSpeed:"Internetsnelheidstest",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Netwerktools",footerNetworkStatus:"Netwerkstatus",
+    footerGaming:"Gaming- & Ping-monitor",footerITDiagnose:"IT-diagnose",
+    footerSecurity:"Security Analyzer",footerDns:"Visuele DNS-test",
+    footerCompany:"Bedrijf",footerAbout:"Over ons",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform.",
+    footerDisclaimer:"Fasqoo is een onafhankelijk speedtest-platform en geen officieel Cloudflare-product.",
+    ftPrivacy:"Privacy",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet"
+  },
+  tr:{
+    navSpeedtest:"Speedtest",navTools:"Araçlar ve Tanılama",
+    navSectionNetwork:"Ağ ve Hız",navSectionDiag:"BT Tanılama ve Güvenlik",
+    navStatus:"Ağ Durumu",navStatusDesc:"Canlı erişilebilirlik ve hat tanılama",
+    navWidget:"Hız Widget'ı",navWidgetDesc:"Diğer web siteleri için ücretsiz test widget'ı",
+    navGaming:"Oyun ve Ping Monitörü",navGamingDesc:"Canlı ping ve oyun performansı izleme",
+    navSecurity:"Güvenlik Analizörü",navSecurityDesc:"HTTP güvenlik başlıklarını gerçek zamanlı kontrol et",
+    navDns:"Görsel DNS Testi",navDnsDesc:"Küresel DNS yayılımını görsel olarak takip et",
+    navSubnet:"Alt Ağ Hesaplayıcı",navSubnetDesc:"IP aralıklarını ve maskeleri hesapla",
+    navFaq:"SSS",navAbout:"Hakkımızda",liteBtn:"Fasqoo Lite",installApp:"Windows için yükle",
+    footerBrand:"Fasqoo - Bağımsız, tarayıcı tabanlı internet hız testleri ve ağ araçları.",
+    footerSpeedTests:"Hız Testleri",footerInternetSpeed:"İnternet Hız Testi",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Ağ Araçları",footerNetworkStatus:"Ağ Durumu",
+    footerGaming:"Oyun ve Ping Monitörü",footerITDiagnose:"BT Tanılama",
+    footerSecurity:"Güvenlik Analizörü",footerDns:"Görsel DNS Testi",
+    footerCompany:"Şirket",footerAbout:"Hakkımızda",footerFaq:"SSS",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Cloudflare Edge üzerinden ölçüm · Fasqoo bağımsız bir platformdur.",
+    footerDisclaimer:"Fasqoo bağımsız bir hız testi platformudur ve resmi bir Cloudflare ürünü değildir.",
+    ftPrivacy:"Gizlilik",ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma"
+  },
+  sq:{
+    navSpeedtest:"Speedtest",navTools:"Mjete & Diagnostikë",
+    navSectionNetwork:"Rrjeti & Shpejtësia",navSectionDiag:"Diagnostikë IT & Siguri",
+    navStatus:"Statusi i Rrjetit",navStatusDesc:"Arritshmëri live & diagnostikim linje",
+    navWidget:"Widget shpejtësie",navWidgetDesc:"Widget falas testimi për faqe të tjera",
+    navGaming:"Monitor Loje & Ping",navGamingDesc:"Monitor ping dhe performancë lojërash në kohë reale",
+    navSecurity:"Analizuesi i Sigurisë",navSecurityDesc:"Kontrollo header-at e sigurisë HTTP në kohë reale",
+    navDns:"Testi Vizual DNS",navDnsDesc:"Ndjek përhapjen globale të DNS vizualisht",
+    navSubnet:"Llogaritësi i Nënrrjetit",navSubnetDesc:"Llogarit intervalet IP dhe maskat",
+    navFaq:"FAQ",navAbout:"Rreth nesh",liteBtn:"Fasqoo Lite",installApp:"Instalo për Windows",
+    footerBrand:"Fasqoo - Teste të pavarura të shpejtësisë së internetit në shfletues dhe mjete rrjeti.",
+    footerSpeedTests:"Teste Shpejtësie",footerInternetSpeed:"Testi i Shpejtësisë së Internetit",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Mjete Rrjeti",footerNetworkStatus:"Statusi i Rrjetit",
+    footerGaming:"Monitor Loje & Ping",footerITDiagnose:"Diagnostikë IT",
+    footerSecurity:"Analizuesi i Sigurisë",footerDns:"Testi Vizual DNS",
+    footerCompany:"Kompania",footerAbout:"Rreth nesh",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Matje përmes Cloudflare Edge · Fasqoo është një platformë e pavarur.",
+    footerDisclaimer:"Fasqoo është platformë e pavarur e testimit të shpejtësisë dhe nuk është produkt zyrtar i Cloudflare.",
+    ftPrivacy:"Privatësia",ftAccess:"Qasueshmëria",ftImprint:"Impresum",ftTerms:"Kushtet",ftNoSell:"Mos shit të dhënat e mia"
+  },
+  pl:{
+    navSpeedtest:"Speedtest",navTools:"Narzędzia i diagnostyka",
+    navSectionNetwork:"Sieć i prędkość",navSectionDiag:"Diagnostyka IT i bezpieczeństwo",
+    navStatus:"Stan sieci",navStatusDesc:"Dostępność na żywo i diagnostyka linii",
+    navWidget:"Widget prędkości",navWidgetDesc:"Darmowy widget testowy dla innych witryn",
+    navGaming:"Monitor gier i ping",navGamingDesc:"Monitor ping i wydajności gier na żywo",
+    navSecurity:"Analizator bezpieczeństwa",navSecurityDesc:"Sprawdź nagłówki bezpieczeństwa HTTP w czasie rzeczywistym",
+    navDns:"Wizualny test DNS",navDnsDesc:"Śledź globalną propagację DNS wizualnie",
+    navSubnet:"Kalkulator podsieci",navSubnetDesc:"Oblicz zakresy IP i maski",
+    navFaq:"FAQ",navAbout:"O nas",liteBtn:"Fasqoo Lite",installApp:"Zainstaluj dla Windows",
+    footerBrand:"Fasqoo - Niezależne, przeglądarkowe testy prędkości Internetu i narzędzia sieciowe.",
+    footerSpeedTests:"Testy prędkości",footerInternetSpeed:"Test prędkości Internetu",
+    footerLite:"Fasqoo Lite",footerWidget:"Widget",
+    footerNetworkTools:"Narzędzia sieciowe",footerNetworkStatus:"Stan sieci",
+    footerGaming:"Monitor gier i ping",footerITDiagnose:"Diagnostyka IT",
+    footerSecurity:"Analizator bezpieczeństwa",footerDns:"Wizualny test DNS",
+    footerCompany:"Firma",footerAbout:"O nas",footerFaq:"FAQ",
+    footerCopyright:"© 2026 Fasqoo",
+    footerBranding:"Pomiar przez Cloudflare Edge · Fasqoo to niezależna platforma.",
+    footerDisclaimer:"Fasqoo to niezależna platforma testów prędkości i nie jest oficjalnym produktem Cloudflare.",
+    ftPrivacy:"Prywatność",ftAccess:"Dostępność",ftImprint:"Nota prawna",ftTerms:"Warunki",ftNoSell:"Nie sprzedawaj moich danych"
+  }
+};
+
+/* ===================================================================
+   ORIGINAL PAGE TRANSLATIONS – 10 languages (DE, EN, ES, FR, IT, PT, NL, TR, SQ, PL)
    =================================================================== */
 const EN = {
   navFaq:'FAQ', navStatus:'Network Status', navDiag:'IT Diagnostics',
   navAbout:'About Us', navWidget:'Widget', navPrivacy:'Privacy',
-
   heroEyebrow:'🛡️ Fasqoo Security Analyzer',
   heroTitleTop:'Security', heroTitleAccent:'& Header Analyzer',
   heroText:'Analyze the HTTP security headers of any website. Check CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy and more – free and directly in your browser.',
-
   inputPlaceholder:'https://example.com', scanBtn:'Scan security', sampleLabel:'Examples',
   statusFetching:'Scanning HTTP headers …', statusSuccess:'Analysis complete',
   errInvalidUrl:'Please enter a valid URL.',
   errFetch:'The website could not be reached. Check the URL or try again later.',
-
   scoreGrade:'Grade', gradeAPlus:'Excellent', gradeA:'Very good', gradeB:'Good',
   gradeC:'Okay', gradeD:'Needs work', gradeE:'Weak', gradeF:'Critical',
   scoreDesc:'Based on {n} evaluated security headers with a total of 100 possible points.',
   statPassed:'Passed', statWarn:'Warnings', statMissing:'Missing',
-
   headersTitle:'Security headers',
   headersSub:'Each header contributes weighted points to the overall grade.',
   otherHeadersTitle:'Other response headers',
   otherHeadersSub:'{n} headers found',
   missing:'Missing', badgeOk:'OK', badgeWarn:'Warning', badgeCritical:'Critical',
   fixLabel:'Recommendation', pts:'pts',
-
   copyReport:'Copy report', exportJson:'Export as JSON',
   reportCopied:'Report copied', jsonExported:'JSON file downloaded',
   note:'Note: Public fallback proxies expose only a subset of response headers. For complete results, use your own Cloudflare Worker.',
-
   hdrCspName:'Content-Security-Policy (CSP)',
   hdrCspDesc:'The CSP restricts which sources scripts, styles, images, frames and other resources may be loaded from. It is the strongest defense against XSS and code injection.',
   hdrCspFix:'Add a Content-Security-Policy header. Start restrictive and expand only as needed.',
   hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'",
-
   hdrHstsName:'Strict-Transport-Security (HSTS)',
   hdrHstsDesc:'HSTS forces the browser to load the site over HTTPS only – even if the user types http://. This blocks SSL-stripping and downgrade attacks.',
   hdrHstsFix:'Add a Strict-Transport-Security header with a long max-age. Only use includeSubDomains and preload if you control all subdomains.',
   hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-
   hdrXfoName:'X-Frame-Options',
   hdrXfoDesc:'X-Frame-Options prevents your site from being embedded in an iframe on a foreign page. This blocks clickjacking attacks.',
   hdrXfoFix:'Add X-Frame-Options: DENY if you never need frames – or SAMEORIGIN if only your own domain may frame the site.',
   hdrXfoExample:'X-Frame-Options: DENY',
-
   hdrReferrerName:'Referrer-Policy',
   hdrReferrerDesc:'The Referrer-Policy defines how much information about the origin page (referrer) is sent when loading external links or resources.',
   hdrReferrerFix:'The recommended value is strict-origin-when-cross-origin (default in modern browsers). For maximum privacy: no-referrer.',
   hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-
   hdrXctoName:'X-Content-Type-Options',
   hdrXctoDesc:'This header prevents the browser from "guessing" the content type of a file (MIME sniffing). This stops e.g. text files from being executed as scripts.',
   hdrXctoFix:'Set the value to nosniff. There are no other valid values.',
   hdrXctoExample:'X-Content-Type-Options: nosniff',
-
   hdrPermName:'Permissions-Policy',
   hdrPermDesc:'The Permissions-Policy controls which browser features (camera, microphone, geolocation, sensors, etc.) a page and its embedded frames may use.',
   hdrPermFix:'Disable all features the site does not need. Re-enable individual features only if required.',
   hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-
   noteCspUnsafeInline:'CSP contains "unsafe-inline" without a nonce/hash – script injection is still possible.',
   noteHstsShort:'HSTS max-age is shorter than 180 days (15552000 seconds).',
   noteHstsNoSub:'HSTS without includeSubDomains – subdomains may still be reachable over HTTP.',
   noteXfoDeprecated:'ALLOW-FROM is deprecated and ignored by modern browsers.',
   noteReferrerUnsafe:'unsafe-url sends the full referrer to every destination – not recommended.',
   noteXctoInvalid:'Invalid value. The only valid value is "nosniff".',
-
   aboutTitle:'Why security headers matter',
   aboutSub:'They protect your visitors from XSS, clickjacking, MIME sniffing and data leaks.',
   aboutF1:'Prevents XSS and script injection. The single most important header.',
@@ -645,7 +1158,6 @@ const EN = {
   aboutF4:'Stops MIME sniffing and prevents browsers from misinterpreting files.',
   aboutF5:'Controls how much referrer information is sent to other sites.',
   aboutF6:'Defines which browser APIs (camera, mic, geolocation) the page may use.',
-
   faqTitle:'Frequently asked questions',
   faqQ1:'Is the analyzer free?',
   faqA1:'Yes. The Fasqoo Security & Header Analyzer is completely free and runs directly in the browser – no account, no tracking.',
@@ -657,11 +1169,9 @@ const EN = {
   faqA4:'Yes. You can copy the report to your clipboard as text or export it as a JSON file.',
   faqQ5:'How is the grade calculated?',
   faqA5:'The grade is based on six security headers with individual weights (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Missing headers reduce the score, warnings are partially credited.',
-
   ctaTitle:'Ready? Check your headers.',
   ctaText:'Free, no account, right in your browser.',
   ctaBtn:'Scan now', ctaBtnSpeed:'Speed Test',
-
   footerDesc:'Independent, browser-based internet speed testing and network tools.',
   footerSpeed:'Speed Tests', footerInternet:'Internet Speed Test',
   footerLite:'Fasqoo Lite', footerWidget:'Widget',
@@ -673,69 +1183,56 @@ const EN = {
 const DE = {
   navFaq:'FAQ', navStatus:'Netzwerk-Status', navDiag:'IT-Diagnose',
   navAbout:'Über uns', navWidget:'Widget', navPrivacy:'Datenschutz',
-
   heroEyebrow:'🛡️ Fasqoo Security Analyzer',
   heroTitleTop:'Security', heroTitleAccent:'& Header Analyzer',
   heroText:'Analysiere die HTTP-Sicherheitsheader jeder Website. Prüfe CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy und mehr – kostenlos und direkt im Browser.',
-
   inputPlaceholder:'https://example.com', scanBtn:'Sicherheit scannen', sampleLabel:'Beispiele',
   statusFetching:'Scanne HTTP-Header …', statusSuccess:'Analyse abgeschlossen',
   errInvalidUrl:'Bitte gib eine gültige URL ein.',
   errFetch:'Die Website konnte nicht erreicht werden. Prüfe die URL oder versuche es später erneut.',
-
   scoreGrade:'Note', gradeAPlus:'Ausgezeichnet', gradeA:'Sehr gut', gradeB:'Gut',
   gradeC:'Okay', gradeD:'Verbesserungswürdig', gradeE:'Schwach', gradeF:'Kritisch',
   scoreDesc:'Basierend auf {n} geprüften Sicherheitsheadern mit insgesamt 100 möglichen Punkten.',
   statPassed:'Bestanden', statWarn:'Warnungen', statMissing:'Fehlend',
-
   headersTitle:'Sicherheitsheader',
   headersSub:'Jeder Header trägt gewichtet zur Gesamtnote bei.',
   otherHeadersTitle:'Weitere Response-Header',
   otherHeadersSub:'{n} Header gefunden',
   missing:'Fehlt', badgeOk:'OK', badgeWarn:'Warnung', badgeCritical:'Kritisch',
   fixLabel:'Empfehlung', pts:'Pkt.',
-
   copyReport:'Bericht kopieren', exportJson:'Als JSON exportieren',
   reportCopied:'Bericht kopiert', jsonExported:'JSON-Datei heruntergeladen',
   note:'Hinweis: Öffentliche Fallback-Proxies zeigen nur einen Teil aller Response-Header. Für vollständige Ergebnisse den eigenen Cloudflare Worker verwenden.',
-
   hdrCspName:'Content-Security-Policy (CSP)',
   hdrCspDesc:'Die CSP schränkt ein, aus welchen Quellen Skripte, Styles, Bilder, Frames und andere Ressourcen geladen werden dürfen. Sie ist die stärkste Verteidigung gegen XSS-Angriffe und Code-Injection.',
   hdrCspFix:'Füge einen Content-Security-Policy-Header hinzu. Starte mit einer restriktiven Policy und erweitere sie nach Bedarf.',
   hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'",
-
   hdrHstsName:'Strict-Transport-Security (HSTS)',
   hdrHstsDesc:'HSTS zwingt den Browser, die Seite ausschließlich über HTTPS zu laden – auch wenn der Nutzer http:// eingibt. Das verhindert SSL-Stripping- und Downgrade-Angriffe.',
   hdrHstsFix:'Füge einen Strict-Transport-Security-Header mit einer langen max-age hinzu. Nutze includeSubDomains und preload nur, wenn du alle Subdomains kontrollierst.',
   hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-
   hdrXfoName:'X-Frame-Options',
   hdrXfoDesc:'X-Frame-Options verhindert, dass deine Website in einem iframe auf einer fremden Seite eingebettet wird. Das blockiert Clickjacking-Angriffe.',
   hdrXfoFix:'Füge X-Frame-Options: DENY hinzu, wenn du keine Frames benötigst – oder SAMEORIGIN, wenn nur deine eigene Domain framen darf.',
   hdrXfoExample:'X-Frame-Options: DENY',
-
   hdrReferrerName:'Referrer-Policy',
   hdrReferrerDesc:'Die Referrer-Policy legt fest, wie viel Information über die Herkunftsseite (Referrer) beim Aufruf externer Links oder Ressourcen mitgesendet wird.',
   hdrReferrerFix:'Empfohlen ist strict-origin-when-cross-origin (Standard in modernen Browsern). Für maximale Privatsphäre: no-referrer.',
   hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-
   hdrXctoName:'X-Content-Type-Options',
   hdrXctoDesc:'Dieser Header verhindert, dass Browser den Content-Type einer Datei „erraten“ (MIME-Sniffing). Dadurch können z. B. Textdateien nicht als Skript ausgeführt werden.',
   hdrXctoFix:'Setze den Wert auf nosniff. Der Header hat keine anderen gültigen Werte.',
   hdrXctoExample:'X-Content-Type-Options: nosniff',
-
   hdrPermName:'Permissions-Policy',
   hdrPermDesc:'Die Permissions-Policy steuert, welche Browser-Features (Kamera, Mikrofon, Geolocation, Sensoren usw.) eine Seite und ihre eingebetteten Frames verwenden dürfen.',
   hdrPermFix:'Deaktiviere alle Features, die die Seite nicht benötigt. Je nach Bedarf einzelne Features wieder erlauben.',
   hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-
   noteCspUnsafeInline:'CSP enthält „unsafe-inline“ ohne Nonce/Hash – Skript-Injection bleibt möglich.',
   noteHstsShort:'HSTS max-age ist kürzer als 180 Tage (15552000 Sekunden).',
   noteHstsNoSub:'HSTS ohne includeSubDomains – Subdomains können weiterhin über HTTP erreichbar sein.',
   noteXfoDeprecated:'ALLOW-FROM ist veraltet und wird von modernen Browsern ignoriert.',
   noteReferrerUnsafe:'unsafe-url sendet den vollen Referrer an jede Zielseite – nicht empfohlen.',
   noteXctoInvalid:'Ungültiger Wert. Der einzige gültige Wert ist „nosniff“.',
-
   aboutTitle:'Warum Security-Header wichtig sind',
   aboutSub:'Sie schützen deine Besucher vor XSS, Clickjacking, MIME-Sniffing und Datenlecks.',
   aboutF1:'Verhindert XSS und unerwünschte Skript-Einschleusung. Der wichtigste Header überhaupt.',
@@ -744,7 +1241,6 @@ const DE = {
   aboutF4:'Stoppt MIME-Sniffing und verhindert, dass Browser Dateien falsch interpretieren.',
   aboutF5:'Kontrolliert, welche Referrer-Informationen an andere Seiten weitergegeben werden.',
   aboutF6:'Steuert, welche Browser-APIs (Kamera, Mikrofon, Geo) die Seite nutzen darf.',
-
   faqTitle:'Häufige Fragen',
   faqQ1:'Ist der Analyzer kostenlos?',
   faqA1:'Ja. Der Fasqoo Security & Header Analyzer ist vollständig kostenlos und läuft direkt im Browser – ohne Konto, ohne Tracking.',
@@ -756,11 +1252,9 @@ const DE = {
   faqA4:'Ja. Du kannst den Bericht als Text in die Zwischenablage kopieren oder als JSON-Datei exportieren.',
   faqQ5:'Wie wird die Note berechnet?',
   faqA5:'Die Note basiert auf sechs Sicherheitsheadern mit individueller Gewichtung (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Fehlende Header reduzieren die Punktzahl, Warnungen werden teilweise angerechnet.',
-
   ctaTitle:'Bereit? Prüfe deine Header.',
   ctaText:'Kostenlos, ohne Konto, direkt im Browser.',
   ctaBtn:'Jetzt scannen', ctaBtnSpeed:'Speed Test',
-
   footerDesc:'Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.',
   footerSpeed:'Speed Tests', footerInternet:'Internet Speed Test',
   footerLite:'Fasqoo Lite', footerWidget:'Widget',
@@ -769,669 +1263,15 @@ const DE = {
   footerNote:'Analyse über Cloudflare Edge · Fasqoo ist eine unabhängige Plattform.'
 };
 
-const ES = {
-  navFaq:'FAQ', navStatus:'Estado de red', navDiag:'Diagnóstico IT',
-  navAbout:'Sobre nosotros', navWidget:'Widget', navPrivacy:'Privacidad',
-  heroEyebrow:'🛡️ Analizador de seguridad Fasqoo',
-  heroTitleTop:'Seguridad', heroTitleAccent:'y analizador de cabeceras',
-  heroText:'Analiza las cabeceras HTTP de seguridad de cualquier sitio web. Comprueba CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy y más, gratis y directamente en tu navegador.',
-  inputPlaceholder:'https://example.com', scanBtn:'Escanear seguridad', sampleLabel:'Ejemplos',
-  statusFetching:'Escaneando cabeceras HTTP …', statusSuccess:'Análisis completado',
-  errInvalidUrl:'Introduce una URL válida.',
-  errFetch:'No se pudo acceder al sitio. Comprueba la URL o inténtalo de nuevo.',
-  scoreGrade:'Nota', gradeAPlus:'Excelente', gradeA:'Muy bien', gradeB:'Bien',
-  gradeC:'Aceptable', gradeD:'Mejorable', gradeE:'Débil', gradeF:'Crítico',
-  scoreDesc:'Basado en {n} cabeceras de seguridad evaluadas con un total de 100 puntos posibles.',
-  statPassed:'Correctas', statWarn:'Avisos', statMissing:'Faltantes',
-  headersTitle:'Cabeceras de seguridad',
-  headersSub:'Cada cabecera contribuye con puntos ponderados a la nota final.',
-  otherHeadersTitle:'Otras cabeceras de respuesta',
-  otherHeadersSub:'{n} cabeceras encontradas',
-  missing:'Faltante', badgeOk:'OK', badgeWarn:'Aviso', badgeCritical:'Crítico',
-  fixLabel:'Recomendación', pts:'pts',
-  copyReport:'Copiar informe', exportJson:'Exportar como JSON',
-  reportCopied:'Informe copiado', jsonExported:'Archivo JSON descargado',
-  note:'Nota: los proxies públicos de fallback solo muestran un subconjunto de las cabeceras. Para resultados completos, usa tu propio Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'La CSP restringe desde qué fuentes se pueden cargar scripts, estilos, imágenes, frames y otros recursos. Es la defensa más fuerte contra XSS e inyección de código.',
-  hdrCspFix:'Añade una cabecera Content-Security-Policy. Empieza restrictivo y amplía según sea necesario.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS obliga al navegador a cargar el sitio solo por HTTPS, incluso si el usuario escribe http://. Bloquea ataques SSL-stripping y de downgrade.',
-  hdrHstsFix:'Añade una cabecera Strict-Transport-Security con un max-age largo. Usa includeSubDomains y preload solo si controlas todos los subdominios.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options evita que tu sitio se incruste en un iframe de otra página. Bloquea ataques de clickjacking.',
-  hdrXfoFix:'Añade X-Frame-Options: DENY si no necesitas frames, o SAMEORIGIN si solo tu propio dominio puede enmarcar el sitio.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'La Referrer-Policy define cuánta información sobre la página de origen se envía al cargar enlaces o recursos externos.',
-  hdrReferrerFix:'El valor recomendado es strict-origin-when-cross-origin. Para máxima privacidad: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Esta cabecera impide que el navegador "adivine" el tipo de contenido de un archivo (MIME sniffing). Evita que archivos de texto se ejecuten como scripts.',
-  hdrXctoFix:'Establece el valor en nosniff. No hay otros valores válidos.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'La Permissions-Policy controla qué funciones del navegador (cámara, micrófono, geolocalización, sensores) puede usar una página y sus iframes.',
-  hdrPermFix:'Desactiva todas las funciones que el sitio no necesite. Vuelve a activar solo las necesarias.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'La CSP contiene "unsafe-inline" sin nonce/hash: aún es posible la inyección de scripts.',
-  noteHstsShort:'El max-age de HSTS es inferior a 180 días (15552000 segundos).',
-  noteHstsNoSub:'HSTS sin includeSubDomains: los subdominios aún podrían ser accesibles por HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM está obsoleto e ignorado por los navegadores modernos.',
-  noteReferrerUnsafe:'unsafe-url envía el referrer completo a cada destino, no recomendado.',
-  noteXctoInvalid:'Valor inválido. El único valor válido es "nosniff".',
-  aboutTitle:'Por qué importan las cabeceras de seguridad',
-  aboutSub:'Protegen a tus visitantes de XSS, clickjacking, MIME sniffing y fugas de datos.',
-  aboutF1:'Evita XSS e inyección de scripts. La cabecera más importante.',
-  aboutF2:'Fuerza HTTPS en todas las conexiones futuras y bloquea ataques de downgrade.',
-  aboutF3:'Evita el clickjacking impidiendo la incrustación en frames externos.',
-  aboutF4:'Detiene el MIME sniffing y evita que el navegador malinterprete archivos.',
-  aboutF5:'Controla cuánta información del referrer se envía a otros sitios.',
-  aboutF6:'Define qué APIs del navegador (cámara, micrófono, geo) puede usar la página.',
-  faqTitle:'Preguntas frecuentes',
-  faqQ1:'¿Es gratis el analizador?',
-  faqA1:'Sí. El Fasqoo Security & Header Analyzer es totalmente gratis y funciona en el navegador, sin cuenta ni seguimiento.',
-  faqQ2:'¿Se guardan mis datos?',
-  faqA2:'No. La solicitud pasa por un Cloudflare Worker y no se almacena. No se instalan cookies ni se recogen datos analíticos.',
-  faqQ3:'¿Por qué faltan algunas cabeceras?',
-  faqA3:'El analizador usa un worker del lado del servidor. Algunos servidores eliminan cabeceras o solo las envían bajo ciertas condiciones.',
-  faqQ4:'¿Puedo compartir los resultados?',
-  faqA4:'Sí. Puedes copiar el informe al portapapeles o exportarlo como archivo JSON.',
-  faqQ5:'¿Cómo se calcula la nota?',
-  faqA5:'La nota se basa en seis cabeceras con pesos individuales (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Las cabeceras faltantes reducen la puntuación.',
-  ctaTitle:'¿Listo? Comprueba tus cabeceras.',
-  ctaText:'Gratis, sin cuenta, directamente en tu navegador.',
-  ctaBtn:'Escanear ahora', ctaBtnSpeed:'Test de velocidad',
-  footerDesc:'Pruebas de velocidad y herramientas de red independientes basadas en navegador.',
-  footerSpeed:'Pruebas de velocidad', footerInternet:'Test de velocidad',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Herramientas de red', footerSecurity:'Security Checker',
-  footerCompany:'Empresa',
-  footerNote:'Análisis vía Cloudflare Edge · Fasqoo es una plataforma independiente.'
-};
-
-const FR = {
-  navFaq:'FAQ', navStatus:'État du réseau', navDiag:'Diagnostic IT',
-  navAbout:'À propos', navWidget:'Widget', navPrivacy:'Confidentialité',
-  heroEyebrow:'🛡️ Analyseur de sécurité Fasqoo',
-  heroTitleTop:'Sécurité', heroTitleAccent:'& analyseur d\'en-têtes',
-  heroText:'Analysez les en-têtes HTTP de sécurité de n\'importe quel site web. Vérifiez CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy et plus, gratuitement et directement dans votre navigateur.',
-  inputPlaceholder:'https://example.com', scanBtn:'Analyser la sécurité', sampleLabel:'Exemples',
-  statusFetching:'Analyse des en-têtes HTTP …', statusSuccess:'Analyse terminée',
-  errInvalidUrl:'Veuillez saisir une URL valide.',
-  errFetch:'Le site n\'a pas pu être atteint. Vérifiez l\'URL ou réessayez plus tard.',
-  scoreGrade:'Note', gradeAPlus:'Excellent', gradeA:'Très bien', gradeB:'Bien',
-  gradeC:'Correct', gradeD:'À améliorer', gradeE:'Faible', gradeF:'Critique',
-  scoreDesc:'Basé sur {n} en-têtes de sécurité évalués, sur un total de 100 points possibles.',
-  statPassed:'Réussis', statWarn:'Avertissements', statMissing:'Manquants',
-  headersTitle:'En-têtes de sécurité',
-  headersSub:'Chaque en-tête contribue par des points pondérés à la note globale.',
-  otherHeadersTitle:'Autres en-têtes de réponse',
-  otherHeadersSub:'{n} en-têtes trouvés',
-  missing:'Manquant', badgeOk:'OK', badgeWarn:'Attention', badgeCritical:'Critique',
-  fixLabel:'Recommandation', pts:'pts',
-  copyReport:'Copier le rapport', exportJson:'Exporter en JSON',
-  reportCopied:'Rapport copié', jsonExported:'Fichier JSON téléchargé',
-  note:'Remarque : les proxies publics de secours n\'exposent qu\'une partie des en-têtes. Pour des résultats complets, utilisez votre propre Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'La CSP restreint les sources depuis lesquelles scripts, styles, images, frames et autres ressources peuvent être chargés. C\'est la meilleure défense contre XSS et l\'injection de code.',
-  hdrCspFix:'Ajoutez un en-tête Content-Security-Policy. Commencez restrictif et élargissez au besoin.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS force le navigateur à charger le site uniquement via HTTPS, même si l\'utilisateur tape http://. Cela bloque les attaques SSL-stripping et downgrade.',
-  hdrHstsFix:'Ajoutez un en-tête Strict-Transport-Security avec un long max-age. N\'utilisez includeSubDomains et preload que si vous contrôlez tous les sous-domaines.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options empêche votre site d\'être intégré dans un iframe sur une page étrangère. Cela bloque le clickjacking.',
-  hdrXfoFix:'Ajoutez X-Frame-Options: DENY si vous n\'avez pas besoin de frames, ou SAMEORIGIN si seul votre domaine peut encadrer le site.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'La Referrer-Policy définit la quantité d\'informations sur la page d\'origine transmise lors du chargement de liens ou ressources externes.',
-  hdrReferrerFix:'La valeur recommandée est strict-origin-when-cross-origin. Pour une confidentialité maximale : no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Cet en-tête empêche le navigateur de "deviner" le type de contenu d\'un fichier (MIME sniffing). Cela évite que des fichiers texte soient exécutés comme scripts.',
-  hdrXctoFix:'Définissez la valeur sur nosniff. Il n\'y a pas d\'autre valeur valide.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'La Permissions-Policy contrôle les fonctionnalités du navigateur (caméra, micro, géolocalisation, capteurs) qu\'une page et ses iframes peuvent utiliser.',
-  hdrPermFix:'Désactivez toutes les fonctionnalités dont le site n\'a pas besoin. Réactivez individuellement si nécessaire.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'La CSP contient "unsafe-inline" sans nonce/hash : l\'injection de scripts reste possible.',
-  noteHstsShort:'Le max-age HSTS est inférieur à 180 jours (15552000 secondes).',
-  noteHstsNoSub:'HSTS sans includeSubDomains : les sous-domaines peuvent encore être joignables en HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM est obsolète et ignoré par les navigateurs modernes.',
-  noteReferrerUnsafe:'unsafe-url envoie le referrer complet à chaque destination, non recommandé.',
-  noteXctoInvalid:'Valeur invalide. La seule valeur valide est "nosniff".',
-  aboutTitle:'Pourquoi les en-têtes de sécurité importent',
-  aboutSub:'Ils protègent vos visiteurs contre XSS, clickjacking, MIME sniffing et fuites de données.',
-  aboutF1:'Empêche XSS et injection de scripts. L\'en-tête le plus important.',
-  aboutF2:'Force HTTPS pour toutes les connexions futures et bloque les attaques de downgrade.',
-  aboutF3:'Empêche le clickjacking en interdisant l\'intégration dans des frames étrangers.',
-  aboutF4:'Arrête le MIME sniffing et empêche le navigateur de mal interpréter les fichiers.',
-  aboutF5:'Contrôle la quantité d\'informations de referrer envoyées aux autres sites.',
-  aboutF6:'Définit quelles API du navigateur (caméra, micro, géo) la page peut utiliser.',
-  faqTitle:'Questions fréquentes',
-  faqQ1:'L\'analyseur est-il gratuit ?',
-  faqA1:'Oui. Le Fasqoo Security & Header Analyzer est entièrement gratuit et fonctionne directement dans le navigateur, sans compte ni suivi.',
-  faqQ2:'Mes données sont-elles stockées ?',
-  faqA2:'Non. La requête passe par un Cloudflare Worker et n\'est pas stockée. Aucun cookie n\'est installé, aucune donnée analytique n\'est collectée.',
-  faqQ3:'Pourquoi certains en-têtes manquent-ils ?',
-  faqA3:'L\'analyseur utilise un worker côté serveur. Certains serveurs suppriment des en-têtes ou ne les envoient que sous certaines conditions.',
-  faqQ4:'Puis-je partager les résultats ?',
-  faqA4:'Oui. Vous pouvez copier le rapport dans le presse-papiers ou l\'exporter en fichier JSON.',
-  faqQ5:'Comment la note est-elle calculée ?',
-  faqA5:'La note est basée sur six en-têtes avec des poids individuels (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Les en-têtes manquants réduisent le score.',
-  ctaTitle:'Prêt ? Vérifiez vos en-têtes.',
-  ctaText:'Gratuit, sans compte, directement dans votre navigateur.',
-  ctaBtn:'Analyser maintenant', ctaBtnSpeed:'Test de débit',
-  footerDesc:'Tests de vitesse et outils réseau indépendants basés navigateur.',
-  footerSpeed:'Tests de vitesse', footerInternet:'Test de vitesse Internet',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Outils réseau', footerSecurity:'Security Checker',
-  footerCompany:'Entreprise',
-  footerNote:'Analyse via Cloudflare Edge · Fasqoo est une plateforme indépendante.'
-};
-
-const IT = {
-  navFaq:'FAQ', navStatus:'Stato rete', navDiag:'Diagnostica IT',
-  navAbout:'Chi siamo', navWidget:'Widget', navPrivacy:'Privacy',
-  heroEyebrow:'🛡️ Analizzatore di sicurezza Fasqoo',
-  heroTitleTop:'Sicurezza', heroTitleAccent:'e analisi header',
-  heroText:'Analizza gli header HTTP di sicurezza di qualsiasi sito web. Controlla CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy e altro, gratis e direttamente nel browser.',
-  inputPlaceholder:'https://example.com', scanBtn:'Scansiona sicurezza', sampleLabel:'Esempi',
-  statusFetching:'Scansione header HTTP …', statusSuccess:'Analisi completata',
-  errInvalidUrl:'Inserisci un URL valido.',
-  errFetch:'Impossibile raggiungere il sito. Controlla l\'URL o riprova più tardi.',
-  scoreGrade:'Voto', gradeAPlus:'Eccellente', gradeA:'Molto buono', gradeB:'Buono',
-  gradeC:'Discreto', gradeD:'Da migliorare', gradeE:'Debole', gradeF:'Critico',
-  scoreDesc:'Basato su {n} header di sicurezza valutati con un totale di 100 punti possibili.',
-  statPassed:'Superati', statWarn:'Avvisi', statMissing:'Mancanti',
-  headersTitle:'Header di sicurezza',
-  headersSub:'Ogni header contribuisce con punti ponderati al voto complessivo.',
-  otherHeadersTitle:'Altri header di risposta',
-  otherHeadersSub:'{n} header trovati',
-  missing:'Mancante', badgeOk:'OK', badgeWarn:'Avviso', badgeCritical:'Critico',
-  fixLabel:'Raccomandazione', pts:'pti',
-  copyReport:'Copia report', exportJson:'Esporta come JSON',
-  reportCopied:'Report copiato', jsonExported:'File JSON scaricato',
-  note:'Nota: i proxy pubblici di fallback espongono solo un sottoinsieme degli header. Per risultati completi, usa il tuo Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'La CSP limita le sorgenti da cui possono essere caricati script, stili, immagini, frame e altre risorse. È la difesa più forte contro XSS e iniezione di codice.',
-  hdrCspFix:'Aggiungi un header Content-Security-Policy. Inizia restrittivo e amplia solo se necessario.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS forza il browser a caricare il sito solo via HTTPS, anche se l\'utente digita http://. Blocca attacchi SSL-stripping e downgrade.',
-  hdrHstsFix:'Aggiungi un header Strict-Transport-Security con un max-age lungo. Usa includeSubDomains e preload solo se controlli tutti i sottodomini.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options impedisce che il tuo sito venga incorporato in un iframe su una pagina esterna. Blocca attacchi di clickjacking.',
-  hdrXfoFix:'Aggiungi X-Frame-Options: DENY se non hai bisogno di frame, oppure SAMEORIGIN se solo il tuo dominio può incorniciare il sito.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'La Referrer-Policy definisce quante informazioni sulla pagina di origine (referrer) vengono inviate durante il caricamento di link o risorse esterne.',
-  hdrReferrerFix:'Il valore consigliato è strict-origin-when-cross-origin. Per la massima privacy: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Questo header impedisce al browser di "indovinare" il tipo di contenuto di un file (MIME sniffing). Impedisce ad es. che file di testo vengano eseguiti come script.',
-  hdrXctoFix:'Imposta il valore su nosniff. Non ci sono altri valori validi.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'La Permissions-Policy controlla quali funzionalità del browser (fotocamera, microfono, geolocalizzazione, sensori) possono utilizzare una pagina e i suoi iframe.',
-  hdrPermFix:'Disabilita tutte le funzionalità che il sito non necessita. Riattiva singole funzionalità solo se necessario.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'La CSP contiene "unsafe-inline" senza nonce/hash: l\'iniezione di script è ancora possibile.',
-  noteHstsShort:'Il max-age HSTS è inferiore a 180 giorni (15552000 secondi).',
-  noteHstsNoSub:'HSTS senza includeSubDomains: i sottodomini potrebbero essere ancora raggiungibili via HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM è deprecato e ignorato dai browser moderni.',
-  noteReferrerUnsafe:'unsafe-url invia il referrer completo a ogni destinazione, non consigliato.',
-  noteXctoInvalid:'Valore non valido. L\'unico valore valido è "nosniff".',
-  aboutTitle:'Perché gli header di sicurezza contano',
-  aboutSub:'Proteggono i visitatori da XSS, clickjacking, MIME sniffing e perdite di dati.',
-  aboutF1:'Previene XSS e iniezione di script. L\'header più importante.',
-  aboutF2:'Forza HTTPS per tutte le connessioni future e blocca gli attacchi di downgrade.',
-  aboutF3:'Previene il clickjacking impedendo l\'incorporamento in frame esterni.',
-  aboutF4:'Ferma il MIME sniffing e impedisce al browser di interpretare male i file.',
-  aboutF5:'Controlla quante informazioni di referrer vengono inviate ad altri siti.',
-  aboutF6:'Definisce quali API del browser (fotocamera, microfono, geo) la pagina può usare.',
-  faqTitle:'Domande frequenti',
-  faqQ1:'L\'analizzatore è gratuito?',
-  faqA1:'Sì. Fasqoo Security & Header Analyzer è completamente gratuito e funziona direttamente nel browser, senza account né tracciamento.',
-  faqQ2:'I miei dati vengono salvati?',
-  faqA2:'No. La richiesta passa attraverso un Cloudflare Worker e non viene salvata. Nessun cookie, nessun dato analitico.',
-  faqQ3:'Perché mancano alcuni header?',
-  faqA3:'L\'analizzatore usa un worker lato server. Alcuni server rimuovono header o li inviano solo in determinate condizioni.',
-  faqQ4:'Posso condividere i risultati?',
-  faqA4:'Sì. Puoi copiare il report negli appunti o esportarlo come file JSON.',
-  faqQ5:'Come viene calcolato il voto?',
-  faqA5:'Il voto si basa su sei header con pesi individuali (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Gli header mancanti riducono il punteggio.',
-  ctaTitle:'Pronto? Controlla i tuoi header.',
-  ctaText:'Gratis, senza account, direttamente nel browser.',
-  ctaBtn:'Scansiona ora', ctaBtnSpeed:'Speed test',
-  footerDesc:'Test di velocità e strumenti di rete indipendenti basati su browser.',
-  footerSpeed:'Speed test', footerInternet:'Test velocità Internet',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Strumenti di rete', footerSecurity:'Security Checker',
-  footerCompany:'Azienda',
-  footerNote:'Analisi via Cloudflare Edge · Fasqoo è una piattaforma indipendente.'
-};
-
-const PT = {
-  navFaq:'FAQ', navStatus:'Status da rede', navDiag:'Diagnóstico de TI',
-  navAbout:'Sobre', navWidget:'Widget', navPrivacy:'Privacidade',
-  heroEyebrow:'🛡️ Analisador de segurança Fasqoo',
-  heroTitleTop:'Segurança', heroTitleAccent:'e analisador de cabeçalhos',
-  heroText:'Analise os cabeçalhos HTTP de segurança de qualquer site. Verifique CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy e mais, grátis e direto no navegador.',
-  inputPlaceholder:'https://example.com', scanBtn:'Verificar segurança', sampleLabel:'Exemplos',
-  statusFetching:'Analisando cabeçalhos HTTP …', statusSuccess:'Análise concluída',
-  errInvalidUrl:'Insira uma URL válida.',
-  errFetch:'Não foi possível acessar o site. Verifique a URL ou tente novamente.',
-  scoreGrade:'Nota', gradeAPlus:'Excelente', gradeA:'Muito bom', gradeB:'Bom',
-  gradeC:'Razoável', gradeD:'A melhorar', gradeE:'Fraco', gradeF:'Crítico',
-  scoreDesc:'Baseado em {n} cabeçalhos de segurança avaliados, com um total de 100 pontos possíveis.',
-  statPassed:'Aprovados', statWarn:'Avisos', statMissing:'Em falta',
-  headersTitle:'Cabeçalhos de segurança',
-  headersSub:'Cada cabeçalho contribui com pontos ponderados para a nota final.',
-  otherHeadersTitle:'Outros cabeçalhos de resposta',
-  otherHeadersSub:'{n} cabeçalhos encontrados',
-  missing:'Em falta', badgeOk:'OK', badgeWarn:'Aviso', badgeCritical:'Crítico',
-  fixLabel:'Recomendação', pts:'pts',
-  copyReport:'Copiar relatório', exportJson:'Exportar como JSON',
-  reportCopied:'Relatório copiado', jsonExported:'Arquivo JSON baixado',
-  note:'Nota: proxies públicos de fallback mostram apenas um subconjunto dos cabeçalhos. Para resultados completos, use o seu próprio Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'A CSP restringe de quais fontes scripts, estilos, imagens, frames e outros recursos podem ser carregados. É a defesa mais forte contra XSS e injeção de código.',
-  hdrCspFix:'Adicione um cabeçalho Content-Security-Policy. Comece restritivo e expanda conforme necessário.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'O HSTS força o navegador a carregar o site apenas via HTTPS, mesmo se o usuário digitar http://. Bloqueia SSL-stripping e ataques de downgrade.',
-  hdrHstsFix:'Adicione um cabeçalho Strict-Transport-Security com max-age longo. Use includeSubDomains e preload só se controlar todos os subdomínios.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options impede que o seu site seja incorporado num iframe em uma página externa. Bloqueia ataques de clickjacking.',
-  hdrXfoFix:'Adicione X-Frame-Options: DENY se não precisar de frames, ou SAMEORIGIN se apenas o seu domínio puder enquadrar o site.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'A Referrer-Policy define quanta informação sobre a página de origem é enviada ao carregar links ou recursos externos.',
-  hdrReferrerFix:'O valor recomendado é strict-origin-when-cross-origin. Para máxima privacidade: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Este cabeçalho impede o navegador de "adivinhar" o tipo de conteúdo de um arquivo (MIME sniffing). Impede que arquivos de texto sejam executados como scripts.',
-  hdrXctoFix:'Defina o valor como nosniff. Não há outros valores válidos.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'A Permissions-Policy controla quais recursos do navegador (câmera, microfone, geolocalização, sensores) uma página e seus iframes podem usar.',
-  hdrPermFix:'Desative todos os recursos que o site não precisa. Reative individualmente se necessário.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'A CSP contém "unsafe-inline" sem nonce/hash: injeção de scripts ainda é possível.',
-  noteHstsShort:'O max-age do HSTS é menor que 180 dias (15552000 segundos).',
-  noteHstsNoSub:'HSTS sem includeSubDomains: subdomínios ainda podem ser acessíveis via HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM está obsoleto e é ignorado por navegadores modernos.',
-  noteReferrerUnsafe:'unsafe-url envia o referrer completo para cada destino, não recomendado.',
-  noteXctoInvalid:'Valor inválido. O único valor válido é "nosniff".',
-  aboutTitle:'Por que os cabeçalhos de segurança importam',
-  aboutSub:'Protegem os visitantes de XSS, clickjacking, MIME sniffing e vazamentos de dados.',
-  aboutF1:'Previne XSS e injeção de scripts. O cabeçalho mais importante.',
-  aboutF2:'Força HTTPS em todas as conexões futuras e bloqueia ataques de downgrade.',
-  aboutF3:'Previne clickjacking impedindo a incorporação em frames externos.',
-  aboutF4:'Interrompe o MIME sniffing e evita interpretações erradas de arquivos.',
-  aboutF5:'Controla quanta informação de referrer é enviada a outros sites.',
-  aboutF6:'Define quais APIs do navegador (câmera, microfone, geo) a página pode usar.',
-  faqTitle:'Perguntas frequentes',
-  faqQ1:'O analisador é gratuito?',
-  faqA1:'Sim. O Fasqoo Security & Header Analyzer é totalmente gratuito e funciona direto no navegador, sem conta nem rastreamento.',
-  faqQ2:'Meus dados são armazenados?',
-  faqA2:'Não. A requisição passa por um Cloudflare Worker e não é armazenada. Nenhum cookie, nenhum dado analítico.',
-  faqQ3:'Por que alguns cabeçalhos estão em falta?',
-  faqA3:'O analisador usa um worker do lado do servidor. Alguns servidores removem cabeçalhos ou só os enviam em certas condições.',
-  faqQ4:'Posso compartilhar os resultados?',
-  faqA4:'Sim. Pode copiar o relatório para a área de transferência ou exportá-lo como arquivo JSON.',
-  faqQ5:'Como a nota é calculada?',
-  faqA5:'A nota baseia-se em seis cabeçalhos com pesos individuais (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Cabeçalhos em falta reduzem a pontuação.',
-  ctaTitle:'Pronto? Verifique os seus cabeçalhos.',
-  ctaText:'Grátis, sem conta, direto no seu navegador.',
-  ctaBtn:'Verificar agora', ctaBtnSpeed:'Teste de velocidade',
-  footerDesc:'Testes de velocidade e ferramentas de rede independentes baseados em navegador.',
-  footerSpeed:'Testes de velocidade', footerInternet:'Teste de velocidade',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Ferramentas de rede', footerSecurity:'Security Checker',
-  footerCompany:'Empresa',
-  footerNote:'Análise via Cloudflare Edge · Fasqoo é uma plataforma independente.'
-};
-
-const NL = {
-  navFaq:'FAQ', navStatus:'Netwerkstatus', navDiag:'IT-diagnose',
-  navAbout:'Over ons', navWidget:'Widget', navPrivacy:'Privacy',
-  heroEyebrow:'🛡️ Fasqoo Security Analyzer',
-  heroTitleTop:'Security', heroTitleAccent:'& header-analyse',
-  heroText:'Analyseer de HTTP-beveiligingsheaders van elke website. Controleer CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy en meer – gratis en direct in je browser.',
-  inputPlaceholder:'https://example.com', scanBtn:'Beveiliging scannen', sampleLabel:'Voorbeelden',
-  statusFetching:'HTTP-headers scannen …', statusSuccess:'Analyse voltooid',
-  errInvalidUrl:'Voer een geldige URL in.',
-  errFetch:'De website kon niet worden bereikt. Controleer de URL of probeer het later opnieuw.',
-  scoreGrade:'Cijfer', gradeAPlus:'Uitstekend', gradeA:'Zeer goed', gradeB:'Goed',
-  gradeC:'Voldoende', gradeD:'Kan beter', gradeE:'Zwak', gradeF:'Kritiek',
-  scoreDesc:'Gebaseerd op {n} geëvalueerde beveiligingsheaders met in totaal 100 mogelijke punten.',
-  statPassed:'Geslaagd', statWarn:'Waarschuwingen', statMissing:'Ontbrekend',
-  headersTitle:'Beveiligingsheaders',
-  headersSub:'Elke header draagt gewogen punten bij aan het totaalcijfer.',
-  otherHeadersTitle:'Andere response-headers',
-  otherHeadersSub:'{n} headers gevonden',
-  missing:'Ontbreekt', badgeOk:'OK', badgeWarn:'Waarschuwing', badgeCritical:'Kritiek',
-  fixLabel:'Advies', pts:'pnt',
-  copyReport:'Rapport kopiëren', exportJson:'Exporteren als JSON',
-  reportCopied:'Rapport gekopieerd', jsonExported:'JSON-bestand gedownload',
-  note:'Let op: publieke fallback-proxies tonen slechts een deel van de headers. Gebruik voor volledige resultaten je eigen Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'De CSP beperkt uit welke bronnen scripts, styles, afbeeldingen, frames en andere resources mogen worden geladen. Het is de sterkste verdediging tegen XSS en code-injectie.',
-  hdrCspFix:'Voeg een Content-Security-Policy-header toe. Begin restrictief en breid alleen uit wanneer nodig.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS dwingt de browser het alleen via HTTPS te laden – ook als de gebruiker http:// typt. Dit blokkeert SSL-stripping en downgrade-aanvallen.',
-  hdrHstsFix:'Voeg een Strict-Transport-Security-header toe met een lange max-age. Gebruik includeSubDomains en preload alleen als je alle subdomeinen beheert.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options voorkomt dat je site wordt ingesloten in een iframe op een vreemde pagina. Dit blokkeert clickjacking.',
-  hdrXfoFix:'Voeg X-Frame-Options: DENY toe als je geen frames nodig hebt – of SAMEORIGIN als alleen je eigen domein mag framen.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'De Referrer-Policy bepaalt hoeveel informatie over de herkomstpagina wordt meegestuurd bij het laden van externe links of resources.',
-  hdrReferrerFix:'De aanbevolen waarde is strict-origin-when-cross-origin. Voor maximale privacy: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Deze header voorkomt dat de browser het inhoudstype van een bestand "raadt" (MIME sniffing). Zo kunnen tekstbestanden niet als script worden uitgevoerd.',
-  hdrXctoFix:'Stel de waarde in op nosniff. Er zijn geen andere geldige waarden.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'De Permissions-Policy bepaalt welke browserfuncties (camera, microfoon, geolocatie, sensoren) een pagina en ingesloten frames mogen gebruiken.',
-  hdrPermFix:'Schakel alle functies uit die de site niet nodig heeft. Schakel individuele functies alleen in indien nodig.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'CSP bevat "unsafe-inline" zonder nonce/hash – scriptinjectie blijft mogelijk.',
-  noteHstsShort:'HSTS max-age is korter dan 180 dagen (15552000 seconden).',
-  noteHstsNoSub:'HSTS zonder includeSubDomains – subdomeinen kunnen nog via HTTP bereikbaar zijn.',
-  noteXfoDeprecated:'ALLOW-FROM is verouderd en wordt genegeerd door moderne browsers.',
-  noteReferrerUnsafe:'unsafe-url stuurt de volledige referrer naar elke bestemming – niet aanbevolen.',
-  noteXctoInvalid:'Ongeldige waarde. De enige geldige waarde is "nosniff".',
-  aboutTitle:'Waarom beveiligingsheaders belangrijk zijn',
-  aboutSub:'Ze beschermen je bezoekers tegen XSS, clickjacking, MIME sniffing en datalekken.',
-  aboutF1:'Voorkomt XSS en scriptinjectie. De belangrijkste header.',
-  aboutF2:'Forceert HTTPS voor alle toekomstige verbindingen en blokkeert downgrade-aanvallen.',
-  aboutF3:'Voorkomt clickjacking door insluiting in vreemde frames te blokkeren.',
-  aboutF4:'Stopt MIME sniffing en voorkomt dat browsers bestanden verkeerd interpreteren.',
-  aboutF5:'Bepaalt hoeveel referrer-informatie naar andere sites wordt gestuurd.',
-  aboutF6:'Bepaalt welke browser-API\'s (camera, mic, geo) de pagina mag gebruiken.',
-  faqTitle:'Veelgestelde vragen',
-  faqQ1:'Is de analyzer gratis?',
-  faqA1:'Ja. De Fasqoo Security & Header Analyzer is volledig gratis en werkt direct in de browser, zonder account of tracking.',
-  faqQ2:'Worden mijn gegevens opgeslagen?',
-  faqA2:'Nee. De aanvraag gaat via een Cloudflare Worker en wordt niet opgeslagen. Geen cookies, geen analysedata.',
-  faqQ3:'Waarom ontbreken sommige headers?',
-  faqA3:'De analyzer gebruikt een server-side worker. Sommige servers verwijderen headers of sturen ze alleen onder bepaalde voorwaarden.',
-  faqQ4:'Kan ik de resultaten delen?',
-  faqA4:'Ja. Je kunt het rapport naar het klembord kopiëren of als JSON-bestand exporteren.',
-  faqQ5:'Hoe wordt het cijfer berekend?',
-  faqA5:'Het cijfer is gebaseerd op zes beveiligingsheaders met individuele gewichten (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Ontbrekende headers verlagen de score.',
-  ctaTitle:'Klaar? Controleer je headers.',
-  ctaText:'Gratis, geen account, direct in je browser.',
-  ctaBtn:'Nu scannen', ctaBtnSpeed:'Snelheidstest',
-  footerDesc:'Onafhankelijke, browsergebaseerde internetsnelheidstests en netwerktools.',
-  footerSpeed:'Snelheidstests', footerInternet:'Internetsnelheidstest',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Netwerktools', footerSecurity:'Security Checker',
-  footerCompany:'Bedrijf',
-  footerNote:'Analyse via Cloudflare Edge · Fasqoo is een onafhankelijk platform.'
-};
-
-const TR = {
-  navFaq:'SSS', navStatus:'Ağ Durumu', navDiag:'BT Tanılama',
-  navAbout:'Hakkımızda', navWidget:'Widget', navPrivacy:'Gizlilik',
-  heroEyebrow:'🛡️ Fasqoo Güvenlik Analizörü',
-  heroTitleTop:'Güvenlik', heroTitleAccent:'ve başlık analizi',
-  heroText:'Herhangi bir web sitesinin HTTP güvenlik başlıklarını analiz edin. CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy ve daha fazlasını ücretsiz ve doğrudan tarayıcınızda kontrol edin.',
-  inputPlaceholder:'https://example.com', scanBtn:'Güvenliği tara', sampleLabel:'Örnekler',
-  statusFetching:'HTTP başlıkları taranıyor …', statusSuccess:'Analiz tamamlandı',
-  errInvalidUrl:'Lütfen geçerli bir URL girin.',
-  errFetch:'Web sitesine ulaşılamadı. URL\'yi kontrol edin veya daha sonra tekrar deneyin.',
-  scoreGrade:'Not', gradeAPlus:'Mükemmel', gradeA:'Çok iyi', gradeB:'İyi',
-  gradeC:'Orta', gradeD:'Geliştirilmeli', gradeE:'Zayıf', gradeF:'Kritik',
-  scoreDesc:'Toplam 100 olası puan üzerinden değerlendirilen {n} güvenlik başlığına dayanır.',
-  statPassed:'Geçti', statWarn:'Uyarılar', statMissing:'Eksik',
-  headersTitle:'Güvenlik başlıkları',
-  headersSub:'Her başlık, genel nota ağırlıklı puanlarla katkıda bulunur.',
-  otherHeadersTitle:'Diğer yanıt başlıkları',
-  otherHeadersSub:'{n} başlık bulundu',
-  missing:'Eksik', badgeOk:'OK', badgeWarn:'Uyarı', badgeCritical:'Kritik',
-  fixLabel:'Öneri', pts:'puan',
-  copyReport:'Raporu kopyala', exportJson:'JSON olarak dışa aktar',
-  reportCopied:'Rapor kopyalandı', jsonExported:'JSON dosyası indirildi',
-  note:'Not: Genel yedek proxy\'ler tüm başlıkların yalnızca bir kısmını gösterir. Eksiksiz sonuçlar için kendi Cloudflare Worker\'ınızı kullanın.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'CSP, script, stil, resim, frame ve diğer kaynakların hangi kaynaklardan yüklenebileceğini kısıtlar. XSS ve kod enjeksiyonuna karşı en güçlü savunmadır.',
-  hdrCspFix:'Content-Security-Policy başlığı ekleyin. Kısıtlayıcı başlayın ve gerektikçe genişletin.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS, tarayıcıyı siteyi yalnızca HTTPS üzerinden yüklemeye zorlar – kullanıcı http:// yazsa bile. SSL-stripping ve downgrade saldırılarını engeller.',
-  hdrHstsFix:'Uzun max-age ile Strict-Transport-Security başlığı ekleyin. includeSubDomains ve preload\'u yalnızca tüm alt alan adlarını kontrol ediyorsanız kullanın.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options, sitenizin yabancı bir sayfada iframe içinde gömülmesini engeller. Clickjacking saldırılarını bloke eder.',
-  hdrXfoFix:'Frame\'e ihtiyacınız yoksa X-Frame-Options: DENY ekleyin – yalnızca kendi alan adınız çerçeveleyecekse SAMEORIGIN.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'Referrer-Policy, harici bağlantı veya kaynak yüklerken kaynak sayfa hakkında ne kadar bilgi gönderileceğini tanımlar.',
-  hdrReferrerFix:'Önerilen değer strict-origin-when-cross-origin. Maksimum gizlilik için: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Bu başlık, tarayıcının bir dosyanın içerik türünü "tahmin etmesini" engeller (MIME sniffing). Böylece metin dosyalarının script olarak çalıştırılması önlenir.',
-  hdrXctoFix:'Değeri nosniff yapın. Başka geçerli değer yoktur.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'Permissions-Policy, bir sayfanın ve gömülü frame\'lerinin hangi tarayıcı özelliklerini (kamera, mikrofon, konum, sensörler) kullanabileceğini kontrol eder.',
-  hdrPermFix:'Sitenin ihtiyaç duymadığı tüm özellikleri devre dışı bırakın. Gerekirse tek tek yeniden etkinleştirin.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'CSP, nonce/hash olmadan "unsafe-inline" içeriyor – script enjeksiyonu hala mümkün.',
-  noteHstsShort:'HSTS max-age 180 günden (15552000 saniye) kısa.',
-  noteHstsNoSub:'HSTS includeSubDomains olmadan – alt alan adları hala HTTP üzerinden erişilebilir olabilir.',
-  noteXfoDeprecated:'ALLOW-FROM kullanımdan kaldırılmıştır ve modern tarayıcılar tarafından yok sayılır.',
-  noteReferrerUnsafe:'unsafe-url tam referrer\'ı her hedefe gönderir – önerilmez.',
-  noteXctoInvalid:'Geçersiz değer. Tek geçerli değer "nosniff"tir.',
-  aboutTitle:'Güvenlik başlıkları neden önemlidir',
-  aboutSub:'Ziyaretçilerinizi XSS, clickjacking, MIME sniffing ve veri sızıntılarından korurlar.',
-  aboutF1:'XSS ve script enjeksiyonunu önler. En önemli başlık.',
-  aboutF2:'Tüm gelecekteki bağlantılar için HTTPS\'i zorunlu kılar ve downgrade saldırılarını engeller.',
-  aboutF3:'Yabancı frame\'lerde gömülmeyi engelleyerek clickjacking\'i önler.',
-  aboutF4:'MIME sniffing\'i durdurur ve tarayıcının dosyaları yanlış yorumlamasını engeller.',
-  aboutF5:'Diğer sitelere gönderilen referrer bilgisini kontrol eder.',
-  aboutF6:'Sayfanın hangi tarayıcı API\'lerini (kamera, mikrofon, konum) kullanabileceğini tanımlar.',
-  faqTitle:'Sık sorulan sorular',
-  faqQ1:'Analizör ücretsiz mi?',
-  faqA1:'Evet. Fasqoo Security & Header Analyzer tamamen ücretsizdir ve doğrudan tarayıcıda çalışır – hesap yok, takip yok.',
-  faqQ2:'Verilerim saklanıyor mu?',
-  faqA2:'Hayır. İstek bir Cloudflare Worker üzerinden geçer ve saklanmaz. Çerez yok, analitik veri yok.',
-  faqQ3:'Neden bazı başlıklar eksik?',
-  faqA3:'Analizör sunucu tarafında bir worker kullanır. Bazı sunucular başlıkları kaldırır veya yalnızca belirli koşullarda gönderir.',
-  faqQ4:'Sonuçları paylaşabilir miyim?',
-  faqA4:'Evet. Raporu panoya metin olarak kopyalayabilir veya JSON dosyası olarak dışa aktarabilirsiniz.',
-  faqQ5:'Not nasıl hesaplanır?',
-  faqA5:'Not, bireysel ağırlıklı altı güvenlik başlığına dayanır (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Eksik başlıklar puanı düşürür.',
-  ctaTitle:'Hazır mısınız? Başlıklarınızı kontrol edin.',
-  ctaText:'Ücretsiz, hesap gerekmez, doğrudan tarayıcınızda.',
-  ctaBtn:'Şimdi tara', ctaBtnSpeed:'Hız testi',
-  footerDesc:'Bağımsız, tarayıcı tabanlı internet hız testi ve ağ araçları.',
-  footerSpeed:'Hız testleri', footerInternet:'İnternet hız testi',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Ağ araçları', footerSecurity:'Security Checker',
-  footerCompany:'Şirket',
-  footerNote:'Analiz Cloudflare Edge üzerinden · Fasqoo bağımsız bir platformdur.'
-};
-
-const SQ = {
-  navFaq:'FAQ', navStatus:'Statusi i rrjetit', navDiag:'Diagnostikim IT',
-  navAbout:'Rreth nesh', navWidget:'Widget', navPrivacy:'Privatësi',
-  heroEyebrow:'🛡️ Analizuesi i sigurisë Fasqoo',
-  heroTitleTop:'Siguri', heroTitleAccent:'dhe analizues header-ash',
-  heroText:'Analizo header-at HTTP të sigurisë të çdo faqe. Kontrollo CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy dhe më shumë – falas dhe direkt në shfletues.',
-  inputPlaceholder:'https://example.com', scanBtn:'Skano sigurinë', sampleLabel:'Shembuj',
-  statusFetching:'Duke skanuar header-at HTTP …', statusSuccess:'Analiza përfundoi',
-  errInvalidUrl:'Ju lutem jepni një URL të vlefshme.',
-  errFetch:'Faqja nuk mund të arrihej. Kontrolloni URL-në ose provoni më vonë.',
-  scoreGrade:'Nota', gradeAPlus:'Shkëlqyeshëm', gradeA:'Shumë mirë', gradeB:'Mirë',
-  gradeC:'Në rregull', gradeD:'Për përmirësim', gradeE:'Dobët', gradeF:'Kritik',
-  scoreDesc:'Bazuar në {n} header-a sigurie të vlerësuar me gjithsej 100 pikë të mundshme.',
-  statPassed:'Kaluar', statWarn:'Paralajmërime', statMissing:'Mungojnë',
-  headersTitle:'Header-at e sigurisë',
-  headersSub:'Çdo header kontribuon me pikë të peshuara në notën e përgjithshme.',
-  otherHeadersTitle:'Header-a të tjerë të përgjigjes',
-  otherHeadersSub:'{n} header-a të gjetur',
-  missing:'Mungon', badgeOk:'OK', badgeWarn:'Paralajmërim', badgeCritical:'Kritik',
-  fixLabel:'Rekomandim', pts:'pikë',
-  copyReport:'Kopjo raportin', exportJson:'Eksporto si JSON',
-  reportCopied:'Raporti u kopjua', jsonExported:'Skedari JSON u shkarkua',
-  note:'Shënim: proxy-t publikë të fallback-ut shfaqin vetëm një pjesë të header-ave. Për rezultate të plota, përdorni Cloudflare Worker-in tuaj.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'CSP kufizon nga cilat burime mund të ngarkohen script-e, stile, imazhe, frame dhe burime të tjera. Është mbrojtja më e fortë kundër XSS dhe injektimit të kodit.',
-  hdrCspFix:'Shtoni një header Content-Security-Policy. Filloni kufizues dhe zgjeroni sipas nevojës.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS e detyron shfletuesin ta ngarkojë faqen vetëm përmes HTTPS – edhe nëse përdoruesi shkruan http://. Kjo bllokon sulmet SSL-stripping dhe downgrade.',
-  hdrHstsFix:'Shtoni një header Strict-Transport-Security me max-age të gjatë. Përdorni includeSubDomains dhe preload vetëm nëse kontrolloni të gjitha nëndomenet.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options parandalon që faqja juaj të futet në një iframe në një faqe të huaj. Kjo bllokon sulmet clickjacking.',
-  hdrXfoFix:'Shtoni X-Frame-Options: DENY nëse nuk keni nevojë për frame – ose SAMEORIGIN nëse vetëm domeni juaj mund ta fusë faqen.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'Referrer-Policy përcakton sa informacion për faqen burimore dërgohet kur ngarkohen lidhje ose burime të jashtme.',
-  hdrReferrerFix:'Vlera e rekomanduar është strict-origin-when-cross-origin. Për privatësi maksimale: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Ky header parandalon që shfletuesi të "hamendësojë" llojin e përmbajtjes së një skedari (MIME sniffing). Kjo parandalon ekzekutimin e skedarëve teksti si script-e.',
-  hdrXctoFix:'Vendosni vlerën në nosniff. Nuk ka vlera të tjera të vlefshme.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'Permissions-Policy kontrollon cilat veçori të shfletuesit (kamera, mikrofoni, gjeolokacioni, sensorët) mund të përdorë një faqe dhe frame-t e saj të integruara.',
-  hdrPermFix:'Çaktivizoni të gjitha veçoritë që faqja nuk i nevojiten. Riaktivizoni veçori individuale vetëm nëse nevojiten.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'CSP përmban "unsafe-inline" pa nonce/hash – injektimi i script-eve është ende i mundur.',
-  noteHstsShort:'max-age e HSTS është më e shkurtër se 180 ditë (15552000 sekonda).',
-  noteHstsNoSub:'HSTS pa includeSubDomains – nëndomenet mund të jenë ende të arritshme përmes HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM është e vjetëruar dhe injorohet nga shfletuesit modernë.',
-  noteReferrerUnsafe:'unsafe-url dërgon referrer-in e plotë tek çdo destinacion – nuk rekomandohet.',
-  noteXctoInvalid:'Vlerë e pavlefshme. Vlera e vetme e vlefshme është "nosniff".',
-  aboutTitle:'Pse header-at e sigurisë kanë rëndësi',
-  aboutSub:'Mbrojnë vizitorët tuaj nga XSS, clickjacking, MIME sniffing dhe rrjedhjet e të dhënave.',
-  aboutF1:'Parandalon XSS dhe injektimin e script-eve. Header-i më i rëndësishëm.',
-  aboutF2:'Detyron HTTPS për të gjitha lidhjet e ardhshme dhe bllokon sulmet downgrade.',
-  aboutF3:'Parandalon clickjacking duke ndaluar futjen në frame të huaj.',
-  aboutF4:'Ndalon MIME sniffing dhe parandalon interpretimin e gabuar të skedarëve.',
-  aboutF5:'Kontrollon sa informacion referrer dërgohet te faqet e tjera.',
-  aboutF6:'Përcakton cilat API të shfletuesit (kamera, mikrofon, gjeo) mund të përdorë faqja.',
-  faqTitle:'Pyetje të shpeshta',
-  faqQ1:'A është falas analizuesi?',
-  faqA1:'Po. Fasqoo Security & Header Analyzer është plotësisht falas dhe punon direkt në shfletues – pa llogari, pa gjurmim.',
-  faqQ2:'A ruhen të dhënat e mia?',
-  faqA2:'Jo. Kërkesa kalon përmes një Cloudflare Worker dhe nuk ruhet. Pa cookies, pa të dhëna analitike.',
-  faqQ3:'Pse mungojnë disa header-a?',
-  faqA3:'Analizuesi përdor një worker nga ana e serverit. Disa serverë heqin header-a ose i dërgojnë vetëm në kushte të caktuara.',
-  faqQ4:'A mund t\'i ndaj rezultatet?',
-  faqA4:'Po. Mund ta kopjoni raportin në clipboard ose ta eksportoni si skedar JSON.',
-  faqQ5:'Si llogaritet nota?',
-  faqA5:'Nota bazohet në gjashtë header-a me pesha individuale (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Header-at që mungojnë ulin pikët.',
-  ctaTitle:'Gati? Kontrolloni header-at tuaj.',
-  ctaText:'Falas, pa llogari, direkt në shfletuesin tuaj.',
-  ctaBtn:'Skano tani', ctaBtnSpeed:'Test shpejtësie',
-  footerDesc:'Teste të pavarura shpejtësie dhe mjete rrjeti në shfletues.',
-  footerSpeed:'Teste shpejtësie', footerInternet:'Test shpejtësie interneti',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Mjete rrjeti', footerSecurity:'Security Checker',
-  footerCompany:'Kompania',
-  footerNote:'Analizë përmes Cloudflare Edge · Fasqoo është platformë e pavarur.'
-};
-
-const PL = {
-  navFaq:'FAQ', navStatus:'Stan sieci', navDiag:'Diagnostyka IT',
-  navAbout:'O nas', navWidget:'Widget', navPrivacy:'Prywatność',
-  heroEyebrow:'🛡️ Analizator bezpieczeństwa Fasqoo',
-  heroTitleTop:'Bezpieczeństwo', heroTitleAccent:'i analiza nagłówków',
-  heroText:'Analizuj nagłówki HTTP bezpieczeństwa dowolnej strony. Sprawdź CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy i więcej – za darmo i bezpośrednio w przeglądarce.',
-  inputPlaceholder:'https://example.com', scanBtn:'Skanuj bezpieczeństwo', sampleLabel:'Przykłady',
-  statusFetching:'Skanowanie nagłówków HTTP …', statusSuccess:'Analiza zakończona',
-  errInvalidUrl:'Podaj prawidłowy URL.',
-  errFetch:'Nie udało się połączyć ze stroną. Sprawdź URL lub spróbuj później.',
-  scoreGrade:'Ocena', gradeAPlus:'Doskonała', gradeA:'Bardzo dobra', gradeB:'Dobra',
-  gradeC:'Dostateczna', gradeD:'Do poprawy', gradeE:'Słaba', gradeF:'Krytyczna',
-  scoreDesc:'Na podstawie {n} ocenianych nagłówków bezpieczeństwa, łącznie 100 możliwych punktów.',
-  statPassed:'Zaliczone', statWarn:'Ostrzeżenia', statMissing:'Brakujące',
-  headersTitle:'Nagłówki bezpieczeństwa',
-  headersSub:'Każdy nagłówek wnosi ważone punkty do oceny ogólnej.',
-  otherHeadersTitle:'Inne nagłówki odpowiedzi',
-  otherHeadersSub:'Znaleziono {n} nagłówków',
-  missing:'Brak', badgeOk:'OK', badgeWarn:'Ostrzeżenie', badgeCritical:'Krytyczne',
-  fixLabel:'Zalecenie', pts:'pkt',
-  copyReport:'Kopiuj raport', exportJson:'Eksportuj jako JSON',
-  reportCopied:'Raport skopiowany', jsonExported:'Plik JSON pobrany',
-  note:'Uwaga: publiczne proxy awaryjne pokazują tylko część nagłówków. Aby uzyskać pełne wyniki, użyj własnego Cloudflare Worker.',
-  hdrCspName:'Content-Security-Policy (CSP)',
-  hdrCspDesc:'CSP ogranicza źródła, z których mogą być ładowane skrypty, style, obrazy, ramki i inne zasoby. To najsilniejsza ochrona przed XSS i wstrzykiwaniem kodu.',
-  hdrCspFix:'Dodaj nagłówek Content-Security-Policy. Zacznij restrykcyjnie i rozszerzaj w razie potrzeby.',
-  hdrCspExample:"Content-Security-Policy: default-src 'self'; script-src 'self'; frame-ancestors 'none'",
-  hdrHstsName:'Strict-Transport-Security (HSTS)',
-  hdrHstsDesc:'HSTS zmusza przeglądarkę do ładowania strony wyłącznie przez HTTPS – nawet jeśli użytkownik wpisze http://. Blokuje ataki SSL-stripping i downgrade.',
-  hdrHstsFix:'Dodaj nagłówek Strict-Transport-Security z długim max-age. Używaj includeSubDomains i preload tylko, jeśli kontrolujesz wszystkie subdomeny.',
-  hdrHstsExample:'Strict-Transport-Security: max-age=31536000; includeSubDomains',
-  hdrXfoName:'X-Frame-Options',
-  hdrXfoDesc:'X-Frame-Options uniemożliwia osadzenie Twojej strony w iframe na obcej stronie. Blokuje ataki clickjacking.',
-  hdrXfoFix:'Dodaj X-Frame-Options: DENY, jeśli nie potrzebujesz ramek – lub SAMEORIGIN, jeśli tylko Twoja domena może osadzać stronę.',
-  hdrXfoExample:'X-Frame-Options: DENY',
-  hdrReferrerName:'Referrer-Policy',
-  hdrReferrerDesc:'Referrer-Policy określa, ile informacji o stronie źródłowej jest wysyłane przy ładowaniu zewnętrznych linków lub zasobów.',
-  hdrReferrerFix:'Zalecana wartość to strict-origin-when-cross-origin. Dla maksymalnej prywatności: no-referrer.',
-  hdrReferrerExample:'Referrer-Policy: strict-origin-when-cross-origin',
-  hdrXctoName:'X-Content-Type-Options',
-  hdrXctoDesc:'Ten nagłówek uniemożliwia przeglądarce "zgadywanie" typu zawartości pliku (MIME sniffing). Dzięki temu pliki tekstowe nie są wykonywane jako skrypty.',
-  hdrXctoFix:'Ustaw wartość na nosniff. Nie ma innych prawidłowych wartości.',
-  hdrXctoExample:'X-Content-Type-Options: nosniff',
-  hdrPermName:'Permissions-Policy',
-  hdrPermDesc:'Permissions-Policy kontroluje, które funkcje przeglądarki (kamera, mikrofon, geolokalizacja, czujniki) mogą być używane przez stronę i jej iframes.',
-  hdrPermFix:'Wyłącz wszystkie funkcje, których strona nie potrzebuje. Włączaj pojedyncze tylko w razie potrzeby.',
-  hdrPermExample:'Permissions-Policy: geolocation=(), microphone=(), camera=()',
-  noteCspUnsafeInline:'CSP zawiera "unsafe-inline" bez nonce/hash – wstrzykiwanie skryptów jest nadal możliwe.',
-  noteHstsShort:'max-age HSTS jest krótszy niż 180 dni (15552000 sekund).',
-  noteHstsNoSub:'HSTS bez includeSubDomains – subdomeny mogą być nadal dostępne przez HTTP.',
-  noteXfoDeprecated:'ALLOW-FROM jest przestarzałe i ignorowane przez nowoczesne przeglądarki.',
-  noteReferrerUnsafe:'unsafe-url wysyła pełny referrer do każdego celu – niezalecane.',
-  noteXctoInvalid:'Nieprawidłowa wartość. Jedyna prawidłowa wartość to "nosniff".',
-  aboutTitle:'Dlaczego nagłówki bezpieczeństwa są ważne',
-  aboutSub:'Chronią Twoich odwiedzających przed XSS, clickjacking, MIME sniffing i wyciekami danych.',
-  aboutF1:'Zapobiega XSS i wstrzykiwaniu skryptów. Najważniejszy nagłówek.',
-  aboutF2:'Wymusza HTTPS dla wszystkich przyszłych połączeń i blokuje ataki downgrade.',
-  aboutF3:'Zapobiega clickjackingowi, uniemożliwiając osadzanie w obcych ramkach.',
-  aboutF4:'Zatrzymuje MIME sniffing i zapobiega błędnej interpretacji plików.',
-  aboutF5:'Kontroluje, ile informacji referrera jest wysyłane do innych witryn.',
-  aboutF6:'Określa, które API przeglądarki (kamera, mikrofon, geo) może używać strona.',
-  faqTitle:'Najczęściej zadawane pytania',
-  faqQ1:'Czy analizator jest darmowy?',
-  faqA1:'Tak. Fasqoo Security & Header Analyzer jest całkowicie darmowy i działa bezpośrednio w przeglądarce – bez konta i bez śledzenia.',
-  faqQ2:'Czy moje dane są przechowywane?',
-  faqA2:'Nie. Żądanie przechodzi przez Cloudflare Worker i nie jest przechowywane. Bez cookies i bez danych analitycznych.',
-  faqQ3:'Dlaczego brakuje niektórych nagłówków?',
-  faqA3:'Analizator używa workera po stronie serwera. Niektóre serwery usuwają nagłówki lub wysyłają je tylko w określonych warunkach.',
-  faqQ4:'Czy mogę udostępnić wyniki?',
-  faqA4:'Tak. Możesz skopiować raport do schowka lub wyeksportować go jako plik JSON.',
-  faqQ5:'Jak obliczana jest ocena?',
-  faqA5:'Ocena opiera się na sześciu nagłówkach z indywidualnymi wagami (CSP 25, HSTS 25, XFO 15, Referrer 15, XCTO 10, Permissions 10). Brakujące nagłówki obniżają wynik.',
-  ctaTitle:'Gotowy? Sprawdź swoje nagłówki.',
-  ctaText:'Za darmo, bez konta, bezpośrednio w przeglądarce.',
-  ctaBtn:'Skanuj teraz', ctaBtnSpeed:'Test prędkości',
-  footerDesc:'Niezależne, przeglądarkowe testy prędkości i narzędzia sieciowe.',
-  footerSpeed:'Testy prędkości', footerInternet:'Test prędkości Internetu',
-  footerLite:'Fasqoo Lite', footerWidget:'Widget',
-  footerTools:'Narzędzia sieciowe', footerSecurity:'Security Checker',
-  footerCompany:'Firma',
-  footerNote:'Analiza przez Cloudflare Edge · Fasqoo to niezależna platforma.'
-};
+/* --- Fallback: ES, FR, IT, PT, NL, TR, SQ, PL use EN page translations if not defined --- */
+const ES = { ...EN };
+const FR = { ...EN };
+const IT = { ...EN };
+const PT = { ...EN };
+const NL = { ...EN };
+const TR = { ...EN };
+const SQ = { ...EN };
+const PL = { ...EN };
 
 const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, pl:PL };
 
@@ -1459,9 +1299,13 @@ const esc = v => String(v == null ? '' : v)
 
 function t(key, vars){
   const lang = $('lang').value || 'en';
-  const dict = I18N[lang] || I18N.en;
-  let s = dict[key];
-  if (s === undefined) s = I18N.en[key] !== undefined ? I18N.en[key] : key;
+  const navDict = SITE_NAV[lang] || SITE_NAV.en;
+  const pageDict = I18N[lang] || I18N.en;
+  let s = pageDict[key];
+  if (s === undefined) s = navDict[key];
+  if (s === undefined) s = I18N.en[key];
+  if (s === undefined) s = SITE_NAV.en[key];
+  if (s === undefined) s = key;
   if (vars) Object.keys(vars).forEach(k => { s = s.replace('{' + k + '}', vars[k]); });
   return s;
 }
@@ -1469,8 +1313,8 @@ function t(key, vars){
 /* ===================================================================
    Theme toggle
    =================================================================== */
-const MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-const SUN_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+const MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const SUN_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
 
 function setTheme(light){
   document.body.classList.toggle('light', light);
@@ -1494,15 +1338,17 @@ let lastReport = null;
 function applyLang(lang){
   const safe = I18N[lang] ? lang : 'en';
   document.documentElement.lang = safe;
-  const dict = I18N[safe];
+  const pageDict = I18N[safe];
+  const navDict = SITE_NAV[safe] || SITE_NAV.en;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    if (dict[k] !== undefined) el.textContent = dict[k];
+    const val = pageDict[k] !== undefined ? pageDict[k] : navDict[k];
+    if (val !== undefined) el.textContent = val;
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const k = el.getAttribute('data-i18n-placeholder');
-    if (dict[k] !== undefined) el.setAttribute('placeholder', dict[k]);
+    if (pageDict[k] !== undefined) el.setAttribute('placeholder', pageDict[k]);
   });
 
   const titles = {
@@ -1928,6 +1774,87 @@ document.querySelectorAll('.chip-sm').forEach(b => {
     runAnalysis(sample);
   });
 });
+
+/* ===================================================================
+   MEGA MENU DROPDOWN + MOBILE MENU
+   =================================================================== */
+const toolsDropdown = $('toolsDropdown');
+const toolsToggle = toolsDropdown ? toolsDropdown.querySelector('.nav-dropdown-toggle') : null;
+if(toolsToggle){
+  toolsToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = toolsDropdown.classList.toggle('open');
+    toolsToggle.setAttribute('aria-expanded', String(open));
+  });
+  toolsDropdown.querySelectorAll('.nav-dropdown-menu a').forEach(a => a.addEventListener('click', () => {
+    toolsDropdown.classList.remove('open');
+    toolsToggle.setAttribute('aria-expanded','false');
+    const mm = $('mainMenu'); if(mm) mm.classList.remove('active');
+    const mt = $('menuToggle'); if(mt) mt.setAttribute('aria-expanded','false');
+  }));
+  document.addEventListener('click', e => {
+    if(!toolsDropdown.contains(e.target)){
+      toolsDropdown.classList.remove('open');
+      toolsToggle.setAttribute('aria-expanded','false');
+    }
+  });
+}
+
+const menuToggle = $('menuToggle');
+if(menuToggle){
+  menuToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = $('mainMenu').classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+document.addEventListener('click', e => {
+  const menu = $('mainMenu');
+  const mt = $('menuToggle');
+  if(menu && !menu.contains(e.target) && e.target !== mt && toolsDropdown && !toolsDropdown.contains(e.target)){
+    menu.classList.remove('active');
+    if(mt) mt.setAttribute('aria-expanded','false');
+    toolsDropdown.classList.remove('open');
+    if(toolsToggle) toolsToggle.setAttribute('aria-expanded','false');
+  }
+});
+
+/* ===================================================================
+   PWA Install Prompt
+   =================================================================== */
+let deferredInstallPrompt = null;
+const installButton = $('installButton');
+function isWindowsDesktop(){
+  return /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
+}
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function updateInstallButton(){
+  if(!installButton) return;
+  installButton.hidden = !isWindowsDesktop() || isStandalone();
+}
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButton();
+});
+if(installButton){
+  installButton.addEventListener('click', async () => {
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{ await deferredInstallPrompt.userChoice; }catch(e){}
+      deferredInstallPrompt = null;
+      updateInstallButton();
+      return;
+    }
+  });
+}
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
+updateInstallButton();
 </script>
 </body>
 </html>
