@@ -759,6 +759,35 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 }
 
 /* ==========================================================
+   PROFESSIONAL SVG MEGA-MENU ICONS
+   ========================================================== */
+.nav-mega-icon svg{
+  width:20px;
+  height:20px;
+  display:block;
+  flex:0 0 auto;
+  color:#52525b;
+  transition:color .18s ease, transform .18s ease;
+}
+.nav-mega-item:hover .nav-mega-icon svg{
+  color:var(--orange);
+  transform:scale(1.05);
+}
+.dark .nav-mega-icon svg{
+  color:#a1a1aa;
+}
+.dark .nav-mega-item:hover .nav-mega-icon svg{
+  color:var(--orange);
+}
+.nav-mega-icon{
+  font-size:0;
+  line-height:0;
+}
+.nav-mega-icon > svg{
+  font-size:initial;
+}
+
+/* ==========================================================
    FASQOO 4-COLUMN FOOTER
    ========================================================== */
 .site-footer{margin-top:45px;padding:42px 0 22px;background:var(--card);border-top:1px solid var(--line);color:var(--muted)}
@@ -877,24 +906,48 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
           <div class="nav-mega-column">
             <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
+            <!-- Netzwerk-Status · Globe Icon -->
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🌐</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
                 <span class="nav-mega-desc" data-i18n="navStatusDesc">Live-Erreichbarkeit &amp; Leitungs-Diagnose</span>
               </span>
             </a>
 
+            <!-- Speed-Widget · Widget-Grid Icon -->
             <a class="nav-mega-item" href="widget.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🧱</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.6"/>
+                  <rect x="13" y="3" width="8" height="5" rx="1.6"/>
+                  <rect x="13" y="10" width="8" height="11" rx="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.6"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
                 <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
               </span>
             </a>
 
+            <!-- Gaming- & Ping-Monitor · Gamepad Icon -->
             <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🎮</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/>
+                  <line x1="6.5" y1="11" x2="10.5" y2="11"/>
+                  <line x1="8.5" y1="9" x2="8.5" y2="13"/>
+                  <circle cx="16" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="18" cy="12.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navGaming">Gaming- &amp; Ping-Monitor</span>
                 <span class="nav-mega-desc" data-i18n="navGamingDesc">Live-Ping &amp; Gaming-Performance überwachen</span>
@@ -905,24 +958,51 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
           <div class="nav-mega-column">
             <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
+            <!-- Security Analyzer · Shield with Checkmark -->
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🛡️</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
                 <span class="nav-mega-desc" data-i18n="navSecurityDesc">HTTP-Sicherheitsheader in Echtzeit prüfen</span>
               </span>
             </a>
 
+            <!-- Visual DNS Test · Globe with Latitudes -->
             <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🗺️</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.4 9h17.2"/>
+                  <path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/>
+                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
                 <span class="nav-mega-desc" data-i18n="navDnsDesc">Globale DNS-Ausbreitung visuell tracken</span>
               </span>
             </a>
 
+            <!-- Subnetz-Rechner · Calculator Icon -->
             <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
-              <span class="nav-mega-icon" aria-hidden="true">🧮</span>
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="3" width="15" height="18" rx="2.2"/>
+                  <rect x="7.5" y="6" width="9" height="3.4" rx="0.9"/>
+                  <circle cx="9" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="9" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
                 <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
@@ -1305,7 +1385,6 @@ tr:{navFaq:"SSS",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkım
 sq:{navFaq:"FAQ",download:"Shkarkim",navStatus:"Statusi i rrjetit",navDiag:"Diagnostika IT",navAbout:"Rreth nesh",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"Shiko në sekonda se çfarë ofron vërtet lidhja jote – përfshirë përshtatshmërinë për streaming, lojëra dhe punë nga shtëpia.",serverLabel:"Serveri",ready:"Gati",start:"Fillo testin",startAgain:"Përsëri",testing:"Duke testuar…",complete:"Përfundoi",ping:"Ping",jitter:"Jitter",upload:"Ngarkim",chartLive:"Performanca",chartWait:"Pritje",lblIp:"IP Publike",lblIsp:"Ofruesi / ISP",lblLoc:"Vendndodhja",lblAsn:"Rrjeti / ASN",qTitle:"Cilësia",qDefault:"Bëj një test për të vlerësuar lidhjen.",qualityBasis:"Bazuar në shkarkim, ngarkim, ping dhe jitter",appsTitle:"Çfarë mund të bësh?",appsSub:"Kontroll i drejtpërdrejtë për lojëra, 4K, punë nga shtëpia dhe rrjete sociale.",diagTitle:"Diagnostika e Rrjetit",diagLatT:"Vonesa",diagLatD:"Mat kohën e përgjigjes.",diagStabT:"Qëndrueshmëria",diagStabD:"Jitter tregon qëndrueshmërinë.",diagDnsT:"Diagnostika DNS",diagDnsD:"Teston DNS-të.",diagIpT:"Diagnostika IP",diagIpD:"Zbulon IP, ISP, ASN.",repTitle:"Raport Profesional",lblRepTestId:"ID",copy:"Kopjo",share:"Shpërndaj",json:"Eksporto JSON",print:"Printo",histTitle:"Historiku",histRecent:"Matjet e fundit",histClear:"Pastro",thDate:"Data",thDown:"Shkarkim",thUp:"Ngarkim",thPing:"Ping",thQual:"Cilësia",noHistory:"Nuk ka matje.",ftRights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",ftAccess:"Qasueshmëria",ftImprint:"Impresum",ftPrivacy:"Privatësia",ftTerms:"Kushtet",ftNoSell:"Mos shit të dhënat e mia",ftPowered:"Mundësuar nga rrjeti Cloudflare Edge për performancë maksimale dhe saktësi matjeje.",ftDisclaimer:"Fasqoo është platformë e pavarur e testimit të shpejtësisë dhe nuk është produkt zyrtar i Cloudflare.",stPing:"Matja e vonesës…",stDown:"Matja e shkarkimit…",stUp:"Matja e ngarkimit…",stErr:"Dështoi.",measurementUnavailable:"Matja e padisponueshme. Provo përsëri.",stExc:"Shkëlqyeshëm",stGood:"Mirë",stLim:"E kufizuar",q90:"Lidhje e shkëlqyer.",q75:"Lidhje shumë e mirë.",q55:"Lidhje e mirë.",q35:"Lidhje mesatare.",q0:"Lidhje e dobët.",alertRun:"Kryej fillimisht një test.",unavail:"E padisponueshme",notDetected:"Nuk u zbulua",appRunTest:"Kryej",copied:"U kopjua",gradeTitle:"Nota globale e rrjetit",appsKicker:"PROFILET E PËRDORIMIT",appsBadge:"KONTROLL LIVE"},
 ar:{navFaq:"الأسئلة الشائعة",navStatus:"حالة الشبكة",navDiag:"تشخيص IT",navAbout:"من نحن",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",download:"تنزيل",title:"Free Internet Speed Test",sub:"اكتشف في ثوانٍ ما تقدمه اتصالك فعلاً — بما في ذلك مدى ملاءمته للبث والألعاب والعمل من المنزل.",serverLabel:"الخادم",ready:"جاهز",start:"بدء الاختبار",startAgain:"إعادة",testing:"جارٍ…",complete:"اكتمل",ping:"Ping",jitter:"Jitter",upload:"رفع",chartLive:"الأداء المباشر",chartWait:"انتظار",lblIp:"عنوان IP",lblIsp:"المزود",lblLoc:"الموقع",lblAsn:"الشبكة",qTitle:"جودة الاتصال",qDefault:"قم بإجراء اختبار.",qualityBasis:"استنادًا إلى التنزيل والرفع وPing وJitter",appsTitle:"ماذا يمكنك أن تفعل؟",appsSub:"فحص مباشر للألعاب و4K والعمل من المنزل.",diagTitle:"تشخيص الشبكة",diagLatT:"زمن الاستجابة",diagLatD:"يقيس وقت الاستجابة.",diagStabT:"الاستقرار",diagStabD:"يوضح Jitter الاستقرار.",diagDnsT:"تشخيص DNS",diagDnsD:"يتحقق من DNS.",diagIpT:"تشخيص IP",diagIpD:"يكتشف IP و ISP.",repTitle:"تقرير احترافي",lblRepTestId:"معرّف",copy:"نسخ",share:"مشاركة",json:"تصدير",print:"طباعة",histTitle:"السجل",histRecent:"القياسات الأخيرة",histClear:"مسح",thDate:"التاريخ",thDown:"تنزيل",thUp:"رفع",thPing:"Ping",thQual:"الجودة",noHistory:"لا توجد اختبارات.",ftRights:"© 2026 Fasqoo. جميع الحقوق محفوظة.",ftAccess:"إمكانية الوصول",ftImprint:"بيانات الناشر",ftPrivacy:"الخصوصية",ftTerms:"الشروط",ftNoSell:"لا تبيع بياناتي",ftPowered:"مدعوم بشبكة Cloudflare Edge لضمان أقصى أداء ودقة قياس.",ftDisclaimer:"Fasqoo منصة اختبار سرعة مستقلة وليست منتجًا رسميًا من Cloudflare.",stPing:"قياس زمن الاستجابة…",stDown:"قياس التنزيل…",stUp:"قياس الرفع…",stErr:"فشل.",measurementUnavailable:"القياس غير متاح. حاول مجددًا.",stExc:"ممتاز",stGood:"جيد",stLim:"محدود",q90:"اتصال ممتاز.",q75:"اتصال جيد جدًا.",q55:"اتصال جيد.",q35:"اتصال متوسط.",q0:"اتصال ضعيف.",alertRun:"قم بإجراء اختبار أولاً.",unavail:"غير متاح",notDetected:"لم يُكتشف",appRunTest:"تشغيل",copied:"تم النسخ",gradeTitle:"التقييم العام للشبكة",appsKicker:"ملفات الاستخدام",appsBadge:"فحص مباشر"}
 };
-
 
 const siteNavTranslations = {
   en:{navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",navStatusDesc:"Live reachability & line diagnostics",navWidgetDesc:"Free test widget for other websites",navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",navSecurityDesc:"Check HTTP security headers in real time",navDnsDesc:"Track global DNS propagation visually",navSubnetDesc:"Calculate IP ranges and subnet masks",navSecurity:"Security Analyzer",navDns:"Visual DNS Test",navSubnet:"Subnet Calculator",footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming & Ping Monitor",footerITDiagnose:"IT Diagnostics",footerSecurity:"Security Analyzer",footerDns:"Visual DNS Test",footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",footerPrivacy:"Privacy Policy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Measurement via Cloudflare Edge · Fasqoo is an independent platform.",footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
