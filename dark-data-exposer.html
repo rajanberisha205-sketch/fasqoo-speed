@@ -27,7 +27,6 @@ footer{margin-top:50px;border-top:1px solid var(--line);padding:40px 0 22px;back
 
 /* ==========================================================
    FASQOO EXACT INDEX HEADER / NAV / FOOTER
-   Copied from the supplied index.html structure and styling.
    ========================================================== */
 .wrap{width:min(1120px,calc(100% - 48px));margin:auto}
 header{height:68px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.03)}
@@ -47,7 +46,6 @@ a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:tra
 .menu-extra{display:flex;align-items:center;gap:8px}
 .menu-extra select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:8px 10px;font-size:12px;cursor:pointer}
 
-/* ---------- FASQOO LITE BUTTON – PREMIUM GRADIENT ---------- */
 .lite-btn,
 .lite-btn:visited{
   height:37px;
@@ -529,9 +527,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
   .nav-mega-desc{font-size:10px}
 }
 
-/* ==========================================================
-   PROFESSIONAL SVG MEGA-MENU ICONS
-   ========================================================== */
 .nav-mega-icon svg{
   width:20px;
   height:20px;
@@ -557,7 +552,6 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 .nav-mega-icon > svg{
   font-size:initial;
 }
-
 
 /* ==========================================================
    FASQOO 4-COLUMN FOOTER
@@ -658,6 +652,12 @@ body.dark .theme-btn,body.dark .install-btn{background:#0e1116;color:#e9f2ef;bor
 body.dark .site-footer{background:rgba(14,17,22,.92)}
 body.dark .footer-brand-name,body.dark .footer-column h4,body.dark .footer-copyright{color:#eef5f2}
 body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,body.dark .footer-disclaimer{color:#8fa39e}
+
+/* ==========================================================
+   THEME OVERRIDE — ensures .dark truly dark and default light
+   ========================================================== */
+html:not(.dark) body:not(.dark){}
+body.dark{--bg:#090c10;--card:#12161b;--text:#f4f6f8;--muted:#98a2ae;--line:#29303a;--soft:#171c22;--shadow:0 18px 50px rgba(0,0,0,.25);background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.09),transparent 34%),#090c10;color:var(--text)}
 </style>
 </head>
 <body>
@@ -695,7 +695,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
           <div class="nav-mega-column">
             <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
-            <!-- Netzwerk-Status · Globe Icon -->
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -710,7 +709,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
               </span>
             </a>
 
-            <!-- Speed-Widget · Widget-Grid Icon -->
             <a class="nav-mega-item" href="widget.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -726,7 +724,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
               </span>
             </a>
 
-            <!-- Gaming- & Ping-Monitor · Gamepad Icon -->
             <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -747,7 +744,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
           <div class="nav-mega-column">
             <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
-            <!-- Security Analyzer · Shield with Checkmark -->
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -761,7 +757,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
               </span>
             </a>
 
-            <!-- Antivirus Scanner -->
             <a class="nav-mega-item" href="antivirus.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -775,7 +770,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
               </span>
             </a>
 
-            <!-- Visual DNS Test · Globe with Latitudes -->
             <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -792,7 +786,6 @@ body.dark .footer-brand p,body.dark .footer-column a,body.dark .footer-powered,b
               </span>
             </a>
 
-            <!-- Subnetz-Rechner · Calculator Icon -->
             <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -920,22 +913,71 @@ const T={
  ar:{speed:'اختبار السرعة',status:'حالة الشبكة',about:'من نحن',hero:'كاشف البيانات والتتبع',heroP:'اعرض الموارد التي يراها المتصفح والبيانات المنقولة وإشارات الخصوصية المحلية في الوقت الفعلي.',heroS:'بيانات حقيقية من المتصفح، دون نتائج شبكة وهمية.',live:'بيانات متصفح حقيقية',requests:'طلبات الخلفية المباشرة',waiting:'بانتظار موارد المتصفح…',bytes:'البيانات المنقولة',co2:'تقدير بصمة CO₂',load:'مؤشر حمل المتصفح',battery:'إشارة البطارية',privacy:'مؤشر نشاط الخصوصية',scoreQuiet:'نشاط منخفض',scoreMed:'تم اكتشاف نشاط خلفي',scoreHigh:'نشاط خلفي مرتفع',monitor:'مراقبة نشاط المتصفح',clear:'مسح القائمة',copy:'نسخ التقرير',rescan:'التقاط النشاط الحقيقي لمدة 10 ثوانٍ',method:'كيف تعمل القياسات',note:'CO₂ تقدير توضيحي وليس قياساً مباشراً. الحمل والخصوصية مؤشرات محسوبة لأن المتصفح لا يعرض هذه القياسات الفيزيائية مباشرة.',none:'غير متاح في هذا المتصفح',charging:'قيد الشحن',discharging:'على البطارية',requestsCol:'النوع / المصدر / الحجم / المدة',sim:'SIM'}
 };
 const SITE_NAV_TRANSLATIONS = {
-  en:{navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",navStatusDesc:"Live reachability & line diagnostics",navWidgetDesc:"Free test widget for other websites",navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",navSecurityDesc:"Check HTTP security headers in real time",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Scan files and content for security risks",navDnsDesc:"Track global DNS propagation visually",navSubnetDesc:"Calculate IP ranges and subnet masks",navSecurity:"Security Analyzer",navDns:"Visual DNS Test",navSubnet:"Subnet Calculator",footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming & Ping Monitor",footerITDiagnose:"IT Diagnostics",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirus Scanner",footerDns:"Visual DNS Test",footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",footerPrivacy:"Privacy Policy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Measurement via Cloudflare Edge · Fasqoo is an independent platform.",footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
-  de:{navSpeedtest:"Speedtest",navTools:"Tools & IT-Diagnose",navSectionNetwork:"Netzwerk & Speed",navSectionDiag:"IT-Diagnose & Security",navStatusDesc:"Live-Erreichbarkeit & Leitungs-Diagnose",navWidgetDesc:"Kostenloses Test-Widget für andere Websites",navGaming:"Gaming- & Ping-Monitor",navGamingDesc:"Live-Ping & Gaming-Performance überwachen",navSecurityDesc:"HTTP-Sicherheitsheader in Echtzeit prüfen",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Dateien und Inhalte auf Sicherheitsrisiken prüfen",navDnsDesc:"Globale DNS-Ausbreitung visuell tracken",navSubnetDesc:"IP-Bereiche und Masken kalkulieren",navSecurity:"Security Analyzer",navDns:"Visual DNS Test",navSubnet:"Subnetz-Rechner",footerBrand:"Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Netzwerk-Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming- & Ping-Monitor",footerITDiagnose:"IT Diagnose",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirus Scanner",footerDns:"Visual DNS Test",footerCompany:"Unternehmen",footerAbout:"Über uns",footerFaq:"FAQ",footerPrivacy:"Datenschutz",footerCopyright:"© 2026 Fasqoo",footerBranding:"Unterstützt durch das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",footerDisclaimer:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt."},
-  fr:{navSpeedtest:"Speedtest",navTools:"Outils & diagnostic",navSectionNetwork:"Réseau & vitesse",navSectionDiag:"Diagnostic IT & sécurité",navGaming:"Moniteur Gaming & Ping",navGamingDesc:"Surveillance du ping et des performances de jeu",navSecurity:"Analyseur de sécurité",navAntivirus:"Scanner antivirus",navAntivirusDesc:"Analyser les fichiers et contenus pour détecter les risques",navDns:"Test DNS visuel",navSubnet:"Calculateur de sous-réseau",footerBrand:"Fasqoo - Tests de vitesse Internet indépendants, directement dans le navigateur, et outils réseau.",footerSpeedTests:"Tests de vitesse",footerInternetSpeed:"Test de vitesse Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Outils réseau",footerNetworkStatus:"État du réseau",footerGaming:"Moniteur Gaming & Ping",footerITDiagnose:"Diagnostic IT",footerSecurity:"Analyseur de sécurité",footerAntivirus:"Scanner antivirus",footerDns:"Test DNS visuel",footerCompany:"Entreprise",footerAbout:"À propos",footerFaq:"FAQ",footerPrivacy:"Confidentialité",footerCopyright:"© 2026 Fasqoo",footerBranding:"Mesure via Cloudflare Edge · Fasqoo est une plateforme indépendante."},
-  es:{navSpeedtest:"Speedtest",navTools:"Herramientas y diagnóstico",navSectionNetwork:"Red y velocidad",navSectionDiag:"Diagnóstico TI y seguridad",navGaming:"Monitor Gaming y Ping",navGamingDesc:"Monitor de ping y rendimiento en juegos en vivo",navSecurity:"Analizador de seguridad",navAntivirus:"Escáner antivirus",navAntivirusDesc:"Analiza archivos y contenido en busca de riesgos de seguridad",navDns:"Prueba DNS visual",navSubnet:"Calculadora de subredes",footerBrand:"Fasqoo - Pruebas de velocidad de Internet independientes desde el navegador y herramientas de red.",footerSpeedTests:"Pruebas de velocidad",footerInternetSpeed:"Test de velocidad de Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Herramientas de red",footerNetworkStatus:"Estado de red",footerGaming:"Monitor Gaming y Ping",footerITDiagnose:"Diagnóstico TI",footerSecurity:"Analizador de seguridad",footerAntivirus:"Escáner antivirus",footerDns:"Prueba DNS visual",footerCompany:"Empresa",footerAbout:"Sobre nosotros",footerFaq:"FAQ",footerPrivacy:"Privacidad",footerCopyright:"© 2026 Fasqoo",footerBranding:"Medición mediante Cloudflare Edge · Fasqoo es una plataforma independiente."},
-  it:{navSpeedtest:"Speedtest",navTools:"Strumenti e diagnostica",navSectionNetwork:"Rete e velocità",navSectionDiag:"Diagnostica IT e sicurezza",navGaming:"Monitor Gaming & Ping",navGamingDesc:"Monitor ping e prestazioni gaming in tempo reale",navSecurity:"Analizzatore di sicurezza",navAntivirus:"Scanner antivirus",navAntivirusDesc:"Controlla file e contenuti per individuare rischi di sicurezza",navDns:"Test DNS visivo",navSubnet:"Calcolatore subnet",footerBrand:"Fasqoo - Test di velocità Internet indipendenti dal browser e strumenti di rete.",footerSpeedTests:"Speed Test",footerInternetSpeed:"Speed Test Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Strumenti di rete",footerNetworkStatus:"Stato della rete",footerGaming:"Monitor Gaming & Ping",footerITDiagnose:"Diagnostica IT",footerSecurity:"Analizzatore di sicurezza",footerAntivirus:"Scanner antivirus",footerDns:"Test DNS visivo",footerCompany:"Azienda",footerAbout:"Chi siamo",footerFaq:"FAQ",footerPrivacy:"Privacy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Misurazione tramite Cloudflare Edge · Fasqoo è una piattaforma indipendente."},
-  pt:{navSpeedtest:"Speedtest",navTools:"Ferramentas e diagnóstico",navSectionNetwork:"Rede e velocidade",navSectionDiag:"Diagnóstico de TI e segurança",navGaming:"Monitor de Gaming e Ping",navGamingDesc:"Monitor de ping e desempenho em jogos em direto",navSecurity:"Analisador de segurança",navAntivirus:"Scanner antivírus",navAntivirusDesc:"Verifica ficheiros e conteúdos em busca de riscos de segurança",navDns:"Teste DNS visual",navSubnet:"Calculadora de sub-rede",footerBrand:"Fasqoo - Testes de velocidade da Internet independentes no navegador e ferramentas de rede.",footerSpeedTests:"Testes de velocidade",footerInternetSpeed:"Teste de velocidade da Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Ferramentas de rede",footerNetworkStatus:"Status da rede",footerGaming:"Monitor de Gaming e Ping",footerITDiagnose:"Diagnóstico de TI",footerSecurity:"Analisador de segurança",footerAntivirus:"Scanner antivírus",footerDns:"Teste DNS visual",footerCompany:"Empresa",footerAbout:"Sobre nós",footerFaq:"FAQ",footerPrivacy:"Privacidade",footerCopyright:"© 2026 Fasqoo",footerBranding:"Medição via Cloudflare Edge · A Fasqoo é uma plataforma independente."},
-  nl:{navSpeedtest:"Speedtest",navTools:"Tools & Diagnose",navSectionNetwork:"Netwerk & snelheid",navSectionDiag:"IT-diagnose & beveiliging",navGaming:"Gaming- & Ping-monitor",navGamingDesc:"Live ping- en gameprestatiemonitor",navSecurity:"Security Analyzer",navAntivirus:"Antivirusscanner",navAntivirusDesc:"Bestanden en inhoud controleren op beveiligingsrisico's",navDns:"Visuele DNS-test",navSubnet:"Subnetcalculator",footerBrand:"Fasqoo - Onafhankelijke browsergebaseerde internetsnelheidstests en netwerktools.",footerSpeedTests:"Snelheidstests",footerInternetSpeed:"Internetsnelheidstest",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Netwerktools",footerNetworkStatus:"Netwerkstatus",footerGaming:"Gaming- & Ping-monitor",footerITDiagnose:"IT-diagnose",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirusscanner",footerDns:"Visuele DNS-test",footerCompany:"Bedrijf",footerAbout:"Over ons",footerFaq:"FAQ",footerPrivacy:"Privacy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform."},
-  tr:{navSpeedtest:"Speedtest",navTools:"Araçlar ve Tanılama",navSectionNetwork:"Ağ ve Hız",navSectionDiag:"BT Tanılama ve Güvenlik",navGaming:"Oyun ve Ping Monitörü",navGamingDesc:"Canlı ping ve oyun performansı izleme",navSecurity:"Güvenlik Analizörü",navAntivirus:"Antivirüs Tarayıcı",navAntivirusDesc:"Dosyaları ve içerikleri güvenlik risklerine karşı kontrol edin",navDns:"Görsel DNS Testi",navSubnet:"Alt Ağ Hesaplayıcı",footerBrand:"Fasqoo - Bağımsız, tarayıcı tabanlı internet hız testleri ve ağ araçları.",footerSpeedTests:"Hız Testleri",footerInternetSpeed:"İnternet Hız Testi",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Ağ Araçları",footerNetworkStatus:"Ağ Durumu",footerGaming:"Oyun ve Ping Monitörü",footerITDiagnose:"BT Tanılama",footerSecurity:"Güvenlik Analizörü",footerAntivirus:"Antivirüs Tarayıcı",footerDns:"Görsel DNS Testi",footerCompany:"Şirket",footerAbout:"Hakkımızda",footerFaq:"SSS",footerPrivacy:"Gizlilik",footerCopyright:"© 2026 Fasqoo",footerBranding:"Cloudflare Edge üzerinden ölçüm · Fasqoo bağımsız bir platformdur."},
-  sq:{navSpeedtest:"Speedtest",navTools:"Mjete & Diagnostikë",navSectionNetwork:"Rrjeti & Shpejtësia",navSectionDiag:"Diagnostikë IT & Siguri",navGaming:"Monitor Loje & Ping",navGamingDesc:"Monitor ping dhe performancë lojërash në kohë reale",navSecurity:"Analizuesi i Sigurisë",navAntivirus:"Skaneri antivirus",navAntivirusDesc:"Kontrollo skedarët dhe përmbajtjen për rreziqe sigurie",navDns:"Testi Vizual DNS",navSubnet:"Llogaritësi i Nënrrjetit",footerBrand:"Fasqoo - Teste të pavarura të shpejtësisë së internetit në shfletues dhe mjete rrjeti.",footerSpeedTests:"Teste Shpejtësie",footerInternetSpeed:"Testi i Shpejtësisë së Internetit",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Mjete Rrjeti",footerNetworkStatus:"Statusi i Rrjetit",footerGaming:"Monitor Loje & Ping",footerITDiagnose:"Diagnostikë IT",footerSecurity:"Analizuesi i Sigurisë",footerAntivirus:"Skaneri antivirus",footerDns:"Testi Vizual DNS",footerCompany:"Kompania",footerAbout:"Rreth nesh",footerFaq:"FAQ",footerPrivacy:"Privatësia",footerCopyright:"© 2026 Fasqoo",footerBranding:"Matje përmes Cloudflare Edge · Fasqoo është një platformë e pavarur."},
-  ar:{navSpeedtest:"اختبار السرعة",navTools:"الأدوات والتشخيص",navSectionNetwork:"الشبكة والسرعة",navSectionDiag:"تشخيص تقنية المعلومات والأمان",navGaming:"مراقب الألعاب والبنغ",navGamingDesc:"مراقبة البنغ وأداء الألعاب المباشر",navSecurity:"محلل الأمان",navAntivirus:"فحص مكافحة الفيروسات",navAntivirusDesc:"فحص الملفات والمحتوى بحثًا عن مخاطر أمنية",navDns:"اختبار DNS المرئي",navSubnet:"حاسبة الشبكات الفرعية",footerBrand:"Fasqoo - اختبارات سرعة إنترنت مستقلة عبر المتصفح وأدوات الشبكات.",footerSpeedTests:"اختبارات السرعة",footerInternetSpeed:"اختبار سرعة الإنترنت",footerLite:"Fasqoo Lite",footerWidget:"الأداة",footerNetworkTools:"أدوات الشبكة",footerNetworkStatus:"حالة الشبكة",footerGaming:"مراقب الألعاب والبنغ",footerITDiagnose:"تشخيص تقنية المعلومات",footerSecurity:"محلل الأمان",footerAntivirus:"فحص مكافحة الفيروسات",footerDns:"اختبار DNS المرئي",footerCompany:"الشركة",footerAbout:"من نحن",footerFaq:"الأسئلة الشائعة",footerPrivacy:"الخصوصية",footerCopyright:"© 2026 Fasqoo",footerBranding:"القياس عبر Cloudflare Edge · Fasqoo منصة مستقلة."}
+  en:{navSpeedtest:"Speedtest",navTools:"Tools & IT Diagnostics",navSectionNetwork:"Network & Speed",navSectionDiag:"IT Diagnostics & Security",navStatusDesc:"Live reachability & line diagnostics",navWidgetDesc:"Free test widget for other websites",navGaming:"Gaming & Ping Monitor",navGamingDesc:"Live ping & gaming performance monitor",navSecurityDesc:"Check HTTP security headers in real time",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Scan files and content for security risks",navDnsDesc:"Track global DNS propagation visually",navSubnetDesc:"Calculate IP ranges and subnet masks",navSecurity:"Security Analyzer",navDns:"Visual DNS Test",navSubnet:"Subnet Calculator",footerBrand:"Fasqoo - Independent, browser-based internet speed tests and network tools.",footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Network Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming & Ping Monitor",footerITDiagnose:"IT Diagnostics",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirus Scanner",footerDns:"Visual DNS Test",footerCompany:"Company",footerAbout:"About Us",footerFaq:"FAQ",footerPrivacy:"Privacy Policy",ftPrivacy:"Privacy Policy",ftAccess:"Accessibility",ftImprint:"Imprint",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",navFaq:"FAQ",navAbout:"About Us",liteBtn:"Fasqoo Lite",installApp:"Install for Windows",footerCopyright:"© 2026 Fasqoo",footerBranding:"Measurement via Cloudflare Edge · Fasqoo is an independent platform.",footerDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product."},
+  de:{navSpeedtest:"Speedtest",navTools:"Tools & IT-Diagnose",navSectionNetwork:"Netzwerk & Speed",navSectionDiag:"IT-Diagnose & Security",navStatusDesc:"Live-Erreichbarkeit & Leitungs-Diagnose",navWidgetDesc:"Kostenloses Test-Widget für andere Websites",navGaming:"Gaming- & Ping-Monitor",navGamingDesc:"Live-Ping & Gaming-Performance überwachen",navSecurityDesc:"HTTP-Sicherheitsheader in Echtzeit prüfen",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Dateien und Inhalte auf Sicherheitsrisiken prüfen",navDnsDesc:"Globale DNS-Ausbreitung visuell tracken",navSubnetDesc:"IP-Bereiche und Masken kalkulieren",navSecurity:"Security Analyzer",navDns:"Visual DNS Test",navSubnet:"Subnetz-Rechner",footerBrand:"Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.",footerSpeedTests:"Speed Tests",footerInternetSpeed:"Internet Speed Test",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Netzwerk-Tools",footerNetworkStatus:"Network Status",footerGaming:"Gaming- & Ping-Monitor",footerITDiagnose:"IT Diagnose",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirus Scanner",footerDns:"Visual DNS Test",footerCompany:"Unternehmen",footerAbout:"Über uns",footerFaq:"FAQ",footerPrivacy:"Datenschutz",ftPrivacy:"Datenschutz",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",navFaq:"FAQ",navAbout:"Über uns",liteBtn:"Fasqoo Lite",installApp:"Für Windows installieren",footerCopyright:"© 2026 Fasqoo",footerBranding:"Unterstützt durch das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",footerDisclaimer:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt."},
+  fr:{navSpeedtest:"Speedtest",navTools:"Outils & diagnostic",navSectionNetwork:"Réseau & vitesse",navSectionDiag:"Diagnostic IT & sécurité",navGaming:"Moniteur Gaming & Ping",navGamingDesc:"Surveillance du ping et des performances de jeu",navSecurity:"Analyseur de sécurité",navAntivirus:"Scanner antivirus",navAntivirusDesc:"Analyser les fichiers et contenus pour détecter les risques",navDns:"Test DNS visuel",navSubnet:"Calculateur de sous-réseau",navFaq:"FAQ",navAbout:"À propos",liteBtn:"Fasqoo Lite",installApp:"Installer pour Windows",ftPrivacy:"Confidentialité",ftAccess:"Accessibilité",ftImprint:"Mentions légales",ftTerms:"Conditions",ftNoSell:"Ne pas vendre mes données",footerBrand:"Fasqoo - Tests de vitesse Internet indépendants, directement dans le navigateur, et outils réseau.",footerSpeedTests:"Tests de vitesse",footerInternetSpeed:"Test de vitesse Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Outils réseau",footerNetworkStatus:"État du réseau",footerGaming:"Moniteur Gaming & Ping",footerITDiagnose:"Diagnostic IT",footerSecurity:"Analyseur de sécurité",footerAntivirus:"Scanner antivirus",footerDns:"Test DNS visuel",footerCompany:"Entreprise",footerAbout:"À propos",footerFaq:"FAQ",footerPrivacy:"Confidentialité",footerCopyright:"© 2026 Fasqoo",footerBranding:"Mesure via Cloudflare Edge · Fasqoo est une plateforme indépendante."},
+  es:{navSpeedtest:"Speedtest",navTools:"Herramientas y diagnóstico",navSectionNetwork:"Red y velocidad",navSectionDiag:"Diagnóstico TI y seguridad",navGaming:"Monitor Gaming y Ping",navGamingDesc:"Monitor de ping y rendimiento en juegos en vivo",navSecurity:"Analizador de seguridad",navAntivirus:"Escáner antivirus",navAntivirusDesc:"Analiza archivos y contenido en busca de riesgos de seguridad",navDns:"Prueba DNS visual",navSubnet:"Calculadora de subredes",navFaq:"FAQ",navAbout:"Sobre nosotros",liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",ftPrivacy:"Privacidad",ftAccess:"Accesibilidad",ftImprint:"Aviso legal",ftTerms:"Términos",ftNoSell:"No vender mis datos",footerBrand:"Fasqoo - Pruebas de velocidad de Internet independientes desde el navegador y herramientas de red.",footerSpeedTests:"Pruebas de velocidad",footerInternetSpeed:"Test de velocidad de Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Herramientas de red",footerNetworkStatus:"Estado de red",footerGaming:"Monitor Gaming y Ping",footerITDiagnose:"Diagnóstico TI",footerSecurity:"Analizador de seguridad",footerAntivirus:"Escáner antivirus",footerDns:"Prueba DNS visual",footerCompany:"Empresa",footerAbout:"Sobre nosotros",footerFaq:"FAQ",footerPrivacy:"Privacidad",footerCopyright:"© 2026 Fasqoo",footerBranding:"Medición mediante Cloudflare Edge · Fasqoo es una plataforma independiente."},
+  it:{navSpeedtest:"Speedtest",navTools:"Strumenti e diagnostica",navSectionNetwork:"Rete e velocità",navSectionDiag:"Diagnostica IT e sicurezza",navGaming:"Monitor Gaming & Ping",navGamingDesc:"Monitor ping e prestazioni gaming in tempo reale",navSecurity:"Analizzatore di sicurezza",navAntivirus:"Scanner antivirus",navAntivirusDesc:"Controlla file e contenuti per individuare rischi di sicurezza",navDns:"Test DNS visivo",navSubnet:"Calcolatore subnet",navFaq:"FAQ",navAbout:"Chi siamo",liteBtn:"Fasqoo Lite",installApp:"Installa per Windows",ftPrivacy:"Privacy",ftAccess:"Accessibilità",ftImprint:"Note legali",ftTerms:"Termini",ftNoSell:"Non vendere i miei dati",footerBrand:"Fasqoo - Test di velocità Internet indipendenti dal browser e strumenti di rete.",footerSpeedTests:"Speed Test",footerInternetSpeed:"Speed Test Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Strumenti di rete",footerNetworkStatus:"Stato della rete",footerGaming:"Monitor Gaming & Ping",footerITDiagnose:"Diagnostica IT",footerSecurity:"Analizzatore di sicurezza",footerAntivirus:"Scanner antivirus",footerDns:"Test DNS visivo",footerCompany:"Azienda",footerAbout:"Chi siamo",footerFaq:"FAQ",footerPrivacy:"Privacy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Misurazione tramite Cloudflare Edge · Fasqoo è una piattaforma indipendente."},
+  pt:{navSpeedtest:"Speedtest",navTools:"Ferramentas e diagnóstico",navSectionNetwork:"Rede e velocidade",navSectionDiag:"Diagnóstico de TI e segurança",navGaming:"Monitor de Gaming e Ping",navGamingDesc:"Monitor de ping e desempenho em jogos em direto",navSecurity:"Analisador de segurança",navAntivirus:"Scanner antivírus",navAntivirusDesc:"Verifica ficheiros e conteúdos em busca de riscos de segurança",navDns:"Teste DNS visual",navSubnet:"Calculadora de sub-rede",navFaq:"FAQ",navAbout:"Sobre nós",liteBtn:"Fasqoo Lite",installApp:"Instalar para Windows",ftPrivacy:"Privacidade",ftAccess:"Acessibilidade",ftImprint:"Informação legal",ftTerms:"Termos",ftNoSell:"Não vender os meus dados",footerBrand:"Fasqoo - Testes de velocidade da Internet independentes no navegador e ferramentas de rede.",footerSpeedTests:"Testes de velocidade",footerInternetSpeed:"Teste de velocidade da Internet",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Ferramentas de rede",footerNetworkStatus:"Status da rede",footerGaming:"Monitor de Gaming e Ping",footerITDiagnose:"Diagnóstico de TI",footerSecurity:"Analisador de segurança",footerAntivirus:"Scanner antivírus",footerDns:"Teste DNS visual",footerCompany:"Empresa",footerAbout:"Sobre nós",footerFaq:"FAQ",footerPrivacy:"Privacidade",footerCopyright:"© 2026 Fasqoo",footerBranding:"Medição via Cloudflare Edge · A Fasqoo é uma plataforma independente."},
+  nl:{navSpeedtest:"Speedtest",navTools:"Tools & Diagnose",navSectionNetwork:"Netwerk & snelheid",navSectionDiag:"IT-diagnose & beveiliging",navGaming:"Gaming- & Ping-monitor",navGamingDesc:"Live ping- en gameprestatiemonitor",navSecurity:"Security Analyzer",navAntivirus:"Antivirusscanner",navAntivirusDesc:"Bestanden en inhoud controleren op beveiligingsrisico's",navDns:"Visuele DNS-test",navSubnet:"Subnetcalculator",navFaq:"FAQ",navAbout:"Over ons",liteBtn:"Fasqoo Lite",installApp:"Installeren voor Windows",ftPrivacy:"Privacy",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",footerBrand:"Fasqoo - Onafhankelijke browsergebaseerde internetsnelheidstests en netwerktools.",footerSpeedTests:"Snelheidstests",footerInternetSpeed:"Internetsnelheidstest",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Netwerktools",footerNetworkStatus:"Netwerkstatus",footerGaming:"Gaming- & Ping-monitor",footerITDiagnose:"IT-diagnose",footerSecurity:"Security Analyzer",footerAntivirus:"Antivirusscanner",footerDns:"Visuele DNS-test",footerCompany:"Bedrijf",footerAbout:"Over ons",footerFaq:"FAQ",footerPrivacy:"Privacy",footerCopyright:"© 2026 Fasqoo",footerBranding:"Meting via Cloudflare Edge · Fasqoo is een onafhankelijk platform."},
+  tr:{navSpeedtest:"Speedtest",navTools:"Araçlar ve Tanılama",navSectionNetwork:"Ağ ve Hız",navSectionDiag:"BT Tanılama ve Güvenlik",navGaming:"Oyun ve Ping Monitörü",navGamingDesc:"Canlı ping ve oyun performansı izleme",navSecurity:"Güvenlik Analizörü",navAntivirus:"Antivirüs Tarayıcı",navAntivirusDesc:"Dosyaları ve içerikleri güvenlik risklerine karşı kontrol edin",navDns:"Görsel DNS Testi",navSubnet:"Alt Ağ Hesaplayıcı",navFaq:"SSS",navAbout:"Hakkımızda",liteBtn:"Fasqoo Lite",installApp:"Windows için yükle",ftPrivacy:"Gizlilik",ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma",footerBrand:"Fasqoo - Bağımsız, tarayıcı tabanlı internet hız testleri ve ağ araçları.",footerSpeedTests:"Hız Testleri",footerInternetSpeed:"İnternet Hız Testi",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Ağ Araçları",footerNetworkStatus:"Ağ Durumu",footerGaming:"Oyun ve Ping Monitörü",footerITDiagnose:"BT Tanılama",footerSecurity:"Güvenlik Analizörü",footerAntivirus:"Antivirüs Tarayıcı",footerDns:"Görsel DNS Testi",footerCompany:"Şirket",footerAbout:"Hakkımızda",footerFaq:"SSS",footerPrivacy:"Gizlilik",footerCopyright:"© 2026 Fasqoo",footerBranding:"Cloudflare Edge üzerinden ölçüm · Fasqoo bağımsız bir platformdur."},
+  sq:{navSpeedtest:"Speedtest",navTools:"Mjete & Diagnostikë",navSectionNetwork:"Rrjeti & Shpejtësia",navSectionDiag:"Diagnostikë IT & Siguri",navGaming:"Monitor Loje & Ping",navGamingDesc:"Monitor ping dhe performancë lojërash në kohë reale",navSecurity:"Analizuesi i Sigurisë",navAntivirus:"Skaneri antivirus",navAntivirusDesc:"Kontrollo skedarët dhe përmbajtjen për rreziqe sigurie",navDns:"Testi Vizual DNS",navSubnet:"Llogaritësi i Nënrrjetit",navFaq:"FAQ",navAbout:"Rreth nesh",liteBtn:"Fasqoo Lite",installApp:"Instalo për Windows",ftPrivacy:"Privatësia",ftAccess:"Qasueshmëria",ftImprint:"Impresum",ftTerms:"Kushtet",ftNoSell:"Mos shit të dhënat e mia",footerBrand:"Fasqoo - Teste të pavarura të shpejtësisë së internetit në shfletues dhe mjete rrjeti.",footerSpeedTests:"Teste Shpejtësie",footerInternetSpeed:"Testi i Shpejtësisë së Internetit",footerLite:"Fasqoo Lite",footerWidget:"Widget",footerNetworkTools:"Mjete Rrjeti",footerNetworkStatus:"Statusi i Rrjetit",footerGaming:"Monitor Loje & Ping",footerITDiagnose:"Diagnostikë IT",footerSecurity:"Analizuesi i Sigurisë",footerAntivirus:"Skaneri antivirus",footerDns:"Testi Vizual DNS",footerCompany:"Kompania",footerAbout:"Rreth nesh",footerFaq:"FAQ",footerPrivacy:"Privatësia",footerCopyright:"© 2026 Fasqoo",footerBranding:"Matje përmes Cloudflare Edge · Fasqoo është një platformë e pavarur."},
+  ar:{navSpeedtest:"اختبار السرعة",navTools:"الأدوات والتشخيص",navSectionNetwork:"الشبكة والسرعة",navSectionDiag:"تشخيص تقنية المعلومات والأمان",navGaming:"مراقب الألعاب والبنغ",navGamingDesc:"مراقبة البنغ وأداء الألعاب المباشر",navSecurity:"محلل الأمان",navAntivirus:"فحص مكافحة الفيروسات",navAntivirusDesc:"فحص الملفات والمحتوى بحثًا عن مخاطر أمنية",navDns:"اختبار DNS المرئي",navSubnet:"حاسبة الشبكات الفرعية",navFaq:"الأسئلة الشائعة",navAbout:"من نحن",liteBtn:"Fasqoo Lite",installApp:"التثبيت لنظام Windows",ftPrivacy:"الخصوصية",ftAccess:"إمكانية الوصول",ftImprint:"بيانات الناشر",ftTerms:"الشروط",ftNoSell:"لا تبيع بياناتي",footerBrand:"Fasqoo - اختبارات سرعة إنترنت مستقلة عبر المتصفح وأدوات الشبكات.",footerSpeedTests:"اختبارات السرعة",footerInternetSpeed:"اختبار سرعة الإنترنت",footerLite:"Fasqoo Lite",footerWidget:"الأداة",footerNetworkTools:"أدوات الشبكة",footerNetworkStatus:"حالة الشبكة",footerGaming:"مراقب الألعاب والبنغ",footerITDiagnose:"تشخيص تقنية المعلومات",footerSecurity:"محلل الأمان",footerAntivirus:"فحص مكافحة الفيروسات",footerDns:"اختبار DNS المرئي",footerCompany:"الشركة",footerAbout:"من نحن",footerFaq:"الأسئلة الشائعة",footerPrivacy:"الخصوصية",footerCopyright:"© 2026 Fasqoo",footerBranding:"القياس عبر Cloudflare Edge · Fasqoo منصة مستقلة."}
 };
-function tr(k){return (T[state.lang]||T.en)[k] || (SITE_NAV_TRANSLATIONS[state.lang]||SITE_NAV_TRANSLATIONS.en)[k] || T.en[k] || k}
+
+/* =========================================================
+   FIX: tr() returns null when no translation exists,
+   so we don't overwrite existing text with the key name.
+   ========================================================= */
+function tr(k){
+  const t1 = (T[state.lang] || T.en)[k];
+  const t2 = (SITE_NAV_TRANSLATIONS[state.lang] || SITE_NAV_TRANSLATIONS.en)[k];
+  const t3 = T.en && T.en[k];
+  const t4 = SITE_NAV_TRANSLATIONS.en && SITE_NAV_TRANSLATIONS.en[k];
+  return t1 || t2 || t3 || t4 || null;
+}
+
 const state={lang:'en',dark:true,bytes:0,requests:0,score:100,domains:new Set(),seen:new Set(),start:performance.now(),sim:false,battery:null,lag:0};
-function applyLanguage(lang){if(!supported.includes(lang))lang='en';state.lang=lang;localStorage.setItem(LANG_KEY,lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').value=lang;document.querySelectorAll('[data-i18n]').forEach(e=>{e.textContent=tr(e.dataset.i18n)});renderWaiting();update();}
-function applyTheme(){state.dark=localStorage.getItem(THEME_KEY)!=='light';document.body.classList.toggle('light',!state.dark);$('themeBtn').textContent=state.dark?'☀':'☾';$('themeBtn').setAttribute('aria-label',state.dark?'Light mode':'Dark mode');document.querySelector('meta[name="theme-color"]').content=state.dark?'#05070a':'#f5f8fa';}
-$('lang').addEventListener('change',e=>applyLanguage(e.target.value));$('themeBtn').addEventListener('click',()=>{localStorage.setItem(THEME_KEY,state.dark?'light':'dark');applyTheme()});$('menuToggle').addEventListener('click',()=>{ const m=$('mainMenu'); const open=m.classList.toggle('active'); $('menuToggle').setAttribute('aria-expanded',open?'true':'false'); });
+
+function applyLanguage(lang){
+  if(!supported.includes(lang))lang='en';
+  state.lang=lang;
+  localStorage.setItem(LANG_KEY,lang);
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  $('lang').value=lang;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{
+    const v = tr(e.dataset.i18n);
+    if (v !== null && v !== undefined) e.textContent = v;
+  });
+  renderWaiting();
+  update();
+}
+
+/* =========================================================
+   FIX: toggle .dark class on <body> instead of .light,
+   and also add .dark on <html> for safety.
+   ========================================================= */
+function applyTheme(){
+  state.dark = localStorage.getItem(THEME_KEY) !== 'light';
+  document.body.classList.toggle('dark', state.dark);
+  document.documentElement.classList.toggle('dark', state.dark);
+  $('themeBtn').textContent = state.dark ? '☀' : '☾';
+  $('themeBtn').setAttribute('aria-label', state.dark ? 'Light mode' : 'Dark mode');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = state.dark ? '#05070a' : '#f5f8fa';
+}
+
+$('lang').addEventListener('change',e=>applyLanguage(e.target.value));
+$('themeBtn').addEventListener('click',()=>{
+  localStorage.setItem(THEME_KEY, state.dark ? 'light' : 'dark');
+  applyTheme();
+});
+$('menuToggle').addEventListener('click',()=>{
+  const m=$('mainMenu');
+  const open=m.classList.toggle('active');
+  $('menuToggle').setAttribute('aria-expanded',open?'true':'false');
+});
 const toolsDropdown=$('toolsDropdown');
 const toolsToggle=toolsDropdown ? toolsDropdown.querySelector('.nav-dropdown-toggle') : null;
 if(toolsToggle){
@@ -943,24 +985,64 @@ if(toolsToggle){
     const open=toolsDropdown.classList.toggle('open');
     toolsToggle.setAttribute('aria-expanded',open?'true':'false');
   });
-  document.addEventListener('click',e=>{ if(!toolsDropdown.contains(e.target)){toolsDropdown.classList.remove('open');toolsToggle.setAttribute('aria-expanded','false');} });
+  document.addEventListener('click',e=>{
+    if(!toolsDropdown.contains(e.target)){
+      toolsDropdown.classList.remove('open');
+      toolsToggle.setAttribute('aria-expanded','false');
+    }
+  });
 }
 function fmt(n){return n<1024?`${Math.round(n)} B`:n<1048576?`${(n/1024).toFixed(2)} KB`:`${(n/1048576).toFixed(2)} MB`}
 function domain(url){try{return new URL(url,location.href).hostname||'(opaque)'}catch{return '(unknown)'}}
 function type(e){const x=(e.initiatorType||'other').toLowerCase();return x==='xmlhttprequest'?'XHR':x==='fetch'?'FETCH':x==='script'?'SCRIPT':x==='img'?'IMG':x==='link'?'LINK':x==='css'?'CSS':x.toUpperCase().slice(0,8)}
-function renderWaiting(){const box=$('requests');if(state.requests===0)box.innerHTML=`<div class="request"><span class="type">READY</span><span class="domain">${tr('waiting')}</span><span class="num">—</span><span class="num duration">—</span></div>`}
+function renderWaiting(){const box=$('requests');if(state.requests===0)box.innerHTML=`<div class="request"><span class="type">READY</span><span class="domain">${tr('waiting')||'Waiting for browser resource activity…'}</span><span class="num">—</span><span class="num duration">—</span></div>`}
 function add(e){const key=`${e.name}|${e.startTime}|${e.duration}`;if(state.seen.has(key))return;state.seen.add(key);const size=Number(e.transferSize||0);state.bytes+=size;state.requests++;state.domains.add(domain(e.name));const row=document.createElement('div');row.className='request new';row.innerHTML=`<span class="type">${type(e)}</span><span class="domain" title="${String(e.name).replace(/"/g,'&quot;')}">${domain(e.name)}</span><span class="num">${fmt(size)}</span><span class="num duration">${Number(e.duration||0).toFixed(0)} ms</span>`;const box=$('requests');if(state.requests===1)box.innerHTML='';box.prepend(row);while(box.children.length>120)box.lastElementChild.remove();update();}
 function calcScore(){const activity=Math.min(100,state.requests*1.2+state.domains.size*3+Math.log10(state.bytes+1)*4);state.score=Math.max(0,Math.round(100-activity));}
-function update(){calcScore();$('bytes').textContent=state.bytes.toLocaleString();$('byteBar').style.width=Math.min(100,Math.log10(state.bytes+1)*14)+'%';const co2=state.bytes/1000000*.81;$('co2').textContent=co2.toFixed(2);$('co2Bar').style.width=Math.min(100,co2*7)+'%';const load=Math.min(100,Math.round(state.lag*4+Math.min(35,state.requests*.4)+Math.max(0,4-(navigator.hardwareConcurrency||4))*4));$('hardware').textContent=load;$('hardwareBar').style.width=load+'%';$('hardwareDesc').textContent=`${navigator.hardwareConcurrency||'?' } logical cores · event-loop lag ${state.lag.toFixed(1)} ms`;$('score').textContent=state.score;$('scoreRing').style.strokeDashoffset=(565.5*(1-state.score/100)).toFixed(1);$('scoreTitle').textContent=state.score>80?tr('scoreQuiet'):state.score>50?tr('scoreMed'):tr('scoreHigh');$('alarm').textContent='● '+tr('monitor');}
-function battery(){if(!navigator.getBattery){$('battery').textContent='N/A';$('batteryDesc').textContent=tr('none');return}navigator.getBattery().then(b=>{state.battery=b;const paint=()=>{$('battery').textContent=Math.round(b.level*100)+'%';$('batteryBar').style.width=(b.level*100)+'%';$('batteryDesc').textContent=b.charging?tr('charging'):tr('discharging')};paint();b.addEventListener('levelchange',paint);b.addEventListener('chargingchange',paint)}).catch(()=>{$('battery').textContent='N/A';$('batteryDesc').textContent=tr('none')})}
-// Real event-loop responsiveness signal; not a fake CPU measurement.
+function update(){
+  calcScore();
+  $('bytes').textContent=state.bytes.toLocaleString();
+  $('byteBar').style.width=Math.min(100,Math.log10(state.bytes+1)*14)+'%';
+  const co2=state.bytes/1000000*.81;
+  $('co2').textContent=co2.toFixed(2);
+  $('co2Bar').style.width=Math.min(100,co2*7)+'%';
+  const load=Math.min(100,Math.round(state.lag*4+Math.min(35,state.requests*.4)+Math.max(0,4-(navigator.hardwareConcurrency||4))*4));
+  $('hardware').textContent=load;
+  $('hardwareBar').style.width=load+'%';
+  $('hardwareDesc').textContent=`${navigator.hardwareConcurrency||'?' } logical cores · event-loop lag ${state.lag.toFixed(1)} ms`;
+  $('score').textContent=state.score;
+  $('scoreRing').style.strokeDashoffset=(565.5*(1-state.score/100)).toFixed(1);
+  $('scoreTitle').textContent=state.score>80?(tr('scoreQuiet')||'Low observed activity'):state.score>50?(tr('scoreMed')||'Background activity detected'):(tr('scoreHigh')||'High background activity');
+  $('alarm').textContent='● '+(tr('monitor')||'Monitoring browser-side activity');
+}
+function battery(){if(!navigator.getBattery){$('battery').textContent='N/A';$('batteryDesc').textContent=tr('none')||'Not exposed by this browser';return}navigator.getBattery().then(b=>{state.battery=b;const paint=()=>{$('battery').textContent=Math.round(b.level*100)+'%';$('batteryBar').style.width=(b.level*100)+'%';$('batteryDesc').textContent=b.charging?(tr('charging')||'Charging'):(tr('discharging')||'Discharging')};paint();b.addEventListener('levelchange',paint);b.addEventListener('chargingchange',paint)}).catch(()=>{$('battery').textContent='N/A';$('batteryDesc').textContent=tr('none')||'Not exposed by this browser'})}
 let last=performance.now();setInterval(()=>{const now=performance.now();const expected=100;state.lag=Math.max(0,now-last-expected);last=now;update()},100);
 try{if('PerformanceObserver'in window){const po=new PerformanceObserver(list=>list.getEntries().forEach(add));po.observe({type:'resource',buffered:true});}}catch(e){}
 try{performance.getEntriesByType('resource').slice(-80).forEach(add)}catch(e){}
 $('clear').addEventListener('click',()=>{state.bytes=0;state.requests=0;state.domains.clear();state.seen.clear();renderWaiting();update()});
-$('copy').addEventListener('click',async()=>{const text=`FASQOO DARK DATA & TRACKER EXPOSER\n${new Date().toISOString()}\nObserved browser resources: ${state.requests}\nTransferred bytes: ${state.bytes}\nEstimated CO2e: ${(state.bytes/1000000*.81).toFixed(2)} mg (illustrative)\nUnique domains: ${state.domains.size}\nBrowser load index: ${$('hardware').textContent}/100\nBattery: ${$('battery').textContent}\nPrivacy activity score: ${state.score}/100\nNote: only browser-exposed PerformanceResourceTiming entries are counted.`;try{await navigator.clipboard.writeText(text)}catch{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}$('copy').textContent='✓ '+tr('copy');setTimeout(()=>{$('copy').textContent=tr('copy')},1400)});
-$('simulate').textContent=tr('rescan');$('simulate').addEventListener('click',()=>{if($('simulate').disabled)return;$('simulate').disabled=true;const before=state.requests;const started=performance.now();const timer=setInterval(()=>{if(performance.now()-started>=10000){clearInterval(timer);$('simulate').disabled=false;update();return}update()},100);});
-state.lang=localStorage.getItem(LANG_KEY)||'en';applyLanguage(state.lang);applyTheme();battery();
+$('copy').addEventListener('click',async()=>{
+  const text=`FASQOO DARK DATA & TRACKER EXPOSER\n${new Date().toISOString()}\nObserved browser resources: ${state.requests}\nTransferred bytes: ${state.bytes}\nEstimated CO2e: ${(state.bytes/1000000*.81).toFixed(2)} mg (illustrative)\nUnique domains: ${state.domains.size}\nBrowser load index: ${$('hardware').textContent}/100\nBattery: ${$('battery').textContent}\nPrivacy activity score: ${state.score}/100\nNote: only browser-exposed PerformanceResourceTiming entries are counted.`;
+  try{await navigator.clipboard.writeText(text)}catch{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
+  const orig=tr('copy')||'Copy Report';
+  $('copy').textContent='✓ '+orig;
+  setTimeout(()=>{$('copy').textContent=orig},1400);
+});
+$('simulate').textContent=tr('rescan')||'Capture real activity for 10 seconds';
+$('simulate').addEventListener('click',()=>{
+  if($('simulate').disabled)return;
+  $('simulate').disabled=true;
+  const started=performance.now();
+  const timer=setInterval(()=>{
+    if(performance.now()-started>=10000){clearInterval(timer);$('simulate').disabled=false;update();return}
+    update();
+  },100);
+});
+
+/* INIT */
+state.lang=localStorage.getItem(LANG_KEY)||'en';
+applyLanguage(state.lang);
+applyTheme();
+battery();
+
 window.FasqooDarkDataExposer={getState:()=>({lang:state.lang,bytes:state.bytes,requests:state.requests,score:state.score,domains:[...state.domains],battery:state.battery?Math.round(state.battery.level*100):null})};
 })();
 </script>
