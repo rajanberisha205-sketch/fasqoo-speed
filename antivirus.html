@@ -1179,11 +1179,11 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 <section class="hero">
   <div class="hero-kicker">
     <span class="hero-kicker-dot" aria-hidden="true"></span>
-    Cybersecurity Suite
+    <span data-i18n="heroKicker">Cybersecurity Suite</span>
   </div>
-  <h1>Antivirus <span class="accent">Scanner</span></h1>
+  <h1><span data-i18n="heroTitle">Antivirus</span> <span class="accent" data-i18n="heroTitleAccent">Scanner</span></h1>
   <p>
-    Prüfe Website-URLs auf Phishing und Malware – oder berechne den digitalen Fingerabdruck einer Datei direkt im Browser. Kostenlos, ohne Anmeldung und ohne Upload.
+    <span data-i18n="heroDesc">Prüfe Website-URLs auf Phishing und Malware – oder berechne den digitalen Fingerabdruck einer Datei direkt im Browser. Kostenlos, ohne Anmeldung und ohne Upload.</span>
   </p>
 </section>
 
@@ -1195,7 +1195,7 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 
     <!-- TABS -->
     <div class="scanner-tabs" role="tablist">
-      <button class="tab-btn active" data-tab="url" type="button" role="tab" aria-selected="true">
+      <button class="tab-btn active" data-tab="url" type="button" role="tab" aria-selected="true" data-i18n="tabUrl">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
           <path d="M3 12h18"/>
@@ -1203,7 +1203,7 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
         </svg>
         URL-Scanner
       </button>
-      <button class="tab-btn" data-tab="file" type="button" role="tab" aria-selected="false">
+      <button class="tab-btn" data-tab="file" type="button" role="tab" aria-selected="false" data-i18n="tabFile">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M14 3v5h5"/>
           <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-5Z"/>
@@ -1214,17 +1214,17 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 
     <!-- URL PANEL -->
     <div class="tab-panel active" data-panel="url" role="tabpanel">
-      <label class="field-label" for="urlInput">Website-URL eingeben</label>
+      <label class="field-label" for="urlInput" data-i18n="urlLabel">Website-URL eingeben</label>
       <div class="input-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
           <path d="M3 12h18"/>
           <path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/>
         </svg>
-        <input id="urlInput" type="text" placeholder="example.com" autocomplete="off" spellcheck="false" aria-label="Website-URL">
+        <input id="urlInput" type="text" placeholder="example.com" autocomplete="off" spellcheck="false" aria-label="Website-URL" data-i18n-aria="urlAria">
       </div>
 
-      <button id="scanUrlBtn" class="btn-primary" type="button">
+      <button id="scanUrlBtn" class="btn-primary" type="button" data-i18n="scanWebsite">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
           <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
@@ -1238,13 +1238,13 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
           <path d="M12 16v-4"/>
           <path d="M12 8h.01"/>
         </svg>
-        Öffnet die VirusTotal-Analyse in einem neuen Tab
+        <span data-i18n="urlHint">Öffnet die VirusTotal-Analyse in einem neuen Tab</span>
       </div>
 
       <div class="error-msg" id="urlError" role="alert"></div>
 
       <div class="examples">
-        <span class="lbl">Schnellauswahl</span>
+        <span class="lbl" data-i18n="quickSelect">Schnellauswahl</span>
         <button class="chip" data-url="google.com" type="button">google.com</button>
         <button class="chip" data-url="cloudflare.com" type="button">cloudflare.com</button>
         <button class="chip" data-url="github.com" type="button">github.com</button>
@@ -1254,16 +1254,16 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 
     <!-- FILE PANEL -->
     <div class="tab-panel" data-panel="file" role="tabpanel">
-      <label class="field-label">Datei auf Schadsoftware prüfen</label>
+      <label class="field-label" data-i18n="fileLabel">Datei auf Schadsoftware prüfen</label>
 
-      <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Datei hierher ziehen oder klicken zum Auswählen">
+      <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Datei hierher ziehen oder klicken zum Auswählen" data-i18n-aria="dropAria">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/>
           <line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
-        <p>Datei hierher ziehen</p>
-        <span>oder klicken zum Auswählen</span>
+        <p data-i18n="dropTitle">Datei hierher ziehen</p>
+        <span data-i18n="dropSubtitle">oder klicken zum Auswählen</span>
         <input id="fileInput" type="file" hidden aria-hidden="true">
       </div>
 
@@ -1283,11 +1283,11 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 
         <div id="hashLoading" class="loading">
           <span class="spinner" aria-hidden="true"></span>
-          <span>Berechne digitalen Fingerabdruck…</span>
+          <span data-i18n="hashLoading">Berechne digitalen Fingerabdruck…</span>
         </div>
 
         <div id="hashResult" class="hash-result">
-          <div class="hash-lbl">SHA-256 Hash</div>
+          <div class="hash-lbl" data-i18n="shaLabel">SHA-256 Hash</div>
           <div class="hash-value" id="hashValue">—</div>
           <div class="hash-actions">
             <button class="btn-secondary" id="copyHashBtn" type="button">
@@ -1295,7 +1295,7 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>
-              <span id="copyHashLabel">Kopieren</span>
+              <span id="copyHashLabel" data-i18n="copy">Kopieren</span>
             </button>
             <button class="btn-secondary" id="openVtBtn" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1303,7 +1303,7 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
                 <polyline points="15 3 21 3 21 9"/>
                 <line x1="10" y1="14" x2="21" y2="3"/>
               </svg>
-              VirusTotal
+              <span data-i18n="openVirusTotal">VirusTotal</span>
             </button>
           </div>
         </div>
@@ -1321,41 +1321,41 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div class="section-kicker">Sicherheit im Browser</div>
-      <h2>Wie Fasqoo dich schützt</h2>
-      <p>Zwei leistungsstarke Sicherheitsprüfungen direkt im Browser – ohne Upload deiner Daten auf einen Server.</p>
+      <div class="section-kicker" data-i18n="featuresKicker">Sicherheit im Browser</div>
+      <h2 data-i18n="featuresTitle">Wie Fasqoo dich schützt</h2>
+      <p data-i18n="featuresIntro">Zwei leistungsstarke Sicherheitsprüfungen direkt im Browser – ohne Upload deiner Daten auf einen Server.</p>
     </div>
 
     <div class="grid-3">
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4l16 6v11c0 10.2-6.7 19-16 23-9.3-4-16-12.8-16-23V10l16-6z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M16 24l5 5 11-12" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-opacity=".14"/></svg></div>
-        <h3>URL-Bedrohungserkennung</h3>
-        <p>Prüfe jede Website-URL gegen die Datenbanken von über 70 Antivirus-Engines über VirusTotal.</p>
+        <h3 data-i18n="feature1Title">URL-Bedrohungserkennung</h3>
+        <p data-i18n="feature1Desc">Prüfe jede Website-URL gegen die Datenbanken von über 70 Antivirus-Engines über VirusTotal.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="20" width="30" height="22" rx="5" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M15 20v-5a9 9 0 0 1 18 0v5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="30" r="2.5" fill="currentColor"/><path d="M24 32.5v4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
-        <h3>Lokale Hash-Berechnung</h3>
-        <p>Der SHA-256-Hash wird vollständig in deinem Browser berechnet. Deine Datei verlässt nie dein Gerät.</p>
+        <h3 data-i18n="feature2Title">Lokale Hash-Berechnung</h3>
+        <p data-i18n="feature2Desc">Der SHA-256-Hash wird vollständig in deinem Browser berechnet. Deine Datei verlässt nie dein Gerät.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><path d="M27 3L10 27h12l-2 18 18-25H26l1-17z" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round"/><path d="M5 12h5M38 12h5M7 38h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/></svg></div>
-        <h3>Blitzschnell &amp; kostenlos</h3>
-        <p>Kein Upload, keine Anmeldung, keine Werbung. Ergebnisse in Sekunden – komplett kostenlos.</p>
+        <h3 data-i18n="feature3Title">Blitzschnell &amp; kostenlos</h3>
+        <p data-i18n="feature3Desc">Kein Upload, keine Anmeldung, keine Werbung. Ergebnisse in Sekunden – komplett kostenlos.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="11" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".75"/><circle cx="24" cy="24" r="4" fill="currentColor"/><path d="M29 19l8-8M33 11h4v4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Präzise Erkennung</h3>
-        <p>SHA-256 liefert eine 256-Bit-Signatur, die jede Datei weltweit eindeutig identifiziert.</p>
+        <h3 data-i18n="feature4Title">Präzise Erkennung</h3>
+        <p data-i18n="feature4Desc">SHA-256 liefert eine 256-Bit-Signatur, die jede Datei weltweit eindeutig identifiziert.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="20" width="30" height="22" rx="5" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M15 20v-5a9 9 0 0 1 18 0v5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M24 28v8M20 32h8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-        <h3>100 % Privatsphäre</h3>
-        <p>Keine Datei-Uploads, kein Tracking, keine Speicherung. Nur der Hash wird übertragen.</p>
+        <h3 data-i18n="feature5Title">100 % Privatsphäre</h3>
+        <p data-i18n="feature5Desc">Keine Datei-Uploads, kein Tracking, keine Speicherung. Nur der Hash wird übertragen.</p>
       </div>
       <div class="feature">
         <div class="feature-icon"><svg class="feature-svg" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M5 24h38M24 5c6 5.1 9 11.4 9 19s-3 13.9-9 19c-6-5.1-9-11.4-9-19s3-13.9 9-19z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10 14c4.1 2.1 8.8 3.2 14 3.2S33.9 16.1 38 14M10 34c4.1-2.1 8.8-3.2 14-3.2s9.9 1.1 14 3.2" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".55"/></svg></div>
-        <h3>Globale Datenbank</h3>
-        <p>VirusTotal aggregiert Milliarden von Scans aus der ganzen Welt in Echtzeit.</p>
+        <h3 data-i18n="feature6Title">Globale Datenbank</h3>
+        <p data-i18n="feature6Desc">VirusTotal aggregiert Milliarden von Scans aus der ganzen Welt in Echtzeit.</p>
       </div>
     </div>
   </div>
@@ -1367,34 +1367,34 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div class="section-kicker">Häufige Fragen</div>
-      <h2>FAQ</h2>
+      <div class="section-kicker" data-i18n="faqKicker">Häufige Fragen</div>
+      <h2 data-i18n="faqTitle">FAQ</h2>
     </div>
 
     <div class="faq">
       <details>
-        <summary>Ist der Fasqoo Antivirus Scanner kostenlos?</summary>
-        <p>Ja, zu 100 %. Es gibt keine versteckten Kosten, keine Premium-Funktionen und keine Werbung. Der Scanner ist ein kostenloser Service von Fasqoo.</p>
+        <summary data-i18n="faq1Q">Ist der Fasqoo Antivirus Scanner kostenlos?</summary>
+        <p data-i18n="faq1A">Ja, zu 100 %. Es gibt keine versteckten Kosten, keine Premium-Funktionen und keine Werbung. Der Scanner ist ein kostenloser Service von Fasqoo.</p>
       </details>
       <details>
-        <summary>Wird meine Datei hochgeladen?</summary>
-        <p>Nein. Deine Datei wird niemals hochgeladen. Der SHA-256-Hash wird vollständig lokal in deinem Browser mit der Web Crypto API berechnet. Nur der Hash-Wert wird – wenn du auf „VirusTotal" klickst – an VirusTotal übermittelt.</p>
+        <summary data-i18n="faq2Q">Wird meine Datei hochgeladen?</summary>
+        <p data-i18n="faq2A">Nein. Deine Datei wird niemals hochgeladen. Der SHA-256-Hash wird vollständig lokal in deinem Browser mit der Web Crypto API berechnet. Nur der Hash-Wert wird – wenn du auf „VirusTotal&quot; klickst – an VirusTotal übermittelt.</p>
       </details>
       <details>
-        <summary>Was ist ein SHA-256-Hash?</summary>
-        <p>Ein SHA-256-Hash ist eine 256-Bit-Signatur, die aus dem Inhalt einer Datei berechnet wird. Er fungiert als digitaler Fingerabdruck: Selbst wenn sich nur ein einziges Byte ändert, sieht der Hash komplett anders aus. Sicherheitsdienste wie VirusTotal vergleichen diesen Hash mit ihrer Datenbank bekannter Schadsoftware.</p>
+        <summary data-i18n="faq3Q">Was ist ein SHA-256-Hash?</summary>
+        <p data-i18n="faq3A">Ein SHA-256-Hash ist eine 256-Bit-Signatur, die aus dem Inhalt einer Datei berechnet wird. Er fungiert als digitaler Fingerabdruck: Selbst wenn sich nur ein einziges Byte ändert, sieht der Hash komplett anders aus. Sicherheitsdienste wie VirusTotal vergleichen diesen Hash mit ihrer Datenbank bekannter Schadsoftware.</p>
       </details>
       <details>
-        <summary>Wie erkenne ich, ob eine Website gefährlich ist?</summary>
-        <p>Gib die URL in unseren URL-Scanner ein. Du wirst zu VirusTotal weitergeleitet, wo über 70 Antivirus-Engines die Domain in Echtzeit überprüfen. Achte besonders auf rote Warnungen von mehreren Engines – dann ist Vorsicht geboten.</p>
+        <summary data-i18n="faq4Q">Wie erkenne ich, ob eine Website gefährlich ist?</summary>
+        <p data-i18n="faq4A">Gib die URL in unseren URL-Scanner ein. Du wirst zu VirusTotal weitergeleitet, wo über 70 Antivirus-Engines die Domain in Echtzeit überprüfen. Achte besonders auf rote Warnungen von mehreren Engines – dann ist Vorsicht geboten.</p>
       </details>
       <details>
-        <summary>Was ist VirusTotal?</summary>
-        <p>VirusTotal ist ein von Google betriebener Dienst, der Dateien und URLs gegen eine Vielzahl von Antivirus-Engines prüft. Fasqoo nutzt die öffentliche VirusTotal-Suche, um dir schnellen Zugriff auf diese Datenbank zu geben.</p>
+        <summary data-i18n="faq5Q">Was ist VirusTotal?</summary>
+        <p data-i18n="faq5A">VirusTotal ist ein von Google betriebener Dienst, der Dateien und URLs gegen eine Vielzahl von Antivirus-Engines prüft. Fasqoo nutzt die öffentliche VirusTotal-Suche, um dir schnellen Zugriff auf diese Datenbank zu geben.</p>
       </details>
       <details>
-        <summary>Kann ich die Ergebnisse teilen?</summary>
-        <p>Ja. Nach der Hash-Berechnung kannst du den SHA-256-Hash kopieren und an jeden weitergeben – z. B. an einen Administrator oder Sicherheitsdienst. Bei URL-Scans teilst du einfach den VirusTotal-Link.</p>
+        <summary data-i18n="faq6Q">Kann ich die Ergebnisse teilen?</summary>
+        <p data-i18n="faq6A">Ja. Nach der Hash-Berechnung kannst du den SHA-256-Hash kopieren und an jeden weitergeben – z. B. an einen Administrator oder Sicherheitsdienst. Bei URL-Scans teilst du einfach den VirusTotal-Link.</p>
       </details>
     </div>
   </div>
@@ -1435,10 +1435,10 @@ body.dark .shared-header .nav-mega-item:hover .nav-mega-icon svg{color:var(--sha
         <a href="about.html" data-nav-i18n="footerAbout">About Us</a>
         <a href="faq.html" data-nav-i18n="footerFaq">FAQ</a>
         <a href="/privacy-policy.html" data-nav-i18n="footerPrivacy">Privacy Policy</a>
-        <a href="/accessibility.html">Accessibility</a>
-        <a href="/impressum.html">Impressum</a>
-        <a href="/terms.html">Terms of Use</a>
-        <a href="/do-not-sell.html">Do Not Sell My Personal Information</a>
+        <a href="/accessibility.html" data-nav-i18n="footerAccessibility">Accessibility</a>
+        <a href="/impressum.html" data-nav-i18n="footerImprint">Impressum</a>
+        <a href="/terms.html" data-nav-i18n="footerTerms">Terms of Use</a>
+        <a href="/do-not-sell.html" data-nav-i18n="footerNoSell">Do Not Sell My Personal Information</a>
       </div>
     </div>
 
@@ -2010,19 +2010,42 @@ els.openVtBtn.addEventListener('click', () => {
     }
   };
 
+  /* Full page translations — all visible Antivirus Scanner content */
+  const PAGE_T = {"en":{"heroKicker":"Cybersecurity Suite","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Check website URLs for phishing and malware, or calculate a file's digital fingerprint directly in your browser. Free, no sign-up and no upload.","tabUrl":"URL Scanner","tabFile":"File Hash","urlLabel":"Enter website URL","urlAria":"Website URL","scanWebsite":"Scan Website","urlHint":"Opens the VirusTotal analysis in a new tab","quickSelect":"Quick selection","fileLabel":"Check file for malware","dropAria":"Drag a file here or click to select","dropTitle":"Drag file here","dropSubtitle":"or click to select","hashLoading":"Calculating digital fingerprint…","shaLabel":"SHA-256 Hash","copy":"Copy","openVirusTotal":"VirusTotal","featuresKicker":"Browser Security","featuresTitle":"How Fasqoo protects you","featuresIntro":"Two powerful security checks directly in your browser — without uploading your data to a server.","feature1Title":"URL threat detection","feature1Desc":"Check any website URL against databases from more than 70 antivirus engines through VirusTotal.","feature2Title":"Local hash calculation","feature2Desc":"The SHA-256 hash is calculated entirely in your browser. Your file never leaves your device.","feature3Title":"Fast & free","feature3Desc":"No upload, no sign-up and no ads. Results in seconds — completely free.","feature4Title":"Precise identification","feature4Desc":"SHA-256 provides a 256-bit signature that uniquely identifies a file worldwide.","feature5Title":"100% privacy","feature5Desc":"No file uploads, no tracking and no storage. Only the hash is transmitted.","feature6Title":"Global database","feature6Desc":"VirusTotal aggregates billions of scans from around the world in real time.","faqKicker":"Frequently Asked Questions","faqTitle":"FAQ","faq1Q":"Is the Fasqoo Antivirus Scanner free?","faq1A":"Yes, 100%. There are no hidden costs, premium features or ads. The scanner is a free Fasqoo service.","faq2Q":"Is my file uploaded?","faq2A":"No. Your file is never uploaded. The SHA-256 hash is calculated locally in your browser using the Web Crypto API. Only the hash value is sent to VirusTotal when you click “VirusTotal”.","faq3Q":"What is a SHA-256 hash?","faq3A":"A SHA-256 hash is a 256-bit signature calculated from a file's contents. It acts as a digital fingerprint: even one changed byte produces a completely different hash. Security services such as VirusTotal compare this hash with their database of known malware.","faq4Q":"How can I tell if a website is dangerous?","faq4A":"Enter the URL in our URL Scanner. You will be taken to VirusTotal, where more than 70 antivirus engines check the domain in real time. Pay particular attention to red warnings from multiple engines.","faq5Q":"What is VirusTotal?","faq5A":"VirusTotal is a service operated by Google that checks files and URLs against many antivirus engines. Fasqoo uses the public VirusTotal search to give you quick access to this database.","faq6Q":"Can I share the results?","faq6A":"Yes. After calculating a hash, you can copy the SHA-256 value and share it with an administrator or security service. For URL scans, simply share the VirusTotal link.","footerAccessibility":"Accessibility","footerImprint":"Imprint","footerTerms":"Terms of Use","footerNoSell":"Do Not Sell My Personal Information"},"de":{"heroKicker":"Cybersecurity Suite","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Prüfe Website-URLs auf Phishing und Malware oder berechne den digitalen Fingerabdruck einer Datei direkt im Browser. Kostenlos, ohne Anmeldung und ohne Upload.","tabUrl":"URL-Scanner","tabFile":"Datei-Hash","urlLabel":"Website-URL eingeben","urlAria":"Website-URL","scanWebsite":"Website scannen","urlHint":"Öffnet die VirusTotal-Analyse in einem neuen Tab","quickSelect":"Schnellauswahl","fileLabel":"Datei auf Schadsoftware prüfen","dropAria":"Datei hierher ziehen oder klicken zum Auswählen","dropTitle":"Datei hierher ziehen","dropSubtitle":"oder klicken zum Auswählen","hashLoading":"Berechne digitalen Fingerabdruck…","shaLabel":"SHA-256 Hash","copy":"Kopieren","openVirusTotal":"VirusTotal","featuresKicker":"Sicherheit im Browser","featuresTitle":"Wie Fasqoo dich schützt","featuresIntro":"Zwei leistungsstarke Sicherheitsprüfungen direkt im Browser – ohne Upload deiner Daten auf einen Server.","feature1Title":"URL-Bedrohungserkennung","feature1Desc":"Prüfe jede Website-URL gegen die Datenbanken von über 70 Antivirus-Engines über VirusTotal.","feature2Title":"Lokale Hash-Berechnung","feature2Desc":"Der SHA-256-Hash wird vollständig in deinem Browser berechnet. Deine Datei verlässt nie dein Gerät.","feature3Title":"Blitzschnell & kostenlos","feature3Desc":"Kein Upload, keine Anmeldung, keine Werbung. Ergebnisse in Sekunden – komplett kostenlos.","feature4Title":"Präzise Erkennung","feature4Desc":"SHA-256 liefert eine 256-Bit-Signatur, die jede Datei weltweit eindeutig identifiziert.","feature5Title":"100 % Privatsphäre","feature5Desc":"Keine Datei-Uploads, kein Tracking, keine Speicherung. Nur der Hash wird übertragen.","feature6Title":"Globale Datenbank","feature6Desc":"VirusTotal aggregiert Milliarden von Scans aus der ganzen Welt in Echtzeit.","faqKicker":"Häufige Fragen","faqTitle":"FAQ","faq1Q":"Ist der Fasqoo Antivirus Scanner kostenlos?","faq1A":"Ja, zu 100 %. Es gibt keine versteckten Kosten, keine Premium-Funktionen und keine Werbung. Der Scanner ist ein kostenloser Service von Fasqoo.","faq2Q":"Wird meine Datei hochgeladen?","faq2A":"Nein. Deine Datei wird niemals hochgeladen. Der SHA-256-Hash wird vollständig lokal in deinem Browser mit der Web Crypto API berechnet. Nur der Hash-Wert wird an VirusTotal übermittelt, wenn du auf „VirusTotal“ klickst.","faq3Q":"Was ist ein SHA-256-Hash?","faq3A":"Ein SHA-256-Hash ist eine 256-Bit-Signatur, die aus dem Inhalt einer Datei berechnet wird. Er fungiert als digitaler Fingerabdruck: Selbst wenn sich nur ein Byte ändert, sieht der Hash komplett anders aus. Sicherheitsdienste wie VirusTotal vergleichen diesen Hash mit ihrer Datenbank bekannter Schadsoftware.","faq4Q":"Wie erkenne ich, ob eine Website gefährlich ist?","faq4A":"Gib die URL in unseren URL-Scanner ein. Du wirst zu VirusTotal weitergeleitet, wo über 70 Antivirus-Engines die Domain in Echtzeit überprüfen. Achte besonders auf rote Warnungen von mehreren Engines – dann ist Vorsicht geboten.","faq5Q":"Was ist VirusTotal?","faq5A":"VirusTotal ist ein von Google betriebener Dienst, der Dateien und URLs gegen eine Vielzahl von Antivirus-Engines prüft. Fasqoo nutzt die öffentliche VirusTotal-Suche, um dir schnellen Zugriff auf diese Datenbank zu geben.","faq6Q":"Kann ich die Ergebnisse teilen?","faq6A":"Ja. Nach der Hash-Berechnung kannst du den SHA-256-Hash kopieren und an jeden weitergeben – z. B. an einen Administrator oder Sicherheitsdienst. Bei URL-Scans teilst du einfach den VirusTotal-Link.","footerAccessibility":"Barrierefreiheit","footerImprint":"Impressum","footerTerms":"Nutzungsbedingungen","footerNoSell":"Meine Daten nicht verkaufen"},"fr":{"heroKicker":"Suite de cybersécurité","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Vérifiez les URL des sites contre le phishing et les logiciels malveillants, ou calculez l'empreinte numérique d'un fichier directement dans votre navigateur. Gratuit, sans inscription ni téléversement.","tabUrl":"Analyseur d’URL","tabFile":"Hash de fichier","urlLabel":"Entrer l’URL du site","urlAria":"URL du site","scanWebsite":"Analyser le site","urlHint":"Ouvre l’analyse VirusTotal dans un nouvel onglet","quickSelect":"Sélection rapide","fileLabel":"Vérifier le fichier contre les logiciels malveillants","dropAria":"Glissez un fichier ici ou cliquez pour le sélectionner","dropTitle":"Glissez le fichier ici","dropSubtitle":"ou cliquez pour sélectionner","hashLoading":"Calcul de l’empreinte numérique…","shaLabel":"Hash SHA-256","copy":"Copier","openVirusTotal":"VirusTotal","featuresKicker":"Sécurité du navigateur","featuresTitle":"Comment Fasqoo vous protège","featuresIntro":"Deux contrôles de sécurité puissants directement dans le navigateur, sans téléverser vos données vers un serveur.","feature1Title":"Détection des menaces URL","feature1Desc":"Vérifiez une URL avec les bases de plus de 70 moteurs antivirus via VirusTotal.","feature2Title":"Calcul local du hash","feature2Desc":"Le hash SHA-256 est calculé entièrement dans votre navigateur. Votre fichier ne quitte jamais votre appareil.","feature3Title":"Rapide et gratuit","feature3Desc":"Aucun téléversement, aucune inscription et aucune publicité. Résultats en quelques secondes.","feature4Title":"Identification précise","feature4Desc":"SHA-256 fournit une signature de 256 bits qui identifie chaque fichier de manière unique.","feature5Title":"100 % de confidentialité","feature5Desc":"Aucun téléversement, aucun suivi et aucun stockage. Seul le hash est transmis.","feature6Title":"Base mondiale","feature6Desc":"VirusTotal agrège des milliards d’analyses du monde entier en temps réel.","faqKicker":"Questions fréquentes","faqTitle":"FAQ","faq1Q":"Le scanner antivirus Fasqoo est-il gratuit ?","faq1A":"Oui, à 100 %. Aucun coût caché, aucune fonction premium et aucune publicité.","faq2Q":"Mon fichier est-il téléversé ?","faq2A":"Non. Votre fichier n’est jamais téléversé. Le hash SHA-256 est calculé localement dans votre navigateur. Seule la valeur du hash est envoyée à VirusTotal lorsque vous cliquez sur « VirusTotal ».","faq3Q":"Qu’est-ce qu’un hash SHA-256 ?","faq3A":"Un hash SHA-256 est une signature de 256 bits calculée à partir du contenu d’un fichier. Il agit comme une empreinte numérique.","faq4Q":"Comment savoir si un site est dangereux ?","faq4A":"Entrez l’URL dans notre analyseur. Vous serez redirigé vers VirusTotal, où plus de 70 moteurs antivirus vérifient le domaine en temps réel.","faq5Q":"Qu’est-ce que VirusTotal ?","faq5A":"VirusTotal est un service qui vérifie les fichiers et les URL avec de nombreux moteurs antivirus.","faq6Q":"Puis-je partager les résultats ?","faq6A":"Oui. Vous pouvez copier le hash SHA-256 ou partager le lien VirusTotal.","footerAccessibility":"Accessibilité","footerImprint":"Mentions légales","footerTerms":"Conditions d’utilisation","footerNoSell":"Ne pas vendre mes informations personnelles"},"es":{"heroKicker":"Suite de ciberseguridad","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Comprueba las URL de sitios web en busca de phishing y malware, o calcula la huella digital de un archivo directamente en tu navegador. Gratis, sin registro ni subida.","tabUrl":"Escáner de URL","tabFile":"Hash de archivo","urlLabel":"Introducir URL del sitio","urlAria":"URL del sitio","scanWebsite":"Escanear sitio","urlHint":"Abre el análisis de VirusTotal en una nueva pestaña","quickSelect":"Selección rápida","fileLabel":"Comprobar archivo en busca de malware","dropAria":"Arrastra un archivo aquí o haz clic para seleccionarlo","dropTitle":"Arrastra el archivo aquí","dropSubtitle":"o haz clic para seleccionar","hashLoading":"Calculando huella digital…","shaLabel":"Hash SHA-256","copy":"Copiar","openVirusTotal":"VirusTotal","featuresKicker":"Seguridad del navegador","featuresTitle":"Cómo te protege Fasqoo","featuresIntro":"Dos comprobaciones de seguridad potentes directamente en el navegador, sin subir tus datos a un servidor.","feature1Title":"Detección de amenazas URL","feature1Desc":"Comprueba cualquier URL con bases de datos de más de 70 motores antivirus mediante VirusTotal.","feature2Title":"Cálculo local del hash","feature2Desc":"El hash SHA-256 se calcula completamente en tu navegador. Tu archivo nunca sale de tu dispositivo.","feature3Title":"Rápido y gratis","feature3Desc":"Sin subidas, sin registro y sin anuncios. Resultados en segundos.","feature4Title":"Identificación precisa","feature4Desc":"SHA-256 proporciona una firma de 256 bits que identifica cada archivo de forma única.","feature5Title":"100 % privacidad","feature5Desc":"Sin subidas, seguimiento ni almacenamiento. Solo se transmite el hash.","feature6Title":"Base de datos global","feature6Desc":"VirusTotal agrega miles de millones de análisis de todo el mundo en tiempo real.","faqKicker":"Preguntas frecuentes","faqTitle":"FAQ","faq1Q":"¿El escáner antivirus de Fasqoo es gratuito?","faq1A":"Sí, al 100 %. No hay costes ocultos, funciones premium ni anuncios.","faq2Q":"¿Se sube mi archivo?","faq2A":"No. Tu archivo nunca se sube. El hash SHA-256 se calcula localmente en el navegador. Solo se envía el hash a VirusTotal al pulsar «VirusTotal».","faq3Q":"¿Qué es un hash SHA-256?","faq3A":"Es una firma de 256 bits calculada a partir del contenido de un archivo y actúa como una huella digital.","faq4Q":"¿Cómo sé si un sitio web es peligroso?","faq4A":"Introduce la URL en nuestro escáner. VirusTotal comprobará el dominio con más de 70 motores antivirus.","faq5Q":"¿Qué es VirusTotal?","faq5A":"VirusTotal es un servicio que comprueba archivos y URL con numerosos motores antivirus.","faq6Q":"¿Puedo compartir los resultados?","faq6A":"Sí. Puedes copiar el hash SHA-256 o compartir el enlace de VirusTotal.","footerAccessibility":"Accesibilidad","footerImprint":"Aviso legal","footerTerms":"Términos de uso","footerNoSell":"No vender mi información personal"},"it":{"heroKicker":"Suite di cybersicurezza","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Controlla gli URL dei siti per phishing e malware o calcola l'impronta digitale di un file direttamente nel browser. Gratis, senza registrazione e senza upload.","tabUrl":"Scanner URL","tabFile":"Hash file","urlLabel":"Inserisci URL del sito","urlAria":"URL del sito","scanWebsite":"Scansiona sito","urlHint":"Apre l'analisi VirusTotal in una nuova scheda","quickSelect":"Selezione rapida","fileLabel":"Controlla il file per malware","dropAria":"Trascina qui un file o fai clic per selezionarlo","dropTitle":"Trascina qui il file","dropSubtitle":"oppure fai clic per selezionare","hashLoading":"Calcolo dell'impronta digitale…","shaLabel":"Hash SHA-256","copy":"Copia","openVirusTotal":"VirusTotal","featuresKicker":"Sicurezza nel browser","featuresTitle":"Come Fasqoo ti protegge","featuresIntro":"Due potenti controlli di sicurezza direttamente nel browser, senza caricare i tuoi dati su un server.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"Domande frequenti","faqTitle":"FAQ","faq1Q":"Lo scanner antivirus Fasqoo è gratuito?","faq1A":"Sì, al 100%. Nessun costo nascosto, funzione premium o pubblicità.","faq2Q":"Il mio file viene caricato?","faq2A":"No. Il file non viene mai caricato. L'hash SHA-256 viene calcolato localmente nel browser.","faq3Q":"Cos'è un hash SHA-256?","faq3A":"È una firma di 256 bit calcolata dal contenuto di un file e funge da impronta digitale.","faq4Q":"Come posso capire se un sito è pericoloso?","faq4A":"Inserisci l'URL nello scanner. VirusTotal controllerà il dominio con oltre 70 motori antivirus.","faq5Q":"Cos'è VirusTotal?","faq5A":"È un servizio che controlla file e URL con molti motori antivirus.","faq6Q":"Posso condividere i risultati?","faq6A":"Sì. Puoi copiare l'hash SHA-256 o condividere il link VirusTotal.","footerAccessibility":"Accessibilità","footerImprint":"Note legali","footerTerms":"Termini d'uso","footerNoSell":"Non vendere le mie informazioni personali"},"pt":{"heroKicker":"Suite de cibersegurança","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Verifique URLs de sites contra phishing e malware ou calcule a impressão digital de um arquivo diretamente no navegador. Grátis, sem cadastro e sem upload.","tabUrl":"Scanner de URL","tabFile":"Hash de arquivo","urlLabel":"Digite a URL do site","urlAria":"URL del sito","scanWebsite":"Verificar site","urlHint":"Abre a análise do VirusTotal em uma nova aba","quickSelect":"Seleção rápida","fileLabel":"Verificar arquivo em busca de malware","dropAria":"Trascina qui un file o fai clic per selezionarlo","dropTitle":"Arraste o arquivo aqui","dropSubtitle":"ou clique para selecionar","hashLoading":"Calculando impressão digital…","shaLabel":"Hash SHA-256","copy":"Copiar","openVirusTotal":"VirusTotal","featuresKicker":"Segurança no navegador","featuresTitle":"Como o Fasqoo protege você","featuresIntro":"Due potenti controlli di sicurezza direttamente nel browser, senza caricare i tuoi dati su un server.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"Perguntas frequentes","faqTitle":"FAQ","faq1Q":"O scanner antivírus do Fasqoo é gratuito?","faq1A":"Sim, 100%. Não há custos ocultos, recursos premium ou anúncios.","faq2Q":"Meu arquivo é enviado?","faq2A":"Não. O arquivo nunca é enviado. O hash SHA-256 é calculado localmente no navegador.","faq3Q":"O que é um hash SHA-256?","faq3A":"É uma assinatura de 256 bits calculada a partir do conteúdo de um arquivo.","faq4Q":"Como saber se um site é perigoso?","faq4A":"Digite a URL no scanner. O VirusTotal verificará o domínio com mais de 70 mecanismos antivírus.","faq5Q":"O que é o VirusTotal?","faq5A":"É um serviço que verifica arquivos e URLs com vários mecanismos antivírus.","faq6Q":"Posso compartilhar os resultados?","faq6A":"Sim. Você pode copiar o hash SHA-256 ou compartilhar o link do VirusTotal.","footerAccessibility":"Acessibilidade","footerImprint":"Aviso legal","footerTerms":"Termos de uso","footerNoSell":"Não vender minhas informações pessoais"},"nl":{"heroKicker":"Cybersecurity Suite","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Controleer website-URL's op phishing en malware of bereken de digitale vingerafdruk van een bestand direct in je browser. Gratis, zonder registratie en zonder upload.","tabUrl":"URL-scanner","tabFile":"Bestandshash","urlLabel":"Website-URL invoeren","urlAria":"URL del sito","scanWebsite":"Website scannen","urlHint":"Opent de VirusTotal-analyse in een nieuw tabblad","quickSelect":"Snelle selectie","fileLabel":"Bestand controleren op malware","dropAria":"Trascina qui un file o fai clic per selezionarlo","dropTitle":"Sleep bestand hierheen","dropSubtitle":"of klik om te selecteren","hashLoading":"Digitale vingerafdruk berekenen…","shaLabel":"Hash SHA-256","copy":"Kopiëren","openVirusTotal":"VirusTotal","featuresKicker":"Browserbeveiliging","featuresTitle":"Hoe Fasqoo je beschermt","featuresIntro":"Due potenti controlli di sicurezza direttamente nel browser, senza caricare i tuoi dati su un server.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"Veelgestelde vragen","faqTitle":"FAQ","faq1Q":"Is de Fasqoo Antivirus Scanner gratis?","faq1A":"Ja, 100%. Geen verborgen kosten, premiumfuncties of advertenties.","faq2Q":"Wordt mijn bestand geüpload?","faq2A":"Nee. Je bestand wordt nooit geüpload. De SHA-256-hash wordt lokaal in je browser berekend.","faq3Q":"Wat is een SHA-256-hash?","faq3A":"Een 256-bits handtekening die uit de inhoud van een bestand wordt berekend en als digitale vingerafdruk werkt.","faq4Q":"Hoe weet ik of een website gevaarlijk is?","faq4A":"Voer de URL in. VirusTotal controleert het domein met meer dan 70 antivirus-engines.","faq5Q":"Wat is VirusTotal?","faq5A":"Een dienst die bestanden en URL's met veel antivirus-engines controleert.","faq6Q":"Kan ik resultaten delen?","faq6A":"Ja. Kopieer de SHA-256-hash of deel de VirusTotal-link.","footerAccessibility":"Toegankelijkheid","footerImprint":"Colofon","footerTerms":"Gebruiksvoorwaarden","footerNoSell":"Mijn persoonlijke gegevens niet verkopen"},"tr":{"heroKicker":"Siber Güvenlik Paketi","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Web sitesi URL'lerini kimlik avı ve kötü amaçlı yazılımlara karşı kontrol edin veya bir dosyanın dijital parmak izini doğrudan tarayıcıda hesaplayın. Ücretsiz, kayıt ve yükleme yok.","tabUrl":"URL Tarayıcı","tabFile":"Dosya Hash'i","urlLabel":"Web sitesi URL'sini girin","urlAria":"URL del sito","scanWebsite":"Siteyi tara","urlHint":"VirusTotal analizini yeni sekmede açar","quickSelect":"Hızlı seçim","fileLabel":"Dosyayı kötü amaçlı yazılımlara karşı kontrol et","dropAria":"Trascina qui un file o fai clic per selezionarlo","dropTitle":"Dosyayı buraya sürükleyin","dropSubtitle":"veya seçmek için tıklayın","hashLoading":"Dijital parmak izi hesaplanıyor…","shaLabel":"Hash SHA-256","copy":"Kopyala","openVirusTotal":"VirusTotal","featuresKicker":"Tarayıcı Güvenliği","featuresTitle":"Fasqoo sizi nasıl korur","featuresIntro":"Due potenti controlli di sicurezza direttamente nel browser, senza caricare i tuoi dati su un server.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"Sık Sorulan Sorular","faqTitle":"FAQ","faq1Q":"Fasqoo Antivirus Scanner ücretsiz mi?","faq1A":"Evet, %100 ücretsizdir. Gizli ücret, premium özellik veya reklam yoktur.","faq2Q":"Dosyam yükleniyor mu?","faq2A":"Hayır. Dosyanız hiçbir zaman yüklenmez. SHA-256 hash'i tarayıcıda yerel olarak hesaplanır.","faq3Q":"SHA-256 hash nedir?","faq3A":"Dosyanın içeriğinden hesaplanan 256 bitlik dijital bir imzadır.","faq4Q":"Bir web sitesinin tehlikeli olduğunu nasıl anlarım?","faq4A":"URL'yi tarayıcıya girin. VirusTotal alan adını 70'ten fazla antivirüs motoruyla kontrol eder.","faq5Q":"VirusTotal nedir?","faq5A":"Dosyaları ve URL'leri birçok antivirüs motoruyla kontrol eden bir hizmettir.","faq6Q":"Sonuçları paylaşabilir miyim?","faq6A":"Evet. SHA-256 hash'ini kopyalayabilir veya VirusTotal bağlantısını paylaşabilirsiniz.","footerAccessibility":"Erişilebilirlik","footerImprint":"Künye","footerTerms":"Kullanım Koşulları","footerNoSell":"Kişisel bilgilerimi satma"},"sq":{"heroKicker":"Paketa e Sigurisë Kibernetike","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"Kontrollo URL-të e faqeve për phishing dhe malware ose llogarit gjurmën dixhitale të një skedari direkt në shfletues. Falas, pa regjistrim dhe pa ngarkim.","tabUrl":"Skanues URL","tabFile":"Hash i Skedarit","urlLabel":"Fut URL-në e faqes","urlAria":"URL del sito","scanWebsite":"Skano faqen","urlHint":"Hap analizën e VirusTotal në një skedë të re","quickSelect":"Zgjedhje e shpejtë","fileLabel":"Kontrollo skedarin për malware","dropAria":"Trascina qui un file o fai clic per selezionarlo","dropTitle":"Tërhiq skedarin këtu","dropSubtitle":"ose kliko për ta zgjedhur","hashLoading":"Po llogaritet gjurma dixhitale…","shaLabel":"Hash SHA-256","copy":"Kopjo","openVirusTotal":"VirusTotal","featuresKicker":"Siguria në Shfletues","featuresTitle":"Si të mbron Fasqoo","featuresIntro":"Due potenti controlli di sicurezza direttamente nel browser, senza caricare i tuoi dati su un server.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"Pyetje të shpeshta","faqTitle":"FAQ","faq1Q":"A është falas Antivirus Scanner i Fasqoo?","faq1A":"Po, 100%. Nuk ka kosto të fshehura, funksione premium apo reklama.","faq2Q":"A ngarkohet skedari im?","faq2A":"Jo. Skedari nuk ngarkohet kurrë. Hash-i SHA-256 llogaritet lokalisht në shfletues.","faq3Q":"Çfarë është hash-i SHA-256?","faq3A":"Është një nënshkrim 256-bit që llogaritet nga përmbajtja e skedarit.","faq4Q":"Si ta kuptoj nëse një faqe është e rrezikshme?","faq4A":"Fut URL-në në skanues. VirusTotal e kontrollon domenin me mbi 70 motorë antivirus.","faq5Q":"Çfarë është VirusTotal?","faq5A":"Është një shërbim që kontrollon skedarët dhe URL-të me shumë motorë antivirus.","faq6Q":"A mund t'i ndaj rezultatet?","faq6A":"Po. Mund të kopjosh hash-in SHA-256 ose të ndash lidhjen e VirusTotal.","footerAccessibility":"Aksesueshmëria","footerImprint":"Imprint","footerTerms":"Kushtet e përdorimit","footerNoSell":"Mos i shit të dhënat e mia personale"},"ar":{"heroKicker":"حزمة الأمن السيبراني","heroTitle":"Antivirus","heroTitleAccent":"Scanner","heroDesc":"تحقق من عناوين مواقع الويب بحثًا عن التصيد والبرامج الضارة، أو احسب البصمة الرقمية لملف مباشرةً في المتصفح. مجانًا وبدون تسجيل أو رفع.","tabUrl":"فاحص URL","tabFile":"بصمة الملف","urlLabel":"أدخل عنوان الموقع","urlAria":"عنوان الموقع","scanWebsite":"فحص الموقع","urlHint":"يفتح تحليل VirusTotal في علامة تبويب جديدة","quickSelect":"اختيار سريع","fileLabel":"فحص الملف بحثًا عن البرمجيات الضارة","dropAria":"اسحب ملفًا هنا أو انقر لاختياره","dropTitle":"اسحب الملف إلى هنا","dropSubtitle":"أو انقر للاختيار","hashLoading":"جارٍ حساب البصمة الرقمية…","shaLabel":"تجزئة SHA-256","copy":"نسخ","openVirusTotal":"VirusTotal","featuresKicker":"أمان المتصفح","featuresTitle":"كيف تحميك Fasqoo","featuresIntro":"فحصان قويان للأمان مباشرةً في المتصفح دون رفع بياناتك إلى خادم.","feature1Title":"Rilevamento minacce URL","feature1Desc":"Controlla qualsiasi URL con i database di oltre 70 motori antivirus tramite VirusTotal.","feature2Title":"Calcolo hash locale","feature2Desc":"L'hash SHA-256 viene calcolato interamente nel browser. Il file non lascia mai il dispositivo.","feature3Title":"Veloce e gratuito","feature3Desc":"Nessun upload, nessuna registrazione e nessuna pubblicità. Risultati in pochi secondi.","feature4Title":"Identificazione precisa","feature4Desc":"SHA-256 fornisce una firma di 256 bit che identifica un file in modo univoco.","feature5Title":"Privacy 100%","feature5Desc":"Nessun upload, tracciamento o archiviazione. Viene trasmesso solo l'hash.","feature6Title":"Database globale","feature6Desc":"VirusTotal aggrega miliardi di scansioni da tutto il mondo in tempo reale.","faqKicker":"الأسئلة الشائعة","faqTitle":"الأسئلة الشائعة","faq1Q":"هل فاحص مكافحة الفيروسات من Fasqoo مجاني؟","faq1A":"نعم، مجاني 100%. لا توجد تكاليف مخفية أو ميزات مدفوعة أو إعلانات.","faq2Q":"هل يتم رفع ملفي؟","faq2A":"لا. لا يتم رفع ملفك أبدًا. يتم حساب SHA-256 محليًا في المتصفح.","faq3Q":"ما هي تجزئة SHA-256؟","faq3A":"توقيع بطول 256 بت يتم حسابه من محتوى الملف ويعمل كبصمة رقمية.","faq4Q":"كيف أعرف أن موقعًا خطير؟","faq4A":"أدخل عنوان URL في الفاحص. سيفحص VirusTotal النطاق باستخدام أكثر من 70 محرك مكافحة فيروسات.","faq5Q":"ما هو VirusTotal؟","faq5A":"خدمة تفحص الملفات وعناوين URL باستخدام العديد من محركات مكافحة الفيروسات.","faq6Q":"هل يمكنني مشاركة النتائج؟","faq6A":"نعم. يمكنك نسخ تجزئة SHA-256 أو مشاركة رابط VirusTotal.","footerAccessibility":"إمكانية الوصول","footerImprint":"بيانات الموقع","footerTerms":"شروط الاستخدام","footerNoSell":"عدم بيع معلوماتي الشخصية"}};
+
   const supported = Object.keys(T);
   const lang = $("lang");
   function applyNavLanguage(code){
     const chosen = supported.includes(code) ? code : "en";
-    const t = T[chosen] || T.en;
+    const t = Object.assign({}, T.en, T[chosen] || {}, PAGE_T.en || {}, PAGE_T[chosen] || {});
     document.querySelectorAll("[data-nav-i18n]").forEach(el => {
       const key = el.getAttribute("data-nav-i18n");
       if(t[key] != null) el.textContent = t[key];
     });
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if(t[key] != null) el.textContent = t[key];
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => {
+      const key = el.getAttribute("data-i18n-aria");
+      if(t[key] != null) el.setAttribute("aria-label", t[key]);
+    });
+    const titleMap = {
+      en:"Fasqoo Antivirus Scanner – URL & File Check",
+      de:"Fasqoo Antivirus Scanner – URL- & Datei-Prüfung",
+      fr:"Fasqoo Antivirus Scanner – Vérification URL & fichier",
+      es:"Fasqoo Antivirus Scanner – Comprobación de URL y archivos",
+      it:"Fasqoo Antivirus Scanner – Controllo URL e file",
+      pt:"Fasqoo Antivirus Scanner – Verificação de URL e arquivo",
+      nl:"Fasqoo Antivirus Scanner – URL- en bestandscontrole",
+      tr:"Fasqoo Antivirus Scanner – URL ve Dosya Kontrolü",
+      sq:"Fasqoo Antivirus Scanner – Kontroll URL dhe skedarësh",
+      ar:"Fasqoo Antivirus Scanner – فحص عناوين URL والملفات"
+    };
+    document.title = titleMap[chosen] || titleMap.en;
     if(lang) lang.value = chosen;
     document.documentElement.lang = chosen;
-    if(chosen === "ar") document.documentElement.dir = "rtl";
-    else document.documentElement.dir = "ltr";
+    document.documentElement.dir = chosen === "ar" ? "rtl" : "ltr";
     localStorage.setItem("fasqoo_lang", chosen);
   }
 
