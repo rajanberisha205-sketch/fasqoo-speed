@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ffffff" id="themeColor">
+<meta name="description" content="Free Fasqoo Gaming & Ping Monitor. Measure real-time latency (ping) and jitter to Valorant, CS2, Apex, Fortnite, Steam, Xbox Live, PlayStation Network, Nintendo Online and Discord — directly in your browser.">
+<meta name="author" content="Fasqoo">
+<meta name="application-name" content="Fasqoo Gaming & Ping Monitor">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fasqoo Gaming- & Ping-Monitor – Live Ping & Jitter">
+<meta property="og:description" content="Check real-time ping and jitter to the most important gaming servers before your match starts. Free, no account required.">
+<meta property="og:url" content="https://www.fasqoo.com/ping-monitor.html">
+<meta property="og:image" content="https://www.fasqoo.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fasqoo Gaming- & Ping-Monitor">
+<meta name="twitter:description" content="Live-Ping und Jitter zu Gaming-Servern in Echtzeit prüfen.">
+<meta name="robots" content="index, follow">
+<title>Fasqoo Gaming- &amp; Ping-Monitor – Live Ping &amp; Jitter zu Gaming-Servern</title>
+<link rel="canonical" href="https://www.fasqoo.com/ping-monitor.html">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Fasqoo Gaming & Ping Monitor","url":"https://www.fasqoo.com/ping-monitor.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web Browser","description":"Real-time ping and jitter monitor for the most popular gaming servers. Free, browser-based, no account required.","publisher":{"@type":"Organization","name":"Fasqoo","url":"https://www.fasqoo.com/"}}
+</script>
+<style>
+/* ==========================================================
+   FASQOO BASE DESIGN SYSTEM
+   ========================================================== */
+:root{
+  --bg:#f3f5f8;--card:#fff;--text:#10141a;--muted:#69727e;--line:#e3e7ec;
+  --soft:#f7f8fa;--orange:#ff5a1f;--orange-2:#ff7b45;--green:#16a36a;
+  --shadow:0 16px 45px rgba(16,24,40,.07);--radius:16px;
+  --success:#22c55e;--warn:#eab308;--danger:#ef4444;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.08),transparent 34%),var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+img,svg{display:block;flex-shrink:0}
+.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+@media(max-width:760px){.wrap{width:min(100% - 24px,1180px)}}
+
+/* ==========================================================
+   HEADER (identisch zur index.html)
+   ========================================================== */
+header{
+  height:72px;background:rgba(255,255,255,.86);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;position:sticky;top:0;z-index:1000;
+  box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+.brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+a.brand,a.brand:visited,a.brand:hover,a.brand:focus,a.brand:active{color:var(--orange);text-decoration:none}
+.brandmark{
+  width:40px;height:40px;border-radius:11px;display:block;
+  box-shadow:0 6px 16px rgba(255,90,31,.28);
+  transition:box-shadow .25s ease,transform .25s ease;
+}
+a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:translateY(-1px)}
+.brandname{font-size:22px;font-weight:800;letter-spacing:-.7px;color:var(--orange);text-decoration:none}
+
+.main-menu{display:flex;align-items:center;justify-content:flex-end;gap:22px;margin-left:auto}
+.main-menu>a{color:var(--text);font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s;position:relative}
+.main-menu>a:hover{color:var(--orange)}
+.main-menu>a.active{color:var(--orange);font-weight:700}
+.main-menu>a:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:var(--orange);transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+.main-menu>a:hover:after,.main-menu>a.active:after{transform:scaleX(1)}
+
+.menu-extra{display:flex;align-items:center;gap:8px}
+.lang-control{
+  height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+  display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;
+  transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.lang-control:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.lang-icon{font-size:14px;line-height:1;color:currentColor}
+.lang-control select{
+  min-width:76px;height:33px;border:0;outline:0;background:transparent;color:var(--text);
+  padding:0 14px 0 0;font-size:12px;font-weight:500;cursor:pointer;
+}
+.theme-btn{
+  width:35px;height:35px;padding:0;border:1px solid var(--line);border-radius:8px;
+  background:var(--card);color:var(--text);display:grid;place-items:center;
+  font-size:16px;transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.theme-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.theme-btn svg{width:16px;height:16px}
+
+.lite-btn{
+  height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;
+  font-size:12px;font-weight:500;white-space:nowrap;text-decoration:none;
+  transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.lite-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+
+.install-btn{
+  height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;
+  font-size:12px;font-weight:500;white-space:nowrap;
+  transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;
+}
+.install-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.install-btn[hidden]{display:none}
+.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
+.win-icon i{display:block;background:currentColor}
+
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
+
+@media(max-width:900px){.install-btn{display:none!important}}
+@media(max-width:760px){
+  .menu-toggle{display:block}
+  .main-menu{
+    display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;
+    background:var(--card);border-bottom:1px solid var(--line);padding:20px;gap:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);align-items:flex-start;
+  }
+  .main-menu.active{display:flex}
+  .menu-extra{width:100%;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);gap:12px}
+}
+
+/* MEGA DROPDOWN */
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown-toggle{
+  appearance:none;border:0;background:transparent;color:var(--text);
+  font:inherit;font-size:13px;font-weight:500;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;padding:8px 0;cursor:pointer;position:relative;
+}
+.nav-dropdown-toggle:hover{color:var(--orange)}
+.nav-dropdown-toggle.active{color:var(--orange);font-weight:700}
+.nav-chevron{font-size:12px;line-height:1;transition:transform .22s ease}
+.nav-dropdown:hover .nav-chevron,.nav-dropdown.open .nav-chevron{transform:rotate(180deg)}
+
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 16px);left:50%;width:100%;
+  max-width:650px;min-width:560px;padding:18px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(16,24,40,.10);border-radius:18px;
+  box-shadow:0 24px 70px rgba(16,24,40,.16),0 6px 22px rgba(16,24,40,.06);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate(-50%,-8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+  z-index:1200;
+}
+.nav-dropdown-menu:before{
+  content:"";position:absolute;top:-7px;left:50%;width:13px;height:13px;
+  transform:translateX(-50%) rotate(45deg);
+  background:rgba(255,255,255,.95);
+  border-left:1px solid rgba(16,24,40,.10);
+  border-top:1px solid rgba(16,24,40,.10);
+  backdrop-filter:blur(10px);
+}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown.open .nav-dropdown-menu{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+}
+.nav-mega-column{min-width:0}
+.nav-dropdown-section{
+  padding:2px 8px 9px;color:var(--muted);font-size:9px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.nav-mega-item{
+  display:flex!important;align-items:flex-start;gap:12px;width:100%;
+  padding:11px 10px!important;border-radius:12px;color:var(--text)!important;
+  text-decoration:none;
+  transition:background .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.nav-mega-item+.nav-mega-item{margin-top:3px}
+.nav-mega-icon{
+  width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;
+  border-radius:10px;background:var(--soft);border:1px solid var(--line);
+  color:var(--orange);
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.nav-mega-icon svg{width:18px;height:18px}
+.nav-mega-copy{min-width:0;padding-top:1px}
+.nav-mega-title{display:block;font-size:12px;line-height:1.25;font-weight:700;color:var(--text);transition:color .18s ease}
+.nav-mega-desc{display:block;margin-top:4px;font-size:10px;line-height:1.45;color:var(--muted);font-weight:400}
+.nav-mega-item:hover{
+  background:linear-gradient(135deg,rgba(255,90,31,.07),rgba(255,255,255,.72));
+  color:var(--orange)!important;transform:translateX(3px);
+  box-shadow:0 7px 18px rgba(16,24,40,.06);
+}
+.nav-mega-item:hover .nav-mega-icon{
+  background:rgba(255,90,31,.10);border-color:rgba(255,90,31,.20);
+  box-shadow:0 0 0 3px rgba(255,90,31,.05);transform:translateY(-1px);
+}
+.nav-mega-item:hover .nav-mega-title{color:var(--orange)}
+
+@media(max-width:1050px){.nav-dropdown-menu{min-width:520px}}
+@media(max-width:760px){
+  .nav-dropdown{width:100%;display:block}
+  .nav-dropdown-toggle{width:100%;justify-content:space-between;padding:2px 0}
+  .nav-dropdown-menu{
+    position:static;width:100%;min-width:0;max-width:none;margin-top:8px;
+    transform:none!important;grid-template-columns:1fr;gap:8px;
+    box-shadow:none;border-radius:12px;padding:9px;
+    opacity:0;visibility:hidden;pointer-events:none;max-height:0;overflow:hidden;
+    transition:opacity .18s ease,max-height .22s ease,visibility .18s ease;
+  }
+  .nav-dropdown-menu:before{display:none}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:0;visibility:hidden;pointer-events:none;max-height:0}
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;max-height:900px}
+  .nav-mega-column{width:100%}
+}
+
+/* ==========================================================
+   MAIN CONTENT
+   ========================================================== */
+main{padding:32px 0 0}
+
+/* HERO */
+.hero{text-align:center;padding:40px 0 20px;position:relative}
+.hero::before{
+  content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.14) 0%,transparent 62%);
+  z-index:-1;pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 12px;
+  border:1px solid rgba(255,90,31,.18);background:rgba(255,90,31,.06);
+  border-radius:999px;font-size:10px;letter-spacing:1.5px;font-weight:800;
+  color:var(--orange);text-transform:uppercase;margin-bottom:20px;
+}
+.eyebrow svg{width:14px;height:14px}
+.hero h1{
+  font-size:clamp(38px,5vw,58px);letter-spacing:-2.2px;margin:0 0 16px;
+  font-weight:800;line-height:1.06;
+}
+.hero h1 .accent{
+  background:linear-gradient(135deg,var(--orange),var(--orange-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.hero p{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto;line-height:1.55}
+@media(max-width:640px){
+  .hero{padding:26px 0 14px}
+  .hero h1{font-size:30px;letter-spacing:-1.5px}
+  .hero p{font-size:14px}
+}
+
+/* CONTROL PANEL */
+.control{padding:24px 0 20px}
+.control-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);
+  display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.control-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--orange),#ffb18e,transparent);
+}
+.control-info{min-width:0;flex:1}
+.control-info h3{margin:0 0 6px;font-size:16px;font-weight:800;letter-spacing:-.3px}
+.control-info p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:640px}
+.control-providers{
+  margin-top:10px;font-size:11.5px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 11px;background:var(--soft);border:1px solid var(--line);border-radius:100px;
+}
+.control-providers svg{width:14px;height:14px;color:var(--green)}
+.control-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:46px;padding:0 22px;border-radius:11px;border:1px solid transparent;
+  font-weight:600;font-size:14px;cursor:pointer;
+  transition:transform .15s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#fff;
+  box-shadow:0 10px 22px rgba(255,90,31,.22);
+}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,90,31,.30)}
+.btn-secondary{background:var(--card);border-color:var(--line);color:var(--text)}
+.btn-secondary:hover:not(:disabled){border-color:#bfc7d1;background:var(--soft)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn svg{width:16px;height:16px}
+.btn-lg{height:54px;padding:0 26px;font-size:15px}
+
+/* STATUS */
+.status{
+  margin-top:14px;padding:13px 16px;border-radius:12px;
+  font-size:13.5px;font-weight:600;display:none;align-items:center;gap:10px;
+  border:1px solid transparent;
+}
+.status.show{display:flex}
+.status.info{background:rgba(255,90,31,.08);border-color:rgba(255,90,31,.22);color:var(--orange)}
+.status.success{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.22);color:#15803d}
+.status.error{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#b91c1c}
+.status .spinner{
+  width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;
+  border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SUMMARY */
+.summary{display:none;margin-top:18px}
+.summary.show{display:block;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.summary-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;
+}
+.summary-score{position:relative;width:132px;height:132px;flex-shrink:0}
+.summary-score svg{width:100%;height:100%}
+.summary-score .track{fill:none;stroke:var(--line);stroke-width:9}
+.summary-score .fill{
+  fill:none;stroke:var(--orange);stroke-width:9;stroke-linecap:round;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1),stroke .35s;
+}
+.summary-score .inner{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;pointer-events:none;
+}
+.summary-score .big{
+  font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.summary-score .lbl{
+  font-size:10px;font-weight:800;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;margin-top:4px;
+}
+.summary-info h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.4px}
+.summary-info p{margin:0 0 14px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.summary-stats{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.summary-stats b{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+.summary-stats span{display:inline-flex;align-items:center;gap:5px}
+
+/* GAME SECTIONS */
+.category{padding:32px 0 6px}
+.category-head{margin-bottom:18px}
+.category-head h2{
+  margin:0 0 6px;font-size:22px;font-weight:800;letter-spacing:-.5px;
+  display:flex;align-items:center;gap:12px;
+}
+.cat-badge{
+  display:inline-grid;place-items:center;width:34px;height:34px;
+  font-size:13px;font-weight:800;color:var(--orange);
+  border:1px solid rgba(255,90,31,.25);background:rgba(255,90,31,.07);
+  border-radius:11px;
+  box-shadow:0 4px 12px rgba(255,90,31,.08);
+}
+.category-head p{margin:0;font-size:13.5px;color:var(--muted);max-width:680px;line-height:1.55}
+
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.grid.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1080px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.grid,.grid.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid,.grid.grid-3{grid-template-columns:1fr}}
+
+/* GAME CARD */
+.game-card{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:18px;overflow:hidden;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+  box-shadow:0 5px 20px rgba(16,24,40,.04);
+}
+.game-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,rgba(16,24,40,.04),transparent);
+  transition:background .3s ease;
+}
+.game-card.state-excellent::before{background:linear-gradient(90deg,var(--success),transparent)}
+.game-card.state-ok::before{background:linear-gradient(90deg,var(--warn),transparent)}
+.game-card.state-bad::before{background:linear-gradient(90deg,var(--danger),transparent)}
+.game-card.state-testing::before{background:linear-gradient(90deg,var(--orange),transparent);animation:pulseBar 1.4s ease-in-out infinite}
+@keyframes pulseBar{0%,100%{opacity:.6}50%{opacity:1}}
+.game-card:hover{transform:translateY(-3px);border-color:#d8dee6;box-shadow:0 12px 32px rgba(16,24,40,.08)}
+
+.game-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.game-icon{
+  width:46px;height:46px;flex:0 0 46px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(255,90,31,.10),rgba(255,90,31,.02));
+  border:1px solid rgba(255,90,31,.18);
+  color:var(--orange);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.game-icon svg{width:24px;height:24px}
+.game-card:hover .game-icon{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 20px rgba(255,90,31,.16)}
+
+.game-meta{min-width:0}
+.game-name{font-size:14.5px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-provider{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.game-ping{display:flex;align-items:baseline;gap:6px;margin-bottom:12px;min-height:42px}
+.game-ping .num{
+  font-size:38px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--text),#3a4150);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.game-card.state-excellent .game-ping .num{background:linear-gradient(135deg,#16a36a,#22c55e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.game-card.state-ok .game-ping .num{background:linear-gradient(135deg,#e6a500,#eab308);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.game-card.state-bad .game-ping .num{background:linear-gradient(135deg,#e5484d,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.game-ping .unit{font-size:13px;font-weight:700;color:var(--muted)}
+.game-ping .spinner{
+  width:20px;height:20px;border:2.5px solid var(--orange);
+  border-top-color:transparent;border-radius:50%;
+  animation:spin .8s linear infinite;margin-left:auto;align-self:center;
+}
+
+.game-stats{
+  display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;
+  font-size:11.5px;color:var(--muted);min-height:16px;
+}
+.game-stats b{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+
+.badge{
+  display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;
+  border-radius:100px;font-size:10.5px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;white-space:nowrap;
+  transition:background .3s ease,color .3s ease;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 20%,transparent)}
+.badge.state-excellent{color:#16a36a;background:rgba(34,197,94,.10)}
+.badge.state-ok{color:#c78900;background:rgba(234,179,8,.12)}
+.badge.state-bad{color:#e5484d;background:rgba(239,68,68,.10)}
+.badge.state-testing{color:var(--orange);background:rgba(255,90,31,.10)}
+.badge.state-idle{color:var(--muted);background:var(--soft)}
+.badge.state-failed{color:#b91c1c;background:rgba(239,68,68,.10)}
+
+/* EXPORT */
+.report-actions{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap}
+.report-actions .btn{flex:1;min-width:220px}
+.report-note{
+  margin:16px 4px 0;font-size:12.5px;color:var(--muted);line-height:1.6;
+  padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);
+}
+
+/* SECTIONS */
+.section{padding:72px 0;border-top:1px solid var(--line);margin-top:40px}
+.section-head{text-align:center;max-width:720px;margin:0 auto 44px}
+.section-kicker{
+  font-size:10px;letter-spacing:1.6px;font-weight:800;color:var(--orange);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.section-head h2{
+  font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.8px;
+  line-height:1.15;margin:0 0 14px;
+}
+.section-head p{font-size:15.5px;color:var(--muted);margin:0;line-height:1.55}
+
+.grid-3.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.grid-3.features{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid-3.features{grid-template-columns:1fr}}
+
+.feature{
+  padding:24px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;transition:all .2s ease;position:relative;overflow:hidden;
+  box-shadow:0 5px 20px rgba(16,24,40,.035);
+}
+.feature:hover{border-color:#d8dee6;transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,24,40,.07)}
+.feature-icon{
+  width:46px;height:46px;border-radius:13px;
+  background:linear-gradient(135deg,rgba(255,90,31,.10),rgba(255,90,31,.02));
+  border:1px solid rgba(255,90,31,.18);
+  color:var(--orange);display:grid;place-items:center;margin-bottom:18px;
+}
+.feature-icon svg{width:22px;height:22px}
+.feature h3{margin:0 0 8px;font-size:15px;font-weight:800;letter-spacing:-.2px}
+.feature p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto}
+.faq details{border-top:1px solid var(--line);padding:0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:19px 36px 19px 2px;position:relative;
+  font-size:15px;font-weight:600;color:var(--text);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-size:22px;font-weight:300;color:var(--muted);transition:transform .2s ease;
+}
+.faq details[open] summary:after{content:"−"}
+.faq details p{
+  font-size:14px;line-height:1.7;color:var(--muted);
+  margin:0;padding:0 36px 19px 2px;
+}
+
+/* CTA */
+.cta{text-align:center;padding:80px 0;border-top:1px solid var(--line)}
+.cta h2{
+  font-size:clamp(1.6rem,3.8vw,2.4rem);font-weight:800;letter-spacing:-.8px;
+  margin:0 0 16px;line-height:1.15;
+}
+.cta p{font-size:15.5px;color:var(--muted);max-width:560px;margin:0 auto 32px}
+.cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ==========================================================
+   FOOTER (identisch zur index.html)
+   ========================================================== */
+.site-footer{
+  margin-top:60px;padding:42px 0 22px;background:var(--card);
+  border-top:1px solid var(--line);color:var(--muted);
+  box-shadow:0 -1px 0 rgba(16,24,40,.025);
+}
+.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1.15fr 1fr;gap:42px;padding-bottom:34px}
+.footer-brand-name{
+  font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text);margin-bottom:12px;
+}
+.footer-brand p{max-width:300px;margin:0;font-size:11.5px;line-height:1.7;color:var(--muted)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.footer-column h4{margin:0 0 7px;color:var(--text);font-size:12px;font-weight:700}
+.footer-column a{color:var(--muted);font-size:11.5px;line-height:1.5;text-decoration:none;transition:color .18s ease}
+.footer-column a:hover{color:var(--orange)}
+.footer-bottom{
+  border-top:1px solid var(--line);padding-top:18px;padding-bottom:22px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:7px;text-align:center;font-size:10px;line-height:1.5;color:var(--muted);
+}
+.footer-copyright{color:var(--text);font-size:11px;font-weight:600}
+.footer-cloudflare{
+  display:flex;flex-direction:column;align-items:center;gap:3px;max-width:760px;
+}
+.footer-powered,.footer-disclaimer{
+  display:block;color:var(--muted);font-size:9px;line-height:1.55;font-weight:400;
+}
+.footer-disclaimer{opacity:.78}
+
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:760px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);
+  background:var(--card);color:var(--text);padding:12px 18px;
+  border-radius:12px;border:1px solid var(--line);font-size:13.5px;
+  font-weight:600;box-shadow:0 20px 50px rgba(16,24,40,.18);z-index:2000;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;align-items:center;gap:8px;pointer-events:none;
+}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{width:16px;height:16px;color:var(--success)}
+
+/* ==========================================================
+   DARK MODE
+   ========================================================== */
+.dark{
+  --bg:#090c10;--card:#12161b;--text:#f4f6f8;--muted:#98a2ae;
+  --line:#29303a;--soft:#171c22;
+  --shadow:0 18px 50px rgba(0,0,0,.25);
+}
+.dark body{background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.09),transparent 34%),var(--bg)}
+.dark header{background:rgba(14,17,22,.88)}
+.dark .site-footer{background:rgba(14,17,22,.88)}
+.dark .nav-dropdown-menu{
+  background:rgba(21,24,29,.96);
+  border-color:rgba(255,255,255,.10);
+  box-shadow:0 26px 75px rgba(0,0,0,.45),0 7px 25px rgba(0,0,0,.25);
+}
+.dark .nav-dropdown-menu:before{
+  background:rgba(21,24,29,.96);border-color:rgba(255,255,255,.10);
+}
+.dark .nav-mega-item:hover{
+  background:linear-gradient(135deg,rgba(255,90,31,.11),rgba(255,255,255,.025));
+  box-shadow:0 8px 22px rgba(0,0,0,.18);
+}
+.dark .game-icon,.dark .feature-icon{
+  background:linear-gradient(135deg,rgba(255,90,31,.14),rgba(255,90,31,.04));
+  border-color:rgba(255,90,31,.25);
+}
+.dark .lang-control select{color-scheme:dark}
+.dark .game-ping .num{background:linear-gradient(135deg,#f4f6f8,#c0c8d2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <a href="index.html" class="brand" aria-label="Fasqoo">
+        <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
+          <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
+          <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
+        </svg>
+        <div class="brandname">Fasqoo</div>
+      </a>
+    </div>
+
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="install-label" data-i18n="installApp">Install for Windows</span>
+    </button>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+
+    <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
+      <a href="index.html" data-i18n="navSpeedtest">Speedtest</a>
+
+      <div class="nav-dropdown" id="toolsDropdown">
+        <button class="nav-dropdown-toggle active" type="button" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
+          <span class="nav-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="nav-dropdown-menu" role="menu">
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
+
+            <a class="nav-mega-item" href="network-status.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
+                <span class="nav-mega-desc" data-i18n="navStatusDesc">Live-Erreichbarkeit &amp; Leitungs-Diagnose</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="widget.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
+                <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="nav-mega-column">
+            <div class="nav-dropdown-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
+
+            <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
+                <span class="nav-mega-desc" data-i18n="navSecurityDesc">HTTP-Sicherheitsheader in Echtzeit prüfen</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
+                <span class="nav-mega-desc" data-i18n="navDnsDesc">Globale DNS-Ausbreitung visuell tracken</span>
+              </span>
+            </a>
+
+            <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
+                <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="faq.html" data-i18n="navFaq">FAQ</a>
+      <a href="about.html" data-i18n="navAbout">Über uns</a>
+
+      <div class="menu-extra">
+        <div class="lang-control">
+          <span class="lang-icon" aria-hidden="true">◎</span>
+          <select id="lang" aria-label="Language">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+            <option value="tr">Türkçe</option>
+            <option value="sq">Shqip</option>
+            <option value="pl">Polski</option>
+          </select>
+        </div>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M7 11v2"/><path d="M11 11v2"/><circle cx="16.5" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="19" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <span data-i18n="heroEyebrow">Fasqoo Gaming Monitor</span>
+    </span>
+    <h1>
+      <span data-i18n="heroTitleTop">Fasqoo Gaming-</span>
+      <span class="accent" data-i18n="heroTitleAccent"> &amp; Ping-Monitor</span>
+    </h1>
+    <p data-i18n="heroText">Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart. 🎮</p>
+  </section>
+
+  <!-- CONTROL -->
+  <section class="control">
+    <div class="control-card">
+      <div class="control-info">
+        <h3 data-i18n="controlTitle">Bereit für deinen Ping-Check?</h3>
+        <p data-i18n="controlText">Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.</p>
+        <span class="control-providers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="controlProviders">Cloudflare Edge · direkter Endpunkt-Ping · keine Serverlogs</span>
+        </span>
+      </div>
+      <div class="control-actions">
+        <button id="startBtn" class="btn btn-primary btn-lg" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <span data-i18n="startBtn">Ping-Test starten</span>
+        </button>
+        <button id="stopBtn" class="btn btn-secondary btn-lg" type="button" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
+          <span data-i18n="stopBtn">Stoppen</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="summary" id="summary">
+      <div class="summary-card">
+        <div class="summary-score">
+          <svg viewBox="0 0 130 130">
+            <circle class="track" cx="65" cy="65" r="54"/>
+            <circle class="fill" id="summaryFill" cx="65" cy="65" r="54" style="stroke-dasharray:339.29;stroke-dashoffset:339.29"/>
+          </svg>
+          <div class="inner">
+            <span class="big" id="summaryScore">—</span>
+            <span class="lbl" data-i18n="summaryScoreLabel">Score</span>
+          </div>
+        </div>
+        <div class="summary-info">
+          <h3 id="summaryTitle">—</h3>
+          <p id="summaryText">—</p>
+          <div class="summary-stats">
+            <span><b id="statExcellent">0</b> <span data-i18n="statExcellent">Exzellent</span></span>
+            <span><b id="statOk">0</b> <span data-i18n="statOk">Akzeptabel</span></span>
+            <span><b id="statBad">0</b> <span data-i18n="statBad">Hoher Ping</span></span>
+            <span><b id="statAvg">—</b> <span data-i18n="statAvg">Ø Ping</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY A -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">A</span>
+        <span data-i18n="catATitle">E-Sports &amp; Shooter</span>
+      </h2>
+      <p data-i18n="catAText">Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.</p>
+    </div>
+    <div class="grid" id="gridShooter"></div>
+  </section>
+
+  <!-- CATEGORY B -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">B</span>
+        <span data-i18n="catBTitle">Gaming-Plattformen</span>
+      </h2>
+      <p data-i18n="catBText">Launcher, Stores und Multiplayer-Netzwerke der großen Plattformen.</p>
+    </div>
+    <div class="grid" id="gridPlatform"></div>
+  </section>
+
+  <!-- CATEGORY C -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">C</span>
+        <span data-i18n="catCTitle">Discord &amp; Voice</span>
+      </h2>
+      <p data-i18n="catCText">Sprach-Chat hängt stärker vom Jitter als vom Ping ab – wir messen beides.</p>
+    </div>
+    <div class="grid grid-3" id="gridVoice"></div>
+  </section>
+
+  <!-- EXPORT -->
+  <section class="category" id="exportSection" style="display:none">
+    <div class="report-actions">
+      <button type="button" class="btn btn-secondary" id="copyReport">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span data-i18n="copyReport">Bericht kopieren</span>
+      </button>
+      <button type="button" class="btn btn-secondary" id="exportJson">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="exportJson">Als JSON exportieren</span>
+      </button>
+    </div>
+    <p class="report-note" data-i18n="reportNote">Hinweis: Ping-Werte sind browserbasierte Messungen zu öffentlichen Endpunkten der Anbieter. Sie können leicht von den In-Game-Werten abweichen, da Spielserver geographisch anders verteilt sind.</p>
+  </section>
+
+</div>
+</main>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker" data-i18n="featKicker">NETWORK INTELLIGENCE</div>
+      <h2 data-i18n="featTitle">Warum Ping &amp; Jitter wichtiger als rohe Bandbreite sind</h2>
+      <p data-i18n="featSub">Für Online-Gaming zählt Latenz und Stabilität – nicht der maximale Download.</p>
+    </div>
+    <div class="grid-3 features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/><path d="M12 2v3"/></svg>
+        </div>
+        <h3 data-i18n="feat1T">Latenz (Ping)</h3>
+        <p data-i18n="feat1D">Die Zeit zwischen deinem Klick und der Antwort des Servers. Unter 30 ms fühlt sich „instant“ an, über 60 ms wird es spürbar träge.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2.5-6 3 12 2.5-8 2 4h5"/></svg>
+        </div>
+        <h3 data-i18n="feat2T">Jitter</h3>
+        <p data-i18n="feat2D">Die Schwankung zwischen den einzelnen Messungen. Hoher Jitter verursacht Rubberbanding und Sprachabbrüche, auch wenn der Ping niedrig ist.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="4" y1="20" x2="20" y2="4"/></svg>
+        </div>
+        <h3 data-i18n="feat3T">Packet Loss</h3>
+        <p data-i18n="feat3D">Verlorene Pakete werden nachgesendet – das erzeugt kurze Freezes und Teleportationen. WLAN und überlastete Router sind die häufigsten Ursachen.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="14" width="20" height="6" rx="2"/><path d="M5 14V9a7 7 0 0 1 14 0v5"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="17" r="1" fill="currentColor" stroke="none"/><line x1="19" y1="3" x2="19" y2="8"/><line x1="17" y1="5" x2="21" y2="5"/></svg>
+        </div>
+        <h3 data-i18n="feat4T">Router &amp; WLAN</h3>
+        <p data-i18n="feat4D">Ein Kabel spart typischerweise 5–15 ms gegenüber WLAN. Teste beide Varianten und vergleiche die Werte oben.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+        </div>
+        <h3 data-i18n="feat5T">Distanz zum Server</h3>
+        <p data-i18n="feat5D">Je weiter der Spielserver entfernt ist, desto höher der Ping. Ein EU-Server liegt für dich in der Regel 10–40 ms entfernt, US-Server 90–160 ms.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h12"/><path d="M3 18h7"/><circle cx="19" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+        </div>
+        <h3 data-i18n="feat6T">Bufferbloat</h3>
+        <p data-i18n="feat6D">Voll ausgelastete Leitungen können den Ping verdoppeln. Ein moderner Router mit SQM (Smart Queue Management) reduziert das drastisch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--card)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker" data-i18n="faqKicker">HELP CENTER</div>
+      <h2 data-i18n="faqTitle">Häufige Fragen</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary data-i18n="faqQ1">Wie funktioniert der Ping-Monitor?</summary>
+        <p data-i18n="faqA1">Dein Browser sendet kleine Anfragen an öffentliche Endpunkte der jeweiligen Anbieter und misst die Zeit bis zur Antwort. Die Messung läuft vollständig clientseitig – es werden keine Zugangsdaten oder Nutzerdaten übertragen.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ2">Warum weichen die Werte von meinem Spiel ab?</summary>
+        <p data-i18n="faqA2">Wir messen zu allgemeinen Anbieter-Endpunkten (z. B. Steam, Riot, Epic). Der eigentliche Spielserver, mit dem du dich im Matchmaking verbindest, kann geographisch anders liegen. Die Werte hier sind ein guter Indikator für die allgemeine Leitungsqualität.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ3">Was ist ein guter Ping zum Gamen?</summary>
+        <p data-i18n="faqA3">Für kompetitive Shooter (Valorant, CS2) sind unter 30 ms exzellent, 30–60 ms akzeptabel. Über 60 ms wird es spürbar. Bei MMOs und Strategie ist alles unter 100 ms in der Regel unproblematisch.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ4">Was ist ein guter Jitter?</summary>
+        <p data-i18n="faqA4">Unter 5 ms ist exzellent. 5–15 ms ist akzeptabel. Über 15 ms führt typischerweise zu hörbaren Sprachproblemen in Discord und zu Rubberbanding in Spielen.</p>
+      </details>
+      <details>
+        <summary data-i18n="faqQ5">Kann ich das Ergebnis exportieren?</summary>
+        <p data-i18n="faqA5">Ja. Über die Buttons am Ende der Messung kannst du den Bericht als Text kopieren oder als JSON-Datei herunterladen – z. B. für Support-Tickets bei deinem ISP.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2 data-i18n="ctaTitle">Bereit für ein besseres Spielgefühl?</h2>
+    <p data-i18n="ctaText">Starte den Test, vergleiche deine Werte und optimiere deine Verbindung.</p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary btn-lg" onclick="document.getElementById('startBtn').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        <span data-i18n="ctaBtn">Ping-Test starten</span>
+      </button>
+      <a href="index.html" class="btn btn-secondary btn-lg">
+        <span data-i18n="ctaBtnSpeed">Speed Test</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Fasqoo</div>
+        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
+        <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
+        <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
+        <a href="widget.html" data-i18n="footerWidget">Widget</a>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
+      </div>
+
+      <div class="footer-column">
+        <h4 data-i18n="footerCompany">Unternehmen</h4>
+        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+        <a href="privacy.html" data-i18n="footerPrivacy">Datenschutz</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright" data-i18n="footerCopyright">© 2026 Fasqoo</span>
+      <div class="footer-cloudflare">
+        <span class="footer-powered" data-i18n="footerBranding">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</span>
+        <span class="footer-disclaimer" data-i18n="footerDisclaimer">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">OK</span>
+</div>
+
+<script>
+/* ===================================================================
+   Fasqoo Gaming & Ping Monitor
+   =================================================================== */
+
+/* ===================================================================
+   TRANSLATIONS
+   =================================================================== */
+const EN = {
+  navSpeedtest:'Speedtest', navTools:'Tools & IT-Diagnostics', navSectionNetwork:'Network & Speed',
+  navSectionDiag:'IT Diagnostics & Security', navFaq:'FAQ', navAbout:'About Us', navWidget:'Widget',
+  navStatus:'Network Status', navStatusDesc:'Live reachability & line diagnostics',
+  navWidgetDesc:'Free test widget for other websites', navSecurity:'Security Analyzer',
+  navSecurityDesc:'Check HTTP security headers in real time', navDns:'Visual DNS Test',
+  navDnsDesc:'Track global DNS propagation visually', navSubnet:'Subnet Calculator',
+  navSubnetDesc:'Calculate IP ranges and subnet masks',
+  liteBtn:'Fasqoo Lite', installApp:'Install for Windows',
+  footerBrand:'Fasqoo - Independent, browser-based internet speed tests and network tools.',
+  footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
+  footerWidget:'Widget', footerNetworkTools:'Network Tools', footerNetworkStatus:'Network Status',
+  footerITDiagnose:'IT Diagnostics', footerSecurity:'Security Analyzer', footerDns:'Visual DNS Test',
+  footerCompany:'Company', footerAbout:'About Us', footerFaq:'FAQ', footerPrivacy:'Privacy Policy',
+  footerCopyright:'© 2026 Fasqoo',
+  footerBranding:'Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.',
+  footerDisclaimer:'Fasqoo is an independent speed-test platform and is not an official Cloudflare product.',
+
+  heroEyebrow:'Fasqoo Gaming Monitor',
+  heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
+  heroText:'Check your latency (ping) and connection stability (jitter) to the world\'s most important gaming servers in real time before your match starts. 🎮',
+  controlTitle:'Ready for your ping check?',
+  controlText:'We measure client-side using browser requests to each provider. No install, no account, no tracking.',
+  controlProviders:'Cloudflare Edge · direct endpoint ping · no server logs',
+  startBtn:'Start ping test', stopBtn:'Stop',
+  statusStarting:'Starting measurement …', statusTesting:'Pinging {name} …',
+  statusDone:'Measurement complete', statusStopped:'Test stopped',
+  summaryScoreLabel:'Score',
+  summaryTitleExcellent:'Excellent connection for gaming',
+  summaryTitleGood:'Good connection for gaming',
+  summaryTitleMedium:'Usable, but not ideal',
+  summaryTitleBad:'High latency detected',
+  summaryTextExcellent:'All measured servers respond under 30 ms. This is a competitive-ready connection.',
+  summaryTextGood:'Most servers respond in the acceptable range. Fast-paced shooters should still feel responsive.',
+  summaryTextMedium:'Some servers respond slowly. Fast-paced games may feel laggy.',
+  summaryTextBad:'Several servers respond very slowly. Check Wi-Fi, background downloads and your router.',
+  statExcellent:'Excellent', statOk:'Acceptable', statBad:'High ping', statAvg:'Avg. ping',
+  catATitle:'E-Sports & Shooters', catAText:'The most competitive titles. Every millisecond matters here.',
+  catBTitle:'Gaming Platforms', catBText:'Launchers, stores and multiplayer networks of the big platforms.',
+  catCTitle:'Discord & Voice', catCText:'Voice chat depends more on jitter than on ping – we measure both.',
+  stateExcellent:'Excellent', stateOk:'Acceptable', stateBad:'High ping',
+  stateTesting:'Testing', stateIdle:'Idle', stateFailed:'Failed',
+  labelJitter:'Jitter', labelSamples:'Samples', ms:'ms',
+
+  copyReport:'Copy report', exportJson:'Export as JSON',
+  reportCopied:'Report copied', jsonExported:'JSON file downloaded',
+  reportNote:'Note: ping values are browser-based measurements to public provider endpoints. They may differ slightly from in-game values because game servers are geographically distributed differently.',
+
+  featKicker:'NETWORK INTELLIGENCE',
+  featTitle:'Why ping & jitter matter more than raw bandwidth',
+  featSub:'For online gaming, latency and stability matter – not the maximum download speed.',
+  feat1T:'Latency (Ping)', feat1D:'The time between your click and the server response. Under 30 ms feels instant, above 60 ms becomes noticeably sluggish.',
+  feat2T:'Jitter', feat2D:'The variation between individual measurements. High jitter causes rubberbanding and voice dropouts even if ping is low.',
+  feat3T:'Packet Loss', feat3D:'Lost packets are retransmitted – creating brief freezes and teleportation. Wi-Fi and congested routers are the most common causes.',
+  feat4T:'Router & Wi-Fi', feat4D:'A cable typically saves 5–15 ms compared to Wi-Fi. Test both and compare the values above.',
+  feat5T:'Distance to server', feat5D:'The further the game server, the higher the ping. An EU server is usually 10–40 ms away for you, US servers 90–160 ms.',
+  feat6T:'Bufferbloat', feat6D:'Fully saturated lines can double your ping. A modern router with SQM (Smart Queue Management) reduces this dramatically.',
+
+  faqKicker:'HELP CENTER',
+  faqTitle:'Frequently asked questions',
+  faqQ1:'How does the ping monitor work?',
+  faqA1:'Your browser sends small requests to public endpoints of each provider and measures the time until a response. The measurement runs entirely client-side – no credentials or user data are transmitted.',
+  faqQ2:'Why do the values differ from my game?',
+  faqA2:'We measure against general provider endpoints (e.g. Steam, Riot, Epic). The actual game server you connect to in matchmaking may be geographically different. The values here are a good indicator of general line quality.',
+  faqQ3:'What is a good ping for gaming?',
+  faqA3:'For competitive shooters (Valorant, CS2) under 30 ms is excellent, 30–60 ms acceptable. Above 60 ms becomes noticeable. For MMOs and strategy, anything under 100 ms is usually fine.',
+  faqQ4:'What is a good jitter?',
+  faqA4:'Under 5 ms is excellent. 5–15 ms is acceptable. Above 15 ms typically causes audible voice issues in Discord and rubberbanding in games.',
+  faqQ5:'Can I export the result?',
+  faqA5:'Yes. Use the buttons at the end of the measurement to copy the report as text or download it as a JSON file – e.g. for support tickets with your ISP.',
+
+  ctaTitle:'Ready for a better game feel?',
+  ctaText:'Run the test, compare your values and optimise your connection.',
+  ctaBtn:'Start ping test', ctaBtnSpeed:'Speed Test'
+};
+
+const DE = {
+  navSpeedtest:'Speedtest', navTools:'Tools & IT-Diagnose', navSectionNetwork:'Netzwerk & Speed',
+  navSectionDiag:'IT-Diagnose & Security', navFaq:'FAQ', navAbout:'Über uns', navWidget:'Widget',
+  navStatus:'Netzwerk-Status', navStatusDesc:'Live-Erreichbarkeit & Leitungs-Diagnose',
+  navWidgetDesc:'Kostenloses Test-Widget für andere Websites', navSecurity:'Security Analyzer',
+  navSecurityDesc:'HTTP-Sicherheitsheader in Echtzeit prüfen', navDns:'Visual DNS Test',
+  navDnsDesc:'Globale DNS-Ausbreitung visuell tracken', navSubnet:'Subnetz-Rechner',
+  navSubnetDesc:'IP-Bereiche und Masken kalkulieren',
+  liteBtn:'Fasqoo Lite', installApp:'Für Windows installieren',
+  footerBrand:'Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.',
+  footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
+  footerWidget:'Widget', footerNetworkTools:'Netzwerk-Tools', footerNetworkStatus:'Network Status',
+  footerITDiagnose:'IT Diagnose', footerSecurity:'Security Analyzer', footerDns:'Visual DNS Test',
+  footerCompany:'Unternehmen', footerAbout:'Über uns', footerFaq:'FAQ', footerPrivacy:'Datenschutz',
+  footerCopyright:'© 2026 Fasqoo',
+  footerBranding:'Betrieben über das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.',
+  footerDisclaimer:'Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.',
+
+  heroEyebrow:'Fasqoo Gaming-Monitor',
+  heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
+  heroText:'Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart. 🎮',
+  controlTitle:'Bereit für deinen Ping-Check?',
+  controlText:'Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.',
+  controlProviders:'Cloudflare Edge · direkter Endpunkt-Ping · keine Serverlogs',
+  startBtn:'Ping-Test starten', stopBtn:'Stoppen',
+  statusStarting:'Messung wird gestartet …', statusTesting:'Pinge {name} …',
+  statusDone:'Messung abgeschlossen', statusStopped:'Test gestoppt',
+  summaryScoreLabel:'Score',
+  summaryTitleExcellent:'Exzellente Verbindung zum Gamen',
+  summaryTitleGood:'Gute Verbindung zum Gamen',
+  summaryTitleMedium:'Nutzbar, aber nicht ideal',
+  summaryTitleBad:'Hohe Latenz erkannt',
+  summaryTextExcellent:'Alle gemessenen Server antworten unter 30 ms. Das ist eine wettbewerbstaugliche Verbindung.',
+  summaryTextGood:'Die meisten Server antworten im akzeptablen Bereich. Schnelle Shooter sollten sich noch responsiv anfühlen.',
+  summaryTextMedium:'Einige Server antworten langsam. Schnelle Spiele können sich träge anfühlen.',
+  summaryTextBad:'Mehrere Server antworten sehr langsam. Prüfe WLAN, Hintergrund-Downloads und deinen Router.',
+  statExcellent:'Exzellent', statOk:'Akzeptabel', statBad:'Hoher Ping', statAvg:'Ø Ping',
+  catATitle:'E-Sports & Shooter', catAText:'Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.',
+  catBTitle:'Gaming-Plattformen', catBText:'Launcher, Stores und Multiplayer-Netzwerke der großen Plattformen.',
+  catCTitle:'Discord & Voice', catCText:'Sprach-Chat hängt stärker vom Jitter als vom Ping ab – wir messen beides.',
+  stateExcellent:'Exzellent', stateOk:'Akzeptabel', stateBad:'Hoher Ping',
+  stateTesting:'Test läuft', stateIdle:'Bereit', stateFailed:'Fehlgeschlagen',
+  labelJitter:'Jitter', labelSamples:'Messungen', ms:'ms',
+
+  copyReport:'Bericht kopieren', exportJson:'Als JSON exportieren',
+  reportCopied:'Bericht kopiert', jsonExported:'JSON-Datei heruntergeladen',
+  reportNote:'Hinweis: Ping-Werte sind browserbasierte Messungen zu öffentlichen Endpunkten der Anbieter. Sie können leicht von den In-Game-Werten abweichen, da Spielserver geographisch anders verteilt sind.',
+
+  featKicker:'NETZWERK-INTELLIGENZ',
+  featTitle:'Warum Ping & Jitter wichtiger als rohe Bandbreite sind',
+  featSub:'Für Online-Gaming zählt Latenz und Stabilität – nicht der maximale Download.',
+  feat1T:'Latenz (Ping)', feat1D:'Die Zeit zwischen deinem Klick und der Antwort des Servers. Unter 30 ms fühlt sich „instant“ an, über 60 ms wird es spürbar träge.',
+  feat2T:'Jitter', feat2D:'Die Schwankung zwischen den einzelnen Messungen. Hoher Jitter verursacht Rubberbanding und Sprachabbrüche, auch wenn der Ping niedrig ist.',
+  feat3T:'Packet Loss', feat3D:'Verlorene Pakete werden nachgesendet – das erzeugt kurze Freezes und Teleportationen. WLAN und überlastete Router sind die häufigsten Ursachen.',
+  feat4T:'Router & WLAN', feat4D:'Ein Kabel spart typischerweise 5–15 ms gegenüber WLAN. Teste beide Varianten und vergleiche die Werte oben.',
+  feat5T:'Distanz zum Server', feat5D:'Je weiter der Spielserver entfernt ist, desto höher der Ping. Ein EU-Server liegt für dich in der Regel 10–40 ms entfernt, US-Server 90–160 ms.',
+  feat6T:'Bufferbloat', feat6D:'Voll ausgelastete Leitungen können den Ping verdoppeln. Ein moderner Router mit SQM (Smart Queue Management) reduziert das drastisch.',
+
+  faqKicker:'HILFE-CENTER',
+  faqTitle:'Häufige Fragen',
+  faqQ1:'Wie funktioniert der Ping-Monitor?',
+  faqA1:'Dein Browser sendet kleine Anfragen an öffentliche Endpunkte der jeweiligen Anbieter und misst die Zeit bis zur Antwort. Die Messung läuft vollständig clientseitig – es werden keine Zugangsdaten oder Nutzerdaten übertragen.',
+  faqQ2:'Warum weichen die Werte von meinem Spiel ab?',
+  faqA2:'Wir messen zu allgemeinen Anbieter-Endpunkten (z. B. Steam, Riot, Epic). Der eigentliche Spielserver, mit dem du dich im Matchmaking verbindest, kann geographisch anders liegen. Die Werte hier sind ein guter Indikator für die allgemeine Leitungsqualität.',
+  faqQ3:'Was ist ein guter Ping zum Gamen?',
+  faqA3:'Für kompetitive Shooter (Valorant, CS2) sind unter 30 ms exzellent, 30–60 ms akzeptabel. Über 60 ms wird es spürbar. Bei MMOs und Strategie ist alles unter 100 ms in der Regel unproblematisch.',
+  faqQ4:'Was ist ein guter Jitter?',
+  faqA4:'Unter 5 ms ist exzellent. 5–15 ms ist akzeptabel. Über 15 ms führt typischerweise zu hörbaren Sprachproblemen in Discord und zu Rubberbanding in Spielen.',
+  faqQ5:'Kann ich das Ergebnis exportieren?',
+  faqA5:'Ja. Über die Buttons am Ende der Messung kannst du den Bericht als Text kopieren oder als JSON-Datei herunterladen – z. B. für Support-Tickets bei deinem ISP.',
+
+  ctaTitle:'Bereit für ein besseres Spielgefühl?',
+  ctaText:'Starte den Test, vergleiche deine Werte und optimiere deine Verbindung.',
+  ctaBtn:'Ping-Test starten', ctaBtnSpeed:'Speed Test'
+};
+
+/* Fallback für weitere Sprachen */
+const ES = Object.assign({}, EN, {
+  heroText:'Comprueba tu latencia (ping) y estabilidad (jitter) hacia los servidores de juego más importantes en tiempo real antes de tu partida. 🎮',
+  startBtn:'Iniciar test de ping', stopBtn:'Detener',
+  stateExcellent:'Excelente', stateOk:'Aceptable', stateBad:'Ping alto',
+  stateTesting:'Probando', stateIdle:'En espera', stateFailed:'Fallido'
+});
+const FR = Object.assign({}, EN, {
+  heroText:'Vérifiez votre latence (ping) et la stabilité (jitter) vers les serveurs de jeu les plus importants en temps réel avant votre partie. 🎮',
+  startBtn:'Lancer le test', stopBtn:'Arrêter',
+  stateExcellent:'Excellent', stateOk:'Acceptable', stateBad:'Ping élevé',
+  stateTesting:'Test en cours', stateIdle:'Prêt', stateFailed:'Échoué'
+});
+const IT = Object.assign({}, EN, {
+  heroText:'Controlla la tua latenza (ping) e stabilità (jitter) verso i server di gioco più importanti in tempo reale prima della partita. 🎮',
+  startBtn:'Avvia test ping', stopBtn:'Ferma',
+  stateExcellent:'Eccellente', stateOk:'Accettabile', stateBad:'Ping alto',
+  stateTesting:'In corso', stateIdle:'Pronto', stateFailed:'Fallito'
+});
+const PT = Object.assign({}, EN, {
+  heroText:'Verifique a sua latência (ping) e estabilidade (jitter) para os servidores de jogos mais importantes em tempo real antes da partida. 🎮',
+  startBtn:'Iniciar teste', stopBtn:'Parar',
+  stateExcellent:'Excelente', stateOk:'Aceitável', stateBad:'Ping alto',
+  stateTesting:'A testar', stateIdle:'Pronto', stateFailed:'Falhou'
+});
+const NL = Object.assign({}, EN, {
+  heroText:'Controleer je latentie (ping) en stabiliteit (jitter) naar de belangrijkste gameservers in realtime voordat je potje begint. 🎮',
+  startBtn:'Start ping-test', stopBtn:'Stop',
+  stateExcellent:'Uitstekend', stateOk:'Acceptabel', stateBad:'Hoge ping',
+  stateTesting:'Testen', stateIdle:'Gereed', stateFailed:'Mislukt'
+});
+const TR = Object.assign({}, EN, {
+  heroText:'Oyun başlamadan önce en önemli oyun sunucularına olan gecikmenizi (ping) ve kararlılığınızı (jitter) gerçek zamanlı ölçün. 🎮',
+  startBtn:'Ping testini başlat', stopBtn:'Durdur',
+  stateExcellent:'Mükemmel', stateOk:'Kabul edilebilir', stateBad:'Yüksek ping',
+  stateTesting:'Test ediliyor', stateIdle:'Hazır', stateFailed:'Başarısız'
+});
+const SQ = Object.assign({}, EN, {
+  heroText:'Kontrollo latencën (ping) dhe qëndrueshmërinë (jitter) ndaj serverëve më të rëndësishëm të lojërave në kohë reale para ndeshjes. 🎮',
+  startBtn:'Fillo testin e ping-ut', stopBtn:'Ndal',
+  stateExcellent:'Shkëlqyeshëm', stateOk:'I pranueshëm', stateBad:'Ping i lartë',
+  stateTesting:'Duke testuar', stateIdle:'Gati', stateFailed:'Dështoi'
+});
+const PL = Object.assign({}, EN, {
+  heroText:'Sprawdź swoje opóźnienie (ping) i stabilność (jitter) do najważniejszych serwerów gier w czasie rzeczywistym przed rozpoczęciem meczu. 🎮',
+  startBtn:'Rozpocznij test ping', stopBtn:'Zatrzymaj',
+  stateExcellent:'Doskonały', stateOk:'Akceptowalny', stateBad:'Wysoki ping',
+  stateTesting:'Testowanie', stateIdle:'Gotowy', stateFailed:'Niepowodzenie'
+});
+
+const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, pl:PL };
+
+/* ===================================================================
+   MODERN SVG ICONS FOR GAME CARDS
+   =================================================================== */
+function ico(key){
+  const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  const icons = {
+    /* Valorant – crosshair / target */
+    valorant:'<svg '+S+'><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><line x1="12" y1="1.5" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22.5" y2="12"/></svg>',
+    /* CS2 – rifle */
+    cs2:'<svg '+S+'><path d="M2.5 14.5h9.5l2.2-2.2h6.8v3h-2.4l-1.4 2.6H7.8l-2.2-1.4H2.5z"/><path d="M7 14.5v3.4"/><path d="M5 11h3.5"/><circle cx="18.4" cy="13.6" r="0.9" fill="currentColor" stroke="none"/></svg>',
+    /* Apex – lightning */
+    apex:'<svg '+S+'><path d="M13 2 4 14h7l-1 8 10-13h-7l0-7z"/></svg>',
+    /* Fortnite – tower / build */
+    fortnite:'<svg '+S+'><rect x="4" y="10" width="6" height="11" rx="1"/><rect x="14" y="3" width="6" height="18" rx="1"/><path d="M4 5l6 3"/><path d="M14 21l6-3"/></svg>',
+    /* Steam – valve wheel */
+    steam:'<svg '+S+'><circle cx="12" cy="12" r="9.2"/><circle cx="15.2" cy="9.2" r="2.8"/><circle cx="15.2" cy="9.2" r="0.9" fill="currentColor" stroke="none"/><path d="M3 14l4.5 2a2.3 2.3 0 0 1 4.4 0.8"/><circle cx="8" cy="16.2" r="2.1"/></svg>',
+    /* Xbox – circle with x */
+    xbox:'<svg '+S+'><circle cx="12" cy="12" r="9.2"/><path d="M6.2 6.2c3 1.6 6.4 4.2 11.6 11.6"/><path d="M17.8 6.2C14.8 7.8 11.4 10.4 6.2 17.8"/></svg>',
+    /* PlayStation – shapes */
+    psn:'<svg '+S+'><path d="M9.5 3.5v17"/><path d="M9.5 6.5c3 0 5.5 1 5.5 3.4 0 2.1-1.6 3.3-3.8 3.6"/><path d="M3 20l18-3.2"/><path d="M14 10.5l4.5 4.2"/></svg>',
+    /* Nintendo – joy-con */
+    nintendo:'<svg '+S+'><rect x="3" y="4" width="7.5" height="16" rx="3.5"/><rect x="13.5" y="4" width="7.5" height="16" rx="3.5"/><circle cx="6.8" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="17.2" cy="15" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* Discord – speech bubble with dots */
+    discord:'<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v9A2.5 2.5 0 0 1 17.5 17H9.4l-4.3 3.6A.7.7 0 0 1 4 20.1V5.5Z"/><circle cx="9.5" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="10.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* TeamSpeak – headset */
+    teamspeak:'<svg '+S+'><path d="M4 13V9a8 8 0 0 1 16 0v4"/><rect x="2.5" y="12" width="4" height="6" rx="1.4"/><rect x="17.5" y="12" width="4" height="6" rx="1.4"/><path d="M19 18a4 4 0 0 1-4 3h-2"/><circle cx="12" cy="21" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* Mumble – microphone */
+    mumble:'<svg '+S+'><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 12a6.5 6.5 0 0 0 13 0"/><path d="M12 18.5V22"/><path d="M8.5 22h7"/></svg>'
+  };
+  return icons[key] || '';
+}
+
+/* ===================================================================
+   GAME CATALOG
+   =================================================================== */
+const GAMES = [
+  { id:'valorant',  cat:'shooter',  name:'Valorant',             provider:'Riot Games',    icon:'valorant',  url:'https://www.riotgames.com/favicon.ico' },
+  { id:'cs2',       cat:'shooter',  name:'Counter-Strike 2',     provider:'Valve',         icon:'cs2',       url:'https://store.steampowered.com/favicon.ico' },
+  { id:'apex',      cat:'shooter',  name:'Apex Legends',         provider:'EA',            icon:'apex',      url:'https://www.ea.com/favicon.ico' },
+  { id:'fortnite',  cat:'shooter',  name:'Fortnite',             provider:'Epic Games',    icon:'fortnite',  url:'https://www.epicgames.com/favicon.ico' },
+
+  { id:'steam',     cat:'platform', name:'Steam',                provider:'Valve',         icon:'steam',     url:'https://store.steampowered.com/favicon.ico' },
+  { id:'xbox',      cat:'platform', name:'Xbox Live',            provider:'Microsoft',     icon:'xbox',      url:'https://www.xbox.com/favicon.ico' },
+  { id:'psn',       cat:'platform', name:'PlayStation Network',  provider:'Sony',          icon:'psn',       url:'https://www.playstation.com/favicon.ico' },
+  { id:'nintendo',  cat:'platform', name:'Nintendo Online',      provider:'Nintendo',      icon:'nintendo',  url:'https://www.nintendo.com/favicon.ico' },
+
+  { id:'discord',   cat:'voice',    name:'Discord Europe',       provider:'Discord',       icon:'discord',   url:'https://discord.com/favicon.ico' },
+  { id:'teamspeak', cat:'voice',    name:'TeamSpeak',            provider:'TeamSpeak',     icon:'teamspeak', url:'https://www.teamspeak.com/favicon.ico' },
+  { id:'mumble',    cat:'voice',    name:'Mumble',               provider:'Mumble',        icon:'mumble',    url:'https://www.mumble.info/favicon.ico' }
+];
+
+/* ===================================================================
+   STATE
+   =================================================================== */
+const SAMPLES_PER_TARGET = 5;
+const TIMEOUT_MS = 6000;
+const state = { running:false, abort:false, results:{} };
+
+/* ===================================================================
+   UTILS
+   =================================================================== */
+const $ = id => document.getElementById(id);
+function t(key, vars){
+  const lang = ($('lang') && $('lang').value) || 'en';
+  const dict = I18N[lang] || I18N.en;
+  let s = dict[key] !== undefined ? dict[key] : (EN[key] !== undefined ? EN[key] : key);
+  if (vars) Object.keys(vars).forEach(k => { s = s.replace('{' + k + '}', vars[k]); });
+  return s;
+}
+function median(arr){
+  if (!arr.length) return NaN;
+  const a = [...arr].sort((x,y)=>x-y);
+  const pos = (a.length-1)*0.5;
+  const lo = Math.floor(pos), hi = Math.ceil(pos);
+  return lo===hi ? a[lo] : a[lo] + (a[hi]-a[lo])*(pos-lo);
+}
+
+/* ===================================================================
+   PING ENGINE
+   =================================================================== */
+async function pingOnce(url, timeoutMs){
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const start = performance.now();
+  const bust = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now() + Math.random();
+  try{
+    await fetch(bust, {
+      method:'GET', mode:'no-cors', cache:'no-store',
+      credentials:'omit', redirect:'follow', signal:controller.signal
+    });
+    return performance.now() - start;
+  }catch(e){ return null; }
+  finally{ clearTimeout(timer); }
+}
+
+async function measureTarget(game, onProgress){
+  const samples = [];
+  for (let i=0; i<SAMPLES_PER_TARGET; i++){
+    if (state.abort) break;
+    const ms = await pingOnce(game.url, TIMEOUT_MS);
+    if (ms !== null && Number.isFinite(ms) && ms > 0){
+      samples.push(ms);
+      if (onProgress) onProgress({ game, sample: ms, index: i, count: SAMPLES_PER_TARGET });
+    }
+    if (i < SAMPLES_PER_TARGET-1) await new Promise(r => setTimeout(r, 120));
+  }
+  if (!samples.length) return { id:game.id, game, ping:null, jitter:null, samples:[], status:'failed' };
+  const ping = median(samples);
+  let jitter = 0;
+  if (samples.length > 1){
+    const deltas = [];
+    for (let i=1; i<samples.length; i++) deltas.push(Math.abs(samples[i]-samples[i-1]));
+    jitter = median(deltas);
+  }
+  let status = 'bad';
+  if (ping < 30) status = 'excellent';
+  else if (ping < 60) status = 'ok';
+  return { id:game.id, game, ping, jitter, samples, status };
+}
+
+/* ===================================================================
+   RENDER
+   =================================================================== */
+function statusLabel(status){
+  if (status === 'excellent') return t('stateExcellent');
+  if (status === 'ok')        return t('stateOk');
+  if (status === 'bad')       return t('stateBad');
+  if (status === 'testing')   return t('stateTesting');
+  if (status === 'failed')    return t('stateFailed');
+  return t('stateIdle');
+}
+
+function renderCard(game){
+  const r = state.results[game.id];
+  const status = r ? r.status : 'idle';
+  const pingVal = r && Number.isFinite(r.ping) ? r.ping.toFixed(0) : '—';
+  const jitterVal = r && Number.isFinite(r.jitter) ? r.jitter.toFixed(1) : '—';
+  const samplesVal = r && r.samples ? r.samples.length : 0;
+  const isTesting = r && r.status === 'testing';
+  const cls = isTesting ? 'state-testing' : ('state-' + status);
+
+  const pingBlock = isTesting
+    ? '<div class="game-ping"><span class="num">…</span><span class="spinner"></span></div>'
+    : '<div class="game-ping"><span class="num">' + pingVal + '</span><span class="unit">' +
+      (status !== 'idle' && status !== 'failed' ? t('ms') : '') + '</span></div>';
+
+  const jitterBlock = (status === 'idle' || status === 'failed' || isTesting)
+    ? ''
+    : '<span>' + t('labelJitter') + ': <b>' + jitterVal + ' ' + t('ms') + '</b></span>' +
+      '<span>' + t('labelSamples') + ': <b>' + samplesVal + '/' + SAMPLES_PER_TARGET + '</b></span>';
+
+  return (
+    '<div class="game-card ' + cls + '" data-id="' + game.id + '">' +
+      '<div class="game-top">' +
+        '<div class="game-icon" aria-hidden="true">' + ico(game.icon) + '</div>' +
+        '<div class="game-meta">' +
+          '<div class="game-name">' + game.name + '</div>' +
+          '<div class="game-provider">' + game.provider + '</div>' +
+        '</div>' +
+      '</div>' +
+      pingBlock +
+      '<div class="game-stats">' + jitterBlock + '</div>' +
+      '<div class="badge ' + cls + '"><span class="dot"></span>' + statusLabel(status) + '</div>' +
+    '</div>'
+  );
+}
+
+function renderGrids(){
+  const shooter  = GAMES.filter(g => g.cat === 'shooter').map(renderCard).join('');
+  const platform = GAMES.filter(g => g.cat === 'platform').map(renderCard).join('');
+  const voice    = GAMES.filter(g => g.cat === 'voice').map(renderCard).join('');
+  const gs = $('gridShooter'), gp = $('gridPlatform'), gv = $('gridVoice');
+  if (gs) gs.innerHTML = shooter;
+  if (gp) gp.innerHTML = platform;
+  if (gv) gv.innerHTML = voice;
+}
+
+function updateCard(id){
+  const card = document.querySelector('.game-card[data-id="' + id + '"]');
+  if (!card) return;
+  const game = GAMES.find(g => g.id === id);
+  if (!game) return;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderCard(game);
+  card.replaceWith(tmp.firstChild);
+}
+
+/* ===================================================================
+   SUMMARY
+   =================================================================== */
+function renderSummary(){
+  const all = GAMES.map(g => state.results[g.id]).filter(Boolean);
+  const valid = all.filter(r => Number.isFinite(r.ping));
+  let excellent = 0, ok = 0, bad = 0;
+  valid.forEach(r => {
+    if (r.status === 'excellent') excellent++;
+    else if (r.status === 'ok') ok++;
+    else bad++;
+  });
+  const failed = all.length - valid.length;
+  const avgPing = valid.length ? valid.reduce((s,r)=>s+r.ping,0)/valid.length : NaN;
+  const validJ = valid.filter(r => Number.isFinite(r.jitter));
+  const avgJitter = validJ.length ? validJ.reduce((s,r)=>s+r.jitter,0)/validJ.length : NaN;
+  const score = valid.length
+    ? Math.round((excellent*100 + ok*60 + bad*20) / (valid.length + failed))
+    : 0;
+
+  let titleKey = 'summaryTitleBad', textKey = 'summaryTextBad', color = '#ef4444';
+  if (avgPing < 30 && avgJitter < 5){ titleKey='summaryTitleExcellent'; textKey='summaryTextExcellent'; color='#22c55e'; }
+  else if (avgPing < 50 && avgJitter < 12){ titleKey='summaryTitleGood'; textKey='summaryTextGood'; color='#22c55e'; }
+  else if (avgPing < 90){ titleKey='summaryTitleMedium'; textKey='summaryTextMedium'; color='#eab308'; }
+
+  const R = 54, C = 2 * Math.PI * R;
+  const off = C * (1 - score / 100);
+
+  $('summaryScore').textContent = score;
+  $('summaryScore').style.color = color;
+  $('summaryTitle').textContent = t(titleKey);
+  $('summaryText').textContent = t(textKey);
+  $('statExcellent').textContent = excellent;
+  $('statOk').textContent = ok;
+  $('statBad').textContent = bad;
+  $('statAvg').textContent = Number.isFinite(avgPing) ? avgPing.toFixed(0) + ' ' + t('ms') : '—';
+
+  const fill = $('summaryFill');
+  fill.style.stroke = color;
+  fill.style.strokeDasharray = C.toFixed(2);
+  fill.style.strokeDashoffset = C.toFixed(2);
+  requestAnimationFrame(() => { fill.style.strokeDashoffset = off.toFixed(2); });
+
+  $('summary').classList.add('show');
+  $('exportSection').style.display = '';
+}
+
+/* ===================================================================
+   STATUS
+   =================================================================== */
+function setStatus(kind, text){
+  const el = $('status');
+  el.className = 'status show ' + kind;
+  el.innerHTML = (kind === 'info')
+    ? '<span class="spinner"></span><span>' + text + '</span>'
+    : '<span>' + text + '</span>';
+}
+function hideStatus(){
+  const el = $('status');
+  el.className = 'status';
+  el.innerHTML = '';
+}
+
+/* ===================================================================
+   RUN TEST
+   =================================================================== */
+async function runTest(){
+  if (state.running) return;
+  state.running = true;
+  state.abort = false;
+  state.results = {};
+  renderGrids();
+  $('summary').classList.remove('show');
+  $('exportSection').style.display = 'none';
+  $('startBtn').disabled = true;
+  $('stopBtn').disabled = false;
+  setStatus('info', t('statusStarting'));
+  await new Promise(r => setTimeout(r, 250));
+
+  for (const game of GAMES){
+    if (state.abort) break;
+    setStatus('info', t('statusTesting', { name: game.name }));
+    state.results[game.id] = { id:game.id, game, ping:null, jitter:null, samples:[], status:'testing' };
+    updateCard(game.id);
+
+    const result = await measureTarget(game, ({ sample }) => {
+      const r = state.results[game.id];
+      if (!r) return;
+      r.samples.push(sample);
+      if (r.samples.length >= 2){
+        const pingNow = median(r.samples);
+        const deltas = [];
+        for (let i=1; i<r.samples.length; i++) deltas.push(Math.abs(r.samples[i]-r.samples[i-1]));
+        r.ping = pingNow;
+        r.jitter = median(deltas);
+        r.status = pingNow < 30 ? 'excellent' : (pingNow < 60 ? 'ok' : 'bad');
+        updateCard(game.id);
+      }
+    });
+
+    state.results[game.id] = result;
+    updateCard(game.id);
+    await new Promise(r => setTimeout(r, 80));
+  }
+
+  state.running = false;
+  $('startBtn').disabled = false;
+  $('stopBtn').disabled = true;
+
+  if (state.abort){
+    setStatus('error', t('statusStopped'));
+    setTimeout(() => hideStatus(), 2200);
+    return;
+  }
+
+  renderSummary();
+  setStatus('success', t('statusDone'));
+  setTimeout(() => hideStatus(), 2400);
+}
+
+/* ===================================================================
+   THEME
+   =================================================================== */
+const MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const SUN_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+
+function setTheme(dark){
+  document.body.classList.toggle('dark', dark);
+  $('themeBtn').innerHTML = dark ? SUN_SVG : MOON_SVG;
+  const tc = $('themeColor');
+  if (tc) tc.setAttribute('content', dark ? '#090c10' : '#ffffff');
+  try { localStorage.setItem('fasqoo_dark', dark); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('fasqoo_dark'); } catch(e){}
+  setTheme(saved === 'true');
+})();
+$('themeBtn').addEventListener('click', () => {
+  setTheme(!document.body.classList.contains('dark'));
+});
+
+/* ===================================================================
+   LANGUAGE
+   =================================================================== */
+function applyLang(lang){
+  const safe = I18N[lang] ? lang : 'en';
+  document.documentElement.lang = safe;
+  const dict = I18N[safe];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (dict[k] !== undefined) el.textContent = dict[k];
+  });
+  try { localStorage.setItem('fasqoo_lang', safe); } catch(e){}
+  renderGrids();
+  if ($('summary').classList.contains('show')) renderSummary();
+}
+(function initLang(){
+  let saved = null;
+  try { saved = localStorage.getItem('fasqoo_lang'); } catch(e){}
+  if (!saved){
+    const nav = (navigator.language || 'en').toLowerCase().split('-')[0];
+    saved = I18N[nav] ? nav : 'en';
+  }
+  if (!I18N[saved]) saved = 'en';
+  $('lang').value = saved;
+  applyLang(saved);
+})();
+$('lang').addEventListener('change', e => applyLang(e.target.value));
+
+/* ===================================================================
+   MENU
+   =================================================================== */
+const menuToggle = $('menuToggle');
+const mainMenu = $('mainMenu');
+if (menuToggle && mainMenu){
+  menuToggle.addEventListener('click', () => {
+    const open = mainMenu.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+const toolsDropdown = $('toolsDropdown');
+const toolsToggle = toolsDropdown ? toolsDropdown.querySelector('.nav-dropdown-toggle') : null;
+if (toolsToggle){
+  toolsToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = toolsDropdown.classList.toggle('open');
+    toolsToggle.setAttribute('aria-expanded', String(open));
+  });
+  if (toolsDropdown){
+    toolsDropdown.querySelectorAll('.nav-dropdown-menu a').forEach(a => a.addEventListener('click', () => {
+      toolsDropdown.classList.remove('open');
+      toolsToggle.setAttribute('aria-expanded','false');
+      if (mainMenu) mainMenu.classList.remove('active');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded','false');
+    }));
+  }
+  document.addEventListener('click', e => {
+    if (toolsDropdown && !toolsDropdown.contains(e.target)){
+      toolsDropdown.classList.remove('open');
+      toolsToggle.setAttribute('aria-expanded','false');
+    }
+  });
+}
+
+/* ===================================================================
+   TOAST & COPY / EXPORT
+   =================================================================== */
+function showToast(msg){
+  const toast = $('toast');
+  $('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+function copyText(text){
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(
+      () => showToast(t('reportCopied')),
+      () => fallbackCopy(text)
+    );
+  } else fallbackCopy(text);
+}
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast(t('reportCopied')); }
+  catch(e){ showToast('Copy failed'); }
+  document.body.removeChild(ta);
+}
+
+$('copyReport').addEventListener('click', () => {
+  const lines = [];
+  lines.push('Fasqoo Gaming & Ping Monitor');
+  lines.push('Generated: ' + new Date().toLocaleString());
+  lines.push('');
+  GAMES.forEach(g => {
+    const r = state.results[g.id];
+    if (!r) return;
+    if (Number.isFinite(r.ping)){
+      lines.push(
+        g.name + ' (' + g.provider + '): ' +
+        r.ping.toFixed(0) + ' ms · Jitter ' + r.jitter.toFixed(1) + ' ms · ' +
+        statusLabel(r.status) + ' · ' + r.samples.length + '/' + SAMPLES_PER_TARGET + ' samples'
+      );
+    } else {
+      lines.push(g.name + ' (' + g.provider + '): unreachable');
+    }
+  });
+  copyText(lines.join('\n'));
+});
+
+$('exportJson').addEventListener('click', () => {
+  const report = {
+    tool:'Fasqoo Gaming & Ping Monitor',
+    generatedAt:new Date().toISOString(),
+    samplesPerTarget:SAMPLES_PER_TARGET,
+    results:GAMES.map(g => {
+      const r = state.results[g.id];
+      if (!r) return { id:g.id, name:g.name, provider:g.provider, status:'not-tested' };
+      return {
+        id:g.id, name:g.name, provider:g.provider, category:g.cat,
+        endpoint:g.url,
+        pingMs:Number.isFinite(r.ping) ? Math.round(r.ping*10)/10 : null,
+        jitterMs:Number.isFinite(r.jitter) ? Math.round(r.jitter*10)/10 : null,
+        samples:r.samples.map(v => Math.round(v*10)/10),
+        status:r.status
+      };
+    })
+  };
+  const blob = new Blob([JSON.stringify(report, null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fasqoo-ping-report-' + Date.now() + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  showToast(t('jsonExported'));
+});
+
+/* ===================================================================
+   WIRING
+   =================================================================== */
+$('startBtn').addEventListener('click', runTest);
+$('stopBtn').addEventListener('click', () => { state.abort = true; });
+
+/* ===================================================================
+   INSTALL BUTTON (Windows PWA)
+   =================================================================== */
+let deferredInstallPrompt = null;
+const installButton = $('installButton');
+function isWindowsDesktop(){
+  return /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
+}
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function updateInstallButton(){
+  if (!installButton) return;
+  installButton.hidden = !isWindowsDesktop() || isStandalone();
+}
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButton();
+});
+if (installButton){
+  installButton.addEventListener('click', async () => {
+    if (deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try { await deferredInstallPrompt.userChoice; }catch(e){}
+      deferredInstallPrompt = null;
+      updateInstallButton();
+      return;
+    }
+    alert('Install is available in Chrome/Edge via the install icon in the address bar or browser menu.');
+  });
+}
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
+updateInstallButton();
+
+/* ===================================================================
+   INIT
+   =================================================================== */
+renderGrids();
+</script>
+</body>
+</html>
