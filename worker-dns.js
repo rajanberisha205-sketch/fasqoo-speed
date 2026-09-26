@@ -1,190 +1,329 @@
-/**
- * Fasqoo DNS Propagation Worker
- * -----------------------------------------------------------------
- * Endpoint:  GET /?domain=example.com&type=A
- * Antwort:   JSON { domain, type, results: [ { id, city, country, resolver, values, latency, status } ] }
- * CORS:      OPTIONS + GET von jeder Origin.
- * -----------------------------------------------------------------
- */
-
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, OPTIONS',
-  'Access-Control-Allow-Headers': '*',
-  'Access-Control-Expose-Headers': '*',
-  'Access-Control-Max-Age': '86400',
-  'Vary': 'Origin'
-};
-
-const CITIES = [
-  { id:'fra', city:'Frankfurt',     country:'DE', flag:'🇩🇪', resolver:'cloudflare' },
-  { id:'lhr', city:'London',        country:'GB', flag:'🇬🇧', resolver:'google'     },
-  { id:'ams', city:'Amsterdam',     country:'NL', flag:'🇳🇱', resolver:'opendns'    },
-  { id:'nyc', city:'New York',      country:'US', flag:'🇺🇸', resolver:'cloudflare' },
-  { id:'yyz', city:'Toronto',       country:'CA', flag:'🇨🇦', resolver:'google'     },
-  { id:'sfo', city:'San Francisco', country:'US', flag:'🇺🇸', resolver:'opendns'    },
-  { id:'lax', city:'Los Angeles',   country:'US', flag:'🇺🇸', resolver:'cloudflare' },
-  { id:'gru', city:'São Paulo',     country:'BR', flag:'🇧🇷', resolver:'google'     },
-  { id:'cpt', city:'Cape Town',     country:'ZA', flag:'🇿🇦', resolver:'cloudflare' },
-  { id:'jnb', city:'Johannesburg',  country:'ZA', flag:'🇿🇦', resolver:'opendns'    },
-  { id:'dxb', city:'Dubai',         country:'AE', flag:'🇦🇪', resolver:'cloudflare' },
-  { id:'bom', city:'Mumbai',        country:'IN', flag:'🇮🇳', resolver:'google'     },
-  { id:'sin', city:'Singapore',     country:'SG', flag:'🇸🇬', resolver:'cloudflare' },
-  { id:'nrt', city:'Tokyo',         country:'JP', flag:'🇯🇵', resolver:'google'     },
-  { id:'syd', city:'Sydney',        country:'AU', flag:'🇦🇺', resolver:'opendns'    }
-];
-
-const RESOLVERS = {
-  cloudflare: {
-    name: 'Cloudflare',
-    /* Cloudflare DoH JSON endpoint */
-    url:  (d, tp) => `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(d)}&type=${tp}`,
-    headers: { 'Accept': 'application/dns-json' }
-  },
-  google: {
-    name: 'Google',
-    url:  (d, tp) => `https://dns.google/resolve?name=${encodeURIComponent(d)}&type=${tp}`,
-    headers: {}
-  },
-  opendns: {
-    name: 'OpenDNS',
-    /* OpenDNS does not offer a public JSON DoH endpoint with CORS;
-       we use Cloudflare as a stand-in resolver for that region. */
-    url:  (d, tp) => `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(d)}&type=${tp}`,
-    headers: { 'Accept': 'application/dns-json' }
-  }
-};
-
-function jsonResponse(data, status = 200){
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: Object.assign(
-      { 'Content-Type': 'application/json; charset=utf-8' },
-      CORS_HEADERS
-    )
-  });
-}
-
-function normalizeDomain(input){
-  if (!input || typeof input !== 'string') return null;
-  let d = input.trim().toLowerCase();
-  /* Strip protocol and path */
-  d = d.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-  if (!/^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$/i.test(d)) return null;
-  return d;
-}
-
-function normalizeType(input){
-  const allowed = ['A','AAAA','CNAME','MX','TXT','NS'];
-  if (!input) return 'A';
-  const up = String(input).trim().toUpperCase();
-  return allowed.includes(up) ? up : 'A';
-}
-
-async function queryDoH(domain, type, resolverKey){
-  const resolver = RESOLVERS[resolverKey] || RESOLVERS.cloudflare;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
-  const t0 = Date.now();
-
-  try {
-    const resp = await fetch(resolver.url(domain, type), {
-      method: 'GET',
-      redirect: 'follow',
-      signal: controller.signal,
-      headers: Object.assign(
-        { 'User-Agent': 'Fasqoo-DNS-Checker/1.0 (+https://www.fasqoo.com/dns-checker.html)' },
-        resolver.headers
-      )
-    });
-    const latency = Date.now() - t0;
-    if (!resp.ok) return { values: [], latency, status: 'error' };
-    const data = await resp.json();
-
-    let values = [];
-    if (Array.isArray(data.Answer)){
-      values = data.Answer
-        .filter(a => {
-          /* Filter to matching type when possible */
-          const typeNum = a.type;
-          const map = { A:1, NS:2, CNAME:5, MX:15, TXT:16, AAAA:28 };
-          return typeNum === map[type] || typeNum === 5 /* include CNAME chain */;
-        })
-        .map(a => {
-          let v = a.data;
-          /* Clean TXT quotes */
-          if (typeof v === 'string' && v.startsWith('"') && v.endsWith('"')) v = v.slice(1, -1);
-          return v;
-        });
-    }
-
-    /* Google returns 'data' or 'data' with different casing; already handled above */
-
-    return {
-      values,
-      latency,
-      status: values.length ? 'success' : 'error'
-    };
-  } catch (e){
-    return { values: [], latency: 0, status: 'error' };
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 export default {
-  async fetch(request){
-    /* CORS preflight */
-    if (request.method === 'OPTIONS'){
-      return new Response(null, { status: 204, headers: CORS_HEADERS });
+  async fetch(request) {
+
+    const cors = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Cache-Control': 'no-store'
+    };
+
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: cors
+      });
     }
-    if (request.method !== 'GET'){
-      return jsonResponse({ ok: false, error: 'method-not-allowed' }, 405);
+
+    if (request.method !== 'GET') {
+      return json(
+        {
+          error: 'method_not_allowed'
+        },
+        405,
+        cors
+      );
     }
 
     const url = new URL(request.url);
 
-    /* Health check */
-    if (!url.searchParams.has('domain')){
-      return jsonResponse({
-        ok: true,
-        service: 'Fasqoo DNS Propagation Worker',
-        version: '1.0',
-        usage: 'GET /?domain=example.com&type=A',
-        docs: 'https://www.fasqoo.com/dns-checker.html'
-      });
+    const domain = normalizeDomain(
+      url.searchParams.get('domain') || ''
+    );
+
+    const type =
+      String(
+        url.searchParams.get('type') || 'A'
+      ).toUpperCase();
+
+    const resolverParam =
+      String(
+        url.searchParams.get('resolver') || 'all'
+      ).toLowerCase();
+
+    const allowedTypes =
+      new Set([
+        'A',
+        'AAAA',
+        'CNAME',
+        'MX',
+        'TXT',
+        'NS'
+      ]);
+
+    if (!isValidDomain(domain)) {
+      return json(
+        {
+          error: 'invalid_domain'
+        },
+        400,
+        cors
+      );
     }
 
-    const domain = normalizeDomain(url.searchParams.get('domain'));
-    const type   = normalizeType(url.searchParams.get('type'));
-
-    if (!domain){
-      return jsonResponse({ ok: false, error: 'invalid-domain' }, 400);
+    if (!allowedTypes.has(type)) {
+      return json(
+        {
+          error: 'unsupported_type'
+        },
+        400,
+        cors
+      );
     }
 
-    /* Query all cities in parallel */
-    const tasks = CITIES.map(async c => {
-      const r = await queryDoH(domain, type, c.resolver);
-      return {
-        id: c.id,
-        city: c.city,
-        country: c.country,
-        flag: c.flag,
-        resolver: RESOLVERS[c.resolver].name,
-        values: r.values,
-        latency: r.latency,
-        status: r.status
-      };
-    });
+    const resolvers = {
+      cloudflare: {
+        name: 'Cloudflare',
+        url: 'https://cloudflare-dns.com/dns-query'
+      },
 
-    const results = await Promise.all(tasks);
+      google: {
+        name: 'Google',
+        url: 'https://dns.google/resolve'
+      },
 
-    return jsonResponse({
-      ok: true,
-      domain,
-      type,
-      resolvedAt: new Date().toISOString(),
-      results
-    }, 200);
+      opendns: {
+        name: 'OpenDNS',
+        url: 'https://doh.opendns.com/dns-query'
+      }
+    };
+
+    const names =
+      resolverParam === 'all'
+        ? Object.keys(resolvers)
+        : resolverParam
+            .split(',')
+            .map(
+              value=>value.trim()
+            )
+            .filter(
+              value=>resolvers[value]
+            );
+
+    if (!names.length) {
+      return json(
+        {
+          error: 'invalid_resolver'
+        },
+        400,
+        cors
+      );
+    }
+
+    const results =
+      await Promise.all(
+        names.map(
+          async resolverKey=>{
+
+            const resolver=
+              resolvers[resolverKey];
+
+            const started=
+              performance.now();
+
+            try{
+
+              const endpoint=
+                new URL(resolver.url);
+
+              endpoint.searchParams.set(
+                'name',
+                domain
+              );
+
+              endpoint.searchParams.set(
+                'type',
+                type
+              );
+
+              const response=
+                await fetch(
+                  endpoint.toString(),
+                  {
+                    method:'GET',
+                    headers:{
+                      'accept':
+                        'application/dns-json'
+                    },
+                    cf:{
+                      cacheTtl:0,
+                      cacheEverything:false
+                    }
+                  }
+                );
+
+              const latency=
+                Math.max(
+                  0,
+                  Math.round(
+                    performance.now()-
+                    started
+                  )
+                );
+
+              if(!response.ok){
+                throw new Error(
+                  `upstream_${response.status}`
+                );
+              }
+
+              const data=
+                await response.json();
+
+              const values=
+                extractValues(
+                  data,
+                  type
+                );
+
+              return {
+                resolver:resolver.name,
+                resolverKey,
+                latency,
+                status:
+                  values.length
+                    ? 'success'
+                    : 'error',
+                values,
+                authoritative:
+                  Boolean(data.AD),
+                responseCode:
+                  Number.isInteger(data.Status)
+                    ? data.Status
+                    : null,
+                source:
+                  'dns-over-https',
+                edge:
+                  request.cf?.colo || null
+              };
+
+            }catch(error){
+
+              return {
+                resolver:resolver.name,
+                resolverKey,
+                latency:null,
+                status:'error',
+                values:[],
+                error:'resolver_unavailable',
+                source:'dns-over-https',
+                edge:
+                  request.cf?.colo || null
+              };
+            }
+          }
+        )
+      );
+
+    return json(
+      {
+        ok:
+          results.some(
+            result=>
+              result.status==='success'
+          ),
+
+        domain,
+        type,
+
+        workerEdge:
+          request.cf?.colo || null,
+
+        results,
+
+        generatedAt:
+          new Date().toISOString()
+      },
+      200,
+      cors
+    );
   }
 };
+
+function normalizeDomain(value){
+
+  return value
+    .trim()
+    .replace(
+      /^https?:\/\//i,
+      ''
+    )
+    .split('/')[0]
+    .replace(/\.$/,'')
+    .toLowerCase();
+}
+
+function isValidDomain(value){
+
+  if(
+    value.length<1 ||
+    value.length>253
+  ){
+    return false;
+  }
+
+  if(value.includes('..')){
+    return false;
+  }
+
+  return /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i.test(value);
+}
+
+function extractValues(data,type){
+
+  const answers=
+    Array.isArray(data?.Answer)
+      ? data.Answer
+      : [];
+
+  return answers
+    .filter(
+      answer=>
+        Number(answer.type)===
+        dnsTypeCode(type)
+    )
+    .map(
+      answer=>
+        String(
+          answer.data ?? ''
+        )
+        .trim()
+    )
+    .filter(Boolean)
+    .map(cleanDnsValue);
+}
+
+function cleanDnsValue(value){
+
+  return value
+    .replace(/\.$/,'')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function dnsTypeCode(type){
+
+  return {
+    A:1,
+    NS:2,
+    CNAME:5,
+    MX:15,
+    TXT:16,
+    AAAA:28
+  }[type];
+}
+
+function json(payload,status,headers){
+
+  return new Response(
+    JSON.stringify(payload),
+    {
+      status,
+      headers:{
+        'Content-Type':
+          'application/json; charset=utf-8',
+        ...headers
+      }
+    }
+  );
+}
