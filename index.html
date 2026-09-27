@@ -35,16 +35,20 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://www.fasqoo.com/#website","name":"Fasqoo","url":"https://www.fasqoo.com/","publisher":{"@id":"https://www.fasqoo.com/#organization"},"inLanguage":"en"}
 </script>
+  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-N4DXJXZ8');</script>
+<!-- End Google Tag Manager -->
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4DXJXZ8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <header>
   <div class="wrap nav">
     <div class="brand">
@@ -79,6 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="nav-mega-column">
             <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
+            <!-- Netzwerk-Status · Globe Icon -->
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -93,6 +98,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Speed-Widget · Widget-Grid Icon -->
             <a class="nav-mega-item" href="widget.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -108,6 +114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Gaming- & Ping-Monitor · Gamepad Icon -->
             <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -128,6 +135,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="nav-mega-column">
             <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
+            <!-- Security Analyzer · Shield with Checkmark -->
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -154,6 +162,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Visual DNS Test · Globe with Latitudes -->
             <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -170,6 +179,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Subnetz-Rechner · Calculator Icon -->
             <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -189,6 +199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Dark Data & Tracker Exposer · Privacy / Data Icon -->
             <a class="nav-mega-item" href="dark-data-exposer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -267,10 +278,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div id="status" class="status" data-i18n="ready">Ready to test</div>
         <div class="gauge-caption"><span class="pulse" aria-hidden="true"></span><span id="measurementHint">Waiting for measurement</span></div>
-        <button id="start" class="start" type="button">
-          <span class="start-progress" id="startProgress" aria-hidden="true"></span>
-          <span class="start-label" id="startLabel" data-i18n="start">Start Speed Test</span>
-        </button>
+        <button id="start" class="start" data-i18n="start">Start Speed Test</button>
       </div>
 
       <div>
@@ -295,13 +303,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
             <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
           </div>
-          <div class="metric metric-bloat">
+          <div class="metric">
             <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
             <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
-            <div class="bloat-rating">
-              <span class="bloat-letter tier-waiting" id="bloatLetter">—</span>
-              <span class="bloat-caption" id="bloatGrade" data-i18n="bbWaiting">Waiting for test</span>
-            </div>
+            <div class="metric-reading" id="bloatGrade"></div>
           </div>
         </div>
         <div class="chart">
@@ -316,19 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
       <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
       <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
-    </div>
-
-    <div class="info-grid info-grid-local">
-      <div class="info">
-        <div class="label" data-i18n="gatewayPing">Gateway Ping (LAN/WLAN)</div>
-        <div id="gatewayPing" class="iv">—</div>
-        <div class="metric-reading" id="gatewaySource"></div>
-      </div>
-      <div class="info">
-        <div class="label" data-i18n="wifiLink">Lokale Link-Qualität</div>
-        <div id="wifiQuality" class="iv">—</div>
-        <div class="metric-reading" id="wifiHint"></div>
-      </div>
     </div>
 
     <div class="quality">
@@ -386,18 +378,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <small data-i18n="automaticEdge">Automatic edge selection</small>
       </div>
     </div>
-  </section>
-
-  <section class="section recommendations-section" id="recommendationsSection" hidden>
-    <div class="section-heading-row">
-      <div>
-        <div class="section-kicker" data-i18n="recKicker">SMART RECOMMENDATIONS</div>
-        <h2 data-i18n="recTitle">Tips tailored to your result</h2>
-        <p class="section-sub" data-i18n="recSub">Concrete, prioritized actions based on your measured metrics.</p>
-      </div>
-      <span class="section-badge" data-i18n="recBadge">PERSONALIZED</span>
-    </div>
-    <div class="recommendations" id="recommendations"></div>
   </section>
 
   <section class="section methodology-section" id="methodology">
