@@ -389,18 +389,41 @@
     }
   }
 
-  /* ============================================================
-     TABS
+   /* ============================================================
+     TABS mit gleitendem Slider
      ============================================================ */
-  const tabs         = document.querySelectorAll('.fasqoo-tab');
-  const speedSection = $('speed-section');
-  const pingSection  = $('ping-section');
+  const tabs          = document.querySelectorAll('.fasqoo-tab');
+  const speedSection  = $('speed-section');
+  const pingSection   = $('ping-section');
+  const tabSlider     = document.getElementById('tabSlider');
+  const tabsContainer = document.getElementById('fasqooTabs');
+
+  function moveSliderTo(activeTab, animate){
+    if(!tabSlider || !activeTab || !tabsContainer) return;
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+    const offsetLeft = tabRect.left - containerRect.left;
+    const width = tabRect.width;
+
+    if(animate === false){
+      const prev = tabSlider.style.transition;
+      tabSlider.style.transition = 'none';
+      tabSlider.style.width = width + 'px';
+      tabSlider.style.transform = 'translateX(' + (offsetLeft - 5) + 'px)';
+      void tabSlider.offsetWidth;
+      tabSlider.style.transition = prev || '';
+    } else {
+      tabSlider.style.width = width + 'px';
+      tabSlider.style.transform = 'translateX(' + (offsetLeft - 5) + 'px)';
+    }
+  }
 
   function switchTab(name){
     tabs.forEach(tab => {
       const active = tab.dataset.tab === name;
       tab.classList.toggle('active', active);
       tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      if(active) moveSliderTo(tab, true);
     });
     if(name === 'speed'){
       speedSection.classList.remove('hidden');
@@ -412,8 +435,27 @@
     }
     try{ history.replaceState(null, '', '#' + name); }catch(e){}
   }
+
   tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
-  if(location.hash === '#ping') switchTab('ping');
+
+  const initialTab = location.hash === '#ping' ? 'ping' : 'speed';
+  switchTab(initialTab);
+  requestAnimationFrame(() => {
+    const activeTab = document.querySelector('.fasqoo-tab.active');
+    if(activeTab) moveSliderTo(activeTab, false);
+  });
+
+  window.addEventListener('resize', () => {
+    const activeTab = document.querySelector('.fasqoo-tab.active');
+    if(activeTab) moveSliderTo(activeTab, false);
+  });
+
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(() => {
+      const activeTab = document.querySelector('.fasqoo-tab.active');
+      if(activeTab) moveSliderTo(activeTab, false);
+    });
+  }
 
   /* ============================================================
      INSTALL BUTTON
