@@ -116,7 +116,7 @@ a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:tra
   filter:brightness(.98);
 }
 
-.install-btn{height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:500;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}.install-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.install-btn:active{transform:translateY(1px)}.install-btn[hidden]{display:none}.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}.win-icon i{display:block;background:currentColor}.install-btn .install-label{line-height:1}
+.install-btn{height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;font-size:12px;font-weight:600;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}.install-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05);transform:none}.install-btn:active{transform:translateY(1px)}.install-btn[hidden]{display:none}.install-platform-icon{width:16px;height:16px;display:grid;place-items:center;border:1px solid currentColor;border-radius:5px;font-size:12px;font-weight:800;line-height:1}.install-btn .install-label{line-height:1}
 .theme-btn{width:35px;height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);display:grid;place-items:center;font-size:16px}
 .menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
 
@@ -142,7 +142,6 @@ a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:tra
 .theme-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05);transform:none}
 @media(max-width:900px){.lang-control{height:35px}.lang-control select{height:33px;min-width:68px}.theme-btn{width:35px;height:35px}}
 @media(max-width:600px){.menu-extra{gap:6px}.lite-btn{font-size:11px;padding:0 12px;height:34px}.lite-btn::before{font-size:12px}.lang-control{padding:0 8px}.lang-control select{min-width:58px;font-size:11px}}
-@media(max-width:900px){.install-btn{display:none!important}}
 main{padding:30px 0 65px}
 .hero{text-align:center;margin-bottom:25px}
 .hero h1{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-1px;margin:0 0 9px}
@@ -323,7 +322,7 @@ footer{margin-top:45px}.foot{align-items:flex-start}
 .dark .start{box-shadow:0 12px 26px rgba(255,90,31,.14)}
 @media(max-width:1000px){.intelligence-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.method-grid{grid-template-columns:1fr}
-  .wrap{width:min(100% - 24px,1180px)}.premium-hero{padding-top:32px}.premium-hero h1{letter-spacing:-1.5px}
+  .wrap{width:min(100% - 24px,1180px)}.premium-hero h1{letter-spacing:-1.5px}
   .test-topline{align-items:flex-start;flex-direction:column}.phase-steps{justify-content:flex-start}
   .gauge{width:280px;height:280px}.gauge:after{inset:23px}
 }
@@ -402,7 +401,7 @@ header{box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035)}
 footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 @media(max-width:900px){.premium-hero h1{font-size:clamp(34px,6vw,48px)}.test-card{padding:24px}}
 @media(max-width:560px){
-  .premium-hero{padding-top:26px}
+  
   .premium-hero h1{font-size:30px;line-height:1.13}
   .premium-hero p{font-size:14px;line-height:1.55}
   .test-card{padding:15px}
@@ -417,6 +416,23 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 .dark .metric:hover{background:rgba(255,255,255,.015)}
 .dark .intel-card:hover,.dark .tool:hover,.dark .method-card:hover{border-color:#3a424d;box-shadow:0 10px 28px rgba(0,0,0,.22)}
 #heroTitle{font-weight:400 !important}
+
+/* ==========================================================
+   FASQOO COMPACT HOME / FIRST-SCREEN SPEED TEST
+   ========================================================== */
+main{padding:12px 0 65px}
+.server-line{margin:0 0 10px}
+.test-card{margin-top:0}
+@media(min-width:761px){
+  .test-card{margin-top:0}
+}
+@media(max-width:760px){
+  main{padding:8px 0 45px}
+  .server-line{margin-bottom:8px}
+}
+@media(max-width:560px){
+  main{padding-top:6px}
+}
 
 /* ==========================================================
    EXTENDED METRICS (6 tiles)
@@ -905,9 +921,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
-    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
-      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo">
+      <span id="installIcon" class="install-platform-icon" aria-hidden="true">↓</span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install Fasqoo</span>
     </button>
     <div id="fasqoo-widget-container"></div>
 
@@ -1067,16 +1083,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="lang-control">
           <span class="lang-icon" aria-hidden="true">◎</span>
           <select id="lang" aria-label="Language">
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <option value="it">Italiano</option>
-            <option value="pt">Português</option>
-            <option value="nl">Nederlands</option>
-            <option value="tr">Türkçe</option>
-            <option value="sq">Shqip</option>
-            <option value="ar">العربية</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="nl">🇳🇱 Nederlands</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="sq">🇦🇱 Shqip</option>
+            <option value="ar">🇸🇦 العربية</option>
           </select>
         </div>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
@@ -1087,14 +1103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 <div class="wrap">
-
-  <section class="hero premium-hero">
-    <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-i18n="eyebrow">FASQOO NETWORK INTELLIGENCE</span></div>
-    <h1 id="heroTitle" data-i18n="title">Free Internet Speed Test</h1>
-    <p id="heroSub" data-i18n="sub">See what your connection really delivers — in seconds. Includes suitability for streaming, gaming and home office.</p>
-  </section>
-
-  <div class="server-line">
+<div class="server-line">
     <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
   </div>
 
@@ -1384,19 +1393,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    - Full i18n coverage (10 languages, 100%)
    ========================================================== */
 
-/* ---------- CLEAN DESKTOP INSTALL ---------- */
+/* ---------- PROFESSIONAL DESKTOP INSTALL ---------- */
 let deferredInstallPrompt = null;
 const installButton = document.getElementById("installButton");
+const installLabel = document.getElementById("installLabel");
+const installIcon = document.getElementById("installIcon");
 
-function isWindowsDesktop(){
-  return /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
+function isMobileDevice(){
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+         (navigator.maxTouchPoints > 1 && Math.min(screen.width, screen.height) < 900);
+}
+function isDesktopDevice(){
+  return !isMobileDevice();
 }
 function isStandalone(){
-  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  return window.matchMedia("(display-mode: standalone)").matches ||
+         window.navigator.standalone === true ||
+         document.referrer.startsWith("android-app://");
+}
+function getDesktopPlatform(){
+  const ua = navigator.userAgent || "";
+  if(/Windows/i.test(ua)) return "windows";
+  if(/Macintosh|Mac OS X/i.test(ua)) return "mac";
+  if(/CrOS/i.test(ua)) return "chromeos";
+  if(/Linux/i.test(ua)) return "linux";
+  return "desktop";
 }
 function updateInstallButton(){
   if(!installButton) return;
-  installButton.hidden = !isWindowsDesktop() || isStandalone();
+  const visible = isDesktopDevice() && !isStandalone();
+  installButton.hidden = !visible;
+  if(!visible) return;
+
+  const platform = getDesktopPlatform();
+  const labels = {
+    windows:"Install for Windows",
+    mac:"Install for Mac",
+    linux:"Install for Linux",
+    chromeos:"Install for ChromeOS",
+    desktop:"Install App"
+  };
+  const icons = {
+    windows:"⊞",
+    mac:"⌘",
+    linux:"◉",
+    chromeos:"▣",
+    desktop:"↓"
+  };
+  const label = labels[platform] || labels.desktop;
+  if(installLabel) installLabel.textContent = label;
+  if(installIcon) installIcon.textContent = icons[platform] || icons.desktop;
+  installButton.setAttribute("aria-label", label);
 }
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
@@ -1405,18 +1452,26 @@ window.addEventListener("beforeinstallprompt", e => {
 });
 installButton?.addEventListener("click", async () => {
   if(deferredInstallPrompt){
-    deferredInstallPrompt.prompt();
-    try{ await deferredInstallPrompt.userChoice; }catch(e){}
+    try{
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    }catch(e){}
     deferredInstallPrompt = null;
     updateInstallButton();
     return;
   }
-  alert((installTranslations[currentLang] || installTranslations.en).installApp + " is available in Chrome/Edge via the install icon in the address bar or browser menu.");
+
+  const platform = getDesktopPlatform();
+  const t = installTranslations[currentLang] || installTranslations.en;
+  const fallback = t.browserHint || installTranslations.en.browserHint;
+  alert(fallback.replace("{platform}", platform === "windows" ? "Windows" : platform === "mac" ? "macOS" : platform === "linux" ? "Linux" : platform === "chromeos" ? "ChromeOS" : "your desktop"));
 });
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
   updateInstallButton();
 });
+window.matchMedia("(display-mode: standalone)").addEventListener?.("change", updateInstallButton);
+window.addEventListener("resize", updateInstallButton);
 updateInstallButton();
 
 const $ = id => document.getElementById(id);
@@ -1476,10 +1531,16 @@ const metricTranslations = {
 };
 
 const installTranslations = {
-  en:{installApp:"Install for Windows"},de:{installApp:"Für Windows installieren"},fr:{installApp:"Installer pour Windows"},
-  es:{installApp:"Instalar para Windows"},it:{installApp:"Installa per Windows"},pt:{installApp:"Instalar para Windows"},
-  nl:{installApp:"Installeren voor Windows"},tr:{installApp:"Windows için yükle"},sq:{installApp:"Instalo për Windows"},
-  ar:{installApp:"التثبيت لنظام Windows"}
+  en:{installApp:"Install App",browserHint:"App installation is available in a supported desktop browser via the install icon or browser menu."},
+  de:{installApp:"App installieren",browserHint:"Die App-Installation ist in einem unterstützten Desktop-Browser über das Installationssymbol oder das Browsermenü verfügbar."},
+  fr:{installApp:"Installer l’application",browserHint:"L’installation est disponible dans un navigateur de bureau compatible via l’icône d’installation ou le menu du navigateur."},
+  es:{installApp:"Instalar aplicación",browserHint:"La instalación está disponible en un navegador de escritorio compatible mediante el icono de instalación o el menú del navegador."},
+  it:{installApp:"Installa app",browserHint:"L’installazione è disponibile in un browser desktop compatibile tramite l’icona di installazione o il menu del browser."},
+  pt:{installApp:"Instalar aplicação",browserHint:"A instalação está disponível num navegador de computador compatível através do ícone de instalação ou do menu do navegador."},
+  nl:{installApp:"App installeren",browserHint:"Installatie is beschikbaar in een ondersteunde desktopbrowser via het installatiepictogram of browsermenu."},
+  tr:{installApp:"Uygulamayı yükle",browserHint:"Kurulum, desteklenen bir masaüstü tarayıcıda yükleme simgesi veya tarayıcı menüsü üzerinden kullanılabilir."},
+  sq:{installApp:"Instalo aplikacionin",browserHint:"Instalimi është i disponueshëm në një shfletues desktop të mbështetur përmes ikonës së instalimit ose menysë së shfletuesit."},
+  ar:{installApp:"تثبيت التطبيق",browserHint:"يتوفر تثبيت التطبيق في متصفح سطح مكتب مدعوم عبر رمز التثبيت أو قائمة المتصفح."}
 };
 
 const staticUiTranslations = {
@@ -2383,6 +2444,7 @@ function applyLanguage(lang){
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   document.title = `${t.title || translations[lang].title || "Internet Speed Test"} | Fasqoo`;
+  updateInstallButton();
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
