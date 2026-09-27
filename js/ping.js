@@ -334,7 +334,7 @@
     }
   };
 
-  function getCurrentLang(){
+    function getCurrentLang(){
     try{
       const stored = localStorage.getItem('fasqoo_lang');
       if(stored && PING_TRANSLATIONS[stored]) return stored;
@@ -343,7 +343,6 @@
     if(PING_TRANSLATIONS[htmlLang]) return htmlLang;
     return 'en';
   }
-
   function t(key){
     const lang = getCurrentLang();
     const dict = PING_TRANSLATIONS[lang] || PING_TRANSLATIONS.en;
