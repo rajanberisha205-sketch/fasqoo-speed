@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#ffffff" id="themeColor">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#111827" id="themeColor">
 <meta name="description" content="Free Internet Speed Test by Fasqoo. Measure real download, upload, ping, jitter, bufferbloat and packet loss in your browser. No account required.">
 <meta name="author" content="Fasqoo">
 <meta name="application-name" content="Fasqoo Internet Speed Test">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- ============================================================
+     PWA / APPLE / ANDROID
+     ============================================================ -->
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fasqoo">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="msapplication-TileColor" content="#111827">
+
+<!-- ============================================================
+     SEO / OPENGRAPH
+     ============================================================ -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo">
 <meta property="og:description" content="Run a real browser-based internet speed test and measure download, upload, ping, jitter, bufferbloat and packet loss.">
@@ -19,13 +38,11 @@
 <meta name="robots" content="index, follow">
 <title>Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo</title>
 <link rel="canonical" href="https://www.fasqoo.com/">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://www.fasqoo.com/#organization","name":"Fasqoo","url":"https://www.fasqoo.com/","logo":"https://www.fasqoo.com/android-chrome-512x512.png"}
 </script>
@@ -35,20 +52,220 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://www.fasqoo.com/#website","name":"Fasqoo","url":"https://www.fasqoo.com/","publisher":{"@id":"https://www.fasqoo.com/#organization"},"inLanguage":"en"}
 </script>
-  <!-- Google Tag Manager -->
+
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-N4DXJXZ8');</script>
-<!-- End Google Tag Manager -->
+
+<!-- Bestehendes Stylesheet -->
 <link rel="stylesheet" href="/css/style.css">
+
+<!-- ============================================================
+     INLINE-STYLES nur für neue Elemente (Tabs + Ping-Monitor)
+     → deine style.css bleibt unangetastet
+     ============================================================ -->
+<style>
+  .hidden{display:none !important}
+
+  /* ---------- Tab-Navigation ---------- */
+  .fasqoo-tabs{
+    display:flex;gap:10px;justify-content:center;
+    margin:0 0 22px;flex-wrap:wrap;
+  }
+  .fasqoo-tab{
+    appearance:none;border:1px solid var(--line);background:var(--card);
+    color:var(--text);font:inherit;font-size:13px;font-weight:600;
+    padding:11px 18px;border-radius:12px;cursor:pointer;
+    transition:transform .2s, box-shadow .2s, border-color .2s, background .2s, color .2s;
+    display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  }
+  .fasqoo-tab:hover{
+    border-color:rgba(255,90,31,.35);transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(255,90,31,.10);
+  }
+  .fasqoo-tab.active{
+    background:linear-gradient(135deg,#ff5a1f 0%,#ff8b61 100%);
+    color:#fff;border-color:#ff5a1f;
+    box-shadow:0 10px 24px rgba(255,90,31,.32);
+  }
+  .dark .fasqoo-tab{background:var(--card);border-color:var(--line)}
+
+  /* ---------- Ping-Monitor Layout ---------- */
+  .ping-grid{display:grid;grid-template-columns:340px 1fr;gap:26px;margin-bottom:22px}
+  .ping-panel{
+    border:1px solid var(--line);border-radius:14px;padding:18px;
+    background:var(--soft);
+  }
+  .ping-panel h3{
+    margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:1px;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .ping-server-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .ping-server{
+    display:flex;align-items:center;gap:10px;padding:10px 12px;
+    border:1px solid var(--line);border-radius:10px;background:var(--card);
+    cursor:pointer;font-size:13px;
+    transition:border-color .2s, background .2s, transform .2s;
+  }
+  .ping-server:hover{border-color:rgba(255,90,31,.35);transform:translateX(2px)}
+  .ping-server input[type="checkbox"]{
+    appearance:none;width:18px;height:18px;border:2px solid var(--line);
+    border-radius:5px;background:var(--card);cursor:pointer;position:relative;
+    flex:0 0 auto;transition:background .2s, border-color .2s;
+  }
+  .ping-server input[type="checkbox"]:checked{
+    background:#ff5a1f;border-color:#ff5a1f;
+  }
+  .ping-server input[type="checkbox"]:checked::after{
+    content:"✓";position:absolute;inset:0;color:#fff;font-size:12px;
+    font-weight:900;display:grid;place-items:center;line-height:1;
+  }
+
+  .ping-mode{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  .ping-mode label{
+    display:flex;align-items:flex-start;gap:10px;padding:11px 12px;
+    border:1px solid var(--line);border-radius:10px;background:var(--card);
+    cursor:pointer;font-size:12px;line-height:1.5;
+    transition:border-color .2s, background .2s;
+  }
+  .ping-mode label:hover{border-color:rgba(255,90,31,.35)}
+  .ping-mode input[type="radio"]{
+    appearance:none;width:16px;height:16px;border:2px solid var(--line);
+    border-radius:50%;background:var(--card);margin-top:2px;flex:0 0 auto;
+    cursor:pointer;position:relative;transition:background .2s, border-color .2s;
+  }
+  .ping-mode input[type="radio"]:checked{
+    border-color:#ff5a1f;background:#ff5a1f;
+  }
+  .ping-mode input[type="radio"]:checked::after{
+    content:"";position:absolute;inset:3px;border-radius:50%;background:#fff;
+  }
+  .ping-mode label.active{border-color:#ff5a1f;background:rgba(255,90,31,.05)}
+  .ping-mode small{display:block;color:var(--muted);font-size:10px;margin-top:3px;line-height:1.5}
+
+  .ping-start{
+    width:100%;height:50px;border:0;border-radius:12px;
+    background:linear-gradient(135deg,#ff5a1f 0%,#ff8b61 100%);
+    color:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+    box-shadow:0 10px 22px rgba(255,90,31,.28);
+    transition:transform .2s, box-shadow .2s, opacity .2s;
+  }
+  .ping-start:hover:not(:disabled){
+    transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,90,31,.36);
+  }
+  .ping-start:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+
+  .ping-live{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .ping-live-box{
+    border:1px solid var(--line);border-radius:12px;background:var(--card);
+    padding:16px 18px;text-align:center;transition:border-color .3s;
+  }
+  .ping-live-box .lbl{
+    display:block;font-size:10px;letter-spacing:1px;font-weight:800;
+    text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+  }
+  .ping-live-box .val{
+    font-size:30px;font-weight:800;letter-spacing:-1px;
+    font-variant-numeric:tabular-nums;line-height:1;color:var(--text);
+    transition:color .35s;
+  }
+  .ping-live-box .val.good{color:#16a36a}
+  .ping-live-box .val.medium{color:#e6a500}
+  .ping-live-box .val.bad{color:#e5484d}
+  .ping-live-box .unit{font-size:11px;color:var(--muted);margin-left:4px;font-weight:500}
+
+  .ping-chart-wrap{
+    border:1px solid var(--line);border-radius:12px;padding:14px;
+    background:var(--card);margin-bottom:18px;
+  }
+  .ping-chart-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:10px;font-size:12px;
+  }
+  .ping-chart-head strong{font-weight:700}
+  .ping-chart-head .hint{color:var(--muted);font-size:10px}
+  #pingCanvas{width:100%;height:180px;display:block}
+
+  .ping-results{
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    margin-bottom:18px;background:var(--card);
+  }
+  .ping-results table{width:100%;border-collapse:collapse;min-width:0}
+  .ping-results th,.ping-results td{
+    text-align:left;padding:12px 14px;border-bottom:1px solid #eef1f5;
+    font-size:12px;white-space:nowrap;
+  }
+  .ping-results th{
+    font-weight:700;color:var(--muted);font-size:10px;letter-spacing:1px;
+    text-transform:uppercase;background:var(--soft);
+  }
+  .ping-results tr:last-child td{border-bottom:0}
+  .ping-results .srv{font-weight:600;color:var(--text)}
+
+  .ping-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .ping-action{
+    border:1px solid var(--line);background:var(--card);color:var(--text);
+    font:inherit;font-size:12px;font-weight:600;padding:10px 14px;
+    border-radius:10px;cursor:pointer;
+    transition:background .2s, border-color .2s, transform .2s;
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .ping-action:hover{background:var(--soft);border-color:rgba(255,90,31,.35);transform:translateY(-1px)}
+  .ping-action:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+  .ping-install{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 18px;border:1px solid rgba(255,90,31,.35);
+    background:rgba(255,90,31,.07);color:#ff5a1f;
+    font:inherit;font-size:13px;font-weight:700;border-radius:12px;
+    cursor:pointer;margin-bottom:16px;
+    transition:background .2s, box-shadow .2s, transform .2s;
+  }
+  .ping-install:hover{
+    background:rgba(255,90,31,.14);
+    box-shadow:0 8px 20px rgba(255,90,31,.20);transform:translateY(-1px);
+  }
+
+  .ping-history{
+    border:1px solid var(--line);border-radius:12px;overflow:auto;background:var(--card);
+  }
+  .ping-history table{width:100%;border-collapse:collapse;min-width:520px}
+  .ping-history th,.ping-history td{
+    text-align:left;padding:11px 14px;border-bottom:1px solid #eef1f5;font-size:12px;
+  }
+  .ping-history th{
+    font-weight:700;color:var(--muted);font-size:10px;letter-spacing:1px;
+    text-transform:uppercase;background:var(--soft);
+  }
+  .ping-history tr:last-child td{border-bottom:0}
+  .ping-empty{text-align:center;padding:24px;color:var(--muted);font-size:12px}
+  .ping-status{font-size:12px;color:var(--muted);margin:10px 0 0;min-height:18px;line-height:1.5}
+  .ping-status.live{color:#2563eb;font-weight:600}
+  .ping-status.done{color:#16a36a;font-weight:600}
+  .ping-status.err{color:#e5484d;font-weight:600}
+
+  @media(max-width:900px){
+    .ping-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .fasqoo-tab{font-size:12px;padding:10px 14px;flex:1 1 auto;justify-content:center}
+    .ping-live{grid-template-columns:1fr;gap:8px}
+    .ping-live-box .val{font-size:26px}
+    .ping-results th,.ping-results td{padding:10px 10px;font-size:11px}
+  }
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4DXJXZ8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
 <header>
   <div class="wrap nav">
     <div class="brand">
@@ -78,17 +295,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
           <span class="nav-chevron" aria-hidden="true">▾</span>
         </button>
-
         <div class="nav-dropdown-menu" role="menu">
           <div class="nav-mega-column">
             <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
-            <!-- Netzwerk-Status · Globe Icon -->
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9"/>
-                  <path d="M3 12h18"/>
+                  <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/>
                   <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
                 </svg>
               </span>
@@ -98,7 +312,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
-            <!-- Speed-Widget · Widget-Grid Icon -->
             <a class="nav-mega-item" href="widget.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -114,13 +327,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
-            <!-- Gaming- & Ping-Monitor · Gamepad Icon -->
             <a class="nav-mega-item" href="Gaming- &amp; Ping-Monitor.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/>
-                  <line x1="6.5" y1="11" x2="10.5" y2="11"/>
-                  <line x1="8.5" y1="9" x2="8.5" y2="13"/>
+                  <line x1="6.5" y1="11" x2="10.5" y2="11"/><line x1="8.5" y1="9" x2="8.5" y2="13"/>
                   <circle cx="16" cy="10.5" r="1" fill="currentColor" stroke="none"/>
                   <circle cx="18" cy="12.5" r="1" fill="currentColor" stroke="none"/>
                 </svg>
@@ -135,7 +346,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="nav-mega-column">
             <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
-            <!-- Security Analyzer · Shield with Checkmark -->
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -162,15 +372,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
-            <!-- Visual DNS Test · Globe with Latitudes -->
             <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="9"/>
-                  <path d="M3.4 9h17.2"/>
-                  <path d="M3.4 15h17.2"/>
-                  <path d="M12 3a14 14 0 0 1 0 18"/>
-                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                  <path d="M3.4 9h17.2"/><path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/>
                 </svg>
               </span>
               <span class="nav-mega-copy">
@@ -179,7 +386,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
-            <!-- Subnetz-Rechner · Calculator Icon -->
             <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -199,7 +405,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
-            <!-- Dark Data & Tracker Exposer · Privacy / Data Icon -->
             <a class="nav-mega-item" href="dark-data-exposer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -242,216 +447,368 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </header>
 
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
 <main>
 <div class="wrap">
-<div class="server-line">
-    <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
-  </div>
 
-  <section class="card test-card">
-    <div class="test-topline">
-      <div>
-        <span class="mini-kicker" data-i18n="liveTest">LIVE CONNECTION TEST</span>
-        <strong id="testPhase">Ready</strong>
-      </div>
-      <div class="phase-steps" aria-label="Test phases">
-        <span class="phase-step active" data-phase="ping" data-i18n="phasePing">Ping</span>
-        <span class="phase-step" data-phase="download" data-i18n="phaseDownload">Download</span>
-        <span class="phase-step" data-phase="upload" data-i18n="phaseUpload">Upload</span>
-        <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
-      </div>
+  <!-- ========================================================
+       TAB-NAVIGATION
+       ======================================================== -->
+  <nav class="fasqoo-tabs" role="tablist" aria-label="Fasqoo Module">
+    <button class="fasqoo-tab active" data-tab="speed" role="tab" aria-selected="true" type="button">
+      🚀 Bandbreiten-Test
+    </button>
+    <button class="fasqoo-tab" data-tab="ping" role="tab" aria-selected="false" type="button">
+      📊 Stabilität &amp; Ping-Monitor
+    </button>
+  </nav>
+
+  <!-- ========================================================
+       SECTION 1: ORIGINALER BANDWREITEN-TEST
+       (IDs + Struktur exakt wie vorher → app.js läuft unverändert)
+       ======================================================== -->
+  <section id="speed-section">
+    <div class="server-line">
+      <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
     </div>
-    <div class="grid">
-      <div class="speedbox">
-        <div class="gauge">
-          <svg viewBox="0 0 300 300">
-            <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
-            </linearGradient></defs>
-            <circle class="ring" cx="150" cy="150" r="130"></circle>
-            <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
-          </svg>
-          <div class="center">
-            <div id="speed" class="num">0</div>
-            <div class="unit">Mbps</div>
-          </div>
-        </div>
-        <div id="status" class="status" data-i18n="ready">Ready to test</div>
-        <div class="gauge-caption"><span class="pulse" aria-hidden="true"></span><span id="measurementHint">Waiting for measurement</span></div>
-        <button id="start" class="start" data-i18n="start">Start Speed Test</button>
-      </div>
 
-      <div>
-        <div class="metrics">
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" id="pingIcon" aria-hidden="true">◌</span></div>
-            <div class="value"><span id="ping">—</span><span class="small">ms</span></div>
-          </div>
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div>
-            <div class="value"><span id="jitter">—</span><span class="small">ms</span></div>
-          </div>
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="packetLoss">Packet Loss</span><span class="icon" aria-hidden="true">⊘</span></div>
-            <div class="value"><span id="loss">—</span><span class="small">%</span></div>
-          </div>
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div>
-            <div class="value"><span id="down">—</span><span class="small">Mbps</span></div>
-          </div>
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
-            <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
-          </div>
-          <div class="metric">
-            <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
-            <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
-            <div class="metric-reading" id="bloatGrade"></div>
-          </div>
+    <section class="card test-card">
+      <div class="test-topline">
+        <div>
+          <span class="mini-kicker" data-i18n="liveTest">LIVE CONNECTION TEST</span>
+          <strong id="testPhase">Ready</strong>
         </div>
-        <div class="chart">
-          <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
-          <canvas id="chart"></canvas>
+        <div class="phase-steps" aria-label="Test phases">
+          <span class="phase-step active" data-phase="ping" data-i18n="phasePing">Ping</span>
+          <span class="phase-step" data-phase="download" data-i18n="phaseDownload">Download</span>
+          <span class="phase-step" data-phase="upload" data-i18n="phaseUpload">Upload</span>
+          <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
         </div>
       </div>
+      <div class="grid">
+        <div class="speedbox">
+          <div class="gauge">
+            <svg viewBox="0 0 300 300">
+              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
+              </linearGradient></defs>
+              <circle class="ring" cx="150" cy="150" r="130"></circle>
+              <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+            </svg>
+            <div class="center">
+              <div id="speed" class="num">0</div>
+              <div class="unit">Mbps</div>
+            </div>
+          </div>
+          <div id="status" class="status" data-i18n="ready">Ready to test</div>
+          <div class="gauge-caption"><span class="pulse" aria-hidden="true"></span><span id="measurementHint">Waiting for measurement</span></div>
+          <button id="start" class="start" data-i18n="start">Start Speed Test</button>
+        </div>
+
+        <div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" id="pingIcon" aria-hidden="true">◌</span></div>
+              <div class="value"><span id="ping">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div>
+              <div class="value"><span id="jitter">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="packetLoss">Packet Loss</span><span class="icon" aria-hidden="true">⊘</span></div>
+              <div class="value"><span id="loss">—</span><span class="small">%</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div>
+              <div class="value"><span id="down">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
+              <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
+              <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
+              <div class="metric-reading" id="bloatGrade"></div>
+            </div>
+          </div>
+          <div class="chart">
+            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
+            <canvas id="chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info"><div class="label" data-i18n="lblIp">Öffentliche IP</div><div id="ip" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
+      </div>
+
+      <div class="quality">
+        <div class="qtop"><span data-i18n="qTitle">Verbindungsqualität</span><span id="score" class="qscore">—</span></div>
+        <div class="bar"><i id="bar"></i></div>
+        <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div>
+        <div id="qualityDetail" class="quality-detail"></div>
+        <div class="quality-meta">
+          <span><i class="mini-dot" aria-hidden="true"></i> <span data-i18n="qualityBasis">Based on download, upload, ping &amp; jitter</span></span>
+          <span id="qualityLabel" data-i18n="notMeasured">Not measured</span>
+        </div>
+      </div>
+
+      <div class="grade-display" id="gradeDisplay" aria-live="polite">
+        <div class="grade-badge" id="gradeBadge">—</div>
+        <div class="grade-meta">
+          <span class="grade-title" data-i18n="gradeTitle">Overall Network Grade</span>
+          <span class="grade-sub" id="gradeSub">Run a test to see your grade</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-trust">
+      <span data-i18n="trust1">Accurate measurement – no estimates</span>
+      <span data-i18n="trust2">Free &amp; no account required</span>
     </div>
 
-    <div class="info-grid">
-      <div class="info"><div class="label" data-i18n="lblIp">Öffentliche IP</div><div id="ip" class="iv">…</div></div>
-      <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
-      <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
-      <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
-    </div>
+    <section class="section intelligence-section">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="networkIntelligence">NETWORK INTELLIGENCE</div>
+          <h2 data-i18n="understand">Understand your connection</h2>
+          <p class="section-sub" data-i18n="intelligenceSub">Fasqoo turns your measurements into practical network insights.</p>
+        </div>
+        <span class="section-badge" data-i18n="professional">PROFESSIONAL</span>
+      </div>
+      <div class="intelligence-grid">
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">↔</div><div><span data-i18n="latency">Latency</span><strong id="intelLatency">—</strong></div><small data-i18n="responseTime">Response time</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">≈</div><div><span data-i18n="stability">Stability</span><strong id="intelStability">—</strong></div><small data-i18n="jitterConsistency">Jitter consistency</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">↓</div><div><span data-i18n="throughput">Throughput</span><strong id="intelThroughput">—</strong></div><small data-i18n="downloadCapacity">Download capacity</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">◎</div><div><span data-i18n="testServer">Test server</span><strong id="intelServer">Cloudflare</strong></div><small data-i18n="automaticEdge">Automatic edge selection</small></div>
+      </div>
+    </section>
 
-    <div class="quality">
-      <div class="qtop"><span data-i18n="qTitle">Verbindungsqualität</span><span id="score" class="qscore">—</span></div>
-      <div class="bar"><i id="bar"></i></div>
-      <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div><div id="qualityDetail" class="quality-detail"></div>
-      <div class="quality-meta">
-        <span><i class="mini-dot" aria-hidden="true"></i> <span data-i18n="qualityBasis">Based on download, upload, ping &amp; jitter</span></span>
-        <span id="qualityLabel" data-i18n="notMeasured">Not measured</span>
+    <section class="section methodology-section" id="methodology">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="howMeasures">HOW FASQOO MEASURES</div>
+          <h2 data-i18n="methodTitle">How your connection is measured</h2>
+          <p class="section-sub" data-i18n="methodSub">Fasqoo measures the connection from your browser to the measurement infrastructure and reports the values it actually receives.</p>
+        </div>
+        <span class="section-badge" data-i18n="transparent">TRANSPARENT</span>
       </div>
-    </div>
+      <div class="method-grid">
+        <div class="method-card"><span class="method-num">01</span><h3 data-i18n="method1T">Latency &amp; jitter</h3><p data-i18n="method1D">Multiple small requests are timed. Ping is based on the measured response times; jitter describes the variation between measurements.</p></div>
+        <div class="method-card"><span class="method-num">02</span><h3 data-i18n="method2T">Download</h3><p data-i18n="method2D">The browser downloads data from the test endpoint. Fasqoo calculates throughput from the bytes received and elapsed time.</p></div>
+        <div class="method-card"><span class="method-num">03</span><h3 data-i18n="method3T">Upload</h3><p data-i18n="method3D">The browser sends measured payloads to the test endpoint and calculates throughput from the bytes sent and elapsed time.</p></div>
+        <div class="method-card"><span class="method-num">04</span><h3 data-i18n="method4T">Why results vary</h3><p data-i18n="method4D">Wi‑Fi signal, device load, VPNs, ISP congestion, routing and distance to the test edge can change the result. Repeat the test for a clearer picture.</p></div>
+      </div>
+      <div class="method-note" data-i18n="methodNote">Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
+    </section>
 
-    <div class="grade-display" id="gradeDisplay" aria-live="polite">
-      <div class="grade-badge" id="gradeBadge">—</div>
-      <div class="grade-meta">
-        <span class="grade-title" data-i18n="gradeTitle">Overall Network Grade</span>
-        <span class="grade-sub" id="gradeSub">Run a test to see your grade</span>
+    <section class="section">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="appsKicker">APPLICATION PROFILES</div>
+          <h2 data-i18n="appsTitle">What can you do with your connection?</h2>
+          <p class="section-sub" data-i18n="appsSub">Live check for gaming, 4K streaming, home office and social media.</p>
+        </div>
+        <span class="section-badge" data-i18n="appsBadge">LIVE CHECK</span>
       </div>
-    </div>
-  </section>
+      <div class="apps" id="appsContainer"></div>
+    </section>
 
-  <div class="hero-trust">
-    <span data-i18n="trust1">Accurate measurement – no estimates</span>
-    <span data-i18n="trust2">Free &amp; no account required</span>
-  </div>
+    <section class="section">
+      <h2 data-i18n="diagTitle">Network Diagnostics</h2>
+      <div class="tools">
+        <div class="tool"><div class="icon" aria-hidden="true">⌁</div><h3 data-i18n="diagLatT">Latency</h3><p data-i18n="diagLatD">Measures response time.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">↯</div><h3 data-i18n="diagStabT">Stability</h3><p data-i18n="diagStabD">Jitter shows connection stability.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">DNS</div><h3 data-i18n="diagDnsT">DNS Diagnostics</h3><p data-i18n="diagDnsD">Checks DNS resolvers.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">IP</div><h3 data-i18n="diagIpT">IP Diagnostics</h3><p data-i18n="diagIpD">Detects IP, ISP, ASN.</p></div>
+      </div>
+    </section>
 
-  <section class="section intelligence-section">
-    <div class="section-heading-row">
-      <div>
-        <div class="section-kicker" data-i18n="networkIntelligence">NETWORK INTELLIGENCE</div>
-        <h2 data-i18n="understand">Understand your connection</h2>
-        <p class="section-sub" data-i18n="intelligenceSub">Fasqoo turns your measurements into practical network insights.</p>
+    <section class="section">
+      <h2 data-i18n="repTitle">Professional Test Report</h2>
+      <div class="report">
+        <div class="reportgrid">
+          <div class="r"><b data-i18n="lblRepTestId">Test ID</b><span id="tid">—</span></div>
+          <div class="r"><b>IPv4</b><span id="ipv4">—</span></div>
+          <div class="r"><b>IPv6</b><span id="ipv6">—</span></div>
+          <div class="r"><b>DNS</b><span id="dns">—</span></div>
+        </div>
+        <div class="actions">
+          <button class="action" id="copy" data-i18n="copy">Ergebnis kopieren</button>
+          <button class="action" id="share" data-i18n="share">Ergebnis teilen</button>
+          <button class="action" id="json" data-i18n="json">JSON exportieren</button>
+          <button class="action" id="print" data-i18n="print">Bericht drucken</button>
+        </div>
       </div>
-      <span class="section-badge" data-i18n="professional">PROFESSIONAL</span>
-    </div>
-    <div class="intelligence-grid">
-      <div class="intel-card">
-        <div class="intel-icon" aria-hidden="true">↔</div>
-        <div><span data-i18n="latency">Latency</span><strong id="intelLatency">—</strong></div>
-        <small data-i18n="responseTime">Response time</small>
-      </div>
-      <div class="intel-card">
-        <div class="intel-icon" aria-hidden="true">≈</div>
-        <div><span data-i18n="stability">Stability</span><strong id="intelStability">—</strong></div>
-        <small data-i18n="jitterConsistency">Jitter consistency</small>
-      </div>
-      <div class="intel-card">
-        <div class="intel-icon" aria-hidden="true">↓</div>
-        <div><span data-i18n="throughput">Throughput</span><strong id="intelThroughput">—</strong></div>
-        <small data-i18n="downloadCapacity">Download capacity</small>
-      </div>
-      <div class="intel-card">
-        <div class="intel-icon" aria-hidden="true">◎</div>
-        <div><span data-i18n="testServer">Test server</span><strong id="intelServer">Cloudflare</strong></div>
-        <small data-i18n="automaticEdge">Automatic edge selection</small>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section methodology-section" id="methodology">
-    <div class="section-heading-row">
-      <div>
-        <div class="section-kicker" data-i18n="howMeasures">HOW FASQOO MEASURES</div>
-        <h2 data-i18n="methodTitle">How your connection is measured</h2>
-        <p class="section-sub" data-i18n="methodSub">Fasqoo measures the connection from your browser to the measurement infrastructure and reports the values it actually receives.</p>
+    <section class="section">
+      <h2 data-i18n="histTitle">Test History</h2>
+      <div class="history">
+        <div class="hhead">
+          <h2 data-i18n="histRecent">Letzte Messungen</h2>
+          <button id="clear" class="action" data-i18n="histClear">Verlauf löschen</button>
+        </div>
+        <table>
+          <thead><tr>
+            <th data-i18n="thDate">Datum</th>
+            <th data-i18n="thProvider">Anbieter</th>
+            <th data-i18n="thDown">Download</th>
+            <th data-i18n="thUp">Upload</th>
+            <th data-i18n="thPing">Ping</th>
+            <th data-i18n="thQual">Qualität</th>
+          </tr></thead>
+          <tbody id="history"></tbody>
+        </table>
       </div>
-      <span class="section-badge" data-i18n="transparent">TRANSPARENT</span>
-    </div>
-    <div class="method-grid">
-      <div class="method-card"><span class="method-num">01</span><h3 data-i18n="method1T">Latency &amp; jitter</h3><p data-i18n="method1D">Multiple small requests are timed. Ping is based on the measured response times; jitter describes the variation between measurements.</p></div>
-      <div class="method-card"><span class="method-num">02</span><h3 data-i18n="method2T">Download</h3><p data-i18n="method2D">The browser downloads data from the test endpoint. Fasqoo calculates throughput from the bytes received and elapsed time.</p></div>
-      <div class="method-card"><span class="method-num">03</span><h3 data-i18n="method3T">Upload</h3><p data-i18n="method3D">The browser sends measured payloads to the test endpoint and calculates throughput from the bytes sent and elapsed time.</p></div>
-      <div class="method-card"><span class="method-num">04</span><h3 data-i18n="method4T">Why results vary</h3><p data-i18n="method4D">Wi‑Fi signal, device load, VPNs, ISP congestion, routing and distance to the test edge can change the result. Repeat the test for a clearer picture.</p></div>
-    </div>
-    <div class="method-note" data-i18n="methodNote">Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
-  </section>
+    </section>
+  </section><!-- /#speed-section -->
 
-  <section class="section">
-    <div class="section-heading-row">
-      <div>
-        <div class="section-kicker" data-i18n="appsKicker">APPLICATION PROFILES</div>
-        <h2 data-i18n="appsTitle">What can you do with your connection?</h2>
-        <p class="section-sub" data-i18n="appsSub">Live check for gaming, 4K streaming, home office and social media.</p>
+  <!-- ========================================================
+       SECTION 2: STABILITÄT & PING-MONITOR
+       ======================================================== -->
+  <section id="ping-section" class="hidden">
+    <section class="card">
+      <div class="test-topline" style="margin-bottom:22px">
+        <div>
+          <span class="mini-kicker">LIVE STABILITY MONITOR</span>
+          <strong id="pingStatusHead">Bereit für Messung</strong>
+        </div>
+        <div class="phase-steps">
+          <span class="phase-step active">Ping</span>
+          <span class="phase-step">Jitter</span>
+          <span class="phase-step">Loss</span>
+        </div>
       </div>
-      <span class="section-badge" data-i18n="appsBadge">LIVE CHECK</span>
-    </div>
-    <div class="apps" id="appsContainer"></div>
-  </section>
 
-  <section class="section">
-    <h2 data-i18n="diagTitle">Network Diagnostics</h2>
-    <div class="tools">
-      <div class="tool"><div class="icon" aria-hidden="true">⌁</div><h3 data-i18n="diagLatT">Latency</h3><p data-i18n="diagLatD">Measures response time.</p></div>
-      <div class="tool"><div class="icon" aria-hidden="true">↯</div><h3 data-i18n="diagStabT">Stability</h3><p data-i18n="diagStabD">Jitter shows connection stability.</p></div>
-      <div class="tool"><div class="icon" aria-hidden="true">DNS</div><h3 data-i18n="diagDnsT">DNS Diagnostics</h3><p data-i18n="diagDnsD">Checks DNS resolvers.</p></div>
-      <div class="tool"><div class="icon" aria-hidden="true">IP</div><h3 data-i18n="diagIpT">IP Diagnostics</h3><p data-i18n="diagIpD">Detects IP, ISP, ASN.</p></div>
-    </div>
-  </section>
+      <button id="pingInstallButton" class="ping-install" type="button" hidden>
+        📲 Fasqoo als App installieren
+      </button>
 
-  <section class="section">
-    <h2 data-i18n="repTitle">Professional Test Report</h2>
-    <div class="report">
-      <div class="reportgrid">
-        <div class="r"><b data-i18n="lblRepTestId">Test ID</b><span id="tid">—</span></div>
-        <div class="r"><b>IPv4</b><span id="ipv4">—</span></div>
-        <div class="r"><b>IPv6</b><span id="ipv6">—</span></div>
-        <div class="r"><b>DNS</b><span id="dns">—</span></div>
+      <div class="ping-grid">
+        <div class="ping-panel">
+          <h3>🌍 Server-Auswahl</h3>
+          <div class="ping-server-list" id="pingServerList">
+            <label class="ping-server">
+              <input type="checkbox" value="de" checked>
+              <span>Deutschland (Frankfurt)</span>
+            </label>
+            <label class="ping-server">
+              <input type="checkbox" value="nl" checked>
+              <span>Niederlande (Amsterdam)</span>
+            </label>
+            <label class="ping-server">
+              <input type="checkbox" value="gb">
+              <span>Großbritannien (London)</span>
+            </label>
+            <label class="ping-server">
+              <input type="checkbox" value="at">
+              <span>Österreich (Wien)</span>
+            </label>
+          </div>
+
+          <h3>⚙️ Modus</h3>
+          <div class="ping-mode" id="pingMode">
+            <label class="active">
+              <input type="radio" name="pingMode" value="normal" checked>
+              <span>
+                Normaler Signal-Test
+                <small>Standardmessung für Ping, Jitter &amp; Paketverlust.</small>
+              </span>
+            </label>
+            <label>
+              <input type="radio" name="pingMode" value="overload">
+              <span>
+                Paket-Überlastungstest
+                <small>Simuliert dichte Netzwerk-Last für Live-Streams/Sprach-Chats.</small>
+              </span>
+            </label>
+          </div>
+
+          <button id="pingStart" class="ping-start" type="button">📡 Messung starten</button>
+          <div id="pingStatus" class="ping-status">Wähle Server &amp; Modus, dann starte die Messung.</div>
+        </div>
+
+        <div>
+          <div class="ping-live">
+            <div class="ping-live-box">
+              <span class="lbl">Verzögerung</span>
+              <span class="val" id="pingVal">—</span><span class="unit">ms</span>
+            </div>
+            <div class="ping-live-box">
+              <span class="lbl">Jitter</span>
+              <span class="val" id="pingJitter">—</span><span class="unit">ms</span>
+            </div>
+            <div class="ping-live-box">
+              <span class="lbl">Paketverlust</span>
+              <span class="val" id="pingLoss">—</span><span class="unit">%</span>
+            </div>
+          </div>
+
+          <div class="ping-chart-wrap">
+            <div class="ping-chart-head">
+              <strong>📈 Live-Verlauf</strong>
+              <span class="hint" id="pingChartHint">Warte auf Messung…</span>
+            </div>
+            <canvas id="pingCanvas" width="800" height="180"></canvas>
+          </div>
+
+          <div class="ping-results">
+            <table>
+              <thead>
+                <tr>
+                  <th>Server</th>
+                  <th>Ø Verzögerung</th>
+                  <th>Jitter</th>
+                  <th>Verlust</th>
+                  <th>Min / Max</th>
+                </tr>
+              </thead>
+              <tbody id="pingResultsBody">
+                <tr><td colspan="5" class="ping-empty">Noch keine Messergebnisse.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ping-actions">
+            <button id="pingShare" class="ping-action" type="button" disabled>🖼️ Ergebnis als Bild teilen</button>
+            <button id="pingClear" class="ping-action" type="button">🗑️ Verlauf löschen</button>
+          </div>
+
+          <div class="ping-history">
+            <table>
+              <thead>
+                <tr>
+                  <th>Zeit</th>
+                  <th>Server</th>
+                  <th>Ping</th>
+                  <th>Jitter</th>
+                  <th>Verlust</th>
+                </tr>
+              </thead>
+              <tbody id="pingHistoryBody">
+                <tr><td colspan="5" class="ping-empty">Noch keine gespeicherten Tests.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="actions">
-        <button class="action" id="copy" data-i18n="copy">Ergebnis kopieren</button>
-        <button class="action" id="share" data-i18n="share">Ergebnis teilen</button>
-        <button class="action" id="json" data-i18n="json">JSON exportieren</button>
-        <button class="action" id="print" data-i18n="print">Bericht drucken</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 data-i18n="histTitle">Test History</h2>
-    <div class="history">
-      <div class="hhead"><h2 data-i18n="histRecent">Letzte Messungen</h2><button id="clear" class="action" data-i18n="histClear">Verlauf löschen</button></div>
-      <table>
-        <thead><tr><th data-i18n="thDate">Datum</th><th data-i18n="thProvider">Anbieter</th><th data-i18n="thDown">Download</th><th data-i18n="thUp">Upload</th><th data-i18n="thPing">Ping</th><th data-i18n="thQual">Qualität</th></tr></thead>
-        <tbody id="history"></tbody>
-      </table>
-    </div>
-  </section>
+    </section>
+  </section><!-- /#ping-section -->
 
 </div>
 </main>
 
+<!-- ============================================================
+     SPEED WIDGET
+     ============================================================ -->
 <div id="speedWidget" class="speed-widget" hidden>
   <div class="speed-widget-head">
     <div>
@@ -474,6 +831,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="widgetProvider" class="widget-provider"><span data-i18n="providerLabel">Provider</span>: —</div>
 </div>
 
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -481,14 +841,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="footer-brand-name">Fasqoo</div>
         <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
       </div>
-
       <div class="footer-column">
         <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
         <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
         <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
         <a href="widget.html" data-i18n="footerWidget">Widget</a>
       </div>
-
       <div class="footer-column">
         <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
         <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
@@ -499,7 +857,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
         <a href="dark-data-exposer.html">Dark Data &amp; Tracker Exposer</a>
       </div>
-
       <div class="footer-column">
         <h4 data-i18n="footerCompany">Unternehmen</h4>
         <a href="about.html" data-i18n="footerAbout">Über uns</a>
@@ -522,6 +879,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+
 <script src="/js/app.js" defer></script>
+<script src="/js/ping.js" defer></script>
 </body>
 </html>
