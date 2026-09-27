@@ -334,13 +334,23 @@
     }
   };
 
-    function getCurrentLang(){
+     function getCurrentLang(){
+    // 1) WICHTIG: documentElement.lang ist die Quelle der Wahrheit –
+    //    app.js setzt diesen Wert bei jedem Sprachwechsel.
+    const htmlLang = (document.documentElement.lang || '').slice(0,2).toLowerCase();
+    if(PING_TRANSLATIONS[htmlLang]) return htmlLang;
+
+    // 2) Fallback: localStorage
     try{
       const stored = localStorage.getItem('fasqoo_lang');
       if(stored && PING_TRANSLATIONS[stored]) return stored;
     }catch(e){}
-    const htmlLang = (document.documentElement.lang || '').slice(0,2).toLowerCase();
-    if(PING_TRANSLATIONS[htmlLang]) return htmlLang;
+
+    // 3) Fallback: Browser-Sprache
+    const bLang = (navigator.language || 'en').slice(0,2).toLowerCase();
+    if(PING_TRANSLATIONS[bLang]) return bLang;
+
+    // 4) Letzter Fallback
     return 'en';
   }
   function t(key){
