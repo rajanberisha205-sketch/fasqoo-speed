@@ -43,6 +43,562 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-N4DXJXZ8');</script>
 <!-- End Google Tag Manager -->
 <link rel="stylesheet" href="/css/style.css">
+<style>
+
+.hidden{display:none!important}
+.fq-main-tabs{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:0 0 24px;padding:5px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(16,24,40,.05);
+  width:max-content;max-width:100%;margin-left:auto;margin-right:auto;
+}
+.fq-main-tab{
+  appearance:none;border:1px solid transparent;background:transparent;color:var(--muted);
+  min-height:40px;padding:0 18px;border-radius:9px;font:600 13px Inter,system-ui,sans-serif;
+  cursor:pointer;transition:background .16s,border-color .16s,color .16s,box-shadow .16s;
+}
+.fq-main-tab:hover{color:var(--text);background:var(--soft)}
+.fq-main-tab.active{
+  background:var(--orange);color:#fff;border-color:var(--orange);
+  box-shadow:0 7px 18px rgba(255,90,31,.20);
+}
+body.dark .fq-main-tabs{background:#12161b;border-color:#29303a;box-shadow:none}
+body.dark .fq-main-tab:hover{background:#171c22;color:#fff}
+@media(max-width:600px){
+  .fq-main-tabs{width:100%;gap:5px}
+  .fq-main-tab{flex:1;padding:0 9px;font-size:12px}
+}
+.fq-gaming .gm-connection{
+  margin:0 0 34px;padding:22px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.fq-gaming .gm-connection-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px}
+.fq-gaming .gm-section-kicker{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:6px}
+.fq-gaming .gm-connection h2{margin:0;font-size:24px;letter-spacing:-.6px}
+.fq-gaming .gm-connection p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.fq-gaming .gm-isp-live{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid rgba(34,197,94,.22);border-radius:999px;color:var(--success);font-size:10px;font-weight:800;letter-spacing:1px}
+.fq-gaming .gm-isp-live i{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 9px rgba(34,197,94,.7)}
+.fq-gaming .gm-connection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fq-gaming .gm-connection-card{padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--soft);min-width:0}
+.fq-gaming .gm-connection-card span{display:block;color:var(--muted);font-size:11px;margin-bottom:6px}
+.fq-gaming .gm-connection-card strong{display:block;color:var(--text);font-size:14px;line-height:1.35;word-break:break-word}
+@media(max-width:900px){.fq-gaming .gm-connection-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.fq-gaming .gm-connection-head{flex-direction:column}.fq-gaming .gm-connection-grid{grid-template-columns:1fr}}
+
+
+.fq-gaming{
+  --bg:#f3f5f8;--card:#fff;--text:#10141a;--muted:#69727e;--line:#e3e7ec;
+  --soft:#f7f8fa;--orange:#ff5a1f;--orange-2:#ff7b45;--green:#16a36a;
+  --shadow:0 16px 45px rgba(16,24,40,.07);--radius:16px;
+  --success:#22c55e;--warn:#eab308;--danger:#ef4444;
+  color:var(--text);
+}
+body.dark .fq-gaming{
+  --bg:#090c10;--card:#12161b;--text:#f4f6f8;--muted:#98a2ae;--line:#29303a;
+  --soft:#171c22;--shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+.fq-gaming .hero{text-align:center;padding:40px 0 20px;position:relative}
+.fq-gaming .hero::before{
+  content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.14) 0%,transparent 62%);
+  z-index:-1;pointer-events:none;
+}
+.fq-gaming .eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 12px;
+  border:1px solid rgba(255,90,31,.18);background:rgba(255,90,31,.06);
+  border-radius:999px;font-size:10px;letter-spacing:1.5px;font-weight:800;
+  color:var(--orange);text-transform:uppercase;margin-bottom:20px;
+}
+.fq-gaming .eyebrow svg{width:14px;height:14px}
+.fq-gaming .hero h1{
+  font-size:clamp(38px,5vw,58px);letter-spacing:-2.2px;margin:0 0 16px;
+  font-weight:800;line-height:1.06;
+}
+.fq-gaming .hero h1 .accent{
+  background:linear-gradient(135deg,var(--orange),var(--orange-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.fq-gaming .hero p{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto;line-height:1.55}
+.fq-gaming .hero{
+  overflow:hidden;
+  isolation:isolate;
+  border-radius:24px;
+  padding-left:24px;padding-right:24px;
+  background:
+    radial-gradient(circle at 18% 58%,rgba(255,90,31,.07),transparent 28%),
+    radial-gradient(circle at 82% 40%,rgba(255,90,31,.10),transparent 30%),
+    linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.08));
+  border:1px solid rgba(16,20,26,.055);
+}
+.fq-gaming .hero::after{
+  content:"";
+  position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background:
+    linear-gradient(rgba(16,20,26,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(16,20,26,.045) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);
+}
+.fq-gaming .hero::before{
+  content:"";position:absolute;top:-210px;left:50%;transform:translateX(-50%);
+  width:1050px;height:700px;border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,90,31,.14),transparent 32%),
+    radial-gradient(circle,rgba(255,90,31,.055) 0%,transparent 63%);
+  z-index:-2;pointer-events:none;
+}
+.fq-gaming .hero .eyebrow{position:relative}
+.fq-gaming .hero .eyebrow::after{
+  content:"";width:88px;height:54px;margin-left:5px;opacity:.35;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 54' fill='none'%3E%3Cpath d='M6 44 27 23l12 11 16-23 27 33' stroke='%23ff5a1f' stroke-width='1.7'/%3E%3Cpath d='M4 49h80' stroke='%23ff5a1f' stroke-opacity='.35'/%3E%3Ccircle cx='67' cy='12' r='3' stroke='%23ff5a1f'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+body.dark .fq-gaming .hero{
+  background:
+    radial-gradient(circle at 18% 58%,rgba(255,90,31,.13),transparent 28%),
+    radial-gradient(circle at 82% 40%,rgba(255,90,31,.14),transparent 30%),
+    linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
+  border-color:rgba(255,255,255,.075);
+  box-shadow:inset 0 1px rgba(255,255,255,.035);
+}
+body.dark .fq-gaming .hero::after{
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+}
+body.dark .fq-gaming .hero p{color:rgba(244,246,248,.70)}
+
+@media(max-width:640px){
+  .hero{padding-left:14px;padding-right:14px;border-radius:18px}
+  .hero .eyebrow::after{display:none}
+}
+
+
+@media(max-width:640px){
+  .hero{padding:26px 0 14px}
+  .hero h1{font-size:30px;letter-spacing:-1.5px}
+  .hero p{font-size:14px}
+}
+.fq-gaming .control{padding:24px 0 20px}
+.fq-gaming .control-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);
+  display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.fq-gaming .control-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--orange),#ffb18e,transparent);
+}
+.fq-gaming .control-info{min-width:0;flex:1}
+.fq-gaming .control-info h3{margin:0 0 6px;font-size:16px;font-weight:800;letter-spacing:-.3px}
+.fq-gaming .control-info p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:640px}
+.fq-gaming .control-providers{
+  margin-top:10px;font-size:11.5px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 11px;background:var(--soft);border:1px solid var(--line);border-radius:100px;
+}
+.fq-gaming .control-providers svg{width:14px;height:14px;color:var(--green)}
+.fq-gaming .control-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fq-gaming .btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:46px;padding:0 22px;border-radius:11px;border:1px solid transparent;
+  font-weight:600;font-size:14px;cursor:pointer;
+  transition:transform .15s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+}
+.fq-gaming .btn-primary{
+  background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#fff;
+  box-shadow:0 10px 22px rgba(255,90,31,.22);
+}
+.fq-gaming .btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,90,31,.30)}
+.fq-gaming .btn-secondary{background:var(--card);border-color:var(--line);color:var(--text)}
+.fq-gaming .btn-secondary:hover:not(:disabled){border-color:#bfc7d1;background:var(--soft)}
+.fq-gaming .btn:disabled{opacity:.55;cursor:not-allowed}
+.fq-gaming .btn svg{width:16px;height:16px}
+.fq-gaming .btn-lg{height:54px;padding:0 26px;font-size:15px}
+.fq-gaming .status{
+  margin-top:14px;padding:13px 16px;border-radius:12px;
+  font-size:13.5px;font-weight:600;display:none;align-items:center;gap:10px;
+  border:1px solid transparent;
+}
+.fq-gaming .status.show{display:flex}
+.fq-gaming .status.info{background:rgba(255,90,31,.08);border-color:rgba(255,90,31,.22);color:var(--orange)}
+.fq-gaming .status.success{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.22);color:#15803d}
+.fq-gaming .status.error{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#b91c1c}
+.fq-gaming .status .spinner{
+  width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;
+  border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.fq-gaming .summary{display:none;margin-top:18px}
+.fq-gaming .summary.show{display:block;animation:fadeUp .5s ease}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fq-gaming .summary-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;
+}
+.fq-gaming .summary-score{position:relative;width:132px;height:132px;flex-shrink:0}
+.fq-gaming .summary-score svg{width:100%;height:100%}
+.fq-gaming .summary-score .track{fill:none;stroke:var(--line);stroke-width:9}
+.fq-gaming .summary-score .fill{
+  fill:none;stroke:var(--orange);stroke-width:9;stroke-linecap:round;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1),stroke .35s;
+}
+.fq-gaming .summary-score .inner{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;pointer-events:none;
+}
+.fq-gaming .summary-score .big{
+  font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.fq-gaming .summary-score .lbl{
+  font-size:10px;font-weight:800;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;margin-top:4px;
+}
+.fq-gaming .summary-info h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.4px}
+.fq-gaming .summary-info p{margin:0 0 14px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.fq-gaming .summary-stats{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.fq-gaming .summary-stats b{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+.fq-gaming .summary-stats span{display:inline-flex;align-items:center;gap:5px}
+.fq-gaming .category{padding:32px 0 6px}
+.fq-gaming .category-head{margin-bottom:18px}
+.fq-gaming .category-head h2{
+  margin:0 0 6px;font-size:22px;font-weight:800;letter-spacing:-.5px;
+  display:flex;align-items:center;gap:12px;
+}
+.fq-gaming .cat-badge{
+  display:inline-grid;place-items:center;width:34px;height:34px;
+  font-size:13px;font-weight:800;color:var(--orange);
+  border:1px solid rgba(255,90,31,.25);background:rgba(255,90,31,.07);
+  border-radius:11px;
+  box-shadow:0 4px 12px rgba(255,90,31,.08);
+}
+.fq-gaming .category-head p{margin:0;font-size:13.5px;color:var(--muted);max-width:680px;line-height:1.55}
+.fq-gaming .grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.fq-gaming .grid.grid-3{grid-template-columns:repeat(3,1fr)}
+
+@media(max-width:1080px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+@media(max-width:900px){.grid,.grid.grid-3{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:520px){.grid,.grid.grid-3{grid-template-columns:1fr}}
+.fq-gaming .game-card{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:18px;overflow:hidden;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+  box-shadow:0 5px 20px rgba(16,24,40,.04);
+}
+.fq-gaming .game-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,rgba(16,24,40,.04),transparent);
+  transition:background .3s ease;
+}
+.fq-gaming .game-card.state-excellent::before{background:linear-gradient(90deg,var(--success),transparent)}
+.fq-gaming .game-card.state-ok::before{background:linear-gradient(90deg,var(--warn),transparent)}
+.fq-gaming .game-card.state-bad::before{background:linear-gradient(90deg,var(--danger),transparent)}
+.fq-gaming .game-card.state-testing::before{background:linear-gradient(90deg,var(--orange),transparent);animation:pulseBar 1.4s ease-in-out infinite}
+
+@keyframes pulseBar{0%,100%{opacity:.6}50%{opacity:1}}
+.fq-gaming .game-card:hover{transform:translateY(-3px);border-color:#d8dee6;box-shadow:0 12px 32px rgba(16,24,40,.08)}
+.fq-gaming .game-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.fq-gaming .game-icon{
+  width:46px;height:46px;flex:0 0 46px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(255,90,31,.10),rgba(255,90,31,.02));
+  border:1px solid rgba(255,90,31,.18);
+  color:var(--orange);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.fq-gaming .game-icon svg{width:24px;height:24px}
+.fq-gaming .game-card:hover .game-icon{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 20px rgba(255,90,31,.16)}
+.fq-gaming .game-meta{min-width:0}
+.fq-gaming .game-name{font-size:14.5px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fq-gaming .game-provider{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fq-gaming .game-ping{display:flex;align-items:baseline;gap:6px;margin-bottom:12px;min-height:42px}
+.fq-gaming .game-ping .num{
+  font-size:38px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--text),#3a4150);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.fq-gaming .game-card.state-excellent .game-ping .num{background:linear-gradient(135deg,#16a36a,#22c55e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fq-gaming .game-card.state-ok .game-ping .num{background:linear-gradient(135deg,#e6a500,#eab308);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fq-gaming .game-card.state-bad .game-ping .num{background:linear-gradient(135deg,#e5484d,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fq-gaming .game-ping .unit{font-size:13px;font-weight:700;color:var(--muted)}
+.fq-gaming .game-ping .spinner{
+  width:20px;height:20px;border:2.5px solid var(--orange);
+  border-top-color:transparent;border-radius:50%;
+  animation:spin .8s linear infinite;margin-left:auto;align-self:center;
+}
+.fq-gaming .game-stats{
+  display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;
+  font-size:11.5px;color:var(--muted);min-height:16px;
+}
+.fq-gaming .game-stats b{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+.fq-gaming .badge{
+  display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;
+  border-radius:100px;font-size:10.5px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;white-space:nowrap;
+  transition:background .3s ease,color .3s ease;
+}
+.fq-gaming .badge .dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 20%,transparent)}
+.fq-gaming .badge.state-excellent{color:#16a36a;background:rgba(34,197,94,.10)}
+.fq-gaming .badge.state-ok{color:#c78900;background:rgba(234,179,8,.12)}
+.fq-gaming .badge.state-bad{color:#e5484d;background:rgba(239,68,68,.10)}
+.fq-gaming .badge.state-testing{color:var(--orange);background:rgba(255,90,31,.10)}
+.fq-gaming .badge.state-idle{color:var(--muted);background:var(--soft)}
+.fq-gaming .badge.state-failed{color:#b91c1c;background:rgba(239,68,68,.10)}
+.fq-gaming .report-actions{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap}
+.fq-gaming .report-actions .btn{flex:1;min-width:220px}
+.fq-gaming .report-note{
+  margin:16px 4px 0;font-size:12.5px;color:var(--muted);line-height:1.6;
+  padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);
+}
+.fq-gaming .section{padding:72px 0;border-top:1px solid var(--line);margin-top:40px}
+.fq-gaming .section-head{text-align:center;max-width:720px;margin:0 auto 44px}
+.fq-gaming .section-kicker{
+  font-size:10px;letter-spacing:1.6px;font-weight:800;color:var(--orange);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.fq-gaming .section-head h2{
+  font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.8px;
+  line-height:1.15;margin:0 0 14px;
+}
+.fq-gaming .section-head p{font-size:15.5px;color:var(--muted);margin:0;line-height:1.55}
+.fq-gaming .grid-3.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+@media(max-width:900px){.grid-3.features{grid-template-columns:1fr 1fr}}
+
+@media(max-width:600px){.grid-3.features{grid-template-columns:1fr}}
+.fq-gaming .feature{
+  padding:24px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;transition:all .2s ease;position:relative;overflow:hidden;
+  box-shadow:0 5px 20px rgba(16,24,40,.035);
+}
+.fq-gaming .feature:hover{border-color:#d8dee6;transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,24,40,.07)}
+.fq-gaming .feature-icon{
+  width:46px;height:46px;border-radius:13px;
+  background:linear-gradient(135deg,rgba(255,90,31,.10),rgba(255,90,31,.02));
+  border:1px solid rgba(255,90,31,.18);
+  color:var(--orange);display:grid;place-items:center;margin-bottom:18px;
+}
+.fq-gaming .feature-icon svg{width:22px;height:22px}
+.fq-gaming .feature h3{margin:0 0 8px;font-size:15px;font-weight:800;letter-spacing:-.2px}
+.fq-gaming .feature p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.6}
+.fq-gaming .faq{max-width:820px;margin:0 auto}
+.fq-gaming .faq details{border-top:1px solid var(--line);padding:0}
+.fq-gaming .faq details:last-child{border-bottom:1px solid var(--line)}
+.fq-gaming .faq summary{
+  list-style:none;cursor:pointer;padding:19px 36px 19px 2px;position:relative;
+  font-size:15px;font-weight:600;color:var(--text);
+}
+.fq-gaming .faq summary::-webkit-details-marker{display:none}
+.fq-gaming .faq summary:after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-size:22px;font-weight:300;color:var(--muted);transition:transform .2s ease;
+}
+.fq-gaming .faq details[open] summary:after{content:"−"}
+.fq-gaming .faq details p{
+  font-size:14px;line-height:1.7;color:var(--muted);
+  margin:0;padding:0 36px 19px 2px;
+}
+.fq-gaming .cta{text-align:center;padding:80px 0;border-top:1px solid var(--line)}
+.fq-gaming .cta h2{
+  font-size:clamp(1.6rem,3.8vw,2.4rem);font-weight:800;letter-spacing:-.8px;
+  margin:0 0 16px;line-height:1.15;
+}
+.fq-gaming .cta p{font-size:15.5px;color:var(--muted);max-width:560px;margin:0 auto 32px}
+.fq-gaming .cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.fq-gaming .site-footer{
+  margin-top:60px;padding:42px 0 22px;background:var(--card);
+  border-top:1px solid var(--line);color:var(--muted);
+  box-shadow:0 -1px 0 rgba(16,24,40,.025);
+}
+.fq-gaming .footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1.15fr 1fr;gap:42px;padding-bottom:34px}
+.fq-gaming .footer-brand-name{
+  font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text);margin-bottom:12px;
+}
+.fq-gaming .footer-brand p{max-width:300px;margin:0;font-size:11.5px;line-height:1.7;color:var(--muted)}
+.fq-gaming .footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.fq-gaming .footer-column h4{margin:0 0 7px;color:var(--text);font-size:12px;font-weight:700}
+.fq-gaming .footer-column a{color:var(--muted);font-size:11.5px;line-height:1.5;text-decoration:none;transition:color .18s ease}
+.fq-gaming .footer-column a:hover{color:var(--orange)}
+.fq-gaming .footer-bottom{
+  border-top:1px solid var(--line);padding-top:18px;padding-bottom:22px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:7px;text-align:center;font-size:10px;line-height:1.5;color:var(--muted);
+}
+.fq-gaming .footer-copyright{color:var(--text);font-size:11px;font-weight:600}
+.fq-gaming .footer-cloudflare{
+  display:flex;flex-direction:column;align-items:center;gap:3px;max-width:760px;
+}
+.fq-gaming .footer-powered,
+.fq-gaming .footer-disclaimer{
+  display:block;color:var(--muted);font-size:9px;line-height:1.55;font-weight:400;
+}
+.fq-gaming .footer-disclaimer{opacity:.78}
+
+
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+  .footer-brand{grid-column:1/-1}
+}
+
+@media(max-width:760px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 22px}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+}
+.fq-gaming .toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);
+  background:var(--card);color:var(--text);padding:12px 18px;
+  border-radius:12px;border:1px solid var(--line);font-size:13.5px;
+  font-weight:600;box-shadow:0 20px 50px rgba(16,24,40,.18);z-index:2000;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;align-items:center;gap:8px;pointer-events:none;
+}
+.fq-gaming .toast.show{transform:translate(-50%,0)}
+.fq-gaming .toast svg{width:16px;height:16px;color:var(--success)}
+.fq-gaming .fq20{margin:10px 0 34px;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.fq-gaming .fq20-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+.fq-gaming .fq20-kicker{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:6px}
+.fq-gaming .fq20 h2{margin:0;font-size:24px;letter-spacing:-.6px;font-weight:800}
+.fq-gaming .fq20-sub{margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.55;max-width:720px}
+.fq-gaming .fq20-clock{min-width:76px;height:48px;border:1px solid var(--line);border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.fq-gaming .fq20-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.fq-gaming .fq20-stat{padding:17px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+.fq-gaming .fq20-stat-label{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:7px}
+.fq-gaming .fq20-stat-value{font-size:28px;line-height:1;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums}
+.fq-gaming .fq20-stat-unit{font-size:11px;color:var(--muted);font-weight:700;margin-left:4px}
+.fq-gaming .fq20-chart{height:240px;border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:8px;position:relative}
+.fq-gaming #fq20Canvas{width:100%;height:100%;display:block}
+.fq-gaming .fq20-chart-meta{position:absolute;top:10px;left:13px;right:13px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);pointer-events:none}
+.fq-gaming .fq20-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;flex-wrap:wrap}
+.fq-gaming .fq20-status{font-size:12px;color:var(--muted);font-weight:600}
+.fq-gaming .fq20-result{display:none;margin-top:15px;padding:17px;border-radius:13px;border:1px solid var(--line);background:var(--soft)}
+.fq-gaming .fq20-result.show{display:block}
+.fq-gaming .fq20-result.excellent{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07)}
+.fq-gaming .fq20-result.good{border-color:rgba(234,179,8,.35);background:rgba(234,179,8,.07)}
+.fq-gaming .fq20-result.bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07)}
+.fq-gaming .fq20-result-title{font-size:17px;font-weight:800;margin-bottom:5px}
+.fq-gaming .fq20-result-text{font-size:12.5px;color:var(--muted);line-height:1.55}
+.fq-gaming .fq20-history{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.fq-gaming .fq20-history-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}
+.fq-gaming .fq20-history h3{margin:0;font-size:14px;font-weight:800}
+.fq-gaming .fq20-history-clear{border:0;background:transparent;color:var(--muted);font-size:11px;font-weight:700;padding:4px 0}
+.fq-gaming .fq20-history-clear:hover{color:var(--orange)}
+.fq-gaming .fq20-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.fq-gaming .fq20-table th{text-align:left;color:var(--muted);font-weight:700;padding:8px 7px;border-bottom:1px solid var(--line)}
+.fq-gaming .fq20-table td{padding:9px 7px;border-bottom:1px solid var(--line);color:var(--text);font-variant-numeric:tabular-nums}
+.fq-gaming .fq20-table tr:last-child td{border-bottom:0}
+.fq-gaming .fq20-grade{font-weight:800}
+.fq-gaming .fq20-empty{text-align:center;color:var(--muted);padding:18px 7px!important}
+
+@media(max-width:640px){.fq20{padding:18px}.fq20-head{display:block}.fq20-clock{margin-top:13px;width:100%}.fq20-stats{grid-template-columns:1fr}.fq20-chart{height:190px}.fq20-table{font-size:10.5px}.fq20-table th:nth-child(1),.fq20-table td:nth-child(1){display:none}}
+body.dark .fq-gaming .fq20-table td,
+body.dark .fq-gaming .fq20 h2,
+body.dark .fq-gaming .fq20-stat-value{color:var(--text)}
+body.dark .fq-gaming .fq20-chart{background:#0d1116}
+body.dark .fq-gaming .fq20-history-clear{color:var(--muted)}
+body.dark .fq-gaming .fq20-clock,
+body.dark .fq-gaming .fq20-stat{background:var(--soft)}
+.fq-gaming .fq20{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 82% 24%,rgba(255,90,31,.20),transparent 24%),
+    radial-gradient(circle at 18% 76%,rgba(255,90,31,.10),transparent 25%),
+    linear-gradient(135deg,#10151b 0%,#0b0f14 52%,#121820 100%);
+  color:#f4f6f8;
+  border-color:rgba(255,255,255,.09);
+}
+.fq-gaming .fq20::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  opacity:.52;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%);
+}
+.fq-gaming .fq20::after{
+  content:"";
+  position:absolute;
+  width:430px;height:430px;
+  right:-110px;top:-160px;
+  z-index:-1;
+  opacity:.42;
+  border:1px solid rgba(255,90,31,.24);
+  border-radius:50%;
+  box-shadow:0 0 0 45px rgba(255,90,31,.035),0 0 0 90px rgba(255,90,31,.025),inset 0 0 80px rgba(255,90,31,.08);
+}
+.fq-gaming .fq20 .fq20-head{position:relative;min-height:116px;align-items:center}
+.fq-gaming .fq20 .fq20-head::after{
+  content:"";
+  position:absolute;
+  right:120px;top:4px;
+  width:160px;height:100px;
+  opacity:.42;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 100' fill='none'%3E%3Cpath d='M20 72 56 36l19 19 25-35 40 52' stroke='%23ff5a1f' stroke-width='2'/%3E%3Ccircle cx='100' cy='20' r='5' stroke='%23ff5a1f'/%3E%3Cpath d='M5 88h150M18 12h42' stroke='%23fff' stroke-opacity='.16'/%3E%3C/svg%3E") center/contain no-repeat;
+  pointer-events:none;
+}
+.fq-gaming .fq20-kicker{display:inline-flex;align-items:center;gap:8px;padding:5px 9px;border:1px solid rgba(255,90,31,.28);border-radius:999px;background:rgba(255,90,31,.08);text-shadow:none}
+.fq-gaming .fq20-kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff5a1f;box-shadow:0 0 12px rgba(255,90,31,.8)}
+.fq-gaming .fq20 h2{font-size:clamp(28px,4vw,42px);letter-spacing:-1.3px;color:#fff;max-width:760px}
+.fq-gaming .fq20-sub{color:rgba(244,246,248,.70);max-width:760px;font-size:14px}
+.fq-gaming .fq20-clock{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.fq-gaming .fq20-stats{position:relative}
+.fq-gaming .fq20-stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09);backdrop-filter:blur(8px);box-shadow:inset 0 1px rgba(255,255,255,.035)}
+.fq-gaming .fq20-stat-label{color:rgba(244,246,248,.58);display:flex;align-items:center;gap:7px}
+.fq-gaming .fq20-stat-label::before{content:"";width:5px;height:5px;border-radius:50%;background:#ff5a1f;box-shadow:0 0 8px rgba(255,90,31,.65)}
+.fq-gaming .fq20-stat-value{color:#fff}
+.fq-gaming .fq20-stat-unit{color:rgba(244,246,248,.55)}
+.fq-gaming .fq20-chart{background:rgba(4,7,10,.46);border-color:rgba(255,255,255,.09);backdrop-filter:blur(8px)}
+.fq-gaming .fq20-chart-meta{color:rgba(244,246,248,.52)}
+.fq-gaming .fq20-actions{position:relative}
+.fq-gaming .fq20-status{color:rgba(244,246,248,.62)}
+.fq-gaming .fq20-result{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+.fq-gaming .fq20-history{border-top-color:rgba(255,255,255,.09)}
+.fq-gaming .fq20-history h3{color:#fff}
+.fq-gaming .fq20-history-clear{color:rgba(244,246,248,.58)}
+.fq-gaming .fq20-table th{color:rgba(244,246,248,.52);border-color:rgba(255,255,255,.09)}
+.fq-gaming .fq20-table td{color:#f4f6f8;border-color:rgba(255,255,255,.07)}
+.fq-gaming .fq20-empty{color:rgba(244,246,248,.55)!important}
+.fq-gaming .fq20 .btn-primary{box-shadow:0 10px 30px rgba(255,90,31,.22)}
+
+@media(max-width:760px){
+  .fq20 .fq20-head::after{right:-20px;top:45px;opacity:.20;width:130px}
+  .fq20 .fq20-head{min-height:0}
+  .fq20 h2{font-size:30px}
+}
+.fq-gaming .fq20-icon{
+  width:18px;height:18px;display:inline-block;vertical-align:-4px;
+  margin-right:6px;color:var(--orange);
+}
+.fq-gaming .fq20-btn-icon{width:17px;height:17px;display:inline-block;vertical-align:-4px;margin-right:7px}
+.fq-gaming .fq20 .btn-primary .fq20-btn-icon{color:currentColor}
+
+
+</style>
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -244,6 +800,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 <div class="wrap">
+  <div class="fq-main-tabs" role="tablist" aria-label="Fasqoo test mode">
+    <button type="button" class="fq-main-tab active" id="bandwidthTab" role="tab" aria-selected="true" aria-controls="speedtest-section">Bandbreiten-Test</button>
+    <button type="button" class="fq-main-tab" id="gamingTab" role="tab" aria-selected="false" aria-controls="gaming-section">Gaming-Monitor</button>
+  </div>
+
+  <div id="speedtest-section">
 <div class="server-line">
     <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
   </div>
@@ -449,7 +1011,307 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  </div>
+
+  <section id="gaming-section" class="hidden fq-gaming" aria-labelledby="gm_heroTitle">
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M7 11v2"/><path d="M11 11v2"/><circle cx="16.5" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="19" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <span data-gm-i18n="heroEyebrow">Fasqoo Gaming Monitor</span>
+    </span>
+    <h1>
+      <span data-gm-i18n="heroTitleTop">Fasqoo Gaming-</span>
+      <span class="accent" data-gm-i18n="heroTitleAccent"> &amp; Ping-Monitor</span>
+    </h1>
+    <p data-gm-i18n="heroText">Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart.</p>
+  </section>
+
+  <!-- CONTROL -->
+  <section class="control">
+    <div class="control-card">
+      <div class="control-info">
+        <h3 data-gm-i18n="controlTitle">Bereit für deinen Ping-Check?</h3>
+        <p data-gm-i18n="controlText">Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.</p>
+        <span class="control-providers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-gm-i18n="controlProviders">Cloudflare Edge · direkter Endpunkt-Ping · keine Serverlogs</span>
+        </span>
+      </div>
+      <div class="control-actions">
+        <button id="gm_startBtn" class="btn btn-primary btn-lg" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <span data-gm-i18n="startBtn">Ping-Test starten</span>
+        </button>
+        <button id="gm_stopBtn" class="btn btn-secondary btn-lg" type="button" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
+          <span data-gm-i18n="stopBtn">Stoppen</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="status" id="gm_status"></div>
+
+    <div class="summary" id="gm_summary">
+      <div class="summary-card">
+        <div class="summary-score">
+          <svg viewBox="0 0 130 130">
+            <circle class="track" cx="65" cy="65" r="54"/>
+            <circle class="fill" id="gm_summaryFill" cx="65" cy="65" r="54" style="stroke-dasharray:339.29;stroke-dashoffset:339.29"/>
+          </svg>
+          <div class="inner">
+            <span class="big" id="gm_summaryScore">—</span>
+            <span class="lbl" data-gm-i18n="summaryScoreLabel">Score</span>
+          </div>
+        </div>
+        <div class="summary-info">
+          <h3 id="gm_summaryTitle">—</h3>
+          <p id="gm_summaryText">—</p>
+          <div class="summary-stats">
+            <span><b id="gm_statExcellent">0</b> <span data-gm-i18n="statExcellent">Exzellent</span></span>
+            <span><b id="gm_statOk">0</b> <span data-gm-i18n="statOk">Akzeptabel</span></span>
+            <span><b id="gm_statBad">0</b> <span data-gm-i18n="statBad">Hoher Ping</span></span>
+            <span><b id="gm_statAvg">—</b> <span data-gm-i18n="statAvg">Ø Ping</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gm-connection" aria-labelledby="gmConnectionTitle">
+    <div class="gm-connection-head">
+      <div>
+        <div class="gm-section-kicker" data-gm-i18n="ispKicker">CONNECTION INFORMATION</div>
+        <h2 id="gmConnectionTitle" data-gm-i18n="ispTitle">Your network connection</h2>
+        <p data-gm-i18n="ispSub">Detected directly in your browser. No account required.</p>
+      </div>
+      <span class="gm-isp-live"><i></i><span data-gm-i18n="ispLive">LIVE</span></span>
+    </div>
+    <div class="gm-connection-grid">
+      <div class="gm-connection-card">
+        <span data-gm-i18n="ispProvider">ISP / Provider</span>
+        <strong id="gm_ispProvider">Detecting…</strong>
+      </div>
+      <div class="gm-connection-card">
+        <span data-gm-i18n="ispIp">Public IP</span>
+        <strong id="gm_ispIp">Detecting…</strong>
+      </div>
+      <div class="gm-connection-card">
+        <span data-gm-i18n="ispLocation">Location</span>
+        <strong id="gm_ispLocation">Detecting…</strong>
+      </div>
+      <div class="gm-connection-card">
+        <span data-gm-i18n="ispNetwork">Network / ASN</span>
+        <strong id="gm_ispNetwork">Detecting…</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASQOO 20-SECOND GAMING & PING MONITOR
+       ======================================================== -->
+  <section class="fq20" id="gm_fq20Monitor" aria-labelledby="fq20Title">
+    <div class="fq20-head">
+      <div>
+        <div class="fq20-kicker" data-gm-i18n="fq20Kicker">20-SECOND LIVE MONITOR</div>
+        <h2 id="gm_fq20Title" data-gm-i18n="fq20Title">Gaming &amp; Ping Stability</h2>
+        <p class="fq20-sub" data-gm-i18n="fq20Sub">20 seconds · one measurement per second · real browser round-trip time to the Fasqoo/Cloudflare Edge endpoint.</p>
+      </div>
+      <div class="fq20-clock" id="gm_fq20Clock" aria-live="polite">0 / 20s</div>
+    </div>
+    <div class="fq20-stats">
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a14 14 0 0 1 0-12"/><path d="M8 15a9 9 0 0 1 0-6"/><circle cx="12" cy="12" r="1.4"/><path d="M16 9a9 9 0 0 1 0 6"/><path d="M20 6a14 14 0 0 1 0 12"/></svg><span data-gm-i18n="fq20Current">Current Ping</span></div><span class="fq20-stat-value" id="gm_fq20Ping">—</span><span class="fq20-stat-unit">ms</span></div>
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15c2.5-7 5-7 7.5 0s5 7 7.5 0 3.5-5 3.5-5"/></svg><span data-gm-i18n="fq20Jitter">Jitter</span></div><span class="fq20-stat-value" id="gm_fq20Jitter">—</span><span class="fq20-stat-unit">ms</span></div>
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/></svg><span data-gm-i18n="fq20Loss">Packet Loss</span></div><span class="fq20-stat-value" id="gm_fq20Loss">0</span><span class="fq20-stat-unit">%</span></div>
+    </div>
+    <div class="fq20-chart">
+      <div class="fq20-chart-meta"><span data-gm-i18n="fq20Graph">Live Ping</span><span id="gm_fq20ChartRange">—</span></div>
+      <canvas id="gm_fq20Canvas" aria-label="Live ping graph"></canvas>
+    </div>
+    <div class="fq20-actions">
+      <span class="fq20-status" id="gm_fq20Status" data-gm-i18n="fq20Ready">Ready — start a 20-second measurement.</span>
+      <button id="gm_fq20Start" class="btn btn-primary" type="button"><svg class="fq20-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8C8.9 4 8 4.4 8 5.2Z"/></svg><span data-gm-i18n="fq20Start">Start 20-second test</span></button>
+    </div>
+    <div class="fq20-result" id="gm_fq20Result" aria-live="polite">
+      <div class="fq20-result-title" id="gm_fq20ResultTitle">—</div>
+      <div class="fq20-result-text" id="gm_fq20ResultText">—</div>
+    </div>
+    <div class="fq20-history">
+      <div class="fq20-history-head">
+        <h3 data-gm-i18n="fq20History">Last 5 tests</h3>
+        <button class="fq20-history-clear" id="gm_fq20Clear" type="button" data-gm-i18n="fq20Clear">Clear history</button>
+      </div>
+      <table class="fq20-table">
+        <thead><tr><th data-gm-i18n="fq20Date">Date</th><th data-gm-i18n="fq20Avg">Avg. Ping</th><th data-gm-i18n="fq20JitShort">Jitter</th><th data-gm-i18n="fq20Gaming">Gaming</th></tr></thead>
+        <tbody id="gm_fq20HistoryBody"><tr><td colspan="4" class="fq20-empty" data-gm-i18n="fq20NoHistory">No completed 20-second tests yet.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CATEGORY A -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">A</span>
+        <span data-gm-i18n="catATitle">E-Sports &amp; Shooter</span>
+      </h2>
+      <p data-gm-i18n="catAText">Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.</p>
+    </div>
+    <div class="grid" id="gm_gridShooter"></div>
+  </section>
+
+  <!-- CATEGORY B -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">B</span>
+        <span data-gm-i18n="catBTitle">Gaming-Plattformen</span>
+      </h2>
+      <p data-gm-i18n="catBText">Launcher, Stores und Multiplayer-Netzwerke der großen Plattformen.</p>
+    </div>
+    <div class="grid" id="gm_gridPlatform"></div>
+  </section>
+
+  <!-- CATEGORY C -->
+  <section class="category">
+    <div class="category-head">
+      <h2>
+        <span class="cat-badge">C</span>
+        <span data-gm-i18n="catCTitle">Discord &amp; Voice</span>
+      </h2>
+      <p data-gm-i18n="catCText">Sprach-Chat hängt stärker vom Jitter als vom Ping ab – wir messen beides.</p>
+    </div>
+    <div class="grid grid-3" id="gm_gridVoice"></div>
+  </section>
+
+  <!-- EXPORT -->
+  <section class="category" id="gm_exportSection" style="display:none">
+    <div class="report-actions">
+      <button type="button" class="btn btn-secondary" id="gm_copyReport">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span data-gm-i18n="copyReport">Bericht kopieren</span>
+      </button>
+      <button type="button" class="btn btn-secondary" id="gm_exportJson">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-gm-i18n="exportJson">Als JSON exportieren</span>
+      </button>
+       <button type="button" class="btn btn-secondary" id="gm_downloadImage">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-4.8-4.8L10 16l-2.7-2.7L3 17"/></svg>
+         <span data-gm-i18n="downloadImage">Bild herunterladen</span>
+       </button>
+    </div>
+    <p class="report-note" data-gm-i18n="reportNote">Hinweis: Ping-Werte sind browserbasierte Messungen zu öffentlichen Endpunkten der Anbieter. Sie können leicht von den In-Game-Werten abweichen, da Spielserver geographisch anders verteilt sind.</p>
+  </section>
+
 </div>
+</main>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker" data-gm-i18n="featKicker">NETWORK INTELLIGENCE</div>
+      <h2 data-gm-i18n="featTitle">Warum Ping &amp; Jitter wichtiger als rohe Bandbreite sind</h2>
+      <p data-gm-i18n="featSub">Für Online-Gaming zählt Latenz und Stabilität – nicht der maximale Download.</p>
+    </div>
+    <div class="grid-3 features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/><path d="M12 2v3"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat1T">Latenz (Ping)</h3>
+        <p data-gm-i18n="feat1D">Die Zeit zwischen deinem Klick und der Antwort des Servers. Unter 30 ms fühlt sich „instant“ an, über 60 ms wird es spürbar träge.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2.5-6 3 12 2.5-8 2 4h5"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat2T">Jitter</h3>
+        <p data-gm-i18n="feat2D">Die Schwankung zwischen den einzelnen Messungen. Hoher Jitter verursacht Rubberbanding und Sprachabbrüche, auch wenn der Ping niedrig ist.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="4" y1="20" x2="20" y2="4"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat3T">Packet Loss</h3>
+        <p data-gm-i18n="feat3D">Verlorene Pakete werden nachgesendet – das erzeugt kurze Freezes und Teleportationen. WLAN und überlastete Router sind die häufigsten Ursachen.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="14" width="20" height="6" rx="2"/><path d="M5 14V9a7 7 0 0 1 14 0v5"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="17" r="1" fill="currentColor" stroke="none"/><line x1="19" y1="3" x2="19" y2="8"/><line x1="17" y1="5" x2="21" y2="5"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat4T">Router &amp; WLAN</h3>
+        <p data-gm-i18n="feat4D">Ein Kabel spart typischerweise 5–15 ms gegenüber WLAN. Teste beide Varianten und vergleiche die Werte oben.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat5T">Distanz zum Server</h3>
+        <p data-gm-i18n="feat5D">Je weiter der Spielserver entfernt ist, desto höher der Ping. Ein EU-Server liegt für dich in der Regel 10–40 ms entfernt, US-Server 90–160 ms.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h12"/><path d="M3 18h7"/><circle cx="19" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+        </div>
+        <h3 data-gm-i18n="feat6T">Bufferbloat</h3>
+        <p data-gm-i18n="feat6D">Voll ausgelastete Leitungen können den Ping verdoppeln. Ein moderner Router mit SQM (Smart Queue Management) reduziert das drastisch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--card)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker" data-gm-i18n="faqKicker">HELP CENTER</div>
+      <h2 data-gm-i18n="faqTitle">Häufige Fragen</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary data-gm-i18n="faqQ1">Wie funktioniert der Ping-Monitor?</summary>
+        <p data-gm-i18n="faqA1">Dein Browser sendet kleine Anfragen an öffentliche Endpunkte der jeweiligen Anbieter und misst die Zeit bis zur Antwort. Die Messung läuft vollständig clientseitig – es werden keine Zugangsdaten oder Nutzerdaten übertragen.</p>
+      </details>
+      <details>
+        <summary data-gm-i18n="faqQ2">Warum weichen die Werte von meinem Spiel ab?</summary>
+        <p data-gm-i18n="faqA2">Wir messen zu allgemeinen Anbieter-Endpunkten (z. B. Steam, Riot, Epic). Der eigentliche Spielserver, mit dem du dich im Matchmaking verbindest, kann geographisch anders liegen. Die Werte hier sind ein guter Indikator für die allgemeine Leitungsqualität.</p>
+      </details>
+      <details>
+        <summary data-gm-i18n="faqQ3">Was ist ein guter Ping zum Gamen?</summary>
+        <p data-gm-i18n="faqA3">Für kompetitive Shooter (Valorant, CS2) sind unter 30 ms exzellent, 30–60 ms akzeptabel. Über 60 ms wird es spürbar. Bei MMOs und Strategie ist alles unter 100 ms in der Regel unproblematisch.</p>
+      </details>
+      <details>
+        <summary data-gm-i18n="faqQ4">Was ist ein guter Jitter?</summary>
+        <p data-gm-i18n="faqA4">Unter 5 ms ist exzellent. 5–15 ms ist akzeptabel. Über 15 ms führt typischerweise zu hörbaren Sprachproblemen in Discord und zu Rubberbanding in Spielen.</p>
+      </details>
+      <details>
+        <summary data-gm-i18n="faqQ5">Kann ich das Ergebnis exportieren?</summary>
+        <p data-gm-i18n="faqA5">Ja. Über die Buttons am Ende der Messung kannst du den Bericht als Text kopieren oder als JSON-Datei herunterladen – z. B. für Support-Tickets bei deinem ISP.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2 data-gm-i18n="ctaTitle">Bereit für ein besseres Spielgefühl?</h2>
+    <p data-gm-i18n="ctaText">Starte den Test, vergleiche deine Werte und optimiere deine Verbindung.</p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary btn-lg" onclick="document.getElementById('gm_startBtn').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        <span data-gm-i18n="ctaBtn">Ping-Test starten</span>
+      </button>
+      <a href="index.html" class="btn btn-secondary btn-lg">
+        <span data-gm-i18n="ctaBtnSpeed">Speed Test</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+  </section>
+
 </main>
 
 <div id="speedWidget" class="speed-widget" hidden>
@@ -522,6 +1384,737 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+
+<script>
+(function(){
+  const bandwidthTab=document.getElementById('bandwidthTab');
+  const gamingTab=document.getElementById('gamingTab');
+  const speedSection=document.getElementById('speedtest-section');
+  const gamingSection=document.getElementById('gaming-section');
+  if(!bandwidthTab || !gamingTab || !speedSection || !gamingSection) return;
+
+  function setMode(mode){
+    const gaming=mode==='gaming';
+    speedSection.classList.toggle('hidden',gaming);
+    gamingSection.classList.toggle('hidden',!gaming);
+    bandwidthTab.classList.toggle('active',!gaming);
+    gamingTab.classList.toggle('active',gaming);
+    bandwidthTab.setAttribute('aria-selected',String(!gaming));
+    gamingTab.setAttribute('aria-selected',String(gaming));
+    if(gaming) window.dispatchEvent(new Event('fasqoo-gaming-visible'));
+  }
+  bandwidthTab.addEventListener('click',()=>setMode('speed'));
+  gamingTab.addEventListener('click',()=>setMode('gaming'));
+})();
+</script>
+<script>
+
+(function(){
+'use strict';
+
+/* ===================================================================
+   Fasqoo Gaming & Ping Monitor
+   =================================================================== */
+
+/* ===================================================================
+   TRANSLATIONS
+   =================================================================== */
+const EN = {
+  navSpeedtest:'Speedtest', navTools:'Tools & IT-Diagnostics', navSectionNetwork:'Network & Speed',
+  navSectionDiag:'IT Diagnostics & Security', navFaq:'FAQ', navAbout:'About Us', navWidget:'Widget',
+  navStatus:'Network Status', navStatusDesc:'Live reachability & line diagnostics',
+  navWidgetDesc:'Free test widget for other websites', navSecurity:'Security Analyzer',
+  navSecurityDesc:'Check HTTP security headers in real time', navDns:'Visual DNS Test',
+  navDnsDesc:'Track global DNS propagation visually', navSubnet:'Subnet Calculator',
+  navSubnetDesc:'Calculate IP ranges and subnet masks',
+  liteBtn:'Fasqoo Lite', installApp:'Install for Windows',
+  footerBrand:'Fasqoo - Independent, browser-based internet speed tests and network tools.',
+  footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
+  footerWidget:'Widget', footerNetworkTools:'Network Tools', footerNetworkStatus:'Network Status',
+  footerITDiagnose:'IT Diagnostics', footerSecurity:'Security Analyzer', footerDns:'Visual DNS Test',
+  footerCompany:'Company', footerAbout:'About Us', footerFaq:'FAQ', footerPrivacy:'Privacy Policy',
+  footerCopyright:'© 2026 Fasqoo',
+  footerBranding:'Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.',
+  footerDisclaimer:'Fasqoo is an independent speed-test platform and is not an official Cloudflare product.',
+
+  heroEyebrow:'Fasqoo Gaming Monitor',
+  heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
+  heroText:'Check your latency (ping) and connection stability (jitter) to the world\'s most important gaming servers in real time before your match starts.',
+  controlTitle:'Ready for your ping check?',
+  controlText:'We measure client-side using browser requests to each provider. No install, no account, no tracking.',
+  controlProviders:'Cloudflare Edge · direct endpoint ping · no server logs',
+  startBtn:'Start ping test', stopBtn:'Stop',
+  statusStarting:'Starting measurement …', statusTesting:'Pinging {name} …',
+  statusDone:'Measurement complete', statusStopped:'Test stopped',
+  summaryScoreLabel:'Score',
+  summaryTitleExcellent:'Excellent connection for gaming',
+  summaryTitleGood:'Good connection for gaming',
+  summaryTitleMedium:'Usable, but not ideal',
+  summaryTitleBad:'High latency detected',
+  summaryTextExcellent:'All measured servers respond under 30 ms. This is a competitive-ready connection.',
+  summaryTextGood:'Most servers respond in the acceptable range. Fast-paced shooters should still feel responsive.',
+  summaryTextMedium:'Some servers respond slowly. Fast-paced games may feel laggy.',
+  summaryTextBad:'Several servers respond very slowly. Check Wi-Fi, background downloads and your router.',
+  statExcellent:'Excellent', statOk:'Acceptable', statBad:'High ping', statAvg:'Avg. ping',
+  catATitle:'E-Sports & Shooters', catAText:'The most competitive titles. Every millisecond matters here.',
+  catBTitle:'Gaming Platforms', catBText:'Launchers, stores and multiplayer networks of the big platforms.',
+  catCTitle:'Discord & Voice', catCText:'Voice chat depends more on jitter than on ping – we measure both.',
+  stateExcellent:'Excellent', stateOk:'Acceptable', stateBad:'High ping',
+  stateTesting:'Testing', stateIdle:'Idle', stateFailed:'Failed',
+  labelJitter:'Jitter', labelSamples:'Samples', ms:'ms',
+
+  copyReport:'Copy report', exportJson:'Export as JSON',
+  reportCopied:'Report copied', jsonExported:'JSON file downloaded',
+  reportNote:'Note: ping values are browser-based measurements to public provider endpoints. They may differ slightly from in-game values because game servers are geographically distributed differently.',
+
+  featKicker:'NETWORK INTELLIGENCE',
+  featTitle:'Why ping & jitter matter more than raw bandwidth',
+  featSub:'For online gaming, latency and stability matter – not the maximum download speed.',
+  feat1T:'Latency (Ping)', feat1D:'The time between your click and the server response. Under 30 ms feels instant, above 60 ms becomes noticeably sluggish.',
+  feat2T:'Jitter', feat2D:'The variation between individual measurements. High jitter causes rubberbanding and voice dropouts even if ping is low.',
+  feat3T:'Packet Loss', feat3D:'Lost packets are retransmitted – creating brief freezes and teleportation. Wi-Fi and congested routers are the most common causes.',
+  feat4T:'Router & Wi-Fi', feat4D:'A cable typically saves 5–15 ms compared to Wi-Fi. Test both and compare the values above.',
+  feat5T:'Distance to server', feat5D:'The further the game server, the higher the ping. An EU server is usually 10–40 ms away for you, US servers 90–160 ms.',
+  feat6T:'Bufferbloat', feat6D:'Fully saturated lines can double your ping. A modern router with SQM (Smart Queue Management) reduces this dramatically.',
+
+  faqKicker:'HELP CENTER',
+  faqTitle:'Frequently asked questions',
+  faqQ1:'How does the ping monitor work?',
+  faqA1:'Your browser sends small requests to public endpoints of each provider and measures the time until a response. The measurement runs entirely client-side – no credentials or user data are transmitted.',
+  faqQ2:'Why do the values differ from my game?',
+  faqA2:'We measure against general provider endpoints (e.g. Steam, Riot, Epic). The actual game server you connect to in matchmaking may be geographically different. The values here are a good indicator of general line quality.',
+  faqQ3:'What is a good ping for gaming?',
+  faqA3:'For competitive shooters (Valorant, CS2) under 30 ms is excellent, 30–60 ms acceptable. Above 60 ms becomes noticeable. For MMOs and strategy, anything under 100 ms is usually fine.',
+  faqQ4:'What is a good jitter?',
+  faqA4:'Under 5 ms is excellent. 5–15 ms is acceptable. Above 15 ms typically causes audible voice issues in Discord and rubberbanding in games.',
+  faqQ5:'Can I export the result?',
+  faqA5:'Yes. Use the buttons at the end of the measurement to copy the report as text or download it as a JSON file – e.g. for support tickets with your ISP.',
+
+  ctaTitle:'Ready for a better game feel?',
+  ctaText:'Run the test, compare your values and optimise your connection.',
+  ctaBtn:'Start ping test', ctaBtnSpeed:'Speed Test'
+};
+
+const DE = {
+  navSpeedtest:'Speedtest', navTools:'Tools & IT-Diagnose', navSectionNetwork:'Netzwerk & Speed',
+  navSectionDiag:'IT-Diagnose & Security', navFaq:'FAQ', navAbout:'Über uns', navWidget:'Widget',
+  navStatus:'Netzwerk-Status', navStatusDesc:'Live-Erreichbarkeit & Leitungs-Diagnose',
+  navWidgetDesc:'Kostenloses Test-Widget für andere Websites', navSecurity:'Security Analyzer',
+  navSecurityDesc:'HTTP-Sicherheitsheader in Echtzeit prüfen', navDns:'Visual DNS Test',
+  navDnsDesc:'Globale DNS-Ausbreitung visuell tracken', navSubnet:'Subnetz-Rechner',
+  navSubnetDesc:'IP-Bereiche und Masken kalkulieren',
+  liteBtn:'Fasqoo Lite', installApp:'Für Windows installieren',
+  footerBrand:'Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.',
+  footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
+  footerWidget:'Widget', footerNetworkTools:'Netzwerk-Tools', footerNetworkStatus:'Network Status',
+  footerITDiagnose:'IT Diagnose', footerSecurity:'Security Analyzer', footerDns:'Visual DNS Test',
+  footerCompany:'Unternehmen', footerAbout:'Über uns', footerFaq:'FAQ', footerPrivacy:'Datenschutz',
+  footerCopyright:'© 2026 Fasqoo',
+  footerBranding:'Betrieben über das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.',
+  footerDisclaimer:'Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.',
+
+  heroEyebrow:'Fasqoo Gaming-Monitor',
+  heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
+  heroText:'Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart.',
+  controlTitle:'Bereit für deinen Ping-Check?',
+  controlText:'Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.',
+  controlProviders:'Cloudflare Edge · direkter Endpunkt-Ping · keine Serverlogs',
+  startBtn:'Ping-Test starten', stopBtn:'Stoppen',
+  statusStarting:'Messung wird gestartet …', statusTesting:'Pinge {name} …',
+  statusDone:'Messung abgeschlossen', statusStopped:'Test gestoppt',
+  summaryScoreLabel:'Score',
+  summaryTitleExcellent:'Exzellente Verbindung zum Gamen',
+  summaryTitleGood:'Gute Verbindung zum Gamen',
+  summaryTitleMedium:'Nutzbar, aber nicht ideal',
+  summaryTitleBad:'Hohe Latenz erkannt',
+  summaryTextExcellent:'Alle gemessenen Server antworten unter 30 ms. Das ist eine wettbewerbstaugliche Verbindung.',
+  summaryTextGood:'Die meisten Server antworten im akzeptablen Bereich. Schnelle Shooter sollten sich noch responsiv anfühlen.',
+  summaryTextMedium:'Einige Server antworten langsam. Schnelle Spiele können sich träge anfühlen.',
+  summaryTextBad:'Mehrere Server antworten sehr langsam. Prüfe WLAN, Hintergrund-Downloads und deinen Router.',
+  statExcellent:'Exzellent', statOk:'Akzeptabel', statBad:'Hoher Ping', statAvg:'Ø Ping',
+  catATitle:'E-Sports & Shooter', catAText:'Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.',
+  catBTitle:'Gaming-Plattformen', catBText:'Launcher, Stores und Multiplayer-Netzwerke der großen Plattformen.',
+  catCTitle:'Discord & Voice', catCText:'Sprach-Chat hängt stärker vom Jitter als vom Ping ab – wir messen beides.',
+  stateExcellent:'Exzellent', stateOk:'Akzeptabel', stateBad:'Hoher Ping',
+  stateTesting:'Test läuft', stateIdle:'Bereit', stateFailed:'Fehlgeschlagen',
+  labelJitter:'Jitter', labelSamples:'Messungen', ms:'ms',
+
+  copyReport:'Bericht kopieren', exportJson:'Als JSON exportieren',
+  reportCopied:'Bericht kopiert', jsonExported:'JSON-Datei heruntergeladen',
+  reportNote:'Hinweis: Ping-Werte sind browserbasierte Messungen zu öffentlichen Endpunkten der Anbieter. Sie können leicht von den In-Game-Werten abweichen, da Spielserver geographisch anders verteilt sind.',
+
+  featKicker:'NETZWERK-INTELLIGENZ',
+  featTitle:'Warum Ping & Jitter wichtiger als rohe Bandbreite sind',
+  featSub:'Für Online-Gaming zählt Latenz und Stabilität – nicht der maximale Download.',
+  feat1T:'Latenz (Ping)', feat1D:'Die Zeit zwischen deinem Klick und der Antwort des Servers. Unter 30 ms fühlt sich „instant“ an, über 60 ms wird es spürbar träge.',
+  feat2T:'Jitter', feat2D:'Die Schwankung zwischen den einzelnen Messungen. Hoher Jitter verursacht Rubberbanding und Sprachabbrüche, auch wenn der Ping niedrig ist.',
+  feat3T:'Packet Loss', feat3D:'Verlorene Pakete werden nachgesendet – das erzeugt kurze Freezes und Teleportationen. WLAN und überlastete Router sind die häufigsten Ursachen.',
+  feat4T:'Router & WLAN', feat4D:'Ein Kabel spart typischerweise 5–15 ms gegenüber WLAN. Teste beide Varianten und vergleiche die Werte oben.',
+  feat5T:'Distanz zum Server', feat5D:'Je weiter der Spielserver entfernt ist, desto höher der Ping. Ein EU-Server liegt für dich in der Regel 10–40 ms entfernt, US-Server 90–160 ms.',
+  feat6T:'Bufferbloat', feat6D:'Voll ausgelastete Leitungen können den Ping verdoppeln. Ein moderner Router mit SQM (Smart Queue Management) reduziert das drastisch.',
+
+  faqKicker:'HILFE-CENTER',
+  faqTitle:'Häufige Fragen',
+  faqQ1:'Wie funktioniert der Ping-Monitor?',
+  faqA1:'Dein Browser sendet kleine Anfragen an öffentliche Endpunkte der jeweiligen Anbieter und misst die Zeit bis zur Antwort. Die Messung läuft vollständig clientseitig – es werden keine Zugangsdaten oder Nutzerdaten übertragen.',
+  faqQ2:'Warum weichen die Werte von meinem Spiel ab?',
+  faqA2:'Wir messen zu allgemeinen Anbieter-Endpunkten (z. B. Steam, Riot, Epic). Der eigentliche Spielserver, mit dem du dich im Matchmaking verbindest, kann geographisch anders liegen. Die Werte hier sind ein guter Indikator für die allgemeine Leitungsqualität.',
+  faqQ3:'Was ist ein guter Ping zum Gamen?',
+  faqA3:'Für kompetitive Shooter (Valorant, CS2) sind unter 30 ms exzellent, 30–60 ms akzeptabel. Über 60 ms wird es spürbar. Bei MMOs und Strategie ist alles unter 100 ms in der Regel unproblematisch.',
+  faqQ4:'Was ist ein guter Jitter?',
+  faqA4:'Unter 5 ms ist exzellent. 5–15 ms ist akzeptabel. Über 15 ms führt typischerweise zu hörbaren Sprachproblemen in Discord und zu Rubberbanding in Spielen.',
+  faqQ5:'Kann ich das Ergebnis exportieren?',
+  faqA5:'Ja. Über die Buttons am Ende der Messung kannst du den Bericht als Text kopieren oder als JSON-Datei herunterladen – z. B. für Support-Tickets bei deinem ISP.',
+
+  ctaTitle:'Bereit für ein besseres Spielgefühl?',
+  ctaText:'Starte den Test, vergleiche deine Werte und optimiere deine Verbindung.',
+  ctaBtn:'Ping-Test starten', ctaBtnSpeed:'Speed Test'
+};
+
+/* Fallback für weitere Sprachen */
+const ES = Object.assign({}, EN, {
+  heroText:'Comprueba tu latencia (ping) y estabilidad (jitter) hacia los servidores de juego más importantes en tiempo real antes de tu partida.',
+  startBtn:'Iniciar test de ping', stopBtn:'Detener',
+  stateExcellent:'Excelente', stateOk:'Aceptable', stateBad:'Ping alto',
+  stateTesting:'Probando', stateIdle:'En espera', stateFailed:'Fallido'
+});
+const FR = Object.assign({}, EN, {
+  heroText:'Vérifiez votre latence (ping) et la stabilité (jitter) vers les serveurs de jeu les plus importants en temps réel avant votre partie.',
+  startBtn:'Lancer le test', stopBtn:'Arrêter',
+  stateExcellent:'Excellent', stateOk:'Acceptable', stateBad:'Ping élevé',
+  stateTesting:'Test en cours', stateIdle:'Prêt', stateFailed:'Échoué'
+});
+const IT = Object.assign({}, EN, {
+  heroText:'Controlla la tua latenza (ping) e stabilità (jitter) verso i server di gioco più importanti in tempo reale prima della partita.',
+  startBtn:'Avvia test ping', stopBtn:'Ferma',
+  stateExcellent:'Eccellente', stateOk:'Accettabile', stateBad:'Ping alto',
+  stateTesting:'In corso', stateIdle:'Pronto', stateFailed:'Fallito'
+});
+const PT = Object.assign({}, EN, {
+  heroText:'Verifique a sua latência (ping) e estabilidade (jitter) para os servidores de jogos mais importantes em tempo real antes da partida.',
+  startBtn:'Iniciar teste', stopBtn:'Parar',
+  stateExcellent:'Excelente', stateOk:'Aceitável', stateBad:'Ping alto',
+  stateTesting:'A testar', stateIdle:'Pronto', stateFailed:'Falhou'
+});
+const NL = Object.assign({}, EN, {
+  heroText:'Controleer je latentie (ping) en stabiliteit (jitter) naar de belangrijkste gameservers in realtime voordat je potje begint.',
+  startBtn:'Start ping-test', stopBtn:'Stop',
+  stateExcellent:'Uitstekend', stateOk:'Acceptabel', stateBad:'Hoge ping',
+  stateTesting:'Testen', stateIdle:'Gereed', stateFailed:'Mislukt'
+});
+const TR = Object.assign({}, EN, {
+  heroText:'Oyun başlamadan önce en önemli oyun sunucularına olan gecikmenizi (ping) ve kararlılığınızı (jitter) gerçek zamanlı ölçün.',
+  startBtn:'Ping testini başlat', stopBtn:'Durdur',
+  stateExcellent:'Mükemmel', stateOk:'Kabul edilebilir', stateBad:'Yüksek ping',
+  stateTesting:'Test ediliyor', stateIdle:'Hazır', stateFailed:'Başarısız'
+});
+const SQ = Object.assign({}, EN, {
+  heroText:'Kontrollo latencën (ping) dhe qëndrueshmërinë (jitter) ndaj serverëve më të rëndësishëm të lojërave në kohë reale para ndeshjes.',
+  startBtn:'Fillo testin e ping-ut', stopBtn:'Ndal',
+  stateExcellent:'Shkëlqyeshëm', stateOk:'I pranueshëm', stateBad:'Ping i lartë',
+  stateTesting:'Duke testuar', stateIdle:'Gati', stateFailed:'Dështoi'
+});
+const PL = Object.assign({}, EN, {
+  heroText:'Sprawdź swoje opóźnienie (ping) i stabilność (jitter) do najważniejszych serwerów gier w czasie rzeczywistym przed rozpoczęciem meczu.',
+  startBtn:'Rozpocznij test ping', stopBtn:'Zatrzymaj',
+  stateExcellent:'Doskonały', stateOk:'Akceptowalny', stateBad:'Wysoki ping',
+  stateTesting:'Testowanie', stateIdle:'Gotowy', stateFailed:'Niepowodzenie'
+});
+
+const AR = Object.assign({}, DE, {
+  navSpeedtest:'اختبار السرعة',navTools:'أدوات وتشخيص تقنية المعلومات',navSectionNetwork:'الشبكة والسرعة',navSectionDiag:'تشخيص وأمان تقنية المعلومات',navStatus:'حالة الشبكة',navStatusDesc:'فحص الاتصال والتشخيص المباشر',navWidget:'أداة اختبار السرعة',navWidgetDesc:'أداة اختبار مجانية لمواقع أخرى',navSecurity:'محلل الأمان',navSecurityDesc:'فحص رؤوس أمان HTTP في الوقت الحقيقي',navAntivirus:'فحص مكافحة الفيروسات',navAntivirusDesc:'فحص الملفات والمحتوى بحثًا عن مخاطر أمنية',navDns:'اختبار DNS المرئي',navDnsDesc:'تتبع انتشار DNS عالميًا بشكل مرئي',navSubnet:'حاسبة الشبكة الفرعية',navSubnetDesc:'حساب نطاقات IP وأقنعة الشبكة الفرعية',navFaq:'الأسئلة الشائعة',navAbout:'من نحن',
+  heroEyebrow:'مراقب الألعاب من Fasqoo',heroTitleTop:'Fasqoo Gaming-',heroTitleAccent:' & مراقب Ping',heroText:'تحقق من زمن الاستجابة واستقرار الاتصال مع أهم خوادم الألعاب في الوقت الحقيقي قبل بدء اللعب.',controlTitle:'هل أنت مستعد لفحص Ping؟',controlText:'يتم القياس مباشرة من المتصفح. بدون تثبيت أو حساب أو تتبع.',controlProviders:'Cloudflare Edge · اختبار نقطة النهاية مباشرة · بدون سجلات خادم',startBtn:'بدء اختبار Ping',stopBtn:'إيقاف',summaryScoreLabel:'النتيجة',statExcellent:'ممتاز',statOk:'مقبول',statBad:'Ping مرتفع',statAvg:'متوسط Ping',
+  fq20Kicker:'مراقب مباشر لمدة 20 ثانية',fq20Title:'استقرار الألعاب وPing',fq20Sub:'20 ثانية · قياس واحد كل ثانية · زمن استجابة حقيقي من المتصفح إلى نقطة Fasqoo/Cloudflare Edge.',fq20Current:'Ping الحالي',fq20Jitter:'التذبذب',fq20Loss:'فقدان الحزم',fq20Graph:'Ping مباشر',fq20Ready:'جاهز — ابدأ قياسًا لمدة 20 ثانية.',fq20Start:'بدء اختبار 20 ثانية',fq20History:'آخر 5 اختبارات',fq20Clear:'مسح السجل',fq20Date:'التاريخ',fq20Avg:'متوسط Ping',fq20JitShort:'التذبذب',fq20Gaming:'الألعاب',fq20NoHistory:'لا توجد اختبارات مكتملة لمدة 20 ثانية بعد.',
+  catATitle:'الرياضات الإلكترونية وألعاب التصويب',catAText:'أكثر الألعاب تنافسية. كل ميلي ثانية مهمة.',catBTitle:'منصات الألعاب',catBText:'المشغلات والمتاجر وشبكات اللعب الجماعي للمنصات الكبرى.',catCTitle:'Discord والصوت',catCText:'الدردشة الصوتية تتأثر بالتذبذب أكثر من Ping؛ نقيس الاثنين.',copyReport:'نسخ التقرير',exportJson:'تصدير JSON',reportNote:'ملاحظة: قيم Ping هي قياسات من المتصفح إلى نقاط عامة وقد تختلف عن قيم اللعبة.',
+  featKicker:'ذكاء الشبكة',featTitle:'لماذا Ping وJitter أهم من سرعة النطاق الترددي؟',featSub:'في الألعاب عبر الإنترنت تهم الاستجابة والاستقرار أكثر من سرعة التنزيل القصوى.',feat1T:'زمن الاستجابة (Ping)',feat1D:'الوقت بين إجراءك واستجابة الخادم. أقل من 30 مللي ثانية ممتاز، وفوق 60 مللي ثانية يصبح ملحوظًا.',feat2T:'Jitter',feat2D:'التغير بين القياسات. التذبذب العالي قد يسبب التقطّع وانقطاع الصوت.',feat3T:'فقدان الحزم',feat3D:'الحزم المفقودة تحتاج إلى إعادة إرسال وقد تسبب تجمدًا أو انتقالًا مفاجئًا.',feat4T:'الراوتر وWi-Fi',feat4D:'قد يقلل Ethernet زمن الاستجابة مقارنةً بـ Wi-Fi. اختبر الخيارين وقارن القيم.',feat5T:'المسافة إلى الخادم',feat5D:'كلما ابتعد خادم اللعبة زاد Ping عادةً.',feat6T:'Bufferbloat',feat6D:'يمكن للاتصال المشغول بالكامل أن يرفع Ping كثيرًا. يمكن لـ SQM تقليل التأثير.',
+  faqKicker:'مركز المساعدة',faqTitle:'الأسئلة الشائعة',faqQ1:'كيف يعمل مراقب Ping؟',faqA1:'يرسل المتصفح طلبات صغيرة إلى نقاط عامة ويقيس زمن الاستجابة.',faqQ2:'لماذا تختلف القيم عن اللعبة؟',faqA2:'قد يكون خادم اللعبة في موقع مختلف، لذلك قد تختلف قيمة الاستجابة داخل اللعبة.',faqQ3:'ما Ping الجيد للألعاب؟',faqA3:'أقل من 30 مللي ثانية ممتاز؛ و30–60 مللي ثانية مقبول عادةً.',faqQ4:'ما Jitter الجيد؟',faqA4:'أقل من 5 مللي ثانية ممتاز. و5–15 مللي ثانية مقبول عادةً.',faqQ5:'هل يمكنني تصدير النتيجة؟',faqA5:'نعم. يمكنك نسخ التقرير أو تنزيله بصيغة JSON.',ctaTitle:'هل أنت مستعد لتجربة لعب أفضل؟',ctaText:'شغّل الاختبار وقارن القيم وحسّن اتصالك.',ctaBtn:'بدء اختبار Ping',ctaBtnSpeed:'اختبار السرعة',
+  footerBrand:'Fasqoo — اختبارات سرعة الإنترنت وأدوات الشبكة المستقلة والمعتمدة على المتصفح.',footerSpeedTests:'اختبارات السرعة',footerInternetSpeed:'اختبار سرعة الإنترنت',footerLite:'Fasqoo Lite',footerWidget:'Widget',footerNetworkTools:'أدوات الشبكة',footerNetworkStatus:'حالة الشبكة',footerGaming:'مراقب Gaming وPing',footerITDiagnose:'تشخيص تقنية المعلومات',footerSecurity:'محلل الأمان',footerAntivirus:'فحص مكافحة الفيروسات',footerDns:'اختبار DNS المرئي',footerCompany:'الشركة',footerAbout:'من نحن',footerFaq:'الأسئلة الشائعة',ftPrivacy:'الخصوصية',ftAccess:'إمكانية الوصول',ftImprint:'إشعار قانوني',ftTerms:'شروط الاستخدام',ftNoSell:'عدم بيع بياناتي',footerCopyright:'© 2026 Fasqoo',footerBranding:'مدعوم بشبكة Cloudflare Edge لتحسين الأداء وموثوقية القياس.',footerDisclaimer:'Fasqoo منصة مستقلة لاختبار السرعة وليست منتجًا رسميًا من Cloudflare.'
+});
+EN.navDarkData='Dark Data & Tracker Exposer'; EN.navDarkDataDesc='Live browser requests, data usage & privacy signals';
+DE.navDarkData='Dark Data & Tracker Exposer'; DE.navDarkDataDesc='Live-Browser-Anfragen, Datenverbrauch & Datenschutzsignale';
+AR.navDarkData='عرض البيانات والتتبعات'; AR.navDarkDataDesc='طلبات المتصفح واستخدام البيانات وإشارات الخصوصية مباشرة';
+const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, ar:AR };
+
+/* ===================================================================
+   MODERN SVG ICONS FOR GAME CARDS
+   =================================================================== */
+function ico(key){
+  const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  const icons = {
+    /* Valorant – crosshair / target */
+    valorant:'<svg '+S+'><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><line x1="12" y1="1.5" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22.5" y2="12"/></svg>',
+    /* CS2 – rifle */
+    cs2:'<svg '+S+'><path d="M2.5 14.5h9.5l2.2-2.2h6.8v3h-2.4l-1.4 2.6H7.8l-2.2-1.4H2.5z"/><path d="M7 14.5v3.4"/><path d="M5 11h3.5"/><circle cx="18.4" cy="13.6" r="0.9" fill="currentColor" stroke="none"/></svg>',
+    /* Apex – lightning */
+    apex:'<svg '+S+'><path d="M13 2 4 14h7l-1 8 10-13h-7l0-7z"/></svg>',
+    /* Fortnite – tower / build */
+    fortnite:'<svg '+S+'><rect x="4" y="10" width="6" height="11" rx="1"/><rect x="14" y="3" width="6" height="18" rx="1"/><path d="M4 5l6 3"/><path d="M14 21l6-3"/></svg>',
+    /* Steam – valve wheel */
+    steam:'<svg '+S+'><circle cx="12" cy="12" r="9.2"/><circle cx="15.2" cy="9.2" r="2.8"/><circle cx="15.2" cy="9.2" r="0.9" fill="currentColor" stroke="none"/><path d="M3 14l4.5 2a2.3 2.3 0 0 1 4.4 0.8"/><circle cx="8" cy="16.2" r="2.1"/></svg>',
+    /* Xbox – circle with x */
+    xbox:'<svg '+S+'><circle cx="12" cy="12" r="9.2"/><path d="M6.2 6.2c3 1.6 6.4 4.2 11.6 11.6"/><path d="M17.8 6.2C14.8 7.8 11.4 10.4 6.2 17.8"/></svg>',
+    /* PlayStation – shapes */
+    psn:'<svg '+S+'><path d="M9.5 3.5v17"/><path d="M9.5 6.5c3 0 5.5 1 5.5 3.4 0 2.1-1.6 3.3-3.8 3.6"/><path d="M3 20l18-3.2"/><path d="M14 10.5l4.5 4.2"/></svg>',
+    /* Nintendo – joy-con */
+    nintendo:'<svg '+S+'><rect x="3" y="4" width="7.5" height="16" rx="3.5"/><rect x="13.5" y="4" width="7.5" height="16" rx="3.5"/><circle cx="6.8" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="17.2" cy="15" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* Discord – speech bubble with dots */
+    discord:'<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v9A2.5 2.5 0 0 1 17.5 17H9.4l-4.3 3.6A.7.7 0 0 1 4 20.1V5.5Z"/><circle cx="9.5" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="10.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* TeamSpeak – headset */
+    teamspeak:'<svg '+S+'><path d="M4 13V9a8 8 0 0 1 16 0v4"/><rect x="2.5" y="12" width="4" height="6" rx="1.4"/><rect x="17.5" y="12" width="4" height="6" rx="1.4"/><path d="M19 18a4 4 0 0 1-4 3h-2"/><circle cx="12" cy="21" r="1.1" fill="currentColor" stroke="none"/></svg>',
+    /* Mumble – microphone */
+    mumble:'<svg '+S+'><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 12a6.5 6.5 0 0 0 13 0"/><path d="M12 18.5V22"/><path d="M8.5 22h7"/></svg>'
+  };
+  return icons[key] || '';
+}
+
+/* ===================================================================
+   GAME CATALOG
+   =================================================================== */
+const GAMES = [
+  { id:'valorant',  cat:'shooter',  name:'Valorant',             provider:'Riot Games',    icon:'valorant',  url:'https://www.riotgames.com/favicon.ico' },
+  { id:'cs2',       cat:'shooter',  name:'Counter-Strike 2',     provider:'Valve',         icon:'cs2',       url:'https://store.steampowered.com/favicon.ico' },
+  { id:'apex',      cat:'shooter',  name:'Apex Legends',         provider:'EA',            icon:'apex',      url:'https://www.ea.com/favicon.ico' },
+  { id:'fortnite',  cat:'shooter',  name:'Fortnite',             provider:'Epic Games',    icon:'fortnite',  url:'https://www.epicgames.com/favicon.ico' },
+
+  { id:'steam',     cat:'platform', name:'Steam',                provider:'Valve',         icon:'steam',     url:'https://store.steampowered.com/favicon.ico' },
+  { id:'xbox',      cat:'platform', name:'Xbox Live',            provider:'Microsoft',     icon:'xbox',      url:'https://www.xbox.com/favicon.ico' },
+  { id:'psn',       cat:'platform', name:'PlayStation Network',  provider:'Sony',          icon:'psn',       url:'https://www.playstation.com/favicon.ico' },
+  { id:'nintendo',  cat:'platform', name:'Nintendo Online',      provider:'Nintendo',      icon:'nintendo',  url:'https://www.nintendo.com/favicon.ico' },
+
+  { id:'discord',   cat:'voice',    name:'Discord Europe',       provider:'Discord',       icon:'discord',   url:'https://discord.com/favicon.ico' },
+  { id:'teamspeak', cat:'voice',    name:'TeamSpeak',            provider:'TeamSpeak',     icon:'teamspeak', url:'https://www.teamspeak.com/favicon.ico' },
+  { id:'mumble',    cat:'voice',    name:'Mumble',               provider:'Mumble',        icon:'mumble',    url:'https://www.mumble.info/favicon.ico' }
+];
+
+/* ===================================================================
+   STATE
+   =================================================================== */
+const SAMPLES_PER_TARGET = 5;
+const TIMEOUT_MS = 6000;
+const state = { running:false, abort:false, results:{} };
+
+/* ===================================================================
+   UTILS
+   =================================================================== */
+const gmEl = id => document.getElementById(id);
+function t(key, vars){
+  const lang = (gmEl('lang') && gmEl('lang').value) || 'en';
+  const dict = I18N[lang] || I18N.en;
+  let s = dict[key] !== undefined ? dict[key] : (EN[key] !== undefined ? EN[key] : key);
+  if (vars) Object.keys(vars).forEach(k => { s = s.replace('{' + k + '}', vars[k]); });
+  return s;
+}
+function median(arr){
+  if (!arr.length) return NaN;
+  const a = [...arr].sort((x,y)=>x-y);
+  const pos = (a.length-1)*0.5;
+  const lo = Math.floor(pos), hi = Math.ceil(pos);
+  return lo===hi ? a[lo] : a[lo] + (a[hi]-a[lo])*(pos-lo);
+}
+
+/* ===================================================================
+   PING ENGINE
+   =================================================================== */
+async function pingOnce(url, timeoutMs){
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const start = performance.now();
+  const bust = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now() + Math.random();
+  try{
+    await fetch(bust, {
+      method:'GET', mode:'no-cors', cache:'no-store',
+      credentials:'omit', redirect:'follow', signal:controller.signal
+    });
+    return performance.now() - start;
+  }catch(e){ return null; }
+  finally{ clearTimeout(timer); }
+}
+
+async function measureTarget(game, onProgress){
+  const samples = [];
+  for (let i=0; i<SAMPLES_PER_TARGET; i++){
+    if (state.abort) break;
+    const ms = await pingOnce(game.url, TIMEOUT_MS);
+    if (ms !== null && Number.isFinite(ms) && ms > 0){
+      samples.push(ms);
+      if (onProgress) onProgress({ game, sample: ms, index: i, count: SAMPLES_PER_TARGET });
+    }
+    if (i < SAMPLES_PER_TARGET-1) await new Promise(r => setTimeout(r, 120));
+  }
+  if (!samples.length) return { id:game.id, game, ping:null, jitter:null, samples:[], status:'failed' };
+  const ping = median(samples);
+  let jitter = 0;
+  if (samples.length > 1){
+    const deltas = [];
+    for (let i=1; i<samples.length; i++) deltas.push(Math.abs(samples[i]-samples[i-1]));
+    jitter = median(deltas);
+  }
+  let status = 'bad';
+  if (ping < 30) status = 'excellent';
+  else if (ping < 60) status = 'ok';
+  return { id:game.id, game, ping, jitter, samples, status };
+}
+
+/* ===================================================================
+   RENDER
+   =================================================================== */
+function statusLabel(status){
+  if (status === 'excellent') return t('stateExcellent');
+  if (status === 'ok')        return t('stateOk');
+  if (status === 'bad')       return t('stateBad');
+  if (status === 'testing')   return t('stateTesting');
+  if (status === 'failed')    return t('stateFailed');
+  return t('stateIdle');
+}
+
+function renderCard(game){
+  const r = state.results[game.id];
+  const status = r ? r.status : 'idle';
+  const pingVal = r && Number.isFinite(r.ping) ? r.ping.toFixed(0) : '—';
+  const jitterVal = r && Number.isFinite(r.jitter) ? r.jitter.toFixed(1) : '—';
+  const samplesVal = r && r.samples ? r.samples.length : 0;
+  const isTesting = r && r.status === 'testing';
+  const cls = isTesting ? 'state-testing' : ('state-' + status);
+
+  const pingBlock = isTesting
+    ? '<div class="game-ping"><span class="num">…</span><span class="spinner"></span></div>'
+    : '<div class="game-ping"><span class="num">' + pingVal + '</span><span class="unit">' +
+      (status !== 'idle' && status !== 'failed' ? t('ms') : '') + '</span></div>';
+
+  const jitterBlock = (status === 'idle' || status === 'failed' || isTesting)
+    ? ''
+    : '<span>' + t('labelJitter') + ': <b>' + jitterVal + ' ' + t('ms') + '</b></span>' +
+      '<span>' + t('labelSamples') + ': <b>' + samplesVal + '/' + SAMPLES_PER_TARGET + '</b></span>';
+
+  return (
+    '<div class="game-card ' + cls + '" data-id="' + game.id + '">' +
+      '<div class="game-top">' +
+        '<div class="game-icon" aria-hidden="true">' + ico(game.icon) + '</div>' +
+        '<div class="game-meta">' +
+          '<div class="game-name">' + game.name + '</div>' +
+          '<div class="game-provider">' + game.provider + '</div>' +
+        '</div>' +
+      '</div>' +
+      pingBlock +
+      '<div class="game-stats">' + jitterBlock + '</div>' +
+      '<div class="badge ' + cls + '"><span class="dot"></span>' + statusLabel(status) + '</div>' +
+    '</div>'
+  );
+}
+
+function renderGrids(){
+  const shooter  = GAMES.filter(g => g.cat === 'shooter').map(renderCard).join('');
+  const platform = GAMES.filter(g => g.cat === 'platform').map(renderCard).join('');
+  const voice    = GAMES.filter(g => g.cat === 'voice').map(renderCard).join('');
+  const gs = gmEl('gm_gridShooter'), gp = gmEl('gm_gridPlatform'), gv = gmEl('gm_gridVoice');
+  if (gs) gs.innerHTML = shooter;
+  if (gp) gp.innerHTML = platform;
+  if (gv) gv.innerHTML = voice;
+}
+
+function updateCard(id){
+  const card = document.querySelector('.game-card[data-id="' + id + '"]');
+  if (!card) return;
+  const game = GAMES.find(g => g.id === id);
+  if (!game) return;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderCard(game);
+  card.replaceWith(tmp.firstChild);
+}
+
+/* ===================================================================
+   SUMMARY
+   =================================================================== */
+function renderSummary(){
+  const all = GAMES.map(g => state.results[g.id]).filter(Boolean);
+  const valid = all.filter(r => Number.isFinite(r.ping));
+  let excellent = 0, ok = 0, bad = 0;
+  valid.forEach(r => {
+    if (r.status === 'excellent') excellent++;
+    else if (r.status === 'ok') ok++;
+    else bad++;
+  });
+  const failed = all.length - valid.length;
+  const avgPing = valid.length ? valid.reduce((s,r)=>s+r.ping,0)/valid.length : NaN;
+  const validJ = valid.filter(r => Number.isFinite(r.jitter));
+  const avgJitter = validJ.length ? validJ.reduce((s,r)=>s+r.jitter,0)/validJ.length : NaN;
+  const score = valid.length
+    ? Math.round((excellent*100 + ok*60 + bad*20) / (valid.length + failed))
+    : 0;
+
+  let titleKey = 'summaryTitleBad', textKey = 'summaryTextBad', color = '#ef4444';
+  if (avgPing < 30 && avgJitter < 5){ titleKey='summaryTitleExcellent'; textKey='summaryTextExcellent'; color='#22c55e'; }
+  else if (avgPing < 50 && avgJitter < 12){ titleKey='summaryTitleGood'; textKey='summaryTextGood'; color='#22c55e'; }
+  else if (avgPing < 90){ titleKey='summaryTitleMedium'; textKey='summaryTextMedium'; color='#eab308'; }
+
+  const R = 54, C = 2 * Math.PI * R;
+  const off = C * (1 - score / 100);
+
+  gmEl('gm_summaryScore').textContent = score;
+  gmEl('gm_summaryScore').style.color = color;
+  gmEl('gm_summaryTitle').textContent = t(titleKey);
+  gmEl('gm_summaryText').textContent = t(textKey);
+  gmEl('gm_statExcellent').textContent = excellent;
+  gmEl('gm_statOk').textContent = ok;
+  gmEl('gm_statBad').textContent = bad;
+  gmEl('gm_statAvg').textContent = Number.isFinite(avgPing) ? avgPing.toFixed(0) + ' ' + t('ms') : '—';
+
+  const fill = gmEl('gm_summaryFill');
+  fill.style.stroke = color;
+  fill.style.strokeDasharray = C.toFixed(2);
+  fill.style.strokeDashoffset = C.toFixed(2);
+  requestAnimationFrame(() => { fill.style.strokeDashoffset = off.toFixed(2); });
+
+  gmEl('gm_summary').classList.add('show');
+  gmEl('gm_exportSection').style.display = '';
+}
+
+/* ===================================================================
+   STATUS
+   =================================================================== */
+function setStatus(kind, text){
+  const el = gmEl('gm_status');
+  el.className = 'status show ' + kind;
+  el.innerHTML = (kind === 'info')
+    ? '<span class="spinner"></span><span>' + text + '</span>'
+    : '<span>' + text + '</span>';
+}
+function hideStatus(){
+  const el = gmEl('gm_status');
+  el.className = 'gm_status';
+  el.innerHTML = '';
+}
+
+/* ===================================================================
+   RUN TEST
+   =================================================================== */
+async function runTest(){
+  if (state.running) return;
+  state.running = true;
+  state.abort = false;
+  state.results = {};
+  renderGrids();
+  gmEl('gm_summary').classList.remove('show');
+  gmEl('gm_exportSection').style.display = 'none';
+  gmEl('gm_startBtn').disabled = true;
+  gmEl('gm_stopBtn').disabled = false;
+  setStatus('info', t('statusStarting'));
+  await new Promise(r => setTimeout(r, 250));
+
+  for (const game of GAMES){
+    if (state.abort) break;
+    setStatus('info', t('statusTesting', { name: game.name }));
+    state.results[game.id] = { id:game.id, game, ping:null, jitter:null, samples:[], status:'testing' };
+    updateCard(game.id);
+
+    const result = await measureTarget(game, ({ sample }) => {
+      const r = state.results[game.id];
+      if (!r) return;
+      r.samples.push(sample);
+      if (r.samples.length >= 2){
+        const pingNow = median(r.samples);
+        const deltas = [];
+        for (let i=1; i<r.samples.length; i++) deltas.push(Math.abs(r.samples[i]-r.samples[i-1]));
+        r.ping = pingNow;
+        r.jitter = median(deltas);
+        r.status = pingNow < 30 ? 'excellent' : (pingNow < 60 ? 'ok' : 'bad');
+        updateCard(game.id);
+      }
+    });
+
+    state.results[game.id] = result;
+    updateCard(game.id);
+    await new Promise(r => setTimeout(r, 80));
+  }
+
+  state.running = false;
+  gmEl('gm_startBtn').disabled = false;
+  gmEl('gm_stopBtn').disabled = true;
+
+  if (state.abort){
+    setStatus('error', t('statusStopped'));
+    setTimeout(() => hideStatus(), 2200);
+    return;
+  }
+
+  renderSummary();
+  try{
+    localStorage.setItem('fasqoo_gaming_last_test_v1', JSON.stringify({
+      timestamp:Date.now(),
+      isp:gmEl('gm_ispProvider')?.textContent || '',
+      results:Object.values(state.results).map(r=>({
+        id:r.id, name:r.game?.name||r.id, provider:r.game?.provider||'',
+        ping:Number.isFinite(r.ping)?r.ping:null,
+        jitter:Number.isFinite(r.jitter)?r.jitter:null,
+        status:r.status
+      }))
+    }));
+  }catch(e){}
+  setStatus('success', t('statusDone'));
+  setTimeout(() => hideStatus(), 2400);
+}
+
+/* ===================================================================
+   WIRING
+   =================================================================== */
+gmEl('gm_startBtn').addEventListener('click', runTest);
+gmEl('gm_stopBtn').addEventListener('click', () => { state.abort = true; });
+
+/* ===================================================================
+   INIT
+   =================================================================== */
+renderGrids();
+
+/* Supplemental strings for the integrated ISP + image export panel. */
+const GM_EXTRA_TRANSLATIONS={
+  en:{ispKicker:'CONNECTION INFORMATION',ispTitle:'Your network connection',ispSub:'Detected directly in your browser. No account required.',ispLive:'LIVE',ispProvider:'ISP / Provider',ispIp:'Public IP',ispLocation:'Location',ispNetwork:'Network / ASN',ispUnavailable:'Unavailable',downloadImage:'Download as image',imageDownloaded:'Image downloaded'},
+  de:{ispKicker:'VERBINDUNGSINFORMATIONEN',ispTitle:'Deine Netzwerkverbindung',ispSub:'Direkt im Browser erkannt. Kein Konto erforderlich.',ispLive:'LIVE',ispProvider:'ISP / Anbieter',ispIp:'Öffentliche IP',ispLocation:'Standort',ispNetwork:'Netzwerk / ASN',ispUnavailable:'Nicht verfügbar',downloadImage:'Als Bild herunterladen',imageDownloaded:'Bild heruntergeladen'},
+  fr:{ispKicker:'INFORMATIONS DE CONNEXION',ispTitle:'Votre connexion réseau',ispSub:'Détectée directement dans votre navigateur. Aucun compte requis.',ispLive:'LIVE',ispProvider:'FAI / Fournisseur',ispIp:'IP publique',ispLocation:'Emplacement',ispNetwork:'Réseau / ASN',ispUnavailable:'Indisponible',downloadImage:'Télécharger en image',imageDownloaded:'Image téléchargée'},
+  es:{ispKicker:'INFORMACIÓN DE CONEXIÓN',ispTitle:'Tu conexión de red',ispSub:'Detectada directamente en tu navegador. No se requiere cuenta.',ispLive:'EN VIVO',ispProvider:'ISP / Proveedor',ispIp:'IP pública',ispLocation:'Ubicación',ispNetwork:'Red / ASN',ispUnavailable:'No disponible',downloadImage:'Descargar como imagen',imageDownloaded:'Imagen descargada'},
+  it:{ispKicker:'INFORMAZIONI CONNESSIONE',ispTitle:'La tua connessione di rete',ispSub:'Rilevata direttamente nel browser. Nessun account richiesto.',ispLive:'LIVE',ispProvider:'ISP / Provider',ispIp:'IP pubblica',ispLocation:'Posizione',ispNetwork:'Rete / ASN',ispUnavailable:'Non disponibile',downloadImage:'Scarica come immagine',imageDownloaded:'Immagine scaricata'},
+  pt:{ispKicker:'INFORMAÇÕES DA CONEXÃO',ispTitle:'Sua conexão de rede',ispSub:'Detectada diretamente no navegador. Não é necessária uma conta.',ispLive:'AO VIVO',ispProvider:'ISP / Provedor',ispIp:'IP pública',ispLocation:'Localização',ispNetwork:'Rede / ASN',ispUnavailable:'Indisponível',downloadImage:'Baixar como imagem',imageDownloaded:'Imagem baixada'},
+  nl:{ispKicker:'VERBINDINGSINFORMATIE',ispTitle:'Je netwerkverbinding',ispSub:'Direct in je browser gedetecteerd. Geen account nodig.',ispLive:'LIVE',ispProvider:'ISP / Provider',ispIp:'Publiek IP',ispLocation:'Locatie',ispNetwork:'Netwerk / ASN',ispUnavailable:'Niet beschikbaar',downloadImage:'Als afbeelding downloaden',imageDownloaded:'Afbeelding gedownload'},
+  tr:{ispKicker:'BAĞLANTI BİLGİLERİ',ispTitle:'Ağ bağlantınız',ispSub:'Doğrudan tarayıcınızda algılanır. Hesap gerekmez.',ispLive:'CANLI',ispProvider:'ISS / Sağlayıcı',ispIp:'Genel IP',ispLocation:'Konum',ispNetwork:'Ağ / ASN',ispUnavailable:'Kullanılamıyor',downloadImage:'Görüntü olarak indir',imageDownloaded:'Görüntü indirildi'},
+  sq:{ispKicker:'INFORMACIONI I LIDHJES',ispTitle:'Lidhja juaj e rrjetit',ispSub:'Zbulohet direkt në shfletues. Nuk kërkohet llogari.',ispLive:'LIVE',ispProvider:'ISP / Ofruesi',ispIp:'IP publike',ispLocation:'Vendndodhja',ispNetwork:'Rrjeti / ASN',ispUnavailable:'Nuk disponohet',downloadImage:'Shkarko si imazh',imageDownloaded:'Imazhi u shkarkua'},
+  ar:{ispKicker:'معلومات الاتصال',ispTitle:'اتصال الشبكة لديك',ispSub:'يتم اكتشافه مباشرة في المتصفح. لا يتطلب حسابًا.',ispLive:'مباشر',ispProvider:'مزود الإنترنت',ispIp:'عنوان IP العام',ispLocation:'الموقع',ispNetwork:'الشبكة / ASN',ispUnavailable:'غير متاح',downloadImage:'تنزيل كصورة',imageDownloaded:'تم تنزيل الصورة'}
+};
+Object.keys(GM_EXTRA_TRANSLATIONS).forEach(lang=>{
+  Object.assign(I18N[lang] || (I18N[lang]={}), GM_EXTRA_TRANSLATIONS[lang]);
+});
+/* ---------------------------------------------------------------
+   GAMING-MONITOR LOCALIZATION
+   --------------------------------------------------------------- */
+function applyGamingLang(lang){
+  const safe = I18N[lang] ? lang : 'en';
+  const dict = I18N[safe] || I18N.en;
+  document.querySelectorAll('#gaming-section [data-gm-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-gm-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  renderGrids();
+  if (gmEl('gm_summary') && gmEl('gm_summary').classList.contains('show')) renderSummary();
+}
+function initGamingLang(){
+  const langEl=document.getElementById('lang');
+  const lang=(langEl && I18N[langEl.value]) ? langEl.value : 'en';
+  applyGamingLang(lang);
+}
+const gmLangEl=document.getElementById('lang');
+if(gmLangEl) gmLangEl.addEventListener('change', ()=>applyGamingLang(gmLangEl.value));
+
+/* ---------------------------------------------------------------
+   ISP / PUBLIC IP DETECTION
+   --------------------------------------------------------------- */
+async function loadGamingISP(){
+  const fields={
+    provider:gmEl('gm_ispProvider'),
+    ip:gmEl('gm_ispIp'),
+    location:gmEl('gm_ispLocation'),
+    network:gmEl('gm_ispNetwork')
+  };
+  if(!fields.provider) return;
+  const set=(key,val)=>{ if(fields[key]) fields[key].textContent=val || t('ispUnavailable'); };
+  try{
+    const c=new AbortController();
+    const timer=setTimeout(()=>c.abort(),3500);
+    const r=await fetch('https://ipwho.is/?fields=success,ip,continent,country,city,connection', {
+      cache:'no-store', credentials:'omit', signal:c.signal
+    });
+    clearTimeout(timer);
+    const d=await r.json();
+    if(!d || d.success===false) throw new Error('ISP lookup failed');
+    const conn=d.connection||{};
+    set('provider', conn.isp || conn.org || '—');
+    set('ip', d.ip || '—');
+    const place=[d.city,d.country].filter(Boolean).join(', ');
+    set('location', place || '—');
+    const asn=conn.asn ? 'AS' + String(conn.asn).replace(/^AS/i,'') : '';
+    const org=conn.org || '';
+    set('network',[asn,org].filter(Boolean).join(' · ') || '—');
+  }catch(e){
+    set('provider','Unavailable');
+    set('ip','Unavailable');
+    set('location','Unavailable');
+    set('network','Unavailable');
+  }
+}
+
+/* ---------------------------------------------------------------
+   IMAGE REPORT DOWNLOAD
+   --------------------------------------------------------------- */
+function downloadGamingImage(){
+  const c=document.createElement('canvas');
+  const W=1600,H=1000;
+  c.width=W;c.height=H;
+  const ctx=c.getContext('2d');
+  const dark=document.body.classList.contains('dark');
+  const bg=dark?'#090c10':'#ffffff', fg=dark?'#f4f6f8':'#10141a', muted=dark?'#98a2ae':'#69727e';
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#ff5a1f';ctx.fillRect(0,0,W,12);
+  ctx.font='800 56px Inter, Arial, sans-serif';ctx.fillStyle=fg;
+  ctx.fillText('Fasqoo Gaming & Ping Monitor',70,105);
+  ctx.font='400 24px Inter, Arial, sans-serif';ctx.fillStyle=muted;
+  ctx.fillText('Gaming latency, jitter and connection diagnostics',70,148);
+  let y=215;
+  ctx.font='700 28px Inter, Arial, sans-serif';ctx.fillStyle=fg;
+  ctx.fillText('Connection',70,y);
+  y+=48;
+  ctx.font='500 24px Inter, Arial, sans-serif';
+  const connRows=[
+    ['ISP / Provider',gmEl('gm_ispProvider')?.textContent||'—'],
+    ['Public IP',gmEl('gm_ispIp')?.textContent||'—'],
+    ['Location',gmEl('gm_ispLocation')?.textContent||'—'],
+    ['Network / ASN',gmEl('gm_ispNetwork')?.textContent||'—']
+  ];
+  connRows.forEach(([a,b],i)=>{
+    const x=i%2?820:70, yy=y+Math.floor(i/2)*58;
+    ctx.fillStyle=muted;ctx.fillText(a,x,yy);
+    ctx.fillStyle=fg;ctx.font='700 24px Inter, Arial, sans-serif';ctx.fillText(String(b).slice(0,42),x,yy+28);
+    ctx.font='500 24px Inter, Arial, sans-serif';
+  });
+  y=365;
+  ctx.font='700 28px Inter, Arial, sans-serif';ctx.fillStyle=fg;
+  ctx.fillText('20-second monitor',70,y);
+  y+=52;
+  const vals=[
+    ['Average ping',(gmEl('gm_fq20Ping')?.textContent||'—')+' ms'],
+    ['Jitter',(gmEl('gm_fq20Jitter')?.textContent||'—')+' ms'],
+    ['Packet loss',(gmEl('gm_fq20Loss')?.textContent||'—')+' %'],
+    ['Gaming result',gmEl('gm_fq20ResultTitle')?.textContent||'—']
+  ];
+  vals.forEach(([a,b],i)=>{
+    const x=70+(i%2)*750, yy=y+Math.floor(i/2)*72;
+    ctx.fillStyle=muted;ctx.font='500 22px Inter, Arial, sans-serif';ctx.fillText(a,x,yy);
+    ctx.fillStyle=fg;ctx.font='700 26px Inter, Arial, sans-serif';ctx.fillText(String(b).slice(0,48),x,yy+31);
+  });
+  y=570;
+  ctx.fillStyle=fg;ctx.font='700 28px Inter, Arial, sans-serif';ctx.fillText('Gaming servers',70,y);
+  const rows=GAMES.map(g=>state.results[g.id]).filter(Boolean);
+  y+=48;
+  ctx.font='500 20px Inter, Arial, sans-serif';
+  rows.slice(0,12).forEach((r,i)=>{
+    const x=i%2?820:70, yy=y+Math.floor(i/2)*48;
+    ctx.fillStyle=fg;
+    const ping=Number.isFinite(r.ping)?r.ping.toFixed(0)+' ms':'—';
+    ctx.fillText((r.game.name||r.id).slice(0,30),x,yy);
+    ctx.fillStyle=muted;ctx.fillText(ping,x+330,yy);
+  });
+  ctx.fillStyle=muted;ctx.font='400 18px Inter, Arial, sans-serif';
+  ctx.fillText('fasqoo.com · Browser-based measurement',70,H-55);
+  const a=document.createElement('a');
+  a.download='fasqoo-gaming-monitor-'+Date.now()+'.png';
+  a.href=c.toDataURL('image/png');
+  a.click();
+  showToast(t('imageDownloaded'));
+}
+const gmImageBtn=gmEl('gm_downloadImage');
+if(gmImageBtn) gmImageBtn.addEventListener('click',downloadGamingImage);
+
+/* Initial data */
+initGamingLang();
+loadGamingISP();
+})();
+</script>
 <script src="/js/app.js" defer></script>
 </body>
 </html>
