@@ -1,13 +1,12 @@
 /* ==========================================================
-   FASQOO SPEED TEST v8.2
-   - 6 metrics incl. Bufferbloat (A+ bis F) + Packet Loss
-   - Gateway-Ping & lokale Link-Qualität
-   - Start-Button mit Phasen-Fortschritt
-   - Live-Gradient-Chart
+   FASQOO SPEED TEST v8.1
+   - 6 metrics incl. Bufferbloat + Packet Loss
+   - Sample-synced pulse
+   - Colored interim states (blue → green/yellow/red)
+   - Live gradient chart with glow + scale
    - Overall Grade A+ to F with glow
-   - Smart Recommendations (dynamische Tipps)
-   - 8 application profile tiles with SVG icons
-   - Full i18n coverage (10 languages)
+   - 8 application profile tiles with SVG icons + reveal
+   - Full i18n coverage (10 languages, 100%)
    ========================================================== */
 
 /* ---------- PROFESSIONAL DESKTOP INSTALL ---------- */
@@ -20,7 +19,9 @@ function isMobileDevice(){
   return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
          (navigator.maxTouchPoints > 1 && Math.min(screen.width, screen.height) < 900);
 }
-function isDesktopDevice(){ return !isMobileDevice(); }
+function isDesktopDevice(){
+  return !isMobileDevice();
+}
 function isStandalone(){
   return window.matchMedia("(display-mode: standalone)").matches ||
          window.navigator.standalone === true ||
@@ -39,28 +40,52 @@ function updateInstallButton(){
   const visible = isDesktopDevice() && !isStandalone();
   installButton.hidden = !visible;
   if(!visible) return;
+
   const platform = getDesktopPlatform();
-  const labels = {windows:"Install for Windows",mac:"Install for Mac",linux:"Install for Linux",chromeos:"Install for ChromeOS",desktop:"Install App"};
-  const icons  = {windows:"⊞",mac:"⌘",linux:"◉",chromeos:"▣",desktop:"↓"};
+  const labels = {
+    windows:"Install for Windows",
+    mac:"Install for Mac",
+    linux:"Install for Linux",
+    chromeos:"Install for ChromeOS",
+    desktop:"Install App"
+  };
+  const icons = {
+    windows:"⊞",
+    mac:"⌘",
+    linux:"◉",
+    chromeos:"▣",
+    desktop:"↓"
+  };
   const label = labels[platform] || labels.desktop;
   if(installLabel) installLabel.textContent = label;
   if(installIcon) installIcon.textContent = icons[platform] || icons.desktop;
   installButton.setAttribute("aria-label", label);
 }
 window.addEventListener("beforeinstallprompt", e => {
-  e.preventDefault(); deferredInstallPrompt = e; updateInstallButton();
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButton();
 });
 installButton?.addEventListener("click", async () => {
   if(deferredInstallPrompt){
-    try{ deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice; }catch(e){}
-    deferredInstallPrompt = null; updateInstallButton(); return;
+    try{
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    }catch(e){}
+    deferredInstallPrompt = null;
+    updateInstallButton();
+    return;
   }
+
   const platform = getDesktopPlatform();
   const t = installTranslations[currentLang] || installTranslations.en;
   const fallback = t.browserHint || installTranslations.en.browserHint;
   alert(fallback.replace("{platform}", platform === "windows" ? "Windows" : platform === "mac" ? "macOS" : platform === "linux" ? "Linux" : platform === "chromeos" ? "ChromeOS" : "your desktop"));
 });
-window.addEventListener("appinstalled", () => { deferredInstallPrompt = null; updateInstallButton(); });
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
 window.matchMedia("(display-mode: standalone)").addEventListener?.("change", updateInstallButton);
 window.addEventListener("resize", updateInstallButton);
 updateInstallButton();
@@ -109,170 +134,16 @@ const extraTranslations = {
 };
 
 const metricTranslations = {
-  en:{packetLoss:"Packet Loss",bufferbloat:"Bufferbloat",bbGradeA:"Excellent",bbGradeB:"Good",bbGradeC:"Fair",bbGradeD:"Poor",bbWaiting:"Waiting for test",gatewayPing:"Gateway Ping (LAN/WLAN)",wifiLink:"Local Link Quality",recKicker:"SMART RECOMMENDATIONS",recTitle:"Tips tailored to your result",recSub:"Concrete, prioritized actions based on your measured metrics.",recBadge:"PERSONALIZED"},
-  de:{packetLoss:"Paketverlust",bufferbloat:"Bufferbloat",bbGradeA:"Hervorragend",bbGradeB:"Gut",bbGradeC:"Mäßig",bbGradeD:"Schlecht",bbWaiting:"Warten auf Test",gatewayPing:"Gateway-Ping (LAN/WLAN)",wifiLink:"Lokale Link-Qualität",recKicker:"SMART-EMPFEHLUNGEN",recTitle:"Auf dein Ergebnis zugeschnittene Tipps",recSub:"Konkrete, priorisierte Maßnahmen basierend auf deinen Messwerten.",recBadge:"PERSONALISIERT"},
-  fr:{packetLoss:"Perte de paquets",bufferbloat:"Bufferbloat",bbGradeA:"Excellent",bbGradeB:"Bon",bbGradeC:"Moyen",bbGradeD:"Faible",bbWaiting:"En attente",gatewayPing:"Ping passerelle (LAN/Wi-Fi)",wifiLink:"Qualité du lien local",recKicker:"RECOMMANDATIONS INTELLIGENTES",recTitle:"Conseils adaptés à votre résultat",recSub:"Actions concrètes et priorisées selon vos mesures.",recBadge:"PERSONNALISÉ"},
-  es:{packetLoss:"Pérdida de paquetes",bufferbloat:"Bufferbloat",bbGradeA:"Excelente",bbGradeB:"Bueno",bbGradeC:"Aceptable",bbGradeD:"Malo",bbWaiting:"Esperando prueba",gatewayPing:"Ping de puerta de enlace (LAN/Wi-Fi)",wifiLink:"Calidad del enlace local",recKicker:"RECOMENDACIONES INTELIGENTES",recTitle:"Consejos adaptados a tu resultado",recSub:"Acciones concretas y priorizadas según tus métricas.",recBadge:"PERSONALIZADO"},
-  it:{packetLoss:"Perdita pacchetti",bufferbloat:"Bufferbloat",bbGradeA:"Eccellente",bbGradeB:"Buono",bbGradeC:"Discreto",bbGradeD:"Scarso",bbWaiting:"In attesa",gatewayPing:"Ping gateway (LAN/Wi-Fi)",wifiLink:"Qualità del link locale",recKicker:"CONSIGLI INTELLIGENTI",recTitle:"Consigli su misura per il tuo risultato",recSub:"Azioni concrete e prioritarie in base alle tue misurazioni.",recBadge:"PERSONALIZZATO"},
-  pt:{packetLoss:"Perda de pacotes",bufferbloat:"Bufferbloat",bbGradeA:"Excelente",bbGradeB:"Bom",bbGradeC:"Razoável",bbGradeD:"Fraco",bbWaiting:"A aguardar teste",gatewayPing:"Ping do gateway (LAN/Wi-Fi)",wifiLink:"Qualidade do link local",recKicker:"RECOMENDAÇÕES INTELIGENTES",recTitle:"Dicas adaptadas ao seu resultado",recSub:"Ações concretas e priorizadas com base nas suas medições.",recBadge:"PERSONALIZADO"},
-  nl:{packetLoss:"Pakketverlies",bufferbloat:"Bufferbloat",bbGradeA:"Uitstekend",bbGradeB:"Goed",bbGradeC:"Redelijk",bbGradeD:"Slecht",bbWaiting:"Wachten op test",gatewayPing:"Gateway-ping (LAN/Wi-Fi)",wifiLink:"Lokale linkkwaliteit",recKicker:"SLIMME AANBEVELINGEN",recTitle:"Tips op maat voor jouw resultaat",recSub:"Concrete, geprioriteerde acties op basis van je metingen.",recBadge:"GEPERSONALISEERD"},
-  tr:{packetLoss:"Paket Kaybı",bufferbloat:"Bufferbloat",bbGradeA:"Mükemmel",bbGradeB:"İyi",bbGradeC:"Orta",bbGradeD:"Zayıf",bbWaiting:"Test bekleniyor",gatewayPing:"Ağ geçidi ping (LAN/Wi-Fi)",wifiLink:"Yerel bağlantı kalitesi",recKicker:"AKILLI ÖNERİLER",recTitle:"Sonucunuza özel ipuçları",recSub:"Ölçümlerinize göre somut ve öncelikli adımlar.",recBadge:"KİŞİSELLEŞTİRİLMİŞ"},
-  sq:{packetLoss:"Humbje paketash",bufferbloat:"Bufferbloat",bbGradeA:"Shkëlqyeshëm",bbGradeB:"Mirë",bbGradeC:"Mesatar",bbGradeD:"Dobët",bbWaiting:"Në pritje të testit",gatewayPing:"Ping i gateway-t (LAN/Wi-Fi)",wifiLink:"Cilësia e lidhjes lokale",recKicker:"REKOMANDIME TË MENÇURA",recTitle:"Këshilla të përshtatura për rezultatin tënd",recSub:"Veprime konkrete dhe të prioritizuara sipas matjeve.",recBadge:"TË PERSONALIZUARA"},
-  ar:{packetLoss:"فقدان الحزم",bufferbloat:"Bufferbloat",bbGradeA:"ممتاز",bbGradeB:"جيد",bbGradeC:"مقبول",bbGradeD:"ضعيف",bbWaiting:"بانتظار الاختبار",gatewayPing:"Ping البوابة (LAN/Wi-Fi)",wifiLink:"جودة الرابط المحلي",recKicker:"توصيات ذكية",recTitle:"نصائح مخصصة لنتيجتك",recSub:"إجراءات عملية مرتبة حسب الأولوية بناءً على قياساتك.",recBadge:"مخصص"}
-};
-
-/* ---------- SMART RECOMMENDATIONS i18n ---------- */
-const recommendationText = {
-  en:{
-    jitterHighT:"Use a LAN cable",jitterHighD:"Your jitter is high (>25 ms). Wi-Fi interference is the most common cause. A wired connection usually stabilizes latency for gaming and calls.",
-    jitterMidT:"Reduce Wi-Fi interference",jitterMidD:"Moderate jitter detected. Move closer to the router, switch to 5 GHz, or close background downloads.",
-    pingHighT:"Route optimization recommended",pingHighD:"Your ping is very high (>100 ms). Check for VPNs, saturated uplinks, or contact your ISP about peering.",
-    pingMidT:"Ping could be better",pingMidD:"Elevated latency. Close background streaming, disable VPN, or test again at a quieter time.",
-    uploadLowT:"Limited for 4K streaming & cloud",uploadLowD:"Upload below 5 Mbps restricts 4K streaming, HD video calls, and cloud backups. Consider a plan upgrade or check for upload throttling.",
-    uploadMidT:"Upload is workable",uploadMidD:"Upload is fine for HD calls and 1080p streaming, but 4K streaming and large cloud syncs will feel slow.",
-    downloadLowT:"Download capacity is low",downloadLowD:"Below 15 Mbps limits HD streaming and multi-device use. Verify nothing else is consuming bandwidth.",
-    downloadMidT:"Download OK for HD",downloadMidD:"Your download handles HD streaming fine. For 4K on multiple devices, higher bandwidth is recommended.",
-    bloatHighT:"Bufferbloat detected (SQM recommended)",bloatHighD:"Your latency rises sharply under load. Enable SQM/QoS on your router (fq_codel / cake) to eliminate lag spikes during downloads.",
-    bloatMidT:"Mild bufferbloat",bloatMidD:"Some latency under load. Enable QoS/SQM if gaming or calls feel laggy during downloads.",
-    lossHighT:"Packet loss detected",lossHighD:"Loss above 2 % causes stutter and dropped calls. Check cables, Wi-Fi signal, and report to your ISP if it persists on LAN.",
-    lossMidT:"Minor packet loss",lossMidD:"Small loss detected. Wi-Fi interference or congestion is likely. Retest on LAN to confirm.",
-    allGoodT:"Excellent connection",allGoodD:"No bottlenecks detected. Your connection is well-suited for gaming, streaming, and home office."
-  },
-  de:{
-    jitterHighT:"LAN-Kabel verwenden",jitterHighD:"Dein Jitter ist hoch (>25 ms). Häufigste Ursache: WLAN-Störungen. Ein Kabel stabilisiert Latenz für Gaming und Calls.",
-    jitterMidT:"WLAN-Störungen reduzieren",jitterMidD:"Mittlerer Jitter erkannt. Näher an den Router, auf 5 GHz wechseln oder Hintergrund-Downloads stoppen.",
-    pingHighT:"Route optimieren",pingHighD:"Dein Ping ist sehr hoch (>100 ms). VPN prüfen, Uplink-Auslastung reduzieren oder ISP auf Peering ansprechen.",
-    pingMidT:"Ping verbesserungsfähig",pingMidD:"Erhöhte Latenz. Hintergrund-Streaming beenden, VPN deaktivieren oder zu ruhigerer Zeit erneut testen.",
-    uploadLowT:"Eingeschränkt für 4K-Streaming & Cloud",uploadLowD:"Upload unter 5 Mbps limitiert 4K-Streaming, HD-Videoanrufe und Cloud-Backups. Tarif prüfen oder Upload-Drosselung ausschließen.",
-    uploadMidT:"Upload nutzbar",uploadMidD:"Für HD-Calls und 1080p-Streaming ausreichend – 4K und große Cloud-Syncs fühlen sich langsam an.",
-    downloadLowT:"Download-Kapazität niedrig",downloadLowD:"Unter 15 Mbps begrenzt HD-Streaming und Mehrgeräte-Nutzung. Prüfe, ob andere Geräte Bandbreite belegen.",
-    downloadMidT:"Download OK für HD",downloadMidD:"HD-Streaming läuft flüssig. Für 4K auf mehreren Geräten ist mehr Bandbreite empfehlenswert.",
-    bloatHighT:"Bufferbloat erkannt (SQM empfohlen)",bloatHighD:"Deine Latenz steigt unter Last stark an. Aktiviere SQM/QoS im Router (fq_codel / cake), um Lag-Spikes zu eliminieren.",
-    bloatMidT:"Leichter Bufferbloat",bloatMidD:"Etwas Latenz unter Last. Bei Gaming/Calls während Downloads QoS/SQM aktivieren.",
-    lossHighT:"Paketverlust erkannt",lossHighD:"Verlust über 2 % verursacht Ruckler und Abbrüche. Kabel, WLAN-Signal prüfen und bei Anhalten über LAN den ISP informieren.",
-    lossMidT:"Geringer Paketverlust",lossMidD:"Kleiner Verlust erkannt. Wahrscheinlich WLAN-Störung oder Überlast. Über LAN gegenprüfen.",
-    allGoodT:"Ausgezeichnete Verbindung",allGoodD:"Keine Engpässe erkannt. Ideal für Gaming, Streaming und Homeoffice."
-  },
-  fr:{
-    jitterHighT:"Utilisez un câble LAN",jitterHighD:"Votre jitter est élevé (>25 ms). Les interférences Wi-Fi en sont la cause principale. Un câble stabilise la latence pour le gaming et les appels.",
-    jitterMidT:"Réduisez les interférences Wi-Fi",jitterMidD:"Jitter modéré détecté. Rapprochez-vous du routeur, passez en 5 GHz ou fermez les téléchargements en arrière-plan.",
-    pingHighT:"Optimisation de route recommandée",pingHighD:"Votre ping est très élevé (>100 ms). Vérifiez les VPN, saturez l'uplink ou contactez votre FAI.",
-    pingMidT:"Le ping peut être meilleur",pingMidD:"Latence élevée. Fermez les streams en arrière-plan, désactivez le VPN ou retestez à un moment plus calme.",
-    uploadLowT:"Limité pour la 4K et le cloud",uploadLowD:"Un upload inférieur à 5 Mbps limite la 4K, les appels HD et les sauvegardes cloud. Envisagez un forfait supérieur.",
-    uploadMidT:"Upload utilisable",uploadMidD:"Correct pour les appels HD et le 1080p, mais la 4K et les syncs cloud seront lentes.",
-    downloadLowT:"Capacité de téléchargement faible",downloadLowD:"En dessous de 15 Mbps, le HD et le multi-appareil sont limités. Vérifiez qu'aucun autre appareil ne consomme la bande passante.",
-    downloadMidT:"Download OK pour le HD",downloadMidD:"Le HD passe bien. Pour la 4K multi-écrans, plus de bande passante est recommandé.",
-    bloatHighT:"Bufferbloat détecté (SQM recommandé)",bloatHighD:"Votre latence explose sous charge. Activez SQM/QoS sur le routeur (fq_codel / cake) pour éliminer les pics de lag.",
-    bloatMidT:"Léger bufferbloat",bloatMidD:"Un peu de latence sous charge. Activez QoS/SQM si le gaming ou les appels saccadent pendant les téléchargements.",
-    lossHighT:"Perte de paquets détectée",lossHighD:"Au-delà de 2 %, la perte provoque des saccades. Vérifiez câbles et signal Wi-Fi, puis informez votre FAI si cela persiste en LAN.",
-    lossMidT:"Perte de paquets mineure",lossMidD:"Petite perte détectée. Probablement une interférence Wi-Fi. Retestez en LAN.",
-    allGoodT:"Connexion excellente",allGoodD:"Aucun goulot d'étranglement détecté. Idéal pour le gaming, le streaming et le télétravail."
-  },
-  es:{
-    jitterHighT:"Usa un cable LAN",jitterHighD:"Tu jitter es alto (>25 ms). La interferencia Wi-Fi es la causa más común. Un cable estabiliza la latencia para gaming y llamadas.",
-    jitterMidT:"Reduce la interferencia Wi-Fi",jitterMidD:"Jitter moderado. Acércate al router, cambia a 5 GHz o cierra descargas en segundo plano.",
-    pingHighT:"Optimización de ruta recomendada",pingHighD:"Tu ping es muy alto (>100 ms). Revisa VPN, saturación del uplink o contacta a tu ISP.",
-    pingMidT:"El ping puede mejorar",pingMidD:"Latencia elevada. Cierra streams en segundo plano, desactiva VPN o repite en un momento más tranquilo.",
-    uploadLowT:"Limitado para 4K y nube",uploadLowD:"Subida menor a 5 Mbps limita 4K, videollamadas HD y backups. Considera un plan superior.",
-    uploadMidT:"Subida utilizable",uploadMidD:"Correcto para llamadas HD y 1080p; 4K y sincronización en la nube serán lentos.",
-    downloadLowT:"Capacidad de descarga baja",downloadLowD:"Por debajo de 15 Mbps limita HD y multi-dispositivo. Verifica que nada más consuma ancho de banda.",
-    downloadMidT:"Descarga OK para HD",downloadMidD:"El HD va bien. Para 4K en varios dispositivos, se recomienda más ancho de banda.",
-    bloatHighT:"Bufferbloat detectado (SQM recomendado)",bloatHighD:"Tu latencia sube mucho bajo carga. Activa SQM/QoS en el router (fq_codel / cake).",
-    bloatMidT:"Bufferbloat leve",bloatMidD:"Algo de latencia bajo carga. Activa QoS/SQM si notas lag en juegos o llamadas durante descargas.",
-    lossHighT:"Pérdida de paquetes detectada",lossHighD:"Por encima del 2 % provoca cortes. Revisa cables y señal Wi-Fi; informa a tu ISP si persiste en LAN.",
-    lossMidT:"Pérdida de paquetes menor",lossMidD:"Pequeña pérdida. Probable interferencia Wi-Fi. Repite en LAN para confirmar.",
-    allGoodT:"Conexión excelente",allGoodD:"Sin cuellos de botella. Ideal para gaming, streaming y teletrabajo."
-  },
-  it:{
-    jitterHighT:"Usa un cavo LAN",jitterHighD:"Il tuo jitter è alto (>25 ms). L'interferenza Wi-Fi è la causa più comune. Un cavo stabilizza la latenza.",
-    jitterMidT:"Riduci l'interferenza Wi-Fi",jitterMidD:"Jitter moderato. Avvicinati al router, passa a 5 GHz o chiudi download in background.",
-    pingHighT:"Ottimizza il routing",pingHighD:"Ping molto alto (>100 ms). Controlla VPN, saturazione uplink o contatta l'ISP.",
-    pingMidT:"Il ping può migliorare",pingMidD:"Latenza elevata. Chiudi streaming in background, disattiva VPN o riprova in un momento più tranquillo.",
-    uploadLowT:"Limitato per 4K e cloud",uploadLowD:"Upload sotto 5 Mbps limita 4K, videochiamate HD e backup cloud. Considera un upgrade.",
-    uploadMidT:"Upload utilizzabile",uploadMidD:"Ok per chiamate HD e 1080p; 4K e sync cloud saranno lenti.",
-    downloadLowT:"Capacità download bassa",downloadLowD:"Sotto 15 Mbps limita HD e multi-dispositivo. Verifica altri consumi di banda.",
-    downloadMidT:"Download OK per HD",downloadMidD:"L'HD va bene. Per 4K su più dispositivi serve più banda.",
-    bloatHighT:"Bufferbloat rilevato (SQM consigliato)",bloatHighD:"Latenza che sale sotto carico. Attiva SQM/QoS sul router (fq_codel / cake).",
-    bloatMidT:"Bufferbloat lieve",bloatMidD:"Un po' di latenza sotto carico. Attiva QoS/SQM se giochi o chiami durante i download.",
-    lossHighT:"Perdita pacchetti rilevata",lossHighD:"Oltre il 2 % causa scatti. Controlla cavi e segnale Wi-Fi; avvisa l'ISP se persiste in LAN.",
-    lossMidT:"Perdita pacchetti lieve",lossMidD:"Piccola perdita. Probabile interferenza Wi-Fi. Riprova in LAN.",
-    allGoodT:"Connessione eccellente",allGoodD:"Nessun collo di bottiglia. Ideale per gaming, streaming e smart working."
-  },
-  pt:{
-    jitterHighT:"Use um cabo LAN",jitterHighD:"O seu jitter está alto (>25 ms). Interferência Wi-Fi é a causa mais comum. Um cabo estabiliza a latência.",
-    jitterMidT:"Reduza a interferência Wi-Fi",jitterMidD:"Jitter moderado. Aproxime-se do router, mude para 5 GHz ou feche downloads em segundo plano.",
-    pingHighT:"Otimização de rota recomendada",pingHighD:"Ping muito alto (>100 ms). Verifique VPNs, uplink saturado ou contacte o ISP.",
-    pingMidT:"O ping pode melhorar",pingMidD:"Latência elevada. Feche streams em segundo plano, desative VPN ou repita em horário mais calmo.",
-    uploadLowT:"Limitado para 4K e cloud",uploadLowD:"Upload abaixo de 5 Mbps limita 4K, chamadas HD e backups cloud. Considere um plano superior.",
-    uploadMidT:"Upload utilizável",uploadMidD:"Ok para chamadas HD e 1080p; 4K e sincronizações cloud serão lentos.",
-    downloadLowT:"Capacidade de download baixa",downloadLowD:"Abaixo de 15 Mbps limita HD e multi-dispositivo. Verifique outros consumos.",
-    downloadMidT:"Download OK para HD",downloadMidD:"O HD corre bem. Para 4K em vários dispositivos, mais banda é recomendado.",
-    bloatHighT:"Bufferbloat detetado (SQM recomendado)",bloatHighD:"A latência sobe muito sob carga. Ative SQM/QoS no router (fq_codel / cake).",
-    bloatMidT:"Bufferbloat ligeiro",bloatMidD:"Alguma latência sob carga. Ative QoS/SQM se notar lag em jogos/chamadas.",
-    lossHighT:"Perda de pacotes detetada",lossHighD:"Acima de 2 % provoca falhas. Verifique cabos e sinal Wi-Fi; informe o ISP se persistir em LAN.",
-    lossMidT:"Perda de pacotes menor",lossMidD:"Pequena perda. Provável interferência Wi-Fi. Repita em LAN.",
-    allGoodT:"Ligação excelente",allGoodD:"Sem estrangulamentos. Ideal para jogos, streaming e teletrabalho."
-  },
-  nl:{
-    jitterHighT:"Gebruik een LAN-kabel",jitterHighD:"Je jitter is hoog (>25 ms). Wi-Fi-storing is de meest voorkomende oorzaak. Een kabel stabiliseert de latentie.",
-    jitterMidT:"Verminder Wi-Fi-storing",jitterMidD:"Matige jitter. Ga dichter bij de router, schakel over naar 5 GHz of sluit achtergrond-downloads.",
-    pingHighT:"Route-optimalisatie aanbevolen",pingHighD:"Ping zeer hoog (>100 ms). Controleer VPN's, uplink-verzadiging of neem contact op met je ISP.",
-    pingMidT:"Ping kan beter",pingMidD:"Verhoogde latentie. Sluit achtergrond-streaming, schakel VPN uit of test opnieuw op een rustiger moment.",
-    uploadLowT:"Beperkt voor 4K en cloud",uploadLowD:"Upload onder 5 Mbps beperkt 4K, HD-videogesprekken en cloudback-ups. Overweeg een upgrade.",
-    uploadMidT:"Upload bruikbaar",uploadMidD:"Prima voor HD-gesprekken en 1080p; 4K en cloud-syncs voelen traag.",
-    downloadLowT:"Downloadcapaciteit laag",downloadLowD:"Onder 15 Mbps beperkt HD en multi-device gebruik. Controleer andere verbruikers.",
-    downloadMidT:"Download OK voor HD",downloadMidD:"HD streamt prima. Voor 4K op meerdere apparaten is meer bandbreedte aanbevolen.",
-    bloatHighT:"Bufferbloat gedetecteerd (SQM aanbevolen)",bloatHighD:"Latentie stijgt sterk onder belasting. Activeer SQM/QoS op je router (fq_codel / cake).",
-    bloatMidT:"Lichte bufferbloat",bloatMidD:"Wat latentie onder belasting. Activeer QoS/SQM als gamen of bellen hapert tijdens downloads.",
-    lossHighT:"Pakketverlies gedetecteerd",lossHighD:"Boven 2 % veroorzaakt haperingen. Controleer kabels en Wi-Fi; meld aan je ISP bij aanhouden op LAN.",
-    lossMidT:"Klein pakketverlies",lossMidD:"Klein verlies. Waarschijnlijk Wi-Fi-storing. Test opnieuw via LAN.",
-    allGoodT:"Uitstekende verbinding",allGoodD:"Geen knelpunten. Ideaal voor gamen, streamen en thuiswerken."
-  },
-  tr:{
-    jitterHighT:"LAN kablosu kullanın",jitterHighD:"Jitter yüksek (>25 ms). En yaygın neden Wi-Fi girişimidir. Kablo, oyun ve aramalarda gecikmeyi stabilize eder.",
-    jitterMidT:"Wi-Fi girişimini azaltın",jitterMidD:"Orta düzey jitter. Yönlendiriciye yaklaşın, 5 GHz'e geçin veya arka plan indirmelerini kapatın.",
-    pingHighT:"Rota optimizasyonu önerilir",pingHighD:"Ping çok yüksek (>100 ms). VPN'leri, uplink doygunluğunu kontrol edin veya ISP ile görüşün.",
-    pingMidT:"Ping daha iyi olabilir",pingMidD:"Yüksek gecikme. Arka plan yayınlarını kapatın, VPN'i devre dışı bırakın veya daha sakin saatte tekrar deneyin.",
-    uploadLowT:"4K ve bulut için sınırlı",uploadLowD:"5 Mbps altı yükleme 4K, HD görüntülü arama ve bulut yedeklemeyi kısıtlar. Plan yükseltmeyi düşünün.",
-    uploadMidT:"Yükleme kullanılabilir",uploadMidD:"HD aramalar ve 1080p için uygun; 4K ve büyük bulut senkronizasyonu yavaş hisseder.",
-    downloadLowT:"İndirme kapasitesi düşük",downloadLowD:"15 Mbps altı HD yayın ve çok cihaz kullanımını sınırlar. Başka tüketici olup olmadığını kontrol edin.",
-    downloadMidT:"HD için indirme OK",downloadMidD:"HD yayın sorunsuz. Birden fazla cihazda 4K için daha fazla bant genişliği önerilir.",
-    bloatHighT:"Bufferbloat tespit edildi (SQM önerilir)",bloatHighD:"Yük altında gecikme keskin şekilde artıyor. Yönlendiricide SQM/QoS (fq_codel / cake) etkinleştirin.",
-    bloatMidT:"Hafif bufferbloat",bloatMidD:"Yük altında bir miktar gecikme. İndirmeler sırasında oyun/aramalarda takılma varsa QoS/SQM etkinleştirin.",
-    lossHighT:"Paket kaybı tespit edildi",lossHighD:"%2 üzeri kayıp takılma ve kopmalara neden olur. Kabloları, Wi-Fi sinyalini kontrol edin; LAN'da sürerse ISP'ye bildirin.",
-    lossMidT:"Küçük paket kaybı",lossMidD:"Küçük kayıp. Muhtemelen Wi-Fi girişimi. LAN'da tekrar test edin.",
-    allGoodT:"Mükemmel bağlantı",allGoodD:"Darboğaz yok. Oyun, yayın ve evden çalışma için ideal."
-  },
-  sq:{
-    jitterHighT:"Përdor kabllo LAN",jitterHighD:"Jitter-i yt është i lartë (>25 ms). Shkaku kryesor është interferenca Wi-Fi. Kabllo stabilizon vonesën.",
-    jitterMidT:"Zvogëlo interferencën Wi-Fi",jitterMidD:"Jitter mesatar. Afërhu router-it, kalo në 5 GHz ose mbyll shkarkimet në sfond.",
-    pingHighT:"Rekomandohet optimizim i rrugës",pingHighD:"Ping shumë i lartë (>100 ms). Kontrollo VPN, uplink të ngarkuar ose kontakto ISP.",
-    pingMidT:"Ping-u mund të përmirësohet",pingMidD:"Vonesë e lartë. Mbyll transmetimet në sfond, çaktivizo VPN ose provo në një kohë më të qetë.",
-    uploadLowT:"I kufizuar për 4K dhe cloud",uploadLowD:"Ngarkim nën 5 Mbps kufizon 4K, thirrjet HD dhe backup cloud. Konsidero një plan më të lartë.",
-    uploadMidT:"Ngarkim i përdorshëm",uploadMidD:"Mirë për thirrje HD dhe 1080p; 4K dhe sinkronizimi cloud do të ndihen të ngadaltë.",
-    downloadLowT:"Kapacitet i ulët shkarkimi",downloadLowD:"Nën 15 Mbps kufizon HD dhe shumë pajisje. Kontrollo konsumatorë të tjerë.",
-    downloadMidT:"Shkarkim OK për HD",downloadMidD:"HD transmeton mirë. Për 4K në disa pajisje, kërkohet më shumë bandwidth.",
-    bloatHighT:"Bufferbloat u zbulua (SQM rekomandohet)",bloatHighD:"Vonesa rritet ndjeshëm nën ngarkesë. Aktivizo SQM/QoS në router (fq_codel / cake).",
-    bloatMidT:"Bufferbloat i lehtë",bloatMidD:"Pak vonesë nën ngarkesë. Aktivizo QoS/SQM nëse lojërat/thirrjet ngecin gjatë shkarkimeve.",
-    lossHighT:"Humbje paketash u zbulua",lossHighD:"Mbi 2 % shkakton ngecje. Kontrollo kabllot, sinjalin Wi-Fi; njofto ISP nëse vazhdon në LAN.",
-    lossMidT:"Humbje e vogël paketash",lossMidD:"Humbje e vogël. Ndoshta interferencë Wi-Fi. Provo përsëri në LAN.",
-    allGoodT:"Lidhje e shkëlqyer",allGoodD:"Pa pengesa. Ideale për lojëra, transmetim dhe punë nga shtëpia."
-  },
-  ar:{
-    jitterHighT:"استخدم كابل LAN",jitterHighD:"قيمة Jitter لديك مرتفعة (>25 مللي ثانية). التداخل اللاسلكي هو السبب الأكثر شيوعًا. الكابل يثبّت الاستجابة.",
-    jitterMidT:"قلل التداخل اللاسلكي",jitterMidD:"Jitter متوسط. اقترب من الراوتر، بدّل إلى 5 GHz، أو أغلق التنزيلات في الخلفية.",
-    pingHighT:"يُنصح بتحسين المسار",pingHighD:"البنغ مرتفع جدًا (>100 مللي ثانية). تحقق من VPN أو ازدحام الرفع أو تواصل مع مزود الخدمة.",
-    pingMidT:"يمكن تحسين البنغ",pingMidD:"زمن استجابة مرتفع. أوقف البث في الخلفية، عطّل VPN أو أعد الاختبار في وقت أهدأ.",
-    uploadLowT:"محدود للبث 4K والسحابة",uploadLowD:"رفع أقل من 5 ميغابت يقيّد 4K ومكالمات HD والنسخ السحابي. فكّر بترقية الخطة.",
-    uploadMidT:"الرفع مقبول",uploadMidD:"مناسب لمكالمات HD و1080p، لكن 4K والمزامنة السحابية سيبدو بطيئًا.",
-    downloadLowT:"سعة التنزيل منخفضة",downloadLowD:"أقل من 15 ميغابت يقيّد HD واستخدام عدة أجهزة. تحقق من عدم وجود مستهلكين آخرين.",
-    downloadMidT:"التنزيل جيد لـ HD",downloadMidD:"HD يعمل بسلاسة. لـ 4K على أجهزة متعددة يُنصح بنطاق أعلى.",
-    bloatHighT:"تم اكتشاف Bufferbloat (يُنصح بـ SQM)",bloatHighD:"الاستجابة ترتفع بشكل حاد تحت الحمل. فعّل SQM/QoS في الراوتر (fq_codel / cake).",
-    bloatMidT:"Bufferbloat خفيف",bloatMidD:"بعض التأخير تحت الحمل. فعّل QoS/SQM إذا واجهت تقطعًا أثناء التنزيل.",
-    lossHighT:"تم اكتشاف فقدان حزم",lossHighD:"فوق 2٪ يسبب تقطعًا. افحص الكابلات والإشارة، وأبلغ المزود إذا استمر على LAN.",
-    lossMidT:"فقدان حزم بسيط",lossMidD:"فقدان طفيف. على الأرجح تداخل لاسلكي. أعد الاختبار على LAN.",
-    allGoodT:"اتصال ممتاز",allGoodD:"لا اختناقات. مثالي للألعاب والبث والعمل من المنزل."
-  }
+  en:{packetLoss:"Packet Loss",bufferbloat:"Bufferbloat",bbGradeA:"A · Excellent",bbGradeB:"B · Good",bbGradeC:"C · Fair",bbGradeD:"D · Poor"},
+  de:{packetLoss:"Paketverlust",bufferbloat:"Bufferbloat",bbGradeA:"A · Hervorragend",bbGradeB:"B · Gut",bbGradeC:"C · Mäßig",bbGradeD:"D · Schlecht"},
+  fr:{packetLoss:"Perte de paquets",bufferbloat:"Bufferbloat",bbGradeA:"A · Excellent",bbGradeB:"B · Bon",bbGradeC:"C · Moyen",bbGradeD:"D · Faible"},
+  es:{packetLoss:"Pérdida de paquetes",bufferbloat:"Bufferbloat",bbGradeA:"A · Excelente",bbGradeB:"B · Bueno",bbGradeC:"C · Aceptable",bbGradeD:"D · Malo"},
+  it:{packetLoss:"Perdita pacchetti",bufferbloat:"Bufferbloat",bbGradeA:"A · Eccellente",bbGradeB:"B · Buono",bbGradeC:"C · Discreto",bbGradeD:"D · Scarso"},
+  pt:{packetLoss:"Perda de pacotes",bufferbloat:"Bufferbloat",bbGradeA:"A · Excelente",bbGradeB:"B · Bom",bbGradeC:"C · Razoável",bbGradeD:"D · Fraco"},
+  nl:{packetLoss:"Pakketverlies",bufferbloat:"Bufferbloat",bbGradeA:"A · Uitstekend",bbGradeB:"B · Goed",bbGradeC:"C · Redelijk",bbGradeD:"D · Slecht"},
+  tr:{packetLoss:"Paket Kaybı",bufferbloat:"Bufferbloat",bbGradeA:"A · Mükemmel",bbGradeB:"B · İyi",bbGradeC:"C · Orta",bbGradeD:"D · Zayıf"},
+  sq:{packetLoss:"Humbje paketash",bufferbloat:"Bufferbloat",bbGradeA:"A · Shkëlqyeshëm",bbGradeB:"B · Mirë",bbGradeC:"C · Mesatar",bbGradeD:"D · Dobët"},
+  ar:{packetLoss:"فقدان الحزم",bufferbloat:"Bufferbloat",bbGradeA:"A · ممتاز",bbGradeB:"B · جيد",bbGradeC:"C · مقبول",bbGradeD:"D · ضعيف"}
 };
 
 const installTranslations = {
@@ -341,21 +212,44 @@ document.addEventListener("click", e => {
   }
 });
 
-/* ---------- APPLICATION PROFILES ---------- */
+/* ---------- APPLICATION PROFILES (8 tiles, SVG) ---------- */
 const APP_KEYS = ["gaming","stream","fourk","call","office","cloud","social","web"];
 
 function appIcon(key){
   const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" ' +
             'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
   const icons = {
-    gaming:'<svg '+S+'><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><circle cx="15.5" cy="10.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="17.5" cy="12.5" r="0.9" fill="currentColor" stroke="none"/><path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/></svg>',
-    stream:'<svg '+S+'><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M8.4 8.4a5 5 0 0 0 0 7.2"/><path d="M15.6 15.6a5 5 0 0 0 0-7.2"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 18.4a9 9 0 0 0 0-12.8"/></svg>',
-    fourk:'<svg '+S+'><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><text x="12" y="12.6" font-family="Inter, sans-serif" font-size="6" font-weight="800" fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
-    call:'<svg '+S+'><rect x="2.5" y="6" width="13" height="12" rx="2.2"/><path d="M15.5 11.2 21 8v8l-5.5-3.2Z"/></svg>',
-    office:'<svg '+S+'><rect x="4" y="5" width="16" height="11" rx="1.8"/><path d="M2 19h20"/><path d="M9 16v3"/><path d="M15 16v3"/></svg>',
-    cloud:'<svg '+S+'><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a3.75 3.75 0 0 1 .5 7.5H7Z"/><path d="M12 15v-3.4"/><path d="M10.4 12.6 12 11l1.6 1.6"/></svg>',
-    social:'<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H9l-4.2 3.6A.6.6 0 0 1 4 19.1V5.5Z"/><path d="M12 12.2c-1.9-1.4-3.3-2.4-3.3-3.9A1.6 1.6 0 0 1 12 7.4a1.6 1.6 0 0 1 3.3.9c0 1.5-1.4 2.5-3.3 3.9Z" fill="currentColor" stroke="none"/></svg>',
-    web:'<svg '+S+'><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>'
+    gaming:
+      '<svg '+S+'><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/>'+
+      '<circle cx="15.5" cy="10.5" r="0.9" fill="currentColor" stroke="none"/>'+
+      '<circle cx="17.5" cy="12.5" r="0.9" fill="currentColor" stroke="none"/>'+
+      '<path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/></svg>',
+    stream:
+      '<svg '+S+'><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>'+
+      '<path d="M8.4 8.4a5 5 0 0 0 0 7.2"/><path d="M15.6 15.6a5 5 0 0 0 0-7.2"/>'+
+      '<path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 18.4a9 9 0 0 0 0-12.8"/></svg>',
+    fourk:
+      '<svg '+S+'><rect x="2.5" y="4" width="19" height="13" rx="2"/>'+
+      '<path d="M8 21h8"/><path d="M12 17v4"/>'+
+      '<text x="12" y="12.6" font-family="Inter, sans-serif" font-size="6" font-weight="800" '+
+      'fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
+    call:
+      '<svg '+S+'><rect x="2.5" y="6" width="13" height="12" rx="2.2"/>'+
+      '<path d="M15.5 11.2 21 8v8l-5.5-3.2Z"/></svg>',
+    office:
+      '<svg '+S+'><rect x="4" y="5" width="16" height="11" rx="1.8"/>'+
+      '<path d="M2 19h20"/><path d="M9 16v3"/><path d="M15 16v3"/></svg>',
+    cloud:
+      '<svg '+S+'><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a3.75 3.75 0 0 1 .5 7.5H7Z"/>'+
+      '<path d="M12 15v-3.4"/><path d="M10.4 12.6 12 11l1.6 1.6"/></svg>',
+    social:
+      '<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H9l-4.2 3.6A.6.6 0 0 1 4 19.1V5.5Z"/>'+
+      '<path d="M12 12.2c-1.9-1.4-3.3-2.4-3.3-3.9A1.6 1.6 0 0 1 12 7.4a1.6 1.6 0 0 1 3.3.9c0 1.5-1.4 2.5-3.3 3.9Z" '+
+      'fill="currentColor" stroke="none"/></svg>',
+    web:
+      '<svg '+S+'><circle cx="12" cy="12" r="9"/>'+
+      '<path d="M3 12h18"/>'+
+      '<path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>'
   };
   return icons[key] || '';
 }
@@ -514,57 +408,6 @@ function measureDns(){
   }catch(e){ $("dns").textContent = "n/v"; }
 }
 
-/* ---------- GATEWAY PING (lokaler Router) ---------- */
-async function gatewayPingTest(){
-  const candidates = [
-    "http://192.168.1.1/","http://192.168.0.1/",
-    "http://10.0.0.1/","http://192.168.178.1/","http://192.168.2.1/"
-  ];
-  for(const url of candidates){
-    try{
-      const started = performance.now();
-      const ctrl = new AbortController();
-      const tid = setTimeout(()=>ctrl.abort(), 900);
-      await fetch(url,{mode:"no-cors",cache:"no-store",signal:ctrl.signal,redirect:"manual"});
-      clearTimeout(tid);
-      const ms = performance.now()-started;
-      if(ms > 0 && ms < 900) return {ms, source:"gateway"};
-    }catch(e){ /* weiter */ }
-  }
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if(conn && Number.isFinite(conn.rtt) && conn.rtt > 0) return {ms: conn.rtt, source:"estimate"};
-  return null;
-}
-
-function renderGatewayPing(result){
-  const el = $("gatewayPing"), srcEl = $("gatewaySource"), wqEl = $("wifiQuality"), wqHint = $("wifiHint");
-  if(!el) return;
-  el.classList.remove("gw-good","gw-medium","gw-bad");
-  if(wqEl) wqEl.classList.remove("wifi-good","wifi-medium","wifi-bad");
-
-  if(!result){
-    el.textContent = "N/V";
-    if(srcEl) srcEl.textContent = (translations[currentLang]||translations.en).notDetected;
-    if(wqEl) wqEl.textContent = "—";
-    if(wqHint) wqHint.textContent = "";
-    return;
-  }
-  const ms = result.ms;
-  el.textContent = ms.toFixed(1) + " ms";
-  const cls = ms <= 5 ? "gw-good" : ms <= 20 ? "gw-medium" : "gw-bad";
-  el.classList.add(cls);
-  if(srcEl){
-    srcEl.textContent = result.source === "gateway"
-      ? "direkt · Router"
-      : "geschätzt · Network API";
-  }
-  if(wqEl && wqHint){
-    if(ms <= 5){ wqEl.textContent = "Sehr gut"; wqEl.classList.add("wifi-good"); wqHint.textContent = "Wenig WLAN-Latenz"; }
-    else if(ms <= 20){ wqEl.textContent = "Gut"; wqEl.classList.add("wifi-medium"); wqHint.textContent = "Leichte WLAN-Latenz"; }
-    else{ wqEl.textContent = "Erhöht"; wqEl.classList.add("wifi-bad"); wqHint.textContent = "WLAN wahrscheinlich Hauptursache"; }
-  }
-}
-
 /* ---------- TIMEOUT ---------- */
 function testTimeout(ms){
   const c = new AbortController();
@@ -573,7 +416,7 @@ function testTimeout(ms){
 }
 
 /* ---------- MEASUREMENT ENGINE ---------- */
-const MEASUREMENT_V7 = { version: "8.2", phaseMs: 8000, maxStreams: 8 };
+const MEASUREMENT_V7 = { version: "8.1", phaseMs: 8000, maxStreams: 8 };
 
 function percentile(values, q){
   if(!values.length) return NaN;
@@ -659,65 +502,25 @@ function stopPingPulse(){
   icon.style.animationDuration = "";
 }
 
-/* ---------- START BUTTON PROGRESS ---------- */
-function setStartProgress(percent){
-  const bar = $("startProgress");
-  if(!bar) return;
-  bar.style.width = Math.max(0, Math.min(100, percent)) + "%";
-}
-function setStartRunning(isRunning){
-  const btn = $("start");
-  if(!btn) return;
-  btn.classList.toggle("running", !!isRunning);
-  if(!isRunning) setTimeout(()=>setStartProgress(0), 500);
-}
-
-/* ---------- BUFFERBLOAT with A+ to F ---------- */
-function bufferbloatGrade(ms){
-  if(!Number.isFinite(ms)) return {letter:"—", tier:"waiting", key:null};
-  if(ms < 5)   return {letter:"A+", tier:"excellent", key:"bbGradeA"};
-  if(ms < 15)  return {letter:"A",  tier:"excellent", key:"bbGradeA"};
-  if(ms < 30)  return {letter:"A-", tier:"excellent", key:"bbGradeA"};
-  if(ms < 45)  return {letter:"B+", tier:"good",      key:"bbGradeB"};
-  if(ms < 60)  return {letter:"B",  tier:"good",      key:"bbGradeB"};
-  if(ms < 90)  return {letter:"B-", tier:"good",      key:"bbGradeB"};
-  if(ms < 130) return {letter:"C+", tier:"medium",    key:"bbGradeC"};
-  if(ms < 180) return {letter:"C",  tier:"medium",    key:"bbGradeC"};
-  if(ms < 250) return {letter:"C-", tier:"medium",    key:"bbGradeC"};
-  if(ms < 350) return {letter:"D+", tier:"bad",       key:"bbGradeD"};
-  if(ms < 500) return {letter:"D",  tier:"bad",       key:"bbGradeD"};
-  return {letter:"F", tier:"bad", key:"bbGradeD"};
-}
-
+/* ---------- BUFFERBLOAT ---------- */
 function displayBufferbloat(bloatMs){
   lastBloatMs = bloatMs;
-  const el = $("bloat"), gradeEl = $("bloatGrade"), letterEl = $("bloatLetter");
+  const el = $("bloat"), gradeEl = $("bloatGrade");
   if(!el) return;
-
   if(!Number.isFinite(bloatMs)){
     el.textContent = "—"; el.dataset.numericValue = "0";
     el.classList.remove("val-good","val-medium","val-bad","val-measuring");
-    if(letterEl){
-      letterEl.textContent = "—";
-      letterEl.classList.remove("tier-excellent","tier-good","tier-medium","tier-bad");
-      letterEl.classList.add("tier-waiting");
-    }
-    if(gradeEl) gradeEl.textContent = tx("bbWaiting");
+    if(gradeEl) gradeEl.textContent = "";
     return;
   }
-
   tickValue(el, bloatMs, {decimals:0, duration:700});
-  const g = bufferbloatGrade(bloatMs);
-  let cls = (g.tier==="excellent"||g.tier==="good") ? "val-good"
-           : g.tier==="medium" ? "val-medium" : "val-bad";
+  let cls, gradeKey;
+  if(bloatMs < 30){ cls="val-good"; gradeKey="bbGradeA"; }
+  else if(bloatMs < 60){ cls="val-good"; gradeKey="bbGradeB"; }
+  else if(bloatMs < 200){ cls="val-medium"; gradeKey="bbGradeC"; }
+  else { cls="val-bad"; gradeKey="bbGradeD"; }
   setFinal("bloat", cls);
-
-  if(letterEl){
-    letterEl.textContent = g.letter;
-    letterEl.classList.remove("tier-waiting","tier-excellent","tier-good","tier-medium","tier-bad");
-    letterEl.classList.add("tier-"+g.tier);
-  }
-  if(gradeEl) gradeEl.textContent = tx(g.key) || "";
+  if(gradeEl) gradeEl.textContent = tx(gradeKey);
 }
 
 /* ---------- GRADE ---------- */
@@ -1072,46 +875,6 @@ function resetAppCards(){
   });
 }
 
-/* ---------- SMART RECOMMENDATIONS ---------- */
-function generateRecommendations(d,u,p,j,loss,bloat){
-  const L = recommendationText[currentLang] || recommendationText.en;
-  const recs = [];
-  const b = Number.isFinite(bloat) ? bloat : 0;
-
-  if(j > 25) recs.push({tone:"bad",  icon:"⚡", title:L.jitterHighT, text:L.jitterHighD});
-  else if(j > 12) recs.push({tone:"warn", icon:"≈", title:L.jitterMidT, text:L.jitterMidD});
-
-  if(p > 100) recs.push({tone:"bad",  icon:"◌", title:L.pingHighT, text:L.pingHighD});
-  else if(p > 50) recs.push({tone:"warn", icon:"◌", title:L.pingMidT, text:L.pingMidD});
-
-  if(u < 5) recs.push({tone:"bad",  icon:"↑", title:L.uploadLowT, text:L.uploadLowD});
-  else if(u < 15) recs.push({tone:"warn", icon:"↑", title:L.uploadMidT, text:L.uploadMidD});
-
-  if(d < 15) recs.push({tone:"bad",  icon:"↓", title:L.downloadLowT, text:L.downloadLowD});
-  else if(d < 50) recs.push({tone:"warn", icon:"↓", title:L.downloadMidT, text:L.downloadMidD});
-
-  if(b >= 100) recs.push({tone:"bad",  icon:"⏱", title:L.bloatHighT, text:L.bloatHighD});
-  else if(b >= 50) recs.push({tone:"warn", icon:"⏱", title:L.bloatMidT, text:L.bloatMidD});
-
-  if(loss >= 2) recs.push({tone:"bad",  icon:"⊘", title:L.lossHighT, text:L.lossHighD});
-  else if(loss >= 0.5) recs.push({tone:"warn", icon:"⊘", title:L.lossMidT, text:L.lossMidD});
-
-  if(recs.length === 0) recs.push({tone:"good", icon:"✓", title:L.allGoodT, text:L.allGoodD});
-  return recs.slice(0, 4);
-}
-function renderRecommendations(recs){
-  const section = $("recommendationsSection");
-  const wrap = $("recommendations");
-  if(!section || !wrap) return;
-  wrap.innerHTML = recs.map(r =>
-    '<div class="rec-card rec-'+r.tone+'">'+
-      '<div class="rec-icon" aria-hidden="true">'+r.icon+'</div>'+
-      '<div class="rec-copy"><h4>'+r.title+'</h4><p>'+r.text+'</p></div>'+
-    '</div>'
-  ).join("");
-  section.hidden = false;
-}
-
 /* ---------- MISC ---------- */
 function createTestID(){ return "FASQOO-"+Math.random().toString(36).slice(2,6).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase(); }
 function historyLoad(){
@@ -1155,7 +918,7 @@ async function start(){
   running = true;
   const t = translations[currentLang];
   $("start").disabled = true;
-  $("startLabel").textContent = t.testing;
+  $("start").textContent = t.testing;
   resetGauge();
   ["down","up","ping","jitter","loss","bloat"].forEach(id => {
     const el = $(id);
@@ -1166,35 +929,20 @@ async function start(){
   $("intelThroughput").textContent = "—";
   $("score").textContent = "—";
   $("bar").style.width = "0%";
-  const gradeEl = $("bloatGrade"); if(gradeEl) gradeEl.textContent = tx("bbWaiting");
-  const letterEl = $("bloatLetter");
-  if(letterEl){
-    letterEl.textContent = "—";
-    letterEl.classList.remove("tier-excellent","tier-good","tier-medium","tier-bad");
-    letterEl.classList.add("tier-waiting");
-  }
+  const gradeEl = $("bloatGrade"); if(gradeEl) gradeEl.textContent = "";
   const gradeBadge = $("gradeBadge");
   if(gradeBadge){ gradeBadge.textContent="—"; gradeBadge.classList.remove("tier-excellent","tier-good","tier-medium","tier-bad"); }
   if($("gradeSub")) $("gradeSub").textContent = "Measuring…";
   lastBloatMs = null;
   resetAppCards();
-  const recSec = $("recommendationsSection");
-  if(recSec) recSec.hidden = true;
   $("status").textContent = t.stPing;
   setTestPhase("ping");
   if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementReal;
-  setStartRunning(true);
-  setStartProgress(8);
 
   try{
     if(performance.clearResourceTimings) performance.clearResourceTimings();
     ["ping","jitter","loss","bloat","down","up"].forEach(setMeasuring);
-
-    // Gateway-Ping parallel zur Cloudflare-Latenz
-    const gatewayPromise = gatewayPingTest();
-
     const p = await pingTest({ onSample: pulseOnce });
-    setStartProgress(20);
     stopPingPulse();
     tickValue($("ping"),   p.ping,       {decimals:1, duration:600});
     setFinal("ping", colorPing(p.ping));
@@ -1206,33 +954,20 @@ async function start(){
     $("intelStability").textContent = p.jitter.toFixed(1) + " ms · " +
       (p.jitter<=10 ? t.stExc : p.jitter<=20 ? t.stGood : t.stLim);
     measureDns();
-
-    // Gateway-Ping anzeigen (parallel ermittelt)
-    try{
-      const gw = await gatewayPromise;
-      renderGatewayPing(gw);
-    }catch(e){ renderGatewayPing(null); }
-
     setTestPhase("download");
     $("status").textContent = t.testing;
     await sleep(2000);
-    setStartProgress(30);
     const dRes = await downloadTest();
     const d = dRes.speed;
-    setStartProgress(65);
     tickValue($("down"), d, {decimals:1, duration:850});
     setFinal("down", colorDownload(d));
-
     setTestPhase("upload");
     $("status").textContent = t.testing;
     await sleep(2000);
-    setStartProgress(72);
     const uRes = await uploadTest();
     const u = uRes.speed;
-    setStartProgress(98);
     tickValue($("up"), u, {decimals:1, duration:850});
     setFinal("up", colorUpload(u));
-
     const allLoaded = [...dRes.loadedLatencies, ...uRes.loadedLatencies].filter(Number.isFinite);
     const loadedPing = allLoaded.length >= 3 ? robustMedian(allLoaded) : null;
     const bloatMs = loadedPing !== null ? Math.max(0, loadedPing - p.ping) : null;
@@ -1242,9 +977,6 @@ async function start(){
     const s = quality(d, u, p.ping, p.jitter, p.packetLoss, bloatMs);
     showQuality(s, d, u, p.ping, p.jitter);
     evaluateApps(d, u, p.ping, p.jitter, p.packetLoss, bloatMs);
-    renderRecommendations(
-      generateRecommendations(d, u, p.ping, p.jitter, p.packetLoss, bloatMs)
-    );
     setPremiumMetrics(d, u, p.ping, p.jitter);
     updateQualityLabel(s);
     if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementComplete;
@@ -1252,7 +984,7 @@ async function start(){
     const date = new Date().toLocaleString();
     last = {id:testID, date:date, download:d, upload:u, ping:p.ping, jitter:p.jitter,
       packetLoss:p.packetLoss, bufferbloat:bloatMs, quality:s,
-      ip:info.ip||"", isp:(info.connection && (info.connection.isp||info.connection. org))||"",
+      ip:info.ip||"", isp:(info.connection && (info.connection.isp||info.connection.org))||"",
       location:$("loc").textContent, asn:$("asn").textContent,
       ipv4:$("ipv4").textContent, ipv6:$("ipv6").textContent, dns:$("dns").textContent};
     $("tid").textContent = testID;
@@ -1260,21 +992,17 @@ async function start(){
     $("chartState").textContent = t.complete;
     saveHistory({date:date, d:d, u:u, p:p.ping, j:p.jitter, s:s, isp:last.isp||"—"});
     updateWidget();
-    setStartProgress(100);
-    setStartRunning(false);
   }catch(err){
     console.error("FASQOO TEST FAILED:", err);
     stopPingPulse();
-    setStartRunning(false);
     const tNow = translations[currentLang];
     $("status").textContent = tNow.measurementUnavailable || tNow.stErr;
     setTestPhase("ping");
     if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementRetry;
-    const recSec = $("recommendationsSection"); if(recSec) recSec.hidden = true;
   }
   running = false;
   $("start").disabled = false;
-  $("startLabel").textContent = translations[currentLang].startAgain;
+  $("start").textContent = translations[currentLang].startAgain;
 }
 $("start").addEventListener("click", start);
 
@@ -1405,7 +1133,6 @@ if("serviceWorker" in navigator){
 /* ---------- INIT ---------- */
 buildAppCards();
 resizeCanvas();
-renderGatewayPing(null); // initial leer
 
 const savedLang = localStorage.getItem("fasqoo_lang");
 const browserCandidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || "en"];
