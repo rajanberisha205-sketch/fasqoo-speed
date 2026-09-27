@@ -831,7 +831,13 @@ body.theme-switching *::after{
 /* ================================================================
    FASQOO GAME SERVER PING DASHBOARD — ISOLATED MODULE
    ================================================================ */
-.fq-gsd{margin:22px 0 30px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+.fq-gsd{margin:28px 0 0;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);color:var(--text);isolation:isolate}
+.fq-gsd *{box-sizing:border-box}.fq-gsd-group-title{margin:18px 0 9px;color:var(--text);font-size:11px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}.fq-gsd-group:first-child .fq-gsd-group-title{margin-top:0}.fq-gsd .fq-gsd-title{color:var(--text)}.fq-gsd .fq-gsd-sub,.fq-gsd .fq-gsd-name span,.fq-gsd .fq-gsd-value span,.fq-gsd .fq-gsd-status,.fq-gsd .fq-gsd-meta,.fq-gsd .fq-gsd-legend{color:var(--muted)}
+body.dark .fq-gsd{background:#12161b;color:#f4f6f8;border-color:#29303a}
+body.dark .fq-gsd-card,body.dark .fq-region-option,body.dark .fq-region-all,body.dark .fq-share-btn{background:#171c22;color:#f4f6f8;border-color:#29303a}
+body.dark .fq-gsd .fq-gsd-title,body.dark .fq-gsd .fq-gsd-group-title,body.dark .fq-gsd .fq-gsd-name strong,body.dark .fq-gsd .fq-gsd-meta strong{color:#f4f6f8}
+body:not(.dark) .fq-gsd{color:var(--text);background:var(--card)}
+body:not(.dark) .fq-gsd .fq-gsd-title,body:not(.dark) .fq-gsd .fq-gsd-group-title,body:not(.dark) .fq-gsd .fq-gsd-name strong,body:not(.dark) .fq-gsd .fq-gsd-meta strong{color:var(--text)}
 .fq-gsd-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
 .fq-gsd-kicker{font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--orange);margin-bottom:5px}
 .fq-gsd-title{margin:0;font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.4px}
@@ -855,11 +861,15 @@ body.theme-switching *::after{
 .fq-gsd-meta{display:flex;justify-content:space-between;margin-top:12px;padding-top:9px;border-top:1px solid var(--line);color:var(--muted);font-size:8px}.fq-gsd-meta strong{color:var(--text);font-variant-numeric:tabular-nums}
 .fq-gsd-legend{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px;color:var(--muted);font-size:9px;font-weight:700}.fq-gsd-legend span{display:inline-flex;align-items:center;gap:5px}.fq-gsd-legend i{width:7px;height:7px;border-radius:50%;display:inline-block}.fq-gsd-green{background:#22c55e}.fq-gsd-yellow{background:#eab308}.fq-gsd-red{background:#ef4444}.fq-gsd-note{margin-left:auto;font-weight:500}
 .fq-gsd-card.skipped{opacity:.42;filter:saturate(.35);border-style:dashed;box-shadow:none}.fq-gsd-card.skipped .fq-gsd-value strong{color:var(--muted)}.fq-gsd-card.skipped .fq-gsd-status:before{background:#94a3b8}
-.fq-region-select{margin:18px 0 14px;padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--soft)}.fq-region-select-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.fq-region-kicker{font-size:9px;font-weight:900;letter-spacing:1.2px;color:var(--orange);margin-bottom:4px}.fq-region-select h3{margin:0;font-size:15px}.fq-region-select p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.5}.fq-region-all{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-region-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:13px}.fq-region-option{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--card);cursor:pointer;min-width:0}.fq-region-option:has(input:checked){border-color:rgba(255,90,31,.45);box-shadow:0 0 0 2px rgba(255,90,31,.08)}.fq-region-option input{accent-color:var(--orange);width:15px;height:15px;flex:0 0 15px}.fq-region-option span{min-width:0;flex:1}.fq-region-option strong,.fq-region-option small{display:block}.fq-region-option strong{font-size:10px}.fq-region-option small{margin-top:2px;color:var(--muted);font-size:8px;line-height:1.35}.fq-region-option b{font-size:8px;color:var(--muted)}
-.fq-share{margin-top:16px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--soft)}.fq-share h3{margin:0;font-size:14px}.fq-share p{margin:4px 0 10px;color:var(--muted);font-size:10px}.fq-share-row{display:flex;flex-wrap:wrap;gap:7px}.fq-share-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-share-btn.primary{border-color:rgba(255,90,31,.35)}.fq-share-canvas{position:absolute;left:-99999px;top:-99999px;width:1200px;height:630px}
+.fq-region-select{margin:18px 0 14px;padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--soft);color:var(--text)}.fq-region-select h3{color:var(--text)}.fq-region-select-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.fq-region-kicker{font-size:9px;font-weight:900;letter-spacing:1.2px;color:var(--orange);margin-bottom:4px}.fq-region-select h3{margin:0;font-size:15px}.fq-region-select p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.5}.fq-region-all{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-region-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:13px}.fq-region-option{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--card);cursor:pointer;min-width:0}.fq-region-option:has(input:checked){border-color:rgba(255,90,31,.45);box-shadow:0 0 0 2px rgba(255,90,31,.08)}.fq-region-option input{accent-color:var(--orange);width:15px;height:15px;flex:0 0 15px}.fq-region-option span{min-width:0;flex:1}.fq-region-option strong,.fq-region-option small{display:block}.fq-region-option strong{font-size:10px}.fq-region-option small{margin-top:2px;color:var(--muted);font-size:8px;line-height:1.35}.fq-region-option b{font-size:8px;color:var(--muted)}
+.fq-share{margin-top:16px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--soft);color:var(--text)}.fq-share h3{color:var(--text)}.fq-share h3{margin:0;font-size:14px}.fq-share p{margin:4px 0 10px;color:var(--muted);font-size:10px}.fq-share-row{display:flex;flex-wrap:wrap;gap:7px}.fq-share-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-share-btn.primary{border-color:rgba(255,90,31,.35)}.fq-share-canvas{position:absolute;left:-99999px;top:-99999px;width:1200px;height:630px}
 @media(max-width:1000px){.fq-gsd-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fq-region-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.fq-gsd{padding:17px}.fq-gsd-head{display:block}.fq-gsd-live{margin-top:12px;width:max-content}.fq-gsd-grid{grid-template-columns:1fr}.fq-gsd-note{width:100%;margin-left:0}.fq-region-select-head{display:block}.fq-region-all{margin-top:10px}.fq-region-grid{grid-template-columns:1fr}.fq-share-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+
+.fq-esports-section .fq20-actions{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.fq-esports-section .fq20-actions .fq20-status{font-size:.9rem;color:var(--muted);text-align:center}
+.fq-esports-cards{margin-top:28px}
 </style>
 </head>
 <body>
@@ -1135,24 +1145,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
 
-  <!-- FASQOO GAME SERVER PING DASHBOARD -->
-  <section class="fq-gsd" id="fqGameServerDashboard" aria-labelledby="fqGsdTitle">
-    <div class="fq-gsd-head"><div><div class="fq-gsd-kicker">GAME SERVER NETWORK</div><h2 class="fq-gsd-title" id="fqGsdTitle">Game Server Ping Dashboard</h2><p class="fq-gsd-sub">Live browser HTTP round-trip measurements to regional cloud/edge reference endpoints. Results update in parallel with the 20-second monitor.</p></div><div class="fq-gsd-live" id="fqGsdLive"><span class="fq-gsd-dot"></span><span id="fqGsdLiveText">Waiting for test</span></div></div>
-    <div class="fq-gsd-groups">
-<div class="fq-gsd-group"><div class="fq-gsd-group-title">Europe</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="frankfurt"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">FRA</div><div class="fq-gsd-name"><strong>Frankfurt</strong><span>Riot Games / AWS Hub</span></div><div class="fq-gsd-region">FRA</div></div><div class="fq-gsd-value"><strong id="fqGsdFrankfurtPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdFrankfurtStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdFrankfurtSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="amsterdam"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">AMS</div><div class="fq-gsd-name"><strong>Amsterdam</strong><span>Activision / Blizzard Hub</span></div><div class="fq-gsd-region">AMS</div></div><div class="fq-gsd-value"><strong id="fqGsdAmsterdamPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdAmsterdamStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdAmsterdamSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="london"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">LON</div><div class="fq-gsd-name"><strong>London</strong><span>UK Gaming Edge</span></div><div class="fq-gsd-region">LON</div></div><div class="fq-gsd-value"><strong id="fqGsdLondonPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdLondonStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdLondonSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="vienna"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">VIE</div><div class="fq-gsd-name"><strong>Vienna</strong><span>Valve / CS2 East Center</span></div><div class="fq-gsd-region">VIE</div></div><div class="fq-gsd-value"><strong id="fqGsdViennaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdViennaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdViennaSamples">0</strong></div></article></div></div>
-<div class="fq-gsd-group"><div class="fq-gsd-group-title">North America</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="virginia"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">IAD</div><div class="fq-gsd-name"><strong>Virginia</strong><span>North America East</span></div><div class="fq-gsd-region">IAD</div></div><div class="fq-gsd-value"><strong id="fqGsdVirginiaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdVirginiaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdVirginiaSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="california"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SFO</div><div class="fq-gsd-name"><strong>California</strong><span>North America West</span></div><div class="fq-gsd-region">SFO</div></div><div class="fq-gsd-value"><strong id="fqGsdCaliforniaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdCaliforniaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdCaliforniaSamples">0</strong></div></article></div></div>
-<div class="fq-gsd-group"><div class="fq-gsd-group-title">Asia</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="singapore"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SIN</div><div class="fq-gsd-name"><strong>Singapore</strong><span>Southeast Asia</span></div><div class="fq-gsd-region">SIN</div></div><div class="fq-gsd-value"><strong id="fqGsdSingaporePing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdSingaporeStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdSingaporeSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="tokyo"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">TYO</div><div class="fq-gsd-name"><strong>Tokyo</strong><span>Japan / East Asia</span></div><div class="fq-gsd-region">TYO</div></div><div class="fq-gsd-value"><strong id="fqGsdTokyoPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdTokyoStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdTokyoSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="mumbai"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">BOM</div><div class="fq-gsd-name"><strong>Mumbai</strong><span>South Asia</span></div><div class="fq-gsd-region">BOM</div></div><div class="fq-gsd-value"><strong id="fqGsdMumbaiPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdMumbaiStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdMumbaiSamples">0</strong></div></article></div></div>
-</div><div class="fq-gsd-legend"><span><i class="fq-gsd-green"></i>&lt; 25 ms</span><span><i class="fq-gsd-yellow"></i>25–50 ms</span><span><i class="fq-gsd-red"></i>&gt; 50 ms</span><span class="fq-gsd-note">HTTP browser RTT · regional cloud/edge reference, not game-protocol ping</span></div></section>
 
-    <div class="fq-region-select" id="fqRegionSelect" aria-labelledby="fqRegionSelectTitle">
+
+    <!-- E-SPORTS & SHOOTER -->
+  <div class="fq-region-select" id="fqRegionSelect" aria-labelledby="fqRegionSelectTitle">
       <div class="fq-region-select-head"><div><div class="fq-region-kicker">SERVER SELECTION</div><h3 id="fqRegionSelectTitle">Choose gaming server regions</h3><p>Select the regions to measure during the 20-second test. Frankfurt and Amsterdam are enabled by default.</p></div><button type="button" class="fq-region-all" id="fqRegionAll">Select all</button></div>
       <div class="fq-region-group-grid">
-<div class="fq-region-group"><div class="fq-region-group-title">Europe</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="frankfurt" checked><span><strong>Frankfurt</strong><small>Riot Games / AWS Hub</small></span><b>FRA</b></label><label class="fq-region-option"><input type="checkbox" value="amsterdam" checked><span><strong>Amsterdam</strong><small>Activision / Blizzard Hub</small></span><b>AMS</b></label><label class="fq-region-option"><input type="checkbox" value="london"><span><strong>London</strong><small>UK Gaming Edge</small></span><b>LON</b></label><label class="fq-region-option"><input type="checkbox" value="vienna"><span><strong>Vienna</strong><small>Valve / CS2 East Center</small></span><b>VIE</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">North America</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="virginia"><span><strong>Virginia</strong><small>North America East</small></span><b>IAD</b></label><label class="fq-region-option"><input type="checkbox" value="california"><span><strong>California</strong><small>North America West</small></span><b>SFO</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">Asia</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="singapore"><span><strong>Singapore</strong><small>Southeast Asia</small></span><b>SIN</b></label><label class="fq-region-option"><input type="checkbox" value="tokyo"><span><strong>Tokyo</strong><small>Japan / East Asia</small></span><b>TYO</b></label><label class="fq-region-option"><input type="checkbox" value="mumbai"><span><strong>Mumbai</strong><small>South Asia</small></span><b>BOM</b></label></div></div></div></div>
+<div class="fq-region-group"><div class="fq-region-group-title">Europe</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="frankfurt" checked><span><strong>Frankfurt</strong><small>Riot Games / AWS Hub</small></span><b>FRA</b></label><label class="fq-region-option"><input type="checkbox" value="amsterdam" checked><span><strong>Amsterdam</strong><small>Activision / Blizzard Hub</small></span><b>AMS</b></label><label class="fq-region-option"><input type="checkbox" value="london"><span><strong>London</strong><small>UK Gaming Edge</small></span><b>LON</b></label><label class="fq-region-option"><input type="checkbox" value="zurich"><span><strong>Zurich</strong><small>AWS Europe Central 2</small></span><b>ZRH</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">North America</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="virginia"><span><strong>Virginia</strong><small>North America East</small></span><b>IAD</b></label><label class="fq-region-option"><input type="checkbox" value="california"><span><strong>California</strong><small>North America West</small></span><b>SFO</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">Asia</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="singapore"><span><strong>Singapore</strong><small>Southeast Asia</small></span><b>SIN</b></label><label class="fq-region-option"><input type="checkbox" value="tokyo"><span><strong>Tokyo</strong><small>Japan / East Asia</small></span><b>TYO</b></label><label class="fq-region-option"><input type="checkbox" value="mumbai"><span><strong>Mumbai</strong><small>South Asia</small></span><b>BOM</b></label></div></div></div></div>
 
-    <div class="fq20-actions">
-      <span class="fq20-status" id="fq20Status" data-i18n="fq20Ready">Ready — start a 20-second measurement.</span>
-      <button id="fq20Start" class="btn btn-primary" type="button"><svg class="fq20-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8C8.9 4 8 4.4 8 5.2Z"/></svg><span data-i18n="fq20Start">Start 20-second test</span></button>
-    </div>
+
     <div class="fq20-result" id="fq20Result" aria-live="polite">
       <div class="fq20-result-title" id="fq20ResultTitle">—</div>
       <div class="fq20-result-text" id="fq20ResultText">—</div>
@@ -1186,15 +1187,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- CATEGORY A -->
-  <section class="category">
+  <section class="category fq-esports-section" aria-labelledby="fqEsportsTitle">
     <div class="category-head">
-      <h2>
-        <span class="cat-badge">A</span>
-        <span data-i18n="catATitle">E-Sports &amp; Shooter</span>
-      </h2>
+      <h2 id="fqEsportsTitle"><span class="cat-badge">A</span><span data-i18n="catATitle">E-Sports &amp; Shooter</span></h2>
       <p data-i18n="catAText">Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.</p>
     </div>
+    <div class="fq20-actions">
+      <span class="fq20-status" id="fq20Status" data-i18n="fq20Ready">Ready — start a 20-second measurement.</span>
+      <button id="fq20Start" class="btn btn-primary" type="button"><svg class="fq20-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8C8.9 4 8 4.4 8 5.2Z"/></svg><span data-i18n="fq20Start">Start 20-second test</span></button>
+    </div>
+  </section>
+
+
+
+  <!-- FASQOO GAME SERVER PING DASHBOARD -->
+  <section class="fq-gsd" id="fqGameServerDashboard" aria-labelledby="fqGsdTitle">
+    <div class="fq-gsd-head"><div><div class="fq-gsd-kicker">GAME SERVER NETWORK</div><h2 class="fq-gsd-title" id="fqGsdTitle">Game Server Ping Dashboard</h2><p class="fq-gsd-sub">Live regional HTTP round-trip measurements. Values use a rolling median to reduce one-off spikes and update in parallel with the 20-second monitor.</p></div><div class="fq-gsd-live" id="fqGsdLive"><span class="fq-gsd-dot"></span><span id="fqGsdLiveText">Waiting for test</span></div></div>
+    <div class="fq-gsd-groups">
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">Europe</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="frankfurt"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">FRA</div><div class="fq-gsd-name"><strong>Frankfurt</strong><span>Riot Games / AWS Hub</span></div><div class="fq-gsd-region">FRA</div></div><div class="fq-gsd-value"><strong id="fqGsdFrankfurtPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdFrankfurtStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdFrankfurtSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="amsterdam"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">AMS</div><div class="fq-gsd-name"><strong>Amsterdam</strong><span>Activision / Blizzard Hub</span></div><div class="fq-gsd-region">AMS</div></div><div class="fq-gsd-value"><strong id="fqGsdAmsterdamPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdAmsterdamStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdAmsterdamSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="london"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">LON</div><div class="fq-gsd-name"><strong>London</strong><span>UK Gaming Edge</span></div><div class="fq-gsd-region">LON</div></div><div class="fq-gsd-value"><strong id="fqGsdLondonPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdLondonStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdLondonSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="zurich"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">ZRH</div><div class="fq-gsd-name"><strong>Zurich</strong><span>AWS Europe Central 2</span></div><div class="fq-gsd-region">ZRH</div></div><div class="fq-gsd-value"><strong id="fqGsdViennaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdViennaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdViennaSamples">0</strong></div></article></div></div>
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">North America</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="virginia"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">IAD</div><div class="fq-gsd-name"><strong>Virginia</strong><span>North America East</span></div><div class="fq-gsd-region">IAD</div></div><div class="fq-gsd-value"><strong id="fqGsdVirginiaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdVirginiaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdVirginiaSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="california"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SFO</div><div class="fq-gsd-name"><strong>California</strong><span>North America West</span></div><div class="fq-gsd-region">SFO</div></div><div class="fq-gsd-value"><strong id="fqGsdCaliforniaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdCaliforniaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdCaliforniaSamples">0</strong></div></article></div></div>
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">Asia</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="singapore"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SIN</div><div class="fq-gsd-name"><strong>Singapore</strong><span>Southeast Asia</span></div><div class="fq-gsd-region">SIN</div></div><div class="fq-gsd-value"><strong id="fqGsdSingaporePing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdSingaporeStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdSingaporeSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="tokyo"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">TYO</div><div class="fq-gsd-name"><strong>Tokyo</strong><span>Japan / East Asia</span></div><div class="fq-gsd-region">TYO</div></div><div class="fq-gsd-value"><strong id="fqGsdTokyoPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdTokyoStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdTokyoSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="mumbai"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">BOM</div><div class="fq-gsd-name"><strong>Mumbai</strong><span>South Asia</span></div><div class="fq-gsd-region">BOM</div></div><div class="fq-gsd-value"><strong id="fqGsdMumbaiPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdMumbaiStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdMumbaiSamples">0</strong></div></article></div></div>
+</div><div class="fq-gsd-legend"><span><i class="fq-gsd-green"></i>&lt; 25 ms</span><span><i class="fq-gsd-yellow"></i>25–50 ms</span><span><i class="fq-gsd-red"></i>&gt; 50 ms</span><span class="fq-gsd-note">Browser HTTP RTT · regional reference endpoint, not a game-protocol UDP/ICMP ping</span></div></section>
+
+  <!-- E-SPORTS & SHOOTER CARDS -->
+  <section class="category fq-esports-cards" aria-label="E-Sports & Shooter games">
     <div class="grid" id="gridShooter"></div>
   </section>
 
@@ -2187,11 +2203,11 @@ const FQ20 = (() => {
     result.className='fq20-result show '+grade.key; el('fq20ResultTitle').textContent=grade.title;
     el('fq20ResultText').textContent=(Number.isFinite(a)?'Average ping: '+a.toFixed(1)+' ms · Jitter: '+j.toFixed(1)+' ms · Packet loss: '+loss.toFixed(1)+'%. ':'')+grade.tip;
     writeHistory({date:new Date().toISOString(),ping:Number.isFinite(a)?a:0,jitter:Number.isFinite(j)?j:0,title:grade.title,serverRegions:(window.FasqooGameServerDashboard?.getSnapshot?.()||{})});
-    renderHistory(); el('fq20Status').textContent=t('fq20Done');
+    renderHistory(); el('fq20Start').disabled=false;el('fq20Start').querySelector('[data-i18n="fq20Start"]').textContent=t('fq20Start'); el('fq20Status').textContent=t('fq20Done');
   }
   async function run(){
-    if(running) return; running=true; window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-start'));samples=[];failures=0;startedAt=performance.now();
-    el('fq20Start').disabled=true;el('fq20Result').className='fq20-result';el('fq20Clock').textContent='0 / 20s';
+    if(running){ running=false; return; } running=true; window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-start'));samples=[];failures=0;startedAt=performance.now();
+    el('fq20Start').disabled=false;el('fq20Start').querySelector('[data-i18n="fq20Start"]').textContent='Stop';el('fq20Result').className='fq20-result';el('fq20Clock').textContent='0 / 20s';
     el('fq20Status').textContent=t('fq20Running');render();
     for(let i=0;i<TOTAL && running;i++){
       const slot=startedAt+i*1000; const wait=slot-performance.now(); if(wait>0) await sleep(wait);
@@ -2199,7 +2215,7 @@ const FQ20 = (() => {
       const v=await ping(); samples.push(v); if(v===null) failures++;
       el('fq20Clock').textContent=(i+1)+' / '+TOTAL+'s'; render();
     }
-    if(running) finish(); else { window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-stop')); el('fq20Start').disabled=false;el('fq20Status').textContent=t('fq20Stopped')}
+    if(running) finish(); else { window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-stop')); el('fq20Start').disabled=false;el('fq20Start').querySelector('[data-i18n="fq20Start"]').textContent=t('fq20Start');el('fq20Status').textContent=t('fq20Stopped')}
   }
   function init(){
     el('fq20Start').addEventListener('click',run);
@@ -2289,18 +2305,30 @@ updateInstallButton();
 
 
 /* ===================================================================
-   GAME SERVER PING DASHBOARD — configurable regional HTTP RTT module
+   GAME SERVER PING DASHBOARD — stable regional HTTP RTT module
    =================================================================== */
 (function initFqGameServerDashboard(){
   'use strict';
-  const cfg={total:20,timeout:1800};
-  const targets={frankfurt:{ping:'fqGsdFrankfurtPing',status:'fqGsdFrankfurtStatus',samples:'fqGsdFrankfurtSamples',url:'https://sts.eu-central-1.amazonaws.com/'},amsterdam:{ping:'fqGsdAmsterdamPing',status:'fqGsdAmsterdamStatus',samples:'fqGsdAmsterdamSamples',url:'https://sts.eu-west-1.amazonaws.com/'},london:{ping:'fqGsdLondonPing',status:'fqGsdLondonStatus',samples:'fqGsdLondonSamples',url:'https://sts.eu-west-2.amazonaws.com/'},vienna:{ping:'fqGsdViennaPing',status:'fqGsdViennaStatus',samples:'fqGsdViennaSamples',url:'https://sts.eu-central-1.amazonaws.com/'},virginia:{ping:'fqGsdVirginiaPing',status:'fqGsdVirginiaStatus',samples:'fqGsdVirginiaSamples',url:'https://sts.us-east-1.amazonaws.com/'},california:{ping:'fqGsdCaliforniaPing',status:'fqGsdCaliforniaStatus',samples:'fqGsdCaliforniaSamples',url:'https://sts.us-west-1.amazonaws.com/'},singapore:{ping:'fqGsdSingaporePing',status:'fqGsdSingaporeStatus',samples:'fqGsdSingaporeSamples',url:'https://sts.ap-southeast-1.amazonaws.com/'},tokyo:{ping:'fqGsdTokyoPing',status:'fqGsdTokyoStatus',samples:'fqGsdTokyoSamples',url:'https://sts.ap-northeast-1.amazonaws.com/'},mumbai:{ping:'fqGsdMumbaiPing',status:'fqGsdMumbaiStatus',samples:'fqGsdMumbaiSamples',url:'https://sts.ap-south-1.amazonaws.com/'}};
-  /* Fasqoo can replace these URLs with its own regional Worker endpoints later. */
+  const cfg={window:5,timeout:1800,maxSamples:20};
+  const targets={
+    frankfurt:{ping:'fqGsdFrankfurtPing',status:'fqGsdFrankfurtStatus',samples:'fqGsdFrankfurtSamples',url:'https://sts.eu-central-1.amazonaws.com/'},
+    amsterdam:{ping:'fqGsdAmsterdamPing',status:'fqGsdAmsterdamStatus',samples:'fqGsdAmsterdamSamples',url:'https://sts.eu-west-1.amazonaws.com/'},
+    london:{ping:'fqGsdLondonPing',status:'fqGsdLondonStatus',samples:'fqGsdLondonSamples',url:'https://sts.eu-west-2.amazonaws.com/'},
+    zurich:{ping:'fqGsdViennaPing',status:'fqGsdViennaStatus',samples:'fqGsdViennaSamples',url:'https://sts.eu-central-2.amazonaws.com/'},
+    virginia:{ping:'fqGsdVirginiaPing',status:'fqGsdVirginiaStatus',samples:'fqGsdVirginiaSamples',url:'https://sts.us-east-1.amazonaws.com/'},
+    california:{ping:'fqGsdCaliforniaPing',status:'fqGsdCaliforniaStatus',samples:'fqGsdCaliforniaSamples',url:'https://sts.us-west-1.amazonaws.com/'},
+    singapore:{ping:'fqGsdSingaporePing',status:'fqGsdSingaporeStatus',samples:'fqGsdSingaporeSamples',url:'https://sts.ap-southeast-1.amazonaws.com/'},
+    tokyo:{ping:'fqGsdTokyoPing',status:'fqGsdTokyoStatus',samples:'fqGsdTokyoSamples',url:'https://sts.ap-northeast-1.amazonaws.com/'},
+    mumbai:{ping:'fqGsdMumbaiPing',status:'fqGsdMumbaiStatus',samples:'fqGsdMumbaiSamples',url:'https://sts.ap-south-1.amazonaws.com/'}
+  };
+  /* Optional: replace any endpoint with a real Fasqoo regional Worker/server. */
   if(window.FASQOO_GAMING_PROBES) Object.keys(targets).forEach(k=>{if(window.FASQOO_GAMING_PROBES[k])targets[k].url=window.FASQOO_GAMING_PROBES[k]});
-  const samples={frankfurt:[],amsterdam:[],london:[],vienna:[],virginia:[],california:[],singapore:[],tokyo:[],mumbai:[]};
+  const keys=Object.keys(targets),samples=Object.fromEntries(keys.map(k=>[k,[]]));
   let running=false,timer=null,observer=null,lastSecond=-1,selected=[];
   const $id=id=>document.getElementById(id);
   const card=k=>document.querySelector('.fq-gsd-card[data-gsd="'+k+'"]');
+  const median=a=>{const v=a.filter(Number.isFinite).slice().sort((x,y)=>x-y);if(!v.length)return NaN;const m=Math.floor(v.length/2);return v.length%2?v[m]:(v[m-1]+v[m])/2};
+  const average=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:NaN;
   function setClass(k,c){const e=card(k);if(!e)return;e.classList.remove('testing','good','warn','bad','skipped');if(c)e.classList.add(c)}
   function status(k,text){const e=$id(targets[k].status);if(e)e.textContent=text}
   function value(k,v){const e=$id(targets[k].ping);if(e)e.textContent=Number.isFinite(v)?Math.round(v):'—'}
@@ -2308,8 +2336,8 @@ updateInstallButton();
   function level(ms){return ms<25?'good':ms<=50?'warn':'bad'}
   function label(ms){return ms<25?'Excellent HTTP latency':ms<=50?'Moderate HTTP latency':'High HTTP latency'}
   function getSelected(){return [...document.querySelectorAll('#fqRegionSelect input[type="checkbox"]:checked')].map(x=>x.value)}
-  function applySelection(){selected=getSelected();Object.keys(targets).forEach(k=>{const active=selected.includes(k);const c=card(k);if(c)c.classList.toggle('skipped',!active);if(!active){samples[k].length=0;value(k,NaN);count(k);setClass(k,'skipped');status(k,'Skipped')}});updateAllButton()}
-  function updateAllButton(){const b=$id('fqRegionAll');if(!b)return;const n=getSelected().length;b.textContent=n===Object.keys(targets).length?'Clear all':'Select all'}
+  function applySelection(){selected=getSelected();keys.forEach(k=>{const active=selected.includes(k),c=card(k);if(c)c.classList.toggle('skipped',!active);if(!active){samples[k].length=0;value(k,NaN);count(k);setClass(k,'skipped');status(k,'Skipped')}});updateAllButton()}
+  function updateAllButton(){const b=$id('fqRegionAll');if(!b)return;const n=getSelected().length;b.textContent=n===keys.length?'Clear all':'Select all'}
   async function probe(k){
     if(!selected.includes(k))return;
     const g=targets[k],controller=new AbortController(),started=performance.now();
@@ -2318,14 +2346,21 @@ updateInstallButton();
     try{
       const u=g.url+(g.url.includes('?')?'&':'?')+'fq_ping='+Date.now()+'-'+Math.random().toString(36).slice(2);
       await fetch(u,{method:'GET',mode:'no-cors',cache:'no-store',credentials:'omit',signal:controller.signal});
-      const ms=performance.now()-started;if(!Number.isFinite(ms)||ms<=0)throw new Error('invalid');
-      samples[k].push(ms);if(samples[k].length>cfg.total)samples[k].shift();value(k,ms);count(k);setClass(k,level(ms));status(k,label(ms));
-    }catch(e){value(k,NaN);setClass(k,'bad');status(k,'Endpoint unavailable / timeout');count(k)}finally{clearTimeout(to)}
+      const ms=performance.now()-started;if(!Number.isFinite(ms)||ms<=0||ms>cfg.timeout)throw new Error('invalid');
+      samples[k].push(ms);if(samples[k].length>cfg.maxSamples)samples[k].shift();
+      const recent=samples[k].slice(-cfg.window),stable=median(recent);
+      value(k,stable);count(k);setClass(k,level(stable));status(k,label(stable)+' · median '+recent.length+' samples');
+    }catch(e){
+      /* Keep the last stable value on transient failures instead of replacing it with a fake number. */
+      const recent=samples[k].slice(-cfg.window),stable=median(recent);
+      if(Number.isFinite(stable)){value(k,stable);setClass(k,level(stable));status(k,'Temporary timeout · last stable median')}else{value(k,NaN);setClass(k,'bad');status(k,'Endpoint unavailable / timeout')}
+      count(k);
+    }finally{clearTimeout(to)}
   }
   async function cycle(){if(!running)return;await Promise.all(selected.map(probe));window.dispatchEvent(new CustomEvent('fasqoo-gaming-server-update',{detail:getSnapshot()}))}
-  function reset(){Object.keys(targets).forEach(k=>{samples[k].length=0;value(k,NaN);count(k);if(selected.includes(k)){setClass(k,null);status(k,'Waiting for measurement')}else{setClass(k,'skipped');status(k,'Skipped')}})}
+  function reset(){keys.forEach(k=>{samples[k].length=0;value(k,NaN);count(k);if(selected.includes(k)){setClass(k,null);status(k,'Waiting for measurement')}else{setClass(k,'skipped');status(k,'Skipped')}})}
   function setLive(active,text){const box=$id('fqGsdLive'),label=$id('fqGsdLiveText');if(box)box.classList.toggle('active',active);if(label)label.textContent=text}
-  function getSnapshot(){return Object.fromEntries(Object.keys(targets).map(k=>{const a=samples[k].filter(Number.isFinite);return [k,{selected:selected.includes(k),samples:a.slice(),avg:a.length?a.reduce((x,y)=>x+y,0)/a.length:null,last:a.length?a[a.length-1]:null}]}))}
+  function getSnapshot(){return Object.fromEntries(keys.map(k=>{const a=samples[k].filter(Number.isFinite),recent=a.slice(-cfg.window),m=median(recent);return [k,{selected:selected.includes(k),samples:a.slice(),recent:recent.slice(),avg:a.length?average(a):null,median:Number.isFinite(m)?m:null,last:a.length?a[a.length-1]:null}]}))}
   function stop(){if(!running)return;running=false;if(timer){clearInterval(timer);timer=null}setLive(false,'Test completed');window.dispatchEvent(new CustomEvent('fasqoo-gaming-server-update',{detail:getSnapshot()}))}
   function start(){if(running)return;selected=getSelected();if(!selected.length){setLive(false,'Select at least one region');return}running=true;lastSecond=-1;reset();setLive(true,'Live · 0 / 20s');cycle();timer=setInterval(()=>{if(!running)return;lastSecond++;setLive(true,'Live · '+Math.min(lastSecond+1,20)+' / 20s');cycle();if(lastSecond>=19)stop()},1000)}
   function sync(){const clock=$id('fq20Clock');if(!clock)return;observer=new MutationObserver(()=>{const m=(clock.textContent||'').match(/(\d+)\s*\/\s*20s/i);if(!m)return;const n=Number(m[1]);if(n>0&&n<=20&&!running)start();if(n>=20)stop()});observer.observe(clock,{childList:true,characterData:true,subtree:true})}
