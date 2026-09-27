@@ -686,6 +686,15 @@ body.dark .lang-control select option,
 }
 .dark .game-ping .num{background:linear-gradient(135deg,#f4f6f8,#c0c8d2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
+/* Instant theme switching: prevent every card/header/button transition from animating when the theme changes. */
+body.theme-switching,
+body.theme-switching *,
+body.theme-switching *::before,
+body.theme-switching *::after{
+  transition:none!important;
+  animation:none!important;
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
@@ -970,8 +979,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </svg>
               </span>
               <span class="nav-mega-copy">
-                <span class="nav-mega-title">Dark Data &amp; Tracker Exposer</span>
-                <span class="nav-mega-desc">Live browser requests, data usage &amp; privacy signals</span>
+                <span class="nav-mega-title" data-i18n="navDarkData">Dark Data &amp; Tracker Exposer</span>
+                <span class="nav-mega-desc" data-i18n="navDarkDataDesc">Live browser requests, data usage &amp; privacy signals</span>
               </span>
             </a>
           </div>
@@ -1534,7 +1543,19 @@ const PL = Object.assign({}, EN, {
   stateTesting:'Testowanie', stateIdle:'Gotowy', stateFailed:'Niepowodzenie'
 });
 
-const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, pl:PL };
+const AR = Object.assign({}, DE, {
+  navSpeedtest:'اختبار السرعة',navTools:'أدوات وتشخيص تقنية المعلومات',navSectionNetwork:'الشبكة والسرعة',navSectionDiag:'تشخيص وأمان تقنية المعلومات',navStatus:'حالة الشبكة',navStatusDesc:'فحص الاتصال والتشخيص المباشر',navWidget:'أداة اختبار السرعة',navWidgetDesc:'أداة اختبار مجانية لمواقع أخرى',navSecurity:'محلل الأمان',navSecurityDesc:'فحص رؤوس أمان HTTP في الوقت الحقيقي',navAntivirus:'فحص مكافحة الفيروسات',navAntivirusDesc:'فحص الملفات والمحتوى بحثًا عن مخاطر أمنية',navDns:'اختبار DNS المرئي',navDnsDesc:'تتبع انتشار DNS عالميًا بشكل مرئي',navSubnet:'حاسبة الشبكة الفرعية',navSubnetDesc:'حساب نطاقات IP وأقنعة الشبكة الفرعية',navFaq:'الأسئلة الشائعة',navAbout:'من نحن',
+  heroEyebrow:'مراقب الألعاب من Fasqoo',heroTitleTop:'Fasqoo Gaming-',heroTitleAccent:' & مراقب Ping',heroText:'تحقق من زمن الاستجابة واستقرار الاتصال مع أهم خوادم الألعاب في الوقت الحقيقي قبل بدء اللعب.',controlTitle:'هل أنت مستعد لفحص Ping؟',controlText:'يتم القياس مباشرة من المتصفح. بدون تثبيت أو حساب أو تتبع.',controlProviders:'Cloudflare Edge · اختبار نقطة النهاية مباشرة · بدون سجلات خادم',startBtn:'بدء اختبار Ping',stopBtn:'إيقاف',summaryScoreLabel:'النتيجة',statExcellent:'ممتاز',statOk:'مقبول',statBad:'Ping مرتفع',statAvg:'متوسط Ping',
+  fq20Kicker:'مراقب مباشر لمدة 20 ثانية',fq20Title:'استقرار الألعاب وPing',fq20Sub:'20 ثانية · قياس واحد كل ثانية · زمن استجابة حقيقي من المتصفح إلى نقطة Fasqoo/Cloudflare Edge.',fq20Current:'Ping الحالي',fq20Jitter:'التذبذب',fq20Loss:'فقدان الحزم',fq20Graph:'Ping مباشر',fq20Ready:'جاهز — ابدأ قياسًا لمدة 20 ثانية.',fq20Start:'بدء اختبار 20 ثانية',fq20History:'آخر 5 اختبارات',fq20Clear:'مسح السجل',fq20Date:'التاريخ',fq20Avg:'متوسط Ping',fq20JitShort:'التذبذب',fq20Gaming:'الألعاب',fq20NoHistory:'لا توجد اختبارات مكتملة لمدة 20 ثانية بعد.',
+  catATitle:'الرياضات الإلكترونية وألعاب التصويب',catAText:'أكثر الألعاب تنافسية. كل ميلي ثانية مهمة.',catBTitle:'منصات الألعاب',catBText:'المشغلات والمتاجر وشبكات اللعب الجماعي للمنصات الكبرى.',catCTitle:'Discord والصوت',catCText:'الدردشة الصوتية تتأثر بالتذبذب أكثر من Ping؛ نقيس الاثنين.',copyReport:'نسخ التقرير',exportJson:'تصدير JSON',reportNote:'ملاحظة: قيم Ping هي قياسات من المتصفح إلى نقاط عامة وقد تختلف عن قيم اللعبة.',
+  featKicker:'ذكاء الشبكة',featTitle:'لماذا Ping وJitter أهم من سرعة النطاق الترددي؟',featSub:'في الألعاب عبر الإنترنت تهم الاستجابة والاستقرار أكثر من سرعة التنزيل القصوى.',feat1T:'زمن الاستجابة (Ping)',feat1D:'الوقت بين إجراءك واستجابة الخادم. أقل من 30 مللي ثانية ممتاز، وفوق 60 مللي ثانية يصبح ملحوظًا.',feat2T:'Jitter',feat2D:'التغير بين القياسات. التذبذب العالي قد يسبب التقطّع وانقطاع الصوت.',feat3T:'فقدان الحزم',feat3D:'الحزم المفقودة تحتاج إلى إعادة إرسال وقد تسبب تجمدًا أو انتقالًا مفاجئًا.',feat4T:'الراوتر وWi-Fi',feat4D:'قد يقلل Ethernet زمن الاستجابة مقارنةً بـ Wi-Fi. اختبر الخيارين وقارن القيم.',feat5T:'المسافة إلى الخادم',feat5D:'كلما ابتعد خادم اللعبة زاد Ping عادةً.',feat6T:'Bufferbloat',feat6D:'يمكن للاتصال المشغول بالكامل أن يرفع Ping كثيرًا. يمكن لـ SQM تقليل التأثير.',
+  faqKicker:'مركز المساعدة',faqTitle:'الأسئلة الشائعة',faqQ1:'كيف يعمل مراقب Ping؟',faqA1:'يرسل المتصفح طلبات صغيرة إلى نقاط عامة ويقيس زمن الاستجابة.',faqQ2:'لماذا تختلف القيم عن اللعبة؟',faqA2:'قد يكون خادم اللعبة في موقع مختلف، لذلك قد تختلف قيمة الاستجابة داخل اللعبة.',faqQ3:'ما Ping الجيد للألعاب؟',faqA3:'أقل من 30 مللي ثانية ممتاز؛ و30–60 مللي ثانية مقبول عادةً.',faqQ4:'ما Jitter الجيد؟',faqA4:'أقل من 5 مللي ثانية ممتاز. و5–15 مللي ثانية مقبول عادةً.',faqQ5:'هل يمكنني تصدير النتيجة؟',faqA5:'نعم. يمكنك نسخ التقرير أو تنزيله بصيغة JSON.',ctaTitle:'هل أنت مستعد لتجربة لعب أفضل؟',ctaText:'شغّل الاختبار وقارن القيم وحسّن اتصالك.',ctaBtn:'بدء اختبار Ping',ctaBtnSpeed:'اختبار السرعة',
+  footerBrand:'Fasqoo — اختبارات سرعة الإنترنت وأدوات الشبكة المستقلة والمعتمدة على المتصفح.',footerSpeedTests:'اختبارات السرعة',footerInternetSpeed:'اختبار سرعة الإنترنت',footerLite:'Fasqoo Lite',footerWidget:'Widget',footerNetworkTools:'أدوات الشبكة',footerNetworkStatus:'حالة الشبكة',footerGaming:'مراقب Gaming وPing',footerITDiagnose:'تشخيص تقنية المعلومات',footerSecurity:'محلل الأمان',footerAntivirus:'فحص مكافحة الفيروسات',footerDns:'اختبار DNS المرئي',footerCompany:'الشركة',footerAbout:'من نحن',footerFaq:'الأسئلة الشائعة',ftPrivacy:'الخصوصية',ftAccess:'إمكانية الوصول',ftImprint:'إشعار قانوني',ftTerms:'شروط الاستخدام',ftNoSell:'عدم بيع بياناتي',footerCopyright:'© 2026 Fasqoo',footerBranding:'مدعوم بشبكة Cloudflare Edge لتحسين الأداء وموثوقية القياس.',footerDisclaimer:'Fasqoo منصة مستقلة لاختبار السرعة وليست منتجًا رسميًا من Cloudflare.'
+});
+EN.navDarkData='Dark Data & Tracker Exposer'; EN.navDarkDataDesc='Live browser requests, data usage & privacy signals';
+DE.navDarkData='Dark Data & Tracker Exposer'; DE.navDarkDataDesc='Live-Browser-Anfragen, Datenverbrauch & Datenschutzsignale';
+AR.navDarkData='عرض البيانات والتتبعات'; AR.navDarkDataDesc='طلبات المتصفح واستخدام البيانات وإشارات الخصوصية مباشرة';
+const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, ar:AR };
 
 /* ===================================================================
    MODERN SVG ICONS FOR GAME CARDS
@@ -1850,11 +1871,17 @@ const MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const SUN_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
 
 function setTheme(dark){
-  document.body.classList.toggle('dark', dark);
+  const body = document.body;
+  /* Disable visual transitions only for the theme change itself, so the switch is immediate. */
+  body.classList.add('theme-switching');
+  body.classList.toggle('dark', dark);
   $('themeBtn').innerHTML = dark ? SUN_SVG : MOON_SVG;
   const tc = $('themeColor');
   if (tc) tc.setAttribute('content', dark ? '#090c10' : '#ffffff');
   try { localStorage.setItem('fasqoo_dark', dark); } catch(e){}
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => body.classList.remove('theme-switching'));
+  });
 }
 (function initTheme(){
   let saved = null;
