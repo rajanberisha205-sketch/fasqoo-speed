@@ -827,6 +827,39 @@ body.theme-switching *::after{
 .fq20-btn-icon{width:17px;height:17px;display:inline-block;vertical-align:-4px;margin-right:7px}
 .fq20 .btn-primary .fq20-btn-icon{color:currentColor}
 
+
+/* ================================================================
+   FASQOO GAME SERVER PING DASHBOARD — ISOLATED MODULE
+   ================================================================ */
+.fq-gsd{margin:22px 0 30px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+.fq-gsd-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+.fq-gsd-kicker{font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--orange);margin-bottom:5px}
+.fq-gsd-title{margin:0;font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.4px}
+.fq-gsd-sub{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.55;max-width:760px}
+.fq-gsd-live{display:flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:var(--soft);color:var(--muted);font-size:10px;font-weight:800}
+.fq-gsd-dot{width:7px;height:7px;border-radius:50%;background:#94a3b8}
+.fq-gsd-live.active .fq-gsd-dot{background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.12);animation:fqGsdPulse 1.2s infinite}
+@keyframes fqGsdPulse{50%{opacity:.35}}
+.fq-gsd-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fq-gsd-card{min-width:0;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--soft);transition:border-color .18s,box-shadow .18s}
+.fq-gsd-card-top{display:flex;align-items:center;gap:9px}
+.fq-gsd-icon{width:36px;height:36px;display:grid;place-items:center;flex:0 0 36px;border-radius:10px;background:rgba(255,90,31,.09);border:1px solid rgba(255,90,31,.18);color:var(--orange);font-size:10px;font-weight:900}
+.fq-gsd-name{min-width:0}.fq-gsd-name strong{display:block;font-size:12px;line-height:1.3}.fq-gsd-name span{display:block;margin-top:2px;color:var(--muted);font-size:9px}
+.fq-gsd-region{margin-left:auto;padding:4px 6px;border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:8px;font-weight:900;letter-spacing:.5px}
+.fq-gsd-value{display:flex;align-items:baseline;gap:4px;margin-top:18px}.fq-gsd-value strong{font-size:32px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px}.fq-gsd-value span{font-size:10px;color:var(--muted);font-weight:700}
+.fq-gsd-status{min-height:17px;margin-top:9px;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:9px;font-weight:700}.fq-gsd-status:before{content:"";width:6px;height:6px;border-radius:50%;background:#94a3b8;flex:0 0 6px}
+.fq-gsd-card.testing{border-color:rgba(255,90,31,.35)}.fq-gsd-card.testing .fq-gsd-value strong{color:var(--orange)}.fq-gsd-card.testing .fq-gsd-status:before{background:var(--orange);animation:fqGsdPulse 1s infinite}
+.fq-gsd-card.good{border-color:rgba(34,197,94,.35)}.fq-gsd-card.good .fq-gsd-value strong{color:#16a36a}.fq-gsd-card.good .fq-gsd-status{color:#16a36a}.fq-gsd-card.good .fq-gsd-status:before{background:#22c55e}
+.fq-gsd-card.warn{border-color:rgba(234,179,8,.4)}.fq-gsd-card.warn .fq-gsd-value strong{color:#ca8a04}.fq-gsd-card.warn .fq-gsd-status{color:#ca8a04}.fq-gsd-card.warn .fq-gsd-status:before{background:#eab308}
+.fq-gsd-card.bad{border-color:rgba(239,68,68,.4)}.fq-gsd-card.bad .fq-gsd-value strong{color:#dc2626}.fq-gsd-card.bad .fq-gsd-status{color:#dc2626}.fq-gsd-card.bad .fq-gsd-status:before{background:#ef4444}
+.fq-gsd-meta{display:flex;justify-content:space-between;margin-top:12px;padding-top:9px;border-top:1px solid var(--line);color:var(--muted);font-size:8px}.fq-gsd-meta strong{color:var(--text);font-variant-numeric:tabular-nums}
+.fq-gsd-legend{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px;color:var(--muted);font-size:9px;font-weight:700}.fq-gsd-legend span{display:inline-flex;align-items:center;gap:5px}.fq-gsd-legend i{width:7px;height:7px;border-radius:50%;display:inline-block}.fq-gsd-green{background:#22c55e}.fq-gsd-yellow{background:#eab308}.fq-gsd-red{background:#ef4444}.fq-gsd-note{margin-left:auto;font-weight:500}
+.fq-gsd-card.skipped{opacity:.42;filter:saturate(.35);border-style:dashed;box-shadow:none}.fq-gsd-card.skipped .fq-gsd-value strong{color:var(--muted)}.fq-gsd-card.skipped .fq-gsd-status:before{background:#94a3b8}
+.fq-region-select{margin:18px 0 14px;padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--soft)}.fq-region-select-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.fq-region-kicker{font-size:9px;font-weight:900;letter-spacing:1.2px;color:var(--orange);margin-bottom:4px}.fq-region-select h3{margin:0;font-size:15px}.fq-region-select p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.5}.fq-region-all{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-region-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:13px}.fq-region-option{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--card);cursor:pointer;min-width:0}.fq-region-option:has(input:checked){border-color:rgba(255,90,31,.45);box-shadow:0 0 0 2px rgba(255,90,31,.08)}.fq-region-option input{accent-color:var(--orange);width:15px;height:15px;flex:0 0 15px}.fq-region-option span{min-width:0;flex:1}.fq-region-option strong,.fq-region-option small{display:block}.fq-region-option strong{font-size:10px}.fq-region-option small{margin-top:2px;color:var(--muted);font-size:8px;line-height:1.35}.fq-region-option b{font-size:8px;color:var(--muted)}
+.fq-share{margin-top:16px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--soft)}.fq-share h3{margin:0;font-size:14px}.fq-share p{margin:4px 0 10px;color:var(--muted);font-size:10px}.fq-share-row{display:flex;flex-wrap:wrap;gap:7px}.fq-share-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.fq-share-btn.primary{border-color:rgba(255,90,31,.35)}.fq-share-canvas{position:absolute;left:-99999px;top:-99999px;width:1200px;height:630px}
+@media(max-width:1000px){.fq-gsd-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fq-region-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.fq-gsd{padding:17px}.fq-gsd-head{display:block}.fq-gsd-live{margin-top:12px;width:max-content}.fq-gsd-grid{grid-template-columns:1fr}.fq-gsd-note{width:100%;margin-left:0}.fq-region-select-head{display:block}.fq-region-all{margin-top:10px}.fq-region-grid{grid-template-columns:1fr}.fq-share-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 </head>
 <body>
@@ -1100,6 +1133,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fq20-chart-meta"><span data-i18n="fq20Graph">Live Ping</span><span id="fq20ChartRange">—</span></div>
       <canvas id="fq20Canvas" aria-label="Live ping graph"></canvas>
     </div>
+
+
+  <!-- FASQOO GAME SERVER PING DASHBOARD -->
+  <section class="fq-gsd" id="fqGameServerDashboard" aria-labelledby="fqGsdTitle">
+    <div class="fq-gsd-head"><div><div class="fq-gsd-kicker">GAME SERVER NETWORK</div><h2 class="fq-gsd-title" id="fqGsdTitle">Game Server Ping Dashboard</h2><p class="fq-gsd-sub">Live browser HTTP round-trip measurements to regional cloud/edge reference endpoints. Results update in parallel with the 20-second monitor.</p></div><div class="fq-gsd-live" id="fqGsdLive"><span class="fq-gsd-dot"></span><span id="fqGsdLiveText">Waiting for test</span></div></div>
+    <div class="fq-gsd-groups">
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">Europe</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="frankfurt"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">FRA</div><div class="fq-gsd-name"><strong>Frankfurt</strong><span>Riot Games / AWS Hub</span></div><div class="fq-gsd-region">FRA</div></div><div class="fq-gsd-value"><strong id="fqGsdFrankfurtPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdFrankfurtStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdFrankfurtSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="amsterdam"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">AMS</div><div class="fq-gsd-name"><strong>Amsterdam</strong><span>Activision / Blizzard Hub</span></div><div class="fq-gsd-region">AMS</div></div><div class="fq-gsd-value"><strong id="fqGsdAmsterdamPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdAmsterdamStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdAmsterdamSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="london"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">LON</div><div class="fq-gsd-name"><strong>London</strong><span>UK Gaming Edge</span></div><div class="fq-gsd-region">LON</div></div><div class="fq-gsd-value"><strong id="fqGsdLondonPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdLondonStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdLondonSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="vienna"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">VIE</div><div class="fq-gsd-name"><strong>Vienna</strong><span>Valve / CS2 East Center</span></div><div class="fq-gsd-region">VIE</div></div><div class="fq-gsd-value"><strong id="fqGsdViennaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdViennaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdViennaSamples">0</strong></div></article></div></div>
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">North America</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="virginia"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">IAD</div><div class="fq-gsd-name"><strong>Virginia</strong><span>North America East</span></div><div class="fq-gsd-region">IAD</div></div><div class="fq-gsd-value"><strong id="fqGsdVirginiaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdVirginiaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdVirginiaSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="california"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SFO</div><div class="fq-gsd-name"><strong>California</strong><span>North America West</span></div><div class="fq-gsd-region">SFO</div></div><div class="fq-gsd-value"><strong id="fqGsdCaliforniaPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdCaliforniaStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdCaliforniaSamples">0</strong></div></article></div></div>
+<div class="fq-gsd-group"><div class="fq-gsd-group-title">Asia</div><div class="fq-gsd-grid"><article class="fq-gsd-card" data-gsd="singapore"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">SIN</div><div class="fq-gsd-name"><strong>Singapore</strong><span>Southeast Asia</span></div><div class="fq-gsd-region">SIN</div></div><div class="fq-gsd-value"><strong id="fqGsdSingaporePing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdSingaporeStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdSingaporeSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="tokyo"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">TYO</div><div class="fq-gsd-name"><strong>Tokyo</strong><span>Japan / East Asia</span></div><div class="fq-gsd-region">TYO</div></div><div class="fq-gsd-value"><strong id="fqGsdTokyoPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdTokyoStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdTokyoSamples">0</strong></div></article><article class="fq-gsd-card" data-gsd="mumbai"><div class="fq-gsd-card-top"><div class="fq-gsd-icon">BOM</div><div class="fq-gsd-name"><strong>Mumbai</strong><span>South Asia</span></div><div class="fq-gsd-region">BOM</div></div><div class="fq-gsd-value"><strong id="fqGsdMumbaiPing">—</strong><span>ms</span></div><div class="fq-gsd-status" id="fqGsdMumbaiStatus">Waiting for measurement</div><div class="fq-gsd-meta"><span>HTTP samples</span><strong id="fqGsdMumbaiSamples">0</strong></div></article></div></div>
+</div><div class="fq-gsd-legend"><span><i class="fq-gsd-green"></i>&lt; 25 ms</span><span><i class="fq-gsd-yellow"></i>25–50 ms</span><span><i class="fq-gsd-red"></i>&gt; 50 ms</span><span class="fq-gsd-note">HTTP browser RTT · regional cloud/edge reference, not game-protocol ping</span></div></section>
+
+    <div class="fq-region-select" id="fqRegionSelect" aria-labelledby="fqRegionSelectTitle">
+      <div class="fq-region-select-head"><div><div class="fq-region-kicker">SERVER SELECTION</div><h3 id="fqRegionSelectTitle">Choose gaming server regions</h3><p>Select the regions to measure during the 20-second test. Frankfurt and Amsterdam are enabled by default.</p></div><button type="button" class="fq-region-all" id="fqRegionAll">Select all</button></div>
+      <div class="fq-region-group-grid">
+<div class="fq-region-group"><div class="fq-region-group-title">Europe</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="frankfurt" checked><span><strong>Frankfurt</strong><small>Riot Games / AWS Hub</small></span><b>FRA</b></label><label class="fq-region-option"><input type="checkbox" value="amsterdam" checked><span><strong>Amsterdam</strong><small>Activision / Blizzard Hub</small></span><b>AMS</b></label><label class="fq-region-option"><input type="checkbox" value="london"><span><strong>London</strong><small>UK Gaming Edge</small></span><b>LON</b></label><label class="fq-region-option"><input type="checkbox" value="vienna"><span><strong>Vienna</strong><small>Valve / CS2 East Center</small></span><b>VIE</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">North America</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="virginia"><span><strong>Virginia</strong><small>North America East</small></span><b>IAD</b></label><label class="fq-region-option"><input type="checkbox" value="california"><span><strong>California</strong><small>North America West</small></span><b>SFO</b></label></div></div><div class="fq-region-group"><div class="fq-region-group-title">Asia</div><div class="fq-region-grid"><label class="fq-region-option"><input type="checkbox" value="singapore"><span><strong>Singapore</strong><small>Southeast Asia</small></span><b>SIN</b></label><label class="fq-region-option"><input type="checkbox" value="tokyo"><span><strong>Tokyo</strong><small>Japan / East Asia</small></span><b>TYO</b></label><label class="fq-region-option"><input type="checkbox" value="mumbai"><span><strong>Mumbai</strong><small>South Asia</small></span><b>BOM</b></label></div></div></div></div>
+
     <div class="fq20-actions">
       <span class="fq20-status" id="fq20Status" data-i18n="fq20Ready">Ready — start a 20-second measurement.</span>
       <button id="fq20Start" class="btn btn-primary" type="button"><svg class="fq20-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8C8.9 4 8 4.4 8 5.2Z"/></svg><span data-i18n="fq20Start">Start 20-second test</span></button>
@@ -1117,6 +1166,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <thead><tr><th data-i18n="fq20Date">Date</th><th data-i18n="fq20Avg">Avg. Ping</th><th data-i18n="fq20JitShort">Jitter</th><th data-i18n="fq20Gaming">Gaming</th></tr></thead>
         <tbody id="fq20HistoryBody"><tr><td colspan="4" class="fq20-empty" data-i18n="fq20NoHistory">No completed 20-second tests yet.</td></tr></tbody>
       </table>
+    </div>
+    <div class="fq-share" id="fqShareBox">
+      <h3>Share your gaming result</h3>
+      <p>After the test, Fasqoo creates a result image containing the selected regional HTTP latency values.</p>
+      <div class="fq-share-row">
+        <button class="fq-share-btn primary" id="fqShareNative" type="button">Share</button>
+        <button class="fq-share-btn" id="fqShareFacebook" type="button">Facebook</button>
+        <button class="fq-share-btn" id="fqShareX" type="button">X / Twitter</button>
+        <button class="fq-share-btn" id="fqShareWhatsApp" type="button">WhatsApp</button>
+        <button class="fq-share-btn" id="fqShareTelegram" type="button">Telegram</button>
+        <button class="fq-share-btn" id="fqShareReddit" type="button">Reddit</button>
+        <button class="fq-share-btn" id="fqShareLinkedIn" type="button">LinkedIn</button>
+        <button class="fq-share-btn" id="fqShareTwitch" type="button">Twitch / Copy</button>
+        <button class="fq-share-btn" id="fqShareCopy" type="button">Copy link</button>
+        <button class="fq-share-btn" id="fqShareDownload" type="button">Download image</button>
+      </div>
+      <canvas id="fqShareCanvas" class="fq-share-canvas" width="1200" height="630" aria-hidden="true"></canvas>
     </div>
   </section>
 
@@ -2116,15 +2182,15 @@ const FQ20 = (() => {
     data.forEach(x=>{const tr=document.createElement('tr');tr.innerHTML='<td>'+new Date(x.date).toLocaleString()+'</td><td>'+Number(x.ping).toFixed(1)+' ms</td><td>'+Number(x.jitter).toFixed(1)+' ms</td><td class="fq20-grade">'+x.title+'</td>';body.appendChild(tr)});
   }
   function finish(){
-    running=false; clearTimeout(timer); el('fq20Start').disabled=false;
+    running=false; window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-stop')); clearTimeout(timer); el('fq20Start').disabled=false;
     const p=samples.filter(Number.isFinite), a=avg(p), j=jitter(p), loss=(failures/TOTAL)*100, grade=classify(a,j), result=el('fq20Result');
     result.className='fq20-result show '+grade.key; el('fq20ResultTitle').textContent=grade.title;
     el('fq20ResultText').textContent=(Number.isFinite(a)?'Average ping: '+a.toFixed(1)+' ms · Jitter: '+j.toFixed(1)+' ms · Packet loss: '+loss.toFixed(1)+'%. ':'')+grade.tip;
-    writeHistory({date:new Date().toISOString(),ping:Number.isFinite(a)?a:0,jitter:Number.isFinite(j)?j:0,title:grade.title});
+    writeHistory({date:new Date().toISOString(),ping:Number.isFinite(a)?a:0,jitter:Number.isFinite(j)?j:0,title:grade.title,serverRegions:(window.FasqooGameServerDashboard?.getSnapshot?.()||{})});
     renderHistory(); el('fq20Status').textContent=t('fq20Done');
   }
   async function run(){
-    if(running) return; running=true;samples=[];failures=0;startedAt=performance.now();
+    if(running) return; running=true; window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-start'));samples=[];failures=0;startedAt=performance.now();
     el('fq20Start').disabled=true;el('fq20Result').className='fq20-result';el('fq20Clock').textContent='0 / 20s';
     el('fq20Status').textContent=t('fq20Running');render();
     for(let i=0;i<TOTAL && running;i++){
@@ -2133,7 +2199,7 @@ const FQ20 = (() => {
       const v=await ping(); samples.push(v); if(v===null) failures++;
       el('fq20Clock').textContent=(i+1)+' / '+TOTAL+'s'; render();
     }
-    if(running) finish(); else {el('fq20Start').disabled=false;el('fq20Status').textContent=t('fq20Stopped')}
+    if(running) finish(); else { window.dispatchEvent(new CustomEvent('fasqoo-gaming-test-stop')); el('fq20Start').disabled=false;el('fq20Status').textContent=t('fq20Stopped')}
   }
   function init(){
     el('fq20Start').addEventListener('click',run);
@@ -2219,6 +2285,90 @@ window.addEventListener('appinstalled', () => {
   updateInstallButton();
 });
 updateInstallButton();
+
+
+
+/* ===================================================================
+   GAME SERVER PING DASHBOARD — configurable regional HTTP RTT module
+   =================================================================== */
+(function initFqGameServerDashboard(){
+  'use strict';
+  const cfg={total:20,timeout:1800};
+  const targets={frankfurt:{ping:'fqGsdFrankfurtPing',status:'fqGsdFrankfurtStatus',samples:'fqGsdFrankfurtSamples',url:'https://sts.eu-central-1.amazonaws.com/'},amsterdam:{ping:'fqGsdAmsterdamPing',status:'fqGsdAmsterdamStatus',samples:'fqGsdAmsterdamSamples',url:'https://sts.eu-west-1.amazonaws.com/'},london:{ping:'fqGsdLondonPing',status:'fqGsdLondonStatus',samples:'fqGsdLondonSamples',url:'https://sts.eu-west-2.amazonaws.com/'},vienna:{ping:'fqGsdViennaPing',status:'fqGsdViennaStatus',samples:'fqGsdViennaSamples',url:'https://sts.eu-central-1.amazonaws.com/'},virginia:{ping:'fqGsdVirginiaPing',status:'fqGsdVirginiaStatus',samples:'fqGsdVirginiaSamples',url:'https://sts.us-east-1.amazonaws.com/'},california:{ping:'fqGsdCaliforniaPing',status:'fqGsdCaliforniaStatus',samples:'fqGsdCaliforniaSamples',url:'https://sts.us-west-1.amazonaws.com/'},singapore:{ping:'fqGsdSingaporePing',status:'fqGsdSingaporeStatus',samples:'fqGsdSingaporeSamples',url:'https://sts.ap-southeast-1.amazonaws.com/'},tokyo:{ping:'fqGsdTokyoPing',status:'fqGsdTokyoStatus',samples:'fqGsdTokyoSamples',url:'https://sts.ap-northeast-1.amazonaws.com/'},mumbai:{ping:'fqGsdMumbaiPing',status:'fqGsdMumbaiStatus',samples:'fqGsdMumbaiSamples',url:'https://sts.ap-south-1.amazonaws.com/'}};
+  /* Fasqoo can replace these URLs with its own regional Worker endpoints later. */
+  if(window.FASQOO_GAMING_PROBES) Object.keys(targets).forEach(k=>{if(window.FASQOO_GAMING_PROBES[k])targets[k].url=window.FASQOO_GAMING_PROBES[k]});
+  const samples={frankfurt:[],amsterdam:[],london:[],vienna:[],virginia:[],california:[],singapore:[],tokyo:[],mumbai:[]};
+  let running=false,timer=null,observer=null,lastSecond=-1,selected=[];
+  const $id=id=>document.getElementById(id);
+  const card=k=>document.querySelector('.fq-gsd-card[data-gsd="'+k+'"]');
+  function setClass(k,c){const e=card(k);if(!e)return;e.classList.remove('testing','good','warn','bad','skipped');if(c)e.classList.add(c)}
+  function status(k,text){const e=$id(targets[k].status);if(e)e.textContent=text}
+  function value(k,v){const e=$id(targets[k].ping);if(e)e.textContent=Number.isFinite(v)?Math.round(v):'—'}
+  function count(k){const e=$id(targets[k].samples);if(e)e.textContent=samples[k].length}
+  function level(ms){return ms<25?'good':ms<=50?'warn':'bad'}
+  function label(ms){return ms<25?'Excellent HTTP latency':ms<=50?'Moderate HTTP latency':'High HTTP latency'}
+  function getSelected(){return [...document.querySelectorAll('#fqRegionSelect input[type="checkbox"]:checked')].map(x=>x.value)}
+  function applySelection(){selected=getSelected();Object.keys(targets).forEach(k=>{const active=selected.includes(k);const c=card(k);if(c)c.classList.toggle('skipped',!active);if(!active){samples[k].length=0;value(k,NaN);count(k);setClass(k,'skipped');status(k,'Skipped')}});updateAllButton()}
+  function updateAllButton(){const b=$id('fqRegionAll');if(!b)return;const n=getSelected().length;b.textContent=n===Object.keys(targets).length?'Clear all':'Select all'}
+  async function probe(k){
+    if(!selected.includes(k))return;
+    const g=targets[k],controller=new AbortController(),started=performance.now();
+    setClass(k,'testing');status(k,'Measuring HTTP RTT…');
+    const to=setTimeout(()=>controller.abort(),cfg.timeout);
+    try{
+      const u=g.url+(g.url.includes('?')?'&':'?')+'fq_ping='+Date.now()+'-'+Math.random().toString(36).slice(2);
+      await fetch(u,{method:'GET',mode:'no-cors',cache:'no-store',credentials:'omit',signal:controller.signal});
+      const ms=performance.now()-started;if(!Number.isFinite(ms)||ms<=0)throw new Error('invalid');
+      samples[k].push(ms);if(samples[k].length>cfg.total)samples[k].shift();value(k,ms);count(k);setClass(k,level(ms));status(k,label(ms));
+    }catch(e){value(k,NaN);setClass(k,'bad');status(k,'Endpoint unavailable / timeout');count(k)}finally{clearTimeout(to)}
+  }
+  async function cycle(){if(!running)return;await Promise.all(selected.map(probe));window.dispatchEvent(new CustomEvent('fasqoo-gaming-server-update',{detail:getSnapshot()}))}
+  function reset(){Object.keys(targets).forEach(k=>{samples[k].length=0;value(k,NaN);count(k);if(selected.includes(k)){setClass(k,null);status(k,'Waiting for measurement')}else{setClass(k,'skipped');status(k,'Skipped')}})}
+  function setLive(active,text){const box=$id('fqGsdLive'),label=$id('fqGsdLiveText');if(box)box.classList.toggle('active',active);if(label)label.textContent=text}
+  function getSnapshot(){return Object.fromEntries(Object.keys(targets).map(k=>{const a=samples[k].filter(Number.isFinite);return [k,{selected:selected.includes(k),samples:a.slice(),avg:a.length?a.reduce((x,y)=>x+y,0)/a.length:null,last:a.length?a[a.length-1]:null}]}))}
+  function stop(){if(!running)return;running=false;if(timer){clearInterval(timer);timer=null}setLive(false,'Test completed');window.dispatchEvent(new CustomEvent('fasqoo-gaming-server-update',{detail:getSnapshot()}))}
+  function start(){if(running)return;selected=getSelected();if(!selected.length){setLive(false,'Select at least one region');return}running=true;lastSecond=-1;reset();setLive(true,'Live · 0 / 20s');cycle();timer=setInterval(()=>{if(!running)return;lastSecond++;setLive(true,'Live · '+Math.min(lastSecond+1,20)+' / 20s');cycle();if(lastSecond>=19)stop()},1000)}
+  function sync(){const clock=$id('fq20Clock');if(!clock)return;observer=new MutationObserver(()=>{const m=(clock.textContent||'').match(/(\d+)\s*\/\s*20s/i);if(!m)return;const n=Number(m[1]);if(n>0&&n<=20&&!running)start();if(n>=20)stop()});observer.observe(clock,{childList:true,characterData:true,subtree:true})}
+  window.FasqooGameServerDashboard={getSnapshot,refreshSelection:applySelection};
+  document.querySelectorAll('#fqRegionSelect input[type="checkbox"]').forEach(x=>x.addEventListener('change',applySelection));
+  $id('fqRegionAll')?.addEventListener('click',()=>{const boxes=[...document.querySelectorAll('#fqRegionSelect input[type="checkbox"]')],all=boxes.every(x=>x.checked);boxes.forEach(x=>x.checked=!all);applySelection()});
+  window.addEventListener('fasqoo-gaming-test-start',start);window.addEventListener('fasqoo-gaming-test-stop',stop);
+  applySelection();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
+})();
+
+/* ===================================================================
+   RESULT SHARE / SOCIAL MEDIA
+   =================================================================== */
+(function initFqShare(){
+  const page='https://www.fasqoo.com/ping-monitor.html';
+  const canvas=document.getElementById('fqShareCanvas');
+  const text=()=>{
+    const snap=window.FasqooGameServerDashboard?.getSnapshot?.()||{};
+    const parts=Object.entries(snap).filter(([,r])=>r.selected&&Number.isFinite(r.avg)).map(([k,r])=>k.toUpperCase()+': '+Math.round(r.avg)+' ms');
+    const main=document.getElementById('fq20Ping')?.textContent||'—';
+    return 'Fasqoo Gaming Monitor — '+(parts.length?parts.join(' · '):'Main ping: '+main+' ms')+'\n'+page;
+  };
+  function draw(){
+    if(!canvas)return;
+    const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height,styles=getComputedStyle(document.body),bg=styles.getPropertyValue('--card').trim()||'#111',fg=styles.getPropertyValue('--text').trim()||'#fff',muted=styles.getPropertyValue('--muted').trim()||'#999',orange=styles.getPropertyValue('--orange').trim()||'#ff5a1f';
+    c.fillStyle=bg;c.fillRect(0,0,w,h);c.fillStyle=orange;c.fillRect(0,0,14,h);c.fillStyle=fg;c.font='800 44px Inter,Arial';c.fillText('Fasqoo Gaming Monitor',60,95);c.fillStyle=muted;c.font='500 22px Inter,Arial';c.fillText('Regional HTTP latency · 20-second test',60,135);
+    const snap=window.FasqooGameServerDashboard?.getSnapshot?.()||{};let y=220;c.font='800 30px Inter,Arial';Object.entries(snap).forEach(([k,r])=>{if(!r.selected)return;c.fillStyle=fg;c.fillText(k.charAt(0).toUpperCase()+k.slice(1),70,y);c.fillStyle=Number.isFinite(r.avg)?orange:muted;c.fillText(Number.isFinite(r.avg)?Math.round(r.avg)+' ms':'—',430,y);c.font='500 18px Inter,Arial';c.fillStyle=muted;c.fillText((r.samples||[]).length+' samples',590,y);c.font='800 30px Inter,Arial';y+=70});c.fillStyle=muted;c.font='500 17px Inter,Arial';c.fillText(new Date().toLocaleString(),70,h-75);c.fillText('www.fasqoo.com/ping-monitor.html',70,h-45);
+  }
+  async function native(){draw();const msg=text();if(navigator.share){try{const blob=await new Promise(r=>canvas.toBlob(r,'image/png',.95));const file=blob&&window.File?new File([blob],'fasqoo-gaming-result.png',{type:'image/png'}):null;const data=file&&navigator.canShare?.({files:[file]})?{title:'Fasqoo Gaming Monitor',text:msg.split('\n')[0],url:page,files:[file]}:{title:'Fasqoo Gaming Monitor',text:msg,url:page};await navigator.share(data);return}catch(e){if(e&&e.name==='AbortError')return}}copyText(msg)}
+  function open(url){window.open(url,'_blank','noopener,noreferrer')}
+  document.getElementById('fqShareNative')?.addEventListener('click',native);
+  document.getElementById('fqShareFacebook')?.addEventListener('click',()=>open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(page)));
+  document.getElementById('fqShareX')?.addEventListener('click',()=>open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text())));
+  document.getElementById('fqShareWhatsApp')?.addEventListener('click',()=>open('https://wa.me/?text='+encodeURIComponent(text())));
+  document.getElementById('fqShareTelegram')?.addEventListener('click',()=>open('https://t.me/share/url?url='+encodeURIComponent(page)+'&text='+encodeURIComponent(text().split('\n')[0])));
+  document.getElementById('fqShareReddit')?.addEventListener('click',()=>open('https://www.reddit.com/submit?url='+encodeURIComponent(page)+'&title='+encodeURIComponent(text().split('\n')[0])));
+  document.getElementById('fqShareLinkedIn')?.addEventListener('click',()=>open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(page)));
+  document.getElementById('fqShareTwitch')?.addEventListener('click',()=>copyText(text()+'\n\nTwitch: paste this link into your stream chat or panel.'));
+  document.getElementById('fqShareCopy')?.addEventListener('click',()=>copyText(text()));
+  document.getElementById('fqShareDownload')?.addEventListener('click',()=>{draw();const a=document.createElement('a');a.download='fasqoo-gaming-result.png';a.href=canvas.toDataURL('image/png');a.click()});
+  window.addEventListener('fasqoo-gaming-server-update',draw);window.addEventListener('fasqoo-gaming-test-stop',draw);draw();
+})();
 
 /* ===================================================================
    INIT
