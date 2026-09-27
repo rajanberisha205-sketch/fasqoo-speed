@@ -19,6 +19,7 @@
 <meta name="robots" content="index, follow">
 <title>Fasqoo Gaming- &amp; Ping-Monitor – Live Ping &amp; Jitter zu Gaming-Servern</title>
 <link rel="canonical" href="https://www.fasqoo.com/ping-monitor.html">
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="manifest" href="/site.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -261,6 +262,59 @@ main{padding:32px 0 0}
   -webkit-text-fill-color:transparent;color:transparent;
 }
 .hero p{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto;line-height:1.55}
+/* Gamer / E-Sports background behind the hero */
+.hero{
+  overflow:hidden;
+  isolation:isolate;
+  border-radius:24px;
+  padding-left:24px;padding-right:24px;
+  background:
+    radial-gradient(circle at 18% 58%,rgba(255,90,31,.07),transparent 28%),
+    radial-gradient(circle at 82% 40%,rgba(255,90,31,.10),transparent 30%),
+    linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.08));
+  border:1px solid rgba(16,20,26,.055);
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background:
+    linear-gradient(rgba(16,20,26,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(16,20,26,.045) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);
+}
+.hero::before{
+  content:"";position:absolute;top:-210px;left:50%;transform:translateX(-50%);
+  width:1050px;height:700px;border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,90,31,.14),transparent 32%),
+    radial-gradient(circle,rgba(255,90,31,.055) 0%,transparent 63%);
+  z-index:-2;pointer-events:none;
+}
+.hero .eyebrow{position:relative}
+.hero .eyebrow::after{
+  content:"";width:88px;height:54px;margin-left:5px;opacity:.35;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 54' fill='none'%3E%3Cpath d='M6 44 27 23l12 11 16-23 27 33' stroke='%23ff5a1f' stroke-width='1.7'/%3E%3Cpath d='M4 49h80' stroke='%23ff5a1f' stroke-opacity='.35'/%3E%3Ccircle cx='67' cy='12' r='3' stroke='%23ff5a1f'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.dark .hero{
+  background:
+    radial-gradient(circle at 18% 58%,rgba(255,90,31,.13),transparent 28%),
+    radial-gradient(circle at 82% 40%,rgba(255,90,31,.14),transparent 30%),
+    linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
+  border-color:rgba(255,255,255,.075);
+  box-shadow:inset 0 1px rgba(255,255,255,.035);
+}
+.dark .hero::after{
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+}
+.dark .hero p{color:rgba(244,246,248,.70)}
+@media(max-width:640px){
+  .hero{padding-left:14px;padding-right:14px;border-radius:18px}
+  .hero .eyebrow::after{display:none}
+}
+
 @media(max-width:640px){
   .hero{padding:26px 0 14px}
   .hero h1{font-size:30px;letter-spacing:-1.5px}
@@ -588,7 +642,8 @@ main{padding:32px 0 0}
   --line:#29303a;--soft:#171c22;
   --shadow:0 18px 50px rgba(0,0,0,.25);
 }
-.dark body{background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.09),transparent 34%),var(--bg)}
+.dark{background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.09),transparent 34%),var(--bg)}
+body.dark{background:radial-gradient(circle at 50% -15%,rgba(255,90,31,.09),transparent 34%),var(--bg)}
 .dark header{background:rgba(14,17,22,.88)}
 .dark .site-footer{background:rgba(14,17,22,.88)}
 .dark .nav-dropdown-menu{
@@ -607,12 +662,162 @@ main{padding:32px 0 0}
   background:linear-gradient(135deg,rgba(255,90,31,.14),rgba(255,90,31,.04));
   border-color:rgba(255,90,31,.25);
 }
-.dark .lang-control select{color-scheme:dark}
+body.dark .lang-control,
+.dark .lang-control{
+  background:#12161b;
+  border-color:#29303a;
+  color:#f4f6f8;
+}
+body.dark .lang-control:hover,
+.dark .lang-control:hover{
+  background:#171c22;
+  border-color:#3a434f;
+}
+body.dark .lang-control select,
+.dark .lang-control select{
+  background:#12161b;
+  color:#f4f6f8;
+  color-scheme:dark;
+}
+body.dark .lang-control select option,
+.dark .lang-control select option{
+  background:#12161b;
+  color:#f4f6f8;
+}
 .dark .game-ping .num{background:linear-gradient(135deg,#f4f6f8,#c0c8d2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* ==========================================================
+   20-SECOND LIVE GAMING MONITOR — isolated module
+   ========================================================== */
+.fq20{margin:10px 0 34px;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.fq20-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+.fq20-kicker{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:6px}
+.fq20 h2{margin:0;font-size:24px;letter-spacing:-.6px;font-weight:800}
+.fq20-sub{margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.55;max-width:720px}
+.fq20-clock{min-width:76px;height:48px;border:1px solid var(--line);border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.fq20-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.fq20-stat{padding:17px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+.fq20-stat-label{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:7px}
+.fq20-stat-value{font-size:28px;line-height:1;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums}
+.fq20-stat-unit{font-size:11px;color:var(--muted);font-weight:700;margin-left:4px}
+.fq20-chart{height:240px;border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:8px;position:relative}
+#fq20Canvas{width:100%;height:100%;display:block}
+.fq20-chart-meta{position:absolute;top:10px;left:13px;right:13px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);pointer-events:none}
+.fq20-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;flex-wrap:wrap}
+.fq20-status{font-size:12px;color:var(--muted);font-weight:600}
+.fq20-result{display:none;margin-top:15px;padding:17px;border-radius:13px;border:1px solid var(--line);background:var(--soft)}
+.fq20-result.show{display:block}
+.fq20-result.excellent{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07)}
+.fq20-result.good{border-color:rgba(234,179,8,.35);background:rgba(234,179,8,.07)}
+.fq20-result.bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07)}
+.fq20-result-title{font-size:17px;font-weight:800;margin-bottom:5px}
+.fq20-result-text{font-size:12.5px;color:var(--muted);line-height:1.55}
+.fq20-history{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.fq20-history-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}
+.fq20-history h3{margin:0;font-size:14px;font-weight:800}
+.fq20-history-clear{border:0;background:transparent;color:var(--muted);font-size:11px;font-weight:700;padding:4px 0}
+.fq20-history-clear:hover{color:var(--orange)}
+.fq20-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.fq20-table th{text-align:left;color:var(--muted);font-weight:700;padding:8px 7px;border-bottom:1px solid var(--line)}
+.fq20-table td{padding:9px 7px;border-bottom:1px solid var(--line);color:var(--text);font-variant-numeric:tabular-nums}
+.fq20-table tr:last-child td{border-bottom:0}
+.fq20-grade{font-weight:800}
+.fq20-empty{text-align:center;color:var(--muted);padding:18px 7px!important}
+@media(max-width:640px){.fq20{padding:18px}.fq20-head{display:block}.fq20-clock{margin-top:13px;width:100%}.fq20-stats{grid-template-columns:1fr}.fq20-chart{height:190px}.fq20-table{font-size:10.5px}.fq20-table th:nth-child(1),.fq20-table td:nth-child(1){display:none}}
+.dark .fq20-table td,.dark .fq20 h2,.dark .fq20-stat-value{color:var(--text)}
+.dark .fq20-chart{background:#0d1116}
+.dark .fq20-history-clear{color:var(--muted)}
+.dark .fq20-clock,.dark .fq20-stat{background:var(--soft)}
+
+
+/* ==========================================================
+   MODERN GAMING / E-SPORTS HERO BACKDROP
+   ========================================================== */
+.fq20{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 82% 24%,rgba(255,90,31,.20),transparent 24%),
+    radial-gradient(circle at 18% 76%,rgba(255,90,31,.10),transparent 25%),
+    linear-gradient(135deg,#10151b 0%,#0b0f14 52%,#121820 100%);
+  color:#f4f6f8;
+  border-color:rgba(255,255,255,.09);
+}
+.fq20::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  opacity:.52;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%);
+}
+.fq20::after{
+  content:"";
+  position:absolute;
+  width:430px;height:430px;
+  right:-110px;top:-160px;
+  z-index:-1;
+  opacity:.42;
+  border:1px solid rgba(255,90,31,.24);
+  border-radius:50%;
+  box-shadow:0 0 0 45px rgba(255,90,31,.035),0 0 0 90px rgba(255,90,31,.025),inset 0 0 80px rgba(255,90,31,.08);
+}
+.fq20 .fq20-head{position:relative;min-height:116px;align-items:center}
+.fq20 .fq20-head::after{
+  content:"";
+  position:absolute;
+  right:120px;top:4px;
+  width:160px;height:100px;
+  opacity:.42;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 100' fill='none'%3E%3Cpath d='M20 72 56 36l19 19 25-35 40 52' stroke='%23ff5a1f' stroke-width='2'/%3E%3Ccircle cx='100' cy='20' r='5' stroke='%23ff5a1f'/%3E%3Cpath d='M5 88h150M18 12h42' stroke='%23fff' stroke-opacity='.16'/%3E%3C/svg%3E") center/contain no-repeat;
+  pointer-events:none;
+}
+.fq20-kicker{display:inline-flex;align-items:center;gap:8px;padding:5px 9px;border:1px solid rgba(255,90,31,.28);border-radius:999px;background:rgba(255,90,31,.08);text-shadow:none}
+.fq20-kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff5a1f;box-shadow:0 0 12px rgba(255,90,31,.8)}
+.fq20 h2{font-size:clamp(28px,4vw,42px);letter-spacing:-1.3px;color:#fff;max-width:760px}
+.fq20-sub{color:rgba(244,246,248,.70);max-width:760px;font-size:14px}
+.fq20-clock{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.fq20-stats{position:relative}
+.fq20-stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09);backdrop-filter:blur(8px);box-shadow:inset 0 1px rgba(255,255,255,.035)}
+.fq20-stat-label{color:rgba(244,246,248,.58);display:flex;align-items:center;gap:7px}
+.fq20-stat-label::before{content:"";width:5px;height:5px;border-radius:50%;background:#ff5a1f;box-shadow:0 0 8px rgba(255,90,31,.65)}
+.fq20-stat-value{color:#fff}
+.fq20-stat-unit{color:rgba(244,246,248,.55)}
+.fq20-chart{background:rgba(4,7,10,.46);border-color:rgba(255,255,255,.09);backdrop-filter:blur(8px)}
+.fq20-chart-meta{color:rgba(244,246,248,.52)}
+.fq20-actions{position:relative}
+.fq20-status{color:rgba(244,246,248,.62)}
+.fq20-result{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+.fq20-history{border-top-color:rgba(255,255,255,.09)}
+.fq20-history h3{color:#fff}
+.fq20-history-clear{color:rgba(244,246,248,.58)}
+.fq20-table th{color:rgba(244,246,248,.52);border-color:rgba(255,255,255,.09)}
+.fq20-table td{color:#f4f6f8;border-color:rgba(255,255,255,.07)}
+.fq20-empty{color:rgba(244,246,248,.55)!important}
+.fq20 .btn-primary{box-shadow:0 10px 30px rgba(255,90,31,.22)}
+@media(max-width:760px){
+  .fq20 .fq20-head::after{right:-20px;top:45px;opacity:.20;width:130px}
+  .fq20 .fq20-head{min-height:0}
+  .fq20 h2{font-size:30px}
+}
+
+/* Modern SVG icons used by the monitor */
+.fq20-icon{
+  width:18px;height:18px;display:inline-block;vertical-align:-4px;
+  margin-right:6px;color:var(--orange);
+}
+.fq20-btn-icon{width:17px;height:17px;display:inline-block;vertical-align:-4px;margin-right:7px}
+.fq20 .btn-primary .fq20-btn-icon{color:currentColor}
+
 </style>
 </head>
 <body>
@@ -634,19 +839,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
-
-    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
-      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span class="install-label" data-i18n="installApp">Install for Windows</span>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo">
+      <span id="installIcon" class="install-platform-icon" aria-hidden="true">↓</span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install Fasqoo</span>
     </button>
+    <div id="fasqoo-widget-container"></div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
 
     <nav class="main-menu" id="mainMenu" aria-label="Main navigation">
-      <a href="index.html" data-i18n="navSpeedtest">Speedtest</a>
+      <a href="index.html" class="active" data-i18n="navSpeedtest">Speedtest</a>
 
       <div class="nav-dropdown" id="toolsDropdown">
-        <button class="nav-dropdown-toggle active" type="button" aria-expanded="false" aria-haspopup="true">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
           <span data-i18n="navTools">Tools &amp; IT-Diagnose</span>
           <span class="nav-chevron" aria-hidden="true">▾</span>
         </button>
@@ -655,9 +860,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="nav-mega-column">
             <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
+            <!-- Netzwerk-Status · Globe Icon -->
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/>
+                </svg>
               </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navStatus">Netzwerk-Status</span>
@@ -665,23 +875,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Speed-Widget · Widget-Grid Icon -->
             <a class="nav-mega-item" href="widget.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1.6"/>
+                  <rect x="13" y="3" width="8" height="5" rx="1.6"/>
+                  <rect x="13" y="10" width="8" height="11" rx="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.6"/>
+                </svg>
               </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navWidget">Speed-Widget</span>
                 <span class="nav-mega-desc" data-i18n="navWidgetDesc">Kostenloses Test-Widget für andere Websites</span>
               </span>
             </a>
+
           </div>
 
           <div class="nav-mega-column">
-            <div class="nav-dropdown-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
+            <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
+            <!-- Security Analyzer · Shield with Checkmark -->
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.7 12.1 2.4 2.4 4.4-4.6"/>
+                </svg>
               </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navSecurity">Security Analyzer</span>
@@ -689,9 +910,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <a class="nav-mega-item" href="antivirus.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4.5 6v5.4c0 4.4 3.1 8.4 7.5 9.6 4.4-1.2 7.5-5.2 7.5-9.6V6L12 3Z"/>
+                  <path d="m8.5 12.2 2.2 2.2 4.8-5"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title" data-i18n="navAntivirus">Antivirus Scanner</span>
+                <span class="nav-mega-desc" data-i18n="navAntivirusDesc">Dateien und Inhalte auf Sicherheitsrisiken prüfen</span>
+              </span>
+            </a>
+
+            <!-- Visual DNS Test · Globe with Latitudes -->
             <a class="nav-mega-item" href="dns-checker.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.4 9h17.2"/>
+                  <path d="M3.4 15h17.2"/>
+                  <path d="M12 3a14 14 0 0 1 0 18"/>
+                  <path d="M12 3a14 14 0 0 0 0 18"/>
+                </svg>
               </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navDns">Visual DNS Test</span>
@@ -699,13 +940,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </span>
             </a>
 
+            <!-- Subnetz-Rechner · Calculator Icon -->
             <a class="nav-mega-item" href="subnet-calculator.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="3" width="15" height="18" rx="2.2"/>
+                  <rect x="7.5" y="6" width="9" height="3.4" rx="0.9"/>
+                  <circle cx="9" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="13" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="9" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="15" cy="17" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
               </span>
               <span class="nav-mega-copy">
                 <span class="nav-mega-title" data-i18n="navSubnet">Subnetz-Rechner</span>
                 <span class="nav-mega-desc" data-i18n="navSubnetDesc">IP-Bereiche und Masken kalkulieren</span>
+              </span>
+            </a>
+
+            <!-- Dark Data & Tracker Exposer · Privacy / Data Icon -->
+            <a class="nav-mega-item" href="dark-data-exposer.html" role="menuitem">
+              <span class="nav-mega-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="3"/>
+                  <path d="M8 9h8M8 12h5M8 15h8"/>
+                  <circle cx="17" cy="12" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="nav-mega-copy">
+                <span class="nav-mega-title">Dark Data &amp; Tracker Exposer</span>
+                <span class="nav-mega-desc">Live browser requests, data usage &amp; privacy signals</span>
               </span>
             </a>
           </div>
@@ -719,21 +985,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="lang-control">
           <span class="lang-icon" aria-hidden="true">◎</span>
           <select id="lang" aria-label="Language">
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="it">Italiano</option>
-            <option value="pt">Português</option>
-            <option value="nl">Nederlands</option>
-            <option value="tr">Türkçe</option>
-            <option value="sq">Shqip</option>
-            <option value="pl">Polski</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="nl">🇳🇱 Nederlands</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="sq">🇦🇱 Shqip</option>
+            <option value="ar">🇸🇦 العربية</option>
           </select>
         </div>
-        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
       </div>
     </nav>
   </div>
@@ -752,7 +1016,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span data-i18n="heroTitleTop">Fasqoo Gaming-</span>
       <span class="accent" data-i18n="heroTitleAccent"> &amp; Ping-Monitor</span>
     </h1>
-    <p data-i18n="heroText">Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart. 🎮</p>
+    <p data-i18n="heroText">Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart.</p>
   </section>
 
   <!-- CONTROL -->
@@ -803,6 +1067,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASQOO 20-SECOND GAMING & PING MONITOR
+       ======================================================== -->
+  <section class="fq20" id="fq20Monitor" aria-labelledby="fq20Title">
+    <div class="fq20-head">
+      <div>
+        <div class="fq20-kicker" data-i18n="fq20Kicker">20-SECOND LIVE MONITOR</div>
+        <h2 id="fq20Title" data-i18n="fq20Title">Gaming &amp; Ping Stability</h2>
+        <p class="fq20-sub" data-i18n="fq20Sub">20 seconds · one measurement per second · real browser round-trip time to the Fasqoo/Cloudflare Edge endpoint.</p>
+      </div>
+      <div class="fq20-clock" id="fq20Clock" aria-live="polite">0 / 20s</div>
+    </div>
+    <div class="fq20-stats">
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a14 14 0 0 1 0-12"/><path d="M8 15a9 9 0 0 1 0-6"/><circle cx="12" cy="12" r="1.4"/><path d="M16 9a9 9 0 0 1 0 6"/><path d="M20 6a14 14 0 0 1 0 12"/></svg><span data-i18n="fq20Current">Current Ping</span></div><span class="fq20-stat-value" id="fq20Ping">—</span><span class="fq20-stat-unit">ms</span></div>
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15c2.5-7 5-7 7.5 0s5 7 7.5 0 3.5-5 3.5-5"/></svg><span data-i18n="fq20Jitter">Jitter</span></div><span class="fq20-stat-value" id="fq20Jitter">—</span><span class="fq20-stat-unit">ms</span></div>
+      <div class="fq20-stat"><div class="fq20-stat-label"><svg class="fq20-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/></svg><span data-i18n="fq20Loss">Packet Loss</span></div><span class="fq20-stat-value" id="fq20Loss">0</span><span class="fq20-stat-unit">%</span></div>
+    </div>
+    <div class="fq20-chart">
+      <div class="fq20-chart-meta"><span data-i18n="fq20Graph">Live Ping</span><span id="fq20ChartRange">—</span></div>
+      <canvas id="fq20Canvas" aria-label="Live ping graph"></canvas>
+    </div>
+    <div class="fq20-actions">
+      <span class="fq20-status" id="fq20Status" data-i18n="fq20Ready">Ready — start a 20-second measurement.</span>
+      <button id="fq20Start" class="btn btn-primary" type="button"><svg class="fq20-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8C8.9 4 8 4.4 8 5.2Z"/></svg><span data-i18n="fq20Start">Start 20-second test</span></button>
+    </div>
+    <div class="fq20-result" id="fq20Result" aria-live="polite">
+      <div class="fq20-result-title" id="fq20ResultTitle">—</div>
+      <div class="fq20-result-text" id="fq20ResultText">—</div>
+    </div>
+    <div class="fq20-history">
+      <div class="fq20-history-head">
+        <h3 data-i18n="fq20History">Last 5 tests</h3>
+        <button class="fq20-history-clear" id="fq20Clear" type="button" data-i18n="fq20Clear">Clear history</button>
+      </div>
+      <table class="fq20-table">
+        <thead><tr><th data-i18n="fq20Date">Date</th><th data-i18n="fq20Avg">Avg. Ping</th><th data-i18n="fq20JitShort">Jitter</th><th data-i18n="fq20Gaming">Gaming</th></tr></thead>
+        <tbody id="fq20HistoryBody"><tr><td colspan="4" class="fq20-empty" data-i18n="fq20NoHistory">No completed 20-second tests yet.</td></tr></tbody>
+      </table>
     </div>
   </section>
 
@@ -984,16 +1289,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="footer-column">
         <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
         <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
         <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
         <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="antivirus.html" data-i18n="footerAntivirus">Antivirus Scanner</a>
         <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
+        <a href="dark-data-exposer.html">Dark Data &amp; Tracker Exposer</a>
       </div>
 
       <div class="footer-column">
         <h4 data-i18n="footerCompany">Unternehmen</h4>
         <a href="about.html" data-i18n="footerAbout">Über uns</a>
         <a href="faq.html" data-i18n="footerFaq">FAQ</a>
-        <a href="privacy.html" data-i18n="footerPrivacy">Datenschutz</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
+        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
       </div>
     </div>
 
@@ -1040,7 +1352,7 @@ const EN = {
 
   heroEyebrow:'Fasqoo Gaming Monitor',
   heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
-  heroText:'Check your latency (ping) and connection stability (jitter) to the world\'s most important gaming servers in real time before your match starts. 🎮',
+  heroText:'Check your latency (ping) and connection stability (jitter) to the world\'s most important gaming servers in real time before your match starts.',
   controlTitle:'Ready for your ping check?',
   controlText:'We measure client-side using browser requests to each provider. No install, no account, no tracking.',
   controlProviders:'Cloudflare Edge · direct endpoint ping · no server logs',
@@ -1116,7 +1428,7 @@ const DE = {
 
   heroEyebrow:'Fasqoo Gaming-Monitor',
   heroTitleTop:'Fasqoo Gaming-', heroTitleAccent:' & Ping-Monitor',
-  heroText:'Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart. 🎮',
+  heroText:'Prüfe deine Latenz (Ping) und Verbindungsstabilität (Jitter) zu den weltweit wichtigsten Gaming-Servern in Echtzeit vor deinem Spielstart.',
   controlTitle:'Bereit für deinen Ping-Check?',
   controlText:'Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.',
   controlProviders:'Cloudflare Edge · direkter Endpunkt-Ping · keine Serverlogs',
@@ -1174,49 +1486,49 @@ const DE = {
 
 /* Fallback für weitere Sprachen */
 const ES = Object.assign({}, EN, {
-  heroText:'Comprueba tu latencia (ping) y estabilidad (jitter) hacia los servidores de juego más importantes en tiempo real antes de tu partida. 🎮',
+  heroText:'Comprueba tu latencia (ping) y estabilidad (jitter) hacia los servidores de juego más importantes en tiempo real antes de tu partida.',
   startBtn:'Iniciar test de ping', stopBtn:'Detener',
   stateExcellent:'Excelente', stateOk:'Aceptable', stateBad:'Ping alto',
   stateTesting:'Probando', stateIdle:'En espera', stateFailed:'Fallido'
 });
 const FR = Object.assign({}, EN, {
-  heroText:'Vérifiez votre latence (ping) et la stabilité (jitter) vers les serveurs de jeu les plus importants en temps réel avant votre partie. 🎮',
+  heroText:'Vérifiez votre latence (ping) et la stabilité (jitter) vers les serveurs de jeu les plus importants en temps réel avant votre partie.',
   startBtn:'Lancer le test', stopBtn:'Arrêter',
   stateExcellent:'Excellent', stateOk:'Acceptable', stateBad:'Ping élevé',
   stateTesting:'Test en cours', stateIdle:'Prêt', stateFailed:'Échoué'
 });
 const IT = Object.assign({}, EN, {
-  heroText:'Controlla la tua latenza (ping) e stabilità (jitter) verso i server di gioco più importanti in tempo reale prima della partita. 🎮',
+  heroText:'Controlla la tua latenza (ping) e stabilità (jitter) verso i server di gioco più importanti in tempo reale prima della partita.',
   startBtn:'Avvia test ping', stopBtn:'Ferma',
   stateExcellent:'Eccellente', stateOk:'Accettabile', stateBad:'Ping alto',
   stateTesting:'In corso', stateIdle:'Pronto', stateFailed:'Fallito'
 });
 const PT = Object.assign({}, EN, {
-  heroText:'Verifique a sua latência (ping) e estabilidade (jitter) para os servidores de jogos mais importantes em tempo real antes da partida. 🎮',
+  heroText:'Verifique a sua latência (ping) e estabilidade (jitter) para os servidores de jogos mais importantes em tempo real antes da partida.',
   startBtn:'Iniciar teste', stopBtn:'Parar',
   stateExcellent:'Excelente', stateOk:'Aceitável', stateBad:'Ping alto',
   stateTesting:'A testar', stateIdle:'Pronto', stateFailed:'Falhou'
 });
 const NL = Object.assign({}, EN, {
-  heroText:'Controleer je latentie (ping) en stabiliteit (jitter) naar de belangrijkste gameservers in realtime voordat je potje begint. 🎮',
+  heroText:'Controleer je latentie (ping) en stabiliteit (jitter) naar de belangrijkste gameservers in realtime voordat je potje begint.',
   startBtn:'Start ping-test', stopBtn:'Stop',
   stateExcellent:'Uitstekend', stateOk:'Acceptabel', stateBad:'Hoge ping',
   stateTesting:'Testen', stateIdle:'Gereed', stateFailed:'Mislukt'
 });
 const TR = Object.assign({}, EN, {
-  heroText:'Oyun başlamadan önce en önemli oyun sunucularına olan gecikmenizi (ping) ve kararlılığınızı (jitter) gerçek zamanlı ölçün. 🎮',
+  heroText:'Oyun başlamadan önce en önemli oyun sunucularına olan gecikmenizi (ping) ve kararlılığınızı (jitter) gerçek zamanlı ölçün.',
   startBtn:'Ping testini başlat', stopBtn:'Durdur',
   stateExcellent:'Mükemmel', stateOk:'Kabul edilebilir', stateBad:'Yüksek ping',
   stateTesting:'Test ediliyor', stateIdle:'Hazır', stateFailed:'Başarısız'
 });
 const SQ = Object.assign({}, EN, {
-  heroText:'Kontrollo latencën (ping) dhe qëndrueshmërinë (jitter) ndaj serverëve më të rëndësishëm të lojërave në kohë reale para ndeshjes. 🎮',
+  heroText:'Kontrollo latencën (ping) dhe qëndrueshmërinë (jitter) ndaj serverëve më të rëndësishëm të lojërave në kohë reale para ndeshjes.',
   startBtn:'Fillo testin e ping-ut', stopBtn:'Ndal',
   stateExcellent:'Shkëlqyeshëm', stateOk:'I pranueshëm', stateBad:'Ping i lartë',
   stateTesting:'Duke testuar', stateIdle:'Gati', stateFailed:'Dështoi'
 });
 const PL = Object.assign({}, EN, {
-  heroText:'Sprawdź swoje opóźnienie (ping) i stabilność (jitter) do najważniejszych serwerów gier w czasie rzeczywistym przed rozpoczęciem meczu. 🎮',
+  heroText:'Sprawdź swoje opóźnienie (ping) i stabilność (jitter) do najważniejszych serwerów gier w czasie rzeczywistym przed rozpoczęciem meczu.',
   startBtn:'Rozpocznij test ping', stopBtn:'Zatrzymaj',
   stateExcellent:'Doskonały', stateOk:'Akceptowalny', stateBad:'Wysoki ping',
   stateTesting:'Testowanie', stateIdle:'Gotowy', stateFailed:'Niepowodzenie'
@@ -1558,7 +1870,7 @@ $('themeBtn').addEventListener('click', () => {
    =================================================================== */
 function applyLang(lang){
   const safe = I18N[lang] ? lang : 'en';
-  document.documentElement.lang = safe;
+  document.documentElement.lang = safe; document.documentElement.dir = safe === 'ar' ? 'rtl' : 'ltr';
   const dict = I18N[safe];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
@@ -1690,6 +2002,152 @@ $('exportJson').addEventListener('click', () => {
   URL.revokeObjectURL(a.href);
   showToast(t('jsonExported'));
 });
+
+
+/* ===================================================================
+   20-SECOND GAMING MONITOR + LOCAL TEST HISTORY
+   Isolated namespace: FQ20
+   =================================================================== */
+const FQ20 = (() => {
+  const KEY = 'fasqoo_gaming_monitor_history_v1';
+  const TOTAL = 20;
+  const ENDPOINT = '/cdn-cgi/trace';
+  let running = false;
+  let samples = [];
+  let failures = 0;
+  let startedAt = 0;
+  let timer = null;
+
+  const el = id => document.getElementById(id);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  function readHistory(){
+    try {
+      const raw = localStorage.getItem(KEY);
+      const data = raw ? JSON.parse(raw) : [];
+      return Array.isArray(data) ? data.slice(0,5) : [];
+    } catch(e){ return []; }
+  }
+  function writeHistory(item){
+    try { localStorage.setItem(KEY, JSON.stringify([item, ...readHistory()].slice(0,5))); } catch(e){}
+  }
+  function avg(a){ return a.length ? a.reduce((x,y)=>x+y,0)/a.length : NaN; }
+  function jitter(a){
+    if(a.length < 2) return a.length ? 0 : NaN;
+    let total=0; for(let i=1;i<a.length;i++) total += Math.abs(a[i]-a[i-1]);
+    return total/(a.length-1);
+  }
+  function classify(p,j){
+    if(Number.isFinite(p) && p < 20 && Number.isFinite(j) && j < 5) return {key:'excellent',title:'🚀 E-Sports Ready',tip:'Low latency and low jitter. Good conditions for competitive shooters.'};
+    if(Number.isFinite(p) && p < 45 && Number.isFinite(j) && j < 12) return {key:'good',title:'👍 Stable for Casual Gaming',tip:'The connection is generally stable for gaming. Keep an eye on spikes.'};
+    return {key:'bad',title:'⚠️ Ping-Spikes / Unstable',tip:'Try a LAN cable instead of Wi-Fi, pause large downloads, and test again.'};
+  }
+  function resizeCanvas(){
+    const c=el('fq20Canvas'), box=c.parentElement, dpr=Math.max(1,window.devicePixelRatio||1);
+    const r=box.getBoundingClientRect(); c.width=Math.max(1,Math.floor(r.width*dpr)); c.height=Math.max(1,Math.floor(r.height*dpr));
+    c._dpr=dpr; draw();
+  }
+  function draw(){
+    const c=el('fq20Canvas'); if(!c) return;
+    const ctx=c.getContext('2d'); const dpr=c._dpr||1; const w=c.width/dpr,h=c.height/dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+    const styles=getComputedStyle(document.body), line=styles.getPropertyValue('--line').trim()||'#29303a', muted=styles.getPropertyValue('--muted').trim()||'#98a2ae', orange=styles.getPropertyValue('--orange').trim()||'#ff5a1f';
+    const valid=samples.filter(Number.isFinite); if(!valid.length){
+      ctx.strokeStyle=line; ctx.setLineDash([4,5]); ctx.beginPath(); ctx.moveTo(12,h-25); ctx.lineTo(w-12,h-25); ctx.stroke(); ctx.setLineDash([]); return;
+    }
+    let min=Math.min(...valid),max=Math.max(...valid); if(min===max){min=Math.max(0,min-5);max+=5} else {const pad=(max-min)*.18;min=Math.max(0,min-pad);max+=pad}
+    ctx.strokeStyle=line;ctx.lineWidth=1;ctx.globalAlpha=.75;
+    for(let i=0;i<4;i++){const y=14+i*(h-39)/3;ctx.beginPath();ctx.moveTo(10,y);ctx.lineTo(w-10,y);ctx.stroke()}
+    ctx.globalAlpha=1;
+    ctx.fillStyle=muted;ctx.font='10px Inter,system-ui,sans-serif';ctx.fillText(Math.round(max)+' ms',12,11);ctx.fillText(Math.round(min)+' ms',12,h-28);
+    ctx.beginPath();
+    valid.forEach((v,i)=>{const x=12+(i/(TOTAL-1||1))*(w-24),y=14+(max-v)/(max-min)*(h-43);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});
+    ctx.strokeStyle=orange;ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+    valid.forEach((v,i)=>{const x=12+(i/(TOTAL-1||1))*(w-24),y=14+(max-v)/(max-min)*(h-43);ctx.fillStyle=orange;ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill()});
+  }
+  async function ping(){
+    const controller=new AbortController(), started=performance.now();
+    const timeout=setTimeout(()=>controller.abort(),900);
+    try{
+      const u=ENDPOINT+'?fq20='+Date.now()+'-'+Math.random().toString(36).slice(2);
+      await fetch(u,{method:'GET',cache:'no-store',credentials:'omit',signal:controller.signal});
+      return performance.now()-started;
+    }catch(e){return null}finally{clearTimeout(timeout)}
+  }
+  function render(){
+    const p=samples.filter(Number.isFinite), current=p.length?p[p.length-1]:null, j=jitter(p), loss=((failures/(samples.length||1))*100);
+    el('fq20Ping').textContent=current===null?'—':current.toFixed(1);
+    el('fq20Jitter').textContent=Number.isFinite(j)?j.toFixed(1):'—';
+    el('fq20Loss').textContent=loss.toFixed(1);
+    el('fq20ChartRange').textContent=p.length?Math.min(...p).toFixed(0)+'–'+Math.max(...p).toFixed(0)+' ms':'—';
+    draw();
+  }
+  function renderHistory(){
+    const body=el('fq20HistoryBody'), data=readHistory();
+    body.innerHTML='';
+    if(!data.length){body.innerHTML='<tr><td colspan="4" class="fq20-empty" data-i18n="fq20NoHistory">'+t('fq20NoHistory')+'</td></tr>';return}
+    data.forEach(x=>{const tr=document.createElement('tr');tr.innerHTML='<td>'+new Date(x.date).toLocaleString()+'</td><td>'+Number(x.ping).toFixed(1)+' ms</td><td>'+Number(x.jitter).toFixed(1)+' ms</td><td class="fq20-grade">'+x.title+'</td>';body.appendChild(tr)});
+  }
+  function finish(){
+    running=false; clearTimeout(timer); el('fq20Start').disabled=false;
+    const p=samples.filter(Number.isFinite), a=avg(p), j=jitter(p), loss=(failures/TOTAL)*100, grade=classify(a,j), result=el('fq20Result');
+    result.className='fq20-result show '+grade.key; el('fq20ResultTitle').textContent=grade.title;
+    el('fq20ResultText').textContent=(Number.isFinite(a)?'Average ping: '+a.toFixed(1)+' ms · Jitter: '+j.toFixed(1)+' ms · Packet loss: '+loss.toFixed(1)+'%. ':'')+grade.tip;
+    writeHistory({date:new Date().toISOString(),ping:Number.isFinite(a)?a:0,jitter:Number.isFinite(j)?j:0,title:grade.title});
+    renderHistory(); el('fq20Status').textContent=t('fq20Done');
+  }
+  async function run(){
+    if(running) return; running=true;samples=[];failures=0;startedAt=performance.now();
+    el('fq20Start').disabled=true;el('fq20Result').className='fq20-result';el('fq20Clock').textContent='0 / 20s';
+    el('fq20Status').textContent=t('fq20Running');render();
+    for(let i=0;i<TOTAL && running;i++){
+      const slot=startedAt+i*1000; const wait=slot-performance.now(); if(wait>0) await sleep(wait);
+      if(!running) break;
+      const v=await ping(); samples.push(v); if(v===null) failures++;
+      el('fq20Clock').textContent=(i+1)+' / '+TOTAL+'s'; render();
+    }
+    if(running) finish(); else {el('fq20Start').disabled=false;el('fq20Status').textContent=t('fq20Stopped')}
+  }
+  function init(){
+    el('fq20Start').addEventListener('click',run);
+    el('fq20Clear').addEventListener('click',()=>{try{localStorage.removeItem(KEY)}catch(e){}renderHistory()});
+    window.addEventListener('resize',resizeCanvas,{passive:true});
+    renderHistory(); resizeCanvas();
+  }
+  return {init};
+})();
+
+/* Add the monitor-only translation keys without touching the existing game catalog. */
+const FQ20_TRANSLATIONS = {
+  en:{fq20Kicker:'20-SECOND LIVE MONITOR',fq20Title:'Gaming & Ping Stability',fq20Sub:'20 seconds · one measurement per second · real browser round-trip time to the Fasqoo/Cloudflare Edge endpoint.',fq20Current:'Current Ping',fq20Jitter:'Jitter',fq20Loss:'Packet Loss',fq20Graph:'Live Ping',fq20Ready:'Ready — start a 20-second measurement.',fq20Start:'Start 20-second test',fq20History:'Last 5 tests',fq20Clear:'Clear history',fq20Date:'Date',fq20Avg:'Avg. Ping',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'No completed 20-second tests yet.',fq20Running:'Measuring for 20 seconds…',fq20Done:'20-second measurement complete.',fq20Stopped:'Measurement stopped.'},
+  de:{fq20Kicker:'20-SEKUNDEN-LIVE-MONITOR',fq20Title:'Gaming- & Ping-Stabilität',fq20Sub:'20 Sekunden · eine Messung pro Sekunde · echte Round-Trip-Zeit im Browser zum Fasqoo/Cloudflare-Edge-Endpunkt.',fq20Current:'Aktueller Ping',fq20Jitter:'Jitter',fq20Loss:'Paketverlust',fq20Graph:'Live-Ping',fq20Ready:'Bereit – 20-Sekunden-Messung starten.',fq20Start:'20-Sekunden-Test starten',fq20History:'Letzte 5 Tests',fq20Clear:'Verlauf löschen',fq20Date:'Datum',fq20Avg:'Ø Ping',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Noch keine abgeschlossene 20-Sekunden-Messung.',fq20Running:'Messung läuft 20 Sekunden…',fq20Done:'20-Sekunden-Messung abgeschlossen.',fq20Stopped:'Messung gestoppt.'},
+  es:{fq20Kicker:'MONITOR EN VIVO DE 20 SEGUNDOS',fq20Title:'Estabilidad de Gaming y Ping',fq20Sub:'20 segundos · una medición por segundo · tiempo real de ida y vuelta desde el navegador al endpoint Fasqoo/Cloudflare Edge.',fq20Current:'Ping actual',fq20Jitter:'Jitter',fq20Loss:'Pérdida de paquetes',fq20Graph:'Ping en vivo',fq20Ready:'Listo: inicia una medición de 20 segundos.',fq20Start:'Iniciar prueba de 20 segundos',fq20History:'Últimas 5 pruebas',fq20Clear:'Borrar historial',fq20Date:'Fecha',fq20Avg:'Ping medio',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Aún no hay pruebas de 20 segundos.',fq20Running:'Midiendo durante 20 segundos…',fq20Done:'Medición de 20 segundos completada.',fq20Stopped:'Medición detenida.'},
+  fr:{fq20Kicker:'MONITEUR LIVE 20 SECONDES',fq20Title:'Stabilité Gaming & Ping',fq20Sub:'20 secondes · une mesure par seconde · temps aller-retour réel du navigateur vers le point d’accès Fasqoo/Cloudflare Edge.',fq20Current:'Ping actuel',fq20Jitter:'Jitter',fq20Loss:'Perte de paquets',fq20Graph:'Ping en direct',fq20Ready:'Prêt — lancez une mesure de 20 secondes.',fq20Start:'Lancer le test de 20 secondes',fq20History:'5 derniers tests',fq20Clear:'Effacer l’historique',fq20Date:'Date',fq20Avg:'Ping moyen',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Aucun test de 20 secondes terminé.',fq20Running:'Mesure pendant 20 secondes…',fq20Done:'Mesure de 20 secondes terminée.',fq20Stopped:'Mesure arrêtée.'},
+  it:{fq20Kicker:'MONITOR LIVE 20 SECONDI',fq20Title:'Stabilità Gaming e Ping',fq20Sub:'20 secondi · una misurazione al secondo · tempo reale di andata e ritorno dal browser all’endpoint Fasqoo/Cloudflare Edge.',fq20Current:'Ping attuale',fq20Jitter:'Jitter',fq20Loss:'Perdita pacchetti',fq20Graph:'Ping live',fq20Ready:'Pronto — avvia una misurazione di 20 secondi.',fq20Start:'Avvia test di 20 secondi',fq20History:'Ultimi 5 test',fq20Clear:'Cancella cronologia',fq20Date:'Data',fq20Avg:'Ping medio',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Nessun test di 20 secondi completato.',fq20Running:'Misurazione per 20 secondi…',fq20Done:'Misurazione di 20 secondi completata.',fq20Stopped:'Misurazione arrestata.'},
+  pt:{fq20Kicker:'MONITOR AO VIVO DE 20 SEGUNDOS',fq20Title:'Estabilidade de Gaming e Ping',fq20Sub:'20 segundos · uma medição por segundo · tempo real de ida e volta do navegador para o endpoint Fasqoo/Cloudflare Edge.',fq20Current:'Ping atual',fq20Jitter:'Jitter',fq20Loss:'Perda de pacotes',fq20Graph:'Ping ao vivo',fq20Ready:'Pronto — inicie uma medição de 20 segundos.',fq20Start:'Iniciar teste de 20 segundos',fq20History:'Últimos 5 testes',fq20Clear:'Limpar histórico',fq20Date:'Data',fq20Avg:'Ping médio',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Ainda não há testes de 20 segundos concluídos.',fq20Running:'Medindo por 20 segundos…',fq20Done:'Medição de 20 segundos concluída.',fq20Stopped:'Medição interrompida.'},
+  nl:{fq20Kicker:'20-SECONDEN LIVE MONITOR',fq20Title:'Gaming- en pingstabiliteit',fq20Sub:'20 seconden · één meting per seconde · echte round-trip-tijd vanuit de browser naar het Fasqoo/Cloudflare Edge-eindpunt.',fq20Current:'Huidige ping',fq20Jitter:'Jitter',fq20Loss:'Pakketverlies',fq20Graph:'Live ping',fq20Ready:'Klaar — start een meting van 20 seconden.',fq20Start:'Start 20-seconden test',fq20History:'Laatste 5 tests',fq20Clear:'Geschiedenis wissen',fq20Date:'Datum',fq20Avg:'Gem. ping',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Nog geen voltooide 20-seconden tests.',fq20Running:'20 seconden meten…',fq20Done:'20-secondenmeting voltooid.',fq20Stopped:'Meting gestopt.'},
+  tr:{fq20Kicker:'20 SANİYELİK CANLI MONİTÖR',fq20Title:'Oyun ve Ping Kararlılığı',fq20Sub:'20 saniye · saniyede bir ölçüm · tarayıcıdan Fasqoo/Cloudflare Edge uç noktasına gerçek gidiş-dönüş süresi.',fq20Current:'Anlık Ping',fq20Jitter:'Jitter',fq20Loss:'Paket Kaybı',fq20Graph:'Canlı Ping',fq20Ready:'Hazır — 20 saniyelik ölçümü başlatın.',fq20Start:'20 saniyelik testi başlat',fq20History:'Son 5 test',fq20Clear:'Geçmişi temizle',fq20Date:'Tarih',fq20Avg:'Ort. Ping',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Henüz tamamlanmış 20 saniyelik test yok.',fq20Running:'20 saniye ölçülüyor…',fq20Done:'20 saniyelik ölçüm tamamlandı.',fq20Stopped:'Ölçüm durduruldu.'},
+  sq:{fq20Kicker:'MONITORIM 20-SEKONDËSH LIVE',fq20Title:'Stabiliteti i Gaming dhe Ping',fq20Sub:'20 sekonda · një matje në sekondë · koha reale vajtje-ardhje nga shfletuesi te endpoint-i Fasqoo/Cloudflare Edge.',fq20Current:'Ping aktual',fq20Jitter:'Jitter',fq20Loss:'Humbje paketash',fq20Graph:'Ping live',fq20Ready:'Gati — nis një matje 20-sekondëshe.',fq20Start:'Nis testin 20-sekondësh',fq20History:'5 testet e fundit',fq20Clear:'Pastro historikun',fq20Date:'Data',fq20Avg:'Ping mes.',fq20JitShort:'Jitter',fq20Gaming:'Gaming',fq20NoHistory:'Nuk ka ende teste 20-sekondëshe të përfunduara.',fq20Running:'Matja po zgjat 20 sekonda…',fq20Done:'Matja 20-sekondëshe përfundoi.',fq20Stopped:'Matja u ndal.'},
+  ar:{fq20Kicker:'مراقبة مباشرة لمدة 20 ثانية',fq20Title:'استقرار الألعاب وزمن الاستجابة',fq20Sub:'20 ثانية · قياس واحد كل ثانية · زمن ذهاب وإياب حقيقي من المتصفح إلى نقطة Fasqoo/Cloudflare Edge.',fq20Current:'زمن الاستجابة الحالي',fq20Jitter:'التذبذب',fq20Loss:'فقدان الحزم',fq20Graph:'زمن الاستجابة المباشر',fq20Ready:'جاهز — ابدأ قياساً لمدة 20 ثانية.',fq20Start:'بدء اختبار 20 ثانية',fq20History:'آخر 5 اختبارات',fq20Clear:'مسح السجل',fq20Date:'التاريخ',fq20Avg:'متوسط Ping',fq20JitShort:'التذبذب',fq20Gaming:'الألعاب',fq20NoHistory:'لا توجد اختبارات مكتملة لمدة 20 ثانية بعد.',fq20Running:'جارٍ القياس لمدة 20 ثانية…',fq20Done:'اكتمل قياس 20 ثانية.',fq20Stopped:'تم إيقاف القياس.'}
+};
+Object.keys(FQ20_TRANSLATIONS).forEach(lang => Object.assign(I18N[lang] || (I18N[lang]={}), FQ20_TRANSLATIONS[lang]));
+
+/* Patch missing shared header/footer keys so the copied index.html navigation is fully translatable. */
+const SHARED_TRANSLATIONS = {
+  en:{navGaming:'Gaming & Ping Monitor',navAntivirus:'Antivirus Scanner',footerGaming:'Gaming & Ping Monitor',footerAntivirus:'Antivirus Scanner',ftPrivacy:'Privacy',ftAccess:'Accessibility',ftImprint:'Legal Notice',ftTerms:'Terms of Use',ftNoSell:'Do Not Sell My Data'},
+  de:{navGaming:'Gaming- & Ping-Monitor',navAntivirus:'Antivirus Scanner',footerGaming:'Gaming- & Ping-Monitor',footerAntivirus:'Antivirus Scanner',ftPrivacy:'Datenschutz',ftAccess:'Barrierefreiheit',ftImprint:'Impressum',ftTerms:'Nutzungsbedingungen',ftNoSell:'Meine Daten nicht verkaufen'},
+  es:{navGaming:'Monitor de Gaming y Ping',navAntivirus:'Escáner antivirus',footerGaming:'Monitor de Gaming y Ping',footerAntivirus:'Escáner antivirus',ftPrivacy:'Privacidad',ftAccess:'Accesibilidad',ftImprint:'Aviso legal',ftTerms:'Términos de uso',ftNoSell:'No vender mis datos'},
+  fr:{navGaming:'Moniteur Gaming & Ping',navAntivirus:'Scanner antivirus',footerGaming:'Moniteur Gaming & Ping',footerAntivirus:'Scanner antivirus',ftPrivacy:'Confidentialité',ftAccess:'Accessibilité',ftImprint:'Mentions légales',ftTerms:'Conditions d’utilisation',ftNoSell:'Ne pas vendre mes données'},
+  it:{navGaming:'Monitor Gaming e Ping',navAntivirus:'Scanner antivirus',footerGaming:'Monitor Gaming e Ping',footerAntivirus:'Scanner antivirus',ftPrivacy:'Privacy',ftAccess:'Accessibilità',ftImprint:'Note legali',ftTerms:'Termini di utilizzo',ftNoSell:'Non vendere i miei dati'},
+  pt:{navGaming:'Monitor de Gaming e Ping',navAntivirus:'Scanner antivírus',footerGaming:'Monitor de Gaming e Ping',footerAntivirus:'Scanner antivírus',ftPrivacy:'Privacidade',ftAccess:'Acessibilidade',ftImprint:'Aviso legal',ftTerms:'Termos de uso',ftNoSell:'Não vender meus dados'},
+  nl:{navGaming:'Gaming- en pingmonitor',navAntivirus:'Antivirusscanner',footerGaming:'Gaming- en pingmonitor',footerAntivirus:'Antivirusscanner',ftPrivacy:'Privacy',ftAccess:'Toegankelijkheid',ftImprint:'Juridische informatie',ftTerms:'Gebruiksvoorwaarden',ftNoSell:'Mijn gegevens niet verkopen'},
+  tr:{navGaming:'Oyun ve Ping Monitörü',navAntivirus:'Antivirüs Tarayıcı',footerGaming:'Oyun ve Ping Monitörü',footerAntivirus:'Antivirüs Tarayıcı',ftPrivacy:'Gizlilik',ftAccess:'Erişilebilirlik',ftImprint:'Yasal Bilgi',ftTerms:'Kullanım Şartları',ftNoSell:'Verilerimi satma'},
+  sq:{navGaming:'Monitori i Gaming dhe Ping',navAntivirus:'Skaneri antivirus',footerGaming:'Monitori i Gaming dhe Ping',footerAntivirus:'Skaneri antivirus',ftPrivacy:'Privatësia',ftAccess:'Aksesueshmëria',ftImprint:'Impressum',ftTerms:'Kushtet e përdorimit',ftNoSell:'Mos i shisni të dhënat e mia'},
+  ar:{navGaming:'مراقب الألعاب وPing',navAntivirus:'فحص مكافحة الفيروسات',footerGaming:'مراقب الألعاب وPing',footerAntivirus:'فحص مكافحة الفيروسات',ftPrivacy:'الخصوصية',ftAccess:'إمكانية الوصول',ftImprint:'الإشعار القانوني',ftTerms:'شروط الاستخدام',ftNoSell:'عدم بيع بياناتي'}
+};
+Object.keys(SHARED_TRANSLATIONS).forEach(lang=>Object.assign(I18N[lang]||{},SHARED_TRANSLATIONS[lang]));
+
+FQ20.init();
 
 /* ===================================================================
    WIRING
