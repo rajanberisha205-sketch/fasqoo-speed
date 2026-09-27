@@ -1,6 +1,7 @@
 /* ============================================================
    FASQOO – Tab-Navigation + Stabilität & Ping-Monitor
    Modern, minimalistisch, voll übersetzt (10 Sprachen)
+   FIXES: Server-Auswahl robuster, Sprachwechsel zuverlässig
    ============================================================ */
 (function(){
   'use strict';
@@ -9,7 +10,7 @@
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   /* ============================================================
-     ÜBERSETZUNGEN (10 Sprachen, synchron mit app.js)
+     ÜBERSETZUNGEN (10 Sprachen)
      ============================================================ */
   const PING_TRANSLATIONS = {
     en:{
@@ -334,43 +335,46 @@
     }
   };
 
-     function getCurrentLang(){
-    // 1) WICHTIG: documentElement.lang ist die Quelle der Wahrheit –
-    //    app.js setzt diesen Wert bei jedem Sprachwechsel.
+  /* ============================================================
+     SPRACHE ERMITTELN
+     Priorität: <html lang> → localStorage → Browser → "en"
+     ============================================================ */
+  function getCurrentLang(){
     const htmlLang = (document.documentElement.lang || '').slice(0,2).toLowerCase();
     if(PING_TRANSLATIONS[htmlLang]) return htmlLang;
 
-    // 2) Fallback: localStorage
     try{
       const stored = localStorage.getItem('fasqoo_lang');
       if(stored && PING_TRANSLATIONS[stored]) return stored;
     }catch(e){}
 
-    // 3) Fallback: Browser-Sprache
     const bLang = (navigator.language || 'en').slice(0,2).toLowerCase();
     if(PING_TRANSLATIONS[bLang]) return bLang;
 
-    // 4) Letzter Fallback
     return 'en';
   }
+
   function t(key){
     const lang = getCurrentLang();
     const dict = PING_TRANSLATIONS[lang] || PING_TRANSLATIONS.en;
     return dict[key] || PING_TRANSLATIONS.en[key] || key;
   }
 
+  /* ============================================================
+     ÜBERSETZUNG ANWENDEN
+     ============================================================ */
   function applyPingTranslations(){
     document.querySelectorAll('[data-ping-i18n]').forEach(el => {
       const key = el.getAttribute('data-ping-i18n');
       const val = t(key);
       if(val) el.textContent = val;
     });
-    // Chart Hint übersetzen, falls nicht im aktiven Messvorgang
+
     const hint = $('pingChartHint');
     if(hint && !hint.dataset.live){
       hint.textContent = t('chartHintIdle');
     }
-    // Status nur übersetzen, wenn nicht gerade am Messen
+
     if(!pingRunning){
       const status = $('pingStatus');
       if(status && !status.dataset.sticky){
@@ -378,7 +382,7 @@
         status.className = 'ping-status';
       }
     }
-    // Falls eine Messung gelaufen ist und wir fertig sind
+
     if(lastResult && !pingRunning){
       renderPingResults();
       renderHistory();
@@ -497,7 +501,7 @@
     const isDark = document.body.classList.contains('dark');
     pingCtx.clearRect(0, 0, w, h);
 
-    // Subtilere Grid
+    // Grid
     pingCtx.strokeStyle = isDark ? '#232830' : '#f0f2f5';
     pingCtx.lineWidth = 1;
     for(let i = 1; i < 4; i++){
@@ -658,7 +662,6 @@
       const loss = d.attempts ? ((d.attempts - ok) / d.attempts) * 100 : 0;
       const min = ok ? Math.min(...d.rtts) : 0;
       const max = ok ? Math.max(...d.rtts) : 0;
-      // Flag aus dem Server-Tile kopieren
       const tile = document.querySelector('.server-tile input[value="' + k + '"]');
       const flagSVG = tile ? tile.parentElement.querySelector('.flag').innerHTML : '';
       return (
@@ -709,13 +712,30 @@
   }
 
   /* ============================================================
+     SERVER-AUSWAHL (robust)
+     ============================================================ */
+  function getSelectedServers(){
+    const validKeys = Object.keys(SERVER_ENDPOINTS);
+    const selected = [];
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      if(cb.checked && validKeys.includes(cb.value)){
+        selected.push(cb.value);
+      }
+    });
+    return selected;
+  }
+
+  /* ============================================================
      MAIN TEST
      ============================================================ */
   async function runPingTest(){
     if(pingRunning) return;
 
-    const selected = Array.from(document.querySelectorAll('#pingServerList input:checked, .server-tile input:checked'))
-      .map(i => i.value);
+    const selected = getSelectedServers();
+
+    // Debug (nur in Console sichtbar)
+    console.log('[Fasqoo Ping] Ausgewählte Server:', selected);
+
     if(!selected.length){
       setPingStatus(t('statusSelectServer'), 'err', true);
       return;
@@ -840,21 +860,18 @@
     cv.width = W; cv.height = H;
     const c = cv.getContext('2d');
 
-    // Hintergrund
     const bg = c.createLinearGradient(0, 0, W, H);
     bg.addColorStop(0, '#0d0f12');
     bg.addColorStop(1, '#1a1f2b');
     c.fillStyle = bg;
     c.fillRect(0, 0, W, H);
 
-    // Orange Glow
     const glow = c.createRadialGradient(W*0.5, -80, 20, W*0.5, -80, 500);
     glow.addColorStop(0, 'rgba(255,90,31,.42)');
     glow.addColorStop(1, 'rgba(255,90,31,0)');
     c.fillStyle = glow;
     c.fillRect(0, 0, W, 320);
 
-    // Header
     c.fillStyle = '#ff5a1f';
     c.font = '800 44px Inter, system-ui, sans-serif';
     c.textBaseline = 'alphabetic';
@@ -868,7 +885,6 @@
     c.font = '400 16px Inter, system-ui, sans-serif';
     c.fillText(lastResult.date + '  ·  ' + lastResult.mode, 60, 168);
 
-    // Metriken
     const drawMetric = (x, label, value, unit, color) => {
       c.fillStyle = 'rgba(255,255,255,.55)';
       c.font = '700 14px Inter, system-ui, sans-serif';
@@ -885,7 +901,6 @@
     drawMetric(460, t('metricJitter'), lastResult.jitter.toFixed(1), 'ms', '#e6a500');
     drawMetric(840, t('metricLoss'),   lastResult.loss.toFixed(1),   '%',  '#16a36a');
 
-    // Server
     c.fillStyle = 'rgba(255,255,255,.55)';
     c.font = '600 14px Inter, system-ui, sans-serif';
     c.fillText(t('thServers').toUpperCase(), 60, 440);
@@ -893,12 +908,10 @@
     c.font = '500 16px Inter, system-ui, sans-serif';
     c.fillText(lastResult.servers.join('  ·  '), 60, 468);
 
-    // Footer
     c.fillStyle = 'rgba(255,255,255,.35)';
     c.font = '500 14px Inter, system-ui, sans-serif';
     c.fillText('www.fasqoo.com', 60, 580);
 
-    // Orange Linie
     const line = c.createLinearGradient(0, 0, W, 0);
     line.addColorStop(0, '#ff5a1f');
     line.addColorStop(1, 'rgba(255,90,31,0)');
@@ -935,27 +948,54 @@
   });
 
   /* ============================================================
-     SPRACHWECHSEL ERKENNEN
+     SPRACHWECHSEL ERKENNEN (robust)
      ============================================================ */
-  // a) Select in der Navigation
+  let lastAppliedLang = null;
+
+  function checkAndApplyLanguage(){
+    const current = getCurrentLang();
+    if(current !== lastAppliedLang){
+      lastAppliedLang = current;
+      applyPingTranslations();
+    }
+  }
+
+  // 1) Direkt am Dropdown lauschen
   const langSelect = document.getElementById('lang');
   if(langSelect){
     langSelect.addEventListener('change', () => {
-      setTimeout(applyPingTranslations, 60);
+      setTimeout(checkAndApplyLanguage, 30);
+    });
+    langSelect.addEventListener('input', () => {
+      setTimeout(checkAndApplyLanguage, 30);
     });
   }
-  // b) MutationObserver auf <html lang="...">
+
+  // 2) MutationObserver auf <html lang="...">
   const htmlObserver = new MutationObserver(() => {
-    setTimeout(applyPingTranslations, 20);
+    setTimeout(checkAndApplyLanguage, 10);
   });
-  htmlObserver.observe(document.documentElement, { attributes:true, attributeFilter:['lang'] });
-  // c) Custom-Event abfangen, falls app.js irgendwann eins wirft
-  window.addEventListener('fasqoo-lang-changed', () => setTimeout(applyPingTranslations, 20));
+  htmlObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['lang']
+  });
+
+  // 3) Polling als Sicherheitsnetz
+  let pollCount = 0;
+  const pollInterval = setInterval(() => {
+    checkAndApplyLanguage();
+    pollCount++;
+    if(pollCount > 20) clearInterval(pollInterval);
+  }, 400);
+
+  // 4) Bei Sichtbarkeitswechsel
+  document.addEventListener('visibilitychange', checkAndApplyLanguage);
 
   /* ============================================================
      INIT
      ============================================================ */
   applyPingTranslations();
+  lastAppliedLang = getCurrentLang();
   renderHistory();
   resizePingCanvas();
 
