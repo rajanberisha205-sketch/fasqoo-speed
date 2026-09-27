@@ -881,6 +881,42 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 </style>
 </head>
 <body>
+  <!-- Button zum Öffnen (Platzieren Sie diesen in Ihrer Menüleiste) -->
+<button id="auth-nav-btn" onclick="openAuthModal()" style="padding: 8px 16px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer;">
+  IT-Firmen Login
+</button>
+
+<!-- Das Login/Registrierungs-Fenster (Modal) -->
+<div id="auth-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+  <div style="background: #111; color: white; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; border: 1px solid #333; position: relative;">
+    
+    <!-- Schließen-Button -->
+    <span onclick="closeAuthModal()" style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px;">&times;</span>
+    
+    <!-- Überschrift -->
+    <h3 id="modal-title" style="margin-top: 0; margin-bottom: 20px; color: #0070f3;">Firmen-Registrierung</h3>
+    <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Speichern Sie Testergebnisse dauerhaft in der Cloud und exportieren Sie IT-Reports.</p>
+
+    <!-- Formular-Felder -->
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <input type="text" id="auth-company" placeholder="Firmenname" style="padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 4px;">
+      <input type="email" id="auth-email" placeholder="Geschäfts-E-Mail" style="padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 4px;">
+      <input type="password" id="auth-password" placeholder="Passwort (min. 6 Zeichen)" style="padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 4px;">
+      
+      <!-- Haupt-Aktionsbutton -->
+      <button id="auth-submit-btn" onclick="handleAuthSubmit()" style="padding: 12px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        Kostenlosen Account erstellen
+      </button>
+    </div>
+
+    <!-- Wechsellink zwischen Login und Registrierung -->
+    <p style="margin-top: 20px; font-size: 14px; text-align: center; color: #aaa;">
+      <span id="auth-toggle-text">Bereits registriert?</span> 
+      <a href="#" id="auth-toggle-link" onclick="toggleAuthMode(event)" style="color: #0070f3; text-decoration: none; font-weight: bold;">Hier anmelden</a>
+    </p>
+  </div>
+</div>
+
 <header>
   <div class="wrap nav">
     <div class="brand">
