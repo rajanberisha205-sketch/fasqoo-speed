@@ -881,7 +881,26 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 </style>
 </head>
 <body>
-  <!-- Button zum Öffnen (Platzieren Sie diesen in Ihrer Menüleiste) -->
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <a href="index.html" class="brand" aria-label="Fasqoo">
+        <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
+          <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
+          <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
+        </svg>
+        <div class="brandname">Fasqoo</div>
+      </a>
+    </div>
+
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
+      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
+    </button>
+    <div id="fasqoo-widget-container"></div>
+ <!-- Button zum Öffnen (Platzieren Sie diesen in Ihrer Menüleiste) -->
 <button id="auth-nav-btn" onclick="openAuthModal()" style="padding: 8px 16px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer;">
   IT-Firmen Login
 </button>
@@ -916,25 +935,6 @@ footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
     </p>
   </div>
 </div>
-
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <a href="index.html" class="brand" aria-label="Fasqoo">
-        <svg class="brandmark" viewBox="0 0 48 48" role="img" aria-label="Fasqoo" focusable="false">
-          <rect width="48" height="48" rx="11" fill="#ff5a1f"/>
-          <path d="M17 13h18v6H23v5h10v6H23v10h-6z" fill="#ffffff"/>
-        </svg>
-        <div class="brandname">Fasqoo</div>
-      </a>
-    </div>
-
-    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
-    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo for Windows">
-      <span class="win-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span id="installLabel" class="install-label" data-i18n="installApp">Install for Windows</span>
-    </button>
-    <div id="fasqoo-widget-container"></div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
 
