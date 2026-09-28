@@ -510,78 +510,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 </style>
 
-
 <style id="fasqoo-network-identity-css">
-/* Fasqoo Network Identity — isolated styles */
-.network-identity{margin:26px 0 0;padding:26px;border:1px solid var(--border,#252525);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));box-shadow:0 14px 45px rgba(0,0,0,.12)}
-.network-identity *{box-sizing:border-box}
-.ni-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:24px}
-.ni-head h2{margin:4px 0 6px;font-size:clamp(22px,3vw,32px);letter-spacing:-.035em}
-.ni-sub{margin:0;color:var(--muted,#8d8d8d);max-width:650px}
-.ni-live{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border,#252525);border-radius:999px;padding:8px 11px;font-size:10px;font-weight:800;letter-spacing:.12em;white-space:nowrap;color:var(--muted,#999)}
-.ni-live-dot{width:7px;height:7px;border-radius:50%;background:#36d399;box-shadow:0 0 0 4px rgba(54,211,153,.1)}
-.ni-main-grid{display:grid;grid-template-columns:minmax(280px,.95fr) minmax(300px,1.05fr);gap:14px}
-.ni-score-card,.ni-stat,.ni-share-row{border:1px solid var(--border,#252525);background:rgba(0,0,0,.12);border-radius:18px}
-.ni-score-card{padding:20px;display:flex;align-items:center;gap:20px;min-height:210px}
-.ni-score-ring{position:relative;width:156px;height:156px;flex:0 0 156px}
-.ni-score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ni-score-ring circle{fill:none;stroke-width:8}
-.ni-ring-track{stroke:rgba(255,255,255,.08)}
-.ni-ring-value{stroke:var(--accent,#ff5a1f);stroke-linecap:round;stroke-dasharray:314.159;stroke-dashoffset:314.159;transition:stroke-dashoffset .7s ease}
-.ni-score-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.ni-score-center strong{font-size:42px;line-height:1;letter-spacing:-.05em}
-.ni-score-center span{font-size:11px;color:var(--muted,#888);margin-top:5px}
-.ni-score-copy{min-width:0}
-.ni-label{display:block;font-size:10px;font-weight:900;letter-spacing:.13em;color:var(--muted,#888)}
-.ni-score-copy strong{display:block;font-size:23px;margin:5px 0}
-.ni-score-copy p{margin:0;color:var(--muted,#8d8d8d);font-size:13px;line-height:1.5}
-.ni-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.ni-stat{padding:17px;display:flex;gap:12px;align-items:center}
-.ni-stat-icon,.ni-empty-icon{width:38px;height:38px;display:grid;place-items:center;flex:0 0 38px;border-radius:12px;background:rgba(255,90,31,.09);color:var(--accent,#ff5a1f)}
-.ni-stat-icon svg,.ni-empty-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ni-stat span{display:block;color:var(--muted,#888);font-size:11px}
-.ni-stat strong{display:block;margin-top:3px;font-size:18px}
-.ni-badges-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:24px 0 12px}
-.ni-badges-head p{margin:4px 0 0;color:var(--muted,#888);font-size:12px}
-.ni-badge-count{font-size:11px;font-weight:800;padding:7px 10px;border-radius:999px;border:1px solid var(--border,#252525);color:var(--muted,#999)}
-.ni-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.ni-badge{padding:15px;border:1px solid var(--border,#252525);border-radius:16px;background:rgba(0,0,0,.10);min-height:108px}
-.ni-badge-icon{width:38px;height:38px;margin-bottom:10px;color:var(--accent,#ff5a1f)}
-.ni-badge-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ni-badge strong{display:block;font-size:13px}
-.ni-badge span{display:block;margin-top:3px;color:var(--muted,#888);font-size:11px;line-height:1.4}
-.ni-empty{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:15px;border:1px dashed var(--border,#303030);border-radius:16px;color:var(--muted,#888);font-size:12px}
-.ni-share-row{margin-top:16px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.ni-share-copy strong{display:block;font-size:15px}
-.ni-share-copy span{display:block;margin-top:4px;color:var(--muted,#888);font-size:12px;line-height:1.45}
-.ni-share-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
-.ni-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border,#2b2b2b);background:transparent;color:inherit;border-radius:11px;padding:10px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
-.ni-button:hover{border-color:rgba(255,90,31,.55);background:rgba(255,90,31,.07)}
-.ni-button:active{transform:translateY(1px)}
-.ni-button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ni-primary{background:var(--accent,#ff5a1f);border-color:var(--accent,#ff5a1f);color:#fff}
-.ni-primary:hover{background:var(--accent,#ff5a1f);border-color:var(--accent,#ff5a1f);filter:brightness(1.06)}
-.ni-status{min-height:18px;margin-top:9px;text-align:right;color:var(--muted,#888);font-size:11px}
-.svg-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-@media (max-width:800px){
-  .network-identity{padding:18px;border-radius:18px}
-  .ni-head{flex-direction:column}
-  .ni-main-grid{grid-template-columns:1fr}
-  .ni-badges{grid-template-columns:1fr 1fr}
-  .ni-share-row{align-items:flex-start;flex-direction:column}
-  .ni-share-actions{justify-content:flex-start}
-}
-@media (max-width:520px){
-  .ni-score-card{flex-direction:column;text-align:center}
-  .ni-score-copy{width:100%}
-  .ni-stat-grid{gap:8px}
-  .ni-stat{padding:13px}
-  .ni-badges{grid-template-columns:1fr}
-  .ni-share-actions{width:100%;display:grid;grid-template-columns:1fr}
-  .ni-button{width:100%}
-}
+.network-identity{margin:22px 0 0;padding:24px;border:1px solid var(--border);border-radius:var(--radius,18px);background:var(--card,rgba(255,255,255,.02));box-shadow:none;color:inherit}.network-identity *{box-sizing:border-box}.ni-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px}.ni-head h2{margin:3px 0 6px;font-size:clamp(22px,3vw,30px);letter-spacing:-.03em}.ni-sub{margin:0;color:var(--muted);max-width:650px;font-size:13px;line-height:1.5}.ni-live{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em;white-space:nowrap}.ni-live-dot{width:6px;height:6px;border-radius:50%;background:#36d399}.ni-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ni-score-card,.ni-stat,.ni-share-row{border:1px solid var(--border);background:var(--soft,rgba(255,255,255,.018));border-radius:var(--radius,18px)}.ni-score-card{padding:18px;display:flex;align-items:center;gap:18px;min-height:190px}.ni-score-ring{position:relative;width:145px;height:145px;flex:0 0 145px}.ni-score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}.ni-score-ring circle{fill:none;stroke-width:8}.ni-ring-track{stroke:rgba(255,255,255,.08)}.ni-ring-value{stroke:var(--accent,#ff5a1f);stroke-linecap:round;stroke-dasharray:314.159;stroke-dashoffset:314.159;transition:stroke-dashoffset .6s ease}.ni-score-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}.ni-score-center strong{font-size:40px;line-height:1}.ni-score-center span{font-size:10px;color:var(--muted);margin-top:5px}.ni-label{display:block;font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--muted)}.ni-score-copy strong{display:block;font-size:21px;margin:5px 0}.ni-score-copy p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.ni-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ni-stat{padding:15px;display:flex;gap:11px;align-items:center}.ni-stat-icon,.ni-empty-icon{width:36px;height:36px;display:grid;place-items:center;flex:0 0 36px;border-radius:10px;background:rgba(255,90,31,.08);color:var(--accent,#ff5a1f)}.ni-stat-icon svg,.ni-empty-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-stat span{display:block;color:var(--muted);font-size:10px}.ni-stat strong{display:block;margin-top:3px;font-size:17px}.ni-badges-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:20px 0 10px}.ni-badges-head p{margin:3px 0 0;color:var(--muted);font-size:11px}.ni-badge-count{font-size:10px;padding:6px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}.ni-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.ni-badge{padding:13px;border:1px solid var(--border);border-radius:14px;background:var(--soft,rgba(255,255,255,.015));min-height:100px}.ni-badge-icon{width:34px;height:34px;margin-bottom:8px;color:var(--accent,#ff5a1f)}.ni-badge-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-badge strong{display:block;font-size:12px}.ni-badge span{display:block;margin-top:3px;color:var(--muted);font-size:10px;line-height:1.4}.ni-empty{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:13px;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:11px}.ni-share-row{margin-top:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.ni-share-copy strong{display:block;font-size:14px}.ni-share-copy span{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.45}.ni-share-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}.ni-button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:transparent;color:inherit;border-radius:10px;padding:9px 11px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.ni-button:hover{border-color:rgba(255,90,31,.55);background:rgba(255,90,31,.06)}.ni-button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-primary{background:var(--accent,#ff5a1f);border-color:var(--accent,#ff5a1f);color:#fff}.ni-status{min-height:16px;margin-top:7px;text-align:right;color:var(--muted);font-size:10px}@media(max-width:800px){.ni-main-grid{grid-template-columns:1fr}.ni-head{flex-direction:column}.ni-badges{grid-template-columns:1fr 1fr}.ni-share-row{flex-direction:column;align-items:flex-start}.ni-share-actions{justify-content:flex-start}}@media(max-width:520px){.network-identity{padding:17px}.ni-score-card{flex-direction:column;text-align:center}.ni-score-copy{width:100%}.ni-badges{grid-template-columns:1fr}.ni-share-actions{width:100%;display:grid;grid-template-columns:1fr}.ni-button{justify-content:center}}
 </style>
-
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -906,110 +837,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <!-- ============================================================
-           NETWORK IDENTITY / SHARE
-           SVG icons only — no icon fonts, emojis or image assets.
-           ============================================================ -->
       <section class="network-identity" id="networkIdentity" aria-live="polite">
         <div class="ni-head">
           <div>
-            <div class="section-kicker">NETWORK IDENTITY</div>
-            <h2>Your internet has a score.</h2>
-            <p class="ni-sub">Turn your real Fasqoo measurements into a shareable network identity.</p>
+            <div class="section-kicker" data-ni-i18n="identityKicker">NETWORK IDENTITY</div>
+            <h2 data-ni-i18n="identityTitle">Your internet has a score.</h2>
+            <p class="ni-sub" data-ni-i18n="identitySub">Turn your real Fasqoo measurements into a shareable network identity.</p>
           </div>
-          <div class="ni-live">
-            <span class="ni-live-dot"></span>
-            <span>REAL MEASUREMENTS</span>
-          </div>
+          <div class="ni-live"><span class="ni-live-dot"></span><span data-ni-i18n="realMeasurements">REAL MEASUREMENTS</span></div>
         </div>
-
         <div class="ni-main-grid">
           <div class="ni-score-card">
-            <div class="ni-score-ring" id="niScoreRing" aria-label="Network score">
-              <svg viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="ni-ring-track" cx="60" cy="60" r="50"></circle>
-                <circle class="ni-ring-value" id="niRingValue" cx="60" cy="60" r="50"></circle>
-              </svg>
-              <div class="ni-score-center">
-                <strong id="niScore">—</strong>
-                <span>/100</span>
-              </div>
-            </div>
-            <div class="ni-score-copy">
-              <span class="ni-label">NETWORK SCORE</span>
-              <strong id="niIdentity">Not measured</strong>
-              <p id="niIdentitySub">Run a speed test to create your network identity.</p>
-            </div>
+            <div class="ni-score-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="ni-ring-track" cx="60" cy="60" r="50"></circle><circle class="ni-ring-value" id="niRingValue" cx="60" cy="60" r="50"></circle></svg><div class="ni-score-center"><strong id="niScore">—</strong><span>/100</span></div></div>
+            <div class="ni-score-copy"><span class="ni-label" data-ni-i18n="networkScore">NETWORK SCORE</span><strong id="niIdentity" data-ni-i18n="notMeasured">Not measured</strong><p id="niIdentitySub" data-ni-i18n="runTestIdentity">Run a speed test to create your network identity.</p></div>
           </div>
-
           <div class="ni-stat-grid">
-            <div class="ni-stat">
-              <div class="ni-stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 19 19 5"></path><path d="M7 5h12v12"></path><path d="M4 20 20 4"></path></svg>
-              </div>
-              <div><span>Download</span><strong id="niDownload">—</strong></div>
-            </div>
-            <div class="ni-stat">
-              <div class="ni-stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 5 19 19"></path><path d="M7 19H19V7"></path><path d="M4 4 20 20"></path></svg>
-              </div>
-              <div><span>Upload</span><strong id="niUpload">—</strong></div>
-            </div>
-            <div class="ni-stat">
-              <div class="ni-stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M2 12h4"></path><path d="M18 12h4"></path></svg>
-              </div>
-              <div><span>Ping</span><strong id="niPing">—</strong></div>
-            </div>
-            <div class="ni-stat">
-              <div class="ni-stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-7 2 4h5"></path></svg>
-              </div>
-              <div><span>Jitter</span><strong id="niJitter">—</strong></div>
-            </div>
+            <div class="ni-stat"><div class="ni-stat-icon"><svg viewBox="0 0 24 24"><path d="M5 19 19 5"></path><path d="M7 5h12v12"></path></svg></div><div><span data-ni-i18n="download">Download</span><strong id="niDownload">—</strong></div></div>
+            <div class="ni-stat"><div class="ni-stat-icon"><svg viewBox="0 0 24 24"><path d="M5 5 19 19"></path><path d="M7 19h12V7"></path></svg></div><div><span data-ni-i18n="upload">Upload</span><strong id="niUpload">—</strong></div></div>
+            <div class="ni-stat"><div class="ni-stat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg></div><div><span data-ni-i18n="ping">Ping</span><strong id="niPing">—</strong></div></div>
+            <div class="ni-stat"><div class="ni-stat-icon"><svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-7 2 4h5"></path></svg></div><div><span data-ni-i18n="jitter">Jitter</span><strong id="niJitter">—</strong></div></div>
           </div>
         </div>
-
-        <div class="ni-badges-head">
-          <div>
-            <span class="ni-label">YOUR BADGES</span>
-            <p>Earned from measured network characteristics.</p>
-          </div>
-          <span id="niBadgeCount" class="ni-badge-count">0 badges</span>
-        </div>
-
-        <div class="ni-badges" id="niBadges">
-          <div class="ni-empty">
-            <span class="ni-empty-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"></path></svg>
-            </span>
-            <span>Complete a real test to unlock your network badges.</span>
-          </div>
-        </div>
-
-        <div class="ni-share-row">
-          <div class="ni-share-copy">
-            <strong>Show your internet.</strong>
-            <span>Share your measured score, stats and badges — without exposing your IP address.</span>
-          </div>
-          <div class="ni-share-actions">
-            <button type="button" class="ni-button ni-primary" id="niShareImage">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>
-              <span>Share card</span>
-            </button>
-            <button type="button" class="ni-button" id="niChallenge">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12h8"></path><path d="m13 7 5 5-5 5"></path><path d="M4 5v14"></path></svg>
-              <span>Challenge</span>
-            </button>
-            <button type="button" class="ni-button" id="niCopyLink">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
-              <span>Copy link</span>
-            </button>
-          </div>
-        </div>
+        <div class="ni-badges-head"><div><span class="ni-label" data-ni-i18n="yourBadges">YOUR BADGES</span><p data-ni-i18n="badgesSub">Earned from measured network characteristics.</p></div><span id="niBadgeCount" class="ni-badge-count">0</span></div>
+        <div class="ni-badges" id="niBadges"><div class="ni-empty"><span class="ni-empty-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"></path></svg></span><span data-ni-i18n="badgesEmpty">Complete a real test to unlock your network badges.</span></div></div>
+        <div class="ni-share-row"><div class="ni-share-copy"><strong data-ni-i18n="showInternet">Show your internet.</strong><span data-ni-i18n="shareSub">Share your measured score, stats and badges — without exposing your IP address.</span></div><div class="ni-share-actions"><button type="button" class="ni-button ni-primary" id="niShareImage"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg><span data-ni-i18n="shareCard">Share card</span></button><button type="button" class="ni-button" id="niChallenge"><svg viewBox="0 0 24 24"><path d="M4 12h14M13 7l5 5-5 5"></path></svg><span data-ni-i18n="challenge">Challenge</span></button><button type="button" class="ni-button" id="niCopyLink"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg><span data-ni-i18n="copyLink">Copy link</span></button></div></div>
         <div class="ni-status" id="niStatus" role="status"></div>
       </section>
-
     </section>
 
     <div class="hero-trust">
@@ -1067,10 +920,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="section">
       <h2 data-i18n="diagTitle">Network Diagnostics</h2>
       <div class="tools">
-        <div class="tool"><div class="icon svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M2 12h4"></path><path d="M18 12h4"></path></svg></div><h3 data-i18n="diagLatT">Latency</h3><p data-i18n="diagLatD">Measures response time.</p></div>
-        <div class="tool"><div class="icon svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-7 2 4h5"></path></svg></div><h3 data-i18n="diagStabT">Stability</h3><p data-i18n="diagStabD">Jitter shows connection stability.</p></div>
-        <div class="tool"><div class="icon svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M4 12h16"></path><path d="M12 4c2.2 2.2 3.2 4.9 3.2 8s-1 5.8-3.2 8c-2.2-2.2-3.2-4.9-3.2-8S9.8 6.2 12 4Z"></path></svg></div><h3 data-i18n="diagDnsT">DNS Diagnostics</h3><p data-i18n="diagDnsD">Checks DNS resolvers.</p></div>
-        <div class="tool"><div class="icon svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M4 12h10"></path><path d="M4 17h16"></path><circle cx="18" cy="12" r="2"></circle></svg></div><h3 data-i18n="diagIpT">IP Diagnostics</h3><p data-i18n="diagIpD">Detects IP, ISP, ASN.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">⌁</div><h3 data-i18n="diagLatT">Latency</h3><p data-i18n="diagLatD">Measures response time.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">↯</div><h3 data-i18n="diagStabT">Stability</h3><p data-i18n="diagStabD">Jitter shows connection stability.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">DNS</div><h3 data-i18n="diagDnsT">DNS Diagnostics</h3><p data-i18n="diagDnsD">Checks DNS resolvers.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">IP</div><h3 data-i18n="diagIpT">IP Diagnostics</h3><p data-i18n="diagIpD">Detects IP, ISP, ASN.</p></div>
       </div>
     </section>
 
@@ -1451,343 +1304,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
-
 <script id="fasqoo-network-identity-js">
-(function(){
-  "use strict";
-
-  const $ = id => document.getElementById(id);
-  const textOf = id => ($(id)?.textContent || "").trim();
-
-  const ICONS = {
-    speed:'<svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 1 1 16 0"></path><path d="m12 12 5-5"></path><path d="M7 19h10"></path></svg>',
-    ping:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M2 12h4"></path><path d="M18 12h4"></path></svg>',
-    stable:'<svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-7 2 4h5"></path></svg>',
-    upload:'<svg viewBox="0 0 24 24"><path d="M12 19V5"></path><path d="m6 11 6-6 6 6"></path><path d="M5 20h14"></path></svg>',
-    badge:'<svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"></path></svg>'
-  };
-
-  let lastSignature = "";
-  let lastData = null;
-
-  function num(id){
-    const s = textOf(id).replace(",", ".");
-    const m = s.match(/-?\d+(?:\.\d+)?/);
-    return m ? Number(m[0]) : NaN;
-  }
-
-  function valid(n){ return Number.isFinite(n) && n >= 0; }
-
-  function readMetrics(){
-    const down = num("download");
-    const up = num("upload");
-    const ping = num("ping");
-    const jitter = num("jitter");
-    const loss = num("loss");
-    const bloat = num("bufferbloat");
-    const existingScore = num("score");
-
-    if(![down,up,ping,jitter].every(valid)) return null;
-
-    return {
-      down, up, ping, jitter,
-      loss: valid(loss) ? loss : null,
-      bloat: valid(bloat) ? bloat : null,
-      existingScore: valid(existingScore) ? existingScore : null
-    };
-  }
-
-  /*
-   * Score is derived only from measured values. No fallback measurement
-   * values are introduced. If the page already exposes Fasqoo's measured
-   * quality score, that score is used for the public Network Score.
-   */
-  function networkScore(m){
-    if(valid(m.existingScore)) return Math.max(0, Math.min(100, Math.round(m.existingScore)));
-
-    const speed = Math.min(100,
-      45 * Math.min(1, m.down / 100) +
-      35 * Math.min(1, m.up / 50) +
-      20 * Math.min(1, Math.log10(Math.max(1,m.down)) / 3)
-    );
-    const latency = 100 * Math.max(0, 1 - Math.min(1, m.ping / 150));
-    const jitter = 100 * Math.max(0, 1 - Math.min(1, m.jitter / 50));
-    const loss = m.loss == null ? 100 : 100 * Math.max(0, 1 - Math.min(1, m.loss / 5));
-    const bloat = m.bloat == null ? 100 : 100 * Math.max(0, 1 - Math.min(1, m.bloat / 300));
-    return Math.max(0, Math.min(100, Math.round(speed*.40 + latency*.25 + jitter*.15 + loss*.10 + bloat*.10)));
-  }
-
-  function identity(score){
-    if(score >= 90) return ["Elite Network","Fast, responsive and stable"];
-    if(score >= 80) return ["Excellent Network","Strong everyday performance"];
-    if(score >= 70) return ["Very Good Network","Solid performance with room to improve"];
-    if(score >= 55) return ["Good Network","Good connection with some limitations"];
-    if(score >= 40) return ["Fair Network","Several measured factors need attention"];
-    return ["Needs Attention","The measured connection has clear limitations"];
-  }
-
-  function badgeList(m){
-    const b = [];
-    if(m.down >= 100) b.push(["Speed Demon","100+ Mbps measured download",ICONS.speed]);
-    if(m.up >= 25) b.push(["Upload Beast","25+ Mbps measured upload",ICONS.upload]);
-    if(m.ping <= 20) b.push(["Ping God","20 ms or less measured ping",ICONS.ping]);
-    if(m.jitter <= 5) b.push(["Rock Solid","5 ms or less measured jitter",ICONS.stable]);
-    if(m.loss != null && m.loss === 0) b.push(["Clean Line","0% measured packet loss",ICONS.stable]);
-    if(m.bloat != null && m.bloat <= 30) b.push(["Clean Under Load","Low measured bufferbloat",ICONS.stable]);
-    return b.slice(0,6);
-  }
-
-  function fmt(n, unit){
-    if(!valid(n)) return "—";
-    const v = n >= 100 ? Math.round(n) : Math.round(n*10)/10;
-    return v + (unit || "");
-  }
-
-  function render(m){
-    const score = networkScore(m);
-    const [title, sub] = identity(score);
-    const badges = badgeList(m);
-
-    $("niScore").textContent = score;
-    $("niIdentity").textContent = title;
-    $("niIdentitySub").textContent = sub;
-    $("niDownload").textContent = fmt(m.down," Mbps");
-    $("niUpload").textContent = fmt(m.up," Mbps");
-    $("niPing").textContent = fmt(m.ping," ms");
-    $("niJitter").textContent = fmt(m.jitter," ms");
-
-    const ring = $("niRingValue");
-    if(ring){
-      const c = 2*Math.PI*50;
-      ring.style.strokeDasharray = c.toFixed(2);
-      ring.style.strokeDashoffset = (c*(1-score/100)).toFixed(2);
-    }
-
-    const box = $("niBadges");
-    box.innerHTML = "";
-    if(!badges.length){
-      box.innerHTML = '<div class="ni-empty"><span class="ni-empty-icon" aria-hidden="true">'+ICONS.badge+'</span><span>No threshold badge was earned by the measured values.</span></div>';
-    } else {
-      badges.forEach(([name,desc,icon])=>{
-        const el=document.createElement("div");
-        el.className="ni-badge";
-        el.innerHTML='<div class="ni-badge-icon" aria-hidden="true">'+icon+'</div><strong>'+name+'</strong><span>'+desc+'</span>';
-        box.appendChild(el);
-      });
-    }
-    $("niBadgeCount").textContent = badges.length + (badges.length === 1 ? " badge" : " badges");
-
-    lastData = { ...m, score, identity:title, badges:badges.map(x=>x[0]) };
-    return lastData;
-  }
-
-  function getData(){
-    const m = readMetrics();
-    if(!m) return null;
-    return render(m);
-  }
-
-  function setStatus(msg){
-    const el=$("niStatus");
-    if(el) el.textContent=msg;
-    clearTimeout(setStatus.t);
-    setStatus.t=setTimeout(()=>{ if(el) el.textContent=""; },3500);
-  }
-
-  function safePayload(){
-    const d = lastData || getData();
-    if(!d) return null;
-    return {
-      score:d.score, identity:d.identity,
-      down:Number(d.down.toFixed(2)), up:Number(d.up.toFixed(2)),
-      ping:Number(d.ping.toFixed(2)), jitter:Number(d.jitter.toFixed(2)),
-      loss:d.loss==null?null:Number(d.loss.toFixed(2)),
-      bloat:d.bloat==null?null:Number(d.bloat.toFixed(2)),
-      badges:d.badges
-    };
-  }
-
-  function challengeUrl(){
-    const p=safePayload();
-    if(!p) return null;
-    const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(p))));
-    return location.origin + location.pathname + "?challenge=" + encodeURIComponent(encoded);
-  }
-
-  async function copyText(s){
-    if(navigator.clipboard && window.isSecureContext){
-      await navigator.clipboard.writeText(s);
-      return true;
-    }
-    const ta=document.createElement("textarea");
-    ta.value=s; ta.style.position="fixed"; ta.style.opacity="0";
-    document.body.appendChild(ta); ta.select();
-    const ok=document.execCommand("copy");
-    ta.remove();
-    return ok;
-  }
-
-  function esc(s){
-    return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  }
-
-  function cardSvg(d){
-    const badgeText=d.badges.length ? d.badges.slice(0,3).join("  •  ") : "Measured network";
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101010"/><stop offset="1" stop-color="#191919"/></linearGradient>
-        <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a1f"/><stop offset="1" stop-color="#ff8a52"/></linearGradient>
-      </defs>
-      <rect width="1200" height="675" rx="34" fill="url(#bg)"/>
-      <circle cx="1080" cy="90" r="180" fill="#ff5a1f" opacity=".07"/>
-      <circle cx="112" cy="600" r="190" fill="#ff5a1f" opacity=".045"/>
-      <rect x="48" y="48" width="1104" height="579" rx="28" fill="none" stroke="#2b2b2b"/>
-      <text x="82" y="105" fill="#ff5a1f" font-family="Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="4">FASQOO</text>
-      <text x="82" y="143" fill="#888" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="2">NETWORK IDENTITY</text>
-      <circle cx="210" cy="305" r="112" fill="none" stroke="#292929" stroke-width="16"/>
-      <circle cx="210" cy="305" r="112" fill="none" stroke="url(#acc)" stroke-width="16" stroke-linecap="round" stroke-dasharray="703" stroke-dashoffset="${703*(1-d.score/100)}" transform="rotate(-90 210 305)"/>
-      <text x="210" y="318" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">${d.score}</text>
-      <text x="210" y="350" text-anchor="middle" fill="#777" font-family="Arial,sans-serif" font-size="15">/ 100</text>
-      <text x="370" y="245" fill="#fff" font-family="Arial,sans-serif" font-size="42" font-weight="800">${esc(d.identity)}</text>
-      <text x="370" y="278" fill="#888" font-family="Arial,sans-serif" font-size="17">Real browser measurement • no IP shown</text>
-      <g font-family="Arial,sans-serif">
-        <rect x="370" y="325" width="225" height="92" rx="18" fill="#141414" stroke="#292929"/>
-        <text x="394" y="355" fill="#777" font-size="13">DOWNLOAD</text><text x="394" y="391" fill="#fff" font-size="25" font-weight="800">${esc(fmt(d.down," Mbps"))}</text>
-        <rect x="615" y="325" width="225" height="92" rx="18" fill="#141414" stroke="#292929"/>
-        <text x="639" y="355" fill="#777" font-size="13">UPLOAD</text><text x="639" y="391" fill="#fff" font-size="25" font-weight="800">${esc(fmt(d.up," Mbps"))}</text>
-        <rect x="860" y="325" width="225" height="92" rx="18" fill="#141414" stroke="#292929"/>
-        <text x="884" y="355" fill="#777" font-size="13">PING / JITTER</text><text x="884" y="391" fill="#fff" font-size="25" font-weight="800">${esc(fmt(d.ping," ms"))} / ${esc(fmt(d.jitter," ms"))}</text>
-      </g>
-      <text x="82" y="520" fill="#777" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="1">BADGES</text>
-      <text x="82" y="553" fill="#fff" font-family="Arial,sans-serif" font-size="19" font-weight="700">${esc(badgeText)}</text>
-      <text x="82" y="596" fill="#555" font-family="Arial,sans-serif" font-size="13">fasqoo.com</text>
-    </svg>`;
-  }
-
-  async function shareCard(){
-    const d=safePayload();
-    if(!d){ setStatus("Run the speed test first."); return; }
-
-    const svg=cardSvg(d);
-    const blob=new Blob([svg],{type:"image/svg+xml;charset=utf-8"});
-    const url=URL.createObjectURL(blob);
-
-    try{
-      if(navigator.share && navigator.canShare){
-        const png=await svgToPng(blob);
-        const file=new File([png],"fasqoo-network-identity.png",{type:"image/png"});
-        if(navigator.canShare({files:[file]})){
-          await navigator.share({
-            title:"My Fasqoo Network Identity",
-            text:`My internet scored ${d.score}/100 on Fasqoo.`,
-            files:[file]
-          });
-          URL.revokeObjectURL(url);
-          return;
-        }
-      }
-      const a=document.createElement("a");
-      a.href=url; a.download="fasqoo-network-identity.svg"; a.click();
-      setStatus("Share card created as SVG.");
-    }catch(e){
-      const a=document.createElement("a");
-      a.href=url; a.download="fasqoo-network-identity.svg"; a.click();
-      setStatus("Share card saved as SVG.");
-    }finally{
-      setTimeout(()=>URL.revokeObjectURL(url),3000);
-    }
-  }
-
-  function svgToPng(blob){
-    return new Promise((resolve,reject)=>{
-      const u=URL.createObjectURL(blob), img=new Image();
-      img.onload=()=>{
-        const c=document.createElement("canvas"); c.width=1200; c.height=675;
-        const ctx=c.getContext("2d"); ctx.drawImage(img,0,0,1200,675);
-        c.toBlob(p=>{URL.revokeObjectURL(u); p?resolve(p):reject(new Error("PNG conversion failed"));},"image/png");
-      };
-      img.onerror=()=>{URL.revokeObjectURL(u);reject(new Error("SVG load failed"));};
-      img.src=u;
-    });
-  }
-
-  function readChallenge(){
-    const q=new URLSearchParams(location.search).get("challenge");
-    if(!q) return;
-    try{
-      const d=JSON.parse(decodeURIComponent(escape(atob(q))));
-      if(!d || !valid(Number(d.score))) return;
-      const title=document.querySelector(".network-identity h2");
-      if(title) title.textContent="Challenge received.";
-      setTimeout(()=>{
-        $("niScore").textContent=Math.round(d.score);
-        $("niIdentity").textContent=d.identity || "Fasqoo Network";
-        $("niIdentitySub").textContent="This result was shared as a challenge. Run your own test to compare real measurements.";
-        if(valid(Number(d.down))) $("niDownload").textContent=fmt(Number(d.down)," Mbps");
-        if(valid(Number(d.up))) $("niUpload").textContent=fmt(Number(d.up)," Mbps");
-        if(valid(Number(d.ping))) $("niPing").textContent=fmt(Number(d.ping)," ms");
-        if(valid(Number(d.jitter))) $("niJitter").textContent=fmt(Number(d.jitter)," ms");
-        const c=2*Math.PI*50, r=$("niRingValue");
-        if(r){r.style.strokeDasharray=c.toFixed(2);r.style.strokeDashoffset=(c*(1-Number(d.score)/100)).toFixed(2);}
-        $("niBadges").innerHTML=(d.badges||[]).map(x=>'<div class="ni-badge"><div class="ni-badge-icon" aria-hidden="true">'+ICONS.badge+'</div><strong>'+esc(x)+'</strong><span>Shared measured badge</span></div>').join("") || '<div class="ni-empty">Run your own test to create your network identity.</div>';
-        $("niBadgeCount").textContent=(d.badges||[]).length+" badges";
-        document.getElementById("networkIdentity")?.scrollIntoView({behavior:"smooth",block:"center"});
-      },500);
-    }catch(_){}
-  }
-
-  function observe(){
-    const ids=["download","upload","ping","jitter","loss","bufferbloat","score"];
-    const nodes=ids.map(id=>$(id)).filter(Boolean);
-    if(!nodes.length) return;
-
-    const observer=new MutationObserver(()=>{
-      const m=readMetrics();
-      if(!m) return;
-      const sig=[m.down,m.up,m.ping,m.jitter,m.loss,m.bloat,m.existingScore].join("|");
-      if(sig===lastSignature) return;
-      lastSignature=sig;
-      render(m);
-    });
-    nodes.forEach(n=>observer.observe(n,{childList:true,subtree:true,characterData:true}));
-
-    const timer=setInterval(()=>{
-      const m=readMetrics();
-      if(!m) return;
-      const sig=[m.down,m.up,m.ping,m.jitter,m.loss,m.bloat,m.existingScore].join("|");
-      if(sig!==lastSignature){lastSignature=sig;render(m);}
-    },1000);
-    window.addEventListener("beforeunload",()=>clearInterval(timer),{once:true});
-  }
-
-  document.addEventListener("DOMContentLoaded",()=>{
-    observe();
-    readChallenge();
-
-    $("niShareImage")?.addEventListener("click",shareCard);
-
-    $("niChallenge")?.addEventListener("click",async()=>{
-      const url=challengeUrl();
-      if(!url){setStatus("Run the speed test first.");return;}
-      try{
-        if(navigator.share){
-          await navigator.share({title:"Beat my Fasqoo score",text:`Can you beat my Fasqoo Network Score?`,url});
-        }else{
-          await copyText(url);
-          setStatus("Challenge link copied.");
-        }
-      }catch(_){}
-    });
-
-    $("niCopyLink")?.addEventListener("click",async()=>{
-      const url=challengeUrl();
-      if(!url){setStatus("Run the speed test first.");return;}
-      try{await copyText(url);setStatus("Challenge link copied.");}
-      catch(_){setStatus("Could not copy the link.");}
-    });
-  });
-})();
-</script>
-
+(function(){'use strict';
+const $=id=>document.getElementById(id), txt=id=>(($(id)||{}).textContent||'').trim();
+const LANGS={en:{identityKicker:'NETWORK IDENTITY',identityTitle:'Your internet has a score.',identitySub:'Turn your real Fasqoo measurements into a shareable network identity.',realMeasurements:'REAL MEASUREMENTS',networkScore:'NETWORK SCORE',notMeasured:'Not measured',runTestIdentity:'Run a speed test to create your network identity.',download:'Download',upload:'Upload',ping:'Ping',jitter:'Jitter',yourBadges:'YOUR BADGES',badgesSub:'Earned from measured network characteristics.',badgesEmpty:'Complete a real test to unlock your network badges.',showInternet:'Show your internet.',shareSub:'Share your measured score, stats and badges — without exposing your IP address.',shareCard:'Share card',challenge:'Challenge',copyLink:'Copy link',measuredBadge:'Measured network badge',copied:'Challenge link copied.',runFirst:'Run the speed test first.'},de:{identityKicker:'NETZWERK-IDENTITÄT',identityTitle:'Dein Internet hat einen Score.',identitySub:'Erstelle aus deinen echten Fasqoo-Messwerten eine teilbare Netzwerk-Identität.',realMeasurements:'ECHTE MESSWERTE',networkScore:'NETWORK SCORE',notMeasured:'Nicht gemessen',runTestIdentity:'Starte einen Speedtest, um deine Netzwerk-Identität zu erstellen.',download:'Download',upload:'Upload',ping:'Ping',jitter:'Jitter',yourBadges:'DEINE BADGES',badgesSub:'Basieren ausschließlich auf gemessenen Netzwerkdaten.',badgesEmpty:'Führe einen echten Test durch, um Badges freizuschalten.',showInternet:'Zeige dein Internet.',shareSub:'Teile Score, Messwerte und Badges — ohne deine IP-Adresse zu veröffentlichen.',shareCard:'Share-Karte',challenge:'Herausfordern',copyLink:'Link kopieren',measuredBadge:'Gemessenes Netzwerk-Badge',copied:'Challenge-Link kopiert.',runFirst:'Starte zuerst den Speedtest.'},fr:{identityKicker:'IDENTITÉ RÉSEAU',identityTitle:'Votre connexion a un score.',identitySub:'Transformez vos mesures Fasqoo réelles en identité réseau partageable.',realMeasurements:'MESURES RÉELLES',networkScore:'SCORE RÉSEAU',notMeasured:'Non mesuré',runTestIdentity:'Lancez un test pour créer votre identité réseau.',download:'Téléchargement',upload:'Envoi',ping:'Ping',jitter:'Gigue',yourBadges:'VOS BADGES',badgesSub:'Basés sur les caractéristiques réellement mesurées.',badgesEmpty:'Effectuez un test réel pour débloquer vos badges.',showInternet:'Montrez votre connexion.',shareSub:'Partagez votre score et vos mesures sans exposer votre adresse IP.',shareCard:'Carte à partager',challenge:'Défier',copyLink:'Copier le lien',measuredBadge:'Badge réseau mesuré',copied:'Lien du défi copié.',runFirst:'Lancez d’abord le test.'},es:{identityKicker:'IDENTIDAD DE RED',identityTitle:'Tu internet tiene una puntuación.',identitySub:'Convierte tus mediciones reales de Fasqoo en una identidad de red compartible.',realMeasurements:'MEDICIONES REALES',networkScore:'PUNTUACIÓN DE RED',notMeasured:'Sin medir',runTestIdentity:'Ejecuta una prueba para crear tu identidad de red.',download:'Descarga',upload:'Subida',ping:'Ping',jitter:'Jitter',yourBadges:'TUS INSIGNIAS',badgesSub:'Obtenidas a partir de características medidas.',badgesEmpty:'Completa una prueba real para desbloquear insignias.',showInternet:'Muestra tu internet.',shareSub:'Comparte tus datos sin mostrar tu dirección IP.',shareCard:'Tarjeta',challenge:'Desafiar',copyLink:'Copiar enlace',measuredBadge:'Insignia de red medida',copied:'Enlace copiado.',runFirst:'Ejecuta primero la prueba.'},it:{identityKicker:'IDENTITÀ DI RETE',identityTitle:'La tua connessione ha un punteggio.',identitySub:'Trasforma le misurazioni reali Fasqoo in un’identità di rete condivisibile.',realMeasurements:'MISURAZIONI REALI',networkScore:'PUNTEGGIO RETE',notMeasured:'Non misurato',runTestIdentity:'Esegui un test per creare la tua identità di rete.',download:'Download',upload:'Upload',ping:'Ping',jitter:'Jitter',yourBadges:'I TUOI BADGE',badgesSub:'Basati sulle caratteristiche realmente misurate.',badgesEmpty:'Completa un test reale per sbloccare i badge.',showInternet:'Mostra la tua connessione.',shareSub:'Condividi i risultati senza esporre il tuo indirizzo IP.',shareCard:'Scheda',challenge:'Sfida',copyLink:'Copia link',measuredBadge:'Badge rete misurato',copied:'Link copiato.',runFirst:'Esegui prima il test.'},pt:{identityKicker:'IDENTIDADE DA REDE',identityTitle:'A sua internet tem uma pontuação.',identitySub:'Transforme medições reais do Fasqoo numa identidade de rede partilhável.',realMeasurements:'MEDIÇÕES REAIS',networkScore:'PONTUAÇÃO DA REDE',notMeasured:'Não medido',runTestIdentity:'Execute um teste para criar a sua identidade de rede.',download:'Download',upload:'Upload',ping:'Ping',jitter:'Jitter',yourBadges:'OS SEUS BADGES',badgesSub:'Baseados em características medidas.',badgesEmpty:'Faça um teste real para desbloquear badges.',showInternet:'Mostre a sua internet.',shareSub:'Partilhe os resultados sem expor o seu IP.',shareCard:'Cartão',challenge:'Desafiar',copyLink:'Copiar link',measuredBadge:'Badge de rede medido',copied:'Link copiado.',runFirst:'Execute primeiro o teste.'},nl:{identityKicker:'NETWERKIDENTITEIT',identityTitle:'Je internet heeft een score.',identitySub:'Maak van je echte Fasqoo-metingen een deelbare netwerkidentiteit.',realMeasurements:'ECHTE METINGEN',networkScore:'NETWERKSCORE',notMeasured:'Niet gemeten',runTestIdentity:'Voer een test uit om je netwerkidentiteit te maken.',download:'Download',upload:'Upload',ping:'Ping',jitter:'Jitter',yourBadges:'JOUW BADGES',badgesSub:'Gebaseerd op gemeten netwerkeigenschappen.',badgesEmpty:'Voer een echte test uit om badges te ontgrendelen.',showInternet:'Laat je internet zien.',shareSub:'Deel je resultaten zonder je IP-adres te tonen.',shareCard:'Deelkaart',challenge:'Uitdagen',copyLink:'Link kopiëren',measuredBadge:'Gemeten netwerkbadge',copied:'Challenge-link gekopieerd.',runFirst:'Voer eerst de test uit.'},tr:{identityKicker:'AĞ KİMLİĞİ',identityTitle:'İnternetinin bir puanı var.',identitySub:'Gerçek Fasqoo ölçümlerini paylaşılabilir bir ağ kimliğine dönüştür.',realMeasurements:'GERÇEK ÖLÇÜMLER',networkScore:'AĞ PUANI',notMeasured:'Ölçülmedi',runTestIdentity:'Ağ kimliğini oluşturmak için testi çalıştır.',download:'İndirme',upload:'Yükleme',ping:'Ping',jitter:'Jitter',yourBadges:'ROZETLERİN',badgesSub:'Gerçek ölçülen ağ özelliklerinden kazanılır.',badgesEmpty:'Rozet kazanmak için gerçek bir test tamamla.',showInternet:'İnternetini göster.',shareSub:'IP adresini göstermeden sonuçlarını paylaş.',shareCard:'Paylaşım kartı',challenge:'Meydan oku',copyLink:'Bağlantıyı kopyala',measuredBadge:'Ölçülen ağ rozeti',copied:'Meydan okuma bağlantısı kopyalandı.',runFirst:'Önce testi çalıştır.'},sq:{identityKicker:'IDENTITETI I RRJETIT',identityTitle:'Interneti yt ka një rezultat.',identitySub:'Kthe matjet reale të Fasqoo në një identitet rrjeti për t’u ndarë.',realMeasurements:'MATJE REALE',networkScore:'REZULTATI I RRJETIT',notMeasured:'Nuk është matur',runTestIdentity:'Nis testin për të krijuar identitetin e rrjetit.',download:'Shkarkim',upload:'Ngarkim',ping:'Ping',jitter:'Jitter',yourBadges:'BADGET E TUA',badgesSub:'Bazohen vetëm në karakteristikat e matura.',badgesEmpty:'Përfundo një test real për të fituar badge.',showInternet:'Trego internetin tënd.',shareSub:'Ndaj rezultatin pa ekspozuar adresën IP.',shareCard:'Kartë për ndarje',challenge:'Sfido',copyLink:'Kopjo lidhjen',measuredBadge:'Badge i rrjetit',copied:'Lidhja u kopjua.',runFirst:'Nis fillimisht testin.'},ar:{identityKicker:'هوية الشبكة',identityTitle:'لديك نتيجة لاتصال الإنترنت.',identitySub:'حوّل قياسات Fasqoo الحقيقية إلى هوية شبكة قابلة للمشاركة.',realMeasurements:'قياسات حقيقية',networkScore:'نتيجة الشبكة',notMeasured:'لم يتم القياس',runTestIdentity:'شغّل الاختبار لإنشاء هوية الشبكة.',download:'التنزيل',upload:'الرفع',ping:'Ping',jitter:'التذبذب',yourBadges:'الشارات الخاصة بك',badgesSub:'تعتمد على خصائص الشبكة المقاسة فعلياً.',badgesEmpty:'أكمل اختباراً حقيقياً لفتح الشارات.',showInternet:'شارك اتصالك.',shareSub:'شارك النتائج دون كشف عنوان IP.',shareCard:'بطاقة المشاركة',challenge:'تحدّ',copyLink:'نسخ الرابط',measuredBadge:'شارة شبكة مقاسة',copied:'تم نسخ رابط التحدي.',runFirst:'شغّل الاختبار أولاً.'}};
+function lang(){let l=document.documentElement.lang||localStorage.getItem('fasqoo_lang')||navigator.language||'en';l=l.toLowerCase().split('-')[0];return LANGS[l]?l:'en'}
+function tr(k){return (LANGS[lang()]||LANGS.en)[k]||LANGS.en[k]||k}
+function translate(){document.querySelectorAll('[data-ni-i18n]').forEach(e=>{e.textContent=tr(e.getAttribute('data-ni-i18n'))});if($('niBadgeCount')&&!lastBadgesRendered)$('niBadgeCount').textContent='0';}
+let lastSig='',lastBadgesRendered=false,lastData=null;
+function n(id){const s=txt(id).replace(',','.');const m=s.match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):NaN}function ok(x){return Number.isFinite(x)&&x>=0}
+function metrics(){const d=n('download'),u=n('upload'),p=n('ping'),j=n('jitter'),l=n('loss'),b=n('bufferbloat'),s=n('score');if(![d,u,p,j].every(ok))return null;return{d,u,p,j,l:ok(l)?l:null,b:ok(b)?b:null,s:ok(s)?s:null}}
+function score(m){if(ok(m.s))return Math.max(0,Math.min(100,Math.round(m.s)));const speed=Math.min(100,45*Math.min(1,m.d/100)+35*Math.min(1,m.u/50)+20*Math.min(1,Math.log10(Math.max(1,m.d))/3));const lat=100*(1-Math.min(1,m.p/150)),jit=100*(1-Math.min(1,m.j/50)),loss=m.l==null?100:100*(1-Math.min(1,m.l/5)),bb=m.b==null?100:100*(1-Math.min(1,m.b/300));return Math.max(0,Math.min(100,Math.round(speed*.4+lat*.25+jit*.15+loss*.1+bb*.1)))}
+function identity(x){if(x>=90)return[tr('elite')||'Elite Network',tr('eliteSub')||'Fast, responsive and stable'];if(x>=80)return[tr('excellent')||'Excellent Network',tr('excellentSub')||'Strong everyday performance'];if(x>=70)return[tr('veryGood')||'Very Good Network',tr('veryGoodSub')||'Solid performance with room to improve'];if(x>=55)return[tr('good')||'Good Network',tr('goodSub')||'Good connection with some limitations'];if(x>=40)return[tr('fair')||'Fair Network',tr('fairSub')||'Several measured factors need attention'];return[tr('attention')||'Needs Attention',tr('attentionSub')||'The measured connection has clear limitations']}
+const icons={speed:'<svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 1 1 16 0"></path><path d="m12 12 5-5"></path></svg>',ping:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg>',stable:'<svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-7 2 4h5"></path></svg>',upload:'<svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg>',badge:'<svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"></path></svg>'};
+function fmt(x,u){if(!ok(x))return'—';return(Math.round((x>=100?x:x*10))/10)+u}
+function render(m){const sc=score(m), id=identity(sc), b=[];if(m.d>=100)b.push(['Speed Demon','100+ Mbps measured download',icons.speed]);if(m.u>=25)b.push(['Upload Beast','25+ Mbps measured upload',icons.upload]);if(m.p<=20)b.push(['Ping God','20 ms or less measured ping',icons.ping]);if(m.j<=5)b.push(['Rock Solid','5 ms or less measured jitter',icons.stable]);if(m.l!=null&&m.l===0)b.push(['Clean Line','0% measured packet loss',icons.stable]);if(m.b!=null&&m.b<=30)b.push(['Clean Under Load','Low measured bufferbloat',icons.stable]);$('niScore').textContent=sc;$('niIdentity').textContent=id[0];$('niIdentitySub').textContent=id[1];$('niDownload').textContent=fmt(m.d,' Mbps');$('niUpload').textContent=fmt(m.u,' Mbps');$('niPing').textContent=fmt(m.p,' ms');$('niJitter').textContent=fmt(m.j,' ms');const c=2*Math.PI*50,r=$('niRingValue');r.style.strokeDasharray=c;r.style.strokeDashoffset=c*(1-sc/100);$('niBadges').innerHTML=b.length?b.map(x=>'<div class="ni-badge"><div class="ni-badge-icon">'+x[2]+'</div><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>').join(''):'<div class="ni-empty"><span class="ni-empty-icon">'+icons.badge+'</span><span>'+tr('badgesEmpty')+'</span></div>';$('niBadgeCount').textContent=b.length+(b.length===1?' badge':' badges');lastBadgesRendered=true;lastData={...m,score:sc,identity:id[0],badges:b.map(x=>x[0])}}
+function observe(){const ids=['download','upload','ping','jitter','loss','bufferbloat','score'],nodes=ids.map($).filter(Boolean);const check=()=>{translate();const m=metrics();if(!m)return;const sig=[m.d,m.u,m.p,m.j,m.l,m.b,m.s].join('|');if(sig!==lastSig){lastSig=sig;render(m)}};new MutationObserver(check).observe(document.body,{subtree:true,childList:true,characterData:true});setInterval(check,1200);check()}
+async function ensureNetworkInfo(){const ids=['ip','isp','loc','asn'];if(ids.every(id=>{const v=txt(id);return v&&v!=='…'&&v!=='—'&&v.toLowerCase()!=='not available'&&v.toLowerCase()!=='nicht verfügbar'}))return;try{const r=await fetch('https://ipwho.is/',{cache:'no-store'});if(!r.ok)return;const d=await r.json();if(!d.success)return;if($('ip')&&txt('ip')==='…')$('ip').textContent=d.ip||'Not available';if($('isp')&&txt('isp')==='…')$('isp').textContent=d.connection?.isp||d.connection?.org||'Not available';if($('loc')&&txt('loc')==='…')$('loc').textContent=[d.city,d.region,d.country].filter(Boolean).join(', ')||'Not available';if($('asn')&&txt('asn')==='…')$('asn').textContent=d.connection?.asn?('AS'+String(d.connection.asn).replace(/^AS/i,'')):'Not available'}catch(e){}}
+function payload(){return lastData?btoa(unescape(encodeURIComponent(JSON.stringify(lastData)))):null}
+async function copy(s){if(navigator.clipboard)return navigator.clipboard.writeText(s);const t=document.createElement('textarea');t.value=s;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
+function status(s){$('niStatus').textContent=s;setTimeout(()=>{$('niStatus').textContent=''},2500)}
+document.addEventListener('DOMContentLoaded',()=>{translate();observe();setTimeout(ensureNetworkInfo,1800);new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});$('niCopyLink')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}await copy(location.origin+location.pathname+'?challenge='+encodeURIComponent(payload()));status(tr('copied'))});$('niChallenge')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}const url=location.origin+location.pathname+'?challenge='+encodeURIComponent(payload());if(navigator.share){try{await navigator.share({title:'Fasqoo Network Challenge',url})}catch(e){}}else{await copy(url);status(tr('copied'))}});$('niShareImage')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="1200" height="675" fill="#111"/><text x="70" y="100" fill="#ff5a1f" font-family="Arial" font-size="28" font-weight="700">FASQOO</text><text x="70" y="145" fill="#fff" font-family="Arial" font-size="46" font-weight="700">'+lastData.score+'/100</text><text x="70" y="190" fill="#aaa" font-family="Arial" font-size="22">'+lastData.identity+'</text><text x="70" y="280" fill="#fff" font-family="Arial" font-size="24">Download  '+lastData.d.toFixed(1)+' Mbps</text><text x="70" y="325" fill="#fff" font-family="Arial" font-size="24">Upload  '+lastData.u.toFixed(1)+' Mbps</text><text x="70" y="370" fill="#fff" font-family="Arial" font-size="24">Ping  '+lastData.p.toFixed(1)+' ms</text><text x="70" y="415" fill="#fff" font-family="Arial" font-size="24">Jitter  '+lastData.j.toFixed(1)+' ms</text><text x="70" y="550" fill="#666" font-family="Arial" font-size="16">fasqoo.com</text></svg>';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));a.download='fasqoo-network-identity.svg';a.click();status(tr('shareCard'))})});
+})();</script>
 </body>
 </html>
