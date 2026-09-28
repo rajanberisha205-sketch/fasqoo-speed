@@ -513,6 +513,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style id="fasqoo-network-identity-css">
 .network-identity{margin:22px 0 0;padding:24px;border:1px solid var(--border);border-radius:var(--radius,18px);background:var(--card,rgba(255,255,255,.02));box-shadow:none;color:inherit}.network-identity *{box-sizing:border-box}.ni-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px}.ni-head h2{margin:3px 0 6px;font-size:clamp(22px,3vw,30px);letter-spacing:-.03em}.ni-sub{margin:0;color:var(--muted);max-width:650px;font-size:13px;line-height:1.5}.ni-live{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em;white-space:nowrap}.ni-live-dot{width:6px;height:6px;border-radius:50%;background:#36d399}.ni-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ni-score-card,.ni-stat,.ni-share-row{border:1px solid var(--border);background:var(--soft,rgba(255,255,255,.018));border-radius:var(--radius,18px)}.ni-score-card{padding:18px;display:flex;align-items:center;gap:18px;min-height:190px}.ni-score-ring{position:relative;width:145px;height:145px;flex:0 0 145px}.ni-score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}.ni-score-ring circle{fill:none;stroke-width:8}.ni-ring-track{stroke:rgba(255,255,255,.08)}.ni-ring-value{stroke:var(--accent,#ff5a1f);stroke-linecap:round;stroke-dasharray:314.159;stroke-dashoffset:314.159;transition:stroke-dashoffset .6s ease}.ni-score-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}.ni-score-center strong{font-size:40px;line-height:1}.ni-score-center span{font-size:10px;color:var(--muted);margin-top:5px}.ni-label{display:block;font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--muted)}.ni-score-copy strong{display:block;font-size:21px;margin:5px 0}.ni-score-copy p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.ni-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ni-stat{padding:15px;display:flex;gap:11px;align-items:center}.ni-stat-icon,.ni-empty-icon{width:36px;height:36px;display:grid;place-items:center;flex:0 0 36px;border-radius:10px;background:rgba(255,90,31,.08);color:var(--accent,#ff5a1f)}.ni-stat-icon svg,.ni-empty-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-stat span{display:block;color:var(--muted);font-size:10px}.ni-stat strong{display:block;margin-top:3px;font-size:17px}.ni-badges-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:20px 0 10px}.ni-badges-head p{margin:3px 0 0;color:var(--muted);font-size:11px}.ni-badge-count{font-size:10px;padding:6px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}.ni-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.ni-badge{padding:13px;border:1px solid var(--border);border-radius:14px;background:var(--soft,rgba(255,255,255,.015));min-height:100px}.ni-badge-icon{width:34px;height:34px;margin-bottom:8px;color:var(--accent,#ff5a1f)}.ni-badge-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-badge strong{display:block;font-size:12px}.ni-badge span{display:block;margin-top:3px;color:var(--muted);font-size:10px;line-height:1.4}.ni-empty{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:13px;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:11px}.ni-share-row{margin-top:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.ni-share-copy strong{display:block;font-size:14px}.ni-share-copy span{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.45}.ni-share-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}.ni-button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:transparent;color:inherit;border-radius:10px;padding:9px 11px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.ni-button:hover{border-color:rgba(255,90,31,.55);background:rgba(255,90,31,.06)}.ni-button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ni-primary{background:var(--accent,#ff5a1f);border-color:var(--accent,#ff5a1f);color:#fff}.ni-status{min-height:16px;margin-top:7px;text-align:right;color:var(--muted);font-size:10px}@media(max-width:800px){.ni-main-grid{grid-template-columns:1fr}.ni-head{flex-direction:column}.ni-badges{grid-template-columns:1fr 1fr}.ni-share-row{flex-direction:column;align-items:flex-start}.ni-share-actions{justify-content:flex-start}}@media(max-width:520px){.network-identity{padding:17px}.ni-score-card{flex-direction:column;text-align:center}.ni-score-copy{width:100%}.ni-badges{grid-template-columns:1fr}.ni-share-actions{width:100%;display:grid;grid-template-columns:1fr}.ni-button{justify-content:center}}
 </style>
+
+<style id="fasqoo-network-identity-light-fix">
+/* Keep the Network Identity visually consistent with Fasqoo, but lighten the grey surfaces. */
+.network-identity,
+.ni-score-card,
+.ni-stat,
+.ni-share-row,
+.ni-badge {
+  background: rgba(255,255,255,.055) !important;
+}
+.ni-score-card,
+.ni-stat,
+.ni-share-row,
+.ni-badge {
+  border-color: rgba(255,255,255,.12) !important;
+}
+.ni-empty {
+  background: rgba(255,255,255,.035) !important;
+  border-color: rgba(255,255,255,.15) !important;
+}
+.ni-head h2,
+.ni-score-copy strong,
+.ni-stat strong,
+.ni-badge strong,
+.ni-share-copy strong {
+  color: var(--text, #f5f5f5);
+}
+</style>
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1326,5 +1355,85 @@ async function copy(s){if(navigator.clipboard)return navigator.clipboard.writeTe
 function status(s){$('niStatus').textContent=s;setTimeout(()=>{$('niStatus').textContent=''},2500)}
 document.addEventListener('DOMContentLoaded',()=>{translate();observe();setTimeout(ensureNetworkInfo,1800);new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});$('niCopyLink')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}await copy(location.origin+location.pathname+'?challenge='+encodeURIComponent(payload()));status(tr('copied'))});$('niChallenge')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}const url=location.origin+location.pathname+'?challenge='+encodeURIComponent(payload());if(navigator.share){try{await navigator.share({title:'Fasqoo Network Challenge',url})}catch(e){}}else{await copy(url);status(tr('copied'))}});$('niShareImage')?.addEventListener('click',async()=>{if(!lastData){status(tr('runFirst'));return}const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="1200" height="675" fill="#111"/><text x="70" y="100" fill="#ff5a1f" font-family="Arial" font-size="28" font-weight="700">FASQOO</text><text x="70" y="145" fill="#fff" font-family="Arial" font-size="46" font-weight="700">'+lastData.score+'/100</text><text x="70" y="190" fill="#aaa" font-family="Arial" font-size="22">'+lastData.identity+'</text><text x="70" y="280" fill="#fff" font-family="Arial" font-size="24">Download  '+lastData.d.toFixed(1)+' Mbps</text><text x="70" y="325" fill="#fff" font-family="Arial" font-size="24">Upload  '+lastData.u.toFixed(1)+' Mbps</text><text x="70" y="370" fill="#fff" font-family="Arial" font-size="24">Ping  '+lastData.p.toFixed(1)+' ms</text><text x="70" y="415" fill="#fff" font-family="Arial" font-size="24">Jitter  '+lastData.j.toFixed(1)+' ms</text><text x="70" y="550" fill="#666" font-family="Arial" font-size="16">fasqoo.com</text></svg>';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));a.download='fasqoo-network-identity.svg';a.click();status(tr('shareCard'))})});
 })();</script>
+
+<script id="fasqoo-network-identity-i18n-fix">
+(function(){
+  const T = {
+    de: {
+      title:"Dein Internet hat einen Score.",
+      sub:"Verwandle deine echten Fasqoo-Messwerte in eine teilbare Netzwerk-Identität."
+    },
+    en: {
+      title:"Your internet has a score.",
+      sub:"Turn your real Fasqoo measurements into a shareable network identity."
+    },
+    fr: {
+      title:"Votre connexion Internet a un score.",
+      sub:"Transformez vos mesures Fasqoo réelles en une identité réseau partageable."
+    },
+    es: {
+      title:"Tu Internet tiene una puntuación.",
+      sub:"Convierte tus mediciones reales de Fasqoo en una identidad de red para compartir."
+    },
+    it: {
+      title:"La tua connessione ha un punteggio.",
+      sub:"Trasforma le tue misurazioni Fasqoo reali in un'identità di rete condivisibile."
+    },
+    pt: {
+      title:"A sua Internet tem uma pontuação.",
+      sub:"Transforme as suas medições reais do Fasqoo numa identidade de rede partilhável."
+    },
+    nl: {
+      title:"Jouw internet heeft een score.",
+      sub:"Maak van je echte Fasqoo-metingen een deelbare netwerkidentiteit."
+    },
+    tr: {
+      title:"İnternet bağlantının bir skoru var.",
+      sub:"Gerçek Fasqoo ölçümlerinizi paylaşılabilir bir ağ kimliğine dönüştürün."
+    },
+    sq: {
+      title:"Interneti juaj ka një rezultat.",
+      sub:"Kthejini matjet reale të Fasqoo në një identitet rrjeti që mund ta ndani."
+    },
+    ar: {
+      title:"لديك درجة لاتصالك بالإنترنت.",
+      sub:"حوّل قياسات Fasqoo الحقيقية إلى هوية شبكة قابلة للمشاركة."
+    }
+  };
+
+  function lang(){
+    const htmlLang=(document.documentElement.lang||"en").toLowerCase().slice(0,2);
+    const selector=document.querySelector('[data-language],#languageSelect,.language-select,select[aria-label*="language" i]');
+    const v=selector && selector.value ? selector.value.toLowerCase().slice(0,2) : "";
+    return T[v] ? v : (T[htmlLang] ? htmlLang : "en");
+  }
+
+  function apply(){
+    const t=T[lang()]||T.en;
+    const title=document.querySelector('[data-i18n="networkIdentityTitle"]');
+    const sub=document.querySelector('[data-i18n="networkIdentitySub"]');
+    if(title) title.textContent=t.title;
+    if(sub) sub.textContent=t.sub;
+  }
+
+  // Run after the page's normal translation code, and again after language changes.
+  document.addEventListener("DOMContentLoaded",()=>{
+    apply();
+    setTimeout(apply,250);
+    setTimeout(apply,1000);
+
+    const root=document.documentElement;
+    new MutationObserver(()=>apply()).observe(root,{attributes:true,attributeFilter:["lang"]});
+
+    document.addEventListener("click",()=>{
+      setTimeout(apply,50);
+      setTimeout(apply,300);
+    },true);
+  });
+
+  window.fasqooNetworkIdentityTranslate=apply;
+})();
+</script>
+
 </body>
 </html>
