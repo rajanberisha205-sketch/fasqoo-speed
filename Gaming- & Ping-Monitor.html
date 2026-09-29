@@ -19,14 +19,14 @@
 <meta name="robots" content="index, follow">
 <title>Fasqoo Gaming- &amp; Ping-Monitor – Live Ping &amp; Jitter zu Gaming-Servern</title>
 <link rel="canonical" href="https://www.fasqoo.com/ping-monitor.html">
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="manifest" href="/site.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Fasqoo Gaming & Ping Monitor","url":"https://www.fasqoo.com/ping-monitor.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web Browser","description":"Real-time ping and jitter monitor for the most popular gaming servers. Free, browser-based, no account required.","publisher":{"@type":"Organization","name":"Fasqoo","url":"https://www.fasqoo.com/"}}
 </script>
@@ -121,20 +121,9 @@ a.brand:hover .brandmark{box-shadow:0 8px 22px rgba(255,90,31,.42);transform:tra
 }
 .lite-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
 
-.install-btn{
-  height:35px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;
-  font-size:12px;font-weight:500;white-space:nowrap;
-  transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;
-}
-.install-btn:hover{background:var(--soft);border-color:#bfc7d1;box-shadow:0 3px 10px rgba(0,0,0,.05)}
-.install-btn[hidden]{display:none}
-.win-icon{width:15px;height:15px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex:0 0 15px}
-.win-icon i{display:block;background:currentColor}
 
 .menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:20px;color:var(--text)}
 
-@media(max-width:900px){.install-btn{display:none!important}}
 @media(max-width:760px){
   .menu-toggle{display:block}
   .main-menu{
@@ -870,6 +859,101 @@ body:not(.dark) .fq-gsd .fq-gsd-title,body:not(.dark) .fq-gsd .fq-gsd-group-titl
 .fq-esports-section .fq20-actions{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
 .fq-esports-section .fq20-actions .fq20-status{font-size:.9rem;color:var(--muted);text-align:center}
 .fq-esports-cards{margin-top:28px}
+
+/* ==========================================================
+   FASQOO PRO GAMING HUD OVERRIDES
+   ========================================================== */
+:root{--bg:#0b0c10;--card:#151922;--soft:#10141b;--text:#eef3f8;--muted:#8e9aaa;--line:rgba(255,255,255,.09);--orange:#ff8a24;--orange-2:#ffb347;--success:#22e38b;--warn:#ff9d2e;--danger:#ff405b;--cyan:#55d6ff;--radius:18px;--shadow:0 20px 60px rgba(0,0,0,.32)}
+body{font-family:Inter,system-ui,sans-serif;background:#0b0c10;color:var(--text);position:relative}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.055;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(255,255,255,.16) 4px);animation:fqScan 9s linear infinite}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(85,214,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(85,214,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle at center,#000 0%,rgba(0,0,0,.75) 55%,transparent 100%)}
+@keyframes fqScan{from{transform:translateY(-4px)}to{transform:translateY(4px)}}
+header{background:rgba(9,12,16,.82);border-bottom:1px solid rgba(85,214,255,.10);box-shadow:0 10px 35px rgba(0,0,0,.28)}
+.brandname,.brandmark{filter:drop-shadow(0 0 12px rgba(255,138,36,.18))}
+.brandname{font-family:Rajdhani,sans-serif;letter-spacing:.4px}.brand{position:relative}.brand:after{content:"";position:absolute;left:12px;top:20px;width:16px;height:1px;background:rgba(85,214,255,.85);box-shadow:0 0 8px rgba(85,214,255,.5);pointer-events:none}.brand:before{content:"";position:absolute;left:19px;top:13px;width:1px;height:16px;background:rgba(85,214,255,.85);box-shadow:0 0 8px rgba(85,214,255,.5);pointer-events:none}
+.brandmark{border-radius:12px}
+.main-menu>a,.nav-dropdown-toggle{color:#cbd4df}
+.main-menu>a:hover,.nav-dropdown-toggle:hover,.main-menu>a.active,.nav-dropdown-toggle.active{color:var(--cyan)}
+.main-menu>a:after{background:var(--cyan)}
+.nav-dropdown-menu{background:rgba(17,22,29,.97);border-color:rgba(85,214,255,.12);box-shadow:0 28px 80px rgba(0,0,0,.55)}
+.nav-dropdown-menu:before{background:rgba(17,22,29,.97);border-color:rgba(85,214,255,.12)}
+.nav-mega-item{color:#dce5ee!important}.nav-mega-item:hover{background:linear-gradient(135deg,rgba(85,214,255,.08),rgba(255,138,36,.05));box-shadow:0 8px 25px rgba(0,0,0,.22)}
+.hero{background:linear-gradient(135deg,rgba(21,25,34,.88),rgba(11,14,19,.72));border-color:rgba(85,214,255,.10);box-shadow:inset 0 1px rgba(255,255,255,.04),0 25px 80px rgba(0,0,0,.20)}
+.hero h1,.fq20 h2,.section-head h2,.category-head h2{font-family:Rajdhani,Inter,sans-serif}
+.hero h1 .accent{background:linear-gradient(135deg,#55d6ff,#ff8a24);-webkit-background-clip:text;background-clip:text}
+.control-card,.summary-card,.fq20,.fq-gsd,.feature{background:rgba(21,25,34,.78);border-color:rgba(255,255,255,.09);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.control-card:before{background:linear-gradient(90deg,var(--cyan),var(--orange),transparent)}
+.btn-primary{background:linear-gradient(135deg,#ff7a18,#ffad42);box-shadow:0 0 0 1px rgba(255,166,64,.25),0 0 35px rgba(255,122,24,.22);animation:fqButtonPulse 2.2s ease-in-out infinite}
+.btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,166,64,.35),0 0 45px rgba(255,122,24,.32)}
+@keyframes fqButtonPulse{0%,100%{box-shadow:0 0 0 1px rgba(255,166,64,.20),0 0 25px rgba(255,122,24,.16)}50%{box-shadow:0 0 0 1px rgba(255,166,64,.38),0 0 42px rgba(255,122,24,.30)}}
+.fq20{background:linear-gradient(135deg,#10151c,#0b0e13 58%,#131923);border-color:rgba(85,214,255,.13)}
+.fq20-stat{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09);transition:transform .2s,border-color .2s,box-shadow .2s}
+.fq20-stat:hover,.fq-gsd-card:hover,.feature:hover{transform:translateY(-2px);border-color:rgba(85,214,255,.24);box-shadow:0 15px 40px rgba(0,0,0,.22)}
+.fq20-stat-value{font-family:Rajdhani,sans-serif;font-size:clamp(34px,4vw,48px);letter-spacing:-.5px}
+.fq20-clock{font-family:Rajdhani,sans-serif;font-size:22px;color:var(--cyan);border-color:rgba(85,214,255,.16)}
+.fq20-chart{height:280px;background:rgba(3,6,9,.55);border-color:rgba(85,214,255,.10)}
+.fq20 .fq20-kicker,.fq-gsd-kicker,.fq-region-kicker,.section-kicker{color:var(--cyan)}
+.fq20-icon{color:var(--cyan)}
+.fq-gsd{background:rgba(18,22,29,.82)}
+.fq-gsd-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fq-gsd-card{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.08);transition:transform .2s,border-color .2s,box-shadow .2s}
+.fq-gsd-value strong,.game-ping .num,.summary-score .big{font-family:Rajdhani,sans-serif}
+.fq-gsd-card.good .fq-gsd-value strong{color:var(--success);text-shadow:0 0 18px rgba(34,227,139,.22)}
+.fq-gsd-card.warn .fq-gsd-value strong{color:var(--warn);text-shadow:0 0 18px rgba(255,157,46,.20)}
+.fq-gsd-card.bad .fq-gsd-value strong{color:var(--danger);text-shadow:0 0 18px rgba(255,64,91,.20)}
+.game-card{background:rgba(21,25,34,.72);border-color:rgba(255,255,255,.08);backdrop-filter:blur(12px)}
+.game-card:hover{border-color:rgba(85,214,255,.22);box-shadow:0 15px 40px rgba(0,0,0,.22)}
+.badge.state-excellent{color:var(--success);background:rgba(34,227,139,.09)}.badge.state-ok{color:var(--warn);background:rgba(255,157,46,.09)}.badge.state-bad{color:var(--danger);background:rgba(255,64,91,.09)}
+.fq-region-select,.fq-share{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.08)}
+.fq-region-option{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.08)}
+.fq-region-option:has(input:checked){border-color:rgba(85,214,255,.45);box-shadow:0 0 0 2px rgba(85,214,255,.08),0 0 18px rgba(85,214,255,.06)}
+.fq-region-option input{accent-color:var(--cyan)}
+.section{border-top-color:rgba(255,255,255,.08)}
+.faq details{border-color:rgba(255,255,255,.08)}
+.site-footer{background:rgba(9,12,16,.92);border-top-color:rgba(85,214,255,.10)}
+.theme-btn,.lang-control,.lite-btn{background:#12161d;border-color:rgba(255,255,255,.09);color:#e9f0f7}
+.theme-btn:hover,.lang-control:hover,.lite-btn:hover{background:#171d25;border-color:rgba(85,214,255,.25)}
+@media(max-width:760px){.fq-gsd-grid{grid-template-columns:1fr}.fq20-chart{height:220px}.main-menu{background:#0e1218;border-color:rgba(85,214,255,.10)}}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}.btn-primary{animation:none}}
+/* Light theme remains a real user-selectable alternate theme. */
+body.light{--bg:#f2f5f8;--card:#ffffff;--soft:#f7f9fb;--text:#10151c;--muted:#667281;--line:#dfe5eb;--shadow:0 18px 50px rgba(16,24,40,.09);background:radial-gradient(circle at 50% -15%,rgba(85,214,255,.10),transparent 34%),var(--bg);color:var(--text)}
+body.light:before{opacity:.018}.light header{background:rgba(255,255,255,.88);border-color:#e1e7ed}.light .main-menu>a,.light .nav-dropdown-toggle{color:#28323d}.light .nav-dropdown-menu{background:rgba(255,255,255,.97);border-color:#dfe5eb}.light .nav-dropdown-menu:before{background:#fff;border-color:#dfe5eb}.light .control-card,.light .summary-card,.light .fq20,.light .fq-gsd,.light .feature{background:rgba(255,255,255,.86);border-color:#dfe5eb}.light .fq20{background:linear-gradient(135deg,#ffffff,#f4f8fb)}.light .fq20-stat,.light .fq-gsd-card,.light .fq-region-option,.light .fq-share{background:#f8fafc;border-color:#e1e7ed}.light .fq20-chart{background:#f7fafc}.light .site-footer{background:#fff}.light .theme-btn,.light .lang-control,.light .lite-btn{background:#fff;color:#10151c;border-color:#dfe5eb}
+
+
+/* ==========================================================
+   FINAL FASQOO HEADER POSITION — centered like fasqoo.com
+   Header/menu structure and links are untouched.
+   ========================================================== */
+:root{--fq-header-max:1180px}
+header .nav-inner,
+header .header-inner,
+header .nav-container,
+header .navbar-inner{
+  width:min(var(--fq-header-max),calc(100% - 48px));
+  margin-inline:auto;
+}
+header > .nav-inner,
+header > .header-inner,
+header > .nav-container,
+header > .navbar-inner{margin-inline:auto}
+
+@media (min-width:900px){
+  header .nav-inner,
+  header .header-inner,
+  header .nav-container,
+  header .navbar-inner{
+    display:flex;
+    align-items:center;
+  }
+}
+@media (max-width:899px){
+  header .nav-inner,
+  header .header-inner,
+  header .nav-container,
+  header .navbar-inner{
+    width:calc(100% - 28px);
+  }
+}
 </style>
 </head>
 <body>
@@ -891,10 +975,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
-    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo">
-      <span id="installIcon" class="install-platform-icon" aria-hidden="true">↓</span>
-      <span id="installLabel" class="install-label" data-i18n="installApp">Install Fasqoo</span>
-    </button>
     <div id="fasqoo-widget-container"></div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
@@ -1431,7 +1511,7 @@ const EN = {
   navSecurityDesc:'Check HTTP security headers in real time', navDns:'Visual DNS Test',
   navDnsDesc:'Track global DNS propagation visually', navSubnet:'Subnet Calculator',
   navSubnetDesc:'Calculate IP ranges and subnet masks',
-  liteBtn:'Fasqoo Lite', installApp:'Install for Windows',
+  liteBtn:'Fasqoo Lite',
   footerBrand:'Fasqoo - Independent, browser-based internet speed tests and network tools.',
   footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
   footerWidget:'Widget', footerNetworkTools:'Network Tools', footerNetworkStatus:'Network Status',
@@ -1507,7 +1587,7 @@ const DE = {
   navSecurityDesc:'HTTP-Sicherheitsheader in Echtzeit prüfen', navDns:'Visual DNS Test',
   navDnsDesc:'Globale DNS-Ausbreitung visuell tracken', navSubnet:'Subnetz-Rechner',
   navSubnetDesc:'IP-Bereiche und Masken kalkulieren',
-  liteBtn:'Fasqoo Lite', installApp:'Für Windows installieren',
+  liteBtn:'Fasqoo Lite',
   footerBrand:'Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.',
   footerSpeedTests:'Speed Tests', footerInternetSpeed:'Internet Speed Test', footerLite:'Fasqoo Lite',
   footerWidget:'Widget', footerNetworkTools:'Netzwerk-Tools', footerNetworkStatus:'Network Status',
@@ -1957,6 +2037,7 @@ function setTheme(dark){
   /* Disable visual transitions only for the theme change itself, so the switch is immediate. */
   body.classList.add('theme-switching');
   body.classList.toggle('dark', dark);
+  body.classList.toggle('light', !dark);
   $('themeBtn').innerHTML = dark ? SUN_SVG : MOON_SVG;
   const tc = $('themeColor');
   if (tc) tc.setAttribute('content', dark ? '#090c10' : '#ffffff');
@@ -2126,6 +2207,7 @@ const FQ20 = (() => {
   let failures = 0;
   let startedAt = 0;
   let timer = null;
+  let chart = null;
 
   const el = id => document.getElementById(id);
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -2151,8 +2233,24 @@ const FQ20 = (() => {
     if(Number.isFinite(p) && p < 45 && Number.isFinite(j) && j < 12) return {key:'good',title:'👍 Stable for Casual Gaming',tip:'The connection is generally stable for gaming. Keep an eye on spikes.'};
     return {key:'bad',title:'⚠️ Ping-Spikes / Unstable',tip:'Try a LAN cable instead of Wi-Fi, pause large downloads, and test again.'};
   }
+  function initChart(){
+    const canvas=el('fq20Canvas');
+    if(!canvas || typeof Chart==='undefined') return;
+    if(chart) chart.destroy();
+    const ctx=canvas.getContext('2d');
+    const gradient=ctx.createLinearGradient(0,0,0,260); gradient.addColorStop(0,'rgba(85,214,255,.28)'); gradient.addColorStop(1,'rgba(85,214,255,0)');
+    chart=new Chart(ctx,{type:'line',data:{labels:Array.from({length:TOTAL},(_,i)=>i+1),datasets:[{data:Array(TOTAL).fill(null),borderColor:'#55d6ff',backgroundColor:gradient,fill:true,tension:.34,pointRadius:2,pointHoverRadius:4,borderWidth:2,spanGaps:false}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:180},plugins:{legend:{display:false},tooltip:{enabled:true}},scales:{x:{grid:{color:'rgba(255,255,255,.045)'},ticks:{color:'#718091',font:{size:9},callback:(v)=>Number(v)+1+'s'}},y:{grid:{color:'rgba(255,255,255,.045)'},ticks:{color:'#718091',font:{size:9},callback:(v)=>v+' ms'},beginAtZero:false}}}});
+  }
+  function updateChart(){
+    if(!chart) return;
+    const data=samples.map(v=>Number.isFinite(v)?Number(v.toFixed(2)):null);
+    chart.data.datasets[0].data=data;
+    chart.update('none');
+  }
   function resizeCanvas(){
-    const c=el('fq20Canvas'), box=c.parentElement, dpr=Math.max(1,window.devicePixelRatio||1);
+    const c=el('fq20Canvas');
+    if(chart){ chart.resize(); return; }
+    const box=c.parentElement, dpr=Math.max(1,window.devicePixelRatio||1);
     const r=box.getBoundingClientRect(); c.width=Math.max(1,Math.floor(r.width*dpr)); c.height=Math.max(1,Math.floor(r.height*dpr));
     c._dpr=dpr; draw();
   }
@@ -2221,7 +2319,7 @@ const FQ20 = (() => {
     el('fq20Start').addEventListener('click',run);
     el('fq20Clear').addEventListener('click',()=>{try{localStorage.removeItem(KEY)}catch(e){}renderHistory()});
     window.addEventListener('resize',resizeCanvas,{passive:true});
-    renderHistory(); resizeCanvas();
+    renderHistory(); initChart(); resizeCanvas();
   }
   return {init};
 })();
@@ -2263,44 +2361,6 @@ FQ20.init();
    =================================================================== */
 $('startBtn').addEventListener('click', runTest);
 $('stopBtn').addEventListener('click', () => { state.abort = true; });
-
-/* ===================================================================
-   INSTALL BUTTON (Windows PWA)
-   =================================================================== */
-let deferredInstallPrompt = null;
-const installButton = $('installButton');
-function isWindowsDesktop(){
-  return /Windows/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent);
-}
-function isStandalone(){
-  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
-function updateInstallButton(){
-  if (!installButton) return;
-  installButton.hidden = !isWindowsDesktop() || isStandalone();
-}
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-  updateInstallButton();
-});
-if (installButton){
-  installButton.addEventListener('click', async () => {
-    if (deferredInstallPrompt){
-      deferredInstallPrompt.prompt();
-      try { await deferredInstallPrompt.userChoice; }catch(e){}
-      deferredInstallPrompt = null;
-      updateInstallButton();
-      return;
-    }
-    alert('Install is available in Chrome/Edge via the install icon in the address bar or browser menu.');
-  });
-}
-window.addEventListener('appinstalled', () => {
-  deferredInstallPrompt = null;
-  updateInstallButton();
-});
-updateInstallButton();
 
 
 
