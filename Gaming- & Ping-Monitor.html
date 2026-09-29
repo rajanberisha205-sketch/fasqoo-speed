@@ -919,6 +919,51 @@ header{background:rgba(9,12,16,.82);border-bottom:1px solid rgba(85,214,255,.10)
 body.light{--bg:#f2f5f8;--card:#ffffff;--soft:#f7f9fb;--text:#10151c;--muted:#667281;--line:#dfe5eb;--shadow:0 18px 50px rgba(16,24,40,.09);background:radial-gradient(circle at 50% -15%,rgba(85,214,255,.10),transparent 34%),var(--bg);color:var(--text)}
 body.light:before{opacity:.018}.light header{background:rgba(255,255,255,.88);border-color:#e1e7ed}.light .main-menu>a,.light .nav-dropdown-toggle{color:#28323d}.light .nav-dropdown-menu{background:rgba(255,255,255,.97);border-color:#dfe5eb}.light .nav-dropdown-menu:before{background:#fff;border-color:#dfe5eb}.light .control-card,.light .summary-card,.light .fq20,.light .fq-gsd,.light .feature{background:rgba(255,255,255,.86);border-color:#dfe5eb}.light .fq20{background:linear-gradient(135deg,#ffffff,#f4f8fb)}.light .fq20-stat,.light .fq-gsd-card,.light .fq-region-option,.light .fq-share{background:#f8fafc;border-color:#e1e7ed}.light .fq20-chart{background:#f7fafc}.light .site-footer{background:#fff}.light .theme-btn,.light .lang-control,.light .lite-btn{background:#fff;color:#10151c;border-color:#dfe5eb}
 
+/* ==========================================================
+   FINAL LIGHT THEME FIX — all gaming/HUD cards
+   ========================================================== */
+body.light .game-card,
+body.light .control-card,
+body.light .summary-card,
+body.light .fq20,
+body.light .fq-gsd,
+body.light .feature{
+  background:rgba(255,255,255,.92)!important;
+  color:var(--text);
+  border-color:#dfe5eb!important;
+  box-shadow:0 16px 45px rgba(16,24,40,.07);
+}
+body.light .game-card:hover,
+body.light .fq20-stat:hover,
+body.light .fq-gsd-card:hover,
+body.light .feature:hover{
+  background:#fff!important;
+  border-color:#cbd6df!important;
+  box-shadow:0 18px 45px rgba(16,24,40,.10);
+}
+body.light .game-name,
+body.light .game-provider,
+body.light .category-head h2,
+body.light .fq-gsd-title,
+body.light .fq-gsd-name strong,
+body.light .fq20 h2,
+body.light .section-head h2{color:var(--text);}
+body.light .game-provider,
+body.light .category-head p,
+body.light .fq-gsd-sub,
+body.light .fq20-sub{color:var(--muted);}
+body.light .fq20-stat{background:#f8fafc!important;border-color:#e1e7ed!important;}
+body.light .fq20-chart{background:#f7fafc!important;border-color:#e1e7ed!important;}
+body.light .fq-gsd-card{background:#f8fafc!important;border-color:#e1e7ed!important;}
+body.light .fq-region-select,
+body.light .fq-share,
+body.light .fq-region-option{background:#f8fafc!important;color:var(--text);border-color:#e1e7ed!important;}
+body.light .nav-mega-item{color:#28323d!important;}
+body.light .nav-mega-item:hover{background:linear-gradient(135deg,rgba(85,214,255,.08),rgba(255,138,36,.05));}
+body.light .nav-dropdown-menu{color:var(--text);}
+body.light .faq details{background:#fff;border-color:#dfe5eb;}
+body.light .faq summary{color:var(--text);}
+
 
 /* ==========================================================
    FINAL FASQOO HEADER POSITION — centered like fasqoo.com
@@ -1127,6 +1172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <option value="tr">🇹🇷 Türkçe</option>
             <option value="sq">🇦🇱 Shqip</option>
             <option value="ar">🇸🇦 العربية</option>
+            <option value="pl">🇵🇱 Polski</option>
           </select>
         </div>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
@@ -1717,7 +1763,27 @@ const AR = Object.assign({}, DE, {
 EN.navDarkData='Dark Data & Tracker Exposer'; EN.navDarkDataDesc='Live browser requests, data usage & privacy signals';
 DE.navDarkData='Dark Data & Tracker Exposer'; DE.navDarkDataDesc='Live-Browser-Anfragen, Datenverbrauch & Datenschutzsignale';
 AR.navDarkData='عرض البيانات والتتبعات'; AR.navDarkDataDesc='طلبات المتصفح واستخدام البيانات وإشارات الخصوصية مباشرة';
-const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, ar:AR };
+const I18N = { de:DE, en:EN, es:ES, fr:FR, it:IT, pt:PT, nl:NL, tr:TR, sq:SQ, pl:PL, ar:AR };
+
+/* ================================================================
+   COMPLETE LANGUAGE PATCH
+   The original language objects inherit EN with Object.assign().
+   This patch explicitly supplies the remaining shared UI strings
+   so language changes never silently leave the dashboard in English.
+   ================================================================ */
+const COMPLETE_LANG = {
+  de:{
+    navTools:'Tools & IT-Diagnose',navSectionNetwork:'Netzwerk & Speed',navSectionDiag:'IT-Diagnose & Sicherheit',navFaq:'FAQ',navAbout:'Über uns',navWidget:'Widget',navStatus:'Netzwerk-Status',navStatusDesc:'Live-Erreichbarkeit & Leitungsdiagnose',navWidgetDesc:'Kostenloses Test-Widget für andere Websites',navSecurity:'Security Analyzer',navSecurityDesc:'HTTP-Sicherheitsheader in Echtzeit prüfen',navDns:'Visueller DNS-Test',navDnsDesc:'Globale DNS-Ausbreitung visuell verfolgen',navSubnet:'Subnetz-Rechner',navSubnetDesc:'IP-Bereiche und Subnetzmasken berechnen',liteBtn:'Fasqoo Lite',
+    controlTitle:'Bereit für deinen Ping-Check?',controlText:'Wir messen clientseitig per Browser-Request die Antwortzeit zu jedem Anbieter. Keine Installation, kein Account, kein Tracking.',controlProviders:'Cloudflare Edge · direkter Endpunkt-Ping · keine Serverprotokolle',statusStarting:'Messung wird gestartet …',statusTesting:'Ping zu {name} …',statusDone:'Messung abgeschlossen',statusStopped:'Test gestoppt',summaryScoreLabel:'Ergebnis',summaryTitleExcellent:'Exzellente Verbindung zum Gamen',summaryTitleGood:'Gute Verbindung zum Gamen',summaryTitleMedium:'Nutzbar, aber nicht optimal',summaryTitleBad:'Hohe Latenz erkannt',summaryTextExcellent:'Alle gemessenen Server antworten unter 30 ms. Das ist eine wettbewerbstaugliche Verbindung.',summaryTextGood:'Die meisten Server antworten im akzeptablen Bereich. Schnelle Shooter sollten sich noch responsiv anfühlen.',summaryTextMedium:'Einige Server antworten langsam. Schnelle Spiele können sich träge anfühlen.',summaryTextBad:'Mehrere Server antworten sehr langsam. Prüfe WLAN, Hintergrund-Downloads und deinen Router.',statAvg:'Ø Ping',catAText:'Die wettbewerbsintensivsten Titel. Hier entscheidet jede Millisekunde.',catBText:'Launcher, Stores und Multiplayer-Netzwerke der großen Plattformen.',catCTitle:'Discord & Voice',catCText:'Sprach-Chat hängt stärker vom Jitter als vom Ping ab – wir messen beides.',stateExcellent:'Exzellent',stateOk:'Akzeptabel',stateBad:'Hoher Ping',stateTesting:'Test läuft',stateIdle:'Bereit',stateFailed:'Fehlgeschlagen',labelJitter:'Jitter',labelSamples:'Messungen',ms:'ms',copyReport:'Bericht kopieren',exportJson:'Als JSON exportieren',reportCopied:'Bericht kopiert',jsonExported:'JSON exportiert',reportNote:'Hinweis: Ping-Werte werden vom Browser zu öffentlichen Endpunkten gemessen und können von Werten im Spiel abweichen.',
+    featKicker:'Netzwerk-Wissen',featTitle:'Warum Ping & Jitter wichtiger als rohe Bandbreite sind',featSub:'Beim Online-Gaming zählen Reaktionszeit und Stabilität stärker als die maximale Download-Geschwindigkeit.',feat1T:'Latenz (Ping)',feat1D:'Die Zeit zwischen deiner Aktion und der Antwort des Servers. Unter 30 ms ist ausgezeichnet, über 60 ms wird spürbar.',feat2T:'Jitter',feat2D:'Die Schwankung zwischen den Messungen. Hoher Jitter kann Ruckler und Audioaussetzer verursachen.',feat3T:'Paketverlust',feat3D:'Verlorene Pakete müssen erneut übertragen werden und können Einfrieren oder plötzliche Bewegungen verursachen.',feat4T:'Router & WLAN',feat4D:'Ethernet kann die Latenz gegenüber WLAN reduzieren. Teste beide Varianten und vergleiche die Werte.',feat5T:'Entfernung zum Server',feat5D:'Je weiter der Spielserver entfernt ist, desto höher ist der Ping normalerweise.',feat6T:'Bufferbloat',feat6D:'Eine vollständig ausgelastete Verbindung kann den Ping stark erhöhen. SQM kann den Effekt reduzieren.',faqKicker:'Hilfe-Center',faqTitle:'Häufige Fragen',faqQ1:'Wie funktioniert der Ping-Monitor?',faqA1:'Der Browser sendet kleine Anfragen an öffentliche Endpunkte und misst die Antwortzeit.',faqQ2:'Warum weichen die Werte von meinem Spiel ab?',faqA2:'Der Spielserver kann an einem anderen Standort liegen, deshalb kann die Antwortzeit im Spiel abweichen.',faqQ3:'Was ist ein guter Ping zum Gamen?',faqA3:'Unter 30 ms ist ausgezeichnet; 30–60 ms sind normalerweise akzeptabel.',faqQ4:'Was ist ein guter Jitter?',faqA4:'Unter 5 ms ist ausgezeichnet. 5–15 ms sind normalerweise akzeptabel.',faqQ5:'Kann ich das Ergebnis exportieren?',faqA5:'Ja. Du kannst den Bericht kopieren oder als JSON herunterladen.',ctaTitle:'Bereit für ein besseres Spielgefühl?',ctaText:'Starte den Test, vergleiche deine Werte und optimiere deine Verbindung.',ctaBtn:'Ping-Test starten',ctaBtnSpeed:'Speedtest',footerBrand:'Fasqoo – unabhängige, browserbasierte Internet-Speedtests und Netzwerktools.',footerSpeedTests:'Speedtests',footerInternetSpeed:'Internet-Speedtest',footerLite:'Fasqoo Lite',footerWidget:'Widget',footerNetworkTools:'Netzwerk-Tools',footerNetworkStatus:'Netzwerk-Status',footerITDiagnose:'IT-Diagnose',footerSecurity:'Security Analyzer',footerDns:'Visueller DNS-Test',footerCompany:'Unternehmen',footerAbout:'Über uns',footerFaq:'FAQ',footerPrivacy:'Datenschutz',footerCopyright:'© 2026 Fasqoo',footerBranding:'Unterstützt durch das Cloudflare-Edge-Netzwerk für hohe Leistung und genaue Messungen.',footerDisclaimer:'Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.',navDarkData:'Dark Data & Tracker Exposer',navDarkDataDesc:'Live-Browser-Anfragen, Datenverbrauch & Datenschutzsignale',
+    catBTitle:'Gaming-Plattformen'
+  },
+  es:{navTools:'Herramientas y diagnóstico IT',navSectionNetwork:'Red y velocidad',navSectionDiag:'Diagnóstico y seguridad IT',navFaq:'Preguntas frecuentes',navAbout:'Sobre nosotros',navWidget:'Widget',navStatus:'Estado de red',navStatusDesc:'Alcance en vivo y diagnóstico de línea',navWidgetDesc:'Widget gratuito para otros sitios web',navSecurity:'Analizador de seguridad',navSecurityDesc:'Comprueba las cabeceras de seguridad HTTP en tiempo real',navDns:'Prueba DNS visual',navDnsDesc:'Sigue visualmente la propagación DNS global',navSubnet:'Calculadora de subredes',navSubnetDesc:'Calcula rangos IP y máscaras de subred',liteBtn:'Fasqoo Lite',controlTitle:'¿Listo para comprobar tu ping?',controlText:'Medimos desde el navegador mediante solicitudes a cada proveedor. Sin instalación, cuenta ni seguimiento.',controlProviders:'Cloudflare Edge · ping directo al endpoint · sin registros del servidor',startBtn:'Iniciar prueba de ping',stopBtn:'Detener',statusStarting:'Iniciando medición …',statusTesting:'Midiendo ping a {name} …',statusDone:'Medición completada',statusStopped:'Prueba detenida',summaryScoreLabel:'Puntuación',summaryTitleExcellent:'Conexión excelente para gaming',summaryTitleGood:'Buena conexión para gaming',summaryTitleMedium:'Utilizable, pero no ideal',summaryTitleBad:'Latencia alta detectada',summaryTextExcellent:'Todos los servidores medidos responden por debajo de 30 ms. Es una conexión apta para competición.',summaryTextGood:'La mayoría de los servidores responden en un rango aceptable. Los shooters rápidos deberían sentirse fluidos.',summaryTextMedium:'Algunos servidores responden lentamente. Los juegos rápidos pueden sentirse con retraso.',summaryTextBad:'Varios servidores responden muy lentamente. Comprueba el Wi‑Fi, las descargas y el router.',statExcellent:'Excelente',statOk:'Aceptable',statBad:'Ping alto',statAvg:'Ping medio',catATitle:'E-Sports y shooters',catAText:'Los títulos más competitivos. Cada milisegundo cuenta.',catBTitle:'Plataformas de gaming',catBText:'Lanzadores, tiendas y redes multijugador de las grandes plataformas.',catCTitle:'Discord y voz',catCText:'El chat de voz depende más del jitter que del ping; medimos ambos.',stateExcellent:'Excelente',stateOk:'Aceptable',stateBad:'Ping alto',stateTesting:'Midiendo',stateIdle:'Listo',stateFailed:'Fallido',labelJitter:'Jitter',labelSamples:'Mediciones',ms:'ms',copyReport:'Copiar informe',exportJson:'Exportar JSON',reportCopied:'Informe copiado',jsonExported:'JSON exportado',reportNote:'Nota: los valores de ping se miden desde el navegador hacia endpoints públicos y pueden diferir de los del juego.',featKicker:'Conocimiento de red',featTitle:'Por qué Ping y Jitter importan más que el ancho de banda bruto',featSub:'En los juegos online importan más la respuesta y la estabilidad que la velocidad máxima de descarga.',feat1T:'Latencia (Ping)',feat1D:'El tiempo entre tu acción y la respuesta del servidor. Menos de 30 ms es excelente y más de 60 ms se nota.',feat2T:'Jitter',feat2D:'La variación entre mediciones. Un jitter alto puede causar tirones y cortes de audio.',feat3T:'Pérdida de paquetes',feat3D:'Los paquetes perdidos deben reenviarse y pueden causar congelaciones o movimientos repentinos.',feat4T:'Router y Wi‑Fi',feat4D:'Ethernet puede reducir la latencia frente al Wi‑Fi. Prueba ambos y compara los valores.',feat5T:'Distancia al servidor',feat5D:'Cuanto más lejos esté el servidor del juego, normalmente mayor será el ping.',feat6T:'Bufferbloat',feat6D:'Una conexión completamente saturada puede aumentar mucho el ping. SQM puede reducir el efecto.',faqKicker:'Centro de ayuda',faqTitle:'Preguntas frecuentes',faqQ1:'¿Cómo funciona el monitor de ping?',faqA1:'El navegador envía pequeñas solicitudes a endpoints públicos y mide el tiempo de respuesta.',faqQ2:'¿Por qué los valores difieren de mi juego?',faqA2:'El servidor del juego puede estar en otra ubicación, por lo que la latencia puede variar.',faqQ3:'¿Qué ping es bueno para jugar?',faqA3:'Menos de 30 ms es excelente; 30–60 ms suele ser aceptable.',faqQ4:'¿Qué jitter es bueno?',faqA4:'Menos de 5 ms es excelente. 5–15 ms suele ser aceptable.',faqQ5:'¿Puedo exportar el resultado?',faqA5:'Sí. Puedes copiar el informe o descargarlo como JSON.',ctaTitle:'¿Listo para una mejor experiencia de juego?',ctaText:'Inicia la prueba, compara tus valores y optimiza tu conexión.',ctaBtn:'Iniciar prueba de ping',ctaBtnSpeed:'Speedtest',footerBrand:'Fasqoo – pruebas de velocidad de Internet y herramientas de red independientes basadas en el navegador.',footerSpeedTests:'Pruebas de velocidad',footerInternetSpeed:'Prueba de velocidad de Internet',footerLite:'Fasqoo Lite',footerWidget:'Widget',footerNetworkTools:'Herramientas de red',footerNetworkStatus:'Estado de red',footerITDiagnose:'Diagnóstico IT',footerSecurity:'Analizador de seguridad',footerDns:'Prueba DNS visual',footerCompany:'Empresa',footerAbout:'Sobre nosotros',footerFaq:'Preguntas frecuentes',footerPrivacy:'Privacidad',footerCopyright:'© 2026 Fasqoo',footerBranding:'Impulsado por la red Cloudflare Edge para ofrecer rendimiento y mediciones precisas.',footerDisclaimer:'Fasqoo es una plataforma independiente de pruebas de velocidad y no es un producto oficial de Cloudflare.',navDarkData:'Expositor de datos y rastreadores',navDarkDataDesc:'Solicitudes del navegador, uso de datos y señales de privacidad en vivo'}
+};
+Object.keys(COMPLETE_LANG).forEach(lang=>Object.assign(I18N[lang], COMPLETE_LANG[lang]));
+Object.assign(I18N.pl,{catATitle:'E-sport i strzelanki',catAText:'Najbardziej konkurencyjne gry. Każda milisekunda ma znaczenie.',catBTitle:'Platformy gamingowe',catBText:'Launchery, sklepy i sieci multiplayer największych platform.',catCTitle:'Discord i głos',catCText:'Czat głosowy zależy bardziej od jittera niż od pingu – mierzymy oba parametry.',navDarkData:'Eksponent danych i trackerów',navDarkDataDesc:'Żądania przeglądarki, użycie danych i sygnały prywatności na żywo'});
+
+
 
 /* ===================================================================
    MODERN SVG ICONS FOR GAME CARDS
@@ -2060,16 +2126,30 @@ $('themeBtn').addEventListener('click', () => {
    =================================================================== */
 function applyLang(lang){
   const safe = I18N[lang] ? lang : 'en';
-  document.documentElement.lang = safe; document.documentElement.dir = safe === 'ar' ? 'rtl' : 'ltr';
-  const dict = I18N[safe];
+  document.documentElement.lang = safe;
+  document.documentElement.dir = safe === 'ar' ? 'rtl' : 'ltr';
+  const dict = I18N[safe] || I18N.en;
+
+  // Translate every static element carrying data-i18n.
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (dict[k] !== undefined) el.textContent = dict[k];
+    const key = el.getAttribute('data-i18n');
+    const value = dict[key] !== undefined ? dict[key] : I18N.en[key];
+    if (value !== undefined) el.textContent = value;
   });
+
+  // Keep the selector itself synchronized.
+  const select = $('lang');
+  if (select && select.value !== safe) select.value = safe;
+
   try { localStorage.setItem('fasqoo_lang', safe); } catch(e){}
+
+  // Dynamic game cards use t() and must be rebuilt after the language changes.
   renderGrids();
-  if ($('summary').classList.contains('show')) renderSummary();
+  if ($('summary') && $('summary').classList.contains('show')) renderSummary();
+  if (typeof renderHistory === 'function') renderHistory();
+  if (typeof updateFq20Texts === 'function') updateFq20Texts();
 }
+
 (function initLang(){
   let saved = null;
   try { saved = localStorage.getItem('fasqoo_lang'); } catch(e){}
