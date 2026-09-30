@@ -510,493 +510,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 </style>
 
-<!-- ============================================================
-     FASQOO TACHO + LIVE-THROUGHPUT V2
-     Nur Visualisierung: bestehende Messlogik/Element-IDs bleiben erhalten.
-     ============================================================ -->
-<style id="fasqoo-gauge-throughput-v2">
-.fq-v2-gauge{width:min(420px,90vw)!important;aspect-ratio:1!important;position:relative;display:grid!important;place-items:center!important;margin:0 auto!important}
-.fq-v2-gauge svg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:visible!important;display:block!important;pointer-events:none!important}
-.fq-v2-track{fill:none;stroke:var(--line,#eef1f5);stroke-width:14;stroke-linecap:round}
-.fq-v2-inner{fill:none;stroke:rgba(127,139,155,.11);stroke-width:1}
-.fq-v2-legacy-progress{opacity:0!important;stroke-width:0!important}
-.fq-v2-progress{fill:none;stroke:#ff3b4e;stroke-width:14;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(255,59,78,.40));transition:stroke .18s linear}
-.fq-v2-ticks line{stroke:rgba(148,163,184,.32);stroke-width:1.4;stroke-linecap:round}
-.fq-v2-ticks line.major{stroke:rgba(148,163,184,.66);stroke-width:2.4}
-.fq-v2-scale text{fill:var(--text,#111827);font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;user-select:none;opacity:.82}
-.dark .fq-v2-scale text{fill:#b8c0cf}.dark .fq-v2-track{stroke:rgba(255,255,255,.07)}.dark .fq-v2-inner{stroke:rgba(255,255,255,.05)}
-.fq-v2-center{width:66%!important;position:relative!important;z-index:3!important;text-align:center!important;pointer-events:none!important}
-.fq-v2-legacy-speed{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
-.fq-v2-speed-display{font-size:clamp(56px,11vw,88px)!important;font-weight:800!important;line-height:.95!important;letter-spacing:-4px!important;font-variant-numeric:tabular-nums!important;color:var(--text,#111827)!important;margin:0!important}
-.fq-v2-center .unit{margin-top:6px!important;font-size:11px!important;font-weight:700!important;letter-spacing:5px!important;color:var(--muted,#7a8394)!important;text-transform:uppercase!important}
-.fq-v2-chart{padding:14px 16px 12px!important;background:var(--card,#fff)!important}
-.fq-v2-chart-head{margin-bottom:8px!important}
-.fq-v2-chart-stage{position:relative;width:100%;height:130px;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,rgba(148,163,184,.035),transparent)}
-.fq-v2-chart-stage #chart,.fq-v2-chart-stage #fq-v2-live-chart{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
-.fq-v2-chart-stage #chart{z-index:1}
-.fq-v2-chart-stage #fq-v2-live-chart{z-index:2;pointer-events:none}
-@media(max-width:560px){.fq-v2-gauge{width:min(390px,92vw)!important}.fq-v2-speed-display{font-size:clamp(52px,17vw,76px)!important}}
-</style>
-
-<style id="fasqoo-modern-menu">
-/* ============================================================
-   FASQOO MODERN MAIN MENU — isolated navigation styles only
-   ============================================================ */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  width:100%;
-  background:rgba(255,255,255,.88);
-  border-bottom:1px solid rgba(17,24,39,.08);
-  box-shadow:0 4px 20px rgba(17,24,39,.05);
-  backdrop-filter:blur(18px) saturate(140%);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);
-}
-
-header .nav{
-  min-height:72px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-header .brand{
-  flex:0 0 auto;
-}
-
-header .main-menu{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:5px;
-  flex:1 1 auto;
-  min-width:0;
-}
-
-header .main-menu > a,
-header .nav-dropdown-toggle{
-  appearance:none;
-  border:0;
-  background:transparent;
-  color:var(--text,#111827);
-  font:inherit;
-  font-size:13px;
-  font-weight:650;
-  line-height:1;
-  text-decoration:none;
-  white-space:nowrap;
-  padding:11px 12px;
-  border-radius:10px;
-  cursor:pointer;
-  transition:background .18s ease,color .18s ease,box-shadow .18s ease;
-}
-
-header .main-menu > a:hover,
-header .nav-dropdown-toggle:hover,
-header .main-menu > a.active{
-  color:var(--text,#111827);
-  background:rgba(255,90,31,.08);
-}
-
-header .nav-dropdown{
-  position:relative;
-  flex:0 0 auto;
-}
-
-header .nav-dropdown-toggle{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-}
-
-header .nav-chevron{
-  font-size:11px;
-  opacity:.65;
-  transform:translateY(-1px);
-  transition:transform .18s ease;
-}
-
-header .nav-dropdown:hover .nav-chevron,
-header .nav-dropdown:focus-within .nav-chevron{
-  transform:rotate(180deg) translateY(1px);
-}
-
-header .nav-dropdown-menu{
-  position:absolute;
-  top:calc(100% + 10px);
-  left:50%;
-  transform:translate(-50%, -6px);
-  width:min(720px,calc(100vw - 32px));
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  padding:12px;
-  border:1px solid rgba(17,24,39,.09);
-  border-radius:18px;
-  background:rgba(255,255,255,.97);
-  box-shadow:0 20px 55px rgba(17,24,39,.14),0 4px 14px rgba(17,24,39,.06);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:opacity .16s ease,transform .16s ease,visibility .16s ease;
-}
-
-header .nav-dropdown:hover .nav-dropdown-menu,
-header .nav-dropdown:focus-within .nav-dropdown-menu,
-header .nav-dropdown-menu.is-open{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:translate(-50%,0);
-}
-
-header .nav-mega-column{
-  min-width:0;
-  padding:6px;
-}
-
-header .nav-mega-column + .nav-mega-column{
-  border-left:1px solid rgba(17,24,39,.08);
-  padding-left:14px;
-}
-
-header .nav-dropdown-section{
-  margin:3px 6px 8px;
-  padding:4px 2px;
-  color:#ff5a1f;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.12em;
-  line-height:1.2;
-  text-transform:uppercase;
-}
-
-header .nav-mega-item{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-width:0;
-  padding:10px;
-  border-radius:12px;
-  color:var(--text,#111827);
-  text-decoration:none;
-  transition:background .16s ease,transform .16s ease;
-}
-
-header .nav-mega-item:hover{
-  background:rgba(255,90,31,.07);
-  transform:translateX(2px);
-}
-
-header .nav-mega-icon{
-  width:34px;
-  height:34px;
-  flex:0 0 34px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(255,90,31,.16);
-  border-radius:10px;
-  color:#ff5a1f;
-  background:rgba(255,90,31,.07);
-}
-
-header .nav-mega-icon svg{
-  width:17px;
-  height:17px;
-}
-
-header .nav-mega-copy{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-}
-
-header .nav-mega-title{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font-size:12.5px;
-  font-weight:700;
-  color:var(--text,#111827);
-}
-
-header .nav-mega-desc{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font-size:10.5px;
-  line-height:1.35;
-  color:var(--muted,#667085);
-}
-
-header .menu-extra{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-left:3px;
-}
-
-header .lang-control{
-  position:relative;
-  display:flex;
-  align-items:center;
-  min-width:76px;
-  height:38px;
-  padding:0 9px 0 8px;
-  border:1px solid rgba(17,24,39,.10);
-  border-radius:10px;
-  background:rgba(255,255,255,.72);
-  box-shadow:0 2px 8px rgba(17,24,39,.04);
-}
-
-header .lang-icon{
-  display:none;
-}
-
-header #lang{
-  width:100%;
-  min-width:0;
-  appearance:none;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:var(--text,#111827);
-  font:inherit;
-  font-size:11.5px;
-  font-weight:700;
-  cursor:pointer;
-  padding-right:12px;
-}
-
-header .lang-control::after{
-  content:"▾";
-  position:absolute;
-  right:7px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted,#667085);
-  font-size:9px;
-  pointer-events:none;
-}
-
-header .theme-btn{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(17,24,39,.10);
-  border-radius:10px;
-  background:rgba(255,255,255,.72);
-  color:var(--text,#111827);
-  cursor:pointer;
-  font:inherit;
-  font-size:16px;
-  transition:background .18s ease,border-color .18s ease,transform .18s ease;
-}
-
-header .theme-btn:hover{
-  background:rgba(255,90,31,.08);
-  border-color:rgba(255,90,31,.22);
-  transform:translateY(-1px);
-}
-
-header .nav-install-btn{
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  min-height:38px;
-  padding:0 14px;
-  margin-left:3px;
-  border:0;
-  border-radius:10px;
-  background:#ff5a1f;
-  color:#fff;
-  font:inherit;
-  font-size:11.5px;
-  font-weight:750;
-  line-height:1;
-  cursor:pointer;
-  box-shadow:0 6px 16px rgba(255,90,31,.22);
-  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
-}
-
-header .nav-install-btn:hover{
-  background:#f45116;
-  transform:translateY(-1px);
-  box-shadow:0 9px 22px rgba(255,90,31,.28);
-}
-
-header .nav-install-btn:active{
-  transform:translateY(0);
-}
-
-header .nav-install-btn[hidden]{
-  display:none !important;
-}
-
-header .install-platform-icon{
-  font-size:15px;
-  line-height:1;
-}
-
-header .menu-toggle{
-  flex:0 0 auto;
-}
-
-/* Dark mode — navigation only */
-.dark header{
-  background:rgba(15,18,23,.90);
-  border-bottom-color:rgba(255,255,255,.08);
-  box-shadow:0 4px 24px rgba(0,0,0,.25);
-}
-
-.dark header .main-menu > a,
-.dark header .nav-dropdown-toggle,
-.dark header .theme-btn,
-.dark header #lang{
-  color:#f3f4f6;
-}
-
-.dark header .main-menu > a:hover,
-.dark header .nav-dropdown-toggle:hover,
-.dark header .main-menu > a.active{
-  background:rgba(255,255,255,.07);
-}
-
-.dark header .lang-control,
-.dark header .theme-btn{
-  border-color:rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-}
-
-.dark header .nav-dropdown-menu{
-  background:rgba(18,22,29,.98);
-  border-color:rgba(255,255,255,.09);
-  box-shadow:0 24px 60px rgba(0,0,0,.42),0 5px 18px rgba(0,0,0,.22);
-}
-
-.dark header .nav-mega-column + .nav-mega-column{
-  border-left-color:rgba(255,255,255,.09);
-}
-
-.dark header .nav-mega-item:hover{
-  background:rgba(255,255,255,.06);
-}
-
-.dark header .nav-mega-title{
-  color:#f3f4f6;
-}
-
-.dark header .nav-mega-desc{
-  color:#98a2b3;
-}
-
-/* Responsive */
-@media (max-width:1050px){
-  header .nav{gap:12px}
-  header .main-menu{gap:2px}
-  header .main-menu > a,
-  header .nav-dropdown-toggle{padding-left:9px;padding-right:9px;font-size:12px}
-  header .nav-install-btn{padding-left:11px;padding-right:11px}
-}
-
-@media (max-width:820px){
-  header .main-menu{
-    display:none;
-  }
-
-  header .main-menu.is-open{
-    position:absolute;
-    left:12px;
-    right:12px;
-    top:calc(100% + 8px);
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    gap:4px;
-    padding:10px;
-    border:1px solid rgba(17,24,39,.09);
-    border-radius:16px;
-    background:rgba(255,255,255,.98);
-    box-shadow:0 20px 45px rgba(17,24,39,.15);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-  }
-
-  .dark header .main-menu.is-open{
-    background:rgba(18,22,29,.98);
-    border-color:rgba(255,255,255,.09);
-  }
-
-  header .main-menu.is-open > a,
-  header .main-menu.is-open .nav-dropdown-toggle{
-    width:100%;
-    justify-content:space-between;
-    padding:12px;
-  }
-
-  header .main-menu.is-open .nav-dropdown-menu{
-    position:static;
-    width:100%;
-    transform:none;
-    grid-template-columns:1fr;
-    box-shadow:none;
-    border:0;
-    border-radius:12px;
-    padding:4px;
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    display:none;
-  }
-
-  header .main-menu.is-open .nav-dropdown:focus-within .nav-dropdown-menu,
-  header .main-menu.is-open .nav-dropdown:hover .nav-dropdown-menu,
-  header .main-menu.is-open .nav-dropdown-menu.is-open{
-    display:grid;
-  }
-
-  header .main-menu.is-open .nav-mega-column + .nav-mega-column{
-    border-left:0;
-    border-top:1px solid rgba(17,24,39,.08);
-    padding:12px 6px 6px;
-  }
-
-  .dark header .main-menu.is-open .nav-mega-column + .nav-mega-column{
-    border-top-color:rgba(255,255,255,.09);
-  }
-
-  header .main-menu.is-open .menu-extra{
-    width:100%;
-    margin:4px 0 0;
-    padding-top:8px;
-    border-top:1px solid rgba(17,24,39,.08);
-  }
-
-  .dark header .main-menu.is-open .menu-extra{
-    border-top-color:rgba(255,255,255,.09);
-  }
-
-  header .main-menu.is-open .nav-install-btn{
-    width:100%;
-    margin:4px 0 0;
-  }
-}
-
-@media (max-width:420px){
-  header .nav{min-height:64px}
-  header .brandname{display:none}
-  header .lang-control{min-width:68px}
-}
-</style>
-
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1018,6 +531,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </div>
 
+    <a href="https://lite.fasqoo.com/" class="lite-btn" data-i18n="liteBtn">Fasqoo Lite</a>
+    <button id="installButton" class="install-btn" type="button" hidden aria-label="Install Fasqoo">
+      <span id="installIcon" class="install-platform-icon" aria-hidden="true">↓</span>
+      <span id="installLabel" class="install-label" data-i18n="installApp">Install Fasqoo</span>
+    </button>
     <div id="fasqoo-widget-container"></div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
@@ -1032,7 +550,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
         <div class="nav-dropdown-menu" role="menu">
           <div class="nav-mega-column">
-            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk-Tools</div>
+            <div class="nav-dropdown-section" data-i18n="navSectionNetwork">Netzwerk &amp; Speed</div>
 
             <a class="nav-mega-item" href="network-status.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
@@ -1079,7 +597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="nav-mega-column">
-            <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">Sicherheit &amp; DNS</div>
+            <div class="nav-dropdown-section diag-section" data-i18n="navSectionDiag">IT-Diagnose &amp; Security</div>
 
             <a class="nav-mega-item" href="Security &amp; Header Analyzer.html" role="menuitem">
               <span class="nav-mega-icon" aria-hidden="true">
@@ -1178,10 +696,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="Dark mode">☾</button>
       </div>
-      <button id="installButton" class="install-btn nav-install-btn" type="button" hidden aria-label="App installieren">
-        <span id="installIcon" class="install-platform-icon" aria-hidden="true">↓</span>
-        <span id="installLabel" class="install-label" data-i18n="installApp">App installieren</span>
-      </button>
     </nav>
   </div>
 </header>
@@ -1241,18 +755,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="grid">
         <div class="speedbox">
-          <div class="gauge fq-v2-gauge">
-            <svg viewBox="0 0 400 400" aria-hidden="true">
-              <circle class="fq-v2-track" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="753.98 251.33"></circle>
-              <circle class="fq-v2-inner" cx="200" cy="200" r="130"></circle>
-              <circle id="prog" class="progress fq-v2-legacy-progress" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="0 9999"></circle>
-              <circle id="fq-v2-progress" class="fq-v2-progress" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="0 9999"></circle>
-              <g class="fq-v2-ticks" id="fq-v2-ticks"></g>
-              <g class="fq-v2-scale" id="fq-v2-scale"></g>
+          <div class="gauge">
+            <svg viewBox="0 0 300 300">
+              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
+              </linearGradient></defs>
+              <circle class="ring" cx="150" cy="150" r="130"></circle>
+              <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
             </svg>
-            <div class="center fq-v2-center">
-              <div id="speed" class="num fq-v2-legacy-speed" aria-hidden="true">0</div>
-              <div id="fq-v2-speed" class="num fq-v2-speed-display">0</div>
+            <div class="center">
+              <div id="speed" class="num">0</div>
               <div class="unit">Mbps</div>
             </div>
           </div>
@@ -1289,12 +801,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="metric-reading" id="bloatGrade"></div>
             </div>
           </div>
-          <div class="chart fq-v2-chart">
-            <div class="charthead fq-v2-chart-head"><span data-i18n="chartLive">Live-Throughput</span><span id="chartState" data-i18n="chartWait">Wartet auf Messung…</span></div>
-            <div class="fq-v2-chart-stage">
-              <canvas id="chart"></canvas>
-              <canvas id="fq-v2-live-chart" aria-hidden="true"></canvas>
-            </div>
+          <div class="chart">
+            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
+            <canvas id="chart"></canvas>
           </div>
         </div>
       </div>
@@ -1765,119 +1274,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
-
-<!-- ============================================================
-     FASQOO TACHO + LIVE-THROUGHPUT V2 — VISUAL BRIDGE
-     Läuft nach app.js/ping.js und greift nur auf bestehende Werte zu.
-     ============================================================ -->
-<script defer>
-(function(){
-  'use strict';
-  const speedEl=document.getElementById('speed');
-  const visualEl=document.getElementById('fq-v2-speed');
-  const arcEl=document.getElementById('fq-v2-progress');
-  const svgTicks=document.getElementById('fq-v2-ticks');
-  const svgScale=document.getElementById('fq-v2-scale');
-  const sourceCanvas=document.getElementById('chart');
-  const liveCanvas=document.getElementById('fq-v2-live-chart');
-  const phaseEl=document.getElementById('status');
-  const chartState=document.getElementById('chartState');
-  if(!speedEl||!visualEl||!arcEl||!svgTicks||!svgScale||!liveCanvas)return;
-
-  const R=160, START=135, SWEEP=270, MAX=1000, ARC=2*Math.PI*R*(SWEEP/360);
-  const SCALE=[0,1,5,10,50,100,500,1000];
-  let target=0,display=0,raf=0;
-  const samples=[];
-
-  function pos(v){return v<=0?0:Math.log10(v+1)/Math.log10(MAX+1)}
-  function color(v){
-    const t=pos(v),h=t*135;
-    return 'hsl('+h.toFixed(0)+',94%,'+(52+t*6).toFixed(0)+'%)';
-  }
-  function buildGauge(){
-    let ticks='',labels='';
-    for(let i=0;i<=60;i++){
-      const t=i/60,a=(START+t*SWEEP)*Math.PI/180,major=i%5===0;
-      const r1=major?132:140,r2=148;
-      ticks+='<line '+(major?'class="major" ':'')+'x1="'+(200+Math.cos(a)*r1).toFixed(2)+'" y1="'+(200+Math.sin(a)*r1).toFixed(2)+'" x2="'+(200+Math.cos(a)*r2).toFixed(2)+'" y2="'+(200+Math.sin(a)*r2).toFixed(2)+'"></line>';
-    }
-    SCALE.forEach(function(v){
-      const t=pos(v),a=(START+t*SWEEP)*Math.PI/180,r=112;
-      labels+='<text x="'+(200+Math.cos(a)*r).toFixed(2)+'" y="'+(200+Math.sin(a)*r).toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+(v>=1000?'1k':v)+'</text>';
-    });
-    svgTicks.innerHTML=ticks;svgScale.innerHTML=labels;
-  }
-  function render(v){
-    const ratio=pos(v),len=ratio*ARC,c=color(v);
-    arcEl.setAttribute('stroke-dasharray',len.toFixed(2)+' 9999');
-    arcEl.style.stroke=v<=0?'#ff3b4e':c;
-    arcEl.style.filter='drop-shadow(0 0 10px '+(v<=0?'rgba(255,59,78,.25)':c)+')';
-    visualEl.textContent=v<10?v.toFixed(1):Math.round(v).toString();
-    if(v>0){
-      samples.push(v);
-      if(samples.length>72)samples.shift();
-    }
-  }
-  function tick(){
-    const d=target-display;
-    display+=Math.abs(d)<.04?d:d*.18;
-    render(Math.max(0,display));
-    if(Math.abs(target-display)>.04)raf=requestAnimationFrame(tick);else{display=target;render(target);raf=0}
-  }
-  function setTarget(v){
-    v=Number(v);if(!Number.isFinite(v)||v<0)v=0;target=Math.min(MAX,v);if(!raf)raf=requestAnimationFrame(tick);
-  }
-  function readSpeed(){
-    const v=parseFloat((speedEl.textContent||'').replace(',','.'));
-    if(Number.isFinite(v))setTarget(v);
-  }
-
-  /* Existing app.js remains authoritative. We only mirror #speed visually. */
-  const observer=new MutationObserver(readSpeed);
-  observer.observe(speedEl,{subtree:true,childList:true,characterData:true});
-  buildGauge();readSpeed();
-
-  /* Zero the visual display whenever the existing phase indicates completion/reset. */
-  if(phaseEl){
-    const po=new MutationObserver(function(){
-      const t=(phaseEl.textContent||'').toLowerCase();
-      if(/complete|fertig|done|ergebnis|bereit|ready/.test(t)){
-        if(target>0&&/complete|fertig|done|ergebnis/.test(t))setTarget(0);
-      }
-    });
-    po.observe(phaseEl,{subtree:true,childList:true,characterData:true});
-  }
-
-  const lctx=liveCanvas.getContext('2d');
-  function resize(){
-    const box=liveCanvas.getBoundingClientRect(),d=window.devicePixelRatio||1;
-    liveCanvas.width=Math.max(1,Math.round(box.width*d));
-    liveCanvas.height=Math.max(1,Math.round(box.height*d));
-    lctx.setTransform(d,0,0,d,0,0);draw();
-  }
-  function draw(){
-    const w=liveCanvas.clientWidth,h=liveCanvas.clientHeight;
-    lctx.clearRect(0,0,w,h);
-    lctx.strokeStyle='rgba(148,163,184,.08)';lctx.lineWidth=1;
-    for(let y=18;y<h;y+=26){lctx.beginPath();lctx.moveTo(0,y);lctx.lineTo(w,y);lctx.stroke()}
-    if(samples.length<2)return;
-    const max=Math.max(1,...samples),grad=lctx.createLinearGradient(0,0,0,h);
-    grad.addColorStop(0,'rgba(255,106,44,.34)');grad.addColorStop(1,'rgba(255,106,44,.02)');
-    const path=function(){samples.forEach(function(v,i){const x=i/(Math.max(1,samples.length-1))*w,y=h-12-Math.min(1,v/max)*(h-30);i?lctx.lineTo(x,y):lctx.moveTo(x,y)})};
-    lctx.beginPath();path();lctx.lineTo(w,h);lctx.lineTo(0,h);lctx.closePath();lctx.fillStyle=grad;lctx.fill();
-    lctx.beginPath();path();lctx.strokeStyle='#ff6a2c';lctx.lineWidth=2;lctx.lineJoin='round';lctx.lineCap='round';lctx.stroke();
-  }
-  window.addEventListener('resize',resize);setTimeout(resize,80);
-  setInterval(function(){readSpeed();draw();},120);
-
-  /* Mirror the existing chart status into the reference-style label. */
-  if(chartState){
-    const co=new MutationObserver(function(){
-      if(chartState.textContent&&chartState.textContent.trim())chartState.textContent=chartState.textContent;
-    });
-    co.observe(chartState,{subtree:true,childList:true,characterData:true});
-  }
-})();
-</script>
 </body>
 </html>
