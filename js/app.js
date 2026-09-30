@@ -1152,3 +1152,43 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+/* =========================================================
+   FASQOO GAUGE – GIFT GREEN DURING DOWNLOAD / UPLOAD
+   ========================================================= */
+
+(function () {
+  const gauge = document.querySelector('.gauge');
+
+  if (!gauge) return;
+
+  function updateGaugeGlow() {
+    const activePhase = document.querySelector(
+      '.phase-step.active'
+    );
+
+    const phase = activePhase?.dataset?.phase || '';
+
+    const measuring =
+      phase === 'download' ||
+      phase === 'upload';
+
+    gauge.classList.toggle('speed-measuring', measuring);
+    gauge.classList.toggle(
+      'speed-finished',
+      phase === 'complete'
+    );
+  }
+
+  /* Überwacht, wenn deine bestehende Messengine
+     die aktive Phase ändert */
+  const phaseObserver = new MutationObserver(updateGaugeGlow);
+
+  document.querySelectorAll('.phase-step').forEach(step => {
+    phaseObserver.observe(step, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  });
+
+  updateGaugeGlow();
+})();
