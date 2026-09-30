@@ -510,6 +510,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 </style>
 
+<!-- ============================================================
+     FASQOO TACHO + LIVE-THROUGHPUT V2
+     Nur Visualisierung: bestehende Messlogik/Element-IDs bleiben erhalten.
+     ============================================================ -->
+<style id="fasqoo-gauge-throughput-v2">
+.fq-v2-gauge{width:min(420px,90vw)!important;aspect-ratio:1!important;position:relative;display:grid!important;place-items:center!important;margin:0 auto!important}
+.fq-v2-gauge svg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:visible!important;display:block!important;pointer-events:none!important}
+.fq-v2-track{fill:none;stroke:var(--line,#eef1f5);stroke-width:14;stroke-linecap:round}
+.fq-v2-inner{fill:none;stroke:rgba(127,139,155,.11);stroke-width:1}
+.fq-v2-legacy-progress{opacity:0!important;stroke-width:0!important}
+.fq-v2-progress{fill:none;stroke:#ff3b4e;stroke-width:14;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(255,59,78,.40));transition:stroke .18s linear}
+.fq-v2-ticks line{stroke:rgba(148,163,184,.32);stroke-width:1.4;stroke-linecap:round}
+.fq-v2-ticks line.major{stroke:rgba(148,163,184,.66);stroke-width:2.4}
+.fq-v2-scale text{fill:var(--text,#111827);font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;user-select:none;opacity:.82}
+.dark .fq-v2-scale text{fill:#b8c0cf}.dark .fq-v2-track{stroke:rgba(255,255,255,.07)}.dark .fq-v2-inner{stroke:rgba(255,255,255,.05)}
+.fq-v2-center{width:66%!important;position:relative!important;z-index:3!important;text-align:center!important;pointer-events:none!important}
+.fq-v2-legacy-speed{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.fq-v2-speed-display{font-size:clamp(56px,11vw,88px)!important;font-weight:800!important;line-height:.95!important;letter-spacing:-4px!important;font-variant-numeric:tabular-nums!important;color:var(--text,#111827)!important;margin:0!important}
+.fq-v2-center .unit{margin-top:6px!important;font-size:11px!important;font-weight:700!important;letter-spacing:5px!important;color:var(--muted,#7a8394)!important;text-transform:uppercase!important}
+.fq-v2-chart{padding:14px 16px 12px!important;background:var(--card,#fff)!important}
+.fq-v2-chart-head{margin-bottom:8px!important}
+.fq-v2-chart-stage{position:relative;width:100%;height:130px;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,rgba(148,163,184,.035),transparent)}
+.fq-v2-chart-stage #chart,.fq-v2-chart-stage #fq-v2-live-chart{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
+.fq-v2-chart-stage #chart{z-index:1}
+.fq-v2-chart-stage #fq-v2-live-chart{z-index:2;pointer-events:none}
+@media(max-width:560px){.fq-v2-gauge{width:min(390px,92vw)!important}.fq-v2-speed-display{font-size:clamp(52px,17vw,76px)!important}}
+</style>
 
 <style id="fasqoo-modern-menu">
 /* ============================================================
@@ -1214,16 +1241,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="grid">
         <div class="speedbox">
-          <div class="gauge">
-            <svg viewBox="0 0 300 300">
-              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
-              </linearGradient></defs>
-              <circle class="ring" cx="150" cy="150" r="130"></circle>
-              <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+          <div class="gauge fq-v2-gauge">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <circle class="fq-v2-track" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="753.98 251.33"></circle>
+              <circle class="fq-v2-inner" cx="200" cy="200" r="130"></circle>
+              <circle id="prog" class="progress fq-v2-legacy-progress" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="0 9999"></circle>
+              <circle id="fq-v2-progress" class="fq-v2-progress" cx="200" cy="200" r="160" transform="rotate(135 200 200)" stroke-dasharray="0 9999"></circle>
+              <g class="fq-v2-ticks" id="fq-v2-ticks"></g>
+              <g class="fq-v2-scale" id="fq-v2-scale"></g>
             </svg>
-            <div class="center">
-              <div id="speed" class="num">0</div>
+            <div class="center fq-v2-center">
+              <div id="speed" class="num fq-v2-legacy-speed" aria-hidden="true">0</div>
+              <div id="fq-v2-speed" class="num fq-v2-speed-display">0</div>
               <div class="unit">Mbps</div>
             </div>
           </div>
@@ -1260,9 +1289,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="metric-reading" id="bloatGrade"></div>
             </div>
           </div>
-          <div class="chart">
-            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
-            <canvas id="chart"></canvas>
+          <div class="chart fq-v2-chart">
+            <div class="charthead fq-v2-chart-head"><span data-i18n="chartLive">Live-Throughput</span><span id="chartState" data-i18n="chartWait">Wartet auf Messung…</span></div>
+            <div class="fq-v2-chart-stage">
+              <canvas id="chart"></canvas>
+              <canvas id="fq-v2-live-chart" aria-hidden="true"></canvas>
+            </div>
           </div>
         </div>
       </div>
@@ -1733,5 +1765,119 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
+
+<!-- ============================================================
+     FASQOO TACHO + LIVE-THROUGHPUT V2 — VISUAL BRIDGE
+     Läuft nach app.js/ping.js und greift nur auf bestehende Werte zu.
+     ============================================================ -->
+<script defer>
+(function(){
+  'use strict';
+  const speedEl=document.getElementById('speed');
+  const visualEl=document.getElementById('fq-v2-speed');
+  const arcEl=document.getElementById('fq-v2-progress');
+  const svgTicks=document.getElementById('fq-v2-ticks');
+  const svgScale=document.getElementById('fq-v2-scale');
+  const sourceCanvas=document.getElementById('chart');
+  const liveCanvas=document.getElementById('fq-v2-live-chart');
+  const phaseEl=document.getElementById('status');
+  const chartState=document.getElementById('chartState');
+  if(!speedEl||!visualEl||!arcEl||!svgTicks||!svgScale||!liveCanvas)return;
+
+  const R=160, START=135, SWEEP=270, MAX=1000, ARC=2*Math.PI*R*(SWEEP/360);
+  const SCALE=[0,1,5,10,50,100,500,1000];
+  let target=0,display=0,raf=0;
+  const samples=[];
+
+  function pos(v){return v<=0?0:Math.log10(v+1)/Math.log10(MAX+1)}
+  function color(v){
+    const t=pos(v),h=t*135;
+    return 'hsl('+h.toFixed(0)+',94%,'+(52+t*6).toFixed(0)+'%)';
+  }
+  function buildGauge(){
+    let ticks='',labels='';
+    for(let i=0;i<=60;i++){
+      const t=i/60,a=(START+t*SWEEP)*Math.PI/180,major=i%5===0;
+      const r1=major?132:140,r2=148;
+      ticks+='<line '+(major?'class="major" ':'')+'x1="'+(200+Math.cos(a)*r1).toFixed(2)+'" y1="'+(200+Math.sin(a)*r1).toFixed(2)+'" x2="'+(200+Math.cos(a)*r2).toFixed(2)+'" y2="'+(200+Math.sin(a)*r2).toFixed(2)+'"></line>';
+    }
+    SCALE.forEach(function(v){
+      const t=pos(v),a=(START+t*SWEEP)*Math.PI/180,r=112;
+      labels+='<text x="'+(200+Math.cos(a)*r).toFixed(2)+'" y="'+(200+Math.sin(a)*r).toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+(v>=1000?'1k':v)+'</text>';
+    });
+    svgTicks.innerHTML=ticks;svgScale.innerHTML=labels;
+  }
+  function render(v){
+    const ratio=pos(v),len=ratio*ARC,c=color(v);
+    arcEl.setAttribute('stroke-dasharray',len.toFixed(2)+' 9999');
+    arcEl.style.stroke=v<=0?'#ff3b4e':c;
+    arcEl.style.filter='drop-shadow(0 0 10px '+(v<=0?'rgba(255,59,78,.25)':c)+')';
+    visualEl.textContent=v<10?v.toFixed(1):Math.round(v).toString();
+    if(v>0){
+      samples.push(v);
+      if(samples.length>72)samples.shift();
+    }
+  }
+  function tick(){
+    const d=target-display;
+    display+=Math.abs(d)<.04?d:d*.18;
+    render(Math.max(0,display));
+    if(Math.abs(target-display)>.04)raf=requestAnimationFrame(tick);else{display=target;render(target);raf=0}
+  }
+  function setTarget(v){
+    v=Number(v);if(!Number.isFinite(v)||v<0)v=0;target=Math.min(MAX,v);if(!raf)raf=requestAnimationFrame(tick);
+  }
+  function readSpeed(){
+    const v=parseFloat((speedEl.textContent||'').replace(',','.'));
+    if(Number.isFinite(v))setTarget(v);
+  }
+
+  /* Existing app.js remains authoritative. We only mirror #speed visually. */
+  const observer=new MutationObserver(readSpeed);
+  observer.observe(speedEl,{subtree:true,childList:true,characterData:true});
+  buildGauge();readSpeed();
+
+  /* Zero the visual display whenever the existing phase indicates completion/reset. */
+  if(phaseEl){
+    const po=new MutationObserver(function(){
+      const t=(phaseEl.textContent||'').toLowerCase();
+      if(/complete|fertig|done|ergebnis|bereit|ready/.test(t)){
+        if(target>0&&/complete|fertig|done|ergebnis/.test(t))setTarget(0);
+      }
+    });
+    po.observe(phaseEl,{subtree:true,childList:true,characterData:true});
+  }
+
+  const lctx=liveCanvas.getContext('2d');
+  function resize(){
+    const box=liveCanvas.getBoundingClientRect(),d=window.devicePixelRatio||1;
+    liveCanvas.width=Math.max(1,Math.round(box.width*d));
+    liveCanvas.height=Math.max(1,Math.round(box.height*d));
+    lctx.setTransform(d,0,0,d,0,0);draw();
+  }
+  function draw(){
+    const w=liveCanvas.clientWidth,h=liveCanvas.clientHeight;
+    lctx.clearRect(0,0,w,h);
+    lctx.strokeStyle='rgba(148,163,184,.08)';lctx.lineWidth=1;
+    for(let y=18;y<h;y+=26){lctx.beginPath();lctx.moveTo(0,y);lctx.lineTo(w,y);lctx.stroke()}
+    if(samples.length<2)return;
+    const max=Math.max(1,...samples),grad=lctx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'rgba(255,106,44,.34)');grad.addColorStop(1,'rgba(255,106,44,.02)');
+    const path=function(){samples.forEach(function(v,i){const x=i/(Math.max(1,samples.length-1))*w,y=h-12-Math.min(1,v/max)*(h-30);i?lctx.lineTo(x,y):lctx.moveTo(x,y)})};
+    lctx.beginPath();path();lctx.lineTo(w,h);lctx.lineTo(0,h);lctx.closePath();lctx.fillStyle=grad;lctx.fill();
+    lctx.beginPath();path();lctx.strokeStyle='#ff6a2c';lctx.lineWidth=2;lctx.lineJoin='round';lctx.lineCap='round';lctx.stroke();
+  }
+  window.addEventListener('resize',resize);setTimeout(resize,80);
+  setInterval(function(){readSpeed();draw();},120);
+
+  /* Mirror the existing chart status into the reference-style label. */
+  if(chartState){
+    const co=new MutationObserver(function(){
+      if(chartState.textContent&&chartState.textContent.trim())chartState.textContent=chartState.textContent;
+    });
+    co.observe(chartState,{subtree:true,childList:true,characterData:true});
+  }
+})();
+</script>
 </body>
 </html>
