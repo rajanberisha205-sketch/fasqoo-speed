@@ -41,7 +41,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://speed.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://www.fasqoo.com/#organization","name":"Fasqoo","url":"https://www.fasqoo.com/","logo":"https://www.fasqoo.com/android-chrome-512x512.png"}
@@ -92,7 +94,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     max-width:100%;
   }
 
-  /* Gleitender Hintergrund */
   .fasqoo-tabs .tab-slider{
     position:absolute;
     top:5px;
@@ -145,7 +146,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .fasqoo-tab.active svg{transform:scale(1.08)}
   .fasqoo-tab:not(.active):hover svg{transform:translateY(-1px)}
 
-  /* Dark Mode */
   .dark .fasqoo-tabs{
     background:rgba(21,24,29,.7);
     border-color:rgba(255,255,255,.08);
@@ -158,7 +158,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .dark .fasqoo-tab:hover{color:#e5e7eb}
   .dark .fasqoo-tab.active{color:#fff}
 
-  /* Mobile: volle Breite */
   @media(max-width:560px){
     .fasqoo-tabs-wrap{padding:0}
     .fasqoo-tabs{
@@ -184,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   /* ============================================================
-     PING-MONITOR – modern, minimalistisch
+     PING-MONITOR
      ============================================================ */
   .ping-wrap{
     display:grid;
@@ -193,7 +192,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-top:4px;
   }
 
-  /* ---------- Settings Panel ---------- */
   .ping-side{
     border:1px solid var(--line);
     border-radius:16px;
@@ -213,7 +211,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
   }
 
-  /* Server Grid – Regionen */
   .server-region{margin-bottom:14px}
   .server-region:last-child{margin-bottom:0}
   .server-region-label{
@@ -246,7 +243,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-weight:600;color:var(--text);font-size:12px;line-height:1.2;
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
-  .server-tile input:checked ~ .name{color:var(--text)}
   .server-tile:has(input:checked){
     border-color:#ff5a1f;
     background:rgba(255,90,31,.05);
@@ -256,7 +252,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     box-shadow:0 0 0 2px rgba(255,90,31,.18);
   }
 
-  /* Mode Selector – Segmented Control */
   .mode-segmented{
     display:grid;grid-template-columns:1fr 1fr;
     border:1px solid var(--line);border-radius:10px;
@@ -290,7 +285,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-top:10px;padding:0 2px;
   }
 
-  /* Start Button */
   .ping-start{
     width:100%;height:48px;border:0;border-radius:11px;
     background:#ff5a1f;color:#fff;
@@ -319,7 +313,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ping-status.done{color:#16a36a}
   .ping-status.err{color:#e5484d}
 
-  /* ---------- Main Panel ---------- */
   .ping-main{display:flex;flex-direction:column;gap:16px;min-width:0}
 
   .metric-row{
@@ -378,7 +371,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   #pingCanvas{width:100%;height:170px;display:block}
 
-  /* Results Table */
   .table-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);overflow:hidden;
@@ -411,7 +403,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-align:center;padding:22px;color:var(--muted);font-size:12px;
   }
 
-  /* Action Row */
   .ping-actions{display:flex;gap:8px;flex-wrap:wrap}
   .ping-action{
     border:1px solid var(--line);background:var(--card);color:var(--text);
@@ -428,7 +419,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ping-action:hover:not(:disabled){border-color:#cfd4dc;background:var(--soft)}
   .ping-action:disabled{opacity:.5;cursor:not-allowed}
 
-  /* History Card */
   .history-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);overflow:hidden;
@@ -442,7 +432,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform:uppercase;color:var(--muted);
   }
 
-  /* Install Button */
   .ping-install{
     display:inline-flex;align-items:center;gap:9px;
     padding:11px 16px;border:1px solid var(--line);
@@ -461,7 +450,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .ping-install[hidden]{display:none}
 
-  /* Header (Titel-Bereich) */
   .ping-header{
     display:flex;justify-content:space-between;align-items:flex-start;
     gap:20px;margin-bottom:22px;padding-bottom:18px;
@@ -494,7 +482,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background:rgba(255,90,31,.06);
   }
 
-  /* Responsive */
   @media(max-width:900px){
     .ping-wrap{grid-template-columns:1fr}
     .ping-side{order:2}
@@ -508,6 +495,205 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .ping-header{flex-direction:column;align-items:flex-start;gap:12px}
     .ping-phase{justify-content:flex-start}
   }
+
+  /* ============================================================
+     FASQOO NETWORK LAB – LIVE DIAGNOSTICS (isoliert)
+     ============================================================ */
+  .fasqoo-nl-widget{
+    --nl-surface:#11151c;
+    --nl-surface-2:#161b24;
+    --nl-line:rgba(255,255,255,.07);
+    --nl-line-2:rgba(255,255,255,.12);
+    --nl-text:#e8ecf3;
+    --nl-text-2:#b8c0cf;
+    --nl-muted:#7a8394;
+    --nl-dim:#4d5566;
+    --nl-accent:#ff6a2c;
+    --nl-accent-2:#ff8a5b;
+    --nl-good:#22e06b;
+    --nl-warn:#ffb020;
+    --nl-bad:#ff3b4e;
+    --nl-chart-bg:#0d1119;
+    background:linear-gradient(160deg,var(--nl-surface),var(--nl-surface-2));
+    border:1px solid var(--nl-line);
+    border-radius:20px;
+    padding:26px;
+    color:var(--nl-text);
+    margin:28px 0;
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.35);
+  }
+  .fasqoo-nl-widget *{box-sizing:border-box}
+  .fasqoo-nl-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:20px;margin-bottom:22px;flex-wrap:wrap;
+  }
+  .fasqoo-nl-kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:700;letter-spacing:1.6px;
+    text-transform:uppercase;color:var(--nl-accent);margin-bottom:8px;
+  }
+  .fasqoo-nl-kicker .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--nl-accent);
+    box-shadow:0 0 0 4px rgba(255,106,44,.15);
+    animation:fasqooNlPulse 2s ease-in-out infinite;
+  }
+  @keyframes fasqooNlPulse{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.6;transform:scale(.85)}
+  }
+  .fasqoo-nl-head h2{
+    margin:0;font-size:22px;font-weight:700;letter-spacing:-.6px;
+    color:var(--nl-text);
+  }
+  .fasqoo-nl-head p{
+    margin:6px 0 0;font-size:12.5px;color:var(--nl-muted);max-width:520px;
+  }
+  .fasqoo-nl-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+    gap:32px;align-items:center;
+  }
+  @media(max-width:880px){
+    .fasqoo-nl-grid{grid-template-columns:1fr;gap:24px}
+  }
+
+  .fasqoo-nl-gauge-wrap{
+    position:relative;width:min(420px,90%);aspect-ratio:1;
+    margin:0 auto;display:grid;place-items:center;
+  }
+  .fasqoo-nl-gauge-wrap svg{
+    position:absolute;inset:0;width:100%;height:100%;
+    overflow:visible;pointer-events:none;display:block;
+  }
+  .fasqoo-nl-track{fill:none;stroke:var(--nl-line);stroke-width:14;stroke-linecap:round}
+  .fasqoo-nl-inner{fill:none;stroke:rgba(255,255,255,.05);stroke-width:1}
+  .fasqoo-nl-progress{
+    fill:none;stroke:var(--nl-bad);stroke-width:14;stroke-linecap:round;
+    transition:stroke .25s linear;
+  }
+  .fasqoo-nl-ticks line{stroke:rgba(255,255,255,.22);stroke-width:1.4;stroke-linecap:round}
+  .fasqoo-nl-ticks line.major{stroke:rgba(255,255,255,.55);stroke-width:2.4}
+  .fasqoo-nl-scale text{
+    fill:var(--nl-text-2);font-family:'Inter',inherit;
+    font-size:13px;font-weight:600;user-select:none;
+  }
+  .fasqoo-nl-center{
+    position:relative;z-index:2;text-align:center;
+    pointer-events:none;width:66%;
+  }
+  .fasqoo-nl-number{
+    font-size:clamp(56px,11vw,88px);font-weight:800;line-height:.95;
+    letter-spacing:-4px;font-variant-numeric:tabular-nums;color:var(--nl-text);
+  }
+  .fasqoo-nl-unit{
+    margin-top:6px;font-size:11px;font-weight:700;
+    letter-spacing:5px;color:var(--nl-muted);text-transform:uppercase;
+  }
+  .fasqoo-nl-phase{
+    margin-top:12px;font-size:9.5px;font-weight:700;
+    letter-spacing:2.4px;text-transform:uppercase;color:var(--nl-dim);
+    min-height:13px;transition:color .3s;
+  }
+  .fasqoo-nl-phase.active{color:var(--nl-text-2)}
+  .fasqoo-nl-phase.done{color:var(--nl-good)}
+
+  .fasqoo-nl-metrics{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;
+  }
+  .fasqoo-nl-metric{
+    border:1px solid var(--nl-line);border-radius:12px;
+    background:var(--nl-surface);padding:14px 16px;
+    transition:border-color .2s;
+  }
+  .fasqoo-nl-metric:hover{border-color:var(--nl-line-2)}
+  .fasqoo-nl-metric .label{
+    display:block;font-size:9.5px;font-weight:700;
+    letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--nl-muted);margin-bottom:6px;
+  }
+  .fasqoo-nl-metric .value{
+    font-size:22px;font-weight:700;letter-spacing:-.8px;
+    line-height:1;font-variant-numeric:tabular-nums;
+    color:var(--nl-text);display:flex;align-items:baseline;gap:4px;
+  }
+  .fasqoo-nl-metric .value .u{
+    font-size:10px;font-weight:500;color:var(--nl-muted);
+  }
+  .fasqoo-nl-metric .value.good{color:var(--nl-good)}
+  .fasqoo-nl-metric .value.warn{color:var(--nl-warn)}
+  .fasqoo-nl-metric .value.bad{color:var(--nl-bad)}
+
+  .fasqoo-nl-chart-box{
+    border:1px solid var(--nl-line);border-radius:12px;
+    background:var(--nl-chart-bg);padding:14px 16px 12px;margin-bottom:14px;
+  }
+  .fasqoo-nl-chart-head{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;
+  }
+  .fasqoo-nl-chart-head strong{
+    font-size:11px;font-weight:600;color:var(--nl-text-2);
+  }
+  .fasqoo-nl-chart-head .hint{
+    font-size:10px;color:var(--nl-muted);font-variant-numeric:tabular-nums;
+  }
+  #nlLiveChart{width:100%;height:130px;display:block}
+
+  .fasqoo-nl-detail-box{
+    border:1px solid var(--nl-line);border-radius:12px;
+    background:var(--nl-surface);padding:14px 16px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .fasqoo-nl-detail-row{
+    display:flex;justify-content:space-between;align-items:center;
+    gap:12px;font-size:12px;
+  }
+  .fasqoo-nl-detail-row .dk{
+    color:var(--nl-muted);font-weight:500;
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .fasqoo-nl-detail-row .dv{
+    color:var(--nl-text);font-weight:600;
+    font-variant-numeric:tabular-nums;
+    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+    font-size:11.5px;text-align:right;
+  }
+  .fasqoo-nl-detail-row .dk svg{
+    width:13px;height:13px;stroke:currentColor;fill:none;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+    color:var(--nl-dim);
+  }
+
+  .fasqoo-nl-actions{
+    margin-top:22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  }
+  .fasqoo-nl-btn{
+    appearance:none;border:0;cursor:pointer;
+    padding:14px 36px;border-radius:10px;
+    font:inherit;font-size:12px;font-weight:700;
+    letter-spacing:1.4px;text-transform:uppercase;
+    background:var(--nl-accent);color:#fff;
+    box-shadow:0 12px 30px rgba(255,106,44,.3);
+    transition:all .2s ease;
+    display:inline-flex;align-items:center;justify-content:center;
+    gap:9px;min-width:220px;
+  }
+  .fasqoo-nl-btn:hover:not(:disabled){
+    background:var(--nl-accent-2);transform:translateY(-1px);
+    box-shadow:0 16px 36px rgba(255,106,44,.38);
+  }
+  .fasqoo-nl-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .fasqoo-nl-btn .spinner{
+    width:13px;height:13px;border-radius:50%;
+    border:2px solid rgba(255,255,255,.35);
+    border-top-color:#fff;
+    animation:fasqooNlSpin .8s linear infinite;
+    display:none;
+  }
+  .fasqoo-nl-btn.running .spinner{display:inline-block}
+  @keyframes fasqooNlSpin{to{transform:rotate(360deg)}}
 </style>
 
 </head>
@@ -707,7 +893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="wrap">
 
   <!-- ========================================================
-       TAB-NAVIGATION – modern mit Slider + SVG-Icons
+       TAB-NAVIGATION
        ======================================================== -->
   <div class="fasqoo-tabs-wrap">
     <nav class="fasqoo-tabs" role="tablist" aria-label="Fasqoo Module" id="fasqooTabs">
@@ -839,6 +1025,113 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span data-i18n="trust1">Accurate measurement – no estimates</span>
       <span data-i18n="trust2">Free &amp; no account required</span>
     </div>
+
+    <!-- ========================================================
+         NEU: FASQOO NETWORK LAB – LIVE DIAGNOSTICS WIDGET
+         ======================================================== -->
+    <section class="section">
+      <div class="fasqoo-nl-widget" id="nlWidget">
+        <div class="fasqoo-nl-head">
+          <div>
+            <div class="fasqoo-nl-kicker"><span class="dot"></span>Live Network Diagnostics</div>
+            <h2>Echtzeit-Netzwerkdiagnose</h2>
+            <p>Präzise Messung von Bandbreite, Latenz und Jitter – direkt über die Cloudflare-Edge-Infrastruktur.</p>
+          </div>
+        </div>
+
+        <div class="fasqoo-nl-grid">
+          <!-- GAUGE -->
+          <div class="fasqoo-nl-gauge-wrap">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <circle class="fasqoo-nl-track" cx="200" cy="200" r="160"
+                      transform="rotate(135 200 200)"
+                      stroke-dasharray="753.98 251.33"/>
+              <circle class="fasqoo-nl-inner" cx="200" cy="200" r="130"/>
+              <circle id="nlGaugeProgress" class="fasqoo-nl-progress"
+                      cx="200" cy="200" r="160"
+                      transform="rotate(135 200 200)"
+                      stroke-dasharray="0 9999"/>
+              <g class="fasqoo-nl-ticks" id="nlGaugeTicks"></g>
+              <g class="fasqoo-nl-scale" id="nlGaugeScale"></g>
+            </svg>
+            <div class="fasqoo-nl-center">
+              <div class="fasqoo-nl-number" id="nlGaugeNumber">0</div>
+              <div class="fasqoo-nl-unit">Mbps</div>
+              <div class="fasqoo-nl-phase" id="nlGaugePhase">Bereit</div>
+            </div>
+          </div>
+
+          <!-- METRICS + CHART + DETAILS -->
+          <div>
+            <div class="fasqoo-nl-metrics">
+              <div class="fasqoo-nl-metric">
+                <span class="label">Download</span>
+                <div class="value" id="nlMDown">—<span class="u">Mbps</span></div>
+              </div>
+              <div class="fasqoo-nl-metric">
+                <span class="label">Upload</span>
+                <div class="value" id="nlMUp">—<span class="u">Mbps</span></div>
+              </div>
+              <div class="fasqoo-nl-metric">
+                <span class="label">Ping</span>
+                <div class="value" id="nlMPing">—<span class="u">ms</span></div>
+              </div>
+              <div class="fasqoo-nl-metric">
+                <span class="label">Jitter</span>
+                <div class="value" id="nlMJitter">—<span class="u">ms</span></div>
+              </div>
+            </div>
+
+            <div class="fasqoo-nl-chart-box">
+              <div class="fasqoo-nl-chart-head">
+                <strong>Live-Throughput</strong>
+                <span class="hint" id="nlChartHint">Wartet auf Messung…</span>
+              </div>
+              <canvas id="nlLiveChart" width="800" height="260"></canvas>
+            </div>
+
+            <div class="fasqoo-nl-detail-box">
+              <div class="fasqoo-nl-detail-row">
+                <span class="dk">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg>
+                  DNS-Auflösung
+                </span>
+                <span class="dv" id="nlDnsTime">—</span>
+              </div>
+              <div class="fasqoo-nl-detail-row">
+                <span class="dk">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                  Test-Server
+                </span>
+                <span class="dv" id="nlServerName">Cloudflare Edge · Auto</span>
+              </div>
+              <div class="fasqoo-nl-detail-row">
+                <span class="dk">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
+                  Öffentliche IP
+                </span>
+                <span class="dv" id="nlIpValue">—</span>
+              </div>
+              <div class="fasqoo-nl-detail-row">
+                <span class="dk">
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  ISP
+                </span>
+                <span class="dv" id="nlIspValue">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fasqoo-nl-actions">
+          <button type="button" class="fasqoo-nl-btn" id="nlStartBtn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="nlStartLabel">Test starten</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- /NEU: NETWORK LAB WIDGET -->
 
     <section class="section intelligence-section">
       <div class="section-heading-row">
@@ -1272,7 +1565,513 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 
+<!-- ============================================================
+     BESTEHENDE SCRIPTS (unverändert)
+     ============================================================ -->
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
+
+<!-- ============================================================
+     FASQOO NETWORK LAB – LIVE DIAGNOSTICS ENGINE
+     Echte Messung über Cloudflare Edge (isoliert in IIFE)
+     ============================================================ -->
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Helpers ---------- */
+  const $ = id => document.getElementById(id);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+  const fmt = (v, d = 1) => Number.isFinite(v) ? v.toFixed(d) : '—';
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  /* ---------- State ---------- */
+  let running = false;
+  let netInfo = { ip: '—', isp: '—' };
+
+  /* ---------- Gauge Config ---------- */
+  const GAUGE = {
+    cx: 200, cy: 200, radius: 160,
+    startAngle: 135, sweep: 270,
+    maxMbps: 1000, tickCount: 60,
+  };
+  GAUGE.arcLength = 2 * Math.PI * GAUGE.radius * (GAUGE.sweep / 360);
+  const SCALE_VALUES = [0, 1, 5, 10, 50, 100, 500, 1000];
+
+  function scalePosition(value){
+    if(value <= 0) return 0;
+    const maxLog = Math.log10(GAUGE.maxMbps + 1);
+    return Math.log10(value + 1) / maxLog;
+  }
+
+  function buildGauge(){
+    const ticks = $('nlGaugeTicks');
+    const scale = $('nlGaugeScale');
+    if(!ticks || !scale) return;
+    let tickHtml = '', scaleHtml = '';
+    for(let i = 0; i <= GAUGE.tickCount; i++){
+      const t = i / GAUGE.tickCount;
+      const angle = GAUGE.startAngle + t * GAUGE.sweep;
+      const rad = angle * Math.PI / 180;
+      const isMajor = i % 5 === 0;
+      const r1 = isMajor ? 132 : 140;
+      const r2 = 148;
+      const x1 = GAUGE.cx + Math.cos(rad) * r1;
+      const y1 = GAUGE.cy + Math.sin(rad) * r1;
+      const x2 = GAUGE.cx + Math.cos(rad) * r2;
+      const y2 = GAUGE.cy + Math.sin(rad) * r2;
+      tickHtml += `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" class="${isMajor ? 'major' : ''}"/>`;
+    }
+    SCALE_VALUES.forEach(v => {
+      const t = scalePosition(v);
+      const angle = GAUGE.startAngle + t * GAUGE.sweep;
+      const rad = angle * Math.PI / 180;
+      const r = 112;
+      const x = GAUGE.cx + Math.cos(rad) * r;
+      const y = GAUGE.cy + Math.sin(rad) * r;
+      const label = v >= 1000 ? '1k' : v;
+      scaleHtml += `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`;
+    });
+    ticks.innerHTML = tickHtml;
+    scale.innerHTML = scaleHtml;
+  }
+
+  function colorForRatio(r){
+    const t = clamp(r, 0, 1);
+    const hue = t * 135;
+    const sat = 88 + t * 8;
+    const light = 52 + t * 6;
+    return `hsl(${hue.toFixed(1)}, ${sat.toFixed(0)}%, ${light.toFixed(0)}%)`;
+  }
+
+  function setArc(mbps){
+    const arc = $('nlGaugeProgress');
+    if(!arc) return;
+    const r = scalePosition(mbps);
+    const len = r * GAUGE.arcLength;
+    arc.setAttribute('stroke-dasharray', `${len.toFixed(2)} 9999`);
+    const color = colorForRatio(r);
+    arc.style.stroke = color;
+    arc.style.filter = `drop-shadow(0 0 12px ${color})`;
+  }
+
+  let numRaf = 0, numDisplay = 0, numTarget = 0;
+  function animateNumber(){
+    const diff = numTarget - numDisplay;
+    if(Math.abs(diff) < 0.05){
+      numDisplay = numTarget;
+      numRaf = 0;
+    } else {
+      numDisplay += diff * 0.14;
+      numRaf = requestAnimationFrame(animateNumber);
+    }
+    const n = numDisplay;
+    const el = $('nlGaugeNumber');
+    if(el) el.textContent = n < 10 ? n.toFixed(1) : Math.round(n);
+  }
+  function setNumber(v){
+    if(!Number.isFinite(v)) return;
+    numTarget = Math.max(0, v);
+    if(!numRaf) numRaf = requestAnimationFrame(animateNumber);
+  }
+  function resetGauge(){
+    numTarget = 0; numDisplay = 0;
+    if(numRaf){ cancelAnimationFrame(numRaf); numRaf = 0; }
+    const el = $('nlGaugeNumber');
+    if(el) el.textContent = '0';
+    setArc(0);
+  }
+  function setPhase(text, cls){
+    const el = $('nlGaugePhase');
+    if(!el) return;
+    el.textContent = text;
+    el.classList.remove('active','done');
+    if(cls) el.classList.add(cls);
+  }
+
+  /* ---------- Live Chart ---------- */
+  const chartCanvas = $('nlLiveChart');
+  const chartCtx = chartCanvas ? chartCanvas.getContext('2d') : null;
+  const chartData = [];
+  const CHART_MAX = 120;
+
+  function resizeChart(){
+    if(!chartCanvas || !chartCtx) return;
+    const rect = chartCanvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    chartCanvas.width = rect.width * dpr;
+    chartCanvas.height = rect.height * dpr;
+    chartCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawChart();
+  }
+
+  function drawChart(){
+    if(!chartCanvas || !chartCtx) return;
+    const w = chartCanvas.clientWidth;
+    const h = chartCanvas.clientHeight;
+    chartCtx.clearRect(0, 0, w, h);
+
+    chartCtx.strokeStyle = 'rgba(148,163,184,.08)';
+    chartCtx.lineWidth = 1;
+    for(let y = 20; y < h; y += 26){
+      chartCtx.beginPath();
+      chartCtx.moveTo(0, y);
+      chartCtx.lineTo(w, y);
+      chartCtx.stroke();
+    }
+    if(chartData.length < 2) return;
+
+    const max = Math.max(1, ...chartData);
+    const grad = chartCtx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, 'rgba(255,106,44,.35)');
+    grad.addColorStop(1, 'rgba(255,106,44,.02)');
+
+    chartCtx.beginPath();
+    chartData.forEach((v, i) => {
+      const x = (i / (CHART_MAX - 1)) * w;
+      const y = h - 12 - (Math.min(1, v / max) * (h - 30));
+      i ? chartCtx.lineTo(x, y) : chartCtx.moveTo(x, y);
+    });
+    chartCtx.lineTo(w, h);
+    chartCtx.lineTo(0, h);
+    chartCtx.closePath();
+    chartCtx.fillStyle = grad;
+    chartCtx.fill();
+
+    chartCtx.beginPath();
+    chartData.forEach((v, i) => {
+      const x = (i / (CHART_MAX - 1)) * w;
+      const y = h - 12 - (Math.min(1, v / max) * (h - 30));
+      i ? chartCtx.lineTo(x, y) : chartCtx.moveTo(x, y);
+    });
+    chartCtx.strokeStyle = '#ff6a2c';
+    chartCtx.lineWidth = 2;
+    chartCtx.lineJoin = 'round';
+    chartCtx.lineCap = 'round';
+    chartCtx.stroke();
+  }
+
+  function pushChart(v){
+    if(!Number.isFinite(v) || v <= 0) return;
+    chartData.push(v);
+    if(chartData.length > CHART_MAX) chartData.shift();
+    drawChart();
+  }
+
+  window.addEventListener('resize', () => {
+    try{ resizeChart(); }catch(e){}
+  });
+
+  /* ---------- Klassifikation ---------- */
+  const classifyPing = v => v < 30 ? 'good' : v < 60 ? 'warn' : 'bad';
+  const classifyJitter = v => v < 10 ? 'good' : v < 25 ? 'warn' : 'bad';
+
+  function updateMetric(el, value, unit, cls){
+    if(!el) return;
+    el.innerHTML = value + `<span class="u">${unit}</span>`;
+    el.classList.remove('good','warn','bad');
+    if(cls) el.classList.add(cls);
+  }
+
+  /* ============================================================
+     ECHTE CLOUDFLARE-MESSUNG
+     ============================================================ */
+  const CF_BASE = 'https://speed.cloudflare.com';
+
+  /* --- Ping / Jitter (echte Requests an Cloudflare) --- */
+  async function phasePingReal(onSample){
+    setPhase('Latenz messen…', 'active');
+    const hint = $('nlChartHint');
+    if(hint) hint.textContent = 'Ping-Phase (Cloudflare)';
+
+    const samples = [];
+    const attempts = 8;
+    const baseUrl = `${CF_BASE}/__down?bytes=0`;
+
+    for(let i = 0; i < attempts; i++){
+      const url = `${baseUrl}&t=${Date.now()}&i=${i}`;
+      const t0 = performance.now();
+      try{
+        await fetch(url, { cache:'no-store', mode:'cors' });
+      } catch(e){ /* ignore einzelne Fehler */ }
+      const dt = performance.now() - t0;
+      samples.push(dt);
+      if(onSample) onSample(dt);
+      await sleep(60);
+    }
+
+    if(!samples.length) return { ping: 0, jitter: 0 };
+
+    const sorted = [...samples].sort((a,b)=>a-b);
+    const ping = sorted[Math.floor(sorted.length / 2)];
+    const deltas = [];
+    for(let i = 1; i < samples.length; i++) deltas.push(Math.abs(samples[i] - samples[i-1]));
+    const sortedD = [...deltas].sort((a,b)=>a-b);
+    const jitter = sortedD.length ? sortedD[Math.floor(sortedD.length/2)] : 0;
+
+    return {
+      ping: Math.round(ping * 10) / 10,
+      jitter: Math.round(jitter * 10) / 10,
+    };
+  }
+
+  /* --- DNS (echter Lookup via Cloudflare) --- */
+  async function phaseDnsReal(){
+    setPhase('DNS-Auflösung prüfen…', 'active');
+    const hint = $('nlChartHint');
+    if(hint) hint.textContent = 'DNS-Phase';
+    const t0 = performance.now();
+    try{
+      await fetch('https://cloudflare-dns.com/dns-query?name=cloudflare.com&type=A',
+        { headers:{ 'accept':'application/dns-json' }, cache:'no-store', mode:'cors' });
+    } catch(e){ /* ignore */ }
+    return Math.round(performance.now() - t0);
+  }
+
+  /* --- Download (echter Cloudflare-Download mit Live-Progress) --- */
+  async function phaseDownloadReal(onTick){
+    setPhase('Download-Test läuft…', 'active');
+    const hint = $('nlChartHint');
+    if(hint) hint.textContent = 'Download · Live';
+
+    // Größe: ~25 MB
+    const bytes = 25 * 1024 * 1024;
+    const url = `${CF_BASE}/__down?bytes=${bytes}&t=${Date.now()}`;
+
+    const t0 = performance.now();
+    let received = 0;
+    let lastTick = t0;
+    let lastBytes = 0;
+    let peak = 0;
+
+    const res = await fetch(url, { cache:'no-store', mode:'cors' });
+    if(!res.ok || !res.body) throw new Error('Download fehlgeschlagen');
+
+    const reader = res.body.getReader();
+    while(true){
+      const { done, value } = await reader.read();
+      if(done) break;
+      received += value.length;
+      const now = performance.now();
+      if(now - lastTick >= 120){
+        const dt = (now - lastTick) / 1000;
+        const dBytes = received - lastBytes;
+        const mbps = (dBytes * 8) / (dt * 1_000_000);
+        peak = Math.max(peak, mbps);
+        onTick(mbps, peak);
+        lastTick = now;
+        lastBytes = received;
+      }
+    }
+
+    const totalTime = (performance.now() - t0) / 1000;
+    const avg = (received * 8) / (Math.max(totalTime, 0.001) * 1_000_000);
+    peak = Math.max(peak, avg);
+    return Math.round(peak);
+  }
+
+  /* --- Upload (echter Cloudflare-Upload mit Live-Progress via XHR) --- */
+  async function phaseUploadReal(onTick){
+    setPhase('Upload-Test läuft…', 'active');
+    const hint = $('nlChartHint');
+    if(hint) hint.textContent = 'Upload · Live';
+
+    // ~10 MB Upload-Payload
+    const bytes = 10 * 1024 * 1024;
+    const payload = new Uint8Array(bytes);
+    for(let i = 0; i < bytes; i += 4096) payload[i] = i & 0xff;
+
+    return await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `${CF_BASE}/__up?t=${Date.now()}`, true);
+      xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+
+      let lastLoaded = 0;
+      let lastTime = performance.now();
+      let peak = 0;
+      const startTime = performance.now();
+
+      xhr.upload.onprogress = e => {
+        const now = performance.now();
+        if(now - lastTime >= 120){
+          const dt = (now - lastTime) / 1000;
+          const dBytes = e.loaded - lastLoaded;
+          const mbps = (dBytes * 8) / (dt * 1_000_000);
+          peak = Math.max(peak, mbps);
+          onTick(mbps, peak);
+          lastLoaded = e.loaded;
+          lastTime = now;
+        }
+      };
+
+      xhr.onload = () => {
+        if(xhr.status >= 200 && xhr.status < 300){
+          const totalTime = (performance.now() - startTime) / 1000;
+          const avg = (bytes * 8) / (Math.max(totalTime, 0.001) * 1_000_000);
+          peak = Math.max(peak, avg);
+          resolve(Math.round(peak));
+        } else {
+          reject(new Error('Upload fehlgeschlagen: ' + xhr.status));
+        }
+      };
+      xhr.onerror = () => reject(new Error('Upload Netzwerkfehler'));
+      xhr.send(payload);
+    });
+  }
+
+  /* --- Paketverlust (Schätzung anhand fehlgeschlagener Mini-Requests) --- */
+  async function phasePacketLossReal(){
+    const url = `${CF_BASE}/__down?bytes=0`;
+    let failed = 0;
+    const attempts = 10;
+    for(let i = 0; i < attempts; i++){
+      try{
+        const res = await fetch(`${url}&t=${Date.now()}&i=${i}`, { cache:'no-store', mode:'cors' });
+        if(!res.ok) failed++;
+      } catch(e){ failed++; }
+    }
+    return Math.round((failed / attempts) * 100 * 10) / 10;
+  }
+
+  /* ---------- Netzwerk-Info (IP/ISP) ---------- */
+  async function fetchNetworkInfo(){
+    try{
+      const res = await fetch('https://ipwho.is/', { cache:'no-store' });
+      if(!res.ok) throw new Error('Netzwerkdienst nicht erreichbar');
+      const data = await res.json();
+      if(data && data.success){
+        netInfo.ip = data.ip || '—';
+        netInfo.isp = data.connection?.isp || data.connection?.org || '—';
+        const ipEl = $('nlIpValue');
+        const ispEl = $('nlIspValue');
+        if(ipEl) ipEl.textContent = netInfo.ip;
+        if(ispEl) ispEl.textContent = netInfo.isp;
+      }
+    } catch(e){
+      console.warn('IP-Abfrage fehlgeschlagen:', e);
+    }
+  }
+
+  /* ---------- Hauptablauf ---------- */
+  async function runFullTest(){
+    if(running) return;
+    running = true;
+
+    const btn = $('nlStartBtn');
+    const label = $('nlStartLabel');
+
+    /* UI Reset */
+    resetGauge();
+    chartData.length = 0;
+    drawChart();
+    setPhase('Verbindung wird vorbereitet…', 'active');
+    const hint = $('nlChartHint');
+    if(hint) hint.textContent = 'Wartet…';
+    if(btn) btn.disabled = true;
+    if(btn) btn.classList.add('running');
+    if(label) label.textContent = 'Test läuft…';
+
+    /* Metric Reset */
+    updateMetric($('nlMDown'), '—', 'Mbps', null);
+    updateMetric($('nlMUp'), '—', 'Mbps', null);
+    updateMetric($('nlMPing'), '—', 'ms', null);
+    updateMetric($('nlMJitter'), '—', 'ms', null);
+
+    try{
+      /* --- PHASE 1: PING --- */
+      const { ping, jitter } = await phasePingReal(v => {
+        updateMetric($('nlMPing'), fmt(v), 'ms', classifyPing(v));
+      });
+      updateMetric($('nlMPing'), fmt(ping), 'ms', classifyPing(ping));
+      updateMetric($('nlMJitter'), fmt(jitter), 'ms', classifyJitter(jitter));
+
+      await sleep(300);
+
+      /* --- PHASE 2: DNS --- */
+      const dns = await phaseDnsReal();
+      const dnsEl = $('nlDnsTime');
+      if(dnsEl) dnsEl.textContent = dns + ' ms · Cloudflare DNS';
+      await sleep(300);
+
+      /* --- PHASE 3: DOWNLOAD --- */
+      const down = await phaseDownloadReal((live) => {
+        setNumber(live);
+        setArc(live);
+        pushChart(live);
+        updateMetric($('nlMDown'), fmt(live, live < 100 ? 1 : 0), 'Mbps', null);
+      });
+      updateMetric($('nlMDown'), fmt(down, down < 100 ? 1 : 0), 'Mbps',
+        down >= 100 ? 'good' : down >= 25 ? 'warn' : 'bad');
+
+      await sleep(400);
+
+      /* Gauge für Upload zurücksetzen */
+      numTarget = 0; numDisplay = 0;
+      if(numRaf){ cancelAnimationFrame(numRaf); numRaf = 0; }
+      const numEl = $('nlGaugeNumber');
+      if(numEl) numEl.textContent = '0';
+      setArc(0);
+      chartData.length = 0; drawChart();
+
+      /* --- PHASE 4: UPLOAD --- */
+      const up = await phaseUploadReal((live) => {
+        setNumber(live);
+        setArc(live);
+        pushChart(live);
+        updateMetric($('nlMUp'), fmt(live, live < 100 ? 1 : 0), 'Mbps', null);
+      });
+      updateMetric($('nlMUp'), fmt(up, up < 100 ? 1 : 0), 'Mbps',
+        up >= 25 ? 'good' : up >= 5 ? 'warn' : 'bad');
+
+      /* --- PHASE 5: PAKETVERLUST --- */
+      await phasePacketLossReal();
+
+      /* --- ABSCHLUSS --- */
+      setPhase('Test abgeschlossen', 'done');
+      if(hint) hint.textContent = 'Test abgeschlossen';
+      setNumber(up);
+      setArc(up);
+
+      if(btn) btn.classList.remove('running');
+      if(btn) btn.disabled = false;
+      if(label) label.textContent = 'Erneut testen';
+
+    } catch(err){
+      console.error('Network-Lab Testfehler:', err);
+      setPhase('Messung fehlgeschlagen', 'done');
+      if(btn) btn.classList.remove('running');
+      if(btn) btn.disabled = false;
+      if(label) label.textContent = 'Erneut testen';
+    } finally {
+      running = false;
+    }
+  }
+
+  /* ---------- Init ---------- */
+  function init(){
+    const widget = $('nlWidget');
+    if(!widget) return;
+
+    buildGauge();
+    resetGauge();
+    resizeChart();
+    setTimeout(resizeChart, 150);
+
+    // IP/ISP laden
+    fetchNetworkInfo();
+
+    const btn = $('nlStartBtn');
+    if(btn) btn.addEventListener('click', runFullTest);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 </body>
 </html>
