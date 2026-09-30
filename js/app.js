@@ -1,9 +1,9 @@
 /* ==========================================================
-   FASQOO SPEED TEST v8.2
+   FASQOO SPEED TEST v8.3
    - 6 metrics incl. Bufferbloat + Packet Loss
    - Sample-synced pulse
    - Colored interim states (blue → green/yellow/red)
-   - Live gradient chart with smooth curves + dual series
+   - LIVE STREAMING CHART (byte-level, fließend wie Oszilloskop)
    - Gauge color states (blue download / green upload)
    - Overall Grade A+ to F with glow
    - 8 application profile tiles with SVG icons + reveal
@@ -103,7 +103,7 @@ es:{navFaq:"FAQ",navAntivirus:"Escáner antivirus",navAntivirusDesc:"Analiza arc
 it:{navFaq:"FAQ",navAntivirus:"Scanner antivirus",navAntivirusDesc:"Controlla file e contenuti per individuare rischi di sicurezza",download:"Download",navStatus:"Stato rete",navDiag:"Diagnostica IT",navAbout:"Chi siamo",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"Scopri in pochi secondi cosa offre davvero la tua connessione, inclusa l'idoneità per streaming, gaming e smart working.",serverLabel:"Server",ready:"Pronto",start:"Avvia test",startAgain:"Ripeti",testing:"In corso…",complete:"Completato",ping:"Ping",jitter:"Jitter",upload:"Upload",chartLive:"Prestazioni Live",chartWait:"In attesa",lblIp:"IP Pubblico",lblIsp:"Provider / ISP",lblLoc:"Posizione",lblAsn:"Rete / ASN",qTitle:"Qualità",qDefault:"Esegui un test per valutare la connessione.",qualityBasis:"Basato su download, upload, ping e jitter",appsTitle:"Cosa puoi fare?",appsSub:"Controllo live per gaming, 4K, smart working e social.",diagTitle:"Diagnostica di rete",diagLatT:"Latenza",diagLatD:"Misura i tempi di risposta.",diagStabT:"Stabilità",diagStabD:"Il jitter mostra la stabilità.",diagDnsT:"Diagnostica DNS",diagDnsD:"Verifica i DNS.",diagIpT:"Diagnostica IP",diagIpD:"Rileva IP, ISP, ASN.",repTitle:"Report professionale",lblRepTestId:"ID",copy:"Copia",share:"Condividi",json:"Esporta JSON",print:"Stampa",histTitle:"Cronologia",histRecent:"Recenti",histClear:"Cancella",thDate:"Data",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualità",noHistory:"Nessun test salvato.",ftRights:"© 2026 Fasqoo. Tutti i diritti riservati.",ftAccess:"Accessibilità",ftImprint:"Note legali",ftPrivacy:"Privacy",ftTerms:"Termini",ftNoSell:"Non vendere i miei dati",footerAntivirus:"Scanner antivirus",ftPowered:"Basato sulla rete Cloudflare Edge per garantire massime prestazioni e precisione di misurazione.",ftDisclaimer:"Fasqoo è una piattaforma di speed test indipendente e non è un prodotto ufficiale Cloudflare.",stPing:"Misura latenza…",stDown:"Misura download…",stUp:"Misura upload…",stErr:"Fallito.",measurementUnavailable:"Misurazione non disponibile. Riprova.",stExc:"Eccellente",stGood:"Buono",stLim:"Limitato",q90:"Connessione eccellente.",q75:"Ottima connessione.",q55:"Buona connessione.",q35:"Connessione media.",q0:"Connessione scarsa.",alertRun:"Esegui prima un test.",unavail:"Non disponibile",notDetected:"Non rilevato",appRunTest:"Esegui",copied:"Copiato",gradeTitle:"Voto globale della rete",appsKicker:"PROFILI D'USO",appsBadge:"CHECK LIVE"},
 pt:{navFaq:"FAQ",navAntivirus:"Scanner antivírus",navAntivirusDesc:"Verifica ficheiros e conteúdos em busca de riscos de segurança",download:"Download",navStatus:"Estado da Rede",navDiag:"Diagnóstico TI",navAbout:"Sobre",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"Descubra em segundos o que a sua ligação realmente oferece — incluindo adequação para streaming, jogos e teletrabalho.",serverLabel:"Servidor",ready:"Pronto",start:"Iniciar teste",startAgain:"Repetir",testing:"A testar…",complete:"Concluído",ping:"Ping",jitter:"Jitter",upload:"Upload",chartLive:"Desempenho",chartWait:"Aguarda",lblIp:"IP Público",lblIsp:"Fornecedor / ISP",lblLoc:"Localização",lblAsn:"Rede / ASN",qTitle:"Qualidade",qDefault:"Execute um teste para avaliar a ligação.",qualityBasis:"Baseado em download, upload, ping e jitter",appsTitle:"O que pode fazer?",appsSub:"Verificação em direto para jogos, 4K, teletrabalho e redes sociais.",diagTitle:"Diagnóstico de Rede",diagLatT:"Latência",diagLatD:"Mede o tempo de resposta.",diagStabT:"Estabilidade",diagStabD:"O jitter mostra estabilidade.",diagDnsT:"Diagnóstico DNS",diagDnsD:"Verifica os DNS.",diagIpT:"Diagnóstico IP",diagIpD:"Deteta IP, ISP, ASN.",repTitle:"Relatório profissional",lblRepTestId:"ID",copy:"Copiar",share:"Partilhar",json:"Exportar JSON",print:"Imprimir",histTitle:"Histórico",histRecent:"Recentes",histClear:"Limpar",thDate:"Data",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualidade",noHistory:"Sem testes guardados.",ftRights:"© 2026 Fasqoo. Todos os direitos reservados.",ftAccess:"Acessibilidade",ftImprint:"Informação legal",ftPrivacy:"Privacidade",ftTerms:"Termos",ftNoSell:"Não vender os meus dados",footerAntivirus:"Scanner antivírus",ftPowered:"Suportado pela rede Cloudflare Edge para garantir o máximo desempenho e precisão de medição.",ftDisclaimer:"A Fasqoo é uma plataforma de teste de velocidade independente e não é um produto oficial da Cloudflare.",stPing:"A medir latência…",stDown:"A medir download…",stUp:"A medir upload…",stErr:"Falhou.",measurementUnavailable:"Medição indisponível. Tente novamente.",stExc:"Excelente",stGood:"Bom",stLim:"Limitado",q90:"Ligação excelente.",q75:"Muito boa ligação.",q55:"Boa ligação.",q35:"Ligação média.",q0:"Ligação fraca.",alertRun:"Execute primeiro um teste.",unavail:"Indisponível",notDetected:"Não detetado",appRunTest:"Executar",copied:"Copiado",gradeTitle:"Nota global da rede",appsKicker:"PERFIS DE USO",appsBadge:"VERIF. LIVE"},
 nl:{navFaq:"FAQ",navAntivirus:"Antivirusscanner",navAntivirusDesc:"Bestanden en inhoud controleren op beveiligingsrisico's",download:"Download",navStatus:"Netwerkstatus",navDiag:"IT-Diagnose",navAbout:"Over ons",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"Zie in seconden wat je verbinding echt levert — inclusief geschiktheid voor streaming, gaming en thuiswerken.",serverLabel:"Server",ready:"Klaar",start:"Start test",startAgain:"Opnieuw",testing:"Bezig…",complete:"Voltooid",ping:"Ping",jitter:"Jitter",upload:"Upload",chartLive:"Live",chartWait:"Wachten",lblIp:"Openbaar IP",lblIsp:"Provider / ISP",lblLoc:"Locatie",lblAsn:"Netwerk / ASN",qTitle:"Kwaliteit",qDefault:"Voer een test uit om te beoordelen.",qualityBasis:"Gebaseerd op download, upload, ping en jitter",appsTitle:"Wat kun je doen?",appsSub:"Live check voor gamen, 4K, thuiswerken en social.",diagTitle:"Netwerkdiagnose",diagLatT:"Latentie",diagLatD:"Meet reactietijd.",diagStabT:"Stabiliteit",diagStabD:"Jitter toont stabiliteit.",diagDnsT:"DNS-diagnose",diagDnsD:"Controleert DNS.",diagIpT:"IP-diagnose",diagIpD:"Detecteert IP, ISP, ASN.",repTitle:"Professioneel rapport",lblRepTestId:"ID",copy:"Kopiëren",share:"Delen",json:"JSON exporteren",print:"Afdrukken",histTitle:"Geschiedenis",histRecent:"Recent",histClear:"Wissen",thDate:"Datum",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Kwaliteit",noHistory:"Nog geen tests.",ftRights:"© 2026 Fasqoo. Alle rechten voorbehouden.",ftAccess:"Toegankelijkheid",ftImprint:"Impressum",ftPrivacy:"Privacy",ftTerms:"Voorwaarden",ftNoSell:"Verkoop mijn data niet",footerAntivirus:"Antivirusscanner",ftPowered:"Aangedreven door het Cloudflare Edge-netwerk voor maximale prestaties en meetnauwkeurigheid.",ftDisclaimer:"Fasqoo is een onafhankelijk speedtest-platform en geen officieel Cloudflare-product.",stPing:"Latentie meten…",stDown:"Download meten…",stUp:"Upload meten…",stErr:"Mislukt.",measurementUnavailable:"Meting niet beschikbaar. Probeer opnieuw.",stExc:"Uitstekend",stGood:"Goed",stLim:"Beperkt",q90:"Uitstekende verbinding.",q75:"Zeer goede verbinding.",q55:"Goede verbinding.",q35:"Gemiddelde verbinding.",q0:"Slechte verbinding.",alertRun:"Voer eerst een test uit.",unavail:"Niet beschikbaar",notDetected:"Niet gedetecteerd",appRunTest:"Start",copied:"Gekopieerd",gradeTitle:"Algemene netwerkbeoordeling",appsKicker:"GEBRUIKSPROFIELEN",appsBadge:"LIVE CHECK"},
-tr:{navFaq:"SSS",navAntivirus:"Antivirüs Tarayıcı",navAntivirusDesc:"Dosyaları ve içerikleri güvenlik risklerine karşı kontrol edin",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",download:"İndirme",title:"Free Internet Speed Test",sub:"Bağlantınızın gerçekte ne sunduğunu saniyeler içinde görün — streaming, oyun ve evden çalışma uygunluğu dahil.",serverLabel:"Sunucu",ready:"Hazır",start:"Testi başlat",startAgain:"Tekrar",testing:"Test ediliyor…",complete:"Tamamlandı",ping:"Ping",jitter:"Jitter",upload:"Yükleme",chartLive:"Canlı",chartWait:"Bekliyor",lblIp:"Açık IP",lblIsp:"Sağlayıcı / ISP",lblLoc:"Konum",lblAsn:"Ağ / ASN",qTitle:"Kalite",qDefault:"Bağlantınızı değerlendirmek için test yapın.",qualityBasis:"İndirme, yükleme, ping ve jitter değerlerine dayanır",appsTitle:"Ne yapabilirsiniz?",appsSub:"Oyun, 4K, evden çalışma ve sosyal medya için canlı kontrol.",diagTitle:"Ağ Tanılama",diagLatT:"Gecikme",diagLatD:"Yanıt süresini ölçer.",diagStabT:"Kararlılık",diagStabD:"Jitter kararlılığı gösterir.",diagDnsT:"DNS Tanılama",diagDnsD:"DNS sunucularını kontrol eder.",diagIpT:"IP Tanılama",diagIpD:"IP, ISP, ASN tespit eder.",repTitle:"Profesyonel Rapor",lblRepTestId:"ID",copy:"Kopyala",share:"Paylaş",json:"JSON",print:"Yazdır",histTitle:"Geçmiş",histRecent:"Son ölçümler",histClear:"Temizle",thDate:"Tarih",thDown:"İndirme",thUp:"Yükleme",thPing:"Ping",thQual:"Kalite",noHistory:"Kayıt yok.",ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.",ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftPrivacy:"Gizlilik",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma",footerAntivirus:"Antivirüs Tarayıcı",ftPowered:"Maksimum performans ve ölçüm doğruluğu için Cloudflare Edge ağı tarafından desteklenmektedir.",ftDisclaimer:"Fasqoo bağımsız bir hız testi platformudur ve resmi bir Cloudflare ürünü değildir.",stPing:"Gecikme ölçülüyor…",stDown:"İndirme ölçülüyor…",stUp:"Yükleme ölçülüyor…",stErr:"Başarısız.",measurementUnavailable:"Ölçüm kullanılamıyor. Tekrar deneyin.",stExc:"Mükemmel",stGood:"İyi",stLim:"Sınırlı",q90:"Mükemmel bağlantı.",q75:"Çok iyi bağlantı.",q55:"İyi bağlantı.",q35:"Ortalama bağlantı.",q0:"Zayıf bağlantı.",alertRun:"Önce test yapın.",unavail:"Kullanılamıyor",notDetected:"Tespit edilmedi",appRunTest:"Çalıştır",copied:"Kopylandı",gradeTitle:"Genel Ağ Notu",appsKicker:"KULLANIM PROFİLLERİ",appsBadge:"CANLI KONTROL"},
+tr:{navFaq:"SSS",navAntivirus:"Antivirüs Tarayıcı",navAntivirusDesc:"Dosyaları ve içerikleri güvenlik risklerine karşı kontrol edin",navStatus:"Ağ Durumu",navDiag:"BT Tanılama",navAbout:"Hakkımızda",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",download:"İndirme",title:"Free Internet Speed Test",sub:"Bağlantınızın gerçekte ne sunduğunu saniyeler içinde görün — streaming, oyun ve evden çalışma uygunluğu dahil.",serverLabel:"Sunucu",ready:"Hazır",start:"Testi başlat",startAgain:"Tekrar",testing:"Test ediliyor…",complete:"Tamamlandı",ping:"Ping",jitter:"Jitter",upload:"Yükleme",chartLive:"Canlı",chartWait:"Bekliyor",lblIp:"Açık IP",lblIsp:"Sağlayıcı / ISP",lblLoc:"Konum",lblAsn:"Ağ / ASN",qTitle:"Kalite",qDefault:"Bağlantınızı değerlendirmek için test yapın.",qualityBasis:"İndirme, yükleme, ping ve jitter değerlerine dayanır",appsTitle:"Ne yapabilirsiniz?",appsSub:"Oyun, 4K, evden çalışma ve sosyal medya için canlı kontrol.",diagTitle:"Ağ Tanılama",diagLatT:"Gecikme",diagLatD:"Yanıt süresini ölçer.",diagStabT:"Kararlılık",diagStabD:"Jitter kararlılığı gösterir.",diagDnsT:"DNS Tanılama",diagDnsD:"DNS sunucularını kontrol eder.",diagIpT:"IP Tanılama",diagIpD:"IP, ISP, ASN tespit eder.",repTitle:"Profesyonel Rapor",lblRepTestId:"ID",copy:"Kopyala",share:"Paylaş",json:"JSON",print:"Yazdır",histTitle:"Geçmiş",histRecent:"Son ölçümler",histClear:"Temizle",thDate:"Tarih",thDown:"İndirme",thUp:"Yükleme",thPing:"Ping",thQual:"Kalite",noHistory:"Kayıt yok.",ftRights:"© 2026 Fasqoo. Tüm hakları saklıdır.",ftAccess:"Erişilebilirlik",ftImprint:"Künye",ftPrivacy:"Gizlilik",ftTerms:"Şartlar",ftNoSell:"Verilerimi satma",footerAntivirus:"Antivirüs Tarayıcı",ftPowered:"Maksimum performans ve ölçüm doğruluğu için Cloudflare Edge ağı tarafından desteklenmektedir.",ftDisclaimer:"Fasqoo bağımsız bir hız testi platformudur ve resmi bir Cloudflare ürünü değildir.",stPing:"Gecikme ölçülüyor…",stDown:"İndirme ölçülüyor…",stUp:"Yükleme ölçülüyor…",stErr:"Başarısız.",measurementUnavailable:"Ölçüm kullanılamıyor. Tekrar deneyin.",stExc:"Mükemmel",stGood:"İyi",stLim:"Sınırlı",q90:"Mükemmel bağlantı.",q75:"Çok iyi bağlantı.",q55:"İyi bağlantı.",q35:"Ortalama bağlantı.",q0:"Zayıf bağlantı.",alertRun:"Önce test yapın.",unavail:"Kullanılamıyor",notDetected:"Tespit edilmedi",appRunTest:"Çalıştır",copied:"Kopyalandı",gradeTitle:"Genel Ağ Notu",appsKicker:"KULLANIM PROFİLLERİ",appsBadge:"CANLI KONTROL"},
 sq:{navFaq:"FAQ",navAntivirus:"Skaneri antivirus",navAntivirusDesc:"Kontrollo skedarët dhe përmbajtjen për rreziqe sigurie",download:"Shkarkim",navStatus:"Statusi i rrjetit",navDiag:"Diagnostika IT",navAbout:"Rreth nesh",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"Shiko në sekonda se çfarë ofron vërtet lidhja jote – përfshirë përshtatshmërinë për streaming, lojëra dhe punë nga shtëpia.",serverLabel:"Serveri",ready:"Gati",start:"Fillo testin",startAgain:"Përsëri",testing:"Duke testuar…",complete:"Përfundoi",ping:"Ping",jitter:"Jitter",upload:"Ngarkim",chartLive:"Performanca",chartWait:"Pritje",lblIp:"IP Publike",lblIsp:"Ofruesi / ISP",lblLoc:"Vendndodhja",lblAsn:"Rrjeti / ASN",qTitle:"Cilësia",qDefault:"Bëj një test për të vlerësuar lidhjen.",qualityBasis:"Bazuar në shkarkim, ngarkim, ping dhe jitter",appsTitle:"Çfarë mund të bësh?",appsSub:"Kontroll i drejtpërdrejtë për lojëra, 4K, punë nga shtëpia dhe rrjete sociale.",diagTitle:"Diagnostika e Rrjetit",diagLatT:"Vonesa",diagLatD:"Mat kohën e përgjigjes.",diagStabT:"Qëndrueshmëria",diagStabD:"Jitter tregon qëndrueshmërinë.",diagDnsT:"Diagnostika DNS",diagDnsD:"Teston DNS-të.",diagIpT:"Diagnostika IP",diagIpD:"Zbulon IP, ISP, ASN.",repTitle:"Raport Profesional",lblRepTestId:"ID",copy:"Kopjo",share:"Shpërndaj",json:"Eksporto JSON",print:"Printo",histTitle:"Historiku",histRecent:"Matjet e fundit",histClear:"Pastro",thDate:"Data",thDown:"Shkarkim",thUp:"Ngarkim",thPing:"Ping",thQual:"Cilësia",noHistory:"Nuk ka matje.",ftRights:"© 2026 Fasqoo. Të gjitha të drejtat e rezervuara.",ftAccess:"Qasueshmëria",ftImprint:"Impresum",ftPrivacy:"Privatësia",ftTerms:"Kushtet",ftNoSell:"Mos shit të dhënat e mia",footerAntivirus:"Skaneri antivirus",ftPowered:"Mundësuar nga rrjeti Cloudflare Edge për performancë maksimale dhe saktësi matjeje.",ftDisclaimer:"Fasqoo është platformë e pavarur e testimit të shpejtësisë dhe nuk është produkt zyrtar i Cloudflare.",stPing:"Matja e vonesës…",stDown:"Matja e shkarkimit…",stUp:"Matja e ngarkimit…",stErr:"Dështoi.",measurementUnavailable:"Matja e padisponueshme. Provo përsëri.",stExc:"Shkëlqyeshëm",stGood:"Mirë",stLim:"E kufizuar",q90:"Lidhje e shkëlqyer.",q75:"Lidhje shumë e mirë.",q55:"Lidhje e mirë.",q35:"Lidhje mesatare.",q0:"Lidhje e dobët.",alertRun:"Kryej fillimisht një test.",unavail:"E padisponueshme",notDetected:"Nuk u zbulua",appRunTest:"Kryej",copied:"U kopjua",gradeTitle:"Nota globale e rrjetit",appsKicker:"PROFILET E PËRDORIMIT",appsBadge:"KONTROLL LIVE"},
 ar:{navFaq:"الأسئلة الشائعة",navAntivirus:"فحص مكافحة الفيروسات",navAntivirusDesc:"فحص الملفات والمحتوى بحثًا عن مخاطر أمنية",navStatus:"حالة الشبكة",navDiag:"تشخيص IT",navAbout:"من نحن",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",download:"تنزيل",title:"Free Internet Speed Test",sub:"اكتشف في ثوانٍ ما تقدمه اتصالك فعلاً — بما في ذلك مدى ملاءمته للبث والألعاب والعمل من المنزل.",serverLabel:"الخادم",ready:"جاهز",start:"بدء الاختبار",startAgain:"إعادة",testing:"جارٍ…",complete:"اكتمل",ping:"Ping",jitter:"Jitter",upload:"رفع",chartLive:"الأداء المباشر",chartWait:"انتظار",lblIp:"عنوان IP",lblIsp:"المزود",lblLoc:"الموقع",lblAsn:"الشبكة",qTitle:"جودة الاتصال",qDefault:"قم بإجراء اختبار.",qualityBasis:"استنادًا إلى التنزيل والرفع وPing وJitter",appsTitle:"ماذا يمكنك أن تفعل؟",appsSub:"فحص مباشر للألعاب و4K والعمل من المنزل.",diagTitle:"تشخيص الشبكة",diagLatT:"زمن الاستجابة",diagLatD:"يقيس وقت الاستجابة.",diagStabT:"الاستقرار",diagStabD:"يوضح Jitter الاستقرار.",diagDnsT:"تشخيص DNS",diagDnsD:"يتحقق من DNS.",diagIpT:"تشخيص IP",diagIpD:"يكتشف IP و ISP.",repTitle:"تقرير احترافي",lblRepTestId:"معرّف",copy:"نسخ",share:"مشاركة",json:"تصدير",print:"طباعة",histTitle:"السجل",histRecent:"القياسات الأخيرة",histClear:"مسح",thDate:"التاريخ",thDown:"تنزيل",thUp:"رفع",thPing:"Ping",thQual:"الجودة",noHistory:"لا توجد اختبارات.",ftRights:"© 2026 Fasqoo. جميع الحقوق محفوظة.",ftAccess:"إمكانية الوصول",ftImprint:"بيانات الناشر",ftPrivacy:"الخصوصية",ftTerms:"الشروط",ftNoSell:"لا تبيع بياناتي",footerAntivirus:"فحص مكافحة الفيروسات",ftPowered:"مدعوم بشبكة Cloudflare Edge لضمان أقصى أداء ودقة قياس.",ftDisclaimer:"Fasqoo منصة اختبار سرعة مستقلة وليست منتجًا رسميًا من Cloudflare.",stPing:"قياس زمن الاستجابة…",stDown:"قياس التنزيل…",stUp:"قياس الرفع…",stErr:"فشل.",measurementUnavailable:"القياس غير متاح. حاول مجددًا.",stExc:"ممتاز",stGood:"جيد",stLim:"محدود",q90:"اتصال ممتاز.",q75:"اتصال جيد جدًا.",q55:"اتصال جيد.",q35:"اتصال متوسط.",q0:"اتصال ضعيف.",alertRun:"قم بإجراء اختبار أولاً.",unavail:"غير متاح",notDetected:"لم يُكتشف",appRunTest:"تشغيل",copied:"تم النسخ",gradeTitle:"التقييم العام للشبكة",appsKicker:"ملفات الاستخدام",appsBadge:"فحص مباشر"}
 };
@@ -168,7 +168,7 @@ const staticUiTranslations = {
   it:{widgetTitle:"Widget velocità Fasqoo",widgetLive:"Risultato in tempo reale",widgetDownload:"Download in Mbps",widgetRun:"Avvia test",providerLabel:"Provider"},
   pt:{widgetTitle:"Widget de velocidade Fasqoo",widgetLive:"Resultado em direto",widgetDownload:"Download em Mbps",widgetRun:"Iniciar teste",providerLabel:"Fornecedor"},
   nl:{widgetTitle:"Fasqoo-snelheidswidget",widgetLive:"Live resultaat",widgetDownload:"Mbps download",widgetRun:"Snelheidstest starten",providerLabel:"Provider"},
-  tr:{widgetTitle:"Fasqoo Hız Widget'ı",widgetLive:"Canlý sonuç",widgetDownload:"Mbps indirme",widgetRun:"Hız testini başlat",providerLabel:"Sağlayıcı"},
+  tr:{widgetTitle:"Fasqoo Hız Widget'ı",widgetLive:"Canlı sonuç",widgetDownload:"Mbps indirme",widgetRun:"Hız testini başlat",providerLabel:"Sağlayıcı"},
   sq:{widgetTitle:"Widget-i i shpejtësisë Fasqoo",widgetLive:"Rezultat në kohë reale",widgetDownload:"Shkarkim në Mbps",widgetRun:"Fillo testin",providerLabel:"Ofruesi"},
   ar:{widgetTitle:"أداة سرعة Fasqoo",widgetLive:"النتيجة المباشرة",widgetDownload:"التنزيل بالميغابت/ث",widgetRun:"بدء اختبار السرعة",providerLabel:"مزود الخدمة"}
 };
@@ -291,15 +291,23 @@ function buildAppCards(){
   });
 }
 
-/* ---------- CHART (smooth curves + dual series) ---------- */
+/* ==========================================================
+   LIVE STREAMING CHART
+   - 20 s rollendes Fenster
+   - bis zu 4000 Punkte
+   - weiche Bezier-Kurven (Catmull-Rom)
+   - zwei Serien: Download (blau) + Upload (grün)
+   ========================================================== */
 const canvas = $("chart");
 const ctx = canvas.getContext("2d");
 
 const chartHistory = {
   download: [],
   upload: [],
-  maxPoints: 240
+  maxPoints: 4000
 };
+const CHART_WINDOW_MS = 20000;
+
 let chartRaf = 0;
 let chartDirty = true;
 
@@ -308,7 +316,7 @@ function pushChartPoint(kind, value){
   const now = performance.now();
   const arr = chartHistory[kind];
   arr.push({ t: now, v: value });
-  const cutoff = now - 60000;
+  const cutoff = now - CHART_WINDOW_MS;
   while(arr.length && arr[0].t < cutoff) arr.shift();
   while(arr.length > chartHistory.maxPoints) arr.shift();
   chartDirty = true;
@@ -322,11 +330,14 @@ function clearChartHistory(){
 function drawSmoothPath(ctx, pts){
   if(pts.length < 2) return;
   ctx.moveTo(pts[0].x, pts[0].y);
-  for(let i=0; i<pts.length-1; i++){
-    const p0 = pts[i-1] || pts[i];
-    const p1 = pts[i];
-    const p2 = pts[i+1];
-    const p3 = pts[i+2] || p2;
+  // Bei sehr vielen Punkten: 1 von N ausdünnen für Performance
+  const step = pts.length > 600 ? Math.floor(pts.length / 400) : 1;
+  const reduced = step > 1 ? pts.filter((_,i) => i % step === 0 || i === pts.length-1) : pts;
+  for(let i=0; i<reduced.length-1; i++){
+    const p0 = reduced[i-1] || reduced[i];
+    const p1 = reduced[i];
+    const p2 = reduced[i+1];
+    const p3 = reduced[i+2] || p2;
     const cp1x = p1.x + (p2.x - p0.x) / 6;
     const cp1y = p1.y + (p2.y - p0.y) / 6;
     const cp2x = p2.x - (p3.x - p1.x) / 6;
@@ -373,11 +384,10 @@ function drawChart(){
   const maxVal = Math.max(10, ...all.map(p => p.v));
   const scaleMax = maxVal * 1.15;
   const now = performance.now();
-  const window = 60000;
-  const timeStart = now - window;
+  const timeStart = now - CHART_WINDOW_MS;
 
   function toXY(p){
-    const x = ((p.t - timeStart) / window) * w;
+    const x = ((p.t - timeStart) / CHART_WINDOW_MS) * w;
     const y = h - 14 - (p.v / scaleMax) * (h - 28);
     return { x, y };
   }
@@ -391,6 +401,7 @@ function drawChart(){
   // ---------- DOWNLOAD (blau) ----------
   if(chartHistory.download.length >= 2){
     const pts = chartHistory.download.map(toXY);
+
     ctx.beginPath();
     ctx.moveTo(pts[0].x, h);
     ctx.lineTo(pts[0].x, pts[0].y);
@@ -406,20 +417,20 @@ function drawChart(){
     ctx.beginPath();
     drawSmoothPath(ctx, pts);
     ctx.strokeStyle = "#2563eb";
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.shadowColor = "rgba(37,99,235,.55)";
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 8;
     ctx.stroke();
     ctx.shadowBlur = 0;
 
     const tip = pts[pts.length-1];
     ctx.beginPath();
-    ctx.arc(tip.x, tip.y, 4.5, 0, Math.PI*2);
+    ctx.arc(tip.x, tip.y, 4, 0, Math.PI*2);
     ctx.fillStyle = "#2563eb";
     ctx.shadowColor = "rgba(37,99,235,.9)";
-    ctx.shadowBlur = 14;
+    ctx.shadowBlur = 12;
     ctx.fill();
     ctx.shadowBlur = 0;
   }
@@ -427,6 +438,7 @@ function drawChart(){
   // ---------- UPLOAD (grün) ----------
   if(chartHistory.upload.length >= 2){
     const pts = chartHistory.upload.map(toXY);
+
     ctx.beginPath();
     ctx.moveTo(pts[0].x, h);
     ctx.lineTo(pts[0].x, pts[0].y);
@@ -442,20 +454,20 @@ function drawChart(){
     ctx.beginPath();
     drawSmoothPath(ctx, pts);
     ctx.strokeStyle = "#16a36a";
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.shadowColor = "rgba(22,163,106,.55)";
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 8;
     ctx.stroke();
     ctx.shadowBlur = 0;
 
     const tip = pts[pts.length-1];
     ctx.beginPath();
-    ctx.arc(tip.x, tip.y, 4.5, 0, Math.PI*2);
+    ctx.arc(tip.x, tip.y, 4, 0, Math.PI*2);
     ctx.fillStyle = "#16a36a";
     ctx.shadowColor = "rgba(22,163,106,.9)";
-    ctx.shadowBlur = 14;
+    ctx.shadowBlur = 12;
     ctx.fill();
     ctx.shadowBlur = 0;
   }
@@ -582,7 +594,7 @@ function testTimeout(ms){
 }
 
 /* ---------- MEASUREMENT ENGINE ---------- */
-const MEASUREMENT_V7 = { version: "8.2", phaseMs: 8000, maxStreams: 8 };
+const MEASUREMENT_V7 = { version: "8.3", phaseMs: 9000, maxStreams: 8 };
 
 function percentile(values, q){
   if(!values.length) return NaN;
@@ -757,16 +769,23 @@ async function pingTest(opts = {}){
   return { ping, jitter, samples: vals, packetLoss, attempts };
 }
 
-/* ---------- IO HELPERS ---------- */
-async function readResponseBytes(response,signal){
-  if(!response.body){ const b=await response.arrayBuffer(); return b.byteLength; }
-  const reader=response.body.getReader(); let bytes=0;
+/* ---------- IO HELPERS (LIVE BYTE CALLBACK) ---------- */
+async function readResponseBytes(response, signal, onProgress){
+  if(!response.body){
+    const b = await response.arrayBuffer();
+    if(onProgress) onProgress(b.byteLength);
+    return b.byteLength;
+  }
+  const reader = response.body.getReader();
+  let bytes = 0;
   try{
     while(running){
       if(signal?.aborted) throw new DOMException("Aborted","AbortError");
-      const part=await reader.read();
+      const part = await reader.read();
       if(part.done) break;
-      bytes += part.value?.byteLength || 0;
+      const chunk = part.value?.byteLength || 0;
+      bytes += chunk;
+      if(onProgress && chunk) onProgress(bytes);
     }
   }catch(err){
     if(err.name !== "AbortError") console.warn("Stream read issue:", err.message);
@@ -780,52 +799,109 @@ function makeUploadBuffer(bytes){
   }else data.fill(83);
   return data;
 }
-async function parallelDownload(bytesPerStream,streams,timeoutMs){
-  const wallStart=performance.now();
-  const jobs=Array.from({length:streams},async()=>{
-    const timer=testTimeout(timeoutMs);
+
+/* -------- Rate-Berechnung aus Byte-Deltas -------- */
+function createRateEmitter(onLiveMbps){
+  const rateWindow = [];
+  let lastEmit = 0;
+  return function emit(totalBytes){
+    const now = performance.now();
+    if(now - lastEmit < 60) return;
+    lastEmit = now;
+    rateWindow.push({ t: now, b: totalBytes });
+    const cutoff = now - 1200;
+    while(rateWindow.length > 2 && rateWindow[0].t < cutoff) rateWindow.shift();
+    if(rateWindow.length >= 2 && onLiveMbps){
+      const first = rateWindow[0];
+      const lastP = rateWindow[rateWindow.length-1];
+      const dBytes = lastP.b - first.b;
+      const dSec = (lastP.t - first.t) / 1000;
+      if(dSec > 0.10){
+        const mbps = (dBytes * 8) / dSec / 1e6;
+        if(Number.isFinite(mbps) && mbps >= 0) onLiveMbps(mbps);
+      }
+    }
+  };
+}
+
+async function parallelDownload(bytesPerStream, streams, timeoutMs, onLiveMbps){
+  const wallStart = performance.now();
+  const streamBytes = new Array(streams).fill(0);
+  const emit = onLiveMbps ? createRateEmitter(onLiveMbps) : null;
+
+  const jobs = Array.from({length: streams}, async (_, idx) => {
+    const timer = testTimeout(timeoutMs);
     try{
-      const r=await fetch(SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+"&v=7&r="+Date.now()+Math.random(),{
-        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
-      });
+      const r = await fetch(
+        SPEED_BASE+"/__down?bytes="+Math.max(1,Math.floor(bytesPerStream))+"&v=7&r="+Date.now()+Math.random(),
+        { cache:"no-store", mode:"cors", credentials:"omit", signal:timer.signal }
+      );
       if(!r.ok) throw new Error("HTTP "+r.status);
-      const bytes=await readResponseBytes(r,timer.signal);
-      if(bytes<=0) throw new Error("Empty download");
+      const bytes = await readResponseBytes(r, timer.signal, (acc) => {
+        streamBytes[idx] = acc;
+        if(emit) emit(streamBytes.reduce((a,b)=>a+b,0));
+      });
+      if(bytes <= 0) throw new Error("Empty download");
+      streamBytes[idx] = bytes;
       return bytes;
-    }finally{timer.clear();}
+    } finally { timer.clear(); }
   });
-  const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled" && x.value>0).map(x=>x.value);
-  const seconds=(performance.now()-wallStart)/1000;
-  if(!good.length || seconds<=0) throw new Error("Download failed");
-  return {bytes:good.reduce((a,x)=>a+x,0),seconds,streams:good.length};
+
+  const results = await Promise.allSettled(jobs);
+  const good = results.filter(x => x.status==="fulfilled" && x.value>0).map(x => x.value);
+  const seconds = (performance.now() - wallStart) / 1000;
+  if(!good.length || seconds <= 0) throw new Error("Download failed");
+  return { bytes: good.reduce((a,x)=>a+x,0), seconds, streams: good.length };
 }
-async function parallelUpload(bytesPerStream,streams,timeoutMs){
-  const payload=makeUploadBuffer(bytesPerStream);
-  const wallStart=performance.now();
-  const jobs=Array.from({length:streams},async()=>{
-    const timer=testTimeout(timeoutMs);
+
+async function parallelUpload(bytesPerStream, streams, timeoutMs, onLiveMbps){
+  const wallStart = performance.now();
+  const streamBytes = new Array(streams).fill(0);
+  const emit = onLiveMbps ? createRateEmitter(onLiveMbps) : null;
+
+  const CHUNK_SIZE = 256 * 1024;
+  const totalChunks = Math.max(1, Math.ceil(bytesPerStream / CHUNK_SIZE));
+
+  const jobs = Array.from({length: streams}, async (_, idx) => {
+    const timer = testTimeout(timeoutMs);
     try{
-      const r=await fetch(SPEED_BASE+"/__up?v=7&r="+Date.now()+Math.random(),{
-        method:"POST",body:payload,headers:{"Content-Type":"application/octet-stream"},
-        cache:"no-store",mode:"cors",credentials:"omit",signal:timer.signal
-      });
-      if(!r.ok) throw new Error("HTTP "+r.status);
-      try{await r.arrayBuffer();}catch(e){}
-      return bytesPerStream;
-    }finally{timer.clear();}
+      for(let c=0; c<totalChunks; c++){
+        if(timer.signal.aborted) break;
+        const start = c * CHUNK_SIZE;
+        const end = Math.min(start + CHUNK_SIZE, bytesPerStream);
+        const chunk = makeUploadBuffer(end - start);
+        const r = await fetch(
+          SPEED_BASE+"/__up?v=7&r="+Date.now()+Math.random()+"&p="+c,
+          {
+            method:"POST",
+            body: chunk,
+            headers:{"Content-Type":"application/octet-stream"},
+            cache:"no-store", mode:"cors", credentials:"omit",
+            signal: timer.signal
+          }
+        );
+        if(!r.ok) throw new Error("HTTP "+r.status);
+        try{ await r.arrayBuffer(); }catch(e){}
+        streamBytes[idx] += chunk.byteLength;
+        if(emit) emit(streamBytes.reduce((a,b)=>a+b,0));
+      }
+      return streamBytes[idx];
+    } finally { timer.clear(); }
   });
-  const results=await Promise.allSettled(jobs);
-  const good=results.filter(x=>x.status==="fulfilled" && x.value>0).map(x=>x.value);
-  const seconds=(performance.now()-wallStart)/1000;
-  if(!good.length || seconds<=0) throw new Error("Upload failed");
-  return {bytes:good.reduce((a,x)=>a+x,0),seconds,streams:good.length};
+
+  const results = await Promise.allSettled(jobs);
+  const good = results.filter(x => x.status==="fulfilled" && x.value>0).map(x => x.value);
+  const seconds = (performance.now() - wallStart) / 1000;
+  if(!good.length || seconds <= 0) throw new Error("Upload failed");
+  return { bytes: good.reduce((a,x)=>a+x,0), seconds, streams: good.length };
 }
+
 function nextPayloadBytes(mbps,remainingMs,streams,minBytes,maxBytes){
   const seconds=Math.max(0.25,Math.min(2.5,remainingMs/1000));
   const targetBytes=Math.ceil((mbps*1000000/8)*seconds*1.20/Math.max(1,streams));
   return clampNumber(targetBytes,minBytes,maxBytes);
 }
+
 async function bufferbloatProbe(shouldContinue, sink){
   await sleep(180);
   while(shouldContinue() && running){
@@ -868,15 +944,16 @@ async function downloadTest(){
     bytesPerStream=nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
     const timeout=Math.max(4000, Math.min(7000, remaining+2000));
     try{
-      const r=await parallelDownload(bytesPerStream, streams, timeout);
+      const r = await parallelDownload(bytesPerStream, streams, timeout, (liveMbps) => {
+        pushChartPoint("download", liveMbps);
+        gauge(liveMbps);
+        $("down").textContent = liveMbps.toFixed(1);
+        $("intelThroughput").textContent = liveMbps.toFixed(1)+" "+x.unitMbps;
+      });
       const sp=r.bytes*8/r.seconds/1e6;
       if(Number.isFinite(sp) && sp>0){
         measured.push(sp);
-        pushChartPoint("download", sp);
         mbps = sp;
-        gauge(sp);
-        $("down").textContent=sp.toFixed(1);
-        $("intelThroughput").textContent=sp.toFixed(1)+" "+x.unitMbps;
       }
     }catch(e){
       console.warn("Download round failed:", e.message);
@@ -913,14 +990,15 @@ async function uploadTest(){
     bytesPerStream=nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
     const timeout=Math.max(4500, Math.min(8000, remaining+2500));
     try{
-      const r=await parallelUpload(bytesPerStream, streams, timeout);
+      const r = await parallelUpload(bytesPerStream, streams, timeout, (liveMbps) => {
+        pushChartPoint("upload", liveMbps);
+        gauge(liveMbps);
+        $("up").textContent = liveMbps.toFixed(1);
+      });
       const sp=r.bytes*8/r.seconds/1e6;
       if(Number.isFinite(sp) && sp>0){
         measured.push(sp);
-        pushChartPoint("upload", sp);
         mbps = sp;
-        gauge(sp);
-        $("up").textContent=sp.toFixed(1);
       }
     }catch(e){
       console.warn("Upload round failed:", e.message);
