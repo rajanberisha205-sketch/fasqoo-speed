@@ -854,3 +854,45 @@ main{padding:12px 0 65px}
   .footer-grid{grid-template-columns:1fr}
   .footer-brand{grid-column:auto}
 }
+/* ==========================================================
+   FASQOO GAUGE – GIFT GREEN DURING DOWNLOAD / UPLOAD
+   ========================================================== */
+
+.gauge.speed-measuring .progress{
+  stroke:#39ff14 !important;
+
+  filter:
+    drop-shadow(0 0 5px rgba(57,255,20,.95))
+    drop-shadow(0 0 14px rgba(57,255,20,.75))
+    drop-shadow(0 0 28px rgba(57,255,20,.45));
+}
+
+.gauge.speed-measuring{
+  filter:
+    drop-shadow(0 0 8px rgba(57,255,20,.20));
+}
+
+@keyframes fasqooGiftGreenPulse{
+  0%,100%{
+    filter:
+      drop-shadow(0 0 5px rgba(57,255,20,.9))
+      drop-shadow(0 0 14px rgba(57,255,20,.7))
+      drop-shadow(0 0 28px rgba(57,255,20,.4));
+  }
+
+  50%{
+    filter:
+      drop-shadow(0 0 8px rgba(57,255,20,1))
+      drop-shadow(0 0 22px rgba(57,255,20,.9))
+      drop-shadow(0 0 40px rgba(57,255,20,.6));
+  }
+}
+
+.gauge.speed-measuring .progress{
+  animation:fasqooGiftGreenPulse 1.15s ease-in-out infinite;
+}
+
+.gauge.speed-finished .progress{
+  animation:none;
+  filter:none;
+}
