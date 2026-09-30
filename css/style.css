@@ -354,6 +354,7 @@ header{box-shadow:0 1px 0 rgba(16,24,40,.04),0 8px 28px rgba(16,24,40,.035)}
 footer{box-shadow:0 -1px 0 rgba(16,24,40,.025)}
 @media(max-width:900px){.premium-hero h1{font-size:clamp(34px,6vw,48px)}.test-card{padding:24px}}
 @media(max-width:560px){
+  
   .premium-hero h1{font-size:30px;line-height:1.13}
   .premium-hero p{font-size:14px;line-height:1.55}
   .test-card{padding:15px}
@@ -562,6 +563,7 @@ main{padding:12px 0 65px}
 .nav-dropdown:hover .nav-chevron,
 .nav-dropdown.open .nav-chevron{transform:rotate(180deg)}
 
+/* Keep mega-menu content fully inside the menu frame */
 .nav-dropdown-menu,
 .nav-dropdown-menu *{box-sizing:border-box}
 .nav-dropdown-menu{overflow:hidden}
@@ -851,93 +853,4 @@ main{padding:12px 0 65px}
 @media(max-width:480px){
   .footer-grid{grid-template-columns:1fr}
   .footer-brand{grid-column:auto}
-}
-
-/* ==========================================================
-   GAUGE GLOW – BLAU beim Download, GRÜN beim Upload
-   ========================================================== */
-
-.gauge .progress{
-  transition: stroke-dashoffset .35s cubic-bezier(.22,.61,.36,1),
-              stroke .35s ease,
-              filter .35s ease;
-}
-
-/* Download: BLAU */
-@keyframes gaugeBluePulse{
-  0%   { filter: drop-shadow(0 0 6px  rgba(37,99,235,.55))
-                 drop-shadow(0 0 14px rgba(37,99,235,.30)); }
-  50%  { filter: drop-shadow(0 0 14px rgba(37,99,235,.90))
-                 drop-shadow(0 0 28px rgba(37,99,235,.55)); }
-  100% { filter: drop-shadow(0 0 6px  rgba(37,99,235,.55))
-                 drop-shadow(0 0 14px rgba(37,99,235,.30)); }
-}
-.gauge.measuring-download .progress{
-  stroke: #2563eb;
-  animation: gaugeBluePulse 1.3s ease-in-out infinite;
-}
-.gauge.measuring-download .num{
-  color: #2563eb;
-  text-shadow: 0 0 14px rgba(37,99,235,.45);
-  transition: color .35s ease, text-shadow .35s ease;
-}
-
-/* Upload: GRÜN */
-@keyframes gaugeGreenPulse{
-  0%   { filter: drop-shadow(0 0 6px  rgba(22,163,106,.55))
-                 drop-shadow(0 0 14px rgba(22,163,106,.30)); }
-  50%  { filter: drop-shadow(0 0 14px rgba(22,163,106,.90))
-                 drop-shadow(0 0 28px rgba(22,163,106,.55)); }
-  100% { filter: drop-shadow(0 0 6px  rgba(22,163,106,.55))
-                 drop-shadow(0 0 14px rgba(22,163,106,.30)); }
-}
-.gauge.measuring-upload .progress{
-  stroke: #16a36a;
-  animation: gaugeGreenPulse 1.3s ease-in-out infinite;
-}
-.gauge.measuring-upload .num{
-  color: #16a36a;
-  text-shadow: 0 0 14px rgba(22,163,106,.45);
-  transition: color .35s ease, text-shadow .35s ease;
-}
-
-/* Dunkler Modus */
-.dark .gauge.measuring-download .progress{
-  stroke: #5b8dff;
-  filter: drop-shadow(0 0 10px rgba(91,141,255,.75))
-          drop-shadow(0 0 22px rgba(91,141,255,.45));
-}
-.dark .gauge.measuring-download .num{ color: #5b8dff; }
-
-.dark .gauge.measuring-upload .progress{
-  stroke: #2fd18a;
-  filter: drop-shadow(0 0 10px rgba(47,209,138,.75))
-          drop-shadow(0 0 22px rgba(47,209,138,.45));
-}
-.dark .gauge.measuring-upload .num{ color: #2fd18a; }
-
-.gauge{ transition: filter .4s ease; }
-
-/* ==========================================================
-   LIVE PERFORMANCE CHART – flüssige Kurven mit Glow
-   ========================================================== */
-#chart{ display:block; }
-
-.chart{
-  position:relative;
-  overflow:hidden;
-}
-.chart:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:radial-gradient(circle at 20% 0%, rgba(37,99,235,.05), transparent 55%);
-  transition: background .5s ease;
-}
-.chart.state-download:before{
-  background:radial-gradient(circle at 20% 0%, rgba(37,99,235,.08), transparent 55%);
-}
-.chart.state-upload:before{
-  background:radial-gradient(circle at 20% 0%, rgba(22,163,106,.08), transparent 55%);
 }
