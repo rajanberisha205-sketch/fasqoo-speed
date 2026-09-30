@@ -1,9 +1,10 @@
 /* ==========================================================
-   FASQOO SPEED TEST v8.1
+   FASQOO SPEED TEST v8.2
    - 6 metrics incl. Bufferbloat + Packet Loss
    - Sample-synced pulse
    - Colored interim states (blue → green/yellow/red)
-   - Live gradient chart with glow + scale
+   - Live gradient chart with smooth curves + dual series
+   - Gauge color states (blue download / green upload)
    - Overall Grade A+ to F with glow
    - 8 application profile tiles with SVG icons + reveal
    - Full i18n coverage (10 languages, 100%)
@@ -167,7 +168,7 @@ const staticUiTranslations = {
   it:{widgetTitle:"Widget velocità Fasqoo",widgetLive:"Risultato in tempo reale",widgetDownload:"Download in Mbps",widgetRun:"Avvia test",providerLabel:"Provider"},
   pt:{widgetTitle:"Widget de velocidade Fasqoo",widgetLive:"Resultado em direto",widgetDownload:"Download em Mbps",widgetRun:"Iniciar teste",providerLabel:"Fornecedor"},
   nl:{widgetTitle:"Fasqoo-snelheidswidget",widgetLive:"Live resultaat",widgetDownload:"Mbps download",widgetRun:"Snelheidstest starten",providerLabel:"Provider"},
-  tr:{widgetTitle:"Fasqoo Hız Widget'ı",widgetLive:"Canlı sonuç",widgetDownload:"Mbps indirme",widgetRun:"Hız testini başlat",providerLabel:"Sağlayıcı"},
+  tr:{widgetTitle:"Fasqoo Hız Widget'ı",widgetLive:"Canlý sonuç",widgetDownload:"Mbps indirme",widgetRun:"Hız testini başlat",providerLabel:"Sağlayıcı"},
   sq:{widgetTitle:"Widget-i i shpejtësisë Fasqoo",widgetLive:"Rezultat në kohë reale",widgetDownload:"Shkarkim në Mbps",widgetRun:"Fillo testin",providerLabel:"Ofruesi"},
   ar:{widgetTitle:"أداة سرعة Fasqoo",widgetLive:"النتيجة المباشرة",widgetDownload:"التنزيل بالميغابت/ث",widgetRun:"بدء اختبار السرعة",providerLabel:"مزود الخدمة"}
 };
@@ -290,52 +291,217 @@ function buildAppCards(){
   });
 }
 
-/* ---------- CHART ---------- */
+/* ---------- CHART (smooth curves + dual series) ---------- */
 const canvas = $("chart");
 const ctx = canvas.getContext("2d");
-function resizeCanvas(){
-  const r = canvas.getBoundingClientRect();
-  const d = window.devicePixelRatio || 1;
-  canvas.width = r.width * d; canvas.height = r.height * d;
-  ctx.setTransform(d,0,0,d,0,0);
-  drawChart();
+
+const chartHistory = {
+  download: [],
+  upload: [],
+  maxPoints: 240
+};
+let chartRaf = 0;
+let chartDirty = true;
+
+function pushChartPoint(kind, value){
+  if(!Number.isFinite(value) || value < 0) return;
+  const now = performance.now();
+  const arr = chartHistory[kind];
+  arr.push({ t: now, v: value });
+  const cutoff = now - 60000;
+  while(arr.length && arr[0].t < cutoff) arr.shift();
+  while(arr.length > chartHistory.maxPoints) arr.shift();
+  chartDirty = true;
 }
+function clearChartHistory(){
+  chartHistory.download.length = 0;
+  chartHistory.upload.length = 0;
+  chartDirty = true;
+}
+
+function drawSmoothPath(ctx, pts){
+  if(pts.length < 2) return;
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for(let i=0; i<pts.length-1; i++){
+    const p0 = pts[i-1] || pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i+1];
+    const p3 = pts[i+2] || p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+  }
+}
+
 function drawChart(){
   if(!canvas || !canvas.clientWidth) return;
-  const w = canvas.clientWidth, h = canvas.clientHeight;
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+
+  if(canvas.width !== Math.round(w*dpr) || canvas.height !== Math.round(h*dpr)){
+    canvas.width  = Math.round(w*dpr);
+    canvas.height = Math.round(h*dpr);
+  }
+  ctx.setTransform(dpr,0,0,dpr,0,0);
   ctx.clearRect(0,0,w,h);
+
   const isDark = document.body.classList.contains("dark");
-  const gridColor = isDark ? "#2b3037" : "#edf1f5";
-  const scaleColor = isDark ? "#6b7280" : "#9aa1ab";
+  const gridColor = isDark ? "#252a31" : "#eef1f5";
+  const scaleColor = isDark ? "#7c8693" : "#9aa1ab";
+
   ctx.strokeStyle = gridColor;
   ctx.lineWidth = 1;
-  for(let i=1;i<5;i++){ const y=i*h/5; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
-  const max = Math.max(100, ...samples);
+  for(let i=1;i<5;i++){
+    const y = i*h/5;
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+  }
+
+  const all = [...chartHistory.download, ...chartHistory.upload];
+  if(!all.length){
+    ctx.fillStyle = scaleColor;
+    ctx.font = "12px Inter, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const t = translations[currentLang];
+    ctx.fillText(t.chartWait || "Waiting", w/2, h/2);
+    return;
+  }
+
+  const maxVal = Math.max(10, ...all.map(p => p.v));
+  const scaleMax = maxVal * 1.15;
+  const now = performance.now();
+  const window = 60000;
+  const timeStart = now - window;
+
+  function toXY(p){
+    const x = ((p.t - timeStart) / window) * w;
+    const y = h - 14 - (p.v / scaleMax) * (h - 28);
+    return { x, y };
+  }
+
   ctx.fillStyle = scaleColor;
   ctx.font = "10px Inter, system-ui, sans-serif";
   ctx.textAlign = "right";
   ctx.textBaseline = "top";
-  ctx.fillText(max.toFixed(0) + " Mbps", w - 6, 6);
-  if(samples.length < 2) return;
-  const pts = samples.map((v,i) => ({ x: i*w/(samples.length-1), y: h-12-v/max*(h-24) }));
-  ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
-  ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
-  const fillGrad = ctx.createLinearGradient(0,0,0,h);
-  fillGrad.addColorStop(0, "rgba(37,99,235,.22)");
-  fillGrad.addColorStop(1, "rgba(37,99,235,0)");
-  ctx.fillStyle = fillGrad; ctx.fill();
-  ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
-  const lineGrad = ctx.createLinearGradient(0,0,0,h);
-  lineGrad.addColorStop(0, "#2563eb");
-  lineGrad.addColorStop(1, "rgba(37,99,235,.35)");
-  ctx.strokeStyle = lineGrad; ctx.lineWidth = 2.5;
-  ctx.lineJoin = "round"; ctx.lineCap = "round";
-  ctx.shadowColor = "rgba(37,99,235,.45)"; ctx.shadowBlur = 8;
-  ctx.stroke(); ctx.shadowBlur = 0;
+  ctx.fillText(scaleMax.toFixed(0) + " Mbps", w - 6, 6);
+
+  // ---------- DOWNLOAD (blau) ----------
+  if(chartHistory.download.length >= 2){
+    const pts = chartHistory.download.map(toXY);
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, h);
+    ctx.lineTo(pts[0].x, pts[0].y);
+    drawSmoothPath(ctx, pts);
+    ctx.lineTo(pts[pts.length-1].x, h);
+    ctx.closePath();
+    const fillGrad = ctx.createLinearGradient(0,0,0,h);
+    fillGrad.addColorStop(0, "rgba(37,99,235,.28)");
+    fillGrad.addColorStop(1, "rgba(37,99,235,0)");
+    ctx.fillStyle = fillGrad;
+    ctx.fill();
+
+    ctx.beginPath();
+    drawSmoothPath(ctx, pts);
+    ctx.strokeStyle = "#2563eb";
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.shadowColor = "rgba(37,99,235,.55)";
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    const tip = pts[pts.length-1];
+    ctx.beginPath();
+    ctx.arc(tip.x, tip.y, 4.5, 0, Math.PI*2);
+    ctx.fillStyle = "#2563eb";
+    ctx.shadowColor = "rgba(37,99,235,.9)";
+    ctx.shadowBlur = 14;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // ---------- UPLOAD (grün) ----------
+  if(chartHistory.upload.length >= 2){
+    const pts = chartHistory.upload.map(toXY);
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, h);
+    ctx.lineTo(pts[0].x, pts[0].y);
+    drawSmoothPath(ctx, pts);
+    ctx.lineTo(pts[pts.length-1].x, h);
+    ctx.closePath();
+    const fillGrad = ctx.createLinearGradient(0,0,0,h);
+    fillGrad.addColorStop(0, "rgba(22,163,106,.26)");
+    fillGrad.addColorStop(1, "rgba(22,163,106,0)");
+    ctx.fillStyle = fillGrad;
+    ctx.fill();
+
+    ctx.beginPath();
+    drawSmoothPath(ctx, pts);
+    ctx.strokeStyle = "#16a36a";
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.shadowColor = "rgba(22,163,106,.55)";
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    const tip = pts[pts.length-1];
+    ctx.beginPath();
+    ctx.arc(tip.x, tip.y, 4.5, 0, Math.PI*2);
+    ctx.fillStyle = "#16a36a";
+    ctx.shadowColor = "rgba(22,163,106,.9)";
+    ctx.shadowBlur = 14;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+}
+
+function chartLoop(){
+  if(chartDirty){
+    drawChart();
+    chartDirty = false;
+  }
+  chartRaf = requestAnimationFrame(chartLoop);
+}
+
+function resizeCanvas(){
+  const r = canvas.getBoundingClientRect();
+  const d = window.devicePixelRatio || 1;
+  canvas.width  = Math.round(r.width  * d);
+  canvas.height = Math.round(r.height * d);
+  ctx.setTransform(d,0,0,d,0,0);
+  chartDirty = true;
 }
 window.addEventListener("resize", resizeCanvas);
+
+/* ---------- GAUGE COLOR STATES ---------- */
+function gaugeSetPhase(phase){
+  const g = document.querySelector(".gauge");
+  if(!g) return;
+  g.classList.remove("measuring-download","measuring-upload");
+  if(phase === "download") g.classList.add("measuring-download");
+  else if(phase === "upload") g.classList.add("measuring-upload");
+}
+function gaugeClearPhase(){
+  const g = document.querySelector(".gauge");
+  if(g) g.classList.remove("measuring-download","measuring-upload");
+}
+function chartSetPhase(phase){
+  const box = document.querySelector(".chart");
+  if(!box) return;
+  box.classList.remove("state-download","state-upload");
+  if(phase === "download") box.classList.add("state-download");
+  else if(phase === "upload") box.classList.add("state-upload");
+}
+function chartClearPhase(){
+  const box = document.querySelector(".chart");
+  if(box) box.classList.remove("state-download","state-upload");
+}
 
 /* ---------- THEME ---------- */
 function applyTheme(dark){
@@ -344,7 +510,7 @@ function applyTheme(dark){
   const tc = $("themeColor");
   if(tc) tc.setAttribute("content", dark ? "#090c10" : "#ffffff");
   localStorage.setItem("fasqoo_dark", dark);
-  drawChart();
+  chartDirty = true;
 }
 $("themeBtn").addEventListener("click", () => applyTheme(!document.body.classList.contains("dark")));
 
@@ -375,7 +541,7 @@ function resetGauge(){
   if(gaugeNumberRaf){ cancelAnimationFrame(gaugeNumberRaf); gaugeNumberRaf = 0; }
   $("speed").textContent = "0";
   gauge(0);
-  drawChart();
+  chartDirty = true;
 }
 
 /* ---------- NETWORK INFO ---------- */
@@ -416,7 +582,7 @@ function testTimeout(ms){
 }
 
 /* ---------- MEASUREMENT ENGINE ---------- */
-const MEASUREMENT_V7 = { version: "8.1", phaseMs: 8000, maxStreams: 8 };
+const MEASUREMENT_V7 = { version: "8.2", phaseMs: 8000, maxStreams: 8 };
 
 function percentile(values, q){
   if(!values.length) return NaN;
@@ -682,7 +848,7 @@ async function bufferbloatProbe(shouldContinue, sink){
 /* ---------- DOWNLOAD ---------- */
 async function downloadTest(){
   const t=translations[currentLang], x=extraTranslations[currentLang]||extraTranslations.en;
-  $("status").textContent=t.stDown; $("chartState").textContent=t.download; samples=[];
+  $("status").textContent=t.stDown; $("chartState").textContent=t.download;
   let mbps = 25;
   try{
     const warm = await parallelDownload(512*1024, 2, 5000);
@@ -705,12 +871,12 @@ async function downloadTest(){
       const r=await parallelDownload(bytesPerStream, streams, timeout);
       const sp=r.bytes*8/r.seconds/1e6;
       if(Number.isFinite(sp) && sp>0){
-        measured.push(sp); samples.push(sp);
+        measured.push(sp);
+        pushChartPoint("download", sp);
         mbps = sp;
         gauge(sp);
         $("down").textContent=sp.toFixed(1);
         $("intelThroughput").textContent=sp.toFixed(1)+" "+x.unitMbps;
-        drawChart();
       }
     }catch(e){
       console.warn("Download round failed:", e.message);
@@ -727,7 +893,7 @@ async function downloadTest(){
 /* ---------- UPLOAD ---------- */
 async function uploadTest(){
   const t=translations[currentLang];
-  $("status").textContent=t.stUp; $("chartState").textContent=t.upload; samples=[];
+  $("status").textContent=t.stUp; $("chartState").textContent=t.upload;
   let mbps = 25;
   try{
     const warm = await parallelUpload(512*1024, 2, 5000);
@@ -750,11 +916,11 @@ async function uploadTest(){
       const r=await parallelUpload(bytesPerStream, streams, timeout);
       const sp=r.bytes*8/r.seconds/1e6;
       if(Number.isFinite(sp) && sp>0){
-        measured.push(sp); samples.push(sp);
+        measured.push(sp);
+        pushChartPoint("upload", sp);
         mbps = sp;
         gauge(sp);
         $("up").textContent=sp.toFixed(1);
-        drawChart();
       }
     }catch(e){
       console.warn("Upload round failed:", e.message);
@@ -920,6 +1086,9 @@ async function start(){
   $("start").disabled = true;
   $("start").textContent = t.testing;
   resetGauge();
+  clearChartHistory();
+  gaugeClearPhase();
+  chartClearPhase();
   ["down","up","ping","jitter","loss","bloat"].forEach(id => {
     const el = $(id);
     if(el){ el.textContent = "—"; el.dataset.numericValue = "0"; }
@@ -956,6 +1125,10 @@ async function start(){
     measureDns();
     setTestPhase("download");
     $("status").textContent = t.testing;
+
+    gaugeSetPhase("download");
+    chartSetPhase("download");
+
     await sleep(2000);
     const dRes = await downloadTest();
     const d = dRes.speed;
@@ -963,11 +1136,19 @@ async function start(){
     setFinal("down", colorDownload(d));
     setTestPhase("upload");
     $("status").textContent = t.testing;
+
+    gaugeSetPhase("upload");
+    chartSetPhase("upload");
+
     await sleep(2000);
     const uRes = await uploadTest();
     const u = uRes.speed;
     tickValue($("up"), u, {decimals:1, duration:850});
     setFinal("up", colorUpload(u));
+
+    gaugeClearPhase();
+    chartClearPhase();
+
     const allLoaded = [...dRes.loadedLatencies, ...uRes.loadedLatencies].filter(Number.isFinite);
     const loadedPing = allLoaded.length >= 3 ? robustMedian(allLoaded) : null;
     const bloatMs = loadedPing !== null ? Math.max(0, loadedPing - p.ping) : null;
@@ -995,12 +1176,16 @@ async function start(){
   }catch(err){
     console.error("FASQOO TEST FAILED:", err);
     stopPingPulse();
+    gaugeClearPhase();
+    chartClearPhase();
     const tNow = translations[currentLang];
     $("status").textContent = tNow.measurementUnavailable || tNow.stErr;
     setTestPhase("ping");
     if($("measurementHint")) $("measurementHint").textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementRetry;
   }
   running = false;
+  gaugeClearPhase();
+  chartClearPhase();
   $("start").disabled = false;
   $("start").textContent = translations[currentLang].startAgain;
 }
@@ -1080,6 +1265,7 @@ function applyLanguage(lang){
   applyExtraLanguage(lang);
   if(!running && $("speed").textContent === "0") $("status").textContent = t.ready;
   if(lastBloatMs !== null) displayBufferbloat(lastBloatMs);
+  chartDirty = true;
 }
 
 const supportedLangs = Object.keys(translations);
@@ -1124,7 +1310,7 @@ window.addEventListener("load",()=>{
 /* ---------- SERVICE WORKER ---------- */
 if("serviceWorker" in navigator){
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js")   // ← ändern zu "/service-worker.js"
+    navigator.serviceWorker.register("/sw.js")
       .then(reg => console.log("SW registered:", reg.scope))
       .catch(err => console.log("SW error:", err));
   });
@@ -1133,6 +1319,8 @@ if("serviceWorker" in navigator){
 /* ---------- INIT ---------- */
 buildAppCards();
 resizeCanvas();
+if(chartRaf) cancelAnimationFrame(chartRaf);
+chartLoop();
 
 const savedLang = localStorage.getItem("fasqoo_lang");
 const browserCandidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || "en"];
@@ -1152,43 +1340,3 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
-/* =========================================================
-   FASQOO GAUGE – GIFT GREEN DURING DOWNLOAD / UPLOAD
-   ========================================================= */
-
-(function () {
-  const gauge = document.querySelector('.gauge');
-
-  if (!gauge) return;
-
-  function updateGaugeGlow() {
-    const activePhase = document.querySelector(
-      '.phase-step.active'
-    );
-
-    const phase = activePhase?.dataset?.phase || '';
-
-    const measuring =
-      phase === 'download' ||
-      phase === 'upload';
-
-    gauge.classList.toggle('speed-measuring', measuring);
-    gauge.classList.toggle(
-      'speed-finished',
-      phase === 'complete'
-    );
-  }
-
-  /* Überwacht, wenn deine bestehende Messengine
-     die aktive Phase ändert */
-  const phaseObserver = new MutationObserver(updateGaugeGlow);
-
-  document.querySelectorAll('.phase-step').forEach(step => {
-    phaseObserver.observe(step, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-  });
-
-  updateGaugeGlow();
-})();
