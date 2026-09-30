@@ -41,12 +41,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://speed.cloudflare.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-<!-- jsPDF für echten PDF-Download -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://www.fasqoo.com/#organization","name":"Fasqoo","url":"https://www.fasqoo.com/","logo":"https://www.fasqoo.com/android-chrome-512x512.png"}
@@ -71,24 +66,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hidden{display:none !important}
 
   /* ============================================================
-     FASQOO TABS
+     FASQOO TABS – moderne Segmented Control mit Slider
      ============================================================ */
   .fasqoo-tabs-wrap{
-    display:flex;justify-content:center;margin:0 0 28px;padding:0 4px;
+    display:flex;
+    justify-content:center;
+    margin:0 0 28px;
+    padding:0 4px;
   }
   .fasqoo-tabs{
-    position:relative;display:inline-flex;align-items:center;gap:4px;
-    padding:5px;border-radius:16px;background:rgba(255,255,255,.6);
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:5px;
+    border-radius:16px;
+    background:rgba(255,255,255,.6);
     border:1px solid var(--line);
     box-shadow:
       0 1px 0 rgba(255,255,255,.9) inset,
       0 8px 24px rgba(16,24,40,.06),
       0 2px 6px rgba(16,24,40,.04);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     max-width:100%;
   }
+
+  /* Gleitender Hintergrund */
   .fasqoo-tabs .tab-slider{
-    position:absolute;top:5px;left:5px;height:calc(100% - 10px);
+    position:absolute;
+    top:5px;
+    left:5px;
+    height:calc(100% - 10px);
     border-radius:12px;
     background:linear-gradient(135deg,#ff5a1f 0%,#ff7a45 100%);
     box-shadow:
@@ -96,26 +105,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       0 2px 6px rgba(255,90,31,.18),
       0 1px 0 rgba(255,255,255,.20) inset;
     transition:transform .35s cubic-bezier(.4,.0,.2,1), width .35s cubic-bezier(.4,.0,.2,1);
-    z-index:1;pointer-events:none;
+    z-index:1;
+    pointer-events:none;
   }
+
   .fasqoo-tab{
-    position:relative;z-index:2;appearance:none;border:0;background:transparent;
-    color:var(--muted);font:inherit;font-size:13.5px;font-weight:600;
-    letter-spacing:.1px;padding:11px 22px;border-radius:12px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+    position:relative;
+    z-index:2;
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    font:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.1px;
+    padding:11px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    white-space:nowrap;
     transition:color .3s ease, transform .2s ease;
   }
   .fasqoo-tab svg{
-    width:16px;height:16px;flex:0 0 16px;stroke:currentColor;fill:none;
-    stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    width:16px;
+    height:16px;
+    flex:0 0 16px;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
     transition:transform .3s ease;
   }
   .fasqoo-tab:hover{color:var(--text)}
   .fasqoo-tab.active{color:#fff}
   .fasqoo-tab.active svg{transform:scale(1.08)}
   .fasqoo-tab:not(.active):hover svg{transform:translateY(-1px)}
+
+  /* Dark Mode */
   .dark .fasqoo-tabs{
-    background:rgba(21,24,29,.7);border-color:rgba(255,255,255,.08);
+    background:rgba(21,24,29,.7);
+    border-color:rgba(255,255,255,.08);
     box-shadow:
       0 1px 0 rgba(255,255,255,.04) inset,
       0 8px 24px rgba(0,0,0,.35),
@@ -124,80 +157,124 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .dark .fasqoo-tab{color:#8a93a0}
   .dark .fasqoo-tab:hover{color:#e5e7eb}
   .dark .fasqoo-tab.active{color:#fff}
+
+  /* Mobile: volle Breite */
   @media(max-width:560px){
     .fasqoo-tabs-wrap{padding:0}
-    .fasqoo-tabs{width:100%;display:flex;border-radius:14px}
-    .fasqoo-tab{flex:1 1 0;justify-content:center;padding:12px 8px;font-size:12.5px;gap:7px}
+    .fasqoo-tabs{
+      width:100%;
+      display:flex;
+      border-radius:14px;
+    }
+    .fasqoo-tab{
+      flex:1 1 0;
+      justify-content:center;
+      padding:12px 8px;
+      font-size:12.5px;
+      gap:7px;
+    }
     .fasqoo-tab svg{width:15px;height:15px;flex:0 0 15px}
   }
   @media(max-width:400px){
-    .fasqoo-tab{padding:11px 4px;font-size:11.5px;gap:6px}
+    .fasqoo-tab{
+      padding:11px 4px;
+      font-size:11.5px;
+      gap:6px;
+    }
   }
 
   /* ============================================================
-     PING-MONITOR
+     PING-MONITOR – modern, minimalistisch
      ============================================================ */
   .ping-wrap{
-    display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);
-    gap:22px;margin-top:4px;
+    display:grid;
+    grid-template-columns:minmax(0,360px) minmax(0,1fr);
+    gap:22px;
+    margin-top:4px;
   }
+
+  /* ---------- Settings Panel ---------- */
   .ping-side{
-    border:1px solid var(--line);border-radius:16px;
-    background:var(--card);padding:22px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--card);
+    padding:22px;
     display:flex;flex-direction:column;gap:22px;
   }
   .ping-block-title{
     display:flex;align-items:center;gap:8px;
     font-size:11px;font-weight:800;letter-spacing:1.3px;
-    text-transform:uppercase;color:var(--muted);margin-bottom:12px;
+    text-transform:uppercase;color:var(--muted);
+    margin-bottom:12px;
   }
   .ping-block-title svg{
-    width:14px;height:14px;flex:0 0 14px;stroke:currentColor;fill:none;
+    width:14px;height:14px;flex:0 0 14px;
+    stroke:currentColor;fill:none;
     stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
   }
+
+  /* Server Grid – Regionen */
   .server-region{margin-bottom:14px}
   .server-region:last-child{margin-bottom:0}
   .server-region-label{
     font-size:10px;font-weight:700;letter-spacing:.8px;
-    text-transform:uppercase;color:var(--muted);margin-bottom:6px;opacity:.7;
+    text-transform:uppercase;color:var(--muted);
+    margin-bottom:6px;opacity:.7;
   }
-  .server-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .server-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:6px;
+  }
   .server-tile{
     display:flex;align-items:center;gap:9px;
     padding:9px 11px;border:1px solid var(--line);border-radius:10px;
-    background:transparent;cursor:pointer;font-size:12px;color:var(--muted);
-    transition:all .15s ease;position:relative;user-select:none;
+    background:transparent;cursor:pointer;
+    font-size:12px;color:var(--muted);
+    transition:all .15s ease;
+    position:relative;
+    user-select:none;
   }
   .server-tile:hover{border-color:#cfd4dc;color:var(--text)}
   .server-tile input{position:absolute;opacity:0;pointer-events:none}
   .server-tile .flag{
-    width:20px;height:20px;flex:0 0 20px;border-radius:4px;overflow:hidden;
-    display:grid;place-items:center;background:var(--soft);
+    width:20px;height:20px;flex:0 0 20px;
+    border-radius:4px;overflow:hidden;
+    display:grid;place-items:center;
+    background:var(--soft);
   }
   .server-tile .flag svg{width:100%;height:100%;display:block}
   .server-tile .name{
     font-weight:600;color:var(--text);font-size:12px;line-height:1.2;
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
+  .server-tile input:checked ~ .name{color:var(--text)}
   .server-tile:has(input:checked){
-    border-color:#ff5a1f;background:rgba(255,90,31,.05);color:var(--text);
+    border-color:#ff5a1f;
+    background:rgba(255,90,31,.05);
+    color:var(--text);
   }
-  .server-tile:has(input:checked) .flag{box-shadow:0 0 0 2px rgba(255,90,31,.18)}
+  .server-tile:has(input:checked) .flag{
+    box-shadow:0 0 0 2px rgba(255,90,31,.18);
+  }
+
+  /* Mode Selector – Segmented Control */
   .mode-segmented{
     display:grid;grid-template-columns:1fr 1fr;
     border:1px solid var(--line);border-radius:10px;
-    padding:3px;background:var(--soft);position:relative;
+    padding:3px;background:var(--soft);
+    position:relative;
   }
   .mode-segmented input{position:absolute;opacity:0;pointer-events:none}
   .mode-segmented label{
     display:flex;align-items:center;justify-content:center;gap:7px;
     padding:9px 8px;border-radius:8px;
     font-size:12px;font-weight:600;color:var(--muted);
-    cursor:pointer;transition:all .18s ease;text-align:center;
+    cursor:pointer;transition:all .18s ease;
+    text-align:center;
   }
   .mode-segmented label svg{
-    width:14px;height:14px;flex:0 0 14px;stroke:currentColor;fill:none;
-    stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    width:14px;height:14px;flex:0 0 14px;
+    stroke:currentColor;fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round;
   }
   .mode-segmented label:hover{color:var(--text)}
   .mode-segmented label.active{
@@ -208,7 +285,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background:#1e2530;color:#f3f4f6;
     box-shadow:0 2px 8px rgba(0,0,0,.35);
   }
-  .mode-hint{font-size:11px;line-height:1.55;color:var(--muted);margin-top:10px;padding:0 2px}
+  .mode-hint{
+    font-size:11px;line-height:1.55;color:var(--muted);
+    margin-top:10px;padding:0 2px;
+  }
+
+  /* Start Button */
   .ping-start{
     width:100%;height:48px;border:0;border-radius:11px;
     background:#ff5a1f;color:#fff;
@@ -227,19 +309,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     box-shadow:0 12px 26px rgba(255,90,31,.32);
   }
   .ping-start:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
   .ping-status{
-    font-size:11.5px;color:var(--muted);margin:0;line-height:1.5;
-    min-height:16px;padding:0 2px;
+    font-size:11.5px;color:var(--muted);
+    margin:0;line-height:1.5;min-height:16px;
+    padding:0 2px;
   }
   .ping-status.live{color:#2563eb}
   .ping-status.done{color:#16a36a}
   .ping-status.err{color:#e5484d}
+
+  /* ---------- Main Panel ---------- */
   .ping-main{display:flex;flex-direction:column;gap:16px;min-width:0}
-  .metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+  .metric-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  }
   .metric-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);padding:18px 18px 16px;
-    display:flex;flex-direction:column;gap:6px;transition:border-color .2s;
+    display:flex;flex-direction:column;gap:6px;
+    transition:border-color .2s;
   }
   .metric-card .m-label{
     display:flex;align-items:center;gap:6px;
@@ -257,10 +347,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color:var(--text);transition:color .3s;
     display:flex;align-items:baseline;gap:5px;
   }
-  .metric-card .m-unit{font-size:13px;font-weight:500;color:var(--muted)}
+  .metric-card .m-unit{
+    font-size:13px;font-weight:500;color:var(--muted);
+    letter-spacing:0;
+  }
   .metric-card .m-value.good{color:#16a36a}
   .metric-card .m-value.medium{color:#c78900}
   .metric-card .m-value.bad{color:#e5484d}
+
   .chart-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);padding:16px 18px 14px;
@@ -278,8 +372,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
     color:var(--muted);
   }
-  .chart-card-head .hint{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .chart-card-head .hint{
+    font-size:10.5px;color:var(--muted);
+    font-variant-numeric:tabular-nums;
+  }
   #pingCanvas{width:100%;height:170px;display:block}
+
+  /* Results Table */
   .table-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);overflow:hidden;
@@ -287,11 +386,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .table-card table{width:100%;border-collapse:collapse}
   .table-card th,.table-card td{
     text-align:left;padding:11px 16px;
-    border-bottom:1px solid #eef1f5;font-size:12px;white-space:nowrap;
+    border-bottom:1px solid #eef1f5;
+    font-size:12px;white-space:nowrap;
   }
   .table-card th{
     font-size:9.5px;font-weight:700;letter-spacing:1.1px;
-    text-transform:uppercase;color:var(--muted);background:var(--soft);
+    text-transform:uppercase;color:var(--muted);
+    background:var(--soft);
   }
   .table-card tr:last-child td{border-bottom:0}
   .table-card .srv{
@@ -303,8 +404,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow:hidden;display:grid;place-items:center;background:var(--soft);
   }
   .table-card .srv .flag svg{width:100%;height:100%}
-  .table-card .ping-val{font-variant-numeric:tabular-nums;font-weight:700}
-  .table-empty{text-align:center;padding:22px;color:var(--muted);font-size:12px}
+  .table-card .ping-val{
+    font-variant-numeric:tabular-nums;font-weight:700;
+  }
+  .table-empty{
+    text-align:center;padding:22px;color:var(--muted);font-size:12px;
+  }
+
+  /* Action Row */
   .ping-actions{display:flex;gap:8px;flex-wrap:wrap}
   .ping-action{
     border:1px solid var(--line);background:var(--card);color:var(--text);
@@ -320,6 +427,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .ping-action:hover:not(:disabled){border-color:#cfd4dc;background:var(--soft)}
   .ping-action:disabled{opacity:.5;cursor:not-allowed}
+
+  /* History Card */
   .history-card{
     border:1px solid var(--line);border-radius:14px;
     background:var(--card);overflow:hidden;
@@ -332,6 +441,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size:11px;font-weight:700;letter-spacing:1.1px;
     text-transform:uppercase;color:var(--muted);
   }
+
+  /* Install Button */
   .ping-install{
     display:inline-flex;align-items:center;gap:9px;
     padding:11px 16px;border:1px solid var(--line);
@@ -349,6 +460,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background:rgba(255,90,31,.04);
   }
   .ping-install[hidden]{display:none}
+
+  /* Header (Titel-Bereich) */
   .ping-header{
     display:flex;justify-content:space-between;align-items:flex-start;
     gap:20px;margin-bottom:22px;padding-bottom:18px;
@@ -367,16 +480,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin:0;font-size:20px;font-weight:700;
     letter-spacing:-.5px;color:var(--text);
   }
-  .ping-phase{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .ping-phase{
+    display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;
+  }
   .ping-phase span{
     font-size:10px;padding:5px 10px;border-radius:999px;
     border:1px solid var(--line);color:var(--muted);
-    background:transparent;font-weight:600;transition:all .2s ease;
+    background:transparent;font-weight:600;
+    transition:all .2s ease;
   }
   .ping-phase span.active{
     color:#ff5a1f;border-color:rgba(255,90,31,.4);
     background:rgba(255,90,31,.06);
   }
+
+  /* Responsive */
   @media(max-width:900px){
     .ping-wrap{grid-template-columns:1fr}
     .ping-side{order:2}
@@ -390,230 +508,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .ping-header{flex-direction:column;align-items:flex-start;gap:12px}
     .ping-phase{justify-content:flex-start}
   }
-
-  /* ============================================================
-     FASQOO ENTERPRISE NETWORK TEST WIDGET
-     Alle Styles streng unter #fasqoo-enterprise-widget gekapselt.
-     ============================================================ */
-  #fasqoo-enterprise-widget{
-    --fqew-surface:#11151c;
-    --fqew-surface-2:#161b24;
-    --fqew-line:rgba(255,255,255,.07);
-    --fqew-line-2:rgba(255,255,255,.12);
-    --fqew-text:#e8ecf3;
-    --fqew-text-2:#b8c0cf;
-    --fqew-muted:#7a8394;
-    --fqew-dim:#4d5566;
-    --fqew-accent:#ff6a2c;
-    --fqew-accent-2:#ff8a5b;
-    --fqew-good:#22e06b;
-    --fqew-warn:#ffb020;
-    --fqew-bad:#ff3b4e;
-    --fqew-chart-bg:#0d1119;
-    background:linear-gradient(160deg,var(--fqew-surface),var(--fqew-surface-2));
-    border:1px solid var(--fqew-line);
-    border-radius:20px;
-    padding:26px;
-    color:var(--fqew-text);
-    margin:0 0 28px;
-    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 24px 60px rgba(0,0,0,.35);
-    box-sizing:border-box;
-  }
-  #fasqoo-enterprise-widget *{box-sizing:border-box}
-  #fasqoo-enterprise-widget .fqew-head{
-    display:flex;justify-content:space-between;align-items:flex-end;
-    gap:20px;margin-bottom:22px;flex-wrap:wrap;
-  }
-  #fasqoo-enterprise-widget .fqew-kicker{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:10px;font-weight:700;letter-spacing:1.6px;
-    text-transform:uppercase;color:var(--fqew-accent);margin-bottom:8px;
-  }
-  #fasqoo-enterprise-widget .fqew-kicker .fqew-dot{
-    width:6px;height:6px;border-radius:50%;background:var(--fqew-accent);
-    box-shadow:0 0 0 4px rgba(255,106,44,.15);
-    animation:fqewPulse 2s ease-in-out infinite;
-  }
-  @keyframes fqewPulse{
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.6;transform:scale(.85)}
-  }
-  #fasqoo-enterprise-widget .fqew-head h2{
-    margin:0;font-size:22px;font-weight:700;letter-spacing:-.6px;
-    color:var(--fqew-text);
-  }
-  #fasqoo-enterprise-widget .fqew-head p{
-    margin:6px 0 0;font-size:12.5px;color:var(--fqew-muted);max-width:520px;
-  }
-  #fasqoo-enterprise-widget .fqew-grid{
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
-    gap:32px;align-items:center;
-  }
-  @media(max-width:880px){
-    #fasqoo-enterprise-widget .fqew-grid{grid-template-columns:1fr;gap:24px}
-  }
-
-  /* Gauge */
-  #fasqoo-enterprise-widget .fqew-gauge-wrap{
-    position:relative;width:min(420px,90%);aspect-ratio:1;
-    margin:0 auto;display:grid;place-items:center;
-  }
-  #fasqoo-enterprise-widget .fqew-gauge-wrap svg{
-    position:absolute;inset:0;width:100%;height:100%;
-    overflow:visible;pointer-events:none;display:block;
-  }
-  #fasqoo-enterprise-widget .fqew-track{
-    fill:none;stroke:var(--fqew-line);stroke-width:14;stroke-linecap:round;
-  }
-  #fasqoo-enterprise-widget .fqew-inner{
-    fill:none;stroke:rgba(255,255,255,.05);stroke-width:1;
-  }
-  #fasqoo-enterprise-widget .fqew-progress{
-    fill:none;stroke:var(--fqew-bad);stroke-width:14;stroke-linecap:round;
-    transition:stroke .25s linear;
-  }
-  #fasqoo-enterprise-widget .fqew-ticks line{
-    stroke:rgba(255,255,255,.22);stroke-width:1.4;stroke-linecap:round;
-  }
-  #fasqoo-enterprise-widget .fqew-ticks line.fqew-major{
-    stroke:rgba(255,255,255,.55);stroke-width:2.4;
-  }
-  #fasqoo-enterprise-widget .fqew-scale text{
-    fill:var(--fqew-text-2);font-family:'Inter',inherit;
-    font-size:13px;font-weight:600;user-select:none;
-  }
-  #fasqoo-enterprise-widget .fqew-center{
-    position:relative;z-index:2;text-align:center;
-    pointer-events:none;width:66%;
-  }
-  #fasqoo-enterprise-widget .fqew-number{
-    font-size:clamp(56px,11vw,88px);font-weight:800;line-height:.95;
-    letter-spacing:-4px;font-variant-numeric:tabular-nums;
-    color:var(--fqew-text);
-  }
-  #fasqoo-enterprise-widget .fqew-unit{
-    margin-top:6px;font-size:11px;font-weight:700;
-    letter-spacing:5px;color:var(--fqew-muted);text-transform:uppercase;
-  }
-  #fasqoo-enterprise-widget .fqew-phase{
-    margin-top:12px;font-size:9.5px;font-weight:700;
-    letter-spacing:2.4px;text-transform:uppercase;color:var(--fqew-dim);
-    min-height:13px;transition:color .3s;
-  }
-  #fasqoo-enterprise-widget .fqew-phase.fqew-active{color:var(--fqew-text-2)}
-  #fasqoo-enterprise-widget .fqew-phase.fqew-done{color:var(--fqew-good)}
-
-  /* Metrics */
-  #fasqoo-enterprise-widget .fqew-metrics{
-    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;
-  }
-  #fasqoo-enterprise-widget .fqew-metric{
-    border:1px solid var(--fqew-line);border-radius:12px;
-    background:var(--fqew-surface);padding:14px 16px;
-    transition:border-color .2s;
-  }
-  #fasqoo-enterprise-widget .fqew-metric:hover{border-color:var(--fqew-line-2)}
-  #fasqoo-enterprise-widget .fqew-metric .fqew-label{
-    display:block;font-size:9.5px;font-weight:700;
-    letter-spacing:1.4px;text-transform:uppercase;
-    color:var(--fqew-muted);margin-bottom:6px;
-  }
-  #fasqoo-enterprise-widget .fqew-metric .fqew-value{
-    font-size:22px;font-weight:700;letter-spacing:-.8px;
-    line-height:1;font-variant-numeric:tabular-nums;
-    color:var(--fqew-text);display:flex;align-items:baseline;gap:4px;
-  }
-  #fasqoo-enterprise-widget .fqew-metric .fqew-value .fqew-u{
-    font-size:10px;font-weight:500;color:var(--fqew-muted);
-  }
-  #fasqoo-enterprise-widget .fqew-metric .fqew-value.fqew-good{color:var(--fqew-good)}
-  #fasqoo-enterprise-widget .fqew-metric .fqew-value.fqew-warn{color:var(--fqew-warn)}
-  #fasqoo-enterprise-widget .fqew-metric .fqew-value.fqew-bad{color:var(--fqew-bad)}
-
-  /* Chart */
-  #fasqoo-enterprise-widget .fqew-chart-box{
-    border:1px solid var(--fqew-line);border-radius:12px;
-    background:var(--fqew-chart-bg);padding:14px 16px 12px;margin-bottom:14px;
-  }
-  #fasqoo-enterprise-widget .fqew-chart-head{
-    display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;
-  }
-  #fasqoo-enterprise-widget .fqew-chart-head strong{
-    font-size:11px;font-weight:600;color:var(--fqew-text-2);
-  }
-  #fasqoo-enterprise-widget .fqew-chart-head .fqew-hint{
-    font-size:10px;color:var(--fqew-muted);font-variant-numeric:tabular-nums;
-  }
-  #fqewLiveChart{width:100%;height:130px;display:block}
-
-  /* Details */
-  #fasqoo-enterprise-widget .fqew-detail-box{
-    border:1px solid var(--fqew-line);border-radius:12px;
-    background:var(--fqew-surface);padding:14px 16px;
-    display:flex;flex-direction:column;gap:12px;
-  }
-  #fasqoo-enterprise-widget .fqew-detail-row{
-    display:flex;justify-content:space-between;align-items:center;
-    gap:12px;font-size:12px;
-  }
-  #fasqoo-enterprise-widget .fqew-detail-row .fqew-dk{
-    color:var(--fqew-muted);font-weight:500;
-    display:inline-flex;align-items:center;gap:7px;
-  }
-  #fasqoo-enterprise-widget .fqew-detail-row .fqew-dv{
-    color:var(--fqew-text);font-weight:600;
-    font-variant-numeric:tabular-nums;
-    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
-    font-size:11.5px;text-align:right;
-  }
-  #fasqoo-enterprise-widget .fqew-detail-row .fqew-dk svg{
-    width:13px;height:13px;stroke:currentColor;fill:none;
-    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
-    color:var(--fqew-dim);
-  }
-
-  /* Actions */
-  #fasqoo-enterprise-widget .fqew-actions{
-    margin-top:22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
-  }
-  #fasqoo-enterprise-widget .fqew-btn{
-    appearance:none;border:0;cursor:pointer;
-    padding:14px 32px;border-radius:10px;
-    font:inherit;font-size:12px;font-weight:700;
-    letter-spacing:1.4px;text-transform:uppercase;
-    background:var(--fqew-accent);color:#fff;
-    box-shadow:0 12px 30px rgba(255,106,44,.3);
-    transition:all .2s ease;
-    display:inline-flex;align-items:center;justify-content:center;
-    gap:9px;min-width:220px;
-  }
-  #fasqoo-enterprise-widget .fqew-btn:hover:not(:disabled){
-    background:var(--fqew-accent-2);transform:translateY(-1px);
-    box-shadow:0 16px 36px rgba(255,106,44,.38);
-  }
-  #fasqoo-enterprise-widget .fqew-btn:disabled{
-    opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;
-  }
-  #fasqoo-enterprise-widget .fqew-btn.fqew-secondary{
-    background:transparent;color:var(--fqew-text-2);
-    border:1px solid var(--fqew-line-2);box-shadow:none;
-  }
-  #fasqoo-enterprise-widget .fqew-btn.fqew-secondary:hover:not(:disabled){
-    background:var(--fqew-surface-2);color:var(--fqew-text);
-    border-color:var(--fqew-line-2);
-  }
-  #fasqoo-enterprise-widget .fqew-btn .fqew-spinner{
-    width:13px;height:13px;border-radius:50%;
-    border:2px solid rgba(255,255,255,.35);
-    border-top-color:#fff;
-    animation:fqewSpin .8s linear infinite;
-    display:none;
-  }
-  #fasqoo-enterprise-widget .fqew-btn.fqew-running .fqew-spinner{display:inline-block}
-  @keyframes fqewSpin{to{transform:rotate(360deg)}}
 </style>
 
 </head>
@@ -813,7 +707,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="wrap">
 
   <!-- ========================================================
-       TAB-NAVIGATION
+       TAB-NAVIGATION – modern mit Slider + SVG-Icons
        ======================================================== -->
   <div class="fasqoo-tabs-wrap">
     <nav class="fasqoo-tabs" role="tablist" aria-label="Fasqoo Module" id="fasqooTabs">
@@ -839,117 +733,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- ========================================================
-       SECTION 1: BANDBREITEN-TEST
-       (Alter Tacho wurde entfernt – hier steht jetzt das neue
-        Fasqoo Enterprise Network Test Widget)
+       SECTION 1: ORIGINALER BANDWREITEN-TEST
        ======================================================== -->
   <section id="speed-section">
-
-    <!-- ========================================================
-         FASQOO ENTERPRISE NETWORK TEST WIDGET
-         Alle Styles unter #fasqoo-enterprise-widget gekapselt
-         ======================================================== -->
-    <div id="fasqoo-enterprise-widget">
-      <div class="fqew-head">
-        <div>
-          <div class="fqew-kicker"><span class="fqew-dot"></span>Live Network Diagnostics</div>
-          <h2>Fasqoo Enterprise Network Test</h2>
-          <p>Präzise Messung von Bandbreite, Latenz und Jitter – direkt über die Cloudflare-Edge-Infrastruktur.</p>
-        </div>
-      </div>
-
-      <div class="fqew-grid">
-        <!-- GAUGE -->
-        <div class="fqew-gauge-wrap">
-          <svg viewBox="0 0 400 400" aria-hidden="true">
-            <circle class="fqew-track" cx="200" cy="200" r="160"
-                    transform="rotate(135 200 200)"
-                    stroke-dasharray="753.98 251.33"/>
-            <circle class="fqew-inner" cx="200" cy="200" r="130"/>
-            <circle id="fqewGaugeProgress" class="fqew-progress"
-                    cx="200" cy="200" r="160"
-                    transform="rotate(135 200 200)"
-                    stroke-dasharray="0 9999"/>
-            <g class="fqew-ticks" id="fqewGaugeTicks"></g>
-            <g class="fqew-scale" id="fqewGaugeScale"></g>
-          </svg>
-          <div class="fqew-center">
-            <div class="fqew-number" id="fqewGaugeNumber">0</div>
-            <div class="fqew-unit">Mbps</div>
-            <div class="fqew-phase" id="fqewGaugePhase">Bereit</div>
-          </div>
-        </div>
-
-        <!-- METRICS + CHART + DETAILS -->
-        <div>
-          <div class="fqew-metrics">
-            <div class="fqew-metric">
-              <span class="fqew-label">Download</span>
-              <div class="fqew-value" id="fqewMDown">—<span class="fqew-u">Mbps</span></div>
-            </div>
-            <div class="fqew-metric">
-              <span class="fqew-label">Upload</span>
-              <div class="fqew-value" id="fqewMUp">—<span class="fqew-u">Mbps</span></div>
-            </div>
-            <div class="fqew-metric">
-              <span class="fqew-label">Ping</span>
-              <div class="fqew-value" id="fqewMPing">—<span class="fqew-u">ms</span></div>
-            </div>
-            <div class="fqew-metric">
-              <span class="fqew-label">Jitter</span>
-              <div class="fqew-value" id="fqewMJitter">—<span class="fqew-u">ms</span></div>
-            </div>
-          </div>
-
-          <div class="fqew-chart-box">
-            <div class="fqew-chart-head">
-              <strong>Live-Throughput</strong>
-              <span class="fqew-hint" id="fqewChartHint">Wartet auf Messung…</span>
-            </div>
-            <canvas id="fqewLiveChart" width="800" height="260"></canvas>
-          </div>
-
-          <div class="fqew-detail-box">
-            <div class="fqew-detail-row">
-              <span class="fqew-dk">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg>
-                DNS-Auflösung
-              </span>
-              <span class="fqew-dv" id="fqewDnsTime">37 ms · Cloudflare DNS</span>
-            </div>
-            <div class="fqew-detail-row">
-              <span class="fqew-dk">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
-                Test-Server
-              </span>
-              <span class="fqew-dv" id="fqewServerName">Cloudflare Edge · Auto</span>
-            </div>
-            <div class="fqew-detail-row">
-              <span class="fqew-dk">
-                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
-                Öffentliche IP
-              </span>
-              <span class="fqew-dv" id="fqewIpValue">185.173.205.213</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fqew-actions">
-        <button type="button" class="fqew-btn" id="fqewStartBtn">
-          <span class="fqew-spinner" aria-hidden="true"></span>
-          <span id="fqewStartLabel">Test starten</span>
-        </button>
-        <button type="button" class="fqew-btn fqew-secondary" id="fqewPdfBtn" disabled>
-          <svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/>
-          </svg>
-          <span>PDF-Bericht herunterladen</span>
-        </button>
-      </div>
+    <div class="server-line">
+      <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
     </div>
-    <!-- /FASQOO ENTERPRISE NETWORK TEST WIDGET -->
+
+    <section class="card test-card">
+      <div class="test-topline">
+        <div>
+          <span class="mini-kicker" data-i18n="liveTest">LIVE CONNECTION TEST</span>
+          <strong id="testPhase">Ready</strong>
+        </div>
+        <div class="phase-steps" aria-label="Test phases">
+          <span class="phase-step active" data-phase="ping" data-i18n="phasePing">Ping</span>
+          <span class="phase-step" data-phase="download" data-i18n="phaseDownload">Download</span>
+          <span class="phase-step" data-phase="upload" data-i18n="phaseUpload">Upload</span>
+          <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="speedbox">
+          <div class="gauge">
+            <svg viewBox="0 0 300 300">
+              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
+              </linearGradient></defs>
+              <circle class="ring" cx="150" cy="150" r="130"></circle>
+              <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
+            </svg>
+            <div class="center">
+              <div id="speed" class="num">0</div>
+              <div class="unit">Mbps</div>
+            </div>
+          </div>
+          <div id="status" class="status" data-i18n="ready">Ready to test</div>
+          <div class="gauge-caption"><span class="pulse" aria-hidden="true"></span><span id="measurementHint">Waiting for measurement</span></div>
+          <button id="start" class="start" data-i18n="start">Start Speed Test</button>
+        </div>
+
+        <div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" id="pingIcon" aria-hidden="true">◌</span></div>
+              <div class="value"><span id="ping">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div>
+              <div class="value"><span id="jitter">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="packetLoss">Packet Loss</span><span class="icon" aria-hidden="true">⊘</span></div>
+              <div class="value"><span id="loss">—</span><span class="small">%</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div>
+              <div class="value"><span id="down">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
+              <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
+              <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
+              <div class="metric-reading" id="bloatGrade"></div>
+            </div>
+          </div>
+          <div class="chart">
+            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
+            <canvas id="chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info"><div class="label" data-i18n="lblIp">Öffentliche IP</div><div id="ip" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
+      </div>
+
+      <div class="quality">
+        <div class="qtop"><span data-i18n="qTitle">Verbindungsqualität</span><span id="score" class="qscore">—</span></div>
+        <div class="bar"><i id="bar"></i></div>
+        <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div>
+        <div id="qualityDetail" class="quality-detail"></div>
+        <div class="quality-meta">
+          <span><i class="mini-dot" aria-hidden="true"></i> <span data-i18n="qualityBasis">Based on download, upload, ping &amp; jitter</span></span>
+          <span id="qualityLabel" data-i18n="notMeasured">Not measured</span>
+        </div>
+      </div>
+
+      <div class="grade-display" id="gradeDisplay" aria-live="polite">
+        <div class="grade-badge" id="gradeBadge">—</div>
+        <div class="grade-meta">
+          <span class="grade-title" data-i18n="gradeTitle">Overall Network Grade</span>
+          <span class="grade-sub" id="gradeSub">Run a test to see your grade</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-trust">
+      <span data-i18n="trust1">Accurate measurement – no estimates</span>
+      <span data-i18n="trust2">Free &amp; no account required</span>
+    </div>
 
     <section class="section intelligence-section">
       <div class="section-heading-row">
@@ -1383,663 +1272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 
-<!-- ============================================================
-     BESTEHENDE SCRIPTS (unverändert)
-     ============================================================ -->
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
-
-<!-- ============================================================
-     FASQOO ENTERPRISE NETWORK TEST – ENGINE
-     Echte Cloudflare-Messung + jsPDF-Export
-     ============================================================ -->
-<script>
-(function(){
-  'use strict';
-
-  /* ---------- Helpers ---------- */
-  const $ = id => document.getElementById(id);
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-  const fmt = (v, d = 1) => Number.isFinite(v) ? v.toFixed(d) : '—';
-
-  /* ---------- Festwerte ---------- */
-  const FIXED = {
-    dns: 37,
-    server: 'Cloudflare Edge · Auto',
-    ip: '185.173.205.213'
-  };
-
-  /* ---------- State ---------- */
-  let running = false;
-  const lastResult = {
-    down: null, up: null, ping: null, jitter: null,
-    loss: null, dns: FIXED.dns,
-    ip: FIXED.ip, server: FIXED.server,
-    testId: null, timestamp: null
-  };
-
-  /* ---------- Gauge Config ---------- */
-  const GAUGE = {
-    cx: 200, cy: 200, radius: 160,
-    startAngle: 135, sweep: 270,
-    maxMbps: 1000, tickCount: 60,
-  };
-  GAUGE.arcLength = 2 * Math.PI * GAUGE.radius * (GAUGE.sweep / 360);
-  const SCALE_VALUES = [0, 1, 5, 10, 50, 100, 500, 1000];
-
-  function scalePosition(value){
-    if(value <= 0) return 0;
-    const maxLog = Math.log10(GAUGE.maxMbps + 1);
-    return Math.log10(value + 1) / maxLog;
-  }
-
-  function buildGauge(){
-    const ticks = $('fqewGaugeTicks');
-    const scale = $('fqewGaugeScale');
-    if(!ticks || !scale) return;
-    let tickHtml = '', scaleHtml = '';
-    for(let i = 0; i <= GAUGE.tickCount; i++){
-      const t = i / GAUGE.tickCount;
-      const angle = GAUGE.startAngle + t * GAUGE.sweep;
-      const rad = angle * Math.PI / 180;
-      const isMajor = i % 5 === 0;
-      const r1 = isMajor ? 132 : 140;
-      const r2 = 148;
-      const x1 = GAUGE.cx + Math.cos(rad) * r1;
-      const y1 = GAUGE.cy + Math.sin(rad) * r1;
-      const x2 = GAUGE.cx + Math.cos(rad) * r2;
-      const y2 = GAUGE.cy + Math.sin(rad) * r2;
-      tickHtml += `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" class="${isMajor ? 'fqew-major' : ''}"/>`;
-    }
-    SCALE_VALUES.forEach(v => {
-      const t = scalePosition(v);
-      const angle = GAUGE.startAngle + t * GAUGE.sweep;
-      const rad = angle * Math.PI / 180;
-      const r = 112;
-      const x = GAUGE.cx + Math.cos(rad) * r;
-      const y = GAUGE.cy + Math.sin(rad) * r;
-      const label = v >= 1000 ? '1k' : v;
-      scaleHtml += `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`;
-    });
-    ticks.innerHTML = tickHtml;
-    scale.innerHTML = scaleHtml;
-  }
-
-  function colorForRatio(r){
-    const t = clamp(r, 0, 1);
-    const hue = t * 135;
-    const sat = 88 + t * 8;
-    const light = 52 + t * 6;
-    return `hsl(${hue.toFixed(1)}, ${sat.toFixed(0)}%, ${light.toFixed(0)}%)`;
-  }
-
-  function setArc(mbps){
-    const arc = $('fqewGaugeProgress');
-    if(!arc) return;
-    const r = scalePosition(mbps);
-    const len = r * GAUGE.arcLength;
-    arc.setAttribute('stroke-dasharray', `${len.toFixed(2)} 9999`);
-    const color = colorForRatio(r);
-    arc.style.stroke = color;
-    arc.style.filter = `drop-shadow(0 0 12px ${color})`;
-  }
-
-  let numRaf = 0, numDisplay = 0, numTarget = 0;
-  function animateNumber(){
-    const diff = numTarget - numDisplay;
-    if(Math.abs(diff) < 0.05){
-      numDisplay = numTarget;
-      numRaf = 0;
-    } else {
-      numDisplay += diff * 0.14;
-      numRaf = requestAnimationFrame(animateNumber);
-    }
-    const n = numDisplay;
-    const el = $('fqewGaugeNumber');
-    if(el) el.textContent = n < 10 ? n.toFixed(1) : Math.round(n);
-  }
-  function setNumber(v){
-    if(!Number.isFinite(v)) return;
-    numTarget = Math.max(0, v);
-    if(!numRaf) numRaf = requestAnimationFrame(animateNumber);
-  }
-  function resetGauge(){
-    numTarget = 0; numDisplay = 0;
-    if(numRaf){ cancelAnimationFrame(numRaf); numRaf = 0; }
-    const el = $('fqewGaugeNumber');
-    if(el) el.textContent = '0';
-    setArc(0);
-  }
-  function setPhase(text, cls){
-    const el = $('fqewGaugePhase');
-    if(!el) return;
-    el.textContent = text;
-    el.classList.remove('fqew-active','fqew-done');
-    if(cls) el.classList.add(cls);
-  }
-
-  /* ---------- Live Chart ---------- */
-  const chartCanvas = $('fqewLiveChart');
-  const chartCtx = chartCanvas ? chartCanvas.getContext('2d') : null;
-  const chartData = [];
-  const CHART_MAX = 120;
-
-  function resizeChart(){
-    if(!chartCanvas || !chartCtx) return;
-    const rect = chartCanvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    chartCanvas.width = rect.width * dpr;
-    chartCanvas.height = rect.height * dpr;
-    chartCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawChart();
-  }
-
-  function drawChart(){
-    if(!chartCanvas || !chartCtx) return;
-    const w = chartCanvas.clientWidth;
-    const h = chartCanvas.clientHeight;
-    chartCtx.clearRect(0, 0, w, h);
-
-    chartCtx.strokeStyle = 'rgba(148,163,184,.08)';
-    chartCtx.lineWidth = 1;
-    for(let y = 20; y < h; y += 26){
-      chartCtx.beginPath();
-      chartCtx.moveTo(0, y);
-      chartCtx.lineTo(w, y);
-      chartCtx.stroke();
-    }
-    if(chartData.length < 2) return;
-
-    const max = Math.max(1, ...chartData);
-    const grad = chartCtx.createLinearGradient(0, 0, 0, h);
-    grad.addColorStop(0, 'rgba(255,106,44,.35)');
-    grad.addColorStop(1, 'rgba(255,106,44,.02)');
-
-    chartCtx.beginPath();
-    chartData.forEach((v, i) => {
-      const x = (i / (CHART_MAX - 1)) * w;
-      const y = h - 12 - (Math.min(1, v / max) * (h - 30));
-      i ? chartCtx.lineTo(x, y) : chartCtx.moveTo(x, y);
-    });
-    chartCtx.lineTo(w, h);
-    chartCtx.lineTo(0, h);
-    chartCtx.closePath();
-    chartCtx.fillStyle = grad;
-    chartCtx.fill();
-
-    chartCtx.beginPath();
-    chartData.forEach((v, i) => {
-      const x = (i / (CHART_MAX - 1)) * w;
-      const y = h - 12 - (Math.min(1, v / max) * (h - 30));
-      i ? chartCtx.lineTo(x, y) : chartCtx.moveTo(x, y);
-    });
-    chartCtx.strokeStyle = '#ff6a2c';
-    chartCtx.lineWidth = 2;
-    chartCtx.lineJoin = 'round';
-    chartCtx.lineCap = 'round';
-    chartCtx.stroke();
-  }
-
-  function pushChart(v){
-    if(!Number.isFinite(v) || v <= 0) return;
-    chartData.push(v);
-    if(chartData.length > CHART_MAX) chartData.shift();
-    drawChart();
-  }
-
-  window.addEventListener('resize', () => {
-    try{ resizeChart(); }catch(e){}
-  });
-
-  /* ---------- Klassifikation ---------- */
-  const classifyPing = v => v < 30 ? 'fqew-good' : v < 60 ? 'fqew-warn' : 'fqew-bad';
-  const classifyJitter = v => v < 10 ? 'fqew-good' : v < 25 ? 'fqew-warn' : 'fqew-bad';
-  const classifyDown = v => v >= 100 ? 'fqew-good' : v >= 25 ? 'fqew-warn' : 'fqew-bad';
-  const classifyUp = v => v >= 25 ? 'fqew-good' : v >= 5 ? 'fqew-warn' : 'fqew-bad';
-
-  function updateMetric(el, value, unit, cls){
-    if(!el) return;
-    el.innerHTML = value + `<span class="fqew-u">${unit}</span>`;
-    el.classList.remove('fqew-good','fqew-warn','fqew-bad');
-    if(cls) el.classList.add(cls);
-  }
-
-  /* ============================================================
-     ECHTE CLOUDFLARE-MESSUNG
-     Nutzt die offiziellen Cloudflare Speedtest-Endpunkte
-     (CORS-fähig). Ein direkter fetch() auf cloudflare.com
-     würde an CORS scheitern, deshalb nutzen wir die
-     dedizierten Speedtest-Endpunkte von Cloudflare.
-     ============================================================ */
-  const CF_BASE = 'https://speed.cloudflare.com';
-
-  /* --- Ping / Jitter --- */
-  async function phasePingReal(onSample){
-    setPhase('Latenz messen…', 'fqew-active');
-    const hint = $('fqewChartHint');
-    if(hint) hint.textContent = 'Ping-Phase (Cloudflare)';
-
-    const samples = [];
-    const attempts = 8;
-    const baseUrl = `${CF_BASE}/__down?bytes=0`;
-
-    for(let i = 0; i < attempts; i++){
-      const url = `${baseUrl}&t=${Date.now()}&i=${i}`;
-      const t0 = performance.now();
-      try{
-        await fetch(url, { cache:'no-store', mode:'cors' });
-      } catch(e){ /* ignore */ }
-      const dt = performance.now() - t0;
-      samples.push(dt);
-      if(onSample) onSample(dt);
-      await sleep(60);
-    }
-
-    if(!samples.length) return { ping: 0, jitter: 0 };
-
-    const sorted = [...samples].sort((a,b)=>a-b);
-    const ping = sorted[Math.floor(sorted.length / 2)];
-    const deltas = [];
-    for(let i = 1; i < samples.length; i++) deltas.push(Math.abs(samples[i] - samples[i-1]));
-    const sortedD = [...deltas].sort((a,b)=>a-b);
-    const jitter = sortedD.length ? sortedD[Math.floor(sortedD.length/2)] : 0;
-
-    return {
-      ping: Math.round(ping * 10) / 10,
-      jitter: Math.round(jitter * 10) / 10,
-    };
-  }
-
-  /* --- Download --- */
-  async function phaseDownloadReal(onTick){
-    setPhase('Download-Test läuft…', 'fqew-active');
-    const hint = $('fqewChartHint');
-    if(hint) hint.textContent = 'Download · Live';
-
-    const bytes = 25 * 1024 * 1024;
-    const url = `${CF_BASE}/__down?bytes=${bytes}&t=${Date.now()}`;
-
-    const t0 = performance.now();
-    let received = 0;
-    let lastTick = t0;
-    let lastBytes = 0;
-    let peak = 0;
-
-    const res = await fetch(url, { cache:'no-store', mode:'cors' });
-    if(!res.ok || !res.body) throw new Error('Download fehlgeschlagen');
-
-    const reader = res.body.getReader();
-    while(true){
-      const { done, value } = await reader.read();
-      if(done) break;
-      received += value.length;
-      const now = performance.now();
-      if(now - lastTick >= 120){
-        const dt = (now - lastTick) / 1000;
-        const dBytes = received - lastBytes;
-        const mbps = (dBytes * 8) / (dt * 1_000_000);
-        peak = Math.max(peak, mbps);
-        onTick(mbps, peak);
-        lastTick = now;
-        lastBytes = received;
-      }
-    }
-
-    const totalTime = (performance.now() - t0) / 1000;
-    const avg = (received * 8) / (Math.max(totalTime, 0.001) * 1_000_000);
-    peak = Math.max(peak, avg);
-    return Math.round(peak);
-  }
-
-  /* --- Upload --- */
-  async function phaseUploadReal(onTick){
-    setPhase('Upload-Test läuft…', 'fqew-active');
-    const hint = $('fqewChartHint');
-    if(hint) hint.textContent = 'Upload · Live';
-
-    const bytes = 10 * 1024 * 1024;
-    const payload = new Uint8Array(bytes);
-    for(let i = 0; i < bytes; i += 4096) payload[i] = i & 0xff;
-
-    return await new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', `${CF_BASE}/__up?t=${Date.now()}`, true);
-      xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-
-      let lastLoaded = 0;
-      let lastTime = performance.now();
-      let peak = 0;
-      const startTime = performance.now();
-
-      xhr.upload.onprogress = e => {
-        const now = performance.now();
-        if(now - lastTime >= 120){
-          const dt = (now - lastTime) / 1000;
-          const dBytes = e.loaded - lastLoaded;
-          const mbps = (dBytes * 8) / (dt * 1_000_000);
-          peak = Math.max(peak, mbps);
-          onTick(mbps, peak);
-          lastLoaded = e.loaded;
-          lastTime = now;
-        }
-      };
-
-      xhr.onload = () => {
-        if(xhr.status >= 200 && xhr.status < 300){
-          const totalTime = (performance.now() - startTime) / 1000;
-          const avg = (bytes * 8) / (Math.max(totalTime, 0.001) * 1_000_000);
-          peak = Math.max(peak, avg);
-          resolve(Math.round(peak));
-        } else {
-          reject(new Error('Upload fehlgeschlagen: ' + xhr.status));
-        }
-      };
-      xhr.onerror = () => reject(new Error('Upload Netzwerkfehler'));
-      xhr.send(payload);
-    });
-  }
-
-  /* --- Paketverlust --- */
-  async function phasePacketLossReal(){
-    const url = `${CF_BASE}/__down?bytes=0`;
-    let failed = 0;
-    const attempts = 10;
-    for(let i = 0; i < attempts; i++){
-      try{
-        const res = await fetch(`${url}&t=${Date.now()}&i=${i}`, { cache:'no-store', mode:'cors' });
-        if(!res.ok) failed++;
-      } catch(e){ failed++; }
-    }
-    return Math.round((failed / attempts) * 100 * 10) / 10;
-  }
-
-  /* ---------- Verdict ---------- */
-  function evaluateVerdict(down, up, ping, jitter){
-    if(down >= 200 && up >= 50 && ping < 25 && jitter < 8)
-      return { title:'Hervorragend!', msg:'Perfekt für 4K-Streaming, Online-Gaming, Video-Calls und Enterprise-Anwendungen.' };
-    if(down >= 100 && up >= 20 && ping < 45)
-      return { title:'Sehr gut!', msg:'Ideal für HD-Streaming, Home-Office und Gaming ohne Verzögerung.' };
-    if(down >= 25 && up >= 5 && ping < 80)
-      return { title:'Solide Verbindung', msg:'Gut geeignet für Web-Browsing, SD-Streaming und Social Media.' };
-    if(down >= 5 && up >= 1)
-      return { title:'Ausreichend', msg:'Grundlegende Nutzung möglich, Streaming kann ruckeln.' };
-    return { title:'Langsam', msg:'Deine Verbindung ist eingeschränkt. Prüfe WLAN oder kontaktiere deinen Anbieter.' };
-  }
-
-  /* ---------- Test ID & Timestamp ---------- */
-  function generateTestId(){
-    const ts = Date.now().toString(36).toUpperCase();
-    const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `FQ-${ts}-${rnd}`;
-  }
-  function formatTimestamp(){
-    const d = new Date();
-    const pad = n => String(n).padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  }
-
-  /* ---------- Hauptablauf ---------- */
-  async function runFullTest(){
-    if(running) return;
-    running = true;
-
-    const btn = $('fqewStartBtn');
-    const label = $('fqewStartLabel');
-    const pdfBtn = $('fqewPdfBtn');
-
-    resetGauge();
-    chartData.length = 0;
-    drawChart();
-    setPhase('Verbindung wird vorbereitet…', 'fqew-active');
-    const hint = $('fqewChartHint');
-    if(hint) hint.textContent = 'Wartet…';
-    if(btn) btn.disabled = true;
-    if(btn) btn.classList.add('fqew-running');
-    if(label) label.textContent = 'Test läuft…';
-    if(pdfBtn) pdfBtn.disabled = true;
-
-    updateMetric($('fqewMDown'), '—', 'Mbps', null);
-    updateMetric($('fqewMUp'), '—', 'Mbps', null);
-    updateMetric($('fqewMPing'), '—', 'ms', null);
-    updateMetric($('fqewMJitter'), '—', 'ms', null);
-
-    try{
-      /* PING */
-      const { ping, jitter } = await phasePingReal(v => {
-        updateMetric($('fqewMPing'), fmt(v), 'ms', classifyPing(v));
-      });
-      updateMetric($('fqewMPing'), fmt(ping), 'ms', classifyPing(ping));
-      updateMetric($('fqewMJitter'), fmt(jitter), 'ms', classifyJitter(jitter));
-      await sleep(300);
-
-      /* DOWNLOAD */
-      const down = await phaseDownloadReal((live) => {
-        setNumber(live);
-        setArc(live);
-        pushChart(live);
-        updateMetric($('fqewMDown'), fmt(live, live < 100 ? 1 : 0), 'Mbps', null);
-      });
-      updateMetric($('fqewMDown'), fmt(down, down < 100 ? 1 : 0), 'Mbps', classifyDown(down));
-      await sleep(400);
-
-      /* Gauge Reset für Upload */
-      numTarget = 0; numDisplay = 0;
-      if(numRaf){ cancelAnimationFrame(numRaf); numRaf = 0; }
-      const numEl = $('fqewGaugeNumber');
-      if(numEl) numEl.textContent = '0';
-      setArc(0);
-      chartData.length = 0; drawChart();
-
-      /* UPLOAD */
-      const up = await phaseUploadReal((live) => {
-        setNumber(live);
-        setArc(live);
-        pushChart(live);
-        updateMetric($('fqewMUp'), fmt(live, live < 100 ? 1 : 0), 'Mbps', null);
-      });
-      updateMetric($('fqewMUp'), fmt(up, up < 100 ? 1 : 0), 'Mbps', classifyUp(up));
-
-      /* LOSS */
-      const loss = await phasePacketLossReal();
-
-      /* Abschluss */
-      setPhase('Test abgeschlossen', 'fqew-done');
-      if(hint) hint.textContent = 'Test abgeschlossen';
-      setNumber(up);
-      setArc(up);
-
-      /* Store Result */
-      lastResult.down = down;
-      lastResult.up = up;
-      lastResult.ping = ping;
-      lastResult.jitter = jitter;
-      lastResult.loss = loss;
-      lastResult.testId = generateTestId();
-      lastResult.timestamp = formatTimestamp();
-
-      if(btn) btn.classList.remove('fqew-running');
-      if(btn) btn.disabled = false;
-      if(label) label.textContent = 'Erneut testen';
-      if(pdfBtn) pdfBtn.disabled = false;
-
-    } catch(err){
-      console.error('Enterprise-Testfehler:', err);
-      setPhase('Messung fehlgeschlagen', 'fqew-done');
-      if(btn) btn.classList.remove('fqew-running');
-      if(btn) btn.disabled = false;
-      if(label) label.textContent = 'Erneut testen';
-    } finally {
-      running = false;
-    }
-  }
-
-  /* ============================================================
-     PDF-EXPORT via jsPDF (echter Datei-Download)
-     ============================================================ */
-  function exportPdf(){
-    const r = lastResult;
-    if(!r.testId){
-      alert('Bitte führe zuerst einen Test durch.');
-      return;
-    }
-
-    const jsPDFCtor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-    if(!jsPDFCtor){
-      alert('PDF-Bibliothek konnte nicht geladen werden. Bitte Seite neu laden.');
-      return;
-    }
-
-    const verdict = evaluateVerdict(r.down, r.up, r.ping, r.jitter);
-    const doc = new jsPDFCtor({ unit:'pt', format:'a4' });
-    const pageW = doc.internal.pageSize.getWidth();
-    const pageH = doc.internal.pageSize.getHeight();
-    const marginX = 48;
-    let y = 64;
-
-    /* Header */
-    doc.setFillColor(255, 90, 31);
-    doc.rect(0, 0, pageW, 10, 'F');
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(22);
-    doc.setTextColor(15, 23, 42);
-    doc.text('Fasqoo', marginX, y);
-    doc.setFontSize(11);
-    doc.setTextColor(148, 163, 184);
-    doc.setFont('helvetica', 'normal');
-    doc.text('ENTERPRISE NETWORK DIAGNOSTICS', marginX + 78, y - 2);
-
-    y += 26;
-    doc.setDrawColor(226, 232, 240);
-    doc.setLineWidth(1);
-    doc.line(marginX, y, pageW - marginX, y);
-
-    y += 30;
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    doc.setTextColor(15, 23, 42);
-    doc.text('Internet-Speedtest Bericht', marginX, y);
-
-    y += 18;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(100, 116, 139);
-    doc.text('Detaillierte Messung Ihrer Netzwerkverbindung – bereitgestellt von Fasqoo.', marginX, y);
-
-    /* Meta-Box */
-    y += 24;
-    doc.setFontSize(10);
-    doc.setTextColor(71, 85, 105);
-    const metaLine1 = `Test-ID: ${r.testId}`;
-    const metaLine2 = `Datum: ${r.timestamp}`;
-    const metaLine3 = `Server: ${r.server}`;
-    doc.text(metaLine1, marginX, y);
-    doc.text(metaLine2, marginX + 220, y);
-    doc.text(metaLine3, marginX + 420, y);
-
-    /* Metrics-Grid 4x2 */
-    y += 30;
-    const cols = 4;
-    const gap = 12;
-    const boxW = (pageW - marginX * 2 - gap * (cols - 1)) / cols;
-    const boxH = 74;
-
-    const metrics = [
-      { label:'Download', value: fmt(r.down, r.down < 100 ? 1 : 0), unit:'Mbps' },
-      { label:'Upload',   value: fmt(r.up,   r.up   < 100 ? 1 : 0), unit:'Mbps' },
-      { label:'Ping',     value: fmt(r.ping), unit:'ms' },
-      { label:'Jitter',   value: fmt(r.jitter), unit:'ms' },
-      { label:'Paketverlust', value: fmt(r.loss), unit:'%' },
-      { label:'DNS-Auflösung', value: String(r.dns), unit:'ms' },
-      { label:'Öffentliche IP', value: r.ip, unit:'' },
-      { label:'Test-Server', value: 'Cloudflare Edge', unit:'' }
-    ];
-
-    metrics.forEach((m, i) => {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const x = marginX + col * (boxW + gap);
-      const yy = y + row * (boxH + gap);
-
-      doc.setDrawColor(226, 232, 240);
-      doc.setFillColor(248, 250, 252);
-      doc.roundedRect(x, yy, boxW, boxH, 6, 6, 'FD');
-
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(7.5);
-      doc.setTextColor(148, 163, 184);
-      doc.text(m.label.toUpperCase(), x + 10, yy + 18);
-
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(16);
-      doc.setTextColor(15, 23, 42);
-      doc.text(String(m.value), x + 10, yy + 46);
-
-      if(m.unit){
-        const vw = doc.getTextWidth(String(m.value));
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(148, 163, 184);
-        doc.text(m.unit, x + 12 + vw * (16 / 16) + 2, yy + 46);
-      }
-    });
-
-    /* Verdict */
-    y += Math.ceil(metrics.length / cols) * (boxH + gap) + 8;
-    doc.setDrawColor(255, 90, 31);
-    doc.setFillColor(255, 245, 238);
-    doc.roundedRect(marginX, y, pageW - marginX * 2, 68, 8, 8, 'FD');
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.setTextColor(255, 90, 31);
-    doc.text(verdict.title, marginX + 14, y + 24);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(71, 85, 105);
-    const wrapWidth = pageW - marginX * 2 - 28;
-    const lines = doc.splitTextToSize(verdict.msg, wrapWidth);
-    doc.text(lines, marginX + 14, y + 44);
-
-    /* Footer */
-    doc.setDrawColor(226, 232, 240);
-    doc.line(marginX, pageH - 60, pageW - marginX, pageH - 60);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(148, 163, 184);
-    doc.text('Measurement via Cloudflare Edge · Fasqoo is an independent platform and not an official Cloudflare product.', marginX, pageH - 40);
-    doc.text(`© ${new Date().getFullYear()} Fasqoo · Enterprise Network Diagnostics`, marginX, pageH - 26);
-
-    /* Save */
-    doc.save(`Fasqoo-Test-Report-${r.testId}.pdf`);
-  }
-
-  /* ---------- Init ---------- */
-  function init(){
-    const widget = $('fasqoo-enterprise-widget');
-    if(!widget) return;
-
-    buildGauge();
-    resetGauge();
-    resizeChart();
-    setTimeout(resizeChart, 150);
-
-    const btn = $('fqewStartBtn');
-    if(btn) btn.addEventListener('click', runFullTest);
-
-    const pdfBtn = $('fqewPdfBtn');
-    if(pdfBtn) pdfBtn.addEventListener('click', exportPdf);
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-
 </body>
 </html>
