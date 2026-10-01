@@ -970,6 +970,293 @@ header .menu-toggle{
 }
 </style>
 
+
+<style id="fasqoo-smooth-realtime-gauge">
+/* ============================================================
+   FASQOO SMOOTH REALTIME PERFORMANCE GAUGE
+   Display-only layer: keeps the existing measurement engine/IDs.
+   ============================================================ */
+
+.speedbox .gauge{
+  position:relative;
+  width:min(360px,100%);
+  aspect-ratio:1;
+  margin:0 auto;
+  contain:layout paint;
+  isolation:isolate;
+}
+
+.speedbox .gauge::before{
+  content:"";
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.72) 0 31%, rgba(255,255,255,0) 57%),
+    radial-gradient(circle, rgba(255,90,31,.08), transparent 67%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.dark .speedbox .gauge::before{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.035) 0 31%, rgba(255,255,255,0) 57%),
+    radial-gradient(circle, rgba(255,90,31,.07), transparent 67%);
+}
+
+.speedbox .gauge svg{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  transform:rotate(-90deg);
+}
+
+.speedbox .gauge .ring{
+  fill:none;
+  stroke:rgba(17,24,39,.075);
+  stroke-width:15;
+}
+
+.dark .speedbox .gauge .ring{
+  stroke:rgba(255,255,255,.075);
+}
+
+.speedbox .gauge .progress{
+  fill:none;
+  stroke:url(#g);
+  stroke-width:15;
+  stroke-linecap:round;
+  filter:drop-shadow(0 0 5px rgba(255,90,31,.16));
+  transition:none !important;
+}
+
+.speedbox .gauge.gauge-live .progress{
+  stroke:#b7ff00 !important;
+  filter:
+    drop-shadow(0 0 4px rgba(183,255,0,.9))
+    drop-shadow(0 0 13px rgba(183,255,0,.62))
+    drop-shadow(0 0 27px rgba(183,255,0,.30));
+}
+
+.speedbox .gauge.gauge-live::after{
+  content:"";
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  box-shadow:
+    0 0 0 1px rgba(183,255,0,.12) inset,
+    0 0 34px rgba(183,255,0,.13);
+  pointer-events:none;
+  animation:fasqooGaugeBreath 1.35s ease-in-out infinite;
+  z-index:0;
+}
+
+@keyframes fasqooGaugeBreath{
+  0%,100%{opacity:.65;transform:scale(.985)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+.speedbox .gauge .center{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  transform:translateY(2px);
+}
+
+.speedbox .gauge .center .num{
+  opacity:0 !important;
+}
+.speedbox .gauge .center .rt-number{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-58%);
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum";
+  font-size:clamp(38px,8vw,66px);
+  line-height:.9;
+  font-weight:750;
+  letter-spacing:-2.8px;
+  color:var(--text,#111827);
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
+  white-space:nowrap;
+  will-change:contents;
+}
+.dark .speedbox .gauge .center .rt-number{color:#f7f8fa;text-shadow:0 0 18px rgba(255,255,255,.06)}
+.speedbox .gauge.gauge-live .center .rt-number{
+  color:#a8f000;
+  text-shadow:0 0 7px rgba(183,255,0,.75),0 0 22px rgba(183,255,0,.42);
+}
+@media(max-width:560px){.speedbox .gauge .center .rt-number{font-size:48px}}
+
+.speedbox .gauge .center .num{
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum";
+  font-size:clamp(38px,8vw,66px);
+  line-height:.9;
+  font-weight:750;
+  letter-spacing:-2.8px;
+  color:var(--text,#111827);
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
+  will-change:contents;
+}
+
+.dark .speedbox .gauge .center .num{
+  color:#f7f8fa;
+  text-shadow:0 0 18px rgba(255,255,255,.06);
+}
+
+.speedbox .gauge.gauge-live .center .num{
+  color:#a8f000;
+  text-shadow:
+    0 0 7px rgba(183,255,0,.75),
+    0 0 22px rgba(183,255,0,.42);
+}
+
+.speedbox .gauge .center .unit{
+  margin-top:10px;
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted,#667085);
+}
+
+.speedbox .gauge .rt-needle{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:4;
+  width:42%;
+  height:4px;
+  transform-origin:0 50%;
+  transform:translateY(-50%) rotate(-135deg);
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff5a1f 0%,#ff8a5b 70%,rgba(255,138,91,0) 100%);
+  box-shadow:0 0 7px rgba(255,90,31,.25);
+  will-change:transform;
+  pointer-events:none;
+}
+
+.speedbox .gauge.gauge-live .rt-needle{
+  background:linear-gradient(90deg,#b7ff00 0%,#d5ff65 70%,rgba(183,255,0,0) 100%);
+  box-shadow:
+    0 0 7px rgba(183,255,0,.95),
+    0 0 17px rgba(183,255,0,.48);
+}
+
+.speedbox .gauge .rt-needle::after{
+  content:"";
+  position:absolute;
+  right:-3px;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  transform:translate(50%,-50%);
+  background:currentColor;
+  box-shadow:0 0 7px currentColor;
+}
+
+.speedbox .gauge .rt-hub{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:6;
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:var(--card,#fff);
+  border:4px solid #ff5a1f;
+  box-shadow:0 0 0 2px rgba(255,90,31,.14),0 3px 9px rgba(0,0,0,.12);
+  pointer-events:none;
+}
+
+.speedbox .gauge.gauge-live .rt-hub{
+  border-color:#b7ff00;
+  box-shadow:
+    0 0 0 2px rgba(183,255,0,.20),
+    0 0 13px rgba(183,255,0,.65);
+}
+
+.dark .speedbox .gauge .rt-hub{
+  background:#15181d;
+}
+
+.speedbox .gauge .rt-live-label{
+  position:absolute;
+  left:50%;
+  bottom:11%;
+  z-index:7;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
+  border:1px solid var(--line,rgba(17,24,39,.1));
+  border-radius:999px;
+  background:color-mix(in srgb, var(--card,#fff) 82%, transparent);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  color:var(--muted,#667085);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.86;
+  pointer-events:none;
+}
+
+.speedbox .gauge .rt-live-label i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#9aa2ad;
+  box-shadow:none;
+}
+
+.speedbox .gauge.gauge-live .rt-live-label{
+  color:#7db000;
+  border-color:rgba(183,255,0,.30);
+  background:rgba(183,255,0,.075);
+}
+
+.dark .speedbox .gauge.gauge-live .rt-live-label{
+  color:#caff59;
+}
+
+.speedbox .gauge.gauge-live .rt-live-label i{
+  background:#b7ff00;
+  box-shadow:0 0 9px rgba(183,255,0,.9);
+  animation:fasqooLiveDot .9s ease-in-out infinite;
+}
+
+@keyframes fasqooLiveDot{
+  0%,100%{transform:scale(.8);opacity:.65}
+  50%{transform:scale(1.25);opacity:1}
+}
+
+/* Keep the existing DOM element that app.js controls, but make its
+   visual motion fully controlled by the display layer. */
+.speedbox .gauge #prog{
+  stroke-dasharray:816.8;
+  stroke-dashoffset:816.8;
+}
+
+@media(max-width:560px){
+  .speedbox .gauge{width:min(330px,92vw)}
+  .speedbox .gauge .center .num{font-size:48px}
+}
+</style>
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1733,5 +2020,148 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
+
+<script id="fasqoo-smooth-realtime-gauge-js">
+(() => {
+  const init = () => {
+    const gauge = document.querySelector('.speedbox .gauge');
+    const speedEl = document.getElementById('speed');
+    const prog = document.getElementById('prog');
+    const phaseEl = document.getElementById('testPhase');
+    const statusEl = document.getElementById('status');
+    if (!gauge || !speedEl || !prog) return;
+
+    /* Add display-only elements. Existing IDs and measurement engine stay untouched. */
+    const originalNumber = speedEl;
+    let rtNumber = gauge.querySelector('.rt-number');
+    if (!rtNumber) {
+      rtNumber = document.createElement('div');
+      rtNumber.className = 'rt-number';
+      rtNumber.setAttribute('aria-hidden','true');
+      rtNumber.textContent = '0';
+      speedEl.parentElement.appendChild(rtNumber);
+    }
+
+    let needle = gauge.querySelector('.rt-needle');
+    if (!needle) {
+      needle = document.createElement('div');
+      needle.className = 'rt-needle';
+      needle.style.color = '#ff5a1f';
+      gauge.appendChild(needle);
+    }
+
+    let hub = gauge.querySelector('.rt-hub');
+    if (!hub) {
+      hub = document.createElement('div');
+      hub.className = 'rt-hub';
+      gauge.appendChild(hub);
+    }
+
+    let liveLabel = gauge.querySelector('.rt-live-label');
+    if (!liveLabel) {
+      liveLabel = document.createElement('div');
+      liveLabel.className = 'rt-live-label';
+      liveLabel.innerHTML = '<i></i><span>REALTIME</span>';
+      gauge.appendChild(liveLabel);
+    }
+
+    const CIRC = 2 * Math.PI * 130;
+    let target = Number.parseFloat(speedEl.textContent.replace(',', '.')) || 0;
+    let value = target;
+    let lastTs = performance.now();
+
+    const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+    /* A logarithmic visual scale keeps 1–10 Gbit/s readable without
+       making low speeds look dead. The actual numeric result is untouched. */
+    const visualProgress = (mbps) => {
+      const max = 10000;
+      const min = 1;
+      if (mbps <= 0) return 0;
+      return clamp(
+        Math.log10(Math.max(min, mbps) + 1) / Math.log10(max + 1),
+        0, 1
+      );
+    };
+
+    const isLive = () => {
+      const phase = (phaseEl?.textContent || '').toLowerCase();
+      const status = (statusEl?.textContent || '').toLowerCase();
+      return /download|upload|measur|test|läuft|running|testing|progress/.test(phase + ' ' + status);
+    };
+
+    const updateTarget = () => {
+      const raw = speedEl.textContent.trim().replace(/[^\d.,-]/g, '').replace(',', '.');
+      const n = Number.parseFloat(raw);
+      if (Number.isFinite(n)) target = Math.max(0, n);
+    };
+
+    const updateLiveState = () => {
+      const live = isLive();
+      gauge.classList.toggle('gauge-live', live);
+      needle.style.color = live ? '#b7ff00' : '#ff5a1f';
+      const label = liveLabel.querySelector('span');
+      if (label) label.textContent = live ? 'REALTIME' : 'READY';
+    };
+
+    /* Smoothly interpolate instead of jumping between measurements. */
+    const frame = (now) => {
+      const dt = Math.min(48, now - lastTs);
+      lastTs = now;
+
+      const speed = Math.max(0, target);
+      const response = speed > 1000 ? 0.14 : 0.19;
+      const alpha = 1 - Math.exp(-response * dt / 16.67);
+      value += (target - value) * alpha;
+
+      /* The existing #speed remains authoritative for the measurement engine.
+         Only the new visual number is animated. */
+      const display = value >= 100 ? value.toFixed(0) :
+                      value >= 10 ? value.toFixed(1) :
+                      value.toFixed(2);
+      rtNumber.textContent = display;
+
+      const p = visualProgress(value);
+      const offset = CIRC * (1 - p);
+      prog.style.strokeDasharray = String(CIRC);
+      prog.style.strokeDashoffset = String(offset);
+
+      /* -135° … +135° = 270° sweep. */
+      const angle = -135 + p * 270;
+      needle.style.transform = `translateY(-50%) rotate(${angle}deg)`;
+
+      updateLiveState();
+      requestAnimationFrame(frame);
+    };
+
+    const observer = new MutationObserver(() => {
+      updateTarget();
+      updateLiveState();
+    });
+
+    observer.observe(speedEl, {childList:true, characterData:true, subtree:true});
+    if (phaseEl) observer.observe(phaseEl, {childList:true, characterData:true, subtree:true});
+    if (statusEl) observer.observe(statusEl, {childList:true, characterData:true, subtree:true});
+
+    /* Catch class/state changes used by the existing engine without modifying it. */
+    const stateObserver = new MutationObserver(updateLiveState);
+    if (phaseEl) stateObserver.observe(phaseEl, {attributes:true, childList:true, characterData:true, subtree:true});
+    if (statusEl) stateObserver.observe(statusEl, {attributes:true, childList:true, characterData:true, subtree:true});
+
+    updateTarget();
+    updateLiveState();
+    requestAnimationFrame(frame);
+  };
+
+  /* Deferred app.js runs before DOMContentLoaded, so this display layer
+     starts after the existing engine has initialized. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, {once:true});
+  } else {
+    init();
+  }
+})();
+</script>
+
 </body>
 </html>
