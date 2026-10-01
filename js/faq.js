@@ -381,12 +381,66 @@
     applyLang(lang);
   };
 
+   /* ============================================================
+     8) TAB-SWITCHING (Speed ↔ Ping)
+     ============================================================ */
+  function initTabs() {
+    var tabs = document.querySelectorAll('.fasqoo-tab');
+    var speedSection = document.getElementById('speed-section');
+    var pingSection = document.getElementById('ping-section');
+    var slider = document.getElementById('tabSlider');
+    if (!tabs.length || !speedSection || !pingSection) return;
+
+    function moveSlider(activeTab) {
+      if (!slider || !activeTab) return;
+      var parent = activeTab.parentElement;
+      var parentRect = parent.getBoundingClientRect();
+      var tabRect = activeTab.getBoundingClientRect();
+      slider.style.width = tabRect.width + 'px';
+      slider.style.transform = 'translateX(' + (tabRect.left - parentRect.left - 5) + 'px)';
+    }
+
+    function activateTab(tabName) {
+      tabs.forEach(function (t) {
+        var isActive = t.dataset.tab === tabName;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', String(isActive));
+      });
+
+      if (tabName === 'ping') {
+        speedSection.classList.add('hidden');
+        pingSection.classList.remove('hidden');
+      } else {
+        speedSection.classList.remove('hidden');
+        pingSection.classList.add('hidden');
+      }
+
+      var activeTab = document.querySelector('.fasqoo-tab[data-tab="' + tabName + '"]');
+      if (activeTab) moveSlider(activeTab);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activateTab(this.dataset.tab);
+      });
+    });
+
+    var activeTab = document.querySelector('.fasqoo-tab.active');
+    if (activeTab) setTimeout(function () { moveSlider(activeTab); }, 50);
+
+    window.addEventListener('resize', function () {
+      var current = document.querySelector('.fasqoo-tab.active');
+      if (current) moveSlider(current);
+    });
+  }
+
   /* ============================================================
-     8) INIT
+     9) INIT
      ============================================================ */
   function init() {
     initLanguage();
     attachObservers();
+    initTabs();
   }
 
   if (document.readyState === 'loading') {
