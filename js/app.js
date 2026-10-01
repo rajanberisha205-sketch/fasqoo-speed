@@ -1135,3 +1135,67 @@ applyLanguage(initialLang);
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+  /* ============================================================
+     9) TAB-SWITCHING (Speed ↔ Ping)
+     ============================================================ */
+  function initTabs() {
+    const tabs = document.querySelectorAll('.fasqoo-tab');
+    const speedSection = document.getElementById('speed-section');
+    const pingSection = document.getElementById('ping-section');
+    const slider = document.getElementById('tabSlider');
+    if (!tabs.length || !speedSection || !pingSection) return;
+
+    function moveSlider(activeTab) {
+      if (!slider || !activeTab) return;
+      const parent = activeTab.parentElement;
+      const parentRect = parent.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      slider.style.width = tabRect.width + 'px';
+      slider.style.transform = 'translateX(' + (tabRect.left - parentRect.left - 5) + 'px)';
+    }
+
+    function activateTab(tabName) {
+      tabs.forEach(function (t) {
+        const isActive = t.dataset.tab === tabName;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', String(isActive));
+      });
+
+      if (tabName === 'ping') {
+        speedSection.classList.add('hidden');
+        pingSection.classList.remove('hidden');
+      } else {
+        speedSection.classList.remove('hidden');
+        pingSection.classList.add('hidden');
+      }
+
+      const activeTab = document.querySelector('.fasqoo-tab[data-tab="' + tabName + '"]');
+      if (activeTab) moveSlider(activeTab);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activateTab(this.dataset.tab);
+      });
+    });
+
+    // Slider beim Laden positionieren
+    const activeTab = document.querySelector('.fasqoo-tab.active');
+    if (activeTab) {
+      // Warten, bis Layout fertig ist
+      setTimeout(function () { moveSlider(activeTab); }, 50);
+    }
+
+    // Bei Fenstergröße neu positionieren
+    window.addEventListener('resize', function () {
+      const current = document.querySelector('.fasqoo-tab.active');
+      if (current) moveSlider(current);
+    });
+  }
+
+  // initTabs zur init() hinzufügen
+  const _originalInit = init;
+  function init() {
+    _originalInit();
+    initTabs();
+  }
