@@ -4,19 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#111827" id="themeColor">
-<meta name="description" content="Free Internet Speed Test by Fasqoo. Measure real download, upload, ping, jitter, bufferbloat and packet loss in your browser. No account required.">
+<meta name="description" content="Free internet speed test by Fasqoo. Measure download, upload, ping, jitter, bufferbloat and packet loss in your browser. No account required.">
 <meta name="author" content="Fasqoo">
 <meta name="application-name" content="Fasqoo Internet Speed Test">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<!-- ============================================================
-     PWA / APPLE / ANDROID
-     ============================================================ -->
+<!-- PWA / APPLE / ANDROID -->
 <link rel="manifest" href="/site.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Fasqoo">
@@ -24,25 +21,24 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="msapplication-TileColor" content="#111827">
 
-<!-- ============================================================
-     SEO / OPENGRAPH
-     ============================================================ -->
+<!-- SEO / OPENGRAPH -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo">
+<meta property="og:title" content="Fasqoo – Free Internet Speed Test, Ping & Bufferbloat Check">
 <meta property="og:description" content="Run a real browser-based internet speed test and measure download, upload, ping, jitter, bufferbloat and packet loss.">
 <meta property="og:url" content="https://www.fasqoo.com/">
 <meta property="og:image" content="https://www.fasqoo.com/android-chrome-512x512.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Free Internet Speed Test | Fasqoo">
+<meta name="twitter:title" content="Fasqoo – Free Internet Speed Test">
 <meta name="twitter:description" content="Measure download, upload, ping, jitter, bufferbloat and packet loss with Fasqoo.">
 <meta name="robots" content="index, follow">
-<title>Free Internet Speed Test – Download, Upload, Ping & Jitter | Fasqoo</title>
+<title>Fasqoo – Internet Speed Test, Ping & Bufferbloat Check (Free)</title>
 <link rel="canonical" href="https://www.fasqoo.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- Structured Data -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://www.fasqoo.com/#organization","name":"Fasqoo","url":"https://www.fasqoo.com/","logo":"https://www.fasqoo.com/android-chrome-512x512.png"}
 </script>
@@ -53,6 +49,17 @@
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://www.fasqoo.com/#website","name":"Fasqoo","url":"https://www.fasqoo.com/","publisher":{"@id":"https://www.fasqoo.com/#organization"},"inLanguage":"en"}
 </script>
 
+<!-- FAQ Structured Data (SEO) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does Fasqoo measure?","acceptedAnswer":{"@type":"Answer","text":"Fasqoo measures download, upload, ping, jitter, packet loss and bufferbloat directly in your browser via the Cloudflare Edge network."}},
+{"@type":"Question","name":"Is Fasqoo really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The speed test is completely free and requires no account. You can test as often as you like."}},
+{"@type":"Question","name":"Why is my result lower than my ISP promises?","acceptedAnswer":{"@type":"Answer","text":"ISP promises often assume ideal conditions. Fasqoo measures realistic conditions including Wi-Fi, other devices, and actual routing distance."}},
+{"@type":"Question","name":"What is bufferbloat?","acceptedAnswer":{"@type":"Answer","text":"Bufferbloat happens when your router buffers too much data before forwarding, causing lag in gaming and video calls. Under 30 ms is good, over 100 ms is a problem."}},
+{"@type":"Question","name":"Can I use Fasqoo for my company?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fasqoo supports multi-location monitoring, SLA evidence and automated tests for business users."}}
+]}
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -61,460 +68,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-N4DXJXZ8');</script>
 
 <link rel="stylesheet" href="/css/style.css">
-
-<style>
-  .hidden{display:none !important}
-
-  /* ============================================================
-     FASQOO TABS – moderne Segmented Control mit Slider
-     ============================================================ */
-  .fasqoo-tabs-wrap{
-    display:flex;
-    justify-content:center;
-    margin:0 0 28px;
-    padding:0 4px;
-  }
-  .fasqoo-tabs{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:5px;
-    border-radius:16px;
-    background:rgba(255,255,255,.6);
-    border:1px solid var(--line);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,.9) inset,
-      0 8px 24px rgba(16,24,40,.06),
-      0 2px 6px rgba(16,24,40,.04);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    max-width:100%;
-  }
-
-  /* Gleitender Hintergrund */
-  .fasqoo-tabs .tab-slider{
-    position:absolute;
-    top:5px;
-    left:5px;
-    height:calc(100% - 10px);
-    border-radius:12px;
-    background:linear-gradient(135deg,#ff5a1f 0%,#ff7a45 100%);
-    box-shadow:
-      0 6px 18px rgba(255,90,31,.32),
-      0 2px 6px rgba(255,90,31,.18),
-      0 1px 0 rgba(255,255,255,.20) inset;
-    transition:transform .35s cubic-bezier(.4,.0,.2,1), width .35s cubic-bezier(.4,.0,.2,1);
-    z-index:1;
-    pointer-events:none;
-  }
-
-  .fasqoo-tab{
-    position:relative;
-    z-index:2;
-    appearance:none;
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    font:inherit;
-    font-size:13.5px;
-    font-weight:600;
-    letter-spacing:.1px;
-    padding:11px 22px;
-    border-radius:12px;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    white-space:nowrap;
-    transition:color .3s ease, transform .2s ease;
-  }
-  .fasqoo-tab svg{
-    width:16px;
-    height:16px;
-    flex:0 0 16px;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:2;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    transition:transform .3s ease;
-  }
-  .fasqoo-tab:hover{color:var(--text)}
-  .fasqoo-tab.active{color:#fff}
-  .fasqoo-tab.active svg{transform:scale(1.08)}
-  .fasqoo-tab:not(.active):hover svg{transform:translateY(-1px)}
-
-  /* Dark Mode */
-  .dark .fasqoo-tabs{
-    background:rgba(21,24,29,.7);
-    border-color:rgba(255,255,255,.08);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,.04) inset,
-      0 8px 24px rgba(0,0,0,.35),
-      0 2px 6px rgba(0,0,0,.2);
-  }
-  .dark .fasqoo-tab{color:#8a93a0}
-  .dark .fasqoo-tab:hover{color:#e5e7eb}
-  .dark .fasqoo-tab.active{color:#fff}
-
-  /* Mobile: volle Breite */
-  @media(max-width:560px){
-    .fasqoo-tabs-wrap{padding:0}
-    .fasqoo-tabs{
-      width:100%;
-      display:flex;
-      border-radius:14px;
-    }
-    .fasqoo-tab{
-      flex:1 1 0;
-      justify-content:center;
-      padding:12px 8px;
-      font-size:12.5px;
-      gap:7px;
-    }
-    .fasqoo-tab svg{width:15px;height:15px;flex:0 0 15px}
-  }
-  @media(max-width:400px){
-    .fasqoo-tab{
-      padding:11px 4px;
-      font-size:11.5px;
-      gap:6px;
-    }
-  }
-
-  /* ============================================================
-     PING-MONITOR – modern, minimalistisch
-     ============================================================ */
-  .ping-wrap{
-    display:grid;
-    grid-template-columns:minmax(0,360px) minmax(0,1fr);
-    gap:22px;
-    margin-top:4px;
-  }
-
-  /* ---------- Settings Panel ---------- */
-  .ping-side{
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:var(--card);
-    padding:22px;
-    display:flex;flex-direction:column;gap:22px;
-  }
-  .ping-block-title{
-    display:flex;align-items:center;gap:8px;
-    font-size:11px;font-weight:800;letter-spacing:1.3px;
-    text-transform:uppercase;color:var(--muted);
-    margin-bottom:12px;
-  }
-  .ping-block-title svg{
-    width:14px;height:14px;flex:0 0 14px;
-    stroke:currentColor;fill:none;
-    stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  }
-
-  /* Server Grid – Regionen */
-  .server-region{margin-bottom:14px}
-  .server-region:last-child{margin-bottom:0}
-  .server-region-label{
-    font-size:10px;font-weight:700;letter-spacing:.8px;
-    text-transform:uppercase;color:var(--muted);
-    margin-bottom:6px;opacity:.7;
-  }
-  .server-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:6px;
-  }
-  .server-tile{
-    display:flex;align-items:center;gap:9px;
-    padding:9px 11px;border:1px solid var(--line);border-radius:10px;
-    background:transparent;cursor:pointer;
-    font-size:12px;color:var(--muted);
-    transition:all .15s ease;
-    position:relative;
-    user-select:none;
-  }
-  .server-tile:hover{border-color:#cfd4dc;color:var(--text)}
-  .server-tile input{position:absolute;opacity:0;pointer-events:none}
-  .server-tile .flag{
-    width:20px;height:20px;flex:0 0 20px;
-    border-radius:4px;overflow:hidden;
-    display:grid;place-items:center;
-    background:var(--soft);
-  }
-  .server-tile .flag svg{width:100%;height:100%;display:block}
-  .server-tile .name{
-    font-weight:600;color:var(--text);font-size:12px;line-height:1.2;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  }
-  .server-tile input:checked ~ .name{color:var(--text)}
-  .server-tile:has(input:checked){
-    border-color:#ff5a1f;
-    background:rgba(255,90,31,.05);
-    color:var(--text);
-  }
-  .server-tile:has(input:checked) .flag{
-    box-shadow:0 0 0 2px rgba(255,90,31,.18);
-  }
-
-  /* Mode Selector – Segmented Control */
-  .mode-segmented{
-    display:grid;grid-template-columns:1fr 1fr;
-    border:1px solid var(--line);border-radius:10px;
-    padding:3px;background:var(--soft);
-    position:relative;
-  }
-  .mode-segmented input{position:absolute;opacity:0;pointer-events:none}
-  .mode-segmented label{
-    display:flex;align-items:center;justify-content:center;gap:7px;
-    padding:9px 8px;border-radius:8px;
-    font-size:12px;font-weight:600;color:var(--muted);
-    cursor:pointer;transition:all .18s ease;
-    text-align:center;
-  }
-  .mode-segmented label svg{
-    width:14px;height:14px;flex:0 0 14px;
-    stroke:currentColor;fill:none;stroke-width:2;
-    stroke-linecap:round;stroke-linejoin:round;
-  }
-  .mode-segmented label:hover{color:var(--text)}
-  .mode-segmented label.active{
-    background:var(--card);color:var(--text);
-    box-shadow:0 2px 6px rgba(0,0,0,.06);
-  }
-  .dark .mode-segmented label.active{
-    background:#1e2530;color:#f3f4f6;
-    box-shadow:0 2px 8px rgba(0,0,0,.35);
-  }
-  .mode-hint{
-    font-size:11px;line-height:1.55;color:var(--muted);
-    margin-top:10px;padding:0 2px;
-  }
-
-  /* Start Button */
-  .ping-start{
-    width:100%;height:48px;border:0;border-radius:11px;
-    background:#ff5a1f;color:#fff;
-    font:inherit;font-size:13.5px;font-weight:700;
-    letter-spacing:.2px;cursor:pointer;
-    display:inline-flex;align-items:center;justify-content:center;gap:9px;
-    box-shadow:0 8px 20px rgba(255,90,31,.24);
-    transition:all .18s ease;
-  }
-  .ping-start svg{
-    width:16px;height:16px;stroke:currentColor;fill:none;
-    stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
-  }
-  .ping-start:hover:not(:disabled){
-    background:#ff4a0a;transform:translateY(-1px);
-    box-shadow:0 12px 26px rgba(255,90,31,.32);
-  }
-  .ping-start:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
-
-  .ping-status{
-    font-size:11.5px;color:var(--muted);
-    margin:0;line-height:1.5;min-height:16px;
-    padding:0 2px;
-  }
-  .ping-status.live{color:#2563eb}
-  .ping-status.done{color:#16a36a}
-  .ping-status.err{color:#e5484d}
-
-  /* ---------- Main Panel ---------- */
-  .ping-main{display:flex;flex-direction:column;gap:16px;min-width:0}
-
-  .metric-row{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-  }
-  .metric-card{
-    border:1px solid var(--line);border-radius:14px;
-    background:var(--card);padding:18px 18px 16px;
-    display:flex;flex-direction:column;gap:6px;
-    transition:border-color .2s;
-  }
-  .metric-card .m-label{
-    display:flex;align-items:center;gap:6px;
-    font-size:10px;font-weight:700;letter-spacing:1.2px;
-    text-transform:uppercase;color:var(--muted);
-  }
-  .metric-card .m-label svg{
-    width:12px;height:12px;flex:0 0 12px;
-    stroke:currentColor;fill:none;stroke-width:2.2;
-    stroke-linecap:round;stroke-linejoin:round;
-  }
-  .metric-card .m-value{
-    font-size:32px;font-weight:700;letter-spacing:-1.2px;
-    line-height:1;font-variant-numeric:tabular-nums;
-    color:var(--text);transition:color .3s;
-    display:flex;align-items:baseline;gap:5px;
-  }
-  .metric-card .m-unit{
-    font-size:13px;font-weight:500;color:var(--muted);
-    letter-spacing:0;
-  }
-  .metric-card .m-value.good{color:#16a36a}
-  .metric-card .m-value.medium{color:#c78900}
-  .metric-card .m-value.bad{color:#e5484d}
-
-  .chart-card{
-    border:1px solid var(--line);border-radius:14px;
-    background:var(--card);padding:16px 18px 14px;
-  }
-  .chart-card-head{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:10px;
-  }
-  .chart-card-head strong{
-    font-size:12px;font-weight:700;color:var(--text);
-    display:inline-flex;align-items:center;gap:7px;
-  }
-  .chart-card-head strong svg{
-    width:13px;height:13px;stroke:currentColor;fill:none;
-    stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-    color:var(--muted);
-  }
-  .chart-card-head .hint{
-    font-size:10.5px;color:var(--muted);
-    font-variant-numeric:tabular-nums;
-  }
-  #pingCanvas{width:100%;height:170px;display:block}
-
-  /* Results Table */
-  .table-card{
-    border:1px solid var(--line);border-radius:14px;
-    background:var(--card);overflow:hidden;
-  }
-  .table-card table{width:100%;border-collapse:collapse}
-  .table-card th,.table-card td{
-    text-align:left;padding:11px 16px;
-    border-bottom:1px solid #eef1f5;
-    font-size:12px;white-space:nowrap;
-  }
-  .table-card th{
-    font-size:9.5px;font-weight:700;letter-spacing:1.1px;
-    text-transform:uppercase;color:var(--muted);
-    background:var(--soft);
-  }
-  .table-card tr:last-child td{border-bottom:0}
-  .table-card .srv{
-    display:inline-flex;align-items:center;gap:9px;
-    font-weight:600;color:var(--text);
-  }
-  .table-card .srv .flag{
-    width:16px;height:16px;flex:0 0 16px;border-radius:3px;
-    overflow:hidden;display:grid;place-items:center;background:var(--soft);
-  }
-  .table-card .srv .flag svg{width:100%;height:100%}
-  .table-card .ping-val{
-    font-variant-numeric:tabular-nums;font-weight:700;
-  }
-  .table-empty{
-    text-align:center;padding:22px;color:var(--muted);font-size:12px;
-  }
-
-  /* Action Row */
-  .ping-actions{display:flex;gap:8px;flex-wrap:wrap}
-  .ping-action{
-    border:1px solid var(--line);background:var(--card);color:var(--text);
-    font:inherit;font-size:12px;font-weight:600;
-    padding:10px 14px;border-radius:10px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:8px;
-    transition:all .15s ease;
-  }
-  .ping-action svg{
-    width:14px;height:14px;flex:0 0 14px;
-    stroke:currentColor;fill:none;stroke-width:1.9;
-    stroke-linecap:round;stroke-linejoin:round;
-  }
-  .ping-action:hover:not(:disabled){border-color:#cfd4dc;background:var(--soft)}
-  .ping-action:disabled{opacity:.5;cursor:not-allowed}
-
-  /* History Card */
-  .history-card{
-    border:1px solid var(--line);border-radius:14px;
-    background:var(--card);overflow:hidden;
-  }
-  .history-head{
-    padding:13px 16px;border-bottom:1px solid var(--line);
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-  }
-  .history-head span{
-    font-size:11px;font-weight:700;letter-spacing:1.1px;
-    text-transform:uppercase;color:var(--muted);
-  }
-
-  /* Install Button */
-  .ping-install{
-    display:inline-flex;align-items:center;gap:9px;
-    padding:11px 16px;border:1px solid var(--line);
-    background:var(--card);color:var(--text);
-    font:inherit;font-size:12.5px;font-weight:600;
-    border-radius:10px;cursor:pointer;margin-bottom:16px;
-    transition:all .15s ease;
-  }
-  .ping-install svg{
-    width:15px;height:15px;stroke:currentColor;fill:none;
-    stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  }
-  .ping-install:hover{
-    border-color:#ff5a1f;color:#ff5a1f;
-    background:rgba(255,90,31,.04);
-  }
-  .ping-install[hidden]{display:none}
-
-  /* Header (Titel-Bereich) */
-  .ping-header{
-    display:flex;justify-content:space-between;align-items:flex-start;
-    gap:20px;margin-bottom:22px;padding-bottom:18px;
-    border-bottom:1px solid var(--line);
-  }
-  .ping-header-left .kicker{
-    font-size:10px;font-weight:800;letter-spacing:1.5px;
-    text-transform:uppercase;color:#ff5a1f;margin-bottom:6px;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .ping-header-left .kicker .dot{
-    width:6px;height:6px;border-radius:50%;background:#ff5a1f;
-    box-shadow:0 0 0 4px rgba(255,90,31,.12);
-  }
-  .ping-header-left h2{
-    margin:0;font-size:20px;font-weight:700;
-    letter-spacing:-.5px;color:var(--text);
-  }
-  .ping-phase{
-    display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;
-  }
-  .ping-phase span{
-    font-size:10px;padding:5px 10px;border-radius:999px;
-    border:1px solid var(--line);color:var(--muted);
-    background:transparent;font-weight:600;
-    transition:all .2s ease;
-  }
-  .ping-phase span.active{
-    color:#ff5a1f;border-color:rgba(255,90,31,.4);
-    background:rgba(255,90,31,.06);
-  }
-
-  /* Responsive */
-  @media(max-width:900px){
-    .ping-wrap{grid-template-columns:1fr}
-    .ping-side{order:2}
-    .ping-main{order:1}
-  }
-  @media(max-width:560px){
-    .metric-row{grid-template-columns:1fr;gap:8px}
-    .metric-card{padding:14px 14px 12px}
-    .metric-card .m-value{font-size:26px}
-    .server-grid{grid-template-columns:1fr}
-    .ping-header{flex-direction:column;align-items:flex-start;gap:12px}
-    .ping-phase{justify-content:flex-start}
-  }
-</style>
-
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4DXJXZ8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4DXJXZ8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ============================================================
      HEADER
@@ -706,9 +262,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 <div class="wrap">
 
-  <!-- ========================================================
-       TAB-NAVIGATION – modern mit Slider + SVG-Icons
-       ======================================================== -->
+  <!-- TABS -->
   <div class="fasqoo-tabs-wrap">
     <nav class="fasqoo-tabs" role="tablist" aria-label="Fasqoo Module" id="fasqooTabs">
       <span class="tab-slider" id="tabSlider" aria-hidden="true"></span>
@@ -720,21 +274,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
           <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
         </svg>
-        <span data-ping-i18n="tabSpeed">Bandbreiten-Test</span>
+        <span data-ping-i18n="tabSpeed">Bandwidth Test</span>
       </button>
 
       <button class="fasqoo-tab" data-tab="ping" role="tab" aria-selected="false" type="button">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 12h3.5l2.5-7 3.5 14 2.5-7H21"/>
         </svg>
-        <span data-ping-i18n="tabPing">Stabilität &amp; Ping</span>
+        <span data-ping-i18n="tabPing">Stability &amp; Ping</span>
       </button>
     </nav>
   </div>
 
-  <!-- ========================================================
-       SECTION 1: ORIGINALER BANDWREITEN-TEST
-       ======================================================== -->
+  <!-- SPEED SECTION -->
   <section id="speed-section">
     <div class="server-line">
       <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
@@ -802,21 +354,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
           <div class="chart">
-            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
+            <div class="charthead"><span data-i18n="chartLive">Live Performance</span><span id="chartState" data-i18n="chartWait">Waiting</span></div>
             <canvas id="chart"></canvas>
           </div>
         </div>
       </div>
 
       <div class="info-grid">
-        <div class="info"><div class="label" data-i18n="lblIp">Öffentliche IP</div><div id="ip" class="iv">…</div></div>
-        <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
-        <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
-        <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblIp">Public IP</div><div id="ip" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblIsp">Provider / ISP</div><div id="isp" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblLoc">Location</div><div id="loc" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblAsn">Network / ASN</div><div id="asn" class="iv">…</div></div>
       </div>
 
       <div class="quality">
-        <div class="qtop"><span data-i18n="qTitle">Verbindungsqualität</span><span id="score" class="qscore">—</span></div>
+        <div class="qtop"><span data-i18n="qTitle">Connection Quality</span><span id="score" class="qscore">—</span></div>
         <div class="bar"><i id="bar"></i></div>
         <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div>
         <div id="qualityDetail" class="quality-detail"></div>
@@ -840,6 +392,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span data-i18n="trust2">Free &amp; no account required</span>
     </div>
 
+    <!-- NETWORK INTELLIGENCE -->
     <section class="section intelligence-section">
       <div class="section-heading-row">
         <div>
@@ -857,6 +410,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
+    <!-- METHODOLOGY -->
     <section class="section methodology-section" id="methodology">
       <div class="section-heading-row">
         <div>
@@ -875,6 +429,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="method-note" data-i18n="methodNote">Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
     </section>
 
+    <!-- APPLICATION PROFILES -->
     <section class="section">
       <div class="section-heading-row">
         <div>
@@ -885,8 +440,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="section-badge" data-i18n="appsBadge">LIVE CHECK</span>
       </div>
       <div class="apps" id="appsContainer"></div>
+      <div id="recommendationContainer"></div>
     </section>
 
+    <!-- NETWORK DIAGNOSTICS -->
     <section class="section">
       <h2 data-i18n="diagTitle">Network Diagnostics</h2>
       <div class="tools">
@@ -897,6 +454,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
+    <!-- PROFESSIONAL REPORT -->
     <section class="section">
       <h2 data-i18n="repTitle">Professional Test Report</h2>
       <div class="report">
@@ -907,300 +465,277 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="r"><b>DNS</b><span id="dns">—</span></div>
         </div>
         <div class="actions">
-          <button class="action" id="copy" data-i18n="copy">Ergebnis kopieren</button>
-          <button class="action" id="share" data-i18n="share">Ergebnis teilen</button>
-          <button class="action" id="json" data-i18n="json">JSON exportieren</button>
-          <button class="action" id="print" data-i18n="print">Bericht drucken</button>
+          <button class="action" id="copy" data-i18n="copy">Copy Result</button>
+          <button class="action" id="share" data-i18n="share">Share Result</button>
+          <button class="action" id="json" data-i18n="json">Export JSON</button>
+          <button class="action" id="print" data-i18n="print">Print Report</button>
         </div>
       </div>
     </section>
 
+    <!-- TEST HISTORY -->
     <section class="section">
       <h2 data-i18n="histTitle">Test History</h2>
       <div class="history">
         <div class="hhead">
-          <h2 data-i18n="histRecent">Letzte Messungen</h2>
-          <button id="clear" class="action" data-i18n="histClear">Verlauf löschen</button>
+          <h2 data-i18n="histRecent">Recent measurements</h2>
+          <button id="clear" class="action" data-i18n="histClear">Clear History</button>
         </div>
         <table>
           <thead><tr>
-            <th data-i18n="thDate">Datum</th>
-            <th data-i18n="thProvider">Anbieter</th>
+            <th data-i18n="thDate">Date</th>
+            <th data-i18n="thProvider">Provider</th>
             <th data-i18n="thDown">Download</th>
             <th data-i18n="thUp">Upload</th>
             <th data-i18n="thPing">Ping</th>
-            <th data-i18n="thQual">Qualität</th>
+            <th data-i18n="thQual">Quality</th>
           </tr></thead>
           <tbody id="history"></tbody>
         </table>
       </div>
     </section>
-  </section><!-- /#speed-section -->
+  </section>
 
- <!-- ============================================================
-     STABILITÄT & PING-MONITOR
-     ============================================================ -->
-<section id="ping-section" class="hidden">
-  <div class="card" style="padding:26px 26px 22px">
-
-    <div class="ping-header">
-      <div class="ping-header-left">
-        <div class="kicker"><span class="dot"></span><span data-ping-i18n="kicker">Live Netzwerk-Stabilität</span></div>
-        <h2 data-ping-i18n="title">Stabilität &amp; Ping-Monitor</h2>
-      </div>
-      <div class="ping-phase">
-        <span class="active" data-ping-i18n="phasePing">Ping</span>
-        <span data-ping-i18n="phaseJitter">Jitter</span>
-        <span data-ping-i18n="phaseLoss">Loss</span>
-      </div>
-    </div>
-
-    <button id="pingInstallButton" class="ping-install" type="button" hidden>
-      <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-      <span data-ping-i18n="installApp">Fasqoo als App installieren</span>
-    </button>
-
-    <div class="ping-wrap">
-
-      <div class="ping-side">
-
-        <div>
-          <div class="ping-block-title">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/></svg>
-            <span data-ping-i18n="serverSelection">Server-Auswahl</span>
-          </div>
-
-          <div class="server-region">
-            <div class="server-region-label" data-ping-i18n="regionEurope">Europa</div>
-            <div class="server-grid">
-              <label class="server-tile">
-                <input type="checkbox" value="de" checked>
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#000"/><rect y="4.66" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.66" fill="#FFCE00"/></svg></span>
-                <span class="name">Frankfurt</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="nl" checked>
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#AE1C28"/><rect y="9.33" width="20" height="4.66" fill="#21468B"/></svg></span>
-                <span class="name">Amsterdam</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="gb">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#fff" stroke-width="2.6"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.6"/><path d="M10 0v14M0 7h20" stroke="#fff" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.6"/></svg></span>
-                <span class="name">London</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="at">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#ED2939"/><rect y="4.66" width="20" height="4.66" fill="#fff"/></svg></span>
-                <span class="name">Wien</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="fr">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="6.66" height="14" fill="#002395"/><rect x="6.66" width="6.66" height="14" fill="#fff"/><rect x="13.33" width="6.66" height="14" fill="#ED2939"/></svg></span>
-                <span class="name">Paris</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="pl">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#fff"/><rect y="7" width="20" height="7" fill="#DC143C"/></svg></span>
-                <span class="name">Warschau</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="server-region">
-            <div class="server-region-label" data-ping-i18n="regionAmericas">Amerika</div>
-            <div class="server-grid">
-              <label class="server-tile">
-                <input type="checkbox" value="us-east">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span>
-                <span class="name">New York</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="us-west">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span>
-                <span class="name">Los Angeles</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="br">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.5 18.5 7 10 12.5 1.5 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.2" fill="#002776"/></svg></span>
-                <span class="name">São Paulo</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="ca">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#FF0000"/><rect x="15" width="5" height="14" fill="#FF0000"/><path d="M10 3.5l.7 1.8h2l-1.6 1.3.6 1.9L10 7.5 8.3 8.5l.6-1.9L7.3 5.3h2z" fill="#FF0000"/></svg></span>
-                <span class="name">Toronto</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="server-region">
-            <div class="server-region-label" data-ping-i18n="regionAsia">Asien</div>
-            <div class="server-grid">
-              <label class="server-tile">
-                <input type="checkbox" value="sg">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#ED2939"/><rect y="7" width="20" height="7" fill="#fff"/><circle cx="4.5" cy="3.5" r="2.2" fill="#fff"/><circle cx="5.6" cy="3.5" r="1.9" fill="#ED2939"/></svg></span>
-                <span class="name">Singapur</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="jp">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3.2" fill="#BC002D"/></svg></span>
-                <span class="name">Tokio</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="in">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#FF9933"/><rect y="9.33" width="20" height="4.66" fill="#138808"/><circle cx="10" cy="7" r="1.6" fill="none" stroke="#000080" stroke-width=".5"/></svg></span>
-                <span class="name">Mumbai</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="kr">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M10 4a3 3 0 0 0 0 6 1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 0 0-3z" fill="#0047A0"/></svg></span>
-                <span class="name">Seoul</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="server-region">
-            <div class="server-region-label" data-ping-i18n="regionOceania">Ozeanien</div>
-            <div class="server-grid">
-              <label class="server-tile">
-                <input type="checkbox" value="au">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="3" r=".8" fill="#fff"/><circle cx="16" cy="7" r=".8" fill="#fff"/><circle cx="15" cy="11" r=".8" fill="#fff"/><circle cx="13" cy="7" r=".5" fill="#fff"/></svg></span>
-                <span class="name">Sydney</span>
-              </label>
-              <label class="server-tile">
-                <input type="checkbox" value="nz">
-                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="4" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="16" cy="8" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="14" cy="11" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/></svg></span>
-                <span class="name">Auckland</span>
-              </label>
-            </div>
-          </div>
+  <!-- PING SECTION -->
+  <section id="ping-section" class="hidden">
+    <div class="card ping-card">
+      <div class="ping-header">
+        <div class="ping-header-left">
+          <div class="kicker"><span class="dot"></span><span data-ping-i18n="kicker">Live Network Stability</span></div>
+          <h2 data-ping-i18n="title">Stability &amp; Ping Monitor</h2>
         </div>
-
-        <div>
-          <div class="ping-block-title">
-            <svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/></svg>
-            <span data-ping-i18n="modeTitle">Test-Modus</span>
-          </div>
-          <div class="mode-segmented" id="pingMode">
-            <label class="active">
-              <input type="radio" name="pingMode" value="normal" checked>
-              <svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg>
-              <span data-ping-i18n="modeNormal">Normal</span>
-            </label>
-            <label>
-              <input type="radio" name="pingMode" value="overload">
-              <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-              <span data-ping-i18n="modeOverload">Überlastung</span>
-            </label>
-          </div>
-          <div class="mode-hint" data-ping-i18n="modeHint">Normal misst Standardwerte. Überlastung simuliert dichte Netzwerk-Last für Live-Streams &amp; Sprach-Chats.</div>
+        <div class="ping-phase">
+          <span class="active" data-ping-i18n="phasePing">Ping</span>
+          <span data-ping-i18n="phaseJitter">Jitter</span>
+          <span data-ping-i18n="phaseLoss">Loss</span>
         </div>
-
-        <div>
-          <button id="pingStart" class="ping-start" type="button">
-            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3Z"/></svg>
-            <span data-ping-i18n="startBtn">Messung starten</span>
-          </button>
-          <div id="pingStatus" class="ping-status" style="margin-top:10px" data-ping-i18n="statusIdle">Wähle Server &amp; Modus, dann starte die Messung.</div>
-        </div>
-
       </div>
 
-      <div class="ping-main">
+      <button id="pingInstallButton" class="ping-install" type="button" hidden>
+        <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        <span data-ping-i18n="installApp">Install Fasqoo as App</span>
+      </button>
 
-        <div class="metric-row">
-          <div class="metric-card">
-            <div class="m-label">
-              <svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
-              <span data-ping-i18n="metricPing">Verzögerung</span>
+      <div class="ping-wrap">
+        <div class="ping-side">
+          <div>
+            <div class="ping-block-title">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/></svg>
+              <span data-ping-i18n="serverSelection">Server Selection</span>
             </div>
-            <div class="m-value" id="pingVal">—<span class="m-unit">ms</span></div>
-          </div>
-          <div class="metric-card">
-            <div class="m-label">
-              <svg viewBox="0 0 24 24"><path d="M2 12h3l2-4 3 8 3-12 3 16 2-8h4"/></svg>
-              <span data-ping-i18n="metricJitter">Jitter</span>
+
+            <div class="server-region">
+              <div class="server-region-label" data-ping-i18n="regionEurope">Europe</div>
+              <div class="server-grid">
+                <label class="server-tile"><input type="checkbox" value="de" checked><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#000"/><rect y="4.66" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.66" fill="#FFCE00"/></svg></span><span class="name">Frankfurt</span></label>
+                <label class="server-tile"><input type="checkbox" value="nl" checked><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#AE1C28"/><rect y="9.33" width="20" height="4.66" fill="#21468B"/></svg></span><span class="name">Amsterdam</span></label>
+                <label class="server-tile"><input type="checkbox" value="gb"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#fff" stroke-width="2.6"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.6"/><path d="M10 0v14M0 7h20" stroke="#fff" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.6"/></svg></span><span class="name">London</span></label>
+                <label class="server-tile"><input type="checkbox" value="at"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#ED2939"/><rect y="4.66" width="20" height="4.66" fill="#fff"/></svg></span><span class="name">Vienna</span></label>
+                <label class="server-tile"><input type="checkbox" value="fr"><span class="flag"><svg viewBox="0 0 20 14"><rect width="6.66" height="14" fill="#002395"/><rect x="6.66" width="6.66" height="14" fill="#fff"/><rect x="13.33" width="6.66" height="14" fill="#ED2939"/></svg></span><span class="name">Paris</span></label>
+                <label class="server-tile"><input type="checkbox" value="pl"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#fff"/><rect y="7" width="20" height="7" fill="#DC143C"/></svg></span><span class="name">Warsaw</span></label>
+              </div>
             </div>
-            <div class="m-value" id="pingJitter">—<span class="m-unit">ms</span></div>
-          </div>
-          <div class="metric-card">
-            <div class="m-label">
-              <svg viewBox="0 0 24 24"><path d="M4 4l16 16"/><path d="M4 20 20 4"/><circle cx="12" cy="12" r="10"/></svg>
-              <span data-ping-i18n="metricLoss">Paketverlust</span>
+
+            <div class="server-region">
+              <div class="server-region-label" data-ping-i18n="regionAmericas">Americas</div>
+              <div class="server-grid">
+                <label class="server-tile"><input type="checkbox" value="us-east"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span><span class="name">New York</span></label>
+                <label class="server-tile"><input type="checkbox" value="us-west"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span><span class="name">Los Angeles</span></label>
+                <label class="server-tile"><input type="checkbox" value="br"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.5 18.5 7 10 12.5 1.5 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.2" fill="#002776"/></svg></span><span class="name">São Paulo</span></label>
+                <label class="server-tile"><input type="checkbox" value="ca"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#FF0000"/><rect x="15" width="5" height="14" fill="#FF0000"/><path d="M10 3.5l.7 1.8h2l-1.6 1.3.6 1.9L10 7.5 8.3 8.5l.6-1.9L7.3 5.3h2z" fill="#FF0000"/></svg></span><span class="name">Toronto</span></label>
+              </div>
             </div>
-            <div class="m-value" id="pingLoss">—<span class="m-unit">%</span></div>
+
+            <div class="server-region">
+              <div class="server-region-label" data-ping-i18n="regionAsia">Asia</div>
+              <div class="server-grid">
+                <label class="server-tile"><input type="checkbox" value="sg"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#ED2939"/><rect y="7" width="20" height="7" fill="#fff"/><circle cx="4.5" cy="3.5" r="2.2" fill="#fff"/><circle cx="5.6" cy="3.5" r="1.9" fill="#ED2939"/></svg></span><span class="name">Singapore</span></label>
+                <label class="server-tile"><input type="checkbox" value="jp"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3.2" fill="#BC002D"/></svg></span><span class="name">Tokyo</span></label>
+                <label class="server-tile"><input type="checkbox" value="in"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#FF9933"/><rect y="9.33" width="20" height="4.66" fill="#138808"/><circle cx="10" cy="7" r="1.6" fill="none" stroke="#000080" stroke-width=".5"/></svg></span><span class="name">Mumbai</span></label>
+                <label class="server-tile"><input type="checkbox" value="kr"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M10 4a3 3 0 0 0 0 6 1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 0 0-3z" fill="#0047A0"/></svg></span><span class="name">Seoul</span></label>
+              </div>
+            </div>
+
+            <div class="server-region">
+              <div class="server-region-label" data-ping-i18n="regionOceania">Oceania</div>
+              <div class="server-grid">
+                <label class="server-tile"><input type="checkbox" value="au"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="3" r=".8" fill="#fff"/><circle cx="16" cy="7" r=".8" fill="#fff"/><circle cx="15" cy="11" r=".8" fill="#fff"/><circle cx="13" cy="7" r=".5" fill="#fff"/></svg></span><span class="name">Sydney</span></label>
+                <label class="server-tile"><input type="checkbox" value="nz"><span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="4" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="16" cy="8" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="14" cy="11" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/></svg></span><span class="name">Auckland</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="ping-block-title">
+              <svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+              <span data-ping-i18n="modeTitle">Test Mode</span>
+            </div>
+            <div class="mode-segmented" id="pingMode">
+              <label class="active">
+                <input type="radio" name="pingMode" value="normal" checked>
+                <svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg>
+                <span data-ping-i18n="modeNormal">Normal</span>
+              </label>
+              <label>
+                <input type="radio" name="pingMode" value="overload">
+                <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+                <span data-ping-i18n="modeOverload">Overload</span>
+              </label>
+            </div>
+            <div class="mode-hint" data-ping-i18n="modeHint">Normal measures standard values. Overload simulates dense network load for live streams &amp; voice chats.</div>
+          </div>
+
+          <div>
+            <button id="pingStart" class="ping-start" type="button">
+              <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3Z"/></svg>
+              <span data-ping-i18n="startBtn">Start Measurement</span>
+            </button>
+            <div id="pingStatus" class="ping-status" style="margin-top:10px" data-ping-i18n="statusIdle">Select servers &amp; mode, then start the measurement.</div>
           </div>
         </div>
 
-        <div class="chart-card">
-          <div class="chart-card-head">
-            <strong>
-              <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-              <span data-ping-i18n="chartTitle">Live-Verlauf</span>
-            </strong>
-            <span class="hint" id="pingChartHint" data-ping-i18n="chartHintIdle">Warte auf Messung…</span>
+        <div class="ping-main">
+          <div class="metric-row">
+            <div class="metric-card">
+              <div class="m-label"><svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/></svg><span data-ping-i18n="metricPing">Latency</span></div>
+              <div class="m-value" id="pingVal">—<span class="m-unit">ms</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="m-label"><svg viewBox="0 0 24 24"><path d="M2 12h3l2-4 3 8 3-12 3 16 2-8h4"/></svg><span data-ping-i18n="metricJitter">Jitter</span></div>
+              <div class="m-value" id="pingJitter">—<span class="m-unit">ms</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="m-label"><svg viewBox="0 0 24 24"><path d="M4 4l16 16"/><path d="M4 20 20 4"/><circle cx="12" cy="12" r="10"/></svg><span data-ping-i18n="metricLoss">Packet Loss</span></div>
+              <div class="m-value" id="pingLoss">—<span class="m-unit">%</span></div>
+            </div>
           </div>
-          <canvas id="pingCanvas" width="800" height="170"></canvas>
-        </div>
 
-        <div class="table-card">
-          <table>
-            <thead>
-              <tr>
-                <th data-ping-i18n="thServer">Server</th>
-                <th data-ping-i18n="thPing">Ø Verzögerung</th>
-                <th data-ping-i18n="thJitter">Jitter</th>
-                <th data-ping-i18n="thLoss">Verlust</th>
-                <th data-ping-i18n="thMinMax">Min / Max</th>
-              </tr>
-            </thead>
-            <tbody id="pingResultsBody">
-              <tr><td colspan="5" class="table-empty" data-ping-i18n="noResults">Noch keine Messergebnisse.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="ping-actions">
-          <button id="pingShare" class="ping-action" type="button" disabled>
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span data-ping-i18n="shareBtn">Als Bild teilen</span>
-          </button>
-          <button id="pingClear" class="ping-action" type="button">
-            <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
-            <span data-ping-i18n="clearBtn">Verlauf löschen</span>
-          </button>
-        </div>
-
-        <div class="history-card">
-          <div class="history-head">
-            <span data-ping-i18n="historyTitle">Letzte Tests</span>
+          <div class="chart-card">
+            <div class="chart-card-head">
+              <strong><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span data-ping-i18n="chartTitle">Live Graph</span></strong>
+              <span class="hint" id="pingChartHint" data-ping-i18n="chartHintIdle">Waiting for measurement…</span>
+            </div>
+            <canvas id="pingCanvas" width="800" height="170"></canvas>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th data-ping-i18n="thTime">Zeit</th>
-                <th data-ping-i18n="thServers">Server</th>
-                <th data-ping-i18n="thPing">Ping</th>
-                <th data-ping-i18n="thJitter">Jitter</th>
-                <th data-ping-i18n="thLoss">Verlust</th>
-              </tr>
-            </thead>
-            <tbody id="pingHistoryBody">
-              <tr><td colspan="5" class="table-empty" data-ping-i18n="noHistory">Noch keine gespeicherten Tests.</td></tr>
-            </tbody>
-          </table>
-        </div>
 
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th data-ping-i18n="thServer">Server</th>
+                  <th data-ping-i18n="thPing">Ø Latency</th>
+                  <th data-ping-i18n="thJitter">Jitter</th>
+                  <th data-ping-i18n="thLoss">Loss</th>
+                  <th data-ping-i18n="thMinMax">Min / Max</th>
+                </tr>
+              </thead>
+              <tbody id="pingResultsBody">
+                <tr><td colspan="5" class="table-empty" data-ping-i18n="noResults">No measurements yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ping-actions">
+            <button id="pingShare" class="ping-action" type="button" disabled>
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span data-ping-i18n="shareBtn">Share as Image</span>
+            </button>
+            <button id="pingClear" class="ping-action" type="button">
+              <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              <span data-ping-i18n="clearBtn">Clear History</span>
+            </button>
+          </div>
+
+          <div class="history-card">
+            <div class="history-head"><span data-ping-i18n="historyTitle">Recent Tests</span></div>
+            <table>
+              <thead>
+                <tr>
+                  <th data-ping-i18n="thTime">Time</th>
+                  <th data-ping-i18n="thServers">Servers</th>
+                  <th data-ping-i18n="thPing">Ping</th>
+                  <th data-ping-i18n="thJitter">Jitter</th>
+                  <th data-ping-i18n="thLoss">Loss</th>
+                </tr>
+              </thead>
+              <tbody id="pingHistoryBody">
+                <tr><td colspan="5" class="table-empty" data-ping-i18n="noHistory">No saved tests yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+    <p class="faq-sub" data-i18n="faqSub">Everything you need to know about the Fasqoo speed test.</p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faqQ1">What exactly does Fasqoo measure?</summary>
+        <div class="faq-answer" data-i18n="faqA1">
+          Fasqoo measures <strong>download</strong>, <strong>upload</strong>, <strong>ping</strong>, <strong>jitter</strong>, <strong>packet loss</strong> and <strong>bufferbloat</strong> directly in your browser. The test runs through the Cloudflare Edge network – the closest server, not a distant one.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ2">Is Fasqoo really free?</summary>
+        <div class="faq-answer" data-i18n="faqA2">
+          Yes. The speed test is completely free and <strong>requires no account</strong>. You can test as often as you like. A login is only planned for advanced features like multi-location management – not for the basic test.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ3">Why is my result worse than my ISP promises?</summary>
+        <div class="faq-answer" data-i18n="faqA3">
+          Many ISP promises assume ideal conditions (LAN cable, no other devices, nearby server). Fasqoo measures <strong>realistic conditions</strong>: Wi-Fi, other devices on the network, actual routing distance. A lower value is often more <em>honest</em>, not wrong.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ4">What is bufferbloat and why does it matter?</summary>
+        <div class="faq-answer" data-i18n="faqA4">
+          Bufferbloat happens when your router buffers too much data before forwarding it. This causes <strong>lag in gaming and video calls</strong> even when download speed looks fine. Under 30 ms is good, over 100 ms is a problem.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ5">Why do my results fluctuate?</summary>
+        <div class="faq-answer" data-i18n="faqA5">
+          Wi-Fi signal, other devices on the network, VPNs, ISP congestion at peak times and distance to the test server all affect the result. <strong>Test several times at different times of day</strong> to get a clear picture.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ6">Can I use Fasqoo for my company?</summary>
+        <div class="faq-answer" data-i18n="faqA6">
+          Yes. Fasqoo is suitable for <strong>multi-location monitoring</strong>, SLA evidence against ISPs and automated tests. For business features (team management, alerts, PDF reports), contact us via the <a href="about.html">About</a> page.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ7">Does Fasqoo store my data?</summary>
+        <div class="faq-answer" data-i18n="faqA7">
+          The test history is stored <strong>locally in your browser</strong> (localStorage). Without a login, your measurements never leave your device. See our <a href="/privacy-policy.html">Privacy Policy</a> for details.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="faqQ8">Which servers does Fasqoo use?</summary>
+        <div class="faq-answer" data-i18n="faqA8">
+          Fasqoo uses the <strong>Cloudflare Speed Test endpoints</strong> via the global Edge network. Fasqoo is an independent service and not an official Cloudflare product.
+        </div>
+      </details>
+    </div>
+  </section>
 
 </div>
 </main>
 
-<!-- ============================================================
-     SPEED WIDGET
-     ============================================================ -->
+<!-- SPEED WIDGET -->
 <div id="speedWidget" class="speed-widget" hidden>
   <div class="speed-widget-head">
     <div>
@@ -1223,15 +758,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="widgetProvider" class="widget-provider"><span data-i18n="providerLabel">Provider</span>: —</div>
 </div>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Fasqoo</div>
-        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+        <p data-i18n="footerBrand">Fasqoo - Independent, browser-based internet speed tests and network tools.</p>
       </div>
       <div class="footer-column">
         <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
@@ -1240,24 +773,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="widget.html" data-i18n="footerWidget">Widget</a>
       </div>
       <div class="footer-column">
-        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <h4 data-i18n="footerNetworkTools">Network Tools</h4>
         <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
-        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
-        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming &amp; Ping Monitor</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnostics</a>
         <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
         <a href="antivirus.html" data-i18n="footerAntivirus">Antivirus Scanner</a>
         <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
         <a href="dark-data-exposer.html">Dark Data &amp; Tracker Exposer</a>
       </div>
       <div class="footer-column">
-        <h4 data-i18n="footerCompany">Unternehmen</h4>
-        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <h4 data-i18n="footerCompany">Company</h4>
+        <a href="about.html" data-i18n="footerAbout">About Us</a>
         <a href="faq.html" data-i18n="footerFaq">FAQ</a>
-        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
-        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
-        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
-        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
-        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Privacy</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Accessibility</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Imprint</a>
+        <a href="/terms.html" data-i18n="ftTerms">Terms of Use</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Do Not Sell My Data</a>
       </div>
     </div>
 
@@ -1271,8 +804,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-
+<!-- JS -->
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
+<script src="/js/faq.js" defer></script>
 </body>
 </html>
