@@ -212,44 +212,29 @@ document.addEventListener("click", e => {
   }
 });
 
-/* ---------- APPLICATION PROFILES (8 tiles, SVG) ---------- */
-const APP_KEYS = ["gaming","stream","fourk","call","office","cloud","social","web"];
-
+/* ---------- UPDATED MODERN APPLICATION PROFILE ICONS ---------- */
 function appIcon(key){
-  const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" ' +
-            'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
   const icons = {
     gaming:
-      '<svg '+S+'><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/>'+
-      '<circle cx="15.5" cy="10.5" r="0.9" fill="currentColor" stroke="none"/>'+
-      '<circle cx="17.5" cy="12.5" r="0.9" fill="currentColor" stroke="none"/>'+
-      '<path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/></svg>',
+      '<svg '+S+'><path d="M6 12h4m-2-2v4"/><circle cx="15.5" cy="10.5" r="1" fill="currentColor" stroke="none"/>'+
+      '<circle cx="17.5" cy="13.5" r="1" fill="currentColor" stroke="none"/>'+
+      '<path d="M3.7 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7.1 7h9.8a3.4 3.4 0 0 1 3.4 2.2c.7 2 .7 4.3 0 6.3a3.4 3.4 0 0 1-3.4 2.5H7.1a3.4 3.4 0 0 1-3.4-2.5Z"/></svg>',
     stream:
-      '<svg '+S+'><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>'+
-      '<path d="M8.4 8.4a5 5 0 0 0 0 7.2"/><path d="M15.6 15.6a5 5 0 0 0 0-7.2"/>'+
-      '<path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 18.4a9 9 0 0 0 0-12.8"/></svg>',
+      '<svg '+S+'><path d="M2 10s3-3 10-3 10 3 10 3"/><path d="M5 14s2.5-2 7-2 7 2 7 2"/><path d="M8.5 18s1.5-1 3.5-1 3.5 1 3.5 1"/><circle cx="12" cy="7" r="1" fill="currentColor" stroke="none"/></svg>',
     fourk:
-      '<svg '+S+'><rect x="2.5" y="4" width="19" height="13" rx="2"/>'+
-      '<path d="M8 21h8"/><path d="M12 17v4"/>'+
-      '<text x="12" y="12.6" font-family="Inter, sans-serif" font-size="6" font-weight="800" '+
-      'fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
+      '<svg '+S+'><rect x="2" y="4" width="20" height="14" rx="2.5"/><path d="M8 21h8"/><path d="M12 18v3"/>'+
+      '<text x="12" y="12.8" font-family="Inter, sans-serif" font-size="6.5" font-weight="800" fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
     call:
-      '<svg '+S+'><rect x="2.5" y="6" width="13" height="12" rx="2.2"/>'+
-      '<path d="M15.5 11.2 21 8v8l-5.5-3.2Z"/></svg>',
+      '<svg '+S+'><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2.5"/></svg>',
     office:
-      '<svg '+S+'><rect x="4" y="5" width="16" height="11" rx="1.8"/>'+
-      '<path d="M2 19h20"/><path d="M9 16v3"/><path d="M15 16v3"/></svg>',
+      '<svg '+S+'><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>',
     cloud:
-      '<svg '+S+'><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a3.75 3.75 0 0 1 .5 7.5H7Z"/>'+
-      '<path d="M12 15v-3.4"/><path d="M10.4 12.6 12 11l1.6 1.6"/></svg>',
+      '<svg '+S+'><path d="M6.5 18H17.5A4.5 4.5 0 0 0 20 13.5 4 4 0 0 0 16.5 9a5.5 5.5 0 0 0-10.5 3.5A3.5 3.5 0 0 0 6.5 18Z"/></svg>',
     social:
-      '<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H9l-4.2 3.6A.6.6 0 0 1 4 19.1V5.5Z"/>'+
-      '<path d="M12 12.2c-1.9-1.4-3.3-2.4-3.3-3.9A1.6 1.6 0 0 1 12 7.4a1.6 1.6 0 0 1 3.3.9c0 1.5-1.4 2.5-3.3 3.9Z" '+
-      'fill="currentColor" stroke="none"/></svg>',
+      '<svg '+S+'><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>',
     web:
-      '<svg '+S+'><circle cx="12" cy="12" r="9"/>'+
-      '<path d="M3 12h18"/>'+
-      '<path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>'
+      '<svg '+S+'><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
   };
   return icons[key] || '';
 }
