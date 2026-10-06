@@ -1153,13 +1153,11 @@ if(!savedLang){
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
 /* ==========================================================
-   SMARTES PWA-INSTALLATIONS-POPUP (KORRIGIERT)
+   SMARTES PWA-INSTALLATIONS-POPUP (FEHLERFREI)
    ========================================================== */
-let deferredInstallPrompt = null;
-
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
-  deferredInstallPrompt = e;
+  deferredInstallPrompt = e; // Nutzt die globale Variable von oben
   showSmartInstallToast();
 });
 
@@ -1180,7 +1178,6 @@ function showSmartInstallToast() {
   toast.id = 'smartPwaToast';
   toast.className = 'pwa-toast';
   
-  // Korrigierte Bedingungen (mit Syntax-Prüfung)
   const descText = isApple 
     ? "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'." 
     : "Füge Fasqoo für blitzschnellen Zugriff zu deinem Startbildschirm hinzu.";
@@ -1201,8 +1198,10 @@ function showSmartInstallToast() {
 
   toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
     if (!isApple && deferredInstallPrompt) {
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
+      try {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+      } catch(e) {}
       deferredInstallPrompt = null;
     }
     closeToast(toast);
