@@ -290,52 +290,141 @@ function buildAppCards(){
   });
 }
 
-/* ---------- CHART ---------- */
+/* ---------- CHART (SMOOTH CURVES) ---------- */
 const canvas = $("chart");
 const ctx = canvas.getContext("2d");
+let _chartPulseRAF = 0;
+
+/* Catmull-Rom → Bezier – erzeugt weiche Kurven ohne Overshoot */
+function _drawSmoothPath(context, points){
+  if(points.length < 2) return;
+  context.moveTo(points[0].x, points[0].y);
+  for(let i = 0; i < points.length - 1; i++){
+    const p0 = points[i - 1] || points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] || p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+  }
+}
+
 function resizeCanvas(){
   const r = canvas.getBoundingClientRect();
   const d = window.devicePixelRatio || 1;
-  canvas.width = r.width * d; canvas.height = r.height * d;
-  ctx.setTransform(d,0,0,d,0,0);
+  canvas.width = r.width * d;
+  canvas.height = r.height * d;
+  ctx.setTransform(d, 0, 0, d, 0, 0);
   drawChart();
 }
+
 function drawChart(){
   if(!canvas || !canvas.clientWidth) return;
   const w = canvas.clientWidth, h = canvas.clientHeight;
-  ctx.clearRect(0,0,w,h);
+  ctx.clearRect(0, 0, w, h);
+
   const isDark = document.body.classList.contains("dark");
   const gridColor = isDark ? "#2b3037" : "#edf1f5";
   const scaleColor = isDark ? "#6b7280" : "#9aa1ab";
+
+  /* Grid */
   ctx.strokeStyle = gridColor;
   ctx.lineWidth = 1;
-  for(let i=1;i<5;i++){ const y=i*h/5; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+  for(let i = 1; i < 5; i++){
+    const y = i * h / 5;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+
+  /* Skala oben rechts */
   const max = Math.max(100, ...samples);
   ctx.fillStyle = scaleColor;
   ctx.font = "10px Inter, system-ui, sans-serif";
   ctx.textAlign = "right";
   ctx.textBaseline = "top";
   ctx.fillText(max.toFixed(0) + " Mbps", w - 6, 6);
+
   if(samples.length < 2) return;
-  const pts = samples.map((v,i) => ({ x: i*w/(samples.length-1), y: h-12-v/max*(h-24) }));
+
+  /* Punkte berechnen */
+  const pts = samples.map((v, i) => ({
+    x: i * w / (samples.length - 1),
+    y: h - 12 - v / max * (h - 24)
+  }));
+
+  /* ---------- Fläche unter der Kurve ---------- */
   ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
-  ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
-  const fillGrad = ctx.createLinearGradient(0,0,0,h);
-  fillGrad.addColorStop(0, "rgba(37,99,235,.22)");
-  fillGrad.addColorStop(1, "rgba(37,99,235,0)");
-  ctx.fillStyle = fillGrad; ctx.fill();
+  _drawSmoothPath(ctx, pts);
+  ctx.lineTo(w, h);
+  ctx.lineTo(0, h);
+  ctx.closePath();
+  const fillGrad = ctx.createLinearGradient(0, 0, 0, h);
+  fillGrad.addColorStop(0,    "rgba(37,99,235,.30)");
+  fillGrad.addColorStop(0.55, "rgba(37,99,235,.10)");
+  fillGrad.addColorStop(1,    "rgba(37,99,235,0)");
+  ctx.fillStyle = fillGrad;
+  ctx.fill();
+
+  /* ---------- Linie mit Glow ---------- */
   ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
-  const lineGrad = ctx.createLinearGradient(0,0,0,h);
-  lineGrad.addColorStop(0, "#2563eb");
-  lineGrad.addColorStop(1, "rgba(37,99,235,.35)");
-  ctx.strokeStyle = lineGrad; ctx.lineWidth = 2.5;
-  ctx.lineJoin = "round"; ctx.lineCap = "round";
-  ctx.shadowColor = "rgba(37,99,235,.45)"; ctx.shadowBlur = 8;
-  ctx.stroke(); ctx.shadowBlur = 0;
+  _drawSmoothPath(ctx, pts);
+  const lineGrad = ctx.createLinearGradient(0, 0, w, 0);
+  lineGrad.addColorStop(0,   "rgba(37,99,235,.45)");
+  lineGrad.addColorStop(0.5, "#2563eb");
+  lineGrad.addColorStop(1,   "#60a5fa");
+  ctx.strokeStyle = lineGrad;
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.shadowColor = "rgba(37,99,235,.55)";
+  ctx.shadowBlur = 10;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  /* ---------- Pulsierender Live-Punkt am letzten Wert ---------- */
+  const lastPt = pts[pts.length - 1];
+  const pulse  = (Math.sin(performance.now() / 380) + 1) / 2;
+
+  /* äußerer Puls-Ring */
+  ctx.beginPath();
+  ctx.arc(lastPt.x, lastPt.y, 5 + pulse * 5, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(37,99,235,${0.10 + pulse * 0.20})`;
+  ctx.fill();
+
+  /* Kern-Punkt */
+  ctx.beginPath();
+  ctx.arc(lastPt.x, lastPt.y, 3.5, 0, Math.PI * 2);
+  ctx.fillStyle = "#2563eb";
+  ctx.fill();
+  ctx.strokeStyle = isDark ? "#0d0f12" : "#fff";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  /* ---------- Animations-Loop nur während des Tests ---------- */
+  if(running && !_chartPulseRAF){
+    _chartPulseRAF = requestAnimationFrame(function loop(){
+      if(!running){
+        _chartPulseRAF = 0;
+        drawChart();     /* einmal final zeichnen */
+        return;
+      }
+      drawChart();
+      _chartPulseRAF = requestAnimationFrame(loop);
+    });
+  }
 }
-window.addEventListener("resize", resizeCanvas);
+
+/* Resize mit Debounce – verhindert Ruckler */
+let _resizeChartTimer = 0;
+window.addEventListener("resize", () => {
+  clearTimeout(_resizeChartTimer);
+  _resizeChartTimer = setTimeout(resizeCanvas, 120);
+});
 
 /* ---------- THEME ---------- */
 function applyTheme(dark){
