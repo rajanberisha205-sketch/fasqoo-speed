@@ -854,3 +854,184 @@ main{padding:12px 0 65px}
   .footer-grid{grid-template-columns:1fr}
   .footer-brand{grid-column:auto}
 }
+/* ==========================================================
+   1. VISUELLE HIERARCHIE & GIGANTISCHER TACHO-GLOW
+   ========================================================== */
+.gauge {
+  filter: drop-shadow(0 0 24px rgba(255, 90, 31, 0.22));
+  transition: filter 0.3s ease;
+}
+.test-card.testing .gauge {
+  filter: drop-shadow(0 0 36px rgba(37, 99, 235, 0.35));
+}
+.progress {
+  filter: drop-shadow(0 0 8px rgba(255, 90, 31, 0.5));
+}
+
+/* ==========================================================
+   2. OLED BLACK & CYBERPUNK / TECH-VIBE (DARK MODE)
+   ========================================================== */
+.dark {
+  --bg: #05070a !important;
+  --card: #0c1017 !important;
+  --text: #f8fafc !important;
+  --muted: #8b9bb4 !important;
+  --line: #1e2633 !important;
+  --soft: #111722 !important;
+}
+.dark header, .dark footer {
+  background: rgba(8, 11, 16, 0.92) !important;
+}
+
+/* Farb-Codierung für Performance in den Metriken */
+.value .val-good, .metric-card .m-value.good, span.val-good {
+  color: #10b981 !important; /* Smaragdgrün (Gaming/Streaming ready) */
+  text-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+.value .val-medium, .metric-card .m-value.medium, span.val-medium {
+  color: #f59e0b !important; /* Durchschnitt / Gelb */
+}
+.value .val-bad, .metric-card .m-value.bad, span.val-bad {
+  color: #ef4444 !important; /* Probleme / Rot */
+  text-shadow: 0 0 16px rgba(239, 68, 68, 0.25);
+}
+
+/* ==========================================================
+   3. ADSTERRA / REVENUE BANNER: CLS-SCHUTZ (KEINE LAYOUT-SPRÜNGE)
+   ========================================================== */
+.ad-container, .ad-slot {
+  width: 100%;
+  min-height: 90px;
+  max-width: 728px;
+  margin: 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--soft);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  /* Verhindert Layout-Verschiebungen (CLS) beim Nachladen */
+  contain-intrinsic-size: 728px 90px;
+  content-visibility: auto;
+}
+.ad-container::before {
+  content: "Advertisement";
+  position: absolute;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   4. MICRO-INTERACTIONS & QUICK-SWITCH (LITE VERSION)
+   ========================================================== */
+@keyframes flashGlow {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.03); filter: brightness(1.2) drop-shadow(0 0 12px rgba(255,90,31,0.6)); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+.flash-feedback {
+  animation: flashGlow 0.4s ease-in-out;
+}
+
+/* Quick Switch Badge zur Lite-Version */
+.lite-quick-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  background: rgba(255, 90, 31, 0.08);
+  border: 1px solid rgba(255, 90, 31, 0.25);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.lite-quick-switch:hover {
+  background: rgba(255, 90, 31, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================
+   5. MOBILE-FIRST & PWA-OPTIMIERUNG (THUMB ZONE & BANNER)
+   ========================================================== */
+@media (max-width: 760px) {
+  /* Daumen-Erreichbarkeit (Thumb Zone): Start-Button prominent unten/mittig fixierbar oder ideal platziert */
+  .speedbox .start {
+    width: 100% !important;
+    max-width: 320px;
+    height: 56px;
+    font-size: 16px;
+    border-radius: 16px;
+    margin: 20px auto 10px;
+    box-shadow: 0 10px 25px rgba(255, 90, 31, 0.35);
+  }
+}
+
+/* Unaufdringliches PWA-Installationsbanner am unteren Rand */
+.pwa-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  width: min(420px, calc(100vw - 32px));
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+.pwa-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.pwa-toast-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.pwa-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+.pwa-toast-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+.pwa-toast-desc {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+.pwa-toast-btn {
+  background: var(--orange);
+  color: #fff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
