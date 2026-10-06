@@ -1168,7 +1168,7 @@ netinfo();
     if (titleEl) titleEl.textContent = t.pwaTitle || "Install Fasqoo App";
     if (descEl) descEl.textContent = isApple ? (t.pwaDescIos || "Add to Home Screen.") : (t.pwaDescAndroid || "Add Fasqoo to your home screen.");
     if (actionBtn) actionBtn.textContent = isApple ? (t.pwaActionIos || "Got it") : (t.pwaActionAndroid || "Install");
-  }
+  });
   Object.assign(translations.de, {
     pwaTitle: "Fasqoo als App installieren",
     pwaDescIos: "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'.",
