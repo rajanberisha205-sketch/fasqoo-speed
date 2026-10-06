@@ -1152,3 +1152,75 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+/* ==========================================================
+   SMARTES PWA-INSTALLATIONS-POPUP (KORRIGIERT)
+   ========================================================== */
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  showSmartInstallToast();
+});
+
+function isIOS() {
+  return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+
+function isStandalone() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function showSmartInstallToast() {
+  if (isStandalone() || localStorage.getItem('fasqoo_pwa_dismissed')) return;
+  if (document.getElementById('smartPwaToast')) return;
+
+  const isApple = isIOS();
+  const toast = document.createElement('div');
+  toast.id = 'smartPwaToast';
+  toast.className = 'pwa-toast';
+  
+  // Korrigierte Bedingungen (mit Syntax-Prüfung)
+  const descText = isApple 
+    ? "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'." 
+    : "Füge Fasqoo für blitzschnellen Zugriff zu deinem Startbildschirm hinzu.";
+  const actionText = isApple ? "Verstanden" : "Installieren";
+
+  toast.innerHTML = `
+    <div class="pwa-toast-icon">⚡</div>
+    <div class="pwa-toast-content">
+      <h4 class="pwa-toast-title">Fasqoo als App installieren</h4>
+      <p class="pwa-toast-desc">${descText}</p>
+    </div>
+    <button class="pwa-toast-btn" id="pwaActionBtn">${actionText}</button>
+    <button class="pwa-toast-close" id="pwaCloseBtn">&times;</button>
+  `;
+
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 1500);
+
+  toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
+    if (!isApple && deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+    }
+    closeToast(toast);
+  });
+
+  toast.querySelector('#pwaCloseBtn').addEventListener('click', () => {
+    closeToast(toast);
+  });
+}
+
+function closeToast(toast) {
+  toast.classList.remove('show');
+  localStorage.setItem('fasqoo_pwa_dismissed', 'true');
+  setTimeout(() => toast.remove(), 350);
+}
+
+window.addEventListener('load', () => {
+  if (isIOS() && !isStandalone()) {
+    setTimeout(showSmartInstallToast, 2500);
+  }
+});
