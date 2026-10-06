@@ -703,37 +703,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 <div class="wrap">
 
-  <!-- Tab-Navigation -->
+  <!-- ========================================================
+       TAB-NAVIGATION – modern mit Slider + SVG-Icons
+       ======================================================== -->
   <div class="fasqoo-tabs-wrap">
     <nav class="fasqoo-tabs" role="tablist" aria-label="Fasqoo Module" id="fasqooTabs">
       <span class="tab-slider" id="tabSlider" aria-hidden="true"></span>
+
       <button class="fasqoo-tab active" data-tab="speed" role="tab" aria-selected="true" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+        </svg>
         <span data-ping-i18n="tabSpeed">Bandbreiten-Test</span>
       </button>
+
       <button class="fasqoo-tab" data-tab="ping" role="tab" aria-selected="false" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h3.5l2.5-7 3.5 14 2.5-7H21"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12h3.5l2.5-7 3.5 14 2.5-7H21"/>
+        </svg>
         <span data-ping-i18n="tabPing">Stabilität &amp; Ping</span>
       </button>
     </nav>
   </div>
 
-  <!-- SECTION 1: BANDBREITEN-TEST -->
+  <!-- ========================================================
+       SECTION 1: ORIGINALER BANDWREITEN-TEST
+       ======================================================== -->
   <section id="speed-section">
     <div class="server-line">
       <span class="server-badge"><span data-i18n="serverLabel">Server</span>: <strong id="serverName">Cloudflare Edge</strong></span>
     </div>
+
     <section class="card test-card">
       <div class="test-topline">
         <div>
           <span class="mini-kicker" data-i18n="liveTest">LIVE CONNECTION TEST</span>
           <strong id="testPhase">Ready</strong>
         </div>
+        <div class="phase-steps" aria-label="Test phases">
+          <span class="phase-step active" data-phase="ping" data-i18n="phasePing">Ping</span>
+          <span class="phase-step" data-phase="download" data-i18n="phaseDownload">Download</span>
+          <span class="phase-step" data-phase="upload" data-i18n="phaseUpload">Upload</span>
+          <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
+        </div>
       </div>
       <div class="grid">
         <div class="speedbox">
           <div class="gauge">
             <svg viewBox="0 0 300 300">
+              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
+              </linearGradient></defs>
               <circle class="ring" cx="150" cy="150" r="130"></circle>
               <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
             </svg>
@@ -742,14 +765,509 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="unit">Mbps</div>
             </div>
           </div>
+          <div id="status" class="status" data-i18n="ready">Ready to test</div>
+          <div class="gauge-caption"><span class="pulse" aria-hidden="true"></span><span id="measurementHint">Waiting for measurement</span></div>
           <button id="start" class="start" data-i18n="start">Start Speed Test</button>
+        </div>
+
+        <div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="ping">Ping</span><span class="icon" id="pingIcon" aria-hidden="true">◌</span></div>
+              <div class="value"><span id="ping">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="jitter">Jitter</span><span class="icon" aria-hidden="true">≋</span></div>
+              <div class="value"><span id="jitter">—</span><span class="small">ms</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="packetLoss">Packet Loss</span><span class="icon" aria-hidden="true">⊘</span></div>
+              <div class="value"><span id="loss">—</span><span class="small">%</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="download">Download</span><span class="icon" aria-hidden="true">↓</span></div>
+              <div class="value"><span id="down">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="upload">Upload</span><span class="icon" aria-hidden="true">↑</span></div>
+              <div class="value"><span id="up">—</span><span class="small">Mbps</span></div>
+            </div>
+            <div class="metric">
+              <div class="mtop"><span class="label" data-i18n="bufferbloat">Bufferbloat</span><span class="icon" aria-hidden="true">⏱</span></div>
+              <div class="value"><span id="bloat">—</span><span class="small">ms</span></div>
+              <div class="metric-reading" id="bloatGrade"></div>
+            </div>
+          </div>
+          <div class="chart">
+            <div class="charthead"><span data-i18n="chartLive">Echtzeit-Leistung</span><span id="chartState" data-i18n="chartWait">Wartet</span></div>
+            <canvas id="chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info"><div class="label" data-i18n="lblIp">Öffentliche IP</div><div id="ip" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblIsp">Anbieter / ISP</div><div id="isp" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblLoc">Standort</div><div id="loc" class="iv">…</div></div>
+        <div class="info"><div class="label" data-i18n="lblAsn">Netzwerk / ASN</div><div id="asn" class="iv">…</div></div>
+      </div>
+
+      <div class="quality">
+        <div class="qtop"><span data-i18n="qTitle">Verbindungsqualität</span><span id="score" class="qscore">—</span></div>
+        <div class="bar"><i id="bar"></i></div>
+        <div id="qtext" class="qtext" data-i18n="qDefault">Run a test to evaluate your connection.</div>
+        <div id="qualityDetail" class="quality-detail"></div>
+        <div class="quality-meta">
+          <span><i class="mini-dot" aria-hidden="true"></i> <span data-i18n="qualityBasis">Based on download, upload, ping &amp; jitter</span></span>
+          <span id="qualityLabel" data-i18n="notMeasured">Not measured</span>
+        </div>
+      </div>
+
+      <div class="grade-display" id="gradeDisplay" aria-live="polite">
+        <div class="grade-badge" id="gradeBadge">—</div>
+        <div class="grade-meta">
+          <span class="grade-title" data-i18n="gradeTitle">Overall Network Grade</span>
+          <span class="grade-sub" id="gradeSub">Run a test to see your grade</span>
         </div>
       </div>
     </section>
-  </section>
+
+    <div class="hero-trust">
+      <span data-i18n="trust1">Accurate measurement – no estimates</span>
+      <span data-i18n="trust2">Free &amp; no account required</span>
+    </div>
+
+    <section class="section intelligence-section">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="networkIntelligence">NETWORK INTELLIGENCE</div>
+          <h2 data-i18n="understand">Understand your connection</h2>
+          <p class="section-sub" data-i18n="intelligenceSub">Fasqoo turns your measurements into practical network insights.</p>
+        </div>
+        <span class="section-badge" data-i18n="professional">PROFESSIONAL</span>
+      </div>
+      <div class="intelligence-grid">
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">↔</div><div><span data-i18n="latency">Latency</span><strong id="intelLatency">—</strong></div><small data-i18n="responseTime">Response time</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">≈</div><div><span data-i18n="stability">Stability</span><strong id="intelStability">—</strong></div><small data-i18n="jitterConsistency">Jitter consistency</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">↓</div><div><span data-i18n="throughput">Throughput</span><strong id="intelThroughput">—</strong></div><small data-i18n="downloadCapacity">Download capacity</small></div>
+        <div class="intel-card"><div class="intel-icon" aria-hidden="true">◎</div><div><span data-i18n="testServer">Test server</span><strong id="intelServer">Cloudflare</strong></div><small data-i18n="automaticEdge">Automatic edge selection</small></div>
+      </div>
+    </section>
+
+    <section class="section methodology-section" id="methodology">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="howMeasures">HOW FASQOO MEASURES</div>
+          <h2 data-i18n="methodTitle">How your connection is measured</h2>
+          <p class="section-sub" data-i18n="methodSub">Fasqoo measures the connection from your browser to the measurement infrastructure and reports the values it actually receives.</p>
+        </div>
+        <span class="section-badge" data-i18n="transparent">TRANSPARENT</span>
+      </div>
+      <div class="method-grid">
+        <div class="method-card"><span class="method-num">01</span><h3 data-i18n="method1T">Latency &amp; jitter</h3><p data-i18n="method1D">Multiple small requests are timed. Ping is based on the measured response times; jitter describes the variation between measurements.</p></div>
+        <div class="method-card"><span class="method-num">02</span><h3 data-i18n="method2T">Download</h3><p data-i18n="method2D">The browser downloads data from the test endpoint. Fasqoo calculates throughput from the bytes received and elapsed time.</p></div>
+        <div class="method-card"><span class="method-num">03</span><h3 data-i18n="method3T">Upload</h3><p data-i18n="method3D">The browser sends measured payloads to the test endpoint and calculates throughput from the bytes sent and elapsed time.</p></div>
+        <div class="method-card"><span class="method-num">04</span><h3 data-i18n="method4T">Why results vary</h3><p data-i18n="method4D">Wi‑Fi signal, device load, VPNs, ISP congestion, routing and distance to the test edge can change the result. Repeat the test for a clearer picture.</p></div>
+      </div>
+      <div class="method-note" data-i18n="methodNote">Measurement infrastructure: Cloudflare Speed Test endpoints. Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker" data-i18n="appsKicker">APPLICATION PROFILES</div>
+          <h2 data-i18n="appsTitle">What can you do with your connection?</h2>
+          <p class="section-sub" data-i18n="appsSub">Live check for gaming, 4K streaming, home office and social media.</p>
+        </div>
+        <span class="section-badge" data-i18n="appsBadge">LIVE CHECK</span>
+      </div>
+      <div class="apps" id="appsContainer"></div>
+    </section>
+
+    <section class="section">
+      <h2 data-i18n="diagTitle">Network Diagnostics</h2>
+      <div class="tools">
+        <div class="tool"><div class="icon" aria-hidden="true">⌁</div><h3 data-i18n="diagLatT">Latency</h3><p data-i18n="diagLatD">Measures response time.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">↯</div><h3 data-i18n="diagStabT">Stability</h3><p data-i18n="diagStabD">Jitter shows connection stability.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">DNS</div><h3 data-i18n="diagDnsT">DNS Diagnostics</h3><p data-i18n="diagDnsD">Checks DNS resolvers.</p></div>
+        <div class="tool"><div class="icon" aria-hidden="true">IP</div><h3 data-i18n="diagIpT">IP Diagnostics</h3><p data-i18n="diagIpD">Detects IP, ISP, ASN.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-i18n="repTitle">Professional Test Report</h2>
+      <div class="report">
+        <div class="reportgrid">
+          <div class="r"><b data-i18n="lblRepTestId">Test ID</b><span id="tid">—</span></div>
+          <div class="r"><b>IPv4</b><span id="ipv4">—</span></div>
+          <div class="r"><b>IPv6</b><span id="ipv6">—</span></div>
+          <div class="r"><b>DNS</b><span id="dns">—</span></div>
+        </div>
+        <div class="actions">
+          <button class="action" id="copy" data-i18n="copy">Ergebnis kopieren</button>
+          <button class="action" id="share" data-i18n="share">Ergebnis teilen</button>
+          <button class="action" id="json" data-i18n="json">JSON exportieren</button>
+          <button class="action" id="print" data-i18n="print">Bericht drucken</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-i18n="histTitle">Test History</h2>
+      <div class="history">
+        <div class="hhead">
+          <h2 data-i18n="histRecent">Letzte Messungen</h2>
+          <button id="clear" class="action" data-i18n="histClear">Verlauf löschen</button>
+        </div>
+        <table>
+          <thead><tr>
+            <th data-i18n="thDate">Datum</th>
+            <th data-i18n="thProvider">Anbieter</th>
+            <th data-i18n="thDown">Download</th>
+            <th data-i18n="thUp">Upload</th>
+            <th data-i18n="thPing">Ping</th>
+            <th data-i18n="thQual">Qualität</th>
+          </tr></thead>
+          <tbody id="history"></tbody>
+        </table>
+      </div>
+    </section>
+  </section><!-- /#speed-section -->
+
+ <!-- ============================================================
+     STABILITÄT & PING-MONITOR
+     ============================================================ -->
+<section id="ping-section" class="hidden">
+  <div class="card" style="padding:26px 26px 22px">
+
+    <div class="ping-header">
+      <div class="ping-header-left">
+        <div class="kicker"><span class="dot"></span><span data-ping-i18n="kicker">Live Netzwerk-Stabilität</span></div>
+        <h2 data-ping-i18n="title">Stabilität &amp; Ping-Monitor</h2>
+      </div>
+      <div class="ping-phase">
+        <span class="active" data-ping-i18n="phasePing">Ping</span>
+        <span data-ping-i18n="phaseJitter">Jitter</span>
+        <span data-ping-i18n="phaseLoss">Loss</span>
+      </div>
+    </div>
+
+    <button id="pingInstallButton" class="ping-install" type="button" hidden>
+      <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span data-ping-i18n="installApp">Fasqoo als App installieren</span>
+    </button>
+
+    <div class="ping-wrap">
+
+      <div class="ping-side">
+
+        <div>
+          <div class="ping-block-title">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.9 4 5.9 4 9s-1.4 6.1-4 9c-2.6-2.9-4-5.9-4-9s1.4-6.1 4-9Z"/></svg>
+            <span data-ping-i18n="serverSelection">Server-Auswahl</span>
+          </div>
+
+          <div class="server-region">
+            <div class="server-region-label" data-ping-i18n="regionEurope">Europa</div>
+            <div class="server-grid">
+              <label class="server-tile">
+                <input type="checkbox" value="de" checked>
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#000"/><rect y="4.66" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.66" fill="#FFCE00"/></svg></span>
+                <span class="name">Frankfurt</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="nl" checked>
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#AE1C28"/><rect y="9.33" width="20" height="4.66" fill="#21468B"/></svg></span>
+                <span class="name">Amsterdam</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="gb">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#fff" stroke-width="2.6"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.6"/><path d="M10 0v14M0 7h20" stroke="#fff" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.6"/></svg></span>
+                <span class="name">London</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="at">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#ED2939"/><rect y="4.66" width="20" height="4.66" fill="#fff"/></svg></span>
+                <span class="name">Wien</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="fr">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="6.66" height="14" fill="#002395"/><rect x="6.66" width="6.66" height="14" fill="#fff"/><rect x="13.33" width="6.66" height="14" fill="#ED2939"/></svg></span>
+                <span class="name">Paris</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="pl">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#fff"/><rect y="7" width="20" height="7" fill="#DC143C"/></svg></span>
+                <span class="name">Warschau</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="server-region">
+            <div class="server-region-label" data-ping-i18n="regionAmericas">Amerika</div>
+            <div class="server-grid">
+              <label class="server-tile">
+                <input type="checkbox" value="us-east">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span>
+                <span class="name">New York</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="us-west">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/></svg></span>
+                <span class="name">Los Angeles</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="br">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.5 18.5 7 10 12.5 1.5 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.2" fill="#002776"/></svg></span>
+                <span class="name">São Paulo</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="ca">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#FF0000"/><rect x="15" width="5" height="14" fill="#FF0000"/><path d="M10 3.5l.7 1.8h2l-1.6 1.3.6 1.9L10 7.5 8.3 8.5l.6-1.9L7.3 5.3h2z" fill="#FF0000"/></svg></span>
+                <span class="name">Toronto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="server-region">
+            <div class="server-region-label" data-ping-i18n="regionAsia">Asien</div>
+            <div class="server-grid">
+              <label class="server-tile">
+                <input type="checkbox" value="sg">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="7" fill="#ED2939"/><rect y="7" width="20" height="7" fill="#fff"/><circle cx="4.5" cy="3.5" r="2.2" fill="#fff"/><circle cx="5.6" cy="3.5" r="1.9" fill="#ED2939"/></svg></span>
+                <span class="name">Singapur</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="jp">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3.2" fill="#BC002D"/></svg></span>
+                <span class="name">Tokio</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="in">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="20" height="4.66" fill="#FF9933"/><rect y="9.33" width="20" height="4.66" fill="#138808"/><circle cx="10" cy="7" r="1.6" fill="none" stroke="#000080" stroke-width=".5"/></svg></span>
+                <span class="name">Mumbai</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="kr">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M10 4a3 3 0 0 0 0 6 1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 0 0-3z" fill="#0047A0"/></svg></span>
+                <span class="name">Seoul</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="server-region">
+            <div class="server-region-label" data-ping-i18n="regionOceania">Ozeanien</div>
+            <div class="server-grid">
+              <label class="server-tile">
+                <input type="checkbox" value="au">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="3" r=".8" fill="#fff"/><circle cx="16" cy="7" r=".8" fill="#fff"/><circle cx="15" cy="11" r=".8" fill="#fff"/><circle cx="13" cy="7" r=".5" fill="#fff"/></svg></span>
+                <span class="name">Sydney</span>
+              </label>
+              <label class="server-tile">
+                <input type="checkbox" value="nz">
+                <span class="flag"><svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#fff" stroke-width="1"/><path d="M0 0l8 5.6M8 0L0 5.6" stroke="#C8102E" stroke-width=".5"/><path d="M4 0v5.6M0 2.8h8" stroke="#fff" stroke-width="1.6"/><path d="M4 0v5.6M0 2.8h8" stroke="#C8102E" stroke-width=".9"/><circle cx="15" cy="4" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="16" cy="8" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/><circle cx="14" cy="11" r=".7" fill="#C8102E" stroke="#fff" stroke-width=".3"/></svg></span>
+                <span class="name">Auckland</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ping-block-title">
+            <svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+            <span data-ping-i18n="modeTitle">Test-Modus</span>
+          </div>
+          <div class="mode-segmented" id="pingMode">
+            <label class="active">
+              <input type="radio" name="pingMode" value="normal" checked>
+              <svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg>
+              <span data-ping-i18n="modeNormal">Normal</span>
+            </label>
+            <label>
+              <input type="radio" name="pingMode" value="overload">
+              <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+              <span data-ping-i18n="modeOverload">Überlastung</span>
+            </label>
+          </div>
+          <div class="mode-hint" data-ping-i18n="modeHint">Normal misst Standardwerte. Überlastung simuliert dichte Netzwerk-Last für Live-Streams &amp; Sprach-Chats.</div>
+        </div>
+
+        <div>
+          <button id="pingStart" class="ping-start" type="button">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3Z"/></svg>
+            <span data-ping-i18n="startBtn">Messung starten</span>
+          </button>
+          <div id="pingStatus" class="ping-status" style="margin-top:10px" data-ping-i18n="statusIdle">Wähle Server &amp; Modus, dann starte die Messung.</div>
+        </div>
+
+      </div>
+
+      <div class="ping-main">
+
+        <div class="metric-row">
+          <div class="metric-card">
+            <div class="m-label">
+              <svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+              <span data-ping-i18n="metricPing">Verzögerung</span>
+            </div>
+            <div class="m-value" id="pingVal">—<span class="m-unit">ms</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="m-label">
+              <svg viewBox="0 0 24 24"><path d="M2 12h3l2-4 3 8 3-12 3 16 2-8h4"/></svg>
+              <span data-ping-i18n="metricJitter">Jitter</span>
+            </div>
+            <div class="m-value" id="pingJitter">—<span class="m-unit">ms</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="m-label">
+              <svg viewBox="0 0 24 24"><path d="M4 4l16 16"/><path d="M4 20 20 4"/><circle cx="12" cy="12" r="10"/></svg>
+              <span data-ping-i18n="metricLoss">Paketverlust</span>
+            </div>
+            <div class="m-value" id="pingLoss">—<span class="m-unit">%</span></div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card-head">
+            <strong>
+              <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+              <span data-ping-i18n="chartTitle">Live-Verlauf</span>
+            </strong>
+            <span class="hint" id="pingChartHint" data-ping-i18n="chartHintIdle">Warte auf Messung…</span>
+          </div>
+          <canvas id="pingCanvas" width="800" height="170"></canvas>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th data-ping-i18n="thServer">Server</th>
+                <th data-ping-i18n="thPing">Ø Verzögerung</th>
+                <th data-ping-i18n="thJitter">Jitter</th>
+                <th data-ping-i18n="thLoss">Verlust</th>
+                <th data-ping-i18n="thMinMax">Min / Max</th>
+              </tr>
+            </thead>
+            <tbody id="pingResultsBody">
+              <tr><td colspan="5" class="table-empty" data-ping-i18n="noResults">Noch keine Messergebnisse.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ping-actions">
+          <button id="pingShare" class="ping-action" type="button" disabled>
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span data-ping-i18n="shareBtn">Als Bild teilen</span>
+          </button>
+          <button id="pingClear" class="ping-action" type="button">
+            <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+            <span data-ping-i18n="clearBtn">Verlauf löschen</span>
+          </button>
+        </div>
+
+        <div class="history-card">
+          <div class="history-head">
+            <span data-ping-i18n="historyTitle">Letzte Tests</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th data-ping-i18n="thTime">Zeit</th>
+                <th data-ping-i18n="thServers">Server</th>
+                <th data-ping-i18n="thPing">Ping</th>
+                <th data-ping-i18n="thJitter">Jitter</th>
+                <th data-ping-i18n="thLoss">Verlust</th>
+              </tr>
+            </thead>
+            <tbody id="pingHistoryBody">
+              <tr><td colspan="5" class="table-empty" data-ping-i18n="noHistory">Noch keine gespeicherten Tests.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 </div>
 </main>
+
+<!-- ============================================================
+     SPEED WIDGET
+     ============================================================ -->
+<div id="speedWidget" class="speed-widget" hidden>
+  <div class="speed-widget-head">
+    <div>
+      <strong data-i18n="widgetTitle">Fasqoo Speed Widget</strong>
+      <span data-i18n="widgetLive">Live result</span>
+    </div>
+    <button id="widgetClose" type="button" aria-label="Close">×</button>
+  </div>
+  <div class="speed-widget-main">
+    <div id="widgetSpeed">—</div>
+    <span data-i18n="widgetDownload">Mbps download</span>
+  </div>
+  <div class="speed-widget-grid">
+    <div><b id="widgetPing">—</b><span data-i18n="ping">Ping</span></div>
+    <div><b id="widgetJitter">—</b><span data-i18n="jitter">Jitter</span></div>
+    <div><b id="widgetUpload">—</b><span data-i18n="upload">Upload</span></div>
+    <div><b id="widgetQuality">—</b><span data-i18n="qTitle">Quality</span></div>
+  </div>
+  <button id="widgetRun" class="widget-run" type="button" data-i18n="widgetRun">Run speed test</button>
+  <div id="widgetProvider" class="widget-provider"><span data-i18n="providerLabel">Provider</span>: —</div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Fasqoo</div>
+        <p data-i18n="footerBrand">Fasqoo - Unabhängige, browserbasierte Internet-Geschwindigkeitstests und Netzwerktools.</p>
+      </div>
+      <div class="footer-column">
+        <h4 data-i18n="footerSpeedTests">Speed Tests</h4>
+        <a href="index.html" data-i18n="footerInternetSpeed">Internet Speed Test</a>
+        <a href="https://lite.fasqoo.com/" data-i18n="footerLite">Fasqoo Lite</a>
+        <a href="widget.html" data-i18n="footerWidget">Widget</a>
+      </div>
+      <div class="footer-column">
+        <h4 data-i18n="footerNetworkTools">Netzwerk-Tools</h4>
+        <a href="network-status.html" data-i18n="footerNetworkStatus">Network Status</a>
+        <a href="Gaming- &amp; Ping-Monitor.html" data-i18n="footerGaming">Gaming- &amp; Ping-Monitor</a>
+        <a href="subnet-calculator.html" data-i18n="footerITDiagnose">IT Diagnose</a>
+        <a href="Security &amp; Header Analyzer.html" data-i18n="footerSecurity">Security Analyzer</a>
+        <a href="antivirus.html" data-i18n="footerAntivirus">Antivirus Scanner</a>
+        <a href="dns-checker.html" data-i18n="footerDns">Visual DNS Test</a>
+        <a href="dark-data-exposer.html">Dark Data &amp; Tracker Exposer</a>
+      </div>
+      <div class="footer-column">
+        <h4 data-i18n="footerCompany">Unternehmen</h4>
+        <a href="about.html" data-i18n="footerAbout">Über uns</a>
+        <a href="faq.html" data-i18n="footerFaq">FAQ</a>
+        <a href="/privacy-policy.html" data-i18n="ftPrivacy">Datenschutz</a>
+        <a href="/accessibility.html" data-i18n="ftAccess">Barrierefreiheit</a>
+        <a href="/impressum.html" data-i18n="ftImprint">Impressum</a>
+        <a href="/terms.html" data-i18n="ftTerms">Nutzungsbedingungen</a>
+        <a href="/do-not-sell.html" data-i18n="ftNoSell">Meine Daten nicht verkaufen</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright" data-i18n="footerCopyright">© 2026 Fasqoo</span>
+      <div class="footer-cloudflare">
+        <span class="footer-powered" data-i18n="footerBranding">Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.</span>
+        <span class="footer-disclaimer" data-i18n="footerDisclaimer">Fasqoo is an independent speed-test platform and is not an official Cloudflare product.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
 
 <script src="/js/app.js" defer></script>
 <script src="/js/ping.js" defer></script>
