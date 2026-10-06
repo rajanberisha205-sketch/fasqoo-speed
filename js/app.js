@@ -1152,14 +1152,84 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+
 /* ==========================================================
-   SMARTES PWA-INSTALLATIONS-POPUP (FEHLERFREI)
+   SMARTES PWA-INSTALLATIONS-POPUP (MEHRSPRACHIG FÜR ALLE 10 SPRACHEN)
    ========================================================== */
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e; // Nutzt die globale Variable von oben
-  showSmartInstallToast();
-});
+
+// PWA-Texte für alle unterstützten Sprachen direkt in den Übersetzungen ergänzen
+if (typeof translations !== 'undefined') {
+  Object.assign(translations.en, {
+    pwaTitle: "Install Fasqoo App",
+    pwaDescIos: "Tap the share icon in your browser and choose 'Add to Home Screen'.",
+    pwaDescAndroid: "Add Fasqoo to your home screen for lightning-fast access.",
+    pwaActionIos: "Got it",
+    pwaActionAndroid: "Install"
+  });
+  Object.assign(translations.de, {
+    pwaTitle: "Fasqoo als App installieren",
+    pwaDescIos: "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'.",
+    pwaDescAndroid: "Füge Fasqoo für blitzschnellen Zugriff zu deinem Startbildschirm hinzu.",
+    pwaActionIos: "Verstanden",
+    pwaActionAndroid: "Installieren"
+  });
+  Object.assign(translations.fr, {
+    pwaTitle: "Installer Fasqoo",
+    pwaDescIos: "Appuyez sur l'icône de partage dans le navigateur et choisissez 'Sur l'écran d'accueil'.",
+    pwaDescAndroid: "Ajoutez Fasqoo à votre écran d'accueil pour un accès ultra-rapide.",
+    pwaActionIos: "Compris",
+    pwaActionAndroid: "Installer"
+  });
+  Object.assign(translations.es, {
+    pwaTitle: "Instalar aplicación Fasqoo",
+    pwaDescIos: "Toca el icono de compartir en el navegador y elige 'Añadir a la pantalla de inicio'.",
+    pwaDescAndroid: "Añade Fasqoo a tu pantalla de inicio para un acceso rápido.",
+    pwaActionIos: "Entendido",
+    pwaActionAndroid: "Instalar"
+  });
+  Object.assign(translations.it, {
+    pwaTitle: "Installa l'app Fasqoo",
+    pwaDescIos: "Tocca l'icona di condivisione nel browser e scegli 'Aggiungi a Home'.",
+    pwaDescAndroid: "Aggiungi Fasqoo alla schermata iniziale per un accesso rapido.",
+    pwaActionIos: "Capito",
+    pwaActionAndroid: "Installa"
+  });
+  Object.assign(translations.pt, {
+    pwaTitle: "Instalar aplicação Fasqoo",
+    pwaDescIos: "Toque no ícone de partilha no navegador e escolha 'Adicionar ao Ecrã Principal'.",
+    pwaDescAndroid: "Adicione a Fasqoo ao ecrã inicial para acesso rápido.",
+    pwaActionIos: "Entendido",
+    pwaActionAndroid: "Instalar"
+  });
+  Object.assign(translations.nl, {
+    pwaTitle: "Fasqoo-app installeren",
+    pwaDescIos: "Tik op het deelsymbool in de browser en kies 'Zet op beginscherm'.",
+    pwaDescAndroid: "Voeg Fasqoo toe aan je startscherm voor snelle toegang.",
+    pwaActionIos: "Begrepen",
+    pwaActionAndroid: "Installeren"
+  });
+  Object.assign(translations.tr, {
+    pwaTitle: "Fasqoo Uygulamasını Yükle",
+    pwaDescIos: "Tarayıcınızdaki paylaş simgesine dokunun ve 'Ana Ekrana Ekle'yi seçin.",
+    pwaDescAndroid: "Hızlı erişim için Fasqoo'yu ana ekranınıza ekleyin.",
+    pwaActionIos: "Anladım",
+    pwaActionAndroid: "Yükle"
+  });
+  Object.assign(translations.sq, {
+    pwaTitle: "Instalo aplikacionin Fasqoo",
+    pwaDescIos: "Prek ikonën e ndarjes në shfletues dhe zgjidh 'Shto në ekranin bazë'.",
+    pwaDescAndroid: "Shto Fasqoo në ekranin kryesor për qasje të shpejtë.",
+    pwaActionIos: "E kuptova",
+    pwaActionAndroid: "Instalo"
+  });
+  Object.assign(translations.ar, {
+    pwaTitle: "تثبيت تطبيق Fasqoo",
+    pwaDescIos: "انقر على رمز المشاركة في المتصفح واختر 'إضافة إلى الشاشة الرئيسية'.",
+    pwaDescAndroid: "أضف Fasqoo إلى شاشتك الرئيسية للوصول السريع.",
+    pwaActionIos: "فهمت",
+    pwaActionAndroid: "تثبيت"
+  });
+}
 
 function isIOS() {
   return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
@@ -1174,19 +1244,20 @@ function showSmartInstallToast() {
   if (document.getElementById('smartPwaToast')) return;
 
   const isApple = isIOS();
+  const t = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : {};
+  
+  const titleText = t.pwaTitle || "Install Fasqoo App";
+  const descText = isApple ? (t.pwaDescIos || "Add to Home Screen.") : (t.pwaDescAndroid || "Add Fasqoo to your home screen.");
+  const actionText = isApple ? (t.pwaActionIos || "Got it") : (t.pwaActionAndroid || "Install");
+
   const toast = document.createElement('div');
   toast.id = 'smartPwaToast';
   toast.className = 'pwa-toast';
   
-  const descText = isApple 
-    ? "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'." 
-    : "Füge Fasqoo für blitzschnellen Zugriff zu deinem Startbildschirm hinzu.";
-  const actionText = isApple ? "Verstanden" : "Installieren";
-
   toast.innerHTML = `
     <div class="pwa-toast-icon">⚡</div>
     <div class="pwa-toast-content">
-      <h4 class="pwa-toast-title">Fasqoo als App installieren</h4>
+      <h4 class="pwa-toast-title">${titleText}</h4>
       <p class="pwa-toast-desc">${descText}</p>
     </div>
     <button class="pwa-toast-btn" id="pwaActionBtn">${actionText}</button>
@@ -1197,7 +1268,7 @@ function showSmartInstallToast() {
   setTimeout(() => toast.classList.add('show'), 1500);
 
   toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
-    if (!isApple && deferredInstallPrompt) {
+    if (!isApple && typeof deferredInstallPrompt !== 'undefined' && deferredInstallPrompt) {
       try {
         deferredInstallPrompt.prompt();
         await deferredInstallPrompt.userChoice;
@@ -1219,7 +1290,7 @@ function closeToast(toast) {
 }
 
 window.addEventListener('load', () => {
-  if (isIOS() && !isStandalone()) {
+  if (!isStandalone()) {
     setTimeout(showSmartInstallToast, 2500);
   }
 });
