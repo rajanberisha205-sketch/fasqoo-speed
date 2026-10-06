@@ -1152,3 +1152,75 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+/* ==========================================================
+   FARB-CODIERUNG FÜR PERFORMANCE (Punkt 2)
+   ========================================================== */
+function getPerformanceClass(metric, val) {
+  if (metric === 'ping') return val <= 20 ? 'val-good' : val <= 60 ? 'val-medium' : 'val-bad';
+  if (metric === 'jitter') return val <= 5 ? 'val-good' : val <= 15 ? 'val-medium' : 'val-bad';
+  if (metric === 'loss') return val < 0.5 ? 'val-good' : val < 2 ? 'val-medium' : 'val-bad';
+  if (metric === 'download') return val >= 100 ? 'val-good' : val >= 25 ? 'val-medium' : 'val-bad';
+  if (metric === 'upload') return val >= 25 ? 'val-good' : val >= 5 ? 'val-medium' : 'val-bad';
+  return '';
+}
+
+/* ==========================================================
+   MICRO-INTERACTIONS & VISUELLES FEEDBACK (Punkt 4)
+   ========================================================== */
+const copyBtn = $("copy");
+if (copyBtn) {
+  copyBtn.addEventListener("click", () => {
+    copyBtn.classList.add("flash-feedback");
+    setTimeout(() => copyBtn.classList.remove("flash-feedback"), 400);
+  });
+}
+
+/* ==========================================================
+   PWA TOAST / BANNER UNTEN AM RAND (Punkt 5)
+   ========================================================== */
+function showPwaToast() {
+  if (localStorage.getItem("fasqoo_pwa_dismissed")) return;
+  
+  // Prüfen ob Toast schon existiert
+  if ($("pwaToast")) return;
+
+  const toast = document.createElement("div");
+  toast.id = "pwaToast";
+  toast.className = "pwa-toast";
+  toast.innerHTML = `
+    <div class="pwa-toast-icon">⚡</div>
+    <div class="pwa-toast-content">
+      <h4 class="pwa-toast-title">Fasqoo als App installieren</h4>
+      <p class="pwa-toast-desc">Blitzschneller Zugriff direkt von deinem Homescreen.</p>
+    </div>
+    <button class="pwa-toast-btn" id="pwaInstallTrigger">Installieren</button>
+  `;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add("show"), 1200);
+
+  toast.querySelector("#pwaInstallTrigger").addEventListener("click", async () => {
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+    }
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  });
+
+  // Nach Klick auf Schließen / Ausblenden
+  toast.addEventListener("click", (e) => {
+    if (e.target === toast) {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 300);
+    }
+  });
+}
+
+// PWA Toast nach kurzer Verzögerung anzeigen (falls nicht standalone)
+if (!isStandalone()) {
+  window.addEventListener("load", () => {
+    setTimeout(showPwaToast, 4000);
+  });
+}
