@@ -1157,15 +1157,18 @@ netinfo();
    SMARTES PWA-INSTALLATIONS-POPUP (MEHRSPRACHIG FÜR ALLE 10 SPRACHEN)
    ========================================================== */
 
-// PWA-Texte für alle unterstützten Sprachen direkt in den Übersetzungen ergänzen
-if (typeof translations !== 'undefined') {
-  Object.assign(translations.en, {
-    pwaTitle: "Install Fasqoo App",
-    pwaDescIos: "Tap the share icon in your browser and choose 'Add to Home Screen'.",
-    pwaDescAndroid: "Add Fasqoo to your home screen for lightning-fast access.",
-    pwaActionIos: "Got it",
-    pwaActionAndroid: "Install"
-  });
+// PWA-Popup Text in Echtzeit aktualisieren, falls es gerade angezeigt wird
+  const activeToast = document.getElementById('smartPwaToast');
+  if (activeToast) {
+    const isApple = isIOS();
+    const titleEl = activeToast.querySelector('.pwa-toast-title');
+    const descEl = activeToast.querySelector('.pwa-toast-desc');
+    const actionBtn = activeToast.querySelector('#pwaActionBtn');
+
+    if (titleEl) titleEl.textContent = t.pwaTitle || "Install Fasqoo App";
+    if (descEl) descEl.textContent = isApple ? (t.pwaDescIos || "Add to Home Screen.") : (t.pwaDescAndroid || "Add Fasqoo to your home screen.");
+    if (actionBtn) actionBtn.textContent = isApple ? (t.pwaActionIos || "Got it") : (t.pwaActionAndroid || "Install");
+  }
   Object.assign(translations.de, {
     pwaTitle: "Fasqoo als App installieren",
     pwaDescIos: "Tippe unten auf das Teilen-Symbol im Browser und wähle 'Zum Homescreen'.",
