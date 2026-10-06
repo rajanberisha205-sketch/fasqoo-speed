@@ -1,15 +1,18 @@
 /* ==========================================================
-   FASQOO SPEED TEST v8.3
-   - Live-Chart mit 40-55 Punkten
-   - Catmull-Rom Smooth-Curve + Puls-Punkt
-   - Gauge: dynamischer Farbverlauf, Ticks, Peak-Marker, Breath
-   - Full i18n (10 Sprachen) inkl. Assessment/Grade
+   FASQOO SPEED TEST v8.2
+   - 6 metrics incl. Bufferbloat + Packet Loss
+   - Live-Reporting für flüssige Chart-Kurve (40-55 Punkte)
+   - Catmull-Rom Smooth-Curve mit Puls-Punkt
+   - Overall Grade A+ to F with glow
+   - 8 application profile tiles with SVG icons
+   - Full i18n coverage (10 languages)
    ========================================================== */
 
+/* ---------- HILFSFUNKTIONEN ---------- */
 const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-/* ---------- INSTALL ---------- */
+/* ---------- INSTALL BUTTON (DESKTOP) ---------- */
 let deferredInstallPrompt = null;
 const installButton = document.getElementById("installButton");
 const installLabel  = document.getElementById("installLabel");
@@ -39,33 +42,56 @@ function updateInstallButton(){
   installButton.hidden = !visible;
   if(!visible) return;
   const platform = getDesktopPlatform();
-  const labels = {windows:"Install for Windows",mac:"Install for Mac",linux:"Install for Linux",chromeos:"Install for ChromeOS",desktop:"Install App"};
-  const icons  = {windows:"⊞",mac:"⌘",linux:"◉",chromeos:"▣",desktop:"↓"};
+  const labels = {
+    windows:"Install for Windows", mac:"Install for Mac",
+    linux:"Install for Linux", chromeos:"Install for ChromeOS",
+    desktop:"Install App"
+  };
+  const icons = { windows:"⊞", mac:"⌘", linux:"◉", chromeos:"▣", desktop:"↓" };
   const label = labels[platform] || labels.desktop;
   if(installLabel) installLabel.textContent = label;
   if(installIcon)  installIcon.textContent  = icons[platform] || icons.desktop;
   installButton.setAttribute("aria-label", label);
 }
-window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredInstallPrompt = e; updateInstallButton(); });
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButton();
+});
 installButton?.addEventListener("click", async () => {
   if(deferredInstallPrompt){
-    try{ deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice; }catch(e){}
-    deferredInstallPrompt = null; updateInstallButton(); return;
+    try{
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    }catch(e){}
+    deferredInstallPrompt = null;
+    updateInstallButton();
+    return;
   }
   const platform = getDesktopPlatform();
   const t = installTranslations[currentLang] || installTranslations.en;
   const fallback = t.browserHint || installTranslations.en.browserHint;
   alert(fallback.replace("{platform}",
-    platform === "windows" ? "Windows" : platform === "mac" ? "macOS" :
-    platform === "linux" ? "Linux" : platform === "chromeos" ? "ChromeOS" : "your desktop"));
+    platform === "windows" ? "Windows" :
+    platform === "mac" ? "macOS" :
+    platform === "linux" ? "Linux" :
+    platform === "chromeos" ? "ChromeOS" : "your desktop"));
 });
-window.addEventListener("appinstalled", () => { deferredInstallPrompt = null; updateInstallButton(); });
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
 window.matchMedia("(display-mode: standalone)").addEventListener?.("change", updateInstallButton);
 let _installResizeTimer = 0;
-window.addEventListener("resize", () => { clearTimeout(_installResizeTimer); _installResizeTimer = setTimeout(updateInstallButton, 150); });
+window.addEventListener("resize", () => {
+  clearTimeout(_installResizeTimer);
+  _installResizeTimer = setTimeout(updateInstallButton, 150);
+});
 updateInstallButton();
 
-/* ---------- TRANSLATIONS ---------- */
+/* ==========================================================
+   TRANSLATIONS
+   ========================================================== */
 const translations = {
 en:{navFaq:"FAQ",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Scan files and content for security risks",download:"Download",navStatus:"Network Status",navDiag:"IT Diagnostics",navAbout:"About Us",liteBtn:"Fasqoo Lite",widgetBtn:"Speed Widget",navWidget:"Widget",title:"Free Internet Speed Test",sub:"See what your connection really delivers — in seconds. Includes suitability for streaming, gaming and home office.",serverLabel:"Server",ready:"Ready to test",start:"Start Speed Test",startAgain:"Test Again",testing:"Testing…",complete:"Test completed",ping:"Ping",jitter:"Jitter",upload:"Upload",chartLive:"Live Performance",chartWait:"Waiting",lblIp:"Public IP",lblIsp:"Provider / ISP",lblLoc:"Location",lblAsn:"Network / ASN",qTitle:"Connection Quality",qDefault:"Run a test to evaluate your connection.",qualityBasis:"Based on download, upload, ping & jitter",appsTitle:"What can you do with your connection?",appsSub:"Live check for gaming, 4K streaming, home office and social media.",diagTitle:"Network Diagnostics",diagLatT:"Latency",diagLatD:"Measures response time.",diagStabT:"Stability",diagStabD:"Jitter shows connection stability.",diagDnsT:"DNS Diagnostics",diagDnsD:"Checks DNS resolvers.",diagIpT:"IP Diagnostics",diagIpD:"Detects IP, ISP, ASN.",repTitle:"Professional Test Report",lblRepTestId:"Test ID",copy:"Copy Result",share:"Share Result",json:"Export JSON",print:"Print Report",histTitle:"Test History",histRecent:"Recent measurements",histClear:"Clear history",thDate:"Date",thProvider:"Provider",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Quality",noHistory:"No tests recorded yet.",ftRights:"© 2026 Fasqoo. All Rights Reserved.",ftAccess:"Accessibility",ftImprint:"Imprint",ftPrivacy:"Privacy Policy",ftTerms:"Terms of Use",ftNoSell:"Do Not Sell My Info",footerAntivirus:"Antivirus Scanner",ftPowered:"Powered by the Cloudflare Edge network to ensure maximum performance and measurement accuracy.",ftDisclaimer:"Fasqoo is an independent speed-test platform and is not an official Cloudflare product.",stPing:"Measuring latency…",stDown:"Measuring download…",stUp:"Measuring upload…",stErr:"Test failed.",measurementUnavailable:"Measurement unavailable. Please try again.",stExc:"Excellent",stGood:"Good",stLim:"Limited",q90:"Excellent connection.",q75:"Very good connection.",q55:"Good connection.",q35:"Average connection.",q0:"Poor connection.",alertRun:"Please run a speed test first.",unavail:"Unavailable",notDetected:"Not detected",appRunTest:"Run test",copied:"Copied",gradeTitle:"Overall Network Grade",appsKicker:"APPLICATION PROFILES",appsBadge:"LIVE CHECK"},
 de:{navFaq:"FAQ",navAntivirus:"Antivirus Scanner",navAntivirusDesc:"Dateien und Inhalte auf Sicherheitsrisiken prüfen",download:"Download",navStatus:"Netzwerk-Status",navDiag:"IT-Diagnose",navAbout:"Über uns",liteBtn:"Fasqoo Lite",widgetBtn:"Speed-Widget",navWidget:"Widget",title:"Kostenloser Internet-Speedtest",sub:"Sieh in Sekunden, was deine Leitung wirklich leistet – inkl. Eignung für Streaming, Gaming und Homeoffice.",serverLabel:"Server",ready:"Bereit zum Testen",start:"Speedtest starten",startAgain:"Test erneut starten",testing:"Test läuft…",complete:"Test abgeschlossen",ping:"Ping",jitter:"Jitter",upload:"Upload",chartLive:"Echtzeit-Leistung",chartWait:"Wartet",lblIp:"Öffentliche IP",lblIsp:"Anbieter / ISP",lblLoc:"Standort",lblAsn:"Netzwerk / ASN",qTitle:"Verbindungsqualität",qDefault:"Führe einen Test aus, um deine Verbindung zu bewerten.",qualityBasis:"Basierend auf Download, Upload, Ping & Jitter",appsTitle:"Was kannst du mit deiner Verbindung machen?",appsSub:"Live-Check für Gaming, 4K-Streaming, Homeoffice und Social Media.",diagTitle:"Netzwerkdiagnose",diagLatT:"Latenz",diagLatD:"Misst die Antwortzeit.",diagStabT:"Stabilität",diagStabD:"Jitter zeigt Verbindungsstabilität.",diagDnsT:"DNS-Diagnose",diagDnsD:"Prüft DNS-Resolver.",diagIpT:"IP-Diagnose",diagIpD:"Erkennt IP, ISP, ASN.",repTitle:"Professioneller Testbericht",lblRepTestId:"Test ID",copy:"Ergebnis kopieren",share:"Ergebnis teilen",json:"JSON exportieren",print:"Bericht drucken",histTitle:"Testverlauf",histRecent:"Letzte Messungen",histClear:"Verlauf löschen",thDate:"Datum",thProvider:"Anbieter",thDown:"Download",thUp:"Upload",thPing:"Ping",thQual:"Qualität",noHistory:"Noch keine Messungen.",ftRights:"© 2026 Fasqoo. Alle Rechte vorbehalten.",ftAccess:"Barrierefreiheit",ftImprint:"Impressum",ftPrivacy:"Datenschutz",ftTerms:"Nutzungsbedingungen",ftNoSell:"Meine Daten nicht verkaufen",footerAntivirus:"Antivirus Scanner",ftPowered:"Betrieben über das Cloudflare Edge-Netzwerk für maximale Leistung und Messgenauigkeit.",ftDisclaimer:"Fasqoo ist eine unabhängige Speedtest-Plattform und kein offizielles Cloudflare-Produkt.",stPing:"Latenz wird gemessen…",stDown:"Download wird gemessen…",stUp:"Upload wird gemessen…",stErr:"Test fehlgeschlagen.",measurementUnavailable:"Messung momentan nicht verfügbar. Bitte erneut versuchen.",stExc:"Hervorragend",stGood:"Gut",stLim:"Eingeschränkt",q90:"Hervorragende Verbindung.",q75:"Sehr gute Verbindung.",q55:"Gute Verbindung.",q35:"Durchschnittliche Verbindung.",q0:"Schlechte Verbindung.",alertRun:"Bitte führe zuerst einen Speedtest aus.",unavail:"Nicht verfügbar",notDetected:"Nicht erkannt",appRunTest:"Test ausführen",copied:"Kopiert",gradeTitle:"Gesamtnote des Netzwerks",appsKicker:"ANWENDUNGSPROFILE",appsBadge:"LIVE-CHECK"},
@@ -144,6 +170,7 @@ const staticUiTranslations = {
   ar:{widgetTitle:"أداة سرعة Fasqoo",widgetLive:"النتيجة المباشرة",widgetDownload:"التنزيل بالميغابت/ث",widgetRun:"بدء اختبار السرعة",providerLabel:"مزود الخدمة"}
 };
 
+/* NEU: i18n für Quality-Detail und Grade-Text */
 const assessmentTranslations = {
   en:{detailExcellent:"Download {d} Mbps, Upload {u} Mbps, Ping {p} ms and Jitter {j} ms indicate a strong, responsive connection.",detailGood:"Your measured speeds are suitable for most everyday use. {p} ms ping and {j} ms jitter indicate generally responsive performance.",detailMedium:"The connection is usable, but one or more values may affect demanding activities. Download {d} Mbps, Upload {u} Mbps, Ping {p} ms, Jitter {j} ms.",detailBad:"The connection has a limiting value. Download {d} Mbps, Upload {u} Mbps, Ping {p} ms, Jitter {j} ms.",bloatLabel:"{v} ms latency under load",bloatNA:"latency under load n/a",gradeMeasuring:"Measuring…",gradeIdle:"Run a test to see your grade"},
   de:{detailExcellent:"Download {d} Mbit/s, Upload {u} Mbit/s, Ping {p} ms und Jitter {j} ms deuten auf eine starke, reaktionsschnelle Verbindung hin.",detailGood:"Deine gemessenen Werte eignen sich für die meisten Alltagsanwendungen. {p} ms Ping und {j} ms Jitter zeigen insgesamt eine reaktionsfreudige Verbindung.",detailMedium:"Die Verbindung ist nutzbar, aber ein oder mehrere Werte können anspruchsvolle Anwendungen beeinträchtigen. Download {d} Mbit/s, Upload {u} Mbit/s, Ping {p} ms, Jitter {j} ms.",detailBad:"Die Verbindung hat einen limitierenden Wert. Download {d} Mbit/s, Upload {u} Mbit/s, Ping {p} ms, Jitter {j} ms.",bloatLabel:"{v} ms Latenz unter Last",bloatNA:"Latenz unter Last n. v.",gradeMeasuring:"Wird gemessen…",gradeIdle:"Führe einen Test aus, um deine Note zu sehen"},
@@ -219,7 +246,7 @@ if (toolsDropdown && toolsToggle) {
 }
 
 /* ==========================================================
-   APP CARDS
+   APP CARDS (8 Kacheln)
    ========================================================== */
 const APP_KEYS = ["gaming","stream","fourk","call","office","cloud","social","web"];
 
@@ -227,14 +254,37 @@ function appIcon(key){
   const S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" ' +
             'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
   const icons = {
-    gaming:'<svg '+S+'><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><circle cx="15.5" cy="10.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="17.5" cy="12.5" r="0.9" fill="currentColor" stroke="none"/><path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/></svg>',
-    stream:'<svg '+S+'><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M8.4 8.4a5 5 0 0 0 0 7.2"/><path d="M15.6 15.6a5 5 0 0 0 0-7.2"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 18.4a9 9 0 0 0 0-12.8"/></svg>',
-    fourk:'<svg '+S+'><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><text x="12" y="12.6" font-family="Inter, sans-serif" font-size="6" font-weight="800" fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
-    call:'<svg '+S+'><rect x="2.5" y="6" width="13" height="12" rx="2.2"/><path d="M15.5 11.2 21 8v8l-5.5-3.2Z"/></svg>',
-    office:'<svg '+S+'><rect x="4" y="5" width="16" height="11" rx="1.8"/><path d="M2 19h20"/><path d="M9 16v3"/><path d="M15 16v3"/></svg>',
-    cloud:'<svg '+S+'><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a3.75 3.75 0 0 1 .5 7.5H7Z"/><path d="M12 15v-3.4"/><path d="M10.4 12.6 12 11l1.6 1.6"/></svg>',
-    social:'<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H9l-4.2 3.6A.6.6 0 0 1 4 19.1V5.5Z"/><path d="M12 12.2c-1.9-1.4-3.3-2.4-3.3-3.9A1.6 1.6 0 0 1 12 7.4a1.6 1.6 0 0 1 3.3.9c0 1.5-1.4 2.5-3.3 3.9Z" fill="currentColor" stroke="none"/></svg>',
-    web:'<svg '+S+'><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>'
+    gaming:
+      '<svg '+S+'><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/>'+
+      '<circle cx="15.5" cy="10.5" r="0.9" fill="currentColor" stroke="none"/>'+
+      '<circle cx="17.5" cy="12.5" r="0.9" fill="currentColor" stroke="none"/>'+
+      '<path d="M3.5 15.5c-.7-2-.7-4.3 0-6.3A3.4 3.4 0 0 1 7 7h10a3.4 3.4 0 0 1 3.5 2.2c.7 2 .7 4.3 0 6.3A3.4 3.4 0 0 1 17 18H7a3.4 3.4 0 0 1-3.5-2.5Z"/></svg>',
+    stream:
+      '<svg '+S+'><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>'+
+      '<path d="M8.4 8.4a5 5 0 0 0 0 7.2"/><path d="M15.6 15.6a5 5 0 0 0 0-7.2"/>'+
+      '<path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 18.4a9 9 0 0 0 0-12.8"/></svg>',
+    fourk:
+      '<svg '+S+'><rect x="2.5" y="4" width="19" height="13" rx="2"/>'+
+      '<path d="M8 21h8"/><path d="M12 17v4"/>'+
+      '<text x="12" y="12.6" font-family="Inter, sans-serif" font-size="6" font-weight="800" '+
+      'fill="currentColor" stroke="none" text-anchor="middle">4K</text></svg>',
+    call:
+      '<svg '+S+'><rect x="2.5" y="6" width="13" height="12" rx="2.2"/>'+
+      '<path d="M15.5 11.2 21 8v8l-5.5-3.2Z"/></svg>',
+    office:
+      '<svg '+S+'><rect x="4" y="5" width="16" height="11" rx="1.8"/>'+
+      '<path d="M2 19h20"/><path d="M9 16v3"/><path d="M15 16v3"/></svg>',
+    cloud:
+      '<svg '+S+'><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a3.75 3.75 0 0 1 .5 7.5H7Z"/>'+
+      '<path d="M12 15v-3.4"/><path d="M10.4 12.6 12 11l1.6 1.6"/></svg>',
+    social:
+      '<svg '+S+'><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H9l-4.2 3.6A.6.6 0 0 1 4 19.1V5.5Z"/>'+
+      '<path d="M12 12.2c-1.9-1.4-3.3-2.4-3.3-3.9A1.6 1.6 0 0 1 12 7.4a1.6 1.6 0 0 1 3.3.9c0 1.5-1.4 2.5-3.3 3.9Z" '+
+      'fill="currentColor" stroke="none"/></svg>',
+    web:
+      '<svg '+S+'><circle cx="12" cy="12" r="9"/>'+
+      '<path d="M3 12h18"/>'+
+      '<path d="M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9Z"/></svg>'
   };
   return icons[key] || '';
 }
@@ -246,7 +296,7 @@ const APP_META = {
   call:{title:{en:"Video Calls",de:"Videoanrufe",fr:"Appels vidéo",es:"Videollamadas",it:"Videochiamate",pt:"Videochamadas",nl:"Videobellen",tr:"Görüntülü arama",sq:"Thirrje video",ar:"مكالمات الفيديو"},desc:{en:"Smooth video conferencing with low lag.",de:"Flüssige Videokonferenzen mit niedriger Latenz.",fr:"Visioconférence fluide avec faible latence.",es:"Videoconferencias fluidas con baja latencia.",it:"Videoconferenze fluide con bassa latenza.",pt:"Videoconferências fluidas com baixa latência.",nl:"Vloeiende videoconferenties met lage latentie.",tr:"Düşük gecikmeli görüntülü görüşme.",sq:"Videokonferenca të qeta me vonesë të ulët.",ar:"مكالمات فيديو سلسة بتأخير منخفض."}},
   office:{title:{en:"Home Office",de:"Homeoffice",fr:"Télétravail",es:"Teletrabajo",it:"Smart working",pt:"Teletrabalho",nl:"Thuiswerken",tr:"Evden çalışma",sq:"Punë nga shtëpia",ar:"العمل من المنزل"},desc:{en:"Video calls, VPN, cloud apps.",de:"Videocalls, VPN, Cloud-Apps.",fr:"Visio, VPN, cloud.",es:"Videollamadas, VPN, nube.",it:"Videochiamate, VPN, cloud.",pt:"Videochamadas, VPN, cloud.",nl:"Videobellen, VPN, cloud.",tr:"Görüntülü görüşme, VPN, bulut.",sq:"Thirrje video, VPN, cloud.",ar:"مكالمات الفيديو، VPN، السحابة."}},
   cloud:{title:{en:"Cloud & Backup",de:"Cloud & Backup",fr:"Cloud & sauvegarde",es:"Nube y copias",it:"Cloud e backup",pt:"Cloud e backup",nl:"Cloud & back-up",tr:"Bulut ve yedek",sq:"Cloud & backup",ar:"السحابة والنسخ الاحتياطي"},desc:{en:"Fast uploads for cloud services and backups.",de:"Schnelle Uploads für Cloud-Dienste und Backups.",fr:"Envois rapides vers le cloud.",es:"Subidas rápidas a la nube.",it:"Upload rapidi verso il cloud.",pt:"Uploads rápidos para a nuvem.",nl:"Snelle uploads naar de cloud.",tr:"Bulut ve yedeklemeler için hızlı yükleme.",sq:"Ngarkime të shpejta për cloud.",ar:"رفع سريع للخدمات السحابية."}},
-  social:{title:{en:"Web & Social",de:"Web & Social",fr:"Web & réseaux",es:"Web y redes",it:"Web e social",pt:"Web e redes",nl:"Web & social",tr:"Web ve sosyal",sq:"Web & sociale",ar:"الويب والتواصل"},desc:{en:"Fast browsing, reels, stories.",de:"Schnelles Surfen, Reels, Stories.",fr:"Navigation rapide, reels, stories.",es:"Navegación rápida, reels, stories.",it:"Navigazione veloce, reel, storie.",pt:"Navegação rápida, reels, stories.",nl:"Snel browsen, reels, stories.",tr:"Hızlı gezinme, hikayeler.",sq:"Shfletim i shpejtë, reels, stories.",ar:"تصفح سريع، ريلز، ستوريز."}},
+  social:{title:{en:"Web & Social",de:"Web & Social",fr:"Web & réseaux",es:"Web y redes",it:"Web e social",pt:"Web e redes",nl:"Web & social",tr:"Web ve sosyal",sq:"Web & sociale",ar:"الويب والتواصل"},desc:{en:"Fast browsing, reels, stories.",de:"Schnelles Surfen, Reels, Stories.",fr:"Navigation rapide, reels, stories.",es:"Navegación rápida, reels, stories.",it:"Navigazione veloce, reel, storie.",pt:"Navegação rápida, reels, stories.",nl:"Snel browsen, reels, stories.",tr:"Hızlı gezinme, reels, hikayeler.",sq:"Shfletim i shpejtë, reels, stories.",ar:"تصفح سريع، ريلز، ستوريز."}},
   web:{title:{en:"Web Browsing",de:"Web-Surfen",fr:"Navigation web",es:"Navegación web",it:"Navigazione web",pt:"Navegação web",nl:"Web browsen",tr:"Web gezinme",sq:"Shfletim web",ar:"تصفح الويب"},desc:{en:"Fast page loads and downloads.",de:"Schnelle Seitenladezeiten und Downloads.",fr:"Chargements et téléchargements rapides.",es:"Cargas y descargas rápidas.",it:"Caricamenti e download rapidi.",pt:"Carregamentos e downloads rápidos.",nl:"Snelle pagina's en downloads.",tr:"Hızlı sayfa yükleme ve indirme.",sq:"Ngarkim i shpejtë i faqeve.",ar:"تحميل صفحات سريع."}}
 };
 
@@ -276,7 +326,7 @@ function buildAppCards(){
 }
 
 /* ==========================================================
-   CHART
+   CHART (SMOOTH CURVES + LIVE PULSE)
    ========================================================== */
 const canvas = $("chart");
 const ctx = canvas ? canvas.getContext("2d") : null;
@@ -312,6 +362,7 @@ function drawChart(){
   if(!canvas || !ctx || !canvas.clientWidth) return;
   const w = canvas.clientWidth, h = canvas.clientHeight;
   ctx.clearRect(0, 0, w, h);
+
   const isDark = document.body.classList.contains("dark");
   const gridColor  = isDark ? "#2b3037" : "#edf1f5";
   const scaleColor = isDark ? "#6b7280" : "#9aa1ab";
@@ -340,6 +391,7 @@ function drawChart(){
     y: h - 12 - v / max * (h - 24)
   }));
 
+  /* Fläche */
   ctx.beginPath();
   _drawSmoothPath(ctx, pts);
   ctx.lineTo(w, h);
@@ -352,6 +404,7 @@ function drawChart(){
   ctx.fillStyle = fillGrad;
   ctx.fill();
 
+  /* Linie */
   ctx.beginPath();
   _drawSmoothPath(ctx, pts);
   const lineGrad = ctx.createLinearGradient(0, 0, w, 0);
@@ -367,6 +420,7 @@ function drawChart(){
   ctx.stroke();
   ctx.shadowBlur = 0;
 
+  /* Puls-Punkt am Ende */
   const lastPt = pts[pts.length - 1];
   const pulse  = (Math.sin(performance.now() / 380) + 1) / 2;
 
@@ -374,6 +428,7 @@ function drawChart(){
   ctx.arc(lastPt.x, lastPt.y, 5 + pulse * 5, 0, Math.PI * 2);
   ctx.fillStyle = `rgba(37,99,235,${0.10 + pulse * 0.20})`;
   ctx.fill();
+
   ctx.beginPath();
   ctx.arc(lastPt.x, lastPt.y, 3.5, 0, Math.PI * 2);
   ctx.fillStyle = "#2563eb";
@@ -382,9 +437,14 @@ function drawChart(){
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
+  /* Live-Puls-Loop, nur während Test */
   if(running && !_chartPulseRAF){
     _chartPulseRAF = requestAnimationFrame(function loop(){
-      if(!running){ _chartPulseRAF = 0; drawChart(); return; }
+      if(!running){
+        _chartPulseRAF = 0;
+        drawChart();
+        return;
+      }
       drawChart();
       _chartPulseRAF = requestAnimationFrame(loop);
     });
@@ -414,68 +474,9 @@ $("themeBtn")?.addEventListener("click", () =>
 );
 
 /* ==========================================================
-   GAUGE (mit dynamischem Farbverlauf, Ticks, Peak-Marker, Breath)
+   GAUGE
    ========================================================== */
 function getGaugeMax(v){ return v<=100?100:v<=300?300:v<=500?500:v<=1000?1000:v<=2500?2500:v<=5000?5000:10000; }
-
-/* Skalen-Ticks einmalig zeichnen */
-function drawGaugeTicks(){
-  const g = $("gaugeTicks");
-  if(!g) return;
-  g.innerHTML = "";
-  const cx = 150, cy = 150;
-  const rOuter = 138, rInnerMajor = 126, rInnerMinor = 132;
-  const totalTicks = 55;
-  for(let i = 0; i <= totalTicks; i++){
-    const angle = (-135 + (270 * i / totalTicks)) * Math.PI / 180;
-    const isMajor = i % 9 === 0;
-    const rIn = isMajor ? rInnerMajor : rInnerMinor;
-    const x1 = cx + Math.cos(angle) * rIn;
-    const y1 = cy + Math.sin(angle) * rIn;
-    const x2 = cx + Math.cos(angle) * rOuter;
-    const y2 = cy + Math.sin(angle) * rOuter;
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", x1);
-    line.setAttribute("y1", y1);
-    line.setAttribute("x2", x2);
-    line.setAttribute("y2", y2);
-    line.setAttribute("stroke", isMajor ? "#c7cdd6" : "#e6e9ee");
-    line.setAttribute("stroke-width", isMajor ? "2" : "1");
-    line.setAttribute("stroke-linecap", "round");
-    g.appendChild(line);
-  }
-}
-
-/* Dynamischer Farbverlauf je nach Wert */
-function gaugeColorForValue(v){
-  if(v < 10)  return ["#ff5a1f", "#ff8b61"];
-  if(v < 50)  return ["#ff5a1f", "#ffb547"];
-  if(v < 150) return ["#f59e0b", "#22c55e"];
-  if(v < 500) return ["#16a36a", "#0ea5e9"];
-  return ["#2563eb", "#7c3aed"];
-}
-function updateGaugeGradient(v){
-  const stops = document.querySelectorAll("#g stop");
-  if(stops.length < 2) return;
-  const [c1, c2] = gaugeColorForValue(v);
-  stops[0].setAttribute("stop-color", c1);
-  stops[1].setAttribute("stop-color", c2);
-}
-
-/* Peak-Marker auf dem Bogen positionieren */
-let gaugePeak = 0;
-function updateGaugePeak(){
-  const peak = $("gaugePeak");
-  if(!peak) return;
-  if(gaugePeak <= 0){ peak.style.opacity = "0"; return; }
-  const p = Math.min(gaugePeak / gaugeMax, 1);
-  const angle = (-135 + 270 * p) * Math.PI / 180;
-  const cx = 150, cy = 150, r = 130;
-  peak.setAttribute("cx", cx + Math.cos(angle) * r);
-  peak.setAttribute("cy", cy + Math.sin(angle) * r);
-  peak.style.opacity = "1";
-}
-
 let gaugeNumberRaf = 0;
 let gaugeNumberDisplay = 0;
 let gaugeNumberTarget = 0;
@@ -494,17 +495,14 @@ function gauge(v){
   const c = 816, vis = c*.75;
   const prog = $("prog");
   if(prog) prog.style.strokeDashoffset = c - vis*p;
-  updateGaugeGradient(v);
-  if(v > gaugePeak){ gaugePeak = v; updateGaugePeak(); }
   gaugeNumberTarget = v;
   if(!gaugeNumberRaf) gaugeNumberRaf = requestAnimationFrame(animateGaugeNumber);
 }
 function resetGauge(){
-  gaugeMax = 100; samples = []; gaugePeak = 0;
+  gaugeMax = 100; samples = [];
   gaugeNumberTarget = 0; gaugeNumberDisplay = 0;
   if(gaugeNumberRaf){ cancelAnimationFrame(gaugeNumberRaf); gaugeNumberRaf = 0; }
   const s = $("speed"); if(s) s.textContent = "0";
-  const peak = $("gaugePeak"); if(peak) peak.style.opacity = "0";
   gauge(0);
   drawChart();
 }
@@ -561,7 +559,7 @@ function testTimeout(ms){
 /* ==========================================================
    MEASUREMENT ENGINE
    ========================================================== */
-const MEASUREMENT_V7 = { version: "8.3", phaseMs: 8000, maxStreams: 8 };
+const MEASUREMENT_V7 = { version: "8.2", phaseMs: 8000, maxStreams: 8 };
 
 function percentile(values, q){
   if(!values.length) return NaN;
@@ -582,7 +580,7 @@ function chooseStreams(mbps, max = MEASUREMENT_V7.maxStreams){
 function clampNumber(v, min, max){ return Math.max(min, Math.min(max, v)); }
 
 /* ==========================================================
-   COLORS
+   COLOR LOGIC
    ========================================================== */
 function colorPing(v){ return v<=15?"val-good":v<=50?"val-medium":"val-bad"; }
 function colorJitter(v){ return v<=5?"val-good":v<=15?"val-medium":"val-bad"; }
@@ -631,7 +629,7 @@ function tickValue(el, target, opts = {}){
 }
 
 /* ==========================================================
-   PULSE
+   PULSE (Ping-Icon)
    ========================================================== */
 let pulseTimer = null;
 function pulseOnce(ms){
@@ -741,7 +739,7 @@ async function pingTest(opts = {}){
       timer.clear();
       const ms = performance.now() - started;
       if(Number.isFinite(ms) && ms > 0 && ms < 9000){ vals.push(ms); onSample(ms); }
-    }catch(e){ console.warn("Latency probe failed:", e?.message || e); }
+    }catch(e){ console.warn("Cloudflare latency probe failed:", e?.message || e); }
     if(i < MAX_ATTEMPTS-1) await sleep(80);
   }
   if(vals.length < 3) throw new Error("MEASUREMENT_UNAVAILABLE");
@@ -754,7 +752,7 @@ async function pingTest(opts = {}){
 }
 
 /* ==========================================================
-   IO HELPERS
+   IO HELPERS (mit Live-Chunk-Callback)
    ========================================================== */
 async function readResponseBytes(response, signal, onChunk){
   if(!response.body){
@@ -786,12 +784,16 @@ function makeUploadBuffer(bytes){
   return data;
 }
 
+/* Live-Reporting für Download */
 async function parallelDownload(bytesPerStream, streams, timeoutMs, onLive){
   const wallStart = performance.now();
   let totalBytes = 0;
+
   const ticker = onLive ? setInterval(() => {
     const sec = (performance.now() - wallStart) / 1000;
-    if(sec > 0.25 && totalBytes > 0) onLive((totalBytes * 8) / sec / 1e6);
+    if(sec > 0.25 && totalBytes > 0){
+      onLive((totalBytes * 8) / sec / 1e6);
+    }
   }, 150) : null;
 
   const jobs = Array.from({length: streams}, async () => {
@@ -807,21 +809,27 @@ async function parallelDownload(bytesPerStream, streams, timeoutMs, onLive){
       return bytes;
     }finally{ timer.clear(); }
   });
+
   const results = await Promise.allSettled(jobs);
   if(ticker) clearInterval(ticker);
+
   const good = results.filter(x => x.status === "fulfilled" && x.value > 0).map(x => x.value);
   const seconds = (performance.now() - wallStart) / 1000;
   if(!good.length || seconds <= 0) throw new Error("Download failed");
   return { bytes: good.reduce((a,x) => a + x, 0), seconds, streams: good.length };
 }
 
+/* Live-Reporting für Upload */
 async function parallelUpload(bytesPerStream, streams, timeoutMs, onLive){
   const payload = makeUploadBuffer(bytesPerStream);
   const wallStart = performance.now();
   let totalBytes = 0;
+
   const ticker = onLive ? setInterval(() => {
     const sec = (performance.now() - wallStart) / 1000;
-    if(sec > 0.25 && totalBytes > 0) onLive((totalBytes * 8) / sec / 1e6);
+    if(sec > 0.25 && totalBytes > 0){
+      onLive((totalBytes * 8) / sec / 1e6);
+    }
   }, 150) : null;
 
   const jobs = Array.from({length: streams}, async () => {
@@ -839,8 +847,10 @@ async function parallelUpload(bytesPerStream, streams, timeoutMs, onLive){
       return bytesPerStream;
     }finally{ timer.clear(); }
   });
+
   const results = await Promise.allSettled(jobs);
   if(ticker) clearInterval(ticker);
+
   const good = results.filter(x => x.status === "fulfilled" && x.value > 0).map(x => x.value);
   const seconds = (performance.now() - wallStart) / 1000;
   if(!good.length || seconds <= 0) throw new Error("Upload failed");
@@ -881,6 +891,7 @@ async function downloadTest(){
   const x = extraTranslations[currentLang] || extraTranslations.en;
   const statusEl = $("status"); if(statusEl) statusEl.textContent = t.stDown;
   const chartStateEl = $("chartState"); if(chartStateEl) chartStateEl.textContent = t.download;
+
   samples = [];
   drawChart();
 
@@ -906,6 +917,7 @@ async function downloadTest(){
     streams = chooseStreams(mbps, MEASUREMENT_V7.maxStreams);
     bytesPerStream = nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
     const timeout = Math.max(4000, Math.min(7000, remaining + 2000));
+
     try{
       const r = await parallelDownload(bytesPerStream, streams, timeout, (liveMbps) => {
         if(!Number.isFinite(liveMbps) || liveMbps <= 0) return;
@@ -917,7 +929,10 @@ async function downloadTest(){
         drawChart();
       });
       const sp = r.bytes * 8 / r.seconds / 1e6;
-      if(Number.isFinite(sp) && sp > 0){ measured.push(sp); mbps = sp; }
+      if(Number.isFinite(sp) && sp > 0){
+        measured.push(sp);
+        mbps = sp;
+      }
     }catch(e){
       console.warn("Download round failed:", e.message);
       if(performance.now() - startTime >= TARGET) break;
@@ -937,6 +952,7 @@ async function uploadTest(){
   const t = translations[currentLang];
   const statusEl = $("status"); if(statusEl) statusEl.textContent = t.stUp;
   const chartStateEl = $("chartState"); if(chartStateEl) chartStateEl.textContent = t.upload;
+
   samples = [];
   drawChart();
 
@@ -962,6 +978,7 @@ async function uploadTest(){
     streams = chooseStreams(mbps, MEASUREMENT_V7.maxStreams);
     bytesPerStream = nextPayloadBytes(mbps, remaining, streams, 128*1024, 32*1024*1024);
     const timeout = Math.max(4500, Math.min(8000, remaining + 2500));
+
     try{
       const r = await parallelUpload(bytesPerStream, streams, timeout, (liveMbps) => {
         if(!Number.isFinite(liveMbps) || liveMbps <= 0) return;
@@ -972,7 +989,10 @@ async function uploadTest(){
         drawChart();
       });
       const sp = r.bytes * 8 / r.seconds / 1e6;
-      if(Number.isFinite(sp) && sp > 0){ measured.push(sp); mbps = sp; }
+      if(Number.isFinite(sp) && sp > 0){
+        measured.push(sp);
+        mbps = sp;
+      }
     }catch(e){
       console.warn("Upload round failed:", e.message);
       if(performance.now() - startTime >= TARGET) break;
@@ -1158,7 +1178,7 @@ async function start(){
 
   const startBtn = $("start");
   if(startBtn){ startBtn.disabled = true; startBtn.textContent = t.testing; }
-  const gaugeEl = $("gaugeEl"); if(gaugeEl) gaugeEl.classList.add("testing");
+
   if(_chartPulseRAF){ cancelAnimationFrame(_chartPulseRAF); _chartPulseRAF = 0; }
   resetGauge();
 
@@ -1253,6 +1273,7 @@ async function start(){
     saveHistory({date:date, d:d, u:u, p:p.ping, j:p.jitter, s:s, isp:last.isp||"—"});
     updateWidget();
 
+    /* Screenreader-Zusammenfassung */
     const srSummary = $("srSummary");
     if(srSummary){
       srSummary.textContent =
@@ -1272,14 +1293,13 @@ async function start(){
     if(hintEl) hintEl.textContent = (extraTranslations[currentLang]||extraTranslations.en).measurementRetry;
   }
   if(_chartPulseRAF){ cancelAnimationFrame(_chartPulseRAF); _chartPulseRAF = 0; }
-  if(gaugeEl) gaugeEl.classList.remove("testing");
   running = false;
   if(startBtn){ startBtn.disabled = false; startBtn.textContent = translations[currentLang].startAgain; }
 }
 $("start")?.addEventListener("click", start);
 
 /* ==========================================================
-   BUTTONS
+   BUTTONS: COPY / SHARE / JSON / PRINT / CLEAR
    ========================================================== */
 $("copy")?.addEventListener("click", async () => {
   const t = translations[currentLang];
@@ -1391,7 +1411,7 @@ $("widgetRun")?.addEventListener("click", async () => {
 });
 
 /* ==========================================================
-   LAZY WIDGET
+   LAZY WIDGET LOADER (optional)
    ========================================================== */
 window.addEventListener("load", () => {
   const loadWidget = () => {
@@ -1422,7 +1442,6 @@ if("serviceWorker" in navigator){
    ========================================================== */
 buildAppCards();
 resizeCanvas();
-drawGaugeTicks();
 
 const savedLang = localStorage.getItem("fasqoo_lang");
 const browserCandidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || "en"];
