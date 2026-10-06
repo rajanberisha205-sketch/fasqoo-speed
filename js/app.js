@@ -1154,7 +1154,7 @@ applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
 
 /* ==========================================================
-   SMARTES PWA-INSTALLATIONS-POPUP (MEHRSPRACHIG FÜR ALLE 10 SPRACHEN)
+   SMARTES PWA-INSTALLATIONS-POPUP (MEHRSPRACHIG & ECHTES LOGO)
    ========================================================== */
 
 if (typeof translations !== 'undefined') {
@@ -1238,9 +1238,9 @@ function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 }
 
+// Funktion, um das Popup dynamisch zu erstellen oder zu aktualisieren
 function showSmartInstallToast() {
   if (isStandalone() || localStorage.getItem('fasqoo_pwa_dismissed')) return;
-  if (document.getElementById('smartPwaToast')) return;
 
   const isApple = isIOS();
   const t = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : {};
@@ -1249,37 +1249,51 @@ function showSmartInstallToast() {
   const descText = isApple ? (t.pwaDescIos || "Add to Home Screen.") : (t.pwaDescAndroid || "Add Fasqoo to your home screen.");
   const actionText = isApple ? (t.pwaActionIos || "Got it") : (t.pwaActionAndroid || "Install");
 
-  const toast = document.createElement('div');
-  toast.id = 'smartPwaToast';
-  toast.className = 'pwa-toast';
+  let toast = document.getElementById('smartPwaToast');
   
-  toast.innerHTML = `
-    <div class="pwa-toast-icon">⚡</div>
-    <div class="pwa-toast-content">
-      <h4 class="pwa-toast-title">${titleText}</h4>
-      <p class="pwa-toast-desc">${descText}</p>
-    </div>
-    <button class="pwa-toast-btn" id="pwaActionBtn">${actionText}</button>
-    <button class="pwa-toast-close" id="pwaCloseBtn">&times;</button>
-  `;
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'smartPwaToast';
+    toast.className = 'pwa-toast';
+    
+    // Nutzt das echte Fasqoo-Logo (/fasqoologo.png) statt des Emojis
+    toast.innerHTML = `
+      <img src="/fasqoologo.png" alt="Fasqoo Logo" class="pwa-toast-logo">
+      <div class="pwa-toast-content">
+        <h4 class="pwa-toast-title"></h4>
+        <p class="pwa-toast-desc"></p>
+      </div>
+      <button class="pwa-toast-btn" id="pwaActionBtn"></button>
+      <button class="pwa-toast-close" id="pwaCloseBtn">&times;</button>
+    `;
 
-  document.body.appendChild(toast);
-  setTimeout(() => toast.classList.add('show'), 1500);
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 1500);
 
-  toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
-    if (!isApple && typeof deferredInstallPrompt !== 'undefined' && deferredInstallPrompt) {
-      try {
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-      } catch(e) {}
-      deferredInstallPrompt = null;
-    }
-    closeToast(toast);
-  });
+    toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
+      if (!isApple && typeof deferredInstallPrompt !== 'undefined' && deferredInstallPrompt) {
+        try {
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+        } catch(e) {}
+        deferredInstallPrompt = null;
+      }
+      closeToast(toast);
+    });
 
-  toast.querySelector('#pwaCloseBtn').addEventListener('click', () => {
-    closeToast(toast);
-  });
+    toast.querySelector('#pwaCloseBtn').addEventListener('click', () => {
+      closeToast(toast);
+    });
+  }
+
+  // Texte setzen / in Echtzeit aktualisieren bei Sprachwechsel
+  const titleEl = toast.querySelector('.pwa-toast-title');
+  const descEl = toast.querySelector('.pwa-toast-desc');
+  const actionBtn = toast.querySelector('#pwaActionBtn');
+
+  if (titleEl) titleEl.textContent = titleText;
+  if (descEl) descEl.textContent = descText;
+  if (actionBtn) actionBtn.textContent = actionText;
 }
 
 function closeToast(toast) {
@@ -1288,6 +1302,7 @@ function closeToast(toast) {
   setTimeout(() => toast.remove(), 350);
 }
 
+// Automatischer Aufruf beim Laden
 window.addEventListener('load', () => {
   if (!isStandalone()) {
     setTimeout(showSmartInstallToast, 2500);
