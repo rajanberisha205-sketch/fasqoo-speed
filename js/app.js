@@ -1152,3 +1152,80 @@ if(!savedLang){
 
 applyTheme(localStorage.getItem("fasqoo_dark") === "true");
 netinfo();
+/* ==========================================================
+   SMARTES PWA-INSTALLATIONS-POPUP (AUTO-TOAST)
+   ========================================================== */
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  // Popup anzeigen, wenn der Browser die Installation unterstützt
+  showSmartInstallToast();
+});
+
+function isIOS() {
+  return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+
+function isStandalone() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function showSmartInstallToast() {
+  // Wenn bereits installiert oder in den letzten Tagen weggedrückt, abbrechen
+  if (isStandalone() || localStorage.getItem('fasqoo_pwa_dismissed')) return;
+  if (document.getElementById('smartPwaToast')) return;
+
+  const isApple = isIOS();
+  const toast = document.createElement('div');
+  toast.id = 'smartPwaToast';
+  toast.className = 'pwa-toast';
+  
+  toast.innerHTML = `
+    <div class="pwa-toast-icon">⚡</div>
+    <div class="pwa-toast-content">
+      <h4 class="pwa-toast-title">Fasqoo als App installieren</h4>
+      <p class="pwa-toast-desc">
+        ${isApple 
+          ="Tippe unten auf das Teilen-Symbol <path .../> und wähle 'Zum Homescreen'." 
+          : "Füge Fasqoo für blitzschnellen Zugriff zu deinem Startbildschirm hinzu."}
+      </p>
+    </div>
+    <button class="pwa-toast-btn" id="pwaActionBtn">${isApple ? 'Verstanden' : 'Installieren'}</button>
+    <button class="pwa-toast-close" id="pwaCloseBtn">&times;</button>
+  `;
+
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 1500);
+
+  // Klick-Aktionen
+  toast.querySelector('#pwaActionBtn').addEventListener('click', async () => {
+    if (!isApple && deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      const choiceResult = await deferredInstallPrompt.userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      }
+      deferredInstallPrompt = null;
+    }
+    closeToast(toast);
+  });
+
+  toast.querySelector('#pwaCloseBtn').addEventListener('click', () => {
+    closeToast(toast);
+  });
+}
+
+function closeToast(toast) {
+  toast.classList.remove('show');
+  localStorage.setItem('fasqoo_pwa_dismissed', 'true');
+  setTimeout(() => toast.remove(), 350);
+}
+
+// Fallback für iOS (da Safari kein 'beforeinstallprompt' feuert)
+window.addEventListener('load', () => {
+  if (isIOS() && !isStandalone()) {
+    setTimeout(showSmartInstallToast, 2500);
+  }
+});
