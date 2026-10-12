@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#111827" id="themeColor">
+<!-- NEU: Optimierte Meta-Beschreibung (Browser + App) -->
 <meta name="description" content="Test your internet speed instantly with Fasqoo. Check your true download, upload, and ping for free. Works in your browser or install it as an app. No account required!">
 <meta name="author" content="Fasqoo">
 <meta name="application-name" content="Fasqoo Internet Speed Test">
@@ -36,7 +37,7 @@
 <meta name="twitter:title" content="Internet Speed Test - Fast & Free Bandwidth Check | Fasqoo">
 <meta name="twitter:description" content="Check your true download, upload, and ping speeds right in your browser. Fast, free, and no signup required.">
 <meta name="robots" content="index, follow">
-<!-- NEU: Optimierter Titel für Suchmaschinen -->
+<!-- NEU: Optimierter Titel -->
 <title>Internet Speed Test - Fast & Free Bandwidth Check | Fasqoo</title>
 <link rel="canonical" href="https://www.fasqoo.com/">
 
@@ -47,7 +48,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://www.fasqoo.com/#organization","name":"Fasqoo","url":"https://www.fasqoo.com/","logo":"https://www.fasqoo.com/android-chrome-512x512.png"}
 </script>
-<!-- NEU: Erweiterte strukturierte Daten mit Preis (kostenlos) und Feature-Liste -->
+<!-- NEU: Erweiterte strukturierte Daten für App-Installation -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","@id":"https://www.fasqoo.com/#speedtest","name":"Fasqoo Internet Speed Test","url":"https://www.fasqoo.com/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web Browser, Android, iOS, Windows, macOS","browserRequirements":"Requires JavaScript","description":"Professional browser-based internet speed test measuring download, upload, ping, jitter, bufferbloat, packet loss and network quality. Can be installed as a Progressive Web App (PWA) for quick access.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Download speed test","Upload speed test","Ping test","Jitter measurement","Packet loss detection","Bufferbloat test","Network diagnostics","Installable as an app"],"publisher":{"@id":"https://www.fasqoo.com/#organization"}}
 </script>
@@ -705,9 +706,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 <div class="wrap">
 
-  <!-- ========================================================
-       NEU: H1-ÜBERSCHRIFT FÜR SEO (Wichtig für Google!)
-       ======================================================== -->
+  <!-- NEU: H1-ÜBERSCHRIFT FÜR SEO (Wichtig für Google!) -->
   <h1 style="text-align: center; margin-bottom: 20px; font-size: 28px; color: var(--text); font-weight: 800;">Free Internet Speed Test</h1>
 
   <!-- ========================================================
@@ -757,9 +756,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="phase-step" data-phase="complete" data-i18n="phaseResult">Result</span>
         </div>
       </div>
+      
       <div class="grid">
         <div class="speedbox">
+          <!-- NEU: Tacho mit Skala, Labels und Needle -->
           <div class="gauge">
+            <div class="gauge-glow"></div>
+            <div class="gauge-label gauge-label-0">0</div>
+            <div class="gauge-label gauge-label-50">50</div>
+            <div class="gauge-label gauge-label-100">100</div>
+            <div class="gauge-label gauge-label-200">200</div>
+
             <svg viewBox="0 0 300 300">
               <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#ff5a1f"/><stop offset="100%" stop-color="#ff8a5b"/>
@@ -767,9 +774,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <circle class="ring" cx="150" cy="150" r="130"></circle>
               <circle id="prog" class="progress" cx="150" cy="150" r="130"></circle>
             </svg>
+            
+            <div class="gauge-needle"></div>
+
             <div class="center">
               <div id="speed" class="num">0</div>
-              <div class="unit">Mbps</div>
+              <div class="unit">Mbit/s</div>
             </div>
           </div>
           <div id="status" class="status" data-i18n="ready">Ready to test</div>
@@ -841,7 +851,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="hero-trust">
       <span data-i18n="trust1">Accurate measurement – no estimates</span>
-      <span data-i18n="trust2">Free &amp; no account required</span>
+      <!-- NEU: Text angepasst für App-Installation -->
+      <span data-i18n="trust2">Free, no account &amp; installable as app</span>
     </div>
 
     <section class="section intelligence-section">
